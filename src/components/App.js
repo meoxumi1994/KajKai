@@ -94,7 +94,7 @@ export default class App extends React.Component{
                         <Col xs={9} md={9}>
                             <ButtonToolbar>
                                 <div className="btn btn-transparent btn-xs" onClick={()=> this.setState({ mainscreen : 'HOME'})}>
-                                    <img src="/config/kaikai.png" alt="Cinque Terre" width="32" height="32"/>
+                                    <img src="/config/kajkai.png" alt="Cinque Terre" width="27" height="27"/>
                                 </div>
                                 <div className="input-group" style={{width: 400}}>
                                     <input type="text" className="form-control input-md" placeholder="tìm kiếm sản phẩm ngay" />
