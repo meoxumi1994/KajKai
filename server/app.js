@@ -9,8 +9,15 @@ import { getPath } from './common/helper'
 import allRoutes from './routes'
 
 const app = express()
-
+var corsOptions = {
+      origin: 'http://localhost:8080',
+      credentials: true
+    }
 app.use(cors())
+// app.use(cors(corsOptions));
+
+// app.options('*', cors())
+// app.use(cors({ credentials: true }));
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -25,10 +32,11 @@ app.use('/static', express.static(getPath(__dirname)('../client/dist')))
 require('./config/passport')(passport);
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email'] }));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }),
+app.get('/auth/facebook/callback', passport.authenticate('facebook'),
   	function(req, res) {
   		console.log('success ' + req.token);
-    	res.sendFile(__dirname + '/index.html')
+  		res.json({hello: "hello"});
+    	// res.sendFile(__dirname + '/index.html')
   	}
 );
 
@@ -48,20 +56,17 @@ app.post('/server/login',
       // console.log(req.token + ' ' + res.token)
 
 
-      if (req.token) {
-        res.cookie('token', req.token, { maxAge: 10000000})
-        console.log(req.token);
-        res.json({
-          type : 'LOGIN_SUCCESS',
-          token : req.token
-        })
-        // res.end();
-      } else {
-        res.json({
-          type : 'LOGIN_FAILED'
-          // token : ''
-        })
-      }
+     	if (req.token) {
+        	res.cookie('token', req.token, { maxAge: 10000000})
+        	console.log(req.token);
+        	res.json({
+          		type : 'LOGIN_SUCCESS'
+        	})
+      	} else {
+        	res.json({
+          		type : 'LOGIN_FAILED'
+        	})
+      	}
 });
 
 //////
@@ -82,9 +87,20 @@ for(let link in allRoutes){
   }
 }
 
-// app.post('/server/login', function(req, res){
-//   res.cookie('token', 'hihi', {maxAge: 1000000000});
-//   res.end();
+app.post('/server/login', function(req, res){
+  res.cookie('token', 'hihi', {maxAge: 1000000000});
+  res.end();
+})
+
+
+
+// app.get('/aaa', function(req, res){
+// 	if (req.cookies && req.cookies.token) {
+// 		console.log("token " + req.cookies.token);
+// 	}
+// 	res.cookie('token', 'minh minh', {maxAge: 100000000});
+// 	res.json({haha: 'hehe'});
+// 	console.log('ahihi');
 // })
 
 export default app

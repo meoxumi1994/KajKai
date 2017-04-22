@@ -75,7 +75,7 @@ module.exports = function(passport) {
                     // done(null, user);
                     req.token = User.getUserToken(user.email);
 
-                    done(null, User.getUserToken(user.email));
+                    done(null, true);
                 } else {
                     // console.log(profile.emails[0].value);
                     // console.log(profile);
@@ -88,7 +88,7 @@ module.exports = function(passport) {
 
                     req.token = User.getUserToken(newuser.email);
 
-                    done(null, User.getUserToken(newuser.email));
+                    done(null, true);
                 }
             })
 

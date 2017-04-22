@@ -14,7 +14,7 @@ export default {
   //   }
   // },
   '/api': {
-    post: {
+    get: {
       controller: 'UserController',
       middleware: [auth()],
       method: 'suckthisshit'

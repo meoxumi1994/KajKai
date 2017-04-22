@@ -17,14 +17,17 @@ const auth = () => {
   		// if (req.cookies.token) {
   		// 	console.log('user ' + user)
   		// }
+      if (req.cookies && req.cookies.token) {
+          console.log(req.cookies.token);
+      }
     	if (verifyToken(req.cookies.token)) {
-
-    		next()
+          console.log('success');
+    		  next()
     	} else {
     		
-    		res.send({
-    			authorization: "FAILED"
-    		})
+    		  res.send({
+    			 authorization: "FAILED"
+    		  })
     	}
   	}
 }
