@@ -35,16 +35,21 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email'] 
 app.get('/auth/facebook/callback', passport.authenticate('facebook'),
   	function(req, res) {
   		// console.log('success ' + req.token);
-  		res.json({hello: "hello"});
+  		
+  		console.log('hello');
+  		//res.json({hello: "hello"});
+  		res.cookie('token', req.token, { maxAge: 10000000})
+  		res.redirect('http://localhost:8080')
     	// res.sendFile(__dirname + '/index.html')
   	}
 );
 
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
   	function(req, res) {
-  		console.log('success ' + req.token);
-    	// res.redirect('/');
-    	res.send('./index.html');
+  		console.log('hello');
+  		//res.json({hello: "hello"});
+  		res.cookie('token', req.token, { maxAge: 10000000})
+  		res.redirect('http://localhost:8080')
   	}
 );
 

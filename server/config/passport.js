@@ -119,10 +119,8 @@ module.exports = function(passport) {
             User.getUserFromGoogleId(profile.id, connection, function(user){
                 if (user) {
                     console.log(user);
+                    req.token = User.getUserToken(user.email);
 
-                    req.cookie.token = User.getUserToken(user.email);
-
-                    done(null, User.getUserToken(user.email));
                 } else {
                     // console.log(profile.emails[0].value);
                     // console.log(profile);
@@ -133,8 +131,8 @@ module.exports = function(passport) {
                     User.saveObjectToDB(newuser, connection);
 
                     req.token = User.getUserToken(newuser.email);
-                    done(null, true);
                 }
+                done(null, true);
             });
 
         });
