@@ -34,7 +34,7 @@ require('./config/passport')(passport);
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email'] }));
 app.get('/auth/facebook/callback', passport.authenticate('facebook'),
   	function(req, res) {
-  		console.log('success ' + req.token);
+  		// console.log('success ' + req.token);
   		res.json({hello: "hello"});
     	// res.sendFile(__dirname + '/index.html')
   	}
