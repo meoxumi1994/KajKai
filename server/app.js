@@ -14,7 +14,7 @@ var corsOptions = {
       credentials: true
     }
 app.use(cors())
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // app.options('*', cors())
 // app.use(cors({ credentials: true }));
