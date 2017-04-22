@@ -1,26 +1,17 @@
-import express from 'express'
-import cors from 'cors'
-import cookieParser from 'cookie-parser'
-import bodyParser from 'body-parser'
-import passport from 'passport'
-
-import init from './socketio'
-import { getPath } from './common/helper'
-import allRoutes from './routes'
-
-const app = express()
+// import cookieParser from 'cookie-parser'
+var cookieParser = require('cookie-parser');
+var express = require('express');
+var body_parser = require('body-parser');
+var app = express();
+var jwt = require('jsonwebtoken');
+app.use(body_parser());
+var passport = require('passport');
+app.use(passport.initialize());
+var cors = require('cors');
 
 app.use(cors())
 app.use(cookieParser())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
-
-app.use(passport.initialize());
-app.use('/static', express.static(getPath(__dirname)('../client/dist')))
-
-
-//////
+app.use(require('./common/middlewares/auth.js')())
 
 require('./config/passport')(passport);
 
@@ -42,7 +33,7 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
-app.post('/server/login',  
+app.post('/server/login', 
   	passport.authenticate('local'),
   	function(req, res) {
       // console.log(req.token + ' ' + res.token)
@@ -64,27 +55,18 @@ app.post('/server/login',
       }
 });
 
-//////
-
-
-
-
-// load all routes
-for(let link in allRoutes){
-
-  let allMethods = allRoutes[link]
-  for(let requestMethod in allMethods){
-
-    let handler = allMethods[requestMethod]
-    let method = require('./controllers/' + handler.controller)[handler.method]
-
-    app[requestMethod](link, handler.middleware || [], method())
-  }
-}
+app.get('/', function(req, res){
+  console.log('root');
+})
 
 // app.post('/server/login', function(req, res){
-//   res.cookie('token', 'hihi', {maxAge: 1000000000});
-//   res.end();
+//   res.cookie('token', 'Minh gay', {maxAge: 1000000000});
+//   // res.end();
+//   res.json({
+//     token: "ihihi"
+//   })
 // })
 
-export default app
+
+app.listen(6969);
+

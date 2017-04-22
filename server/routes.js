@@ -1,15 +1,23 @@
 import auth from './common/middlewares/auth'
+// import cors from 'cors'
 
 export default {
-  '/demo': {
-    get: {
-      controller: 'DemoController',
-      middleware: [auth()],
-      method: 'getDemo'
-    },
+  // '/demo': {
+  //   get: {
+  //     controller: 'DemoController',
+  //     middleware: [auth()],
+  //     method: 'getDemo'
+  //   },
+  //   post: {
+  //     controller: 'DemoController',
+  //     method: 'postDemo'
+  //   }
+  // },
+  '/api': {
     post: {
-      controller: 'DemoController',
-      method: 'postDemo'
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'suckthisshit'
     }
   }
 }
