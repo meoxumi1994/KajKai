@@ -3,9 +3,11 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import passport from 'passport'
+import path from 'path'
+
+require('./config/passport')(passport);
 
 import init from './socketio'
-import { getPath } from './common/helper'
 import allRoutes from './routes'
 
 const app = express()
@@ -24,18 +26,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 app.use(passport.initialize());
-app.use('/static', express.static(getPath(__dirname)('../client/dist')))
-
-
-//////
-
-require('./config/passport')(passport);
+app.use('/static', express.static(path.resolve(__dirname, '../client/dist')))
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email'] }));
 app.get('/auth/facebook/callback', passport.authenticate('facebook'),
   	function(req, res) {
   		// console.log('success ' + req.token);
-  		
+
   		console.log('hello');
   		//res.json({hello: "hello"});
   		res.cookie('token', req.token, { maxAge: 10000000})
@@ -55,7 +52,7 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
-app.post('/server/login',  
+app.post('/server/login',
   	passport.authenticate('local'),
   	function(req, res) {
       // console.log(req.token + ' ' + res.token)

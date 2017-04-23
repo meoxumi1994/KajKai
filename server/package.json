@@ -10,6 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "babel-register": "^6.24.1",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
@@ -23,5 +28,9 @@
     "passport-local": "^1.0.0",
     "react": "^15.5.4",
     "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1"
   }
 }
