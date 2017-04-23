@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const BarScreen = () => (
     <div className="container-fluid" style={{ backgroundColor: "white"}}>
@@ -12,7 +12,7 @@ const BarScreen = () => (
                         </Link>
                     </div>
                     <div className="btn btn-transparent btn-xs">
-                        <Link to="/Map">
+                        <Link to="/map">
                             <img src="./images/map.png" alt="Cinque Terre" width="27" height="27"/>
                         </Link>
                     </div>

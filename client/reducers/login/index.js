@@ -1,10 +1,10 @@
-const login = (state = { type: 'NOT_LOGGED_IN'}, action) => {
+const login = (state = { status: 'AUTH_NOT'}, action) => {
   switch (action.type) {
-    case 'LOGGING_IN':
-    case 'LOG_IN_SUCCESS':
-    case 'LOG_IN_FAILURE':
-    case 'NOT_LOGGED_IN':
-      return action
+    case 'AUTH_ING':
+    case 'AUTH_SUCCESS':
+    case 'AUTH_FAILURE':
+    case 'AUTH_NOT':
+      return {...state, status: action.type }
     default:
       return state
   }

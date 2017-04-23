@@ -1,25 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 // AppContainer is a necessary wrapper component for HMR
+import { AppContainer } from 'react-hot-loader';
 
-import App from './components/App';
+import reducers from './reducers'
+import Components from './components';
 
-const render = (Component) => {
-  ReactDOM.render(
+const store = createStore(
+    reducers,
+    applyMiddleware(
+        thunkMiddleware
+    )
+)
+
+ReactDOM.render(
     <AppContainer>
-      <Component/>
+       <Provider store={store}>
+          <Components/>
+      </Provider>
     </AppContainer>,
-    document.getElementById('root')
-  );
-};
-
-render(App);
-
-// Hot Module Replacement API
-if (module.hot) {
-    module.hot.accept('./', () => {
-    render(App)
-  });
-}
+  document.getElementById('root')
+)

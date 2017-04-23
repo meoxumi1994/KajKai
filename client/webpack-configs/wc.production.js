@@ -2,10 +2,10 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: {
-    "demo": './index.js'
+    "bundle": './index.js'
   },
   output: {
-    path: __dirname + '/dist',
+    path: __dirname+'/dist',
     filename: "[name].js"
   },
   module: {

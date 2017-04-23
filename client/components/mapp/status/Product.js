@@ -3,7 +3,7 @@ import { Row,Col,OverlayTrigger,Popover } from 'react-bootstrap';
 
 const popoverImageProduct = (
     <Popover id="popover-positioned-bottom" title="tên sản phẩm">
-        <img src="./config/product.png" alt="Cinque Terre" width="200" height="200"/>
+        <img src="./images/product.png" alt="Cinque Terre" width="200" height="200"/>
     </Popover>
 );
 
@@ -20,14 +20,14 @@ const Product = () => (
         </Col>
         <Col xs={1} md={1}>
             <div className="btn btn-transparent btn-xs">
-                <img src="./config/(+).png" alt="Cinque Terre" width="16" height="16"/>
+                <img src="./images/(+).png" alt="Cinque Terre" width="16" height="16"/>
             </div>
         </Col>
         <Col xs={1} md={1}>
         </Col>
         <Col xs={1} md={1}>
             <OverlayTrigger placement="bottom" overlay={popoverImageProduct}>
-                <img src="./config/(->).png" alt="Cinque Terre" width="16" height="16"/>
+                <img src="./images/(->).png" alt="Cinque Terre" width="16" height="16"/>
             </OverlayTrigger>
         </Col>
     </Row>

@@ -1,6 +1,8 @@
+const { resolve } = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+  "devtool": "eval",
   entry: [
       'react-hot-loader/patch',
       'webpack-dev-server/client?http://localhost:8080',
@@ -18,7 +20,8 @@ module.exports = {
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react'],
+          plugins: ["transform-object-rest-spread"]
         }
       }
     ]
@@ -26,7 +29,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     hot: true,
-    contentBase: __dirname,
+    contentBase: __dirname + '/dist',
     // match the output path
 
     publicPath: '/dist'

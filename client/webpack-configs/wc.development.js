@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    "demo": './index.js'
+    "bundle": './index.js'
   },
   "devtool": "eval",
   output: {
