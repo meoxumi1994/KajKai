@@ -8,6 +8,7 @@ module.exports = {
   getUserFromGoogleId,
   verifyToken,
   saveObjectToDB,
+  verifiedUser
 };
 
 function User(email, password, username, address, phone, facebookid, googleid){
@@ -92,7 +93,15 @@ function verifyToken(token) {
 	}
 }
 
-function saveObjectToDB(user, connection) {
+function verifiedUser(email, connection, next) {
+	connection.query('update user set verified = 1 where email = ' 
+		+ "'" + email + "'", function(){
+		next()
+	})
+}
+
+
+function saveObjectToDB(user, connection, next) {
 	var email = (user.email) ? "'" + user.email + "'" : 'null';
 	var password = (user.password) ? "'" + user.password + "'" : 'null';
 	var username = (user.username) ? "'" + user.username + "'" : 'null';
@@ -100,7 +109,7 @@ function saveObjectToDB(user, connection) {
 	var phone = (user.phone) ? "'" + user.phone + "'" : 'null';
 	var facebookid = (user.facebookid) ? "'" + user.facebookid + "'" : 'null';
 	var googleid = (user.googleid) ? "'" + user.googleid + "'" : 'null';
-
+	var verified = (user.verified) ? user.verified : '';
 
 	connection.query('insert into user (email, password, username, address, phone, facebookid, googleid) '
 		+ 'values (' + email + ","
@@ -109,6 +118,8 @@ function saveObjectToDB(user, connection) {
 							+ address + ","
 							+ phone + ","
 							+ facebookid + ","
-							+ googleid + ")");
+							+ googleid + ")", function(){
+								next()
+							});
 }
 
