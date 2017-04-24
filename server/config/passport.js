@@ -4,6 +4,7 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var User = require('../services/UserService.js')
 var connection = require('./mysqlDB.js');
 
+
 // load up the user model
 // var User       = require('../app/models/user');
 

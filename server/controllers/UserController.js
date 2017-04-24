@@ -76,5 +76,39 @@ export const comfirmEmailVerification = () => {
 	}
 }
 
+export const checkEmailExist = () => {
+	return (req, res) => {
+		console.log(req.body)
+		if (req.body && req.body.email) {
+			User.checkEmailExist(req.body.email, connection, function(result){
+				if (result) {
+					res.json({email: 'yes'})
+				} else {
+					res.json({email: 'no'})
+				}
+			})
+		} else {
+			res.json({email: 'wrong format'})
+		}
+	}
+}
+
+export const checkPhoneExist = () => {
+	return (req, res) => {
+		if (req.body && req.body.phone) {
+			User.checkPhoneExist(req.body.phone, connection, function(result){
+				if (result) {
+					res.json({phone: 'yes'})
+				} else {
+					res.json({phone: 'no'})
+				}
+			})
+		} else {
+			res.json({phone : 'wrong format'})
+		}
+	}
+}
+
+
 
 
