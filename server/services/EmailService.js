@@ -12,7 +12,7 @@ function sendVerifyEmail(email, token, next) {
 	  	// replyTo:'user@gmail.com'           // replyTo: by default undefined 
 	  	subject: 'Finish your registration',
 	  	text:    'Please click on following link to finish you registration: \n' + 
-	  		'http://localhost:3000/emailverification/' 
+	  		'http://34.209.206.70:3000/emailverification/' 
 	  		+ token
 	  	// html:    '<b>html text text</b>' 
 	});
