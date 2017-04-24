@@ -43,5 +43,13 @@ export default {
       controller: 'UserController',
       method: 'checkPhoneExist'
     }
+  },
+
+  '/who': {
+    get: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'getUser'
+    }
   }
 }
