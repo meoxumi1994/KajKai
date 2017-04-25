@@ -4,6 +4,7 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var User = require('../services/UserService.js')
 var connection = require('./mysqlDB.js');
 
+
 // load up the user model
 // var User       = require('../app/models/user');
 
@@ -35,12 +36,8 @@ module.exports = function(passport) {
             console.log(email + ' ' + password);
             User.getUserFromEmail(email, connection, function(user){
                 console.log(user);
-                // if (!user || password != user.password) {
-                //     req.token = null;
-                // } else {
-                //     req.token = User.getUserToken(email);
-                //     // console.log(req.token);
-                // }
+                
+                req.token = User.getUserToken(email);
                 done(null, true);
             })
         }

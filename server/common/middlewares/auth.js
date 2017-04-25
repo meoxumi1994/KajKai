@@ -11,16 +11,12 @@ const auth = () => {
 
   	return (req, res, next) => {
   		console.log("a hihi");
-  		// console.log("token " + req.cookies.token);
-  		// console.log("uehfew " + req.cookie.token);
-  		// console.log("a hia e " + req.cookies);
-  		// if (req.cookies.token) {
-  		// 	console.log('user ' + user)
-  		// }
       if (req.cookies && req.cookies.token) {
           console.log(req.cookies.token);
       }
-    	if (verifyToken(req.cookies.token)) {
+      var decoded = verifyToken(req.cookies.token)
+    	if (decoded) {
+          req.decoded = decoded
           console.log('success');
     		  next()
     	} else {

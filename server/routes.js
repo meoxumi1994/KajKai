@@ -1,23 +1,55 @@
 import auth from './common/middlewares/auth'
-// import cors from 'cors'
 
 export default {
-  // '/demo': {
-  //   get: {
-  //     controller: 'DemoController',
-  //     middleware: [auth()],
-  //     method: 'getDemo'
-  //   },
-  //   post: {
-  //     controller: 'DemoController',
-  //     method: 'postDemo'
-  //   }
-  // },
+
   '/api': {
     get: {
       controller: 'UserController',
       middleware: [auth()],
       method: 'suckthisshit'
+    }
+  },
+  
+  '/register': {
+    post: {
+      controller: 'UserController',
+      method: 'registerNewUser'
+    }
+  },
+
+  '/verify': {
+    post: {
+      controller: 'UserController',
+      method: 'sendVerifyEmail'
+    }
+  },
+
+  '/emailverification/:token': {
+    get: {
+      controller: 'UserController',
+      method: 'comfirmEmailVerification'
+    }
+  },
+
+  '/checkemail': {
+    post: {
+      controller: 'UserController',
+      method: 'checkEmailExist'
+    }
+  },
+
+  '/checkphone': {
+    post: {
+      controller: 'UserController',
+      method: 'checkPhoneExist'
+    }
+  },
+
+  '/who': {
+    get: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'getUser'
     }
   }
 }

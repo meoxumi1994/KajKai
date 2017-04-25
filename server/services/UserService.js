@@ -8,6 +8,9 @@ module.exports = {
   getUserFromGoogleId,
   verifyToken,
   saveObjectToDB,
+  verifiedUser,
+  checkPhoneExist,
+  checkEmailExist
 };
 
 function User(email, password, username, address, phone, facebookid, googleid){
@@ -39,6 +42,39 @@ function getUserFromEmail(email, connection, next) {
 		console.log(results[0].password);
 		next(new User(results[0].email, results[0].password, results[0].username, results[0].address,
 				results[0].phone, results[0].facebookid, results[0].googleid));
+	})
+}
+
+function checkEmailExist(email, connection, next) {
+	console.log(email)
+	connection.query('Select * from user where email = ' + "'" + email + "'", function(error, results, fields){
+		if (error) {
+			console.log(error);
+			next(null);
+			return
+		}
+
+		if (results.length == 0) {
+			next(null);
+			return;
+		}
+		next(true)
+	})
+}
+
+function checkPhoneExist(phone, connection, next) {
+	connection.query('Select * from user where phone = ' + "'" + phone + "'", function(error, results, fields){
+		if (error) {
+			console.log(error);
+			next(null);
+			return
+		}
+
+		if (results.length == 0) {
+			next(null);
+			return;
+		}
+		next(true)
 	})
 }
 
@@ -92,7 +128,15 @@ function verifyToken(token) {
 	}
 }
 
-function saveObjectToDB(user, connection) {
+function verifiedUser(email, connection, next) {
+	connection.query('update user set verified = 1 where email = ' 
+		+ "'" + email + "'", function(){
+		next()
+	})
+}
+
+
+function saveObjectToDB(user, connection, next) {
 	var email = (user.email) ? "'" + user.email + "'" : 'null';
 	var password = (user.password) ? "'" + user.password + "'" : 'null';
 	var username = (user.username) ? "'" + user.username + "'" : 'null';
@@ -100,7 +144,7 @@ function saveObjectToDB(user, connection) {
 	var phone = (user.phone) ? "'" + user.phone + "'" : 'null';
 	var facebookid = (user.facebookid) ? "'" + user.facebookid + "'" : 'null';
 	var googleid = (user.googleid) ? "'" + user.googleid + "'" : 'null';
-
+	var verified = (user.verified) ? user.verified : '';
 
 	connection.query('insert into user (email, password, username, address, phone, facebookid, googleid) '
 		+ 'values (' + email + ","
@@ -109,6 +153,8 @@ function saveObjectToDB(user, connection) {
 							+ address + ","
 							+ phone + ","
 							+ facebookid + ","
-							+ googleid + ")");
+							+ googleid + ")", function(){
+								next()
+							});
 }
 

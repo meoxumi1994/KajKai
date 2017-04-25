@@ -15,7 +15,7 @@ var corsOptions = {
       origin: 'http://localhost:8080',
       credentials: true
     }
-app.use(cors())
+// app.use(cors())
 app.use(cors(corsOptions));
 
 // app.options('*', cors())
@@ -52,12 +52,10 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
-app.post('/server/login',
+app.post('/login',
   	passport.authenticate('local'),
   	function(req, res) {
       // console.log(req.token + ' ' + res.token)
-
-
      	if (req.token) {
         	res.cookie('token', req.token, { maxAge: 10000000})
         	console.log(req.token);
@@ -89,20 +87,8 @@ for(let link in allRoutes){
   }
 }
 
-app.post('/server/login', function(req, res){
-  res.cookie('token', 'hihi', {maxAge: 1000000000});
-  res.end();
-})
 
 
 
-// app.get('/aaa', function(req, res){
-// 	if (req.cookies && req.cookies.token) {
-// 		console.log("token " + req.cookies.token);
-// 	}
-// 	res.cookie('token', 'minh minh', {maxAge: 100000000});
-// 	res.json({haha: 'hehe'});
-// 	console.log('ahihi');
-// })
 
 export default app
