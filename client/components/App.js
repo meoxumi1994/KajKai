@@ -1,11 +1,11 @@
 import React from 'react'
-import { Router, Route, hashHistory , browserHistory} from 'react-router'
+import { Router, Route, hashHistory , browserHistory } from 'react-router'
 
-import BarScreen from './BarScreen'
+import BarScreenContainer from '../containers/BarScreenContainer'
 
 const App = (props) => (
     <div>
-        <BarScreen/>
+        <BarScreenContainer/>
         <hr style={{margin: 0}}></hr>
         { props.children }
     </div>

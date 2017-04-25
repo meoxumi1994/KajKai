@@ -4,7 +4,7 @@ import { Router, Route, hashHistory , browserHistory, IndexRoute} from 'react-ro
 import Home from './home/Home'
 import Mapp from './mapp/Map'
 import App from './App'
-import UserLoginRegister from './user-login-register'
+import UserLoginRegisterContainer from '../containers/user-login-register'
 import Store from './store/Store'
 
 const Components = () => (
@@ -12,11 +12,10 @@ const Components = () => (
         <Route path="/" component={App}>
             <IndexRoute component={Home}/>
             <Route path="/map" component={Mapp}/>
-            <Route path="/register" component={UserLoginRegister}/>
+            <Route path="/register" component={UserLoginRegisterContainer}/>
             <Route path="/store" component={Store}/>
         </Route>
     </Router>
 )
-
 
 export default Components
