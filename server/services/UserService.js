@@ -10,7 +10,8 @@ module.exports = {
   saveObjectToDB,
   verifiedUser,
   checkPhoneExist,
-  checkEmailExist
+  checkEmailExist,
+  getUserFromPhone
 };
 
 function User(email, password, username, address, phone, facebookid, googleid){
@@ -28,6 +29,26 @@ function User(email, password, username, address, phone, facebookid, googleid){
 function getUserFromEmail(email, connection, next) {
 	// console.log('Select * from user where email = ' + "'" + email + "'");
 	connection.query('Select * from user where email = ' + "'" + email + "'", function(error, results, fields){
+		if (error) {
+			console.log(error);
+			next(null);
+			return
+		}
+
+		if (results.length == 0) {
+			next(null);
+			return;
+		}
+		console.log(results[0].email);
+		console.log(results[0].password);
+		next(new User(results[0].email, results[0].password, results[0].username, results[0].address,
+				results[0].phone, results[0].facebookid, results[0].googleid));
+	})
+}
+
+function getUserFromPhone(phone, connection, next) {
+	// console.log('Select * from user where email = ' + "'" + email + "'");
+	connection.query('Select * from user where phone = ' + "'" + phone + "'", function(error, results, fields){
 		if (error) {
 			console.log(error);
 			next(null);

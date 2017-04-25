@@ -3,6 +3,9 @@ var User = require('../services/UserService.js')
 var connection = require('../config/mysqlDB.js')
 var Email = require('../services/EmailService.js')
 
+const phoneRegrex = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
+const emailRegrex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
 export const suckthisshit = () => {
   return (req, res) => {
     // Send the rendered page back to the client
@@ -18,27 +21,55 @@ export const registerNewUser = () => {
 			var body = req.body;
 			// console.log(body);
 
-			if (body.loginID && body.username && body.password) {			
-				User.getUserFromEmail(body.loginID, connection, function(user){
-					if (user) {
-						// console.log("hehe");
-						res.json({status: 'email is already registered'})
-						return;
-					}
-					var newUser = new User.User(body.loginID, body.password, body.username, body.address,
-					body.phone, '', '')
+			if (body.loginID && body.username && body.password) {	
 
-					User.saveObjectToDB(newUser, connection, function(){
-						// console.log('success');
-						let email = newUser.email
-						Email.sendVerifyEmail(email, 
-							User.getUserToken(email) ,function(){
-							console.log('sent')
+				if (emailRegrex.test(body.loginID)) {	
+					User.getUserFromEmail(body.loginID, connection, function(user){
+						if (user) {
+							// console.log("hehe");
+							res.json({status: 'already registered'})
+							return;
+						}
+						var newUser = new User.User(body.loginID, body.password, body.username, body.address,
+						body.phone, '', '')
+
+						User.saveObjectToDB(newUser, connection, function(){
+							// console.log('success');
+							let email = newUser.email
+							Email.sendVerifyEmail(email, 
+								User.getUserToken(email) ,function(){
+								console.log('sent')
+							})
+							res.json({status: 'success'})
+							return
 						})
-						res.json({status: 'success'})
-						return
 					})
-				})
+					return
+				}
+				if (phoneRegrex.test(body.loginID)) {	
+					User.getUserFromPHone(body.loginID, connection, function(user){
+						if (user) {
+							// console.log("hehe");
+							res.json({status: 'already registered'})
+							return;
+						}
+						var newUser = new User.User(body.loginID, body.password, body.username, body.address,
+						body.phone, '', '')
+
+						User.saveObjectToDB(newUser, connection, function(){
+							// console.log('success');
+							let email = newUser.email
+							Email.sendVerifyEmail(email, 
+								User.getUserToken(email) ,function(){
+								console.log('sent')
+							})
+							res.json({status: 'success'})
+							return
+						})
+					})
+					return
+				} 
+				res.json({status: 'failed'})
 			} else {
 				res.json({status: 'failed'})
 			} 
@@ -76,35 +107,65 @@ export const comfirmEmailVerification = () => {
 	}
 }
 
-export const checkEmailExist = () => {
-	return (req, res) => {
-		console.log(req.body)
-		if (req.body && req.body.email) {
-			User.checkEmailExist(req.body.email, connection, function(result){
-				if (result) {
-					res.json({email: 'yes'})
-				} else {
-					res.json({email: 'no'})
-				}
-			})
-		} else {
-			res.json({email: 'wrong format'})
-		}
-	}
-}
+// export const checkEmailExist = () => {
+// 	return (req, res) => {
+// 		console.log(req.body)
+// 		if (req.body && req.body.email) {
+// 			User.checkEmailExist(req.body.email, connection, function(result){
+// 				if (result) {
+// 					res.json({email: 'yes'})
+// 				} else {
+// 					res.json({email: 'no'})
+// 				}
+// 			})
+// 		} else {
+// 			res.json({email: 'wrong format'})
+// 		}
+// 	}
+// }
 
-export const checkPhoneExist = () => {
+// export const checkPhoneExist = () => {
+// 	return (req, res) => {
+// 		if (req.body && req.body.phone) {
+// 			User.checkPhoneExist(req.body.phone, connection, function(result){
+// 				if (result) {
+// 					res.json({phone: 'yes'})
+// 				} else {
+// 					res.json({phone: 'no'})
+// 				}
+// 			})
+// 		} else {
+// 			res.json({phone : 'wrong format'})
+// 		}
+// 	}
+// }
+
+export const findLoginID = () => {
 	return (req, res) => {
-		if (req.body && req.body.phone) {
-			User.checkPhoneExist(req.body.phone, connection, function(result){
-				if (result) {
-					res.json({phone: 'yes'})
+		if (req.body && req.body.loginID) {
+
+			if (phoneRegrex.test(loginID)) {
+
+				User.checkPhoneExist(req.body.phone, connection, function(result){
+					if (result) {
+						res.json({type: 'yes'})
+					} else {
+						res.json({type: 'no'})
+					}
+				})
+			} else {
+				if (emailRegrex.test(loginID)) {
+					if (result) {
+						res.json({type: 'yes'})
+					} else {
+						res.json({type: 'no'})
+					}
 				} else {
-					res.json({phone: 'no'})
+					res.json({type: 'no'})
 				}
-			})
+			}
 		} else {
-			res.json({phone : 'wrong format'})
+			res.json({type: 'no'})
 		}
 	}
 }
@@ -115,7 +176,7 @@ export const getUser = () => {
 		if (req.decoded) {
 			var email = req.decoded.user
 			User.getUserFromEmail(email, connection, function(user){
-				res.json({name : user.username})
+				res.json({username : user.username})
 			})
 		} else {
 			res.json({error: 'unknown err'})
