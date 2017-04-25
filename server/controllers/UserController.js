@@ -143,10 +143,11 @@ export const comfirmEmailVerification = () => {
 export const findLoginID = () => {
 	return (req, res) => {
 		if (req.body && req.body.loginID) {
+			let loginID = req.body.loginID
 
 			if (phoneRegrex.test(loginID)) {
 
-				User.checkPhoneExist(req.body.phone, connection, function(result){
+				User.checkPhoneExist(loginID, connection, function(result){
 					if (result) {
 						res.json({type: 'yes'})
 					} else {
@@ -155,11 +156,13 @@ export const findLoginID = () => {
 				})
 			} else {
 				if (emailRegrex.test(loginID)) {
+					User.checkEmailExist(loginID, connection, function(result){
 					if (result) {
 						res.json({type: 'yes'})
 					} else {
 						res.json({type: 'no'})
 					}
+				})
 				} else {
 					res.json({type: 'no'})
 				}
