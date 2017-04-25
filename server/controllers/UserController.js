@@ -111,6 +111,7 @@ export const checkPhoneExist = () => {
 
 export const getUser = () => {
 	return (req, res) => {
+		console.log(req.decoded)
 		if (req.decoded) {
 			var email = req.decoded.user
 			User.getUserFromEmail(email, connection, function(user){

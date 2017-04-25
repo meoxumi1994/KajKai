@@ -36,8 +36,9 @@ module.exports = function(passport) {
             console.log(email + ' ' + password);
             User.getUserFromEmail(email, connection, function(user){
                 console.log(user);
-                
-                req.token = User.getUserToken(email);
+                if (user) {
+                    req.token = User.getUserToken(email);
+                }
                 done(null, true);
             })
         }
