@@ -9,15 +9,27 @@ export const loginResult = (type) => ({
     type: type
 })
 
+export const who = (loginID) => {
+    flet('/who',{
+    },{
+        username: ''
+    })
+}
+
+export const findLoginID = (loginID) => {
+    flet('/findLoginID',{
+        loginID: loginID
+    },{
+        type: 'YES|NO'
+    })
+}
+
 export const logIn = (loginID, password) => dispatch => {
     flet('/login',{
         loginID: loginID,
         password: password
     },{
-        type: ''
-    })
-    .then((res)=>{
-
+        type: 'SUCCESS|FAILURE'
     })
 }
 
@@ -27,9 +39,6 @@ export const register = (username, loginID, password) => dispatch => {
         loginID: loginID,
         password: password,
     },{
-        status: ''
-    })
-    .then((res)=>{
-        
+        status: 'wrong form|has already registered|success, verify now'
     })
 }
