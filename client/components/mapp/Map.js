@@ -26,11 +26,11 @@ class Map extends React.Component {
     render() {
         return (
             <div>
-                <div style={{ width: 400, float: 'left', backgroundColor: 'white' , height: window.innerHeight - 46, overflow: 'scroll'}}>
+                <div style={{ width: 300, float: 'left', backgroundColor: 'white' , height: window.innerHeight - 46, overflow: 'scroll'}}>
                     { this.state.isList ? <List changeScreenLeft = {this.changeScreenLeft.bind(this)}/>
                     : <StoreInMap changeScreenLeft = {this.changeScreenLeft.bind(this)}/> }
                 </div>
-                <div style={{ marginLeft : 380 }}>
+                <div style={{ marginLeft : 300 }}>
                     <GettingStartedGoogleMap
                         containerElement={ <div style={{ height: window.innerHeight - 46 }} /> }
                         mapElement={ <div style={{ height: window.innerHeight - 46 }} /> }
