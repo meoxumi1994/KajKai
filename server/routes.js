@@ -31,17 +31,10 @@ export default {
     }
   },
 
-  '/checkemail': {
+  '/findLoginID': {
     post: {
       controller: 'UserController',
-      method: 'checkEmailExist'
-    }
-  },
-
-  '/checkphone': {
-    post: {
-      controller: 'UserController',
-      method: 'checkPhoneExist'
+      method: 'findLoginID'
     }
   },
 

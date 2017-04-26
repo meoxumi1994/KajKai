@@ -60,16 +60,18 @@ app.post('/login',
         	res.cookie('token', req.token, { maxAge: 10000000})
         	console.log(req.token);
         	res.json({
-          		type : 'LOGIN_SUCCESS'
+          		type : 'SUCCESS'
         	})
       	} else {
         	res.json({
-          		type : 'LOGIN_FAILED'
+          		type : 'FAILED'
         	})
       	}
 });
 
 //////
+
+
 
 
 

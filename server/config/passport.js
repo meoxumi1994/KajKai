@@ -4,6 +4,8 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var User = require('../services/UserService.js')
 var connection = require('./mysqlDB.js');
 
+const phoneRegrex = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
+const emailRegrex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
 // load up the user model
 // var User       = require('../app/models/user');
@@ -31,16 +33,32 @@ module.exports = function(passport) {
         passReqToCallback: true,
         session: false
     },
-        function(req, email, password, done) {
+        function(req, loginID, password, done) {
 
-            console.log(email + ' ' + password);
-            User.getUserFromEmail(email, connection, function(user){
-                console.log(user);
-                if (user) {
-                    req.token = User.getUserToken(email);
-                }
-                done(null, true);
-            })
+            console.log(loginID + ' ' + password);
+
+            if (emailRegrex.test(loginID)) {
+
+                User.getUserFromEmail(loginID, connection, function(user){
+                    console.log(user);
+                    if (user) {
+                        req.token = User.getUserToken(loginID);
+                    }
+                    done(null, true);
+                })
+            } else {
+                if (phoneRegrex.test(loginID)) {
+                    User.getUserFromPhone(loginID, connection, function(user){
+                        console.log(user);
+                        if (user) {
+                            req.token = User.getUserToken(loginID);
+                        }
+                        done(null, true);
+                    })
+                } else done(null, true)
+            }
+
+
         }
     ));
 
