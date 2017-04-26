@@ -29,7 +29,7 @@ export const logIn = (loginID, password) => dispatch => {
         loginID: loginID,
         password: password
     },{
-        type: 'SUCCESS|FAILURE'
+        type: 'SUCCESS|FAILED'
     })
 }
 

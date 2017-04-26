@@ -4,20 +4,22 @@ import logIn from '../../actions/auth'
 import config from '../../config'
 import allString from '../../config/allString'
 
+import flet from '../../actions/support'
+
 const checkloginID = (loginID) => {
     if(!isLoginClick) return null;
     const length = loginID.length;
     const isphone = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/.test(loginID)
     const ismail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(loginID)
     if( !ismail && !isphone ) return 'error'
-    return 'success';
+    return null;
 }
 
 const checkPassword = (password) => {
     if(!isLoginClick) return null;
     const length = password.length;
     if (0 <= length && length < 5 ) return 'error';
-    return 'success';
+    return null;
 }
 
 let isLoginClick = false
@@ -52,7 +54,7 @@ class UserLogin extends React.Component {
     }
     clickLogin(){
         isLoginClick = true
-        if( this.getValidationLoginID() == 'success' && this.getValidationPassword() == 'success' ){
+        if( this.getValidationLoginID() == null && this.getValidationPassword() == null ){
             let { loginID, password } = this.state;
             this.props.onLoginClick( loginID, password )
         }else{
@@ -97,7 +99,6 @@ class UserLogin extends React.Component {
                         <HelpBlock >Validation is based on string length.</HelpBlock>
                     }
                 </FormGroup>
-
                 <div className="btn btn-xs" ><a>{ getlanguage('FORGOT_PASSWORD') }</a></div>
                 <div>
                     <div style={{  float: 'right' }}>
