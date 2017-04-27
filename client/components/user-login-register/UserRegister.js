@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button, FormGroup, FormControl, Panel, HelpBlock, ControlLabel } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, Panel, HelpBlock, ControlLabel, Modal} from 'react-bootstrap';
 
 import config from '../../config'
 import allString from '../../config/allString'
+import {flet} from '../../actions/support'
 
 const verifyCharacterVietname = (username) => {
     username = username.toUpperCase();
@@ -40,7 +41,7 @@ const checkUserName = (username) => {
     if(!isRegisterClick) return null;
     const length = username.length;
     if( length > 45 || length < 5 || (length > 0 && !verifyCharacterVietname(username)) ) return 'error'
-    return 'success'
+    return null
 }
 
 const checkloginID = (loginID) => {
@@ -50,14 +51,14 @@ const checkloginID = (loginID) => {
     const ismail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(loginID)
     if( !ismail && !isphone ) return 'error'
     isMail = ismail
-    return 'success';
+    return null
 }
 
 const checkPassword = (password) => {
     if(!isRegisterClick) return null;
     const length = password.length;
     if (0 <= length && length < 5 ) return 'error';
-    return 'success';
+    return null
 }
 
 let isRegisterClick = false
@@ -68,11 +69,12 @@ class UserRegister extends React.Component {
         super(props)
         this.state = {
             username : 'tran duc minh',
-            loginID : 'mingtdse02995@gmail.com',
+            loginID : 'minhtdse02995@gmail.com',
             password : '123456',
             openUsernameError : false,
             openLoginIDError : false,
             openPasswordError : false,
+            showModal: false,
         }
     }
     getValidationUserName() {
@@ -104,10 +106,24 @@ class UserRegister extends React.Component {
     }
     clickregisterUSER(){
         isRegisterClick = true
-        if( this.getValidationUserName() == 'success' && this.getValidationloginID() == 'success'
-            && this.getValidationPassword() == 'success' ){
+        if( this.getValidationUserName() == null && this.getValidationloginID() == null
+            && this.getValidationPassword() == null ){
                 let { username, loginID, password } = this.state;
-                this.props.onRegisterClick(username, loginID, password)
+
+                flet('/register',{
+                    username : username,
+                    loginID: loginID,
+                    password: password,
+                },{
+                    status: 'wrong form|has already registered|success, verify now'
+                })
+                .then((res)=>{
+                    this.setState({ showModal: true });
+                })
+                // this.props.onRegisterClick(username, loginID, password)
+                //     .then((res)=> {
+                //         console.log(res)
+                //     })
         }else{
             this.setState({
                 openUsernameError: checkUserName(this.state.username) == 'error',
@@ -115,6 +131,12 @@ class UserRegister extends React.Component {
                 openPasswordError: checkPassword(this.state.password) == 'error'
             });
         }
+    }
+    close() {
+        this.setState({ showModal: false });
+    }
+    open() {
+        this.setState({ showModal: true });
     }
     render(){
         const getlanguage = (lang) => allString.get(this.props.language, lang)
@@ -133,7 +155,7 @@ class UserRegister extends React.Component {
                     />
                     <FormControl.Feedback />
                     {   this.state.openUsernameError &&
-                        <HelpBlock >Validation is based on string length.</HelpBlock>
+                        <HelpBlock > { getlanguage('NAME_WARNING') } </HelpBlock>
                     }
                 </FormGroup>
 
@@ -148,7 +170,7 @@ class UserRegister extends React.Component {
                     />
                     <FormControl.Feedback />
                     {   this.state.openLoginIDError &&
-                        <HelpBlock >Validation is based on string length.</HelpBlock>
+                        <HelpBlock >{ getlanguage('EMAIL_OR_PHONE_WARNING') }</HelpBlock>
                     }
                 </FormGroup>
 
@@ -163,7 +185,7 @@ class UserRegister extends React.Component {
                     />
                     <FormControl.Feedback />
                     {   this.state.openPasswordError &&
-                        <HelpBlock >Validation is based on string length.</HelpBlock>
+                        <HelpBlock >{ getlanguage('PASSWORD_WARNING') }</HelpBlock>
                     }
                 </FormGroup>
 
@@ -175,8 +197,29 @@ class UserRegister extends React.Component {
                   Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
                   Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                 </Panel> */}
-                <div className='small'>{allString.get('RULE')}</div>
+
+                <div className='small'>
+                    <i className="fa fa-circle-o-notch fa-spin"
+                        style={{ fontSize: 16, color: '#BD081C', zIndex: 1, position: 'absolute', marginTop: 10, marginLeft: 30 }}></i>
+                    {allString.get('RULE')}
+                </div>
                 <Button bsStyle="success" onClick={this.clickregisterUSER.bind(this)}>{ getlanguage('CREATE_ACCOUNT') }</Button>
+                <Modal show={ this.state.showModal } onHide={this.close.bind(this)} style={{ marginTop: 140 }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                        { getlanguage('REGISTER_MODAL_HEADER_WARNING') }
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p> <strong>{this.state.loginID}</strong></p>
+                        <p>
+                            { (isMail)? getlanguage('REGISTER_MODAL_EMAIL_WARNING'): getlanguage('REGISTER_MODAL_PHONE_WARNING') }
+                        </p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button onClick={this.close.bind(this)}>{ getlanguage('CLOSE')}</Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         )
     }
