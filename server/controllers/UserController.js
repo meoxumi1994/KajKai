@@ -184,7 +184,7 @@ export const getUser = () => {
 				res.json({username : user.username})
 			})
 		} else {
-			res.json({error: 'unknown err'})
+			res.json({error: 'unknown'})
 		}
 	}
 }
