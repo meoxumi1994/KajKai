@@ -46,8 +46,10 @@ export const registerNewUser = () => {
 					})
 					return
 				}
+				console.log(body.loginID);
 				if (phoneRegrex.test(body.loginID)) {	
-					User.getUserFromPHone(body.loginID, connection, function(user){
+
+					User.getUserFromPhone(body.loginID, connection, function(user){
 						if (user) {
 							// console.log("hehe");
 							res.json({status: 'already registered'})
