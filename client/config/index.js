@@ -2,8 +2,9 @@ const config = {
     ISTEST : true,
     PROTOCOL: ['http', 'http'],
     IP: ['localhost', '34.209.206.70'], // 34.209.206.70 10.20.16.139
-    PORT: 3000,
+    PORT: 8080,
     getDomain: () => {
+        console.log(config.ISTEST)
         if(config.ISTEST)
             return config.PROTOCOL[1] + '://' + config.IP[1] + ':' + config.PORT;
         else

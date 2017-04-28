@@ -4,6 +4,46 @@
 body {
     background-color: #E9EBEE;
 }
+a {
+    color: #999999;
+}
+
+.clocker {
+  width: 22px;
+  height: 22px;
+  -webkit-animation: 1s clock infinite steps(1);
+}
+
+@-webkit-keyframes clock {
+  0% { transform: rotate(0deg); }
+  8.333333% { transform: rotate(30deg); }
+  16.666667% { transform: rotate(60deg); }
+  25% { transform: rotate(90deg); }
+  33.333333% { transform: rotate(120deg); }
+  41.666667% { transform: rotate(150deg); }
+  50% { transform: rotate(180deg); }
+  58.333333% { transform: rotate(210deg); }
+  66.666667% { transform: rotate(240deg); }
+  75% { transform: rotate(270deg); }
+  83.333333% { transform: rotate(300deg); }
+  91.666667% { transform: rotate(330deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader {
+  border: 2px solid #BD081C;
+  border-radius: 100%;
+  border-top: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 0.8s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
 
 .btn-social{position:relative;padding-left:44px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.btn-social>:first-child{position:absolute;left:0;top:0;bottom:0;width:32px;line-height:34px;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
 .btn-social.btn-lg{padding-left:61px}.btn-social.btn-lg>:first-child{line-height:45px;width:45px;font-size:1.8em}

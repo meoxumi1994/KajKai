@@ -10,9 +10,9 @@ module.exports = {
       'webpack/hot/only-dev-server'
   ],
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/',
     filename: "bundle.js",
-    publicPath: '/dist'
+    publicPath: '/'
   },
   module: {
     loaders: [
@@ -29,10 +29,9 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     hot: true,
-    contentBase: __dirname + '/dist',
+    contentBase: __dirname + '/',
     // match the output path
-
-    publicPath: '/dist'
+    publicPath: '/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

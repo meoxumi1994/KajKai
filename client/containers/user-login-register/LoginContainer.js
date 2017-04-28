@@ -1,8 +1,7 @@
 import { connect } from 'react-redux'
 
-import { logIn } from '../../actions/auth'
-import { language } from '../../actions/language'
-import UserLogin from '../../components/user-login-register/UserLogin'
+import { logIn } from '../../actions/user-login-register/login'
+import UserLogin from '../../components/user-login-register/Login'
 
 const mapStateToProps = (state, ownProps) => ({
     language: state.language

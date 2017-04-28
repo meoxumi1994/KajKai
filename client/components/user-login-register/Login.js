@@ -1,10 +1,7 @@
 import React from 'react';
 import { Button, FormGroup, FormControl, HelpBlock } from 'react-bootstrap';
-import logIn from '../../actions/auth'
 import config from '../../config'
 import allString from '../../config/allString'
-
-import flet from '../../actions/support'
 
 const checkloginID = (loginID) => {
     if(!isLoginClick) return null;
@@ -28,8 +25,8 @@ class UserLogin extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            loginID : 'bintele15@yahoo.com',
-            password : '123456',
+            loginID : '',
+            password : '',
             openLoginIDError : false,
             openPasswordError : false,
         }
@@ -81,7 +78,7 @@ class UserLogin extends React.Component {
                     />
                     <FormControl.Feedback />
                     {   this.state.openLoginIDError &&
-                        <HelpBlock >Validation is based on string length.</HelpBlock>
+                        <HelpBlock >{ getlanguage('EMAIL_OR_PHONE_WARNING') }</HelpBlock>
                     }
                 </FormGroup>
 
@@ -96,25 +93,27 @@ class UserLogin extends React.Component {
                     />
                     <FormControl.Feedback />
                     {   this.state.openPasswordError &&
-                        <HelpBlock >Validation is based on string length.</HelpBlock>
+                        <HelpBlock>{ getlanguage('PASSWORD_WARNING') }</HelpBlock>
                     }
                 </FormGroup>
-                <div className="btn btn-xs" ><a>{ getlanguage('FORGOT_PASSWORD') }</a></div>
+                <div className="btn btn-xs" style={{ padding: 0}}><a>{ getlanguage('FORGOT_PASSWORD') }</a></div>
                 <div>
                     <div style={{  float: 'right' }}>
                         <a  href={ config.getDomain() + "/auth/facebook" }
-                            className="btn btn-social btn-facebook"
+                            className="btn btn-social btn-default"
                             style={{ marginRight: 4 }}>
-                            <span className="fa fa-facebook"></span>
-                            Facebook
+                            <span className="fa fa-facebook" style={{ color: '#3b5998'}}></span>
+                            <span style={{ color: '#3b5998'}} >Facebook</span>
                         </a>
                         <a href={ config.getDomain() + "/auth/google" }
-                            className="btn btn-social btn-google">
-                            <span className="fa fa-google"></span>
-                            Google
+                            className="btn btn-social btn-default">
+                            <span className="fa fa-google" style={{ color: '#C23321'}}></span>
+                            <span style={{ color: '#C23321'}} >Google</span>
                         </a>
                     </div>
-                    <button className="btn btn-success" style={{ marginBottom: 7 }} onClick={this.clickLogin.bind(this)}>
+                    <button className="btn"
+                        style={{ marginBottom: 7, backgroundColor: '#BD081C', color: 'white'}}
+                        onClick={this.clickLogin.bind(this)}>
                         { getlanguage('LOG_IN') }
                     </button>
                 </div>
