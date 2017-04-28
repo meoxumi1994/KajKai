@@ -9,7 +9,8 @@ const config = {
         else
             return config.PROTOCOL[1] + '://' + config.IP[1] + ':' + config.PORT;
     },
-    OTHERPORT: 3000
+    OTHERPORT: 3000,
+    REDIRECTURL: 'www.kajkai.com'
 }
 
 export default config
