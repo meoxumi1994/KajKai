@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import passport from 'passport'
 import path from 'path'
+import config from './config/serverConfig'
 
 require('./config/passport')(passport);
 
@@ -11,10 +12,13 @@ import init from './socketio'
 import allRoutes from './routes'
 
 const app = express()
+var whitelist = ['http://localhost:' + config.OTHERPORT, 'http://34.209.206.70:' + config.OTHERPORT]
+var serveraddress = config.getDomain()
 var corsOptions = {
-      origin: 'http://localhost:8080',
+      origin: serveraddress,
       credentials: true
     }
+
 // app.use(cors())
 app.use(cors(corsOptions));
 
@@ -70,10 +74,6 @@ app.post('/login',
 });
 
 //////
-
-
-
-
 
 
 // load all routes

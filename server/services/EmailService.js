@@ -1,3 +1,4 @@
+import config from '../config/serverConfig'
 
 module.exports = {
   sendVerifyEmail
@@ -12,7 +13,7 @@ function sendVerifyEmail(email, token, next) {
 	  	// replyTo:'user@gmail.com'           // replyTo: by default undefined 
 	  	subject: 'Finish your registration',
 	  	text:    'Please click on following link to finish you registration: \n' + 
-	  		'http://34.209.206.70:3000/emailverification/' 
+	  		config.getDomain() + '/emailverification/' 
 	  		+ token
 	  	// html:    '<b>html text text</b>' 
 	});

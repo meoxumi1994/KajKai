@@ -1,9 +1,9 @@
 import app from './app'
 import http from 'http'
 import init from './socketio'
-// import config from '../config'
+import config from './config/serverConfig'
 
 const server = http.Server(app)
 const sio = init(server)
 
-server.listen(3000)
+server.listen(config.PORT)
