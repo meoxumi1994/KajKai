@@ -22,6 +22,7 @@ export const flet = (url, need, get) => {
 }
 
 export const flem = (url, get) => {
+    console.log("flem config.getDomain()",config.getDomain())
     let myurl = config.getDomain() + url
     console.log(myurl,get)
     return fetch( myurl , {
