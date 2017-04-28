@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
 
-import { register } from '../../actions/auth'
-import UserRegister from '../../components/user-login-register/UserRegister'
+import { register } from '../../actions/user-login-register/register'
+import UserRegister from '../../components/user-login-register/Register'
 
 const mapStateToProps = (state, ownProps) => ({
-    language: state.language
+    language: state.language,
+    registerResult: state.registerResult
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

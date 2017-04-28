@@ -14,7 +14,7 @@ const myString = {
     RULE: ['khi bạn đăng ký là đã đồng ý với tất cả điều khoản của chúng tôi','By clicking Create Account, you agree to our Terms'],
     KAJKAI_THANK : ['KajKai cảm ơn các bạn đã quan tâm', 'KajKai thank you for your interest'],
     CHECK: ['Xác Nhận','Confirm'],
-    PLEASE_GO_EMAIL_TO_CHECK: ['bạn vui lòng vào mail kiểm tra để xác nhận, nếu không có bạn có thể tìm lại ở hòm thư spam','Please check your mail to confirm, if not you can find in the spam mailbox'],
+    PLEASE_GO_EMAIL_TO_CHECK: ['bạn vui lòng vào email kiểm tra để xác nhận, nếu không có bạn có thể tìm lại ở mục spam','Please check your mail to confirm, if not you can find in the spam mailbox'],
     FORGOT_PASSWORD: ['bạn quên mật khẩu?','forgot your password?'],
     REGISTER_MODAL_HEADER_WARNING: ['Hãy kiểm tra lại','Please check again'],
     REGISTER_MODAL_EMAIL_WARNING: ['email này đã được sử dụng để đăng ký từ trước','This email has been used to register'],

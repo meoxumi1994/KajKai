@@ -14,6 +14,24 @@ export const flet = (url, need, get) => {
     .then((response) => response.json())
     .then((res) => {
         console.log(res)
+        return res
+    })
+    .catch((error)=> {
+        console.error(myurl,error);
+    })
+}
+
+export const flem = (url, get) => {
+    let myurl = config.getDomain() + url
+    console.log(myurl,get)
+    return fetch( myurl , {
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then((response) => response.json())
+    .then((res) => {
+        console.log(res)
+        return res
     })
     .catch((error)=> {
         console.error(myurl,error);

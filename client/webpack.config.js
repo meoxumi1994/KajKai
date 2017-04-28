@@ -1,18 +1,12 @@
-const { resolve } = require('path');
-var webpack = require('webpack');
+var webpack = require('webpack')
 
 module.exports = {
-  "devtool": "eval",
-  entry: [
-      'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:8080',
-      "./index.js",
-      'webpack/hot/only-dev-server'
-  ],
+  entry: {
+    "bundle": './index.js'
+  },
   output: {
-    path: __dirname + '/dist',
-    filename: "bundle.js",
-    publicPath: '/dist'
+    path: __dirname,
+    filename: "[name].js"
   },
   module: {
     loaders: [
@@ -26,17 +20,16 @@ module.exports = {
       }
     ]
   },
-  devServer: {
-    historyApiFallback: true,
-    hot: true,
-    contentBase: __dirname + '/',
-    // match the output path
-    publicPath: '/dist'
-  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    // enable HMR globally
-    new webpack.NamedModulesPlugin(),
-    // prints more readable module names in the browser console on HMR updates
-  ],
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false
+      }
+    })
+  ]
 }

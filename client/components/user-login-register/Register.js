@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button, FormGroup, FormControl, Panel, HelpBlock, ControlLabel, Modal} from 'react-bootstrap';
+import { Button, FormGroup, FormControl, Panel, HelpBlock, ControlLabel} from 'react-bootstrap';
 
 import config from '../../config'
 import allString from '../../config/allString'
-import {flet} from '../../actions/support'
+import { flet } from '../../actions/support'
 
 const verifyCharacterVietname = (username) => {
     username = username.toUpperCase();
@@ -68,13 +68,12 @@ class UserRegister extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            username : 'tran duc minh',
+            username : 'minhtdse',
             loginID : 'minhtdse02995@gmail.com',
             password : '123456',
             openUsernameError : false,
             openLoginIDError : false,
             openPasswordError : false,
-            showModal: false,
         }
     }
     getValidationUserName() {
@@ -109,21 +108,7 @@ class UserRegister extends React.Component {
         if( this.getValidationUserName() == null && this.getValidationloginID() == null
             && this.getValidationPassword() == null ){
                 let { username, loginID, password } = this.state;
-
-                flet('/register',{
-                    username : username,
-                    loginID: loginID,
-                    password: password,
-                },{
-                    status: 'wrong form|has already registered|success, verify now'
-                })
-                .then((res)=>{
-                    this.setState({ showModal: true });
-                })
-                // this.props.onRegisterClick(username, loginID, password)
-                //     .then((res)=> {
-                //         console.log(res)
-                //     })
+                this.props.onRegisterClick(username, loginID, password)
         }else{
             this.setState({
                 openUsernameError: checkUserName(this.state.username) == 'error',
@@ -132,16 +117,10 @@ class UserRegister extends React.Component {
             });
         }
     }
-    close() {
-        this.setState({ showModal: false });
-    }
-    open() {
-        this.setState({ showModal: true });
-    }
     render(){
-        const getlanguage = (lang) => allString.get(this.props.language, lang)
+        let { language, registerResult} = this.props
+        const getlanguage = (lang) => allString.get(language, lang)
         return (
-
             <div>
                 <h3>{ getlanguage('CREATE_A_NEW_ACCOUNT') }</h3>
                 <FormGroup
@@ -197,29 +176,18 @@ class UserRegister extends React.Component {
                   Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
                   Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                 </Panel> */}
-
+                {/* <i className="fa fa-circle-o-notch fa-spin"
+                    style={{ fontSize: 16, color: '#BD081C', zIndex: 1, position: 'absolute', marginTop: 10, marginLeft: 20 }}></i> */}
                 <div className='small'>
-                    <i className="fa fa-circle-o-notch fa-spin"
-                        style={{ fontSize: 16, color: '#BD081C', zIndex: 1, position: 'absolute', marginTop: 10, marginLeft: 30 }}></i>
                     {allString.get('RULE')}
                 </div>
-                <Button bsStyle="success" onClick={this.clickregisterUSER.bind(this)}>{ getlanguage('CREATE_ACCOUNT') }</Button>
-                <Modal show={ this.state.showModal } onHide={this.close.bind(this)} style={{ marginTop: 140 }}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                        { getlanguage('REGISTER_MODAL_HEADER_WARNING') }
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <p> <strong>{this.state.loginID}</strong></p>
-                        <p>
-                            { (isMail)? getlanguage('REGISTER_MODAL_EMAIL_WARNING'): getlanguage('REGISTER_MODAL_PHONE_WARNING') }
-                        </p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                    <Button onClick={this.close.bind(this)}>{ getlanguage('CLOSE')}</Button>
-                    </Modal.Footer>
-                </Modal>
+
+                <button className="btn"
+                    style={{ backgroundColor: '#BD081C', color: 'white', width: 123}}
+                    onClick={this.clickregisterUSER.bind(this)}>
+                    {  (registerResult=='REGISTER_WAIT')? getlanguage('CREATE_ACCOUNT')
+                        : <div className="loader" style={{ marginLeft: 40 }}></div> }
+                </button>
             </div>
         )
     }

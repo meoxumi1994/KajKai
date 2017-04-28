@@ -29,9 +29,8 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     hot: true,
-    contentBase: __dirname + '/dist',
+    contentBase: __dirname + '/',
     // match the output path
-
     publicPath: '/dist'
   },
   plugins: [

@@ -1,18 +1,49 @@
 import React from 'react'
 import { Col } from 'react-bootstrap'
 
-import UserMailWatting from './UserMailWaitting'
-import UserLoginContainer from '../../containers/user-login-register/UserLoginContainer'
-import UserRegisterContainer from '../../containers/user-login-register/UserRegisterContainer'
+import UserVerifyContainer from '../../containers/user-login-register/VerifyContainer'
+import UserLoginContainer from '../../containers/user-login-register/LoginContainer'
+import UserRegisterContainer from '../../containers/user-login-register/RegisterContainer'
 
 import allString from '../../config/allString'
+
+const LeftScreen = (props) => {
+    let { registerResult } = props
+    switch (registerResult) {
+        case 'REGISTER_WAIT':
+            return (
+                <div>
+                    <UserLoginContainer/>
+                    <hr style={{ borderColor: "#333333"}}/>
+                    <UserRegisterContainer/>
+                </div>
+            )
+        case 'REGISTER_ING':
+            return (
+                <div style={{ pointerEvents: 'none', cursor: 'default' }}>
+                    <UserLoginContainer/>
+                    <hr style={{ borderColor: "#333333"}}/>
+                    <UserRegisterContainer/>
+                </div>
+            )
+        case 'REGISTER_ALREADY':
+            return (
+                <div>
+                    <UserVerifyContainer/>
+                </div>
+            )
+        default:
+            return <div></div>
+    }
+}
+
 
 class UserLoginRegister extends React.Component {
     constructor(props){
         super(props)
     }
     render(){
-        let { language, onLanguageClick } = this.props
+        let { language, onLanguageClick, registerResult } = this.props
         return (
             <div className="container-fluid">
                 <div className="row">
@@ -25,10 +56,8 @@ class UserLoginRegister extends React.Component {
                         </div>
                     </Col>
                     <Col xs={6} sm={6} md={6} style={{ height: window.innerHeight - 146, width: 460 }}>
-                        <UserLoginContainer/>
-                        <hr style={{ borderColor: "#333333"}}/>
-                        <UserRegisterContainer/>
-                        {/* <UserMailWatting/> */}
+                        <LeftScreen registerResult={registerResult} language = {language}/>
+                        {/* <UserVerify/> */}
                     </Col>
                 </div>
                 <div className="row" style={{ height: 102, backgroundColor: 'white' }}>

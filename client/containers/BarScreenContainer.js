@@ -4,7 +4,8 @@ import { language } from '../actions/language'
 import BarScreen from '../components/BarScreen'
 
 const mapStateToProps = (state, ownProps) => ({
-    language: state.language
+    language: state.language,
+    whoResult: state.whoResult
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
