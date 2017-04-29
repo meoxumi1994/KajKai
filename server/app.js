@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import passport from 'passport'
 import path from 'path'
+import config from './config/serverConfig'
 
 require('./config/passport')(passport);
 
@@ -11,10 +12,23 @@ import init from './socketio'
 import allRoutes from './routes'
 
 const app = express()
+var whitelist = ['http://localhost:' + config.OTHERPORT, 'http://34.209.206.70:' + config.OTHERPORT,
+'http://kajkai.com:' + config.OTHERPORT]
+// var serveraddress = config.getDomain()
+
+
+
 var corsOptions = {
-      origin: 'http://localhost:8080',
-      credentials: true
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
     }
+  },
+  credentials: true
+}
+
 // app.use(cors())
 app.use(cors(corsOptions));
 
@@ -36,7 +50,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook'),
   		console.log('hello');
   		//res.json({hello: "hello"});
   		res.cookie('token', req.token, { maxAge: 10000000})
-  		res.redirect('http://localhost:8080')
+  		res.redirect(config.REDIRECTURL)
     	// res.sendFile(__dirname + '/index.html')
   	}
 );
@@ -46,7 +60,7 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
   		console.log('hello');
   		//res.json({hello: "hello"});
   		res.cookie('token', req.token, { maxAge: 10000000})
-  		res.redirect('http://localhost:8080')
+  		res.redirect(config.REDIRECTURL)
   	}
 );
 
@@ -70,10 +84,6 @@ app.post('/login',
 });
 
 //////
-
-
-
-
 
 
 // load all routes
