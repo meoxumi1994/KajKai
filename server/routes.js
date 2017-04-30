@@ -2,14 +2,6 @@ import auth from './common/middlewares/auth'
 
 export default {
 
-  '/api': {
-    get: {
-      controller: 'UserController',
-      middleware: [auth()],
-      method: 'suckthisshit'
-    }
-  },
-  
   '/register': {
     post: {
       controller: 'UserController',
@@ -17,26 +9,33 @@ export default {
     }
   },
 
-  '/verify': {
+  // '/verify': {
+  //   post: {
+  //     controller: 'UserController',
+  //     method: 'sendVerifyEmail'
+  //   }
+  // },
+
+  // '/emailverification/:token': {
+  //   get: {
+  //     controller: 'UserController',
+  //     method: 'comfirmEmailVerification'
+  //   }
+  // },
+
+  '/login': {
     post: {
       controller: 'UserController',
-      method: 'sendVerifyEmail'
+      method: 'authorizeUser'
     }
   },
 
-  '/emailverification/:token': {
-    get: {
-      controller: 'UserController',
-      method: 'comfirmEmailVerification'
-    }
-  },
-
-  '/findLoginID': {
-    post: {
-      controller: 'UserController',
-      method: 'findLoginID'
-    }
-  },
+  // '/findLoginID': {
+  //   post: {
+  //     controller: 'UserController',
+  //     method: 'findLoginID'
+  //   }
+  // },
 
   '/who': {
     get: {

@@ -1,72 +1,32 @@
-// import cookieParser from 'cookie-parser'
-var cookieParser = require('cookie-parser');
-var express = require('express');
-var body_parser = require('body-parser');
-var app = express();
-var jwt = require('jsonwebtoken');
-app.use(body_parser());
-var passport = require('passport');
-app.use(passport.initialize());
-var cors = require('cors');
+// import models from './models'
+// var models = require('./models')
+import { User } from './models'
 
-app.use(cors())
-app.use(cookieParser())
-app.use(require('./common/middlewares/auth.js')())
+// console.log(models.User)
 
-require('./config/passport')(passport);
+var user = new User({name:'haha', password : '1234', email : 'abc@gmail.com'})
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email'] }));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }),
-  	function(req, res) {
-  		console.log('success ' + req.token);
-    	res.sendFile(__dirname + '/index.html')
-  	}
-);
-
-app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
-  	function(req, res) {
-  		console.log('success ' + req.token);
-    	// res.redirect('/');
-    	res.send('./index.html');
-  	}
-);
-
-app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-
-app.post('/server/login', 
-  	passport.authenticate('local'),
-  	function(req, res) {
-      // console.log(req.token + ' ' + res.token)
-
-
-      if (req.token) {
-        res.cookie('token', req.token, { maxAge: 10000000})
-        console.log(req.token);
-        res.json({
-          type : 'LOGIN_SUCCESS',
-          token : req.token
-        })
-        // res.end();
-      } else {
-        res.json({
-          type : 'LOGIN_FAILED'
-          // token : ''
-        })
-      }
-});
-
-app.get('/', function(req, res){
-  console.log('root');
-})
-
-// app.post('/server/login', function(req, res){
-//   res.cookie('token', 'Minh gay', {maxAge: 1000000000});
-//   // res.end();
-//   res.json({
-//     token: "ihihi"
-//   })
+// console.log(user._id)
+// user.save(function(err) {
+// 	console.log(err)
 // })
 
+// console.log(user)
 
-app.listen(6969);
+// models.User.find({}, function (err, u) {
 
+// 	console.log('fuck')
+// 	if (err) {
+// 		console.log(err)
+// 	} else {
+// 		console.log(u)
+// 	}
+// } )
+
+// models.User.findById('590601c096b7620cbe7648d2', function(err, user) {
+// 	if (err) {
+// 		console.log(err)
+// 	} else {
+// 		console.log(user.toObject())
+// 	}
+// } )

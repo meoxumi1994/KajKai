@@ -6,7 +6,7 @@ import passport from 'passport'
 import path from 'path'
 import config from './config/serverConfig'
 
-require('./config/passport')(passport);
+// require('./config/passport')(passport);
 
 import init from './socketio'
 import allRoutes from './routes'
