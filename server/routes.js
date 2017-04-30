@@ -44,5 +44,21 @@ export default {
       middleware: [auth()],
       method: 'getUser'
     }
+  },
+
+  '/loginfacebook': {
+    get: {
+      controller: 'UserController',
+      method: 'getFacebookUser'
+    }
+  },
+
+  '/logingoogle': {
+    get: {
+      controller: 'UserController',
+      method: 'getGoogleUser'
+    }
   }
+
+
 }
