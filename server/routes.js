@@ -47,14 +47,14 @@ export default {
   },
 
   '/loginfacebook': {
-    get: {
+    post: {
       controller: 'UserController',
       method: 'getFacebookUser'
     }
   },
 
   '/logingoogle': {
-    get: {
+    post: {
       controller: 'UserController',
       method: 'getGoogleUser'
     }
