@@ -5,7 +5,7 @@ module.exports = {
   "devtool": "eval",
   entry: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:8080',
+      'webpack-dev-server/client?http://localhost:3000',
       "./index.js",
       'webpack/hot/only-dev-server'
   ],
@@ -27,6 +27,7 @@ module.exports = {
     ]
   },
   devServer: {
+    port: 3000,
     historyApiFallback: true,
     hot: true,
     contentBase: __dirname + '/',

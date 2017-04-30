@@ -21,9 +21,11 @@
     "webpack-dev-server": "^2.4.3"
   },
   "dependencies": {
+    "express": "^4.15.2",
     "react": "^15.5.4",
     "react-bootstrap": "^0.30.10",
     "react-dom": "^15.5.4",
+    "react-facebook-login": "^3.5.0",
     "react-google-maps": "^6.3.0",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-redux": "^5.0.4",
