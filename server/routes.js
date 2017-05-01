@@ -30,6 +30,22 @@ export default {
     }
   },
 
+  '/logout': {
+    get: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'logOutUser'
+    }
+  },
+
+  '/updatephone': {
+    put: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'changeUserPhone'
+    }
+  },
+
   // '/findLoginID': {
   //   post: {
   //     controller: 'UserController',

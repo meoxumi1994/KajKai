@@ -148,7 +148,8 @@ export const getUser = () => {
 			UserService.getUser(id, function(user) {
 				if (user) {
 					console.log(user)
-					res.json({name: user.name, imageUrl: user.imageUrl})
+					res.json({name: user.name, imageUrl: user.imageUrl,
+						phone: user.phone, address: user.address})
 				} else {
 					res.end()
 				}
@@ -242,7 +243,31 @@ export const getFacebookUser = () => {
 	}
 }
 
+export const logOutUser = () => {
+	return (req, res) => {
+		res.cookie('token', 'invalid')
+		res.end()
+	}
+}
 
+export const changeUserPhone = () => {
+	return (req, res) => {
+		UserService.getUser(req.decoded._id, function(user){
+			if (user) {
+				user.phone = req.body.phone
+				user.save(function(err){
+					if (err) {
+						res.json({status: 'failed'})
+					} else {
+						res.json({status: 'success'})
+					}
+				})
+			} else {
+				res.json({status: 'failed'})
+			}
+		})
+	}
+}
 
 export const getGoogleUser = () => {
 	return (req, res) => {
