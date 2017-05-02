@@ -23,6 +23,20 @@ export default {
   //   }
   // },
 
+  '/verifyphone': {
+    post: {
+      controller: 'PhoneController',
+      method: 'verifyPhone'
+    }
+  },
+
+  '/verifycheck': {
+    post: {
+      controller: 'PhoneController',
+      method: 'verifyCheck'
+    }
+  },
+
   '/login': {
     post: {
       controller: 'UserController',

@@ -31,7 +31,8 @@
     "passport-local": "^1.0.0",
     "react": "^15.5.4",
     "request": "^2.81.0",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "verify-javascript-sdk": "^0.2.4"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
