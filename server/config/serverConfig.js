@@ -11,7 +11,7 @@ const config = {
     },
     OTHERPORT: 3000,
     REDIRECTURL: 'http://www.kajkai.com',
-    FACEBOOK_API_URL: 'https://graph.facebook.com/me?fields=id,name,picture&access_token=',
+    FACEBOOK_API_URL: 'https://graph.facebook.com/me?fields=id,name,picture.type(large)&access_token=',
     GOOGLE_API_URL: 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='
 }
 

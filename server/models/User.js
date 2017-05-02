@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema({
   imageUrl: {type: String},
   phone: {type: String},
   address: {type: String},
+  language: {type: String, enum: _.values(enums.Language)}
 });
 
 UserSchema.methods.getName = function () {

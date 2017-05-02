@@ -8,3 +8,8 @@ const LoginType = {
 	GOOGLE: 'google',
 	FACEBOOK: 'Facebook'
 }
+
+const Language = {
+	VIETNAM: 'VIETNAMESE',
+	ENGLISH: 'ENGLISH'
+}

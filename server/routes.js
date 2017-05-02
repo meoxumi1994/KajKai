@@ -46,6 +46,14 @@ export default {
     }
   },
 
+  '/updateuser': {
+    put: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'changeUserProfile'
+    }
+  },
+
   // '/findLoginID': {
   //   post: {
   //     controller: 'UserController',
