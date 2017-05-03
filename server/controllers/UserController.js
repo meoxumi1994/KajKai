@@ -223,9 +223,12 @@ export const changeUserProfile = () => {
 					user.imageUrl = req.body.imageUrl
 				if (req.body.address)
 					user.address = req.body.address
-				if (req.body.language) {
+				if (req.body.language) 
 					user.language = req.body.language
-				}
+				if (req.body.sex) 
+					user.sex = req.body.sex
+				if (req.body.birthday) 
+					user.birthday = req.body.birthday
 
 				user.save(function(err){
 					if (err) {

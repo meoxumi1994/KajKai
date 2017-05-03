@@ -87,6 +87,23 @@ function saveNewUser(user, next) {
 	})
 }
 
+function updateUserPhone(id, phone, next) {
+	UserService.getUser(id, function(user){
+		if (user) {
+			user.phone = phone
+			user.save(function(err){
+				if (err) {
+					next('failed')
+				} else {
+					next('success')
+				}
+			})
+		} else {
+			next('failed')
+		}
+	})
+}
+
 // function verifiedUser(email, connection, next) {
 // 	connection.query('update user set verified = 1 where email = ' 
 // 		+ "'" + email + "'", function(){

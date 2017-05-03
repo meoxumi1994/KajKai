@@ -23,17 +23,19 @@ export default {
   //   }
   // },
 
-  '/verifyphone': {
+  '/updatephone': {
     post: {
       controller: 'PhoneController',
-      method: 'verifyPhone'
+      middleware: [auth()],
+      method: 'updateUserPhone'
     }
   },
 
-  '/verifycheck': {
+  '/verifyphone': {
     post: {
       controller: 'PhoneController',
-      method: 'verifyCheck'
+      middleware: [auth()],
+      method: 'verifyPhone'
     }
   },
 

@@ -1,7 +1,7 @@
 import { mNexmoVerifyPhone, mNexmoVerifyCheck } from '../services/PhoneService'
 import UserService from '../services/UserService.js'
 
-export const verifyPhone = () => (req, res) => {
+export const updateUserPhone = () => (req, res) => {
   const { phone } = req.body
 
   UserService.getUserFromPhone(phone, function(user){
@@ -20,11 +20,17 @@ export const verifyPhone = () => (req, res) => {
   })
 }
 
-export const verifyCheck = () => (req, res) => {
+export const verifyPhone = () => (req, res) => {
   const { phone, code } = req.body
     mNexmoVerifyCheck(phone, code)
     .then((status) => {
-        res.send({status})
+        if (status == 'verified') {
+          UserService.updateUserPhone(req.decoded._id, phone, function(mstatus){
+            res.json('status': mstatus)
+          })
+        } else {
+          res.send({status})
+        }
     }, (err) => {
       res.send({
         status: 'error'
