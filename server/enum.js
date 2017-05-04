@@ -13,3 +13,8 @@ const Language = {
 	VIETNAM: 'VIETNAMESE',
 	ENGLISH: 'ENGLISH'
 }
+
+const Sex = {
+	MALE: 'MALE',
+	FEMALE: 'FEMALE'
+}

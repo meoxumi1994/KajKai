@@ -10,7 +10,10 @@ module.exports = {
   getUserFromEmail,
   getUserFromPhone,
   verifyToken,
-  saveNewUser
+  saveNewUser,
+  validateName,
+  validateLanguage,
+  validateSex
 };
 
 function getUser(id, next) {
@@ -102,6 +105,58 @@ function updateUserPhone(id, phone, next) {
 			next('failed')
 		}
 	})
+}
+
+const verifyCharacterVietname = (username) => {
+    username = username.toUpperCase();
+    const VIETNAMESE_DIACRITIC_CHARACTERS = "ẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ";
+
+    var numspace = 0;
+    var curdisspace = 0;
+    var minspace = 10;
+    for (let i = 0; i < username.length; i++) {
+        let ok = false;
+        if( username[i] == " ") {
+            numspace++;
+            if(minspace > curdisspace)
+                minspace = curdisspace
+            curdisspace = 0;
+            continue;
+        }
+        curdisspace++;
+        if( /^[A-Za-z]+$/.test(username[i]) ) continue;
+        for (let j = 0; j < VIETNAMESE_DIACRITIC_CHARACTERS.length; j++) {
+            if(username[i] == VIETNAMESE_DIACRITIC_CHARACTERS[j] ){
+                ok = true;
+                break;
+            }
+        }
+        if(!ok) return false;
+    }
+    const isTwoSpace = username.search("  ") != -1;
+    if( isTwoSpace || numspace > 5 || minspace < 2) return false;
+    return true;
+}
+
+
+const validateName = (username) => {
+    if(!isRegisterClick) return null;
+    const length = username.length;
+    // if( length > 45 || length < 5 || (length > 0 && !verifyCharacterVietname(username)) ) return 'error'
+    // return null
+    if (length >= 5 && length <= 45 && verifyCharacterVietname(username)) {
+    	return true
+    } else {
+    	return false
+    }
+}
+
+const validateLanguage = (language) => {
+	return (language == enums.Language.VIETNAM || language == enums.Language.ENGLISH)
+}
+
+const validateSex = (sex) => {
+	return (sex == enums.Sex.MALE || sex == enums.Sex.FEMALE)
 }
 
 // function verifiedUser(email, connection, next) {

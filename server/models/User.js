@@ -6,7 +6,6 @@ const UserSchema = new mongoose.Schema({
   name: {type: String},
   email: {type: String},
   password: {type: String},
-  userName: {type: String},
   socialNetworkType: {type: String, enum: _.values(enums.SocialType)},
   socialNetworkId: {type: String},
   resetPasswordCode: {type: String},

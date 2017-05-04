@@ -159,8 +159,8 @@ export const getFacebookUser = () => {
 					if (user) {
 						res.cookie('token', UserService.getUserToken(user._id))
 						console.log('facebook: ' + UserService.getUserToken(user._id))
-						res.json({ username: body.name,
-			        			imageUrl: body.picture.data.url, 
+						res.json({ username: user.name,
+			        			imageUrl: user.imageUrl, 
 			        			phone: user.phone, 
 			        			address: user.address})
 					} else {
@@ -217,18 +217,32 @@ export const changeUserProfile = () => {
 	return (req, res) => {
 		UserService.getUser(req.decoded._id, function(user){
 			if (user) {
-				if (req.body.username)
+				if (req.body.username && UserService.validateName(req.body.username)) {
 					user.name = req.body.username
+				} else {
+					res.json({error: 'name error'})
+				}
 				if (req.body.imageUrl)
 					user.imageUrl = req.body.imageUrl
-				if (req.body.address)
+				if (req.body.address) // TO DO
 					user.address = req.body.address
-				if (req.body.language) 
+				if (req.body.language && UserService.validateLanguage(req.body.language)) { 
 					user.language = req.body.language
-				if (req.body.sex) 
+				} else {
+					res.json({error: 'language error'})
+				}
+				if (req.body.sex && UserService.validateSex(req.body.sex)) { // 
 					user.sex = req.body.sex
-				if (req.body.birthday) 
-					user.birthday = req.body.birthday
+				} else {
+					res.json({error: 'sex error'})
+				}
+				if (req.body.birthday) // TO DO JS 
+					user.birthday = req.body.birthday 
+				if (req.body.password && req.body.password.length > 5) {
+					user.password = req.body.password
+				} else {
+					res.json({error: 'password err'})
+				}
 
 				user.save(function(err){
 					if (err) {
@@ -264,8 +278,8 @@ export const getGoogleUser = () => {
 					if (user) {
 						res.cookie('token', UserService.getUserToken(user._id))
 						console.log('google: ' + UserService.getUserToken(user._id))
-						res.json({username: body.name,
-		        				imageUrl: body.picture,
+						res.json({username: user.name,
+		        				imageUrl: user.imageUrl,
 		        				phone: user.phone,
 		        				address: user.address})
 					} else {

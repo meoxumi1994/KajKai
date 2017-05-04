@@ -90,6 +90,13 @@ export default {
       controller: 'UserController',
       method: 'getGoogleUser'
     }
+  },
+
+  '/getcategorylist': {
+    get: {
+      controller: 'CategoryController',
+      method: 'getCategory'
+    }
   }
 
 
