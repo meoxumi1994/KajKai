@@ -25,32 +25,131 @@
 }, {
     "name": "Điện Thoại - Máy Tính Bảng",
     "subcategory": [{
-        "name": "Apple"
+        "name": "Iphone"
     }, {
-        "name": "Loa"
+        "name": "Samsung"
     }, {
-        "name": "Thiết Bị Mạng"
+        "name": "Sony"
     }, {
-        "name": "Phụ Kiện Điện Thoại"
+        "name": "Asus"
     }, {
-        "name": "Phụ Kiện Máy Tính"
+        "name": "OPPO"
     }, {
-        "name": "Thiết Bị Đeo Thông Minh"
+        "name": "HTC"
+    }, {
+        "name": "Ipad"
+    }, {
+        "name": "Galaxy Tab"
     }]
 }, {
-    "name": "Nhà Cửa Đời Sống"
+    "name": "Nhà Cửa Đời Sống",
+    "subcategory": [{
+        "name": "Nhà Bếp Và Phòng Ăn"
+    }, {
+        "name": "Sửa Chữa Nhà Cửa"
+    }, {
+        "name": "Nhà Tắm"
+    }, {
+        "name": "Phòng Ngủ"
+    }, {
+        "name": "Thiết Bị Chiếu Sáng"
+    }]
 }, {
-    "name": "Làm Đẹp - Sức Khoẻ"
+    "name": "Làm Đẹp - Sức Khoẻ",
+    "subcategory": [{
+        "name": "Trang Điểm"
+    }, {
+        "name": "Thực Phẩm Chức Năng"
+    }, {
+        "name": "Chăm Sóc Da Mặt"
+    }, {
+        "name": "Chăm Sóc Cơ Thể"
+    }, {
+        "name": "Thiết Bị Chăm Sóc Sức Khoẻ"
+    }]
 }, {
-    "name": "Thiết Bị Văn Phòng Phẩm"
+    "name": "Bách Hoá Online",
+    "subcategory": [{
+        "name": "Bánh Kẹo"
+    }, {
+        "name": "Gia Vị"
+    }, {
+        "name": "Dầu Ăn"
+    }, {
+        "name": "Thực Phẩm Chay"
+    }, {
+        "name": "Đồ Uống"
+    }, {
+        "name": "Cà Phê - Trà"
+    }, {
+        "name": "Nước Tẩy Rửa"
+    }, {
+        "name": "Bột Giặt - Nước Xả"
+    }, {
+        "name": "Xà Phòng - Dầu Gội"
+    }]
 }, {
-    "name": "Mẹ Và Bé"
+    "name": "Mẹ Và Bé",
+    "subcategory": [{
+        "name": "Sữa"
+    }, {
+        "name": "Tả Bỉm"
+    }, {
+        "name": "Thực Phẩm Ăn Dặm"
+    }, {
+        "name": "Bình Sữa, Đồ Dùng Ăn Uống"
+    }, {
+        "name": "Đồ Dùng Bảo Vệ An Toàn"
+    }, {
+        "name": "Đồ Dùng Phòng Ngủ"
+    }, {
+        "name": "Đồ Dùng Phòng Tắm"
+    }]
 }, {
-    "name": "Đồ Chơi - Đồ Lưu Niệm"
+	"name": "Thể Thao - Dã Ngoại",
+    "subcategory": [{
+        "name": "Dã Ngoại, Leo Núi"
+    }, {
+        "name": "Giày Patin"
+    }, {
+        "name": "Cờ"
+    }, {
+        "name": "Bơi Lội"
+    }, {
+        "name": "Cầu Lông"
+    }, {
+        "name": "Bóng Đá, Bóng Rổ"
+    }]
 }, {
-	"name": "Thể Thao - Dã Ngoại"
+	"name": "Máy Ảnh - Máy Quay Phim",
+    "subcategory": [{
+        "name": "Máy Ảnh"
+    }, {
+        "name": "Ống Kính - Lens"
+    }, {
+        "name": "Máy Quay Phim"
+    }, {
+        "name": "Phụ Kiện Máy Ảnh"
+    }, {
+        "name": "Camera Bảo Vệ"
+    }]
 }, {
-	"name": "Máy Ảnh - Máy Quay Phim"
-}, {
-	"name": "Ăn uống"
+	"name": "Ăn uống",
+    "subcategory": [{
+        "name": "Bún"
+    }, {
+        "name": "Phở"
+    }, {
+        "name": "Pizza"
+    }, {
+        "name": "Burger"
+    }, {
+        "name": "Bánh Mì"
+    }, {
+        "name": "Cháo"
+    }, {
+        "name": "Nướng - Lẩu"
+    }, {
+        "name": "Hải Sản"
+    }]
 }]
