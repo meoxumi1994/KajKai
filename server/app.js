@@ -13,7 +13,7 @@ import allRoutes from './routes'
 
 const app = express()
 var whitelist = ['http://localhost:' + config.OTHERPORT, 'http://34.209.206.70:' + config.OTHERPORT,
-'http://kajkai.com:' + config.OTHERPORT]
+'http://www.kajkai.com']
 
 var corsOptions = {
   // origin: function (origin, callback) {
