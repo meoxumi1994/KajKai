@@ -10,8 +10,8 @@ class UserVerify extends React.Component {
         this.props.onBackRegisterClick()
     }
     render(){
-        let { language } = this.props
-        const getlanguage = (lang) => allString.get( language, lang )
+        let { user } = this.props
+        const getlanguage = (lang) => allString.get( user.language, lang )
         return (
             <div>
                 <h3>{ getlanguage('CHECK') }</h3>

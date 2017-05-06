@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 
 import App from '../components/App'
-import { onWho, whoResult } from '../actions/firstLoading'
+import { onWho } from '../actions/asyn/app'
 
 const mapStateToProps = (state, ownProps) => ({
-    whoResult: state.whoResult,
+    auth: state.auth,
     children: ownProps.children
 })
 

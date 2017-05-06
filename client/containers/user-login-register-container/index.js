@@ -1,16 +1,17 @@
 import { connect } from 'react-redux'
 
-import { changeLanguage } from '../../actions/language'
-import { registerResult } from '../../actions/user-login-register/register'
+import { changeLanguage } from '~/actions/asyn/user-login-register'
 import UserLoginRegister from '../../components/user-login-register'
 
 const mapStateToProps = (state, ownProps) => ({
-    language: state.language,
-    registerResult: state.registerResult
+    auth: state.auth,
+    user: state.user,
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onLanguageClick: (language) => dispatch(changeLanguage(language))
+    changeLanguageClick: (language, user) => {
+        dispatch(changeLanguage(language, user))
+    }
 })
 
 const UserLoginRegisterContainer = connect(
