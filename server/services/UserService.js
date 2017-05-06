@@ -107,7 +107,7 @@ function updateUserPhone(id, phone, next) {
 	})
 }
 
-const verifyCharacterVietname = (username) => {
+function verifyCharacterVietname(username) {
     username = username.toUpperCase();
     const VIETNAMESE_DIACRITIC_CHARACTERS = "ẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ";
 
@@ -139,11 +139,8 @@ const verifyCharacterVietname = (username) => {
 }
 
 
-const validateName = (username) => {
-    if(!isRegisterClick) return null;
+function validateName(username) {
     const length = username.length;
-    // if( length > 45 || length < 5 || (length > 0 && !verifyCharacterVietname(username)) ) return 'error'
-    // return null
     if (length >= 5 && length <= 45 && verifyCharacterVietname(username)) {
     	return true
     } else {
@@ -151,11 +148,11 @@ const validateName = (username) => {
     }
 }
 
-const validateLanguage = (language) => {
+function validateLanguage(language){
 	return (language == enums.Language.VIETNAM || language == enums.Language.ENGLISH)
 }
 
-const validateSex = (sex) => {
+function validateSex(sex) {
 	return (sex == enums.Sex.MALE || sex == enums.Sex.FEMALE)
 }
 

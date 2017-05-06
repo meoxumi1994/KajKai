@@ -217,31 +217,43 @@ export const changeUserProfile = () => {
 	return (req, res) => {
 		UserService.getUser(req.decoded._id, function(user){
 			if (user) {
-				if (req.body.username && UserService.validateName(req.body.username)) {
-					user.name = req.body.username
-				} else {
-					res.json({error: 'name error'})
+				if (req.body.username) {
+					if (UserService.validateName(req.body.username)) {
+						user.name = req.body.username
+					} else {
+						res.json({error: 'name error'})
+						return
+					}
 				}
 				if (req.body.imageUrl)
 					user.imageUrl = req.body.imageUrl
 				if (req.body.address) // TO DO
 					user.address = req.body.address
-				if (req.body.language && UserService.validateLanguage(req.body.language)) { 
-					user.language = req.body.language
-				} else {
-					res.json({error: 'language error'})
+				if (req.body.language) {
+					if (UserService.validateLanguage(req.body.language)) { 
+						user.language = req.body.language
+					} else {
+						res.json({error: 'language error'})
+						return
+					}
 				}
-				if (req.body.sex && UserService.validateSex(req.body.sex)) { // 
-					user.sex = req.body.sex
-				} else {
-					res.json({error: 'sex error'})
+				if (req.body.sex) {
+					if (UserService.validateSex(req.body.sex)) { // 
+						user.sex = req.body.sex
+					} else {
+						res.json({error: 'sex error'})
+						return
+					}
 				}
 				if (req.body.birthday) // TO DO JS 
 					user.birthday = req.body.birthday 
-				if (req.body.password && req.body.password.length > 5) {
-					user.password = req.body.password
-				} else {
-					res.json({error: 'password err'})
+				if (req.body.password) {
+					if (req.body.password.length > 5) {
+						user.password = req.body.password
+					} else {
+						res.json({error: 'password err'})
+						return
+					}
 				}
 
 				user.save(function(err){
