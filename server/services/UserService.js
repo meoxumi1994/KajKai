@@ -155,34 +155,3 @@ function validateLanguage(language){
 function validateSex(sex) {
 	return (sex == enums.Sex.MALE || sex == enums.Sex.FEMALE)
 }
-
-// function verifiedUser(email, connection, next) {
-// 	connection.query('update user set verified = 1 where email = ' 
-// 		+ "'" + email + "'", function(){
-// 		next()
-// 	})
-// }
-
-
-// function saveObjectToDB(user, connection, next) {
-// 	var email = (user.email) ? "'" + user.email + "'" : 'null';
-// 	var password = (user.password) ? "'" + user.password + "'" : 'null';
-// 	var username = (user.username) ? "'" + user.username + "'" : 'null';
-// 	var address = (user.address) ? "'" + user.address + "'" : 'null';
-// 	var phone = (user.phone) ? "'" + user.phone + "'" : 'null';
-// 	var facebookid = (user.facebookid) ? "'" + user.facebookid + "'" : 'null';
-// 	var googleid = (user.googleid) ? "'" + user.googleid + "'" : 'null';
-// 	var verified = (user.verified) ? user.verified : '';
-
-// 	connection.query('insert into user (email, password, username, address, phone, facebookid, googleid) '
-// 		+ 'values (' + email + ","
-// 							+ password + ","
-// 							+ username + ","
-// 							+ address + ","
-// 							+ phone + ","
-// 							+ facebookid + ","
-// 							+ googleid + ")", function(){
-// 								next()
-// 							});
-// }
-

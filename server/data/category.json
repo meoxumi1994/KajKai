@@ -1,9 +1,42 @@
 [{
-    "name": "Điện Thoại - Máy Tính Bảng"
+    "name": "Điện Gia Dụng - Điện Lạnh",
+    "subcategory": [{
+        "name": "Đồ Dùng Nhà Bếp"
+    }, {
+        "name": "Thiết Bị Gia Đình"
+    }, {
+        "name": "Điện Lạnh"
+    }]
 }, {
-    "name": "Thiết bị số - Phụ Kiện số"
+    "name": "Thiết bị số - Phụ Kiện số",
+    "subcategory": [{
+        "name": "Tai Nghe"
+    }, {
+        "name": "Loa"
+    }, {
+        "name": "Thiết Bị Mạng"
+    }, {
+        "name": "Phụ Kiện Điện Thoại"
+    }, {
+        "name": "Phụ Kiện Máy Tính"
+    }, {
+        "name": "Thiết Bị Đeo Thông Minh"
+    }]
 }, {
-    "name": "Điện Gia Dụng"
+    "name": "Điện Thoại - Máy Tính Bảng",
+    "subcategory": [{
+        "name": "Apple"
+    }, {
+        "name": "Loa"
+    }, {
+        "name": "Thiết Bị Mạng"
+    }, {
+        "name": "Phụ Kiện Điện Thoại"
+    }, {
+        "name": "Phụ Kiện Máy Tính"
+    }, {
+        "name": "Thiết Bị Đeo Thông Minh"
+    }]
 }, {
     "name": "Nhà Cửa Đời Sống"
 }, {

@@ -4,8 +4,10 @@ import UserService from '../services/UserService.js'
 import request from 'request'
 import { User } from '../models'
 import enums from '../enum'
+import {parseNum} from '../utils/NumberUtils'
 // var Email = require('../services/EmailService.js')
 // var request = require('request')
+
 
 const phoneRegrex = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
 const emailRegrex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
@@ -88,7 +90,8 @@ export const getUser = () => {
 				if (user) {
 					console.log(user)
 					res.json({username: user.name, imageUrl: user.imageUrl,
-						phone: user.phone, address: user.address})
+						phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
+						language: user.language})
 				} else {
 					res.end()
 				}
@@ -245,8 +248,6 @@ export const changeUserProfile = () => {
 						return
 					}
 				}
-				if (req.body.birthday) // TO DO JS 
-					user.birthday = req.body.birthday 
 				if (req.body.password) {
 					if (req.body.password.length > 5) {
 						user.password = req.body.password
@@ -256,12 +257,26 @@ export const changeUserProfile = () => {
 					}
 				}
 
+				if (req.body.yearOfBirth) {
+					var year = parseNum(req.body.yearOfBirth)
+					if (year == 'NaN') {
+						res.json({error: 'year error'})
+						return
+					}
+					if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
+						user.yearOfBirth = year
+					} else {
+						res.json({error: 'year error'})
+					}
+				}
+
 				user.save(function(err){
 					if (err) {
 						res.json({error: 'undefined'})
 					} else {
 						res.json({status: 'success'})
 					}
+					return
 				})
 			} else {
 				res.json({status: 'failed'})
@@ -314,5 +329,6 @@ export const getGoogleUser = () => {
 		})
 	}
 }
+
 
 

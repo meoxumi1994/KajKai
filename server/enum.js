@@ -18,3 +18,10 @@ const Sex = {
 	MALE: 'MALE',
 	FEMALE: 'FEMALE'
 }
+
+module.exports = {
+	SocialType,
+	LoginType,
+	Language,
+	Sex
+}
