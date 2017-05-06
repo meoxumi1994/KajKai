@@ -37,3 +37,24 @@ export const flem = (url, get) => {
         console.error(myurl,error);
     })
 }
+
+export const fleu = (url, need, get) => {
+    let myurl = config.getDomain() + url
+    console.log(myurl,need,get)
+    return fetch( myurl , {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: 'PUT',
+        credentials: 'include',
+        body: JSON.stringify(need)
+    })
+    .then((response) => response.json())
+    .then((res) => {
+        console.log(res)
+        return res
+    })
+    .catch((error)=> {
+        console.error(myurl,error);
+    })
+}

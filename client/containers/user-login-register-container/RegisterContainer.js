@@ -1,17 +1,20 @@
 import { connect } from 'react-redux'
 
-import { register } from '../../actions/user-login-register/register'
+import { register } from '../../actions/asyn/user-login-register/register'
 import UserRegister from '../../components/user-login-register/Register'
 
 const mapStateToProps = (state, ownProps) => ({
-    language: state.language,
-    registerResult: state.registerResult
+    auth: state.auth,
+    user: state.user,
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onRegisterClick: (username, loginID, password) => {
-      dispatch(register(username, loginID, password))
-    }
+    onRegisterClick: (username, loginId, password) => {
+        dispatch(register(username, loginId, password))
+    },
+    onCloseAlready: () => {
+        dispatch({ type: 'REGISTER_ALREADY_CLOSE' })
+    },
 })
 
 const UserRegisterContainer = connect(

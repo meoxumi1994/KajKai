@@ -1,15 +1,17 @@
 import { connect } from 'react-redux'
 
-import { language } from '../actions/language'
+import { logOut } from '../actions/asyn/user-login-register/login'
 import BarScreen from '../components/BarScreen'
 
 const mapStateToProps = (state, ownProps) => ({
-    language: state.language,
-    whoResult: state.whoResult
+    auth: state.auth,
+    user: state.user,
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+    onLogoutClick: () => {
+        dispatch(logOut())
+    }
 })
 
 const BarScreenContainer = connect(

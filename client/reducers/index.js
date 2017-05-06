@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux'
 
-import userlogin from './user-login-register/login'
-import registerResult from './user-login-register/register'
-import firstLoading from './firstLoading'
-import language from './language'
+import auth from './sync/auth'
+import updateuser from './sync/updateuser'
+import user from './data/user'
+import middle from './instance/profile/middle/index.js'
 
 const app = combineReducers({
-  userlogin,
-  registerResult,
-  language,
-  whoResult: firstLoading,
+    auth,
+    user,
+    updateuser,
+    middle,
 })
 
 export default app
