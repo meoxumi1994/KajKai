@@ -30,7 +30,8 @@ export const registerNewUser = () => {
 						}
 						var newuser = new User({email: body.email, 
 							password: body.password, 
-							name: body.username})
+							name: body.username,
+							verified: 0})
 						newuser.save(function(){
 							EmailService.sendVerifyEmail(newuser.email, UserService.getUserToken(newuser._id), function(){
 								res.json({status: 'success'})
@@ -110,21 +111,24 @@ export const authorizeUser = () => {
 					res.json({status: 'success'})
 				})
 				
+			} 
+		} 
+		var email = req.body.email
+		if (email && password) {
+			if (emailRegrex.test(loginId)) {
+				UserService.getUserFromEmail(email, function(user) {
+					if (!user || user.password != password || user.verified == 0) {
+						res.json({status : 'failed'})
+						return
+					}
+					res.cookie('token', UserService.getUserToken(user._id))
+					res.json({status: 'success'})
+				})
 			} else {
-				if (emailRegrex.test(loginId)) {
-					UserService.getUserFromEmail(loginId, function(user) {
-						if (!user || user.password != password) {
-							res.json({status : 'failed'})
-							return
-						}
-						res.cookie('token', UserService.getUserToken(user._id))
-						res.json({status: 'success'})
-					})
-				} else {
-					res.json({status: 'failed'})
-				}
+				res.json({status: 'failed'})
 			}
-		} else {
+		}
+		else {
 			res.json({status: 'failed'})
 		}
 
@@ -161,7 +165,8 @@ export const getFacebookUser = () => {
 							socialNetworkId: body.id,
 							name: body.name,
 							imageUrl: body.picture.data.url,
-							password: '1234'})
+							password: '1234',
+							verified: 1})
 						newuser.save(function(){
 							res.cookie('token', UserService.getUserToken(newuser._id))
 							console.log('facebook ' + UserService.getUserToken(newuser._id))
@@ -298,7 +303,8 @@ export const getGoogleUser = () => {
 						var newuser = new User({email : body.email,
 							name: body.name,
 							imageUrl: body.picture,
-							password: '1234'})
+							password: '1234',
+							verified: 1})
 						newuser.save(function(){
 							res.cookie('token', UserService.getUserToken(newuser._id))
 							res.json(UserService.getUserInfo(newuser))
