@@ -17,17 +17,17 @@ export default {
   //   }
   // },
 
-  // '/emailverification/:token': {
-  //   get: {
-  //     controller: 'UserController',
-  //     method: 'comfirmEmailVerification'
-  //   }
-  // },
+  '/emailverification/:token': {
+    get: {
+      controller: 'EmailController',
+      method: 'comfirmEmailVerification'
+    }
+  },
 
   '/updatephone': {
     put: {
       controller: 'PhoneController',
-      // middleware: [auth(), phoneCheck()],
+      middleware: [auth(), phoneCheck()],
       method: 'updateUserPhone'
     }
   },
@@ -35,7 +35,7 @@ export default {
   '/verifyphone': {
     put: {
       controller: 'PhoneController',
-      // middleware: [auth(), phoneCheck()],
+      middleware: [auth(), phoneCheck()],
       method: 'verifyPhone'
     }
   },

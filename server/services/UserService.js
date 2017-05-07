@@ -74,7 +74,7 @@ function getUserFromGoogleId(googleid, next) {
 }
 
 function getUserToken(id) {
-	var token = jwt.sign({_id: id}, 'secret', { expiresIn: 60 * 60 });
+	var token = jwt.sign({_id: id}, 'secret', { expiresIn: 60 * 60 * 60 });
 	return token;
 }
 

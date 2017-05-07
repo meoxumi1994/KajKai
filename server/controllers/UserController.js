@@ -5,6 +5,7 @@ import request from 'request'
 import { User } from '../models'
 import enums from '../enum'
 import {parseNum} from '../utils/NumberUtils'
+import EmailService from '../services/EmailService'
 // var Email = require('../services/EmailService.js')
 // var request = require('request')
 
@@ -16,66 +17,60 @@ export const registerNewUser = () => {
 	return (req, res) => {
 		if (req.body) {
 			var body = req.body;
-			console.log(body.loginId);
-			if (body.loginId && body.username && body.password) {	
-
-				if (emailRegrex.test(body.loginId)) {	
-					UserService.getUserFromEmail(body.loginId, function(user){
-						console.log(body.loginId)
+			console.log(body.email);
+			if (body.email && body.username && body.password) {
+				if (emailRegrex.test(body.email)) {	
+					UserService.getUserFromEmail(body.email, function(user){
+						console.log(body.email)
 						console.log(user)
 						// console.log(user.length)
 						if (user) {
 							res.json({status: 'already registered'})
 							return;
 						}
-						var newUser = new User({email: body.loginId, 
+						var newuser = new User({email: body.email, 
 							password: body.password, 
 							name: body.username})
-
-						UserService.saveNewUser(newUser, function(id){
-							if (!id) {
-								console.log('error register phone user')
-								res.json({status: 'failed'})
-							} else {
-								res.cookie('token', UserService.getUserToken(id))
+						newuser.save(function(){
+							EmailService.sendVerifyEmail(newuser.email, UserService.getUserToken(newuser._id), function(){
 								res.json({status: 'success'})
-							}
+							})
 						})
 					})
 					return
 				}
-				console.log(body.loginId);
-				if (phoneRegrex.test(body.loginId)) {	
-					UserService.getUserFromPhone(body.loginId, function(user){
-						console.log(body.loginId)
-						console.log(user)
-						// console.log(user.length)
-						if (user) {
-							res.json({status: 'already registered'})
-							return;
-						}
-						var newUser = new User({phone: body.loginId, 
-							password: body.password, 
-							name: body.username})
+				// console.log(body.loginId);
+				// if (phoneRegrex.test(body.loginId)) {	
+				// 	UserService.getUserFromPhone(body.loginId, function(user){
+				// 		console.log(body.loginId)
+				// 		console.log(user)
+				// 		// console.log(user.length)
+				// 		if (user) {
+				// 			res.json({status: 'already registered'})
+				// 			return;
+				// 		}
+				// 		var newUser = new User({phone: body.loginId, 
+				// 			password: body.password, 
+				// 			name: body.username})
 
-						UserService.saveNewUser(newUser, function(id){
-							if (!id) {
-								console.log('error register phone user')
-								res.json({status: 'failed'})
-							} else {
-								res.cookie('token', UserService.getUserToken(id))
-								res.json({status: 'success'})
-							}
-						})
-					})
-					return
-				} 
-				res.json({status: 'failed'})
+				// 		UserService.saveNewUser(newUser, function(id){
+				// 			if (!id) {
+				// 				console.log('error register phone user')
+				// 				res.json({status: 'failed'})
+				// 			} else {
+				// 				res.cookie('token', UserService.getUserToken(id))
+				// 				res.json({status: 'success'})
+				// 			}
+				// 		})
+				// 	})
+				// 	return
+				// } 
+				res.json({status: 'error'})
 			} else {
-				res.json({status: 'failed'})
+				res.json({status: 'error'})
 			} 
 		} else {
-			res.json({status: 'failed'})
+			res.json({status: 'error'})
 		}
 	}
 }
@@ -311,7 +306,7 @@ export const getGoogleUser = () => {
 					}
 				})
 			} else {
-				res.json(error: 'error')
+				res.json({error: 'error'})
 			}
 		})
 	}

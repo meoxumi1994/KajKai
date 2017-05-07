@@ -13,7 +13,7 @@ function sendVerifyEmail(email, token, next) {
 	  	// replyTo:'user@gmail.com'           // replyTo: by default undefined 
 	  	subject: 'Finish your registration',
 	  	text:    'Please click on following link to finish you registration: \n' + 
-	  		config.getDomain() + '/emailverification/' 
+	  		'13.228.23.106:8080' + '/emailverification/' 
 	  		+ token
 	  	// html:    '<b>html text text</b>' 
 	});
