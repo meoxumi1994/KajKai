@@ -34,3 +34,17 @@ export const mNexmoVerifyCheck = (phone, code) => (
       throw err
   })
 )
+
+export const mNexmoVerifyLogout = (phone) => (
+  Nexmo.verifyLogout({
+    number: phone
+
+  }).then((status) => {
+    console.log('logout_status', status)
+    return status
+
+  },( err ) => {
+    console.log('logout_error', err)
+    throw err
+  })
+)

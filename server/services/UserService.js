@@ -13,8 +13,15 @@ module.exports = {
   saveNewUser,
   validateName,
   validateLanguage,
-  validateSex
+  validateSex,
+  getUserInfo
 };
+
+function getUserInfo(user) {
+	return {username: user.name, imageUrl: user.imageUrl,
+						phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
+						language: user.language}
+}
 
 function getUser(id, next) {
 	User.findById(id, function(err, user) {

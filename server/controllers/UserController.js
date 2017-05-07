@@ -89,9 +89,7 @@ export const getUser = () => {
 			UserService.getUser(id, function(user) {
 				if (user) {
 					console.log(user)
-					res.json({username: user.name, imageUrl: user.imageUrl,
-						phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
-						language: user.language})
+					res.json(UserService.getUserInfo(user))
 				} else {
 					res.end()
 				}
@@ -162,10 +160,7 @@ export const getFacebookUser = () => {
 					if (user) {
 						res.cookie('token', UserService.getUserToken(user._id))
 						console.log('facebook: ' + UserService.getUserToken(user._id))
-						res.json({ username: user.name,
-			        			imageUrl: user.imageUrl, 
-			        			phone: user.phone, 
-			        			address: user.address})
+						res.json(UserService.getUserInfo(user))
 					} else {
 						var newuser = new User({socialNetworkType: enums.FACEBOOK, 
 							socialNetworkId: body.id,
@@ -175,10 +170,7 @@ export const getFacebookUser = () => {
 						newuser.save(function(){
 							res.cookie('token', UserService.getUserToken(newuser._id))
 							console.log('facebook ' + UserService.getUserToken(newuser._id))
-							res.json({ username: body.name,
-			        			imageUrl: body.picture.data.url,
-			        			phone: newuser.phone,
-			        			address: newuser.address})
+							res.json(UserService.getUserInfo(newuser))
 						})
 					}
 				})
@@ -199,6 +191,7 @@ export const logOutUser = () => {
 
 export const changeUserPhone = () => {
 	return (req, res) => {
+		console.log(req.body.phone)
 		UserService.getUser(req.decoded._id, function(user){
 			if (user) {
 				user.phone = req.body.phone
@@ -305,10 +298,7 @@ export const getGoogleUser = () => {
 					if (user) {
 						res.cookie('token', UserService.getUserToken(user._id))
 						console.log('google: ' + UserService.getUserToken(user._id))
-						res.json({username: user.name,
-		        				imageUrl: user.imageUrl,
-		        				phone: user.phone,
-		        				address: user.address})
+						res.json(UserService.getUserInfo(user))
 					} else {
 						var newuser = new User({email : body.email,
 							name: body.name,
@@ -316,10 +306,7 @@ export const getGoogleUser = () => {
 							password: '1234'})
 						newuser.save(function(){
 							res.cookie('token', UserService.getUserToken(newuser._id))
-							res.json({username: body.name,
-			        				imageUrl: body.picture,
-			        				phone: newuser.phone,
-			        				address: newuser.address})
+							res.json(UserService.getUserInfo(newuser))
 						})
 					}
 				})

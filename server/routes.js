@@ -27,7 +27,7 @@ export default {
   '/updatephone': {
     put: {
       controller: 'PhoneController',
-      middleware: [auth(), phoneCheck()],
+      // middleware: [auth(), phoneCheck()],
       method: 'updateUserPhone'
     }
   },
@@ -35,8 +35,15 @@ export default {
   '/verifyphone': {
     put: {
       controller: 'PhoneController',
-      middleware: [auth(), phoneCheck()],
+      // middleware: [auth(), phoneCheck()],
       method: 'verifyPhone'
+    }
+  },
+
+  '/logoutphone': {
+    post: {
+      controller: 'PhoneController',
+      method: 'verifyLogout'
     }
   },
 
