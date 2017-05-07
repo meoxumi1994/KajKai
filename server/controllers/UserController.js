@@ -25,7 +25,7 @@ export const registerNewUser = () => {
 						console.log(user)
 						// console.log(user.length)
 						if (user) {
-							res.json({status: 'already registered'})
+							res.json({status: 'used'})
 							return;
 						}
 						var newuser = new User({email: body.email, 
