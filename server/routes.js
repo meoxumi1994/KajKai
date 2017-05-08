@@ -32,6 +32,14 @@ export default {
     }
   },
 
+  '/updatepassword': {
+    put:{
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'updateUserPassword'
+    }
+  },
+
   '/verifyphone': {
     put: {
       controller: 'PhoneController',

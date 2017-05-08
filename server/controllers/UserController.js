@@ -114,9 +114,13 @@ export const authorizeUser = () => {
 			} 
 		} 
 		var email = req.body.email
+		console.log(email)
+		console.log(password)
 		if (email && password) {
-			if (emailRegrex.test(loginId)) {
+			// console.log(emailRegrex.te)
+			if (emailRegrex.test(email)) {
 				UserService.getUserFromEmail(email, function(user) {
+					console.log(user)
 					if (!user || user.password != password || user.verified == 0) {
 						res.json({status : 'failed'})
 						return
@@ -202,6 +206,30 @@ export const changeUserPhone = () => {
 						res.json({status: 'success'})
 					}
 				})
+			} else {
+				res.json({status: 'failed'})
+			}
+		})
+	}
+}
+
+export const updateUserPassword = () => {
+	return (req, res) => {
+		console.log(req.decoded._id)
+		var id = req.decoded._id
+		// var id = req.body.id
+		console.log(id)
+		UserService.getUser(id, function(user){
+			if (user) {
+				if (user.password != req.body.password || !req.body.newpassword || req.body.newpassword.length < 6) {
+					res.json({status: 'failed'})
+				} else {
+					user.password = req.body.newpassword
+					// 
+					user.save(function(){
+						res.json({status: 'success'})
+					})
+				}
 			} else {
 				res.json({status: 'failed'})
 			}
