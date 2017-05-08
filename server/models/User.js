@@ -18,7 +18,9 @@ const UserSchema = new mongoose.Schema({
   yearOfBirth: {type: Number},
   verified: {type: Number},
   passwordLastUpdatedAt: {type: Date},
-  nameLastUpdatedAt: {type: Date}
+  nameLastUpdatedAt: {type: Date},
+  yearOfBirthLastUpdateAt: {type: Date},
+  addressLastUpdateAt: {type: Date},
 });
 
 UserSchema.methods.getName = function () {

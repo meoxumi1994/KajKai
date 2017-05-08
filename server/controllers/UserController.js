@@ -305,10 +305,10 @@ export const changeUserProfile = () => {
 					user.nameLastUpdatedAt = new Date()
 				}
   				if (updateYOB) {
-  					yearOfBirthLastUpdateAt = new Date()
+  					user.yearOfBirthLastUpdateAt = new Date()
   				}
   				if (updateAddress) {
-  					addressLastUpdateAt = new Date()
+  					user.addressLastUpdateAt = new Date()
   				}
 
 
