@@ -20,7 +20,10 @@ module.exports = {
 function getUserInfo(user) {
 	return {username: user.name, imageUrl: user.imageUrl,
 						phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
-						language: user.language}
+						language: user.language, passwordLastUpdatedAt: user.passwordLastUpdatedAt,
+						usernameLastUpdatedAt: user.nameLastUpdatedAt,
+						yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
+  						addressLastUpdateAt: user.addressLastUpdateAt}
 }
 
 function getUser(id, next) {

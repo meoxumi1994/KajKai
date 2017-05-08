@@ -16,7 +16,9 @@ const UserSchema = new mongoose.Schema({
   language: {type: String, enum: _.values(enums.Language)},
   sex: {type: String},
   yearOfBirth: {type: Number},
-  verified: {type: Number}
+  verified: {type: Number},
+  passwordLastUpdatedAt: {type: Date},
+  nameLastUpdatedAt: {type: Date}
 });
 
 UserSchema.methods.getName = function () {

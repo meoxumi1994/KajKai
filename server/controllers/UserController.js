@@ -213,6 +213,8 @@ export const changeUserPhone = () => {
 	}
 }
 
+// console.log(new Date())
+
 export const updateUserPassword = () => {
 	return (req, res) => {
 		console.log(req.decoded._id)
@@ -221,11 +223,12 @@ export const updateUserPassword = () => {
 		console.log(id)
 		UserService.getUser(id, function(user){
 			if (user) {
-				if (user.password != req.body.password || !req.body.newpassword || req.body.newpassword.length < 6) {
+				if (user.password != req.body.password || !req.body.newpassword || req.body.newpassword.length < 6
+					|| user.password == user.newpassword) {
 					res.json({status: 'failed'})
 				} else {
 					user.password = req.body.newpassword
-					// 
+					user.passwordLastUpdatedAt = new Date()
 					user.save(function(){
 						res.json({status: 'success'})
 					})
@@ -241,9 +244,13 @@ export const changeUserProfile = () => {
 	return (req, res) => {
 		UserService.getUser(req.decoded._id, function(user){
 			if (user) {
+				var updateName = false
+				var updateAddress = false
+				var updateYOB = false
 				if (req.body.username) {
 					if (UserService.validateName(req.body.username)) {
 						user.name = req.body.username
+						updateName = true
 					} else {
 						res.json({error: 'name error'})
 						return
@@ -251,8 +258,10 @@ export const changeUserProfile = () => {
 				}
 				if (req.body.imageUrl)
 					user.imageUrl = req.body.imageUrl
-				if (req.body.address) // TO DO
+				if (req.body.address) { // TO DO
 					user.address = req.body.address
+					updateAddress = true
+				}
 				if (req.body.language) {
 					if (UserService.validateLanguage(req.body.language)) { 
 						user.language = req.body.language
@@ -269,14 +278,14 @@ export const changeUserProfile = () => {
 						return
 					}
 				}
-				if (req.body.password) {
-					if (req.body.password.length > 5) {
-						user.password = req.body.password
-					} else {
-						res.json({error: 'password err'})
-						return
-					}
-				}
+				// if (req.body.password) {
+				// 	if (req.body.password.length > 5) {
+				// 		user.password = req.body.password
+				// 	} else {
+				// 		res.json({error: 'password err'})
+				// 		return
+				// 	}
+				// }
 
 				if (req.body.yearOfBirth) {
 					var year = parseNum(req.body.yearOfBirth)
@@ -286,10 +295,22 @@ export const changeUserProfile = () => {
 					}
 					if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
 						user.yearOfBirth = year
+						updateYOB = true
 					} else {
 						res.json({error: 'year error'})
 					}
 				}
+
+				if (updateName) {
+					user.nameLastUpdatedAt = new Date()
+				}
+  				if (updateYOB) {
+  					yearOfBirthLastUpdateAt = new Date()
+  				}
+  				if (updateAddress) {
+  					addressLastUpdateAt = new Date()
+  				}
+
 
 				user.save(function(err){
 					if (err) {
