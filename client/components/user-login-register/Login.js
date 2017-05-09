@@ -9,7 +9,7 @@ import GoogleLogin from 'react-google-login';
 const checkloginId = (loginId) => {
     if(!isLoginClick) return null;
     const length = loginId.length;
-    const isphone = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/.test(loginId)
+    // const isphone = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/.test(loginId)
     const ismail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(loginId)
     if( !ismail && !isphone ) return 'error'
     return null;
@@ -28,8 +28,8 @@ class UserLogin extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            loginId : '01655791021',
-            password : '123456',
+            loginId : '',
+            password : '',
             openLoginIdError : false,
             openPasswordError : false,
         }
@@ -91,7 +91,7 @@ class UserLogin extends React.Component {
                     />
                     <FormControl.Feedback />
                     {   this.state.openLoginIdError &&
-                        <HelpBlock >{ getlanguage('EMAIL_OR_PHONE_WARNING') }</HelpBlock>
+                        <HelpBlock >{ getlanguage('EMAIL_WARNING') }</HelpBlock>
                     }
                 </FormGroup>
 

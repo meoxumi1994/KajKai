@@ -1,3 +1,7 @@
+import allString from '~/config/allString'
+
+const g = (lang) => allString.get(state.user.language, lang)
+
 const verifyCharacterVietname = (username) => {
     username = username.toUpperCase();
     const VIETNAMESE_DIACRITIC_CHARACTERS = "ẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ";
@@ -36,10 +40,22 @@ export const checkUserName = (username) => {
 }
 
 export const checkEmail = (email) => {
-    const length = loginID.length;
-    // const isphone = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/.test(loginID)
     const ismail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
     if( !ismail ) return 'error'
+    return null
+}
+
+export const checkBasicPhone = (phone) => {
+    for(let i = 0; i< phone.length; i++){
+        if(phone[i]!= '+' || (phone[i] < '0' || '9' < phone[i]))
+            return 'error'
+    }
+    return null
+}
+
+export const checkPhone = (phone) => {
+    const isphone = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/.test(phone)
+    if( !isphone ) return 'error'
     return null
 }
 
@@ -47,4 +63,15 @@ export const checkPassword = (password) => {
     const length = password.length;
     if (0 <= length && length < 5 ) return 'error';
     return null
+}
+
+export const FilteringPhoneDefaultVietName = (phone) => {
+    let newphone;
+    if(phone[0] == '0')
+        newphone = '+84' + phone.substring(1);
+    else if(phone[0] != '+')
+        newphone = '+' + phone;
+    else
+        newphone = phone;
+    return newphone;
 }

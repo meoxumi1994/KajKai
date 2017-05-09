@@ -1,15 +1,13 @@
-import { updateuserData } from '../../sync/updateuser'
-import { fleu } from '../../support'
+import { updateuserData } from '~/actions/sync/updateuser'
+import { fleu } from '~/actions/support'
 
-export const changeLanguage = (language, user) => dispatch => {
+export const changeLanguage = (language) => dispatch => {
     dispatch(updateuserData('LANGUAGE', { language : language }))
-    if(user.username){
-        fleu('/updateuser',{
-            language: language
-        },{
-            status: 'failed|success'
-        })
-        .then((response) => {
-        })
-    }
+    fleu('/updateuser',{
+        language: language
+    },{
+        status: 'failed|success'
+    })
+    .then((response) => {
+    })
 }

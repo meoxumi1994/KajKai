@@ -1,10 +1,10 @@
 import { authAction, authData } from '../../sync/auth'
 import { flet,flem } from '../../support'
 
-export const logIn = (loginId, password) => dispatch => {
+export const logIn = (email, password) => dispatch => {
     dispatch(authAction('LOGIN_ING'))
     flet('/login',{
-        loginId: loginId,
+        email: email,
         password: password
     },{
         username: undefined,
