@@ -13,8 +13,18 @@ module.exports = {
   saveNewUser,
   validateName,
   validateLanguage,
-  validateSex
+  validateSex,
+  getUserInfo
 };
+
+function getUserInfo(user) {
+	return {username: user.name, imageUrl: user.imageUrl,
+						phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
+						language: user.language, passwordLastUpdatedAt: user.passwordLastUpdatedAt,
+						usernameLastUpdatedAt: user.nameLastUpdatedAt,
+						yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
+  						addressLastUpdateAt: user.addressLastUpdateAt}
+}
 
 function getUser(id, next) {
 	User.findById(id, function(err, user) {
@@ -67,7 +77,7 @@ function getUserFromGoogleId(googleid, next) {
 }
 
 function getUserToken(id) {
-	var token = jwt.sign({_id: id}, 'secret', { expiresIn: 60 * 60 });
+	var token = jwt.sign({_id: id}, 'secret', { expiresIn: 60 * 60 * 60 });
 	return token;
 }
 

@@ -17,12 +17,12 @@ export default {
   //   }
   // },
 
-  // '/emailverification/:token': {
-  //   get: {
-  //     controller: 'UserController',
-  //     method: 'comfirmEmailVerification'
-  //   }
-  // },
+  '/emailverification/:token': {
+    get: {
+      controller: 'EmailController',
+      method: 'comfirmEmailVerification'
+    }
+  },
 
   '/updatephone': {
     put: {
@@ -32,11 +32,26 @@ export default {
     }
   },
 
+  '/updatepassword': {
+    put:{
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'updateUserPassword'
+    }
+  },
+
   '/verifyphone': {
     put: {
       controller: 'PhoneController',
       middleware: [auth(), phoneCheck()],
       method: 'verifyPhone'
+    }
+  },
+
+  '/logoutphone': {
+    post: {
+      controller: 'PhoneController',
+      method: 'verifyLogout'
     }
   },
 

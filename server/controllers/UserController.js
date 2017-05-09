@@ -5,6 +5,7 @@ import request from 'request'
 import { User } from '../models'
 import enums from '../enum'
 import {parseNum} from '../utils/NumberUtils'
+import EmailService from '../services/EmailService'
 // var Email = require('../services/EmailService.js')
 // var request = require('request')
 
@@ -16,66 +17,61 @@ export const registerNewUser = () => {
 	return (req, res) => {
 		if (req.body) {
 			var body = req.body;
-			console.log(body.loginId);
-			if (body.loginId && body.username && body.password) {	
-
-				if (emailRegrex.test(body.loginId)) {	
-					UserService.getUserFromEmail(body.loginId, function(user){
-						console.log(body.loginId)
+			console.log(body.email);
+			if (body.email && body.username && body.password) {
+				if (emailRegrex.test(body.email)) {	
+					UserService.getUserFromEmail(body.email, function(user){
+						console.log(body.email)
 						console.log(user)
 						// console.log(user.length)
 						if (user) {
-							res.json({status: 'already registered'})
+							res.json({status: 'used'})
 							return;
 						}
-						var newUser = new User({email: body.loginId, 
+						var newuser = new User({email: body.email, 
 							password: body.password, 
-							name: body.username})
-
-						UserService.saveNewUser(newUser, function(id){
-							if (!id) {
-								console.log('error register phone user')
-								res.json({status: 'failed'})
-							} else {
-								res.cookie('token', UserService.getUserToken(id))
+							name: body.username,
+							verified: 0})
+						newuser.save(function(){
+							EmailService.sendVerifyEmail(newuser.email, UserService.getUserToken(newuser._id), function(){
 								res.json({status: 'success'})
-							}
+							})
 						})
 					})
 					return
 				}
-				console.log(body.loginId);
-				if (phoneRegrex.test(body.loginId)) {	
-					UserService.getUserFromPhone(body.loginId, function(user){
-						console.log(body.loginId)
-						console.log(user)
-						// console.log(user.length)
-						if (user) {
-							res.json({status: 'already registered'})
-							return;
-						}
-						var newUser = new User({phone: body.loginId, 
-							password: body.password, 
-							name: body.username})
+				// console.log(body.loginId);
+				// if (phoneRegrex.test(body.loginId)) {	
+				// 	UserService.getUserFromPhone(body.loginId, function(user){
+				// 		console.log(body.loginId)
+				// 		console.log(user)
+				// 		// console.log(user.length)
+				// 		if (user) {
+				// 			res.json({status: 'already registered'})
+				// 			return;
+				// 		}
+				// 		var newUser = new User({phone: body.loginId, 
+				// 			password: body.password, 
+				// 			name: body.username})
 
-						UserService.saveNewUser(newUser, function(id){
-							if (!id) {
-								console.log('error register phone user')
-								res.json({status: 'failed'})
-							} else {
-								res.cookie('token', UserService.getUserToken(id))
-								res.json({status: 'success'})
-							}
-						})
-					})
-					return
-				} 
-				res.json({status: 'failed'})
+				// 		UserService.saveNewUser(newUser, function(id){
+				// 			if (!id) {
+				// 				console.log('error register phone user')
+				// 				res.json({status: 'failed'})
+				// 			} else {
+				// 				res.cookie('token', UserService.getUserToken(id))
+				// 				res.json({status: 'success'})
+				// 			}
+				// 		})
+				// 	})
+				// 	return
+				// } 
+				res.json({status: 'error'})
 			} else {
-				res.json({status: 'failed'})
+				res.json({status: 'error'})
 			} 
 		} else {
-			res.json({status: 'failed'})
+			res.json({status: 'error'})
 		}
 	}
 }
@@ -89,9 +85,7 @@ export const getUser = () => {
 			UserService.getUser(id, function(user) {
 				if (user) {
 					console.log(user)
-					res.json({username: user.name, imageUrl: user.imageUrl,
-						phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
-						language: user.language})
+					res.json(UserService.getUserInfo(user))
 				} else {
 					res.end()
 				}
@@ -117,21 +111,28 @@ export const authorizeUser = () => {
 					res.json({status: 'success'})
 				})
 				
+			} 
+		} 
+		var email = req.body.email
+		console.log(email)
+		console.log(password)
+		if (email && password) {
+			// console.log(emailRegrex.te)
+			if (emailRegrex.test(email)) {
+				UserService.getUserFromEmail(email, function(user) {
+					console.log(user)
+					if (!user || user.password != password || user.verified == 0) {
+						res.json({status : 'failed'})
+						return
+					}
+					res.cookie('token', UserService.getUserToken(user._id))
+					res.json({status: 'success'})
+				})
 			} else {
-				if (emailRegrex.test(loginId)) {
-					UserService.getUserFromEmail(loginId, function(user) {
-						if (!user || user.password != password) {
-							res.json({status : 'failed'})
-							return
-						}
-						res.cookie('token', UserService.getUserToken(user._id))
-						res.json({status: 'success'})
-					})
-				} else {
-					res.json({status: 'failed'})
-				}
+				res.json({status: 'failed'})
 			}
-		} else {
+		}
+		else {
 			res.json({status: 'failed'})
 		}
 
@@ -162,23 +163,18 @@ export const getFacebookUser = () => {
 					if (user) {
 						res.cookie('token', UserService.getUserToken(user._id))
 						console.log('facebook: ' + UserService.getUserToken(user._id))
-						res.json({ username: user.name,
-			        			imageUrl: user.imageUrl, 
-			        			phone: user.phone, 
-			        			address: user.address})
+						res.json(UserService.getUserInfo(user))
 					} else {
 						var newuser = new User({socialNetworkType: enums.FACEBOOK, 
 							socialNetworkId: body.id,
 							name: body.name,
 							imageUrl: body.picture.data.url,
-							password: '1234'})
+							password: '1234',
+							verified: 1})
 						newuser.save(function(){
 							res.cookie('token', UserService.getUserToken(newuser._id))
 							console.log('facebook ' + UserService.getUserToken(newuser._id))
-							res.json({ username: body.name,
-			        			imageUrl: body.picture.data.url,
-			        			phone: newuser.phone,
-			        			address: newuser.address})
+							res.json(UserService.getUserInfo(newuser))
 						})
 					}
 				})
@@ -199,6 +195,7 @@ export const logOutUser = () => {
 
 export const changeUserPhone = () => {
 	return (req, res) => {
+		console.log(req.body.phone)
 		UserService.getUser(req.decoded._id, function(user){
 			if (user) {
 				user.phone = req.body.phone
@@ -216,13 +213,44 @@ export const changeUserPhone = () => {
 	}
 }
 
+// console.log(new Date())
+
+export const updateUserPassword = () => {
+	return (req, res) => {
+		console.log(req.decoded._id)
+		var id = req.decoded._id
+		// var id = req.body.id
+		console.log(id)
+		UserService.getUser(id, function(user){
+			if (user) {
+				if (user.password != req.body.password || !req.body.newpassword || req.body.newpassword.length < 6
+					|| user.password == user.newpassword) {
+					res.json({status: 'failed'})
+				} else {
+					user.password = req.body.newpassword
+					user.passwordLastUpdatedAt = new Date()
+					user.save(function(){
+						res.json({status: 'success'})
+					})
+				}
+			} else {
+				res.json({status: 'failed'})
+			}
+		})
+	}
+}
+
 export const changeUserProfile = () => {
 	return (req, res) => {
 		UserService.getUser(req.decoded._id, function(user){
 			if (user) {
+				var updateName = false
+				var updateAddress = false
+				var updateYOB = false
 				if (req.body.username) {
 					if (UserService.validateName(req.body.username)) {
 						user.name = req.body.username
+						updateName = true
 					} else {
 						res.json({error: 'name error'})
 						return
@@ -230,8 +258,10 @@ export const changeUserProfile = () => {
 				}
 				if (req.body.imageUrl)
 					user.imageUrl = req.body.imageUrl
-				if (req.body.address) // TO DO
+				if (req.body.address) { // TO DO
 					user.address = req.body.address
+					updateAddress = true
+				}
 				if (req.body.language) {
 					if (UserService.validateLanguage(req.body.language)) { 
 						user.language = req.body.language
@@ -248,14 +278,14 @@ export const changeUserProfile = () => {
 						return
 					}
 				}
-				if (req.body.password) {
-					if (req.body.password.length > 5) {
-						user.password = req.body.password
-					} else {
-						res.json({error: 'password err'})
-						return
-					}
-				}
+				// if (req.body.password) {
+				// 	if (req.body.password.length > 5) {
+				// 		user.password = req.body.password
+				// 	} else {
+				// 		res.json({error: 'password err'})
+				// 		return
+				// 	}
+				// }
 
 				if (req.body.yearOfBirth) {
 					var year = parseNum(req.body.yearOfBirth)
@@ -265,10 +295,22 @@ export const changeUserProfile = () => {
 					}
 					if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
 						user.yearOfBirth = year
+						updateYOB = true
 					} else {
 						res.json({error: 'year error'})
 					}
 				}
+
+				if (updateName) {
+					user.nameLastUpdatedAt = new Date()
+				}
+  				if (updateYOB) {
+  					user.yearOfBirthLastUpdateAt = new Date()
+  				}
+  				if (updateAddress) {
+  					user.addressLastUpdateAt = new Date()
+  				}
+
 
 				user.save(function(err){
 					if (err) {
@@ -305,26 +347,21 @@ export const getGoogleUser = () => {
 					if (user) {
 						res.cookie('token', UserService.getUserToken(user._id))
 						console.log('google: ' + UserService.getUserToken(user._id))
-						res.json({username: user.name,
-		        				imageUrl: user.imageUrl,
-		        				phone: user.phone,
-		        				address: user.address})
+						res.json(UserService.getUserInfo(user))
 					} else {
 						var newuser = new User({email : body.email,
 							name: body.name,
 							imageUrl: body.picture,
-							password: '1234'})
+							password: '1234',
+							verified: 1})
 						newuser.save(function(){
 							res.cookie('token', UserService.getUserToken(newuser._id))
-							res.json({username: body.name,
-			        				imageUrl: body.picture,
-			        				phone: newuser.phone,
-			        				address: newuser.address})
+							res.json(UserService.getUserInfo(newuser))
 						})
 					}
 				})
 			} else {
-				res.json(error: 'error')
+				res.json({error: 'error'})
 			}
 		})
 	}

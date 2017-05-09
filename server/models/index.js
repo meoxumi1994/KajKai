@@ -5,9 +5,13 @@ var User = mongoose.model('User', UserSchema)
 var CategorySchema = require('./Category')
 var Category = mongoose.model('Category', CategorySchema)
 
+var SubCategorySchema = require('./SubCategory')
+var SubCategory = mongoose.model('SubCategory', SubCategorySchema)
+
 module.exports = {
 	User,
-	Category
+	Category,
+	SubCategory
 }
 
 // var fs = require('fs')
@@ -18,7 +22,16 @@ module.exports = {
 // 	var obj = JSON.parse(data)
 // 	obj.forEach(function(e) {
 // 		console.log(e)
-// 		var cat = new Category({name: e.name})
-// 		cat.save()
+// 		var sub = e.subcategory
+
+// 		var subCategories = []
+// 		sub.forEach(function(subcat){
+// 			console.log(subcat)
+// 			var subCategory = new SubCategory({name: subcat.name})
+// 			subCategories.push(subCategory)
+// 		})
+
+// 		var category = new Category({name: e.name, subcategory: subCategories})
+// 		category.save()
 // 	})
 // })
