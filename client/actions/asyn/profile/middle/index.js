@@ -13,8 +13,8 @@ export const changeLanguage = (language) => dispatch => {
     })
 }
 
-export const verifyPhone = (phone) => dispatch => {
-    dispatch(updateuserAction('UPDATE_PHONE_ING'))
+export const updatePhone = (phone) => dispatch => {
+    dispatch({ type: 'UPDATE_PHONE_ING', newvalue: phone })
     fleu('/updatephone',{
         phone: phone
     },{
@@ -22,15 +22,15 @@ export const verifyPhone = (phone) => dispatch => {
     })
     .then(({status}) => {
         if(status == 'pending')
-            dispath(updateuserAction('UPDATE_PHONE_PENDING'))
+            dispatch(updateuserAction('UPDATE_PHONE_PENDING'))
         if(status == 'used' )
-            dispath(updateuserAction('UPDATE_PHONE_USED'))
+            dispatch(updateuserAction('UPDATE_PHONE_USED'))
         if(status == 'error')
-            dispath(updateuserAction('UPDATE_PHONE_FAILED'))
+            dispatch(updateuserAction('UPDATE_PHONE_FAILED'))
     })
 }
 
-export const updatePhone = (phone, code) => dispatch => {
+export const verifyPhone = (phone, code) => dispatch => {
     dispatch(updateuserAction('VERIFY_PHONE_ING'))
     fleu('/verifyphone',{
         phone: phone,
@@ -43,6 +43,22 @@ export const updatePhone = (phone, code) => dispatch => {
             dispatch(updateuserData('VERIFY_PHONE_SUCCESS', {phone}))
         if(status == 'error')
             dispatch(updateuserAction('VERIFY_PHONE_FAILED'))
+    })
+}
+
+export const updatePassword = (password, newpassword) => dispatch =>{
+    dispatch(updateuserAction('UPDATE_PASSWORD_ING'))
+    fleu('/updatepassword',{
+        password: password,
+        newpassword: newpassword,
+    },{
+        status: 'failed|success',
+    })
+    .then(({status}) => {
+        if(status == 'failed')
+            dispatch(updateuserAction('UPDATE_PASSWORD_FAILED'))
+        if(status == 'success')
+            dispatch(updateuserData('UPDATE_PASSWORD_SUCCESS'))
     })
 }
 

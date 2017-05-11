@@ -4,6 +4,7 @@ import { logIn, logInFaceBook, logInGoogle } from '../../actions/asyn/user-login
 import UserLogin from '../../components/user-login-register/Login'
 
 const mapStateToProps = (state, ownProps) => ({
+    g : (lang) => allString.get(state.user.language, lang),
     auth: state.auth,
     user: state.user,
 })

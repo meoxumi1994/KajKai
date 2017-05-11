@@ -7,6 +7,9 @@ const updateuser = ( state = 'WAIT' , action) => {
         case 'VERIFY_PHONE_ING':
         case 'VERIFY_PHONE_FAILED':
         case 'VERIFY_PHONE_SUCCESS':
+        case 'UPDATE_PASSWORD_ING':
+        case 'UPDATE_PASSWORD_FAILED':
+        case 'UPDATE_PASSWORD_SUCCESS':
         case 'UPDATE_USER_ING':
         case 'UPDATE_USER_FAILED':
         case 'UPDATE_USER_SUCCESS':

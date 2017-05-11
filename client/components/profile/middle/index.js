@@ -1,9 +1,11 @@
 import React from 'react';
 import allString from '~/config/allString'
+import { browserHistory } from 'react-router';
 
 import RowInfoProfileContainer from '~/containers/profile-container/middle-container/RowInfoProfileContainer'
 import RowPrivacyProfile from './RowPrivacyProfile'
-import RowSecurityProfile from './RowSecurityProfile'
+import RowSecurityProfileContainer from '~/containers/profile-container/middle-container/RowSecurityProfileContainer'
+import PhoneInfoContainer from '~/containers/profile-container/middle-container/PhoneInfoContainer'
 
 class Middle extends React.Component {
     constructor(props){
@@ -39,29 +41,26 @@ class Middle extends React.Component {
                     </div>
                     <hr style={{ marginTop: 45, marginBottom: 0}}></hr>
                     <RowInfoProfileContainer
-                        title={g('USER_NAME')}
-                        noteContent={g('NOTE_USER_NAME')}
+                        title={'USER_NAME'}
                         itemType={'username'}
                         itemId={0}
                     />
                     <RowInfoProfileContainer
-                        title={g('PHONE')}
-                        noteContent={g('NOTE_PHONE')}
+                        title={'PHONE'}
                         itemType={'phone'}
                         itemId={1}
                     />
                     <RowInfoProfileContainer
-                        title={g('ADDRESS')}
-                        noteContent={g('NOTE_ADDRESS')}
+                        title={'ADDRESS'}
                         itemType={'address'}
                         itemId={2}
                     />
                     <RowInfoProfileContainer
-                        title={g('AGE')}
-                        noteContent={g('NOTE_AGE')}
+                        title={'AGE'}
                         itemType={'yearOfBirth'}
                         itemId={3}
                     />
+                    <PhoneInfoContainer/>
                     <h5 style={{ padding: 8, paddingLeft: 13, margin: 0, backgroundColor: '#EEEEEE'}}><strong>Detail</strong></h5>
                     <hr style={{ margin: 0}}></hr>
                     {/* <RowInfoProfile
@@ -83,15 +82,14 @@ class Middle extends React.Component {
                 <div className="panel panel-default"
                     style={{ minWidth: 540, margin: 7}}>
                     <div className="panel-heading">Security</div>
-                    {/* <RowSecurityProfile
-                        language={user.language}
-                        title={g('PASSWORD')}
-                        onClickChange={}
-                        noteContent={g('NOTE_PASSWORD')}
-                    /> */}
+                    <RowSecurityProfileContainer
+                        title={'PASSWORD'}
+                        itemType={'password'}
+                        itemID={4}
+                    />
                 </div>
                 <div className="panel panel-default"
-                    style={{ minWidth: 540, height: 720, margin: 7}}
+                    style={{ minWidth: 540, height: 120, margin: 7}}
                     >
                     <div style={{ marginLeft: 20}} className="btn"
                         onClick={()=> changeLanguage('VIETNAMESE')}>
@@ -104,6 +102,12 @@ class Middle extends React.Component {
                 </div>
             </div>
         )
+    }
+    componentDidMount(){
+        let { username } = this.props;
+        if( username == undefined){
+            browserHistory.push('/register');
+        }
     }
     componentDidUpdate(){
         let { username } = this.props;

@@ -34,9 +34,5 @@
     "request": "^2.81.0",
     "socket.io": "^1.7.3",
     "verify-javascript-sdk": "^0.2.4"
-  },
-  "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1"
   }
 }

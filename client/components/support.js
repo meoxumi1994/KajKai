@@ -38,8 +38,6 @@ export const checkUserName = (username, isCheck) => {
 
 export const checkEmail = (email, isCheck) => {
     if(!isCheck) return null;
-    const length = loginID.length;
-    // const isphone = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/.test(loginID)
     const ismail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
     if( !ismail ) return 'error'
     return null
