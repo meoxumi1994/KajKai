@@ -112,7 +112,14 @@ export default {
       controller: 'CategoryController',
       method: 'getCategory'
     }
-  }
+  },
 
+  '/getawsimageurl': {
+    post: {
+      controller: 'AWSController',
+      auth: [auth()],
+      method: 'getS3PutObjectSignedUrl'
+    }
+  }
 
 }
