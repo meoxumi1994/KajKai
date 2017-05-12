@@ -298,6 +298,7 @@ export const changeUserProfile = () => {
 						updateYOB = true
 					} else {
 						res.json({error: 'year error'})
+						return
 					}
 				}
 
