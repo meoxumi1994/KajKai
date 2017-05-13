@@ -1,6 +1,6 @@
 export default {
   'DEMO_EVENT': {
-    controller: 'DemoSioController',
+    controller: 'CommentController',
     method: 'handleSioDemo'
   }
 }
