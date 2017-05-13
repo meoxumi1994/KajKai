@@ -1,6 +1,8 @@
 import mongoose from '../datasource'
 import enums from '../enum'
 import _ from 'lodash'
+import { Store } from '.'
+console.log(Store)
 
 const UserSchema = new mongoose.Schema({
   name: {type: String},

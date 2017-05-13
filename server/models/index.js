@@ -8,10 +8,14 @@ var Category = mongoose.model('Category', CategorySchema)
 var SubCategorySchema = require('./SubCategory')
 var SubCategory = mongoose.model('SubCategory', SubCategorySchema)
 
+var StoreSchema = require('./Store')
+var Store = mongoose.model('Store', StoreSchema)
+
 module.exports = {
 	User,
 	Category,
-	SubCategory
+	SubCategory,
+	Store
 }
 
 // var fs = require('fs')

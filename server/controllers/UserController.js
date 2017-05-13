@@ -9,7 +9,6 @@ import EmailService from '../services/EmailService'
 // var Email = require('../services/EmailService.js')
 // var request = require('request')
 
-
 const phoneRegrex = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
 const emailRegrex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 

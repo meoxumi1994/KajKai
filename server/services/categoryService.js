@@ -1,10 +1,6 @@
 import { Category } from '../models'
 
-module.exports = {
-  getCategoryList
-};
-
-function getCategoryList(next) {
+export const getCategoryList = (next) => {
 	Category.find({}, function(err, categories) {
 		if (err) {
 			next(null)
@@ -13,3 +9,13 @@ function getCategoryList(next) {
 		}
 	})
 }
+
+// export const findCategoryByName = (name, next) => {
+// 	Category.find({name: name}, function (err) {
+// 		if (err) {
+// 			next(null)
+// 		} else {
+// 			next(true)
+// 		}
+//     })
+// }

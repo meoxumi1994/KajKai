@@ -18,3 +18,4 @@ export const parseNum = (number) => {
 	if (number[0] == '-') result = -result
 	return result
 }
+
