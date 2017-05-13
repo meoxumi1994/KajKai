@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a1eb2775-422f-4150-9f5c-597961e18fb6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/controllers/UserController.js" afterPath="$PROJECT_DIR$/server/controllers/UserController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/services/StoreService.js" afterPath="$PROJECT_DIR$/server/services/StoreService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/services/UserService.js" afterPath="$PROJECT_DIR$/server/services/UserService.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -429,7 +426,7 @@
       <updated>1494569826506</updated>
       <workItem from="1494569828396" duration="342000" />
       <workItem from="1494599664819" duration="914000" />
-      <workItem from="1494644709489" duration="8378000" />
+      <workItem from="1494644709489" duration="8391000" />
     </task>
     <task id="LOCAL-00001" summary="sock">
       <created>1494649154654</created>
@@ -452,11 +449,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494664856330</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="sock">
+      <created>1494665993541</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1494665993541</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9634000" />
+    <option name="totallyTimeSpent" value="9647000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="19" y="76" width="1400" height="782" extended-state="0" />
