@@ -1,6 +1,7 @@
-import { User, Store } from '../models'
+import { User } from '../models'
 import jwt from 'jsonwebtoken'
 import enums from '../enum'
+import {findStoreList} from './StoreService'
 
 module.exports = {
   getUserToken,
@@ -18,16 +19,15 @@ module.exports = {
 };
 
 function getUserInfo(user, next) {
-	Store.findStoreList(user._id, function (err, stores) {
-		
-    })
-
-	return {username: user.name, imageUrl: user.imageUrl,
-						phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
-						language: user.language, passwordLastUpdatedAt: user.passwordLastUpdatedAt,
-						usernameLastUpdatedAt: user.nameLastUpdatedAt,
-						yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
-  						addressLastUpdateAt: user.addressLastUpdateAt}
+	findStoreList(user.id, function(stores){
+        next( {username: user.name, imageUrl: user.imageUrl,
+            phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
+            language: user.language, passwordLastUpdatedAt: user.passwordLastUpdatedAt,
+            usernameLastUpdatedAt: user.nameLastUpdatedAt,
+            yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
+            addressLastUpdateAt: user.addressLastUpdateAt,
+			storeList: stores} )
+	})
 }
 
 function getUser(id, next) {

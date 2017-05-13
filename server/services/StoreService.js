@@ -1,5 +1,6 @@
 import { Store, Category } from '../models'
 import { checkPhone } from '../utils/Utils'
+import UserService from './UserService'
 
 export const getStore = (id, next) => {
     Store.findById(id, function (err, store) {
@@ -50,6 +51,7 @@ export const addNewStore = (_ownerId, _storename, _address, _phone, _category, _
         next(null)
         return
     }
+
     store.save(function(err) {
         if (err) {
             next(null)

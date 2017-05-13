@@ -84,7 +84,9 @@ export const getUser = () => {
 			UserService.getUser(id, function(user) {
 				if (user) {
 					console.log(user)
-					res.json(UserService.getUserInfo(user))
+					UserService.getUserInfo(user, function(data){
+						res.json(data)
+					})
 				} else {
 					res.end()
 				}
@@ -162,7 +164,10 @@ export const getFacebookUser = () => {
 					if (user) {
 						res.cookie('token', UserService.getUserToken(user._id))
 						console.log('facebook: ' + UserService.getUserToken(user._id))
-						res.json(UserService.getUserInfo(user))
+						// res.json(UserService.getUserInfo(user))
+						UserService.getUserInfo(user, function (data) {
+							res.json(data)
+                        })
 					} else {
 						var newuser = new User({socialNetworkType: enums.FACEBOOK, 
 							socialNetworkId: body.id,
@@ -173,7 +178,9 @@ export const getFacebookUser = () => {
 						newuser.save(function(){
 							res.cookie('token', UserService.getUserToken(newuser._id))
 							console.log('facebook ' + UserService.getUserToken(newuser._id))
-							res.json(UserService.getUserInfo(newuser))
+                            UserService.getUserInfo(newuser, function (data) {
+                                res.json(data)
+                            })
 						})
 					}
 				})
@@ -347,7 +354,10 @@ export const getGoogleUser = () => {
 					if (user) {
 						res.cookie('token', UserService.getUserToken(user._id))
 						console.log('google: ' + UserService.getUserToken(user._id))
-						res.json(UserService.getUserInfo(user))
+						// res.json(UserService.getUserInfo(user))
+						UserService.getUserInfo(user, function (data) {
+							res.json(data)
+                        })
 					} else {
 						var newuser = new User({email : body.email,
 							name: body.name,
@@ -356,7 +366,9 @@ export const getGoogleUser = () => {
 							verified: 1})
 						newuser.save(function(){
 							res.cookie('token', UserService.getUserToken(newuser._id))
-							res.json(UserService.getUserInfo(newuser))
+                            UserService.getUserInfo(newuser, function (data) {
+                                res.json(data)
+                            })
 						})
 					}
 				})
