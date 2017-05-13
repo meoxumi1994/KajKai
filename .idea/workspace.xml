@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1eb2775-422f-4150-9f5c-597961e18fb6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/controllers/StoreController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/models/Store.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/services/StoreService.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/utils/Utils.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/common/middlewares/auth.js" afterPath="$PROJECT_DIR$/server/common/middlewares/auth.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/controllers/CategoryController.js" afterPath="$PROJECT_DIR$/server/controllers/CategoryController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/controllers/UserController.js" afterPath="$PROJECT_DIR$/server/controllers/UserController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/models/User.js" afterPath="$PROJECT_DIR$/server/models/User.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/models/index.js" afterPath="$PROJECT_DIR$/server/models/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/routes.js" afterPath="$PROJECT_DIR$/server/routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/services/UserService.js" afterPath="$PROJECT_DIR$/server/services/UserService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/services/categoryService.js" afterPath="$PROJECT_DIR$/server/services/categoryService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/utils/NumberUtils.js" afterPath="$PROJECT_DIR$/server/utils/NumberUtils.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -438,7 +425,7 @@
       <updated>1494569826506</updated>
       <workItem from="1494569828396" duration="342000" />
       <workItem from="1494599664819" duration="914000" />
-      <workItem from="1494644709489" duration="7435000" />
+      <workItem from="1494644709489" duration="7444000" />
     </task>
     <task id="LOCAL-00001" summary="sock">
       <created>1494649154654</created>
@@ -447,11 +434,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494649154654</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="sock">
+      <created>1494664851019</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1494664851019</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8691000" />
+    <option name="totallyTimeSpent" value="8700000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="30" y="37" width="1400" height="782" extended-state="0" />
@@ -820,7 +814,7 @@
         <state relative-caret-position="60">
           <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#0#36#0" expanded="false" />
           </folding>
         </state>
       </provider>
