@@ -15,7 +15,8 @@ module.exports = {
   validateName,
   validateLanguage,
   validateSex,
-  getUserInfo
+  getUserInfo,
+	updateImageUrl
 };
 
 function getUserInfo(user, next) {
@@ -168,4 +169,10 @@ function validateLanguage(language){
 
 function validateSex(sex) {
 	return (sex == enums.Sex.MALE || sex == enums.Sex.FEMALE)
+}
+
+function updateImageUrl(id, imageURL) {
+	User.findOneAndUpdate({_id: id}, {$set:{imageUrl: imageURL}}, function(err){
+		console.log('err ' + err)
+	})
 }
