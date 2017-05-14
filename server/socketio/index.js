@@ -12,16 +12,17 @@ const init = (server) => {
         // load all events
         for(let e in allEvents){
             let handler = allEvents[e]
-            console.log(handler)
+            console.log(e)
             let method = require('../controllers/' + handler.controller)[handler.method]
             socket.on(e, (action) => {
-                if(validateTokenDemo(action.token)) {
-                    method(action, sio)
-                } else {
-                    socket.emit('action', {
-                        type: 'NOT_LOGGED_IN'
-                    })
-                }
+                // if(validateTokenDemo(action.token)) {
+                //     method(action, sio)
+                // } else {
+                //     socket.emit('action', {
+                //         type: 'NOT_LOGGED_IN'
+                //     })
+                // }
+                method(action, socket)
             })
         }
     })
