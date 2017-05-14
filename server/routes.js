@@ -128,5 +128,13 @@ export default {
             middleware: [auth()],
             method: 'registerStore'
         }
+    },
+
+    '/updatestore': {
+        post: {
+            controller: 'StoreController',
+            middleware: [auth()],
+            method: 'updateStore'
+        }
     }
 }

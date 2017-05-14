@@ -12,6 +12,7 @@ export const handleSioDemo = (action, sio) => {
 export const textSockIO = (action, sio) => {
     // if (action.type == '') {
     console.log(action)
+    console.log(sio)
         // sio.emit('hello', {
         //     abc: 'def'
         // })

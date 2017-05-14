@@ -20,7 +20,9 @@ export const getStoreInfo = (store) => {
         category: store.category,
         longitude: store.longtitue,
         latitude: store.latitude,
-        id: store._id
+        id: store._id,
+        avatarUrl: store.avatarUrl,
+        coverUrl: store.coverUrl
     }
 }
 
@@ -61,21 +63,27 @@ export const addNewStore = (_ownerId, _storename, _address, _phone, _category, _
     })
 }
 
-export const updateStore = (id, _ownerId, _storename, _address, _phone, _category, _longitude, _latitude, next) => {
+export const modifyStore = (updateStore, next) => {
+    // var id = up, _ownerId, _storename, _address, _phone, _category, _longitude, _latitude
+    var id = updateStore.id
+    var _ownerId = updateStore.owner
+
     getStore(id, function (store) {
         if (!store) {
             next({status: 'error'})
         } else {
-            if (_ownerId != store.owner) {
+            if (_ownerId !== store.owner) {
                 next({status: 'unauthorize'})
                 return
             }
-            if (_storename) store.storename = _storename
-            if (_address) store.address = _address
-            if (_phone) store.phone = _phone
-            if (_category) store.category = _category
-            if (_longitude) store.longitude = _longitude
-            if (_latitude) store.latitude = _latitude
+            if (updateStore.storename) store.storename = updateStore.storename
+            if (updateStore.address) store.address = updateStore.address
+            if (updateStore.phone) store.phone = updateStore.phone
+            if (updateStore.category) store.category = updateStore.category
+            if (updateStore.longitude) store.longitude = updateStore.longitude
+            if (updateStore.latitude) store.latitude = updateStore.latitude
+            if (updateStore.avatarUrl) store.avatarUrl = updateStore.avatarUrl
+            if (updateStore.coverUrl) store.coverUrl = updateStore.coverUrl
 
             store.save(function(err){
                 if (err) {

@@ -7,7 +7,9 @@ const StoreSchema = new mongoose.Schema({
     category: {type: String},
     longitude: {type: Number},
     latitude: {type: Number},
-    owner: {type: String}
+    owner: {type: String},
+    avatarUrl: {type: String},
+    imageUrl: {type: String}
 });
 
 module.exports = StoreSchema
