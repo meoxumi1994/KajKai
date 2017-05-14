@@ -186,7 +186,7 @@ export const getFacebookUser = () => {
 					}
 				})
 			} else {
-				res.json(error: 'error')
+				res.json({error: 'error'})
 			}
 		})
 	}
