@@ -27,14 +27,14 @@ module.exports = {
 // 	obj.forEach(function(e) {
 // 		console.log(e)
 // 		var sub = e.subcategory
-
+//
 // 		var subCategories = []
 // 		sub.forEach(function(subcat){
 // 			console.log(subcat)
 // 			var subCategory = new SubCategory({name: subcat.name})
 // 			subCategories.push(subCategory)
 // 		})
-
+//
 // 		var category = new Category({name: e.name, subcategory: subCategories})
 // 		category.save()
 // 	})

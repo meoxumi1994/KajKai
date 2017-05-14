@@ -24,6 +24,7 @@
     "gmail-send": "^1.2.8",
     "jsonwebtoken": "^7.3.0",
     "lodash": "^4.17.4",
+    "md5": "^2.2.1",
     "mongoose": "^4.9.6",
     "mysql": "^2.13.0",
     "passport": "^0.3.2",

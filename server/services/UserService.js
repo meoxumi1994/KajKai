@@ -21,13 +21,15 @@ module.exports = {
 
 function getUserInfo(user, next) {
 	findStoreList(user.id, function(stores){
-        next( {username: user.name, imageUrl: user.imageUrl,
+        next( {username: user.name, listUrls: [user.imageUrl],
             phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
             language: user.language, passwordLastUpdatedAt: user.passwordLastUpdatedAt,
             usernameLastUpdatedAt: user.nameLastUpdatedAt,
             yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
             addressLastUpdateAt: user.addressLastUpdateAt,
-			storeList: stores} )
+			storeList: stores,
+			avatarUrl: user.avatarUrl,
+			coverUrl: user.coverUrl} )
 	})
 }
 
