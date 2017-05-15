@@ -33,19 +33,31 @@ const verifyCharacterVietname = (username) => {
     return true;
 }
 
+const positiveNumber = (value) => {
+    if(!value) return false
+    for(let i = 0; i< value.length; i++){
+        if(value[i] < '0' || '9' < value[i])
+            return false
+    }
+    return true
+}
+
 export const checkUserName = (username) => {
+    if(!username) return 'error'
     const length = username.length;
     if( length > 45 || length < 5 || (length > 0 && !verifyCharacterVietname(username)) ) return 'error'
     return null
 }
 
 export const checkEmail = (email) => {
+    if(!email) return 'error'
     const ismail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
     if( !ismail ) return 'error'
     return null
 }
 
 export const checkBasicPhone = (phone) => {
+    if(!phone) return 'error'
     for(let i = 0; i< phone.length; i++){
         if(phone[i]!= '+' || (phone[i] < '0' || '9' < phone[i]))
             return 'error'
@@ -54,14 +66,31 @@ export const checkBasicPhone = (phone) => {
 }
 
 export const checkPhone = (phone) => {
+    if(!phone) return 'error'
     const isphone = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/.test(phone)
     if( !isphone ) return 'error'
     return null
 }
 
 export const checkPassword = (password) => {
+    if(!password) return 'error'
     const length = password.length;
     if (0 <= length && length < 5 ) return 'error';
+    return null
+}
+
+export const checkloginId = (loginId) => {
+    if(!loginId) return 'error'
+    const length = loginId.length;
+    const isphone = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/.test(loginId)
+    const ismail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(loginId)
+    if( !ismail && !isphone ) return 'error'
+    return null;
+}
+
+export const checkAge = (age) => {
+    if(!positiveNumber(age)) return 'error'
+    if(age > 100) return 'error'
     return null
 }
 
