@@ -1,23 +1,22 @@
 import React from 'react'
-import { Router, Route, hashHistory , browserHistory, IndexRoute} from 'react-router'
+// import { Router, Route, hashHistory , browserHistory, IndexRoute} from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
+
 
 import Home from './home/Home'
 import Mapp from './mapp/Map'
-import ProfileContainer from '~/containers/profile-container'
-import AppContainer from '~/containers/AppContainer'
-import UserLoginRegisterContainer from '~/containers/user-login-register-container'
-import Store from './store/Store'
+import Profile from '~/containers/profile'
+import App from '~/containers/App'
+import UserLoginRegister from '~/containers/user-login-register'
+import RegisterStore from '~/containers/register-store'
+import Store from '~/containers/store'
 
 const Components = () => (
-    <Router history={browserHistory}>
-        <Route path="/" component={AppContainer}>
-            <IndexRoute component={Home}/>
-            <Route path="/map" component={Mapp}/>
-            <Route path="/register" component={UserLoginRegisterContainer}/>
-            <Route path="/store" component={Store}/>
-            <Route path="/profile" component={ProfileContainer}/>
-        </Route>
-    </Router>
+    <BrowserRouter>
+        <div>
+            <Route path="*" component={App}/>
+        </div>
+    </BrowserRouter>
 )
 
 export default Components

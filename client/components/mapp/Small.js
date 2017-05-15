@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row,Col } from 'react-bootstrap';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const Small = (props) => (
     <div className="list-group-item" style={{ height: 90, paddingTop:3, paddingBottom: 3, paddingLeft: 0,paddingRight: 0 }}>
