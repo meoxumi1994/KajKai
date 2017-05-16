@@ -5,10 +5,10 @@ import Left from '~/containers/profile/left'
 import Middle from '~/containers/profile/middle'
 import Right from '~/containers/profile/right'
 
-const Profile = ({ isloading, username}) => {
-    if(isloading)
+const Profile = ({ iswhoing, isusername}) => {
+    if(iswhoing)
         return <div></div>
-    if(!username)
+    if(!isusername)
         return <Redirect to='/register'/>
     return(
         <div className="container-fluid" style={{ overflow: 'scroll', height: window.innerHeight - 46 }}>

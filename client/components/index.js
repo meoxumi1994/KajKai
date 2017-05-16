@@ -1,5 +1,4 @@
 import React from 'react'
-// import { Router, Route, hashHistory , browserHistory, IndexRoute} from 'react-router-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 

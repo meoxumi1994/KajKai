@@ -5,10 +5,12 @@ const user = ( state = {
     storeList: [],
 }, action) => {
     switch (action.type) {
-        case 'WAIT':
+        case 'LOGOUT':
             return {
+                avatarUrl: './images/avatardefaultIcon.png',
+                coverUrl: './images/cover.png',
                 language: state.language,
-                imageUrl: './images/avatardefaultIcon.png',
+                storeList: [],
             }
         case 'WHO_SUCCESS':
         case 'LOGIN_SUCCESS':
