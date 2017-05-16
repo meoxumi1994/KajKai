@@ -10,6 +10,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "aws-sdk": "^2.49.0",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
@@ -24,7 +25,8 @@
     "gmail-send": "^1.2.8",
     "jsonwebtoken": "^7.3.0",
     "lodash": "^4.17.4",
-    "mongoose": "^4.4.6",
+    "md5": "^2.2.1",
+    "mongoose": "^4.9.6",
     "mysql": "^2.13.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
@@ -32,8 +34,9 @@
     "passport-local": "^1.0.0",
     "react": "^15.5.4",
     "request": "^2.81.0",
-    "socket.io": "^1.7.3",
     "spdy": "^3.4.4",
+    "socket.io": "^1.7.4",
+    "socket.io-client": "^2.0.1",
     "verify-javascript-sdk": "^0.2.4"
   },
   "devDependencies": {}

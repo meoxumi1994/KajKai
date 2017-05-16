@@ -1,4 +1,4 @@
-import { authAction, authData } from '../../sync/auth'
+import { authAction, authData } from '~/actions/sync/auth'
 import { flet } from '../../support'
 
 export const register = (username, email, password) => dispatch => {

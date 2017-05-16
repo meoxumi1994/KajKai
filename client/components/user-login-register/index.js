@@ -1,19 +1,19 @@
 import React from 'react'
 import { Col } from 'react-bootstrap'
-import { browserHistory } from 'react-router';
+import { Redirect } from 'react-router-dom'
 
-import VerifyContainer from '../../containers/user-login-register-container/VerifyContainer'
-import LoginContainer from '../../containers/user-login-register-container/LoginContainer'
-import RegisterContainer from '../../containers/user-login-register-container/RegisterContainer'
+import VerifyContainer from '~/containers/user-login-register/VerifyContainer'
+import LoginContainer from '~/containers/user-login-register/LoginContainer'
+import RegisterContainer from '~/containers/user-login-register/RegisterContainer'
 
-import allString from '../../config/allString'
+import allString from '~/config/allString'
 
 class LoginRegister extends React.Component {
     constructor(props){
         super(props)
     }
     render(){
-        const { g, user, whoing, changeLanguage, isregistersuccess, isloading } = this.props
+        const { g, whoing, changeLanguage, isregistersuccess, isloading } = this.props
         if(whoing)
             return <div></div>
         return (
@@ -60,12 +60,12 @@ class LoginRegister extends React.Component {
             </div>
         )
     }
-    componentDidUpdate(){
-        const { username } = this.props
-        if(username){
-            browserHistory.push('/profile');
-        }
-    }
+    // componentDidUpdate(){
+    //     const { isusername } = this.props
+    //     if(isusername){
+    //         browserHistory.push('/profile');
+    //     }
+    // }
 }
 
 export default LoginRegister;

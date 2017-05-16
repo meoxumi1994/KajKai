@@ -1,13 +1,13 @@
-import CategoryService from '../services/CategoryService.js'
+import { getCategoryList } from '../services/CategoryService.js'
 
 export const getCategory = () => {
-	return (req, res) => {
-		CategoryService.getCategoryList(function(categories){
-			if (categories) {
-				res.send({categories: categories, status: 'success'})
-			} else {
-				res.send({status: 'failed'})
-			}
-		})
-	}
+    return (req, res) => {
+        getCategoryList(function (categories) {
+            if (categories) {
+                res.send({categories: categories, status: 'success'})
+            } else {
+                res.send({status: 'failed'})
+            }
+        })
+    }
 }

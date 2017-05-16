@@ -11,7 +11,7 @@ const myString = {
     EMAIL_OR_PHONE_NUMBER : ['email hoặc số điện thoại di động','email or your phone number'],
     EMAIL_NEED : ['nhập email của bạn','enter your email'],
     EMAIL_WARNING: ['email của bạn không khả dụng','your email number are not available'],
-    PHONE_WARNING: ['số điện thoại không khả dụng','your phone numbers are not available'],
+    PHONE_WARNING: ['số điện thoại không hợp lệ','your phone numbers are not available'],
     PASSWORD : ['mật khẩu','password'],
     PASSWORD_WARNING: ['mật khẩu cần ít nhất 6 ký tự','Password requires at least 6 characters'],
     RULE: ['khi bạn đăng ký là đã đồng ý với tất cả điều khoản của chúng tôi','By clicking Create Account, you agree to our Terms'],
@@ -29,8 +29,10 @@ const myString = {
     // profile
     NOTE: ['Lưu Ý','Note'],
     SAVE_CHANGE: ['Lưu Thay Đổi','Save Change'],
+    SAVE: ['lưu', 'save'],
     CHANGE: ['Thay đổi','Change'],
-    CANCEL: ['huỷ','Cancel'],
+    CANCEL: ['huỷ','cancel'],
+    EDIT: ['sửa','edit'],
     NO: ['Chưa có','No'],
     USER_NAME: ['Tên của bạn','Name'],
     NOTE_USER_NAME: ['tên bạn sử dụng để hiển thị khi đặt hàng hay bình luận về cửa hàng, nên sử dụng tên thật của bạn để cửa hàng có thể gọi đúng cũng như đảm bảo gói hàng sẽ được giao đúng',
@@ -59,6 +61,19 @@ const myString = {
     RE_PASSWORD: ['nhập lại mật khẩu mởi','rewrite new password'],
     PASSWORD_CHANGE_SUCCESS: ['Thay đổi mật khẩu thành công','Change password successfully'],
     PASSWORD_CHANGE_FAILED: ['Bạn nhập sai mât khẩu cũ','You mistyped the old password'],
+    INFO: ['Thông tin', 'Info'],
+    PRIVACY: ['Cá nhân', 'Privacy'],
+    SECURITY: ['Bảo mật', 'Security'],
+    CREATE_STORE: ['Tạo cửa hàng','create store'],
+    // store
+    STORE: ['Cửa hàng','Store'],
+    STORE_NAME_WARNING: ['bạn nhập thiếu tên cửa hàng','you\'re missing store name'],
+    ENTER_STORE: ['tên cửa hàng của bạn', 'your Store\'s name'],
+    ENTER_ADDRESS: ['nhập địa cửa hàng chỉ của bạn', 'your Store\'s address'],
+    ADDRESS_WARNING: ['địa chỉ chưa có','have no address'],
+    ENTER_CATEGORY: ['loại hình kinh doanh của cửa hàng','your Store\'s category'],
+    CATEGORY_WARNING: ['chưa có loại hình kinh doanh','enter category please'],
+    PHONE_STORE: ['số điện thoại để khách hàng liên hệ đến của hàng','Phone numbers for customers to contact the store'],
 }
 
 const allString = {
@@ -69,6 +84,15 @@ const allString = {
             return myString[name][1]
         return null
     }
+}
+
+export const get = (language, name) => {
+    if(!myString[name]) return null;
+    if(language === 'VIETNAMESE')
+        return myString[name][0]
+    if(language == 'ENGLISH')
+        return myString[name][1]
+    return null
 }
 
 export default allString

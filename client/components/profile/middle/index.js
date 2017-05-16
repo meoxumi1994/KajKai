@@ -1,27 +1,32 @@
 import React from 'react';
-import allString from '~/config/allString'
-import { browserHistory } from 'react-router';
 
-import RowInfoProfileContainer from '~/containers/profile-container/middle-container/RowInfoProfileContainer'
-import RowPrivacyProfile from './RowPrivacyProfile'
-import RowSecurityProfileContainer from '~/containers/profile-container/middle-container/RowSecurityProfileContainer'
-import PhoneInfoContainer from '~/containers/profile-container/middle-container/PhoneInfoContainer'
+import RowInfo from '~/containers/profile/middle/RowInfo'
+import RowPrivacy from '~/containers/profile/middle/RowPrivacy'
+import RowSecurity from '~/containers/profile/middle/RowSecurity'
+import PhoneInfo from '~/containers/profile/middle/PhoneInfo'
+import ModalUploadAvatar from '~/containers/profile/middle/ModalUploadAvatar'
+import ModalUploadCover from '~/containers/profile/middle/ModalUploadCover'
 
 class Middle extends React.Component {
     constructor(props){
         super(props)
     }
     render(){
-        let { imageUrl, username, g, changeLanguage } = this.props
+        let { avatarUrl, coverUrl, username, changeLanguage, onUpdateAvatar, onUpdateCover, INFO, PRIVACY, SECURITY,} = this.props
         return(
             <div>
                 <div className="panel panel-default"
                     style={{ minWidth: 540, minheight: 700,  margin: 7}}>
-                    <img src="./images/cover.png" alt="Cinque Terre" width="100%" height="180px"
+                    <img src={ coverUrl } alt="Cinque Terre" width="100%" height="180px"
                         style={{
                             borderTopRightRadius: 3,
                             borderTopLeftRadius: 3
                         }}/>
+                        <div className="btn btn-default btn-xs"
+                            style={{ position: 'absolute', marginLeft: -37, marginTop: 5 }}
+                            onClick={ () => onUpdateCover()} >
+                            <span className="glyphicon glyphicon-camera" style={{ fontSize: 20 }}></span>
+                        </div>
                     <div style={{
                         position: 'relative',
                         float: 'left',
@@ -31,7 +36,13 @@ class Middle extends React.Component {
                     }}>
                         <div className="panel panel-default"
                             style={{ padding: 4, width: 140, height: 140,float: 'left' }}>
-                            <img src={ imageUrl } alt="Cinque Terre" width="100%" height="100%"/>
+                            <img src={ avatarUrl } alt="Cinque Terre" width="100%" height="100%"/>
+                        </div>
+                        <div className="btn btn-default btn-xs"
+                            style={{ position: 'absolute', marginLeft: -30, marginTop: 5 }}
+                            onClick={() => onUpdateAvatar()}
+                            >
+                            <span className="glyphicon glyphicon-camera" style={{ fontSize: 15 }}></span>
                         </div>
                         <h3 style={{
                             position: 'static',
@@ -40,49 +51,41 @@ class Middle extends React.Component {
                         }}>{ username }</h3>
                     </div>
                     <hr style={{ marginTop: 45, marginBottom: 0}}></hr>
-                    <RowInfoProfileContainer
+                </div>
+                <div className="panel panel-default"
+                    style={{ minWidth: 540, margin: 7}}>
+                    <div className="panel-heading">{INFO}</div>
+                    <RowInfo
                         title={'USER_NAME'}
                         itemType={'username'}
                         itemId={0}
                     />
-                    <RowInfoProfileContainer
+                    <RowInfo
                         title={'PHONE'}
                         itemType={'phone'}
                         itemId={1}
                     />
-                    <RowInfoProfileContainer
+                    <RowInfo
                         title={'ADDRESS'}
                         itemType={'address'}
                         itemId={2}
                     />
-                    <RowInfoProfileContainer
+                    <RowInfo
                         title={'AGE'}
                         itemType={'yearOfBirth'}
                         itemId={3}
                     />
-                    <PhoneInfoContainer/>
-                    <h5 style={{ padding: 8, paddingLeft: 13, margin: 0, backgroundColor: '#EEEEEE'}}><strong>Detail</strong></h5>
-                    <hr style={{ margin: 0}}></hr>
-                    {/* <RowInfoProfile
-                        language={user.language}
-                        title={g('AGE')}
-                        value={user.age}
-                        open={this.state.openAll[3]}
-                        onSaveChange={(value) => this.onSaveChange('age',value)}
-                        onCancel = {() => onCancel()}
-                        onEdit = {() => onEdit(3)}
-                        noteContent={g('NOTE_AGE')}
-                    /> */}
+                    <PhoneInfo/>
                 </div>
                 <div className="panel panel-default"
                     style={{ minWidth: 540, margin: 7}}>
-                    <div className="panel-heading">Privacy</div>
+                    <div className="panel-heading">{PRIVACY}</div>
                     {/* <RowPrivacyProfile/> */}
                 </div>
                 <div className="panel panel-default"
                     style={{ minWidth: 540, margin: 7}}>
-                    <div className="panel-heading">Security</div>
-                    <RowSecurityProfileContainer
+                    <div className="panel-heading">{SECURITY}</div>
+                    <RowSecurity
                         title={'PASSWORD'}
                         itemType={'password'}
                         itemID={4}
@@ -100,20 +103,10 @@ class Middle extends React.Component {
                         <a>English</a>
                     </div>
                 </div>
+                <ModalUploadAvatar/>
+                <ModalUploadCover/>
             </div>
         )
-    }
-    componentDidMount(){
-        let { username } = this.props;
-        if( username == undefined){
-            browserHistory.push('/register');
-        }
-    }
-    componentDidUpdate(){
-        let { username } = this.props;
-        if( username == undefined){
-            browserHistory.push('/register');
-        }
     }
 }
 

@@ -9,7 +9,6 @@ import EmailService from '../services/EmailService'
 // var Email = require('../services/EmailService.js')
 // var request = require('request')
 
-
 const phoneRegrex = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
 const emailRegrex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
@@ -85,7 +84,9 @@ export const getUser = () => {
 			UserService.getUser(id, function(user) {
 				if (user) {
 					console.log(user)
-					res.json(UserService.getUserInfo(user))
+					UserService.getUserInfo(user, function(data){
+						res.json(data)
+					})
 				} else {
 					res.end()
 				}
@@ -163,23 +164,29 @@ export const getFacebookUser = () => {
 					if (user) {
 						res.cookie('token', UserService.getUserToken(user._id))
 						console.log('facebook: ' + UserService.getUserToken(user._id))
-						res.json(UserService.getUserInfo(user))
+						// res.json(UserService.getUserInfo(user))
+						UserService.getUserInfo(user, function (data) {
+							res.json(data)
+                        })
 					} else {
 						var newuser = new User({socialNetworkType: enums.FACEBOOK, 
 							socialNetworkId: body.id,
 							name: body.name,
-							imageUrl: body.picture.data.url,
+							imageUrl: [body.picture.data.url],
+							avatarUrl: body.picture.data.url,
 							password: '1234',
 							verified: 1})
 						newuser.save(function(){
 							res.cookie('token', UserService.getUserToken(newuser._id))
 							console.log('facebook ' + UserService.getUserToken(newuser._id))
-							res.json(UserService.getUserInfo(newuser))
+                            UserService.getUserInfo(newuser, function (data) {
+                                res.json(data)
+                            })
 						})
 					}
 				})
 			} else {
-				res.json(error: 'error')
+				res.json({error: 'error'})
 			}
 		})
 	}
@@ -256,8 +263,26 @@ export const changeUserProfile = () => {
 						return
 					}
 				}
-				if (req.body.imageUrl)
-					user.imageUrl = req.body.imageUrl
+				if (req.body.avatarUrl) {
+                    user.avatarUrl = req.body.avatarUrl
+					if (!user.imageUrl) {
+                    	user.imageUrl = [req.body.avatarUrl]
+					} else {
+                        if (user.imageUrl.indexOf(req.body.avatarUrl) === -1) {
+                            user.imageUrl.push(user.avatarUrl)
+                        }
+                    }
+                }
+                if (req.body.coverUrl) {
+					user.coverUrl = req.body.coverUrl
+					if (!user.imageUrl) {
+						user.imageUrl = [req.body.coverUrl]
+					} else {
+                        if (user.imageUrl.indexOf(req.body.coverUrl) === -1) {
+                            user.imageUrl.push(req.body.coverUrl)
+                        }
+                    }
+				}
 				if (req.body.address) { // TO DO
 					user.address = req.body.address
 					updateAddress = true
@@ -278,14 +303,6 @@ export const changeUserProfile = () => {
 						return
 					}
 				}
-				// if (req.body.password) {
-				// 	if (req.body.password.length > 5) {
-				// 		user.password = req.body.password
-				// 	} else {
-				// 		res.json({error: 'password err'})
-				// 		return
-				// 	}
-				// }
 
 				if (req.body.yearOfBirth) {
 					var year = parseNum(req.body.yearOfBirth)
@@ -298,6 +315,7 @@ export const changeUserProfile = () => {
 						updateYOB = true
 					} else {
 						res.json({error: 'year error'})
+						return
 					}
 				}
 
@@ -329,12 +347,10 @@ export const changeUserProfile = () => {
 
 export const getGoogleUser = () => {
 	return (req, res) => {
-
 		var headers = {
 		    'User-Agent':       'Super Agent/0.0.1',
 		    'Content-Type':     'application/x-www-form-urlencoded'
 		}
-
 		var options = {
 		    url: config.GOOGLE_API_URL + req.body.tokenId, 
 		    method: 'GET',
@@ -347,16 +363,21 @@ export const getGoogleUser = () => {
 					if (user) {
 						res.cookie('token', UserService.getUserToken(user._id))
 						console.log('google: ' + UserService.getUserToken(user._id))
-						res.json(UserService.getUserInfo(user))
+						UserService.getUserInfo(user, function (data) {
+							res.json(data)
+                        })
 					} else {
 						var newuser = new User({email : body.email,
 							name: body.name,
-							imageUrl: body.picture,
+							imageUrl: [body.picture],
+							avatarUrl: body.picture,
 							password: '1234',
 							verified: 1})
 						newuser.save(function(){
 							res.cookie('token', UserService.getUserToken(newuser._id))
-							res.json(UserService.getUserInfo(newuser))
+                            UserService.getUserInfo(newuser, function (data) {
+                                res.json(data)
+                            })
 						})
 					}
 				})
@@ -366,6 +387,3 @@ export const getGoogleUser = () => {
 		})
 	}
 }
-
-
-

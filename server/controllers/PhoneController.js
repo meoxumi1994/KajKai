@@ -28,7 +28,7 @@ export const verifyPhone = () => (req, res) => {
     .then((status) => {
         if (status == 'verified') {
           UserService.updateUserPhone(req.decoded._id, phone, function(mstatus){
-            mNexmoVerifyLogout(phone).then(res.json('status': mstatus))
+            mNexmoVerifyLogout(phone).then(res.json({'status': mstatus}))
           })
         } else {
           res.send({status})

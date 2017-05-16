@@ -12,6 +12,9 @@ const auth = ( state = 'WAIT' , action) => {
         case 'REGISTER_ALREADY_OPEN':
         case 'REGISTER_ALREADY_CLOSE':
         case 'REGISTER_SUCCESS':
+        case 'REGISTER_STORE_ING':
+        case 'REGISTER_STORE_SUCCESS':
+        case 'REGISTER_STORE_FAILED':
             return action.type
         default:
             return state

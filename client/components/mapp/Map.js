@@ -1,6 +1,6 @@
 import React from 'react';
 import { withGoogleMap,GoogleMap } from "react-google-maps";
-import { BrowserRouter as Router, Route, Link } from 'react-router';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import List from './List';
 import StoreInMap from './StoreInMap';
 

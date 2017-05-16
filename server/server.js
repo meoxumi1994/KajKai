@@ -5,7 +5,7 @@ import config from './config/serverConfig'
 import fs from 'fs'
 
 const server = http.Server(app)
-// const sio = init(server)
+const sio = init(server)
 
 const options = {
   key: fs.readFileSync('./config/kajkai.key'),

@@ -1,6 +1,7 @@
 import { User } from '../models'
 import jwt from 'jsonwebtoken'
 import enums from '../enum'
+import {findStoreList} from './StoreService'
 
 module.exports = {
   getUserToken,
@@ -14,16 +15,22 @@ module.exports = {
   validateName,
   validateLanguage,
   validateSex,
-  getUserInfo
+  getUserInfo,
+	updateImageUrl
 };
 
-function getUserInfo(user) {
-	return {username: user.name, imageUrl: user.imageUrl,
-						phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
-						language: user.language, passwordLastUpdatedAt: user.passwordLastUpdatedAt,
-						usernameLastUpdatedAt: user.nameLastUpdatedAt,
-						yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
-  						addressLastUpdateAt: user.addressLastUpdateAt}
+function getUserInfo(user, next) {
+	findStoreList(user.id, function(stores){
+        next( {username: user.name, listUrls: [user.imageUrl],
+            phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
+            language: user.language, passwordLastUpdatedAt: user.passwordLastUpdatedAt,
+            usernameLastUpdatedAt: user.nameLastUpdatedAt,
+            yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
+            addressLastUpdateAt: user.addressLastUpdateAt,
+			storeList: stores,
+			avatarUrl: user.avatarUrl,
+			coverUrl: user.coverUrl} )
+	})
 }
 
 function getUser(id, next) {
@@ -164,4 +171,10 @@ function validateLanguage(language){
 
 function validateSex(sex) {
 	return (sex == enums.Sex.MALE || sex == enums.Sex.FEMALE)
+}
+
+function updateImageUrl(id, imageURL) {
+	User.findOneAndUpdate({_id: id}, {$set:{imageUrl: imageURL}}, function(err){
+		console.log('err ' + err)
+	})
 }

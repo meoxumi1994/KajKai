@@ -1,5 +1,7 @@
 
 export const parseNum = (number) => {
+	// console.log(number)
+	number = number + ''
 	var length = number.length
 	var i = 0
 	if (number[0] == '+' || number[0] == '-') {
@@ -16,3 +18,4 @@ export const parseNum = (number) => {
 	if (number[0] == '-') result = -result
 	return result
 }
+
