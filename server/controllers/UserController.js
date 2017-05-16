@@ -387,3 +387,16 @@ export const getGoogleUser = () => {
 		})
 	}
 }
+
+export const getUserInfo = () => {
+	return (req, res) => {
+		const id = req.body.id
+		UserService.getUser(id, function (user) {
+			if (user) {
+				res.json({status: 'success', user: UserService.getUserBasicInfo(user)})
+			} else {
+				res.json({status: 'failed'})
+			}
+        })
+	}
+}

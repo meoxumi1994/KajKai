@@ -1,5 +1,5 @@
 import config from '../config/serverConfig'
-import { addNewStore, modifyStore } from '../services/StoreService.js'
+import { addNewStore, modifyStore, getStore, getStoreInfoService } from '../services/StoreService.js'
 // console.log(StoreService)
 
 export const registerStore = () => {
@@ -29,6 +29,20 @@ export const updateStore = () => {
         let uStore = new Store(req.body.store)
         modifyStore(uStore, function (status) {
             res.json(status)
+        })
+    }
+}
+
+export const getStoreInfo = () => {
+    return (req, res) => {
+        const id = req.body.id
+        console.log(id)
+        getStore(id, function(store){
+            if (store) {
+                res.json({status: 'success', store: getStoreInfoService(store)});
+            } else {
+                res.json({status: 'failed'})
+            }
         })
     }
 }
