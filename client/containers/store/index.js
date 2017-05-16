@@ -7,8 +7,9 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const { index } = state.inst.store.index
     return({
-        index: index,
+        iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT'),
         isusername: state.user.username,
+        index: index,
     })
 }
 

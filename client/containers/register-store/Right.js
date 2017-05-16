@@ -26,6 +26,7 @@ const mapStateToProps = (state, ownProps) => {
         warningaddress: isclick && !address,
         warningphone: isclick && checkPhone(phone),
         warningcategory: isclick && !category,
+        newindex: state.user.storeList.length
     })
 }
 
@@ -33,9 +34,17 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     handleChange: (type, value) => {
         dispatch({ type: 'REGISTER_STORE_RIGHT_HANDLE_CHANGE', value : { [type] : value }})
     },
-    onRegisterClick: (storename, address, phone, category) => {
+    onRegisterClick: (newindex, storename, address, phone, category) => {
         if(storename && address && !checkPhone(phone) && category){
-            dispatch(registerStore(storename, address, phone, category))
+            dispatch(registerStore(
+                newindex,
+                {
+                    storename: storename,
+                    address: address,
+                    phone: phone,
+                    category: category,
+                }
+            ))
         }else{
             dispatch({ type: 'REGISTER_STORE_RIGHT_CLICK_REGISTER' })
         }

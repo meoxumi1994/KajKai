@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import Profile from '~/components/profile'
 
 const mapStateToProps = (state, ownProps) => ({
-    isloading: (state.auth == 'WHO_ING'),
-    username: state.user.username,
+    iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT'),
+    isusername: state.user.username,
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

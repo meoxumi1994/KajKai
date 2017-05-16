@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import ModalUploadImage from '~/components/store/middle/ModalUploadImage'
+import UploadImage from '~/components/entity/modal/UploadImage'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
-    const { open } = state.inst.store.middle.open
+    const { open } = state.inst.entity.modal.uploadimage
     return({
         open : open,
         CLOSE: g('CLOSE'),
@@ -14,16 +14,16 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     close: () => {
-        dispatch({ type: 'STORE_MIDDLE_MODAL_UPLOAD_IMAGE_CLOSE' })
+        dispatch({ type: 'ENTITY_MODAL_UPLOAD_IMAGE_CLOSE' })
     },
-    handleImageChange: (e) => {
+    handleImageChange: (type, e) => {
         const file = e.target.files[0]
-        dispatch(uploadImage('avatarUrl', file))
+        dispatch(uploadImage([type], file))
     }
 })
 
-const ModalUploadImageContainer = connect(
+const UploadImageContainer = connect(
     mapStateToProps, mapDispatchToProps
-)(ModalUploadImage)
+)(UploadImage)
 
-export default ModalUploadImageContainer
+export default UploadImageContainer

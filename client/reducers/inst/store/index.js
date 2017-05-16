@@ -10,6 +10,8 @@ const index = (state = {
     switch (action.type) {
         case 'STORE_OPEN':
             return {...state, index: action.index }
+        case 'REGISTER_STORE_SUCCESS':
+            return {...state, index: action.user.newindex }
         default:
             return state
     }
