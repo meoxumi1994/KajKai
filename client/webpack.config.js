@@ -1,11 +1,12 @@
 const { resolve } = require('path');
 var webpack = require('webpack');
+var fs = require('fs');
 
 module.exports = {
   "devtool": "eval",
   entry: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:3000',
+      'webpack-dev-server/client?https://localhost:3000',
       "./index.js",
       'webpack/hot/only-dev-server'
   ],
@@ -15,18 +16,25 @@ module.exports = {
     publicPath: '/'
   },
   module: {
-    loaders: [
-      {
-        exclude: /(node_modules)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react'],
-          plugins: ["transform-object-rest-spread"]
+    rules: [
+        {
+            test: /\.js$/,
+            exclude: /(node_modules)/,
+            options: {
+                presets: [[ 'es2015', {"modules": false}], 'react'],
+                plugins: ["transform-object-rest-spread",
+                          "babel-plugin-root-import",
+                        ]
+            },
+            loader: 'babel-loader',
         }
-      }
     ]
   },
   devServer: {
+    https: {
+        key: fs.readFileSync('./config/kajkai.key'),
+        cert: fs.readFileSync('./config/kajkai.crt'),
+    },
     port: 3000,
     historyApiFallback: true,
     hot: true,
