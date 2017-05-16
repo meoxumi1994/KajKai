@@ -1,4 +1,5 @@
 import express from 'express'
+import compression from 'compression'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
@@ -12,8 +13,8 @@ import init from './socketio'
 import allRoutes from './routes'
 
 const app = express()
-var whitelist = ['http://localhost:' + config.OTHERPORT, 'http://34.209.206.70:' + config.OTHERPORT,
-'http://www.kajkai.com']
+var whitelist = ['https://localhost:' + config.OTHERPORT, 'https://34.209.206.70:' + config.OTHERPORT,
+'https://www.kajkai.com']
 
 var corsOptions = {
   // origin: function (origin, callback) {
@@ -27,6 +28,7 @@ var corsOptions = {
   credentials: true
 }
 
+app.use(compression())
 app.use(cors(corsOptions));
 app.use(cookieParser())
 app.use(bodyParser.json())
