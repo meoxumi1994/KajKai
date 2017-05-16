@@ -28,12 +28,7 @@ var corsOptions = {
   credentials: true
 }
 
-<<<<<<< HEAD
 app.use(compression())
-=======
-
-
->>>>>>> 2886481067b89c07c045d67fe42de5bfaea533ad
 app.use(cors(corsOptions));
 app.use(cookieParser())
 app.use(bodyParser.json())
