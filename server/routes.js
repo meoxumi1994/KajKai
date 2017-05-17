@@ -136,5 +136,22 @@ export default {
             middleware: [auth()],
             method: 'updateStore'
         }
+    },
+
+    '/getstore': {
+        post: {
+            controller: 'StoreController',
+            middleware: [auth()],
+            method: 'getStoreInfo'
+        }
+    },
+
+    '/getuser': {
+        post: {
+            controller: 'UserController',
+            // middleware: [auth()]
+            method: 'getUserInfo'
+        }
     }
+
 }
