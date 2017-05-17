@@ -1,51 +1,63 @@
-const { resolve } = require('path');
-var webpack = require('webpack');
-var fs = require('fs');
+var webpack = require('webpack')
+var fs = require('fs')
 
 module.exports = {
-  "devtool": "eval",
   entry: [
       'react-hot-loader/patch',
       'webpack-dev-server/client?https://localhost:3000',
-      "./index.js",
-      'webpack/hot/only-dev-server'
+      'webpack/hot/only-dev-server',
+      './index.js'
   ],
   output: {
-    path: __dirname + '/',
-    filename: "bundle.js",
-    publicPath: '/'
+    path: __dirname,
+    filename: 'bundle.js',
+    publicPath: '/dist/',
+    chunkFilename: '[id].chunk.js'
   },
   module: {
     rules: [
-        {
-            test: /\.js$/,
-            exclude: /(node_modules)/,
-            options: {
-                presets: [[ 'es2015', {"modules": false}], 'react'],
-                plugins: ["transform-object-rest-spread",
-                          "babel-plugin-root-import",
-                        ]
-            },
+      {
+        exclude: /(node_modules)/,
+        test: /\.js$/,
+        use: [
+          {
             loader: 'babel-loader',
-        }
+            options: {
+              presets: [
+                ['es2015', {'modules': false}],
+                'react'
+              ],
+              plugins: [
+                'babel-plugin-root-import',
+                'react-hot-loader/babel',
+                'syntax-dynamic-import',
+                'transform-object-rest-spread'
+              ]
+            }
+          }
+        ]
+      },
+      // {test: /\.css$/, loader: 'style-loader!css-loader'},
+      // {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+      // {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream'},
+      // {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'},
+      // {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml'}
     ]
   },
   devServer: {
     https: {
-        key: fs.readFileSync('./config/kajkai.key'),
-        cert: fs.readFileSync('./config/kajkai.crt'),
+      key: fs.readFileSync('./config/kajkai.key'),
+      cert: fs.readFileSync('./config/kajkai.crt')
     },
     port: 3000,
     historyApiFallback: true,
     hot: true,
-    contentBase: __dirname + '/',
-    // match the output path
-    publicPath: '/'
+    contentBase: __dirname,
+    publicPath: '/dist/'
   },
+  devtool: 'eval',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    // enable HMR globally
-    new webpack.NamedModulesPlugin(),
-    // prints more readable module names in the browser console on HMR updates
-  ],
+    new webpack.NamedModulesPlugin()
+  ]
 }
