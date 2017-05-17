@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-import { socket } from '~/components/support'
+// import { socket } from '~/components/support'
 
 import Bar from '~/containers/Bar'
 import Home from './home/Home'
@@ -34,10 +34,10 @@ class App extends React.Component {
         )
     }
     componentDidMount(){
-        socket.on('news', (data) => {
-            console.log(data);
-            // socket.emit('my other event', { my: 'data' });
-        });
+        // socket.on('news', (data) => {
+        //     console.log(data);
+        //     // socket.emit('my other event', { my: 'data' });
+        // });
         this.props.onWho();
     }
 }
