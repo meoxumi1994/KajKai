@@ -2,6 +2,7 @@ import { authAction, authData } from '~/actions/sync/auth'
 import { flet,flem } from '~/actions/support'
 
 export const getStore = (id) => dispatch => {
+    
     flem('/getstore',{
         id: id
     },{
@@ -12,7 +13,7 @@ export const getStore = (id) => dispatch => {
         if(status == 'success'){
 
         } else if(status == 'failed'){
-            
+
         }
     })
 }
