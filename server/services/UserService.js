@@ -4,33 +4,38 @@ import enums from '../enum'
 import {findStoreList} from './StoreService'
 
 module.exports = {
-  getUserToken,
-  getUser,
-  getUserFromFacebookId,
-  getUserFromGoogleId,
-  getUserFromEmail,
-  getUserFromPhone,
-  verifyToken,
-  saveNewUser,
-  validateName,
-  validateLanguage,
-  validateSex,
-  getUserInfo,
-	updateImageUrl
+	getUserToken,
+	getUser,
+	getUserFromFacebookId,
+	getUserFromGoogleId,
+	getUserFromEmail,
+	getUserFromPhone,
+	verifyToken,
+	saveNewUser,
+	validateName,
+	validateLanguage,
+	validateSex,
+  	getUserInfo,
+	updateImageUrl,
+	getUserBasicInfo
 };
 
 function getUserInfo(user, next) {
 	findStoreList(user.id, function(stores){
-        next( {username: user.name, listUrls: [user.imageUrl],
-            phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
-            language: user.language, passwordLastUpdatedAt: user.passwordLastUpdatedAt,
-            usernameLastUpdatedAt: user.nameLastUpdatedAt,
-            yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
-            addressLastUpdateAt: user.addressLastUpdateAt,
-			storeList: stores,
-			avatarUrl: user.avatarUrl,
-			coverUrl: user.coverUrl} )
+        next(getUserBasicInfo(user, stores))
 	})
+}
+
+function getUserBasicInfo(user, stores = null) {
+	return {username: user.name, listUrls: [user.imageUrl],
+        phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
+        language: user.language, passwordLastUpdatedAt: user.passwordLastUpdatedAt,
+        usernameLastUpdatedAt: user.nameLastUpdatedAt,
+        yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
+        addressLastUpdateAt: user.addressLastUpdateAt,
+        storeList: stores,
+        avatarUrl: user.avatarUrl,
+        coverUrl: user.coverUrl}
 }
 
 function getUser(id, next) {

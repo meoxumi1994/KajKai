@@ -1,6 +1,6 @@
 import React from 'react'
-import { socket } from '~/components/support'
 import { BrowserRouter, Route } from 'react-router-dom'
+// import { socket } from '~/components/support'
 
 import Bar from '~/containers/Bar'
 // import Home from './home/Home'
@@ -40,6 +40,8 @@ class App extends React.Component {
         return(
             <div style={{ minWidth: 990, minHeight: 700 }}>
                 <Bar/>
+                {/* <input type="text" ref="input"/>
+                <button onClick={ () => console.log('123123')}>click</button> */}
                 <hr style={{margin: 0}}></hr>
                 <div>
                     <Route exact path="/" component={Home}/>
@@ -53,10 +55,10 @@ class App extends React.Component {
         )
     }
     componentDidMount(){
-        socket.on('news', (data) => {
-            console.log(data);
-            // socket.emit('my other event', { my: 'data' });
-        });
+        // socket.on('news', (data) => {
+        //     console.log(data);
+        //     // socket.emit('my other event', { my: 'data' });
+        // });
         this.props.onWho();
     }
 }

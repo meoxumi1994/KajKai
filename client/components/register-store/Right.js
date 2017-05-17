@@ -7,7 +7,7 @@ class Right extends React.Component {
     render(){
         const { STORE, ENTER_STORE, ENTER_ADDRESS, PHONE_STORE, ADDRESS_WARNING,
             PHONE_WARNING, STORE_NAME_WARNING, CATEGORY_WARNING, ENTER_CATEGORY,
-            handleChange, storename, address, phone, warningstorename,
+            handleChange, storename, address, phone, warningstorename, newindex,
             warningcategory, warningaddress, warningphone, category, onRegisterClick } = this.props
         return(
             <div>
@@ -49,7 +49,7 @@ class Right extends React.Component {
                     </div>
                 </div>
                 <div className="btn btn-default btn-md"
-                    onClick={() => onRegisterClick(storename, address, phone, category)}>
+                    onClick={() => onRegisterClick(newindex, storename, address, phone, category)}>
                     REGISTER STORE
                 </div>
             </div>

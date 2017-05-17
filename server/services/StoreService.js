@@ -12,14 +12,23 @@ export const getStore = (id, next) => {
     })
 }
 
-export const getStoreInfo = (store) => {
+export const getStoreInfoService = (store) => {
     return {
         storename: store.storename,
         address: store.address,
         phone: store.phone,
         category: store.category,
-        longitude: store.longtitue,
+        longitude: store.longitude,
         latitude: store.latitude,
+        id: store._id,
+        avatarUrl: store.avatarUrl,
+        coverUrl: store.coverUrl
+    }
+}
+
+export const getStoreBasicInfoService = (store) => {
+    return {
+        storename: store.storename,
         id: store._id,
         avatarUrl: store.avatarUrl,
         coverUrl: store.coverUrl
@@ -96,13 +105,16 @@ export const modifyStore = (updateStore, next) => {
     })
 }
 
-
 export const findStoreList = (ownerId, next) => {
     Store.find({owner: ownerId}, function (err, stores) {
         if (err) {
             next(err)
         } else {
-            next(stores)
+            var storeList = []
+            for (var i = 0, mLength = stores.length; i < mLength; ++i) {
+                storeList.push(getStoreBasicInfoService(stores[i]))
+            }
+            next(storeList)
         }
     })
 }
