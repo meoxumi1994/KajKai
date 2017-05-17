@@ -3,13 +3,34 @@ import { BrowserRouter, Route } from 'react-router-dom'
 // import { socket } from '~/components/support'
 
 import Bar from '~/containers/Bar'
-import Home from './home/Home'
-import Mapp from './mapp/Map'
+// import Home from './home/Home'
+// import Mapp from './mapp/Map'
 import Profile from '~/containers/profile'
 import UserLoginRegister from '~/containers/user-login-register'
 import RegisterStore from '~/containers/register-store'
 import Store from '~/containers/store'
 
+import Bundle from '../common/Bundle'
+import loadHome from 'bundle-loader?lazy!./home/Home'
+import loadMapp from 'bundle-loader?lazy!./mapp/Map'
+
+const Home = () => (
+  <Bundle load={loadHome}>
+    {(Comp) => (Comp
+      ? <Comp/>
+      : null
+    )}
+  </Bundle>
+)
+
+const Mapp = () => (
+  <Bundle load={loadMapp}>
+    {(Comp) => (Comp
+      ? <Comp/>
+      : null
+    )}
+  </Bundle>
+)
 
 class App extends React.Component {
     constructor(props){
