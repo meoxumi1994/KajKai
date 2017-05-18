@@ -22,7 +22,8 @@ export const getStoreInfoService = (store) => {
         latitude: store.latitude,
         id: store._id,
         avatarUrl: store.avatarUrl,
-        coverUrl: store.coverUrl
+        coverUrl: store.coverUrl,
+        owner: store.owner
     }
 }
 

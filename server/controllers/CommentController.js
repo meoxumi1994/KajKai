@@ -1,3 +1,32 @@
+import UserService from '../services/UserService.js'
+import { User } from '../models'
+import {getStore, getStoreInfoService} from '../services/StoreService'
+
+export const getTarget = () => {
+    return (req, res) => {
+        const id = req.body.id
+        if (!id) {
+            res.json({status: 'failed'})
+        } else {
+            UserService.getUser(id, function (user) {
+                if (user) {
+                    res.json({status: 'success', type: 'user',
+                                user: UserService.getUserBasicInfo(user)})
+                } else {
+                    getStore(id, function (store) {
+                        if (store) {
+                            res.json({status: 'success', type: 'store',
+                                store: getStoreInfoService(store)})
+                        } else {
+                            res.json({status: 'failed'})
+                        }
+                    })
+                }
+            })
+        }
+    }
+}
+
 export const handleSioDemo = (action, sio) => {
     if(action.type === 'server/SEND_MESSAGE'){
         sio.emit('action', {

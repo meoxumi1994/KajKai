@@ -152,6 +152,13 @@ export default {
             // middleware: [auth()]
             method: 'getUserInfo'
         }
+    },
+
+    '/gettarget' : {
+        post: {
+            controller: 'CommentController',
+            method: 'getTarget'
+        }
     }
 
 }
