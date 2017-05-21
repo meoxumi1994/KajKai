@@ -159,6 +159,22 @@ export default {
             controller: 'CommentController',
             method: 'getTarget'
         }
+    },
+
+    '/getchatlist' : {
+        post: {
+            controller: 'ChatController',
+            middleware: [auth()],
+            method: 'getChatBuddies'
+        }
+    },
+
+    '/getmessage' : {
+        post: {
+            controller: 'ChatController',
+            middleware: [auth()],
+            method: 'getMessages'
+        }
     }
 
 }
