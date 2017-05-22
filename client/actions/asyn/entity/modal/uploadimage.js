@@ -1,6 +1,6 @@
 import config from '~/config'
 import { updateuserAction, updateuserData } from '~/actions/sync/updateuser'
-import { updateUser } from '~/actions/profile/middle'
+import { updateUser } from '~/actions/asyn/profile/middle'
 import { flet } from '~/actions/support'
 
 export const uploadImage = (type, file) => dispatch => {

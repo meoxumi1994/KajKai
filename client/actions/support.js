@@ -26,7 +26,7 @@ export const flem = (url, get) => {
     console.log(myurl,get)
     return fetch( myurl , {
         method: 'GET',
-        credentials: 'include'
+        credentials: 'include',
     })
     .then((response) => response.json())
     .then((res) => {
