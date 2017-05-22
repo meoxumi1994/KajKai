@@ -1,24 +1,27 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import Store from '~/components/store'
+import Middle from '~/components/target/middle'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
-    const { index } = state.inst.store.index
+    const { type } = state.inst.target.index
     return({
-        iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT'),
-        isusername: state.user.username,
-        index: index,
+        type: type,
     })
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-     
+    onUpdateCover: () => {
+
+    },
+    onUpdateAvatar: () => {
+
+    }
 })
 
-const StoreContainer = connect(
+const MiddleContainer = connect(
     mapStateToProps, mapDispatchToProps
-)(Store)
+)(Middle)
 
-export default StoreContainer
+export default MiddleContainer

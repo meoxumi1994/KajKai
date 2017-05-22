@@ -1,24 +1,24 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import Store from '~/components/store'
+import Left from '~/components/profile/left'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
-    const { index } = state.inst.store.index
     return({
-        iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT'),
-        isusername: state.user.username,
-        index: index,
+        CREATE_STORE: g('CREATE_STORE'),
+        storeList: state.user.storeList,
     })
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-     
+    onStoreClick: (index) => {
+        dispatch({ type: 'STORE_OPEN', index: index })
+    }
 })
 
-const StoreContainer = connect(
+const LeftContainer = connect(
     mapStateToProps, mapDispatchToProps
-)(Store)
+)(Left)
 
-export default StoreContainer
+export default LeftContainer

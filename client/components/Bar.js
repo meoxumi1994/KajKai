@@ -18,7 +18,9 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick}) => {
                   </div>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu1"
                       style={{ marginLeft: -100 }}>
-                      <li><a href="#" onClick={()=> onLogoutClick() }>Log out</a></li>
+                      <li><a href="#" onClick={()=> onLogoutClick() }>create store</a></li>
+                      <li><a href="#" onClick={()=> onLogoutClick() }>setting</a></li>
+                      <li><a href="#" onClick={()=> onLogoutClick() }>log out</a></li>
                   </ul>
               </div>
             </div>
