@@ -35,7 +35,8 @@ function getUserBasicInfo(user, stores = null) {
         addressLastUpdateAt: user.addressLastUpdateAt,
         storeList: stores,
         avatarUrl: user.avatarUrl,
-        coverUrl: user.coverUrl}
+        coverUrl: user.coverUrl,
+		id: user._id}
 }
 
 function getUser(id, next) {
