@@ -1,4 +1,4 @@
-import {getMessageList, getChatList} from '../services/MessageService'
+import {getMessageList, getChatList, addNewMessage, getMessageId} from '../services/MessageService'
 
 export const getChatBuddies = () => {
     return (req, res) => {
@@ -20,6 +20,27 @@ export const getMessages = () => {
         getMessageList(person1, person2, offset, length, function (data) {
             res.json({messages: data})
         })
+    }
+}
+
+export const addMessage = () => {
+    return (req, res) => {
+        var mesId = req.body.mesId
+        var person = req.body.person
+        var message = req.body.message
+        var time = req.body.time
+        addNewMessage(mesId, person, message, time, function (err) {
+            if (err) res.json({status: 'failed'})
+            else res.json({status: 'success'})
+        })
+    }
+}
+
+export const getChatID = () => {
+    return (req, res) => {
+        var id = req.decoded._id
+        var person = req.body.person
+        res.json({id: getMessageId(id, person)})
     }
 }
 

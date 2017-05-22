@@ -11,7 +11,7 @@ export const getMessageId = (person1, person2) => {
 
 export const getMessageList = (person1, person2, offset, length, next) => {
     const mesID = getMessageId(person1, person2)
-    console.log(mesID)
+    console.log(mesID + ' ' + offset + ' ' + (offset + length - 1))
     if (!mesID) {
         next(null)
     } else {
@@ -21,6 +21,9 @@ export const getMessageList = (person1, person2, offset, length, next) => {
         })
     }
 }
+redisClient.zrange('5922e9bbd979c3394849e33d$5922efab7b5064397e930ee8', 0, 10, function (err, reply) {
+    console.log(reply)
+})
 
 export const getChatListID = (person) => {
     return 'chatList$' + person
@@ -34,14 +37,10 @@ export const getChatList = (person, offset, length, next) => {
     })
 }
 
-export const addNewMessage = (person1, person2, message, time) =>{
-    const mesID = getMessageId(person1, person2)
-    if (!mesID) {
-        next(null)
-    } else {
-        var mes = new Message(person2, message, time)
-        redisClient.zadd(id, -time, mes, function (err) {
-            next(err)
-        })
-    }
+export const addNewMessage = (mesID, person, message, time, next) =>{
+    var mes = JSON.stringify(new Message(person, message, time))
+    console.log(mesID + ' ' + mes)
+    redisClient.zadd(mesID, -time, mes, function (err) {
+        next(err)
+    })
 }
