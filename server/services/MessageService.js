@@ -37,10 +37,27 @@ export const getChatList = (person, offset, length, next) => {
     })
 }
 
+export const updateChatLList = (personA, personB, time, next) {
+    redisClient.zadd(getChatListID(personA), -time, personB, function (err) {
+        if (err) next(err)
+        else {
+            redisClient.zadd(getChatListID(personB), -time, personA, function (err) {
+                next(err)
+            })
+        }
+    })
+}
+
 export const addNewMessage = (mesID, person, message, time, next) =>{
     var mes = JSON.stringify(new Message(person, message, time))
     console.log(mesID + ' ' + mes)
     redisClient.zadd(mesID, -time, mes, function (err) {
-        next(err)
+        if (err) next(err)
+        else {
+            var id = mesID.split('$')
+            updateChatLList(id[0], id[1], time, function (e) {
+                next(e)
+            })
+        }
     })
 }
