@@ -37,7 +37,7 @@ export const getChatList = (person, offset, length, next) => {
     })
 }
 
-export const updateChatLList = (personA, personB, time, next) {
+export const updateChatLList = (personA, personB, time, next) => {
     redisClient.zadd(getChatListID(personA), -time, personB, function (err) {
         if (err) next(err)
         else {
