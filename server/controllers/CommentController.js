@@ -66,3 +66,16 @@ export const comment = (action, sio) => {
     console.log(action)
     sio.to(action.room).emit('new_message', action.message)
 }
+
+export const testToken = (action, sio) => {
+    // const token = action.token
+    // UserService.verifyToken(token, function (decoded) {
+    //     if (decoded) {
+    //         sio.emit("server/hi", {status: 'success'})
+    //     } else {
+    //         sio.emit("server/hi", {status: 'failed'})
+    //     }
+    // })
+    console.log('fick')
+    sio.emit('action', {type: 'server/hi', data: 'aeofiew'})
+}

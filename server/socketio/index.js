@@ -4,6 +4,8 @@ import { validateTokenDemo } from '../services/DemoService'
 
 const init = (server) => {
     const sio = socketIo(server)
+    // console.log('fuck')
+    // console.log(sio)
     sio.on('connection', (socket) => {
         console.log('a user connected')
         socket.on('disconnect', () => {
@@ -12,14 +14,15 @@ const init = (server) => {
         // load all events
         for(let e in allEvents){
             let handler = allEvents[e]
-            console.log(e)
+            // console.log(e)
             let method = require('../controllers/' + handler.controller)[handler.method]
             socket.on(e, (action) => {
                 // if(validateTokenDemo(action.token)) {
                 //     method(action, sio)
                 // } else {
                 //     socket.emit('action', {
-                //         type: 'NOT_LOGGED_IN'
+                //         type: 'NOT_LOGGED_IN',
+
                 //     })
                 // }
                 method(action, socket)
