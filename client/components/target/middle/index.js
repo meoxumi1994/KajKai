@@ -8,7 +8,6 @@ class Middle extends React.Component {
         super(props)
     }
     render(){
-        console.log('components/Middle')
         let { avatarUrl, coverUrl, type } = this.props
         if(type == 'user')
             return <User/>

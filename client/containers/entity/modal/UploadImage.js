@@ -7,7 +7,6 @@ import { uploadImage } from '~/actions/asyn/entity/modal/uploadimage'
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const { open, typeUrl} = state.inst.entity.modal.uploadimage
-    console.log('mapStateToProps', open, typeUrl)
     return({
         open : open,
         typeUrl: typeUrl,
