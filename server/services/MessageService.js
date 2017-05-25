@@ -33,14 +33,8 @@ export const getChatListID = (person) => {
 export const getChatList = (person, offset, length, next) => {
     const id = getChatListID(person)
     redisClient.zrange(id, offset, offset + length - 1, function (err, reply) {
-        console.log(reply)
-        if (!reply) next(reply)
-        else {
-            // var userInfo = []
-            // for (var i = 0; i < reply.length; ++i) {
-            //     var user = UserService.getUser(reply[i])
-            // }
-        }
+        if (err) next(null)
+        else next(reply)
     })
 }
 
