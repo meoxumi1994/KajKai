@@ -7,5 +7,4 @@ mongoose.connect('mongodb://localhost/kajkai', (err) => {
         console.log('err', err)
     }
 })
-
 export default mongoose

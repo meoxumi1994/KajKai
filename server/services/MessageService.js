@@ -1,5 +1,6 @@
 import { Message } from '../models/Message'
 import { redisClient } from '../datasource'
+import {UserService} from '../services/UserService'
 
 export const getMessageId = (person1, person2) => {
     var cmp = person1.localeCompare(person2)
@@ -33,7 +34,13 @@ export const getChatList = (person, offset, length, next) => {
     const id = getChatListID(person)
     redisClient.zrange(id, offset, offset + length - 1, function (err, reply) {
         console.log(reply)
-        next(reply)
+        if (!reply) next(reply)
+        else {
+            // var userInfo = []
+            // for (var i = 0; i < reply.length; ++i) {
+            //     var user = UserService.getUser(reply[i])
+            // }
+        }
     })
 }
 

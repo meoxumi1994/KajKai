@@ -77,5 +77,5 @@ export const testToken = (action, sio) => {
     //     }
     // })
     console.log('fick')
-    sio.emit('action', {type: 'server/hi', data: 'aeofiew'})
+    sio.emit('action', {type: 'client/hi', data: 'aeofiew'})
 }
