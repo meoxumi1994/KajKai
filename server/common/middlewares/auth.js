@@ -2,17 +2,21 @@ import { verifyToken } from '../../services/UserService'
 
 const auth = () => {
   	return (req, res, next) => {
-        console.log('token :' + req.cookies.token)
-        let decoded = verifyToken(req.cookies.token)
-		if (decoded) {
-			console.log(decoded)
-			req.decoded = decoded
-			next()
+		var token = req.header('tokenid')
+		console.log('token: ' + token)
+		if (!token) {
+			res.json({authorization: "FAILED"})
 		} else {
-			res.send({
-				authorization: "FAILED"
-			})
-		}
+            let decoded = verifyToken(token)
+            if (decoded) {
+                req.decoded = decoded
+                next()
+            } else {
+                res.send({
+                    authorization: "FAILED"
+                })
+            }
+        }
   	}
 }
 
