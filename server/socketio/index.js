@@ -11,6 +11,8 @@ const init = (server) => {
         socket.on('disconnect', () => {
         console.log('a user disconnected')
         })
+        // console.log(socket.header('cookie'))
+        console.log(socket.handshake.headers.cookie)
         // load all events
         for(let e in allEvents){
             let handler = allEvents[e]

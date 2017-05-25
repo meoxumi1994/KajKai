@@ -2,7 +2,7 @@ import { verifyToken } from '../../services/UserService'
 
 const auth = () => {
   	return (req, res, next) => {
-		var token = req.header('tokenid')
+		var token = req.cookies.token
 		console.log('token: ' + token)
 		if (!token) {
 			res.json({authorization: "FAILED"})

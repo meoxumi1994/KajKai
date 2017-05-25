@@ -108,7 +108,8 @@ export const authorizeUser = () => {
 					}
 					// res.cookie('token', UserService.getUserToken(user._id))
 					const token = UserService.getUserToken(user._id)
-					res.json({status: 'success', token: token})
+                    res.cookie('token', token)
+					res.json({status: 'success'})
 				})
 				
 			} 
@@ -127,7 +128,8 @@ export const authorizeUser = () => {
 					}
 					// res.cookie('token', UserService.getUserToken(user._id))
                     const token = UserService.getUserToken(user._id)
-                    res.json({status: 'success', token: token})
+                    res.cookie('token', token)
+                    res.json({status: 'success'})
 				})
 			} else {
 				res.json({status: 'failed'})
@@ -164,8 +166,9 @@ export const getFacebookUser = () => {
 					if (user) {
 						const token = UserService.getUserToken(user._id)
 						console.log('facebook: ' + token)
+						res.cookie('token', token)
 						UserService.getUserInfo(user, function (data) {
-							res.json({user: data, token: token})
+                            res.json({user: data})
                         })
 					} else {
 						var newuser = new User({socialNetworkType: enums.FACEBOOK, 
@@ -178,8 +181,9 @@ export const getFacebookUser = () => {
 						newuser.save(function(){
 							const token = UserService.getUserToken(newuser._id)
 							console.log('facebook ' + token + ' ' + newuser._id)
+                            res.cookie('token', token)
                             UserService.getUserInfo(newuser, function (data) {
-                                res.json({user: data, token: token})
+                                res.json({user: data})
                             })
 						})
 					}
@@ -360,8 +364,9 @@ export const getGoogleUser = () => {
 					if (user) {
 						console.log('google: ' + UserService.getUserToken(user._id))
 						var token = UserService.getUserToken(user._id)
+                        res.cookie('token', token)
 						UserService.getUserInfo(user, function (data) {
-							res.json({user: data, token: token})
+                            res.json({user: data})
                         })
 					} else {
 						var newuser = new User({email : body.email,
@@ -372,8 +377,9 @@ export const getGoogleUser = () => {
 							verified: 1})
 						newuser.save(function(){
                             var token = UserService.getUserToken(newuser._id)
+                            res.cookie('token', token)
                             UserService.getUserInfo(newuser, function (data) {
-                                res.json({user: data, token: token})
+                                res.json({user: data})
                             })
 						})
 					}
