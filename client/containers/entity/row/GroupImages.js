@@ -3,14 +3,17 @@ import { get } from '~/config/allString'
 
 import GroupImages from '~/components/entity/row/GroupImages'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     return({
+        id: id,
     })
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    
+const mapDispatchToProps = (dispatch, { id, onChange }) => ({
+    onChangeBasicInput: (value) => {
+        onChange({text: value, id})
+    }
 })
 
 const GroupImagesContainer = connect(
