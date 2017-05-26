@@ -1,0 +1,23 @@
+"chat": {
+  "left": {
+      "chatList": [
+        {
+          "id": "",
+          "avatarUrl": "",
+          "username": ""
+        }
+      ]
+  },
+  "center": {
+      "id": "",
+      "avatarUrl": "",
+      "username": "",
+      "chatLog": []    
+  },
+  "bottom": {
+
+  },
+  "right": {
+
+  }
+}
