@@ -1,4 +1,5 @@
 import {getMessageList, getChatList, addNewMessage, getMessageId} from '../services/MessageService'
+import UserService from '../services/UserService'
 
 export const getChatBuddies = () => {
     return (req, res) => {
@@ -6,7 +7,12 @@ export const getChatBuddies = () => {
         var offset = req.body.offset
         var length = req.body.length
         getChatList(id, offset, length, function (data) {
-            res.json({chatList : data})
+            if (!data) res.json({chatList : data})
+            else {
+                UserService.getListUser(data, function (docs) {
+                    res.json({chatList: UserService.getChatUserListInfo(docs)})
+                })
+            }
         })
     }
 }

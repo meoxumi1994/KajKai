@@ -13,7 +13,7 @@ import owaiejf from './services/MessageService'
 
 const app = express()
 var whitelist = ['https://localhost:' + config.OTHERPORT, 'https://34.209.206.70:' + config.OTHERPORT,
-'https://www.kajkai.com']
+'https://www.kajkai.com', 'null']
 
 var corsOptions = {
   // origin: function (origin, callback) {

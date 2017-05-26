@@ -80,19 +80,17 @@ export const getUser = () => {
 		console.log(req.decoded)
 		if (req.decoded) {
 			var id = req.decoded._id
-			console.log('this ' + id)
 			UserService.getUser(id, function(user) {
 				if (user) {
-					console.log(user)
 					UserService.getUserInfo(user, function(data){
 						res.json(data)
 					})
 				} else {
-					res.end()
+					res.json({status: 'failed'})
 				}
 			})
 		} else {
-			res.end()
+            res.json({status: 'failed'})
 		}
 	}
 }
@@ -108,7 +106,9 @@ export const authorizeUser = () => {
 						res.json({status : 'failed'})
 						return
 					}
-					res.cookie('token', UserService.getUserToken(user._id))
+					// res.cookie('token', UserService.getUserToken(user._id))
+					const token = UserService.getUserToken(user._id)
+                    res.cookie('token', token)
 					res.json({status: 'success'})
 				})
 				
@@ -126,8 +126,10 @@ export const authorizeUser = () => {
 						res.json({status : 'failed'})
 						return
 					}
-					res.cookie('token', UserService.getUserToken(user._id))
-					res.json({status: 'success'})
+					// res.cookie('token', UserService.getUserToken(user._id))
+                    const token = UserService.getUserToken(user._id)
+                    res.cookie('token', token)
+                    res.json({status: 'success'})
 				})
 			} else {
 				res.json({status: 'failed'})
@@ -162,11 +164,11 @@ export const getFacebookUser = () => {
 
 				UserService.getUserFromFacebookId(body.id, function(user) {
 					if (user) {
-						res.cookie('token', UserService.getUserToken(user._id))
-						console.log('facebook: ' + UserService.getUserToken(user._id))
-						// res.json(UserService.getUserInfo(user))
+						const token = UserService.getUserToken(user._id)
+						console.log('facebook: ' + token)
+						res.cookie('token', token)
 						UserService.getUserInfo(user, function (data) {
-							res.json(data)
+                            res.json({user: data})
                         })
 					} else {
 						var newuser = new User({socialNetworkType: enums.FACEBOOK, 
@@ -177,10 +179,11 @@ export const getFacebookUser = () => {
 							password: '1234',
 							verified: 1})
 						newuser.save(function(){
-							res.cookie('token', UserService.getUserToken(newuser._id))
-							console.log('facebook ' + UserService.getUserToken(newuser._id))
+							const token = UserService.getUserToken(newuser._id)
+							console.log('facebook ' + token + ' ' + newuser._id)
+                            res.cookie('token', token)
                             UserService.getUserInfo(newuser, function (data) {
-                                res.json(data)
+                                res.json({user: data})
                             })
 						})
 					}
@@ -219,8 +222,6 @@ export const changeUserPhone = () => {
 		})
 	}
 }
-
-// console.log(new Date())
 
 export const updateUserPassword = () => {
 	return (req, res) => {
@@ -361,10 +362,11 @@ export const getGoogleUser = () => {
 				body = JSON.parse(body)
 				UserService.getUserFromGoogleId(body.email, function(user) {
 					if (user) {
-						res.cookie('token', UserService.getUserToken(user._id))
 						console.log('google: ' + UserService.getUserToken(user._id))
+						var token = UserService.getUserToken(user._id)
+                        res.cookie('token', token)
 						UserService.getUserInfo(user, function (data) {
-							res.json(data)
+                            res.json({user: data})
                         })
 					} else {
 						var newuser = new User({email : body.email,
@@ -374,9 +376,10 @@ export const getGoogleUser = () => {
 							password: '1234',
 							verified: 1})
 						newuser.save(function(){
-							res.cookie('token', UserService.getUserToken(newuser._id))
+                            var token = UserService.getUserToken(newuser._id)
+                            res.cookie('token', token)
                             UserService.getUserInfo(newuser, function (data) {
-                                res.json(data)
+                                res.json({user: data})
                             })
 						})
 					}
