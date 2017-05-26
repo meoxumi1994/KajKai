@@ -1,8 +1,5 @@
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
-const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
+var webpack = require('webpack')
+var fs = require('fs')
 
 module.exports = {
     entry: {

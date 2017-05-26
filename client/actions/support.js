@@ -5,13 +5,15 @@ export const flet = (url, need, get) => {
     console.log(myurl,need,get)
     return fetch( myurl , {
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify(need)
     })
-    .then((response) => response.json())
+    .then((response) => {
+        return response.json()
+    })
     .then((res) => {
         console.log(res)
         return res
@@ -43,7 +45,7 @@ export const fleu = (url, need, get) => {
     console.log(myurl,need,get)
     return fetch( myurl , {
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
         method: 'PUT',
         credentials: 'include',

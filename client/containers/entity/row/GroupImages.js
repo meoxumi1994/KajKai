@@ -1,23 +1,20 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import Normal from '~/components/entity/row/Normal'
+import GroupImages from '~/components/entity/row/GroupImages'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     return({
-        id: ownProps.id
     })
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onChangeBasicInput: (value) => {
-        console.log('onChangeBasicInput',value)
-    }
+    
 })
 
-const NormalContainer = connect(
+const GroupImagesContainer = connect(
     mapStateToProps, mapDispatchToProps
-)(Normal)
+)(GroupImages)
 
-export default NormalContainer
+export default GroupImagesContainer

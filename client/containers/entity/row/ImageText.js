@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import Normal from '~/components/entity/row/Normal'
+import ImageText from '~/components/entity/row/ImageText'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     return({
-        id: ownProps.id
+        id: id,
+        onChange: id,
     })
 }
 
@@ -16,8 +17,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     }
 })
 
-const NormalContainer = connect(
+const ImageTextContainer = connect(
     mapStateToProps, mapDispatchToProps
-)(Normal)
+)(ImageText)
 
-export default NormalContainer
+export default ImageTextContainer
