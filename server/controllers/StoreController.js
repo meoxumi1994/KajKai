@@ -1,6 +1,6 @@
 import config from '../config/serverConfig'
 import { addNewStore, modifyStore, getStore, getStoreInfoService } from '../services/StoreService.js'
-// console.log(StoreService)
+import { encryptID, decryptID } from '../utils/Utils'
 
 export const registerStore = () => {
     return (req, res) => {
@@ -11,14 +11,13 @@ export const registerStore = () => {
         let category = body.category
         let longitude = body.longitude
         let latitude = body.latitude
-        console.log(req.decoded)
         let ownerId = req.decoded._id
         addNewStore(ownerId, storename, address, phone, category, longitude, latitude,
             function (store) {
                 if (!store) {
                     res.json({status: 'error'})
                 } else {
-                    res.json({status: 'success', store: store})
+                    res.json({status: 'success', store: getStoreInfoService(store)})
                 }
             })
     }

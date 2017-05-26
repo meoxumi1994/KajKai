@@ -20,6 +20,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onEdit: () => {
+
         dispatch({ type: 'STORE_MIDDLE_MAINPOST_EDIT_CLICK'})
     },
     onSave: () => {

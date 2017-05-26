@@ -12,7 +12,8 @@ class Middle extends React.Component {
         super(props)
     }
     render(){
-        let { avatarUrl, coverUrl, username, changeLanguage, onUpdateAvatar, onUpdateCover, INFO, PRIVACY, SECURITY,} = this.props
+        let { avatarUrl, coverUrl, username, changeLanguage,
+            onUpdateAvatar, onUpdateCover, INFO, PRIVACY, SECURITY, } = this.props
         return(
             <div>
                 <div className="panel panel-default"
@@ -24,7 +25,7 @@ class Middle extends React.Component {
                         }}/>
                         <div className="btn btn-default btn-xs"
                             style={{ position: 'absolute', marginLeft: -37, marginTop: 5 }}
-                            onClick={ () => onUpdateCover()} >
+                            onClick={ () => onUpdateCover() } >
                             <span className="glyphicon glyphicon-camera" style={{ fontSize: 20 }}></span>
                         </div>
                     <div style={{
@@ -40,7 +41,7 @@ class Middle extends React.Component {
                         </div>
                         <div className="btn btn-default btn-xs"
                             style={{ position: 'absolute', marginLeft: -30, marginTop: 5 }}
-                            onClick={() => onUpdateAvatar()}
+                            onClick={() => onUpdateAvatar() }
                             >
                             <span className="glyphicon glyphicon-camera" style={{ fontSize: 15 }}></span>
                         </div>

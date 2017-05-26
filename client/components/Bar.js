@@ -1,15 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick}) => {
+const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick}) => {
     if(isusername){
         return (
-            <div style={{ width: 47}}>
-                <div className="btn btn-transparent btn-xs" style={{ padding: 0}}>
-                    <Link to="/profile" >
-                        <img src={avatarUrl} alt="Cinque Terre" width="29" height="29"/>
+            <div style={{ width: 87, float: 'left'}}>
+                <div style={{float: 'left'}}>
+                    <Link to="/chat" >
+                        <img src="./images/comment.png" width="22.5" height="27"/>
                     </Link>
                 </div>
+
+
                 <div className="dropdown" style={{ width : 15, float: 'right'}}>
                   <div className="btn btn-default btn-xs  dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
                       style={{ paddingLeft: 3, paddingRight: 3,
@@ -18,9 +20,18 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick}) => {
                   </div>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu1"
                       style={{ marginLeft: -100 }}>
-                      <li><a href="#" onClick={()=> onLogoutClick() }>Log out</a></li>
+                      <li><a href="#" onClick={()=> onLogoutClick() }>create store</a></li>
+                      <li><a href="#" onClick={()=> onLogoutClick() }>setting</a></li>
+                      <li><a href="#" onClick={()=> onLogoutClick() }>log out</a></li>
                   </ul>
               </div>
+
+              <div className="btn btn-transparent btn-xs" style={{ padding: 0, float: 'right'}}>
+                  <Link to="/profile" >
+                      <img src={avatarUrl} alt="Cinque Terre" width="29" height="29"/>
+                  </Link>
+              </div>
+
             </div>
         )
     }

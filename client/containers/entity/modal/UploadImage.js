@@ -2,12 +2,14 @@ import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
 import UploadImage from '~/components/entity/modal/UploadImage'
+import { uploadImage } from '~/actions/asyn/entity/modal/uploadimage'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
-    const { open } = state.inst.entity.modal.uploadimage
+    const { open, typeUrl} = state.inst.entity.modal.uploadimage
     return({
         open : open,
+        typeUrl: typeUrl,
         CLOSE: g('CLOSE'),
     })
 }
@@ -16,9 +18,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     close: () => {
         dispatch({ type: 'ENTITY_MODAL_UPLOAD_IMAGE_CLOSE' })
     },
-    handleImageChange: (type, e) => {
+    handleImageChange: (e, typeUrl) => {
         const file = e.target.files[0]
-        dispatch(uploadImage([type], file))
+        dispatch(uploadImage(typeUrl, file))
     }
 })
 

@@ -5,7 +5,6 @@ import Status from './status/Status';
 import Advertisement from './Advertisement';
 import History from './history/History';
 
-
 const Home = () => (
     <div style={{ overflow: 'scroll', height: window.innerHeight - 46 }}>
         <div className="container-fluid">

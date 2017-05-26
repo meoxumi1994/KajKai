@@ -152,6 +152,45 @@ export default {
             // middleware: [auth()]
             method: 'getUserInfo'
         }
+    },
+
+    '/gettarget' : {
+        post: {
+            controller: 'CommentController',
+            method: 'getTarget'
+        }
+    },
+
+    '/getchatlist' : {
+        post: {
+            controller: 'ChatController',
+            middleware: [auth()],
+            method: 'getChatBuddies'
+        }
+    },
+
+    '/getmessage' : {
+        post: {
+            controller: 'ChatController',
+            middleware: [auth()],
+            method: 'getMessages'
+        }
+    },
+
+    '/addmessage' : {
+        post: {
+            controller: 'ChatController',
+            middleware: [auth()],
+            method: 'addMessage'
+        }
+    },
+
+    '/getchatid' : {
+        post: {
+            controller: 'ChatController',
+            middleware: [auth()],
+            method: 'getChatID'
+        }
     }
 
 }

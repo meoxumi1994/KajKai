@@ -1,7 +1,7 @@
 import React from 'react';
 
 import FacebookLogin from 'react-facebook-login';
-import GoogleLogin from 'react-google-login';
+// import GoogleLogin from 'react-google-login';
 
 const Login = (props) => {
     const { user, g, loginid, password, handleChange, onLoginClick,
@@ -27,7 +27,7 @@ const Login = (props) => {
                     { warningPassword && g('PASSWORD_WARNING')}
                 </div>
             </div>
-            <div className="btn btn-xs" style={{ padding: 0}}><a>{ g('FORGOT_PASSWORD') }</a></div>
+            <div onClick={()=> forgotPassword()} className="btn btn-xs" style={{ padding: 0}}><a>{ g('FORGOT_PASSWORD') }</a></div>
             <div>
                 <div style={{  float: 'right' }}>
                     <FacebookLogin
@@ -38,7 +38,7 @@ const Login = (props) => {
                         cssClass="btn btn-social btn-default facebookcolor"
                         icon="fa-facebook"
                     />
-                    <GoogleLogin
+                    {/* <GoogleLogin
                         clientId="450463283380-skt4llatg404ru1e2ra4hk6c0ie4ei64.apps.googleusercontent.com"
                         onSuccess={ (res) => logInGoogle(res.tokenId) }
                         onFailure={ (response) => console.error(response) }
@@ -46,7 +46,7 @@ const Login = (props) => {
                         style={{ marginLeft: 4 }}>
                           <span className="fa fa-google" style={{ color: '#C23321'}}></span>
                           <span style={{ color: '#C23321'}} >Google</span>
-                     </GoogleLogin>
+                     </GoogleLogin> */}
                 </div>
                 <button className="btn"
                     style={{ marginBottom: 7, backgroundColor: '#BD081C', color: 'white'}}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
 
-const ModalUploadImage = ({ open, close, CLOSE, handleImageChange, handleUpload }) => {
+const ModalUploadImage = ({ open, close, CLOSE, handleImageChange, handleUpload, typeUrl}) => {
     return(
         <div>
             <Modal style={{ marginTop: 120 }} show={open} onHide={() => close()}>
@@ -9,7 +9,7 @@ const ModalUploadImage = ({ open, close, CLOSE, handleImageChange, handleUpload 
                 <Modal.Title> Upload Avatar </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <input type="file" onChange={(e) => handleImageChange(e)}/>
+                    <input type="file" onChange={(e) => handleImageChange(e, typeUrl)}/>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button onClick={() => close()}>{CLOSE}</Button>

@@ -22,6 +22,10 @@ export default {
     'commentMessage': {
         controller: 'CommentController',
         method: 'comment'
+    },
+    'server/hello': {
+        controller: 'CommentController',
+        method: 'testToken'
     }
 
 }

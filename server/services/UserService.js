@@ -2,6 +2,7 @@ import { User } from '../models'
 import jwt from 'jsonwebtoken'
 import enums from '../enum'
 import {findStoreList} from './StoreService'
+import mongoose from '../datasource'
 
 module.exports = {
 	getUserToken,
@@ -17,7 +18,9 @@ module.exports = {
 	validateSex,
   	getUserInfo,
 	updateImageUrl,
-	getUserBasicInfo
+	getUserBasicInfo,
+    getListUser,
+    getChatUserListInfo
 };
 
 function getUserInfo(user, next) {
@@ -35,7 +38,8 @@ function getUserBasicInfo(user, stores = null) {
         addressLastUpdateAt: user.addressLastUpdateAt,
         storeList: stores,
         avatarUrl: user.avatarUrl,
-        coverUrl: user.coverUrl}
+        coverUrl: user.coverUrl,
+		id: user._id}
 }
 
 function getUser(id, next) {
@@ -46,6 +50,29 @@ function getUser(id, next) {
 			next(user)
 		}
 	})
+}
+
+function getListUser(ids, next) {
+	var list = []
+	for (var i = 0; i < ids.length; ++i) {
+		list.push(mongoose.Types.ObjectId(ids[i]))
+	}
+	User.find({'_id': {$in: list}}, function(err, docs){
+		// console.log(docs)
+		next(docs)
+	})
+}
+
+function getChatUserInfo(user) {
+	return {id: user._id, avatarUrl: user.avatarUrl, name: user.name}
+}
+
+function getChatUserListInfo(userList) {
+	var result = []
+	for (var i = 0; i < userList.length; ++i) {
+        result.push(getChatUserInfo(userList[i]))
+    }
+    return result
 }
 
 function getUserFromEmail(_email, next) {
