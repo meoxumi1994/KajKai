@@ -1,23 +1,20 @@
-var webpack = require('webpack')
-var fs = require('fs')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-  entry: [
-      'react-hot-loader/patch',
-      'webpack-dev-server/client?https://localhost:3000',
-      'webpack/hot/only-dev-server',
-      './index.js'
-  ],
+  entry: {
+    'bundle': './index.js'
+  },
   output: {
-    path: __dirname,
-    filename: 'bundle.js',
+    path: __dirname + '/dist',
+    filename: '[name].[chunkhash].js',
     publicPath: '/dist/',
-    chunkFilename: '[id].chunk.js'
+    chunkFilename: '[id].chunk.[chunkhash].js'
   },
   module: {
     rules: [
       {
-        exclude: /(node_modules)/,
         test: /\.js$/,
         use: [
           {
@@ -29,35 +26,53 @@ module.exports = {
               ],
               plugins: [
                 'babel-plugin-root-import',
-                'react-hot-loader/babel',
-                'syntax-dynamic-import',
                 'transform-object-rest-spread'
               ]
             }
           }
-        ]
+        ],
+        exclude: /node_modules/
       },
-      // {test: /\.css$/, loader: 'style-loader!css-loader'},
-      // {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-      // {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream'},
-      // {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'},
-      // {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml'}
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
+      }
     ]
-  },
-  devServer: {
-    https: {
-      key: fs.readFileSync('./config/kajkai.key'),
-      cert: fs.readFileSync('./config/kajkai.crt')
-    },
-    port: 3000,
-    historyApiFallback: true,
-    hot: true,
-    contentBase: __dirname,
-    publicPath: '/dist/'
   },
   devtool: 'eval',
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
+    new ExtractTextPlugin({
+      filename: 'style.[contenthash].css',
+      allChunks: true,
+      ignoreOrder: true
+    }),
+    new HtmlWebpackPlugin({
+      filename: '../index.html',
+      template: './template.html'
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function (module) {
+        if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
+          return false
+        }
+        return module.context && module.context.indexOf("node_modules") !== -1
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['manifest'],
+      minChunks: Infinity
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      comments: false
+    })
   ]
 }
