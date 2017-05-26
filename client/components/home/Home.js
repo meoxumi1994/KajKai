@@ -4,7 +4,7 @@ import { Row,Col } from 'react-bootstrap';
 import Status from './status/Status';
 import Advertisement from './Advertisement';
 import History from './history/History';
-
+import Chat from './chat/Chat';
 
 const Home = () => (
     <div style={{ overflow: 'scroll', height: window.innerHeight - 46 }}>

@@ -4,10 +4,10 @@ const config = {
     IP: ['localhost', '13.228.23.106'], // 13.228.23.106 10.20.16.148
     PORT: 8080,
     getDomain: () => {
-        if(config.ISTEST)
+        // if(config.ISTEST)
             return config.PROTOCOL[1] + '://' + config.IP[1] + ':' + config.PORT;
-        else
-            return config.PROTOCOL[0] + '://' + config.IP[0] + ':' + config.PORT;
+        // else
+            // return config.PROTOCOL[0] + '://' + config.IP[0] + ':' + config.PORT;
     }
 }
 
