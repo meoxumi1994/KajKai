@@ -9,7 +9,6 @@ export const getChatList = (id, offset, length) => dispatch => {
 
     })
     .then((response) => {
-        // console.log('getchatlist response ',response.chatList);
         dispatch({ type: 'LOAD_CHAT_LIST', chatList: response.chatList})
     })
 }
@@ -27,8 +26,8 @@ export const getMessage = (chat) => dispatch => {
 
     })
     .then((response) => {
-        // console.log('getmessage response ', chat);
-        dispatch({type: 'LOAD_CHAT', messages: response.messages, chat});
+        const newChat = Object.assign({}, chat, {username: chat.name});
+        dispatch({type: 'LOAD_CHAT', messages: response.messages, chat: newChat });
     })
 }
 

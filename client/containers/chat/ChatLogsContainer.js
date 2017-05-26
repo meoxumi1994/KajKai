@@ -1,18 +1,15 @@
 import { connect } from 'react-redux'
-import ChatLog from '~/components/chat/ChatLog'
+import ChatLogs from '~/components/chat/ChatLogs'
 import { findName } from '../support'
 
 const mapStateToProps = (state, ownProps) => {
   const { chatLog, currentUser } = state.inst.chat.center
-  const { username, id, avatarUrl } = state.user
-  console.log('currentUser ',currentUser);
+  const user = state.user
   return (
     {
-      id,
-      username,
       chatLog,
-      avatarUrl,
-      currentUser
+      currentUser,
+      user
     }
   )
 }
@@ -21,8 +18,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 })
 
-const ChatLogContainer = connect(
+const ChatLogsContainer = connect(
   mapStateToProps, mapDispatchToProps
-)(ChatLog)
+)(ChatLogs)
 
-export default ChatLogContainer
+export default ChatLogsContainer

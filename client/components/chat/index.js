@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Grid, Row } from 'react-bootstrap'
 import RecentUserListContainer from '~/containers/chat/RecentUserListContainer'
 import SendMessageContainer from '~/containers/chat/SendMessageContainer'
-import ChatLogContainer from '~/containers/chat/ChatLogContainer'
+import ChatLogsContainer from '~/containers/chat/ChatLogsContainer'
 
 const Chat = () => {
   return(
@@ -12,7 +12,7 @@ const Chat = () => {
               <RecentUserListContainer/>
            </Col>
            <Col lg={14} lgOffset={3}>
-              <Row><ChatLogContainer/></Row>
+              <Row><ChatLogsContainer/></Row>
               <Row><SendMessageContainer/></Row>
            </Col>
      </Grid>

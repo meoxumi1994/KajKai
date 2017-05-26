@@ -3,7 +3,7 @@ import RecentUserList from '~/components/chat/RecentUserList'
 import { getChatList, addMessage, getMessage, getChatId, getTarget } from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('state ',state);
+  // console.log('state ',state);
   const { chatList } = state.inst.chat.left
   return (
     {
@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(getMessage(chat));
   },
   loadchat: () => {
-    console.log('loading chat');
     dispatch(getChatList());
   }
 })
