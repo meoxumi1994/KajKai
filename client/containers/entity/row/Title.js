@@ -3,10 +3,10 @@ import { get } from '~/config/allString'
 
 import Title from '~/components/entity/row/Title'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     return({
-
+        id: id
     })
 }
 

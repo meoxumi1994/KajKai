@@ -2,10 +2,11 @@ import React from 'react'
 
 import BasicInput from '~/containers/entity/input/BasicInput'
 
-const Title = ({ onChangeBasicInput }) => {
+const Title = ({ id, onChangeBasicInput }) => {
+    console.log('Title', id)
     return(
         <div style={{ padding: '5px 8px 0px 8px' }}>
-            <BasicInput fontSize={17} onChange={onChangeBasicInput}/>
+            <BasicInput id={id} fontSize={17} onChange={onChangeBasicInput}/>
         </div>
     )
 }

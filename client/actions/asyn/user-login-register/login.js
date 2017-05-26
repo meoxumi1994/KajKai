@@ -12,9 +12,9 @@ export const logIn = (email, password) => dispatch => {
         address: undefined,
         phone: undefined,
     })
-    .then((response) => {
-        if(response.username){
-            dispatch(authData('LOGIN_SUCCESS', response))
+    .then(({ user }) => {
+        if(user.username){
+            dispatch(authData('LOGIN_SUCCESS', user))
         }else{
             dispatch(authAction('LOGIN_FAILED'))
         }
@@ -26,14 +26,15 @@ export const logInFaceBook = (tokenId) => dispatch => {
     flet('/loginfacebook',{
         tokenId: tokenId
     },{
+        tokenId: undefined,
         username: undefined,
         imageUrl: undefined,
         address: undefined,
         phone: undefined,
     })
-    .then((response) => {
-        if(response.username){
-            dispatch(authData('LOGIN_SUCCESS', response))
+    .then(({ user }) => {
+        if(user.username){
+            dispatch(authData('LOGIN_SUCCESS', user))
         }else{
             dispatch(authAction('LOGIN_FAILED'))
         }
@@ -50,9 +51,9 @@ export const logInGoogle = (tokenId) => dispatch => {
         address: undefined,
         phone: undefined,
     })
-    .then((response) => {
-        if(response.username){
-            dispatch(authData('LOGIN_SUCCESS', response))
+    .then(({ user }) => {
+        if(user.username){
+            dispatch(authData('LOGIN_SUCCESS', user))
         }else{
             dispatch(authAction('LOGIN_FAILED'))
         }
@@ -63,6 +64,7 @@ export const logOut = () => dispatch => {
     flem('/logout',{
     })
     .then((response) => {
+
         dispatch(authAction('LOGOUT'))
     })
 }

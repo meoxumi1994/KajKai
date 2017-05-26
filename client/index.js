@@ -14,8 +14,9 @@ import Components from './components';
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client'
 
-console.log(document.cookie)
 function execute(action, emit, next, dispatch) {
+    console.log('action12312312321',{...action})
+    emit(action.type, {...action})
     // console.log(cookie.load('token'))
     // if(cookie.load('token') !== undefined){
     //     emit('DEMO_EVENT', {...action, token: cookie.load('token')})
@@ -25,18 +26,18 @@ function execute(action, emit, next, dispatch) {
     // }
 }
 
-// const socket = io(config.getDomain());
-// const socketIoMiddleware = createSocketIoMiddleware(socket, "server/", { execute: execute });
+const socket = io(config.getDomain());
+const socketIoMiddleware = createSocketIoMiddleware(socket, "server/", { execute: execute });
 
 const store = createStore(
     reducers,
     applyMiddleware(
         thunkMiddleware,
-        // socketIoMiddleware
+        socketIoMiddleware
     )
 )
 
-store.dispatch({type:'serve/hello'});
+store.dispatch({ type:'server/hello' });
 
 ReactDOM.render(
     <AppContainer>

@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
 
+import middle from './middle'
+
 const index = (state = {
 }, action) => {
     switch (action.type) {
@@ -14,6 +16,7 @@ const index = (state = {
 
 const target = combineReducers({
     index,
+    middle,
 })
 
 export default target
