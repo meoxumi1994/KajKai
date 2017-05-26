@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from 'react-router-dom'
 // import { socket } from '~/components/support'
 
 import Bar from '~/containers/Bar'
-
 import Bundle from '../common/Bundle'
 import loadHome from 'bundle-loader?lazy!./home/Home'
 import loadMapp from 'bundle-loader?lazy!./mapp/Map'
@@ -12,9 +11,11 @@ import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
 import loadStore from 'bundle-loader?lazy!../containers/store'
 import Target from '~/containers/target'
+import Chat from './chat'
 // import loadTarget from 'bundle-loader?lazy!../containers/target'
 
 import BasicInput from '~/containers/entity/input/BasicInput'
+
 
 const Home = () => (
   <Bundle load={loadHome}>
@@ -89,7 +90,7 @@ class App extends React.Component {
             <div style={{ minWidth: 990, minHeight: 700 }}>
                 <Bar/>
                 <hr style={{margin: 0}}></hr>
-                {(path == "/" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
+                {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                     <div>
                         <Route exact path="/" component={Home}/>
                         <Route path="/map" component={Mapp}/>
@@ -97,6 +98,7 @@ class App extends React.Component {
                         <Route path="/store" component={Store}/>
                         <Route path="/profile" component={Profile}/>
                         <Route path="/registerstore" component={RegisterStore}/>
+                        <Route path="/chat" component={Chat}/>
                     </div>
                 :   <div>
                         <Target id={path.substring(1)}/>

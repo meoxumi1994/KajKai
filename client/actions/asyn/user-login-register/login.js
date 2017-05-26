@@ -68,3 +68,7 @@ export const logOut = () => dispatch => {
         dispatch(authAction('LOGOUT'))
     })
 }
+
+export const forgotPassword = () => dispatch => {
+  console.log('forgotPassword');
+}

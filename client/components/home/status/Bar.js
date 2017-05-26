@@ -19,17 +19,24 @@ const Bar = () => (
                     </div>
                 </Link>
             </Col>
+
             <Col xs={6} md={8}>
                 <div>
-                    Store A
+                    Store
                 </div>
                 <small className="text-muted">8 mins</small>
             </Col>
+
             <Col xs={2} md={2}>
                 <div className="btn btn-transparent btn-xs">
                     <img src="./images/ship.png" alt="Cinque Terre" width="40" height="25"/>
                     {" "}<small className="text-muted">500m</small>
                 </div>
+                <Link to='/chat'>
+                    <div className="btn btn-transparent btn-xs" style={{float:'right'}}>
+                        <img src="./images/comment.png" alt="Cinque Terre" width="22.5" height="27"/>
+                    </div>
+                </Link>
             </Col>
             <Col xs={1} md={1}>
                 <div className="dropdown" style={{ width : 27}}>

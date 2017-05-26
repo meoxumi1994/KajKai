@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import config from './config'
@@ -9,7 +9,8 @@ import thunkMiddleware from 'redux-thunk'
 import { AppContainer } from 'react-hot-loader';
 import cookie from 'react-cookie'
 import reducers from './reducers'
-import Components from './components';
+import Components from './components'
+import './App.css'
 
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client'

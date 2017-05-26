@@ -27,7 +27,7 @@ const Login = (props) => {
                     { warningPassword && g('PASSWORD_WARNING')}
                 </div>
             </div>
-            <div className="btn btn-xs" style={{ padding: 0}}><a>{ g('FORGOT_PASSWORD') }</a></div>
+            <div onClick={()=> forgotPassword()} className="btn btn-xs" style={{ padding: 0}}><a>{ g('FORGOT_PASSWORD') }</a></div>
             <div>
                 <div style={{  float: 'right' }}>
                     <FacebookLogin
