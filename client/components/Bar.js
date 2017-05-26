@@ -5,7 +5,7 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoa
     if(isusername){
         return (
             <div style={{ width: 87, float: 'left'}}>
-                <div style={{float: 'left'}} onClick={()=> onLoadChatClick() }>
+                <div style={{float: 'left'}}>
                     <Link to="/chat" >
                         <img src="./images/comment.png" width="22.5" height="27"/>
                     </Link>

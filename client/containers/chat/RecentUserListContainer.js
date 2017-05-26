@@ -17,27 +17,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(getMessage(chat));
   },
   loadchat: () => {
+    console.log('loading chat');
     dispatch(getChatList());
-    // dispatch(addMessage(user[0].chatId, user[2].id, "heyyy"))
   }
 })
-
-var user = [
-  {
-    name: 'Minh',
-    id: '591d7c7cb79aa862cc15d21b',
-    chatId: '591d7c7cb79aa862cc15d21b$591d844fb79aa862cc15d21c'
-  },
-  {
-    name: 'Long Long',
-    id: '5923f11c29dd9977674d1af0',
-    chatId: '591d844fb79aa862cc15d21c$5923f11c29dd9977674d1af0'
-  },
-  {
-    name: 'Long Ly',
-    id: '591d844fb79aa862cc15d21c'
-  },
-]
 
 const RecentUserListContainer = connect(
   mapStateToProps, mapDispatchToProps
