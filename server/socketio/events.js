@@ -26,6 +26,18 @@ export default {
     'server/hello': {
         controller: 'CommentController',
         method: 'testToken'
+    },
+    'server/CHANGE_STOREMAINPOST': {
+        controller: 'StorePostController',
+        method: 'updateStoreMainPost'
+    },
+    'server/JOIN_STOREMAINPOST': {
+        controller: 'StorePostController',
+        method: 'joinMainPost'
+    },
+    'server/LEAVE_STOREMAINPOST': {
+        controller: 'StorePostController',
+        method: 'leaveMainPost'
     }
 
 }
