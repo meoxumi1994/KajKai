@@ -1,5 +1,5 @@
 import mongoose from '../datasource'
-import StorePostDetailSchema from './index'
+import StorePostDetailSchema from './StorePostDetail'
 
 const StorePostSchema = new mongoose.Schema({
     storeId: {type: String},

@@ -8,12 +8,13 @@ import path from 'path'
 import config from './config/serverConfig'
 import init from './socketio'
 import allRoutes from './routes'
-
-import owaiejf from './services/MessageService'
+// import owaiejf from './services/MessageService'
+import StorePostService from './services/StorePostService'
 
 const app = express()
 var whitelist = ['https://localhost:' + config.OTHERPORT, 'https://34.209.206.70:' + config.OTHERPORT,
 'https://www.kajkai.com', 'null']
+
 
 var corsOptions = {
   // origin: function (origin, callback) {

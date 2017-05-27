@@ -1,5 +1,5 @@
 import mongoose from '../datasource'
-import StorePost from './index'
+import StorePostSchema from './StorePost'
 
 const StoreSchema = new mongoose.Schema({
     storename: {type: String},
@@ -11,7 +11,7 @@ const StoreSchema = new mongoose.Schema({
     owner: {type: String},
     avatarUrl: {type: String},
     imageUrl: {type: String},
-    mainPost: {type: StorePost}
+    mainPost: {type: StorePostSchema}
 });
 
 module.exports = StoreSchema

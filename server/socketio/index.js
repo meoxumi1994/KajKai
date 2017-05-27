@@ -4,14 +4,11 @@ import { validateTokenDemo } from '../services/DemoService'
 
 const init = (server) => {
     const sio = socketIo(server)
-    // console.log('fuck')
-    // console.log(sio)
     sio.on('connection', (socket) => {
         console.log('a user connected')
         socket.on('disconnect', () => {
         console.log('a user disconnected')
         })
-        // console.log(socket.header('cookie'))
         console.log(socket.handshake.headers.cookie)
         // load all events
         for(let e in allEvents){
@@ -27,7 +24,7 @@ const init = (server) => {
 
                 //     })
                 // }
-                method(action, socket)
+                method(action, socket, sio)
             })
         }
     })
