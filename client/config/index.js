@@ -5,9 +5,9 @@ const config = {
     PORT: 8080,
     getDomain: () => {
         // if(config.ISTEST)
-            return config.PROTOCOL[1] + '://' + config.IP[1] + ':' + config.PORT;
+            // return config.PROTOCOL[1] + '://' + config.IP[1] + ':' + config.PORT;
         // else
-            // return config.PROTOCOL[0] + '://' + config.IP[0] + ':' + config.PORT;
+            return config.PROTOCOL[0] + '://' + config.IP[0] + ':' + config.PORT;
     }
 }
 
