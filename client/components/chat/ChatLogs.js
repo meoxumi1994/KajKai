@@ -26,6 +26,7 @@ const style = {
 
 const ChatLogs = (props) => {
   const { chatLog, currentUser, user } = props
+  console.log('chatLog ',chatLog);
   if (chatLog.length > 0)
       return (
         <div>

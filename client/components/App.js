@@ -12,7 +12,6 @@ import loadStore from 'bundle-loader?lazy!../containers/store'
 import loadChat from 'bundle-loader?lazy!../containers/chat'
 import loadTarget from 'bundle-loader?lazy!../containers/target'
 
-
 const Home = () => (
   <Bundle load={loadHome}>
     {(Comp) => (Comp
@@ -113,7 +112,8 @@ class App extends React.Component {
         )
     }
     componentDidMount(){
-        // this.props.onWho();
+        this.props.onWho();
+
     }
 }
 

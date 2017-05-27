@@ -38,10 +38,9 @@ export const getChatId = (id) => dispatch => {
 
     })
     .then((response) => {
-      console.log('getchatid response ',response);
+      
     })
 }
-
 
 export const addMessage = (id, person, message) => dispatch => {
     flet('/addMessage',{
