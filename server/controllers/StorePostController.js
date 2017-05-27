@@ -4,15 +4,15 @@ import {getMainPost} from '../services/StoreService'
 export const joinMainPost = (action, sio, io) => {
     getMainPost(action.data.id, function (store) {
         console.log('join: ' + action.data.id)
-        console.log('store ' + store.mainPost.list)
         if (store) {
+            console.log('store ' + store.mainPost.list)
             sio.join(action.data.id)
             // sio.emit('action', {type: 'client/STOREMAINPOSTXXX', data: {list: store.mainPost.list, id: action.data.id}})
             const list = store.mainPost.list
             console.log('list ' + list)
             io.to(action.data.id).emit('action', {
                 type: 'client/STOREMAINPOSTXXX',
-                data: {list: list, id: action.data.id, minh: store.mainPost.list[0].text}
+                data: {list: list, id: action.data.id}
             })
         }
     })

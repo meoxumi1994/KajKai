@@ -1,31 +1,50 @@
 import socketIo from 'socket.io'
 import allEvents from './events'
 import { validateTokenDemo } from '../services/DemoService'
+import { verifyToken } from '../services/UserService'
+import {getTokenSocketCookie} from '../utils/Utils'
 
 const init = (server) => {
     const sio = socketIo(server)
+    // sio.use(cookieParser())
     sio.on('connection', (socket) => {
         console.log('a user connected')
         socket.on('disconnect', () => {
         console.log('a user disconnected')
         })
-        console.log(socket.handshake.headers.cookie)
         // load all events
+        const token =  getTokenSocketCookie(socket.handshake.headers.cookie)
+        console.log('sockettoken: ' + token)
+
+        var userID = null
+        if (token) {
+            var decoded = verifyToken(token)
+            if (decoded)
+                userID = decoded._id
+        }
+        console.log('me ' + userID)
+
         for(let e in allEvents){
             let handler = allEvents[e]
             // console.log(e)
             let method = require('../controllers/' + handler.controller)[handler.method]
-            socket.on(e, (action) => {
-                // if(validateTokenDemo(action.token)) {
-                //     method(action, sio)
-                // } else {
-                //     socket.emit('action', {
-                //         type: 'NOT_LOGGED_IN',
+            if (handler.controller === 'ChatController') {
+                socket.on(e, (action) => {
+                    method(action, socket, sio, userID)
+                })
+            } else {
+                socket.on(e, (action) => {
+                    // if(validateTokenDemo(action.token)) {
+                    //     method(action, sio)
+                    // } else {
+                    //     socket.emit('action', {
+                    //         type: 'NOT_LOGGED_IN',
 
-                //     })
-                // }
-                method(action, socket, sio)
-            })
+                    //     })
+                    // }
+                    method(action, socket, sio)
+                })
+            }
         }
     })
     return sio

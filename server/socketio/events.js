@@ -38,6 +38,19 @@ export default {
     'server/LEAVE_STOREMAINPOST': {
         controller: 'StorePostController',
         method: 'leaveMainPost'
+    },
+    'server/JOIN_CHAT': {
+        controller: 'ChatController',
+        method: 'joinChat'
+    },
+    'server/LEAVE_CHAT': {
+        controller: 'ChatController',
+        method: 'leaveChat'
+    },
+    'server/ADD_MESSAGE': {
+        controller: 'ChatController',
+        method: 'addMessage'
     }
+
 
 }
