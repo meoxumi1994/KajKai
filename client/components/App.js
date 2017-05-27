@@ -10,7 +10,8 @@ import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
 import loadStore from 'bundle-loader?lazy!../containers/store'
 import loadChat from 'bundle-loader?lazy!../containers/chat'
-import loadTarget from 'bundle-loader?lazy!../containers/target'
+import Target from '~/containers/target'
+// import loadTarget from 'bundle-loader?lazy!../containers/target'
 
 
 const Home = () => (
@@ -76,14 +77,14 @@ const Chat = ({ id }) => (
     </Bundle>
 )
 
-const Target = ({ id }) => (
-    <Bundle load={loadTarget}>
-        {(Comp) => (Comp
-          ? <Comp/>
-          : null
-        )}
-    </Bundle>
-)
+// const Target = ({ id }) => (
+//     <Bundle load={loadTarget}>
+//         {(Comp) => (Comp
+//           ? <Comp/>
+//           : null
+//         )}
+//     </Bundle>
+// )
 
 class App extends React.Component {
     constructor(props){
@@ -113,7 +114,7 @@ class App extends React.Component {
         )
     }
     componentDidMount(){
-        // this.props.onWho();
+        this.props.onWho();
     }
 }
 

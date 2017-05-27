@@ -6,11 +6,11 @@ import config from './config'
 
 import thunkMiddleware from 'redux-thunk'
 // AppContainer is a necessary wrapper component for HMR
-// import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader';
 import cookie from 'react-cookie'
 import reducers from './reducers'
 import Components from './components'
-import './App.css'
+// import './App.css'
 
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client'
@@ -34,13 +34,13 @@ const store = createStore(
 store.dispatch({ type:'server/hello' });
 
 ReactDOM.render(
-    // <AppContainer>
-    //    <Provider store={store}>
-    //       <Components/>
-    //   </Provider>
-    // </AppContainer>,
-    <Provider store={store}>
-       <Components/>
-   </Provider>,
+    <AppContainer>
+       <Provider store={store}>
+          <Components/>
+      </Provider>
+    </AppContainer>,
+   //  <Provider store={store}>
+   //     <Components/>
+   // </Provider>,
   document.getElementById('root')
 )

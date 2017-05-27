@@ -1,13 +1,14 @@
 import React from 'react'
 import Textarea from 'react-textarea-autosize';
 
-const BasicInput = ({ id, width, fontSize, minRows, textare, handleChange, opensupplement, onFocus, onBlur, onSave, onBold, onItalic, focus }) => {
+const BasicInput = ({ width, fontSize, minRows, textare, handleChange, opensupplement, onFocus, onBlur, onSave, onBold, onItalic, focus }) => {
 
     const styleTextArea = {
         style : {
             width: '100%',
             fontSize: 14,
-            borderWidth:  0,
+            borderWidth:  1,
+            borderColor: '#cccccc',
             resize: 'none',
             fontSize: fontSize,
         },
@@ -16,7 +17,7 @@ const BasicInput = ({ id, width, fontSize, minRows, textare, handleChange, opens
         onChange: (e) => handleChange('textare',e)
     }
     return(
-        <div tabIndex={id} onFocus={() => onFocus(this.textInput)} onBlur={() => onBlur(this.textInput)}
+        <div tabIndex="0" onFocus={() => onFocus(this.textInput)} onBlur={() => onBlur(this.textInput)}
             style={{ width: width }}>
             <Textarea {...styleTextArea} ref={(input) => { this.textInput = input; }}/>
             {/* {opensupplement &&

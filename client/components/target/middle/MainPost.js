@@ -1,36 +1,23 @@
 import React from 'react'
 
-import Title from '~/containers/entity/row/Title'
-import Normal from '~/containers/entity/row/Normal'
-import ImageText from '~/containers/entity/row/ImageText'
-import TextImage from '~/containers/entity/row/TextImage'
-import GroupImages from '~/containers/entity/row/GroupImages'
+import MainPostRow from '~/containers/entity/row/MainPostRow'
 
-const MainPost = ({ onChooseType, list, onedit, onSave, onEdit, onItemChange}) => {
-    return(
-        <div>
-            <div className="panel panel-default">
+class MainPost extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    render(){
+        const { onedit, list, onEdit, onSave, onChooseType, idstore } = this.props
+        console.log('MainPost')
+        return(
+            <div className="panel panel-default"
+                style={{ minWidth: 540, minheight: 700,  margin: 7}}>
                 {onedit?
-                    <div className="btn btn-default" onClick={() => onSave()}>save</div>
+                    <div className="btn btn-default" onClick={() => onSave(idstore, list)}>save</div>
                 :   <div className="btn btn-default" onClick={() => onEdit()}>edit</div>
                 }
                 {onedit?
-                    list.map((item, index) => {
-                        switch (item.type) {
-                            case 'title':
-                                return <Title onChange={(data) => onItemChange(data)} key={index} id={index}/>
-                            case 'normal':
-                                return <Normal onChange={(data) => onItemChange(data)} key={index} id={index}/>
-                            case 'imagetext':
-                                return <ImageText onChange={(data) => onItemChange(data)} key={index} id={index}/>
-                            case 'textimage':
-                                return <TextImage onChange={(data) => onItemChange(data)} key={index} id={index}/>
-                            case 'groupimages':
-                                return <GroupImages onChange={(data) => onItemChange(data)} key={index} id={index}/>
-                            default:
-                                return <div></div>
-                        }
-                    })
+                    list.map((item, index) => <MainPostRow key={index} id={item.id}/>)
                 : <div></div>
                 }
                 <div className="input-group-btn">
@@ -48,8 +35,12 @@ const MainPost = ({ onChooseType, list, onedit, onSave, onEdit, onItemChange}) =
                   </ul>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+    componentDidUpdate(){
+        const { list, onCreaterow } = this.props
+        onCreaterow(list)
+    }
 }
 
 export default MainPost

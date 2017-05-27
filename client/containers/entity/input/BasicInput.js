@@ -15,9 +15,8 @@ const mapStateToProps = (state, { id }) => {
     })
 }
 
-const mapDispatchToProps = (dispatch, { id, onChange }) => ({
+const mapDispatchToProps = (dispatch, { id }) => ({
     handleChange: (type, e) => {
-        onChange(e.target.value)
         dispatch({ type: 'ENTITY_INPUT_BASICINPUT_HANDLE_CHANGE', [type]: e.target.value, id })
     },
     onFocus: () => {

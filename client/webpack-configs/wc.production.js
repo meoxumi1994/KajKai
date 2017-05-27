@@ -54,13 +54,16 @@ module.exports = {
       template: './template.html'
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module) {
-        if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
-          return false
-        }
-        return module.context && module.context.indexOf("node_modules") !== -1
-      }
+    //   name: 'vendor',
+    //   minChunks: function (module) {
+    //     if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
+    //       return false
+    //     }
+    //     return module.context && module.context.indexOf("node_modules") !== -1
+    //     },
+        asyn: true,
+        children: true,
+        minChunks: Infinity,
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: ['manifest'],
