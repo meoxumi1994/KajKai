@@ -12,6 +12,6 @@ console.log('socket server start')
 io.on('connection', function (socket) {
   socket.emit('news', { hello: 'HELLO WORLD' });
   socket.on('my other event', function (data) {
-    console.log(data);
+    console.log('my other event: ',data);
   });
 });

@@ -7,13 +7,12 @@ const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     return({
         id: id,
-        onChange: id,
     })
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, { id, onChange }) => ({
     onChangeBasicInput: (value) => {
-        console.log('onChangeBasicInput',value)
+        onChange({text: value, id})
     }
 })
 

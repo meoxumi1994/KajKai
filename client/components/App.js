@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-// import { socket } from '~/components/support'
 
 import Bar from '~/containers/Bar'
 import Bundle from '../common/Bundle'
@@ -10,11 +9,8 @@ import loadUserLoginRegister from 'bundle-loader?lazy!../containers/user-login-r
 import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
 import loadStore from 'bundle-loader?lazy!../containers/store'
-import Target from '~/containers/target'
-import Chat from './chat'
-// import loadTarget from 'bundle-loader?lazy!../containers/target'
-
-import BasicInput from '~/containers/entity/input/BasicInput'
+import loadChat from 'bundle-loader?lazy!../containers/chat'
+import loadTarget from 'bundle-loader?lazy!../containers/target'
 
 
 const Home = () => (
@@ -71,14 +67,23 @@ const Store = () => (
     </Bundle>
 )
 
-// const Target = ({ id }) => (
-//     <Bundle load={loadTarget}>
-//         {(Comp) => (Comp
-//           ? <Comp/>
-//           : null
-//         )}
-//     </Bundle>
-// )
+const Chat = ({ id }) => (
+    <Bundle load={loadChat}>
+        {(Comp) => (Comp
+          ? <Comp/>
+          : null
+        )}
+    </Bundle>
+)
+
+const Target = ({ id }) => (
+    <Bundle load={loadTarget}>
+        {(Comp) => (Comp
+          ? <Comp/>
+          : null
+        )}
+    </Bundle>
+)
 
 class App extends React.Component {
     constructor(props){
@@ -97,7 +102,7 @@ class App extends React.Component {
                         <Route path="/register" component={UserLoginRegister}/>
                         <Route path="/store" component={Store}/>
                         <Route path="/profile" component={Profile}/>
-                        <Route path="/registerstore" component={RegisterStore}/>
+                        <Route path="/registerstore" component={RegisterStore}/> */}
                         <Route path="/chat" component={Chat}/>
                     </div>
                 :   <div>
@@ -108,7 +113,7 @@ class App extends React.Component {
         )
     }
     componentDidMount(){
-        this.props.onWho();
+        // this.props.onWho();
     }
 }
 
