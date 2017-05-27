@@ -1,8 +1,8 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
-const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin')
+// const ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = {
   entry: {
@@ -28,7 +28,6 @@ module.exports = {
               ],
               plugins: [
                 'babel-plugin-root-import',
-                'syntax-dynamic-import',
                 'transform-object-rest-spread'
               ]
             }
@@ -40,13 +39,13 @@ module.exports = {
       //   test: /\.html$/,
       //   use: 'html-loader'
       // },
-      // {
-      //   test: /\.css$/,
-      //   use: ExtractTextPlugin.extract({
-      //     fallback: "style-loader",
-      //     use: "css-loader"
-      //   })
-      // },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
+      },
       // {
       //   test: /\.(png|svg|jpg|gif)$/,
       //   use: [
@@ -85,29 +84,30 @@ module.exports = {
     //   manifestVariable: 'webpackManifest',
     //   inlineManifest: true
     // }),
-    // new ExtractTextPlugin({
-    //   filename: 'style.[contenthash].css',
-    //   allChunks: true,
-    //   ignoreOrder: true
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: '../index.html',
-    //   template: './template.html'
-    // }),
+    new ExtractTextPlugin({
+      filename: 'style.[contenthash].css',
+      allChunks: true,
+      ignoreOrder: true
+    }),
+    new HtmlWebpackPlugin({
+      filename: '../index.html',
+      template: './template.html'
+    }),
     // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
     //   minChunks: function (module) {
     //     // This prevents stylesheet resources with the .css or .scss extension
     //     // from being moved from their original chunk to the vendor chunk
     //     if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
-    //       return false;
+    //       return false
     //     }
-    //     return module.context && module.context.indexOf("node_modules") !== -1;
+    //     return module.context && module.context.indexOf("node_modules") !== -1
     //   },
-    //   children: true,
-    //   async: true
+    //   // children: true,
+    //   // async: true
     // }),
-    //   new webpack.optimize.CommonsChunkPlugin({
-    //   name: ['bundle', 'manifest'],
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: ['manifest'],
     //   minChunks: Infinity
     // }),
     // new webpack.DefinePlugin({
@@ -116,9 +116,7 @@ module.exports = {
     //   }
     // }),
     // new webpack.optimize.UglifyJsPlugin({
-    //   compressor: {
-    //     warnings: false
-    //   }
+    //   comments: false
     // })
   ]
 }

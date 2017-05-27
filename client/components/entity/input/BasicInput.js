@@ -1,7 +1,7 @@
 import React from 'react'
 import Textarea from 'react-textarea-autosize';
 
-const BasicInput = ({ width, fontSize, minRows, textare, handleChange, opensupplement, onFocus, onBlur, onSave, onBold, onItalic, focus }) => {
+const BasicInput = ({ id, width, fontSize, minRows, textare, handleChange, opensupplement, onFocus, onBlur, onSave, onBold, onItalic, focus }) => {
 
     const styleTextArea = {
         style : {
@@ -16,11 +16,11 @@ const BasicInput = ({ width, fontSize, minRows, textare, handleChange, opensuppl
         onChange: (e) => handleChange('textare',e)
     }
     return(
-        <div tabIndex="0" onFocus={() => onFocus(this.textInput)} onBlur={() => onBlur(this.textInput)}
+        <div tabIndex={id} onFocus={() => onFocus(this.textInput)} onBlur={() => onBlur(this.textInput)}
             style={{ width: width }}>
             <Textarea {...styleTextArea} ref={(input) => { this.textInput = input; }}/>
             {/* {opensupplement &&
-                <div className="btn-group" role="group" style={{ width: 200, margin}}>
+                <div className="btn-group" role="group" style={{ width: 200 }}>
                     <div onMouseDown={ () => onBold(this.textInput) }
                         type="button" className="btn btn-default btn-xs">bold</div>
                     <div onMouseDown={ () => onItalic(this.textInput) }

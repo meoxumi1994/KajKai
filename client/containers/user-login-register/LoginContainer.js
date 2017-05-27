@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import allString from '~/config/allString'
 
 import { checkloginId, checkPassword } from '~/containers/support'
-import { logIn, logInFaceBook, logInGoogle } from '~/actions/asyn/user-login-register/login'
+import { logIn, logInFaceBook, logInGoogle, forgotPassword } from '~/actions/asyn/user-login-register/login'
 import Login from '~/components/user-login-register/Login'
 
 const mapStateToProps = (state, ownProps) => {
@@ -31,6 +31,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     handleChange: (type, value) => {
         dispatch({ type: 'USER_LOGIN_REGISTER_LOGIN_INPUT_CHANGE', value: { [type] : value } })
+    },
+    forgotPassword: () => {
+        dispatch(forgotPassword())
     }
 })
 

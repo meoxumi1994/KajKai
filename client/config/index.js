@@ -1,7 +1,7 @@
 const config = {
     ISTEST : true,
-    PROTOCOL: ['https', 'https'],
-    IP: ['localhost', '13.228.23.106'], // 13.228.23.106 10.20.16.148
+    PROTOCOL: ['http', 'https'],
+    IP: ['localhost', '13.228.23.106'], // 13.228.23.106 10.20.16.136
     PORT: 8080,
     getDomain: () => {
         if(config.ISTEST)

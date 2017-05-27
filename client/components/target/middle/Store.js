@@ -6,7 +6,7 @@ import MainPost from '~/containers/target/middle/MainPost'
 const Store = (props) => {
     return(
         <div>
-            <Top {...props}/>
+            <Top {...props} />
             <MainPost/>
         </div>
     )

@@ -30,7 +30,6 @@ module.exports = {
               plugins: [
                 'babel-plugin-root-import',
                 'react-hot-loader/babel',
-                'syntax-dynamic-import',
                 'transform-object-rest-spread'
               ]
             }
