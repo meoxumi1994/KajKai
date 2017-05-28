@@ -11,7 +11,7 @@ export const joinMainPost = (action, sio, io) => {
             const list = store.mainPost.list
             console.log('list ' + list)
             io.to(action.data.id).emit('action', {
-                type: 'client/STOREMAINPOSTXXX',
+                type: 'client/STOREMAINPOST',
                 data: {list: list, id: action.data.id}
             })
         }
