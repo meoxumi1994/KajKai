@@ -1,17 +1,17 @@
 const item = (state = {}, action) => {
     switch (action.type) {
         case 'ENTITY_ROW_MAINPOSTROW_CREATE':
-            return action.data
+            return {...state, ...action.data}
         default:
             return state
     }
 }
 
-const mainpostrow = (state = { default: {
+const mainpostrow = (state = {default: {
     type: '',
-    text: '',
+    content: '',
     images: [],
-} }, action) => {
+}}, action) => {
     switch (action.type) {
         case 'ENTITY_ROW_MAINPOSTROW_CREATE':
             return {...state, [action.data.id] : item(state[action.data.id], action) }

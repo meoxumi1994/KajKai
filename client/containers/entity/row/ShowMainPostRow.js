@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import MainPostRow from '~/components/entity/row/MainPostRow'
+import ShowMainPostRow from '~/components/entity/row/ShowMainPostRow'
 
 const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
@@ -14,13 +14,11 @@ const mapStateToProps = (state, { id }) => {
 }
 
 const mapDispatchToProps = (dispatch, { id }) => ({
-    onCreate: (data) => {
-        dispatch({ type: 'ENTITY_INPUT_BASICINPUT_CREATE', id: data.id, textare: data.content})
-    }
+
 })
 
-const MainPostRowContainer = connect(
+const ShowMainPostRowContainer = connect(
     mapStateToProps, mapDispatchToProps
-)(MainPostRow)
+)(ShowMainPostRow)
 
-export default MainPostRowContainer
+export default ShowMainPostRowContainer

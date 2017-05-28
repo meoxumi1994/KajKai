@@ -4,13 +4,13 @@ const mainpost = (state = {
 }, action) => {
     switch (action.type) {
         case 'client/STOREMAINPOST':
-            console.log('client/STOREMAINPOST',action)
+            console.log('client/STOREMAINPOST', action)
             return { ...state, list: action.data.list }
         case 'TARGET_MIDDLE_MAINPOST_ADD':
             return { ...state, list: [...state.list, {
                 id: 'mainstore_row_'+state.list.length,
                 type: action.rowtype,
-                text: '',
+                content: '',
                 images: [],
             }]}
         case 'TARGET_MIDDLE_MAINPOST_ON_EDIT':

@@ -13,7 +13,6 @@ import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Target from '~/containers/target'
 // import loadTarget from 'bundle-loader?lazy!../containers/target'
 
-
 const Home = () => (
   <Bundle load={loadHome}>
     {(Comp) => (Comp
@@ -103,7 +102,7 @@ class App extends React.Component {
                         <Route path="/register" component={UserLoginRegister}/>
                         <Route path="/store" component={Store}/>
                         <Route path="/profile" component={Profile}/>
-                        <Route path="/registerstore" component={RegisterStore}/> */}
+                        <Route path="/registerstore" component={RegisterStore}/>
                         <Route path="/chat" component={Chat}/>
                     </div>
                 :   <div>

@@ -21,7 +21,7 @@ function execute(action, emit, next, dispatch) {
 }
 
 const socket = io(config.getDomain());
-const socketIoMiddleware = createSocketIoMiddleware(socket, "server/", { execute: execute });
+const socketIoMiddleware = createSocketIoMiddleware(socket, ["server/","client/"], { execute: execute });
 
 const store = createStore(
     reducers,
@@ -30,8 +30,6 @@ const store = createStore(
         socketIoMiddleware
     )
 )
-
-store.dispatch({ type:'server/hello' });
 
 ReactDOM.render(
     <AppContainer>

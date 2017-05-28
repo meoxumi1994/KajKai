@@ -7,13 +7,12 @@ class MainPost extends React.Component {
         super(props)
     }
     render(){
-        const { onedit, list, onEdit, onSave, onChooseType, idstore } = this.props
-        console.log('MainPost')
+        const { onedit, list, onEdit, onSave, onChooseType } = this.props
         return(
             <div className="panel panel-default"
                 style={{ minWidth: 540, minheight: 700,  margin: 7}}>
                 {onedit?
-                    <div className="btn btn-default" onClick={() => onSave(idstore, list)}>save</div>
+                    <div className="btn btn-default" onClick={() => onSave()}>save</div>
                 :   <div className="btn btn-default" onClick={() => onEdit()}>edit</div>
                 }
                 {onedit?
