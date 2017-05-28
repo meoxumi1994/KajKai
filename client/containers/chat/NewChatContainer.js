@@ -13,8 +13,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onNewChatSubmit: (person) => {
-        dispatch(joinChat(person));
+    onNewChatSubmit: (chat) => {
+        dispatch(joinChat(chat));
     }
 })
 
