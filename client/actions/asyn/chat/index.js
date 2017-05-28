@@ -40,7 +40,6 @@ export const sendMessage = (msg) => dispatch => {
 
 
 export const joinChat = (chat) => dispatch => {
-  dispatch(getChatId(chat));
   dispatch(
     {
       type:"server/JOIN_CHAT",
@@ -49,6 +48,7 @@ export const joinChat = (chat) => dispatch => {
       }
     }
   )
+  dispatch(getChatId(chat));
 }
 
 export const getChatId = (chat) => dispatch => {
@@ -58,6 +58,6 @@ export const getChatId = (chat) => dispatch => {
 
     })
     .then((response) => {
-        dispatch(getMessage({id: chat.id, username: chat.name, avatarUrl: chat.avatarUrl, mesId: response.id}));
+          dispatch(getMessage({id: chat.id, username: chat.name, avatarUrl: chat.avatarUrl, mesId: response.id}));
     })
 }
