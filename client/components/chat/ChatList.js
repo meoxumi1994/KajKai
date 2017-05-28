@@ -29,7 +29,7 @@ class ChatList extends React.Component {
     }
 
     componentDidMount(){
-        this.props.loadchat()
+        this.props.getChatList()
     }
 }
 

@@ -101,7 +101,7 @@ class App extends React.Component {
                         <Route path="/register" component={UserLoginRegister}/>
                         <Route path="/store" component={Store}/>
                         <Route path="/profile" component={Profile}/>
-                        <Route path="/registerstore" component={RegisterStore}/> */}
+                        <Route path="/registerstore" component={RegisterStore}/>
                         <Route path="/chat" component={Chat}/>
                     </div>
                 :   <div>

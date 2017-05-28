@@ -6,12 +6,13 @@ const center = (state = {
         case 'LOAD_CHAT':
             return {...state, chatLog: action.messages, currentChat: action.chat}
         case 'client/RECEIVE_MESSAGE':
-            // console.log('action ',action);
-            var newMessage = "{id:\""+ action.data.person + "\", message: \"" + action.data.message + "\", time: \""+ action.data.time+"\"}";
-            // console.log('newMessage ',newMessage);
-            console.log('RECEIVE_MESSAGE ', {...state, chatLog: [...state.chatLog, newMessage]})
-            // return {...state, chatLog: [...state.chatLog, newMessage]}
-            return state
+            var newMessage = {
+              id: action.data.person,
+              message: action.data.message,
+              time: action.data.time
+            }
+            console.log();
+            return {...state, chatLog: [...state.chatLog, JSON.stringify(newMessage)].reverse()}
         default:
             return state
     }

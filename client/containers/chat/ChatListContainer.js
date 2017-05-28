@@ -4,7 +4,6 @@ import { getChatList, addMessage, getMessage, getChatId, getTarget } from '~/act
 import { joinChat } from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('state ',state);
   const { chatList } = state.inst.chat.left
   return (
     {
@@ -17,7 +16,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   onChat: (chat) => {
     dispatch(joinChat(chat))
   },
-  loadchat: () => {
+  getChatList: () => {
     dispatch(getChatList());
   }
 })

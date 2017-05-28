@@ -23,31 +23,37 @@ const style = {
   }
 }
 
-const MessageList = (props) => {
-  const { chatLog, currentChat, user } = props
-  if (chatLog.length > 0)
-      return (
-        <div>
-            {chatLog.reverse().map(chat =>
-                user.id === JSON.parse(chat).id?
-                <Message
-                  key={JSON.parse(chat).time}
-                  {...JSON.parse(chat)}
-                  user={user}
-                  style={style.alignRight}
-                />
-                :
-                <Message
-                  key={JSON.parse(chat).time}
-                  {...JSON.parse(chat)}
-                  user={currentChat}
-                  style={style.alignLeft}
-                />
-            )}
-        </div>
-      )
-  else
-      return <p><i>Select a conversation</i></p>
+class MessageList  extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+      const { chatLog, currentChat, user } = this.props
+      if (chatLog.length > 0)
+          return (
+            <div>
+                {chatLog.reverse().map(chat =>
+                    user.id === JSON.parse(chat).id?
+                    <Message
+                      key={JSON.parse(chat).time}
+                      {...JSON.parse(chat)}
+                      user={user}
+                      style={style.alignRight}
+                    />
+                    :
+                    <Message
+                      key={JSON.parse(chat).time}
+                      {...JSON.parse(chat)}
+                      user={currentChat}
+                      style={style.alignLeft}
+                    />
+                )}
+            </div>
+          )
+      else
+          return <p><i>Select a conversation</i></p>
+  }
 }
 
 export default MessageList
