@@ -14,13 +14,13 @@ class MainPostRow extends React.Component {
                 case 'title':
                     return(
                         <div style={{ padding: '5px 8px 0px 8px' }}>
-                            <ShowTextArea content={data.content} fontSize={17} />
+                            <ShowTextArea id={id} fontSize={17} />
                         </div>
                     )
                 case 'normal':
                     return(
                         <div style={{ padding: '5px 8px 0px 8px' }}>
-                            <ShowTextArea content={data.content} fontSize={14} />
+                            <ShowTextArea id={id} fontSize={14} />
                         </div>
                     )
                 case 'imagetext':
@@ -28,7 +28,7 @@ class MainPostRow extends React.Component {
                         <div style={{ minHeight: 250 }}>
                             <img src='./images/avatardefault.png' style={{ float: 'right', width: 250, height: 250 }}/>
                             <div style={{ marginRight: 250, padding: '5px 8px 0px 8px'}}>
-                                <ShowTextArea content={data.content} minRows={12}/>
+                                <ShowTextArea id={id} minRows={12}/>
                             </div>
                         </div>
                     )
@@ -37,7 +37,7 @@ class MainPostRow extends React.Component {
                         <div style={{ minHeight: 250 }}>
                             <img src='./images/avatardefault.png' style={{ float: 'right', width: 250, height: 250 }}/>
                             <div style={{ marginRight: 250, padding: '5px 8px 0px 8px'}}>
-                                <ShowTextArea content={data.content} minRows={12}/>
+                                <ShowTextArea id={id} minRows={12}/>
                             </div>
                         </div>
                     )
@@ -56,6 +56,10 @@ class MainPostRow extends React.Component {
         }
 
         return <ShowRow/>
+    }
+    componentDidUpdate(){
+        const { data, onCreate } = this.props
+        onCreate(data)
     }
 }
 

@@ -8,13 +8,13 @@ class MainPost extends React.Component {
         super(props)
     }
     render(){
-        const { onedit, list, onEdit, onSave, onChooseType } = this.props
+        const { canedit, onedit, list, onEdit, onSave, onChooseType } = this.props
         return(
             <div className="panel panel-default"
                 style={{ minWidth: 540, minheight: 700,  margin: 7}}>
-                {onedit?
+                {canedit && ( onedit?
                     <div className="btn btn-default" onClick={() => onSave()}>save</div>
-                :   <div className="btn btn-default" onClick={() => onEdit()}>edit</div>
+                :   <div className="btn btn-default" onClick={() => onEdit()}>edit</div> )
                 }
                 {onedit?
                     list.map((item, index) => <MainPostRow key={index} id={item.id}/>)

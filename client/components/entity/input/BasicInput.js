@@ -1,7 +1,8 @@
 import React from 'react'
 import Textarea from 'react-textarea-autosize';
 
-const BasicInput = ({ width, fontSize, minRows, textare, handleChange, opensupplement, onFocus, onBlur, onSave, onBold, onItalic, focus }) => {
+const BasicInput = ({ width, fontSize, minRows, textare, handleChange,
+    opensupplement, onFocus, onBlur, onSave, onBold, onItalic, focus }) => {
 
     const styleTextArea = {
         style : {

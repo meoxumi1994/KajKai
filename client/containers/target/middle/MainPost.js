@@ -16,9 +16,12 @@ const mapStateToProps = (state, ownProps) => {
         mylist[index] = { ...list[index], content: textare}
     })
     idstore = state.inst.target.index.id
+    let canedit = false
+    state.user.storeList.map((item) => canedit = canedit || item.id == idstore)
     return({
         list: list,
         onedit: onedit,
+        canedit: canedit,
     })
 }
 

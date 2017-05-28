@@ -14,7 +14,9 @@ const mapStateToProps = (state, { id }) => {
 }
 
 const mapDispatchToProps = (dispatch, { id }) => ({
-    
+    onCreate: (data) => {
+        dispatch({ type: 'ENTITY_INPUT_BASICINPUT_CREATE', id: data.id, textare: data.content})
+    }
 })
 
 const ShowMainPostRowContainer = connect(
