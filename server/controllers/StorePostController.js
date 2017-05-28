@@ -25,7 +25,7 @@ export const leaveMainPost = (action, sio) => {
 
 export const updateStoreMainPost = (action, sio) => {
     console.log('update ' + JSON.stringify(action.data))
-    updateMainPost(action.data.id, action.data.list, function (list) {
+    updateMainPost(action.data.id, action.data.list, action.data.userID, function (list) {
         console.log(list)
         if (list) {
             sio.emit('action', {type: 'client/STOREMAINPOST', data: {list: list, id: action.data.id}})

@@ -28,12 +28,16 @@ const init = (server) => {
             let handler = allEvents[e]
             // console.log(e)
             let method = require('../controllers/' + handler.controller)[handler.method]
+
             if (handler.controller === 'ChatController') {
                 socket.on(e, (action) => {
                     method(action, socket, sio, userID)
                 })
             } else {
                 socket.on(e, (action) => {
+                    if (action.data) {
+                        action.data = {...action.data, userID: userID }
+                    }
                     // if(validateTokenDemo(action.token)) {
                     //     method(action, sio)
                     // } else {
