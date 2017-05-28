@@ -10,12 +10,8 @@ import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
 import loadStore from 'bundle-loader?lazy!../containers/store'
 import loadChat from 'bundle-loader?lazy!../containers/chat'
-<<<<<<< HEAD
 import Target from '~/containers/target'
 // import loadTarget from 'bundle-loader?lazy!../containers/target'
-=======
-import loadTarget from 'bundle-loader?lazy!../containers/target'
->>>>>>> a67ddc208c5c731b79ae2d975ad7b0a3c4febfff
 
 const Home = () => (
   <Bundle load={loadHome}>
