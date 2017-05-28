@@ -4,7 +4,7 @@ import {FormGroup, FormControl, HelpBlock, ControlLabel, Button} from 'react-boo
 const SendMessage = ({mesId, onSendMessageSubmit}) => {
   let msg
   return (
-    <div>
+    <div style={{padding: 10}}>
         <form style={{position: 'relative'}} onSubmit={e => {
           e.preventDefault()
           if (msg.value.trim()) {
@@ -12,14 +12,16 @@ const SendMessage = ({mesId, onSendMessageSubmit}) => {
             msg.value = ''
           }
         }}>
-            <input
-              style={{width: 400}}
-              ref={ref => { msg = ref }}
-              placeholder="Enter message"
-            />
-            <Button type="submit">
-              Send
-            </Button>
+          <div className="input-group">
+                <FormControl
+                  style={{width:750}}
+                  inputRef={ref => { msg = ref }}
+                  placeholder="Enter message"
+                />
+                <Button type="submit" style={{marginLeft: 10}}>
+                  Send
+                </Button>
+          </div>
         </form>
     </div>
   )

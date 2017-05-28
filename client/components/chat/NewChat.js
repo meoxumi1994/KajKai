@@ -1,5 +1,5 @@
 import React from 'react'
-import {FormGroup, FormControl, HelpBlock, ControlLabel, Button} from 'react-bootstrap'
+import { Button, FormControl } from 'react-bootstrap'
 
 const NewChat = ({onNewChatSubmit}) => {
   let msg
@@ -11,18 +11,19 @@ const NewChat = ({onNewChatSubmit}) => {
             onNewChatSubmit({id: msg.value})
           }
         }}>
-            <input
-              style={{width: 400}}
-              ref={ref => { msg = ref }}
-              placeholder="To"
-            />
-            <Button type="submit">
-              Join
-            </Button>
+        <div className="input-group">
+              <FormControl
+                style={{width:600}}
+                inputRef={ref => { msg = ref }}
+                placeholder="To"
+              />
+              <Button type="submit">
+                Send
+              </Button>
+        </div>
         </form>
     </div>
   )
 }
-
 
 export default NewChat

@@ -6,7 +6,7 @@ const style = {
   alignRight: {
     img: {
       float: 'right',
-      marginRight: 140
+      marginRight: 20
     },
     text: {
       marginRight: 40,
@@ -16,10 +16,16 @@ const style = {
   alignLeft: {
     img: {
       float: 'left',
+      marginLeft: 20,
     },
     text: {
       marginLeft: 40
     }
+  },
+  messageListDiv: {
+    width: 900,
+    height: 600,
+    overflow: 'scroll'
   }
 }
 
@@ -30,29 +36,29 @@ class MessageList  extends React.Component {
 
   render() {
       const { chatLog, currentChat, user } = this.props
-      if (chatLog.length > 0)
-          return (
-            <div>
-                {chatLog.reverse().map(chat =>
-                    user.id === JSON.parse(chat).id?
-                    <Message
-                      key={JSON.parse(chat).time}
-                      {...JSON.parse(chat)}
-                      user={user}
-                      style={style.alignRight}
-                    />
-                    :
-                    <Message
-                      key={JSON.parse(chat).time}
-                      {...JSON.parse(chat)}
-                      user={currentChat}
-                      style={style.alignLeft}
-                    />
-                )}
-            </div>
-          )
-      else
-          return <p><i>Select a conversation</i></p>
+      return (
+        <div>
+          <h3>{currentChat.username}</h3>
+          <div style={style.messageListDiv}  >
+              {chatLog.reverse().map(chat =>
+                  user.id === JSON.parse(chat).id?
+                  <Message
+                    key={JSON.parse(chat).time}
+                    {...JSON.parse(chat)}
+                    user={user}
+                    style={style.alignRight}
+                  />
+                  :
+                  <Message
+                    key={JSON.parse(chat).time}
+                    {...JSON.parse(chat)}
+                    user={currentChat}
+                    style={style.alignLeft}
+                  />
+              )}
+          </div>
+        </div>
+      )
   }
 }
 

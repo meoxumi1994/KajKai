@@ -10,12 +10,11 @@ const Chat = () => {
     <div style={{paddingTop:10}}>
       <Grid>
            <Col lg={3} lgPull={1}>
-              <Row  style={{float: 'left'}}><ChatListContainer/></Row>
+              <Row style={{float: 'left'}}><ChatListContainer/></Row>
            </Col>
            <Col lg={14} lgOffset={3}>
-              <Row><NewChatContainer/></Row>
-              <Row><MessageListContainer/></Row>
-              <Row style={{ bottom: 0}}><SendMessageContainer/></Row>
+              <MessageListContainer/>
+              <SendMessageContainer/>
            </Col>
      </Grid>
     </div>

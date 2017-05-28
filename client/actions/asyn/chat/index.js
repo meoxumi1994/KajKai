@@ -17,7 +17,7 @@ export const getMessage = (chat) => dispatch => {
     flet('/getmessage',{
         id: chat.id,
         offset: 0,
-        length: 10
+        length: 50
     },{
 
     })
