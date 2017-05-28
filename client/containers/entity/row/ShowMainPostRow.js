@@ -14,7 +14,7 @@ const mapStateToProps = (state, { id }) => {
 }
 
 const mapDispatchToProps = (dispatch, { id }) => ({
-
+    
 })
 
 const ShowMainPostRowContainer = connect(

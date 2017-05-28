@@ -25,7 +25,7 @@ class MainPostRow extends React.Component {
                     )
                 case 'imagetext':
                     return(
-                        <div>
+                        <div style={{ minHeight: 250 }}>
                             <img src='./images/avatardefault.png' style={{ float: 'right', width: 250, height: 250 }}/>
                             <div style={{ marginRight: 250, padding: '5px 8px 0px 8px'}}>
                                 <ShowTextArea content={data.content} minRows={12}/>
@@ -34,7 +34,7 @@ class MainPostRow extends React.Component {
                     )
                 case 'textimage':
                     return(
-                        <div>
+                        <div style={{ minHeight: 250 }}>
                             <img src='./images/avatardefault.png' style={{ float: 'right', width: 250, height: 250 }}/>
                             <div style={{ marginRight: 250, padding: '5px 8px 0px 8px'}}>
                                 <ShowTextArea content={data.content} minRows={12}/>
@@ -43,7 +43,7 @@ class MainPostRow extends React.Component {
                     )
                 case 'groupimages':
                     return(
-                        <div style={{ width: 515 }}>
+                        <div style={{ height: 250, width: 515 }}>
                             <img src='./images/default.png'
                             style={{ position: 'relative', padding: '5px 0px 5px 5px', width: 250, height: 250, display: 'inline' }}/>
                             <img src='./images/default.png'

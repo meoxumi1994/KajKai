@@ -16,8 +16,12 @@ import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client'
 
 function execute(action, emit, next, dispatch) {
-    console.log('execute action',{...action})
-    emit(action.type, {...action})
+    console.log('socket.io',{...action})
+    if(action.type.substr(0,6) == 'client'){
+        next(action)
+    }else{
+        emit(action.type, {...action})
+    }
 }
 
 const socket = io(config.getDomain());

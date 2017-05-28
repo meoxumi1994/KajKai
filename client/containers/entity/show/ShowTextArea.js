@@ -3,9 +3,11 @@ import { get } from '~/config/allString'
 
 import ShowTextArea from '~/components/entity/show/ShowTextArea'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, { content, fontSize}) => {
     const g = (lang) => get(state.user.language, lang)
     return({
+        content: content,
+        fontSize: fontSize,
     })
 }
 

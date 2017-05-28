@@ -14,6 +14,7 @@ const mainpostrow = (state = {default: {
 }}, action) => {
     switch (action.type) {
         case 'ENTITY_ROW_MAINPOSTROW_CREATE':
+            console.log('ENTITY_ROW_MAINPOSTROW_CREATE')
             return {...state, [action.data.id] : item(state[action.data.id], action) }
         default:
             return state
