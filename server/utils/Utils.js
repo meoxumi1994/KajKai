@@ -26,3 +26,12 @@ export const decryptID = (id) => {
         return null
     }
 }
+
+export const getTokenSocketCookie = (str) => {
+    if (!str) return str
+    var n = str.indexOf('token')
+    if (n === -1) return null
+    var last = str.indexOf(';')
+    if (last === -1) last = str.length
+    return str.substr(n + 6, last - n - 6)
+}

@@ -29,18 +29,18 @@ export const getMessages = () => {
     }
 }
 
-export const addMessage = () => {
-    return (req, res) => {
-        var mesId = req.body.mesId
-        var person = req.body.person
-        var message = req.body.message
-        var time = req.body.time
-        addNewMessage(mesId, person, message, time, function (err) {
-            if (err) res.json({status: 'failed'})
-            else res.json({status: 'success'})
-        })
-    }
-}
+// export const addMessage = () => {
+//     return (req, res) => {
+//         var mesId = req.body.mesId
+//         var person = req.body.person
+//         var message = req.body.message
+//         var time = req.body.time
+//         addNewMessage(mesId, person, message, time, function (err) {
+//             if (err) res.json({status: 'failed'})
+//             else res.json({status: 'success'})
+//         })
+//     }
+// }
 
 export const getChatID = () => {
     return (req, res) => {
@@ -50,3 +50,39 @@ export const getChatID = () => {
     }
 }
 
+export const joinChat = (action, sio, io, myId) => {
+    const id = action.data.person
+    console.log(action.data)
+    console.log(myId)
+    const mesId = getMessageId(id, myId)
+    sio.join(mesId)
+}
+
+export const leaveChat = (action, sio, io, myId) => {
+    const mesId = getMessageId(action.data.person, myId)
+    sio.leave(mesId)
+}
+
+export const addMessage = (action, sio, io, myId) => {
+    const data  = action.data
+    console.log(data)
+    addNewMessage(data.mesId, myId, data.message, data.time, function (err) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(data.mesId)
+            io.to(data.mesId).emit('action', {type:'client/RECEIVE_MESSAGE', data: {
+                mesId: data.mesId,
+                time: data.time,
+                message: data.message,
+                person: myId
+            }})
+            // sio.emit('action', {type:'client/RECEIVE_MESSAGE', data: {
+            //     mesId: data.mesId,
+            //     time: data.time,
+            //     message: data.message,
+            //     person: myId
+            // }})
+        }
+    })
+}

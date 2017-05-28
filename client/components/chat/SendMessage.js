@@ -9,8 +9,8 @@ const SendMessage = ({sender, receiver, onSendMessageSubmit}) => {
           e.preventDefault()
           if (msg.value.trim()) {
             onSendMessageSubmit({
-              msgId: sender+'&'+receiver,
-              person: sender,
+              receiver,
+              sender,
               message: msg.value
             })
             msg.value = ''
