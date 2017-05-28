@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ChatLog = ({message, time, user, style}) => {
+const Message = ({message, time, user, style}) => {
   return (
     <div key={time}>
         <div className="btn btn-transparent btn-xs" style={style.img}>
@@ -14,4 +14,4 @@ const ChatLog = ({message, time, user, style}) => {
   )
 }
 
-export default ChatLog
+export default Message

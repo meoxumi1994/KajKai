@@ -1,8 +1,7 @@
 import React from 'react'
 import { Button,Row } from 'react-bootstrap'
-import Waiting from './Waiting'
 
-class RecentUserList extends React.Component {
+class ChatList extends React.Component {
 
     constructor(props){
         super(props)
@@ -30,8 +29,8 @@ class RecentUserList extends React.Component {
     }
 
     componentDidMount(){
-        this.props.loadchat()
+        this.props.getChatList()
     }
 }
 
-export default RecentUserList
+export default ChatList

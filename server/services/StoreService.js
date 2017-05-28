@@ -1,4 +1,4 @@
-import { Store, Category } from '../models'
+import { Store, Category, StorePost } from '../models'
 import { checkPhone } from '../utils/Utils'
 import UserService from './UserService'
 
@@ -116,6 +116,23 @@ export const findStoreList = (ownerId, next) => {
                 storeList.push(getStoreBasicInfoService(stores[i]))
             }
             next(storeList)
+        }
+    })
+}
+
+export const getMainPost = (storeid, next) => {
+    getStore(storeid, function (store) {
+        if (!store) next(null)
+        else {
+            if (!store.mainPost) {
+                store.mainPost = new StorePost();
+                store.save(function(err){
+                    if (!err) next(store)
+                    else next(null)
+                })
+            } else {
+                next(store)
+            }
         }
     })
 }

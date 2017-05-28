@@ -1,24 +1,23 @@
 import React from 'react'
 import {FormGroup, FormControl, HelpBlock, ControlLabel, Button} from 'react-bootstrap'
 
-const SendMessage = ({mesId, onSendMessageSubmit}) => {
+const NewChat = ({onNewChatSubmit}) => {
   let msg
   return (
     <div>
         <form style={{position: 'relative'}} onSubmit={e => {
           e.preventDefault()
           if (msg.value.trim()) {
-            onSendMessageSubmit({mesId: mesId, text: msg.value})
-            msg.value = ''
+            onNewChatSubmit(msg.value)
           }
         }}>
             <input
               style={{width: 400}}
               ref={ref => { msg = ref }}
-              placeholder="Enter message"
+              placeholder="To"
             />
             <Button type="submit">
-              Send
+              Join
             </Button>
         </form>
     </div>
@@ -26,4 +25,4 @@ const SendMessage = ({mesId, onSendMessageSubmit}) => {
 }
 
 
-export default SendMessage
+export default NewChat

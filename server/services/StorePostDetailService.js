@@ -11,3 +11,7 @@ export const getListPostDetail = (list) => {
     }
     return res
 }
+
+export const toString = (storePostDetail) => {
+    return JSON.stringify(storePostDetail)
+}

@@ -176,14 +176,14 @@ export default {
             method: 'getMessages'
         }
     },
-
-    '/addmessage' : {
-        post: {
-            controller: 'ChatController',
-            middleware: [auth()],
-            method: 'addMessage'
-        }
-    },
+    //
+    // '/addmessage' : {
+    //     post: {
+    //         controller: 'ChatController',
+    //         middleware: [auth()],
+    //         method: 'addMessage'
+    //     }
+    // },
 
     '/getchatid' : {
         post: {

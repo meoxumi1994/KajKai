@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
-import RecentUserList from '~/components/chat/RecentUserList'
+import ChatList from '~/components/chat/ChatList'
 import { getChatList, addMessage, getMessage, getChatId, getTarget } from '~/actions/asyn/chat'
+import { joinChat } from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log('state ',state);
   const { chatList } = state.inst.chat.left
   return (
     {
@@ -14,15 +14,15 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onChat: (chat) => {
-    dispatch(getMessage(chat));
+    dispatch(joinChat(chat))
   },
-  loadchat: () => {
+  getChatList: () => {
     dispatch(getChatList());
   }
 })
 
-const RecentUserListContainer = connect(
+const ChatListContainer = connect(
   mapStateToProps, mapDispatchToProps
-)(RecentUserList)
+)(ChatList)
 
-export default RecentUserListContainer
+export default ChatListContainer

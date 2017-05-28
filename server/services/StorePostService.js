@@ -7,9 +7,10 @@ export const updateMainPost = (storeid, list, next) => {
         if (!store || !store.mainPost) {
             next(null)
         } else {
-            store.mainPost.list = list
+            store.mainPost.list = getListPostDetail(list)
             store.save(function (err) {
-                next(list)
+                if (err) next(null)
+                else next(list)
             })
         }
     })
