@@ -1,19 +1,18 @@
 import {connect} from 'react-redux'
 import SendMessage from '~/components/chat/SendMessage'
-import {sendMessage} from '~/actions/asyn/chat/chatSocket'
+import {sendMessage} from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
   return (
     {
-      sender: state.user.id,
-      receiver: state.inst.chat.center.currentUser.id
+      mesId: state.inst.chat.center.currentChat.mesId
     }
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onSendMessageSubmit: (chat) => {
-    dispatch(sendMessage(chat));
+  onSendMessageSubmit: (msg) => {
+    dispatch(sendMessage(msg));
   }
 })
 

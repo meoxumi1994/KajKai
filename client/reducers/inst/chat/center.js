@@ -1,37 +1,36 @@
 const center = (state = {
-  currentUser: {},
+  currentChat: {},
   chatLog: []
 }, action) => {
     switch (action.type) {
         case 'LOAD_CHAT':
-            return {...state, chatLog: action.messages, currentUser: action.chat}
-        case 'SEND_MESSAGE':
-            console.log('action ',action)
-            return {
-              id: action.id,
-              author: action.author,
-              message: action.message,
-              toggled: false
-            }
+            return {...state, chatLog: action.messages, currentChat: action.chat}
+        case 'client/RECEIVE_MESSAGE':
+            // console.log('action ',action);
+            var newMessage = "{id:\""+ action.data.person + "\", message: \"" + action.data.message + "\", time: \""+ action.data.time+"\"}";
+            // console.log('newMessage ',newMessage);
+            console.log('RECEIVE_MESSAGE ', {...state, chatLog: [...state.chatLog, newMessage]})
+            // return {...state, chatLog: [...state.chatLog, newMessage]}
+            return state
         default:
             return state
     }
 }
 
-const message = (state = {}, action) => {
-  switch (action.type) {
-    case 'SEND_MESSAGE':
-      console.log('action ',action)
-      return {
-        id: action.id,
-        author: action.author,
-        message: action.message,
-        toggled: false
-      }
-    default:
-      return state
-  }
-}
+// const message = (state = {}, action) => {
+//   switch (action.type) {
+//     case 'SEND_MESSAGE':
+//       console.log('action ',action)
+//       return {
+//         id: action.id,
+//         author: action.author,
+//         message: action.message,
+//         toggled: false
+//       }
+//     default:
+//       return state
+//   }
+// }
 
 // const messages = (state = [], action) => {
 //   switch (action.type) {
