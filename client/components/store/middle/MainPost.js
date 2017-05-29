@@ -1,5 +1,5 @@
 import React from 'react'
-import Textarea from 'react-textarea-autosize';
+import textarea from 'react-textarea-autosize';
 
 const MainPost = ({ storename, onEdit, onSave, EDIT, SAVE, textare, handleChange, canedit }) => {
     return(

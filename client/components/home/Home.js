@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row,Col } from 'react-bootstrap';
 
 import Status from './status/Status';
 import Advertisement from './Advertisement';

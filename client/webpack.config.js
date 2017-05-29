@@ -54,16 +54,16 @@ module.exports = {
       template: './template.html'
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      // name: 'vendor',
-      // minChunks: function (module) {
-      //   if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
-      //     return false
-      //   }
-      //   return module.context && module.context.indexOf("node_modules") !== -1
-      // }
-      children: true,
-      asyn: true,
-      minChunks: Infinity
+    //   name: 'vendor',
+    //   minChunks: function (module) {
+    //     if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
+    //       return false
+    //     }
+    //     return module.context && module.context.indexOf("node_modules") !== -1
+    //     },
+        asyn: true,
+        children: true,
+        minChunks: Infinity,
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: ['manifest'],
@@ -75,25 +75,7 @@ module.exports = {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-      },
-      output: {
-        comments: false,
-      },
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
+      comments: false
     })
   ]
 }

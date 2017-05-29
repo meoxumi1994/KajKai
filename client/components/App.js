@@ -10,7 +10,8 @@ import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
 import loadStore from 'bundle-loader?lazy!../containers/store'
 import loadChat from 'bundle-loader?lazy!../containers/chat'
-import loadTarget from 'bundle-loader?lazy!../containers/target'
+import Target from '~/containers/target'
+// import loadTarget from 'bundle-loader?lazy!../containers/target'
 
 const Home = () => (
   <Bundle load={loadHome}>
@@ -75,14 +76,14 @@ const Chat = ({ id }) => (
     </Bundle>
 )
 
-const Target = ({ id }) => (
-    <Bundle load={loadTarget}>
-        {(Comp) => (Comp
-          ? <Comp/>
-          : null
-        )}
-    </Bundle>
-)
+// const Target = ({ id }) => (
+//     <Bundle load={loadTarget}>
+//         {(Comp) => (Comp
+//           ? <Comp/>
+//           : null
+//         )}
+//     </Bundle>
+// )
 
 class App extends React.Component {
     constructor(props){
@@ -101,7 +102,7 @@ class App extends React.Component {
                         <Route path="/register" component={UserLoginRegister}/>
                         <Route path="/store" component={Store}/>
                         <Route path="/profile" component={Profile}/>
-                        <Route path="/registerstore" component={RegisterStore}/> */}
+                        <Route path="/registerstore" component={RegisterStore}/>
                         <Route path="/chat" component={Chat}/>
                     </div>
                 :   <div>
@@ -113,7 +114,6 @@ class App extends React.Component {
     }
     componentDidMount(){
         this.props.onWho();
-
     }
 }
 

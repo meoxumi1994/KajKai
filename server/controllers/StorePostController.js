@@ -11,7 +11,7 @@ export const joinMainPost = (action, sio, io) => {
             const list = store.mainPost.list
             console.log('list ' + list)
             io.to(action.data.id).emit('action', {
-                type: 'client/STOREMAINPOSTXXX',
+                type: 'client/STOREMAINPOST',
                 data: {list: list, id: action.data.id}
             })
         }
@@ -25,7 +25,7 @@ export const leaveMainPost = (action, sio) => {
 
 export const updateStoreMainPost = (action, sio) => {
     console.log('update ' + JSON.stringify(action.data))
-    updateMainPost(action.data.id, action.data.list, function (list) {
+    updateMainPost(action.data.id, action.data.list, action.data.userID, function (list) {
         console.log(list)
         if (list) {
             sio.emit('action', {type: 'client/STOREMAINPOST', data: {list: list, id: action.data.id}})

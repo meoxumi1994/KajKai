@@ -1,5 +1,6 @@
 import { flet, flem } from '~/actions/support'
 import { getTarget } from '../user'
+import { loadChatList, loadChat } from './actions'
 
 export const getChatList = (id, offset, length) => dispatch => {
     flet('/getchatlist',{
@@ -9,49 +10,55 @@ export const getChatList = (id, offset, length) => dispatch => {
 
     })
     .then((response) => {
-        dispatch({ type: 'LOAD_CHAT_LIST', chatList: response.chatList})
+        dispatch(loadChatList(response.chatList))
     })
-}
-
-export const updateChatList = (response) => dispatch => {
-    dispatch({ type: 'LOAD_CHAT_LIST', response})
 }
 
 export const getMessage = (chat) => dispatch => {
     flet('/getmessage',{
         id: chat.id,
         offset: 0,
-        length: 10
+        length: 50
     },{
 
     })
     .then((response) => {
-        const newChat = Object.assign({}, chat, {username: chat.name});
-        dispatch({type: 'LOAD_CHAT', messages: response.messages, chat: newChat });
+      dispatch(loadChat(response.messages, chat));
     })
 }
 
-export const getChatId = (id) => dispatch => {
+export const sendMessage = (msg) => dispatch => {
+    dispatch(
+      {
+        type:"server/ADD_MESSAGE",
+        data: {
+          mesId: msg.mesId,
+          message: msg.text,
+          time: Date.now()
+        }
+      })
+}
+
+
+export const joinChat = (chat) => dispatch => {
+  dispatch(
+    {
+      type:"server/JOIN_CHAT",
+      data: {
+        person: chat.id
+      }
+    }
+  )
+  dispatch(getChatId(chat));
+}
+
+export const getChatId = (chat) => dispatch => {
     flet('/getchatid',{
-        person: id
+        person: chat.id
     },{
 
     })
     .then((response) => {
-      
-    })
-}
-
-export const addMessage = (id, person, message) => dispatch => {
-    flet('/addMessage',{
-        mesId: id,
-        person: person,
-        message: message,
-        time: Date.now()
-    },{
-
-    })
-    .then((response) => {
-
+          dispatch(getMessage({id: chat.id, username: chat.name, avatarUrl: chat.avatarUrl, mesId: response.id}));
     })
 }

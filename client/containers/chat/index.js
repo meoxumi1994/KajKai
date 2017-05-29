@@ -3,7 +3,7 @@ import Chat from '~/components/chat'
 import { findName } from '../support'
 
 const mapStateToProps = (state, ownProps) => {
-
+  return state
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

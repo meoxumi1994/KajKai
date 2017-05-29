@@ -3,6 +3,7 @@ const item = (state = {
     opensupplement: false,
 }, action) => {
     switch (action.type) {
+        case 'ENTITY_INPUT_BASICINPUT_CREATE':
         case 'ENTITY_INPUT_BASICINPUT_HANDLE_CHANGE':
             return {...state, textare: action.textare }
         case 'ENTITY_INPUT_BASICINPUT_OPEN_SUPPLEMENT':
@@ -19,6 +20,7 @@ const basicinput = (state = { default: {
     opensupplement: false,
 }}, action) => {
     switch (action.type) {
+        case 'ENTITY_INPUT_BASICINPUT_CREATE':
         case 'ENTITY_INPUT_BASICINPUT_HANDLE_CHANGE':
         case 'ENTITY_INPUT_BASICINPUT_OPEN_SUPPLEMENT':
         case 'ENTITY_INPUT_BASICINPUT_CLOSE_SUPPLEMENT':

@@ -1,19 +1,21 @@
 import React from 'react'
 import { Col, Grid, Row } from 'react-bootstrap'
-import RecentUserListContainer from '~/containers/chat/RecentUserListContainer'
-import SendMessageContainer from '~/containers/chat/SendMessageContainer'
-import ChatLogsContainer from '~/containers/chat/ChatLogsContainer'
+import ChatListContainer from '~/containers/chat/left/ChatListContainer'
+import SendMessageContainer from '~/containers/chat/bottom/SendMessageContainer'
+import MessageListContainer from '~/containers/chat/center/MessageListContainer'
+import NewChatContainer from '~/containers/chat/top/NewChatContainer'
 
 const Chat = () => {
   return(
     <div style={{paddingTop:10}}>
       <Grid>
            <Col lg={3} lgPull={1}>
-              <RecentUserListContainer/>
+              <Row style={{float: 'left'}}><ChatListContainer/></Row>
            </Col>
            <Col lg={14} lgOffset={3}>
-              <Row><ChatLogsContainer/></Row>
-              <Row><SendMessageContainer/></Row>
+              <NewChatContainer/>
+              <MessageListContainer/>
+              <SendMessageContainer/>
            </Col>
      </Grid>
     </div>

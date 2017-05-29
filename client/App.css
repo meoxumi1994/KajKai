@@ -52,7 +52,7 @@ textarea#note {
   border-bottom: 7px solid #ccc;
   border-left: 7px solid transparent;
   border-bottom-color: rgba(0, 0, 0, 0.2);
-  content: '';
+  text: '';
 }
 
 .dropdown-menu:after {
@@ -63,7 +63,7 @@ textarea#note {
   border-right: 6px solid transparent;
   border-bottom: 6px solid #ffffff;
   border-left: 6px solid transparent;
-  content: '';
+  text: '';
 }*/
 
 @-webkit-keyframes clock {
