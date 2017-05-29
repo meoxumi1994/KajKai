@@ -1,9 +1,9 @@
 import React from 'react'
 import { Col, Grid, Row } from 'react-bootstrap'
-import ChatListContainer from '~/containers/chat/ChatListContainer'
-import SendMessageContainer from '~/containers/chat/SendMessageContainer'
-import MessageListContainer from '~/containers/chat/MessageListContainer'
-import NewChatContainer from '~/containers/chat/NewChatContainer'
+import ChatListContainer from '~/containers/chat/left/ChatListContainer'
+import SendMessageContainer from '~/containers/chat/bottom/SendMessageContainer'
+import MessageListContainer from '~/containers/chat/center/MessageListContainer'
+import NewChatContainer from '~/containers/chat/top/NewChatContainer'
 
 const Chat = () => {
   return(

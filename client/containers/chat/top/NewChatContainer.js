@@ -1,8 +1,7 @@
 import { connect } from 'react-redux'
-import { findName } from '../support'
 import { joinChat } from '~/actions/asyn/chat'
 
-import NewChat from '~/components/chat/NewChat'
+import NewChat from '~/components/chat/top/NewChat'
 
 const mapStateToProps = (state, ownProps) => {
   return (

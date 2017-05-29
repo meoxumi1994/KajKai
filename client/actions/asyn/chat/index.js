@@ -1,5 +1,6 @@
 import { flet, flem } from '~/actions/support'
 import { getTarget } from '../user'
+import { loadChatList, loadChat } from './actions'
 
 export const getChatList = (id, offset, length) => dispatch => {
     flet('/getchatlist',{
@@ -9,7 +10,7 @@ export const getChatList = (id, offset, length) => dispatch => {
 
     })
     .then((response) => {
-        dispatch({ type: 'LOAD_CHAT_LIST', chatList: response.chatList})
+        dispatch(loadChatList(response.chatList))
     })
 }
 
@@ -22,7 +23,7 @@ export const getMessage = (chat) => dispatch => {
 
     })
     .then((response) => {
-      dispatch({type: 'LOAD_CHAT', messages: response.messages, chat });
+      dispatch(loadChat(response.messages, chat));
     })
 }
 

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import SendMessage from '~/components/chat/SendMessage'
+import SendMessage from '~/components/chat/bottom/SendMessage'
 import {sendMessage} from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {

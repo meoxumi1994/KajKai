@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ChatList from '~/components/chat/ChatList'
+import ChatList from '~/components/chat/left/ChatList'
 import { getChatList, addMessage, getMessage, getChatId, getTarget } from '~/actions/asyn/chat'
 import { joinChat } from '~/actions/asyn/chat'
 import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actions/asyn/chat/actions'

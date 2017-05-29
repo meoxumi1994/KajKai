@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
-import MessageList from '~/components/chat/MessageList'
-import { findName } from '../support'
+import MessageList from '~/components/chat/center/MessageList'
 
 const mapStateToProps = (state, ownProps) => {
   const { chatLog, currentChat } = state.inst.chat.center
