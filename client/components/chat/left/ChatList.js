@@ -17,7 +17,7 @@ class ChatList extends React.Component {
                   </Button>
               </h3>
               {this.props.chatList.map(chat =>
-                <Button style={{width:250, marginBottom: 10}} key={chat.id} onClick={() => this.props.onChat(chat)}>
+                <Button style={{width:250, marginBottom: 10}} key={chat.id} onClick={() => this.props.getChat(chat, this.props.lazyLoad)}>
                         <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}>
                             <img src={chat.avatarUrl} width="38" height="38"/>
                         </div>

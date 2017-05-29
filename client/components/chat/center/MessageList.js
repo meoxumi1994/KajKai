@@ -34,31 +34,48 @@ class MessageList  extends React.Component {
     super(props)
   }
 
+  componentDidMount() {
+    // console.log(ReactDOM.findDOMNode("1496056434120"));
+  }
+
   render() {
-      const { chatLog, currentChat, user, visibility } = this.props
-      return (
-        <div style={{display: visibility}}>
-          <h3><i>{currentChat.username}</i></h3>
-          <div style={style.messageListDiv}  >
-              {chatLog.reverse().map(chat =>
-                  user.id === JSON.parse(chat).id?
-                  <Message
-                    key={JSON.parse(chat).time}
-                    {...JSON.parse(chat)}
-                    user={user}
-                    style={style.alignRight}
-                  />
-                  :
-                  <Message
-                    key={JSON.parse(chat).time}
-                    {...JSON.parse(chat)}
-                    user={currentChat}
-                    style={style.alignLeft}
-                  />
-              )}
+      const { chatLog, currentChat, user, visibility, lazyLoad } = this.props
+      console.log('lazyLoad ', lazyLoad);
+      if (chatLog.length > 0) {
+        return (
+          <div style={{display: visibility}}>
+            <h3><i>{currentChat.username}</i></h3>
+            <div style={style.messageListDiv}  >
+                <div onClick={() => this.props.onShowMoreClick(currentChat.id, lazyLoad)} style={{textAlign: 'center'}}><i><a>(Show more)</a></i></div>
+                {chatLog.reverse().map(chat =>
+                    user.id === JSON.parse(chat).id?
+                      <Message
+                        key={JSON.parse(chat).time}
+                        {...JSON.parse(chat)}
+                        user={user}
+                        style={style.alignRight}
+                      />
+                      :
+                      <Message
+                        key={JSON.parse(chat).time}
+                        {...JSON.parse(chat)}
+                        user={currentChat}
+                        style={style.alignLeft}
+                      />
+                )}
+            </div>
           </div>
-        </div>
-      )
+        )
+      } else {
+          return (
+            <div style={{display: visibility}}>
+              <h3><i>{currentChat.username}</i></h3>
+              <div style={style.messageListDiv}>
+              </div>
+            </div>
+          )
+      }
+
   }
 }
 
