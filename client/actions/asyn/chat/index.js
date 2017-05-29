@@ -1,6 +1,38 @@
 import { flet, flem } from '~/actions/support'
 import { loadChatList, loadChat } from './actions'
 
+// Get list of recented chats
+export const getChatList = (offset, length) => dispatch => {
+    flet('/getchatlist',{
+        offset: 0,
+        length: 10
+    },{
+      chatList: [
+        {
+          id: "",
+          avatarUrl: "",
+          name: ""
+        }
+      ]
+    })
+    .then((response) => {
+        dispatch(loadChatList(response.chatList))
+    })
+}
+
+// [socket.io] Join chat
+export const joinChat = (chat) => dispatch => {
+    dispatch(
+      {
+        type:"server/JOIN_CHAT",
+        data: {
+          person: chat.id
+        }
+      }
+    )
+}
+
+// [socket.io] Send message
 export const sendMessage = (msg) => dispatch => {
     dispatch(
       {
@@ -13,17 +45,24 @@ export const sendMessage = (msg) => dispatch => {
       })
 }
 
-export const getChatList = (offset, length) => dispatch => {
-    flet('/getchatlist',{
-        offset: 0,
+// Get message
+export const getMessage = (chat) => dispatch => {
+    flet('/getmessage',{
+        id: chat.id,
+        offset: chat.offset,
         length: 10
     },{
-      chatList: []
+        messages: []
     })
     .then((response) => {
-        dispatch(loadChatList(response.chatList))
+        dispatch({type: 'LOAD_MORE_MESSAGE', messages: response.messages})
     })
 }
+
+
+
+
+
 
 export const getTarget = (chat) => dispatch => {
     flet('/gettarget',{
@@ -43,17 +82,7 @@ export const getTarget = (chat) => dispatch => {
     })
 }
 
-export const joinChat = (chat, lazyLoad) => dispatch => {
-    dispatch(
-      {
-        type:"server/JOIN_CHAT",
-        data: {
-          person: chat.id
-        }
-      }
-    )
-    dispatch(getChatId(chat, lazyLoad));
-}
+
 
 export const getChatId = (chat, lazyLoad) => dispatch => {
     flet('/getchatid',{
@@ -70,32 +99,5 @@ export const getChatId = (chat, lazyLoad) => dispatch => {
           mesId: response.id
         }
         dispatch(getMessage(castChatObj, lazyLoad));
-    })
-}
-
-export const getMessage = (chat, lazyLoad) => dispatch => {
-    flet('/getmessage',{
-        id: chat.id,
-        offset: lazyLoad.offset,
-        length: lazyLoad.length
-    },{
-        messages: []
-    })
-    .then((response) => {
-        dispatch(loadChat(response.messages, chat))
-        // dispatch(loadChatList())
-    })
-}
-
-export const loadMoreMessage = (id, lazyLoad) => dispatch => {
-    flet('/getmessage',{
-        id: id,
-        offset: lazyLoad.offset + 20,
-        length: lazyLoad.length + 20
-    },{
-        messages: []
-    })
-    .then((response) => {
-        dispatch({type: 'LOAD_MORE_CHAT', messages: response.messages})
     })
 }

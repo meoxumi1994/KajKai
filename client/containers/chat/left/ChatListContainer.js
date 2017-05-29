@@ -5,21 +5,17 @@ import { joinChat } from '~/actions/asyn/chat'
 import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
-  const chat = state.inst.chat
-  const { chatList } = chat.left
-  const { lazyLoad } = chat.center
-
   return (
     {
-      chatList,
-      lazyLoad
+      chatList: state.inst.chat.left.chatList,
+      lazyLoad: state.inst.chat.center.lazyLoad
     }
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  getChat: (chat, lazyLoad) => {
-      dispatch(joinChat(chat, lazyLoad))
+  getChat: (chat) => {
+      dispatch(joinChat(chat))
       // visibility
       dispatch(updateMessageListVisibility(true))
       dispatch(updateCreateChatVisibility(false))
@@ -27,8 +23,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   getChatList: () => {
       dispatch(getChatList());
   },
-  onNewChatClick: () => {
-    // visibility
+  createNewChat: () => {
+      // visibility
       dispatch(updateMessageListVisibility(false))
       dispatch(updateCreateChatVisibility(true))
   }

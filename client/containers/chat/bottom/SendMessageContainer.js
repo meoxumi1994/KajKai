@@ -3,17 +3,16 @@ import SendMessage from '~/components/chat/bottom/SendMessage'
 import {sendMessage} from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
-  const chat = state.inst.chat
   return (
     {
-      mesId: chat.center.currentChat.mesId,
-      visibility: chat.visibility.sendMessage
+      mesId: state.inst.chat.center.mesId,
+      visibility: state.inst.chat.visibility.sendMessage
     }
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onSendMessageSubmit: (msg) => {
+  sendMessage: (msg) => {
     dispatch(sendMessage(msg));
   }
 })
