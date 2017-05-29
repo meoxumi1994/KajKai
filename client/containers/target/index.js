@@ -14,6 +14,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => ({
     onGetTarget: (id) => {
         dispatch(getTarget(id))
+        dispatch({ type: 'server/JOIN_STOREMAINPOST', data: { id: id } })
     }
 })
 

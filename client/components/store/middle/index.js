@@ -1,5 +1,5 @@
 import React from 'react'
-import Textarea from 'react-textarea-autosize';
+import textarea from 'react-textarea-autosize';
 
 import MainPost from '~/containers/store/middle/MainPost'
 import Top from '~/containers/store/middle/Top'

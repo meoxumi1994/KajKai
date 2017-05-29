@@ -6,22 +6,26 @@ import config from './config'
 
 import thunkMiddleware from 'redux-thunk'
 // AppContainer is a necessary wrapper component for HMR
-// import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader';
 import cookie from 'react-cookie'
 import reducers from './reducers'
 import Components from './components'
-import './App.css'
+// import './App.css'
 
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client'
 
 function execute(action, emit, next, dispatch) {
-    console.log('execute action',{...action})
-    emit(action.type, {...action})
+    console.log('socket.io',{...action})
+    if(action.type.substr(0,6) == 'client'){
+        next(action)
+    }else{
+        emit(action.type, {...action})
+    }
 }
 
 const socket = io(config.getDomain());
-const socketIoMiddleware = createSocketIoMiddleware(socket, "server/", { execute: execute });
+const socketIoMiddleware = createSocketIoMiddleware(socket, ["server/","client/"], { execute: execute });
 
 const store = createStore(
     reducers,
@@ -31,16 +35,14 @@ const store = createStore(
     )
 )
 
-store.dispatch({ type:'server/hello' });
-
 ReactDOM.render(
-    // <AppContainer>
-    //    <Provider store={store}>
-    //       <Components/>
-    //   </Provider>
-    // </AppContainer>,
-    <Provider store={store}>
-       <Components/>
-   </Provider>,
+    <AppContainer>
+       <Provider store={store}>
+          <Components/>
+      </Provider>
+    </AppContainer>,
+   //  <Provider store={store}>
+   //     <Components/>
+   // </Provider>,
   document.getElementById('root')
 )
