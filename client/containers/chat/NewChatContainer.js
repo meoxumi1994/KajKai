@@ -7,7 +7,7 @@ import NewChat from '~/components/chat/NewChat'
 const mapStateToProps = (state, ownProps) => {
   return (
     {
-      state
+      visibility: state.inst.chat.visibility.newChat
     }
   )
 }

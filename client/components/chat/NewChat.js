@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button, FormControl } from 'react-bootstrap'
 
-const NewChat = ({onNewChatSubmit}) => {
+const NewChat = ({onNewChatSubmit, visibility}) => {
   let msg
   return (
-    <div>
+    <div style={{display: visibility, marginRight: 1000}}>
         <form style={{position: 'relative'}} onSubmit={e => {
           e.preventDefault()
           if (msg.value.trim()) {

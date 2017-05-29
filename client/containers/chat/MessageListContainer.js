@@ -5,11 +5,13 @@ import { findName } from '../support'
 const mapStateToProps = (state, ownProps) => {
   const { chatLog, currentChat } = state.inst.chat.center
   const user = state.user
+  const visibility = state.inst.chat.visibility.messageList
   return (
     {
       chatLog,
       currentChat,
-      user
+      user,
+      visibility
     }
   )
 }

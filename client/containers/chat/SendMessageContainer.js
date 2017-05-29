@@ -3,9 +3,11 @@ import SendMessage from '~/components/chat/SendMessage'
 import {sendMessage} from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
+  const chat = state.inst.chat
   return (
     {
-      mesId: state.inst.chat.center.currentChat.mesId
+      mesId: chat.center.currentChat.mesId,
+      visibility: chat.visibility.sendMessage
     }
   )
 }

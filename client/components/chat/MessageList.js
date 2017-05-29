@@ -1,5 +1,5 @@
 import React from 'react'
-import { Popover } from 'react-bootstrap'
+import { Popover, Row } from 'react-bootstrap'
 import Message from './Message'
 
 const style = {
@@ -35,10 +35,10 @@ class MessageList  extends React.Component {
   }
 
   render() {
-      const { chatLog, currentChat, user } = this.props
+      const { chatLog, currentChat, user, visibility } = this.props
       return (
-        <div>
-          <h3>{currentChat.username}</h3>
+        <div style={{display: visibility}}>
+          <h3><i>{currentChat.username}</i></h3>
           <div style={style.messageListDiv}  >
               {chatLog.reverse().map(chat =>
                   user.id === JSON.parse(chat).id?
