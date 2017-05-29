@@ -20,7 +20,8 @@ module.exports = {
 	updateImageUrl,
 	getUserBasicInfo,
     getListUser,
-    getChatUserListInfo
+    getChatUserListInfo,
+    getChatUserInfo
 };
 
 function getUserInfo(user, next) {

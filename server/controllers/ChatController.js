@@ -56,6 +56,16 @@ export const joinChat = (action, sio, io, myId) => {
     console.log(myId)
     const mesId = getMessageId(id, myId)
     sio.join(mesId)
+    getMessageList(id, myId, 0, 10, function (messList) {
+        UserService.getUser(id, function (user) {
+            sio.emit('action', {type: 'client/INIT_MESSAGE', data: {
+                mesId: mesId,
+                messages: messList,
+                user: UserService.getChatUserInfo(user)
+            }})
+        })
+    })
+
 }
 
 export const leaveChat = (action, sio, io, myId) => {
