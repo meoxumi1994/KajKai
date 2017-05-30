@@ -19,7 +19,7 @@ class Target extends React.Component {
             <div className="container-fluid" style={{ overflow: 'scroll', height: window.innerHeight - 46 }}>
                 <div className="row">
                     <div className="col-xs-2 " style={{ padding: 0, margin: 0}}>
-
+                        
                     </div>
                     <div className="col-xs-6 " style={{ padding: 0, margin: 0}}>
                         <Middle/>
