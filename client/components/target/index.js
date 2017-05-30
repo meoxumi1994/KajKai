@@ -8,11 +8,13 @@ class Target extends React.Component {
         super(props)
     }
     render(){
-        let { iswhoing, isusername  } = this.props
+        let { iswhoing, isusername, type } = this.props
         if(iswhoing)
             return <div></div>
         if(!isusername)
             return <Redirect to='/register'/>
+        if(!type)
+            return <div>NOT FOUND</div>
         return(
             <div className="container-fluid" style={{ overflow: 'scroll', height: window.innerHeight - 46 }}>
                 <div className="row">

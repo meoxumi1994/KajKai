@@ -13,6 +13,8 @@ import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Target from '~/containers/target'
 // import loadTarget from 'bundle-loader?lazy!../containers/target'
 
+import Comment from '~/containers/entity/row/Comment'
+
 const Home = () => (
   <Bundle load={loadHome}>
     {(Comp) => (Comp
@@ -93,6 +95,7 @@ class App extends React.Component {
         const path = this.props.location.pathname;
         return(
             <div style={{ minWidth: 990, minHeight: 700 }}>
+                <Comment/>
                 <Bar/>
                 <hr style={{margin: 0}}></hr>
                 {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?

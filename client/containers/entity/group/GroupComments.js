@@ -6,7 +6,7 @@ import GroupComments from '~/components/GroupComments'
 const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     return({
-        
+
     })
 }
 
