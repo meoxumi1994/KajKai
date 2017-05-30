@@ -1,7 +1,7 @@
 const item = (state = {}, action) => {
     switch (action.type) {
-        case 'ENTITY_ROW_MAINPOSTROW_CREATE':
-            return {...state, ...action.data}
+        case 'TARGET_MIDDLE_MAINPOST_ADD':
+            return {...state, type: action.rowtype}
         default:
             return state
     }
@@ -9,12 +9,15 @@ const item = (state = {}, action) => {
 
 const mainpostrow = (state = {default: {
     type: '',
-    content: '',
-    images: [],
 }}, action) => {
     switch (action.type) {
-        case 'ENTITY_ROW_MAINPOSTROW_CREATE':
-            return {...state, [action.data.id] : item(state[action.data.id], action) }
+        case 'client/STOREMAINPOST':
+            action.data.list.map((row) => {
+                state = {...state, [row.id]: {...state[row.id], type: row.type }}
+            })
+            return state
+        case 'TARGET_MIDDLE_MAINPOST_ADD':
+            return {...state, [action.rowid] : item(state[action.rowid], action) }
         default:
             return state
     }

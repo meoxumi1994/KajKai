@@ -6,10 +6,10 @@ import BasicInput from '~/components/entity/input/BasicInput'
 const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     const basicinput = state.inst.entity.input.basicinput
-    const { textare, opensupplement, focus } = basicinput[id] || basicinput.default
+    const { content, opensupplement, focus } = basicinput[id] || basicinput.default
     return({
         focus: focus,
-        textare: textare,
+        content: content,
         opensupplement: opensupplement,
         id: id,
     })

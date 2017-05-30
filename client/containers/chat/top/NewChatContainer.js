@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { getTarget } from '~/actions/asyn/chat'
+import { joinChat } from '~/actions/asyn/chat'
 import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actions/asyn/chat/actions'
 import NewChat from '~/components/chat/top/NewChat'
 
@@ -12,8 +12,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onNewChatSubmit: (id) => {
-        dispatch(getTarget(id))
+    onNewChatSubmit: (chat) => {
+        dispatch(joinChat(chat))
         dispatch(updateMessageListVisibility(true))
         dispatch(updateCreateChatVisibility(false))
     }

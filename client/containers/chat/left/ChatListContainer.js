@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  getChat: (chat) => {
+  joinChat: (chat) => {
       dispatch(joinChat(chat))
       // visibility
       dispatch(updateMessageListVisibility(true))

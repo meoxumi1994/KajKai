@@ -14,7 +14,7 @@ const Product = () => (
         </Col>
         <Col xs={1} md={1}>
             <div className="btn btn-transparent btn-xs">
-                <img src="./images/(-).png" alt="Cinque Terre" width="16" height="16"/>
+                <img src="./images/minus.png" alt="Cinque Terre" width="16" height="16"/>
             </div>
         </Col>
         <Col xs={1} md={1}>
