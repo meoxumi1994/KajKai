@@ -1,22 +1,24 @@
 import { connect } from 'react-redux'
 import MessageList from '~/components/chat/center/MessageList'
+import { getMessage } from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
-  const { chatLog, currentChat } = state.inst.chat.center
-  const user = state.user
-  const visibility = state.inst.chat.visibility.messageList
+  // console.log('state ',state);
   return (
     {
-      chatLog,
-      currentChat,
-      user,
-      visibility
+      myInfo: state.user,
+      partnerInfo: state.inst.chat.center.user,
+      messages: state.inst.chat.center.messages,
+      visibility: state.inst.chat.visibility.messageList,
+      lazyLoad: state.inst.chat.center.lazyLoad
     }
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+  showMore: (chat) => {
+    dispatch(getMessage(chat))
+  }
 })
 
 const MessageListContainer = connect(

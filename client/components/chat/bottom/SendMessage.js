@@ -1,14 +1,14 @@
 import React from 'react'
 import {FormGroup, FormControl, HelpBlock, ControlLabel, Button} from 'react-bootstrap'
 
-const SendMessage = ({mesId, onSendMessageSubmit, visibility}) => {
+const SendMessage = ({mesId, sendMessage, visibility}) => {
   let msg
   return (
     <div style={{padding: 10, display: visibility}}>
         <form style={{position: 'relative'}} onSubmit={e => {
           e.preventDefault()
           if (msg.value.trim()) {
-            onSendMessageSubmit({mesId: mesId, text: msg.value})
+            sendMessage({mesId: mesId, text: msg.value})
             msg.value = ''
           }
         }}>

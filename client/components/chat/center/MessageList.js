@@ -35,30 +35,51 @@ class MessageList  extends React.Component {
   }
 
   render() {
-      const { chatLog, currentChat, user, visibility } = this.props
-      return (
-        <div style={{display: visibility}}>
-          <h3><i>{currentChat.username}</i></h3>
-          <div style={style.messageListDiv}  >
-              {chatLog.reverse().map(chat =>
-                  user.id === JSON.parse(chat).id?
-                  <Message
-                    key={JSON.parse(chat).time}
-                    {...JSON.parse(chat)}
-                    user={user}
-                    style={style.alignRight}
-                  />
-                  :
-                  <Message
-                    key={JSON.parse(chat).time}
-                    {...JSON.parse(chat)}
-                    user={currentChat}
-                    style={style.alignLeft}
-                  />
-              )}
+      const { myInfo, partnerInfo, messages, visibility, lazyLoad } = this.props
+      if (messages.length > 0) {
+        return (
+          <div style={{display: visibility}}>
+            <h3><i>{partnerInfo.username}</i></h3>
+            <div style={style.messageListDiv}>
+
+                <div
+                    onClick={() => this.props.showMore({
+                      id: partnerInfo.id,
+                      offset: lazyLoad.offset + 10
+                    })}
+                    style={{textAlign: 'center'}}>
+                    <i><a>(Show more)</a></i>
+                </div>
+
+                {messages.reverse().map(message =>
+                    myInfo.id === JSON.parse(message).id?
+                      <Message
+                        key={JSON.parse(message).time}
+                        {...JSON.parse(message)}
+                        user={myInfo}
+                        style={style.alignRight}
+                      />
+                      :
+                      <Message
+                        key={JSON.parse(message).time}
+                        {...JSON.parse(message)}
+                        user={partnerInfo}
+                        style={style.alignLeft}
+                      />
+                )}
+            </div>
           </div>
-        </div>
-      )
+        )
+      } else {
+          return (
+            <div style={{display: visibility}}>
+              <h3><i>{partnerInfo.username}</i></h3>
+              <div style={style.messageListDiv}>
+              </div>
+            </div>
+          )
+      }
+
   }
 }
 
