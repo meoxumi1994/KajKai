@@ -8,21 +8,25 @@ class ChatList extends React.Component {
     }
 
     render(){
+          const { chatList, lazyLoad, joinChat, createNewChat } = this.props
+
           return(
             <div>
-              <h2>Recent Chat</h2>
+              <h3>Recent Chat
+                  <Button style={{marginLeft: 65, width: 50, height: 50}} onClick={() => createNewChat()}>
+                      <img style={{width: 27, height: 27}} src="./images/newMessage.png"/>
+                  </Button>
+              </h3>
               {this.props.chatList.map(chat =>
-                <Row key={chat.id} onClick={() => this.props.onChat(chat)}>
-                    <div className="list-group-item" style={{ paddingTop:3, paddingBottom: 3, paddingLeft: 0,paddingRight: 0 }}>
+                <Button style={{width:250, marginBottom: 10}} key={chat.id} onClick={() => joinChat(chat)}>
                         <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}>
-                            <img src={chat.avatarUrl} width="33" height="33"/>
+                            <img src={chat.avatarUrl} width="38" height="38"/>
                         </div>
                         <div style={{ marginLeft: 40}}>
                             <div>{chat.name}</div>
                             <small className="text-muted" >Online</small>
                         </div>
-                    </div>
-                </Row>
+                </Button>
               )}
             </div>
           )

@@ -1,17 +1,18 @@
 import {connect} from 'react-redux'
-import SendMessage from '~/components/chat/SendMessage'
+import SendMessage from '~/components/chat/bottom/SendMessage'
 import {sendMessage} from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
   return (
     {
-      mesId: state.inst.chat.center.currentChat.mesId
+      mesId: state.inst.chat.center.mesId,
+      visibility: state.inst.chat.visibility.sendMessage
     }
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onSendMessageSubmit: (msg) => {
+  sendMessage: (msg) => {
     dispatch(sendMessage(msg));
   }
 })
