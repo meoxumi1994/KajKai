@@ -10,3 +10,4 @@ tasks.xml
 .gitignore.swp
 **/.idea/
 ./dbdump
+client/webpack.config.js
