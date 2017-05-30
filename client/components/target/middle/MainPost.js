@@ -1,7 +1,6 @@
 import React from 'react'
 
 import MainPostRow from '~/containers/entity/row/MainPostRow'
-import ShowMainPostRow from '~/containers/entity/row/ShowMainPostRow'
 
 class MainPost extends React.Component {
     constructor(props){
@@ -16,9 +15,7 @@ class MainPost extends React.Component {
                     <div className="btn btn-default" onClick={() => onSave()}>save</div>
                 :   <div className="btn btn-default" onClick={() => onEdit()}>edit</div> )
                 }
-                {onedit?
-                    list.map((item, index) => <MainPostRow key={index} id={item.id}/>)
-                :   list.map((item, index) => <ShowMainPostRow key={index} id={item.id}/>)
+                {list.map((item, index) => <MainPostRow key={index} id={item.id} onedit={onedit}/>)
                 }
                 {onedit &&
                     <div className="input-group-btn">
@@ -38,14 +35,6 @@ class MainPost extends React.Component {
                 }
             </div>
         )
-    }
-    componentDidUpdate(){
-        const { list, onCreaterow } = this.props
-        onCreaterow(list)
-    }
-    componentDidMount(){
-        const { list, onCreaterow } = this.props
-        onCreaterow(list)
     }
 }
 

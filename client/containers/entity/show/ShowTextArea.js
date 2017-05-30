@@ -6,9 +6,9 @@ import ShowTextArea from '~/components/entity/show/ShowTextArea'
 const mapStateToProps = (state, { id, fontSize }) => {
     const g = (lang) => get(state.user.language, lang)
     const basicinput = state.inst.entity.input.basicinput
-    const { textare } = basicinput[id] || basicinput.default
+    const { content } = basicinput[id] || basicinput.default
     return({
-        content: textare,
+        content: content,
         fontSize: fontSize,
     })
 }
