@@ -1,6 +1,7 @@
 import React from 'react'
 import { Popover, Row } from 'react-bootstrap'
 import Message from './Message'
+import LazyLoad from 'react-lazy-load';
 
 const style = {
   alignRight: {
@@ -53,19 +54,22 @@ class MessageList  extends React.Component {
 
                 {messages.reverse().map(message =>
                     myInfo.id === JSON.parse(message).id?
-                      <Message
-                        key={JSON.parse(message).time}
-                        {...JSON.parse(message)}
-                        user={myInfo}
-                        style={style.alignRight}
-                      />
+                        <LazyLoad key={JSON.parse(message).time}>
+                          <Message
+                            {...JSON.parse(message)}
+                            user={myInfo}
+                            style={style.alignRight}
+                          />
+                        </LazyLoad>
                       :
-                      <Message
-                        key={JSON.parse(message).time}
-                        {...JSON.parse(message)}
-                        user={partnerInfo}
-                        style={style.alignLeft}
-                      />
+                        <LazyLoad key={JSON.parse(message).time}>
+                          <Message
+                            key={JSON.parse(message).time}
+                            {...JSON.parse(message)}
+                            user={partnerInfo}
+                            style={style.alignLeft}
+                          />
+                        </LazyLoad>
                 )}
             </div>
           </div>

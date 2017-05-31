@@ -3,7 +3,10 @@ const left = (state = {
 }, action) => {
     switch (action.type) {
         case 'LOAD_CHAT_LIST':
-            return {...state, chatList: action.chatList}
+            return {
+              ...state,
+              chatList: action.chatList
+            }
         default:
             return state
     }

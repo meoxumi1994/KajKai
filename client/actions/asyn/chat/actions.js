@@ -8,6 +8,11 @@ export const updateCreateChatVisibility = (display) => ({
     display
 })
 
+export const updateUploadImageVisibility = (display) => ({
+    type: 'UPDATE_UPLOADIMAGE_VISIBILITY',
+    display
+})
+
 export const loadChatList = (chatList) => ({
     type: 'LOAD_CHAT_LIST',
     chatList
@@ -17,4 +22,9 @@ export const loadChat = (messages, chat) => ({
     type: 'LOAD_CHAT',
     messages,
     chat
+})
+
+export const uploadingImages = (uploadingImgs) => ({
+    type: 'UPLOADING_IMAGES',
+    uploadingImgs: uploadingImgs
 })

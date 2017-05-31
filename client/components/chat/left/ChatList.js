@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button,Row } from 'react-bootstrap'
+import { Button, Roư } from 'react-bootstrap'
 
 class ChatList extends React.Component {
 
@@ -17,17 +17,17 @@ class ChatList extends React.Component {
                       <img style={{width: 27, height: 27}} src="./images/newMessage.png"/>
                   </Button>
               </h3>
-              {this.props.chatList.map(chat =>
-                <Button style={{width:250, marginBottom: 10}} key={chat.id} onClick={() => joinChat(chat)}>
-                        <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}>
-                            <img src={chat.avatarUrl} width="38" height="38"/>
-                        </div>
-                        <div style={{ marginLeft: 40}}>
-                            <div>{chat.name}</div>
-                            <small className="text-muted" >Online</small>
-                        </div>
-                </Button>
-              )}
+                {this.props.chatList.map(chat =>
+                  <Button style={{width:250, marginBottom: 10}} key={chat.id} onClick={() => joinChat(chat)}>
+                          <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}>
+                              <img src={chat.avatarUrl} width="38" height="38"/>
+                          </div>
+                          <div style={{ marginLeft: 40}}>
+                              <div>{chat.name}</div>
+                              <small className="text-muted" >Online</small>
+                          </div>
+                  </Button>
+                )}
             </div>
           )
     }
