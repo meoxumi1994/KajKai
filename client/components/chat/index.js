@@ -4,7 +4,6 @@ import ChatListContainer from '~/containers/chat/left/ChatListContainer'
 import SendMessageContainer from '~/containers/chat/bottom/SendMessageContainer'
 import MessageListContainer from '~/containers/chat/center/MessageListContainer'
 import NewChatContainer from '~/containers/chat/top/NewChatContainer'
-import MyComponent from './MyComponent'
 
 const Chat = () => {
   return(
