@@ -13,7 +13,7 @@ import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Target from '~/containers/target'
 // import loadTarget from 'bundle-loader?lazy!../containers/target'
 
-import Comment from '~/containers/entity/row/Comment'
+import GroupComments from '~/containers/entity/group/GroupComments'
 
 const Home = () => (
   <Bundle load={loadHome}>
@@ -95,7 +95,11 @@ class App extends React.Component {
         const path = this.props.location.pathname;
         return(
             <div style={{ minWidth: 990, minHeight: 700 }}>
-                <Comment/>
+                <div className="panel panel-default" style={{ width: 600, marginLeft: 10, paddingTop: 5, paddingBottom: 5 }}>
+                    <GroupComments
+                        myavatar='https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/15747515_1037057729734095_4191500541739317185_n.jpg?oh=eb25f2635dc8ee0d8e4fdd1d1a65bcba&oe=59EA1733'
+                        id='GroupComments_1'/>
+                </div>
                 <Bar/>
                 <hr style={{margin: 0}}></hr>
                 {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?

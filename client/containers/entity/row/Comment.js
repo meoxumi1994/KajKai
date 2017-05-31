@@ -6,14 +6,9 @@ import Comment from '~/components/entity/row/Comment'
 const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     const comment = state.inst.entity.row.comment
-    const {  content, numlikes, likes, avatar, name, time, } = comment[id] || comment.default
+    const data = comment[id] || comment.default
     return({
-        content: content,
-        numlikes: numlikes,
-        likes: likes,
-        avatar: avatar,
-        name: name,
-        time: time,
+        ...data
     })
 }
 

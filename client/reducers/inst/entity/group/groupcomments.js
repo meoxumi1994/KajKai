@@ -10,7 +10,7 @@ const groupcommets = (state = {
     default: {
         istyping: '',
         listtype: '',
-        listcms: []
+        listcms: [{ id: 'default'},{ id: 'default'},{ id: 'default'}]
     }
 }, action) => {
     switch (action.type) {

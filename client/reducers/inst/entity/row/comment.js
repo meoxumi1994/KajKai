@@ -3,6 +3,8 @@ const comment = (state = { default: {
     content: 'give me 2 cakes more, please',
     numlikes: 2,
     likes: ['meoxumi','meomun'],
+    numreplys: 3,
+    replys: ['meoxumi','meomun','meobeo'],
     avatar: './images/avatar.png',
     name: 'pornnappan pornpenpipat',
     time: '11 mins',
