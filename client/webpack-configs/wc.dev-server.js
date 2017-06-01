@@ -4,7 +4,7 @@ var fs = require('fs')
 module.exports = {
   entry: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?https://localhost:3000',
+      'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
       './index.js'
   ],
@@ -44,7 +44,7 @@ module.exports = {
     ]
   },
   devServer: {
-    https: {
+    http: {
       key: fs.readFileSync('./config/kajkai.key'),
       cert: fs.readFileSync('./config/kajkai.crt')
     },
