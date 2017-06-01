@@ -5,7 +5,7 @@ export const comfirmEmailVerification = () => {
 	return (req, res) => {
 		console.log(req.params.token)
 		var token = req.params.token
-		var redirectUrl = 'https://localhost:3000'
+		var redirectUrl = 'http://localhost:3000'
 		if (!token) {
 			res.redirect(redirectUrl + '/login')
 		}

@@ -1,29 +1,19 @@
 const comments = (state = {
     default: {
         id: undefined,
-        products: [{
-            id: undefined,
-            name: 'cakes red',
-            numbers: 1,
-            price: '1.2$'
-        },{
-            id: undefined,
-            name: 'cakes red',
-            numbers: 2,
-            price: '2.5$'
-        }],
+        products: [],
         isreply: false,
-        content: 'more spicy please',
-        avatar: './images/avatar.png',
-        name: 'meoxumi',
-        time: '10 mins',
+        content: '',
+        avatar: './images/avatardefault.png',
+        name: '',
+        time: '',
         status: 'waiting',
-        numlikes: 10,
+        numlikes: 0,
         likes: [],
-        numreplys: 3,
+        numreplys: 0,
         replys: [],
         istyping: true,
-        listcm: [{ id: 'default' },{ id: 'default' },{ id: 'default' }],
+        listcm: [],
     }
 }, action) => {
     switch (action.type) {
@@ -32,6 +22,12 @@ const comments = (state = {
             return {...state, [action.id]: {...state[action.id], isreply: true }}
         case 'ENTITY_ROW_COMMENTS_CONTENT_HANDLE_CHANGE':
             return {...state, [action.id]: {...state[action.id], content: action.content }}
+        case 'client/JOIN_GROUPCOMMENTS':
+            const listcms = action.data.listcms
+            listcms.map((item) => {
+                state = {...state, [item.id]: {...item}}
+            })
+            return {...state}
         default:
             return state
     }
