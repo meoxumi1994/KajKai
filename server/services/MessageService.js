@@ -10,15 +10,19 @@ export const getMessageId = (person1, person2) => {
     else return person2 + '$' + person1
 }
 
-export const getMessageList = (person1, person2, offset, length, next) => {
+export const getMessageList = (person1, person2, time, length, next) => {
     const mesID = getMessageId(person1, person2)
-    console.log(mesID + ' ' + offset + ' ' + (offset + length - 1))
+    // console.log(mesID + ' ' + offset + ' ' + (offset + length - 1))
     if (!mesID) {
         next(null)
     } else {
-        redisClient.zrange(mesID, offset, offset + length - 1, function (err, reply) {
-            console.log(reply)
-            next(reply)
+        // redisClient.zrange(mesID, offset, offset + length - 1, function (err, reply) {
+        //     console.log(reply)
+        //     next(reply)
+        // })
+        redisClient.zrangebyscore(id, -time, 'inf', 'limit', 0, length - 1, function (err, reply) {
+            if (err) next(null)
+            else next(reply)
         })
     }
 }
@@ -32,14 +36,14 @@ export const getChatListID = (person) => {
 
 export const getChatList = (person, time, length, next) => {
     const id = getChatListID(person)
-    // redisClient.zrange(id, offset, offset + length - 1, function (err, reply) {
-    //     if (err) next(null)
-    //     else next(reply)
-    // })
-    redisClient.zrangebyscore(id, -time, 'inf', 'limit', 0, length - 1, function (err, reply) {
+    redisClient.zrange(id, offset, offset + length - 1, function (err, reply) {
         if (err) next(null)
         else next(reply)
     })
+    // redisClient.zrangebyscore(id, -time, 'inf', 'limit', 0, length - 1, function (err, reply) {
+    //     if (err) next(null)
+    //     else next(reply)
+    // })
 }
 
 export const updateChatLList = (personA, personB, time, next) => {
