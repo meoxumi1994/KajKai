@@ -8,9 +8,24 @@ const center = (state = {
   },
   lazyLoad: {
     offset: 0
+  },
+  url: {
+    uploadingImgs: [],
+    sentImgs: []
   }
 }, action) => {
     switch (action.type) {
+        case 'UPLOADING_IMAGES':
+            return {
+              ...state,
+              url: {
+                ...state.url,
+                uploadingImgs: [
+                  action.uploadingImgs
+                ]
+              }
+            }
+
         // [socket.io] Init last 10 message
         case 'client/INIT_MESSAGE':
           return {
@@ -34,11 +49,26 @@ const center = (state = {
               message: action.data.message,
               time: action.data.time
             }
-            // console.log('state.lazyLoad.offset ',state.lazyLoad.offset);
-            return {...state, lazyLoad: {offset: state.lazyLoad.offset + 1}, messages: [...state.messages, JSON.stringify(newMessage)].reverse()}
+            console.log('action ', action);
+            return {
+              ...state,
+              lazyLoad: {
+                offset: state.lazyLoad.offset + 1},
+                messages: [
+                  ...state.messages,
+                  JSON.stringify(newMessage)
+                ].reverse()
+              }
 
         case 'LOAD_MORE_MESSAGE':
-            return {...state, lazyLoad: {offset: state.lazyLoad.offset + 10}, messages: state.messages.reverse().concat(action.messages)}
+            return {
+              ...state,
+              lazyLoad: {
+                offset: state.lazyLoad.offset + 10
+              },
+              messages: state.messages.reverse().concat(action.messages)
+            }
+
         default:
             return state
     }

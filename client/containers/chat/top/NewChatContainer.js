@@ -4,9 +4,10 @@ import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actio
 import NewChat from '~/components/chat/top/NewChat'
 
 const mapStateToProps = (state, ownProps) => {
+  // console.log('state ',state);
   return (
     {
-      visibility: state.inst.chat.visibility.newChat
+      visibility: state.inst.chat.visibility.top.newChat
     }
   )
 }

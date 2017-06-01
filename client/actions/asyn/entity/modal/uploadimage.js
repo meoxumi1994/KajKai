@@ -2,6 +2,7 @@ import config from '~/config'
 import { updateuserAction, updateuserData } from '~/actions/sync/updateuser'
 import { updateUser } from '~/actions/asyn/profile/middle'
 import { flet } from '~/actions/support'
+import { uploadingImages } from '~/actions/asyn/chat/actions'
 
 export const uploadImage = (type, file) => dispatch => {
     dispatch(updateuserAction('UPDATE_USER_ING'))
@@ -22,7 +23,16 @@ export const uploadImage = (type, file) => dispatch => {
                 body: reader.result
             })
             .then( res => {
-                dispatch(updateUser({ [type]: urlreal }))
+              switch (type) {
+                case "avatarUrl":
+                  dispatch(updateUser({ [type]: urlreal }))
+                  break
+                case "sendImage":
+                  dispatch(uploadingImages(urlreal))
+                  break
+                default:
+                  console.log('res ', res)
+              }
             })
         }
         reader.readAsArrayBuffer(file)

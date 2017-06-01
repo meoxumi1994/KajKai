@@ -5,12 +5,12 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoa
     if(isusername){
         return (
             <div style={{ width: 87, float: 'left'}}>
+            
                 <div style={{float: 'left'}}>
                     <Link to="/chat" >
                         <img src="./images/comment.png" width="22.5" height="27"/>
                     </Link>
                 </div>
-
 
                 <div className="dropdown" style={{ width : 15, float: 'right'}}>
                   <div className="btn btn-default btn-xs  dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"

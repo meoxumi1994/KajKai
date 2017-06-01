@@ -53,19 +53,17 @@ class MessageList  extends React.Component {
 
                 {messages.reverse().map(message =>
                     myInfo.id === JSON.parse(message).id?
-                      <Message
-                        key={JSON.parse(message).time}
-                        {...JSON.parse(message)}
-                        user={myInfo}
-                        style={style.alignRight}
-                      />
+                        <Message key={JSON.parse(message).time}
+                            {...JSON.parse(message)}
+                            user={myInfo}
+                            style={style.alignRight}
+                        />
                       :
-                      <Message
-                        key={JSON.parse(message).time}
-                        {...JSON.parse(message)}
-                        user={partnerInfo}
-                        style={style.alignLeft}
-                      />
+                        <Message key={JSON.parse(message).time}
+                            {...JSON.parse(message)}
+                            user={partnerInfo}
+                            style={style.alignLeft}
+                        />
                 )}
             </div>
           </div>

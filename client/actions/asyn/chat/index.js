@@ -34,6 +34,7 @@ export const joinChat = (chat) => dispatch => {
 
 // [socket.io] Send message
 export const sendMessage = (msg) => dispatch => {
+    console.log('sendMessage ',msg);
     dispatch(
       {
         type:"server/ADD_MESSAGE",
@@ -59,11 +60,6 @@ export const getMessage = (chat) => dispatch => {
     })
 }
 
-
-
-
-
-
 export const getTarget = (chat) => dispatch => {
     flet('/gettarget',{
         id: chat.id
@@ -81,8 +77,6 @@ export const getTarget = (chat) => dispatch => {
         dispatch(joinChat(response.user))
     })
 }
-
-
 
 export const getChatId = (chat, lazyLoad) => dispatch => {
     flet('/getchatid',{

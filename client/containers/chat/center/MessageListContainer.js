@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
       myInfo: state.user,
       partnerInfo: state.inst.chat.center.user,
       messages: state.inst.chat.center.messages,
-      visibility: state.inst.chat.visibility.messageList,
+      visibility: state.inst.chat.visibility.center.messageList,
       lazyLoad: state.inst.chat.center.lazyLoad
     }
   )
