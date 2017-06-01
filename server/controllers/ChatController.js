@@ -21,9 +21,9 @@ export const getMessages = () => {
     return (req, res) => {
         var person1 = req.decoded._id
         var person2 = req.body.id
-        var offset = req.body.offset
+        var time = req.body.time
         var length = req.body.length
-        getMessageList(person1, person2, offset, length, function (data) {
+        getMessageList(person1, person2, time, length, function (data) {
             res.json({messages: data})
         })
     }
@@ -56,7 +56,11 @@ export const joinChat = (action, sio, io, myId) => {
     console.log(myId)
     const mesId = getMessageId(id, myId)
     sio.join(mesId)
-    getMessageList(id, myId, 0, 10, function (messList) {
+    var time = (new Date()).getTime()
+    var length = 20
+    if (action.data.time) time = action.data.time
+    if (action.data.length) length = action.data.length
+    getMessageList(id, myId, time, length, function (messList) {
         UserService.getUser(id, function (user) {
             sio.emit('action', {type: 'client/INIT_MESSAGE', data: {
                 mesId: mesId,
@@ -65,7 +69,6 @@ export const joinChat = (action, sio, io, myId) => {
             }})
         })
     })
-
 }
 
 export const leaveChat = (action, sio, io, myId) => {
@@ -87,12 +90,6 @@ export const addMessage = (action, sio, io, myId) => {
                 message: data.message,
                 person: myId
             }})
-            // sio.emit('action', {type:'client/RECEIVE_MESSAGE', data: {
-            //     mesId: data.mesId,
-            //     time: data.time,
-            //     message: data.message,
-            //     person: myId
-            // }})
         }
     })
 }

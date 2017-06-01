@@ -1,6 +1,7 @@
 import UserService from '../services/UserService.js'
 import { User } from '../models'
-import {getStore, getStoreInfoService} from '../services/StoreService'
+import { getStore, getStoreInfoService } from '../services/StoreService'
+import { getTimelyFirstComment, addNewComment } from '../services/CommentService'
 
 export const getTarget = () => {
     return (req, res) => {
@@ -79,3 +80,36 @@ export const testToken = (action, sio) => {
     console.log('fick')
     sio.emit('action', {type: 'client/hi', data: 'aeofiew'})
 }
+
+export const joinGroupComment = (action, sio, io) => {
+    // const data = action.data
+    const id = action.data.id
+    var time = (new Date()).getTime()
+    if (action.data.offset) time = action.data.offset
+    const length = 20
+    sio.join(action.id)
+    getTimelyFirstComment(id, time, length, function(data){
+        if (data) {
+            io.to(action.id).emit('action', {type: 'client/JOIN_GROUPCOMMENTS', data: {
+                id: id,
+                comments: data
+            }})
+        }
+    })
+}
+
+export const leaveGroupComment = (action, sio, io) => {
+    sio.leave(action.data.id)
+}
+
+export const addComment = (action, sio, io) => {
+    addNewComment(action.data.id, action.data.comment, action.data.userID, function (comment) {
+        if (comment) {
+            io.to(action.data.id).emit('action', {type: 'client/ADD_COMMENTS', data: {
+                id: id,
+                comment: comment
+            }})
+        }
+    })
+}
+

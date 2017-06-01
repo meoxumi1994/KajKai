@@ -50,6 +50,18 @@ export default {
     'server/ADD_MESSAGE': {
         controller: 'ChatController',
         method: 'addMessage'
+    },
+    'server/JOIN_GROUPCOMMENTS': {
+        controller: 'CommentController',
+        method: 'joinGroupComment'
+    },
+    'server/LEAVE_COMMENTS': {
+        controller: 'CommentController',
+        method: 'leaveGroupComment'
+    },
+    'server/ADD_COMMENTS': {
+        controller: 'CommentController',
+        method: 'addComment'
     }
 
 

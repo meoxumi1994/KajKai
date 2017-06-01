@@ -17,7 +17,20 @@ var StorePost = mongoose.model('StorePost', StorePostSchema)
 var StoreSchema = require('./Store')
 var Store = mongoose.model('Store', StoreSchema)
 
+var SecondLayerCommentSchema = require('./SecondLayerComment')
+var SecondLayerComment = mongoose.models('SecondLayerComment', SecondLayerCommentSchema)
 
+var ProductSchema = require('./Product')
+var Product = mongoose.models('Product', ProductSchema)
+
+var OrderDetailSchema = require('./OrderDetail')
+var OrderDetail = mongoose.models('OrderDetail', OrderDetailSchema)
+
+var OrderSchema = require('./Order')
+var Order = mongoose.models('Order', OrderSchema)
+
+var FirstLayerCommentSchema = require('./FirstLayerComment')
+var FirstLayerComment = mongoose.models('FirstLayerComment', FirstLayerCommentSchema)
 
 module.exports = {
 	User,
@@ -25,7 +38,8 @@ module.exports = {
 	SubCategory,
 	Store,
     StorePostDetail,
-    StorePost
+    StorePost,
+	FirstLayerComment
 }
 
 // var fs = require('fs')
