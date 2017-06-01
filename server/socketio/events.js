@@ -55,14 +55,24 @@ export default {
         controller: 'CommentController',
         method: 'joinGroupComment'
     },
-    'server/LEAVE_COMMENTS': {
+    'server/LEAVE_GROUPCOMMENTS': {
         controller: 'CommentController',
         method: 'leaveGroupComment'
     },
-    'server/ADD_COMMENTS': {
+    'server/ADD_GROUPCOMMENTS': {
         controller: 'CommentController',
         method: 'addComment'
+    },
+    'server/JOIN_COMMENTS': {
+        controller: 'CommentController',
+        method: 'joinComment'
+    },
+    'server/LEAVE_COMMENTS': {
+        controller: 'CommentController',
+        method: 'leaveComment'
+    },
+    'server/ADD_COMMENTS': {
+        controller: 'CommentController',
+        method: 'addSubComment'
     }
-
-
 }

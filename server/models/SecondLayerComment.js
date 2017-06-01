@@ -5,7 +5,7 @@ const SecondLayerCommentSchema = new mongoose.Schema({
     posterAvatar: {type: String},
     posterName: {type: String},
     content: {type: String},
-    time: {type: String},
+    time: {type: Number},
 });
 
 module.exports = SecondLayerCommentSchema

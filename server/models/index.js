@@ -39,7 +39,8 @@ module.exports = {
 	Store,
     StorePostDetail,
     StorePost,
-	FirstLayerComment
+	FirstLayerComment,
+    SecondLayerComment
 }
 
 // var fs = require('fs')
