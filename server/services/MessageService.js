@@ -20,7 +20,7 @@ export const getMessageList = (person1, person2, time, length, next) => {
         //     console.log(reply)
         //     next(reply)
         // })
-        redisClient.zrangebyscore(id, -time, 'inf', 'limit', 0, length - 1, function (err, reply) {
+        redisClient.zrangebyscore(mesID, -time, 'inf', 'limit', 0, length - 1, function (err, reply) {
             if (err) next(null)
             else next(reply)
         })
