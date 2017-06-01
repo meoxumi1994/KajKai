@@ -21,7 +21,8 @@ module.exports = {
 	getUserBasicInfo,
     getListUser,
     getChatUserListInfo,
-    getChatUserInfo
+    getChatUserInfo,
+    updateVerifyUser
 };
 
 function getUserInfo(user, next) {
@@ -210,4 +211,10 @@ function updateImageUrl(id, imageURL) {
 	User.findOneAndUpdate({_id: id}, {$set:{imageUrl: imageURL}}, function(err){
 		console.log('err ' + err)
 	})
+}
+
+function updateVerifyUser(id, next) {
+    User.findOneAndUpdate({_id: id}, {$set:{verified: 1}}, function (err) {
+        next(err)
+    })
 }

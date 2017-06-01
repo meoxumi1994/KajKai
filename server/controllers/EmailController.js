@@ -14,8 +14,14 @@ export const comfirmEmailVerification = () => {
 		if (!decoded) {
 			res.redirect(redirectUrl + '/login')
 		} else {
-			res.cookie('token', UserService.getUserToken(decoded._id))
-			res.redirect(redirectUrl + '/profile')
+            UserService.updateVerifyUser(decoded._id, function (err) {
+                if (err) {
+                    res.redirect(redirectUrl + '/login')
+                } else {
+                    res.cookie('token', UserService.getUserToken(decoded._id))
+                    res.redirect(redirectUrl + '/profile')
+                }
+            })
 		}
 	}
 }
