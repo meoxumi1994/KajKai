@@ -34,7 +34,7 @@ export const getChatListID = (person) => {
     return 'chatList$' + person
 }
 
-export const getChatList = (person, time, length, next) => {
+export const getChatList = (person, offset, length, next) => {
     const id = getChatListID(person)
     redisClient.zrange(id, offset, offset + length - 1, function (err, reply) {
         if (err) next(null)
