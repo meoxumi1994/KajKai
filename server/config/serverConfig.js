@@ -1,6 +1,6 @@
 const config = {
     ISTEST : true,
-    PROTOCOL: ['https', 'https'],
+    PROTOCOL: ['http', 'http'],
     IP: ['localhost', '13.228.23.106'], // 34.209.206.70 10.20.16.137
     PORT: 8080,
     getDomain: () => {
@@ -10,9 +10,9 @@ const config = {
             return config.PROTOCOL[1] + '://' + config.IP[1] + ':' + config.PORT;
     },
     OTHERPORT: 3000,
-    REDIRECTURL: 'https://www.kajkai.com',
-    FACEBOOK_API_URL: 'https://graph.facebook.com/me?fields=id,name,picture.type(large)&access_token=',
-    GOOGLE_API_URL: 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='
+    REDIRECTURL: 'http://www.kajkai.com',
+    FACEBOOK_API_URL: 'http://graph.facebook.com/me?fields=id,name,picture.type(large)&access_token=',
+    GOOGLE_API_URL: 'http://www.googleapis.com/oauth2/v3/tokeninfo?id_token='
 }
 
 export default config
