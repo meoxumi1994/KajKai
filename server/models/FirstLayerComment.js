@@ -13,7 +13,7 @@ const FirstLayerCommentSchema = new mongoose.Schema({
     postId: {type: String}
 })
 
-FirstLayerCommentSchema.createIndex({postId: 1, time: 1})
+// FirstLayerCommentSchema.createIndex({postId: 1, time: 1})
 
 module.exports = FirstLayerCommentSchema
 

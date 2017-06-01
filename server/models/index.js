@@ -18,19 +18,19 @@ var StoreSchema = require('./Store')
 var Store = mongoose.model('Store', StoreSchema)
 
 var SecondLayerCommentSchema = require('./SecondLayerComment')
-var SecondLayerComment = mongoose.models('SecondLayerComment', SecondLayerCommentSchema)
+var SecondLayerComment = mongoose.model('SecondLayerComment', SecondLayerCommentSchema)
 
 var ProductSchema = require('./Product')
-var Product = mongoose.models('Product', ProductSchema)
+var Product = mongoose.model('Product', ProductSchema)
 
 var OrderDetailSchema = require('./OrderDetail')
-var OrderDetail = mongoose.models('OrderDetail', OrderDetailSchema)
+var OrderDetail = mongoose.model('OrderDetail', OrderDetailSchema)
 
 var OrderSchema = require('./Order')
-var Order = mongoose.models('Order', OrderSchema)
+var Order = mongoose.model('Order', OrderSchema)
 
 var FirstLayerCommentSchema = require('./FirstLayerComment')
-var FirstLayerComment = mongoose.models('FirstLayerComment', FirstLayerCommentSchema)
+var FirstLayerComment = mongoose.model('FirstLayerComment', FirstLayerCommentSchema)
 
 module.exports = {
 	User,
