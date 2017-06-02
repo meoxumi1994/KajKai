@@ -3,6 +3,16 @@ import allEvents from './events'
 import { validateTokenDemo } from '../services/DemoService'
 import { verifyToken } from '../services/UserService'
 import {getTokenSocketCookie} from '../utils/Utils'
+import {redisClient} from '../datasource'
+
+redisClient.zrange('123294', 0, 0, function (err, data) {
+    console.log('fuck ' + data)
+    // data.emit('aowejf')
+    // const rocket = socketIo(data[0])
+    // rocket.emit('action', {type: 'client/hello', data: {
+    //     hello: 'hello'
+    // }})
+})
 
 const init = (server) => {
     const sio = socketIo(server)
@@ -10,7 +20,7 @@ const init = (server) => {
     sio.on('connection', (socket) => {
         console.log('a user connected')
         socket.on('disconnect', () => {
-        console.log('a user disconnected')
+            console.log('a user disconnected')
         })
         // load all events
         const token =  getTokenSocketCookie(socket.handshake.headers.cookie)

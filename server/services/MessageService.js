@@ -64,9 +64,15 @@ export const addNewMessage = (mesID, person, message, time, next) =>{
         if (err) next(err)
         else {
             var id = mesID.split('$')
-            updateChatLList(id[0], id[1], time, function (e) {
-                next(e)
-            })
+            if (person === id[1]) {
+                updateChatLList(id[0], id[1], time, function (e) {
+                    next(e)
+                })
+            } else {
+                updateChatLList(id[1], id[0], time, function (e) {
+                    next(e)
+                })
+            }
         }
     })
 }

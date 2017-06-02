@@ -2,6 +2,7 @@ import UserService from '../services/UserService.js'
 import { User } from '../models'
 import { getStore, getStoreInfoService } from '../services/StoreService'
 import { getTimelyFirstComment, addNewComment, addNewSecondLayerComment, getSecondLayerComment } from '../services/CommentService'
+import { getStoreByMainPostId } from '../services/StoreService'
 
 export const getTarget = () => {
     return (req, res) => {
@@ -87,15 +88,30 @@ export const joinGroupComment = (action, sio, io) => {
     const id = action.data.id
     var time = (new Date()).getTime()
     if (action.data.offset) time = action.data.offset
-    const length = 20
-    sio.join(action.id)
-    getTimelyFirstComment(id, time, length, function(data){
-        if (data) {
-            console.log("this shit " + data)
-            sio.emit('action', {type: 'client/JOIN_GROUPCOMMENTS', data: {
-                id: id,
-                comments: data
-            }})
+    var length = 20
+    if (action.data.length) length = action.data.length
+    sio.join(action.data.id)
+
+    getStoreByMainPostId(action.data.id, function (store) {
+        if (store) {
+            getTimelyFirstComment(id, time, length, function (data) {
+                if (data) {
+                    console.log("this shit " + data)
+                    sio.emit('action', {
+                        type: 'client/JOIN_GROUPCOMMENTS', data: {
+                            id: id,
+                            comments: data,
+                            storeId: store._id
+                        }
+                    })
+                } else {
+                    sio.emit('action', {
+                        type: 'client/JOIN_GROUPCOMMENTS', data: {
+                            storeId: store._id
+                        }
+                    })
+                }
+            })
         }
     })
 }
@@ -107,16 +123,16 @@ export const leaveGroupComment = (action, sio, io) => {
 export const addComment = (action, sio, io) => {
     // console.log(action.data.id)
     console.log(action.data)
-    addNewComment(action.data.id, action.data, action.data.userID, function (comment) {
+    addNewComment(action.data.id, action.data, action.data.userID, action.data.storeId, function (comment) {
         if (comment) {
             io.to(action.data.id).emit('action', {type: 'client/ADD_GROUPCOMMENTS', data: {
                 id: action.data.id,
                 comment: comment
             }})
-            sio.emit('action', {type: 'client/ADD_GROUPCOMMENTS', data: {
-                id: action.data.id,
-                comment: comment
-            }})
+            // sio.emit('action', {type: 'client/ADD_GROUPCOMMENTS', data: {
+            //     id: action.data.id,
+            //     comment: comment
+            // }})
         }
     })
 }
@@ -126,6 +142,7 @@ export const joinComment = (action, sio, io) => {
     if (action.data.offset) time = action.data.offset
     const length = (action.data.length) ? action.data.length : 20
     sio.join(action.data.id)
+    console.log('minh minh join comment nho')
     getSecondLayerComment(action.data.id, time, length, function(data){
         if (data) {
             console.log("this shit " + data)
@@ -143,16 +160,16 @@ export const leaveComment = (action, sio, io) => {
 
 export const addSubComment = (action, sio, io) => {
     console.log(action.data)
-    addNewSecondLayerComment(action.data.id, action.data, action.data.userID, function (comment) {
+    addNewSecondLayerComment(action.data.id, action.data, action.data.userID, action.data.storeId, function (comment) {
         if (comment) {
             io.to(action.data.id).emit('action', {type: 'client/ADD_COMMENTS', data: {
                 id: action.data.id,
                 comment: comment
             }})
-            sio.emit('action', {type: 'client/ADD_COMMENTS', data: {
-                id: action.data.id,
-                comment: comment
-            }})
+            // sio.emit('action', {type: 'client/ADD_COMMENTS', data: {
+            //     id: action.data.id,
+            //     comment: comment
+            // }})
         }
     })
 }

@@ -157,6 +157,8 @@ export const getFacebookUser = () => {
 		   	headers: headers
 		}
 
+		console.log("url" + options.url)
+
 		request(options, function(error, response, body) {
 			if (!error && response.statusCode == 200) {
 				body = JSON.parse(body)

@@ -66,8 +66,9 @@ function getListUser(ids, next) {
 }
 
 function getChatUserInfo(user) {
-	return {id: user._id, avatarUrl: user.avatarUrl, name: user.name}
+    return {id: user._id, avatarUrl: user.avatarUrl, name: user.name}
 }
+
 
 function getChatUserListInfo(userList) {
 	var result = []

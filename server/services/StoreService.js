@@ -23,7 +23,8 @@ export const getStoreInfoService = (store) => {
         id: store._id,
         avatarUrl: store.avatarUrl,
         coverUrl: store.coverUrl,
-        owner: store.owner
+        owner: store.owner,
+        mainPostId: (store.mainPost) ? store.mainPost._id : null
     }
 }
 
@@ -136,3 +137,14 @@ export const getMainPost = (storeid, next) => {
         }
     })
 }
+
+export const getStoreByMainPostId = (id, next) => {
+    Store.findOne({'mainPost._id': id}, function (err, store) {
+        // console.log(store)
+        if (err) next(null)
+        else next(store)
+    })
+}
+
+// getStoreByMainPostId('5929b0a92d53f82b01c48419')
+
