@@ -130,7 +130,7 @@ export const joinComment = (action, sio, io) => {
         if (data) {
             console.log("this shit " + data)
             sio.emit('action', {type: 'client/JOIN_COMMENTS', data: {
-                id: id,
+                id: action.data.id,
                 comments: data
             }})
         }
