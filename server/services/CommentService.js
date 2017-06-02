@@ -45,17 +45,23 @@ export const addNewComment = (postId, data, userId, next) => {
 }
 
 export const getSecondLayerComment = (postId, time, length, next) => {
-    var query = SecondLayerComment.find({postId: postId, time: {$lt: time}}).limit(length)
-    // const query = FirstLayerComment.aggregate([ {$match:{$and:[{time: {$lt:time}}, {postId: postId}]}}, { $limit : length },
-    //     {$project: {id: '$_id', _id: 0,
-    //         posterId: 1,
-    //         posterAvatar: 1, posterName: 1,
-    //         time: 1,
-    //         postId: 1,
-    //         content: 1}}])
-    query.exec(function (err, data){
-        if (err) next(null)
-        else next(data)
+    // var query = SecondLayerComment.find({postId: postId, time: {$lt: time}}).limit(length)
+    // // const query = FirstLayerComment.aggregate([ {$match:{$and:[{time: {$lt:time}}, {postId: postId}]}}, { $limit : length },
+    // //     {$project: {id: '$_id', _id: 0,
+    // //         posterId: 1,
+    // //         posterAvatar: 1, posterName: 1,
+    // //         time: 1,
+    // //         postId: 1,
+    // //         content: 1}}])
+    // query.exec(function (err, data){
+    //     if (err) next(null)
+    //     else next(data)
+    // })
+    FirstLayerComment.findById(postId, function (err, firstComment) {
+        if (err) next(null);
+        else {
+            next(firstComment.childComment)
+        }
     })
 }
 
