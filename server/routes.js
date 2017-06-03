@@ -191,6 +191,14 @@ export default {
             middleware: [auth()],
             method: 'getChatID'
         }
+    },
+
+    '/addpost' : {
+        post:{
+            controller: 'StorePostController',
+            middleware: [auth()],
+            method: 'addPost'
+        }
     }
 
 }

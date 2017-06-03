@@ -5,7 +5,7 @@ import {getOrder} from './OrderService'
 import {getStore} from './StoreService'
 
 export const getTimelyFirstComment = (postId, time, length, next) => {
-    var query = FirstLayerComment.find({postId: postId, time: {$lt: time}}).sort({time: -1}).limit(length)
+    var query = FirstLayerComment.find({postId: postId, time: {$lt: time}}).sort({time: -1}).limit(length).select('-childComment')
     // var query = FirstLayerComment.aggregate([ {$match:{postId: postId, time: {$lt: time}}} ,{$project:{id: '$_id', _id: 0}}])
     // const query = FirstLayerComment.aggregate([ {$match:{$and:[{time: {$lt:time}}, {postId: postId}]}}, { $limit : length },
     //     {$project: {id: '$_id', _id: 0,

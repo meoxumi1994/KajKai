@@ -11,7 +11,7 @@ const StoreSchema = new mongoose.Schema({
     owner: {type: String},
     avatarUrl: {type: String},
     imageUrl: {type: String},
-    mainPost: {type: StorePostSchema}
+    mainPostId: {type: String}
 });
 
 module.exports = StoreSchema

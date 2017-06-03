@@ -20,31 +20,55 @@ export const getMessageList = (person1, person2, time, length, next) => {
         //     console.log(reply)
         //     next(reply)
         // })
-        redisClient.zrangebyscore(mesID, -time, 'inf', 'limit', 0, length - 1, function (err, reply) {
+        redisClient.zrangebyscore(mesID, -time, 'inf', 'limit', 0, length, function (err, reply) {
             if (err) next(null)
             else next(reply)
         })
     }
 }
-redisClient.zrange('5922e9bbd979c3394849e33d$5922efab7b5064397e930ee8', 0, 10, function (err, reply) {
-    console.log(reply)
-})
-
 export const getChatListID = (person) => {
     return 'chatList$' + person
+}
+
+export const getLastMessage = (id, listId, index, time, next) => {
+    // console.log('ffuck ' + id + ' ' + listId[index - 1])
+    if (index > 1) {
+        getLastMessage(id, listId, index - 1, function (lastMessages) {
+            getMessageList(id, listId[index - 1], time, 1, function (message) {
+                if (!message) lastMessages.push(null)
+                else lastMessages.push(message)
+                next(message)
+            })
+        })
+    } else {
+        getMessageList(id, listId[index - 1], time, 1, function (message) {
+            if (!message) next([null])
+            else next([message])
+        })
+    }
 }
 
 export const getChatList = (person, offset, length, next) => {
     const id = getChatListID(person)
     redisClient.zrange(id, offset, offset + length - 1, function (err, reply) {
-        if (err) next(null)
-        else next(reply)
+        if (err || reply.length === 0) next(null)
+        else {
+            next(reply)
+        }
     })
     // redisClient.zrangebyscore(id, -time, 'inf', 'limit', 0, length - 1, function (err, reply) {
     //     if (err) next(null)
     //     else next(reply)
     // })
 }
+
+
+
+// getMessageList()
+
+// getLastMessage('5929aafe756f662ac515c08a', ['59298af92d2933264a56e4ca'], 1, function (data) {
+//     console.log('fuck this shit ' + data)
+// })
 
 export const updateChatLList = (personA, personB, time, next) => {
     redisClient.zadd(getChatListID(personA), -time, personB, function (err) {
@@ -75,4 +99,8 @@ export const addNewMessage = (mesID, person, message, time, next) =>{
             }
         }
     })
+}
+
+export const getWaitingServiceId = (id) => {
+    return 'waiting$' + id
 }

@@ -1,6 +1,7 @@
 import { Store, Category, StorePost } from '../models'
 import { checkPhone } from '../utils/Utils'
 import UserService from './UserService'
+import {getPost} from './StorePostService'
 
 export const getStore = (id, next) => {
     Store.findById(id, function (err, store) {
@@ -24,7 +25,7 @@ export const getStoreInfoService = (store) => {
         avatarUrl: store.avatarUrl,
         coverUrl: store.coverUrl,
         owner: store.owner,
-        mainPostId: (store.mainPost) ? store.mainPost._id : null
+        mainPostId: store.mainPostId
     }
 }
 
@@ -64,13 +65,16 @@ export const addNewStore = (_ownerId, _storename, _address, _phone, _category, _
         next(null)
         return
     }
-
-    store.save(function(err) {
-        if (err) {
-            next(null)
-        } else {
-            next(store)
-        }
+    var storePost = new StorePost({storeId: store._id, createdAt: (new Date()).getTime(), type: 'MAIN'})
+    storePost.save(function (err) {
+        store.mainPostId = storePost._id
+        store.save(function(err) {
+            if (err) {
+                next(null)
+            } else {
+                next(store)
+            }
+        })
     })
 }
 
@@ -125,26 +129,39 @@ export const getMainPost = (storeid, next) => {
     getStore(storeid, function (store) {
         if (!store) next(null)
         else {
-            if (!store.mainPost) {
-                store.mainPost = new StorePost();
-                store.save(function(err){
-                    if (!err) next(store)
-                    else next(null)
+            if (!store.mainPostId) {
+                var mainPost = new StorePost({storeId: store._id});
+                mainPost.save(function () {
+                    store.mainPostId = mainPost._id;
+                    store.save(function(err){
+                        if (!err) next(mainPost)
+                        else next(null)
+                    })
                 })
+
             } else {
-                next(store)
+                getPost(store.mainPostId, function (err, post) {
+                    if (err) next(null)
+                    else next(post)
+                })
             }
         }
     })
 }
 
-export const getStoreByMainPostId = (id, next) => {
+export const getStoreByPostId = (id, next) => {
     Store.findOne({'mainPost._id': id}, function (err, store) {
         // console.log(store)
         if (err) next(null)
         else next(store)
     })
+    getPost(id, function (post) {
+        if (!post) next(null)
+        else {
+            getStore(post.storeId, function (store) {
+                if (!store) next(null)
+                else next(store)
+            })
+        }
+    })
 }
-
-// getStoreByMainPostId('5929b0a92d53f82b01c48419')
-
