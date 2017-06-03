@@ -7,7 +7,9 @@ import LoginContainer from '~/containers/user-login-register/LoginContainer'
 import RegisterContainer from '~/containers/user-login-register/RegisterContainer'
 
 
-const LoginRegister = ({ g, iswhoing, isusername, changeLanguage, isregistersuccess, isloading }) => {
+const LoginRegister = ({
+    KAJKAI_THANK,
+    g, iswhoing, isusername, changeLanguage, isregistersuccess, isloading }) => {
     if(iswhoing)
         return <div></div>
     if(isusername)
@@ -18,7 +20,7 @@ const LoginRegister = ({ g, iswhoing, isusername, changeLanguage, isregistersucc
                 <Col xs={6} sm={6} md={6} style={{ minHeight: 700-146, height: window.innerHeight - 146, backgroundColor: 'white'}}>
                     <div className="text-center">
                       <h2>
-                          KajKai<small>{g('KAJKAI_THANK')}</small>
+                          KajKai<small>{KAJKAI_THANK}</small>
                       </h2>
                     </div>
                     <div className="text-center">

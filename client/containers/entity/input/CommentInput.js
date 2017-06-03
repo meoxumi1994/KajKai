@@ -10,7 +10,6 @@ const mapStateToProps = (state, { id, groupcommentsId, margintopbot }) => {
     if(content == '\n') content = ''
     const groupcomments = state.inst.entity.group.groupcomments
     const { storeId } = groupcomments[groupcommentsId] || groupcomments.default
-    console.log('state.inst.entity.group.groupcomments[id]',id, storeId)
     return({
         storeId,
         content,

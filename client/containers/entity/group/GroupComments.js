@@ -7,7 +7,6 @@ const mapStateToProps = (state, { myavatar, id }) => {
     const g = (lang) => get(state.user.language, lang)
     const groupcomments = state.inst.entity.group.groupcomments
     const data = groupcomments[id] || groupcomments.default
-    console.log('mapStateToProps GroupComments', id)
     return({
         ...data,
         id: id,
@@ -16,7 +15,7 @@ const mapStateToProps = (state, { myavatar, id }) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    
+
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {

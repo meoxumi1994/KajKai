@@ -4,7 +4,6 @@ import Comments from '~/containers/entity/group/Comments'
 import CommentInput from '~/containers/entity/input/CommentInput'
 
 const GroupComments = ({ id, myavatar, content, time, comments, products }) => {
-    console.log('GroupComments id', id)
     return(
         <div className="container-fluid">
             <div className="row" style={{ marginBottom: 5 }}>

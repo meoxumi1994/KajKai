@@ -4,7 +4,6 @@ import Comment from '~/containers/entity/row/Comment'
 import CommentInput from '~/containers/entity/input/CommentInput'
 
 const Comments = ({ id, groupcommentsId, isreply, listcm, istyping, myavatar }) => {
-    console.log('Comments id', id)
     return(
         <div>
             <Comment avatarsize={37} id={id} replydispatch='server/JOIN_COMMENTS'/>

@@ -10,7 +10,6 @@ class Post extends React.Component {
     }
     render(){
         const { canedit, onedit, avatarUrl, id, list, onEdit, onSave, onChooseType } = this.props
-        console.log('components mainPostId', id)
         return(
             <div className="panel panel-default"
                 style={{ minWidth: 540, minheight: 700,  margin: 7}}>
