@@ -1,4 +1,4 @@
-import {getMessageList, getChatList, addNewMessage, getMessageId} from '../services/MessageService'
+import {getMessageList, getChatList, addNewMessage, getMessageId, getLastMessage, getWaitingServiceId} from '../services/MessageService'
 import UserService from '../services/UserService'
 
 export const getChatBuddies = () => {
@@ -10,12 +10,21 @@ export const getChatBuddies = () => {
             if (!data) res.json({chatList : data})
             else {
                 UserService.getListUser(data, function (docs) {
-                    res.json({chatList: UserService.getChatUserListInfo(docs)})
+                    getLastMessage(id, docs, docs.length, (new Date()).getTime(), function (lastMessages) {
+                        var chatList = UserService.getChatUserListInfo(docs)
+                        for (var i = 0; i < chatList.length; ++i) {
+                            chatList[i] = {...chatList[i], lastMessage: lastMessages[i]}
+                        }
+                        console.log(chatList)
+                        res.json({chatList: chatList})
+                    })
                 })
             }
         })
     }
 }
+
+
 
 export const getMessages = () => {
     return (req, res) => {
@@ -90,7 +99,47 @@ export const addMessage = (action, sio, io, myId) => {
                 message: data.message,
                 person: myId
             }})
+            var pId = mesId.split('$')
+            if (pId !== myId) {
+                getLastMessage(myId, [pId], 1, data.time, function (lastMessages) {
+                    var chatList = UserService.getChatUserListInfo(docs)
+                    for (var i = 0; i < chatList.length; ++i) {
+                        chatList[i] = {...chatList[i], lastMessage: lastMessages[i]}
+                    }
+                    console.log(chatList)
+                    sio.emit('action', {type: 'client/CHAT_WAITING', data: chatList})
+                })
+            }
         }
     })
 }
 
+
+export const joinChatWaiting = (action, sio, io) => {
+    const id = getWaitingServiceId(action.data.userID)
+    sio.join(id)
+    var offset = (new Date()).getTime()
+    if (action.data.offset) offset = action.data.offset
+    var length = 10
+    if (action.data.body) length = 10
+    getChatList(action.data.id, offset, length, function (data) {
+        if (!data) {}
+        else {
+            UserService.getListUser(data, function (docs) {
+                getLastMessage(id, docs, docs.length, (new Date()).getTime(), function (lastMessages) {
+                    var chatList = UserService.getChatUserListInfo(docs)
+                    for (var i = 0; i < chatList.length; ++i) {
+                        chatList[i] = {...chatList[i], lastMessage: lastMessages[i]}
+                    }
+                    console.log(chatList)
+                    //res.json({chatList: chatList})
+                    sio.emit('action', {type: 'client/CHAT_WAITING', data: chatList})
+                })
+            })
+        }
+    })
+}
+
+export const stopChatWaiting = (action, sio, io) => {
+    sio.leave(getWaitingServiceId(action.data.userID))
+}

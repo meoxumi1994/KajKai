@@ -10,22 +10,21 @@ const center = (state = {
     offset: 0
   },
   url: {
-    uploadingImgs: [],
-    sentImgs: []
+    imageList: [],
+    isLoading: true
   }
 }, action) => {
     switch (action.type) {
         case 'UPLOADING_IMAGES':
+            console.log('action ',action);
             return {
               ...state,
               url: {
                 ...state.url,
-                uploadingImgs: [
-                  action.uploadingImgs
-                ]
+                imageList: action.imageList,
+                isLoading: action.imageList.length == 0? true: false
               }
             }
-
         // [socket.io] Init last 10 message
         case 'client/INIT_MESSAGE':
           return {
@@ -44,12 +43,10 @@ const center = (state = {
         // [socket.io] recevice message
         case 'client/RECEIVE_MESSAGE':
             var newMessage = {
-
               id: action.data.person,
               message: action.data.message,
               time: action.data.time
             }
-            console.log('action ', action);
             return {
               ...state,
               lazyLoad: {

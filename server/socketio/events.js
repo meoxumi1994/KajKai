@@ -27,17 +27,17 @@ export default {
         controller: 'CommentController',
         method: 'testToken'
     },
-    'server/CHANGE_STOREMAINPOST': {
+    'server/CHANGE_STORE_POST': {
         controller: 'StorePostController',
-        method: 'updateStoreMainPost'
+        method: 'updateStorePost'
     },
-    'server/JOIN_STOREMAINPOST': {
+    'server/JOIN_STORE_POST': {
         controller: 'StorePostController',
-        method: 'joinMainPost'
+        method: 'joinPost'
     },
-    'server/LEAVE_STOREMAINPOST': {
+    'server/LEAVE_STORE_POST': {
         controller: 'StorePostController',
-        method: 'leaveMainPost'
+        method: 'leavePost'
     },
     'server/JOIN_CHAT': {
         controller: 'ChatController',
@@ -74,5 +74,13 @@ export default {
     'server/ADD_COMMENTS': {
         controller: 'CommentController',
         method: 'addSubComment'
+    },
+    'server/CHAT_WAITING': {
+        controller: 'ChatController',
+        method: 'joinChatWaiting'
+    },
+    'server/STOP_CHAT_WAITING': {
+        controller: 'ChatController',
+        method: 'stopChatWaiting'
     }
 }

@@ -2,7 +2,7 @@ import UserService from '../services/UserService.js'
 import { User } from '../models'
 import { getStore, getStoreInfoService } from '../services/StoreService'
 import { getTimelyFirstComment, addNewComment, addNewSecondLayerComment, getSecondLayerComment } from '../services/CommentService'
-import { getStoreByMainPostId } from '../services/StoreService'
+import { getStoreByPostId } from '../services/StoreService'
 
 export const getTarget = () => {
     return (req, res) => {
@@ -92,7 +92,7 @@ export const joinGroupComment = (action, sio, io) => {
     if (action.data.length) length = action.data.length
     sio.join(action.data.id)
 
-    getStoreByMainPostId(action.data.id, function (store) {
+    getStoreByPostId(action.data.id, function (store) {
         if (store) {
             getTimelyFirstComment(id, time, length, function (data) {
                 if (data) {
