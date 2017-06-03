@@ -20,6 +20,14 @@ export const getChatList = (offset, length) => dispatch => {
     })
 }
 
+export const  chatWaiting = () => dispatch => {
+  dispatch (
+    {
+      type: "server/CHAT_WAITING"
+    }
+  )
+}
+
 // [socket.io] Join chat
 export const joinChat = (chat) => dispatch => {
     dispatch(
@@ -34,7 +42,6 @@ export const joinChat = (chat) => dispatch => {
 
 // [socket.io] Send message
 export const sendMessage = (msg) => dispatch => {
-    console.log('sendMessage ',msg);
     dispatch(
       {
         type:"server/ADD_MESSAGE",

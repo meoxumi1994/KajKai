@@ -3,7 +3,7 @@ import { get } from '~/config/allString'
 
 import Middle from '~/components/target/middle'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state ) => {
     const g = (lang) => get(state.user.language, lang)
     const { type } = state.inst.target.index
     return({

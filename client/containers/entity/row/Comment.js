@@ -2,22 +2,30 @@ import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
 import Comment from '~/components/entity/row/Comment'
+import { getTime } from '~/containers/support'
 
-const mapStateToProps = (state, { id }) => {
+const mapStateToProps = (state, { id, avatarsize }) => {
     const g = (lang) => get(state.user.language, lang)
     const comment = state.inst.entity.row.comment
     const data = comment[id] || comment.default
+    const time = getTime(data.time)
     return({
-        ...data
+        ...data,
+        time: time,
+        avatarsize: avatarsize,
     })
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    onLikeClick: (id) => {
+const mapDispatchToProps = (dispatch, { id, replydispatch }) => ({
+    onLikeClick: () => {
         console.log('onLikeClick', id)
     },
     onReplyClick: (name) => {
-        console.log('onReplyClick', name)
+        if(replydispatch == 'server/JOIN_COMMENTS'){
+            dispatch({ type: replydispatch, data: { id: id } })
+        }else{
+            dispatch({ type: replydispatch, name: name, id: id })
+        }
     }
 })
 
@@ -28,7 +36,6 @@ const mergerProps = (stateProps, dispatchProps, { id }) => {
         ...anotherState,
         ...anotherDispatch,
         name,
-        onLikeClick: () => onLikeClick(id),
         onReplyClick: () => onReplyClick(name),
     })
 }

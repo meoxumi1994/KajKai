@@ -3,7 +3,6 @@ import MessageList from '~/components/chat/center/MessageList'
 import { getMessage } from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log('state ',state);
   return (
     {
       myInfo: state.user,

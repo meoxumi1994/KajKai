@@ -1,6 +1,8 @@
 import React from 'react'
-import {FormGroup, FormControl, HelpBlock, ControlLabel, Button} from 'react-bootstrap'
+import { FormGroup, FormControl, HelpBlock, ControlLabel, Button , OverlayTrigger, Popover } from 'react-bootstrap'
 import ModalUploadImageContainer from '~/containers/chat/bottom/ModalUploadImageContainer'
+import IconPopOver from './IconPopOver'
+// import IconPopOverContainer from '~/containers/chat/bottom/IconPopOverContainer'
 
 const SendMessage = ({mesId, sendMessage, visibility, uploadImage}) => {
   let msg
@@ -29,9 +31,12 @@ const SendMessage = ({mesId, sendMessage, visibility, uploadImage}) => {
                     <i className="glyphicon glyphicon-camera"></i>
                 </button>
 
-                <button className="btn btn-default btn-md" type="button">
-                    <i className="glyphicon glyphicon-apple"></i>
-                </button>
+                <OverlayTrigger trigger="click" rootClose placement="top" overlay={IconPopOver}>
+                    <button className="btn btn-default btn-md" type="button">
+                        <i className="glyphicon glyphicon-apple"></i>
+                    </button>
+                </OverlayTrigger>
+
           </div>
           <ModalUploadImageContainer/>
         </span>
@@ -40,28 +45,6 @@ const SendMessage = ({mesId, sendMessage, visibility, uploadImage}) => {
   )
 }
 
-const styles = {
-  inputWrapper: {
-    height: 32,
-    width: 64,
-    overflow: 'hidden',
-    position: 'relative',
-    cursor: 'pointer',
-    /*Using a background color, but you can use a background image to represent a button*/
-    backgroundColor: '#DDF',
-},
-fileInput: {
-    cursor: 'pointer',
-    height: '100%',
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    zIndex: 99,
-    /*This makes the button huge. If you want a bigger button, increase the font size*/
-    /*Opacity settings for all browsers*/
-    opacity: 100,
-    MozOpacity: 100,
-}
-}
+
 
 export default SendMessage

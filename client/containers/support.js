@@ -104,3 +104,14 @@ export const FilteringPhoneDefaultVietName = (phone) => {
         newphone = phone;
     return newphone;
 }
+
+export const getTime = (time) => {
+    const seconds = Math.floor(((new Date()).getTime() - time) / 1000);
+    if(seconds < 60) return 'just now'
+    const mins = Math.floor(((new Date()).getTime() - time) / 60000);
+    if(mins < 60) return mins+' mins'
+    const hours = Math.floor(((new Date()).getTime() - time) / 3600000);
+    if(hours < 24) return hours+' hrs'
+    const days = Math.floor(((new Date()).getTime() - time) / 86400000);
+    return days+' days'
+}

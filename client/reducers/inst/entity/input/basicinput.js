@@ -19,9 +19,9 @@ const basicinput = (state = { default: {
     opensupplement: false,
 }}, action) => {
     switch (action.type) {
-        case 'TARGET_MIDDLE_MAINPOST_ADD':
+        case 'TARGET_MIDDLE_POST_ADD':
             return {...state, [action.rowid]: {...state.default}}
-        case 'client/STOREMAINPOST':
+        case 'client/STORE_POST':
             action.data.list.map((row) => {
                 state = {...state, [row.id]: {...state[row.id], content: row.content }}
             })

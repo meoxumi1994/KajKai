@@ -8,11 +8,11 @@ import ModalUploadImage from '~/components/chat/bottom/ModalUploadImage'
 import { sendMessage } from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
-    // console.log('state ',state.inst.chat.center.url.uploadingImgs);
     return ({
       visibility: state.inst.chat.visibility.buttom.uploadImage,
-      uploadingImgs: state.inst.chat.center.url.uploadingImgs,
-      mesId: state.inst.chat.center.mesId
+      imageList: state.inst.chat.center.url.imageList,
+      mesId: state.inst.chat.center.mesId,
+      isLoading: state.inst.chat.center.url.isLoading
     })
 }
 
@@ -25,9 +25,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         const file = e.target.files[0]
         dispatch(uploadImage('sendImage', file))
     },
-    sendImage: (mesId, uploadingImgs) => {
-        for (var i=0; i< uploadingImgs.length; i++) {
-            dispatch(sendMessage({mesId: mesId, text: uploadingImgs[i]}))
+    sendImage: (mesId, imageList) => {
+        for (var i=0; i< imageList.length; i++) {
+            dispatch(sendMessage({mesId: mesId, text: imageList[i].urlreal}))
         }
         dispatch(updateUploadImageVisibility(false))
     }

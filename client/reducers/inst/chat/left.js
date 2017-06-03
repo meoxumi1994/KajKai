@@ -7,6 +7,9 @@ const left = (state = {
               ...state,
               chatList: action.chatList
             }
+        case 'client/CHAT_WAITING':
+            console.log('action ',action);
+            return state
         default:
             return state
     }

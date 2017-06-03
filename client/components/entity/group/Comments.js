@@ -3,34 +3,32 @@ import React from 'react'
 import Comment from '~/containers/entity/row/Comment'
 import CommentInput from '~/containers/entity/input/CommentInput'
 
-const Comments = ({ id, products, content, avatar, myavatar, name, time,
-    status, likes, numlikes, numreplys, istyping, isreply, listcm, onHandleChangeContent, onLikeClick, onReplyClick }) => {
+const Comments = ({ id, groupcommentsId, isreply, listcm, istyping, myavatar }) => {
+    console.log('Comments id', id)
     return(
-        <div className="row">
-            <div className="col-xs-1">
-                <img src={avatar} style={{ width: 37, height: 37 }}/>
-            </div>
-            <div className="col-xs-11">
-                <strong >{name}</strong>{" "}
-                <span>{content}</span>
-                <div>
-                    <div className="btn btn-transparent btn-xs" onClick={() => onLikeClick()}><a>Like</a>{" " + numlikes}</div>
-                    <div className="btn btn-transparent btn-xs" onClick={() => onReplyClick()}><a>Reply</a>{" " + numreplys}</div>
+        <div>
+            <Comment avatarsize={37} id={id} replydispatch='server/JOIN_COMMENTS'/>
+            <div className="row">
+                <div className="col-xs-1">
                 </div>
-                {isreply &&
-                    <div>
-                        {listcm.map((item, index) => <Comment key={index} id={item}/>)}
-                        {istyping && <div>someone is typing .... </div>}
-                        <div className="row">
-                            <div className="col-xs-1">
-                                <img src={myavatar} style={{ width: 37, height: 37 }}/>
-                            </div>
-                            <div className="col-xs-11">
-                                <CommentInput id={id}/>
+                <div className="col-xs-11">
+                    {isreply &&
+                        <div>
+                            {listcm.map((item, index) =>
+                                <Comment avatarsize={25} key={index} id={item.id} replydispatch='ENTITY_ROW_COMMENTS_REPLY' />)}
+                            {istyping && <div>someone is typing .... </div>}
+                            <div className="row">
+                                <div className="col-xs-1">
+                                    <img src={myavatar} style={{ width: 25, height: 25 }}/>
+                                </div>
+                                <div className="col-xs-11">
+                                    <CommentInput groupcommentsId={groupcommentsId}
+                                        id={id} paddingtopbot={0} request='server/ADD_COMMENTS'/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     )
