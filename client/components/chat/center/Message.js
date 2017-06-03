@@ -1,8 +1,6 @@
 import React from 'react'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 
-
-
 const Message = ({message, time, user, style}) => {
 
     const popoverHoverFocus = (
