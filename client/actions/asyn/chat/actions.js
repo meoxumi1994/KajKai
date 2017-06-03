@@ -24,7 +24,7 @@ export const loadChat = (messages, chat) => ({
     chat
 })
 
-export const uploadingImages = (uploadingImgs) => ({
+export const uploadingImages = (imageList) => ({
     type: 'UPLOADING_IMAGES',
-    uploadingImgs: uploadingImgs
+    imageList: imageList
 })
