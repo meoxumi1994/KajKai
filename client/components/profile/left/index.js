@@ -12,12 +12,14 @@ const Left = ({ storeList, CREATE_STORE, onStoreClick}) => {
                 </div>
             </Link>
 
-            {storeList && storeList.map((value,index) =>
-                <Link key={index} to='/store'>
-                    <div className="btn btn-default btn-sm" onClick={() => onStoreClick(index)}>
-                        {value.storename}
-                    </div>
-                </Link>)
+            {storeList && storeList.map((value,index) => {
+                return(
+                    <Link key={index} to={'/' + value.id}>
+                        <div className="btn btn-default btn-sm" onClick={() => onStoreClick(index)}>
+                            {value.storename}
+                        </div>
+                    </Link>)
+                })
             }
 
         </div>

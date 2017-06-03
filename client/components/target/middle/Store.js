@@ -1,13 +1,16 @@
 import React from 'react';
 
 import Top from '~/containers/target/middle/Top'
-import MainPost from '~/containers/target/middle/MainPost'
+import Post from '~/containers/target/middle/Post'
 
-const Store = (props) => {
+const Store = ({ id, onCreateStore}) => {
     return(
         <div>
-            <Top {...props} />
-            <MainPost/>
+            <Top/>
+            <Post id={id}/>
+            <div className="btn btn-default" onClick={() => onCreateStore()}>
+                create store
+            </div>
         </div>
     )
 }

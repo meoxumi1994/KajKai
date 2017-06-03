@@ -3,21 +3,24 @@ const groupcommets = (state = {
         id: 'default',
         istyping: '',
         listtype: '',
-        listcms: [{ id: 'default'},{ id: 'default'},{ id: 'default'}]
+        comments: [],
+        storeId: undefined,
     }
 }, action) => {
     switch (action.type) {
         case 'client/ADD_GROUPCOMMENTS':
             const { id, comment } = action.data
             return {...state, [id]: {...state[id],
-                listcms: [...state[id].listcms, { id: comment.id }],
+                comments: [...state[id].comments, { id: comment._id }],
             }}
         case 'client/JOIN_GROUPCOMMENTS':
-            const mylist = action.data.listcm.map((item) => ({ id: item.id }))
-            return {...state, [action.id]: {
+            const mylist = action.data.comments.map((item) => ({ id: item._id }))
+            console.log('action.data.storeId', action.data.storeId)
+            return {...state, [action.data.id]: {
                 ...action.data,
-                listcms: mylist,
-            } }
+                comments: mylist,
+                storeId: action.data.storeId,
+            }}
         default:
             return state
     }

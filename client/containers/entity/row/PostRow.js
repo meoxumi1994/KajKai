@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import MainPostRow from '~/components/entity/row/MainPostRow'
+import PostRow from '~/components/entity/row/PostRow'
 
 const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
-    const mainpostrow = state.inst.entity.row.mainpostrow
-    const data = mainpostrow[id] || mainpostrow.default
+    const postrow = state.inst.entity.row.postrow
+    const data = postrow[id] || postrow.default
     return({
         id: id,
         data: data,
@@ -17,8 +17,8 @@ const mapDispatchToProps = (dispatch, { id }) => ({
 
 })
 
-const MainPostRowContainer = connect(
+const PostRowContainer = connect(
     mapStateToProps, mapDispatchToProps
-)(MainPostRow)
+)(PostRow)
 
-export default MainPostRowContainer
+export default PostRowContainer

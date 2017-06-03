@@ -1,13 +1,16 @@
 import React from 'react'
 
-import MainPostRow from '~/containers/entity/row/MainPostRow'
+import PostRow from '~/containers/entity/row/PostRow'
 
-class MainPost extends React.Component {
+import GroupComments from '~/containers/entity/group/GroupComments'
+
+class Post extends React.Component {
     constructor(props){
         super(props)
     }
     render(){
-        const { canedit, onedit, list, onEdit, onSave, onChooseType } = this.props
+        const { canedit, onedit, avatarUrl, id, list, onEdit, onSave, onChooseType } = this.props
+        console.log('components mainPostId', id)
         return(
             <div className="panel panel-default"
                 style={{ minWidth: 540, minheight: 700,  margin: 7}}>
@@ -15,7 +18,7 @@ class MainPost extends React.Component {
                     <div className="btn btn-default" onClick={() => onSave()}>save</div>
                 :   <div className="btn btn-default" onClick={() => onEdit()}>edit</div> )
                 }
-                {list.map((item, index) => <MainPostRow key={index} id={item.id} onedit={onedit}/>)
+                {list.map((item, index) => <PostRow key={index} id={item.id} onedit={onedit}/>)
                 }
                 {onedit &&
                     <div className="input-group-btn">
@@ -33,9 +36,12 @@ class MainPost extends React.Component {
                       </ul>
                     </div>
                 }
+                <GroupComments
+                    myavatar={avatarUrl}
+                    id={id}/>
             </div>
         )
     }
 }
 
-export default MainPost
+export default Post

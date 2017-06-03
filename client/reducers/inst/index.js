@@ -12,7 +12,6 @@ const inst = combineReducers({
     userloginregister,
     profile,
     registerstore,
-    store,
     target,
     entity,
     chat

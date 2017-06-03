@@ -9,35 +9,20 @@ const mapStateToProps = (state, { id, myavatar }) => {
     const data = comments[id] || comments.default
     return({
         id: id,
-        ...data,
         myavatar: myavatar,
+        ...data,
     })
 }
 
 const mapDispatchToProps = (dispatch, { id }) => ({
     onHandleChangeContent : (event) => {
         dispatch({ type: 'ENTITY_ROW_COMMENTS_CONTENT_HANDLE_CHANGE', id: id, content: event.target.value})
-    },
-    onLikeClick: (id) => {
-        console.log('onLikeClick', id)
-    },
-    onReplyClick: () => {
-        dispatch({ type: 'ENTITY_ROW_COMMENTS_REPLY', id: id })
     }
 })
 
-const mergerProps = (stateProps, dispatchProps, { id }) => {
-    const { ...anotherState } = stateProps
-    const { onLikeClick, ...anotherDispatch } = dispatchProps
-    return({
-        ...anotherState,
-        ...anotherDispatch,
-        onLikeClick: () => onLikeClick(id)
-    })
-}
 
 const CommentsContainer = connect(
-    mapStateToProps, mapDispatchToProps, mergerProps
+    mapStateToProps, mapDispatchToProps
 )(Comments)
 
 export default CommentsContainer

@@ -1,26 +1,26 @@
 const item = (state = {}, action) => {
     switch (action.type) {
-        case 'TARGET_MIDDLE_MAINPOST_ADD':
+        case 'TARGET_MIDDLE_POST_ADD':
             return {...state, type: action.rowtype}
         default:
             return state
     }
 }
 
-const mainpostrow = (state = {default: {
+const postrow = (state = {default: {
     type: '',
 }}, action) => {
     switch (action.type) {
-        case 'client/STOREMAINPOST':
+        case 'client/STORE_POST':
             action.data.list.map((row) => {
                 state = {...state, [row.id]: {...state[row.id], type: row.type }}
             })
             return state
-        case 'TARGET_MIDDLE_MAINPOST_ADD':
+        case 'TARGET_MIDDLE_POST_ADD':
             return {...state, [action.rowid] : item(state[action.rowid], action) }
         default:
             return state
     }
 }
 
-export default mainpostrow
+export default postrow

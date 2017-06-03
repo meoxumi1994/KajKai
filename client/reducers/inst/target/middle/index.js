@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import mainpost from './mainpost'
+import post from './post'
 
 const middle = combineReducers({
-    mainpost,
+    post,
 })
 
 export default middle

@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 
-import mainpostrow from './mainpostrow'
+import postrow from './postrow'
 import comment from './comment'
 
 const row = combineReducers({
-    mainpostrow,
+    postrow,
     comment,
 })
 

@@ -3,7 +3,8 @@ import React from 'react'
 import Comments from '~/containers/entity/group/Comments'
 import CommentInput from '~/containers/entity/input/CommentInput'
 
-const GroupComments = ({ id, myavatar, content, time, listcms, products }) => {
+const GroupComments = ({ id, myavatar, content, time, comments, products }) => {
+    console.log('GroupComments id', id)
     return(
         <div className="container-fluid">
             <div className="row" style={{ marginBottom: 5 }}>
@@ -12,11 +13,13 @@ const GroupComments = ({ id, myavatar, content, time, listcms, products }) => {
                 </div>
                 <div className="col-xs-11">
                     <div style={{ marginTop: 2 }}>
-                        <CommentInput id={id} paddingtopbot={5}/>
+                        <CommentInput groupcommentsId={id}
+                            id={id} paddingtopbot={5} request='server/ADD_GROUPCOMMENTS'/>
                     </div>
                 </div>
             </div>
-            {listcms.map((item,index) => <Comments id={item.id} key={index} myavatar={myavatar}/>)}
+            {comments.map((item,index) => <Comments groupcommentsId={id}
+                id={item.id} key={index} myavatar={myavatar}/>)}
         </div>
     )
 }

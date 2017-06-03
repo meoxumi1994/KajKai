@@ -35,6 +35,8 @@ const store = createStore(
     )
 )
 
+store.dispatch({ type: 'server/hello'})
+
 ReactDOM.render(
     <AppContainer>
        <Provider store={store}>

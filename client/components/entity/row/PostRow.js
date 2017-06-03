@@ -2,7 +2,7 @@ import React from 'react'
 
 import BasicInput from '~/containers/entity/input/BasicInput'
 
-class MainPostRow extends React.Component {
+class PostRow extends React.Component {
     constructor(props){
         super(props)
     }
@@ -58,4 +58,4 @@ class MainPostRow extends React.Component {
     }
 }
 
-export default MainPostRow
+export default PostRow

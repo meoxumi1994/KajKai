@@ -1,31 +1,33 @@
 const comments = (state = {
     default: {
-        id: undefined,
-        products: [],
+        id: 'default',
         isreply: false,
-        content: '',
-        avatar: './images/avatardefault.png',
-        name: '',
-        time: '',
-        status: 'waiting',
-        numlikes: 0,
-        likes: [],
-        numreplys: 0,
-        replys: [],
         istyping: true,
         listcm: [],
     }
 }, action) => {
     switch (action.type) {
-        case 'ENTITY_ROW_COMMENTS_REPLY':
-            console.log('ENTITY_ROW_COMMENTS_REPLY', {...state, [action.id]: {...state[action.id], isreply: true } })
-            return {...state, [action.id]: {...state[action.id], isreply: true }}
+        case 'client/JOIN_COMMENTS':
+            const mylistcm = action.data.comments.map((item) => ({ id: item._id }))
+            return {...state, [action.data.id]: {...state[action.data.id], listcm: mylistcm, isreply: true }}
+        case 'client/ADD_COMMENTS':
+            const id = action.data.id
+            const item = action.data.comment
+            return {...state, [id]: {
+                ...state[id],
+                listcm: [...state[id].listcm, { id: item._id } ]
+            }}
         case 'ENTITY_ROW_COMMENTS_CONTENT_HANDLE_CHANGE':
             return {...state, [action.id]: {...state[action.id], content: action.content }}
+        case 'client/ADD_GROUPCOMMENTS':
+            const { comment } = action.data
+            return {...state, [comment._id]: {...comment} }
         case 'client/JOIN_GROUPCOMMENTS':
-            const listcms = action.data.listcms
-            listcms.map((item) => {
-                state = {...state, [item.id]: {...item}}
+            const comments = action.data.comments
+            comments.map((item) => {
+                state = {...state, [item._id]: {
+                    id: item._id,
+                }}
             })
             return {...state}
         default:

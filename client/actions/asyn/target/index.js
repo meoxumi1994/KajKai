@@ -16,6 +16,9 @@ export const getTarget = (id) => dispatch => {
             dispatch(targetData('TARGET_GET_SUCCESS', { ...user, type }))
         }else if(status == 'success' && store){
             dispatch(targetData('TARGET_GET_SUCCESS', { ...store, type }))
+            dispatch({ type: 'server/JOIN_GROUPCOMMENTS',
+                data: { id: store.mainPostId , type: 'MOSTRECENT', offset: (new Date()).getTime(),length:  10 } })
+            dispatch({ type: 'server/JOIN_STORE_POST', data: { id: store.mainPostId } })
         }else {
             dispatch(targetAction('TARGET_GET_FAILED'))
         }
