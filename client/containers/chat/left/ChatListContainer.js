@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ChatList from '~/components/chat/left/ChatList'
-import { getChatList, addMessage, getMessage, getChatId, getTarget } from '~/actions/asyn/chat'
+import { getChatList, addMessage, getMessage, getChatId, getTarget, chatWaiting } from '~/actions/asyn/chat'
 import { joinChat } from '~/actions/asyn/chat'
 import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actions/asyn/chat/actions'
 
@@ -21,7 +21,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       dispatch(updateCreateChatVisibility(false))
   },
   getChatList: () => {
-      dispatch(getChatList());
+      dispatch(getChatList())
+      dispatch(chatWaiting())
   },
   createNewChat: () => {
       // visibility

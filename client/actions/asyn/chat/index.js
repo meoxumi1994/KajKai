@@ -20,7 +20,7 @@ export const getChatList = (offset, length) => dispatch => {
     })
 }
 
-export const  chatWaiting = () => dispatch => {
+export const chatWaiting = () => dispatch => {
   dispatch (
     {
       type: "server/CHAT_WAITING"
