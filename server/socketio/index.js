@@ -14,16 +14,7 @@ const init = (server) => {
             console.log('a user disconnected')
         })
         // load all events
-        const token =  getTokenSocketCookie(socket.handshake.headers.cookie)
-        console.log('sockettoken: ' + token)
 
-        var userID = null
-        if (token) {
-            var decoded = verifyToken(token)
-            if (decoded)
-                userID = decoded._id
-        }
-        console.log('me ' + userID)
 
         for(let e in allEvents){
             let handler = allEvents[e]
@@ -32,10 +23,30 @@ const init = (server) => {
 
             if (handler.controller === 'ChatController') {
                 socket.on(e, (action) => {
+                    const token =  getTokenSocketCookie(socket.handshake.headers.cookie)
+                    console.log('sockettoken: ' + token)
+
+                    var userID = null
+                    if (token) {
+                        var decoded = verifyToken(token)
+                        if (decoded)
+                            userID = decoded._id
+                    }
+                    console.log('me ' + userID)
                     method(action, socket, sio, userID)
                 })
             } else {
                 socket.on(e, (action) => {
+                    const token =  getTokenSocketCookie(socket.handshake.headers.cookie)
+                    console.log('sockettoken: ' + token)
+
+                    var userID = null
+                    if (token) {
+                        var decoded = verifyToken(token)
+                        if (decoded)
+                            userID = decoded._id
+                    }
+                    console.log('me ' + userID)
                     if (action.data) {
                         action.data = {...action.data, userID: userID }
                     }

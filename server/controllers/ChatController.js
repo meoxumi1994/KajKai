@@ -116,7 +116,7 @@ export const addMessage = (action, sio, io, myId) => {
 
 
 export const joinChatWaiting = (action, sio, io) => {
-    const id = getWaitingServiceId(action.data.id)
+    const id = getWaitingServiceId(action.data.userID)
     sio.join(id)
     var offset = (new Date()).getTime()
     if (action.data.offset) offset = action.data.offset
@@ -141,5 +141,5 @@ export const joinChatWaiting = (action, sio, io) => {
 }
 
 export const stopChatWaiting = (action, sio, io) => {
-    sio.leave(getWaitingServiceId(action.data.id))
+    sio.leave(getWaitingServiceId(action.data.userID))
 }
