@@ -49,6 +49,8 @@ const init = (server) => {
                     console.log('me ' + userID)
                     if (action.data) {
                         action.data = {...action.data, userID: userID }
+                    } else {
+                        action.data = {userID, userID}
                     }
                     // if(validateTokenDemo(action.token)) {
                     //     method(action, sio)
