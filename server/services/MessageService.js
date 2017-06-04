@@ -36,7 +36,7 @@ export const getLastMessage = (id, listId, index, time, next) => {
         getLastMessage(id, listId, index - 1, time, function (lastMessages) {
             getMessageList(id, listId[index - 1], time, 1, function (message) {
                 if (!message || message.length === 0) lastMessages.push(null)
-                else lastMessages.push(message)
+                else lastMessages.push(message[0])
                 console.log(message)
                 next(lastMessages)
             })

@@ -10,7 +10,7 @@ export const getChatBuddies = () => {
             if (!data) res.json({chatList : data})
             else {
                 UserService.getListUser(data, function (docs) {
-                    getLastMessage(id, docs, docs.length, (new Date()).getTime(), function (lastMessages) {
+                    getLastMessage(id, data, data.length, (new Date()).getTime(), function (lastMessages) {
                         console.log(lastMessages)
                         var chatList = UserService.getChatUserListInfo(docs)
                         for (var i = 0; i < chatList.length; ++i) {
@@ -129,7 +129,7 @@ export const joinChatWaiting = (action, sio, io) => {
         if (!data) {}
         else {
             UserService.getListUser(data, function (docs) {
-                getLastMessage(id, docs, docs.length, (new Date()).getTime(), function (lastMessages) {
+                getLastMessage(id, data, data.length, (new Date()).getTime(), function (lastMessages) {
                     var chatList = UserService.getChatUserListInfo(docs)
                     for (var i = 0; i < chatList.length; ++i) {
                         chatList[i] = {...chatList[i], lastMessage: lastMessages[i]}
