@@ -50,7 +50,7 @@ const init = (server) => {
                     if (action.data) {
                         action.data = {...action.data, userID: userID }
                     } else {
-                        action.data = {userID, userID}
+                        action.data = {userID: userID}
                     }
                     // if(validateTokenDemo(action.token)) {
                     //     method(action, sio)
