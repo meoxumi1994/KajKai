@@ -110,7 +110,7 @@ export const addMessage = (action, sio, io) => {
                         chatList[i] = {...chatList[i], lastMessage: lastMessages[i]}
                     }
                     console.log(chatList)
-                    sio.emit('action', {type: 'client/CHAT_WAITING', data: chatList})
+                    io.to(getWaitingServiceId(pId).emit('action', {type: 'client/CHAT_WAITING', data: chatList})
                 })
             }
         }
@@ -124,8 +124,8 @@ export const joinChatWaiting = (action, sio, io) => {
     var offset = (new Date()).getTime()
     if (action.data.offset) offset = action.data.offset
     var length = 10
-    if (action.data.body) length = 10
-    getChatList(action.data.id, offset, length, function (data) {
+    if (action.data.length) length = 10
+    getChatList(action.data.userID, offset, length, function (data) {
         if (!data) {}
         else {
             UserService.getListUser(data, function (docs) {
