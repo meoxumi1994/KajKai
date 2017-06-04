@@ -21,48 +21,33 @@ const init = (server) => {
             // console.log(e)
             let method = require('../controllers/' + handler.controller)[handler.method]
 
-            if (handler.controller === 'ChatController') {
-                socket.on(e, (action) => {
-                    const token =  getTokenSocketCookie(socket.handshake.headers.cookie)
-                    console.log('sockettoken: ' + token)
+            socket.on(e, (action) => {
+                const token =  getTokenSocketCookie(socket.handshake.headers.cookie)
+                console.log('sockettoken: ' + token)
 
-                    var userID = null
-                    if (token) {
-                        var decoded = verifyToken(token)
-                        if (decoded)
-                            userID = decoded._id
-                    }
-                    console.log('me ' + userID)
-                    method(action, socket, sio, userID)
-                })
-            } else {
-                socket.on(e, (action) => {
-                    const token =  getTokenSocketCookie(socket.handshake.headers.cookie)
-                    console.log('sockettoken: ' + token)
+                var userID = null
+                if (token) {
+                    var decoded = verifyToken(token)
+                    if (decoded)
+                        userID = decoded._id
+                }
+                console.log('me ' + userID)
+                if (action.data) {
+                    action.data = {...action.data, userID: userID }
+                } else {
+                    action.data = {userID: userID}
+                }
+                // if(validateTokenDemo(action.token)) {
+                //     method(action, sio)
+                // } else {
+                //     socket.emit('action', {
+                //         type: 'NOT_LOGGED_IN',
 
-                    var userID = null
-                    if (token) {
-                        var decoded = verifyToken(token)
-                        if (decoded)
-                            userID = decoded._id
-                    }
-                    console.log('me ' + userID)
-                    if (action.data) {
-                        action.data = {...action.data, userID: userID }
-                    } else {
-                        action.data = {userID: userID}
-                    }
-                    // if(validateTokenDemo(action.token)) {
-                    //     method(action, sio)
-                    // } else {
-                    //     socket.emit('action', {
-                    //         type: 'NOT_LOGGED_IN',
+                //     })
+                // }
+                method(action, socket, sio)
+            })
 
-                    //     })
-                    // }
-                    method(action, socket, sio)
-                })
-            }
         }
     })
     return sio

@@ -59,8 +59,9 @@ export const getChatID = () => {
     }
 }
 
-export const joinChat = (action, sio, io, myId) => {
+export const joinChat = (action, sio, io) => {
     const id = action.data.person
+    const myId = action.data.userID
     console.log(action.data)
     console.log(myId)
     const mesId = getMessageId(id, myId)
@@ -80,13 +81,14 @@ export const joinChat = (action, sio, io, myId) => {
     })
 }
 
-export const leaveChat = (action, sio, io, myId) => {
-    const mesId = getMessageId(action.data.person, myId)
+export const leaveChat = (action, sio, io) => {
+    const mesId = getMessageId(action.data.person, action.data.userID)
     sio.leave(mesId)
 }
 
-export const addMessage = (action, sio, io, myId) => {
+export const addMessage = (action, sio, io) => {
     const data  = action.data
+    const myId = data.userID
     console.log(data)
     addNewMessage(data.mesId, myId, data.message, data.time, function (err) {
         if (err) {
