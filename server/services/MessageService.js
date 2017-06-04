@@ -42,7 +42,7 @@ export const getLastMessage = (id, listId, index, time, next) => {
         })
     } else {
         getMessageList(id, listId[index - 1], time, 1, function (message) {
-            if (!message) next([null])
+            if (!message) next([''])
             else next([message])
         })
     }
