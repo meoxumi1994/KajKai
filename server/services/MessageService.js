@@ -33,7 +33,7 @@ export const getChatListID = (person) => {
 export const getLastMessage = (id, listId, index, time, next) => {
     // console.log('ffuck ' + id + ' ' + listId[index - 1])
     if (index > 1) {
-        getLastMessage(id, listId, index - 1, function (lastMessages) {
+        getLastMessage(id, listId, index - 1, time, function (lastMessages) {
             getMessageList(id, listId[index - 1], time, 1, function (message) {
                 if (!message) lastMessages.push(null)
                 else lastMessages.push(message)
@@ -42,8 +42,10 @@ export const getLastMessage = (id, listId, index, time, next) => {
         })
     } else {
         getMessageList(id, listId[index - 1], time, 1, function (message) {
-            if (!message) next([''])
-            else next([message])
+            var arr = []
+            if (message) arr.push(message)
+            else arr.push(null)
+            next(arr)
         })
     }
 }
@@ -63,12 +65,6 @@ export const getChatList = (person, offset, length, next) => {
 }
 
 
-
-// getMessageList()
-
-// getLastMessage('5929aafe756f662ac515c08a', ['59298af92d2933264a56e4ca'], 1, function (data) {
-//     console.log('fuck this shit ' + data)
-// })
 
 export const updateChatLList = (personA, personB, time, next) => {
     redisClient.zadd(getChatListID(personA), -time, personB, function (err) {
