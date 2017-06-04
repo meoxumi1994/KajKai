@@ -3,18 +3,17 @@ import { get } from '~/config/allString'
 
 import Post from '~/components/target/middle/Post'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
-    const { list, onedit } = state.inst.target.middle.post
+    const post = state.inst.target.middle.post
+    const { list, onedit } = post[id] || post.default
     const basicinput = state.inst.entity.input.basicinput
     const postrow = state.inst.entity.row.postrow
     const idstore = state.inst.target.index.id
     let canedit = false
     state.user.storeList.map((item) => canedit = canedit || item.id == idstore)
-    const { mainPostId } = state.inst.target.index
-    console.log('state.inst.target.index.mainPostId', mainPostId)
     return({
-        id: mainPostId,
+        id: id,
         idstore: idstore,
         basicinput: basicinput,
         postrow: postrow,
@@ -24,20 +23,19 @@ const mapStateToProps = (state, ownProps) => {
     })
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, { id }) => ({
     onChooseType : (rowid, rowtype) => {
-        dispatch( { type: 'TARGET_MIDDLE_POST_ADD', rowid: rowid, rowtype: rowtype } )
+        dispatch( { type: 'TARGET_MIDDLE_POST_ADD', id: id, rowid: rowid, rowtype: rowtype } )
     },
     onEdit: () => {
-        dispatch( { type: 'TARGET_MIDDLE_POST_ON_EDIT'})
+        dispatch( { type: 'TARGET_MIDDLE_POST_ON_EDIT', id: id })
     },
-    onSave: (idstore, mylist) => {
-        dispatch( { type: 'TARGET_MIDDLE_POST_ON_SAVE'})
-        dispatch( { type: 'server/CHANGE_STORE_POST', data: { id: idstore, list: mylist }} )
+    onSave: (mylist) => {
+        dispatch( { type: 'server/CHANGE_STORE_POST', data: { id: id, list: mylist }} )
     }
 })
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
+const mergeProps = (stateProps, dispatchProps, { id }) => {
     const { basicinput, list, onedit, canedit, idstore, postrow, ...anotherState} = stateProps
     const { onChooseType, onEdit, onSave } = dispatchProps
     let mylist = [...list]
@@ -51,9 +49,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         list: list,
         onedit: onedit,
         canedit: canedit,
-        onSave: () => onSave(idstore, mylist),
+        onSave: () => onSave(mylist),
         onEdit: () => onEdit(),
-        onChooseType: (rowtype) => onChooseType('mainstore_row_' + list.length, rowtype),
+        onChooseType: (rowtype) => onChooseType( id + '_postrow_' + list.length, rowtype),
     })
 }
 

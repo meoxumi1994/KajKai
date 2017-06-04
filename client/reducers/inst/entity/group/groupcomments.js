@@ -15,7 +15,6 @@ const groupcommets = (state = {
             }}
         case 'client/JOIN_GROUPCOMMENTS':
             const mylist = action.data.comments.map((item) => ({ id: item._id }))
-            console.log('action.data.storeId', action.data.storeId)
             return {...state, [action.data.id]: {
                 ...action.data,
                 comments: mylist,

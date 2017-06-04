@@ -20,7 +20,7 @@ const Message = ({message, time, user, style}) => {
                 </OverlayTrigger>
             </div>
             <div style={style.text}>
-                {message.indexOf('.jpg') == -1 ?
+                {(message.indexOf('.jpg') == -1 && message.indexOf('.png') == -1) ?
                     <div>
                         <div>{message}</div>
                         <small className="text-muted" >{user.username}</small>
@@ -31,8 +31,6 @@ const Message = ({message, time, user, style}) => {
                     </a>
                 }
             </div>
-            <div style={{ height: 120 }}>
-           </div>
         </div>
       )
 }

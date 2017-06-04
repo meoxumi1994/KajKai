@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import allString from '~/config/allString'
+import { get } from '~/config/allString'
 
 import { checkloginId, checkPassword } from '~/containers/support'
 import { logIn, logInFaceBook, logInGoogle, forgotPassword } from '~/actions/asyn/user-login-register/login'
@@ -7,8 +7,14 @@ import Login from '~/components/user-login-register/Login'
 
 const mapStateToProps = (state, ownProps) => {
     const { loginid, password, isclick } = state.inst.userloginregister.login
+    const g = (lang) => get(state.user.language, lang)
     return ({
-        g : (lang) => allString.get(state.user.language, lang),
+        LOG_IN : g('LOG_IN'),
+        EMAIL_WARNING : g('EMAIL_WARNING'),
+        EMAIL_OR_PHONE_NUMBER : g('EMAIL_OR_PHONE_NUMBER'),
+        PASSWORD : g('PASSWORD'),
+        PASSWORD_WARNING : g('PASSWORD_WARNING'),
+        FORGOT_PASSWORD : g('FORGOT_PASSWORD'),
         loginid : loginid,
         password : password,
         warningloginId: isclick && checkloginId(loginid),
