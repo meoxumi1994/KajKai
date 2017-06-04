@@ -11,6 +11,7 @@ export const getChatBuddies = () => {
             else {
                 UserService.getListUser(data, function (docs) {
                     getLastMessage(id, docs, docs.length, (new Date()).getTime(), function (lastMessages) {
+                        console.log(lastMessages)
                         var chatList = UserService.getChatUserListInfo(docs)
                         for (var i = 0; i < chatList.length; ++i) {
                             chatList[i] = {...chatList[i], lastMessage: lastMessages[i]}
