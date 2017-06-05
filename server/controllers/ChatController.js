@@ -110,7 +110,7 @@ export const addMessage = (action, sio, io) => {
                         chatList[i] = {...chatList[i], lastMessage: lastMessages[i]}
                     }
                     console.log(chatList)
-                    io.to(getWaitingServiceId(pId).emit('action', {type: 'client/CHAT_WAITING', data: chatList})
+                    io.to(getWaitingServiceId(pId)).emit('action', {type: 'client/CHAT_WAITING', data: chatList})
                 })
             }
         }
