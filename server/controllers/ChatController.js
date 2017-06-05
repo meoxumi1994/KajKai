@@ -102,7 +102,7 @@ export const addMessage = (action, sio, io) => {
                 message: data.message,
                 person: myId
             }})
-            var pId = mesId.split('$')
+            var pId = data.mesId.split('$')
             if (pId !== myId) {
                 getLastMessage(myId, [pId], 1, data.time, function (lastMessages) {
                     var chatList = UserService.getChatUserListInfo(docs)
