@@ -5,7 +5,7 @@ export const comfirmEmailVerification = () => {
 	return (req, res) => {
 		console.log(req.params.token)
 		var token = req.params.token
-		var redirectUrl = 'https://dqp2llohmlrz8.cloudfront.net'
+		var redirectUrl = config.REDIRECTURL
 		if (!token) {
 			res.redirect(redirectUrl + '/login')
 		}

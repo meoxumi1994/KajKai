@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import config from './config'
 
 import thunkMiddleware from 'redux-thunk'
 // AppContainer is a necessary wrapper component for HMR
@@ -23,8 +22,7 @@ function execute(action, emit, next, dispatch) {
     }
 }
 
-console.log(config.getDomain())
-const socket = io(config.getDomain());
+const socket = io('https://socket.kajkai.com')
 const socketIoMiddleware = createSocketIoMiddleware(socket, ["server/","client/"], { execute: execute });
 
 const store = createStore(
