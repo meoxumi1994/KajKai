@@ -36,6 +36,7 @@ const store = createStore(
 )
 
 store.dispatch({ type: 'server/hello'})
+store.dispatch({ type: 'server/TestController'})
 
 ReactDOM.render(
     <AppContainer>

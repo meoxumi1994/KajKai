@@ -84,7 +84,6 @@ class App extends React.Component {
         return(
             <div style={{ minWidth: 990, minHeight: 700 }}>
                 <Bar/>
-                <input value={<div>123</div>}/>
                 <hr style={{margin: 0}}></hr>
                 {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                     <div>
