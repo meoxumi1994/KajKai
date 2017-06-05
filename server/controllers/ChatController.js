@@ -105,7 +105,7 @@ export const addMessage = (action, sio, io) => {
             var pId = data.mesId.split('$')
             if (pId !== myId) {
                 getLastMessage(myId, [pId], 1, data.time, function (lastMessages) {
-                    var chatList = UserService.getChatUserListInfo(docs)
+                    var chatList = UserService.getChatUserListInfo(pId)
                     for (var i = 0; i < chatList.length; ++i) {
                         chatList[i] = {...chatList[i], lastMessage: lastMessages[i]}
                     }
@@ -116,7 +116,6 @@ export const addMessage = (action, sio, io) => {
         }
     })
 }
-
 
 export const joinChatWaiting = (action, sio, io) => {
     const id = getWaitingServiceId(action.data.userID)
