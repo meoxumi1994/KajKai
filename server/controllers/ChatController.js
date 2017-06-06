@@ -103,20 +103,23 @@ export const addMessage = (action, sio, io) => {
                 person: myId
             }})
             var pId = data.mesId.split('$')
-            if (pId !== myId) {
-                getLastMessage(myId, [pId], 1, data.time, function (lastMessages) {
-                    var chatList = UserService.getChatUserListInfo(docs)
-                    for (var i = 0; i < chatList.length; ++i) {
-                        chatList[i] = {...chatList[i], lastMessage: lastMessages[i]}
-                    }
-                    console.log(chatList)
-                    io.to(getWaitingServiceId(pId)).emit('action', {type: 'client/CHAT_WAITING', data: chatList})
+            var otherId = (pId[0] === myId) ? pId[1] : pId[0];
+            if (otherId !== null) {
+                UserService.getListUser([myId], function (docs) {
+                    getLastMessage(otherId, [myId], 1, (new Date()).getTime(), function (lastMessages) {
+                        var chatList = UserService.getChatUserListInfo(docs)
+                        for (var i = 0; i < chatList.length; ++i) {
+                            chatList[i] = {...chatList[i], lastMessage: lastMessages[i]}
+                        }
+                        console.log(chatList)
+                        //res.json({chatList: chatList})
+                        sio.to(getWaitingServiceId(otherId)).emit('action', {type: 'client/CHAT_WAITING', data: chatList})
+                    })
                 })
             }
         }
     })
 }
-
 
 export const joinChatWaiting = (action, sio, io) => {
     const id = getWaitingServiceId(action.data.userID)
