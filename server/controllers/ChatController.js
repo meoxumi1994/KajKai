@@ -14,7 +14,7 @@ export const getChatBuddies = () => {
                         console.log(lastMessages)
                         var chatList = UserService.getChatUserListInfo(docs)
                         for (var i = 0; i < chatList.length; ++i) {
-                            chatList[i] = {...chatList[i], lastMessage: lastMessages[i]}
+                            chatList[i] = {...chatList[i], lastMessage: lastMessages[i], mesId: getMessageId(id, data[i])}
                         }
                         console.log(chatList)
                         res.json({chatList: chatList})

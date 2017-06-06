@@ -1,6 +1,7 @@
 import {StorePost, FirstLayerComment, SecondLayerComment} from  '../models'
 import { getPost } from '../services/StorePostService'
 import { redisClient } from '../datasource'
+import { Like } from '../models'
 
 const LIKE_DATABASE = 'likeDatabase'
 
@@ -74,16 +75,19 @@ export const removeLike = (userId, likenId, likenType, next) => {
 
 
 
-export const addLikeRedis  = (redisId) => {
-    redisClient.hset(LIKE_DATABASE, redisId, 1, function(err, reply){
+export const addLikeDB  = (userId, likenId, likenType, next) => {
+    var like = new Like({userId: userId, likenId: likenId, likenType: likenType})
+    like.save(function (err) {
         if (err) next(null)
-        else next(reply)
+        else next(like)
     })
+
 }
 
-export const removeLikeRedis = (redisId) => {
-    redisClient.hdel(LIKE_DATABASE, redisId, function (err, reply) {
+export const removeLikeDB = (redisId) => {
+    var like = new Like({userId: userId, likenId: likenId, likenType: likenType})
+    like.save(function (err) {
         if (err) next(null)
-        else next(reply)
+        else next(like)
     })
 }
