@@ -9,7 +9,6 @@ const FirstLayerCommentSchema = new mongoose.Schema({
     content: {type: String},
     time: {type: Number},
     order: {type: OrderSchema},
-    childComment: [SecondLayerCommentSchema],
     postId: {type: String},
     likeCounter: {type: Number},
     commentCounter: {type: Number}

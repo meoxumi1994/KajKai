@@ -32,6 +32,9 @@ var Order = mongoose.model('Order', OrderSchema)
 var FirstLayerCommentSchema = require('./FirstLayerComment')
 var FirstLayerComment = mongoose.model('FirstLayerComment', FirstLayerCommentSchema)
 
+var LikeSchema = require('./Like')
+var Like = mongoose.models('Like', LikeSchema)
+
 module.exports = {
 	User,
 	Category,
@@ -40,7 +43,8 @@ module.exports = {
     StorePostDetail,
     StorePost,
 	FirstLayerComment,
-    SecondLayerComment
+    SecondLayerComment,
+    Like
 }
 
 // var fs = require('fs')

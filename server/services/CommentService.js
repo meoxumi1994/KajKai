@@ -3,9 +3,10 @@ import mongoose from '../datasource'
 import UserService from './UserService'
 import {getOrder} from './OrderService'
 import {getStore} from './StoreService'
+import {getPost} from './StorePostService'
 
 export const getTimelyFirstComment = (postId, time, length, next) => {
-    var query = FirstLayerComment.find({postId: postId, time: {$lt: time}}).sort({time: -1}).limit(length).select('-childComment')
+    var query = FirstLayerComment.find({postId: postId, time: {$lt: time}}).sort({time: -1}).limit(length)
     // var query = FirstLayerComment.aggregate([ {$match:{postId: postId, time: {$lt: time}}} ,{$project:{id: '$_id', _id: 0}}])
     // const query = FirstLayerComment.aggregate([ {$match:{$and:[{time: {$lt:time}}, {postId: postId}]}}, { $limit : length },
     //     {$project: {id: '$_id', _id: 0,
@@ -40,6 +41,24 @@ export const getSecondLayerCommentById = (id, next) => {
     })
 }
 
+export const saveNewComment = (firstLayerComment, next) => {
+    firstLayerComment.save(function (err) {
+        if (err) next(null)
+        else {
+            getPost(firstLayerComment.postId, function (storePost) {
+                if (!storePost) next(null)
+                else {
+                    storePost++
+                    storePost.save(function (err) {
+                        if (err) next(null)
+                        else next(firstLayerComment)
+                    })
+                }
+            })
+        }
+    })
+}
+
 export const addNewComment = (postId, data, userId, storeId, next) => {
     var order = null
     if (data.products.length > 0) order = getOrder(data.products)
@@ -54,9 +73,9 @@ export const addNewComment = (postId, data, userId, storeId, next) => {
                     var comment = new FirstLayerComment({posterId: user._id, posterAvatar: user.avatarUrl, posterName: user.name,
                         order: order, time: data.time, postId: postId, content: data.content})
                     console.log(comment)
-                    comment.save(function (err) {
-                        if (err) next(null)
-                        else next(comment)
+                    saveNewComment(comment, function (cm) {
+                        if (cm) next(comment)
+                        else next(null)
                     })
                 }
             })
@@ -66,9 +85,9 @@ export const addNewComment = (postId, data, userId, storeId, next) => {
                     posterId: store._id, posterAvatar: store.avatarUrl, posterName: store.storename,
                     order: order, time: data.time, postId: postId, content: data.content
                 })
-                comment.save(function (err) {
-                    if (err) next(null)
-                    else next(comment)
+                saveNewComment(comment, function (cm) {
+                    if (cm) next(comment)
+                    else next(null)
                 })
             } else {
                 UserService.getUser(userId, function (user) {
@@ -79,9 +98,9 @@ export const addNewComment = (postId, data, userId, storeId, next) => {
                         var comment = new FirstLayerComment({posterId: user._id, posterAvatar: user.avatarUrl, posterName: user.name,
                             order: order, time: data.time, postId: postId, content: data.content})
                         console.log(comment)
-                        comment.save(function (err) {
-                            if (err) next(null)
-                            else next(comment)
+                        saveNewComment(comment, function (cm) {
+                            if (cm) next(comment)
+                            else next(null)
                         })
                     }
                 })
@@ -93,22 +112,32 @@ export const addNewComment = (postId, data, userId, storeId, next) => {
 }
 
 export const getSecondLayerComment = (postId, time, length, next) => {
-    // var query = SecondLayerComment.find({postId: postId, time: {$lt: time}}).limit(length)
-    // // const query = FirstLayerComment.aggregate([ {$match:{$and:[{time: {$lt:time}}, {postId: postId}]}}, { $limit : length },
-    // //     {$project: {id: '$_id', _id: 0,
-    // //         posterId: 1,
-    // //         posterAvatar: 1, posterName: 1,
-    // //         time: 1,
-    // //         postId: 1,
-    // //         content: 1}}])
-    // query.exec(function (err, data){
-    //     if (err) next(null)
-    //     else next(data)
-    // })
-    FirstLayerComment.findById(postId, function (err, firstComment) {
-        if (err) next(null);
+    var query = SecondLayerComment.find({postId: postId, time: {$lt: time}}).sort({time: -1}).limit(length)
+    query.exec(function (err, data){
+        if (err) next(null)
         else {
-            next(firstComment.childComment)
+            data.sort(function (a, b) {
+                return a.time - b.time
+            })
+            next(data)
+        }
+    })
+}
+
+export const saveSecondLayerComment = (secondLayerComment, next) => {
+    secondLayerComment.save(function (err) {
+        if (err) next(null)
+        else {
+            getFirstLayerComment(secondLayerComment.postId, function (firstLayerComment) {
+                if (!firstLayerComment) next(null)
+                else {
+                    firstLayerComment.commentCounter++
+                    firstLayerComment.save(function (err) {
+                        if (err) next(null)
+                        else next(secondLayerComment)
+                    })
+                }
+            })
         }
     })
 }
@@ -123,15 +152,9 @@ export const addNewSecondLayerComment = (postId, data, userId, storeId, next) =>
                     var comment = new SecondLayerComment({posterId: user._id, posterAvatar: user.avatarUrl, posterName: user.name,
                         time: data.time, postId: postId, content: data.content})
                     console.log(comment)
-                    FirstLayerComment.findById(postId, function (err, firstComment) {
-                        if (err) next(null)
-                        else {
-                            firstComment.childComment.push(comment)
-                            firstComment.save(function (err) {
-                                if (err) next(null)
-                                else next(comment)
-                            })
-                        }
+                    saveSecondLayerComment(comment, function (cm) {
+                        if (cm) next(comment)
+                        else next(null)
                     })
                 }
             })
@@ -141,15 +164,9 @@ export const addNewSecondLayerComment = (postId, data, userId, storeId, next) =>
                     posterId: store._id, posterAvatar: store.avatarUrl, posterName: store.storename,
                     time: data.time, postId: postId, content: data.content
                 })
-                FirstLayerComment.findById(postId, function (err, firstComment) {
-                    if (err) next(null)
-                    else {
-                        firstComment.childComment.push(comment)
-                        firstComment.save(function (err) {
-                            if (err) next(null)
-                            else next(comment)
-                        })
-                    }
+                saveSecondLayerComment(comment, function (cm) {
+                    if (cm) next(comment)
+                    else next(null)
                 })
             } else {
                 UserService.getUser(userId, function (user) {
@@ -161,15 +178,9 @@ export const addNewSecondLayerComment = (postId, data, userId, storeId, next) =>
                             time: data.time, postId: postId, content: data.content
                         })
                         console.log(comment)
-                        FirstLayerComment.findById(postId, function (err, firstComment) {
-                            if (err) next(null)
-                            else {
-                                firstComment.childComment.push(comment)
-                                firstComment.save(function (err) {
-                                    if (err) next(null)
-                                    else next(comment)
-                                })
-                            }
+                        saveSecondLayerComment(comment, function (cm) {
+                            if (cm) next(comment)
+                            else next(null)
                         })
                     }
                 })
