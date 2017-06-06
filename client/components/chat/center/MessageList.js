@@ -10,6 +10,7 @@ const style = {
     },
     text: {
       marginRight: 40,
+      marginTop: 10,
       textAlign: 'right'
     }
   },
@@ -19,7 +20,8 @@ const style = {
       marginLeft: 20,
     },
     text: {
-      marginLeft: 40
+      marginLeft: 40,
+      marginTop: 10
     }
   },
   messageListDiv: {

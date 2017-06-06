@@ -16,7 +16,11 @@ export const getChatList = (offset, length) => dispatch => {
       ]
     })
     .then((response) => {
-        dispatch(loadChatList(response.chatList))
+        if (response != undefined) {
+          dispatch(loadChatList(response.chatList))
+        } else {
+          console.log('CANNOT /getchatlist')
+        }
     })
 }
 
