@@ -28,3 +28,18 @@ export const uploadingImages = (imageList) => ({
     type: 'UPLOADING_IMAGES',
     imageList: imageList
 })
+
+export const waitingChat = (avatarUrl, id, name, mesId, text) => ({
+  type: 'client/CHAT_WAITING',
+  data: {
+    avatarUrl: avatarUrl,
+    id: id,
+    name: name,
+    lastMessage: {
+      mesId: mesId,
+      person: id,
+      message: text,
+      time: Date.now()
+    }
+  }
+})

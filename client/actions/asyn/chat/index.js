@@ -45,14 +45,13 @@ export const joinChat = (chat) => dispatch => {
 }
 
 // [socket.io] Send message
-export const sendMessage = (msg) => dispatch => {
-  console.log(msg);
+export const sendMessage = (mesId, text) => dispatch => {
     dispatch(
       {
         type:"server/ADD_MESSAGE",
         data: {
-          mesId: msg.mesId,
-          message: msg.text,
+          mesId: mesId,
+          message: text,
           time: Date.now()
         }
       })
