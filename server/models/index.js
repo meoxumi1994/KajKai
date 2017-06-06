@@ -33,7 +33,7 @@ var FirstLayerCommentSchema = require('./FirstLayerComment')
 var FirstLayerComment = mongoose.model('FirstLayerComment', FirstLayerCommentSchema)
 
 var LikeSchema = require('./Like')
-var Like = mongoose.models('Like', LikeSchema)
+var Like = mongoose.model('Like', LikeSchema)
 
 module.exports = {
 	User,
