@@ -44,7 +44,7 @@ const visibility = (state = {
                 uploadImage: action.display
               }
             }
-            
+
         default:
             return state
     }

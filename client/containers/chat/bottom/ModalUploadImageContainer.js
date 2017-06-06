@@ -8,11 +8,12 @@ import ModalUploadImage from '~/components/chat/bottom/ModalUploadImage'
 import { sendMessage } from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
+    console.log('state ',state);
     return ({
       visibility: state.inst.chat.visibility.buttom.uploadImage,
-      imageList: state.inst.chat.center.url.imageList,
+      imageList: state.inst.chat.buttom.url.imageList,
       mesId: state.inst.chat.center.mesId,
-      isLoading: state.inst.chat.center.url.isLoading
+      isLoading: state.inst.chat.buttom.url.isLoading
     })
 }
 
