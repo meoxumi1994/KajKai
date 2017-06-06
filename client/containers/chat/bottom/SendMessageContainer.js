@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   uploadImage: () => {
     dispatch(updateUploadImageVisibility(true))
     dispatch(uploadingImages([]))
+  },
+  typingMessage: (e) => {
+    console.log(e.key);
   }
 })
 

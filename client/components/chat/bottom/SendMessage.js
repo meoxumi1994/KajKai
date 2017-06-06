@@ -3,7 +3,7 @@ import { FormGroup, FormControl, HelpBlock, ControlLabel, Button , OverlayTrigge
 import ModalUploadImageContainer from '~/containers/chat/bottom/ModalUploadImageContainer'
 import EmoNavContainer from '~/containers/chat/bottom/IconPopOverContainer/EmoNavContainer'
 
-const SendMessage = ({mesId, sendMessage, visibility, uploadImage}) => {
+const SendMessage = ({mesId, sendMessage, visibility, uploadImage, typingMessage}) => {
   let msg
   return (
     <div style={{padding: 10, display: visibility}}>
@@ -16,6 +16,7 @@ const SendMessage = ({mesId, sendMessage, visibility, uploadImage}) => {
         }}>
         <span className="input-group-btn">
           <div className="input-group">
+
                 <FormControl
                   style={{width:750}}
                   inputRef={ref => { msg = ref }}

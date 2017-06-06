@@ -10,7 +10,11 @@ const ModalUploadImage = ({ visibility,  imageList, mesId, isLoading, handleImag
                 </Modal.Header>
                 <Modal.Body>
                     <input type="file" onChange={(e) => handleImageChange(e)}/>
-                    {  imageList.length > 0? imageList.map(url => <img key={url.urlreal} src={url.urlreal} width="400" height="400"/>): <div></div>}
+                    {  imageList.length > 0?
+                      imageList.map(url => <img key={url.urlreal} src={url.urlreal} width="400" height="400"/>)
+                      :
+                      <div></div>
+                    }
                 </Modal.Body>
                 <Modal.Footer>
                   <Button disabled={isLoading}  onClick={() => sendImage(mesId, imageList)}>SEND</Button>
