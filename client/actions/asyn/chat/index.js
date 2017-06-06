@@ -1,5 +1,5 @@
 import { flet, flem } from '~/actions/support'
-import { loadChatList, loadChat } from './actions'
+import { loadChatList, loadChat, waitingChat } from './actions'
 
 // Get list of recented chats
 export const getChatList = (offset, length) => dispatch => {
@@ -45,14 +45,18 @@ export const joinChat = (chat) => dispatch => {
 }
 
 // [socket.io] Send message
-export const sendMessage = (mesId, text) => dispatch => {
+export const sendMessage = (mesId, user, message) => dispatch => {
+    let time = Date.now()
+    
+    dispatch(waitingChat(user.avatarUrl, user.id, user.username, mesId, message, time))
+
     dispatch(
       {
         type:"server/ADD_MESSAGE",
         data: {
-          mesId: mesId,
-          message: text,
-          time: Date.now()
+          mesId,
+          message,
+          time
         }
       })
 }

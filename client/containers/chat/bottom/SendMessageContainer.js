@@ -16,8 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   sendMessage: (mesId, user, text) => {
-    dispatch(sendMessage(mesId, text))
-    dispatch(waitingChat(user.avatarUrl, user.id, user.username, mesId, text))
+    dispatch(sendMessage(mesId, user, text))
   },
   uploadImage: () => {
     dispatch(updateUploadImageVisibility(true))

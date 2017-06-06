@@ -26,7 +26,18 @@ class ChatList extends React.Component {
                           </div>
                           <div style={{ marginLeft: 40}}>
                               <div>{chat.name}</div>
-                              <small className="text-muted" >{JSON.parse(chat.lastMessage).message}</small>
+                              <small className="text-muted" >
+                              {
+                                JSON.parse(chat.lastMessage).message.indexOf('http') != -1?
+                                <div>
+                                  <p><i>(Sent a picture)</i></p>
+                                </div>
+                                :
+                                <div>
+                                  {JSON.parse(chat.lastMessage).message}
+                                </div>
+                              }
+                              </small>
                           </div>
                   </Button>
                 )}

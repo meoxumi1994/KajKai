@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
 
-const ModalUploadImage = ({ visibility,  imageList, mesId, isLoading, handleImageChange, close, sendImage }) => {
+const ModalUploadImage = ({ visibility,  imageList, mesId, user, isLoading, handleImageChange, close, sendImage }) => {
     return(
         <div>
             <Modal style={{ marginTop: 120 }} show={visibility}>
@@ -17,7 +17,7 @@ const ModalUploadImage = ({ visibility,  imageList, mesId, isLoading, handleImag
                     }
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button disabled={isLoading}  onClick={() => sendImage(mesId, imageList)}>SEND</Button>
+                  <Button disabled={isLoading}  onClick={() => sendImage(mesId, user, imageList)}>SEND</Button>
                   <Button onClick={() => close()}>CLOSE</Button>
                 </Modal.Footer>
             </Modal>

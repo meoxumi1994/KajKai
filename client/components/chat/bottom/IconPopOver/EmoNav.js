@@ -9,7 +9,7 @@ class EmoNav extends React.Component {
     }
 
     render() {
-      const { mesId, id, sendEmo } = this.props
+      const { mesId, user, sendEmo } = this.props
 
       const popoverHoverFocus = (
         <Popover id="popover-trigger-hover-focus">
@@ -24,7 +24,7 @@ class EmoNav extends React.Component {
                 <OverlayTrigger key={icon.src} trigger={['hover', 'focus']} placement="bottom"
                   overlay={<Popover id="popover-trigger-hover-focus">{icon.syntax}</Popover>}>
 
-                  <img src={icon.src} width="60" height="60" style={{marginLeft:5}} onClick={() => sendEmo(mesId, id, icon.syntax)}/>
+                  <img src={icon.src} width="60" height="60" style={{marginLeft:5}} onClick={() => sendEmo(mesId, user, icon.syntax)}/>
                 </OverlayTrigger>
               )
             }
