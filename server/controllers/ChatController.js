@@ -122,7 +122,7 @@ export const addMessage = (action, sio, io) => {
                         message: data.message,
                         person: myId
                     }}
-                    sio.to(getWaitingServiceId(otherId)).emit('action', {type: 'client/CHAT_WAITING', data: chatList})
+                    sio.to(getWaitingServiceId(otherId)).emit('action', {type: 'client/CHAT_WAITING', data: chatList[0]})
                 })
             }
         }
