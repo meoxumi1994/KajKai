@@ -1,9 +1,10 @@
 import socketIo from 'socket.io'
 import allEvents from './events'
-import { validateTokenDemo } from '../services/DemoService'
 import { verifyToken } from '../services/UserService'
 import {getTokenSocketCookie} from '../utils/Utils'
 import {redisClient} from '../datasource'
+import { getSecondLayerCommentById } from '../services/CommentService'
+import { SecondLayerComment } from '../models'
 
 const init = (server) => {
     const sio = socketIo(server)

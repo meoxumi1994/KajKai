@@ -26,6 +26,20 @@ export const getTimelyFirstComment = (postId, time, length, next) => {
     })
 }
 
+export const getFirstLayerComment = (id, next) => {
+    FirstLayerComment.findById(id, function (err, data) {
+        if (err) next(null)
+        else next(data)
+    })
+}
+
+export const getSecondLayerCommentById = (id, next) => {
+    SecondLayerComment.findById(id, function (err, data) {
+        if (err) next(null)
+        else next(data)
+    })
+}
+
 export const addNewComment = (postId, data, userId, storeId, next) => {
     var order = null
     if (data.products.length > 0) order = getOrder(data.products)

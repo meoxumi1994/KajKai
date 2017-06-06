@@ -6,6 +6,8 @@ const SecondLayerCommentSchema = new mongoose.Schema({
     posterName: {type: String},
     content: {type: String},
     time: {type: Number},
+    likeCounter: {type: Number},
+    commentCounter: {type: Number}
 });
 
 module.exports = SecondLayerCommentSchema
