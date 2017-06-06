@@ -20,13 +20,13 @@ class ChatList extends React.Component {
                   <div>Waiting...</div>
                   :
                   this.props.chatList.map(chat =>
-                  <Button style={{width:250, marginBottom: 10}} key={chat.id} onClick={() => joinChat(chat)}>
+                  <Button style={{width:250, marginBottom: 10}} key={JSON.stringify(chat)} onClick={() => joinChat(chat)}>
                           <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}>
                               <img src={chat.avatarUrl} width="38" height="38"/>
                           </div>
                           <div style={{ marginLeft: 40}}>
                               <div>{chat.name}</div>
-                              <small className="text-muted" >Online</small>
+                              <small className="text-muted" >{JSON.parse(chat.lastMessage).message}</small>
                           </div>
                   </Button>
                 )}

@@ -3,6 +3,9 @@ import React from 'react';
 import Status from './status/Status';
 import Advertisement from './Advertisement';
 import History from './history/History';
+import MessageListContainer from '~/containers/chat/center/MessageListContainer'
+import SendMessageContainer from '~/containers/chat/bottom/SendMessageContainer'
+import { DropdownButton,  MenuItem  } from 'react-bootstrap'
 
 const Home = () => (
     <div style={{ overflow: 'scroll', height: window.innerHeight - 46 }}>

@@ -5,15 +5,13 @@ import iconUtility from '~/config/iconUtility'
 const Message = ({message, time, user, style}) => {
 
     var regex = /\((.*?)\)/g
-    var match
-    var newMessage = message
+    var match = regex.exec(message);
+    
+    if (match && iconUtility.getIcon(match[1]) != null) {
+        message = message.split('('+match[1]+')').join('<img src="'+iconUtility.getIcon(match[1]).src+'" width="40" height="40"/>')
+    }
 
-      match = regex.exec(message);
-      if (match && iconUtility.getIcon(match[1]) != null) {
-          newMessage = message.split('('+match[1]+')').join('<img src="'+iconUtility.getIcon(match[1]).src+'" width="40" height="40"/>')
-      }
-
-    if (newMessage == undefined) {
+    if (message == undefined) {
       return (<div></div>)
     }
 
@@ -31,14 +29,14 @@ const Message = ({message, time, user, style}) => {
               </OverlayTrigger>
           </div>
           <div style={style.text}>
-              {(newMessage.indexOf('http') == -1) ?
+              {(message.indexOf('http') == -1) ?
                   <div>
-                      <div dangerouslySetInnerHTML={{__html: newMessage}} />
+                      <div dangerouslySetInnerHTML={{__html: message}} />
                       <small style={{color: 'grey'}} className="text-muted" ><i><u>({user.username})</u></i></small>
                   </div>
               :
-                  <a href={newMessage}>
-                      <img src={newMessage} width="300" height="300"/>
+                  <a href={message}>
+                      <img src={message} width="300" height="300"/>
                   </a>
                 }
           </div>

@@ -46,6 +46,7 @@ export const joinChat = (chat) => dispatch => {
 
 // [socket.io] Send message
 export const sendMessage = (msg) => dispatch => {
+  console.log(msg);
     dispatch(
       {
         type:"server/ADD_MESSAGE",

@@ -12,20 +12,20 @@ const center = (state = {
 }, action) => {
     switch (action.type) {
 
-        case 'client/INIT_MESSAGE':
-          return {
-            ...state,
-            mesId: action.data.mesId,
-            messages: action.data.messages,
-            user: {
-              id: action.data.user.id,
-              avatarUrl: action.data.user.avatarUrl,
-              username: action.data.user.name
-            },
-            lazyLoad: {
-              offset: 0
-            }
+      case 'client/INIT_MESSAGE':
+        return {
+          ...state,
+          mesId: action.data.mesId,
+          messages: action.data.messages,
+          user: {
+            id: action.data.user.id,
+            avatarUrl: action.data.user.avatarUrl,
+            username: action.data.user.name
+          },
+          lazyLoad: {
+            offset: 0
           }
+        }
 
         case 'client/RECEIVE_MESSAGE':
             var newMessage = {

@@ -5,6 +5,7 @@ import { joinChat } from '~/actions/asyn/chat'
 import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
+  console.log('chatList ',state.inst.chat.left.chatList);
   return (
     {
       chatList: state.inst.chat.left.chatList,
