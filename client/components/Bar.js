@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { DropdownButton, MenuItem } from 'react-bootstrap'
+import ChatListContainer from '~/containers/chat/left/ChatListContainer'
 
 const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick}) => {
     if(isusername){
         return (
             <div style={{ width: 87, float: 'left'}}>
-            
-                <div style={{float: 'left'}}>
-                    <Link to="/chat" >
+                <div >
+                    <Link to="/chat" style={{float: 'left'}}>
                         <img src="./images/comment.png" width="22.5" height="27"/>
                     </Link>
                 </div>
@@ -32,9 +33,14 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoa
                   </Link>
               </div>
 
+              <DropdownButton title="Chat" id="bg-nested-dropdown">
+                 <ChatListContainer/>
+             </DropdownButton>
+
             </div>
         )
     }
+    
     if(isloading){
         return (
             <div style={{ paddingTop: 4, paddingBottom: 3, paddingLeft: 10, paddingRight: 10 }}>
@@ -44,6 +50,7 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoa
             </div>
         )
     }
+
     return (
         <Link to="/register">
             <button className="btn btn-default btn-sm" type="button" >

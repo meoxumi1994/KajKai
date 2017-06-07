@@ -12,34 +12,32 @@ const center = (state = {
 }, action) => {
     switch (action.type) {
 
-        case 'client/INIT_MESSAGE':
-          return {
-            ...state,
-            mesId: action.data.mesId,
-            messages: action.data.messages,
-            user: {
-              id: action.data.user.id,
-              avatarUrl: action.data.user.avatarUrl,
-              username: action.data.user.name
-            },
-            lazyLoad: {
-              offset: 0
-            }
+      case 'client/INIT_MESSAGE':
+        const { mesId, messages } = action.data
+        const { id, avatarUrl, name } = action.data.user
+        return {
+          ...state,
+          mesId,
+          messages,
+          user: {
+            id,
+            avatarUrl,
+            username: name
+          },
+          lazyLoad: {
+            offset: 0
           }
+        }
 
         case 'client/RECEIVE_MESSAGE':
-            var newMessage = {
-              id: action.data.person,
-              message: action.data.message,
-              time: action.data.time
-            }
+            const { person, message, time } = action.data
             return {
               ...state,
               lazyLoad: {
                 offset: state.lazyLoad.offset + 1},
                 messages: [
                   ...state.messages,
-                  JSON.stringify(newMessage)
+                  buildMessage(person, message, time)
                 ].reverse()
               }
 
@@ -55,6 +53,14 @@ const center = (state = {
         default:
             return state
     }
+}
+
+const buildMessage = (id, message, time) => {
+  return JSON.stringify({
+    id,
+    message,
+    time
+  })
 }
 
 export default center

@@ -6,12 +6,13 @@ import iconUtility from '~/config/iconUtility'
 const mapStateToProps = (state, ownProps) => {
     return ({
       mesId: state.inst.chat.center.mesId,
+      user: state.user
     })
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    sendEmo: (emo, mesId) => {
-      dispatch(sendMessage({mesId: mesId, text: emo}))
+    sendEmo: (mesId, user, emo) => {
+      dispatch(sendMessage(mesId, user, emo))
     },
     loadIcon: () => {
       iconUtility.getIconList()

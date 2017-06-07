@@ -52,6 +52,6 @@ const visibility = (state = {
 
 export default visibility
 
-function getVisibility(display) {
-    return display? 'inline': 'none'
+const getVisibility = (display) => {
+  return display? 'inline': 'none'
 }
