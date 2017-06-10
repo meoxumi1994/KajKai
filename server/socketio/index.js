@@ -6,7 +6,7 @@ import {redisClient} from '../datasource'
 import { getSecondLayerCommentById } from '../services/CommentService'
 import { SecondLayerComment } from '../models'
 import { addUserOnline, getStatusOnline, removeUserOnline } from '../services/OnlineService'
-import { getUserRoomId } from '../services/SocketService'
+import { getEmitDetail, getUserRoomId } from '../services/SocketService'
 import { getMessageList, getLastMessageAndInfo, passChatList } from '../services/MessageService'
 
 getEmitDetail('593bc3ff0607380b9934204e', function(rep){
