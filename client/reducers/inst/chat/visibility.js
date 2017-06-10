@@ -3,14 +3,14 @@ const visibility = (state = {
 
   },
   center: {
-    messageList: 'none',
+    messageList: 'inline',
   },
   buttom: {
-    sendMessage: 'none',
+    sendMessage: 'inline',
     uploadImage: false
   },
   top: {
-    newChat: 'none'
+    newChat: 'inline'
   }
 }, action) => {
     switch (action.type) {

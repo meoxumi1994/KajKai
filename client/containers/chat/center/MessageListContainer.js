@@ -16,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   showMore: (chat) => {
-    dispatch(getMessage(chat))
+    // dispatch(getMessage(chat))
   }
 })
 
