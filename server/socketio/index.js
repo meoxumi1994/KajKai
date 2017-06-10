@@ -14,7 +14,7 @@ const init = (server) => {
     // sio.use(cookieParser())
     sio.on('connection', (socket) => {
         console.log('a user connected')
-        const token =  getTokenSocketCookie(socket.handshake.headers.cookie)
+        const token = getTokenSocketCookie(socket.handshake.headers.cookie)
         var userID = null
         if (token) {
             var decoded = verifyToken(token)
