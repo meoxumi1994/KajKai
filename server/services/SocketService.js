@@ -20,11 +20,19 @@ export const getSubcriberIdList = (emitId, next) => {
 }
 
 export const addNewEmitSocketDetail = (emitId, id, next) => {
-    const emitSocketDetail = new EmitSocketDetail({emitId: emitId, followerId: id})
-    emitSocketDetail.save(function (err) {
+    EmitSocketDetail.findOne({emitId: emitId, followerId: id}, function (err, reply) {
         if (err) next(null)
         else {
-            next(emitSocketDetail)
+            if (reply) next(reply)
+            else {
+                const emitSocketDetail = new EmitSocketDetail({emitId: emitId, followerId: id})
+                emitSocketDetail.save(function (err) {
+                    if (err) next(null)
+                    else {
+                        next(emitSocketDetail)
+                    }
+                })
+            }
         }
     })
 }

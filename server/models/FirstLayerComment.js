@@ -11,10 +11,9 @@ const FirstLayerCommentSchema = new mongoose.Schema({
     order: {type: OrderSchema},
     postId: {type: String},
     likeCounter: {type: Number},
-    commentCounter: {type: Number}
+    commentCounter: {type: Number},
+    emitId: {type: String}
 })
-
-// FirstLayerCommentSchema.createIndex({postId: 1, time: 1})
 
 module.exports = FirstLayerCommentSchema
 

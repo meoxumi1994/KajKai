@@ -2,6 +2,8 @@ import {StorePost, StorePostDetail} from '../models'
 import {getMainPost} from './StoreService'
 import {getListPostDetail} from './StorePostDetailService'
 import { getStore } from './StoreService'
+import { createNewEmit } from './EmitDetailService'
+import { addNewEmitSocketDetail } from './SocketService'
 
 export const updatePost = (postId, list, userID, next) => {
     StorePost.findById(postId, function (err, post) {
@@ -32,10 +34,8 @@ export const addPostService = (storeId, list, next) => {
         const storePostDetail = new StorePostDetail(raw)
         detailList.push(storePostDetail)
     }
-    var post = new StorePost({storeId: storeId, list: detailList, type: 'REGULAR'})
-    post.save(function (err) {
-        if (err) next(null)
-        else next(post)
+    createNewPost(storeId, (new Date()).getTime(), list, 'REGULAR', function (post) {
+        next(post)
     })
 }
 
@@ -55,6 +55,24 @@ export const getPostList = (storeId, time, length, next) => {
                 return a.createdAt - b.createdAt
             })
             next(data)
+        }
+    })
+}
+
+export const createNewPost = (storeId, time, list, postType, next) => {
+    var storePost = new StorePost({storeId: storeId, createdAt: (new Date()).getTime(), type: postType, list: list})
+    createNewEmit({type: 'STORE_POST', lastTime: (new Date()).getTime()}, function (emitDetail) {
+        if (!emitDetail) next(null)
+        else {
+            storePost.emitId = emitDetail._id
+            storePost.save(function (err) {
+                getStore(storeId, function (store) {
+                    const owner = store.owner
+                    addNewEmitSocketDetail(storePost.emitId, owner, function () {
+                        next(storePost)
+                    })
+                })
+            })
         }
     })
 }

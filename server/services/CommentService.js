@@ -1,9 +1,11 @@
 import { FirstLayerComment, SecondLayerComment } from '../models'
-import mongoose from '../datasource'
+import { getCurrentTime } from '../utils/Utils'
 import UserService from './UserService'
-import {getOrder} from './OrderService'
-import {getStore} from './StoreService'
-import {getPost} from './StorePostService'
+import { getOrder } from './OrderService'
+import { getStore } from './StoreService'
+import { getPost } from './StorePostService'
+import { addNewEmitSocketDetail } from './SocketService'
+import { createNewEmit } from './EmitDetailService'
 
 export const getTimelyFirstComment = (postId, time, length, next) => {
     var query = FirstLayerComment.find({postId: postId, time: {$lt: time}}).sort({time: -1}).limit(length)
@@ -41,21 +43,26 @@ export const getSecondLayerCommentById = (id, next) => {
     })
 }
 
-export const saveNewComment = (firstLayerComment, next) => {
-    firstLayerComment.save(function (err) {
-        if (err) next(null)
-        else {
-            getPost(firstLayerComment.postId, function (storePost) {
-                if (!storePost) next(null)
-                else {
-                    storePost++
-                    storePost.save(function (err) {
-                        if (err) next(null)
-                        else next(firstLayerComment)
+export const saveNewFirstLayerComment = (posterId, posterAvatar, posterName, order, time, postId, content, next) => {
+    var comment = new FirstLayerComment({posterId: posterId, posterName: posterName, posterAvatar: posterAvatar,
+                            order: order, time: time, postId: postId, content: content})
+
+    createNewEmit({type: 'FistLayerComment', lastTime: getCurrentTime()}, function (emitDetail) {
+        comment.emitId = emitDetail._id
+        comment.save(function (err) {
+            addNewEmitSocketDetail(comment.emitId, posterId, function (emitSocketDetail) {
+                getPost(comment.postId, function (storePost) {
+                    storePost.commentCounter++
+                    addNewEmitSocketDetail(storePost.emitId, posterId, function (emitSocket) {
+                        storePost.save(function (err) {
+                            if (err) next(null)
+                            else next(comment)
+                        })
                     })
-                }
+                })
             })
-        }
+
+        })
     })
 }
 
@@ -68,26 +75,16 @@ export const addNewComment = (postId, data, userId, storeId, next) => {
             UserService.getUser(userId, function (user) {
                 if (!user) {
                     next(null)
-
                 } else {
-                    var comment = new FirstLayerComment({posterId: user._id, posterAvatar: user.avatarUrl, posterName: user.name,
-                        order: order, time: data.time, postId: postId, content: data.content})
-                    console.log(comment)
-                    saveNewComment(comment, function (cm) {
-                        if (cm) next(comment)
-                        else next(null)
+                    saveNewFirstLayerComment(user._id, user.avatarUrl, user.name, order, data.time, postId, data.content, function (comment) {
+                        next(comment)
                     })
                 }
             })
         } else {
             if (userId === store.owner) {
-                var comment = new FirstLayerComment({
-                    posterId: store._id, posterAvatar: store.avatarUrl, posterName: store.storename,
-                    order: order, time: data.time, postId: postId, content: data.content
-                })
-                saveNewComment(comment, function (cm) {
-                    if (cm) next(comment)
-                    else next(null)
+                saveNewFirstLayerComment(store._id, store.avatarUrl, store.storename, order, data.time, postId, data.content, function (comment) {
+                    next(comment)
                 })
             } else {
                 UserService.getUser(userId, function (user) {
@@ -95,12 +92,8 @@ export const addNewComment = (postId, data, userId, storeId, next) => {
                         next(null)
 
                     } else {
-                        var comment = new FirstLayerComment({posterId: user._id, posterAvatar: user.avatarUrl, posterName: user.name,
-                            order: order, time: data.time, postId: postId, content: data.content})
-                        console.log(comment)
-                        saveNewComment(comment, function (cm) {
-                            if (cm) next(comment)
-                            else next(null)
+                        saveNewFirstLayerComment(user._id, user.avatarUrl, user.name, order, data.time, postId, data.content, function (comment) {
+                            next(comment)
                         })
                     }
                 })
@@ -122,21 +115,23 @@ export const getSecondLayerComment = (postId, time, length, next) => {
     })
 }
 
-export const saveSecondLayerComment = (secondLayerComment, next) => {
-    secondLayerComment.save(function (err) {
-        if (err) next(null)
-        else {
-            getFirstLayerComment(secondLayerComment.postId, function (firstLayerComment) {
-                if (!firstLayerComment) next(null)
-                else {
-                    firstLayerComment.commentCounter++
-                    firstLayerComment.save(function (err) {
-                        if (err) next(null)
-                        else next(secondLayerComment)
+export const saveNewSecondLayerComment = (posterId, posterAvatar, posterName, time, postId, content) => {
+    var comment = new SecondLayerComment({posterId: posterId, posterAvatar: posterAvatar, posterName: posterName,
+                                    time: time, postId: postId, content: content})
+    getFirstLayerComment(postId, function (firstComment) {
+        addNewEmitSocketDetail(firstComment.emitId, posterId, function () {
+            firstComment.commentCounter++
+            firstComment.save(function () {
+                createNewEmit({type: 'SecondLayerComment', lastTime: getCurrentTime()}, function (emitDetail) {
+                    comment.emitId = emitDetail._id
+                    addNewEmitSocketDetail(emitDetail._id, posterId, function () {
+                        comment.save(function () {
+                            next(comment)
+                        })
                     })
-                }
+                })
             })
-        }
+        })
     })
 }
 
@@ -147,38 +142,23 @@ export const addNewSecondLayerComment = (postId, data, userId, storeId, next) =>
                 if (!user) {
                     next(null)
                 } else {
-                    var comment = new SecondLayerComment({posterId: user._id, posterAvatar: user.avatarUrl, posterName: user.name,
-                        time: data.time, postId: postId, content: data.content})
-                    console.log(comment)
-                    saveSecondLayerComment(comment, function (cm) {
-                        if (cm) next(comment)
-                        else next(null)
+                    saveNewSecondLayerComment(user._id, user.avatarUrl, user.name, data.time, postId, content, function (comment) {
+                        next(comment)
                     })
                 }
             })
         } else {
             if (store.owner === userId) {
-                var comment = new FirstLayerComment({
-                    posterId: store._id, posterAvatar: store.avatarUrl, posterName: store.storename,
-                    time: data.time, postId: postId, content: data.content
-                })
-                saveSecondLayerComment(comment, function (cm) {
-                    if (cm) next(comment)
-                    else next(null)
+                saveNewSecondLayerComment(store._id, store.avatarUrl, store.storename, data.time, postId, content, function (comment) {
+                    next(comment)
                 })
             } else {
                 UserService.getUser(userId, function (user) {
                     if (!user) {
                         next(null)
                     } else {
-                        var comment = new SecondLayerComment({
-                            posterId: user._id, posterAvatar: user.avatarUrl, posterName: user.name,
-                            time: data.time, postId: postId, content: data.content
-                        })
-                        console.log(comment)
-                        saveSecondLayerComment(comment, function (cm) {
-                            if (cm) next(comment)
-                            else next(null)
+                        saveNewSecondLayerComment(user._id, user.avatarUrl, user.name, data.time, postId, content, function (comment) {
+                            next(comment)
                         })
                     }
                 })
@@ -186,20 +166,3 @@ export const addNewSecondLayerComment = (postId, data, userId, storeId, next) =>
         }
     })
 }
-
-// var comment = new SecondLayerComment({content: 'fuck', time:  (new Date()).getTime(), postId:'59303ae9c2b270956486f2aa' })
-//
-// FirstLayerComment.findById('59303ae9c2b270956486f2aa', function (err, firstComment) {
-//     if (err) console.log(err)
-//     else {
-//         firstComment.childComment.push(comment)
-//         firstComment.save(function (err) {
-//             if (err) console.log(err)
-//             else console.log(firstComment)
-//         })
-//     }
-// })
-
-// getTimelyFirstComment('5929b0a92d53f82b01c48419', (new Date()).getTime(), 10, function (da) {
-//     console.log(da)
-// })

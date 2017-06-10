@@ -14,5 +14,14 @@ export default {
     'server/ADD_COMMENTS': {
         controller: 'CommentController',
         method: 'addSubComment'
+    },
+    'server/GET_GROUPCOMMENTS': {
+        controller: 'CommentController',
+        method: 'getGroupComment'
+    },
+    'server/GET_COMMENTS': {
+        controller: 'CommentController',
+        method: 'getSubComment'
     }
+
 }

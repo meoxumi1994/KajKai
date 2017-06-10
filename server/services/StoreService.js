@@ -1,7 +1,6 @@
 import { Store, Category, StorePost } from '../models'
 import { checkPhone } from '../utils/Utils'
-import UserService from './UserService'
-import {getPost} from './StorePostService'
+import { getPost, createNewPost } from './StorePostService'
 
 export const getStore = (id, next) => {
     Store.findById(id, function (err, store) {
@@ -65,15 +64,10 @@ export const addNewStore = (_ownerId, _storename, _address, _phone, _category, _
         next(null)
         return
     }
-    var storePost = new StorePost({storeId: store._id, createdAt: (new Date()).getTime(), type: 'MAIN'})
-    storePost.save(function (err) {
+    createNewPost(store._id, (new Date()).getTime(), null, 'MAIN', function (storePost) {
         store.mainPostId = storePost._id
-        store.save(function(err) {
-            if (err) {
-                next(null)
-            } else {
-                next(store)
-            }
+        store.save(function () {
+            next(store)
         })
     })
 }
@@ -150,17 +144,11 @@ export const getMainPost = (storeid, next) => {
 }
 
 export const getStoreByPostId = (id, next) => {
-    Store.findOne({'mainPost._id': id}, function (err, store) {
-        // console.log(store)
-        if (err) next(null)
-        else next(store)
-    })
-    getPost(id, function (post) {
-        if (!post) next(null)
+    getPost(id, function (storePost) {
+        if (!storePost) next(null)
         else {
-            getStore(post.storeId, function (store) {
-                if (!store) next(null)
-                else next(store)
+            getStore(storePost.storeId, function (store) {
+                next(store)
             })
         }
     })
