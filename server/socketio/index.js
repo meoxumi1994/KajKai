@@ -1,23 +1,10 @@
 import socketIo from 'socket.io'
 import allEvents from './events'
 import { verifyToken } from '../services/UserService'
-import {getTokenSocketCookie} from '../utils/Utils'
-import {redisClient} from '../datasource'
-import { getSecondLayerCommentById } from '../services/CommentService'
-import { SecondLayerComment } from '../models'
-import { addUserOnline, getStatusOnline, removeUserOnline } from '../services/OnlineService'
-import { getEmitDetail, getUserRoomId } from '../services/SocketService'
-import { getMessageList, getLastMessageAndInfo, passChatList } from '../services/MessageService'
-
-getEmitDetail('593bc3ff0607380b9934204e', function(rep){
-    console.log(rep)
-})
-
-getLastMessageAndInfo('59302b189afeed1a7f37cac1', 0, 10, function(rep){
-    console.log(rep)
-})
-
-
+import { getTokenSocketCookie } from '../utils/Utils'
+import { addUserOnline, removeUserOnline } from '../services/OnlineService'
+import { getUserRoomId } from '../services/SocketService'
+import { passChatList } from '../services/MessageService'
 
 const init = (server) => {
     const sio = socketIo(server)
