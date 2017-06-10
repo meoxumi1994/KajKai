@@ -138,6 +138,9 @@ export const getLastMessageAndInfo = (userId, offset, length, next) => {
         } else {
             getEmitListDetail(emitIDList, function (emitDetailList) {
                 getLastMessage(userId, emitIDList, offset, function (lastMessageList) {
+                    console.log('emitId: ' + JSON.stringify(emitIDList))
+                    console.log('emitDetail: ' + JSON.stringify(emitDetailList))
+                    console.log('lastMess:' + JSON.stringify(lastMessageList))
                     for (var i = 0, sz = emitDetailList.length; i < sz; ++i) {
                         emitDetailList[i] = {mesId: emitDetailList[i]._id, groupName: emitDetailList[i].name,
                             time: emitDetailList[i].lastTime, users: emitDetailList[i].followers, lastMessage: lastMessageList[i]}
