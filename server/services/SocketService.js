@@ -1,5 +1,5 @@
 import mongoose from '../datasource'
-import { EmitSocketDetail } from '../models'
+import { EmitSocketDetail, EmitDetail } from '../models'
 import { getUser } from '../services/UserService'
 import { getStore } from '../services/StoreService'
 
@@ -107,8 +107,10 @@ export const getEmitListDetailRecur = (emitIdList, index, next) => {
     } else {
         getEmitListDetailRecur(emitIdList, index - 1, function (emitListDetail) {
             getSubcriberDetailList(emitIdList[index - 1], function (subcriberDetailList) {
-                emitListDetail[index - 1] = {...emitListDetail[index - 1], followers: subcriberDetailList}
-                next(emitListDetail)
+                getEmitDetail(emitIdList[index - 1], function (emitDetail) {
+                    emitListDetail.push({...emitDetail, followers: subcriberDetailList})
+                    next(emitListDetail)
+                })
             })
         })
     }
@@ -133,5 +135,10 @@ export const emitDataToUser = (emitId, data, type, sio) => {
 }
 
 export const getEmitDetail = (emitId, next) => {
-
+    EmitDetail.findById(emitId, function (err, emitDetail) {
+        if (err) next({_id, emitId})
+        else {
+            next(emitDetail)
+        }
+    })
 }
