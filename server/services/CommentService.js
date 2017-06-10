@@ -185,9 +185,7 @@ export const addNewSecondLayerComment = (postId, data, userId, storeId, next) =>
             }
         }
     })
-
 }
-
 
 // var comment = new SecondLayerComment({content: 'fuck', time:  (new Date()).getTime(), postId:'59303ae9c2b270956486f2aa' })
 //
