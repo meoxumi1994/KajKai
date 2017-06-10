@@ -26,7 +26,7 @@ export const getMessageList = (mesId, time, length, next) => {
     })
 }
 
-export const getMessageList = (person1, person2, time, length, next) => {
+export const getMessageList2People = (person1, person2, time, length, next) => {
     if (person1 === person2) {
         next(null)
     } else {
@@ -58,15 +58,15 @@ export const getChatListID = (person) => {
 }
 
 export const getLastMessage = (id, listId, time, next) => {
-    getLastMessage(id, listId, listId.length, time, function (lastMessageList) {
+    getLastMessageRecur(id, listId, listId.length, time, function (lastMessageList) {
         next(lastMessageList)
     })
 }
 
-export const getLastMessage = (id, listId, index, time, next) => {
+export const getLastMessageRecur = (id, listId, index, time, next) => {
     // console.log('ffuck ' + id + ' ' + listId[index - 1])
     if (index > 1) {
-        getLastMessage(id, listId, index - 1, time, function (lastMessages) {
+        getLastMessageRecur(id, listId, index - 1, time, function (lastMessages) {
             getMessageList(id, listId[index - 1], time, 1, function (message) {
                 if (!message || message.length === 0) lastMessages.push(null)
                 else lastMessages.push(message[0])

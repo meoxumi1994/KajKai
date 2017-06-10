@@ -1,5 +1,5 @@
-import {getMessageList, getChatList, addNewMessage, getMessageId, getLastMessage, getLastMessageAndInfo} from '../services/MessageService'
-import { getUserRoomId, emitDataToUser } from '../services/SocketService'
+import { addNewMessage, getMessageId, getLastMessageAndInfo, getMessageList2People} from '../services/MessageService'
+import { emitDataToUser } from '../services/SocketService'
 
 
 export const getChatBuddies = () => {
@@ -19,7 +19,7 @@ export const getMessages = () => {
         var person2 = req.body.id
         var time = req.body.time
         var length = req.body.length
-        getMessageList(person1, person2, time, length, function (data) {
+        getMessageList2People(person1, person2, time, length, function (data) {
             res.json(data)
         })
     }

@@ -43,13 +43,13 @@ export const removeEmitSocketDetail = (emitId, id, next) => {
     })
 }
 
-export const getDetailList = (listId, index, next) => {
+export const getDetailListRecur = (listId, index, next) => {
     if (index === 1) {
         getDetailFromId(listId[index - 1], function (detail) {
             next([detail])
         })
     } else {
-        getDetailList(listId, index - 1, function (detailList) {
+        getDetailListRecur(listId, index - 1, function (detailList) {
             getDetailFromId(listId[index - 1], function (detail) {
                 detailList.push(detail)
                 next(detailList)
@@ -59,7 +59,7 @@ export const getDetailList = (listId, index, next) => {
 }
 
 export const getDetailList = (listId, next) => {
-    getDetailList(listId, listId.length, function (listDetail) {
+    getDetailListRecur(listId, listId.length, function (listDetail) {
         next(listDetail)
     })
 }
@@ -91,16 +91,16 @@ export const getSubcriberDetailList = (emitId, next) => {
 }
 
 export const getEmitListDetail = (emitIdlist, next) => {
-    getEmitListDetail(emitIdlist, emitIdlist.length, function (emitListDetail) {
+    getEmitListDetailRecur(emitIdlist, emitIdlist.length, function (emitListDetail) {
         next(emitListDetail)
     })
 }
 
-export const getEmitListDetail = (emitIdList, index, next) => {
+export const getEmitListDetailRecur = (emitIdList, index, next) => {
     if (index === 0) {
         next([])
     } else {
-        getEmitListDetail(emitIdList, index - 1, function (emitListDetail) {
+        getEmitListDetailRecur(emitIdList, index - 1, function (emitListDetail) {
             getSubcriberDetailList(emitIdList[index - 1], function (subcriberDetailList) {
                 emitListDetail[index - 1] = {...emitListDetail[index - 1], followers: subcriberDetailList}
                 next(emitListDetail)
