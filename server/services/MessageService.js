@@ -156,7 +156,7 @@ export const getLastMessageAndInfo = (userId, offset, length, next) => {
 }
 
 export const passChatList = (userId, sio, io) => {
-    const offset = (new Date()).getTime()
+    const offset = 0
     const length = 20
     getLastMessageAndInfo(userId, offset, length, function (lasstMessageAndInfo) {
         sio.emit('action', {type: 'client/INIT_CHAT_LIST', data: lasstMessageAndInfo})
