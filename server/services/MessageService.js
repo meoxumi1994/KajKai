@@ -59,7 +59,7 @@ export const addNewChatGroup = (idList, next) => {
 }
 
 export const addChatListGroupUser = (listId, mesId, next) => {
-    addChatListGroupUser(listId, listId.length, mesId, function () {
+    addChatListGroupUserRecur(listId, listId.length, mesId, function () {
         next()
     })
 }
