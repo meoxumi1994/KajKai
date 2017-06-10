@@ -108,6 +108,7 @@ export const getEmitListDetailRecur = (emitIdList, index, next) => {
         getEmitListDetailRecur(emitIdList, index - 1, function (emitListDetail) {
             getSubcriberDetailList(emitIdList[index - 1], function (subcriberDetailList) {
                 getEmitDetail(emitIdList[index - 1], function (emitDetail) {
+                    console.log('this ' + emitDetail)
                     emitListDetail.push({...emitDetail, followers: subcriberDetailList})
                     next(emitListDetail)
                 })

@@ -9,9 +9,14 @@ import { addUserOnline, getStatusOnline, removeUserOnline } from '../services/On
 import { getUserRoomId } from '../services/SocketService'
 import { getMessageList, getLastMessageAndInfo, passChatList } from '../services/MessageService'
 
+getEmitDetail('593bc3ff0607380b9934204e', function(rep){
+    console.log(rep)
+})
+
 getLastMessageAndInfo('59302b189afeed1a7f37cac1', 0, 10, function(rep){
     console.log(rep)
 })
+
 
 
 const init = (server) => {
