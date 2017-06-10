@@ -26,13 +26,10 @@ export const addNewEmitSocketDetail = (emitId, id, next) => {
 
 export const addNewEmitSocketDetailList = (emitId, listId, next) => {
     var docs = []
-    console.log(listId)
-    for (let id in listId) {
-        const emitSocketDetail = new EmitSocketDetail({emitId: emitId, followerId: id})
-        console.log(emitSocketDetail)
+    for (var i = 0, sz = listId.length; i < sz; ++i) {
+        const emitSocketDetail = new EmitSocketDetail({emitId: emitId, followerId: listId[i]})
         docs.push(emitSocketDetail)
     }
-    console.log(docs)
     EmitSocketDetail.insertMany(docs, function (err) {
         if (err) next(false)
         else next(true)
@@ -117,15 +114,15 @@ export const emitDataToOneUser = (emitId, data, type, userId, sio) => {
 }
 
 export const emitDataToGroupUser = (emitId, data, type, listUserId, sio) => {
-    for (let id in listUserId) {
-        emitDataToOneUser(emitId, data, type, id, sio)
+    for (var i = 0, sz = listUserId.length; i < sz; ++i) {
+        emitDataToOneUser(emitId, data, type, listUserId[i], sio)
     }
 }
 
 export const emitDataToUser = (emitId, data, type, sio) => {
     getSubcriberIdList(emitId, function (subcriberId) {
-        for (let id in subcriberId) {
-            emitDataToOneUser(emitId, data, type, id, sio)
+        for (var i = 0, sz = subcriberId.length; i < sz; ++i) {
+            emitDataToOneUser(emitId, data, type, subcriberId[i], sio)
         }
     })
 }
