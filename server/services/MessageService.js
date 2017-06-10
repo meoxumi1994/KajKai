@@ -93,10 +93,10 @@ export const getLastMessage = (id, listId, time, next) => {
 }
 
 export const getLastMessageRecur = (id, listId, index, time, next) => {
-    // console.log('ffuck ' + id + ' ' + listId[index - 1])
-    if (index > 1) {
+    if (index > 0) {
+        console.log('ffuck ' + id + ' ' + listId[index - 1])
         getLastMessageRecur(id, listId, index - 1, time, function (lastMessages) {
-            getMessageList(id, listId[index - 1], time, 1, function (message) {
+            getMessageList(listId[index - 1], id, time, 1, function (message) {
                 if (!message || message.length === 0) lastMessages.push(null)
                 else lastMessages.push(message[0])
                 console.log(message)
@@ -104,13 +104,7 @@ export const getLastMessageRecur = (id, listId, index, time, next) => {
             })
         })
     } else {
-        getMessageList(id, listId[index - 1], time, 1, function (message) {
-            var arr = []
-            console.log(message)
-            if (message && message.length > 0) arr.push(message[0])
-            else arr.push(null)
-            next(arr)
-        })
+        next([])
     }
 }
 

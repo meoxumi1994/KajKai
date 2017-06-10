@@ -7,7 +7,12 @@ import { getSecondLayerCommentById } from '../services/CommentService'
 import { SecondLayerComment } from '../models'
 import { addUserOnline, getStatusOnline, removeUserOnline } from '../services/OnlineService'
 import { getUserRoomId } from '../services/SocketService'
-import { passChatList } from '../services/MessageService'
+import { getMessageList, getLastMessageAndInfo, passChatList } from '../services/MessageService'
+
+getLastMessageAndInfo('59302b189afeed1a7f37cac1', 0, 10, function(rep){
+    console.log(rep)
+})
+
 
 const init = (server) => {
     const sio = socketIo(server)
