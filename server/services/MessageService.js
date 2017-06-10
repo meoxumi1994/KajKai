@@ -50,9 +50,35 @@ export const addNewChatGroup = (idList, next) => {
         if (!emitDetail) next(null)
         else {
             addNewEmitSocketDetailList(emitDetail._id, idList, function (reply) {
-                next(emitDetail)
+                addChatListGroupUser(idList, emitDetail._id, function () {
+                    next(emitDetail)
+                })
             })
         }
+    })
+}
+
+export const addChatListGroupUser = (listId, mesId, next) => {
+    addChatListGroupUser(listId, listId.length, mesId, function () {
+        next()
+    })
+}
+
+export const addChatListGroupUserRecur = (listId, index, mesId, next) => {
+    if (index === 0) {
+        next()
+    } else {
+        addChatListGroupUserRecur(listId, index - 1, mesId, function () {
+            addChatListUser(listId[index - 1], mesId, function () {
+                next()
+            })
+        })
+    }
+}
+
+export const addChatListUser = (id, mesId, next) => {
+    redisClient.zadd(getChatListID(id), -((new Date()).getTime()), mesId,function () {
+        next()
     })
 }
 
