@@ -136,7 +136,7 @@ export const emitDataToUser = (emitId, data, type, sio) => {
 
 export const getEmitDetail = (emitId, next) => {
     EmitDetail.findById(emitId, function (err, emitDetail) {
-        if (err) next({_id, emitId})
+        if (err) next({_id: emitId})
         else {
             next(emitDetail)
         }
