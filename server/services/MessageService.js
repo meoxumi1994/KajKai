@@ -96,8 +96,8 @@ export const getLastMessageRecur = (id, listId, index, time, next) => {
     if (index > 0) {
         console.log('ffuck ' + id + ' ' + listId[index - 1])
         getLastMessageRecur(id, listId, index - 1, time, function (lastMessages) {
-            getMessageList(listId[index - 1], id, time, 1, function (message) {
-                if (!message || message.length === 0) lastMessages.push(null)
+            getMessageList(listId[index - 1], time, 1, function (message) {
+                if (!message || message.length === 0) lastMessages.push({})
                 else lastMessages.push(message[0])
                 console.log(message)
                 next(lastMessages)
