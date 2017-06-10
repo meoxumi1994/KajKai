@@ -1,4 +1,4 @@
-import redisClient from '../datasource'
+import { redisClient } from '../datasource'
 const ONLINE_LIST_ID = 'online_list_id'
 
 export const getStatusOnline = (id, next) => {

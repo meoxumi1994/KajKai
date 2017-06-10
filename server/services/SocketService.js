@@ -109,10 +109,20 @@ export const getEmitListDetailRecur = (emitIdList, index, next) => {
     }
 }
 
+export const emitDataToOneUser = (emitId, data, type, userId, sio) => {
+    sio.to(getUserRoomId(userId)).emit('action', {type: type, data: data})
+}
+
+export const emitDataToGroupUser = (emitId, data, type, listUserId, sio) => {
+    for (let id in listUserId) {
+        emitDataToOneUser(emitId, data, type, id, sio)
+    }
+}
+
 export const emitDataToUser = (emitId, data, type, sio) => {
     getSubcriberIdList(emitId, function (subcriberId) {
-        for (var id in subcriberId) {
-            sio.to(getUserRoomId(id)).emit('action', {type: type, data: data})
+        for (let id in subcriberId) {
+            emitDataToOneUser(emitId, data, type, id, sio)
         }
     })
 }

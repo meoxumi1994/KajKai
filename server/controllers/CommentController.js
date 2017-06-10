@@ -3,6 +3,7 @@ import { User } from '../models'
 import { getStore, getStoreInfoService } from '../services/StoreService'
 import { getTimelyFirstComment, addNewComment, addNewSecondLayerComment, getSecondLayerComment } from '../services/CommentService'
 import { getStoreByPostId } from '../services/StoreService'
+import { emitDataToOneUser } from '../services/SocketService'
 
 export const getTarget = () => {
     return (req, res) => {
@@ -29,59 +30,6 @@ export const getTarget = () => {
     }
 }
 
-export const handleSioDemo = (action, sio) => {
-    if(action.type === 'server/SEND_MESSAGE'){
-        sio.emit('action', {
-            type: 'SEND_MESSAGE',
-            message: action.message,
-            author: action.token,
-            id: Date.now()
-        })
-    }
-}
-
-export const textSockIO = (action, sio) => {
-    // if (action.type == '') {
-    console.log(action)
-    console.log(sio)
-        // sio.emit('hello', {
-        //     abc: 'def'
-        // })
-    // }
-    sio.join(action.hello)
-}
-
-export const transerMessage = (action, sio) => {
-    console.log(action)
-    sio.to(action.room).emit('nhan', action.message)
-}
-
-export const subcribe = (action, sio) => {
-    sio.join(action.room)
-}
-
-export const unsubcribe = (action, sio) => {
-    sio.leave(action.room)
-}
-
-export const comment = (action, sio) => {
-    console.log(action)
-    sio.to(action.room).emit('new_message', action.message)
-}
-
-export const testToken = (action, sio) => {
-    // const token = action.token
-    // UserService.verifyToken(token, function (decoded) {
-    //     if (decoded) {
-    //         sio.emit("server/hi", {status: 'success'})
-    //     } else {
-    //         sio.emit("server/hi", {status: 'failed'})
-    //     }
-    // })
-    console.log('fick')
-    sio.emit('action', {type: 'client/hi', data: 'aeofiew'})
-}
-
 export const joinGroupComment = (action, sio, io) => {
     // const data = action.data
     console.log(action)
@@ -95,22 +43,14 @@ export const joinGroupComment = (action, sio, io) => {
     getStoreByPostId(action.data.id, function (store) {
         if (store) {
             getTimelyFirstComment(id, time, length, function (data) {
+                var returnData
+                const type = 'client/JOIN_GROUPCOMMENTS'
                 if (data) {
-                    console.log("this shit " + data)
-                    sio.emit('action', {
-                        type: 'client/JOIN_GROUPCOMMENTS', data: {
-                            id: id,
-                            comments: data,
-                            storeId: store._id
-                        }
-                    })
+                    returnData = {id: id, comments: data, storeId: store._id}
                 } else {
-                    sio.emit('action', {
-                        type: 'client/JOIN_GROUPCOMMENTS', data: {
-                            storeId: store._id
-                        }
-                    })
+                    returnData = {storeId: store._id}
                 }
+                emitDataToOneUser()
             })
         }
     })

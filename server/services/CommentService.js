@@ -107,8 +107,6 @@ export const addNewComment = (postId, data, userId, storeId, next) => {
             }
         }
     })
-
-
 }
 
 export const getSecondLayerComment = (postId, time, length, next) => {
