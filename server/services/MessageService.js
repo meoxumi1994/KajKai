@@ -13,7 +13,10 @@ export const getMessageId = (person1, person2, next) => {
         if (messageMapping) next(messageMapping.emitId)
         else {
             addNewChatGroup([person1, person2], function (emitDetail) {
-                next(emitDetail._id)
+                const messageMapping = new MessageMapping({trivialId: trivialMesId, emitId: emitDetail._id})
+                messageMapping.save(function () {
+                    next(messageMapping.mesId)
+                })
             })
         }
     })
