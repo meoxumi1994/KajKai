@@ -10,7 +10,12 @@ export const getUserRoomId = (id) => {
 export const getSubcriberIdList = (emitId, next) => {
     EmitSocketDetail.find({emitId: emitId}, function (err, list) {
         if (err || list.length === 0) next([])
-        else next(list)
+        else {
+            var idList = []
+            for (var i = 0; i < list.length; ++i)
+                idList.push(list[i].followerId)
+            next(idList)
+        }
     })
 }
 
