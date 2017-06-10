@@ -26,10 +26,13 @@ export const addNewEmitSocketDetail = (emitId, id, next) => {
 
 export const addNewEmitSocketDetailList = (emitId, listId, next) => {
     var docs = []
-    for (var id in listId) {
+    console.log(listId)
+    for (let id in listId) {
         const emitSocketDetail = new EmitSocketDetail({emitId: emitId, followerId: id})
+        console.log(emitSocketDetail)
         docs.push(emitSocketDetail)
     }
+    console.log(docs)
     EmitSocketDetail.insertMany(docs, function (err) {
         if (err) next(false)
         else next(true)
