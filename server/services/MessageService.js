@@ -1,33 +1,66 @@
 import { Message } from '../models/Message'
+import { MessageMapping } from '../models'
 import { redisClient } from '../datasource'
 import {UserService} from '../services/UserService'
+import { addNewEmitSocketDetailList, getSubcriberDetailList, getEmitListDetail } from './SocketService'
+import { createNewEmit, updateEmitInfo } from './EmitDetailService'
 
-export const getMessageId = (person1, person2) => {
+export const getMessageId = (person1, person2, next) => {
     var cmp = person1.localeCompare(person2)
-    var id;
-    if (cmp == 0) return null
-    if (cmp < 0) return person1 + '$' + person2
-    else return person2 + '$' + person1
+    if (cmp === 0) return next(null)
+    const trivialMesId = (cmp < 0) ? person1 + '$' + person2 : person2 + '$' + person1
+    MessageMapping.findOne({trivialId: trivialMesId}, function (err, messageMapping) {
+        if (messageMapping) next(messageMapping.emitId)
+        else {
+            addNewChatGroup([person1, person2], function (emitDetail) {
+                next(emitDetail._id)
+            })
+        }
+    })
+}
+
+export const getMessageList = (mesId, time, length, next) => {
+    redisClient.zrangebyscore(mesId, -time, 'inf', 'limit', 0, length, function (err, reply) {
+        if (err) next(null)
+        else next(reply)
+    })
 }
 
 export const getMessageList = (person1, person2, time, length, next) => {
-    const mesID = getMessageId(person1, person2)
-    // console.log(mesID + ' ' + offset + ' ' + (offset + length - 1))
-    if (!mesID) {
+    if (person1 === person2) {
         next(null)
     } else {
-        // redisClient.zrange(mesID, offset, offset + length - 1, function (err, reply) {
-        //     console.log(reply)
-        //     next(reply)
-        // })
-        redisClient.zrangebyscore(mesID, -time, 'inf', 'limit', 0, length, function (err, reply) {
-            if (err) next(null)
-            else next(reply)
+        getMessageId(person1, person2, function (mesId) {
+            if (!mesId) next(null)
+            else {
+                getMessageList(mesId, time, length, function (reply) {
+                    reply = {messages: reply, mesId: mesId}
+                    next(reply)
+                })
+            }
         })
     }
 }
+
+export const addNewChatGroup = (idList, next) => {
+    createNewEmit({lastTime: (new Date().getTime())}, function (emitDetail) {
+        if (!emitDetail) next(null)
+        else {
+            addNewEmitSocketDetailList(emitDetail._id, idList, function (reply) {
+                next(emitDetail)
+            })
+        }
+    })
+}
+
 export const getChatListID = (person) => {
     return 'chatList$' + person
+}
+
+export const getLastMessage = (id, listId, time, next) => {
+    getLastMessage(id, listId, listId.length, time, function (lastMessageList) {
+        next(lastMessageList)
+    })
 }
 
 export const getLastMessage = (id, listId, index, time, next) => {
@@ -60,23 +93,6 @@ export const getChatList = (person, offset, length, next) => {
             next(reply)
         }
     })
-    // redisClient.zrangebyscore(id, -time, 'inf', 'limit', 0, length - 1, function (err, reply) {
-    //     if (err) next(null)
-    //     else next(reply)
-    // })
-}
-
-
-
-export const updateChatLList = (personA, personB, time, next) => {
-    redisClient.zadd(getChatListID(personA), -time, personB, function (err) {
-        if (err) next(err)
-        else {
-            redisClient.zadd(getChatListID(personB), -time, personA, function (err) {
-                next(err)
-            })
-        }
-    })
 }
 
 export const addNewMessage = (mesID, person, message, time, next) =>{
@@ -85,20 +101,35 @@ export const addNewMessage = (mesID, person, message, time, next) =>{
     redisClient.zadd(mesID, -time, mes, function (err) {
         if (err) next(err)
         else {
-            var id = mesID.split('$')
-            if (person === id[1]) {
-                updateChatLList(id[0], id[1], time, function (e) {
-                    next(e)
-                })
-            } else {
-                updateChatLList(id[1], id[0], time, function (e) {
-                    next(e)
-                })
-            }
+            updateEmitInfo(mesID, {lastTime: time}, function (emitDetail) {
+                next(emitDetail)
+            })
         }
     })
 }
 
-export const getWaitingServiceId = (id) => {
-    return 'waiting$' + id
+export const getLastMessageAndInfo = (userId, offset, length, next) => {
+    getChatList(userId, offset, length, function (emitIDList) {
+        if (!emitIDList) {
+            next([])
+        } else {
+            getEmitListDetail(emitIDList, function (emitDetailList) {
+                getLastMessage(userId, emitIDList, offset, function (lastMessageList) {
+                    for (var i = 0, sz = emitDetailList.length; i < sz; ++i) {
+                        emitDetailList[i] = {mesId: emitDetailList[i]._id, groupName: emitDetailList[i].name,
+                            time: emitDetailList[i].lastTime, users: emitDetailList[i].followers, lastMessage: JSON.parse(lastMessageList[i])}
+                    }
+                    next(emitDetailList)
+                })
+            })
+        }
+    })
+}
+
+export const passChatList = (userId, sio, io) => {
+    const offset = (new Date()).getTime()
+    const length = 20
+    getLastMessageAndInfo(userId, offset, length, function (lasstMessageAndInfo) {
+        sio.emit('action', {type: 'client/INIT_CHAT_LIST', data: lasstMessageAndInfo})
+    })
 }

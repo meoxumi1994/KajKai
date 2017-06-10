@@ -1,3 +1,122 @@
+import mongoose from '../datasource'
+import { EmitSocketDetail } from '../models'
+import { getUser } from '../services/UserService'
+import { getStore } from '../services/StoreService'
+
 export const getUserRoomId = (id) => {
     return 'room$' + id
+}
+
+export const getSubcriberIdList = (emitId, next) => {
+    EmitSocketDetail.find({emitId: emitId}, function (err, list) {
+        if (err || list.length === 0) next([])
+        else next(list)
+    })
+}
+
+export const addNewEmitSocketDetail = (emitId, id, next) => {
+    const emitSocketDetail = new EmitSocketDetail({emitId: emitId, followerId: id})
+    emitSocketDetail.save(function (err) {
+        if (err) next(null)
+        else {
+            next(emitSocketDetail)
+        }
+    })
+}
+
+export const addNewEmitSocketDetailList = (emitId, listId, next) => {
+    var docs = []
+    for (var id in listId) {
+        const emitSocketDetail = new EmitSocketDetail({emitId: emitId, followerId: id})
+        docs.push(emitSocketDetail)
+    }
+    EmitSocketDetail.insertMany(docs, function (err) {
+        if (err) next(false)
+        else next(true)
+    })
+}
+
+export const removeEmitSocketDetail = (emitId, id, next) => {
+    EmitSocketDetail.remove({emitId: emitId, followerId: id}, function (err) {
+        if (err) next(null)
+        else next(true)
+    })
+}
+
+export const getDetailList = (listId, index, next) => {
+    if (index === 1) {
+        getDetailFromId(listId[index - 1], function (detail) {
+            next([detail])
+        })
+    } else {
+        getDetailList(listId, index - 1, function (detailList) {
+            getDetailFromId(listId[index - 1], function (detail) {
+                detailList.push(detail)
+                next(detailList)
+            })
+        })
+    }
+}
+
+export const getDetailList = (listId, next) => {
+    getDetailList(listId, listId.length, function (listDetail) {
+        next(listDetail)
+    })
+}
+
+export const getDetailFromId = (id, next) => {
+    getUser(id, function (user) {
+        if (user) next({id: user._id, avatarUrl: user.avatarUrl, name: user.name})
+        else {
+            getStore(id, function (store) {
+                if (store) {
+                    next({id: store._id, avatarUrl: store.avatarUrl, name: store.name})
+                } else {
+                    next({id: id})
+                }
+            })
+        }
+    })
+}
+
+export const getSubcriberDetailList = (emitId, next) => {
+    getSubcriberIdList(emitId, function (idList) {
+        if (idList.length === 0) next(idList)
+        else {
+            getDetailList(idList, function (detailList) {
+                next(detailList)
+            })
+        }
+    })
+}
+
+export const getEmitListDetail = (emitIdlist, next) => {
+    getEmitListDetail(emitIdlist, emitIdlist.length, function (emitListDetail) {
+        next(emitListDetail)
+    })
+}
+
+export const getEmitListDetail = (emitIdList, index, next) => {
+    if (index === 0) {
+        next([])
+    } else {
+        getEmitListDetail(emitIdList, index - 1, function (emitListDetail) {
+            getSubcriberDetailList(emitIdList[index - 1], function (subcriberDetailList) {
+                emitListDetail[index - 1] = {...emitListDetail[index - 1], followers: subcriberDetailList}
+                next(emitListDetail)
+            })
+        })
+    }
+}
+
+export const emitDataToUser = (emitId, data, type, sio) => {
+    getSubcriberIdList(emitId, function (subcriberId) {
+        for (var id in subcriberId) {
+            sio.to(getUserRoomId(id)).emit('action', {type: type, data: data})
+        }
+    })
+}
+
+export const getEmitDetail = (emitId, next) => {
+
 }

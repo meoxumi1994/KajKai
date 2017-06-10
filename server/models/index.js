@@ -35,6 +35,15 @@ var FirstLayerComment = mongoose.model('FirstLayerComment', FirstLayerCommentSch
 var LikeSchema = require('./Like')
 var Like = mongoose.model('Like', LikeSchema)
 
+var EmitSocketDetailSchema = require('./EmitSocketDetail')
+var EmitSocketDetail = mongoose.model('EmitSocket', EmitSocketDetailSchema)
+
+var EmitDetailSchema = require('./EmitDetail')
+var EmitDetail = mongoose.model('EmitDetail', EmitDetailSchema)
+
+var MessageMappingSchema = require('./MessageMapping')
+var MessageMapping = mongoose.model('MessageMapping', MessageMappingSchema)
+
 module.exports = {
 	User,
 	Category,
@@ -44,7 +53,10 @@ module.exports = {
     StorePost,
 	FirstLayerComment,
     SecondLayerComment,
-    Like
+    Like,
+    EmitSocketDetail,
+    EmitDetail,
+    MessageMapping
 }
 
 // var fs = require('fs')

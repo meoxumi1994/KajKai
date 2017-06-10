@@ -7,6 +7,7 @@ import { getSecondLayerCommentById } from '../services/CommentService'
 import { SecondLayerComment } from '../models'
 import { addUserOnline, getStatusOnline, removeUserOnline } from '../services/OnlineService'
 import { getUserRoomId } from '../services/SocketService'
+import { passChatList } from '../services/MessageService'
 
 const init = (server) => {
     const sio = socketIo(server)
@@ -23,10 +24,11 @@ const init = (server) => {
             addUserOnline(userID, function (reply) {
                 if (reply) {
                     socket.join(getUserRoomId(userID))
+                    // sock chat
+                    passChatList(userID, socket, sio)
                 }
             })
         }
-
 
         socket.on('disconnect', () => {
             console.log('a user disconnected')
