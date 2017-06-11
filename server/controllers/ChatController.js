@@ -1,4 +1,4 @@
-import { addNewMessage, getMessageId, getLastMessageAndInfo, getMessageList2People} from '../services/MessageService'
+import { addNewMessage, getMessageId, getLastMessageAndInfo, getMessageList2People, getMessageList } from '../services/MessageService'
 import { emitDataToUser } from '../services/SocketService'
 
 
@@ -15,11 +15,10 @@ export const getChatBuddies = () => {
 
 export const getMessages = () => {
     return (req, res) => {
-        var person1 = req.decoded._id
-        var person2 = req.body.id
-        var time = req.body.time
-        var length = req.body.length
-        getMessageList2People(person1, person2, time, length, function (data) {
+        let time = req.body.time
+        let length = req.body.length
+        let mesId = req.body.mesId
+        getMessageList(mesId, time, length, function (data) {
             res.json(data)
         })
     }
