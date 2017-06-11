@@ -78,6 +78,7 @@ export const getDetailList = (listId, next) => {
 }
 
 export const getDetailFromId = (id, next) => {
+    console.log('fuck ' + id)
     getUser(id, function (user) {
         if (user) next({id: user._id, avatarUrl: user.avatarUrl, name: user.name})
         else {
