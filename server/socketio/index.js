@@ -76,7 +76,10 @@ const init = (server) => {
 
                 //     })
                 // }
-                if (handler.controller !== 'ChatController' || userID !== null) {
+                // if (handler.controller !== 'ChatController' || userID !== null) {
+                //     method(action, socket, sio)
+                // }
+                if (handler.controller === 'ChatController') {
                     method(action, socket, sio)
                 }
             })
