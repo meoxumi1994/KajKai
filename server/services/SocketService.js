@@ -2,12 +2,12 @@ import mongoose from '../datasource'
 import { EmitSocketDetail, EmitDetail } from '../models'
 import { getUser } from './UserService'
 import { getStore } from './StoreService'
+function myFunc (arg) {
+    // fuckUser()
+    console.log('arg was => ' + arg);
+}
 
-// getUser('59302b189afeed1a7f37cac1', function (rep) {
-//     console.log('fuck this shit ' + rep)
-// })
-
-// getUser('839758943')
+setTimeout(myFunc, 2, 'funky');
 
 export const getUserRoomId = (id) => {
     return 'room$' + id

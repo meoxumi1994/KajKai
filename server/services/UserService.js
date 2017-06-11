@@ -1,7 +1,7 @@
 import { User } from '../models'
 import jwt from 'jsonwebtoken'
 import enums from '../enum'
-import {findStoreList} from './StoreService'
+import { findStoreList } from './StoreService'
 import mongoose from '../datasource'
 
 export const getUser = (id, next) => {
@@ -122,7 +122,7 @@ export const saveNewUser = (user, next) => {
 }
 
 export const updateUserPhone = (id, phone, next) => {
-	UserService.getUser(id, function(user){
+	getUser(id, function(user){
 		if (user) {
 			user.phone = phone
 			user.save(function(err){
