@@ -3,6 +3,10 @@ import { EmitSocketDetail, EmitDetail } from '../models'
 import { getUser } from './UserService'
 import { getStore } from './StoreService'
 
+getUser('59302b189afeed1a7f37cac1', function (rep) {
+    console.log('fuck this shit ' + rep)
+})
+
 export const getUserRoomId = (id) => {
     return 'room$' + id
 }
