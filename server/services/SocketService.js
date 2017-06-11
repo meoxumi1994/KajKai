@@ -1,7 +1,7 @@
 import mongoose from '../datasource'
 import { EmitSocketDetail, EmitDetail } from '../models'
-import { getUser } from '../services/UserService'
-import { getStore } from '../services/StoreService'
+import { getUser } from './UserService'
+import { getStore } from './StoreService'
 
 export const getUserRoomId = (id) => {
     return 'room$' + id
