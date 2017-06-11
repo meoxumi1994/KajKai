@@ -13,9 +13,9 @@ const Chat = () => {
               <Row style={{float: 'left'}}><ChatListContainer/></Row>
            </Col>
            <Col lg={14} lgOffset={3}>
-               <NewChatContainer/>
-               <MessageListContainer/>
-               <SendMessageContainer/>
+              <NewChatContainer/>
+              <MessageListContainer/>
+              <SendMessageContainer/>
            </Col>
      </Grid>
     </div>

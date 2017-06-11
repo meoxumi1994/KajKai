@@ -10,7 +10,7 @@ const SendMessage = ({mesId, sendMessage, visibility, user, uploadImage}) => {
         <form style={{position: 'relative'}} onSubmit={e => {
           e.preventDefault()
           if (msg.value.trim()) {
-            sendMessage(mesId, user, msg.value)
+            sendMessage(mesId, user.id, msg.value, '', 'msg')
             msg.value = ''
           }
         }}>

@@ -40,6 +40,7 @@ class MessageList  extends React.Component {
       const { myInfo, partnerInfo, messages, visibility, lazyLoad } = this.props
       if (messages.length > 0) {
         return (
+
           <div style={{display: visibility}}>
             <h3><i>{partnerInfo.username}</i></h3>
             <div style={style.messageListDiv}>

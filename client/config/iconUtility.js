@@ -29,7 +29,8 @@ const iconList = [
   "stunned",
   "tired",
   "tough",
-  "wink"
+  "wink",
+  "minhGay"
 ]
 
 const languageMaping = (icon) => {
