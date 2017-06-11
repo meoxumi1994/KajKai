@@ -136,6 +136,7 @@ export const addNewMessage = (mesID, person, message, time, next) =>{
 export const getLastMessageAndInfo = (userId, offset, length, next) => {
     getChatList(userId, offset, length, function (emitIDList) {
         console.log('emitId: ' + emitIDList)
+        console.log(emitIDList instanceof Array)
         if (!emitIDList) {
             next([])
         } else {
@@ -157,7 +158,7 @@ export const getLastMessageAndInfo = (userId, offset, length, next) => {
 export const passChatList = (userId, sio, io) => {
     const offset = 0
     const length = 20
-    getLastMessageAndInfo(userId, offset, length, function (lasstMessageAndInfo) {
-        sio.emit('action', {type: 'client/INIT_CHAT_LIST', data: lasstMessageAndInfo})
+    getLastMessageAndInfo(userId, offset, length, function (lastMessageAndInfo) {
+        sio.emit('action', {type: 'client/INIT_CHAT_LIST', data: lastMessageAndInfo})
     })
 }
