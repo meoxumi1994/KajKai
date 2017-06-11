@@ -1,6 +1,6 @@
 import { FirstLayerComment, SecondLayerComment } from '../models'
 import { getCurrentTime } from '../utils/Utils'
-import UserService from './UserService'
+import { getUser } from './UserService'
 import { getOrder } from './OrderService'
 import { getStore } from './StoreService'
 import { getPost } from './StorePostService'
@@ -72,7 +72,7 @@ export const addNewComment = (postId, data, userId, storeId, next) => {
 
     getStore(storeId, function (store) {
         if (!store) {
-            UserService.getUser(userId, function (user) {
+            getUser(userId, function (user) {
                 if (!user) {
                     next(null)
                 } else {
@@ -87,7 +87,7 @@ export const addNewComment = (postId, data, userId, storeId, next) => {
                     next(comment)
                 })
             } else {
-                UserService.getUser(userId, function (user) {
+                getUser(userId, function (user) {
                     if (!user) {
                         next(null)
 
@@ -138,7 +138,7 @@ export const saveNewSecondLayerComment = (posterId, posterAvatar, posterName, ti
 export const addNewSecondLayerComment = (postId, data, userId, storeId, next) => {
     getStore(storeId, function (store) {
         if (!store) {
-            UserService.getUser(userId, function (user) {
+            getUser(userId, function (user) {
                 if (!user) {
                     next(null)
                 } else {
@@ -153,7 +153,7 @@ export const addNewSecondLayerComment = (postId, data, userId, storeId, next) =>
                     next(comment)
                 })
             } else {
-                UserService.getUser(userId, function (user) {
+                getUser(userId, function (user) {
                     if (!user) {
                         next(null)
                     } else {

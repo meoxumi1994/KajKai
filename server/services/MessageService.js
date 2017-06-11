@@ -1,7 +1,6 @@
 import { Message } from '../models/Message'
 import { MessageMapping } from '../models'
 import { redisClient } from '../datasource'
-import {UserService} from '../services/UserService'
 import { addNewEmitSocketDetailList, getSubcriberDetailList, getEmitListDetail } from './SocketService'
 import { createNewEmit, updateEmitInfo } from './EmitDetailService'
 

@@ -1,4 +1,4 @@
-import UserService from '../services/UserService.js'
+import { getUser, getUserBasicInfo } from '../services/UserService.js'
 import { getStore, getStoreInfoService } from '../services/StoreService'
 import { getTimelyFirstComment, addNewComment, addNewSecondLayerComment, getSecondLayerComment, getFirstLayerComment } from '../services/CommentService'
 import { getStoreByPostId } from '../services/StoreService'
@@ -11,10 +11,10 @@ export const getTarget = () => {
         if (!id) {
             res.json({status: 'failed'})
         } else {
-            UserService.getUser(id, function (user) {
+            getUser(id, function (user) {
                 if (user) {
                     res.json({status: 'success', type: 'user',
-                                user: UserService.getUserBasicInfo(user)})
+                                user: getUserBasicInfo(user)})
                 } else {
                     getStore(id, function (store) {
                         if (store) {

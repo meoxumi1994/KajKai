@@ -1,10 +1,10 @@
 import { mNexmoVerifyPhone, mNexmoVerifyCheck, mNexmoVerifyLogout } from '../services/PhoneService'
-import UserService from '../services/UserService.js'
+import { getUserFromPhone, updateUserPhone } from '../services/UserService.js'
 
 export const updateUserPhone = () => (req, res) => {
   const { phone } = req.body
   console.log(phone)
-  UserService.getUserFromPhone(phone, function(user){
+  getUserFromPhone(phone, function(user){
     if (user) {
       res.json({status: 'phone is already used'})
     } else {
@@ -26,8 +26,8 @@ export const verifyPhone = () => (req, res) => {
   const { phone, code } = req.body
     mNexmoVerifyCheck(phone, code)
     .then((status) => {
-        if (status == 'verified') {
-          UserService.updateUserPhone(req.decoded._id, phone, function(mstatus){
+        if (status === 'verified') {
+          updateUserPhone(req.decoded._id, phone, function(mstatus){
             mNexmoVerifyLogout(phone).then(res.json({'status': mstatus}))
           })
         } else {

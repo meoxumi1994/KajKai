@@ -89,7 +89,7 @@ export default {
         get: {
             controller: 'UserController',
             middleware: [auth()],
-            method: 'getUser'
+            method: 'getUserController'
         }
     },
 
@@ -150,7 +150,7 @@ export default {
         post: {
             controller: 'UserController',
             // middleware: [auth()]
-            method: 'getUserInfo'
+            method: 'getUserInfoController'
         }
     },
 
