@@ -4,6 +4,16 @@ import enums from '../enum'
 import {findStoreList} from './StoreService'
 import mongoose from '../datasource'
 
+export const getUser = (id, next) => {
+    User.findById(id, function(err, user) {
+        if (err) {
+            next(null)
+        } else {
+            next(user)
+        }
+    })
+}
+
 export const getUserInfo = (user, next) => {
 	findStoreList(user.id, function(stores){
         next(getUserBasicInfo(user, stores))
@@ -21,20 +31,6 @@ export const getUserBasicInfo = (user, stores = null) => {
         avatarUrl: user.avatarUrl,
         coverUrl: user.coverUrl,
 		id: user._id}
-}
-
-export const getUser = (id, next) => {
-	User.findById(id, function(err, user) {
-		if (err) {
-			next(null)
-		} else {
-			next(user)
-		}
-	})
-}
-
-export const fuckUser = () => {
-    console.log('hello')
 }
 
 export const getListUser = (ids, next) => {

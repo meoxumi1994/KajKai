@@ -1,7 +1,7 @@
 import { mNexmoVerifyPhone, mNexmoVerifyCheck, mNexmoVerifyLogout } from '../services/PhoneService'
 import { getUserFromPhone, updateUserPhone } from '../services/UserService.js'
 
-export const updateUserPhone = () => (req, res) => {
+export const updateUserPhoneController = () => (req, res) => {
   const { phone } = req.body
   console.log(phone)
   getUserFromPhone(phone, function(user){

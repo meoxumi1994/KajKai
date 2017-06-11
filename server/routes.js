@@ -28,7 +28,7 @@ export default {
         put: {
           controller: 'PhoneController',
           middleware: [auth(), phoneCheck()],
-          method: 'updateUserPhone'
+          method: 'updateUserPhoneController'
         }
     },
 
