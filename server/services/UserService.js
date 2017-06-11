@@ -33,6 +33,10 @@ export const getUser = (id, next) => {
 	})
 }
 
+export const fuckUser = () => {
+    console.log('hello')
+}
+
 export const getListUser = (ids, next) => {
 	var list = []
 	for (var i = 0; i < ids.length; ++i) {
