@@ -1,10 +1,14 @@
 import socketIo from 'socket.io'
 import allEvents from './events'
-import { verifyToken } from '../services/UserService'
+import { verifyToken, getUser } from '../services/UserService'
 import { getTokenSocketCookie } from '../utils/Utils'
 import { addUserOnline, removeUserOnline } from '../services/OnlineService'
 import { getUserRoomId } from '../services/SocketService'
 import { passChatList } from '../services/MessageService'
+
+getUser('59302b189afeed1a7f37cac1', function (rep) {
+    console.log('fuck ' + rep)
+})
 
 const init = (server) => {
     const sio = socketIo(server)
