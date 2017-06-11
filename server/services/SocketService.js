@@ -57,10 +57,8 @@ export const removeEmitSocketDetail = (emitId, id, next) => {
 }
 
 export const getDetailListRecur = (listId, index, next) => {
-    if (index === 1) {
-        getDetailFromId(listId[index - 1], function (detail) {
-            next([detail])
-        })
+    if (index <= 0) {
+        next([])
     } else {
         getDetailListRecur(listId, index - 1, function (detailList) {
             getDetailFromId(listId[index - 1], function (detail) {
@@ -80,7 +78,10 @@ export const getDetailList = (listId, next) => {
 export const getDetailFromId = (id, next) => {
     console.log('fuck ' + id)
     getUser(id, function (user) {
-        if (user) next({id: user._id, avatarUrl: user.avatarUrl, name: user.name})
+        if (user) {
+            console.log('shit ' + user)
+            next({id: user._id, avatarUrl: user.avatarUrl, name: user.name})
+        }
         else {
             getStore(id, function (store) {
                 if (store) {
@@ -97,7 +98,9 @@ export const getSubcriberDetailList = (emitId, next) => {
     getSubcriberIdList(emitId, function (idList) {
         if (idList.length === 0) next(idList)
         else {
+            console.log('idList ' + idList)
             getDetailList(idList, function (detailList) {
+                console.log('detailList ' + detailList)
                 next(detailList)
             })
         }
