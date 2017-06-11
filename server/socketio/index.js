@@ -19,23 +19,26 @@ const init = (server) => {
                 userID = decoded._id
         }
         if (userID) {
-            addUserOnline(userID, function (reply) {
-                if (reply) {
-                    socket.join(getUserRoomId(userID))
-                    // sock chat
-                    passChatList(userID, socket, sio)
-                }
-            })
+            // addUserOnline(userID, function (reply) {
+            //     if (reply) {
+            //         socket.join(getUserRoomId(userID))
+            //         // sock chat
+            //         passChatList(userID, socket, sio)
+            //     }
+            // })
+            socket.join(getUserRoomId(userID))
+            passChatList(userID, socket, sio)
         }
 
         socket.on('disconnect', () => {
             console.log('a user disconnected')
             if (userID) {
-                removeUserOnline(userID, function (reply) {
-                    if (reply) {
-                        socket.leave(getUserRoomId(userID))
-                    }
-                })
+                // removeUserOnline(userID, function (reply) {
+                //     if (reply) {
+                //
+                //     }
+                // })
+                socket.leave(getUserRoomId(userID))
             }
         })
 

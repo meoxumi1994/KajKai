@@ -1,33 +1,19 @@
-import {StorePost, FirstLayerComment, SecondLayerComment} from  '../models'
 import { getPost } from '../services/StorePostService'
-import { redisClient } from '../datasource'
+import { getFirstLayerComment, getSecondLayerComment } from '../services/CommentService'
+import { getUser } from '../services/UserService'
 import { Like } from '../models'
+import { getCurrentTime } from  '../utils/Utils'
 
-const LIKE_DATABASE = 'likeDatabase'
-
-export const getRedisId = (userId, likenId, likenType) => {
-    return userId + '$' + likenType + '~' + likenType;
-}
-export const actLikes = (userId, likenId, likenType, next) => {
-    const redisId = getRedisId(userId, likenId, likenType)
-    redisClient.hexists(LIKE_DATABASE, redisId, function (err, reply) {
-        if (reply === 0) {
-            addLikeRedis(redisId, function (reply) {
-                if (!reply) next(null)
+export const getObj = (id, next) => {
+    getPost(id, function (post) {
+        if (post) next(post)
+        else {
+            getFirstLayerComment(id, function (firComment) {
+                if (firComment) next(firComment)
                 else {
-                    addLike(userId, likenId, likenType, function (res) {
-                        if (!res) next(null)
-                        else next(res)
-                    })
-                }
-            })
-        } else {
-            removeLikeRedis(redisId, function (reply) {
-                if (!reply) next(null)
-                else {
-                    removeLikeRedis(userId, likenId, likenType, function (res) {
-                        if (!res) next(null)
-                        else next(res)
+                    getSecondLayerComment(id, function (secComment) {
+                        if (secComment) next(secComment)
+                        else next(null)
                     })
                 }
             })
@@ -35,59 +21,58 @@ export const actLikes = (userId, likenId, likenType, next) => {
     })
 }
 
-export const addLike = (userId, likenId, likenType, next) => {
-    switch (likenType) {
-        case 1: // post
-            getPost(likenId, function (post) {
-                if (!post) {
-                    next(null)
-                } else {
-                    post.likeCounter++;
-                    post.save(function (err) {
-                        if (err) next(null)
-                        else next('success')
-                    })
-                }
-            })
-            break
-        case 2: // comment
-
-            break
-    }
-}
-
-export const removeLike = (userId, likenId, likenType, next) => {
-    switch (likenType) {
-        case 1:
-            getPost(likenId, function (post) {
-                if (!post) {
-                    next(null)
-                } else {
-                    post.likeCounter++;
-                    post.save(function (err) {
-                        if (err) next(null)
-
-                    })
-                }
-            })
-    }
-}
-
-
-
-export const addLikeDB  = (userId, likenId, likenType, next) => {
-    var like = new Like({userId: userId, likenId: likenId, likenType: likenType})
-    like.save(function (err) {
-        if (err) next(null)
-        else next(like)
-    })
-
-}
-
-export const removeLikeDB = (redisId) => {
-    var like = new Like({userId: userId, likenId: likenId, likenType: likenType})
-    like.save(function (err) {
-        if (err) next(null)
-        else next(like)
+export const updateLikeCounter = (obj, added, next) => {
+    obj.likeCounter += added
+    obj.save(function () {
+        next()
     })
 }
+
+export const modifyLike = (userId, likenId, time, next) => {
+    getObj(likenId, function (obj) {
+        if (!obj) next(null)
+        else {
+            getUser(userId, function (user) {
+                if (!user) next(null)
+                Like.findOne({userId: userId, likenId: likenId}, function (like) {
+                    if (like) {
+                        Like.findOneAndRemove({userId: userId, likenId: likenId}, function () {
+                            updateLikeCounter(obj, -1, function () {
+                                next({user: user, type: 'unlike'})
+                            })
+                        })
+                    } else {
+                        const newLike = new Like({userId: userId, likenId: likenId, time: time})
+                        newLike.save(function () {
+                            updateLikeCounter(obj, 1, function () {
+                                next({user: user, type: 'like'})
+                            })
+                        })
+                    }
+                })
+            })
+        }
+    })
+}
+
+export const getLikeUserIdList = (objId, length, next) => {
+    const query = Like.find({likenId: objId}).sort({time: -1}).limit(length)
+    query.exec(function (list) {
+        if (!list) next([])
+        else {
+            var arr = []
+            for (var i = 0, sz = list.length; i < sz; ++i)
+                arr.push(arr[i].userId)
+            next(arr)
+        }
+    })
+}
+
+export const getLikeObjIdList = (userId, time, length, next) => {
+    const query = Like.find({userId: userId, time: {$lt: time}}).sort({time: -1}).limit(length)
+    query.exec(function (list) {
+
+    })
+}
+
+
