@@ -133,15 +133,18 @@ export const addNewMessage = (mesID, person, message, time, next) =>{
 
 export const getLastMessageAndInfo = (userId, offset, length, next) => {
     getChatList(userId, offset, length, function (emitIDList) {
+        console.log('emitId: ' + emitIDList)
         if (!emitIDList) {
             next([])
         } else {
             getEmitListDetail(emitIDList, function (emitDetailList) {
+                console.log('emitDetail: ' + emitDetailList)
                 getLastMessage(userId, emitIDList, (new Date()).getTime(), function (lastMessageList) {
                     for (var i = 0, sz = emitDetailList.length; i < sz; ++i) {
                         emitDetailList[i] = {mesId: emitIDList[i], groupName: emitDetailList[i].name,
                             time: emitDetailList[i].lastTime, users: emitDetailList[i].followers, lastMessage: JSON.parse(lastMessageList[i])}
                     }
+                    console.log('emitDetail: ' + emitIDList)
                     next(emitDetailList)
                 })
             })
