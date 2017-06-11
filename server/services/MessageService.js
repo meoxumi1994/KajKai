@@ -113,7 +113,9 @@ export const getChatList = (person, offset, length, next) => {
     redisClient.zrange(id, offset, offset + length - 1, function (err, reply) {
         if (err || reply.length === 0) next(null)
         else {
-            next(reply)
+            if (reply instanceof Array)
+                next(reply)
+            else next([reply])
         }
     })
 }
