@@ -1,9 +1,7 @@
 import { Category } from '../models'
 import { getUser } from './UserService'
 
-getUser('34985u49385', function () {
-    console.log('hello bug')
-})
+console.log('fuck category')
 
 export const getCategoryList = (next) => {
 	Category.find({}, function(err, categories) {

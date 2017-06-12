@@ -1,13 +1,11 @@
 // const getAbsolutePath = getPath(__dirname)
 import config from '../config/serverConfig'
-import { getUserFromEmail, getUserToken, getUser, getUserInfo, getUserFromPhone, getUserFromFacebookId, validateName, validateLanguage, getUserBasicInfo, getUserFromGoogleId, validateSex} from '../services/UserService.js'
 import request from 'request'
-import { User } from '../models'
 import enums from '../enum'
+import { getUserFromEmail, getUserToken, getUser, getUserInfo, getUserFromPhone, getUserFromFacebookId, validateName, validateLanguage, getUserBasicInfo, getUserFromGoogleId, validateSex} from '../services/UserService.js'
+import { User } from '../models'
 import {parseNum} from '../utils/NumberUtils'
 import EmailService from '../services/EmailService'
-// var Email = require('../services/EmailService.js')
-// var request = require('request')
 
 const phoneRegrex = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
 const emailRegrex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/

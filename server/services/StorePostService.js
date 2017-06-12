@@ -1,6 +1,6 @@
 import {StorePost, StorePostDetail} from '../models'
 import {getMainPost} from './StoreService'
-import {getListPostDetail} from './StorePostDetailService'
+import { getListPostDetail } from './StorePostDetailService'
 import { getStore } from './StoreService'
 import { createNewEmit } from './EmitDetailService'
 import { addNewEmitSocketDetail } from './SocketService'
