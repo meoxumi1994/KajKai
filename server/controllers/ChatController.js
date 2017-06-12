@@ -1,6 +1,7 @@
 import { addNewMessage, getMessageId, getLastMessageAndInfo, getMessageList2People, getMessageList } from '../services/MessageService'
 import { emitDataToUser } from '../services/SocketService'
 
+console.log('fuck chat controller')
 
 export const getChatBuddies = () => {
     return (req, res) => {

@@ -11,10 +11,10 @@ const server = http.Server(app)
 //   key: fs.readFileSync('./config/kajkai.key'),
 //   cert: fs.readFileSync('./config/kajkai.crt')
 // }
+
+console.log('this shit')
+
 const sio = init(server)
 server.listen(config.PORT)
 
 // const server = require('spdy').createServer(options, app)
-
-
-// sio.listen(config.PORT)
