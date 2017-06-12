@@ -11,7 +11,7 @@ import allRoutes from './routes'
 import { getUser } from './services/UserService'
 
 const app = express()
-var whitelist = ['https://dyrzutxpmw2we.cloudfront.net', 'http://34.209.206.70:' + config.OTHERPORT,
+var whitelist = ['https://dqp2llohmlrz8.cloudfront.net', 'http://34.209.206.70:' + config.OTHERPORT,
 'http://www.kajkai.com', 'null']
 
 
