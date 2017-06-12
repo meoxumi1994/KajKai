@@ -23,7 +23,7 @@ var corsOptions = {
   //     callback(new Error('Not allowed by CORS'))
   //   }
   // },
-  origin: 'https://dqp2llohmlrz8.cloudfront.net',
+  origin: whitelist[0],
   credentials: true
 }
 
