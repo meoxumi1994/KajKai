@@ -3,22 +3,16 @@ import { Link } from 'react-router-dom';
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 import ChatListContainer from '~/containers/chat/left/ChatListContainer'
 
-const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick}) => {
+const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat}) => {
     if(isusername){
         return (
             <div style={{ width: 87, float: 'left'}}>
-                <div >
+                <div onClick={() => setMultiChat(false)}>
                     <Link to="/chat" style={{float: 'left'}}>
                         <img src="./images/comment.png" width="22.5" height="27"/>
                     </Link>
                 </div>
 
-                <div className="dropdown" style={{ width : 15, float: 'right'}}>
-                  <div className="btn btn-default btn-xs  dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
-                      style={{ paddingLeft: 3, paddingRight: 3,
-                          borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
-                      <img src="./images/setting.png" alt="Cinque Terre" width="22.5" height="27"/>
-                  </div>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu1"
                       style={{ marginLeft: -100 }}>
                       <li><a href="#" onClick={()=> onLogoutClick() }>create store</a></li>
@@ -33,14 +27,14 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoa
                   </Link>
               </div>
 
-              <DropdownButton title="Chat" id="bg-nested-dropdown">
+              <DropdownButton title="Chat" id="bg-nested-dropdown" onClick={() => setMultiChat(true)}>
                  <ChatListContainer/>
-             </DropdownButton>
+               </DropdownButton>
 
             </div>
         )
     }
-    
+
     if(isloading){
         return (
             <div style={{ paddingTop: 4, paddingBottom: 3, paddingLeft: 10, paddingRight: 10 }}>

@@ -1,31 +1,4 @@
-export const updateMessageListVisibility = (display) => ({
-    type: 'UPDATE_MESSAGELIST_VISIBILITY',
-    display
-})
 
-export const updateCreateChatVisibility = (display) => ({
-    type: 'UPDATE_CREATECHAT_VISIBILITY',
-    display
-})
-
-export const updateUploadImageVisibility = (display) => ({
-    type: 'UPDATE_UPLOADIMAGE_VISIBILITY',
-    display
-})
-
-export const sendMessage = (mesId, id, text, url, type) => ({
-    type: 'server/ADD_MESSAGE',
-    data: {
-      mesId: '593bc3ff0607380b9934204eKa',
-      id,
-      message: {
-        text,
-        url,
-        type
-      },
-      time: Date.now()
-    }
-})
 
 // export const loadChatList = (chatList) => ({
 //     type: 'LOAD_CHAT_LIST',
