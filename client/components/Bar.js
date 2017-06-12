@@ -13,6 +13,13 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoa
                     </Link>
                 </div>
 
+                <div className="dropdown" style={{ width : 15, float: 'right'}}>
+                  <div className="btn btn-default btn-xs  dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
+                      style={{ paddingLeft: 3, paddingRight: 3,
+                          borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
+                      <img src="./images/setting.png" alt="Cinque Terre" width="22.5" height="27"/>
+                </div>
+
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu1"
                       style={{ marginLeft: -100 }}>
                       <li><a href="#" onClick={()=> onLogoutClick() }>create store</a></li>
@@ -26,11 +33,7 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoa
                       <img src={avatarUrl} alt="Cinque Terre" width="29" height="29"/>
                   </Link>
               </div>
-
-              <DropdownButton title="Chat" id="bg-nested-dropdown" onClick={() => setMultiChat(true)}>
-                 <ChatListContainer/>
-               </DropdownButton>
-
+              
             </div>
         )
     }
