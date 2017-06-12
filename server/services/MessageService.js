@@ -140,7 +140,7 @@ export const getLastMessageAndInfo = (userId, offset, length, next) => {
             next([])
         } else {
             getEmitListDetail(emitIDList, function (emitDetailList) {
-                console.log('emitDetail: ' + emitDetailList)
+                console.log('emitDetail: ', emitDetailList)
                 getLastMessage(userId, emitIDList, (new Date()).getTime(), function (lastMessageList) {
                     for (var i = 0, sz = emitDetailList.length; i < sz; ++i) {
                         emitDetailList[i] = {mesId: emitIDList[i], groupName: emitDetailList[i].name,
