@@ -23,7 +23,7 @@ var corsOptions = {
   //     callback(new Error('Not allowed by CORS'))
   //   }
   // },
-  origin: whitelist[0],
+  origin: true,
   credentials: true
 }
 
@@ -53,4 +53,3 @@ for(let link in allRoutes){
 }
 
 export default app
-
