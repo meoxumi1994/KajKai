@@ -146,7 +146,7 @@ export const getLastMessageAndInfo = (userId, offset, length, next) => {
                         emitDetailList[i] = {mesId: emitIDList[i], groupName: emitDetailList[i].name,
                             time: emitDetailList[i].lastTime, users: emitDetailList[i].followers, lastMessage: JSON.parse(lastMessageList[i])}
                     }
-                    console.log('emitDetail: ' + emitIDList)
+                    console.log('emitDetail2: ', emitIDList)
                     next(emitDetailList)
                 })
             })
