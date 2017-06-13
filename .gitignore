@@ -11,3 +11,4 @@ tasks.xml
 **/.idea/
 ./dbdump
 client/webpack.config.js
+*-deploy.js

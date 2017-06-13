@@ -3,15 +3,17 @@ import compression from 'compression'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
+import passport from 'passport'
+import path from 'path'
 import config from './config/serverConfig'
+import init from './socketio'
 import allRoutes from './routes'
+import { getUser } from './services/UserService'
 
 const app = express()
 var whitelist = ['http://localhost:' + config.OTHERPORT, 'http://34.209.206.70:' + config.OTHERPORT,
 'http://www.kajkai.com', 'null']
 
-
-console.log('fuck app')
 
 var corsOptions = {
   // origin: function (origin, callback) {
@@ -30,6 +32,12 @@ app.use(cors(corsOptions));
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(passport.initialize());
+app.use('/static', express.static(path.resolve(__dirname, '../client/dist')))
+
+getUser('w98579438', function () {
+    console.log('shit ')
+})
 
 // load all routes
 for(let link in allRoutes){
