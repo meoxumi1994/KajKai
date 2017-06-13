@@ -231,8 +231,8 @@ export const updateUserPassword = () => {
 		console.log(id)
 		getUser(id, function(user){
 			if (user) {
-				if (user.password != req.body.password || !req.body.newpassword || req.body.newpassword.length < 6
-					|| user.password == user.newpassword) {
+				if (user.password !== req.body.password || !req.body.newpassword || req.body.newpassword.length < 6
+					|| user.password === user.newpassword) {
 					res.json({status: 'failed'})
 				} else {
 					user.password = req.body.newpassword
