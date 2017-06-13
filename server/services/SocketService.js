@@ -3,9 +3,9 @@ import { getUser } from './UserService'
 import { getStore } from './StoreService'
 
 // console.log('fuck socket ' + a)
-// getUser('efiejo', function () {
-//
-// })
+getUser('efiejo', function () {
+
+})
 // function myFunc (arg) {
 
 //     console.log('arg was => ' + arg);
