@@ -4,6 +4,8 @@ import enums from '../enum'
 import { findStoreList } from './StoreService'
 import mongoose from '../datasource'
 
+console.log('fuck user')
+
 export const getUser = (id, next) => {
     User.findById(id, function(err, user) {
         if (err) {

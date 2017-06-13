@@ -3,17 +3,16 @@ import { OverlayTrigger, Popover } from 'react-bootstrap'
 import iconUtility from '~/config/iconUtility'
 
 const Message = ({message, time, user, style}) => {
-
-    var regex = /\((.*?)\)/g
-    var match = regex.exec(message);
-
-    if (match && iconUtility.getIcon(match[1]) != null) {
-        message = message.split('('+match[1]+')').join('<img src="'+iconUtility.getIcon(match[1]).src+'" width="40" height="40"/>')
-    }
-
-    if (message == undefined) {
-      return (<div></div>)
-    }
+    // var regex = /\((.*?)\)/g
+    // var match = regex.exec(message);
+    //
+    // if (match && iconUtility.getIcon(match[1]) != null) {
+    //     message = message.split('('+match[1]+')').join('<img src="'+iconUtility.getIcon(match[1]).src+'" width="40" height="40"/>')
+    // }
+    //
+    // if (message == undefined) {
+    //   return (<div></div>)
+    // }
 
     const showTimePopup = (
       <Popover id="popover-trigger-hover-focus">
@@ -35,18 +34,10 @@ const Message = ({message, time, user, style}) => {
               </OverlayTrigger>
           </div>
           <div style={style.text}>
-              {(message.indexOf('http') == -1) ?
-                  <div>
-                      <div dangerouslySetInnerHTML={{__html: message}} />
-                      <small style={{color: 'grey'}} className="text-muted" ><i><u>({user.username})</u></i></small>
-                  </div>
-              :
-                  <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={picturePopup}>
-                    <a href={message}>
-                        <img src={message} width="300" height="300"/>
-                    </a>
-                  </OverlayTrigger>
-                }
+              <div>
+                  <div dangerouslySetInnerHTML={{__html: message.text}} />
+                  <small style={{color: 'grey'}} className="text-muted" ><i><u>({user.name})</u></i></small>
+              </div>
           </div>
       </div>
     )

@@ -36,7 +36,7 @@ var LikeSchema = require('./Like')
 var Like = mongoose.model('Like', LikeSchema)
 
 var EmitSocketDetailSchema = require('./EmitSocketDetail')
-var EmitSocketDetail = mongoose.model('EmitSocket', EmitSocketDetailSchema)
+var EmitSocketDetail = mongoose.model('EmitSocketDetail', EmitSocketDetailSchema)
 
 var EmitDetailSchema = require('./EmitDetail')
 var EmitDetail = mongoose.model('EmitDetail', EmitDetailSchema)

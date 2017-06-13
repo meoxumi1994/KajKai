@@ -1,6 +1,97 @@
 import { flet, flem } from '~/actions/support'
 import { loadChatList, loadChat, waitingChat } from './actions'
 
+// [socket.io] Send message
+export const sendMessage = (mesId, id, text, url, type) => dispatch => {
+    dispatch(
+      {
+        type:"server/ADD_MESSAGE",
+        data: {
+          mesId,
+          id,
+          message: {
+            text,
+            url,
+            type
+          },
+          time: Date.now()
+        }
+      })
+}
+
+// Get message
+export const getMessage = (mesId) => dispatch => {
+    flet('/getmessage',{
+        mesId,
+        offset: 0,
+        length: 10
+    },{
+        messages: []
+    })
+    .then((response) => {
+        // if (mesId === "593bc3ff0607380b9934204e") {
+        //   response = {
+        //     mesId: "593bc3ff0607380b9934204e",
+        //     messages: [
+        //       {
+        //         id: "59302a009afeed1a7f37cac0",
+        //         message: {
+        //           text: "hey boy",
+        //           type: "msg",
+        //           url: ""
+        //         },
+        //         time: 1497089078194
+        //       },
+        //       {
+        //         id: "59302b189afeed1a7f37cac1",
+        //         message: {
+        //           text: "hi there",
+        //           type: "msg",
+        //           url: ""
+        //         },
+        //         time: 1497089078194
+        //       }
+        //     ]
+        //   }
+        // } else {
+        //   response = {
+        //     mesId: "593e4c1a2688d830be26fc66",
+        //     messages: [
+        //       {
+        //         id: "593234a11c75513e381e5c87",
+        //         message: {
+        //           text: "fuck u",
+        //           type: "msg",
+        //           url: ""
+        //         },
+        //         time: 1497089078194
+        //       },
+        //       {
+        //         id: "593234a11c75513e381e5c87",
+        //         message: {
+        //           text: "answer me",
+        //           type: "msg",
+        //           url: ""
+        //         },
+        //         time: 1497089078194
+        //       },
+        //       {
+        //         id: "59302b189afeed1a7f37cac1",
+        //         message: {
+        //           text: "hi there",
+        //           type: "msg",
+        //           url: ""
+        //         },
+        //         time: 1497089078194
+        //       }
+        //     ]
+        //   }
+        // }
+
+        dispatch({type: 'ADD_CHAT', data: response})
+    })
+}
+
 // Get list of recented chats
 // export const getChatList = (offset, length) => dispatch => {
 //     flet('/getchatlist',{
@@ -44,37 +135,8 @@ import { loadChatList, loadChat, waitingChat } from './actions'
 //     )
 // }
 
-// [socket.io] Send message
-// export const sendMessage = (mesId, user, message) => dispatch => {
-//     let time = Date.now()
-//
-//     // dispatch(waitingChat(user.avatarUrl, user.id, user.username, mesId, message, time))
-//
-//     dispatch(
-//       {
-//         type:"server/ADD_MESSAGE",
-//         data: {
-//           mesId,
-//           message,
-//           time
-//         }
-//       })
-// }
 
-// Get message
-export const getMessage = (id) => dispatch => {
-    flet('/getmessage',{
-        id,
-        offset: 0,
-        length: 10
-    },{
-        messages: []
-    })
-    .then((response) => {
-        // console.log('/getmessage ',response);
-        // dispatch({type: 'LOAD_MORE_MESSAGE', messages: response.messages})
-    })
-}
+
 
 // export const getTarget = (chat) => dispatch => {
 //     flet('/gettarget',{

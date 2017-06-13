@@ -1,13 +1,23 @@
-import mongoose from '../datasource'
 import { EmitSocketDetail, EmitDetail } from '../models'
 import { getUser } from './UserService'
 import { getStore } from './StoreService'
-function myFunc (arg) {
-    // fuckUser()
-    console.log('arg was => ' + arg);
-}
 
-setTimeout(myFunc, 2, 'funky');
+// console.log('fuck socket ' + a)
+getUser('efiejo', function () {
+
+})
+// function myFunc (arg) {
+
+//     console.log('arg was => ' + arg);
+// }
+//
+// setTimeout(myFunc, 2, 'funky');
+
+
+
+
+
+
 
 export const getUserRoomId = (id) => {
     return 'room$' + id

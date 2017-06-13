@@ -6,6 +6,8 @@ import { addUserOnline, removeUserOnline } from '../services/OnlineService'
 import { getUserRoomId } from '../services/SocketService'
 import { passChatList } from '../services/MessageService'
 
+console.log('fuck init')
+
 getUser('59302b189afeed1a7f37cac1', function (rep) {
     console.log('fuck ' + rep)
 })

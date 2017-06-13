@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import ChatList from '~/components/chat/left/ChatList'
-import { } from '~/actions/asyn/chat'
-import { } from '~/actions/asyn/chat'
-import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actions/asyn/chat/actions'
+import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actions/asyn/chat/visibility'
+import { getMessage } from '~/actions/asyn/chat/'
 
 const mapStateToProps = (state, ownProps) => {
   const { chatListMap, chatListKey } = state.inst.chat.left
   const { user } = state
+  console.log('STATE ', state.inst.chat)
   return (
     {
       chatListMap,
@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   createNewChat: () => {
       // dispatch(updateMessageListVisibility(true))
       // dispatch(updateCreateChatVisibility(true))
+  },
+  loadChat: (mesId) => {
+      dispatch(getMessage(mesId))
   }
 })
 

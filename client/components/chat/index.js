@@ -15,7 +15,6 @@ const Chat = () => {
            <Col lg={14} lgOffset={3}>
               <NewChatContainer/>
               <MessageListContainer/>
-              <SendMessageContainer/>
            </Col>
      </Grid>
     </div>

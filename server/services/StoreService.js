@@ -2,6 +2,7 @@ import { Store, Category, StorePost } from '../models'
 import { checkPhone } from '../utils/Utils'
 import { getPost, createNewPost } from './StorePostService'
 
+
 export const getStore = (id, next) => {
     Store.findById(id, function (err, store) {
         if (err) {
@@ -108,7 +109,7 @@ export const modifyStore = (updateStore, next) => {
 export const findStoreList = (ownerId, next) => {
     Store.find({owner: ownerId}, function (err, stores) {
         if (err) {
-            next(err)
+            next(null)
         } else {
             var storeList = []
             for (var i = 0, mLength = stores.length; i < mLength; ++i) {

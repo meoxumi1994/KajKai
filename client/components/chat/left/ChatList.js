@@ -9,7 +9,7 @@ class ChatList extends React.Component {
 
     render(){
           const { chatListMap, chatListKey, user } = this.props
-          const { createNewChat } = this.props
+          const { createNewChat, loadChat } = this.props
           return(
             <div>
               <h3>Recent Chat
@@ -22,25 +22,21 @@ class ChatList extends React.Component {
                     {
                       const { chatKey, userKey } = cKey
                       const { mesId, lastMessage, time, users } = chatListMap[chatKey]
+                      const conversaters = []
+                      userKey.map(uKey => uKey != user.id? conversaters.push(uKey): undefined)
 
                       return (
-                        <Button style={{width:250, marginBottom: 10}} key={mesId}>
+                        <Button style={{width:250, marginBottom: 10}} key={mesId} onClick={() => loadChat(mesId)}>
                             <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}>
                                 {
-                                  userKey.map(
-                                      uKey => uKey === user.id ?
-                                        <div key={uKey}></div>
-                                        :
-                                        <img src={users[uKey].avatarUrl} key={uKey} width="38" height="38"/>
+                                  conversaters.map(
+                                      uKey => <img src={users[uKey].avatarUrl} key={uKey} width="38" height="38"/>
                                   )
                                 }
                             </div>
                             <div style={{ marginLeft: 40}}>
-                                  {userKey.map(
-                                    uKey => uKey === user.id ?
-                                      <div key={uKey}></div>
-                                      :
-                                      <div key={uKey}>{users[uKey].name}</div>
+                                  {conversaters.map(
+                                    uKey => <div key={uKey}>{users[uKey].name}</div>
                                   )}
                                   <small className="text-muted" >
                                     { users[lastMessage.id].name }

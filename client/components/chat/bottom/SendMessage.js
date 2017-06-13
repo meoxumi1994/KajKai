@@ -3,14 +3,14 @@ import { FormGroup, FormControl, HelpBlock, ControlLabel, Button , OverlayTrigge
 import ModalUploadImageContainer from '~/containers/chat/bottom/ModalUploadImageContainer'
 import EmoNavContainer from '~/containers/chat/bottom/IconPopOverContainer/EmoNavContainer'
 
-const SendMessage = ({mesId, sendMessage, visibility, user, uploadImage}) => {
+const SendMessage = ({mesId, userId, visibility, sendMessage, uploadImage}) => {
   let msg
   return (
     <div style={{padding: 10, display: visibility}}>
         <form style={{position: 'relative'}} onSubmit={e => {
           e.preventDefault()
           if (msg.value.trim()) {
-            sendMessage(mesId, user.id, msg.value, '', 'msg')
+            sendMessage(mesId, userId, msg.value, '', 'msg')
             msg.value = ''
           }
         }}>

@@ -1,9 +1,10 @@
 import { getUser, getUserBasicInfo } from '../services/UserService.js'
-import { getStore, getStoreInfoService } from '../services/StoreService'
+import { getStore, getStoreInfoService,getStoreByPostId } from '../services/StoreService'
 import { getTimelyFirstComment, addNewComment, addNewSecondLayerComment, getSecondLayerComment, getFirstLayerComment } from '../services/CommentService'
-import { getStoreByPostId } from '../services/StoreService'
 import { emitDataToOneUser, emitDataToUser } from '../services/SocketService'
 import { getPost } from '../services/StorePostService'
+
+console.log('fuck comment controller')
 
 export const getTarget = () => {
     return (req, res) => {
