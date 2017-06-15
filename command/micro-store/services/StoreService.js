@@ -28,7 +28,6 @@ export const getStoreInfoService = (store) => {
         address: store.address,
         phone: store.phone,
         category: store.category,
-        address: store.address,
         id: getStoreGlobalId(store._id),
         avatarUrl: store.avatarUrl,
         coverUrl: store.coverUrl,

@@ -16,6 +16,10 @@ export const getPostLocalId = (id) => {
     }
 }
 
+export const getPostGlobalId = (id) => {
+    return POST_GLOBAL_ID + id
+}
+
 export const getPost = (postId, next) => {
     StorePost.findById(getPostLocalId(postId), function (err, post) {
         if (err) next(null)
@@ -44,20 +48,20 @@ export const updatePost = (postId, list, userID, next) => {
     })
 }
 
-export const addPostService = (storeId, list, next) => {
+export const addPostService = (storeId, list, type, next) => {
     var list = req.body.list
     var detailList = []
     for (var raw in list) {
         const storePostDetail = new StorePostDetail(raw)
         detailList.push(storePostDetail)
     }
-    createNewPost(storeId, (new Date()).getTime(), list, 'REGULAR', function (post) {
+    createNewPost(storeId, (new Date()).getTime(), list, type, function (post) {
         next(post)
     })
 }
 
-export const getPostList = (storeId, time, length, next) => {
-    var q = StorePost.find({storeId: storeId, createdAt: {$lt: time}, type: 'REGULAR'}).sort({createdAt: -1}).limit(length)
+export const getPostList = (storeId, time, length, type, next) => {
+    var q = StorePost.find({storeId: storeId, createdAt: {$lt: time}, type: type}).sort({createdAt: -1}).limit(length)
     q.exec(function (err, data){
         if (err) next(null)
         else {
