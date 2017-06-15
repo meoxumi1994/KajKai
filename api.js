@@ -7,16 +7,16 @@ GET /user {
 POST /user {
     username : 'chairty',
     email: 'thiennvtse90219@fpt.edu.vn',
-    password: '123456',
+    password: '123456', // password >= 6
 },{
     status: 'success|used|error'
 }
 PUT /user {
-  username: 'charity',
+  username: 'charity', //username >= 5, <= 45
   avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/abcxyz.png',
   coverUrl: 'https://d1z4p30mgj29.cloudfront.net/xyzabc.png',
   address: '47 Cầu Giấy, Hà Nội',
-  language: 'TIếng Việt',
+  language: 'TIếng Việt', // vi|en
   sex: 'gay',
   yearOfBirth: '6462636'
 },{
@@ -80,7 +80,7 @@ GET /store/:id {
       userid: ,
       username: ,
     },
-  ], // tối đa 5 thằng bạn
+  ], // tối đa 5 thằng linh tinh
   numfollow: '43',
   follows: [
     {
@@ -88,7 +88,7 @@ GET /store/:id {
       userid:
       username:
     },
-  ], // tối đa 5 thằng bạn
+  ], // tối đa 5 thằng
 }
 GET /sellpost/:storeid?offset=-1 { // length = 2
   offset: ,
@@ -103,7 +103,7 @@ GET /sellpost/:storeid?offset=-1 { // length = 2
       description: ,
       time: , // last update
       status: 'notyet|open|sleep',
-      ship: '', // store viết vào có thể null
+      ship: '', // store viết vào có thể un
       postrows: [ // tables lấy những thằng đầu có tổng hàng <= ???, nếu quá nửa thằng cuối thì trả về cả thằng cuối
         {
           sellpostid:,
@@ -147,7 +147,7 @@ GET /sellpost/:storeid?offset=-1 { // length = 2
       numshare: ,
       leadercomments: [ // tối đa 2 thằng trong 1 giờ
         {
-          id: 'leadercomment001',
+          id: '7586449578',
           sellpostid: ,
           order: [
               {
@@ -175,19 +175,16 @@ GET /sellpost/:storeid?offset=-1 { // length = 2
     },
   ],
 }
-GET minorpost/:id?offset=-1 { // length = 3
+GET minorpost/:storeid?offset=-1 { // length = 3
   offset: ,
   minorposts: [
     {
       id: ,
       storeid: ,
-      storename: ,
-      category: ,
-      title: ,
-      description: ,
       time: , // last update
-      status: 'notyet|open|sleep',
-      ship: '', // store viết vào có thể null
+      content:,
+      images:[],
+      video:,
       numlike: '23',
       likes: [
         {
@@ -220,7 +217,7 @@ GET minorpost/:id?offset=-1 { // length = 3
           comments: [ // thằng đầu tiền là comment của leader
             {
               id: ,
-              ownerid: ,
+              ownerid: , // null
               leadercommentid: ,//
               avatarUrl: // small size 20x20
               name: ,
@@ -258,3 +255,6 @@ POST /store/:id {
 GET /post/:id {
 
 }
+
+
+
