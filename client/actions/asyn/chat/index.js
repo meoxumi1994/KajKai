@@ -20,7 +20,7 @@ export const getChatList = (offset, length) => dispatch => {
     })
 }
 
-export const  chatWaiting = () => dispatch => {
+export const chatWaiting = () => dispatch => {
   dispatch (
     {
       type: "server/CHAT_WAITING"
@@ -72,7 +72,7 @@ export const getTarget = (chat) => dispatch => {
         id: chat.id
     },{
       user: {
-        username: "",
+        name: "",
         listUrls: [],
         storeList: null,
         avatarUrl: "",
@@ -94,8 +94,8 @@ export const getChatId = (chat, lazyLoad) => dispatch => {
     .then((response) => {
         const castChatObj = {
           id: chat.id,
-          username:
-          chat.name == undefined? chat.username: chat.name,
+          name:
+          chat.name == undefined? chat.name: chat.name,
           avatarUrl: chat.avatarUrl,
           mesId: response.id
         }

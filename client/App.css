@@ -1,14 +1,22 @@
 * {
     font-family: "Lucida Grande/Tahoma", Sans-serif;
 }
+html {
+    height: 100%;
+}
 body {
+    overflow: 'scroll';
     background-color: #E9EBEE;
+    height: 100%;
 }
 .panel {
     border-color: #CCCCCC;
 }
 a {
     color: #999999;
+}
+div.root {
+    height: 100%;
 }
 hr {
     border-color: #CCCCCC;

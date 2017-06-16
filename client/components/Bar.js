@@ -1,22 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RiseUp from '~/components/entity/draw/RiseUp'
 
-const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick}) => {
+const HandlerUser = ({
+    LOG_IN, id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick}) => {
     if(isusername){
         return (
-            <div style={{ width: 87, float: 'left'}}>
-            
+            <div style={{ width: 143, float: 'left'}}>
+
                 <div style={{float: 'left'}}>
                     <Link to="/chat" >
-                        <img src="./images/comment.png" width="22.5" height="27"/>
+                        <RiseUp
+                            src="./images/message.png"
+                            srcHas="./images/messagehas.png"
+                            width="29" height="29" number="1"/>
                     </Link>
+                </div>
+
+                <div style={{marginLeft: 3, float: 'left'}}>
+                    <RiseUp
+                        src="./images/notification.png"
+                        srcHas="./images/notificationhas.png"
+                        width="29" height="29" number="12"/>
+                    {/* <img src="./images/notification.png" width="29" height="29"/> */}
                 </div>
 
                 <div className="dropdown" style={{ width : 15, float: 'right'}}>
                   <div className="btn btn-default btn-xs  dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
                       style={{ paddingLeft: 3, paddingRight: 3,
                           borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
-                      <img src="./images/setting.png" alt="Cinque Terre" width="22.5" height="27"/>
+                      <img src="./images/setting.svg" alt="Cinque Terre" width="22.5" height="27"/>
                   </div>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu1"
                       style={{ marginLeft: -100 }}>
@@ -27,7 +40,7 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoa
               </div>
 
               <div className="btn btn-transparent btn-xs" style={{ padding: 0, float: 'right'}}>
-                  <Link to="/profile" >
+                  <Link to={"/"+id} >
                       <img src={avatarUrl} alt="Cinque Terre" width="29" height="29"/>
                   </Link>
               </div>
@@ -39,7 +52,7 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoa
         return (
             <div style={{ paddingTop: 4, paddingBottom: 3, paddingLeft: 10, paddingRight: 10 }}>
                 <div className="clocker" >
-                    <img src="./images/loader.png" alt="Cinque Terre" width="22px" height="22px"/>
+                    <img src="./images/loader.svg" alt="Cinque Terre" width="22px" height="22px"/>
                 </div>
             </div>
         )
@@ -47,27 +60,28 @@ const HandlerUser = ({ isloading, isusername, avatarUrl, g, onLogoutClick, onLoa
     return (
         <Link to="/register">
             <button className="btn btn-default btn-sm" type="button" >
-                {g('LOG_IN')}
+                {LOG_IN}
             </button>
         </Link>
     )
 }
 
 const BarScreen = (props) => {
-    const {g} = props
+    const { SEARCH_PRODUCT, SEARCH_LOCATION, } = props
     return (
-        <div className="container-fluid" style={{ backgroundColor: "white" }}>
-            <div className="row" style={{ marginTop: 7, marginBottom: 6 }}>
+        <div className="container-fluid"
+            style={{ position: 'fixed', zIndex: 1, left: 0, top: 0, backgroundColor: "white" }}>
+            <div className="row" style={{ marginTop: 8, marginBottom: 7 }}>
                 <div className="col-xs-1 col-md-1 col-md-offset-1">
                     <div style={{minWidth: 100 }}>
                         <div className="btn btn-transparent btn-xs">
                             <Link to="/">
-                                <img src="./images/kajkai.png" alt="Cinque Terre" width="27" height="27"/>
+                                <img src="./images/kajkai.svg" alt="Cinque Terre" width="27" height="27"/>
                             </Link>
                         </div>
                         <div className="btn btn-transparent btn-xs">
                             <Link to="/map">
-                                <img src="./images/map.png" alt="Cinque Terre" width="27" height="27"/>
+                                <img src="./images/map.svg" alt="Cinque Terre" width="27" height="27"/>
                             </Link>
                         </div>
                     </div>
@@ -87,7 +101,7 @@ const BarScreen = (props) => {
                           <li><a href="#">All</a></li>
                         </ul>
                       </div>
-                      <input type="text" className="form-control input-sm" placeholder={ g('SEARCH_PRODUCT')}/>
+                      <input type="text" className="form-control input-sm" placeholder={SEARCH_PRODUCT}/>
                       <span className="input-group-btn">
                           <button className="btn btn-default btn-sm" type="button">
                               <i className="glyphicon glyphicon-search"></i>
@@ -97,7 +111,7 @@ const BarScreen = (props) => {
                 </div>
                 <div className="col-xs-2 col-md-2">
                     <div className="input-group" style={{ minWidth: 200 }}>
-                        <input type="text" className="form-control input-sm" placeholder={ g('SEARCH_LOCATION')} />
+                        <input type="text" className="form-control input-sm" placeholder={SEARCH_LOCATION} />
                         <span className="input-group-btn">
                             <button className="btn btn-default btn-sm" type="button" >
                                 <i className="glyphicon glyphicon-map-marker"></i>

@@ -14,6 +14,7 @@ app.get('*',function(req, res){
 //   cert: fs.readFileSync('./config/kajkai.crt')
 // }
 
+
 app.listen(3000)
 // var server = require('spdy').createServer(options, app).listen(3000)
 

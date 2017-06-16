@@ -9,7 +9,6 @@ class ChatList extends React.Component {
 
     render(){
           const { chatList, lazyLoad, joinChat, createNewChat } = this.props
-
           return(
             <div>
               <h3>Recent Chat
@@ -17,7 +16,10 @@ class ChatList extends React.Component {
                       <img style={{width: 27, height: 27}} src="./images/newMessage.png"/>
                   </Button>
               </h3>
-                {this.props.chatList.map(chat =>
+                { chatList == null?
+                  <div>Waiting...</div>
+                  :
+                  this.props.chatList.map(chat =>
                   <Button style={{width:250, marginBottom: 10}} key={chat.id} onClick={() => joinChat(chat)}>
                           <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}>
                               <img src={chat.avatarUrl} width="38" height="38"/>

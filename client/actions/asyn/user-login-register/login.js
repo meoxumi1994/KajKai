@@ -65,7 +65,6 @@ export const logOut = () => dispatch => {
     flem('/logout',{
     })
     .then((response) => {
-
         dispatch(authAction('LOGOUT'))
     })
 }

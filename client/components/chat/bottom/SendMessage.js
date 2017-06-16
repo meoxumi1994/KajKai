@@ -1,8 +1,7 @@
 import React from 'react'
-import { FormGroup, FormControl, HelpBlock, ControlLabel, Button , OverlayTrigger, Popover } from 'react-bootstrap'
+import { FormGroup, FormControl, HelpBlock, ControlLabel, Button , OverlayTrigger, Popover, Nav, NavItem } from 'react-bootstrap'
 import ModalUploadImageContainer from '~/containers/chat/bottom/ModalUploadImageContainer'
-import IconPopOver from './IconPopOver'
-// import IconPopOverContainer from '~/containers/chat/bottom/IconPopOverContainer'
+import EmoNavContainer from '~/containers/chat/bottom/IconPopOverContainer/EmoNavContainer'
 
 const SendMessage = ({mesId, sendMessage, visibility, uploadImage}) => {
   let msg
@@ -31,7 +30,7 @@ const SendMessage = ({mesId, sendMessage, visibility, uploadImage}) => {
                     <i className="glyphicon glyphicon-camera"></i>
                 </button>
 
-                <OverlayTrigger trigger="click" rootClose placement="top" overlay={IconPopOver}>
+                <OverlayTrigger trigger="click" rootClose placement="left" overlay={IconPopOver}>
                     <button className="btn btn-default btn-md" type="button">
                         <i className="glyphicon glyphicon-apple"></i>
                     </button>
@@ -45,6 +44,15 @@ const SendMessage = ({mesId, sendMessage, visibility, uploadImage}) => {
   )
 }
 
+const IconPopOver = (
+  <Popover id="popover-trigger-click-root-close" title="Icons">
+    <Nav bsStyle="tabs" activeKey={1}>
+        <NavItem>
+            <EmoNavContainer/>
+        </NavItem>
+    </Nav>
+  </Popover>
+)
 
 
 export default SendMessage

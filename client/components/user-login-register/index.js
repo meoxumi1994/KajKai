@@ -8,12 +8,11 @@ import RegisterContainer from '~/containers/user-login-register/RegisterContaine
 
 
 const LoginRegister = ({
-    KAJKAI_THANK,
-    g, iswhoing, isusername, changeLanguage, isregistersuccess, isloading }) => {
+    KAJKAI_THANK, iswhoing, isusername, changeLanguage, isregistersuccess, isloading, id }) => {
     if(iswhoing)
         return <div></div>
     if(isusername)
-        return <Redirect to='/profile'/>
+        return <Redirect to={'/' + id}/>
     return (
         <div className="container-fluid">
             <div className="row">

@@ -10,6 +10,7 @@ import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
 import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Target from '~/containers/target'
+import ContactHistory from '~/containers/contacthistory'
 // import loadTarget from 'bundle-loader?lazy!../containers/target'
 
 const Home = () => (
@@ -81,23 +82,34 @@ class App extends React.Component {
     }
     render(){
         const path = this.props.location.pathname;
+        const { width, height, username, onScroll } = this.props
         return(
-            <div style={{ minWidth: 990, minHeight: 700 }}>
+            <div style={{ height: '100%', minWidth: 1050 }}>
                 <Bar/>
                 <hr style={{margin: 0}}></hr>
-                {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
-                    <div>
-                        <Route exact path="/" component={Home}/>
-                        <Route path="/map" component={Mapp}/>
-                        <Route path="/register" component={UserLoginRegister}/>
-                        <Route path="/profile" component={Profile}/>
-                        <Route path="/registerstore" component={RegisterStore}/>
-                        <Route path="/chat" component={Chat}/>
+                <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
+                    style={{ height: height - 48 }}>
+                    { username && width > 1050 + 280 &&
+                        <div style={{ position: 'fixed',right: 0, top: 48, height: '100%', width: 280}}>
+                            <ContactHistory/>
+                        </div>
+                    }
+                    <div style={{ marginRight: (width > 1050 + 280)? 280: 0 }}>
+                        {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
+                            <div>
+                                <Route exact path="/" component={Home}/>
+                                <Route path="/map" component={Mapp}/>
+                                <Route path="/register" component={UserLoginRegister}/>
+                                <Route path="/profile" component={Profile}/>
+                                <Route path="/registerstore" component={RegisterStore}/>
+                                <Route path="/chat" component={Chat}/>
+                            </div>
+                        :   <div>
+                                <Route path="*" component={Target}/>
+                            </div>
+                        }
                     </div>
-                :   <div>
-                        <Target id={path.substring(1)}/>
-                    </div>
-                }
+                </div>
             </div>
         )
     }

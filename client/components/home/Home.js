@@ -2,10 +2,9 @@ import React from 'react';
 
 import Status from './status/Status';
 import Advertisement from './Advertisement';
-import History from './history/History';
 
 const Home = () => (
-    <div style={{ overflow: 'scroll', height: window.innerHeight - 46 }}>
+    <div>
         <div className="container-fluid">
             <div className="row">
                 <div className="col-sm-0 col-md-2" style={{ padding: 0}}>
@@ -17,14 +16,7 @@ const Home = () => (
                     </div>
                 </div>
                 <div className="col-sm-3 col-md-2" style={{ padding: 0}}>
-                    <Advertisement/>
-                </div>
-                <div className="col-sm-3 col-md-3" style={{ padding: 0}}>
-                    <div className="row">
-                        <div className="col-md-offset-3" style={{ padding: 0}}>
-                            <History/>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

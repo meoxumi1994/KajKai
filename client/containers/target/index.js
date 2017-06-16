@@ -12,9 +12,9 @@ const mapStateToProps = (state, ownProps ) => {
     })
 }
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
     onGetTarget: () => {
-        dispatch(getTarget(id))
+        dispatch(getTarget(ownProps.location.pathname.split('/')[1]))
     }
 })
 
