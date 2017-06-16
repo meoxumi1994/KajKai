@@ -46,6 +46,7 @@ const Store = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNee
                                     123123123
                                 </div>
                             )}
+                            <span id="loaderr"></span>
                         </div>
                     </div>
                     <div ref={ minorpost => this.minorpost = minorpost }
@@ -67,6 +68,7 @@ const Store = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNee
                                     123123123
                                 </div>
                             )}
+                            <div id="loaderr"></div>
                         </div>
                     </div>
                 </div>

@@ -14,7 +14,7 @@ class ChatList extends React.Component {
             <div>
               <h3>Recent Chat
                   <Button style={{marginLeft: 65, width: 50, height: 50}} onClick={() => createNewChat()}>
-                      <img style={{width: 27, height: 27}} src="./images/newMessage.png"/>
+                      <img style={{width: 27, height: 27}} src="./images/newmessage.svg"/>
                   </Button>
               </h3>
               <div>

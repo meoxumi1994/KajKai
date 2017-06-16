@@ -1,6 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
+import { PulseLoader } from 'halogen';
+
 import App from '~/containers/App'
 
 class Comp extends React.Component {
@@ -82,6 +84,7 @@ class Comp extends React.Component {
     }
 }
 
+
 const Components = () => (
     <BrowserRouter>
         <div>
@@ -90,6 +93,17 @@ const Components = () => (
     </BrowserRouter>
 
 )
+
+const Compp = () => {
+    return(
+        <div>
+            123123123
+            <div id="loaderr"></div>
+            123123
+        </div>
+
+    )
+}
 
 // getBoundingClientRect
 // scrollTop

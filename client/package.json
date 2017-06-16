@@ -12,6 +12,7 @@
   "dependencies": {
     "draft-js": "^0.10.1",
     "express": "^4.15.2",
+    "halogen": "^0.2.0",
     "react-contenteditable": "^2.0.2",
     "redux-socket.io": "^1.4.0",
     "spdy": "^3.4.4"
