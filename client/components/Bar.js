@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RiseUp from '~/components/entity/draw/RiseUp'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 import ChatListContainer from '~/containers/chat/left/ChatListContainer'
 
@@ -7,18 +8,21 @@ const HandlerUser = ({ LOG_IN,
     id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat}) => {
     if(isusername){
         return (
-            <div style={{ width: 87, float: 'left'}}>
+            <div style={{ width: 120, float: 'left'}}>
                 <div onClick={() => setMultiChat(false)}>
                     <Link to="/chat" style={{float: 'left'}}>
-                        <img src="./images/comment.png" width="22.5" height="27"/>
+                        <RiseUp
+                            src="./images/message.png"
+                            srcHas="./images/messagehas.png"
+                            width="29" height="29" number="2"/>
                     </Link>
                 </div>
 
                 <div style={{marginLeft: 3, float: 'left'}}>
-                    {/* <RiseUp
+                    <RiseUp
                         src="./images/notification.png"
                         srcHas="./images/notificationhas.png"
-                        width="29" height="29" number="12"/> */}
+                        width="29" height="29" number="12"/>
                     {/* <img src="./images/notification.png" width="29" height="29"/> */}
                 </div>
 
@@ -26,7 +30,7 @@ const HandlerUser = ({ LOG_IN,
                   <div className="btn btn-default btn-xs  dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
                       style={{ paddingLeft: 3, paddingRight: 3,
                           borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
-                      <img src="./images/setting.png" alt="Cinque Terre" width="22.5" height="27"/>
+                      <img src="./images/setting.svg" alt="Cinque Terre" width="22.5" height="27"/>
                 </div>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu1"
                       style={{ marginLeft: -100 }}>

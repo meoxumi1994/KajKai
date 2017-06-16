@@ -34,7 +34,7 @@ const Bar = () => (
                 </div>
                 <Link to='/chat'>
                     <div className="btn btn-transparent btn-xs" style={{float:'right'}}>
-                        <img src="./images/comment.png" alt="Cinque Terre" width="22.5" height="27"/>
+                        <img src="./images/comment.svg" alt="Cinque Terre" width="22.5" height="27"/>
                     </div>
                 </Link>
             </Col>
