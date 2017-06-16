@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import Chat from '~/components/chat'
-import { findName } from '../support'
+import ChatCenter from '~/components/chat/center'
+import { getMessage } from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
   const { user } = state
@@ -25,8 +25,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 })
 
-const ChatContainer = connect(
+const ChatCenterContainer = connect(
   mapStateToProps, mapDispatchToProps
-)(Chat)
+)(ChatCenter)
 
-export default ChatContainer
+export default ChatCenterContainer

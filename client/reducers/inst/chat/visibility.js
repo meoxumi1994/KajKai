@@ -10,7 +10,8 @@ const visibility = (state = {
     uploadImage: false
   },
   top: {
-    newChat: 'inline'
+    newChat: 'inline',
+    setting: 'inline'
   }
 }, action) => {
     switch (action.type) {

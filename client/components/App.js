@@ -12,6 +12,8 @@ import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Target from '~/containers/target'
 import ContactHistory from '~/containers/contacthistory'
 // import loadTarget from 'bundle-loader?lazy!../containers/target'
+import ChatCenterContainer from '~/containers/chat/center'
+import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 
 const Home = () => (
   <Bundle load={loadHome}>
@@ -83,6 +85,7 @@ class App extends React.Component {
     render(){
         const path = this.props.location.pathname;
         const { width, height, username, onScroll } = this.props
+        const { chat } = this.props
         return(
             <div style={{ height: '100%', minWidth: 1050 }}>
                 <Bar/>
@@ -96,13 +99,32 @@ class App extends React.Component {
                     }
                     <div style={{ marginRight: (width > 1050 + 280)? 280: 0 }}>
                         {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
-                            <div>
-                                <Route exact path="/" component={Home}/>
-                                <Route path="/map" component={Mapp}/>
-                                <Route path="/register" component={UserLoginRegister}/>
-                                <Route path="/profile" component={Profile}/>
-                                <Route path="/registerstore" component={RegisterStore}/>
-                                <Route path="/chat" component={Chat}/>
+                          <div>
+                              <div>
+                                  <Route exact path="/" component={Home}/>
+                                  <Route path="/map" component={Mapp}/>
+                                  <Route path="/register" component={UserLoginRegister}/>
+                                  <Route path="/profile" component={Profile}/>
+                                  <Route path="/registerstore" component={RegisterStore}/>
+                                  <Route path="/chat" component={Chat}/>
+                              </div>
+                              <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>
+                                  {
+                                    chat.messagesKey.map((mesId,index) => {
+                                      return (<div key={mesId} style={{
+                                        position: 'fixed',
+                                        bottom: 0,
+                                        backgroundColor: 'white',
+                                        width: 320 ,
+                                        height: 400,
+                                        zIndex:100,
+                                        marginLeft: index * 325 + 5
+                                      }}>
+                                          <ChatCenterContainer path={path} mesId={mesId}/>
+                                      </div>)
+                                    })
+                                  }
+                                </div>
                             </div>
                         :   <div>
                                 <Route path="*" component={Target}/>
@@ -116,6 +138,11 @@ class App extends React.Component {
     componentDidMount(){
         this.props.onWho();
     }
+
+    componentWillMount() {
+      const path = this.props.location.pathname;
+    }
+
 }
 
 export default App

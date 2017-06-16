@@ -2,7 +2,7 @@ import React from 'react'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import iconUtility from '~/config/iconUtility'
 
-const Message = ({message, time, user, style}) => {
+const Message = ({message, time, user, styles}) => {
     // var regex = /\((.*?)\)/g
     // var match = regex.exec(message);
     //
@@ -28,12 +28,12 @@ const Message = ({message, time, user, style}) => {
 
     return (
       <div key={time}>
-          <div className="btn btn-transparent btn-xs" style={style.img}>
+          <div className="btn btn-transparent btn-xs" style={styles.img}>
               <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={showTimePopup}>
                   <img src={user.avatarUrl} width="33" height="33"/>
               </OverlayTrigger>
           </div>
-          <div style={style.text}>
+          <div style={styles.text}>
               <div>
                   <div dangerouslySetInnerHTML={{__html: message.text}} />
                   <small style={{color: 'grey'}} className="text-muted" ><i><u>({user.name})</u></i></small>

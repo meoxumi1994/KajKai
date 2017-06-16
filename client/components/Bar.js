@@ -9,13 +9,16 @@ const HandlerUser = ({ LOG_IN,
     if(isusername){
         return (
             <div style={{ width: 120, float: 'left'}}>
-                <div onClick={() => setMultiChat(false)}>
-                    <Link to="/chat" style={{float: 'left'}}>
-                        <RiseUp
-                            src="./images/message.png"
-                            srcHas="./images/messagehas.png"
-                            width="29" height="29" number="2"/>
-                    </Link>
+                <div className="dropdown" style={{width: 15, float: 'left'}}>
+                    <div className="btn btn-default btn-xs dropdown-toggle" id="chatDropDown" data-toggle="dropdown"
+                        style={{ paddingLeft: 3, paddingRight: 3,
+                            borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
+                        <img src="./images/comment.png" alt="Cinque Terre" width="22.5" height="27"/>
+                    </div>
+
+                    <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{backgroundColor: '#e9ebee', borderRadius: 15, borderWidth: 1, borderColor: 'black'}}>
+                        <ChatListContainer/>
+                    </ul>
                 </div>
 
                 <div style={{marginLeft: 3, float: 'left'}}>
@@ -32,6 +35,7 @@ const HandlerUser = ({ LOG_IN,
                           borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
                       <img src="./images/setting.svg" alt="Cinque Terre" width="22.5" height="27"/>
                 </div>
+
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu1"
                       style={{ marginLeft: -100 }}>
                       <li><a href="#" onClick={()=> onLogoutClick() }>create store</a></li>

@@ -4,25 +4,25 @@ import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actio
 import { getMessage } from '~/actions/asyn/chat/'
 
 const mapStateToProps = (state, ownProps) => {
-  const { chatListMap, chatListKey } = state.inst.chat.left
+  const { chatListMap, chatListKey, unreadChat } = state.inst.chat.left
   const { user } = state
-  console.log('STATE ', state.inst.chat)
+  const { currentChat } = state.inst.chat.center
+  console.log('---STATE ', state);
   return (
     {
       chatListMap,
       chatListKey,
-      user
+      user,
+      currentChat,
+      unreadChat
     }
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  createNewChat: () => {
-      // dispatch(updateMessageListVisibility(true))
-      // dispatch(updateCreateChatVisibility(true))
-  },
   loadChat: (mesId) => {
       dispatch(getMessage(mesId))
+      dispatch({type: 'READ_CHAT', mesId: mesId})
   }
 })
 

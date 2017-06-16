@@ -24,6 +24,7 @@ class Map extends React.Component {
         })
     }
     render() {
+        console.log(Geolocation.getCurrentPosition());
         return (
             <div>
                 <div style={{ width: 300, float: 'left', backgroundColor: 'white' , height: window.innerHeight - 46, overflow: 'scroll'}}>

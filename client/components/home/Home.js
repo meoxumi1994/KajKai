@@ -2,10 +2,9 @@ import React from 'react';
 
 import Status from './status/Status';
 import Advertisement from './Advertisement';
-
 import MessageListContainer from '~/containers/chat/center/MessageListContainer'
 import SendMessageContainer from '~/containers/chat/bottom/SendMessageContainer'
-import { DropdownButton,  MenuItem  } from 'react-bootstrap'
+import { DropdownButton,  MenuItem, Grid, Row, Col  } from 'react-bootstrap'
 
 const Home = () => (
     <div>
@@ -26,5 +25,7 @@ const Home = () => (
         </div>
     </div>
 )
+
+
 
 export default Home
