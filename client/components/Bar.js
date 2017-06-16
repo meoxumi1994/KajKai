@@ -9,13 +9,18 @@ const HandlerUser = ({ LOG_IN,
     if(isusername){
         return (
             <div style={{ marginLeft: 60, width: 145, float: 'left'}}>
-                <div onClick={() => setMultiChat(false)}>
-                    <Link to="/chat" style={{float: 'left'}}>
+                <div className="dropdown" style={{ float: 'left'}}>
+                    <div className="btn btn-default btn-xs dropdown-toggle" id="chatDropDown" data-toggle="dropdown"
+                        style={{ paddingLeft: 3, paddingRight: 3,
+                            borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
                         <RiseUp
                             src="./images/message.svg"
                             srcHas="./images/message.svg"
                             width="29" height="29" number="2"/>
-                    </Link>
+                    </div>
+                    <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{backgroundColor: '#e9ebee', borderRadius: 15, borderWidth: 1, borderColor: 'black'}}>
+                        <ChatListContainer/>
+                    </ul>
                 </div>
 
                 <div style={{marginLeft: 3, float: 'left'}}>
@@ -23,7 +28,6 @@ const HandlerUser = ({ LOG_IN,
                         src="./images/notification.svg"
                         srcHas="./images/notification.svg"
                         width="29" height="29" number="12"/>
-                    {/* <img src="./images/notification.png" width="29" height="29"/> */}
                 </div>
 
                 <div className="dropdown" style={{ width : 15, float: 'right'}}>
@@ -32,6 +36,7 @@ const HandlerUser = ({ LOG_IN,
                           borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
                       <img src="./images/setting.svg" alt="Cinque Terre" width="24" height="27"/>
                 </div>
+
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu1"
                       style={{ marginLeft: -100 }}>
                       <li><a href="#" onClick={()=> onLogoutClick() }>create store</a></li>

@@ -13,6 +13,7 @@ const RiseUp = ({ src, srcHas, height, width, number }) => {
             <img src={srcHas} width={width} height={height}/>
             <div style={{ marginTop: -30, marginLeft: 12 }}>
                 <small  style={{
+                    fontSize: 12,
                     border: '1px solid #ffffff',
                     borderRadius: '3px',
                     backgroundColor: '#BB0F23',

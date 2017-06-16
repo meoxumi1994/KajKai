@@ -128,6 +128,7 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 },
 'global/LIKE' {
     type: 'store|sellpost|minorpost|leadercomment|comment'
+    status:
     storeid: ,
     sellpostid: ,
     minorpostid: ,
@@ -136,34 +137,13 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 },
 'client/LIKE' {
     type: 'store|sellpost|minorpost|leadercomment|comment'
+    status:
     storeid: ,
     sellpostid: ,
     minorpostid: ,
     leadcommentid: ,
     subcommentid:,
 }
-
-'server/UN_LIKE' {
-    type: 'store|sellpost|minorpost|leadercomment|comment'
-    id:
-},
-'global/UN_LIKE' {
-    type: 'store|sellpost|minorpost|leadercomment|comment'
-    storeid: ,
-    sellpostid: ,
-    minorpostid: ,
-    leadcommentid: ,
-    subcommentid:,
-},
-'client/UN_LIKE' {
-    type: 'store|sellpost|minorpost|leadercomment|comment'
-    storeid: ,
-    sellpostid: ,
-    minorpostid: ,
-    leadcommentid: ,
-    subcommentid:,
-}
-
 
 
 'server/EDIT_SELLPOST' {

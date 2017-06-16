@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button, Row } from 'react-bootstrap'
+import { Button, Row, FormGroup, InputGroup, FormControl } from 'react-bootstrap'
+import Avatar from 'react-avatar';
 
 class ChatList extends React.Component {
 
@@ -8,48 +9,93 @@ class ChatList extends React.Component {
     }
 
     render(){
-          const { chatListMap, chatListKey, user } = this.props
-          const { createNewChat, loadChat } = this.props
-          return(
-            <div>
-              <h3>Recent Chat
-                  <Button style={{marginLeft: 65, width: 50, height: 50}} onClick={() => createNewChat()}>
-                      <img style={{width: 27, height: 27}} src="./images/newmessage.svg"/>
-                  </Button>
-              </h3>
-              <div>
-                  {chatListKey.map(cKey =>
-                    {
-                      const { chatKey, userKey } = cKey
-                      const { mesId, lastMessage, time, users } = chatListMap[chatKey]
-                      const conversaters = []
-                      userKey.map(uKey => uKey != user.id? conversaters.push(uKey): undefined)
+        const { chatListMap, chatListKey, user, currentChat, unreadChat } = this.props
+        const { createNewChat, loadChat } = this.props
+        return(
+          <div style={{textAlign: 'left'}}>
+              <div style={{width: 350, marginLeft: 25, marginTop: 25}}>
+                <FormGroup>
+                  <InputGroup>
+                    <InputGroup.Addon>
+                        <img src='./images/search.png' width="20" height="20"/>
+                    </InputGroup.Addon>
+                    <FormControl type="text"placeholder="Search" />
+                  </InputGroup>
+                </FormGroup>
+              </div>
+              <hr style={{marginTop: 24}}/>
+              {chatListKey.map(mesId =>
+                {
+                  const { lastMessage, time, usersKey, usersMap } = chatListMap[mesId]
+                  const conversaters = []
+                  let read = true
 
-                      return (
-                        <Button style={{width:250, marginBottom: 10}} key={mesId} onClick={() => loadChat(mesId)}>
-                            <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}>
+                  usersKey.map(uKey => uKey != user.id? conversaters.push(uKey): undefined)
+                  let bgnColor
+
+                  if (unreadChat.indexOf(mesId) != -1) {
+                    read = false
+                  }
+
+                  if (mesId == currentChat) {
+                    bgnColor = '#cccdd1'
+                  } else {
+                    bgnColor = '#e9ebee'
+                  }
+
+                  return (
+                      <ul className="nav nav-tabs" key={mesId} onClick={() => loadChat(mesId)}
+                      style={{ borderRadius:15, borderWidth: 1, borderColor: '#7f8082', width:400, height: 70, backgroundColor: bgnColor}}>
+                          <div className="btn btn-transparent btn-xs" style={{ float: 'left', marginTop: 4, marginRight: 10, marginLeft: 20}}>
+                              {
+                                conversaters.length == 1?
+                                <Avatar round='true' size="55" src={usersMap[conversaters[0]].avatarUrl} key={conversaters[0]}/>
+                                :
+                                <Avatar round='true' size="55" value="G" key={JSON.stringify(conversaters)}/>
+                              }
+                          </div>
+                          <div style={{height: 70, marginTop: 8}}>
                                 {
                                   conversaters.map(
-                                      uKey => <img src={users[uKey].avatarUrl} key={uKey} width="38" height="38"/>
-                                  )
-                                }
-                            </div>
-                            <div style={{ marginLeft: 40}}>
-                                  {conversaters.map(
-                                    uKey => <div key={uKey}>{users[uKey].name}</div>
-                                  )}
+                                  uKey =>
+                                    read?
+                                    <label>
+                                      {conversaters.indexOf(uKey) == conversaters.length - 1? usersMap[uKey].name: usersMap[uKey].name + ', '}
+                                    </label>
+                                    :
+                                    <label><i>
+                                      {conversaters.indexOf(uKey) == conversaters.length - 1? usersMap[uKey].name: usersMap[uKey].name + ', '}
+                                    </i></label>
+                                )
+                              }
+                              {
+                                read?
+                                <p>
                                   <small className="text-muted" >
-                                    { users[lastMessage.id].name }
-                                    : { lastMessage.message.text }
+                                    {lastMessage.id == user.id ? 'You':usersMap[lastMessage.id].name}
+                                    :
+                                    {' '+ lastMessage.message.text}
                                   </small>
-                              </div>
-                        </Button>
-                      )
-                    }
-                  )}
-              </div>
-            </div>
-          )
+                                </p>
+                                :
+                                  <p>
+                                  <img src='./images/unread.png' width="20" height="20"/>
+                                  <i><b><u>
+                                    <small className="text-muted" >
+                                      {lastMessage.id == user.id ? 'You':usersMap[lastMessage.id].name}
+                                      :
+                                      {' '+ lastMessage.message.text}
+                                    </small>
+                                  </u></b></i></p>
+                                }
+
+                            </div>
+                      </ul>
+                  )
+                }
+              )}
+          </div>
+        )
     }
 }
 

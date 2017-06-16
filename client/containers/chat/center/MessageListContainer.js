@@ -3,19 +3,7 @@ import MessageList from '~/components/chat/center/MessageList'
 import { getMessage } from '~/actions/asyn/chat'
 
 const mapStateToProps = (state, ownProps) => {
-  const { user } = state
-  const { chatListKey, chatListMap } = state.inst.chat.left
-  const { messagesKey, messagesMap, multipleChatWindow } = state.inst.chat.center
-  return (
-    {
-      user,
-      chatListKey,
-      chatListMap,
-      messagesKey,
-      messagesMap,
-      multipleChatWindow
-    }
-  )
+  return state
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
