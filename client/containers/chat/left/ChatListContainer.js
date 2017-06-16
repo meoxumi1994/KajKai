@@ -1,33 +1,28 @@
 import { connect } from 'react-redux'
 import ChatList from '~/components/chat/left/ChatList'
-import { getChatList, addMessage, getMessage, getChatId, getTarget, chatWaiting } from '~/actions/asyn/chat'
-import { joinChat } from '~/actions/asyn/chat'
-import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actions/asyn/chat/actions'
+import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actions/asyn/chat/visibility'
+import { getMessage } from '~/actions/asyn/chat/'
 
 const mapStateToProps = (state, ownProps) => {
+  const { chatListMap, chatListKey } = state.inst.chat.left
+  const { user } = state
+  console.log('STATE ', state.inst.chat)
   return (
     {
-      chatList: state.inst.chat.left.chatList,
-      lazyLoad: state.inst.chat.center.lazyLoad
+      chatListMap,
+      chatListKey,
+      user
     }
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  joinChat: (chat) => {
-      dispatch(joinChat(chat))
-      // visibility
-      dispatch(updateMessageListVisibility(true))
-      dispatch(updateCreateChatVisibility(false))
-  },
-  getChatList: () => {
-      dispatch(getChatList())
-      dispatch(chatWaiting())
-  },
   createNewChat: () => {
-      // visibility
-      dispatch(updateMessageListVisibility(false))
-      dispatch(updateCreateChatVisibility(true))
+      // dispatch(updateMessageListVisibility(true))
+      // dispatch(updateCreateChatVisibility(true))
+  },
+  loadChat: (mesId) => {
+      dispatch(getMessage(mesId))
   }
 })
 

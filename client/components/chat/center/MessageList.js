@@ -1,6 +1,7 @@
 import React from 'react'
 import { Popover, Row } from 'react-bootstrap'
 import Message from './Message'
+import SendMessageContainer from '~/containers/chat/bottom/SendMessageContainer'
 
 const style = {
   alignRight: {
@@ -10,6 +11,7 @@ const style = {
     },
     text: {
       marginRight: 40,
+      marginTop: 10,
       textAlign: 'right'
     }
   },
@@ -19,7 +21,8 @@ const style = {
       marginLeft: 20,
     },
     text: {
-      marginLeft: 40
+      marginLeft: 40,
+      marginTop: 10
     }
   },
   messageListDiv: {
@@ -35,49 +38,38 @@ class MessageList  extends React.Component {
   }
 
   render() {
-      const { myInfo, partnerInfo, messages, visibility, lazyLoad } = this.props
-      if (messages.length > 0) {
-        return (
-          <div style={{display: visibility}}>
-            <h3><i>{partnerInfo.username}</i></h3>
-            <div style={style.messageListDiv}>
-
-                <div
-                    onClick={() => this.props.showMore({
-                      id: partnerInfo.id,
-                      offset: lazyLoad.offset + 10
-                    })}
-                    style={{textAlign: 'center'}}>
-                    <i><a>(Show more)</a></i>
-                </div>
-
-                {messages.reverse().map(message =>
-                    myInfo.id === JSON.parse(message).id?
-                        <Message key={JSON.parse(message).time}
-                            {...JSON.parse(message)}
-                            user={myInfo}
-                            style={style.alignRight}
-                        />
-                      :
-                        <Message key={JSON.parse(message).time}
-                            {...JSON.parse(message)}
-                            user={partnerInfo}
-                            style={style.alignLeft}
-                        />
-                )}
-            </div>
-          </div>
-        )
-      } else {
-          return (
-            <div style={{display: visibility}}>
-              <h3><i>{partnerInfo.username}</i></h3>
-              <div style={style.messageListDiv}>
-              </div>
-            </div>
-          )
-      }
-
+      const { user, chatListKey, chatListMap, messagesKey, messagesMap, multipleChatWindow } = this.props
+      return (
+        <div>
+          {
+            messagesKey.map(
+              mesId => {
+                const { users } = chatListMap[mesId]
+                return (
+                  <div key={mesId}>
+                      <h3><i>
+                        Chat windows
+                      </i></h3>
+                      <div style={style.messageListDiv}>
+                        {
+                          messagesMap[mesId].map(
+                            mes =>
+                              <Message key={JSON.stringify(mes)}
+                                  {...mes}
+                                  user={users[mes.id]}
+                                  style={mes.id === user.id? style.alignRight: style.alignLeft}
+                              />
+                          )
+                        }
+                      </div>
+                      <SendMessageContainer mesId={mesId}/>
+                  </div>
+                )
+              }
+            )
+          }
+        </div>
+      )
   }
 }
 

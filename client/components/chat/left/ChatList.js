@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Roư } from 'react-bootstrap'
+import { Button, Row } from 'react-bootstrap'
 
 class ChatList extends React.Component {
 
@@ -8,7 +8,8 @@ class ChatList extends React.Component {
     }
 
     render(){
-          const { chatList, lazyLoad, joinChat, createNewChat } = this.props
+          const { chatListMap, chatListKey, user } = this.props
+          const { createNewChat, loadChat } = this.props
           return(
             <div>
               <h3>Recent Chat
@@ -16,26 +17,39 @@ class ChatList extends React.Component {
                       <img style={{width: 27, height: 27}} src="./images/newMessage.png"/>
                   </Button>
               </h3>
-                { chatList == null?
-                  <div>Waiting...</div>
-                  :
-                  this.props.chatList.map(chat =>
-                  <Button style={{width:250, marginBottom: 10}} key={chat.id} onClick={() => joinChat(chat)}>
-                          <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}>
-                              <img src={chat.avatarUrl} width="38" height="38"/>
-                          </div>
-                          <div style={{ marginLeft: 40}}>
-                              <div>{chat.name}</div>
-                              <small className="text-muted" >Online</small>
-                          </div>
-                  </Button>
-                )}
+              <div>
+                  {chatListKey.map(cKey =>
+                    {
+                      const { chatKey, userKey } = cKey
+                      const { mesId, lastMessage, time, users } = chatListMap[chatKey]
+                      const conversaters = []
+                      userKey.map(uKey => uKey != user.id? conversaters.push(uKey): undefined)
+
+                      return (
+                        <Button style={{width:250, marginBottom: 10}} key={mesId} onClick={() => loadChat(mesId)}>
+                            <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}>
+                                {
+                                  conversaters.map(
+                                      uKey => <img src={users[uKey].avatarUrl} key={uKey} width="38" height="38"/>
+                                  )
+                                }
+                            </div>
+                            <div style={{ marginLeft: 40}}>
+                                  {conversaters.map(
+                                    uKey => <div key={uKey}>{users[uKey].name}</div>
+                                  )}
+                                  <small className="text-muted" >
+                                    { users[lastMessage.id].name }
+                                    : { lastMessage.message.text }
+                                  </small>
+                              </div>
+                        </Button>
+                      )
+                    }
+                  )}
+              </div>
             </div>
           )
-    }
-
-    componentDidMount(){
-        this.props.getChatList()
     }
 }
 

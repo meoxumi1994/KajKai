@@ -44,7 +44,7 @@ module.exports = {
     ]
   },
   devServer: {
-    // https: {
+    // http: {
     //   key: fs.readFileSync('./config/kajkai.key'),
     //   cert: fs.readFileSync('./config/kajkai.crt')
     // },

@@ -8,7 +8,7 @@ const NewChat = ({onNewChatSubmit, visibility}) => {
         <form style={{position: 'relative'}} onSubmit={e => {
           e.preventDefault()
           if (msg.value.trim()) {
-            onNewChatSubmit({id: msg.value})
+            onNewChatSubmit(msg.value)
           }
         }}>
         <div className="input-group">

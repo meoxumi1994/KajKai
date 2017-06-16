@@ -35,3 +35,7 @@ export const getTokenSocketCookie = (str) => {
     if (last === -1) last = str.length
     return str.substr(n + 6, last - n - 6)
 }
+
+export const getCurrentTime = () => {
+    return (new Date()).getTime()
+}

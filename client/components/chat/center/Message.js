@@ -1,38 +1,46 @@
 import React from 'react'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
+import iconUtility from '~/config/iconUtility'
 
 const Message = ({message, time, user, style}) => {
+    // var regex = /\((.*?)\)/g
+    // var match = regex.exec(message);
+    //
+    // if (match && iconUtility.getIcon(match[1]) != null) {
+    //     message = message.split('('+match[1]+')').join('<img src="'+iconUtility.getIcon(match[1]).src+'" width="40" height="40"/>')
+    // }
+    //
+    // if (message == undefined) {
+    //   return (<div></div>)
+    // }
 
-    const popoverHoverFocus = (
+    const showTimePopup = (
       <Popover id="popover-trigger-hover-focus">
           {Date(time*1000)}
       </Popover>
     )
 
-    if (message == undefined) {
-      return (<div></div>)
-    }
-      return (
-        <div key={time}>
-            <div className="btn btn-transparent btn-xs" style={style.img}>
-                <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={popoverHoverFocus}>
-                    <img src={user.avatarUrl} width="33" height="33"/>
-                </OverlayTrigger>
-            </div>
-            <div style={style.text}>
-                {(message.indexOf('.jpg') == -1 && message.indexOf('.png') == -1) ?
-                    <div>
-                        <div>{message}</div>
-                        <small className="text-muted" >{user.username}</small>
-                    </div>
-                  :
-                    <a href={message}>
-                      <img src={message} width="300" height="300"/>
-                    </a>
-                }
-            </div>
-        </div>
-      )
+    const picturePopup = (
+      <Popover id="image-popup">
+          Download
+      </Popover>
+    )
+
+    return (
+      <div key={time}>
+          <div className="btn btn-transparent btn-xs" style={style.img}>
+              <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={showTimePopup}>
+                  <img src={user.avatarUrl} width="33" height="33"/>
+              </OverlayTrigger>
+          </div>
+          <div style={style.text}>
+              <div>
+                  <div dangerouslySetInnerHTML={{__html: message.text}} />
+                  <small style={{color: 'grey'}} className="text-muted" ><i><u>({user.name})</u></i></small>
+              </div>
+          </div>
+      </div>
+    )
 }
 
 export default Message

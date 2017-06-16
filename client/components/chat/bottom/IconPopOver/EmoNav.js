@@ -1,6 +1,6 @@
 import React from 'react'
-import iconMaps from '~/config/iconMaps'
-import readFileTest from '~/config'
+import iconUtility from '~/config/iconUtility'
+import { Popover, OverlayTrigger } from 'react-bootstrap'
 
 class EmoNav extends React.Component {
 
@@ -9,13 +9,23 @@ class EmoNav extends React.Component {
     }
 
     render() {
-      const { mesId, sendEmo } = this.props
+      const { mesId, user, sendEmo } = this.props
+
+      const popoverHoverFocus = (
+        <Popover id="popover-trigger-hover-focus">
+            Hello
+        </Popover>
+      )
 
       return (
         <div style={{overflow: 'scroll', width:225, height: 300}} >
-            {
-              iconMaps.map(icon =>
-                <img key={icon} src={icon} width="60" height="60" style={{marginLeft:5}} onClick={() => sendEmo(icon, mesId)}/>
+              {
+              iconUtility.getIconList().map(icon =>
+                <OverlayTrigger key={icon.src} trigger={['hover', 'focus']} placement="bottom"
+                  overlay={<Popover id="popover-trigger-hover-focus">{icon.syntax}</Popover>}>
+
+                  <img src={icon.src} width="60" height="60" style={{marginLeft:5}} onClick={() => sendEmo(mesId, user, icon.syntax)}/>
+                </OverlayTrigger>
               )
             }
         </div>

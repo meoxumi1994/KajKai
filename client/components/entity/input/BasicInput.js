@@ -3,7 +3,6 @@ import Textarea from 'react-textarea-autosize'
 
 const BasicInput = ({ width, fontSize, minRows, content, handleChange,
     opensupplement, onFocus, onBlur, onSave, onBold, onItalic, focus, onedit}) => {
-
     const styleTextArea = {
         style : {
             width: '100%',

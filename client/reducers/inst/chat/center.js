@@ -1,74 +1,104 @@
 const center = (state = {
-  mesId: "",
-  messages: [],
-  user: {
-    id: "",
-    avatarUrl: "",
-    username: ""
-  },
+  multipleChatWindow: false,
+  messagesKey: [],
+  messagesMap: {},
+
+  // mesId: "",
+  // messages: [],
+  // user: {
+  //   id: "",
+  //   avatarUrl: "",
+  //   username: ""
+  // },
   lazyLoad: {
     offset: 0
-  },
-  url: {
-    imageList: [],
-    isLoading: true
   }
 }, action) => {
     switch (action.type) {
-        case 'UPLOADING_IMAGES':
-            console.log('action ',action);
-            return {
-              ...state,
-              url: {
-                ...state.url,
-                imageList: action.imageList,
-                isLoading: action.imageList.length == 0? true: false
-              }
-            }
-        // [socket.io] Init last 10 message
-        case 'client/INIT_MESSAGE':
+      case 'ADD_CHAT':
+        if (state.multipleChatWindow) {
+          console.log('--------------------------');
+          if (state.messagesKey.indexOf(action.data.mesId) != -1) {
+            console.log('this mesId exited');
+            return state
+          }
+          var tempMessagesKey = state.messagesKey
+          tempMessagesKey.push(action.data.mesId)
+
           return {
             ...state,
-            mesId: action.data.mesId,
-            messages: action.data.messages,
-            user: {
-              id: action.data.user.id,
-              avatarUrl: action.data.user.avatarUrl,
-              username: action.data.user.name
-            },
-            lazyLoad: {
-              offset: 0
+            messagesKey: tempMessagesKey,
+            messagesMap: {
+              ...state.messagesMap,
+              [action.data.mesId]: action.data.messages
             }
           }
-        // [socket.io] recevice message
-        case 'client/RECEIVE_MESSAGE':
-            var newMessage = {
-              id: action.data.person,
-              message: action.data.message,
-              time: action.data.time
+        } else {
+          return {
+            ...state,
+            messagesKey: [action.data.mesId],
+            messagesMap: {
+              [action.data.mesId]: action.data.messages
             }
-            return {
-              ...state,
-              lazyLoad: {
-                offset: state.lazyLoad.offset + 1},
-                messages: [
-                  ...state.messages,
-                  JSON.stringify(newMessage)
-                ].reverse()
-              }
+          }
+        }
+        console.log('ADD_CHAT ', action);
+        return state
 
-        case 'LOAD_MORE_MESSAGE':
-            return {
-              ...state,
-              lazyLoad: {
-                offset: state.lazyLoad.offset + 10
-              },
-              messages: state.messages.reverse().concat(action.messages)
-            }
+      case 'MULTIPLE_CHAT':
+        return {
+          ...state,
+          multipleChatWindow: action.data
+        }
+      // case 'client/INIT_MESSAGE':
+      //   const { mesId, messages } = action.data
+      //   const { id, avatarUrl, name } = action.data.user
+      //   return {
+      //     ...state,
+      //     mesId,
+      //     messages,
+      //     user: {
+      //       id,
+      //       avatarUrl,
+      //       username: name
+      //     },
+      //     lazyLoad: {
+      //       offset: 0
+      //     }
+      //   }
+
+        // case 'client/RECEIVE_MESSAGE':
+        //     const { person, message, time } = action.data
+        //     return {
+        //       ...state,
+        //       lazyLoad: {
+        //         offset: state.lazyLoad.offset + 1},
+        //         messages: [
+        //           ...state.messages,
+        //           buildMessage(person, message, time)
+        //         ].reverse()
+        //       }
+        //
+        // case 'LOAD_MORE_MESSAGE':
+        //     return {
+        //       ...state,
+        //       lazyLoad: {
+        //         offset: state.lazyLoad.offset + 10
+        //       },
+        //       messages: state.messages.reverse().concat(action.messages)
+        //     }
 
         default:
             return state
     }
 }
+
+// const buildMessage = (id, message, time) => {
+//   return JSON.stringify({
+//     id,
+//     message,
+//     time
+//   })
+// }
 
 export default center

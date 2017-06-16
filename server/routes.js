@@ -28,7 +28,7 @@ export default {
         put: {
           controller: 'PhoneController',
           middleware: [auth(), phoneCheck()],
-          method: 'updateUserPhone'
+          method: 'updateUserPhoneController'
         }
     },
 
@@ -89,7 +89,7 @@ export default {
         get: {
             controller: 'UserController',
             middleware: [auth()],
-            method: 'getUser'
+            method: 'getUserController'
         }
     },
 
@@ -150,7 +150,7 @@ export default {
         post: {
             controller: 'UserController',
             // middleware: [auth()]
-            method: 'getUserInfo'
+            method: 'getUserInfoController'
         }
     },
 
@@ -200,5 +200,4 @@ export default {
             method: 'addPost'
         }
     }
-
 }

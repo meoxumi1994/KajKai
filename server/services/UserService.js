@@ -1,37 +1,28 @@
 import { User } from '../models'
 import jwt from 'jsonwebtoken'
 import enums from '../enum'
-import {findStoreList} from './StoreService'
+import { findStoreList } from './StoreService'
 import mongoose from '../datasource'
 
-module.exports = {
-	getUserToken,
-	getUser,
-	getUserFromFacebookId,
-	getUserFromGoogleId,
-	getUserFromEmail,
-	getUserFromPhone,
-	verifyToken,
-	saveNewUser,
-	validateName,
-	validateLanguage,
-	validateSex,
-  	getUserInfo,
-	updateImageUrl,
-	getUserBasicInfo,
-    getListUser,
-    getChatUserListInfo,
-    getChatUserInfo,
-    updateVerifyUser
-};
+console.log('fuck user')
 
-function getUserInfo(user, next) {
+export const getUser = (id, next) => {
+    User.findById(id, function(err, user) {
+        if (err) {
+            next(null)
+        } else {
+            next(user)
+        }
+    })
+}
+
+export const getUserInfo = (user, next) => {
 	findStoreList(user.id, function(stores){
         next(getUserBasicInfo(user, stores))
 	})
 }
 
-function getUserBasicInfo(user, stores = null) {
+export const getUserBasicInfo = (user, stores = null) => {
 	return {username: user.name, listUrls: [user.imageUrl],
         phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
         language: user.language, passwordLastUpdatedAt: user.passwordLastUpdatedAt,
@@ -44,17 +35,7 @@ function getUserBasicInfo(user, stores = null) {
 		id: user._id}
 }
 
-function getUser(id, next) {
-	User.findById(id, function(err, user) {
-		if (err) {
-			next(null)
-		} else {
-			next(user)
-		}
-	})
-}
-
-function getListUser(ids, next) {
+export const getListUser = (ids, next) => {
 	var list = []
 	for (var i = 0; i < ids.length; ++i) {
 		list.push(mongoose.Types.ObjectId(ids[i]))
@@ -65,12 +46,12 @@ function getListUser(ids, next) {
 	})
 }
 
-function getChatUserInfo(user) {
+export const getChatUserInfo = (user) => {
     return {id: user._id, avatarUrl: user.avatarUrl, name: user.name}
 }
 
 
-function getChatUserListInfo(userList) {
+export const getChatUserListInfo = (userList) => {
 	var result = []
 	for (var i = 0; i < userList.length; ++i) {
         result.push(getChatUserInfo(userList[i]))
@@ -78,7 +59,7 @@ function getChatUserListInfo(userList) {
     return result
 }
 
-function getUserFromEmail(_email, next) {
+export const getUserFromEmail = (_email, next) => {
 	User.findOne({email: _email}, function (err, user) {
 		if (err) {
 			next(null)
@@ -88,7 +69,7 @@ function getUserFromEmail(_email, next) {
 	})
 }
 
-function getUserFromPhone(_phone, next) {
+export const getUserFromPhone = (_phone, next) => {
 	User.findOne({phone: _phone}, function (err, user) {
 		if (err) {
 			next(null)
@@ -98,7 +79,7 @@ function getUserFromPhone(_phone, next) {
 	})
 }
 
-function getUserFromFacebookId(facebookid, next) {
+export const getUserFromFacebookId = (facebookid, next) => {
 	User.findOne({socialNetworkType: enums.FACEBOOK, socialNetworkId: facebookid}, function (err, user) {
 		if (err) {
 			next(null)
@@ -108,7 +89,7 @@ function getUserFromFacebookId(facebookid, next) {
 	})
 }
 
-function getUserFromGoogleId(googleid, next) {
+export const getUserFromGoogleId = (googleid, next) => {
 	User.findOne({socialNetworkType: enums.GOOGLE, socialNetworkId: googleid}, function (err, user) {
 		if (err) {
 			next(null)
@@ -118,12 +99,12 @@ function getUserFromGoogleId(googleid, next) {
 	})
 }
 
-function getUserToken(id) {
+export const getUserToken = (id) => {
 	var token = jwt.sign({_id: id}, 'secret', { expiresIn: 60 * 60 * 60 });
 	return token;
 }
 
-function verifyToken(token) {
+export const verifyToken = (token) => {
 	try {
 		var decoded = jwt.verify(token, 'secret');
 		return decoded;
@@ -132,7 +113,7 @@ function verifyToken(token) {
 	}
 }
 
-function saveNewUser(user, next) {
+export const saveNewUser = (user, next) => {
 	user.save(function(err) {
 		if (err) {
 			next(null)
@@ -142,8 +123,8 @@ function saveNewUser(user, next) {
 	})
 }
 
-function updateUserPhone(id, phone, next) {
-	UserService.getUser(id, function(user){
+export const updateUserPhone = (id, phone, next) => {
+	getUser(id, function(user){
 		if (user) {
 			user.phone = phone
 			user.save(function(err){
@@ -159,7 +140,7 @@ function updateUserPhone(id, phone, next) {
 	})
 }
 
-function verifyCharacterVietname(username) {
+export const verifyCharacterVietname = (username) => {
     username = username.toUpperCase();
     const VIETNAMESE_DIACRITIC_CHARACTERS = "ẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ";
 
@@ -191,7 +172,7 @@ function verifyCharacterVietname(username) {
 }
 
 
-function validateName(username) {
+export const validateName = (username) => {
     const length = username.length;
     if (length >= 5 && length <= 45 && verifyCharacterVietname(username)) {
     	return true
@@ -200,21 +181,21 @@ function validateName(username) {
     }
 }
 
-function validateLanguage(language){
+export const validateLanguage = (language) => {
 	return (language == enums.Language.VIETNAM || language == enums.Language.ENGLISH)
 }
 
-function validateSex(sex) {
+export const validateSex = (sex) =>{
 	return (sex == enums.Sex.MALE || sex == enums.Sex.FEMALE)
 }
 
-function updateImageUrl(id, imageURL) {
+export const updateImageUrl = (id, imageURL) => {
 	User.findOneAndUpdate({_id: id}, {$set:{imageUrl: imageURL}}, function(err){
 		console.log('err ' + err)
 	})
 }
 
-function updateVerifyUser(id, next) {
+export const updateVerifyUser = (id, next) => {
     User.findOneAndUpdate({_id: id}, {$set:{verified: 1}}, function (err) {
         next(err)
     })
