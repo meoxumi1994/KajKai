@@ -1,7 +1,7 @@
 import auth from './middlewares/auth'
 
 export default {
-    '/register': {
+    '/user': {
         post: {
             controller: 'RegisterController',
             method: 'registerNewUser'
@@ -15,7 +15,7 @@ export default {
         }
     },
 
-    '/updatephone': {
+    '/phone': {
         put: {
             controller: 'PhoneController',
             middleware: [auth()],
@@ -23,7 +23,7 @@ export default {
         }
     },
 
-    '/updatepassword': {
+    '/password': {
         put: {
             controller: 'UserController',
             middleware: [auth()],

@@ -23,10 +23,27 @@ export const flet = (url, need, get) => {
     })
 }
 
-export const flem = (url, get) => {
-    let myurl = config.getDomain() + url
-    console.log(myurl,get)
-    return fetch( myurl , {
+export const flem = (url, get, param, query) => {
+    let myUrl = config.getDomain() + url
+
+    if (param) {
+      param.map((pr) => {
+        myUrl += '/' + pr
+      })
+    }
+
+    if (query) {
+      let ch = '?'
+      for (let qr in query) {
+        myUrl += ch + qr + '=' + query[qr]
+        if (ch == '?') {
+          ch = '&'
+        }
+      }
+    }
+
+    console.log(myUrl,get)
+    return fetch( myUrl , {
         method: 'GET',
         credentials: 'include',
     })

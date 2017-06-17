@@ -22,18 +22,24 @@ PUT /user {
 },{
     status: 'failed|success'
 }
-PUT /user/password {
+PUT /password {
     password: '123456',
     newpassword: '654321',
 },{
     status: 'failed|success',
 }
-PUT /user/phone {
+PUT /phone {
     phone: '0987654321'
 },{
     status: 'pending|used|error'
 }
-POST /user/login {
+PUT /verifyphone {
+    phone: '0123456789',
+    code: '43245',
+},{
+    status: 'verified|error'
+}
+POST /login {
     email: 'thiennvtse90219@fpt.edu.vn',
     password: '123456',
 },{
@@ -42,7 +48,7 @@ POST /user/login {
     address: '47 Cầu Giấy, Hà Nội',
     phone: '0123456789',
 }
-POST /user/loginfacebook {
+POST /loginfacebook {
     tokenId: 'djhkayr389rbqcfacebook3bqkvrtq39ry3xbr92ycr2r9'
 },{
     tokenId: undefined,
@@ -51,7 +57,7 @@ POST /user/loginfacebook {
     address: undefined,
     phone: undefined,
 }
-POST /user/logingoogle {
+POST /logingoogle {
     tokenId: 'djhkayr389rbqcfrgooglebqkvrtq39ry3xbr92ycr2r9'
 },{
     username: undefined,
@@ -59,8 +65,7 @@ POST /user/logingoogle {
     address: undefined,
     phone: undefined,
 }
-GET /user/logout {
-},{
+GET /logout {
 }
 GET /store/:id {
   id: , //store id
@@ -88,7 +93,7 @@ GET /store/:id {
       userid:
       username:
     },
-  ], // tối đa 5 thằng bạn
+  ], // tối đa 5 thằng có tương tác nhiều nhất
 }
 GET /sellpost/:storeid?offset=-1 { // length = 2
   offset: ,
