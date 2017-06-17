@@ -78,8 +78,8 @@ const BarScreen = (props) => {
     const { SEARCH_PRODUCT, SEARCH_LOCATION, } = props
     return (
         <div className="container-fluid"
-            style={{ position: 'fixed', zIndex: 1, left: 0, top: 0, backgroundColor: "white" }}>
-            <div className="row" style={{ marginTop: 8, marginBottom: 7 }}>
+            style={{ position: 'fixed', zIndex: 1, left: 0, top: 0, padding: 0, backgroundColor: "white" }}>
+            <div className="row" style={{ marginTop: 8, marginBottom: 8 }}>
                 <div className="col-xs-1 col-md-1 col-md-offset-1">
                     <div style={{minWidth: 100 }}>
                         <div className="btn btn-transparent btn-xs">
@@ -131,6 +131,7 @@ const BarScreen = (props) => {
                     <HandlerUser {...props}/>
                 </div>
             </div>
+            <hr style={{ margin: 0 }}></hr>
         </div>
 
     )

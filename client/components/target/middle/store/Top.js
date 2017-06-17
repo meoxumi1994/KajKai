@@ -9,23 +9,31 @@ const Top = (props) => {
         return (
             <Link to={"/"+id+"/"+title}>
                 <button type="button" className="btn btn-default"
-                    style={{ height: 46, borderRadius: 0, borderRightWidth: last, fontSize: 16 }}>
+                    style={{ height: 46, width: 78, borderRadius: 0, borderRightWidth: last, fontSize: 16 }}>
                     {title}
                 </button>
+                <img style={{
+                    position: 'absolute',
+                    marginTop: 38.5,
+                    marginLeft: -46,
+                    width: 17,
+                    height: 9.5,
+                    borderColor: 'transparent',
+                    backgroundColor: 'transparent',
+                }}
+                src= "./images/arrowup.svg"/>
             </Link>
         )
     }
 
     return(
         <div className="panel panel-default"
-            style={{ margin: 0, borderWidth: 0 }}>
+            style={{ margin: 0, borderWidth: 1 , borderRadius: '0px 0px 5px 5px'}}>
             <img src={ coverUrl }
             style={{
                 width: '100%',
                 height: '250px',
                 border: 0,
-                borderTopRightRadius: 5,
-                borderTopLeftRadius: 5,
             }}/>
             <div className="btn btn-default btn-xs"
                 style={{ position: 'fix', marginLeft: -37, marginTop: -210 }}
@@ -53,13 +61,15 @@ const Top = (props) => {
                     position: 'static',
                     marginTop: 65,
                     marginLeft: 183,
+                    color: 'white',
+                    textShadow: '2px 2px 4px #000000',
                 }}>{ name }</h3>
                 <div style={{
                     position: 'static',
                     marginTop: -2,
                     marginLeft: 183,
                 }}>
-                    <ButtonLine title="Interest" last="0" link="interest"/>
+                    <ButtonLine title="Interest" last="0" link="/"/>
                     <ButtonLine title="About" last="0" link="about"/>
                     <ButtonLine title="Post" last="0" link="post"/>
                     <ButtonLine title="Store" last="0" link="store"/>
@@ -68,7 +78,7 @@ const Top = (props) => {
                     <ButtonLine title="Setting" last="1px" link="setting"/>
                 </div>
             </div>
-            <hr style={{ marginTop: 43, marginBottom: 0, borderColor: 'white'}}></hr>
+            <hr style={{ marginTop: 43, marginBottom: 0, borderColor: 'transparent'}}></hr>
             <ModalUploadImage/>
         </div>
     )

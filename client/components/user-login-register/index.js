@@ -23,7 +23,7 @@ const LoginRegister = ({
                       </h2>
                     </div>
                     <div className="text-center">
-                        <img src="/images/world.png" alt="Cinque Terre" width="75%"/>
+                        <img src="/images/world.svg" alt="Cinque Terre" width="75%"/>
                     </div>
                 </Col>
                 <Col xs={6} sm={6} md={6} style={{ minHeight: 700-146, height: window.innerHeight - 146, width: 460 }}>

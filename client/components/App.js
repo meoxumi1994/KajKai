@@ -87,17 +87,16 @@ class App extends React.Component {
         const { width, height, username, onScroll } = this.props
         const { chat } = this.props
         return(
-            <div style={{ height: '100%', minWidth: 1050 }}>
+            <div style={{ height: '100%', minWidth: 1100 }}>
                 <Bar/>
-                <hr style={{margin: 0}}></hr>
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
                     style={{ height: height - 48 }}>
-                    { username && width > 1050 + 280 &&
-                        <div style={{ position: 'fixed',right: 0, top: 48, height: '100%', width: 280}}>
+                    { username && width > 1100 + 280 &&
+                        <div style={{ position: 'fixed',right: 0, top: 47, height: '100%', width: 280}}>
                             <ContactHistory/>
                         </div>
                     }
-                    <div style={{ marginRight: (width > 1050 + 280)? 280: 0 }}>
+                    <div style={{ marginTop: 48, marginRight: (width > 1100 + 280)? 280: 0 }}>
                         {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
                               <div>
