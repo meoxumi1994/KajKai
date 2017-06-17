@@ -1,17 +1,22 @@
 import config from '../config'
 
+import { getAPI } from '../fakedata'
+
+console.log('config.ISTEST', config.ISTEST)
+
 export const flet = (url, need, get) => {
     let myurl = config.getDomain() + url
     console.log(myurl,need,get)
-    return fetch( myurl , {
+
+    const P = (config.ISTEST == 2)?
+    getAPI(url,need) : fetch( myurl , {
         headers: {
             "Content-Type": "application/json",
         },
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify(need)
-    })
-    .then((response) => {
+    }).then((response) => {
         return response.json()
     })
     .then((res) => {
@@ -21,33 +26,19 @@ export const flet = (url, need, get) => {
     .catch((error)=> {
         console.error(myurl,error);
     })
+    return P
 }
 
-export const flem = (url, get, param, query) => {
-    let myUrl = config.getDomain() + url
-
-    if (param) {
-      param.map((pr) => {
-        myUrl += '/' + pr
-      })
-    }
-
-    if (query) {
-      let ch = '?'
-      for (let qr in query) {
-        myUrl += ch + qr + '=' + query[qr]
-        if (ch == '?') {
-          ch = '&'
-        }
-      }
-    }
-
-    console.log(myUrl,get)
-    return fetch( myUrl , {
+export const flem = (url, get) => {
+    let myurl = config.getDomain() + url
+    console.log(myurl,get)
+    const P = (config.ISTEST == 2)? getAPI(url,{}) : fetch( myurl , {
         method: 'GET',
         credentials: 'include',
+    }).then((response) => {
+        console.log(response)
+        return response.json()
     })
-    .then((response) => response.json())
     .then((res) => {
         console.log(res)
         return res
@@ -55,20 +46,20 @@ export const flem = (url, get, param, query) => {
     .catch((error)=> {
         console.error(myurl,error);
     })
+    return P
 }
 
 export const fleu = (url, need, get) => {
     let myurl = config.getDomain() + url
     console.log(myurl,need,get)
-    return fetch( myurl , {
+    const P = (config.ISTEST == 2)? getAPI(url,need) : fetch( myurl , {
         headers: {
             "Content-Type": "application/json",
         },
         method: 'PUT',
         credentials: 'include',
         body: JSON.stringify(need)
-    })
-    .then((response) => response.json())
+    }).then((response) => response.json())
     .then((res) => {
         console.log(res)
         return res
@@ -76,4 +67,5 @@ export const fleu = (url, need, get) => {
     .catch((error)=> {
         console.error(myurl,error);
     })
+    return P
 }

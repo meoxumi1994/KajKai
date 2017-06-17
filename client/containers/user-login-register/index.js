@@ -8,6 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     return({
         KAJKAI_THANK: g('KAJKAI_THANK'),
+        id: state.user.id,
         iswhoing: state.auth == 'WHO_ING' || state.auth == 'WAIT',
         isusername: state.user.username,
         isregistersuccess: (state.auth == 'REGISTER_SUCCESS'),

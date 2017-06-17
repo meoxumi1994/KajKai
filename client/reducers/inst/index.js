@@ -6,6 +6,8 @@ import registerstore from './register-store'
 import target from './target'
 import entity from './entity'
 import chat from './chat'
+import app from './app'
+
 
 const inst = combineReducers({
     userloginregister,
@@ -13,7 +15,8 @@ const inst = combineReducers({
     registerstore,
     target,
     entity,
-    chat
+    chat,
+    app,
 })
 
 export default inst

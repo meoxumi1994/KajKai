@@ -1,26 +1,26 @@
 const center = (state = {
-  multipleChatWindow: false,
   messagesKey: [],
   messagesMap: {},
-
-  // mesId: "",
-  // messages: [],
-  // user: {
-  //   id: "",
-  //   avatarUrl: "",
-  //   username: ""
-  // },
+  currentChat: '',
+  multipleChatWindow: false,
   lazyLoad: {
     offset: 0
   }
 }, action) => {
     switch (action.type) {
+
+      case 'SET_CURRENT_CHAT':
+        return {
+          ...state,
+          currentChat: action.mesId
+        }
+
       case 'ADD_CHAT':
-        if (state.multipleChatWindow) {
-          console.log('--------------------------');
           if (state.messagesKey.indexOf(action.data.mesId) != -1) {
-            console.log('this mesId exited');
-            return state
+            return {
+              ...state,
+              currentChat: action.data.mesId
+            }
           }
           var tempMessagesKey = state.messagesKey
           tempMessagesKey.push(action.data.mesId)
@@ -31,19 +31,23 @@ const center = (state = {
             messagesMap: {
               ...state.messagesMap,
               [action.data.mesId]: action.data.messages
-            }
+            },
+            currentChat: action.data.mesId
           }
-        } else {
-          return {
-            ...state,
-            messagesKey: [action.data.mesId],
-            messagesMap: {
-              [action.data.mesId]: action.data.messages
-            }
-          }
-        }
-        console.log('ADD_CHAT ', action);
         return state
+
+      case 'REMOVE_CHAT':
+        const tempKey = state.messagesKey
+        tempKey.splice(tempKey.indexOf(action.mesId), 1)
+        const tempMap = state.messagesMap
+        delete tempMap[action.mesId]
+
+        return {
+          ...state,
+          messagesKey: tempKey,
+          messagesMap: tempMap
+        }
+
 
       case 'MULTIPLE_CHAT':
         return {

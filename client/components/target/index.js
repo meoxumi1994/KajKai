@@ -16,17 +16,9 @@ class Target extends React.Component {
         // if(!type)
         //     return <div>NOT FOUND</div>
         return(
-            <div className="container-fluid" style={{ overflow: 'scroll', height: window.innerHeight - 46 }}>
-                <div className="row">
-                    <div className="col-xs-2 " style={{ padding: 0, margin: 0}}>
-
-                    </div>
-                    <div className="col-xs-6 " style={{ padding: 0, margin: 0}}>
-                        <Middle/>
-                    </div>
-                    <div className="col-xs-4" style={{ padding: 0, margin: 0}}>
-
-                    </div>
+            <div style={{ width: 1050, margin: 'auto'}}>
+                <div>
+                    <Middle location = {this.props.location}/>
                 </div>
             </div>
         )

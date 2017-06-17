@@ -14,7 +14,7 @@ const Condition = () => (
     <Row>
         <Col xs={3} md={3}>
             <div className="btn btn-transparent btn-xs">
-                <img src="./images/like.png" alt="Cinque Terre" width="18" height="22"/>
+                <img src="./images/like.svg" alt="Cinque Terre" width="18" height="22"/>
                 {" "}Like
             </div>
             <div className="btn btn-transparent btn-xs">
@@ -26,7 +26,7 @@ const Condition = () => (
         </Col>
         <Col xs={4} md={4}>
             <div className="btn btn-transparent btn-xs">
-                <img src="./images/comment.png" alt="Cinque Terre" width="18" height="22"/>
+                <img src="./images/comment.svg" alt="Cinque Terre" width="18" height="22"/>
                 {" "}Comment
             </div>
             <div className="btn btn-transparent btn-xs">
@@ -38,7 +38,7 @@ const Condition = () => (
         </Col>
         <Col xs={4} md={4}>
             <div className="btn btn-transparent btn-xs">
-                <img src="./images/share.png" alt="Cinque Terre" width="18" height="22"/>
+                <img src="./images/share.svg" alt="Cinque Terre" width="18" height="22"/>
                 {" "}Share
             </div>
             <div className="btn btn-transparent btn-xs">

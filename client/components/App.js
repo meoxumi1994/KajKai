@@ -10,7 +10,10 @@ import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
 import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Target from '~/containers/target'
+import ContactHistory from '~/containers/contacthistory'
 // import loadTarget from 'bundle-loader?lazy!../containers/target'
+import ChatCenterContainer from '~/containers/chat/center'
+import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 
 const Home = () => (
   <Bundle load={loadHome}>
@@ -81,30 +84,65 @@ class App extends React.Component {
     }
     render(){
         const path = this.props.location.pathname;
+        const { width, height, username, onScroll } = this.props
+        const { chat } = this.props
         return(
-            <div style={{ minWidth: 990, minHeight: 700 }}>
+            <div style={{ height: '100%', minWidth: 1050 }}>
                 <Bar/>
-                <input value={<div>123</div>}/>
                 <hr style={{margin: 0}}></hr>
-                {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
-                    <div>
-                        <Route exact path="/" component={Home}/>
-                        <Route path="/map" component={Mapp}/>
-                        <Route path="/register" component={UserLoginRegister}/>
-                        <Route path="/profile" component={Profile}/>
-                        <Route path="/registerstore" component={RegisterStore}/>
-                        <Route path="/chat" component={Chat}/>
+                <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
+                    style={{ height: height - 48 }}>
+                    { username && width > 1050 + 280 &&
+                        <div style={{ position: 'fixed',right: 0, top: 48, height: '100%', width: 280}}>
+                            <ContactHistory/>
+                        </div>
+                    }
+                    <div style={{ marginRight: (width > 1050 + 280)? 280: 0 }}>
+                        {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
+                          <div>
+                              <div>
+                                  <Route exact path="/" component={Home}/>
+                                  <Route path="/map" component={Mapp}/>
+                                  <Route path="/register" component={UserLoginRegister}/>
+                                  <Route path="/profile" component={Profile}/>
+                                  <Route path="/registerstore" component={RegisterStore}/>
+                                  <Route path="/chat" component={Chat}/>
+                              </div>
+                              <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>
+                                  {
+                                    chat.messagesKey.map((mesId,index) => {
+                                      return (<div key={mesId} style={{
+                                        position: 'fixed',
+                                        bottom: 0,
+                                        backgroundColor: 'white',
+                                        width: 320 ,
+                                        height: 400,
+                                        zIndex:100,
+                                        marginLeft: index * 325 + 5
+                                      }}>
+                                          <ChatCenterContainer path={path} mesId={mesId}/>
+                                      </div>)
+                                    })
+                                  }
+                                </div>
+                            </div>
+                        :   <div>
+                                <Route path="*" component={Target}/>
+                            </div>
+                        }
                     </div>
-                :   <div>
-                        <Target id={path.substring(1)}/>
-                    </div>
-                }
+                </div>
             </div>
         )
     }
     componentDidMount(){
         this.props.onWho();
     }
+
+    componentWillMount() {
+      const path = this.props.location.pathname;
+    }
+
 }
 
 export default App

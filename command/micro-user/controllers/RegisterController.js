@@ -17,7 +17,7 @@ export const registerNewUser = () => {
                                 res.json({status: 'failed xxxxx'})
                             } else {
                                 sendVerifyEmail(body.email, getUserToken(user._id), () => {
-                                    res.json()
+                                    res.json({status: 'success'})
                                 })
                             }
                         })

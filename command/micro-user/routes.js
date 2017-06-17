@@ -1,28 +1,30 @@
 import auth from './middlewares/auth'
 
 export default {
-    '/user': {
-        post: {
-            controller: 'RegisterController',
-            method: 'registerNewUser'
-        }
-    },
-
+  
     '/emailverification/:token': {
         get: {
             controller: 'RegisterController',
             method: 'confirmEmailVerification'
         }
     },
-
-    '/phone': {
-        put: {
-            controller: 'PhoneController',
+    '/user': {
+        get: {
+            controller: 'UserController',
             middleware: [auth()],
-            method: 'updateUserPhoneController'
+            method: 'getUserTrivial'
+        },
+        post: {
+            controller: 'RegisterController',
+            method: 'registerNewUser'
+
+        },
+        put: {
+            controller: 'UserController',
+            middleware: [auth()],
+            method: 'changeUserProfile'
         }
     },
-
     '/password': {
         put: {
             controller: 'UserController',
@@ -30,80 +32,36 @@ export default {
             method: 'updateUserPassword'
         }
     },
-
-    '/verifyphone': {
+    '/phone': {
         put: {
-            controller: 'PhoneController',
+            controller: 'UserController',
             middleware: [auth()],
-            method: 'verifyPhone'
+            method: 'changeUserPhone'
         }
     },
-
-    '/logoutphone': {
-        post: {
-            controller: 'PhoneController',
-            method: 'verifyLogout'
-        }
-    },
-
     '/login': {
-        post: {
-            controller: 'LoginController',
-            method: 'loginEmail'
-        }
+       post: {
+           controller: 'LoginController',
+           method: 'loginEmail'
+       }
     },
-
-    '/logout': {
-        get: {
-            controller: 'LoginController',
-            middleware: [auth()],
-            method: 'logOutUser'
-        }
-    },
-
-    '/updateuser': {
-        put: {
-            controller: 'UserController',
-            middleware: [auth()],
-            method: 'changeUserProfile'
-        }
-    },
-
-    '/who': {
-        get: {
-            controller: 'UserController',
-            middleware: [auth()],
-            method: 'getUserController'
-        }
-    },
-
     '/loginfacebook': {
         post: {
             controller: 'LoginController',
             method: 'loginFacebook'
         }
     },
-
     '/logingoogle': {
         post: {
             controller: 'LoginController',
             method: 'loginGoogle'
         }
     },
-
-    '/getawsimageurl': {
-        post: {
-            controller: 'AWSController',
+    '/logout': {
+        get: {
+            controller: 'LoginController',
             middleware: [auth()],
-            method: 'getS3PutObjectSignedUrl'
-        }
-    },
-
-    '/getuser': {
-        post: {
-            controller: 'UserController',
-            middleware: [auth()],
-            method: 'getUserController'
+            method: 'logOutUser'
         }
     }
 }

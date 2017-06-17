@@ -15,7 +15,7 @@ const Bar = () => (
             <Col xs={1} md={1}>
                 <Link to='/store'>
                     <div className="btn btn-transparent btn-xs">
-                        <img src="./images/kajkai.png" alt="Cinque Terre" width="37" height="37"/>
+                        <img src="./images/kajkai.svg" alt="Cinque Terre" width="37" height="37"/>
                     </div>
                 </Link>
             </Col>
@@ -34,14 +34,14 @@ const Bar = () => (
                 </div>
                 <Link to='/chat'>
                     <div className="btn btn-transparent btn-xs" style={{float:'right'}}>
-                        <img src="./images/comment.png" alt="Cinque Terre" width="22.5" height="27"/>
+                        <img src="./images/comment.svg" alt="Cinque Terre" width="22.5" height="27"/>
                     </div>
                 </Link>
             </Col>
             <Col xs={1} md={1}>
                 <div className="dropdown" style={{ width : 27}}>
                   <button className="btn btn-xs btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" >
-                      <img src="./images/settingSmall.png" alt="Cinque Terre" width="15" height="15"/>
+                      <img src="./images/settingSmall.svg" alt="Cinque Terre" width="15" height="15"/>
                   </button>
                   <ul className="dropdown-menu pull-right" aria-labelledby="dropdownMenu1">
                       <li><a href="#">report</a></li>
