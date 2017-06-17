@@ -7,7 +7,9 @@ const USER_GLOBAL_ID = '001'
 
 export const getUser = (id, next) => {
     if (id.startsWith(USER_GLOBAL_ID)) {
+
         id = getUserLocalId(id)
+        console.log(id);
         User.findById(id, function(err, user) {
             if (err) {
                 next(null)
@@ -200,11 +202,11 @@ export const updateVerifyUser = (id, next) => {
     getUser(id, (user) => {
         if (user) {
             user.verified = 1
-            user.save(() => {
-                next(true)
+            user.save((err, user) => {
+                next(err)
             })
         } else {
-            next(null)
+            next(true)
         }
     })
 }
@@ -219,13 +221,8 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
         if (!socialNetworkType) next(null)
     }
     if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) next(null)
-    console.log(email, userName, password, verified, yearOfBirth, socialNetworkType, socialNetworkId);
-    console.log(JSON.stringify({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
-                socialNetworkId: socialNetworkId}))
-    // const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
-    //             socialNetworkId: socialNetworkId})
-    const user = new User({email: email, userName: userName, password: password})//, verified: verified})
-    console.log(user, JSON.stringify(user));
+    const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
+                socialNetworkId: socialNetworkId})
     user.save(function (err) {
         if (err) {
             next(null)
