@@ -5,7 +5,7 @@ export const comfirmEmailVerification = () => {
 	return (req, res) => {
 		console.log(req.params.token)
 		var token = req.params.token
-		var redirectUrl = config.REDIRECTURL
+		var redirectUrl = config.getClientDomain()
 		if (!token) {
 			res.redirect(redirectUrl + '/login')
 		}

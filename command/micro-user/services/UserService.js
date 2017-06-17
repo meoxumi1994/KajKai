@@ -29,6 +29,16 @@ export const getUserLocalId = (id) => {
     return id.substr(3, id.length)
 }
 
+export const getUserTrivivalInfo = (user) => {
+    return {
+        username: user.userName,
+        imageUrl: user.avatarUrl,
+        address: user.address,
+        phone: user.phone
+    }
+
+}
+
 export const getUserBasicInfo = (user) => {
     return { username: user.userName, listUrls: [user.imageUrl],
         phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,

@@ -9,16 +9,16 @@ module.exports = {
 
 function sendVerifyEmail(email, token, next) {
 	var send = require('gmail-send')({
-	  	user: 'kajkaiverify@gmail.com',               // Your GMail account used to send emails 
-	  	pass: 'verifykajkai',             // Application-specific password 
-	  	to:   email,     
-	  	// from:   '"User" <user@gmail.com>'  // from: by default equals to user 
-	  	// replyTo:'user@gmail.com'           // replyTo: by default undefined 
+	  	user: 'kajkaiverify@gmail.com',               // Your GMail account used to send emails
+	  	pass: 'verifykajkai',             // Application-specific password
+	  	to:   email,
+	  	// from:   '"User" <user@gmail.com>'  // from: by default equals to user
+	  	// replyTo:'user@gmail.com'           // replyTo: by default undefined
 	  	subject: 'Finish your registration',
-	  	text:    'Please click on following link to finish you registration: \n' + 
-	  		config.getDomain() + '/emailverification/' 
+	  	text:    'Please click on following link to finish you registration: \n' +
+	  		config.REDIRECTURL + '/emailverification/' 
 	  		+ token
-	  	// html:    '<b>html text text</b>' 
+	  	// html:    '<b>html text text</b>'
 	});
 	console.log('hehe')
 	send({}, function(err, res){
@@ -27,6 +27,3 @@ function sendVerifyEmail(email, token, next) {
 		next()
 	})
 }
-
-
-

@@ -14,10 +14,10 @@ export const registerNewUser = () => {
                     } else {
                         createUser(body.email, body.username, body.password, 0, body.yearOfBirth, null, null, (user) => {
                             if (!user) {
-                                res.json({status: 'failed'})
+                                res.json({status: 'failed xxxxx'})
                             } else {
                                 sendVerifyEmail(body.email, getUserToken(user._id), () => {
-                                    res.json()
+                                    res.json({status: 'success'})
                                 })
                             }
                         })

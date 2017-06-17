@@ -1,4 +1,4 @@
-import { updateUserInfo, getUser, getUserBasicInfo} from '../services/UserService.js'
+import { updateUserInfo, getUser, getUserBasicInfo, getUserTrivivalInfo} from '../services/UserService.js'
 
 export const getUserController = () => {
     return (req, res) => {
@@ -7,9 +7,26 @@ export const getUserController = () => {
             const id = req.decoded._id
             getUser(id, (user) => {
                 if (user) {
-                    getUserInfo(user, (data) => {
+                    getUserBasicInfo(user, (data) => {
                         res.json(data)
                     })
+                } else {
+                    res.json({status: 'failed'})
+                }
+            })
+        } else {
+            res.json({status: 'failed'})
+        }
+    }
+}
+
+export const getUserTrivial = () => {
+    return (req, res) => {
+        if (req.decoded) {
+            const id = req.decoded._id
+            getUser(id, function (user) {
+                if (user) {
+                    res.json(getUserTrivivalInfo(user))
                 } else {
                     res.json({status: 'failed'})
                 }
