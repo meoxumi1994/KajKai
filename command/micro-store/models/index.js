@@ -20,3 +20,4 @@ export const StorePost = mongoose.model('StorePost', StorePostSchema)
 
 const StoreSchema = require('./Store')
 export const Store = mongoose.model('Store', StoreSchema)
+
