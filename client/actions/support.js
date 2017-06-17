@@ -29,8 +29,25 @@ export const flet = (url, need, get) => {
     return P
 }
 
-export const flem = (url, get) => {
+export const flem = (url, get, param, query) => {
     let myurl = config.getDomain() + url
+
+    if (param) {
+      param.map((pr) => {
+        myurl += '/' + pr
+      })
+    }
+
+    if (query) {
+      let ch = '?'
+      for (let qr in query) {
+        myurl += ch + qr + '=' + query[qr]
+        if (ch == '?') {
+          ch = '&'
+        }
+      }
+    }
+    
     console.log(myurl,get)
     const P = (config.ISTEST == 2)? getAPI(url,{}) : fetch( myurl , {
         method: 'GET',
