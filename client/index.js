@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import config from './config'
 
+import { socketIO } from './fakedata'
+
 import thunkMiddleware from 'redux-thunk'
 // AppContainer is a necessary wrapper component for HMR
 import { AppContainer } from 'react-hot-loader'
@@ -19,7 +21,11 @@ function execute(action, emit, next, dispatch) {
     if(action.type.substr(0,6) == 'client'){
         next(action)
     }else{
-        emit(action.type, {...action})
+        if(config.ISTEST == 2){
+            socketIO(action, dispatch)
+        }else{
+            emit(action.type, action.data)
+        }
     }
 }
 
@@ -34,7 +40,17 @@ const store = createStore(
     )
 )
 
+window.addEventListener('resize', () => {
+    store.dispatch({ type: 'SCREEN_RESIZE', width: window.innerWidth, height: window.innerHeight });
+});
+document.getElementsByTagName("BODY")[0].onscroll = () => {
+    store.dispatch({ type: 'ON_SCROLL_BODY',
+        scrollTop: document.getElementsByTagName("BODY")[0].scrollTop,
+        scrollLeft: document.getElementsByTagName("BODY")[0].scrollLeft, })
+}
+
 store.dispatch({ type: 'server/hello'})
+store.dispatch({ type: 'server/TestController'})
 
 ReactDOM.render(
     <AppContainer>

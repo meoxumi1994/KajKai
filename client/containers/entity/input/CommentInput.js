@@ -19,7 +19,15 @@ const mapStateToProps = (state, { id, groupcommentsId, margintopbot }) => {
 
 const mapDispatchToProps = (dispatch, { id, request }) => ({
     onHandleChangeContent: (e) => {
-        dispatch({ type: 'ENTITY_INPUT_COMMENTINPUT_CONTENT_HANDLE_CHANGE', id: id, content : e.target.value })
+        let newcontent = '';
+        let first = true;
+        e.target.value.split(':D').map((value) => {
+            if(!first)
+                newcontent = newcontent + '<img width="15" height="15" src="./images/notification.png"/>'
+            newcontent = newcontent + value
+            first = false;
+        })
+        dispatch({ type: 'ENTITY_INPUT_COMMENTINPUT_CONTENT_HANDLE_CHANGE', id: id, content : newcontent })
     },
     onHandleKeyPress: (e, content, storeId) => {
         if(e.charCode == 13 && !e.shiftKey){

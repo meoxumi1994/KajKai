@@ -12,7 +12,7 @@ const popoverSettingSmall = (
 const Bar = () => (
     <div>
         <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}>
-            <img src="./images/kajkai.png" alt="Cinque Terre" width="37" height="37"/>
+            <img src="./images/kajkai.svg" alt="Cinque Terre" width="37" height="37"/>
         </div>
         <div>
             Store A
@@ -23,7 +23,7 @@ const Bar = () => (
             {" "}<small className="text-muted">500m</small>
         </div>
         <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={popoverSettingSmall}>
-            <img src="./images/settingSmall.png" alt="Cinque Terre" width="15" height="15" style={{ float: 'right'}}/>
+            <img src="./images/settingSmall.svg" alt="Cinque Terre" width="15" height="15" style={{ float: 'right'}}/>
         </OverlayTrigger>
     </div>
 )
