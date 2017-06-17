@@ -1,7 +1,7 @@
 import auth from './middlewares/auth'
 
 export default {
-  
+
     '/emailverification/:token': {
         get: {
             controller: 'RegisterController',
@@ -32,7 +32,7 @@ export default {
             method: 'updateUserPassword'
         }
     },
-    '/phone': {
+    '/user/phone': {
         put: {
             controller: 'UserController',
             middleware: [auth()],
