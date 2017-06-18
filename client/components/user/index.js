@@ -1,16 +1,15 @@
 import React from 'react';
 import { Redirect  } from 'react-router-dom';
 
-import Top from '~/containers/store/Top'
-import About from '~/containers/store/About'
-import Page from '~/containers/store/Page'
-import Photo from '~/containers/store/Photo'
-import Video from '~/containers/store/Video'
-import Setting from '~/containers/store/Setting'
-import Post from '~/containers/store/Post'
-import Left from '~/containers/store/Left'
-import Contact from '~/containers/store/Contact'
-import Activity from '~/containers/store/Activity'
+import Top from '~/containers/user/Top'
+import Interest from '~/containers/user/Interest'
+import About from '~/containers/user/About'
+import Setting from '~/containers/user/Setting'
+import Store from '~/containers/user/Store'
+import Post from '~/containers/user/Post'
+import Left from '~/containers/user/Left'
+import Contact from '~/containers/user/Contact'
+import Activity from '~/containers/user/Activity'
 
 class Store extends React.Component {
     constructor(props){
@@ -26,13 +25,11 @@ class Store extends React.Component {
         const Middle = () => {
             switch (location.pathname.split('/')[2]) {
                 case undefined:
-                    return <Page/>
+                    return <Interest/>
                 case 'about':
                     return <About/>
-                case 'photo':
-                    return <Photo/>
-                case 'video':
-                    return <Video/>
+                case 'store':
+                    return <Store/>
                 case 'post':
                     return <Post/>
                 case 'contact':
