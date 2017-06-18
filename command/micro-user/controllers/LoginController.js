@@ -99,7 +99,7 @@ export const loginGoogle = () => {
                             res.json({user: data})
                         })
                     } else {
-                        createUser(body.email, body.name, '1234', 1, null, enums.GOOGLE, null, function (user) {
+                        createUser(body.email, body.name, '1234', 1, null, null, null, function (user) {
                             if (!user) {
                                 res.json({error: 'error'})
                             } else {

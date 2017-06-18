@@ -1,9 +1,9 @@
 import mongoose from '../datasource'
 import {SocialType, Language} from '../enum'
 import _ from 'lodash'
-import AddressSchema from './Address'
+import {AddressSchema} from './Address'
 
-const UserSchema = new mongoose.Schema({
+export const UserSchema = new mongoose.Schema({
     userName: {type: String},
     email: {type: String},
     password: {type: String},
@@ -25,5 +25,3 @@ const UserSchema = new mongoose.Schema({
     yearOfBirthLastUpdateAt: {type: Date},
     addressLastUpdateAt: {type: Date},
 });
-
-export default UserSchema

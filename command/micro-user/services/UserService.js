@@ -7,9 +7,7 @@ const USER_GLOBAL_ID = '001'
 
 export const getUser = (id, next) => {
     if (id.startsWith(USER_GLOBAL_ID)) {
-
         id = getUserLocalId(id)
-        console.log(id);
         User.findById(id, function(err, user) {
             if (err) {
                 next(null)
@@ -202,11 +200,11 @@ export const updateVerifyUser = (id, next) => {
     getUser(id, (user) => {
         if (user) {
             user.verified = 1
-            user.save((err, user) => {
-                next(err)
+            user.save(() => {
+                next(true)
             })
         } else {
-            next(true)
+            next(null)
         }
     })
 }
@@ -223,10 +221,8 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
     if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) next(null)
     const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
                 socialNetworkId: socialNetworkId})
-    console.log(JSON.stringify(user));
     user.save(function (err) {
         if (err) {
-          console.log('error');
             next(null)
         } else {
             next(user)
