@@ -54,7 +54,7 @@ export const getUserBasicInfo = (user) => {
         yearOfBirth: user.yearOfBirth,
         lastUpdate: {
             username: user.nameLastUpdatedAt,
-            phone: null,
+            phone: user.phoneLastUpdateAt,
             address: user.addressLastUpdateAt,
         },
         // blacklist: [{
@@ -62,13 +62,6 @@ export const getUserBasicInfo = (user) => {
         //     type: 'userid|storeid|mesid',
         //     name: ,
         // }],
-        //
-        //  listUrls: [user.imageUrl],
-        //  , yearOfBirth: user.yearOfBirth,
-        // , passwordLastUpdatedAt: user.passwordLastUpdatedAt,
-        // usernameLastUpdatedAt: user.nameLastUpdatedAt,
-        // yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
-        // addressLastUpdateAt: user.addressLastUpdateAt,
 
         id: getUserGlobalId(user._id) }
 }
@@ -162,6 +155,7 @@ export const updateUserPhone = (id, phone, next) => {
         if (user) {
             let oldPhone = user.phone
             user.phone = phone
+            user.phoneLastUpdateAt = new Date()
             user.save(function(err){
                 if (err) {
                     next('failed')

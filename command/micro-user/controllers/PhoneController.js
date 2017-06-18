@@ -31,7 +31,7 @@ export const verifyPhone = () => (req, res) => {
                   if(mstatus == 'success') {
                     if (oldPhone) {
                       mNexmoVerifyLogout(oldPhone)
-                    }                    
+                    }
                     res.send({status})
                   } else {
                     res.send({
