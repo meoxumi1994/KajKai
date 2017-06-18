@@ -12,6 +12,7 @@ export const registerNewUser = () => {
                     if (user) {
                         res.json({status: 'used'})
                     } else {
+                      console.log(body.email, body.username, body.password);
                         createUser(body.email, body.username, body.password, 0, null, null, null, (user) => {
                             if (!user) {
                                 res.json({status: 'failed'})
