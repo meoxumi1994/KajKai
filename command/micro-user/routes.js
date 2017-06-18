@@ -35,9 +35,9 @@ export default {
     },
     '/user/phone': {
         put: {
-            controller: 'UserController',
+            controller: 'PhoneController',
             middleware: [auth()],
-            method: 'changeUserPhone'
+            method: 'updateUserPhoneController'
         }
     },
     '/phoneverification': {

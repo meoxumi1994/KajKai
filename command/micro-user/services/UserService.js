@@ -49,26 +49,19 @@ export const getUserBasicInfo = (user) => {
         coverUrl: user.coverUrl,
         address: user.address,
         phone: user.phone,
-        language: user.language == enum.VIETNAM ? 'vi' : 'en',
+        language: user.language == enums.VIETNAM ? 'vi' : 'en',
         sex: user.sex,
         yearOfBirth: user.yearOfBirth,
         lastUpdate: {
             username: user.nameLastUpdatedAt,
-            phone: ,
+            phone: user.phoneLastUpdateAt,
             address: user.addressLastUpdateAt,
         },
-        blacklist: [{
-            id:,
-            type: 'userid|storeid|mesid',
-            name: ,
-        }],
-
-         listUrls: [user.imageUrl],
-         , yearOfBirth: user.yearOfBirth,
-        , passwordLastUpdatedAt: user.passwordLastUpdatedAt,
-        usernameLastUpdatedAt: user.nameLastUpdatedAt,
-        yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
-        addressLastUpdateAt: user.addressLastUpdateAt,
+        // blacklist: [{
+        //     id:,
+        //     type: 'userid|storeid|mesid',
+        //     name: ,
+        // }],
 
         id: getUserGlobalId(user._id) }
 }
@@ -160,12 +153,14 @@ export const getUserFromToken = (token, next) => {
 export const updateUserPhone = (id, phone, next) => {
     getUser(id, function(user){
         if (user) {
+            let oldPhone = user.phone
             user.phone = phone
+            user.phoneLastUpdateAt = new Date()
             user.save(function(err){
                 if (err) {
                     next('failed')
                 } else {
-                    next('success')
+                    next('success', oldPhone)
                 }
             })
         } else {
