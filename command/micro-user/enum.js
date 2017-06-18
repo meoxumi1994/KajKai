@@ -1,4 +1,5 @@
 export const SocialType = {
+    null: null,
     GOOGLE: 'Google',
     FACEBOOK: 'Facebook',
 };
