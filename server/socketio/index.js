@@ -1,54 +1,21 @@
 import socketIo from 'socket.io'
 import allEvents from './events'
-import { verifyToken, getUser } from '../services/UserService'
-import { getTokenSocketCookie } from '../utils/Utils'
-import { addUserOnline, removeUserOnline } from '../services/OnlineService'
-import { getUserRoomId } from '../services/SocketService'
-import { passChatList } from '../services/MessageService'
-
-console.log('fuck init')
-
-getUser('59302b189afeed1a7f37cac1', function (rep) {
-    console.log('fuck ' + rep)
-})
+import { validateTokenDemo } from '../services/DemoService'
+import { verifyToken } from '../services/UserService'
+import {getTokenSocketCookie} from '../utils/Utils'
+import {redisClient} from '../datasource'
 
 const init = (server) => {
     const sio = socketIo(server)
     // sio.use(cookieParser())
     sio.on('connection', (socket) => {
         console.log('a user connected')
-        const token = getTokenSocketCookie(socket.handshake.headers.cookie)
-        var userID = null
-        if (token) {
-            var decoded = verifyToken(token)
-            if (decoded)
-                userID = decoded._id
-        }
-        if (userID) {
-            // addUserOnline(userID, function (reply) {
-            //     if (reply) {
-            //         socket.join(getUserRoomId(userID))
-            //         // sock chat
-            //         passChatList(userID, socket, sio)
-            //     }
-            // })
-            socket.join(getUserRoomId(userID))
-            passChatList(userID, socket, sio)
-        }
-
         socket.on('disconnect', () => {
             console.log('a user disconnected')
-            if (userID) {
-                // removeUserOnline(userID, function (reply) {
-                //     if (reply) {
-                //
-                //     }
-                // })
-                socket.leave(getUserRoomId(userID))
-            }
         })
-
         // load all events
+
+
         for(let e in allEvents){
             let handler = allEvents[e]
             // console.log(e)
@@ -78,12 +45,7 @@ const init = (server) => {
 
                 //     })
                 // }
-                // if (handler.controller !== 'ChatController' || userID !== null) {
-                //     method(action, socket, sio)
-                // }
-                if (handler.controller === 'ChatController') {
-                    method(action, socket, sio)
-                }
+                method(action, socket, sio)
             })
 
         }

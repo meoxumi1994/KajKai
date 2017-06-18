@@ -42,14 +42,34 @@ export const getUserTrivivalInfo = (user) => {
 }
 
 export const getUserBasicInfo = (user) => {
-    return { username: user.userName, listUrls: [user.imageUrl],
-        phone: user.phone, address: user.address, yearOfBirth: user.yearOfBirth,
-        language: user.language, passwordLastUpdatedAt: user.passwordLastUpdatedAt,
+    return {
+        username: user.userName,
+        email: user.email,
+        avatarUrl: user.avatarUrl,
+        coverUrl: user.coverUrl,
+        address: user.address,
+        phone: user.phone,
+        language: user.language == enum.VIETNAM ? 'vi' : 'en',
+        sex: user.sex,
+        yearOfBirth: user.yearOfBirth,
+        lastUpdate: {
+            username: user.nameLastUpdatedAt,
+            phone: ,
+            address: user.addressLastUpdateAt,
+        },
+        blacklist: [{
+            id:,
+            type: 'userid|storeid|mesid',
+            name: ,
+        }],
+
+         listUrls: [user.imageUrl],
+         , yearOfBirth: user.yearOfBirth,
+        , passwordLastUpdatedAt: user.passwordLastUpdatedAt,
         usernameLastUpdatedAt: user.nameLastUpdatedAt,
         yearOfBirthLastUpdateAt: user.yearOfBirthLastUpdateAt,
         addressLastUpdateAt: user.addressLastUpdateAt,
-        avatarUrl: user.avatarUrl,
-        coverUrl: user.coverUrl,
+
         id: getUserGlobalId(user._id) }
 }
 
