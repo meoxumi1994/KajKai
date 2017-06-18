@@ -14,4 +14,4 @@ const Head = () => {
 
 export default Head
 
-// <img style={{marginLeft: 50, width: 27, height: 27}} src="./images/newMessage.png" onClick={() => createNewChat()}/>
+// <img style={{marginLeft: 50, width: 27, height: 27}} src="/images/newMessage.png" onClick={() => createNewChat()}/>

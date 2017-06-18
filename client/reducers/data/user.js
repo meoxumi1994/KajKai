@@ -1,14 +1,14 @@
 const user = ( state = {
-    avatarUrl: './images/avatardefaultIcon.png',
-    coverUrl: './images/cover.png',
+    avatarUrl: '/images/avatardefaultIcon.png',
+    coverUrl: '/images/cover.png',
     language: 'ENGLISH',
     storeList: [],
 }, action) => {
     switch (action.type) {
         case 'LOGOUT':
             return {
-                avatarUrl: './images/avatardefaultIcon.png',
-                coverUrl: './images/cover.png',
+                avatarUrl: '/images/avatardefaultIcon.png',
+                coverUrl: '/images/cover.png',
                 language: state.language,
                 storeList: [],
             }

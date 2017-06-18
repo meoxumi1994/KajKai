@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch, { id, request }) => ({
         let first = true;
         e.target.value.split(':D').map((value) => {
             if(!first)
-                newcontent = newcontent + '<img width="15" height="15" src="./images/notification.png"/>'
+                newcontent = newcontent + '<img width="15" height="15" src="/images/notification.png"/>'
             newcontent = newcontent + value
             first = false;
         })

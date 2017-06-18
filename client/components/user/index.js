@@ -11,7 +11,7 @@ import Left from '~/containers/user/Left'
 import Contact from '~/containers/user/Contact'
 import Activity from '~/containers/user/Activity'
 
-class Store extends React.Component {
+class User extends React.Component {
     constructor(props){
         super(props)
     }
@@ -21,9 +21,8 @@ class Store extends React.Component {
             return <div></div>
         if(!isusername)
             return <Redirect to='/register'/>
-        console.log(location.pathname.split('/')[2])
         const Middle = () => {
-            switch (location.pathname.split('/')[2]) {
+            switch (location.pathname.split('/')[3]) {
                 case undefined:
                     return <Interest/>
                 case 'about':
@@ -61,9 +60,9 @@ class Store extends React.Component {
         )
     }
     componentDidMount(){
-        const { onGetStore } = this.props
-        onGetStore()
+        const { onGetUser } = this.props
+        onGetUser()
     }
 }
 
-export default Store
+export default User

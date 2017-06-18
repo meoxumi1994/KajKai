@@ -5,7 +5,7 @@ const comment = (state = { default: {
     likes: ['meoxumi','meomun'],
     numreplys: 3,
     replys: ['meoxumi','meomun','meobeo'],
-    avatar: './images/avatar.png',
+    avatar: '/images/avatar.png',
     name: 'pornnappan pornpenpipat',
     time: '11 mins',
 }}, action) => {

@@ -21,7 +21,7 @@ const Top = (props) => {
                     borderColor: 'transparent',
                     backgroundColor: 'transparent',
                 }}
-                src= "./images/arrowup.svg"/>
+                src= "/images/arrowup.svg"/>
             </Link>
         )
     }

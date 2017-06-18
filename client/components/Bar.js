@@ -14,8 +14,8 @@ const HandlerUser = ({ LOG_IN,
                         style={{ paddingLeft: 3, paddingRight: 3,
                             borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
                         <RiseUp
-                            src="./images/message.svg"
-                            srcHas="./images/message.svg"
+                            src="/images/message.svg"
+                            srcHas="/images/message.svg"
                             width="29" height="29" number="2"/>
                     </div>
                     <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{backgroundColor: '#e9ebee', borderRadius: 15, borderWidth: 1, borderColor: 'black'}}>
@@ -25,8 +25,8 @@ const HandlerUser = ({ LOG_IN,
 
                 <div style={{marginLeft: 3, float: 'left'}}>
                     <RiseUp
-                        src="./images/notification.svg"
-                        srcHas="./images/notification.svg"
+                        src="/images/notification.svg"
+                        srcHas="/images/notification.svg"
                         width="29" height="29" number="12"/>
                 </div>
 
@@ -34,7 +34,7 @@ const HandlerUser = ({ LOG_IN,
                   <div className="btn btn-default btn-xs  dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
                       style={{ paddingLeft: 3, paddingRight: 3,
                           borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
-                      <img src="./images/setting.svg" alt="Cinque Terre" width="24" height="27"/>
+                      <img src="/images/setting.svg" alt="Cinque Terre" width="24" height="27"/>
                 </div>
 
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu1"
@@ -59,7 +59,7 @@ const HandlerUser = ({ LOG_IN,
         return (
             <div style={{ paddingTop: 4, paddingBottom: 3, paddingLeft: 10, paddingRight: 10 }}>
                 <div className="clocker" >
-                    <img src="./images/loader.svg" alt="Cinque Terre" width="22px" height="22px"/>
+                    <img src="/images/loader.svg" alt="Cinque Terre" width="22px" height="22px"/>
                 </div>
             </div>
         )
@@ -84,12 +84,12 @@ const BarScreen = (props) => {
                     <div style={{minWidth: 100 }}>
                         <div className="btn btn-transparent btn-xs">
                             <Link to="/">
-                                <img src="./images/kajkai.svg" alt="Cinque Terre" width="27" height="27"/>
+                                <img src="/images/kajkai.svg" alt="Cinque Terre" width="27" height="27"/>
                             </Link>
                         </div>
                         <div className="btn btn-transparent btn-xs">
                             <Link to="/map">
-                                <img src="./images/map.svg" alt="Cinque Terre" width="27" height="27"/>
+                                <img src="/images/map.svg" alt="Cinque Terre" width="27" height="27"/>
                             </Link>
                         </div>
                     </div>

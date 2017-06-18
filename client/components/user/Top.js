@@ -7,12 +7,12 @@ const Top = (props) => {
     const { id, coverUrl, avatarUrl, name, onUploadImage, location} = props
     const ButtonLine = ({ title, last, link}) => {
         return (
-            <Link to={"/"+id + link}>
+            <Link to={"/user/"+id+link}>
                 <button type="button" className="btn btn-default"
                     style={{ height: 46, width: 78, borderRadius: 0, borderRightWidth: last, fontSize: 16 }}>
                     {title}
                 </button>
-                {location.pathname.split('/')[2] == link.split('/')[1] &&
+                {location.pathname.split('/')[3] == link.split('/')[1] &&
                     <img style={{
                         position: 'absolute',
                         marginTop: 38.5,
@@ -22,7 +22,7 @@ const Top = (props) => {
                         borderColor: 'transparent',
                         backgroundColor: 'transparent',
                     }}
-                    src= "./images/arrowup.svg"/>
+                    src= "/images/arrowup.svg"/>
                 }
             </Link>
         )
@@ -71,11 +71,10 @@ const Top = (props) => {
                     marginTop: -2,
                     marginLeft: 183,
                 }}>
-                    <ButtonLine title="Page" last="0" link=""/>
+                    <ButtonLine title="Interest" last="0" link=""/>
                     <ButtonLine title="About" last="0" link="/about"/>
                     <ButtonLine title="Post" last="0" link="/post"/>
-                    <ButtonLine title="Photos" last="0" link="/photo"/>
-                    <ButtonLine title="Videos" last="0" link="/video"/>
+                    <ButtonLine title="Store" last="0" link="/store"/>
                     <ButtonLine title="Contact" last="0" link="/contact"/>
                     <ButtonLine title="Activity" last="0" link="/activity"/>
                     <ButtonLine title="Setting" last="1px" link="/setting"/>

@@ -7,7 +7,7 @@ const Small = (props) => (
         <div className="btn btn-transparent btn-xs" style={{ float: 'left'}}
             onClick = { ()=> props.changeScreenLeft() }
             >
-            <img src="./images/avatastore.png" style={{ width: 70, height: 80 }}/>
+            <img src="/images/avatastore.png" style={{ width: 70, height: 80 }}/>
         </div>
         <div style={{ marginLeft: 50}}>
             <div>StoreA 169 cầu giấy <small className="text-muted" > 5 mins ago</small></div>
