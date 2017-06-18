@@ -8,10 +8,6 @@ GET /user {
     language: 'vi|en',
     sex: 'MALE|FEMALE',
     yearOfBirth: '6462636',
-    certificate: {
-        content: ,
-        imageUrl: ,
-    },
     lastUpdate: {
         username: ,
         phone: ,
@@ -30,23 +26,9 @@ GET /user/privacy {
 }
 
 POST /user {
-    username: 'charity',
-    avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/abcxyz.png',
-    coverUrl: 'https://d1z4p30mgj29.cloudfront.net/xyzabc.png',
-    address: undefined,
-    phone: undefined,
-    language: 'vi|en',
-    sex: 'MALE|FEMALE',
-    yearOfBirth: '6462636',
-    lastUpdate: {
-        username: ,
-        phone: ,
-        address: ,
-    },
-    blacklist: [{
-        id:
-        type: 'userid|storeid|mesid'
-    }],
+    username: ,
+    email: 'prominh@gmail.com',
+    password:
 },{
     status: 'success|used|error'
 }
@@ -75,7 +57,7 @@ PUT /password {
     status: 'failed|success',
 }
 
-PUT /phone {
+PUT /user/phone {
     code: '1234', // code == undefined is need get verifi-code
     phone: '0987654321'
 },{
@@ -279,6 +261,139 @@ GET /store/sellpost/:storeid?offset=-1 { // length = 2
       ]
     },
   ],
+}
+
+POST /postrows {
+    content: ,
+    numline: , // numline of row <= 30
+    images: [
+    // list of imageUrl
+    ], // textimage|imagetext|groupimage
+    titles_order: [],
+    titles: [ // for product|listproduct otherwise  null
+
+    ],
+    products: [ // for product|listproduct otherwise  null
+        {
+          id: 'product002',
+          content: ,
+          imageUrl: , // 20x20
+          list: [],
+          totalnum: // số lần được gọi trong leadercomment
+        },
+    ],
+    type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+}
+
+PUT /postrows {
+    content: ,
+    numline: , // numline of row <= 30
+    images: [
+    // list of imageUrl
+    ], // textimage|imagetext|groupimage
+    titles_order: [],
+    titles: [ // for product|listproduct otherwise  null
+
+    ],
+    products: [ // for product|listproduct otherwise  null
+        {
+          id: 'product002',
+          content: ,
+          imageUrl: , // 20x20
+          list: [],
+          totalnum: // số lần được gọi trong leadercomment
+        },
+    ],
+    type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+}
+
+PUT /sellpost {
+    category: ,
+    title: ,
+    description: ,
+    time: , // last update
+    status: 'notyet|open|sleep',
+    ship: '', // store viết vào có thể un
+    postrows_order: [],
+
+}
+
+POST /sellpost {
+  storeid: ,
+  category: ,
+  title: ,
+  description: ,
+  time: , // last update
+  status: 'notyet|open|sleep',
+  ship: '', // store viết vào có thể un
+  postrows_order: [],
+  postrows: [ // tables lấy những thằng đầu có tổng hàng <= 30, nếu quá nửa thằng cuối thì trả về cả thằng cuối
+    {
+        id: , //
+        content: ,
+        numline: , // numline of row <= 30
+        images: [
+        // list of imageUrl
+        ], // textimage|imagetext|groupimage
+        titles_order: [],
+        titles: [ // for product|listproduct otherwise  null
+
+        ],
+        products: [ // for product|listproduct otherwise  null
+            {
+              id: 'product002',
+              content: ,
+              imageUrl: , // 20x20
+              list: [],
+              totalnum: // số lần được gọi trong leadercomment
+            },
+        ],
+        type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+    },
+  ],
+  numlike: '23',
+  likes: [
+    {
+      userid: ,
+      username: ,
+    },
+  ], // tối đa 5 thằng bạn
+  numfollow: '43',
+  follows: [
+    {
+      userid: ,
+      username: ,
+    },
+  ], // tối đa 5 thằng bạn
+  numcomment: ,
+  numshare: ,
+  leadercomments: [ // tối đa 2 thằng trong 1 giờ
+    {
+      id: '7586449578',
+      sellpostid: ,
+      order: [
+          {
+            id: 'product002',
+            content: ,
+            imageUrl: ,
+            list: [],
+            num: 2
+          },
+      ],
+      comments: [ // thằng đầu tiền là comment của leader
+        {
+          id: ,
+          ownerid: ,
+          leadercommentid: ,//
+          avatarUrl: // small size 20x20
+          name: ,
+          content: ,
+          time: ,
+          numlike: ,
+        }
+      ]
+    }
+  ]
 }
 
 
