@@ -69,10 +69,11 @@ const Top = (props) => {
                     marginTop: -2,
                     marginLeft: 183,
                 }}>
-                    <ButtonLine title="Interest" last="0" link="/"/>
+                    <ButtonLine title="Page" last="0" link="/"/>
                     <ButtonLine title="About" last="0" link="about"/>
                     <ButtonLine title="Post" last="0" link="post"/>
-                    <ButtonLine title="Store" last="0" link="store"/>
+                    <ButtonLine title="Photos" last="0" link="post"/>
+                    <ButtonLine title="Videos" last="0" link="post"/>
                     <ButtonLine title="Contact" last="0" link="contact"/>
                     <ButtonLine title="Activity" last="0" link="activity"/>
                     <ButtonLine title="Setting" last="1px" link="setting"/>

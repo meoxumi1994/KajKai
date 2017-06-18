@@ -1,6 +1,18 @@
 import React from 'react'
 
-const Page = ({}) => {
+const Page = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeedSellPost, onNeedMinorPost}) => {
+    let sellpost_marginTop = 0
+    let minorpost_marginTop = 0
+    if(this.sellpost){
+        sellpost_marginTop = height - this.sellpost.getBoundingClientRect().bottom > 0
+        if(this.sellpost.getBoundingClientRect().bottom - height < 780)
+            onNeedSellPost()
+    }
+    if(this.minorpost){
+        minorpost_marginTop = height - this.minorpost.getBoundingClientRect().bottom > 0
+        if(this.minorpost.getBoundingClientRect().bottom - height < 780)
+            onNeedMinorPost()
+    }
     return (
         <div className="container-fluid">
             <div className="row">

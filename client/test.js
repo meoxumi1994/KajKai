@@ -40,7 +40,7 @@ let store = [
     }
 ]
 
-app.get('/who',(req,res) => {
+app.get('/user',(req,res) => {
     console.log('/who')
     res.send({
         id: '5933bda8d5e8f76039403e06',
