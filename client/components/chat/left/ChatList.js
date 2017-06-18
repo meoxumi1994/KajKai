@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Row, FormGroup, InputGroup, FormControl } from 'react-bootstrap'
-import Avatar from 'react-avatar';
+// import Avatar from 'react-avatar';
 
 class ChatList extends React.Component {
 
@@ -48,10 +48,10 @@ class ChatList extends React.Component {
                       style={{ borderRadius:15, borderWidth: 1, borderColor: '#7f8082', width:400, height: 70, backgroundColor: bgnColor}}>
                           <div className="btn btn-transparent btn-xs" style={{ float: 'left', marginTop: 4, marginRight: 10, marginLeft: 20}}>
                               {
-                                conversaters.length == 1?
-                                <Avatar round='true' size="55" src={usersMap[conversaters[0]].avatarUrl} key={conversaters[0]}/>
-                                :
-                                <Avatar round='true' size="55" value="G" key={JSON.stringify(conversaters)}/>
+                                // conversaters.length == 1?
+                                // <Avatar round='true' size="55" src={usersMap[conversaters[0]].avatarUrl} key={conversaters[0]}/>
+                                // :
+                                // <Avatar round='true' size="55" value="G" key={JSON.stringify(conversaters)}/>
                               }
                           </div>
                           <div style={{height: 70, marginTop: 8}}>

@@ -346,6 +346,18 @@ const api = {
             }
         }
     },
+    getstore: (body) => {
+        return {
+            status: 'success',
+            store: store.filter(item => item.id == body.id)[0],
+        }
+    },
+    getuser: (body) => {
+        return{
+            status: 'success',
+            user: user.filter(item => item.id == body.id)[0],
+        }
+    },
     getstoresellposts: (body) => {
         const list_sellposts = sellpost.filter(item => item.storeid == body.storeid)
         const offset = (body.offset == -1)? list_sellposts.length : body.offset

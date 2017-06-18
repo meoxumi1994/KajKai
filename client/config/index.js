@@ -1,5 +1,5 @@
 const config = {
-    ISTEST : 2,
+    ISTEST : 0,
     PROTOCOL: ['http', 'http','http'],
     IP: ['localhost', '13.228.23.106','localhost'], // 13.228.23.106 10.20.16.137 192.168.43.179
     PORT: 8080,

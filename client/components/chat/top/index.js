@@ -1,7 +1,7 @@
 import React from 'react'
 import SettingContainer from '~/containers/chat/top/SettingContainer'
 import { Link } from 'react-router-dom'
-import Avatar from 'react-avatar'
+// import Avatar from 'react-avatar'
 
 const ChatTop = ({usersMap, usersKey, styles, user, close, mesId, setMultiChat, currentChat}) => {
   const conversaters = []
@@ -10,8 +10,8 @@ const ChatTop = ({usersMap, usersKey, styles, user, close, mesId, setMultiChat, 
   return (
     <div style={currentChat == mesId? styles.chatHeader: styles.chatHeaderGrey} className="input-group">
       {
-        conversaters.map(uKey =>
-          <Avatar style={styles.topAvatar} round='true' size='55' src={usersMap[uKey].avatarUrl} key={uKey}/>
+        conversaters.map(uKey => {}
+        //   <Avatar style={styles.topAvatar} round='true' size='55' src={usersMap[uKey].avatarUrl} key={uKey}/>
         )
       }
       {

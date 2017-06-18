@@ -4,12 +4,7 @@ import { flem } from '../support'
 
 export const onWho = () => dispatch => {
     dispatch(authAction('WHO_ING'))
-    flem('/who', {
-        username: undefined,
-        imageUrl: undefined,
-        address: undefined,
-        phone: undefined,
-    })
+    flem('/who')
     .then((response) => {
         if(response.username){
             dispatch(authData('WHO_SUCCESS',response))

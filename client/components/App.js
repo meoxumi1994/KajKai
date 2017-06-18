@@ -9,9 +9,8 @@ import loadUserLoginRegister from 'bundle-loader?lazy!../containers/user-login-r
 import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
 import loadChat from 'bundle-loader?lazy!../containers/chat'
-import Target from '~/containers/target'
+import Store from '~/containers/store'
 import ContactHistory from '~/containers/contacthistory'
-// import loadTarget from 'bundle-loader?lazy!../containers/target'
 import ChatCenterContainer from '~/containers/chat/center'
 import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 
@@ -126,7 +125,7 @@ class App extends React.Component {
                                 </div>
                             </div>
                         :   <div>
-                                <Route path="*" component={Target}/>
+                                <Route path="*" component={Store}/>
                             </div>
                         }
                     </div>

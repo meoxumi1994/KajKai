@@ -7,6 +7,7 @@ import target from './target'
 import entity from './entity'
 import chat from './chat'
 import app from './app'
+import store from './store'
 
 
 const inst = combineReducers({
@@ -14,6 +15,7 @@ const inst = combineReducers({
     profile,
     registerstore,
     target,
+    store,
     entity,
     chat,
     app,
