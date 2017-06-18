@@ -10,7 +10,7 @@ const Setting = ({changeGroupName, styles}) => {
           </Button>
       </Popover>}>
 
-      <img style={styles.headerIcon} src="./images/whiteSetting.png"/>
+      <img style={styles.headerIcon} src="/images/whiteSetting.png"/>
     </OverlayTrigger>
   )
 }

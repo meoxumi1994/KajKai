@@ -14,7 +14,7 @@ const Product = () => (
         </Col>
         <Col xs={1} md={1}>
             <div className="btn btn-transparent btn-xs">
-                <img src="./images/minus.svg" alt="Cinque Terre" width="16" height="16"/>
+                <img src="/images/minus.svg" alt="Cinque Terre" width="16" height="16"/>
             </div>
         </Col>
         <Col xs={1} md={1}>
@@ -25,7 +25,7 @@ const Product = () => (
 const Comment = () => (
     <Row>
         <Col xs={1} md={1}>
-            <img src="./images/avatar.png" alt="Cinque Terre" width="37" height="37"/>
+            <img src="/images/avatar.png" alt="Cinque Terre" width="37" height="37"/>
         </Col>
         <Col xs={11} md={11}>
             <Product/>

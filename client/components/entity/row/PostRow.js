@@ -25,7 +25,7 @@ class PostRow extends React.Component {
                 case 'imagetext':
                     return(
                         <div style={{ minHeight: 250 }}>
-                            <img src='./images/avatardefault.png' style={{ float: 'right', width: 250, height: 250 }}/>
+                            <img src='/images/avatardefault.png' style={{ float: 'right', width: 250, height: 250 }}/>
                             <div style={{ marginRight: 250, padding: '5px 8px 0px 8px'}}>
                                 <BasicInput id={id} minRows={12} onedit={onedit}/>
                             </div>
@@ -34,7 +34,7 @@ class PostRow extends React.Component {
                 case 'textimage':
                     return(
                         <div style={{ minHeight: 250 }}>
-                            <img src='./images/avatardefault.png' style={{ float: 'right', width: 250, height: 250 }}/>
+                            <img src='/images/avatardefault.png' style={{ float: 'right', width: 250, height: 250 }}/>
                             <div style={{ marginRight: 250, padding: '5px 8px 0px 8px'}}>
                                 <BasicInput id={id} minRows={12} onedit={onedit}/>
                             </div>
@@ -43,9 +43,9 @@ class PostRow extends React.Component {
                 case 'groupimages':
                     return(
                         <div style={{ width: 515 }}>
-                            <img src='./images/default.png'
+                            <img src='/images/default.png'
                             style={{ position: 'relative', padding: '5px 0px 5px 5px', width: 250, height: 250, display: 'inline' }}/>
-                            <img src='./images/default.png'
+                            <img src='/images/default.png'
                             style={{ position: 'absolute', padding: '5px 0px 5px 5px', width: 250, height: 250 }}/>
                         </div>
                     )

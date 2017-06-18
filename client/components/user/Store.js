@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Videos = ({}) => {
+const Store = ({}) => {
     return (
         <div>
-            Video
+            Store
         </div>
     )
 }
 
-export default Videos
+export default Store
