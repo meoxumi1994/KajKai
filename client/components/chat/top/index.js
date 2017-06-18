@@ -10,8 +10,8 @@ const ChatTop = ({usersMap, usersKey, styles, user, close, mesId, setMultiChat, 
   return (
     <div style={currentChat == mesId? styles.chatHeader: styles.chatHeaderGrey} className="input-group">
       {
-        conversaters.map(uKey => {}
-        //   <Avatar style={styles.topAvatar} round='true' size='55' src={usersMap[uKey].avatarUrl} key={uKey}/>
+        conversaters.map(uKey =>
+          <img src={usersMap[uKey].avatarUrl} key={uKey} width="35" height="35"/>
         )
       }
       {

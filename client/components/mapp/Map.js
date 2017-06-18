@@ -1,43 +1,81 @@
 import React from 'react';
-import { withGoogleMap,GoogleMap } from "react-google-maps";
+import { withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import List from './List';
 import StoreInMap from './StoreInMap';
+import RiseUp from '~/components/entity/draw/RiseUp'
 
 const GettingStartedGoogleMap = withGoogleMap(props => (
     <GoogleMap
-        defaultZoom={14}
-        defaultCenter={{ lat: 21.0135539, lng: 105.5258113 }}>
+        ref={props.onMapLoaded}
+        defaultZoom={props.defaultZoom}
+        defaultCenter={props.defaultCenter}
+        onIdle={props.onMapIdle}
+        >
+        {props.markers.map((marker, index) => (
+            <Marker
+               {...marker}
+             >
+               <InfoWindow position={marker.position} key={index}>
+                   <div className="container-fluid" style={{width: 170, height: 10}}>
+                       <div className="row">
+                           <div className="col col-xs-4">
+                             <RiseUp
+                                 src={marker.avatarUrl}
+                                 srcHas={marker.avatarUrl}
+                                 width="27" height="27" number="12"/>
+                           </div>
+                           <div className="col col-xs-8">
+                             <p>{marker.street}</p>
+                             <small>{marker.lastUpdated} minutes ago</small>
+                           </div>
+                       </div>
+                   </div>
+               </InfoWindow>
+             </Marker>
+    ))}
     </GoogleMap>
 ));
 
 class Map extends React.Component {
     constructor(props){
+
         super(props);
-        this.state = {
-            isList : true
-        }
     }
-    changeScreenLeft(){
-        this.setState({
-            isList : !this.state.isList
+
+    componentDidMount() {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            const coords = pos.coords;
+            if (coords != null && coords != undefined) {
+                this.props.updateCurrentLocation(coords.latitude, coords.longitude)
+            }
         })
     }
+
     render() {
-        console.log(Geolocation.getCurrentPosition());
+        const { markers, defaultCenter, clickMarker } = this.props.map
+        let myMap
         return (
-            <div>
-                <div style={{ width: 300, float: 'left', backgroundColor: 'white' , height: window.innerHeight - 46, overflow: 'scroll'}}>
-                    { this.state.isList ? <List changeScreenLeft = {this.changeScreenLeft.bind(this)}/>
-                    : <StoreInMap changeScreenLeft = {this.changeScreenLeft.bind(this)}/> }
-                </div>
-                <div style={{ marginLeft : 300 }}>
-                    <GettingStartedGoogleMap
-                        containerElement={ <div style={{ height: window.innerHeight - 46 }} /> }
-                        mapElement={ <div style={{ height: window.innerHeight - 46 }} /> }
-                    />
-                </div>
-            </div>
+          <div>
+            <GettingStartedGoogleMap
+                containerElement={ <div style={{ height: window.innerHeight - 46 }} /> }
+                mapElement={ <div style={{ height: window.innerHeight - 46 }} /> }
+                markers={markers}
+                defaultCenter={defaultCenter}
+                defaultZoom={13}
+
+                onMapLoaded={(map) => {
+                    myMap = map
+                }}
+
+                onMapIdle={()=> {
+                  console.log('---map is ready');
+                  console.log('NorthEast ', myMap.getBounds().getNorthEast().toString());
+                  console.log('SouthWest ', myMap.getBounds().getSouthWest().toString());
+                  console.log('SouthWest ', myMap.getBounds().toString());
+                }}
+            />
+          </div>
         )
     }
 }

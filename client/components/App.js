@@ -4,8 +4,10 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Bar from '~/containers/Bar'
 import Bundle from '../common/Bundle'
 import loadHome from 'bundle-loader?lazy!./home/Home'
-import loadMapp from 'bundle-loader?lazy!./mapp/Map'
+// import loadMapp from 'bundle-loader?lazy!./mapp/Map'
 import loadUserLoginRegister from 'bundle-loader?lazy!../containers/user-login-register'
+import MapContainer from 'bundle-loader?lazy!../containers/mapp/MapContainer'
+
 import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
 import loadChat from 'bundle-loader?lazy!../containers/chat'
@@ -24,7 +26,7 @@ const Home = () => (
 )
 
 const Mapp = () => (
-  <Bundle load={loadMapp}>
+  <Bundle load={MapContainer}>
     {(Comp) => (Comp
       ? <Comp/>
       : null
