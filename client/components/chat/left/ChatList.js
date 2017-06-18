@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Row, FormGroup, InputGroup, FormControl } from 'react-bootstrap'
-import Avatar from 'react-avatar';
+// import Avatar from 'react-avatar';
 
 class ChatList extends React.Component {
 
@@ -49,9 +49,9 @@ class ChatList extends React.Component {
                           <div className="btn btn-transparent btn-xs" style={{ float: 'left', marginTop: 4, marginRight: 10, marginLeft: 20}}>
                               {
                                 conversaters.length == 1?
-                                <Avatar round='true' size="55" src={usersMap[conversaters[0]].avatarUrl} key={conversaters[0]}/>
+                                <img src={usersMap[conversaters[0]].avatarUrl} key={conversaters[0]} width="35" height="35"/>
                                 :
-                                <Avatar round='true' size="55" value="G" key={JSON.stringify(conversaters)}/>
+                                <img src={usersMap[conversaters[0]].avatarUrl} key={JSON.stringify(conversaters)} width="35" height="35"/>
                               }
                           </div>
                           <div style={{height: 70, marginTop: 8}}>
@@ -59,11 +59,11 @@ class ChatList extends React.Component {
                                   conversaters.map(
                                   uKey =>
                                     read?
-                                    <label>
+                                    <label key={uKey}>
                                       {conversaters.indexOf(uKey) == conversaters.length - 1? usersMap[uKey].name: usersMap[uKey].name + ', '}
                                     </label>
                                     :
-                                    <label><i>
+                                    <label key={uKey}><i>
                                       {conversaters.indexOf(uKey) == conversaters.length - 1? usersMap[uKey].name: usersMap[uKey].name + ', '}
                                     </i></label>
                                 )

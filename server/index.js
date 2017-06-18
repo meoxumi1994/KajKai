@@ -1,5 +1,5 @@
 require('babel-register')({
-    presets: ['es2015'],
+    presets: ['es2015', 'react'],
     plugins: ["transform-object-rest-spread"]
-})
-require('./server')
+});
+require('./server');

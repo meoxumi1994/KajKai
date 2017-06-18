@@ -4,14 +4,15 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Bar from '~/containers/Bar'
 import Bundle from '../common/Bundle'
 import loadHome from 'bundle-loader?lazy!./home/Home'
-import loadMapp from 'bundle-loader?lazy!./mapp/Map'
+// import loadMapp from 'bundle-loader?lazy!./mapp/Map'
 import loadUserLoginRegister from 'bundle-loader?lazy!../containers/user-login-register'
+import MapContainer from 'bundle-loader?lazy!../containers/mapp/MapContainer'
+
 import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
 import loadChat from 'bundle-loader?lazy!../containers/chat'
-import Target from '~/containers/target'
+import Store from '~/containers/store'
 import ContactHistory from '~/containers/contacthistory'
-// import loadTarget from 'bundle-loader?lazy!../containers/target'
 import ChatCenterContainer from '~/containers/chat/center'
 import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 
@@ -25,7 +26,7 @@ const Home = () => (
 )
 
 const Mapp = () => (
-  <Bundle load={loadMapp}>
+  <Bundle load={MapContainer}>
     {(Comp) => (Comp
       ? <Comp/>
       : null
@@ -87,17 +88,16 @@ class App extends React.Component {
         const { width, height, username, onScroll } = this.props
         const { chat } = this.props
         return(
-            <div style={{ height: '100%', minWidth: 1050 }}>
+            <div style={{ height: '100%', minWidth: 1100 }}>
                 <Bar/>
-                <hr style={{margin: 0}}></hr>
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
                     style={{ height: height - 48 }}>
-                    { username && width > 1050 + 280 &&
-                        <div style={{ position: 'fixed',right: 0, top: 48, height: '100%', width: 280}}>
+                    { username && width > 1100 + 280 &&
+                        <div style={{ position: 'fixed',right: 0, top: 47, height: '100%', width: 280}}>
                             <ContactHistory/>
                         </div>
                     }
-                    <div style={{ marginRight: (width > 1050 + 280)? 280: 0 }}>
+                    <div style={{ marginTop: 48, marginRight: (width > 1100 + 280)? 280: 0 }}>
                         {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
                               <div>
@@ -127,7 +127,7 @@ class App extends React.Component {
                                 </div>
                             </div>
                         :   <div>
-                                <Route path="*" component={Target}/>
+                                <Route path="*" component={Store}/>
                             </div>
                         }
                     </div>

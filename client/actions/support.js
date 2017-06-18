@@ -1,71 +1,68 @@
 import config from '../config'
 
-import { getAPI } from '../fakedata'
-
 console.log('config.ISTEST', config.ISTEST)
 
-export const flet = (url, need, get) => {
+export const flet = (url, body) => {
     let myurl = config.getDomain() + url
-    console.log(myurl,need,get)
-
-    const P = (config.ISTEST == 2)?
-    getAPI(url,need) : fetch( myurl , {
+    console.log(myurl, body)
+    return fetch( myurl , {
         headers: {
             "Content-Type": "application/json",
         },
         method: 'POST',
         credentials: 'include',
-        body: JSON.stringify(need)
-    }).then((response) => {
-        return response.json()
-    })
+        body: JSON.stringify(body)
+    }).then((response) => response.json())
     .then((res) => {
-        console.log(res)
+        console.log(myurl, res)
         return res
     })
     .catch((error)=> {
         console.error(myurl,error);
     })
-    return P
 }
 
-export const flem = (url, get) => {
+export const flem = (url, body) => {
     let myurl = config.getDomain() + url
-    console.log(myurl,get)
-    const P = (config.ISTEST == 2)? getAPI(url,{}) : fetch( myurl , {
+    if (body) {
+      let ch = '?'
+      for (let qr in body) {
+        myurl += ch + qr + '=' + body[qr]
+        if (ch == '?') {
+          ch = '&'
+        }
+      }
+    }
+    console.log(myurl)
+    return fetch( myurl , {
         method: 'GET',
         credentials: 'include',
-    }).then((response) => {
-        console.log(response)
-        return response.json()
-    })
+    }).then((response) => response.json())
     .then((res) => {
-        console.log(res)
+        console.log(myurl, res)
         return res
     })
     .catch((error)=> {
         console.error(myurl,error);
     })
-    return P
 }
 
-export const fleu = (url, need, get) => {
+export const fleu = (url, body) => {
     let myurl = config.getDomain() + url
-    console.log(myurl,need,get)
-    const P = (config.ISTEST == 2)? getAPI(url,need) : fetch( myurl , {
+    console.log(myurl, body)
+    return fetch( myurl , {
         headers: {
             "Content-Type": "application/json",
         },
         method: 'PUT',
         credentials: 'include',
-        body: JSON.stringify(need)
+        body: JSON.stringify(body)
     }).then((response) => response.json())
     .then((res) => {
-        console.log(res)
+        console.log(myurl, res)
         return res
     })
     .catch((error)=> {
         console.error(myurl,error);
     })
-    return P
 }

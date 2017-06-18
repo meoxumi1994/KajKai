@@ -11,7 +11,6 @@ class Comp extends React.Component {
     }
     render(){
         const listpost = []
-        console.log('listpost = []')
         return(
             <div style={{ height: '100%'}}>
                 <div style={{ position: 'fixed', zIndex: 1, right: 0, top: 0, width: '100%', backgroundColor: 'blue', height: 48}}>
@@ -25,7 +24,7 @@ class Comp extends React.Component {
 
                     </div>
                     <div style={{ marginRight: 280}}>
-                        <div style={{ width: 1050, margin: 'auto', backgroundColor: 'yellow'}}>
+                        <div style={{ width: 1100, margin: 'auto', backgroundColor: 'yellow'}}>
                             <div>
                                 <div style={{ marginLeft: 170, float: 'left', width: 880}}>
                                     <div className="panel panel-default" style={{ height: 300, margin: '10px 0px 0px 0px'}}>
@@ -96,10 +95,13 @@ const Components = () => (
 
 const Compp = () => {
     return(
-        <div>
-            123123123
-            <div id="loaderr"></div>
-            123123
+        <div style={{ backgroundColor: 'white', width: 100, height: 100,
+            borderLeft: '10px solid transparent',
+            borderRight: '10px solid transparent',
+            borderBottom: '10px solid #E9EBEE',
+        }}>
+            2313123
+
         </div>
 
     )

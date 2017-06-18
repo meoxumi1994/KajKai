@@ -19,7 +19,7 @@ const Store = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNee
     }
     return(
         <div>
-            <div style={{ marginLeft: 160, float: 'left', width: 890}}>
+            <div style={{ marginLeft: 160, float: 'left', width: 940 }}>
                 <Top/>
             </div>
             <div className="container-fluid">
@@ -27,7 +27,7 @@ const Store = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNee
                     <div className="col col-xs-2">
                     </div>
                     <div ref={ sellpost => this.sellpost = sellpost }
-                        className="col col-xs-5"
+                        className="col col-xs-6"
                         style={{
                             height: this.sellpost_inside_height?this.sellpost_inside_height.offsetHeight: undefined,
                             margin: 0,
@@ -37,9 +37,9 @@ const Store = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNee
                         <div ref= { sellpost_inside => { this.sellpost_inside_height = sellpost_inside } }
                             style={{
                             position: sellpost_marginTop?'fixed':'static',
-                            marginLeft: sellpost_marginTop?(-scrollLeft-15):-15,
-                            marginTop: sellpost_marginTop?(-this.sellpost_inside_height.offsetHeight + height - 295):0,
-                            width: 480 }}>
+                            marginLeft: sellpost_marginTop?(-scrollLeft-24):-24,
+                            marginTop: sellpost_marginTop?(-this.sellpost_inside_height.offsetHeight + height - 343):0,
+                            width: 530 }}>
                             {sellposts.map((item, index) =>
                                 <div key={index} className="panel panel-default"
                                     style={{ height: 600,margin: '10px 0px 0px 0px'}}>
@@ -50,7 +50,7 @@ const Store = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNee
                         </div>
                     </div>
                     <div ref={ minorpost => this.minorpost = minorpost }
-                        className="col col-xs-5"
+                        className="col col-xs-4"
                         style={{
                             height: this.minorpost_inside_height?this.minorpost_inside_height.offsetHeight: undefined,
                             margin: 0,
@@ -59,8 +59,8 @@ const Store = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNee
                         <div ref= { minorpost_inside => { this.minorpost_inside_height = minorpost_inside } }
                             style={{
                             position: minorpost_marginTop?'fixed':'static',
-                            marginLeft: minorpost_marginTop?(-scrollLeft+37):37,
-                            marginTop: minorpost_marginTop?(-this.minorpost_inside_height.offsetHeight + height - 295):0,
+                            marginLeft: minorpost_marginTop?(-scrollLeft-33):-33,
+                            marginTop: minorpost_marginTop?(-this.minorpost_inside_height.offsetHeight + height - 343):0,
                             width: 400 }}>
                             {minorposts.map((intem,index) =>
                                 <div key={index} className="panel panel-default"

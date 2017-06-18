@@ -2,7 +2,7 @@ import React from 'react'
 
 const Comment = ({}) => {
     return(
-        <div style={{ height: '60%',}}>
+        <div style={{ height: '75%',}}>
             <div style={{ padding: 4, backgroundColor: '#E9EBEE'}}>
                 <div style={{ float: 'right'}} className="form-check">
                       <input className="form-check-input" type="checkbox" value=""/>
@@ -22,9 +22,8 @@ const Comment = ({}) => {
                     <li><a href="#">All</a></li>
                   </ul>
                 </div>
-
-
             </div>
+            <hr style={{ margin: 0}}/>
         </div>
 
     )

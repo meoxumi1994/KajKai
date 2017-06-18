@@ -7,16 +7,14 @@ import { config } from './config/commonConfig'
 import allRoutes from './routes'
 
 const app = express()
-const whitelist = ['http://localhost:' + config.OTHERPORT, 'http://34.209.206.70:' + config.OTHERPORT,
-'http://www.kajkai.com', 'null']
 
 const corsOptions = {
-    origin: whitelist[0],
+    origin: config.getClientDomain(),
     credentials: true
 }
 
 app.use(compression())
-app.use(cors(corsOptions));
+app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

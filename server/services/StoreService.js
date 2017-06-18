@@ -1,7 +1,7 @@
 import { Store, Category, StorePost } from '../models'
 import { checkPhone } from '../utils/Utils'
-import { getPost, createNewPost } from './StorePostService'
-
+import UserService from './UserService'
+import {getPost} from './StorePostService'
 
 export const getStore = (id, next) => {
     Store.findById(id, function (err, store) {
@@ -65,10 +65,15 @@ export const addNewStore = (_ownerId, _storename, _address, _phone, _category, _
         next(null)
         return
     }
-    createNewPost(store._id, (new Date()).getTime(), null, 'MAIN', function (storePost) {
+    var storePost = new StorePost({storeId: store._id, createdAt: (new Date()).getTime(), type: 'MAIN'})
+    storePost.save(function (err) {
         store.mainPostId = storePost._id
-        store.save(function () {
-            next(store)
+        store.save(function(err) {
+            if (err) {
+                next(null)
+            } else {
+                next(store)
+            }
         })
     })
 }
@@ -109,7 +114,7 @@ export const modifyStore = (updateStore, next) => {
 export const findStoreList = (ownerId, next) => {
     Store.find({owner: ownerId}, function (err, stores) {
         if (err) {
-            next(null)
+            next(err)
         } else {
             var storeList = []
             for (var i = 0, mLength = stores.length; i < mLength; ++i) {
@@ -145,11 +150,17 @@ export const getMainPost = (storeid, next) => {
 }
 
 export const getStoreByPostId = (id, next) => {
-    getPost(id, function (storePost) {
-        if (!storePost) next(null)
+    Store.findOne({'mainPost._id': id}, function (err, store) {
+        // console.log(store)
+        if (err) next(null)
+        else next(store)
+    })
+    getPost(id, function (post) {
+        if (!post) next(null)
         else {
-            getStore(storePost.storeId, function (store) {
-                next(store)
+            getStore(post.storeId, function (store) {
+                if (!store) next(null)
+                else next(store)
             })
         }
     })

@@ -25,6 +25,15 @@ hr {
     color: #3b5998;
 }
 
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+}
+
+
 .clocker {
   width: 22px;
   height: 22px;
@@ -151,7 +160,7 @@ textarea#note {
   width:16px;
   height:16px;
 
-  margin:20px auto;
+  margin: auto;
 
   animation: wait .80s steps(1, start) infinite;
 

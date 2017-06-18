@@ -1,11 +1,13 @@
 // const getAbsolutePath = getPath(__dirname)
 import config from '../config/serverConfig'
+import UserService from '../services/UserService.js'
 import request from 'request'
-import enums from '../enum'
-import { getUserFromEmail, getUserToken, getUser, getUserInfo, getUserFromPhone, getUserFromFacebookId, validateName, validateLanguage, getUserBasicInfo, getUserFromGoogleId, validateSex} from '../services/UserService.js'
 import { User } from '../models'
+import enums from '../enum'
 import {parseNum} from '../utils/NumberUtils'
 import EmailService from '../services/EmailService'
+// var Email = require('../services/EmailService.js')
+// var request = require('request')
 
 const phoneRegrex = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
 const emailRegrex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
@@ -17,7 +19,7 @@ export const registerNewUser = () => {
 			console.log(body.email);
 			if (body.email && body.username && body.password) {
 				if (emailRegrex.test(body.email)) {	
-					getUserFromEmail(body.email, function(user){
+					UserService.getUserFromEmail(body.email, function(user){
 						console.log(body.email)
 						console.log(user)
 						// console.log(user.length)
@@ -30,7 +32,7 @@ export const registerNewUser = () => {
 							name: body.username,
 							verified: 0})
 						newuser.save(function(){
-							EmailService.sendVerifyEmail(newuser.email, getUserToken(newuser._id), function(){
+							EmailService.sendVerifyEmail(newuser.email, UserService.getUserToken(newuser._id), function(){
 								res.json({status: 'success'})
 							})
 						})
@@ -73,14 +75,14 @@ export const registerNewUser = () => {
 	}
 }
 
-export const getUserController = () => {
+export const getUser = () => {
 	return (req, res) => {
 		console.log(req.decoded)
 		if (req.decoded) {
 			var id = req.decoded._id
-			getUser(id, function(user) {
+			UserService.getUser(id, function(user) {
 				if (user) {
-					getUserInfo(user, function(data){
+					UserService.getUserInfo(user, function(data){
 						res.json(data)
 					})
 				} else {
@@ -99,13 +101,13 @@ export const authorizeUser = () => {
 		var password = req.body.password
 		if (loginId && password) {
 			if (phoneRegrex.test(loginId)) {
-				getUserFromPhone(loginId, function(user) {
+				UserService.getUserFromPhone(loginId, function(user) {
 					if (!user || user.password != password) {
 						res.json({status : 'failed'})
 						return
 					}
 					// res.cookie('token', UserService.getUserToken(user._id))
-					const token = getUserToken(user._id)
+					const token = UserService.getUserToken(user._id)
                     res.cookie('token', token)
 					res.json({status: 'success'})
 				})
@@ -118,14 +120,14 @@ export const authorizeUser = () => {
 		if (email && password) {
 			// console.log(emailRegrex.te)
 			if (emailRegrex.test(email)) {
-				getUserFromEmail(email, function(user) {
+				UserService.getUserFromEmail(email, function(user) {
 					console.log(user)
 					if (!user || user.password != password || user.verified == 0) {
 						res.json({status : 'failed'})
 						return
 					}
 					// res.cookie('token', UserService.getUserToken(user._id))
-                    const token = getUserToken(user._id)
+                    const token = UserService.getUserToken(user._id)
                     res.cookie('token', token)
                     res.json({status: 'success'})
 				})
@@ -162,12 +164,12 @@ export const getFacebookUser = () => {
 				body = JSON.parse(body)
 				console.log(body)
 
-				getUserFromFacebookId(body.id, function(user) {
+				UserService.getUserFromFacebookId(body.id, function(user) {
 					if (user) {
-						const token = getUserToken(user._id)
+						const token = UserService.getUserToken(user._id)
 						console.log('facebook: ' + token)
 						res.cookie('token', token)
-						getUserInfo(user, function (data) {
+						UserService.getUserInfo(user, function (data) {
                             res.json({user: data})
                         })
 					} else {
@@ -179,10 +181,10 @@ export const getFacebookUser = () => {
 							password: '1234',
 							verified: 1})
 						newuser.save(function(){
-							const token = getUserToken(newuser._id)
+							const token = UserService.getUserToken(newuser._id)
 							console.log('facebook ' + token + ' ' + newuser._id)
                             res.cookie('token', token)
-                            getUserInfo(newuser, function (data) {
+                            UserService.getUserInfo(newuser, function (data) {
                                 res.json({user: data})
                             })
 						})
@@ -206,7 +208,7 @@ export const logOutUser = () => {
 export const changeUserPhone = () => {
 	return (req, res) => {
 		console.log(req.body.phone)
-		getUser(req.decoded._id, function(user){
+		UserService.getUser(req.decoded._id, function(user){
 			if (user) {
 				user.phone = req.body.phone
 				user.save(function(err){
@@ -229,10 +231,10 @@ export const updateUserPassword = () => {
 		var id = req.decoded._id
 		// var id = req.body.id
 		console.log(id)
-		getUser(id, function(user){
+		UserService.getUser(id, function(user){
 			if (user) {
-				if (user.password !== req.body.password || !req.body.newpassword || req.body.newpassword.length < 6
-					|| user.password === user.newpassword) {
+				if (user.password != req.body.password || !req.body.newpassword || req.body.newpassword.length < 6
+					|| user.password == user.newpassword) {
 					res.json({status: 'failed'})
 				} else {
 					user.password = req.body.newpassword
@@ -250,13 +252,13 @@ export const updateUserPassword = () => {
 
 export const changeUserProfile = () => {
 	return (req, res) => {
-		getUser(req.decoded._id, function(user){
+		UserService.getUser(req.decoded._id, function(user){
 			if (user) {
 				var updateName = false
 				var updateAddress = false
 				var updateYOB = false
 				if (req.body.username) {
-					if (validateName(req.body.username)) {
+					if (UserService.validateName(req.body.username)) {
 						user.name = req.body.username
 						updateName = true
 					} else {
@@ -289,7 +291,7 @@ export const changeUserProfile = () => {
 					updateAddress = true
 				}
 				if (req.body.language) {
-					if (validateLanguage(req.body.language)) {
+					if (UserService.validateLanguage(req.body.language)) { 
 						user.language = req.body.language
 					} else {
 						res.json({error: 'language error'})
@@ -297,7 +299,7 @@ export const changeUserProfile = () => {
 					}
 				}
 				if (req.body.sex) {
-					if (validateSex(req.body.sex)) { //
+					if (UserService.validateSex(req.body.sex)) { // 
 						user.sex = req.body.sex
 					} else {
 						res.json({error: 'sex error'})
@@ -360,12 +362,12 @@ export const getGoogleUser = () => {
 		request(options, function(error, response, body) {
 			if (!error && response.statusCode == 200) {
 				body = JSON.parse(body)
-				getUserFromGoogleId(body.email, function(user) {
+				UserService.getUserFromGoogleId(body.email, function(user) {
 					if (user) {
-						console.log('google: ' + getUserToken(user._id))
-						var token = getUserToken(user._id)
+						console.log('google: ' + UserService.getUserToken(user._id))
+						var token = UserService.getUserToken(user._id)
                         res.cookie('token', token)
-						getUserInfo(user, function (data) {
+						UserService.getUserInfo(user, function (data) {
                             res.json({user: data})
                         })
 					} else {
@@ -376,9 +378,9 @@ export const getGoogleUser = () => {
 							password: '1234',
 							verified: 1})
 						newuser.save(function(){
-                            var token = getUserToken(newuser._id)
+                            var token = UserService.getUserToken(newuser._id)
                             res.cookie('token', token)
-                            getUserInfo(newuser, function (data) {
+                            UserService.getUserInfo(newuser, function (data) {
                                 res.json({user: data})
                             })
 						})
@@ -391,12 +393,12 @@ export const getGoogleUser = () => {
 	}
 }
 
-export const getUserInfoController = () => {
+export const getUserInfo = () => {
 	return (req, res) => {
 		const id = req.body.id
-		getUser(id, function (user) {
+		UserService.getUser(id, function (user) {
 			if (user) {
-				res.json({status: 'success', user: getUserBasicInfo(user)})
+				res.json({status: 'success', user: UserService.getUserBasicInfo(user)})
 			} else {
 				res.json({status: 'failed'})
 			}

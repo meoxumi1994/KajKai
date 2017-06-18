@@ -1,16 +1,16 @@
 {
-  "name": "fuck",
+  "name": "micro-user",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.67.0",
+    "aws-sdk": "^2.71.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.24.1",
@@ -22,8 +22,8 @@
     "gmail-send": "^1.2.10",
     "jsonwebtoken": "^7.4.1",
     "md5": "^2.2.1",
-    "mongoose": "^4.10.5",
     "request": "^2.81.0",
+    "mongoose": "^4.10.6",
     "verify-javascript-sdk": "^0.2.4"
   }
 }
