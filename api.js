@@ -1,4 +1,4 @@
-GET /user {
+GET /user/:id {
     username: 'charity',
     email: 'prominh@gmail.com',
     avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/abcxyz.png',
