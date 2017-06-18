@@ -3,6 +3,7 @@ import { SocialType, Language } from '../enum'
 import _ from 'lodash'
 import AddressSchema from './Address'
 import LastUpdateSchema from './LastUpdate'
+import BlackSchema from './Black'
 
 const UserSchema = new mongoose.Schema({
     username: {type: String},
@@ -15,7 +16,7 @@ const UserSchema = new mongoose.Schema({
     sex: {type: String},
     yearOfBirth: {type: Number},
     lastUpdate: {type: LastUpdateSchema},
-    blacklist: []
+    blacklist: [{type: BlackSchema}]
 });
 
 export default UserSchema

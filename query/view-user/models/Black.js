@@ -1,15 +1,10 @@
 import mongoose from '../datasource'
+import { BlackType } from '../enum'
 
 const BlackSchema = new mongoose.Schema({
     id: {type: String},
-    type: {type: String, enum: _.values(Language)},
-    street: {type: String},
-    longitute: {type: Number},
-    latitute: {type: Number}
+    type: {type: String, enum: _.values(BlackType)},
+    name: {type: String}
 });
 
-export default AddressSchema
-
-id:,
-type: 'userid|storeid|mesid',
-name
+export default BlackSchema

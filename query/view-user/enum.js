@@ -26,3 +26,9 @@ export const Privacy = {
   yes: 'yes',
   no: 'no'
 }
+
+export const BlackType = {
+  userid: 'userid',
+  storeid: 'storeid',
+  mesid: 'mesid'
+}
