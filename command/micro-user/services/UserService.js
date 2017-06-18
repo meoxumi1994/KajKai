@@ -243,7 +243,6 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
     if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) next(null)
     const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
                 socialNetworkId: socialNetworkId})
-    console.log(JSON.stringify(user));
     user.save(function (err) {
         if (err) {
           console.log('error');
