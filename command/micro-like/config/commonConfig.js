@@ -1,5 +1,5 @@
 export const config = {
-    SERVER_PORT: 8080,
+    SERVER_PORT: 8083,
     CLIENT_PORT: 3000,
     // EC2 : 13.228.23.106
     // API Gateway : https://g9fd0yor1e.execute-api.ap-southeast-1.amazonaws.com/kajkai

@@ -14,7 +14,7 @@ const corsOptions = {
 }
 
 app.use(compression())
-app.use(cors(corsOptions));
+app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
