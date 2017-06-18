@@ -13,3 +13,4 @@ tasks.xml
 client/webpack.config.js
 *-deploy.js
 *package-lock.json
+*run.sh
