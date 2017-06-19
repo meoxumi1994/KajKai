@@ -19,7 +19,7 @@ function execute(action, emit, next, dispatch) {
     if(action.type.substr(0,6) == 'client'){
         next(action)
     }else{
-        emit(action.type, action.data)
+        emit(action.type, action)
     }
 }
 
