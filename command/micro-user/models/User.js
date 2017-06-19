@@ -1,5 +1,5 @@
 import mongoose from '../datasource'
-import { SocialType, Language, Privacy } from '../enum'
+import { SocialType, Language, PrivacyAEP, PrivacyOthers } from '../enum'
 import _ from 'lodash'
 import AddressSchema from './Address'
 
@@ -23,8 +23,8 @@ const UserSchema = new mongoose.Schema({
     yearOfBirthLastUpdateAt: {type: Date},
     addressLastUpdateAt: {type: Date},
     phoneLastUpdateAt: {type: Date},
-    privacyAEP: {type: String, enum: _values(Privacy)},
-    privacyOthers: {type: String, enum: _values(Privacy)}
+    privacyAEP: {type: String, enum: _values(PrivacyAEP)},
+    privacyOthers: {type: String, enum: _values(PrivacyOthers)}
 });
 
 export default UserSchema
