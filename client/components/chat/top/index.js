@@ -22,11 +22,11 @@ const ChatTop = ({usersMap, usersKey, styles, user, close, mesId, setMultiChat, 
           </label>
       )}
 
-      <img style={styles.closeButton} src="./images/whiteClose.png" onClick={() => close(mesId)}/>
+      <img style={styles.closeButton} src="/images/whiteClose.png" onClick={() => close(mesId)}/>
       <SettingContainer styles={styles}/>
-      <img style={styles.headerIcon} src="./images/whiteAdd.png"/>
+      <img style={styles.headerIcon} src="/images/whiteAdd.png"/>
       <Link to="/chat">
-          <img style={styles.headerIcon} src="./images/chatWindow.png"/>
+          <img style={styles.headerIcon} src="/images/chatWindow.png"/>
       </Link>
       <hr style={styles.topHr}/>
     </div>

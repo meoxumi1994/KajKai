@@ -1,4 +1,5 @@
 import auth from './middlewares/auth'
+import phoneCheck from './middlewares/phoneChecking'
 
 export default {
   
@@ -34,9 +35,16 @@ export default {
     },
     '/phone': {
         put: {
-            controller: 'UserController',
+            controller: 'PhoneController',
             middleware: [auth()],
-            method: 'changeUserPhone'
+            method: 'updateUserPhoneController'
+        }
+    },
+    '/phoneverification': {
+        put: {
+          controller: 'PhoneController',
+          middleware: [auth(), phoneCheck()],
+          method: 'verifyPhone'
         }
     },
     '/login': {

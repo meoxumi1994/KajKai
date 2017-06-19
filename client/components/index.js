@@ -1,8 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
-import { PulseLoader } from 'halogen';
-
 import App from '~/containers/App'
 
 class Comp extends React.Component {

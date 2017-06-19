@@ -1,4 +1,4 @@
-const babyCollection = "./images/chatIcons/Baby/"
+const babyCollection = "/images/chatIcons/Baby/"
 
 const iconList = [
   "angry",

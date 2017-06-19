@@ -17,7 +17,7 @@ class ChatList extends React.Component {
                 <FormGroup>
                   <InputGroup>
                     <InputGroup.Addon>
-                        <img src='./images/search.png' width="20" height="20"/>
+                        <img src='/images/search.png' width="20" height="20"/>
                     </InputGroup.Addon>
                     <FormControl type="text"placeholder="Search" />
                   </InputGroup>
@@ -79,7 +79,7 @@ class ChatList extends React.Component {
                                 </p>
                                 :
                                   <p>
-                                  <img src='./images/unread.png' width="20" height="20"/>
+                                  <img src='/images/unread.png' width="20" height="20"/>
                                   <i><b><u>
                                     <small className="text-muted" >
                                       {lastMessage.id == user.id ? 'You':usersMap[lastMessage.id].name}

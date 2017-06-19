@@ -27,8 +27,17 @@ export const verifyPhone = () => (req, res) => {
     mNexmoVerifyCheck(phone, code)
         .then((status) => {
             if (status === 'verified') {
-                updateUserPhone(req.decoded._id, phone, function(mstatus){
-                    mNexmoVerifyLogout(phone).then(res.json({'status': mstatus}))
+                updateUserPhone(req.decoded._id, phone, function(mstatus, oldPhone){
+                  if(mstatus == 'success') {
+                    if (oldPhone) {
+                      mNexmoVerifyLogout(oldPhone)
+                    }
+                    res.send({status})
+                  } else {
+                    res.send({
+                        status: 'error'
+                    })
+                  }
                 })
             } else {
                 res.send({status})

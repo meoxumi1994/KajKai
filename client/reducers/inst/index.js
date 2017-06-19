@@ -9,6 +9,7 @@ import chat from './chat'
 import app from './app'
 import store from './store'
 import map from './map'
+import user from './user'
 
 const inst = combineReducers({
     userloginregister,
@@ -19,7 +20,8 @@ const inst = combineReducers({
     entity,
     chat,
     app,
-    map
+    map,
+    user
 })
 
 export default inst

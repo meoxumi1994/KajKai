@@ -4,8 +4,6 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import config from './config'
 
-import { socketIO } from './fakedata'
-
 import thunkMiddleware from 'redux-thunk'
 // AppContainer is a necessary wrapper component for HMR
 import { AppContainer } from 'react-hot-loader'
@@ -21,11 +19,7 @@ function execute(action, emit, next, dispatch) {
     if(action.type.substr(0,6) == 'client'){
         next(action)
     }else{
-        if(config.ISTEST == 2){
-            socketIO(action, dispatch)
-        }else{
-            emit(action.type, action.data)
-        }
+        emit(action.type, action.data)
     }
 }
 

@@ -1,6 +1,7 @@
 import { config } from '../config/commonConfig'
 import { getUserFromFacebookId, getUserBasicInfo, getUserToken, createUser, getUserFromEmail, getUserFromPhone } from '../services/UserService'
 import { checkPhone, checkEmail } from '../utils/utils'
+import { SocialType } from '../enum'
 
 export const loginFacebook = () => {
     return (req, res) => {
@@ -27,7 +28,7 @@ export const loginFacebook = () => {
                             res.json({user: data})
                         })
                     } else {
-                        createUser(null, body.name, '1234', 1, null, enums.FACEBOOK, body.id, function (user) {
+                        createUser(null, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, function (user) {
                             if (user) {
                                 res.cookie('token', getUserToken(user._id))
                                 getUserBasicInfo(user, function (data) {
@@ -99,7 +100,7 @@ export const loginGoogle = () => {
                             res.json({user: data})
                         })
                     } else {
-                        createUser(body.email, body.name, '1234', 1, null, null, null, function (user) {
+                        createUser(body.email, body.name, '1234', 1, null, SocialType.GOOGLE, null, function (user) {
                             if (!user) {
                                 res.json({error: 'error'})
                             } else {

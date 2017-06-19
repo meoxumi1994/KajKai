@@ -1,13 +1,18 @@
-import { flet, flem } from '~/actions/support'
+import { flem, flet } from '~/actions/support'
 
-export const getTarget = (id) => dispatch => {
-    console.log('/getTarget');
-    flet('/gettarget',{
-        id: id
-    },{
-
+export const getUser = (id) => dispatch => {
+    console.log('getUser', id)
+    dispatch({ type: 'USER_GET_ING' });
+    flem('/user',{
+        id: id,
     })
     .then((response) => {
-        return response;
+        const { status, user } = response
+        console.log('getUser', { status, user })
+        if(status == 'success'){
+            dispatch({ type: 'USER_GET_SUCCESS', user })
+        }else{
+            dispatch({ type: 'USER_GET_FAILED', user })
+        }
     })
 }

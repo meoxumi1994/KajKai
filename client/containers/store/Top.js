@@ -5,7 +5,7 @@ import Top from '~/components/store/Top'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
-    const { id, avatarUrl, coverUrl, storename } = state.inst.target.index
+    const { id, avatarUrl, coverUrl, storename } = state.inst.store.index
     return({
         id : id,
         name: storename,

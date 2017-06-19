@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import Bar from '~/containers/Bar'
 import Bundle from '../common/Bundle'
@@ -12,6 +12,7 @@ import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
 import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Store from '~/containers/store'
+import User from '~/containers/user'
 import ContactHistory from '~/containers/contacthistory'
 import ChatCenterContainer from '~/containers/chat/center'
 import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
@@ -87,6 +88,19 @@ class App extends React.Component {
         const path = this.props.location.pathname;
         const { width, height, username, onScroll } = this.props
         const { chat } = this.props
+        const Target = () => {
+            if(location.pathname.split('/')[1] == 'user')
+                return(
+                    <div>
+                        <Route path="*" component={User}/>
+                    </div>
+                )
+            return (
+                <div>
+                    <Route path="*" component={Store}/>
+                </div>
+            )
+        }
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
                 <Bar/>
@@ -126,9 +140,7 @@ class App extends React.Component {
                                   }
                                 </div>
                             </div>
-                        :   <div>
-                                <Route path="*" component={Store}/>
-                            </div>
+                        :   <Target/>
                         }
                     </div>
                 </div>

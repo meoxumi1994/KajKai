@@ -18,3 +18,10 @@ export const Sex = {
     MALE: 'MALE',
     FEMALE: 'FEMALE'
 }
+
+export const Privacy = {
+  comment_store: 'comment_store',
+  no_one: 'no_one',
+  yes: 'yes',
+  no: 'no'
+}

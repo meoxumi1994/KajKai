@@ -40,17 +40,26 @@ let store = [
     }
 ]
 
-app.get('/who',(req,res) => {
-    console.log('/who')
-    res.send({
-        id: '5933bda8d5e8f76039403e06',
-        username: 'Duc Minh',
-        avatarUrl: 'https://scontent.xx.fbcdn.net/v/t1.0-1/s200x200/10354686_10150004552801856_220367501106153455_n.jpg?oh=9fd397c48503bf5c5946134de4d111ee&oe=59B05050',
-        storeList: store.filter(item => item.userid == '5933bda8d5e8f76039403e06'),
-        phone: '01655791021',
-        address: '163 le quy don, daklak',
-        age: 24,
-    })
+app.get('/user',(req,res) => {
+
+    const { id } = req.query
+    if(id){
+        console.log('/user', user.filter(item => item.id == id)[0])
+        res.send({
+            status: 'success',
+            user: user.filter(item => item.id == id)[0],
+        })
+    }else{
+        res.send({
+            id: '5933bda8d5e8f76039403e06',
+            username: 'Duc Minh',
+            avatarUrl: 'https://scontent.xx.fbcdn.net/v/t1.0-1/s200x200/10354686_10150004552801856_220367501106153455_n.jpg?oh=9fd397c48503bf5c5946134de4d111ee&oe=59B05050',
+            storeList: store.filter(item => item.userid == '5933bda8d5e8f76039403e06'),
+            phone: '01655791021',
+            address: '163 le quy don, daklak',
+            age: 24,
+        })
+    }
 })
 
 app.get('/getstore',(req,res) => {

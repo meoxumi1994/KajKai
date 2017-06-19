@@ -1,4 +1,4 @@
-GET /user {
+GET /user/:id {
     username: 'charity',
     email: 'prominh@gmail.com',
     avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/abcxyz.png',
@@ -145,7 +145,7 @@ POST /logingoogle {
 
 
 GET /logout {
-
+    status: 'success|failed'
 }
 
 GET /store/:id {
@@ -154,11 +154,26 @@ GET /store/:id {
   storename: 'Forest',
   avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
   coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
-  address: 'fpt university',
-  category: 'shirt',
+  lastUpdate: {
+      storename: ,
+      phone: ,
+      addressMap:,
+      address: ,
+  }
+  address: ,
+  addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
+  category: ,
+  categoryAuto: {
+      id: ,
+      name: ,
+  },
   latitute: '1423424',
   longitute: '453535',
   phone: '01655791025',
+  certificates: {
+      images: [],
+      content: ,
+  },
   numlike: '23',
   likes: [
     {
@@ -175,6 +190,54 @@ GET /store/:id {
       username:
     },
   ], // tối đa 5 thằng
+}
+
+POST /store {
+    userid: ,//owner
+    storename: 'Forest',
+    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+    coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
+    address: ,
+    addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
+    category: ,
+    categoryAuto: {
+        id: ,
+        name: ,
+    },
+    latitute: '1423424',
+    longitute: '453535',
+    phone: '01655791025',
+    certificates: { // co the null
+        images: [],
+        content: ,
+    },
+}
+
+PUT /store {
+  id: , //store id
+  storename: 'Forest',
+  avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+  coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
+  lastUpdate: {
+      storename: ,
+      phone: ,
+      addressMap:,
+      address: ,
+  }
+  address: ,
+  addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
+  category: ,
+  categoryAuto: {
+      id: ,
+      name: ,
+  },
+  latitute: '1423424',
+  longitute: '453535',
+  phone: '01655791025',
+  certificates: {
+      images: [],
+      content: ,
+  },
 }
 
 GET /store/sellpost/:storeid?offset=-1 { // length = 2
@@ -263,51 +326,9 @@ GET /store/sellpost/:storeid?offset=-1 { // length = 2
   ],
 }
 
-POST /postrows {
-    content: ,
-    numline: , // numline of row <= 30
-    images: [
-    // list of imageUrl
-    ], // textimage|imagetext|groupimage
-    titles_order: [],
-    titles: [ // for product|listproduct otherwise  null
-
-    ],
-    products: [ // for product|listproduct otherwise  null
-        {
-          id: 'product002',
-          content: ,
-          imageUrl: , // 20x20
-          list: [],
-          totalnum: // số lần được gọi trong leadercomment
-        },
-    ],
-    type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
-}
-
-PUT /postrows {
-    content: ,
-    numline: , // numline of row <= 30
-    images: [
-    // list of imageUrl
-    ], // textimage|imagetext|groupimage
-    titles_order: [],
-    titles: [ // for product|listproduct otherwise  null
-
-    ],
-    products: [ // for product|listproduct otherwise  null
-        {
-          id: 'product002',
-          content: ,
-          imageUrl: , // 20x20
-          list: [],
-          totalnum: // số lần được gọi trong leadercomment
-        },
-    ],
-    type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
-}
-
-PUT /sellpost {
+GET /sellpost/:id {
+    storeid: ,
+    storename: ,
     category: ,
     title: ,
     description: ,
@@ -315,19 +336,7 @@ PUT /sellpost {
     status: 'notyet|open|sleep',
     ship: '', // store viết vào có thể un
     postrows_order: [],
-
-}
-
-POST /sellpost {
-  storeid: ,
-  category: ,
-  title: ,
-  description: ,
-  time: , // last update
-  status: 'notyet|open|sleep',
-  ship: '', // store viết vào có thể un
-  postrows_order: [],
-  postrows: [ // tables lấy những thằng đầu có tổng hàng <= 30, nếu quá nửa thằng cuối thì trả về cả thằng cuối
+    postrows: [ // tables lấy những thằng đầu có tổng hàng <= 30, nếu quá nửa thằng cuối thì trả về cả thằng cuối
     {
         id: , //
         content: ,
@@ -350,50 +359,145 @@ POST /sellpost {
         ],
         type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
     },
-  ],
-  numlike: '23',
-  likes: [
+    ],
+    numlike: '23',
+    likes: [
     {
       userid: ,
       username: ,
     },
-  ], // tối đa 5 thằng bạn
-  numfollow: '43',
-  follows: [
+    ], // tối đa 5 thằng bạn
+    numfollow: '43',
+    follows: [
     {
       userid: ,
       username: ,
     },
-  ], // tối đa 5 thằng bạn
-  numcomment: ,
-  numshare: ,
-  leadercomments: [ // tối đa 2 thằng trong 1 giờ
-    {
-      id: '7586449578',
-      sellpostid: ,
-      order: [
-          {
-            id: 'product002',
-            content: ,
-            imageUrl: ,
-            list: [],
-            num: 2
-          },
-      ],
-      comments: [ // thằng đầu tiền là comment của leader
+    ], // tối đa 5 thằng bạn
+    numcomment: ,
+    numshare: ,
+    leadercomments: [ // tối đa 2 thằng trong 1 giờ
         {
-          id: ,
-          ownerid: ,
-          leadercommentid: ,//
-          avatarUrl: // small size 20x20
-          name: ,
-          content: ,
-          time: ,
-          numlike: ,
+          id: '7586449578',
+          sellpostid: ,
+          order: [
+              {
+                id: 'product002',
+                content: ,
+                imageUrl: ,
+                list: [],
+                num: 2
+              },
+          ],
+          comments: [ // thằng đầu tiền là comment của leader
+            {
+              id: ,
+              ownerid: ,
+              leadercommentid: ,//
+              avatarUrl: // small size 20x20
+              name: ,
+              content: ,
+              time: ,
+              numlike: ,
+            }
+          ]
         }
-      ]
-    }
-  ]
+    ]
+}
+
+PUT /sellpost {
+    category: ,
+    title: ,
+    description: ,
+    time: , // last update
+    status: 'notyet|open|sleep',
+    ship: '', // store viết vào có thể un
+    postrows_order: [],
+}
+
+POST /sellpost {
+  storeid: ,
+  category: ,
+  title: ,
+  description: ,
+  time: , // last update
+  status: 'notyet|open|sleep',
+  ship: '', // store viết vào có thể un
+}
+
+DELETE /sellpost {
+    storeid:
+    sellpostid:
+}
+
+POST /postrows {
+    sellpostid: ,
+    content: ,
+    numline: , // numline of row <= 30
+    images: [
+    // list of imageUrl
+    ], // textimage|imagetext|groupimage
+    titles_order: [],
+    titles: [ // for product|listproduct otherwise  null
+
+    ],
+    products_order: [],
+    products: [ // for product|listproduct otherwise  null
+        {
+          content: ,
+          imageUrl: , // 20x20
+          list: [],
+        },
+    ],
+    type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+}
+
+PUT /postrows {
+    id: ,
+    content: ,
+    numline: , // numline of row <= 30
+    images: [
+    // list of imageUrl
+    ], // textimage|imagetext|groupimage
+    titles_order: [],
+    titles: [ // for product|listproduct otherwise  null
+
+    ],
+    products_order: [],
+    type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+}
+
+DELETE /postrows {
+    sellpostid: ,
+    postrows_order: [],
+    id: ,
+}
+
+POST /postrows/product {
+    sellpostid:
+    postrowsid:
+    product: {
+      content: ,
+      imageUrl: , // 20x20
+      list: [],
+    },
+}
+
+PUT /postrows/product {
+    sellpostid:
+    postrowsid:
+    product: {
+      content: ,
+      imageUrl: , // 20x20
+      list: [],
+    },
+}
+
+DELETE /postrows/product {
+    sellpostid:
+    postrowsid:
+    products_order: []
+    productid:
 }
 
 
@@ -412,6 +516,7 @@ GET /postrow/:sellpostid?offset=-1 { // numline = 30
           titles: [ // for product|listproduct otherwise  null
 
           ],
+          products_order: [],
           products: [ // for product|listproduct otherwise  null
             {
               id: 'product002',
@@ -561,5 +666,13 @@ GET /search/user?text='char' {
             avatarUrl: '',
             name: ''
         }
+    ]
+}
+
+GET /comment/like {
+    commentid: // co the undefined
+    leadercommentid: // co the undefined
+    likes: [
+        name
     ]
 }
