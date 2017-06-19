@@ -1,15 +1,17 @@
-import { updateUserInfo, getUser, getUserBasicInfo, getUserTrivivalInfo} from '../services/UserService.js'
+import { getUser } from '../services/UserService.js'
 
-export const getUserController = () => {
+export const getUserHandler = () => {
     return (req, res) => {
-        console.log(req.decoded)
         if (req.decoded) {
-            const id = req.decoded._id
-            getUser(id, (user) => {
+            let requestedId = req.params.id
+
+            if(!requestedId) {
+              requestedId = req.decoded._id
+            }
+
+            getUser(requestedId, (user) => {
                 if (user) {
-                    getUserBasicInfo(user, (data) => {
-                        res.json(data)
-                    })
+                    res.json(user)
                 } else {
                     res.json({status: 'failed'})
                 }

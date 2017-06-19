@@ -1,21 +1,36 @@
-import { getUserFromToken, getUserBasicStoreInfo } from '../services/UserService'
+import { User } from '../models'
 
-export const authorizeToken = (message, next) => {
-    getUserFromToken(message.token, function (user) {
-        if (user) {
-            next({status: 'success', user: getUserBasicStoreInfo(user)})
-        } else {
-            next({status: 'failed'})
-        }
-    })
+export const createUser = (message) => {
+  const { id, username, email } = message
+
+  const user = new User({
+    id,
+    username,
+    email
+  })
+
+  user.save()
 }
 
-export const getUser = (message, next) => {
-    getUserBasicStoreInfo(message.userId, function (user) {
-        if (user) {
-            next({status: 'success', user: getUserBasicStoreInfo(user)})
-        } else {
-            next({status: 'failed'})
-        }
-    })
+export const updateUser = (message) => {
+  const { id, avatarUrl, coverUrl, address, phone, language, sex, yearOfBirth, lastUpdate, blacklist } = message
+
+  User.findOneAndUpdate({
+    id: id
+  }, {
+    avatarUrl, coverUrl, address, phone, language, sex, yearOfBirth, lastUpdate, blacklist
+  })
+
 }
+
+// export const updatePhone = (message) => {
+//
+// }
+//
+// export const updateBlackList = (message) => {
+//
+// }
+//
+// export const testHandler = (message) => {
+//   console.log('xxxxxxxxxx', message);
+// }
