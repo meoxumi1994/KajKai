@@ -13,10 +13,10 @@ const GettingStartedGoogleMap = withGoogleMap(props => (
         onIdle={props.onMapIdle}
         >
         {props.markers.map((marker, index) => (
-            <Marker
+            <Marker position={marker.position} key={index}
                {...marker}
              >
-               <InfoWindow position={marker.position} key={index}>
+               <InfoWindow >
                    <div className="container-fluid" style={{width: 170, height: 10}}>
                        <div className="row">
                            <div className="col col-xs-4">
@@ -53,8 +53,9 @@ class Map extends React.Component {
     }
 
     render() {
-        const { markers, defaultCenter, clickMarker } = this.props.map
         let myMap
+        const { markers, defaultCenter, clickMarker } = this.props.map
+        const { getStoreMarkers } = this.props
         return (
           <div>
             <GettingStartedGoogleMap
@@ -69,10 +70,7 @@ class Map extends React.Component {
                 }}
 
                 onMapIdle={()=> {
-                  console.log('---map is ready');
-                  console.log('NorthEast ', myMap.getBounds().getNorthEast().toString());
-                  console.log('SouthWest ', myMap.getBounds().getSouthWest().toString());
-                  console.log('SouthWest ', myMap.getBounds().toString());
+                  getStoreMarkers(myMap.getBounds())
                 }}
             />
           </div>

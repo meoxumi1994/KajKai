@@ -2,7 +2,7 @@ import auth from './middlewares/auth'
 import phoneCheck from './middlewares/phoneChecking'
 
 export default {
-
+  
     '/emailverification/:token': {
         get: {
             controller: 'RegisterController',
@@ -33,7 +33,7 @@ export default {
             method: 'updateUserPassword'
         }
     },
-    '/user/phone': {
+    '/phone': {
         put: {
             controller: 'PhoneController',
             middleware: [auth()],
