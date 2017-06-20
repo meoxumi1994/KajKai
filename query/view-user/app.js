@@ -3,7 +3,7 @@ import compression from 'compression'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
-import { config } from './config/commonConfig'
+import config from './config/commonConfig'
 import allRoutes from './routes'
 
 const app = express()

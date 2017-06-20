@@ -1,18 +1,10 @@
 export default {
-  'USER.Created': {
-    controller: 'UserSubController',
-    method: 'createUser'
+  'STORE.Created': {
+    controller: 'StoreSubController',
+    method: 'createStore'
   },
-  'USER.Updated': {
-    controller: 'UserSubController',
-    method: 'updateUser'
-  },
-  // 'USER.PhoneUpdated': {
-  //   controller: 'UserSubController',
-  //   method: 'updatePhone'
-  // },
-  // 'USER.Blacklist': {
-  //   controller: 'UserSubController',
-  //   method: 'updateBlackList'
-  // }
+  'STORE.Updated': {
+    controller: 'StoreSubController',
+    method: 'updateStore'
+  }
 }

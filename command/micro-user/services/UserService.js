@@ -1,6 +1,6 @@
 import { User, Address } from '../models'
 import jwt from 'jsonwebtoken'
-import enums from '../enum'
+import { Language } from '../enum'
 import mongoose from '../datasource'
 import { checkEmail, getCU } from '../utils/utils'
 const USER_GLOBAL_ID = '001'
@@ -46,7 +46,7 @@ export const getUserBasicInfo = (user) => {
         coverUrl: user.coverUrl,
         address: user.address,
         phone: user.phone,
-        language: user.language === enums.VIETNAM ? 'vi' : 'en',
+        language: user.language === Language.VIETNAM ? 'vi' : 'en',
         sex: user.sex,
         yearOfBirth: user.yearOfBirth,
         lastUpdate: {
@@ -336,4 +336,3 @@ export const updateUserInfo = (userId, info, next) => {
         })
     })
 };
-
