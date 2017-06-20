@@ -8,22 +8,6 @@ export default {
                             username: '',
                             email: '',
                             avatarUrl: '',
-                            coverUrl: '',
-                            address: '',
-                            phone:'',
-                            language: '',
-                            sex: '',
-                            yearOfBirth: '',
-                            lastUpdate: {
-                                username: '',
-                                phone: '',
-                                address: '',
-                            },
-                            // blacklist: [{
-                            //     id:,
-                            //     type: 'userid|storeid|mesid',
-                            //     name: ,
-                            // }],
                             id: ''
                     }
                 },
@@ -43,11 +27,6 @@ export default {
                             phone: '',
                             address: '',
                         },
-                        // blacklist: [{
-                        //     id:,
-                        //     type: 'userid|storeid|mesid',
-                        //     name: ,
-                        // }],
                         id: ''
                     }
                 },

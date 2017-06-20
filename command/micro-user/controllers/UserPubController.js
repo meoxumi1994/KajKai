@@ -37,6 +37,6 @@ export const getStore = (storeId, next) => {
 
 export const updateBlackList = (userId, blockId, status) => {
     const pub = redis.createClient(config);
-    const publishData = {userId: userId, blockId: blockId, status: status};
+    const publishData = {user: {userId: userId, blockId: blockId, status: status}};
     pub.publish('USER.BlackListUpdated', JSON.stringify(publishData));
 };
