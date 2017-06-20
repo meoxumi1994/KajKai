@@ -20,7 +20,7 @@ GET /user/:id {
     }],
 }
 
-GET /privacy/user {
+GET /privacy/user/:id {
     address_email_phone: 'comment_store|no_one',
     another: 'yes|no'
 }
