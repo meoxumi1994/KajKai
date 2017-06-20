@@ -12,10 +12,9 @@ export const registerNewUser = () => {
                     if (user) {
                         res.json({status: 'used'})
                     } else {
-                      console.log(body.email, body.username, body.password);
-                        createUser(body.email, body.username, body.password, 0, null, null, null, (user) => {
+                        createUser(body.email, body.username, body.password, 0, body.yearOfBirth, null, null, (user) => {
                             if (!user) {
-                                res.json({status: 'failed'})
+                                res.json({status: 'failed xxxxx'})
                             } else {
                                 sendVerifyEmail(body.email, getUserToken(user._id), () => {
                                     res.json({status: 'success'})
@@ -32,7 +31,7 @@ export const registerNewUser = () => {
 export const confirmEmailVerification = () => {
     return (req, res) => {
         const token = req.params.token
-        const redirectUrl = config.getClientDomain()
+        const redirectUrl = config.REDIRECT_URL
         if (!token) {
             res.redirect(redirectUrl + '/login')
             return

@@ -1,6 +1,7 @@
 import mongoose from '../datasource'
-import UserSchema from './User'
-import AddressSchema from './Address'
 
+const UserSchema = require('./User')
 export const User = mongoose.model('User', UserSchema)
+
+const AddressSchema = require('./Address')
 export const Address = mongoose.model('Address', AddressSchema)

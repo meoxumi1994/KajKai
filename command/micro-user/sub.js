@@ -1,5 +1,5 @@
 import redis from 'redis'
-import config from './config'
+import config from './config/pubSubConfig'
 import allChannels from './channels'
 
 const sub = redis.createClient(config)

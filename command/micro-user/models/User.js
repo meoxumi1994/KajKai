@@ -1,16 +1,14 @@
 import mongoose from '../datasource'
-import { SocialType, Language } from '../enum'
+import { SocialType, Language, PrivacyAEP, PrivacyOthers } from '../enum'
 import _ from 'lodash'
-import AddressSchema from './Address'
+import {AddressSchema} from './Address'
 
-const UserSchema = new mongoose.Schema({
+export const UserSchema = new mongoose.Schema({
     userName: {type: String},
     email: {type: String},
     password: {type: String},
     socialNetworkType: {type: String, enum: _.values(SocialType)},
     socialNetworkId: {type: String},
-    resetPasswordCode: {type: String},
-    resetPasswordExpiration: Date,
     imageUrl: [String],
     avatarUrl: {type: String},
     coverUrl: {type: String},
@@ -24,7 +22,9 @@ const UserSchema = new mongoose.Schema({
     nameLastUpdatedAt: {type: Date},
     yearOfBirthLastUpdateAt: {type: Date},
     addressLastUpdateAt: {type: Date},
-    phoneLastUpdateAt: {type: Date}
+    phoneLastUpdateAt: {type: Date},
+    privacyAEP: {type: String, enum: _values(PrivacyAEP)},
+    privacyOthers: {type: String, enum: _values(PrivacyOthers)}
 });
 
 export default UserSchema

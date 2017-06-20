@@ -1,4 +1,4 @@
-GET /user {
+GET /user/:id {
     username: 'charity',
     email: 'prominh@gmail.com',
     avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/abcxyz.png',
@@ -20,7 +20,7 @@ GET /user {
     }],
 }
 
-GET /user/privacy {
+GET /privacy/user/:id {
     address_email_phone: 'comment_store|no_one',
     another: 'yes|no'
 }
@@ -57,7 +57,7 @@ PUT /password {
     status: 'failed|success',
 }
 
-PUT /user/phone {
+PUT /phone/user {
     code: '1234', // code == undefined is need get verifi-code
     phone: '0987654321'
 },{
