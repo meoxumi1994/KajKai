@@ -1,7 +1,6 @@
 import config from '../config/commonConfig'
 
 export const sendVerifyEmail = (email, token, next) => {
-  console.log(config, config.getServerDomain());
     var send = require('gmail-send')({
         user: 'kajkaiverify@gmail.com',
         pass: 'verifykajkai',

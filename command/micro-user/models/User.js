@@ -3,7 +3,7 @@ import { SocialType, Language, PrivacyAEP, PrivacyOthers } from '../enum'
 import _ from 'lodash'
 import { AddressSchema } from './Address'
 
-export const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     userName: {type: String},
     email: {type: String},
     password: {type: String},
