@@ -8,6 +8,13 @@ export default {
           method: 'getUserHandler'
       },
     },
+    '/privacy/user/:id': {
+      get: {
+        controller: 'UserController',
+        middleware: [auth()],
+        method: 'getUserPrivacyHandler'
+      }
+    },
     '/test': {
       post: {
         controller: 'TestController',

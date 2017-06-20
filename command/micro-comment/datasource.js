@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import redis from 'redis'
 
 export const redisClient = redis.createClient()
-mongoose.connect('mongodb://localhost/kajkai', (err) => {
+mongoose.connect('mongodb://localhost/kajkai-comment', (err) => {
     if (err) {
         console.log('err', err)
     }
