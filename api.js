@@ -57,7 +57,7 @@ PUT /password {
     status: 'failed|success',
 }
 
-PUT /user/phone {
+PUT /phone/user {
     code: '1234', // code == undefined is need get verifi-code
     phone: '0987654321'
 },{
