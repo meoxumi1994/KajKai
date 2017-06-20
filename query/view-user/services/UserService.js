@@ -27,6 +27,20 @@ export const getUser = (id, next) => {
       }
   })
 }
+
+export const getUserPrivacy = (id, next) => {
+  User.findOne({ id }, function(err, user) {
+      if (err) {
+          next(null)
+      } else {
+          next({
+            id: user.id,
+            address_email_phone: user.privacy.address_email_phone,
+            another: user.privacy.others
+          })
+      }
+  })
+}
 //
 // export const getUserGlobalId = (id) => {
 //     return USER_GLOBAL_ID + id

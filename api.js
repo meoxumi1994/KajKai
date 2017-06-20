@@ -57,7 +57,7 @@ PUT /password {
     status: 'failed|success',
 }
 
-PUT /user/phone {
+PUT /phone/user {
     code: '1234', // code == undefined is need get verifi-code
     phone: '0987654321'
 },{
@@ -66,9 +66,9 @@ PUT /user/phone {
 
 PUT /blacklist { // blockid co thi delete ko co thi add
     blockid: ,
-    idtype: 'storeid|userid|mesid' ,
 },{
     blockid: ,
+    type: 'REMOVE|ADD'
     idtype: 'storeid|userid|mesid' ,
     name: , // name of blockid
 }

@@ -7,7 +7,6 @@ const index = (state = {
         case 'USER_GET_ING':
             return {}
         case 'USER_GET_SUCCESS':
-            console.log(action)
             return action.user
         default:
             return state

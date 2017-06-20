@@ -1,5 +1,7 @@
 import React from 'react'
 
+import TimeLine from '~/components/entity/draw/TimeLine'
+
 const Page = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeedSellPost, onNeedMinorPost}) => {
     let sellpost_marginTop = 0
     let minorpost_marginTop = 0
@@ -29,14 +31,15 @@ const Page = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeed
                         position: sellpost_marginTop?'fixed':'static',
                         marginLeft: sellpost_marginTop?(-scrollLeft-24):-24,
                         marginTop: sellpost_marginTop?(-this.sellpost_inside_height.offsetHeight + height - 343):0,
-                        width: 530 }}>
+                        width: 520 }}>
                         {sellposts.map((item, index) =>
-                            <div key={index} className="panel panel-default"
-                                style={{ height: 600,margin: '10px 0px 0px 0px'}}>
-                                123123123
-                            </div>
+                            // <div key={index} className="panel panel-default"
+                            //     style={{ height: 600,margin: '10px 0px 0px 0px'}}>
+                            //     123123123
+                            // </div>
+                            <TimeLine style={{ height: 600, margin: '10px 0px 0px 0px'}} key={index}/>
                         )}
-                        <span id="loaderr"></span>
+                        <span style={{ marginTop: 10 }} id="loaderr"></span>
                     </div>
                 </div>
                 <div ref={ minorpost => this.minorpost = minorpost }
@@ -49,16 +52,17 @@ const Page = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeed
                     <div ref= { minorpost_inside => { this.minorpost_inside_height = minorpost_inside } }
                         style={{
                         position: minorpost_marginTop?'fixed':'static',
-                        marginLeft: minorpost_marginTop?(-scrollLeft-18):-18,
+                        marginLeft: minorpost_marginTop?(-scrollLeft-28):-28,
                         marginTop: minorpost_marginTop?(-this.minorpost_inside_height.offsetHeight + height - 343):0,
-                        width: 400 }}>
+                        width: 410 }}>
                         {minorposts.map((intem,index) =>
-                            <div key={index} className="panel panel-default"
-                                style={{ height: 400,margin: '10px 0px 0px 0px'}}>
-                                123123123
-                            </div>
+                            // <div key={index} className="panel panel-default"
+                            //     style={{ height: 400,margin: '10px 0px 0px 0px'}}>
+                            //     123123123
+                            // </div>
+                            <TimeLine key={index} style={{ height: 400, width: 410, margin: '10px 0px 0px 0px'}}/>
                         )}
-                        <div id="loaderr"></div>
+                        <div style={{ marginTop: 10 }} id="loaderr"></div>
                     </div>
                 </div>
             </div>

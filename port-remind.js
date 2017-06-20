@@ -12,3 +12,4 @@
 
 
 "view-user": 7070
+"view-store": 7071
