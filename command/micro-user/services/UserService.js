@@ -2,7 +2,7 @@ import { User, Address } from '../models'
 import jwt from 'jsonwebtoken'
 import { Language } from '../enum'
 import mongoose from '../datasource'
-import { checkEmail, getCU } from '../utils/utils'
+import { checkEmail } from '../utils/utils'
 const USER_GLOBAL_ID = '001'
 
 export const getUser = (id, next) => {
@@ -18,16 +18,16 @@ export const getUser = (id, next) => {
     } else {
         next(null)
     }
-}
+};
 
 export const getUserGlobalId = (id) => {
     return USER_GLOBAL_ID + id
-}
+};
 
 export const getUserLocalId = (id) => {
     if (id.length <= 3) return id
     return id.substr(3, id.length)
-}
+};
 
 export const getUserTrivivalInfo = (user) => {
     return {
