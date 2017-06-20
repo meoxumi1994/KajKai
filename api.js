@@ -240,7 +240,7 @@ PUT /store {
   },
 }
 
-GET /store/sellpost/:storeid?offset=-1 { // length = 2
+GET /sellpost/:storeid?offset=-1 { // length = 2
   offset: ,
   storeid: ,
   sellposts: [
