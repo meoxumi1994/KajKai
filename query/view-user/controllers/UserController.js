@@ -1,25 +1,43 @@
 import { getUser } from '../services/UserService.js'
 
-export const getUserHandler = () => {
-    return (req, res) => {
-        if (req.decoded) {
-            let requestedId = req.params.id
+export const getUserHandler = () => (req, res) => {
+  if (req.decoded) {
+    let requestedId = req.params.id
 
-            if(!requestedId) {
-              requestedId = req.decoded._id
-            }
-
-            getUser(requestedId, (user) => {
-                if (user) {
-                    res.json(user)
-                } else {
-                    res.json({status: 'failed'})
-                }
-            })
-        } else {
-            res.json({status: 'failed'})
-        }
+    if(!requestedId) {
+      requestedId = req.decoded._id
     }
+
+    getUser(requestedId, (user) => {
+      if (user) {
+        res.json(user)
+      } else {
+        res.json({status: 'failed'})
+      }
+    })
+  } else {
+    res.json({status: 'failed'})
+  }
+}
+
+export const getUserPrivacyHandler = () => (req, res) => {
+  if (req.decoded) {
+    let requestedId = req.params.id
+
+    if(!requestedId) {
+      requestedId = req.decoded._id
+    }
+
+    getUser(requestedId, (userPrivacy) => {
+      if (userPrivacy) {
+        res.json(userPrivacy)
+      } else {
+        res.json({status: 'failed'})
+      }
+    })
+  } else {
+    res.json({status: 'failed'})
+  }
 }
 
 export const getUserTrivial = () => {
