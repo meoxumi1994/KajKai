@@ -66,9 +66,9 @@ PUT /phone/user {
 
 PUT /blacklist { // blockid co thi delete ko co thi add
     blockid: ,
-    idtype: 'storeid|userid|mesid' ,
 },{
     blockid: ,
+    type: 'REMOVE|ADD'
     idtype: 'storeid|userid|mesid' ,
     name: , // name of blockid
 }

@@ -229,81 +229,148 @@ class WebcamCapture extends React.Component {
         imgData.src = imageSrc
     }
     render() {
-        const { style } = this.props
+        const { style, title} = this.props
         return (
-          <div>
-            <Webcam
-              audio={false}
-              width={style.width}
-              height={style.height}
-              ref={ (webcam) => this.webcam = webcam }
-              screenshotFormat="image/jpeg"
-            />
-            <button onClick={() => this.capture() }>Capture photo</button>
-            <img id="imgData"/>
-          </div>
-        );
-    }
-}
-
-class AlignImage extends React.Component {
-    constructor(props){
-        super(props)
-    }
-    render(){
-        const { style } = this.props
-        return (
-            <div>
-
+            <div id="webcamcapture" className="modal fade" role="dialog">
+                <div className="modal-dialog" style={{ width: style.width + 16}}>
+                    <div className="modal-content">
+                        <div className="modal-header" style={{ padding: 8 }}>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <strong>{title}</strong>
+                        </div>
+                        <div className="modal-body">
+                            <Webcam
+                              audio={false}
+                              width={style.width}
+                              height={style.height}
+                              ref={ (webcam) => this.webcam = webcam }
+                              screenshotFormat="image/jpeg"
+                            />
+                            <button onClick={() => this.capture() }>Capture photo</button>
+                            <img id="imgData"/>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                </div>
             </div>
-        )
+              <div>
+
+              </div>
+        );
     }
 }
 
 class Croppie extends React.Component {
     constructor(props){
         super(props)
+        this.state = { first : true }
     }
-    // _crop(){
-    //     console.log('crop', )
-    // }
     onZoom(){
-        this.refs.cropper.zoomTo(2)
+        this.refs.cropper.zoomTo(0.1)
     }
     onSave(){
         this.img.src = this.refs.cropper.getCroppedCanvas().toDataURL()
     }
     render() {
-        const { style } = this.props
+        const { style, src, title, description} = this.props
         return (
-            <div style={{ width: style.width, backgroundColor: '#F2F2F2'}}>
-                <Cropper
-                    viewMode={1}
-                    ref='cropper'
-                    src='https://static.pexels.com/photos/36753/flower-purple-lical-blosso.jpg'
-                    style={{height: style.height, width: style.width }}
-                    aspectRatio={1 / 1}
-                    guides={false}
-                    modal={false}
-                    scalable={false}
-                    cropBoxMovable={false}
-                    cropBoxResizable={false}
-                    dragMode='move'
-                    background={false}
-                    autoCropArea={0.7}
-                    // crop={this._crop.bind(this)}
-                />
-                <div>
-                    <div className="btn btn-xs btn-default"
-                        onClick={() => this.onSave()}> save </div>
-                    <div className="btn btn-xs btn-default"
-                        onClick={() => this.onZoom()}> zoom </div>
+            <div id="croppie" className="modal fade" role="dialog">
+              <div className="modal-dialog" style={{ width: style.width + 2 }}>
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <button type="button" className="close" data-dismiss="modal">&times;</button>
+                    <strong>{title}</strong>
+                  </div>
+                  <div className="modal-body" style={{ padding: 0 }}>
+                      <Cropper
+                          viewMode={1}
+                          ref='cropper'
+                          src={src}
+                          minContainerWidth={style.width}
+                          minContainerHeight={style.height}
+                          aspectRatio={1 / 1}
+                          guides={false}
+                          modal={true}
+                          cropBoxMovable={false}
+                          cropBoxResizable={false}
+                          dragMode='move'
+                          background={false}
+                          autoCropArea={1}
+                      />
+                  </div>
+                  <div style={{ paddingLeft: 20 }}>
+                      {description}
+                      <img ref={(img) => this.img = img }/>
+                  </div>
+                  <div className="modal-footer">
+                      <button type="button" className="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+                      <div className="btn btn-sm btn-default"
+                          style={{ backgroundColor: '#BB0F23', borderColor: '#BB0F23', color: 'white'}}
+                          onClick={() => this.onSave()}> Save </div>
+                  </div>
                 </div>
-                <div>
-                    <img ref={(img) => this.img = img }/>
-                </div>
+
+              </div>
             </div>
         );
+    }
+}
+
+class KeepImage extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    uploadPhoto(){
+        document.getElementById("myinput_file").click()
+    }
+    render(){
+        const { TITLE, UPLOAD_PHOTO, TAKE_PHOTO, SUGGEST_PHOTO } = this.props
+        return(
+            <div id="keepimage" className="modal fade" role="dialog">
+                <div className="modal-dialog" style={{ width: 784 }}>
+                    <div className="modal-content">
+                        <div className="modal-header">
+                          <button type="button" className="close" data-dismiss="modal">&times;</button>
+                          <strong>{TITLE}</strong>
+                        </div>
+                        <div className="modal-body" style={{ padding: 8 }}>
+                            <div className="container-fluid">
+                                <div className="row">
+                                    <div className="col col-xs-6" style={{ padding: 0}}>
+                                        <div className="btn btn-default"
+                                            style={{ width: 380, height: 110, paddingTop: 44}}
+                                            onClick={() => this.uploadPhoto()}>
+                                            + {UPLOAD_PHOTO}
+                                        </div>
+                                        <input style={{
+                                            position: 'absolute',
+                                            visibility: 'hidden',
+                                            width: 0,
+                                            height: 0,
+                                        }} accept="image/*" type="file" id="myinput_file"/>
+                                    </div>
+                                    <div className="col col-xs-6" style={{ padding: 0}}>
+                                        <div className="btn btn-default"
+                                            style={{ width: 380, height: 110 , paddingTop: 44}}>
+                                            + {TAKE_PHOTO}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={{ padding: 8 }}>
+                                <span className="text-muted"
+                                    fontSize={17}>{SUGGEST_PHOTO}</span>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 }
 
@@ -313,14 +380,34 @@ const Compp = ({}) => (
             images={["/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg"]}
             onClick={() => console.log('onClick')}
             textChange="Add photo"
-            onedit={true}/>
-        <Camera style={{ width: 170, height: 170 }}
+            onedit={true}/> */}
+        {/* <button type="button" className="btn btn-info btn-lg"
+            data-toggle="modal" data-target="#keepimage">Open Modal</button>
+        <KeepImage
+            TITLE='Add Photo'
+            UPLOAD_PHOTO='Upload Photo'
+            TAKE_PHOTO='Take Photo'
+            SUGGEST_PHOTO='Suggest Photo'/> */}
+        {/* <Camera style={{ width: 170, height: 170 }}
             src="/images/flower001.jpg"
             onClick={() => console.log('onClick')}
             textChange="Add photo"
         /> */}
-        {/* <WebcamCapture style={{ width: 500, height: 300 }}/> */}
-        <Croppie style={{ width: 780, height: 440 }}/>
+        <button type="button" class="btn btn-info btn-lg"
+            data-toggle="modal" data-target="#webcamcapture">Open Modal</button>
+        <WebcamCapture
+            title='take photo'
+            description='Your current profile picture is always public.'
+            style={{ width: 500, height: 300 }}/>
+
+        {/* <button type="button" className="btn btn-info btn-lg"
+            data-toggle="modal" data-target="#croppie">Open Modal</button>
+        <Croppie
+            description={'scroll to zoom in and zoom out'}
+            title="Create profile picture"
+            src="/images/flower005.jpg"
+            style={{ width: 780, height: 440 }}/> */}
+
     </div>
 )
 

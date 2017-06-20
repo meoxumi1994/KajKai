@@ -2,18 +2,19 @@ import { config } from '../config/commonConfig'
 import { getUserFromFacebookId, getUserBasicInfo, getUserToken, createUser, getUserFromEmail, getUserFromPhone } from '../services/UserService'
 import { checkPhone, checkEmail } from '../utils/utils'
 import { SocialType } from '../enum'
+import { createUserPub } from './UserPubController'
 
 export const loginFacebook = () => {
     return (req, res) => {
         const headers = {
             'User-Agent':       'Super Agent/0.0.1',
             'Content-Type':     'application/x-www-form-urlencoded'
-        }
+        };
         const options = {
             url: config.FACEBOOK_API_URL + req.body.tokenId,
             method: 'GET',
             headers: headers
-        }
+        };
         request(options, function(error, response, body) {
             if (!error && response.statusCode === 200) {
                 body = JSON.parse(body)
@@ -30,6 +31,7 @@ export const loginFacebook = () => {
                     } else {
                         createUser(null, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, function (user) {
                             if (user) {
+                                createUserPub(user)
                                 res.cookie('token', getUserToken(user._id))
                                 getUserBasicInfo(user, function (data) {
                                     res.json({user: data})
@@ -104,7 +106,8 @@ export const loginGoogle = () => {
                             if (!user) {
                                 res.json({error: 'error'})
                             } else {
-                                res.cookie('token', getUserToken(newuser._id))
+                                createUserPub(user)
+                                res.cookie('token', getUserToken(user._id))
                                 getUserBasicInfo(user, function (data) {
                                     res.json({user: data})
                                 })

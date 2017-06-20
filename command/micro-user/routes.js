@@ -71,5 +71,12 @@ export default {
             middleware: [auth()],
             method: 'logOutUser'
         }
+    },
+    '/blacklist': {
+        put: {
+            controller: 'UserController',
+            middleware: [auth()],
+            method: 'blackList'
+        }
     }
 }
