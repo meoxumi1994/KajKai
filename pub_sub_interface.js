@@ -33,7 +33,7 @@ export default {
                 {
                     event: 'USER.BlackListUpdated',
                     user: {
-                        userId: '', blockId: '', status: ''
+                        userId: '', blockId: '', status: 'add|remove'
                     }
                 }
             ]

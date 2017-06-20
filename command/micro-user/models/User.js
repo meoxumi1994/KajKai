@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
     yearOfBirthLastUpdateAt: {type: Date},
     addressLastUpdateAt: {type: Date},
     phoneLastUpdateAt: {type: Date},
-    privacyAEP: {type: String, enum: _.values(PrivacyAEP), default},
+    privacyAEP: {type: String, enum: _.values(PrivacyAEP)},
     privacyOthers: {type: String, enum: _.values(PrivacyOthers)}
 })
 

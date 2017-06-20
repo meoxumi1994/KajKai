@@ -1,7 +1,7 @@
 import { getUserFromEmail, createUser, getUserToken, verifyToken, updateVerifyUser } from '../services/UserService'
 import { checkEmail } from '../utils/utils'
 import { sendVerifyEmail } from '../services/EmailService'
-import { config }  from '../config/commonConfig'
+import config from '../config/commonConfig'
 import { createUserPub } from './UserPubController'
 
 export const registerNewUser = () => {
@@ -33,7 +33,7 @@ export const registerNewUser = () => {
 export const confirmEmailVerification = () => {
     return (req, res) => {
         const token = req.params.token;
-        const redirectUrl = config.REDIRECT_URL;
+        const redirectUrl = config.getClientDomain();
         if (!token) {
             res.redirect(redirectUrl + '/login');
             return
