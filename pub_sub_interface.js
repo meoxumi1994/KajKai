@@ -8,7 +8,6 @@ export default {
                             username: '',
                             email: '',
                             avatarUrl: '',
-                            coverUrl: '',
                             id: ''
                     }
                 },
