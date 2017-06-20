@@ -7,12 +7,14 @@ export const createUserPub = (user) => {
     const pub = redis.createClient(config);
     const publicData = {user: getUserBasicInfo(user)};
     pub.publish('USER.Created', JSON.stringify(publicData));
+    pub.quit();
 };
 
 export const updateUserPub = (user) => {
     const pub = redis.createClient(config);
     const publishData = ({user: getUserBasicInfo(user)});
     pub.publish('USER.Updated', JSON.stringify(publishData));
+    pub.quit();
 };
 
 export const getStore = (storeId, next) => {
@@ -39,4 +41,5 @@ export const updateBlackList = (userId, blockId, status) => {
     const pub = redis.createClient(config);
     const publishData = {user: {userId: userId, blockId: blockId, status: status}};
     pub.publish('USER.BlackListUpdated', JSON.stringify(publishData));
+    pub.quit();
 };
