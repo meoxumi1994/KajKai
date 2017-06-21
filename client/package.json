@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "cors": "^2.8.3",
+    "cropperjs": "^1.0.0-rc.2",
     "draft-js": "^0.10.1",
     "express": "^4.15.2",
     "react-contenteditable": "^2.0.2",
