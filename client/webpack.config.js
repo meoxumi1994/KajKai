@@ -16,13 +16,13 @@ module.exports = {
   },
   module: {
     rules: [
-        {
-            test: /\.css$/,
-            use: [
-                'style-loader',
-                'css-loader?importLoader=1&modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
-            ]
-        },
+        // {
+        //     test: /\.css$/,
+        //     use: [
+        //         'style-loader',
+        //         'css-loader?importLoader=1&modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+        //     ]
+        // },
       {
         exclude: /(node_modules)/,
         test: /\.js$/,

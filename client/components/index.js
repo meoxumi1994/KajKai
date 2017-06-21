@@ -234,8 +234,8 @@ class WebcamCapture extends React.Component {
         }
     }
     capture(){
+        if(this.state.iswaitting) return;
         this.setState({
-            click_capture: true,
             iswaitting: true,
             cowndown: 3,
         })
@@ -246,6 +246,7 @@ class WebcamCapture extends React.Component {
             if(this.state.cowndown == 0){
                 clearInterval(myInterval)
                 this.setState({
+                    click_capture: true,
                     iswaitting: false,
                     cowndown: undefined,
                 })
@@ -263,6 +264,7 @@ class WebcamCapture extends React.Component {
         })
     }
     onSave(){
+        if(this.state.iswaitting) return;
         console.log('onSave')
     }
     render() {
@@ -321,15 +323,20 @@ class WebcamCapture extends React.Component {
                             {this.state.click_capture?
                                 <div className="modal-footer">
                                     <div className="btn btn-sm btn-default"
-                                            style={{ backgroundColor: '#BB0F23', borderColor: '#BB0F23', color: 'white'}}
+                                        disabled={this.state.iswaitting}
+                                            style={{ backgroundColor: '#BB0F23', borderColor: '#BB0F23',
+                                            color: 'white' }}
                                         onClick={() => this.capture()}>{RETAKE_PHOTO}</div>
-                                    <button className="btn btn-sm btn-default"
-                                            style={{ backgroundColor: '#BB0F23', borderColor: '#BB0F23', color: 'white'}}
-                                        onClick={() => {if(!this.state.iswaittin)this.onSave()}}>
-                                        {SAVE}</button>
+                                    {!this.state.iswaitting &&
+                                        <button className="btn btn-sm btn-default"
+                                                style={{ backgroundColor: '#BB0F23', borderColor: '#BB0F23', color: 'white'}}
+                                            onClick={() => {this.onSave()}}>
+                                            {SAVE}</button>
+                                    }
                                 </div>
                             :    <div className="modal-footer">
                                     <div className="btn btn-sm btn-default"
+                                        disabled={this.state.iswaitting}
                                         style={{ backgroundColor: '#BB0F23', borderColor: '#BB0F23', color: 'white'}}
                                         onClick={() => this.capture()}>{CAPTURE_PHOTO}</div>
                                 </div>
@@ -371,27 +378,26 @@ class Croppie extends React.Component {
             console.log(this.refs.cropper)
             const img = new Image()
             img.src = reader.result
-            // this.refs.cropper.cropper = new Cropperjs(img, {
-            //     ref: 'cropper',
-            //     viewMode: 1,
-            //     dragMode: 'move',
-            //     aspectRatio: 1,
-            //     minContainerWidth: this.props.style.width,
-            //     minContainerHeight: this.props.style.height,
-            //     guides: true,
-            //     modal: true,
-            //     cropBoxMovable: false,
-            //     cropBoxResizable: false,
-            //     background: false,
-            //     autoCropArea: 1,
-            // })
+            this.refs.cropper.cropper = new Cropperjs(img, {
+                ref: 'cropper',
+                viewMode: 1,
+                dragMode: 'move',
+                aspectRatio: 1,
+                minContainerWidth: this.props.style.width,
+                minContainerHeight: this.props.style.height,
+                guides: true,
+                modal: true,
+                cropBoxMovable: false,
+                cropBoxResizable: false,
+                background: false,
+                autoCropArea: 1,
+            })
             console.log(this.refs.cropper)
             document.getElementById("btn_open_modal").click()
         }
     }
     render() {
         const { style, TITLE, DESCRIPTION} = this.props
-        const Croppii = new Cropperjs()
         return (
             <div>
                 <button type="button" className="btn btn-default"
@@ -422,7 +428,7 @@ class Croppie extends React.Component {
                           </div>
                           <div className="modal-body" style={{ padding: 0 }}>
                               <img id="mycropper"/>
-                              <Croppii ref="cropper"/>
+                              {/* <Croppii ref="cropper"/> */}
                           </div>
                           <div style={{ paddingLeft: 20 }}>
                               {DESCRIPTION}

@@ -1,15 +1,17 @@
 socket mac dinh { type: , data: ... }
 server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 
-'server/JOIN_POST' {
+'server/JOIN_SELL_POST' {
     sellpostid:
-    minorpostid:
-    offsettop:     // -1 == end
-    offsetbottom:    // -1 == end
+    offset: 
+}
+'client/JOIN_SELL_POST' {
+
 }
 'server/LEAVE_POST' {
     sellpostid:
     minorpostid:
+    offset:
 }
 
 'server/COMMENT' {
