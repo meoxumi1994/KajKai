@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
   sex: {type: String, enum: _.values(Sex)},
   yearOfBirth: {type: Number},
   lastUpdate: {type: LastUpdateSchema},
-  blacklist: [BlackSchema],
+  blackList: [BlackSchema],
   privacy: {type: PrivacySchema}
 })
 

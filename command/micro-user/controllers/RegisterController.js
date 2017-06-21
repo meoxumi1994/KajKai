@@ -1,7 +1,8 @@
 import { getUserFromEmail, createUser, getUserToken, verifyToken, updateVerifyUser } from '../services/UserService'
 import { checkEmail } from '../utils/utils'
 import { sendVerifyEmail } from '../services/EmailService'
-import { config }  from '../config/commonConfig'
+import config from '../config/commonConfig'
+import { createUserPub } from './UserPubController'
 
 export const registerNewUser = () => {
     return (req, res) => {
@@ -12,10 +13,11 @@ export const registerNewUser = () => {
                     if (user) {
                         res.json({status: 'used'})
                     } else {
-                        createUser(body.email, body.username, body.password, 0, body.yearOfBirth, null, null, (user) => {
+                        createUser(body.email, body.username, body.password, 0, null, null, null, (user) => {
                             if (!user) {
-                                res.json({status: 'failed xxxxx'})
+                                res.json({status: 'failed'})
                             } else {
+                                createUserPub(user);
                                 sendVerifyEmail(body.email, getUserToken(user._id), () => {
                                     res.json({status: 'success'})
                                 })
@@ -26,17 +28,17 @@ export const registerNewUser = () => {
             }
         }
     }
-}
+};
 
 export const confirmEmailVerification = () => {
     return (req, res) => {
-        const token = req.params.token
-        const redirectUrl = config.REDIRECT_URL
+        const token = req.params.token;
+        const redirectUrl = config.getClientDomain();
         if (!token) {
-            res.redirect(redirectUrl + '/login')
+            res.redirect(redirectUrl + '/login');
             return
         }
-        const decoded = verifyToken(token)
+        const decoded = verifyToken(token);
         if (!decoded) {
             res.redirect(redirectUrl + '/login')
         } else {
@@ -44,10 +46,10 @@ export const confirmEmailVerification = () => {
                 if (err) {
                     res.redirect(redirectUrl + '/login')
                 } else {
-                    res.cookie('token', getUserToken(decoded._id))
+                    res.cookie('token', getUserToken(decoded._id));
                     res.redirect(redirectUrl + '/profile')
                 }
             })
         }
     }
-}
+};

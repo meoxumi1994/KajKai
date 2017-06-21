@@ -1,7 +1,7 @@
 import { Store, Category, StorePost } from '../models'
 import { checkPhone } from '../utils/Utils'
 import { getPost, createNewPost } from './StorePostService'
-const GLOBAL_STORE_ID = '002'
+const GLOBAL_STORE_ID = '002';
 
 export const getStore = (id, next) => {
     Store.findById(getStoreLocalId(id), function (err, store) {

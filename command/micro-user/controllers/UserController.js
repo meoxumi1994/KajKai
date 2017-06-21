@@ -1,4 +1,7 @@
-import { updateUserInfo, getUser, getUserBasicInfo, getUserTrivivalInfo} from '../services/UserService.js'
+import { updateUserInfo, getUser, getUserBasicInfo, getUserTrivivalInfo } from '../services/UserService.js'
+import { updateUserPub } from './UserPubController'
+import { checkBlackList } from '../services/BlackListService'
+import global from '../config/globalId'
 
 export const getUserController = () => {
     return (req, res) => {
@@ -18,12 +21,12 @@ export const getUserController = () => {
             res.json({status: 'failed'})
         }
     }
-}
+};
 
 export const getUserTrivial = () => {
     return (req, res) => {
         if (req.decoded) {
-            const id = req.decoded._id
+            const id = req.decoded._id;
             getUser(id, function (user) {
                 if (user) {
                     res.json(getUserTrivivalInfo(user))
@@ -35,7 +38,7 @@ export const getUserTrivial = () => {
             res.json({status: 'failed'})
         }
     }
-}
+};
 
 export const changeUserPhone = () => {
     return (req, res) => {
@@ -59,7 +62,7 @@ export const changeUserPhone = () => {
 
 export const updateUserPassword = () => {
     return (req, res) => {
-        const id = req.decoded._id
+        const id = req.decoded._id;
         getUser(id, (user) => {
             if (user) {
                 if (user.password !== req.body.password || !req.body.newpassword || req.body.newpassword.length < 6
@@ -77,25 +80,37 @@ export const updateUserPassword = () => {
             }
         })
     }
-}
+};
 
 export const changeUserProfile = () => {
     return (req, res) => {
-        updateUserInfo(req.decoded._id,req.body, (status) => {
-            res.json(status)
-        })
-    }
-}
-
-export const getUserInfoController = () => {
-    return (req, res) => {
-        const id = req.body.id
-        getUser(id, function (user) {
+        updateUserInfo(req.decoded._id,req.body, (status, user) => {
             if (user) {
-                res.json({status: 'success', user: getUserBasicInfo(user)})
-            } else {
-                res.json({status: 'failed'})
+                updateUserPub(user)
             }
+            res.json({status: status})
         })
     }
-}
+};
+
+export const blackList = () => {
+    return (req, res) => {
+        const userId = req.decoded._id;
+        const blockId = req.body.blockid;
+        checkBlackList(userId, blockId, (block, type) => {
+            var idtype = '';
+            switch (userId) {
+                case userId.startsWith(global.USER_GLOBAL_ID):
+                    idtype = 'userid';
+                    break;
+                case userId.startsWith(global.STORE_GLOBAL_ID):
+                    idtype = 'storeid';
+                    break;
+                case userId.startsWith(global.MESSAGE_GLOBAL_ID):
+                    idtype = 'mesid'
+                    break
+            }
+            res.json({blockid: blockId, type: type, idtype: idtype, name: block.name})
+        })
+    }
+};

@@ -604,21 +604,6 @@ GET /product/:id {
   totalnum: // số lần được gọi trong leadercomment
 }
 
-POST /store/:id {
-  storename: 'Táo Tàu',
-  address: '47 Cầu Giáy, Hà Nội',
-  phone: '0123456789',
-  category: 'hoa quả táo Việt',
-  longitude: '424242',
-  latitude: '536363',
-},{
-    status: 'success|error'
-}
-
-GET /post/:id {
-
-}
-
 GET /chatlist?offset=offset&length=length: {
     data: [
       {

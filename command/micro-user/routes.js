@@ -2,7 +2,7 @@ import auth from './middlewares/auth'
 import phoneCheck from './middlewares/phoneChecking'
 
 export default {
-  
+
     '/emailverification/:token': {
         get: {
             controller: 'RegisterController',
@@ -70,6 +70,13 @@ export default {
             controller: 'LoginController',
             middleware: [auth()],
             method: 'logOutUser'
+        }
+    },
+    '/blacklist': {
+        put: {
+            controller: 'UserController',
+            middleware: [auth()],
+            method: 'blackList'
         }
     }
 }

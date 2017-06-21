@@ -12,10 +12,10 @@ export const insertHandler = () => (req, res) => {
 }
 
 export const updateHandler = () => (req, res) => {
-  const user = new User({
-    _id: '5947f72603b3340ad4183857',
-    username: 'abcxyz'
-  })
+  // const user = new User({
+  //   _id: '5947f72603b3340ad4183857',
+  //   username: 'abcxyz'
+  // })
 
   // User.findById('5947f72603b3340ad4183857', (err, user) => {
   //   user.username = 'aaaxxx'
@@ -26,12 +26,16 @@ export const updateHandler = () => (req, res) => {
   //     })
   //   })
   // })
+  const { username, email } = req.body
+
+  const user = {}
+  if(username) user.username = username
+  if(email) user.email = email
+
 
   User.findOneAndUpdate({
     id: 'ey89dheify927f02buv3u'
-  }, {
-    username: 'another name'
-  }, (a, b, c, d, e) => {
+  }, user, (a, b, c, d, e) => {
     res.send({
       a, b, c, d, e
     })

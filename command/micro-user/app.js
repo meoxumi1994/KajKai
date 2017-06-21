@@ -3,7 +3,7 @@ import compression from 'compression'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
-import { config } from './config/commonConfig'
+import config from './config/commonConfig'
 import allRoutes from './routes'
 
 const app = express()
@@ -14,7 +14,7 @@ const corsOptions = {
 }
 
 app.use(compression())
-app.use(cors(corsOptions));
+app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

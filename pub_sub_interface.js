@@ -1,7 +1,42 @@
 export default {
     user: {
         sub: ['USER.GetUser', 'USER.AuthorizeToken'],
-        pub: ['USER.Created', 'USER.Updated', 'USER.PasswordUpdated', 'USER.PhoneUpdated', 'USER.BlackList'],
+        pub: //['USER.Created', 'USER.Updated', 'USER.PasswordUpdated', 'USER.PhoneUpdated', 'USER.BlackList'],{
+            [{
+                event: 'USER.Created',
+                user: {
+                            username: '',
+                            email: '',
+                            avatarUrl: '',
+                            id: ''
+                    }
+                },
+                {
+                    event: 'USER.Updated',
+                    user: {
+                        username: '',
+                        avatarUrl: '',
+                        coverUrl: '',
+                        address: '',
+                        phone:'',
+                        language: '',
+                        sex: '',
+                        yearOfBirth: '',
+                        lastUpdate: {
+                            username: '',
+                            phone: '',
+                            address: '',
+                        },
+                        id: ''
+                    }
+                },
+                {
+                    event: 'USER.BlackListUpdated',
+                    user: {
+                        userId: '', blockId: '', status: 'add|remove'
+                    }
+                }
+            ]
     },
     store: {
         sub: ['STORE.GetStore'],

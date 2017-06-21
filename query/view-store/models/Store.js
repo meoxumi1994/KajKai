@@ -20,10 +20,10 @@ const StoreSchema = new mongoose.Schema({
   longitute: {type: Number},
   phone: {type: String},
   certificates: {type: CertificateSchema},
-  numlike: {type: Number},
-  likes: [LikerSchema],
-  numfollow: {type: Number},
-  follows: [FollowerSchema]
+  numberOfLike: {type: Number},
+  likers: [LikerSchema],
+  numerOfFollow: {type: Number},
+  followers: [FollowerSchema]
 })
 
 export default StoreSchema

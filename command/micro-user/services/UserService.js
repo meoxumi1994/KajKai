@@ -1,8 +1,8 @@
 import { User, Address } from '../models'
 import jwt from 'jsonwebtoken'
-import enums from '../enum'
+import { Language } from '../enum'
 import mongoose from '../datasource'
-import { checkEmail, getCU } from '../utils/utils'
+import { checkEmail } from '../utils/utils'
 const USER_GLOBAL_ID = '001'
 
 export const getUser = (id, next) => {
@@ -18,16 +18,16 @@ export const getUser = (id, next) => {
     } else {
         next(null)
     }
-}
+};
 
 export const getUserGlobalId = (id) => {
     return USER_GLOBAL_ID + id
-}
+};
 
 export const getUserLocalId = (id) => {
     if (id.length <= 3) return id
     return id.substr(3, id.length)
-}
+};
 
 export const getUserTrivivalInfo = (user) => {
     return {
@@ -36,8 +36,7 @@ export const getUserTrivivalInfo = (user) => {
         address: user.address,
         phone: user.phone
     }
-
-}
+};
 
 export const getUserBasicInfo = (user) => {
     return {
@@ -47,7 +46,7 @@ export const getUserBasicInfo = (user) => {
         coverUrl: user.coverUrl,
         address: user.address,
         phone: user.phone,
-        language: user.language == enums.VIETNAM ? 'vi' : 'en',
+        language: user.language === Language.VIETNAM ? 'vi' : 'en',
         sex: user.sex,
         yearOfBirth: user.yearOfBirth,
         lastUpdate: {
@@ -60,9 +59,8 @@ export const getUserBasicInfo = (user) => {
         //     type: 'userid|storeid|mesid',
         //     name: ,
         // }],
-
         id: getUserGlobalId(user._id) }
-}
+};
 
 export const getUserBasicStoreInfo = (user) => {
     return { username: user.userName,
@@ -233,9 +231,13 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
     if (email === null || !checkEmail(email)) {
         if (!socialNetworkType) next(null)
     }
-    if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) next(null)
-    const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
-                socialNetworkId: socialNetworkId})
+    if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) next(null);
+    // const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
+    //             socialNetworkId: socialNetworkId});
+    // const user = new User({email: email, userName: userName, password: password});
+    console.log(email + ' ' + userName + ' ' + password);
+    const user = new User({email: email});
+    console.log(user);
     user.save(function (err) {
         if (err) {
             next(null)
@@ -248,23 +250,23 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
 export const updateUserInfo = (userId, info, next) => {
     getUser(userId, (user) => {
         if (!user) {
-            next({error: 'user error'})
+            next('user err', null);
             return
         }
-        var updateName = false
-        var updateAddress = false
-        var updateYOB = false
+        var updateName = false;
+        var updateAddress = false;
+        var updateYOB = false;
         if (info.username) {
             if (validateName(info.username)) {
-                user.userName = info.username
+                user.userName = info.username;
                 updateName = true
             } else {
-                next({error: 'name error'})
+                next('name error', null);
                 return
             }
         }
         if (info.avatarUrl) {
-            user.avatarUrl = info.avatarUrl
+            user.avatarUrl = info.avatarUrl;
             if (!user.imageUrl) {
                 user.imageUrl = [info.avatarUrl]
             } else {
@@ -274,7 +276,7 @@ export const updateUserInfo = (userId, info, next) => {
             }
         }
         if (info.coverUrl) {
-            user.coverUrl = info.coverUrl
+            user.coverUrl = info.coverUrl;
             if (!user.imageUrl) {
                 user.imageUrl = [info.coverUrl]
             } else {
@@ -284,14 +286,14 @@ export const updateUserInfo = (userId, info, next) => {
             }
         }
         if (info.address) { // TO DO
-            user.address = new Address(info.address)
+            user.address = new Address(info.address);
             updateAddress = true
         }
         if (info.language) {
             if (validateLanguage(info.language)) {
                 user.language = info.language
             } else {
-                next({error: 'language error'})
+                next('language error', null);
                 return
             }
         }
@@ -299,7 +301,7 @@ export const updateUserInfo = (userId, info, next) => {
             if (validateSex(info.sex)) { //
                 user.sex = info.sex
             } else {
-                next({error: 'sex error'})
+                next('sex error', null);
                 return
             }
         }
@@ -308,14 +310,14 @@ export const updateUserInfo = (userId, info, next) => {
             try{
                 const year = parseInt(info.yearOfBirth)
                 if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
-                    user.yearOfBirth = year
+                    user.yearOfBirth = year;
                     updateYOB = true
                 } else {
-                    next({error: 'year error'})
+                    next('year error', null);
                     return
                 }
             } catch (err) {
-                next({error: 'year error'})
+                next('year error', null)
             }
         }
 
@@ -331,10 +333,10 @@ export const updateUserInfo = (userId, info, next) => {
 
         user.save((err) => {
             if (err) {
-                next({status: 'update err'})
+                next('update err', null)
             } else {
-                next({status: 'success'})
+                next('success', user)
             }
         })
     })
-}
+};
