@@ -390,7 +390,7 @@ GET /sellpost/:id {
                 num: 2
               },
           ],
-          comments: [ // thằng đầu tiền là comment của leader // lay tat ca trong 1 gio gan day toi da 7
+          comments: [ // thằng đầu tiền là comment của leader // lay tat ca trong 1 gio gan day toi da 2
             {
               id: ,
               ownerid: ,
