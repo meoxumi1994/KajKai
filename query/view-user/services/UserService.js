@@ -40,3 +40,12 @@ export const getUserPrivacy = (id, next) => {
       }
   })
 }
+
+export const verifyToken = (token) => {
+    try {
+        const decoded = jwt.verify(token, 'secret');
+        return decoded;
+    } catch(err) {
+        return null;
+    }
+}

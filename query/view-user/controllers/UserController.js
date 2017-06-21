@@ -15,6 +15,7 @@ export const getUserHandler = () => (req, res) => {
         res.send({status: 'failed'})
       }
     })
+
   } else {
     res.send({status: 'failed'})
   }
@@ -35,6 +36,7 @@ export const getUserPrivacyHandler = () => (req, res) => {
         res.send({status: 'failed'})
       }
     })
+
   } else {
     res.send({status: 'failed'})
   }

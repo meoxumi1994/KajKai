@@ -13,3 +13,4 @@
 
 "view-user": 7070
 "view-store": 7071
+"view-sellpost": 7072

@@ -1,7 +1,7 @@
 import { Store } from '../models'
 
 export const createStore = (message) => {
-  const { id, userId, storeName } = message.store
+  const { id, userId, storeName } = message
 
   const store = new Store({
     id,
@@ -13,7 +13,7 @@ export const createStore = (message) => {
 }
 
 export const updateStore = (message) => {
-  const { avatarUrl, coverUrl, lastUpdate, address, addressMap, category, categoryAuto, latitute, longitute, phone, certificates } = message.store
+  const { avatarUrl, coverUrl, lastUpdate, address, addressMap, category, categoryAuto, latitute, longitute, phone, certificates } = message
   const store = {}
 
   if(avatarUrl) store.avatarUrl = avatarUrl
