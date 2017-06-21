@@ -17,5 +17,22 @@ export default {
             middleware: [auth()],
             method: 'deleteProductCon'
         }
+    },
+    '/postrows': {
+        post: {
+            controller: 'SellPostDetailController',
+            middleware: [auth()],
+            method: 'createSellPostDetailCon'
+        },
+        put: {
+            controller: 'SellPostDetailController',
+            middleware: [auth()],
+            method: 'updateSellPostDetailCon'
+        },
+        delete: {
+            controller: 'SellPostDetailController',
+            middleware: [auth()],
+            method: 'dellSellPostDetailCon'
+        }
     }
 }

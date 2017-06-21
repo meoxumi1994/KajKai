@@ -4,10 +4,10 @@ const SellPostDetailSchema = new mongoose.Schema({
     sellPostId: {type: String},
     content: {type: String},
     line: {type: Number},
-    imageURLs: {type: String},
+    imageURLs: [String],
     titlesOrder: [Number],
-    titles: {type: String},
-    productOrders: {type: String},
+    titles: [String],
+    productOrders: [Number],
     type: {type: String}
 });
 
