@@ -31,8 +31,7 @@ export const getStoreInfoService = (store) => {
         id: getStoreGlobalId(store._id),
         avatarUrl: store.avatarUrl,
         coverUrl: store.coverUrl,
-        owner: store.owner,
-        mainPostId: store.mainPostId
+        owner: store.owner
     }
 }
 
@@ -48,7 +47,7 @@ export const getStoreBasicInfoService = (store) => {
 export const validateStore = (store) => {
     if (!store.phone || !checkPhone(store.phone)) return false
     if (!store.address) return false
-    if (!store.storename || store.storename.length < 5 || store.storename.length > 50) return false
+    if (!store.storename || store.storename.length < 5 || store.storename.length > 50) return false;
     return true
 }
 
@@ -57,7 +56,7 @@ export const addNewStore = (_ownerId, _storename, _address, _phone, _category, n
                             address: _address,
                             phone: _phone,
                             category: _category,
-                            owner: _ownerId})
+                            owner: _ownerId});
     if (!validateStore(store)) {
         next(null)
         return
