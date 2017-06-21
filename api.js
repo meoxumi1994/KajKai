@@ -491,6 +491,7 @@ POST /postrows/product {
 PUT /postrows/product {
     sellpostid:
     postrowsid:
+    productid:
     product: {
         content: ,
         imageUrl: , // 20x20
