@@ -1,23 +1,17 @@
 import mongoose from '../datasource'
+import SubCategorySchema from './SubCategory'
+import CategorySchema from './Category'
+import ProductSchema from './Product'
+import SellPostDetailSchema from './SellPostDetail'
+import SellPostSchema from './SellPost'
+import StoreSchema from './Store'
 
-const AddressSchema = require('./Address')
-export const Address = mongoose.model('Address', AddressSchema)
 
-const SubCategorySchema = require('./SubCategory')
-export const SubCategory = mongoose.model('SubCategory', SubCategorySchema)
 
-const CategorySchema = require('./Category')
-export const Category = mongoose.model('Category', CategorySchema)
-
-const ProductSchema = require('./Product')
-export const Product = mongoose.model('Product', ProductSchema)
-
-const StorePostDetailSchema = require('./StorePostDetail')
-export const StorePostDetail = mongoose.model('StorePostDetail', StorePostDetailSchema)
-
-const StorePostSchema = require('./StorePost')
-export const StorePost = mongoose.model('StorePost', StorePostSchema)
-
-const StoreSchema = require('./Store')
-export const Store = mongoose.model('Store', StoreSchema)
+export const SubCategory = mongoose.model('SubCategory', SubCategorySchema);
+export const Category = mongoose.model('Category', CategorySchema);
+export const Product = mongoose.model('Product', ProductSchema);
+export const SellPostDetail = mongoose.model('SellPostDetail', SellPostDetailSchema);
+export const SellPost = mongoose.model('SellPost', SellPostSchema);
+export const Store = mongoose.model('Store', StoreSchema);
 
