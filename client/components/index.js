@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
+import { Modal } from 'react-bootstrap'
 
 import Cropper from 'react-cropper';
 import Cropperjs from 'cropperjs'
@@ -279,7 +280,7 @@ class WebcamCapture extends React.Component {
                     <span style={{ fontSize: 17}} >{" " + TITLE}</span>
                 </button>
                 <Modal show={this.state.showModal} onHide={this.close}>
-                    
+
                 </Modal>
                 <div id="webcamcapture" className="modal fade" role="dialog">
                     <div className="modal-dialog" style={{ width: style.width + 16}}>
