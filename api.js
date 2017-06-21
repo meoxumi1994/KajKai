@@ -240,7 +240,7 @@ PUT /store {
   },
 }
 
-GET /sellpost/:storeid?offset=-1 { // length = 2
+GET /sellpost/store/:storeid?offset=-1 { // length = 2
   offset: ,
   storeid: ,
   sellposts: [
@@ -295,7 +295,7 @@ GET /sellpost/:storeid?offset=-1 { // length = 2
       ], // tối đa 5 thằng bạn
       numcomment: ,
       numshare: ,
-      leadercomments: [ // tối đa 2 thằng trong 1 giờ
+      leadercomments: [ // tối đa 5 thằng trong 1 giờ
         {
           id: '7586449578',
           sellpostid: ,
@@ -327,6 +327,7 @@ GET /sellpost/:storeid?offset=-1 { // length = 2
 }
 
 GET /sellpost/:id {
+    offset: ,
     storeid: ,
     storename: ,
     category: ,
@@ -376,7 +377,7 @@ GET /sellpost/:id {
     ], // tối đa 5 thằng bạn
     numcomment: ,
     numshare: ,
-    leadercomments: [ // tối đa 2 thằng trong 1 giờ
+    leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
         {
           id: '7586449578',
           sellpostid: ,
@@ -389,7 +390,7 @@ GET /sellpost/:id {
                 num: 2
               },
           ],
-          comments: [ // thằng đầu tiền là comment của leader
+          comments: [ // thằng đầu tiền là comment của leader // lay tat ca trong 1 gio gan day toi da 2
             {
               id: ,
               ownerid: ,
@@ -416,13 +417,13 @@ PUT /sellpost {
 }
 
 POST /sellpost {
-  storeid: ,
-  category: ,
-  title: ,
-  description: ,
-  time: , // last update
-  status: 'notyet|open|sleep',
-  ship: '', // store viết vào có thể un
+    storeid: ,
+    category: ,
+    title: ,
+    description: ,
+    time: , // last update
+    status: 'notyet|open|sleep',
+    ship: '', // store viết vào có thể un
 }
 
 DELETE /sellpost {
@@ -486,10 +487,11 @@ POST /postrows/product {
 PUT /postrows/product {
     sellpostid:
     postrowsid:
+    productid:
     product: {
-      content: ,
-      imageUrl: , // 20x20
-      list: [],
+        content: ,
+        imageUrl: , // 20x20
+        list: [],
     },
 }
 
@@ -559,7 +561,7 @@ GET /minorpost/:storeid?offset=-1 { // length = 3
       ], // tối đa 5 thằng bạn
       numcomment: ,
       numshare: ,
-      leadercomments: [ // tối đa 2 thằng trong 1 giờ
+      leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
         {
           id: 'leadercomment001',
           sellpostid: ,
@@ -572,7 +574,7 @@ GET /minorpost/:storeid?offset=-1 { // length = 3
                 num: 2
               },
           ],
-          comments: [ // thằng đầu tiền là comment của leader
+          comments: [ // thằng đầu tiền là comment của leader // lay trong 1h gan day tối đa 2 thằng
             {
               id: ,
               ownerid: , // null
@@ -590,6 +592,148 @@ GET /minorpost/:storeid?offset=-1 { // length = 3
   ],
 }
 
+GET /post/user/:userid?offset=-1 { // length = 2
+  offset: ,
+  data: [
+      {
+          storeid: ,
+          sellpost:
+            {
+              id: ,
+              storeid: ,
+              storename: ,
+              category: ,
+              title: ,
+              description: ,
+              time: , // last update
+              status: 'notyet|open|sleep',
+              ship: '', // store viết vào có thể un
+              postrows_order: [],
+              postrows: [ // tables lấy những thằng đầu có tổng hàng <= 30, nếu quá nửa thằng cuối thì trả về cả thằng cuối
+                {
+                    id: , //
+                    content: ,
+                    numline: , // numline of row <= 30
+                    images: [
+                    // list of imageUrl
+                    ], // textimage|imagetext|groupimage
+                    titles_order: [],
+                    titles: [ // for product|listproduct otherwise  null
+
+                    ],
+                    products: [ // for product|listproduct otherwise  null
+                        {
+                          id: 'product002',
+                          content: ,
+                          imageUrl: , // 20x20
+                          list: [],
+                          totalnum: // số lần được gọi trong leadercomment
+                        },
+                    ],
+                    type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+                },
+              ],
+              numlike: '23',
+              likes: [
+                {
+                  userid: ,
+                  username: ,
+                },
+              ], // tối đa 5 thằng bạn
+              numfollow: '43',
+              follows: [
+                {
+                  userid: ,
+                  username: ,
+                },
+              ], // tối đa 5 thằng bạn
+              numcomment: ,
+              numshare: ,
+              leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
+                {
+                  id: '7586449578',
+                  sellpostid: ,
+                  order: [
+                      {
+                        id: 'product002',
+                        content: ,
+                        imageUrl: ,
+                        list: [],
+                        num: 2
+                      },
+                  ],
+                  comments: [ // thằng đầu tiền là comment của leader // toi da 2 thang trong 1h
+                    {
+                      id: ,
+                      ownerid: ,
+                      leadercommentid: ,//
+                      avatarUrl: // small size 20x20
+                      name: ,
+                      content: ,
+                      time: ,
+                      numlike: ,
+                    }
+                  ]
+                }
+              ]
+            },
+          minorpost: // lay 200 ky tu dau tien cua content
+            {
+              id: ,
+              numline: , // numline chi lien quan den content
+              storeid: ,
+              time: , // last update
+              content:,
+              images: [], //
+              video: ,
+              numlike: '23',
+              likes: [
+                {
+                  userid: ,
+                  username: ,
+                },
+              ], // tối đa 5 thằng bạn
+              numfollow: '43',
+              follows: [
+                {
+                  userid: ,
+                  username: ,
+                },
+              ], // tối đa 5 thằng bạn
+              numcomment: ,
+              numshare: ,
+              leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
+                {
+                  id: 'leadercomment001',
+                  sellpostid: ,
+                  order: [
+                      {
+                        id: 'product002',
+                        content: ,
+                        imageUrl: ,
+                        list: [],
+                        num: 2
+                      },
+                  ],
+                  comments: [ // thằng đầu tiền là comment của leader // toi da 2 thang trong 1h
+                    {
+                      id: ,
+                      ownerid: , // null
+                      leadercommentid: ,//
+                      avatarUrl: // small size 20x20
+                      name: ,
+                      content: ,
+                      time: ,
+                      numlike: ,
+                    }
+                  ]
+                }
+              ]
+            },
+      }
+  ]
+}
+
 GET /content/:minorpostid {
     content: '', // lay phan con lai cua content
 }
@@ -602,21 +746,6 @@ GET /product/:id {
   content: ,
   list: [],
   totalnum: // số lần được gọi trong leadercomment
-}
-
-POST /store/:id {
-  storename: 'Táo Tàu',
-  address: '47 Cầu Giáy, Hà Nội',
-  phone: '0123456789',
-  category: 'hoa quả táo Việt',
-  longitude: '424242',
-  latitude: '536363',
-},{
-    status: 'success|error'
-}
-
-GET /post/:id {
-
 }
 
 GET /chatlist?offset=offset&length=length: {

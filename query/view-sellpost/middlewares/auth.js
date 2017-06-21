@@ -1,4 +1,4 @@
-import { verifyToken } from '../services/StoreService'
+import { verifyToken } from '../services/SellpostService'
 
 const auth = () => {
     return (req, res, next) => {

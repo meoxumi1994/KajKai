@@ -1,4 +1,4 @@
-import { User } from '../models'
+import { User, Address } from '../models'
 
 export const insertHandler = () => (req, res) => {
   const user = new User(req.body)
@@ -12,6 +12,27 @@ export const insertHandler = () => (req, res) => {
 }
 
 export const updateHandler = () => (req, res) => {
+
+
+  // const address = new Address({
+  //   _id: "59493a5aae88a8155cf374de"
+  // })
+
+
+  Address.findById('59493a5aae88a8155cf374de', (err, address) => {
+    address.city = 'Quang Nam'
+    address.district = 'Dien Ban'
+    address.street = 'Truong Sa'
+    address.longitude = 123
+    address.latitude = 321
+
+    address.save((err, newAddress) => {
+      res.send({
+        err, newAddress
+      })
+    })
+  })
+
   // const user = new User({
   //   _id: '5947f72603b3340ad4183857',
   //   username: 'abcxyz'
@@ -26,18 +47,18 @@ export const updateHandler = () => (req, res) => {
   //     })
   //   })
   // })
-  const { username, email } = req.body
-
-  const user = {}
-  if(username) user.username = username
-  if(email) user.email = email
-
-
-  User.findOneAndUpdate({
-    id: 'ey89dheify927f02buv3u'
-  }, user, (a, b, c, d, e) => {
-    res.send({
-      a, b, c, d, e
-    })
-  })
+  // const { username, email } = req.body
+  //
+  // const user = {}
+  // if(username) user.username = username
+  // if(email) user.email = email
+  //
+  //
+  // User.findOneAndUpdate({
+  //   id: 'ey89dheify927f02buv3u'
+  // }, user, (a, b, c, d, e) => {
+  //   res.send({
+  //     a, b, c, d, e
+  //   })
+  // })
 }

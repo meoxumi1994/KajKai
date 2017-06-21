@@ -6,5 +6,9 @@ export default {
   'USER.Updated': {
     controller: 'UserSubController',
     method: 'updateUser'
+  },
+  'USER.BlackListUpdated': {
+    controller: 'UserSubController',
+    method: 'updateBlackList'
   }
 }
