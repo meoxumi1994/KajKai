@@ -5,7 +5,6 @@ export const getStore = (id, next) => {
         if (err) {
             next(null)
         } else {
-          const { likers, followers } = store
             next({
               id: store.id,
               userid: store.userId,
@@ -22,12 +21,21 @@ export const getStore = (id, next) => {
               phone: store.phone,
               certificates: store.certificates,
               numberOfLike: store.likeNumber,
-              likes: likers.slice(0, 5),
+              likes: store.likers.slice(0, 5),
               numfollow: store.numerOfFollow,
-              follows: followers.slice(0, 5),
+              follows: store.followers.slice(0, 5),
             })
         }
     })
+}
+
+export const verifyToken = (token) => {
+    try {
+        const decoded = jwt.verify(token, 'secret');
+        return decoded;
+    } catch(err) {
+        return null;
+    }
 }
 //
 // export const getStoreLocalId = (id) => {

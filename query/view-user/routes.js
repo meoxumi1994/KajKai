@@ -1,28 +1,42 @@
 import auth from './middlewares/auth'
 
 export default {
-    '/user/:id': {
-      get: {
-          controller: 'UserController',
-          middleware: [auth()],
-          method: 'getUserHandler'
-      },
-    },
-    '/privacy/user/:id': {
-      get: {
+  '/user': {
+    get: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'getUserHandler'
+    }
+  },
+  '/user/:id': {
+    get: {
         controller: 'UserController',
         middleware: [auth()],
-        method: 'getUserPrivacyHandler'
-      }
+        method: 'getUserHandler'
     },
-    '/test': {
-      post: {
-        controller: 'TestController',
-        method: 'insertHandler'
-      },
-      put: {
-        controller: 'TestController',
-        method: 'updateHandler'
-      }
+  },
+  '/privacy/user': {
+    get: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'getUserPrivacyHandler'
     }
+  },
+  '/privacy/user/:id': {
+    get: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'getUserPrivacyHandler'
+    }
+  },
+  '/test': {
+    post: {
+      controller: 'TestController',
+      method: 'insertHandler'
+    },
+    put: {
+      controller: 'TestController',
+      method: 'updateHandler'
+    }
+  }
 }

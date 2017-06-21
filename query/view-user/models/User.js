@@ -2,8 +2,8 @@ import mongoose from '../datasource'
 import _ from 'lodash'
 import { Sex, Language } from '../enum'
 import AddressSchema from './Address'
-import LastUpdateSchema from './LastUpdate'
 import BlackSchema from './Black'
+import LastUpdateSchema from './LastUpdate'
 import PrivacySchema from './Privacy'
 
 const UserSchema = new mongoose.Schema({

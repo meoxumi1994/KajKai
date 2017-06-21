@@ -1,10 +1,8 @@
-import { User } from '../models'
+import { User, Black } from '../models'
 
 export const createUser = (message) => {
-  const { id, username, email, avatarUrl } = message
-  const user = new User({
-    id
-  })
+  const { id, username, email, avatarUrl } = message.user
+  const user = new User({ id })
 
   if(username) user.username = username
   if(email) user.email = email
@@ -14,7 +12,7 @@ export const createUser = (message) => {
 }
 
 export const updateUser = (message) => {
-  const { id, avatarUrl, coverUrl, address, phone, language, sex, yearOfBirth, lastUpdate, blacklist } = message
+  const { id, avatarUrl, coverUrl, address, phone, language, sex, yearOfBirth, lastUpdate } = message.user
   const user = {}
 
   if(id) user.id = id
@@ -26,7 +24,43 @@ export const updateUser = (message) => {
   if(sex) user.sex = sex
   if(yearOfBirth) user.yearOfBirth = yearOfBirth
   if(lastUpdate) user.lastUpdate = lastUpdate
-  if(blacklist) user.blacklist = blacklist
 
   User.findOneAndUpdate({ id }, user)
+}
+
+export const updateBlackList = (message) => {
+  const { userId, blockId, status } = message.user
+
+  User.findOne({ id: userId }, (err, user) => {
+    if (user) {
+      const { blackList } = user
+
+      if (status == 'add') {
+        User.findOne({ id: blockId }, (err, user) => {
+          if(user) {
+            const black = new Black({
+              id: blockId,
+              type: '???',
+              name: user.username
+            })
+
+            blackList.push(black)
+
+            user.blackList = blackList
+            user.save()
+          }
+        })
+      } else {
+        for (let i = 0; i < blackList.length; i++) {
+          if (blackList[i].id == blockid) {
+            blackList.splice(i, 1)
+            break
+          }
+        }
+
+        user.blackList = blackList
+        user.save()
+      }
+    }
+  })
 }

@@ -1,8 +1,10 @@
 import mongoose from '../datasource'
-import LastUpdateSchema from './LastUpdate'
 import AddressSchema from './Address'
 import CategorySchema from './Category'
+import CategoryAutoSchema from './CategoryAuto'
 import CertificateSchema from './Certificate'
+import FollowerSchema from './Follower'
+import LastUpdateSchema from './LastUpdate'
 import LikerSchema from './Liker'
 
 const StoreSchema = new mongoose.Schema({
