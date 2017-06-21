@@ -20,14 +20,9 @@ export const getSellpostHandler = () => (req, res) => {
 export const getSellpostsHandler = () => (req, res) => {
   if (req.decoded) {
     const { id: storeId } = req.params
-    const { offset } = req.query
-    getSellposts(storeId, offset, (newOffset, sellposts) => {
+    getSellposts(storeId, (sellposts) => {
       if (sellposts) {
-        res.send({
-          offset: newOffset,
-          storeid: storeId,
-          sellposts,
-        })
+        res.send(sellposts)
       } else {
         res.send({status: 'failed'})
       }

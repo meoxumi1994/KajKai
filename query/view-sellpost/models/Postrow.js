@@ -1,17 +1,16 @@
 import mongoose from '../datasource'
 import _ from 'lodash'
 import { PostrowType } from '../enum'
+import TitleSchema from './Title'
+import ProductSchema from './Product'
 
 const PostrowSchema = new mongoose.Schema({
   id: {type: String},
-  sellpostId: {type: String},
   content: {type: String},
   numberOfLine: {type: Number},
   images: [String],
-  titleOrder: [String],
-  titles: [String],
-  productOrder: [String],
-  products: [String],
+  titles: [TitleSchema],
+  products: [ProductSchema],
   type: {type: String, enum: _.values(PostrowType)}
 })
 
