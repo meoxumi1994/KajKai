@@ -327,7 +327,6 @@ GET /sellpost/store/:storeid?offset=-1 { // length = 2
 }
 
 GET /sellpost/:id {
-    offset: ,
     storeid: ,
     storename: ,
     category: ,
@@ -336,6 +335,7 @@ GET /sellpost/:id {
     time: , // last update
     status: 'notyet|open|sleep',
     ship: '', // store viết vào có thể un
+    postrows_offset: ,
     postrows_order: [],
     postrows: [ // tables lấy những thằng đầu có tổng hàng <= 30, nếu quá nửa thằng cuối thì trả về cả thằng cuối
     {
@@ -377,8 +377,12 @@ GET /sellpost/:id {
     ], // tối đa 5 thằng bạn
     numcomment: ,
     numshare: ,
+    offsettop:,
+    offsetbottom:,
     leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
         {
+          offsettop:,
+          offsetbottom:,
           id: '7586449578',
           sellpostid: ,
           order: [

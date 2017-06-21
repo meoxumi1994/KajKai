@@ -278,6 +278,9 @@ class WebcamCapture extends React.Component {
                     <span style={{ fontSize: 17}} className="glyphicon glyphicon-camera"></span>
                     <span style={{ fontSize: 17}} >{" " + TITLE}</span>
                 </button>
+                <Modal show={this.state.showModal} onHide={this.close}>
+                    
+                </Modal>
                 <div id="webcamcapture" className="modal fade" role="dialog">
                     <div className="modal-dialog" style={{ width: style.width + 16}}>
                         <div className="modal-content">
@@ -356,6 +359,7 @@ class Croppie extends React.Component {
         super(props)
         this.state = {
             first : true,
+            cropper_src: "/images/flower001.jpg",
         }
     }
     onZoom(){
@@ -368,31 +372,13 @@ class Croppie extends React.Component {
         document.getElementById("myinput_file").click()
     }
     readURL(){
-        console.log(this.refs.imagefile.files)
         const file = this.refs.imagefile.files[0];
         const reader = new FileReader();
         const url = reader.readAsDataURL(file);
-
         reader.onloadend = (e) => {
-            document.getElementById("mycropper").src = reader.result
-            console.log(this.refs.cropper)
-            const img = new Image()
-            img.src = reader.result
-            this.refs.cropper.cropper = new Cropperjs(img, {
-                ref: 'cropper',
-                viewMode: 1,
-                dragMode: 'move',
-                aspectRatio: 1,
-                minContainerWidth: this.props.style.width,
-                minContainerHeight: this.props.style.height,
-                guides: true,
-                modal: true,
-                cropBoxMovable: false,
-                cropBoxResizable: false,
-                background: false,
-                autoCropArea: 1,
+            this.setState({
+                cropper_src: reader.result
             })
-            console.log(this.refs.cropper)
             document.getElementById("btn_open_modal").click()
         }
     }
@@ -404,10 +390,11 @@ class Croppie extends React.Component {
                     style={{ width: 380, height: 110 , padding: 0 }}
                     onClick={() => this.uploadPhoto()}
                     >
-                    <span style={{ fontSize: 17}} className="glyphicon glyphicon-camera"></span>
+                    <span style={{ fontSize: 17}} className="glyphicon glyphicon-plus"></span>
                     <span style={{ fontSize: 17}} >{" " + TITLE}</span>
                 </button>
-                <input onChange={() => this.readURL()}
+                <input
+                    onChange={() => this.readURL()}
                     ref="imagefile"
                     style={{
                     position: 'absolute',
@@ -427,8 +414,22 @@ class Croppie extends React.Component {
                             <strong>{TITLE}</strong>
                           </div>
                           <div className="modal-body" style={{ padding: 0 }}>
-                              <img id="mycropper"/>
+                              {/* <img ref={(imgcropper) => this.imgcropper = imgcropper }/> */}
                               {/* <Croppii ref="cropper"/> */}
+                              <Cropper
+                                  viewMode= {1}
+                                  dragMode= 'move'
+                                  src={this.state.cropper_src}
+                                  aspectRatio= {1}
+                                  minContainerWidth = {this.props.style.width}
+                                  minContainerHeight =  {this.props.style.height}
+                                  guides = {true}
+                                  modal = {true}
+                                  cropBoxMovable = {false}
+                                  cropBoxResizable = {false}
+                                  background = {false}
+                                  autoCropArea = {1}
+                              />
                           </div>
                           <div style={{ paddingLeft: 20 }}>
                               {DESCRIPTION}
