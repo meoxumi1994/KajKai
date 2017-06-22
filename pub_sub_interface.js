@@ -115,7 +115,7 @@ export default {
             event: 'POSTROW.Created',
             postrow: {
                 postrowId: '',
-                sellpostid:'',
+                sellPostId:'',
                 content:'',
                 numline:'', // numline of row <= 30
                 images: [
@@ -138,7 +138,7 @@ export default {
         },{
             event: 'POSTROW.Updated',
             postrow: {
-                id:'',
+                postrowId:'',
                 content:'',
                 numline:'', // numline of row <= 30
                 images: [
@@ -155,12 +155,12 @@ export default {
             event: 'POSTROW.Deleted',
             postrow: {
                 postrowId:'',
-                sellpostId: '',
+                sellPostId: '',
             }
         },{
             event: 'POSTROW.PRODUCT.Created',
             product: {
-                sellpostid: '',
+                sellPostId: '',
                 postrowsid: '',
                 productid: '',
                 product: {
@@ -172,7 +172,7 @@ export default {
         },{
             event: 'POSTROW.PRODUCT.Updated',
             product: {
-                sellpostid: '',
+                sellPostId: '',
                 postrowsid: '',
                 productid: '',
                 product: {
@@ -184,7 +184,7 @@ export default {
         },{
             event: 'POSTROW.PRODUCT.Deleted',
             product: {
-                sellpostid: '',
+                sellPostId: '',
                 postrowsid: '',
                 productid: '',
             }
