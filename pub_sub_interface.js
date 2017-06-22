@@ -33,7 +33,7 @@ export default {
                 {
                     event: 'USER.BlackListUpdated',
                     user: {
-                        userId: '', blockId: '', status: 'add|remove'
+                        userId: '', blockId: '', status: 'add|remove' // cho anh thêm cái type userid|storeid|mesid nữa lão Đại - charity
                     }
                 }
             ]
@@ -57,7 +57,7 @@ export default {
                 latitude: '',
                 phone: '',
                 certificates: {
-                    image: [],
+                    images: [],
                     content: ''
                 }
             }
@@ -76,7 +76,7 @@ export default {
                 latitude: '',
                 phone: '',
                 certificates: {
-                    image: [],
+                    images: [],
                     content: ''
                 }
             }
@@ -94,7 +94,7 @@ export default {
         },{
             event: 'SELLPOST.Created',
             sellpost: {
-                storeId: '',
+                storeId: '', // publish thêm storeName nữa lão Đại - charity
                 category:'',
                 title:'',
                 description:'',
