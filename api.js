@@ -508,9 +508,9 @@ DELETE /postrows/product {
 
 
 
-GET /postrow/:sellpostid?offset=-1 { // numline = 30
+GET /postrows/:sellpostid?offset=-1 { // numline = 30
     offset: ,
-    postrow: [
+    postrows: [
         {
           sellpostid:,
           id: , //
