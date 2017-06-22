@@ -82,7 +82,8 @@ export default {
             }
         },{
             event: 'SELLPOST.Updated',
-            sellpost: { // give me sellpostId please ! - charity
+            sellpost: {
+                sellPostId: '',
                 category: '',
                 title: '',
                 description: '',
@@ -94,7 +95,9 @@ export default {
         },{
             event: 'SELLPOST.Created',
             sellpost: {
-                storeId: '', // publish thêm storeName và sellpostId nữa lão Đại - charity
+                sellPostId: ''.
+                storeId: '',
+                storeName: '',
                 category:'',
                 title:'',
                 description:'',
@@ -110,8 +113,9 @@ export default {
             }
         },{
             event: 'POSTROW.Created',
-            postrow: {  // cho anh id của postrow nữa chú - charity
-                sellpostid:'',
+            postrow: {
+                postrowId: '',
+                sellPostId:'',
                 content:'',
                 numline:'', // numline of row <= 30
                 images: [
@@ -134,7 +138,8 @@ export default {
         },{
             event: 'POSTROW.Updated',
             postrow: {
-                id:'',
+                sellPostId: '',
+                postrowId:'',
                 content:'',
                 numline:'', // numline of row <= 30
                 images: [
@@ -151,12 +156,12 @@ export default {
             event: 'POSTROW.Deleted',
             postrow: {
                 postrowId:'',
-                sellpostId: '',
+                sellPostId: '',
             }
         },{
             event: 'POSTROW.PRODUCT.Created',
             product: {
-                sellpostid: '',
+                sellPostId: '',
                 postrowsid: '',
                 productid: '',
                 product: {
@@ -168,7 +173,7 @@ export default {
         },{
             event: 'POSTROW.PRODUCT.Updated',
             product: {
-                sellpostid: '',
+                sellPostId: '',
                 postrowsid: '',
                 productid: '',
                 product: {
@@ -180,7 +185,7 @@ export default {
         },{
             event: 'POSTROW.PRODUCT.Deleted',
             product: {
-                sellpostid: '',
+                sellPostId: '',
                 postrowsid: '',
                 productid: '',
             }

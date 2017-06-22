@@ -1,7 +1,7 @@
 import { Sellpost } from '../models'
 
 export const createSellpost = (message) => {
-  const { id, storeId, storeName, category, title, description, time, status: storeState, ship: shipStatus } = message.sellpost
+  const { sellPostId: id, storeId, storeName, category, title, description, time, status: storeState, ship: shipStatus } = message.sellpost
 
   const sellpost = new Sellpost({
     id,
@@ -21,7 +21,7 @@ export const createSellpost = (message) => {
 
 
 export const updateSellpost = (message) => {
-  const { id, category, title, description, time, status: storeState, ship: shipStatus, postrows_order: postrowOrder } = message.sellpost
+  const { sellPostId: id, category, title, description, time, status: storeState, ship: shipStatus, postrows_order: postrowOrder } = message.sellpost
   const sellpost = {}
 
   if (category) sellpost.category = category
@@ -56,6 +56,6 @@ export const updateSellpost = (message) => {
 }
 
 export const deleteSellpost = (message) => {
-  const { sellPostId :id } = message.sellpost
+  const { sellPostId: id } = message.sellpost
   Sellpost.remove({ id })
 }

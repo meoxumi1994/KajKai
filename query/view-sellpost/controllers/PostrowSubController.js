@@ -1,7 +1,7 @@
 import { Sellpost, Postrow } from '../models'
 
 export const createPostrow = (message) => {
-  const { sellpostId, id, content, numberOfLine, images, titles, products, type } = message.postrow
+  const { sellPostId: sellpostId, postrowId: id, content, numline: numberOfLine, images, titles, products, type } = message.postrow
   const postrow = new Postrow({
     sellpostId, id
   })
@@ -22,7 +22,7 @@ export const createPostrow = (message) => {
 }
 
 export const updatePostrow = (message) => {
-  const { postrowId: id, sellpostId, content, numberOfLine, images, titles, products, type } = message.postrow
+  const { postrowId: id, sellPostId: sellpostId, content, numline: numberOfLine, images, titles, products, type } = message.postrow
   const mPostrow = {}
 
   if (content) mPostrow.content = content
@@ -50,7 +50,7 @@ export const updatePostrow = (message) => {
 }
 
 export const deletePostrow = (message) => {
-  const { postrowId: id, sellpostId } = message.sellpost
+  const { postrowId: id, sellPostId: sellpostId } = message.sellpost
   Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
     if (sellpost) {
       const { postrows } = sellpost
