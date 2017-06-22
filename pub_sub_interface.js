@@ -95,7 +95,7 @@ export default {
         },{
             event: 'SELLPOST.Created',
             sellpost: {
-                sellPostId: ''.
+                sellPostId: '',
                 storeId: '',
                 storeName: '',
                 category:'',

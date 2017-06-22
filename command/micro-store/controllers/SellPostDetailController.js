@@ -1,4 +1,5 @@
 import { createSellPostDetail, updateSellPostDetail, dellSellPostDetail, getSellPostDetailBasicInfo } from '../services/SellPostDetailService'
+import { updateSellPost } from '../services/SellPostService'
 
 export const createSellPostDetailCon = () => {
     return (req, res) => {
@@ -18,8 +19,10 @@ export const updateSellPostDetailCon = () => {
 
 export const dellSellPostDetailCon = () => {
     return (req, res) => {
-        dellSellPostDetail(req.body.id, () => {
-
+        dellSellPostDetail(req.body.id, (sellPostDetail) => {
+            updateSellPost({sellpostid: req.body.sellpostid, products_order: req.body.postrows_order}, () => {
+                res.json(req.body)
+            })
         })
     }
 };

@@ -1,6 +1,7 @@
 import { Store, Category, Certificate } from '../models'
 import { checkPhone } from '../utils/Utils'
 import globalId from '../config/globalId'
+import { createStorePub, updateStorePub } from '../controllers/StorePubController'
 
 const GLOBAL_STORE_ID = globalId.STORE_GLOBAL_ID;
 
@@ -71,6 +72,7 @@ export const createStore = (storeInfo, next) => {
                             certificates: certificate
                         });
     store.save(() => {
+        createStorePub(getPubStoreInfo(store));
         next(store)
     })
 };
@@ -90,6 +92,7 @@ export const updateStore = (storeInfo, next) => {
             store.certificates = new Certificate(storeInfo.certificates);
         }
         store.save(() => {
+            updateStorePub(getPubStoreInfo(store));
             next(store);
         })
     })
@@ -104,4 +107,21 @@ export const getStoreByPostId = (id, next) => {
             })
         }
     })
-}
+};
+
+export const getPubStoreInfo = (store) => {
+    return {
+        id: getStoreGlobalId(store._id),
+        owner: store.owner,
+        storeName: store.storeName,
+        avatarUrl: store.avatarUrl,
+        coverUrl: store.coverUrl,
+        address: store.address,
+        addressMap: store.addressMap,
+        category: store.category,
+        longitude: store.longitude,
+        latitude: store.latitude,
+        phone: store.phone,
+        certificates: store.certificates
+    }
+};

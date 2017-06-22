@@ -1,5 +1,7 @@
 import { SellPost } from '../models'
 import globalId from '../config/globalId'
+import { getStore } from './StoreService'
+import { sellPostCreated, sellPostDeleted, sellPostUpdated} from '../controllers/StorePubController'
 
 const SELLPOST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID
 
@@ -17,17 +19,6 @@ export const getSellPost = (sellPostId, next) => {
         next(sellPost)
     })
 };
-
-// const SellPostSchema = new mongoose.Schema({
-//     storeId: {type: String},
-//     category: {type: String},
-//     title: {type: String},
-//     description: {type: String},
-//     time: {type: String},
-//     status: {type: String}, //'notyet|open|sleep',
-//     shippable: {type: String},
-//     sellPostDetailOrders: [Number]
-// });
 
 export const getSellPostBasicInfo = (sellPost) => {
     return {
@@ -47,6 +38,9 @@ export const addSellPost = (sellPostInfo, next) => {
         title: sellPostInfo.title, description: sellPostInfo.description, time: sellPostInfo.time,
         status: sellPostInfo.status, shippable: sellPostInfo.ship});
     sellPost.save(() => {
+        getPubSellPostInfo(sellPost, (info) => {
+           sellPostCreated(info);
+        });
         next(sellPost)
     })
 };
@@ -61,6 +55,9 @@ export const updateSellPost = (sellpostInfo, next) => {
         if (sellpostInfo.ship) sellPost.shippable = sellpostInfo.ship;
         if (sellpostInfo.postrows_order) sellPost.sellPostDetailOrders = sellpostInfo.postrow_order;
         sellPost.save(() => {
+            getPubSellPostInfo(sellPost, (info) => {
+                sellPostUpdated(info);
+            });
             next(sellPost);
         })
     })
@@ -71,8 +68,25 @@ export const deleteSellPost = (sellpostid, next) => {
         if (!sellPost) next(null);
         else {
             SellPost.findOneAndRemove({_id: getSellPostLocalId(sellpostid)}, () => {
+                sellPostDeleted(sellPost.storeId, sellpostid);
                 next(true)
             })
         }
     })
+};
+
+export const getPubSellPostInfo = (sellPost, next) => {
+    getStore(sellPost.storeId, (store) => {
+        next({
+            sellPostId: getSellPostGlobalId(sellPost._id),
+            storeId: sellPost.storeId,
+            storeName: store.storeName,
+            category: sellPost.category,
+            title: sellPost.title,
+            description: sellPost.description,
+            time: sellPost.time,
+            status: sellPost.time,
+            ship: sellPost.shippable, // store viết vào có thể un
+        })
+    });
 };
