@@ -754,8 +754,7 @@ GET /product/:id {
 
 GET /chatlist?offset=offset&length=length: {
     lazyLoad: {
-      offset: '',
-      length: ''
+      offset: ''
     },
     data: [
       {
@@ -783,8 +782,7 @@ GET /chatlist?offset=offset&length=length: {
 
 GET /messages/:mesid?offset=offset&length=length {
   lazyLoad: {
-    offset: '',
-    length: ''
+    offset: ''
   },
   mesId: '',
   messages: [
