@@ -110,7 +110,7 @@ export default {
             }
         },{
             event: 'POSTROW.Created',
-            postrow: {
+            postrow: {  // cho anh id của postrow nữa chú - charity
                 sellpostid:'',
                 content:'',
                 numline:'', // numline of row <= 30
