@@ -5,6 +5,7 @@ import TitleSchema from './Title'
 import ProductSchema from './Product'
 
 const PostrowSchema = new mongoose.Schema({
+  sellpostId: {type: String},
   id: {type: String},
   content: {type: String},
   numberOfLine: {type: Number},

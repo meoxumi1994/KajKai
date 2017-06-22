@@ -19,7 +19,7 @@ export default {
     get: {
       controller: 'PostrowController',
       middleware: [auth()],
-      method: 'getPostrowHandler'
+      method: 'getPostrowsHandler'
     }
   }
 }

@@ -2,7 +2,7 @@ import mongoose from '../datasource'
 import _ from 'lodash'
 import { StoreState } from '../enum'
 import PostrowSchema from './Postrow'
-import FollowerSchema ffrom './Follower'
+import FollowerSchema from './Follower'
 import LikerSchema from './Liker'
 import CommentSchema from './Comment'
 
@@ -20,7 +20,7 @@ const SellpostSchema = new mongoose.Schema({
   numberOfLike: {type: Number},
   likers: [LikerSchema],
   numerOfFollow: {type: Number},
-  followers: [FollowerSchema]
+  followers: [FollowerSchema],
   numberOfComment: {type: Number},
   numberOfShare: {type: Number},
   comments: [CommentSchema]

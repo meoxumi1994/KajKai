@@ -1,29 +1,16 @@
-import { getPostrow } from '../services/PostrowService.js'
+import { getPostrows } from '../services/PostrowService.js'
 
-export const getPostrowHandler = () => (req, res) => {
+export const getPostrowsHandler = () => (req, res) => {
   if (req.decoded) {
-    const sellpostId = req.params.sellpostid
-    const { offset } = req.query
+    const { sellpostid: sellpostId } = req.params
 
-    if (offset) {
-      const storeId = id
-      getSellposts(storeId, (sellposts) => {
-        if (sellposts) {
-          res.send(sellposts)
-        } else {
-          res.send({status: 'failed'})
-        }
-      })
-
-    } else {
-      getSellpost(id, (sellpost) => {
-        if (sellpost) {
-          res.send(sellpost)
-        } else {
-          res.send({status: 'failed'})
-        }
-      })
-    }
+    getPostrows(id, (postrows) => {
+      if (postrows) {
+        res.send(postrows)
+      } else {
+        res.send({status: 'failed'})
+      }
+    })
 
   } else {
     res.send({status: 'failed'})
