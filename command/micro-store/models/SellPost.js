@@ -1,7 +1,6 @@
 import mongoose from '../datasource'
-import StorePostDetailSchema from './StorePostDetail'
 
-const StorePostSchema = new mongoose.Schema({
+const SellPostSchema = new mongoose.Schema({
     storeId: {type: String},
     category: {type: String},
     title: {type: String},
@@ -9,6 +8,7 @@ const StorePostSchema = new mongoose.Schema({
     time: {type: String},
     status: {type: String}, //'notyet|open|sleep',
     shippable: {type: String},
+    sellPostDetailOrders: [Number]
 });
 
-export default StorePostSchema
+export default SellPostSchema
