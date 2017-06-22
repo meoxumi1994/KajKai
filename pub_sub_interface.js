@@ -82,7 +82,8 @@ export default {
             }
         },{
             event: 'SELLPOST.Updated',
-            sellpost: { // give me sellpostId please ! - charity
+            sellpost: {
+                sellPostId: '',
                 category: '',
                 title: '',
                 description: '',
@@ -94,7 +95,9 @@ export default {
         },{
             event: 'SELLPOST.Created',
             sellpost: {
-                storeId: '', // publish thêm storeName và sellpostId nữa lão Đại - charity
+                sellPostId: ''.
+                storeId: '',
+                storeName: '',
                 category:'',
                 title:'',
                 description:'',
@@ -110,7 +113,8 @@ export default {
             }
         },{
             event: 'POSTROW.Created',
-            postrow: {  // cho anh id của postrow nữa chú - charity
+            postrow: {
+                postrowId: '',
                 sellpostid:'',
                 content:'',
                 numline:'', // numline of row <= 30
