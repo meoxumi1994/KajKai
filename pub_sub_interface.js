@@ -97,7 +97,6 @@ export default {
             sellpost: {
                 sellPostId: '',
                 storeId: '',
-                storeName: '',
                 category:'',
                 title:'',
                 description:'',

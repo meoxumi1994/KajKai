@@ -752,7 +752,7 @@ GET /product/:id {
   totalnum: // số lần được gọi trong leadercomment
 }
 
-GET /chatlist?offset=offset&length=length: {
+GET /chatlist?offset=offset&length=length: { // thứ tự trả về như thế nào ? và nếu tạo nhóm nhưng chưa chat thì có lấy về không?
     lazyLoad: {
       offset: ''
     },

@@ -1,13 +1,14 @@
-import { Sellpost, Store } from '../models'
+import { Sellpost } from '../models'
 
 export const createSellpost = (message) => {
-  const { sellPostId: id, storeId, category, title, description, time, status: storeState, ship: shipStatus } = message.sellpost
+  const { sellPostId: id, storeId, storeName, category, title, description, time, status: storeState, ship: shipStatus } = message.sellpost
 
   const sellpost = new Sellpost({
     id,
     storeId
   })
 
+  if (storeName) sellpost.storeName = storeName
   if (category) sellpost.category = category
   if (title) sellpost.title = title
   if (description) sellpost.description = description
@@ -15,13 +16,7 @@ export const createSellpost = (message) => {
   if (storeState) sellpost.storeState = storeState
   if (shipStatus) sellpost.shipStatus = shipStatus
 
-  Store.findOne({ id: storeId }, (err, store) => {
-    if (store) {
-      sellpost.storeName = store.storeName
-    }
-    sellpost.save()
-  })
-
+  sellpost.save()
 }
 
 
