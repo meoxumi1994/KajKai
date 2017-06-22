@@ -82,7 +82,7 @@ export default {
             }
         },{
             event: 'SELLPOST.Updated',
-            sellpost: {
+            sellpost: { // give me sellpostId please ! - charity
                 category: '',
                 title: '',
                 description: '',
@@ -94,7 +94,7 @@ export default {
         },{
             event: 'SELLPOST.Created',
             sellpost: {
-                storeId: '', // publish thêm storeName nữa lão Đại - charity
+                storeId: '', // publish thêm storeName và sellpostId nữa lão Đại - charity
                 category:'',
                 title:'',
                 description:'',
