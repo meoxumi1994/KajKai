@@ -2,14 +2,14 @@ import { addNewStore, modifyStore, getStore, getStoreInfoService } from '../serv
 
 export const registerStore = () => {
     return (req, res) => {
-        let body = req.body
-        let storename = body.storename
-        let address = body.address
-        let phone = body.phone
-        let category = body.category
-        let longitude = body.longitude
-        let latitude = body.latitude
-        let ownerId = req.decoded._id
+        let body = req.body;
+        let storename = body.storename;
+        let address = body.address;
+        let phone = body.phone;
+        let category = body.category;
+        let longitude = body.longitude;
+        let latitude = body.latitude;
+        let ownerId = req.decoded._id;
         addNewStore(ownerId, storename, address, phone, category, longitude, latitude,
              (store) => {
                 if (!store) {
@@ -32,8 +32,8 @@ export const updateStore = () => {
 
 export const getStoreInfo = () => {
     return (req, res) => {
-        const id = req.body.id
-        console.log(id)
+        const id = req.body.id;
+        console.log(id);
         getStore(id, function(store){
             if (store) {
                 res.json({status: 'success', store: getStoreInfoService(store)});
@@ -42,4 +42,4 @@ export const getStoreInfo = () => {
             }
         })
     }
-}
+};

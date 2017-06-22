@@ -1,7 +1,6 @@
 import mongoose from '../datasource'
 import CertificateSchema from './Certificate'
 
-
 const StoreSchema = new mongoose.Schema({
     storeName: {type: String},
     phone: {type: String},

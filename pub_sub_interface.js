@@ -33,7 +33,7 @@ export default {
                 {
                     event: 'USER.BlackListUpdated',
                     user: {
-                        userId: '', blockId: '', status: 'add|remove' // cho anh thêm cái type userid|storeid|mesid nữa lão Đại - charity
+                        userId: '', blockId: '', status: 'add|remove', type: 'userid|storeid|mesid'
                     }
                 }
             ]
