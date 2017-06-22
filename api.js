@@ -787,6 +787,7 @@ GET /messages/:mesid?offset=offset&length=length {
   mesId: '',
   messages: [
     {
+      id: //userId cái thằng mà chat cái mesage này hay còn gọi là sendId
       message: {
         text: '',
         url: '',
