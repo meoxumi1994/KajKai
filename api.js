@@ -753,6 +753,10 @@ GET /product/:id {
 }
 
 GET /chatlist?offset=offset&length=length: {
+    lazyLoad: {
+      offset: '',
+      length: ''
+    },
     data: [
       {
         mesId: '',
@@ -766,8 +770,7 @@ GET /chatlist?offset=offset&length=length: {
           }
         },
         groupName: '',
-        time: '',
-        users: [
+        users: [                 // Not included requester
           {
             avatarUrl: '',
             id: '',
@@ -779,6 +782,10 @@ GET /chatlist?offset=offset&length=length: {
 }
 
 GET /messages/:mesid?offset=offset&length=length {
+  lazyLoad: {
+    offset: '',
+    length: ''
+  },
   mesId: '',
   messages: [
     {
