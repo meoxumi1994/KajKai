@@ -768,7 +768,7 @@ GET /chatlist?offset=offset&length=length: {
             url: ''
           }
         },
-        groupName: '',
+        displayLabel: '',
         users: [                 // Not included requester
           {
             avatarUrl: '',
