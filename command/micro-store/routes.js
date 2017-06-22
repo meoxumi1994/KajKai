@@ -34,5 +34,34 @@ export default {
             middleware: [auth()],
             method: 'dellSellPostDetailCon'
         }
+    },
+    '/store': {
+        post: {
+            controller: 'StoreController',
+            middleware: [auth()],
+            method: 'addStoreCon'
+        },
+        put: {
+            controller: 'StoreController',
+            middleware: [auth()],
+            method: 'updateStoreCon'
+        }
+    },
+    '/sellpost': {
+        put: {
+            controller: 'SellPostController',
+            middleware: [auth()],
+            method: 'addSellPostCon'
+        },
+        post: {
+            controller: 'SellPostController',
+            middleware: [auth()],
+            method: 'updateSellPostCon'
+        },
+        delete:{
+            controller: 'SellPostController',
+            middleware: [auth()],
+            method: 'deleteSellPostCon'
+        }
     }
 }

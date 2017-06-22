@@ -1,4 +1,4 @@
-import { Store, Category, StorePost } from '../models'
+import { Store, Category, Certificate } from '../models'
 import { checkPhone } from '../utils/Utils'
 import globalId from '../config/globalId'
 
@@ -25,16 +25,18 @@ export const getStoreGlobalId = (id) => {
 
 export const getStoreInfoService = (store) => {
     return {
-        storeName: store.storename,
-        address: store.address,
-        phone: store.phone,
-        category: store.category,
-        id: getStoreGlobalId(store._id),
+        storeName: store.storeName, phone: store.phone,
+        category: store.category, owner: store.owner,
         avatarUrl: store.avatarUrl,
         coverUrl: store.coverUrl,
-        owner: store.owner
+        address: store.address,
+        addressMap: store.addressMap,
+        longitude: store.longitude,
+        latitude: store.latitude,
+        certificates: store.certificates,
+        storeId: getStoreGlobalId(store._id)
     }
-}
+};
 
 export const getStoreBasicInfoService = (store) => {
     return {
@@ -43,50 +45,21 @@ export const getStoreBasicInfoService = (store) => {
         avatarUrl: store.avatarUrl,
         coverUrl: store.coverUrl
     }
-}
+};
 
 export const validateStore = (store) => {
     if (!store.phone || !checkPhone(store.phone)) return false
     if (!store.address) return false
     if (!store.storename || store.storename.length < 5 || store.storename.length > 50) return false;
     return true
-}
+};
 
-// export const addNewStore = (_ownerId, _storename, _address, _phone, _category, next) => {
-//     var store = new Store({ storeName: _storename,
-//                             address: _address,
-//                             phone: _phone,
-//                             category: _category,
-//                             owner: _ownerId});
-//     if (!validateStore(store)) {
-//         next(null)
-//         return
-//     }
-//     createNewPost(store._id, (new Date()).getTime(), null, 'MAIN', function (storePost) {
-//         store.mainPostId = storePost._id
-//         store.save(function () {
-//             next(store)
-//         })
-//     })
-// }
-//
-// storeName: {type: String},
-// phone: {type: String},
-// category: {type: String},
-// owner: {type: String},
-// avatarUrl: {type: String},
-// coverUrl: {type: String},
-// imageUrl: {type: String},
-// address: {type: String},
-// addressMap: [String],
-//     categoryAuto: {type: String},
-// longitude: {type: Number},
-// latitude: {type: Number},
-// certificates: {type: CertificateSchema}
 
 export const createStore = (storeInfo, next) => {
-    var cetificate = null;
-    if (storeInfo.certificates)
+    var certificate = null;
+    if (storeInfo.certificates) {
+        certificate = new Certificate(storeInfo.certificates);
+    }
     const store = new Store({storeName: storeInfo.storename, phone: storeInfo.phone,
                             category: storeInfo.category, owner: storeInfo.userid,
                             avatarUrl: storeInfo.avatarUrl,
@@ -95,42 +68,32 @@ export const createStore = (storeInfo, next) => {
                             addressMap: storeInfo.addressMap,
                             longitude: storeInfo.longitude,
                             latitude: storeInfo.latitude,
-
-                        })
+                            certificates: certificate
+                        });
+    store.save(() => {
+        next(store)
+    })
 };
 
-export const modifyStore = (updateStore, next) => {
-    // var id = up, _ownerId, _storename, _address, _phone, _category, _longitude, _latitude
-    var id = updateStore.id
-    var _ownerId = updateStore.owner
-
-    getStore(id, function (store) {
-        if (!store) {
-            next({status: 'error'})
-        } else {
-            if (_ownerId !== store.owner) {
-                next({status: 'unauthorize'})
-                return
-            }
-            if (updateStore.storename) store.storename = updateStore.storename
-            if (updateStore.address) store.address = updateStore.address
-            if (updateStore.phone) store.phone = updateStore.phone
-            if (updateStore.category) store.category = updateStore.category
-            if (updateStore.longitude) store.longitude = updateStore.longitude
-            if (updateStore.latitude) store.latitude = updateStore.latitude
-            if (updateStore.avatarUrl) store.avatarUrl = updateStore.avatarUrl
-            if (updateStore.coverUrl) store.coverUrl = updateStore.coverUrl
-
-            store.save(function(err){
-                if (err) {
-                    next({status: 'err'})
-                } else {
-                    next({status: 'success'})
-                }
-            })
+export const updateStore = (storeInfo, next) => {
+    getStore(storeInfo.id, (store) => {
+        if (storeInfo.storename) store.storeName = storeInfo.storename;
+        if (storeInfo.phone) store.phone = storeInfo.phone;
+        if (storeInfo.category) store.category = storeInfo.category;
+        if (storeInfo.avatarUrl) store.avatarUrl = storeInfo.avatarUrl;
+        if (storeInfo.coverUrl) store.coverUrl = storeInfo.coverUrl;
+        if (storeInfo.address) store.address = storeInfo.address;
+        if (storeInfo.addressMap) store.addressMap = storeInfo.addressMap;
+        if (store.longitude) store.longitude = storeInfo.longitude;
+        if (store.latitude) store.latitude = storeInfo.latitude;
+        if (store.certificates) {
+            store.certificates = new Certificate(storeInfo.certificates);
         }
+        store.save(() => {
+            next(store);
+        })
     })
-}
+};
 
 export const getStoreByPostId = (id, next) => {
     getPost(id, function (storePost) {
