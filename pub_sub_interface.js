@@ -138,6 +138,7 @@ export default {
         },{
             event: 'POSTROW.Updated',
             postrow: {
+                sellPostId: '',
                 postrowId:'',
                 content:'',
                 numline:'', // numline of row <= 30
