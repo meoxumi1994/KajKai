@@ -773,7 +773,7 @@ GET /chatlist?offset=offset&length=length: { // thứ tự trả về như thế
           {
             avatarUrl: '',
             id: '',
-            name: '',
+            username: '',
           }
         ]
       }
@@ -803,7 +803,7 @@ GET /search/user?text='char' {
         {
             id: '',
             avatarUrl: '',
-            name: ''
+            username: ''
         }
     ]
 }
