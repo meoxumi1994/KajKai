@@ -7,5 +7,12 @@ export default {
         middleware: [auth()],
         method: 'getUserChatsHandler'
     }
+  },
+  '/messages/:chatid': {
+    get: {
+      controller: 'ChatController',
+      middleware: [auth()],
+      method: 'getChatMessagesHandler'
+    }
   }
 }

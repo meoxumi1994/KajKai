@@ -1,7 +1,7 @@
-import { Sellpost } from '../models'
+import { Chat } from '../models'
 
-export const createSellpost = (message) => {
-  const { sellPostId: id, storeId, storeName, category, title, description, time, status: storeState, ship: shipStatus } = message.sellpost
+export const createChat = (message) => {
+  const { sellPostId: id, storeId, storeName, category, title, description, time, status: storeState, ship: shipStatus } = message.chat
 
   const sellpost = new Sellpost({
     id,
@@ -20,8 +20,8 @@ export const createSellpost = (message) => {
 }
 
 
-export const updateSellpost = (message) => {
-  const { sellPostId: id, category, title, description, time, status: storeState, ship: shipStatus, postrows_order: postrowOrder } = message.sellpost
+export const updateChat = (message) => {
+  const { sellPostId: id, category, title, description, time, status: storeState, ship: shipStatus, postrows_order: postrowOrder } = message.chat
   const sellpost = {}
 
   if (category) sellpost.category = category

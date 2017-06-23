@@ -1,17 +1,17 @@
-import { UserChat } from '../models'
+import { Chat } from '../models'
 
-export const getChats = (userId, offset, length, next) => {
+export const getChatMessages = (id, offset, length, next) => {
 
-  UserChat.findOne({ userId }, (err, userChat) => {
+  Chat.findOne({ id }, (err, chat) => {
     if (err) {
       next(null)
     } else {
-      const { chats } = userChat
+      const { messages } = chat
       const mChats = []
       let currentNumberOfChat = 0, mOffset = -1
 
-      for (let i = chats.length - 1; i >= 0; i--) {
-        let chat = chats[i]
+      for (let i = messages.length - 1; i >= 0; i--) {
+        let message = messages[i]
         if (chat.lastMessageTime && chat.lastMessageTime < offset) {
           if (currentNumberOfChat < length) {
 
@@ -39,7 +39,18 @@ export const getChats = (userId, offset, length, next) => {
         lazyLoad: {
           offset: mOffset
         },
-        data: mChats
+        mesId: id,
+        messages: [
+          {
+            id: //userId cái thằng mà chat cái mesage này hay còn gọi là sendId
+            message: {
+              text: '',
+              url: '',
+              type: ''
+            },
+            time: ''
+          }
+        ]
       })
     }
   })

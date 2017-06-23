@@ -1,8 +1,8 @@
-import { getChats } from '../services/ChatService.js'
+import { getChats } from '../services/UserChatService.js'
 
 export const getUserChatsHandler = () => (req, res) => {
   if (req.decoded) {
-    const { _id: userId } = req.decoded._id
+    const { _id: userId } = req.decoded
     const { offset, length } = req.query
 
     getUserChats(userId, offset, length, (chats) => {

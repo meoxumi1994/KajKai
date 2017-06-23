@@ -12,9 +12,10 @@ export const createUser = (message) => {
 }
 
 export const updateUser = (message) => {
-  const { id, avatarUrl, coverUrl, address, phone, language, sex, yearOfBirth, lastUpdate } = message.user
+  const { id, username, avatarUrl, coverUrl, address, phone, language, sex, yearOfBirth, lastUpdate } = message.user
   const user = {}
 
+  if (username) user.username = username
   if (avatarUrl) user.avatarUrl = avatarUrl
   if (coverUrl) user.coverUrl = coverUrl
   if (address) user.address = address
