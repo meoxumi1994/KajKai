@@ -1,0 +1,69 @@
+import { Chat } from '../models'
+
+export const createMessage = (message) => {
+  const { mesId: ,  } = message.message
+
+  const sellpost = new Sellpost({
+    id,
+    storeId
+  })
+
+  if (storeName) sellpost.storeName = storeName
+  if (category) sellpost.category = category
+  if (title) sellpost.title = title
+  if (description) sellpost.description = description
+  if (time) sellpost.time = time
+  if (storeState) sellpost.storeState = storeState
+  if (shipStatus) sellpost.shipStatus = shipStatus
+
+  sellpost.save()
+}
+
+mesId: '',
+id: '',                      // senderId
+message: {
+  text: '',
+  url: '',
+  type: ''
+},
+time: ''
+}
+export const updateChat = (message) => {
+  const { sellPostId: id, category, title, description, time, status: storeState, ship: shipStatus, postrows_order: postrowOrder } = message.chat
+  const sellpost = {}
+
+  if (category) sellpost.category = category
+  if (title) sellpost.title = title
+  if (description) sellpost.description = description
+  if (time) sellpost.time = time
+  if (storeState) sellpost.storeState = storeState
+  if (shipStatus) sellpost.shipStatus = shipStatus
+
+
+  if (postrowOrder) {
+    Sellpost.findOne({ id }, (err, sellpost) => {
+      if (sellpost) {
+        const { postrows } = sellpost
+        const mPostrows = [], postrowsById = {}
+
+        postrows.map((postrow) => {
+          postrowsById[postrow.id] = postrow
+        })
+
+        postrowOrder.map((id) => {
+          mPostrows.push(postrowsById[id])
+        })
+
+        sellpost.postrows = mPostrows
+        sellpost.save()
+      }
+    })
+  } else {
+    Sellpost.findOneAndUpdate({ id }, sellpost)
+  }
+}
+
+export const deleteSellpost = (message) => {
+  const { sellPostId: id } = message.sellpost
+  Sellpost.remove({ id })
+}

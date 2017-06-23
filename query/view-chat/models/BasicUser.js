@@ -1,5 +1,4 @@
 import mongoose from '../datasource'
-import BasicUserSchema from './Chat'
 
 const BasicUserSchema = new mongoose.Schema({
   id: {type: String},

@@ -18,7 +18,7 @@ export const getChats = (userId, offset, length, next) => {
             let mChat = {}, lastMessage = chat.messages[chat.messages.length - 1]
             mChat.mesId = chat.id
             mChat.lastMessage = {
-              id: lastMessage.id,
+              id: lastMessage.userId,
               time: lastMessage.time,
               message: lastMessage.content
             }
