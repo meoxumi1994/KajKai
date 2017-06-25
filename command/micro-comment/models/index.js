@@ -1,16 +1,14 @@
 import mongoose from '../datasource'
 
-const ProductSchema = require('./Product')
-export const Product = mongoose.model('Product', ProductSchema)
 
-const OrderDetailSchema = require('./OrderDetail')
-export const OrderDetail = mongoose.model('OrderDetail',OrderDetailSchema)
+import ProductSchema from './Product';
+import OrderDetailSchema from './OrderDetail';
+import OrderSchema from './Order';
+import SecondLayerCommentSchema from './SecondLayerComment'
+import FirstLayerCommentSchema from './FirstLayerComment'
 
-const OrderSchema = require('./Order')
-export const Order = mongoose.model('Order', OrderSchema)
-
-const SecondLayerCommentSchema = require('./SecondLayerComment')
-export const SecondLayerComment = mongoose.model('SecondLayerComment', SecondLayerCommentSchema)
-
-const FirstLayerCommentSchema = require('./FirstLayerComment')
-export const FirstLayerComment = mongoose.model('FirstLayerComment', FirstLayerCommentSchema)
+export const Product = mongoose.model('Product', ProductSchema);
+export const OrderDetail = mongoose.model('OrderDetail',OrderDetailSchema);
+export const Order = mongoose.model('Order', OrderSchema);
+export const SecondLayerComment = mongoose.model('SecondLayerComment', SecondLayerCommentSchema);
+export const FirstLayerComment = mongoose.model('FirstLayerComment', FirstLayerCommentSchema);

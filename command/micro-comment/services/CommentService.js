@@ -1,12 +1,11 @@
 import { FirstLayerComment, SecondLayerComment } from '../models'
 import { getCurrentTime } from '../utils/Utils'
-import { getUser } from './UserService'
-import { getOrder } from './OrderService'
-import { getStore } from './StoreService'
-import { getPost } from './StorePostService'
+import { getOrder, getOrderInfo } from './OrderService'
+import globalId from '../config/globalId'
+import { getUser } from '../controllers/CommentPubController'
 
-const FIRST_COMMENT_GLOBAL_ID = '004';
-const SECOND_COMMENT_GLOBAL_ID = '005';
+const FIRST_COMMENT_GLOBAL_ID = globalId.FIRST_COMMENT_GLOBAL_ID;
+const SECOND_COMMENT_GLOBAL_ID = globalId.SECOND_COMMENT_GLOBAL_ID;
 
 export const getFirstCommentGlobalId = (id) => {
     return FIRST_COMMENT_GLOBAL_ID + id
@@ -18,9 +17,7 @@ export const getSecondCommentGlobalId = (id) => {
 
 export const getSecondCommentLocalId = (id) => {
     if (id.length <= 3) return id;
-    else {
-        return id.substr(3, id.length - 3)
-    }
+    else return id.substr(3, id.length - 3)
 };
 
 export const getFirstCommentLocalId = (id) => {
@@ -29,7 +26,7 @@ export const getFirstCommentLocalId = (id) => {
 };
 
 export const getListFirstComment = (postId, time, length, next) => {
-    var query = FirstLayerComment.find({postId: postId, time: {$lt: time}}).sort({time: -1}).limit(length)
+    const query = FirstLayerComment.find({postId: postId, time: {$lt: time}}).sort({time: -1}).limit(length);
     query.exec(function (err, data){
         if (err) next(null);
         else {
@@ -42,9 +39,33 @@ export const getListFirstComment = (postId, time, length, next) => {
 };
 
 export const getFirstLayerComment = (id, next) => {
-    FirstLayerComment.findById(id, (err, data) => {
+    FirstLayerComment.findById(getFirstCommentLocalId(id), (err, data) => {
         if (err) next(null);
         else next(data)
+    })
+};
+
+// posterId: {type: String},
+// content: {type: String},
+// time: {type: Number},
+// order: {type: OrderSchema},
+// postId: {type: String},
+// likeCounter: {type: Number},
+// commentCounter: {type: Number}
+
+export const getFirstLayerCommentInfo = (fComment, next) => {
+    getUser(fComment.posterId, (user) => {
+        if (!user) next(null);
+        else {
+            var info = {content: fComment.content, name: user.userName, avatarUrl: user.avatarUrl, commenterid: user.id, time: fComment.time,
+                    order: getOrderInfo(fComment.order)};
+            if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
+                info = {...info, sellpostid: fComment.postId}
+            } else {
+                info = {...info, minorpostid: fComment.postId};
+            }
+            next(info);
+        }
     })
 };
 
@@ -76,7 +97,7 @@ export const saveNewFirstLayerComment = (posterId, posterAvatar, posterName, ord
 
         })
     })
-}
+};
 
 export const addNewComment = (postId, data, userId, storeId, next) => {
     var order = null;
