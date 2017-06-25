@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="179px" height="177px" viewBox="0 0 179 177" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="107px" height="108px" viewBox="0 0 107 108" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
-    <title>Group 8</title>
+    <title>like</title>
     <desc>Created with Sketch.</desc>
-    <defs></defs>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.964705882   0 0 0 0 0.968627451   0 0 0 0 0.976470588  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group-8" transform="translate(-20.000000, -24.000000)" fill="#BD081C">
-            <g id="Group-4" transform="translate(20.745614, 24.000000)">
-                <polygon id="Path-11" points="0 74.2265625 0 173.949219 30.273052 173.949219 31.4186284 69"></polygon>
-                <path d="M40.1209567,68.0297772 L38.6622807,173.959465 C38.6622807,173.959465 111.758155,176.959465 138.666307,176.959463 C165.574459,176.959461 181.163137,72.8380946 177.56065,65.9399334 C173.958162,59.0417723 122.451429,65.0297755 122.451429,65.0297755 C122.451429,65.0297755 130.519118,54.3344421 133.99928,35.7172772 C137.479443,17.1001123 138.81083,1.03161029 129.475911,0.0922771977 C120.140993,-0.847055896 120.039749,5.0790585 97.3924068,32.0336834 C74.7450651,58.9883084 40.1209567,68.0297772 40.1209567,68.0297772 Z" id="Path-12"></path>
-            </g>
+        <g id="like" filter="url(#filter-1)" transform="translate(4.409239, 2.000000)" fill="#3C3F45">
+            <polygon id="Path-11" points="4.28037793e-15 41.935911 4.28037793e-15 98.2763949 16.6157314 98.2763949 17.2444948 38.9830508"></polygon>
+            <path d="M22.0208732,38.4349024 L21.2202612,98.2821836 C21.2202612,98.2821836 61.3398173,99.9770989 76.1086826,99.9770977 C90.8775478,99.9770966 99.4335826,41.1514659 97.4563139,37.2541997 C95.4790447,33.3569335 67.2089503,36.7399862 67.2089503,36.7399862 C67.2089503,36.7399862 71.6369992,30.6974249 73.5471282,20.1792527 C75.4572579,9.6610804 76.1880058,0.582830672 71.0644224,0.05213401 C65.9408395,-0.478562653 65.8852705,2.86952458 53.4550024,18.0981262 C41.0247345,33.3267279 22.0208732,38.4349024 22.0208732,38.4349024 L22.0208732,38.4349024 Z" id="Path-12"></path>
         </g>
     </g>
 </svg>

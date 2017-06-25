@@ -520,3 +520,9 @@ textarea#note {
                          a large part of the input clickable in most browsers */
     height: 200px;
 }
+
+.grow { transition: all .17s ease-in-out; }
+.grow.growing { transform: scale(1.3); }
+
+.decline { transition: all .08s ease-in-out; }
+.decline.declineing { transform: scale(0.97); }
