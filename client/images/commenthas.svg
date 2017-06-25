@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="90px" viewBox="0 0 100 90" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>commenthas</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="commenthas" transform="translate(0.000000, -5.000000)" fill="#BD081C">
+            <path d="M0,20.0044793 C0,11.7177342 6.71655983,5 14.9980512,5 L85.0019488,5 C93.2851438,5 100,11.710704 100,20.0044793 L100,64.1411738 C100,72.4279189 93.2891137,79.1456531 85.0037529,79.1456531 L46.7998047,79.1456531 L23.1621094,94.4257812 L23.1621094,79.1456531 L14.9960161,79.1456531 C6.71394509,79.1456531 0,72.4349491 0,64.1411738 L0,20.0044793 Z" id="Rectangle-1"></path>
+        </g>
+    </g>
+</svg>

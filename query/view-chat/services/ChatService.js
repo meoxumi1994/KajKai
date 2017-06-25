@@ -1,0 +1,51 @@
+import { Chat } from '../models'
+
+export const getChatMessages = (id, offset, length, next) => {
+
+  Chat.findOne({ id }, (err, chat) => {
+    if (err) {
+      next(null)
+    } else {
+      const { messages } = chat
+      const mMessages = []
+      let currentNumberOfMessage = 0, mOffset = -1
+
+      for (let i = messages.length - 1; i >= 0; i--) {
+        let message = messages[i]
+        if (message.time < offset) {
+          if (currentNumberOfMessage < length) {
+
+            let mMessage = {}
+            mMessage.id = message.userId
+            mMessage.time = message.time
+            mMessage.message = message.content
+
+            mMessages.push(mMessage)
+
+            mOffset = message.time
+            currentNumberOfMessage++
+          } else {
+            break
+          }
+        }
+      }
+
+      next({
+        lazyLoad: {
+          offset: mOffset
+        },
+        mesId: id,
+        messages: mMessages
+      })
+    }
+  })
+}
+
+export const verifyToken = (token) => {
+    try {
+        const decoded = jwt.verify(token, 'secret');
+        return decoded;
+    } catch(err) {
+        return null;
+    }
+}

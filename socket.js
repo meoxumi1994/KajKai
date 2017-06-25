@@ -1,9 +1,74 @@
 socket mac dinh { type: , data: ... }
 server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 
+//// NEW NEW NEW NEW NEW
+
+'client/JOIN_POST' {
+    sellpostid || minorpostid:
+}
+'client/JOIN_LEADERCOMMENT' {
+    leadercommentid:
+}
+'client/LEAVE_POST' {
+    sellpostid || minorpostid:
+}
+
+'client/COMMENT' && 'global/COMMENT' {
+    id:
+    sellpostid || minorpostid:
+    leadercommentid:
+	content:
+	name:
+	avatarUrl:
+	commenterid:
+	time:
+    like:
+}
+
+'client/COMMENT_ING' {
+    sellpostid || minorpostid:
+    leadercommentid:
+}
+
+'client/LEADERCOMMENT' && 'global/LEADERCOMMENT' {
+    id:
+    sellpostid || minorpostid:
+    content:
+    name:
+    avatarUrl:
+    commenterid:
+    time:
+    order: [
+        {
+            id: '',
+            content: ,
+            imageUrl: ,
+            list: [],
+            num: ,
+        },
+    ],
+    like:
+}
+
+'client/LEADERCOMMENT_ING' {
+    sellpostid || minorpostid:
+},
+
+'client/LIKE' && 'global/LIKE' {
+    type: 'store|sellpost|minorpost|leadercomment|comment'
+    status:
+    storeid: ,
+    sellpostid: ,
+    minorpostid: ,
+    leadcommentid: ,
+    subcommentid:,
+}
+
+
+//// NEW NEW NEW NEW NEW
 'server/JOIN_SELL_POST' {
     sellpostid:
-    offset: 
+    offset:
 }
 'client/JOIN_SELL_POST' {
 
@@ -13,7 +78,6 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
     minorpostid:
     offset:
 }
-
 'server/COMMENT' {
     leadercommentid:
 	content:
@@ -209,7 +273,7 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
       {
           id: '',
           avatarUrl: '',
-          name: ''
+          username: ''
       }
     ],
     id: '',
@@ -245,11 +309,6 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 }
 
 
-
-
-
-
-
 socket mac dinh { type: , data: ... }
 
 'server/JOIN_COMMENT' {
@@ -258,20 +317,15 @@ socket mac dinh { type: , data: ... }
 }
 'client/JOIN_COMMENT' {
     offset: // time
-    leadercomments: [
+    comments: [
         {
-            leadercommentid:
+            commentid:
         	content:
         	name:
         	avatarUrl:
         	commenterid:
         	time:
-        }
-    ]
-    likes: [
-        {
-            commentid: ,
-            numlike: ,
+            numlike:
         }
     ]
 }

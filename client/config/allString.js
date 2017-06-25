@@ -32,7 +32,7 @@ const myString = {
     SAVE: ['lưu', 'save'],
     CHANGE: ['Thay đổi','Change'],
     CANCEL: ['huỷ','cancel'],
-    EDIT: ['sửa','edit'],
+    EDIT: ['Sửa','Edit'],
     NO: ['Chưa có','No'],
     USER_NAME: ['Tên của bạn','Name'],
     NOTE_USER_NAME: ['tên bạn sử dụng để hiển thị khi đặt hàng hay bình luận về cửa hàng, nên sử dụng tên thật của bạn để cửa hàng có thể gọi đúng cũng như đảm bảo gói hàng sẽ được giao đúng',
@@ -74,6 +74,17 @@ const myString = {
     ENTER_CATEGORY: ['loại hình kinh doanh của cửa hàng','your Store\'s category'],
     CATEGORY_WARNING: ['chưa có loại hình kinh doanh','enter category please'],
     PHONE_STORE: ['số điện thoại để khách hàng liên hệ đến của hàng','Phone numbers for customers to contact the store'],
+    // thumnail
+    ADD_PHOTO: ['Thêm ảnh', 'Add Photo'],
+    SUGGEST_PHOTO:['Gợi Ý Ảnh', 'Suggest Photo'],
+    SEE_MORE: ['Xem thêm', 'See More'],
+    TAKE_PHOTO: ['Lấy Ảnh','Take Photo'],
+    WEBCAM_DESCRIPTION: ['Hình ảnh của bạn luôn công khai.', 'Your picture is always public.'],
+    CAPTURE_PHOTO: ['Chụp Ảnh','Capture Photo'],
+    RETAKE_PHOTO: ['Chụp Lại','Retake Photo'],
+    SAVE: ['Lưu','Save'],
+    CROPPIE_DESCRIPTION: ['Cuộn để phóng to và thu nhỏ','scroll to zoom in and zoom out'],
+    CROPPIE_TITLE: ['Tải ảnh lên','Upload Photo'],
 }
 
 const allString = {

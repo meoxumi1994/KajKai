@@ -752,7 +752,7 @@ GET /product/:id {
   totalnum: // số lần được gọi trong leadercomment
 }
 
-GET /chatlist?offset=offset&length=length: {
+GET /chatlist?offset=offset&length=length: { // thứ tự trả về như thế nào ? và nếu tạo nhóm nhưng chưa chat thì có lấy về không?
     lazyLoad: {
       offset: ''
     },
@@ -768,12 +768,12 @@ GET /chatlist?offset=offset&length=length: {
             url: ''
           }
         },
-        groupName: '',
+        displayLabel: '',
         users: [                 // Not included requester
           {
             avatarUrl: '',
             id: '',
-            name: '',
+            username: '',
           }
         ]
       }
@@ -787,6 +787,7 @@ GET /messages/:mesid?offset=offset&length=length {
   mesId: '',
   messages: [
     {
+      id: //userId cái thằng mà chat cái mesage này hay còn gọi là sendId
       message: {
         text: '',
         url: '',
@@ -802,7 +803,7 @@ GET /search/user?text='char' {
         {
             id: '',
             avatarUrl: '',
-            name: ''
+            username: ''
         }
     ]
 }

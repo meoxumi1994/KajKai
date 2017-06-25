@@ -7,6 +7,8 @@ import Cropperjs from 'cropperjs'
 
 import App from '~/containers/App'
 import Webcam from 'react-webcam';
+import KeepImage from '~/containers/entity/thumnail/KeepImage'
+import AddPhoto from '~/containers/entity/thumnail/AddPhoto'
 
 class Comp extends React.Component {
     constructor(props){
@@ -16,7 +18,7 @@ class Comp extends React.Component {
         const listpost = []
         return(
             <div style={{ height: '100%'}}>
-                <div style={{ position: 'fixed', zIndex: 1, right: 0, top: 0, width: '100%', backgroundColor: 'blue', height: 48}}>
+                <div style={{ position: 'fixed', right: 0, top: 0, width: '100%', backgroundColor: 'blue', height: 48}}>
                 </div>
                 <div ref={ (scroll) => this.scroll = scroll }
                     onScroll={(e) => console.log('onScroll',
@@ -93,439 +95,155 @@ const Components = () => (
             <Route path="*" component={App}/>
         </div>
     </BrowserRouter>
-
 )
 
-class Camera extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = { hover: false }
-    }
-    toggleHover(){
-        this.setState({hover: !this.state.hover})
-    }
-    render(){
-        const { style, src, onClick, textChange } = this.props
-        return(
-            <div
-                className ="btn"
-                style={{ padding: 0 }}
-                onMouseEnter={() => this.toggleHover()}
-                onMouseLeave={() => this.toggleHover()}
-                onClick={() => { document.getElementById("myinput_file").click(), onClick() } }>
-                <input style={{
-                    position: 'absolute',
-                    visibility: 'hidden',
-                    width: 0,
-                    height: 0,
-                }} accept="image/*" type="file" id="myinput_file"/>
-                <img src={src} style={{ width: style.width, height: style.height }}/>
-                {this.state.hover ?
-                    <div style={{
-                        textAlign: 'left',
-                        position: 'absolute',
-                        zIndex: 1,
-                        width: style.width,
-                        opacity: 0.8,
-                        marginTop: - style.height,
-                        backgroundColor: '#000000' }}>
-                        <img src="/images/camera.svg" style={{ margin: 8 ,height: style.height / 8 }}/>
-                        <span style={{ marginLeft: 8, fontSize: 12, color: 'white'}}>{textChange}</span>
-                    </div>
-                :   <div  style={{
-                        textAlign: 'left',
-                        position: 'absolute',
-                        zIndex: 1,
-                        marginTop: - style.height }}>
-                        <img src="/images/camera.svg" style={{ margin: 12 ,height: style.height / 10 }}/>
-                    </div>
-                }
-            </div>
-        )
-
-    }
-}
-
-
-
-class Carousel extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = { hover: false }
-    }
-    toggleHover(){
-        this.setState({hover: !this.state.hover})
-    }
-    render(){
-        const { images, style, onClick, textChange, onedit } = this.props
-        return(
-            <div className="container-fluid" style={{ width: style.width + 30, height: style.height }}>
-              <div id="myCarousel" className="carousel slide" data-ride="carousel">
-                <div
-                    style={{ padding: 0 }}
-                    onMouseEnter={() => this.toggleHover()}
-                    onMouseLeave={() => this.toggleHover()}
-                    onClick={() => { onClick() } }
-                    className="btn carousel-inner">
-                    {images.map((item, index) =>
-                        <div key={index} className={index?"item":"item active"}>
-                          <img key={index} src={item} style={{ width: style.width, height: style.height }}/>
-                        </div>
-                    )}
-                    { (onedit && this.state.hover) ?
+const LikeShareComment = ({ onLike, onComment, onShare, beLike }) => {
+    return(
+        <div className="container-fluid" style={{
+            width: 265,
+        }}>
+            <div className="row">
+                <div className="col col-xs-4" style={{ padding: 0, margin: 0 }}>
+                    <div className="btn" style={{ padding: 4 }}
+                        onClick={() => {
+                            this.like.className = "grow growing"
+                            setTimeout(() => {
+                                this.like.className = "grow"
+                            }, 170)
+                        }}>
+                        <img
+                            ref={img=> this.like = img}
+                            style={{
+                                float: 'left',
+                                width: 14,
+                                height: 14,
+                                marginRight: 7,
+                            }} src={beLike?"/images/likehas.svg":"/images/like.svg"}
+                        />
                         <div style={{
-                            textAlign: 'left',
-                            position: 'absolute',
-                            zIndex: 1,
-                            width: style.width,
-                            opacity: 0.8,
-                            marginTop: - style.height / 9 - 16,
-                            backgroundColor: '#000000' }}>
-                            <img src="/images/camera.svg" style={{ margin: 8 ,height: style.height / 9 }}/>
-                            <span style={{ marginLeft: 8, fontSize: 12, color: 'white'}}>{textChange}</span>
+                            marginLeft: 7,
+                            marginTop: -3,
+                        }}><a style={{
+                            color: beLike?'#BD081C': '#3C3F45',
+                            fontSize: 13,
+                            fontWeight: 'bold',
+                        }}>{'Like'}</a>
                         </div>
-                    : onedit &&  <div  style={{
-                            position: 'absolute',
-                            zIndex: 1,
-                            textAlign: 'left', marginTop: - style.height / 11 - 16, }}>
-                            <img src="/images/camera.svg" style={{ margin: 8 ,height: style.height / 11 }}/>
-                        </div>
-                    }
+                    </div>
                 </div>
-                {images.length > 1 &&
-                    <a className="left carousel-control" href="#myCarousel" data-slide="prev">
-                      <span style={{ marginTop: style.height / 2 - 10}} className="glyphicon glyphicon-menu-left"></span>
-                      <span className="sr-only">Previous</span>
-                    </a>
-                }
-                {images.length > 1 &&
-                    <a className="right carousel-control" href="#myCarousel" data-slide="next">
-                      <span style={{ marginTop: style.height / 2 - 10}} className="glyphicon glyphicon-menu-right"></span>
-                      <span className="sr-only">Next</span>
-                    </a>
-                }
-              </div>
-            </div>
-        )
-    }
-}
+                <div className="col col-xs-4" style={{ padding: 0, margin: 0 }}>
+                    <div className="btn" style={{ marginLeft: -7, padding: 4, width: 100 }}
+                        ref={img => this.cmt = img}
+                        onClick={() => {
+                            this.cmt.className = "btn decline declineing"
+                            setTimeout(() => {
+                                this.cmt.className = "btn decline"
+                            }, 80)
+                        }}>
+                        <img
+                            style={{
 
-// class ViewModal extends React.Component {
-//     constructor(props){
-//         super(props)
-//     }
-//     render(){
-//         return(
-//
-//         )
-//     }
-// }
-
-
-
-
-
-class WebcamCapture extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            click_capture : false,
-            iswaitting: false,
-            cowndown: undefined,
-        }
-    }
-    capture(){
-        if(this.state.iswaitting) return;
-        this.setState({
-            iswaitting: true,
-            cowndown: 3,
-        })
-        const myInterval = setInterval(() => {
-            this.setState({
-                cowndown: this.state.cowndown - 1,
-            })
-            if(this.state.cowndown == 0){
-                clearInterval(myInterval)
-                this.setState({
-                    click_capture: true,
-                    iswaitting: false,
-                    cowndown: undefined,
-                })
-                const imageSrc = this.webcam.getScreenshot()
-                const imgData = document.getElementById("imgData")
-                imgData.src = imageSrc
-            }
-        },1000)
-    }
-    openModal(){
-        this.setState({
-            click_capture : false,
-            iswaitting: false,
-            cowndown: undefined,
-        })
-    }
-    onSave(){
-        if(this.state.iswaitting) return;
-        console.log('onSave')
-    }
-    render() {
-        const { style, TITLE, DESCRIPTION, CAPTURE_PHOTO, SAVE , RETAKE_PHOTO} = this.props
-        return (
-            <div>
-                <button type="button" className="btn btn-default"
-                    data-toggle="modal" data-target="#webcamcapture"
-                    style={{ width: 380, height: 110 , padding: 0 }}
-                    onClick={() => this.openModal()}>
-                    <span style={{ fontSize: 17}} className="glyphicon glyphicon-camera"></span>
-                    <span style={{ fontSize: 17}} >{" " + TITLE}</span>
-                </button>
-                <Modal show={this.state.showModal} onHide={this.close}>
-
-                </Modal>
-                <div id="webcamcapture" className="modal fade" role="dialog">
-                    <div className="modal-dialog" style={{ width: style.width + 16}}>
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <button type="button" className="close" data-dismiss="modal">&times;</button>
-                                <strong>{TITLE}</strong>
-                                <div className="text-muted">{DESCRIPTION}</div>
-                            </div>
-                            <div className="modal-body" style={{ padding: 8 }}>
-                                <Webcam
-                                  audio={false}
-                                  width={style.width}
-                                  height={style.width / 1.32}
-                                  ref={ (webcam) => this.webcam = webcam }
-                                  screenshotFormat="image/jpeg"
-                                />
-                                <div style={{
-                                    position: 'absolute',
-                                    // visibility: (!this.state.iswaitting && this.state.click_capture)?'visible':'hidden'
-                                    marginTop: - style.width / 1.32 - 3,
-                                    paddingTop: 140,
-                                }}>
-                                    <strong style={{
-                                        marginLeft: style.width / 2,
-                                        fontSize: 30,
-                                        textShadow: '1px 1px 0px #000000',
-                                        color: 'white'}}>
-                                        {this.state.cowndown}
-                                    </strong>
-                                </div>
-                                <div style={{
-                                    position: 'absolute',
-                                    // visibility: (!this.state.iswaitting && this.state.click_capture)?'visible':'hidden'
-                                    marginTop: - style.width / 1.32 - 3
-                                }}>
-                                    <img id="imgData"
-                                        style={{
-                                            width: style.width,
-                                            visibility: (!this.state.iswaitting && this.state.click_capture)?'visible':'hidden'
-                                        }}/>
-                                </div>
-                            </div>
-                            {this.state.click_capture?
-                                <div className="modal-footer">
-                                    <div className="btn btn-sm btn-default"
-                                        disabled={this.state.iswaitting}
-                                            style={{ backgroundColor: '#BB0F23', borderColor: '#BB0F23',
-                                            color: 'white' }}
-                                        onClick={() => this.capture()}>{RETAKE_PHOTO}</div>
-                                    {!this.state.iswaitting &&
-                                        <button className="btn btn-sm btn-default"
-                                                style={{ backgroundColor: '#BB0F23', borderColor: '#BB0F23', color: 'white'}}
-                                            onClick={() => {this.onSave()}}>
-                                            {SAVE}</button>
-                                    }
-                                </div>
-                            :    <div className="modal-footer">
-                                    <div className="btn btn-sm btn-default"
-                                        disabled={this.state.iswaitting}
-                                        style={{ backgroundColor: '#BB0F23', borderColor: '#BB0F23', color: 'white'}}
-                                        onClick={() => this.capture()}>{CAPTURE_PHOTO}</div>
-                                </div>
-                            }
-
+                                float: 'left',
+                                width: 14,
+                                height: 14,
+                                marginRight: 7,
+                            }} src="/images/comment.svg"
+                        />
+                        <div style={{
+                            marginLeft: 7,
+                            marginTop: -3,
+                        }}><a style={{
+                            color: '#3C3F45',
+                            fontSize: 13,
+                            fontWeight: 'bold',
+                        }}>{'Comment'}</a>
+                        </div>
+                    </div>
+                </div>
+                <div className="col col-xs-4" style={{ padding: 0, margin: 0 }}>
+                    <div className="btn" style={{ marginLeft: 14, padding: 4, width: 74}}
+                        onClick={() => onShare()}
+                        >
+                        <img
+                            style={{
+                                float: 'left',
+                                width: 14,
+                                height: 14,
+                                marginRight: 7,
+                            }} src={"/images/share.svg"}
+                        />
+                        <div style={{
+                            marginLeft: 7,
+                            marginTop: -3,
+                        }}><a style={{
+                            color: '#3C3F45',
+                            fontSize: 13,
+                            fontWeight: 'bold',
+                        }}>{'Share'}</a>
                         </div>
                     </div>
                 </div>
             </div>
-
-        );
-    }
-}
-
-class Croppie extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            first : true,
-            cropper_src: "/images/flower001.jpg",
-        }
-    }
-    onZoom(){
-        this.refs.cropper.zoomTo(0.1)
-    }
-    onSave(){
-        this.img.src = this.cropper.getCroppedCanvas().toDataURL()
-    }
-    uploadPhoto(){
-        document.getElementById("myinput_file").click()
-    }
-    readURL(){
-        const file = this.refs.imagefile.files[0];
-        const reader = new FileReader();
-        const url = reader.readAsDataURL(file);
-        reader.onloadend = (e) => {
-            this.setState({
-                cropper_src: reader.result
-            })
-            document.getElementById("btn_open_modal").click()
-        }
-    }
-    render() {
-        const { style, TITLE, DESCRIPTION} = this.props
-        return (
-            <div>
-                <button type="button" className="btn btn-default"
-                    style={{ width: 380, height: 110 , padding: 0 }}
-                    onClick={() => this.uploadPhoto()}
-                    >
-                    <span style={{ fontSize: 17}} className="glyphicon glyphicon-plus"></span>
-                    <span style={{ fontSize: 17}} >{" " + TITLE}</span>
-                </button>
-                <input
-                    onChange={() => this.readURL()}
-                    ref="imagefile"
-                    style={{
-                    position: 'absolute',
-                    visibility: 'hidden',
-                    width: 0,
-                    height: 0,
-                }} accept="image/*" type="file" id="myinput_file"/>
-                <button id="btn_open_modal" type="button" className="btn btn-default"
-                    data-toggle="modal" data-target="#croppie"
-                    style={{ width: 0, height: 0 , padding: 0 }}
-                    ></button>
-                <div id="croppie" className="modal fade" role="dialog">
-                    <div className="modal-dialog" style={{ width: style.width + 2 }}>
-                        <div className="modal-content">
-                          <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal">&times;</button>
-                            <strong>{TITLE}</strong>
-                          </div>
-                          <div className="modal-body" style={{ padding: 0 }}>
-                              {/* <img ref={(imgcropper) => this.imgcropper = imgcropper }/> */}
-                              {/* <Croppii ref="cropper"/> */}
-                              <Cropper
-                                  viewMode= {1}
-                                  dragMode= 'move'
-                                  src={this.state.cropper_src}
-                                  aspectRatio= {1}
-                                  minContainerWidth = {this.props.style.width}
-                                  minContainerHeight =  {this.props.style.height}
-                                  guides = {true}
-                                  modal = {true}
-                                  cropBoxMovable = {false}
-                                  cropBoxResizable = {false}
-                                  background = {false}
-                                  autoCropArea = {1}
-                              />
-                          </div>
-                          <div style={{ paddingLeft: 20 }}>
-                              {DESCRIPTION}
-                              <img ref={(img) => this.img = img }/>
-                          </div>
-                          <div className="modal-footer">
-                              <button type="button" className="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
-                              <div className="btn btn-sm btn-default"
-                                  style={{ backgroundColor: '#BB0F23', borderColor: '#BB0F23', color: 'white'}}
-                                  onClick={() => this.onSave()}> Save </div>
-                          </div>
-                        </div>
-                      </div>
-                </div>
-            </div>
-        );
-    }
-}
-
-class KeepImage extends React.Component {
-    constructor(props){
-        super(props)
-    }
-    uploadPhoto(){
-        document.getElementById("myinput_file").click()
-    }
-    render(){
-        const { TITLE, UPLOAD_PHOTO, TAKE_PHOTO, SUGGEST_PHOTO } = this.props
-        return(
-            <div>
-                <button type="button" className="btn btn-info btn-lg"
-                    data-toggle="modal" data-target="#keepimage">Open Modal</button>
-                <div id="keepimage" className="modal fade" role="dialog">
-                    <div className="modal-dialog" style={{ width: 784, height: '100%'}}>
-                        <div className="modal-content">
-                            <div className="modal-header">
-                              <button type="button" className="close" data-dismiss="modal">&times;</button>
-                              <strong>{TITLE}</strong>
-                            </div>
-                            <div className="modal-body" style={{ padding: 8 }}>
-                                <div className="container-fluid">
-                                    <div className="row">
-                                        <div className="col col-xs-6" style={{ padding: 0}}>
-                                            <Croppie
-                                                DESCRIPTION={'scroll to zoom in and zoom out'}
-                                                TITLE="Upload Photo"
-                                                src="/images/flower005.jpg"
-                                                style={{ width: 780, height: 440 }} />
-                                        </div>
-                                        <div className="col col-xs-6" style={{ padding: 0}}>
-                                            <WebcamCapture
-                                                TITLE='Take Photo'
-                                                DESCRIPTION='Your current profile picture is always public.'
-                                                CAPTURE_PHOTO='Capture Photo'
-                                                RETAKE_PHOTO='Retake Photo'
-                                                SAVE='Save'
-                                                style={{ width: 440 }}/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style={{ padding: 8 }}>
-                                    <span className="text-muted"
-                                        fontSize={17}>{SUGGEST_PHOTO}</span>
-                                </div>
-                            </div>
-                            <div className="modal-footer">
-                              <button type="button" className="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+        </div>
+    )
 }
 
 const Compp = ({}) => (
     <div>
-        {/* <Carousel style={{ width: 260, height: 260 }}
+        {/* <Carousel key={'123'} style={{ width: 260, height: 260 }}
             images={["/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg"]}
             onClick={() => console.log('onClick')}
             textChange="Add photo"
             onedit={true}/> */}
 
-        {/* <Camera style={{ width: 170, height: 170 }}
-            src="/images/flower001.jpg"
+        {/* <Camera style={{ width: 500, height: 170 }}
+            src="/images/garden.png"
             onClick={() => console.log('onClick')}
             textChange="Add photo"
+            isTop={true}
+        /> */}
+        {/* <AddPhoto/> */}
+        <LikeShareComment beLike={true}/>
+        {/* <Croppie
+            DESCRIPTION={'scroll to zoom in and zoom out'}
+            TITLE="Upload Photo"
+            src="/images/flower005.jpg"
+            style={{ width: 780, height: 440 }}
+            btnstyle={{
+                width: 380,
+                height: 110,
+                fontSize: 17,
+            }}
+        /> */}
+        {/* <KeepImage
+            type={'GroupImage'} // GroupImage || Carousel
+            images={["/images/flower001.jpg",
+            "/images/garden.png",
+            "/images/flower001.jpg", "/images/flower002.jpg",
+            "/images/flower004.jpg",
+            "/images/i love you.jpg"
+            ]}
+            imagesSuggest={[
+                "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
+                "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
+                "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
+                "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
+                "/images/flower001.jpg", "/images/flower002.jpg",
+                "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
+            ]}
+            canEdit={true}
         /> */}
 
-        <KeepImage
-            TITLE='Add Photo'
-            UPLOAD_PHOTO='Upload Photo'
-            TAKE_PHOTO='Take Photo'
-            SUGGEST_PHOTO='Suggest Photo'/>
+        {/* <GroupImage
+            EDIT={'Edit'}
+            canEdit={true}
+            width={520}
+            height={360}
+            images={[
+                "/images/flower001.jpg",
+                "/images/garden.png",
+                "/images/i love you.jpg"
+                ]}/> */}
     </div>
 )
 

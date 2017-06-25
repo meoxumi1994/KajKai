@@ -6,6 +6,7 @@ import PostrowSchema from './Postrow'
 import ProductSchema from './Product'
 import ReplySchema from './Reply'
 import SellpostSchema from './Sellpost'
+import StoreSchema from './Store'
 import TitleSchema from './Title'
 
 export const Comment = mongoose.model('Comment', CommentSchema)
@@ -15,4 +16,5 @@ export const Postrow = mongoose.model('Postrow', PostrowSchema)
 export const Product = mongoose.model('Product', ProductSchema)
 export const Reply = mongoose.model('Reply', ReplySchema)
 export const Sellpost = mongoose.model('Sellpost', SellpostSchema)
+export const Store = mongoose.model('Store', StoreSchema)
 export const Title = mongoose.model('Title', TitleSchema)
