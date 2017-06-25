@@ -24,7 +24,20 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 	time:
     like:
 }
-
+'client/GET_MORE_COMMENT' {
+    offset:
+    comments: [{
+        id:
+        sellpostid || minorpostid:
+        leadercommentid:
+    	content:
+    	name:
+    	avatarUrl:
+    	commenterid:
+    	time:
+        like:
+    }]
+}
 'client/COMMENT_ING' {
     sellpostid || minorpostid:
     leadercommentid:
@@ -49,7 +62,28 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
     ],
     like:
 }
-
+'client/GET_MORE_LEADERCOMMENT' {
+    offset:
+    leadercomments: [{
+        id:
+        sellpostid || minorpostid:
+        content:
+        name:
+        avatarUrl:
+        commenterid:
+        time:
+        order: [
+            {
+                id: '',
+                content: ,
+                imageUrl: ,
+                list: [],
+                num: ,
+            },
+        ],
+        like:
+    }]
+}
 'client/LEADERCOMMENT_ING' {
     sellpostid || minorpostid:
 },

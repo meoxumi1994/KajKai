@@ -104,12 +104,16 @@ const LikeShareComment = ({ onLike, onComment, onShare, beLike }) => {
         }}>
             <div className="row">
                 <div className="col col-xs-4" style={{ padding: 0, margin: 0 }}>
-                    <div className="btn" style={{ padding: 4 }}
+                    <div className="btn btnn" style={{ padding: 4, width: 65 }}
                         onClick={() => {
                             this.like.className = "grow growing"
                             setTimeout(() => {
                                 this.like.className = "grow"
                             }, 170)
+                            this.liketext.className = "decline declineing"
+                            setTimeout(() => {
+                                this.liketext.className = "decline"
+                            }, 80)
                         }}>
                         <img
                             ref={img=> this.like = img}
@@ -117,11 +121,10 @@ const LikeShareComment = ({ onLike, onComment, onShare, beLike }) => {
                                 float: 'left',
                                 width: 14,
                                 height: 14,
-                                marginRight: 7,
                             }} src={beLike?"/images/likehas.svg":"/images/like.svg"}
                         />
-                        <div style={{
-                            marginLeft: 7,
+                        <div ref={ liketext => this.liketext = liketext}
+                            style={{
                             marginTop: -3,
                         }}><a style={{
                             color: beLike?'#BD081C': '#3C3F45',
@@ -142,15 +145,12 @@ const LikeShareComment = ({ onLike, onComment, onShare, beLike }) => {
                         }}>
                         <img
                             style={{
-
                                 float: 'left',
                                 width: 14,
                                 height: 14,
-                                marginRight: 7,
                             }} src="/images/comment.svg"
                         />
                         <div style={{
-                            marginLeft: 7,
                             marginTop: -3,
                         }}><a style={{
                             color: '#3C3F45',
@@ -161,19 +161,24 @@ const LikeShareComment = ({ onLike, onComment, onShare, beLike }) => {
                     </div>
                 </div>
                 <div className="col col-xs-4" style={{ padding: 0, margin: 0 }}>
-                    <div className="btn" style={{ marginLeft: 14, padding: 4, width: 74}}
+                    <div className="btn" style={{ marginLeft: 16, padding: 4, width: 74}}
                         onClick={() => onShare()}
+                        ref={img => this.share = img}
+                        onClick={() => {
+                            this.share.className = "btn decline declineing"
+                            setTimeout(() => {
+                                this.share.className = "btn decline"
+                            }, 80)
+                        }}
                         >
                         <img
                             style={{
                                 float: 'left',
                                 width: 14,
                                 height: 14,
-                                marginRight: 7,
                             }} src={"/images/share.svg"}
                         />
                         <div style={{
-                            marginLeft: 7,
                             marginTop: -3,
                         }}><a style={{
                             color: '#3C3F45',
@@ -203,7 +208,11 @@ const Compp = ({}) => (
             isTop={true}
         /> */}
         {/* <AddPhoto/> */}
-        <LikeShareComment beLike={true}/>
+        <LikeShareComment
+            onLike={() => onLike()}
+            onComment={() => onComment()}
+            onShare={() => onShare()}
+            beLike={true}/>
         {/* <Croppie
             DESCRIPTION={'scroll to zoom in and zoom out'}
             TITLE="Upload Photo"
