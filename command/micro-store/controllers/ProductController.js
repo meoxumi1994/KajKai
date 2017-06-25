@@ -1,4 +1,5 @@
 import { createProduct, updateProduct, deleteProduct, getBasicProductInfo } from '../services/ProductService'
+import { updateSellPostDetail } from '../services/SellPostDetailService'
 
 export const createProductCon = () => {
     return (req, res) => {
@@ -30,7 +31,9 @@ export const deleteProductCon = () => {
         const productid = req.body.productid;
         const productOrder = req.body.products_order;
         deleteProduct(productid, postrowsid, sellpostid, () => {
-            res.json(req.body)
+            updateSellPostDetail(postrowsid, {products_order: productOrder}, () => {
+                res.json(req.body)
+            });
         })
     }
 };

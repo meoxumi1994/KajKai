@@ -1,4 +1,5 @@
 import { Product } from '../models/index'
+import { productCreatedPub, productDeletedPub, productUpdatedPub } from '../controllers/StorePubController'
 
 const PRODUCT_GLOBAL_ID = require('../config/globalId').default.PRODUCT_GLOBAL_ID
 
@@ -26,6 +27,7 @@ export const updateProduct = (productId, updateInfo, next) => {
             if (updateInfo.imageUrl) product.imageUrl = updateInfo.imageUrl;
             if (updateInfo.list) product.list = updateInfo.list;
             product.save(() => {
+                productUpdatedPub(getPubProductInfo(product));
                 next(product)
             })
         }
@@ -34,6 +36,7 @@ export const updateProduct = (productId, updateInfo, next) => {
 
 export const deleteProduct = (productId, postrowId, sellPostId, next) => {
     Product.findOneAndRemove({_id: getProductLocalId(productId)}, () => {
+        productDeletedPub(sellPostId, postrowId, productId);
         next(productId, postrowId, sellPostId)
     })
 };
@@ -42,6 +45,7 @@ export const createProduct = (sellPostId, postRowId, productInfo, next) => {
     const product = new Product({content: productInfo, imageUrl: productInfo.imageUrl, list: productInfo.list, sellPostId: sellPostId,
         sellPostDetailId: postRowId});
     product.save(() => {
+        productCreatedPub(getPubProductInfo(product));
         next(product)
     })
 };
@@ -52,5 +56,18 @@ export const getBasicProductInfo = (product) => {
         content: product.content,
         imageUrl: product.imageUrl,
         list: product.list
+    }
+};
+
+export const getPubProductInfo = (product) => {
+    return {
+        sellPostId: product.sellPostId,
+        postrowsid: product.sellPostDetailId,
+        productid: getProductGlobalId(product._id),
+        product: {
+            content: product.content,
+            imageUrl: product.imageUrl,
+            list: product.list
+        }
     }
 };

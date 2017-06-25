@@ -2,7 +2,7 @@ import { getUser } from '../services/UserService.js'
 
 export const getUserHandler = () => (req, res) => {
   if (req.decoded) {
-    let requestedId = req.params.id
+    let { id: requestedId } = req.params
 
     if(!requestedId) {
       requestedId = req.decoded._id
@@ -23,7 +23,7 @@ export const getUserHandler = () => (req, res) => {
 
 export const getUserPrivacyHandler = () => (req, res) => {
   if (req.decoded) {
-    let requestedId = req.params.id
+    let { id: requestedId } = req.params
 
     if(!requestedId) {
       requestedId = req.decoded._id

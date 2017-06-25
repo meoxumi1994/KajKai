@@ -5,9 +5,9 @@ import ProductSchema from './Product'
 import SellPostDetailSchema from './SellPostDetail'
 import SellPostSchema from './SellPost'
 import StoreSchema from './Store'
+import CertificateSchema from './Certificate'
 
-
-
+export const Certificate = mongoose.model('Certificate', CertificateSchema);
 export const SubCategory = mongoose.model('SubCategory', SubCategorySchema);
 export const Category = mongoose.model('Category', CategorySchema);
 export const Product = mongoose.model('Product', ProductSchema);

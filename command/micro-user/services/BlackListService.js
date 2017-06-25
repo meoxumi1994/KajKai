@@ -23,7 +23,7 @@ export const addBlackList = (userId, blockId, next) => {
     switch (blockId) {
         case blockId.startsWith('001'): {
             getUser(blockId, (user) => {
-                const block = new BlackList({userId: userId, blockId: blockId, name: user.name})
+                const block = new BlackList({userId: userId, blockId: blockId, name: user.userName});
                 block.save(function () {
                     next(block)
                 })
@@ -32,7 +32,7 @@ export const addBlackList = (userId, blockId, next) => {
         }
         case blockId.startsWith('002'): {
             getStore(blockId, (store) => {
-                const block = new BlackList({userId: userId, blockId: blockId, name: store.storename})
+                const block = new BlackList({userId: userId, blockId: blockId, name: store.storename});
                 block.save(function () {
                     next(block)
                 })

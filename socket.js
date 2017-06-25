@@ -273,7 +273,7 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
       {
           id: '',
           avatarUrl: '',
-          name: ''
+          username: ''
       }
     ],
     id: '',

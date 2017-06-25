@@ -508,9 +508,9 @@ DELETE /postrows/product {
 
 
 
-GET /postrow/:sellpostid?offset=-1 { // numline = 30
+GET /postrows/:sellpostid?offset=-1 { // numline = 30
     offset: ,
-    postrow: [
+    postrows: [
         {
           sellpostid:,
           id: , //
@@ -752,7 +752,10 @@ GET /product/:id {
   totalnum: // số lần được gọi trong leadercomment
 }
 
-GET /chatlist?offset=offset&length=length: {
+GET /chatlist?offset=offset&length=length: { // thứ tự trả về như thế nào ? và nếu tạo nhóm nhưng chưa chat thì có lấy về không?
+    lazyLoad: {
+      offset: ''
+    },
     data: [
       {
         mesId: '',
@@ -765,13 +768,12 @@ GET /chatlist?offset=offset&length=length: {
             url: ''
           }
         },
-        groupName: '',
-        time: '',
-        users: [
+        displayLabel: '',
+        users: [                 // Not included requester
           {
             avatarUrl: '',
             id: '',
-            name: '',
+            username: '',
           }
         ]
       }
@@ -779,9 +781,13 @@ GET /chatlist?offset=offset&length=length: {
 }
 
 GET /messages/:mesid?offset=offset&length=length {
+  lazyLoad: {
+    offset: ''
+  },
   mesId: '',
   messages: [
     {
+      id: //userId cái thằng mà chat cái mesage này hay còn gọi là sendId
       message: {
         text: '',
         url: '',
@@ -797,7 +803,7 @@ GET /search/user?text='char' {
         {
             id: '',
             avatarUrl: '',
-            name: ''
+            username: ''
         }
     ]
 }

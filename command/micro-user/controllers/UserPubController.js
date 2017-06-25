@@ -2,6 +2,7 @@ import redis from 'redis'
 import config from '../config/pubSubConfig'
 import { getUserBasicInfo } from '../services/UserService'
 import { getUUID } from '../utils/utils'
+import globalId from '../config/globalId'
 
 export const createUserPub = (user) => {
     const pub = redis.createClient(config);
@@ -39,7 +40,19 @@ export const getStore = (storeId, next) => {
 
 export const updateBlackList = (userId, blockId, status) => {
     const pub = redis.createClient(config);
-    const publishData = {user: {userId: userId, blockId: blockId, status: status}};
+    var type = 'userid';
+    switch (blockId){
+        case blockId.startsWith(globalId.USER_GLOBAL_ID):
+            type = 'userid';
+            break;
+        case blockId.startsWith(globalId.STORE_GLOBAL_ID):
+            type = 'storeid';
+            break;
+        case blockId.startsWith(globalId.MESSAGE_GLOBAL_ID):
+            type = 'mesid';
+            break;
+    }
+    const publishData = {user: {userId: userId, blockId: blockId, status: status, type: type}};
     pub.publish('USER.BlackListUpdated', JSON.stringify(publishData));
     pub.quit();
 };

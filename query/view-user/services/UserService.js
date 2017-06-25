@@ -16,11 +16,7 @@ export const getUser = (id, next) => {
             language: user.language,
             sex: user.sex,
             yearOfBirth: user.yearOfBirth,
-            lastUpdate: {
-                username: user.lastUpdate.username,
-                phone: user.lastUpdate.phone,
-                address: user.lastUpdate.address,
-            },
+            lastUpdate: user.lastUpdate,
             blacklist: user.blackList
           })
       }

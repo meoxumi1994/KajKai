@@ -1,20 +1,20 @@
 import mongoose from '../datasource'
-import AddressSchema from './Address'
-import CategorySchema from './Category'
-import CategoryAutoSchema from './CategoryAuto'
-import CertificateSchema from './Certificate'
+import CommentSchema from './Comment'
 import FollowerSchema from './Follower'
-import LastUpdateSchema from './LastUpdate'
 import LikerSchema from './Liker'
+import PostrowSchema from './Postrow'
+import ProductSchema from './Product'
+import ReplySchema from './Reply'
+import SellpostSchema from './Sellpost'
 import StoreSchema from './Store'
-import SubCategorySchema from './SubCategory'
+import TitleSchema from './Title'
 
-export const Address = mongoose.model('Address', AddressSchema)
-export const Category = mongoose.model('Category', CategorySchema)
-export const CategoryAuto = mongoose.model('CategoryAuto', CategoryAutoSchema)
-export const Certificate = mongoose.model('Certificate', CertificateSchema)
+export const Comment = mongoose.model('Comment', CommentSchema)
 export const Follower = mongoose.model('Follower', FollowerSchema)
-export const LastUpdate = mongoose.model('LastUpdate', LastUpdateSchema)
 export const Liker = mongoose.model('Liker', LikerSchema)
+export const Postrow = mongoose.model('Postrow', PostrowSchema)
+export const Product = mongoose.model('Product', ProductSchema)
+export const Reply = mongoose.model('Reply', ReplySchema)
+export const Sellpost = mongoose.model('Sellpost', SellpostSchema)
 export const Store = mongoose.model('Store', StoreSchema)
-export const SubCategory = mongoose.model('SubCategory', SubCategorySchema)
+export const Title = mongoose.model('Title', TitleSchema)

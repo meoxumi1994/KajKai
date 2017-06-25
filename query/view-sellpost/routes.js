@@ -15,11 +15,11 @@ export default {
         method: 'getSellpostsHandler'
     }
   },
-  '/postrow/:sellpostid': {
+  '/postrows/:sellpostid': {
     get: {
       controller: 'PostrowController',
       middleware: [auth()],
-      method: 'getPostrowHandler'
+      method: 'getPostrowsHandler'
     }
   }
 }
