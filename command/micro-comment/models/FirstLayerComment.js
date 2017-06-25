@@ -1,7 +1,7 @@
 import mongoose from '../datasource'
-import {OrderSchema} from './Order'
+import OrderSchema from './Order'
 
-export const FirstLayerCommentSchema = new mongoose.Schema({
+const FirstLayerCommentSchema = new mongoose.Schema({
     posterId: {type: String},
     content: {type: String},
     time: {type: Number},
@@ -9,5 +9,7 @@ export const FirstLayerCommentSchema = new mongoose.Schema({
     postId: {type: String},
     likeCounter: {type: Number},
     commentCounter: {type: Number}
-})
+});
+
+export default FirstLayerCommentSchema;
 

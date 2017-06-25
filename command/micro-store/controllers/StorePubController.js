@@ -20,7 +20,7 @@ export const getUser = (userId, next) => {
         sub.quit();
         pub.quit();
     })
-}
+};
 
 export const authoriseToken = (token, next) => {
     const sub = redis.createClient(config);

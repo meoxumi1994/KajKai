@@ -22,23 +22,21 @@ export const getUser = (userId, next) => {
     })
 };
 
-export const getStore = (storeId, next) => {
+export const authoriseToken = (token, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const id = getUUID();
-    const publicData = {userId: userId, eventId: id};
-    pub.publish('STORE.GetStore', JSON.stringify(publicData));
-    sub.subscribe('STORE.GetStore' + id);
+    const publishData = {token: token, eventId: getUUID()};
+    pub.publish('USER.AuthorizeToken', JSON.stringify(publishData));
+    sub.subcribe('USER.AuthorizeToken' + publishData.eventId);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
+        sub.unsubcribe();
+        sub.quit();
+        pub.quit();
         if (message.status === 'success') {
-            next(message.store)
+            next(message.user)
         } else {
             next(null)
         }
-        sub.unsubscribe();
-        sub.quit();
-        pub.quit()
     })
 };
-
