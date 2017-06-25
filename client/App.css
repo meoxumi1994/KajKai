@@ -33,6 +33,12 @@ hr {
   border-bottom: 5px solid black;
 }
 
+btnn:active{
+    background:transparent;
+}
+btnn:focus{
+    background:transparent;
+}
 
 .clocker {
   width: 22px;
