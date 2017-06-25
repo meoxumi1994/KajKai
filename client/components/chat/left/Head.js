@@ -3,15 +3,18 @@ import { Button, FormGroup, InputGroup, FormControl } from 'react-bootstrap'
 
 const Head = () => {
   return (
-    <span className="border-top-0">
-      <div style={{textAlign: 'center'}}>
-          
-
+    <div>
+      <div style={{width: '75%', marginLeft: 25, height: 25}}>
+          <FormControl type="text" placeholder="Search" style={{borderRadius: 20, height: 45, marginTop: 12}} />
       </div>
-    </span>
+      <div style={{width: '15%', height: 42, position: 'absolute', right: 20, top: 10}}>
+          <button className="btn" style={{width: 45, height: 45, backgroundColor: 'white', borderRadius: 50, float: 'right', borderWidth: 1, borderColor: 'grey'}}>
+              <img src='./images/newMessage.png' style={{width: 20, height: 20}}/>
+          </button>
+      </div>
+      <hr style={{marginTop: 45}}/>
+    </div>
   )
 }
 
 export default Head
-
-// <img style={{marginLeft: 50, width: 27, height: 27}} src="/images/newMessage.png" onClick={() => createNewChat()}/>

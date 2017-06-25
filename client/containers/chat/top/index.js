@@ -2,7 +2,15 @@ import { connect } from 'react-redux'
 import ChatTop from '~/components/chat/top'
 
 const mapStateToProps = (state, ownProps) => {
-  return state
+    const { chatListMap } = state.inst.chat.left
+    const { currentChat } = state.inst.chat.center
+    const { user } = state
+
+    return {
+      chatListMap,
+      currentChat,
+      user
+    }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

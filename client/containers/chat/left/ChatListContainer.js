@@ -1,27 +1,36 @@
 import { connect } from 'react-redux'
 import ChatList from '~/components/chat/left/ChatList'
-import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actions/asyn/chat/visibility'
-import { getMessage } from '~/actions/asyn/chat/'
+import { getChatList, getMessages } from '~/actions/asyn/chat/restful'
+import { readChat } from '~/actions/asyn/chat/socket'
+
 
 const mapStateToProps = (state, ownProps) => {
   const { chatListMap, chatListKey, unreadChat } = state.inst.chat.left
   const { user } = state
   const { currentChat } = state.inst.chat.center
+  const { catagory, currentThemes} = state.inst.chat.display.themes
+  const themes = catagory[currentThemes]
+  console.log('---STATE ', currentChat);
   return (
     {
       chatListMap,
       chatListKey,
       user,
       currentChat,
-      unreadChat
+      unreadChat: unreadChat.messages,
+      themes,
     }
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadChat: (mesId) => {
-      dispatch(getMessage(mesId))
-      dispatch({type: 'READ_CHAT', mesId: mesId})
+      dispatch(getMessages(mesId, Date.now(), 10))
+      dispatch(readChat(mesId))
+
+  },
+  getChatList: () => {
+      dispatch(getChatList(Date.now(), 10))
   }
 })
 

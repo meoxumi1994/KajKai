@@ -1,6 +1,4 @@
 import { connect } from 'react-redux'
-import { getChatId, getMessage } from '~/actions/asyn/chat'
-import { updateMessageListVisibility, updateCreateChatVisibility } from '~/actions/asyn/chat/actions'
 import NewChat from '~/components/chat/top/NewChat'
 
 const mapStateToProps = (state, ownProps) => {

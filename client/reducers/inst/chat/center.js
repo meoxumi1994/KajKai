@@ -34,18 +34,16 @@ const center = (state = {
             },
             currentChat: action.data.mesId
           }
-        return state
 
       case 'REMOVE_CHAT':
         const tempKey = state.messagesKey
         tempKey.splice(tempKey.indexOf(action.mesId), 1)
         const tempMap = state.messagesMap
         delete tempMap[action.mesId]
-
         return {
           ...state,
           messagesKey: tempKey,
-          messagesMap: tempMap
+          messagesMap: tempMap,
         }
 
 

@@ -1,148 +1,240 @@
-const styles =  {
-    bigWindow: {
-        rightMsg: {
-          img: {
-            float: 'right',
-            marginRight: 20
+const mainColor= '#e9ebee'
+
+const bigWindow = (color) => {
+    return {
+      top: {
+          currentMainDiv: {
+              backgroundColor: 'white',
+              height: '7.5%',
+              width: '100%',
           },
-          text: {
-            marginRight: 40,
-            marginTop: 10,
-            textAlign: 'right'
-          }
-        },
-        leftMsg: {
-          img: {
-            float: 'left',
+          mainDiv: {
+
+          },
+          iconImg: {
+              width: 27,
+              height: 27,
+              borderRadius: 50,
+              marginRight: 10,
+              marginTop: 15
+          },
+          iconGroupDiv: {
+              position: 'absolute',
+              right: 10,
+              top: 6,
+              backgroundColor: mainColor
+          },
+          spliterHr: {
+            marginTop: 18
+          },
+          displayLabel: {
+            fontSize: 18,
             marginLeft: 20,
-          },
-          text: {
-            marginLeft: 40,
-            marginTop: 10
+            marginTop: 22
           }
-        },
-        messageListDiv: {
-          width: 900,
-          height: 520,
-          overflow: 'scroll'
-        },
-        headerIcon: {
-          width: 27,
-          height: 27,
-          float: 'right',
-          marginTop: 4,
-          marginRight: 10
-        },
+      },
+      center: {
+          mainDiv: {
+            overflowY: 'scroll',
+            height: '80%',
+            backgroundColor: 'white'
+          },
+          rightMsg: {
+              imgDiv: {
+                  float: 'right',
+                  marginRight: 20
+              },
+              imgIcon: {
+                  borderRadius: 50,
+                  borderWidth: 1,
+                  width: 40,
+                  height: 40
+              },
+              text: {
+                  marginRight: 40,
+                  marginTop: 10,
+                  textAlign: 'left',
+              },
+              bounds: {
+                  backgroundColor: color,
+                  color: 'white',
+                  width: 300,
+                  paddingTop: 10,
+                  paddingRight: 10,
+                  paddingBottom: 10,
+                  paddingLeft: 10,
+                  borderRadius: 10,
+                  float: 'right',
+              },
+              senderDiv: {
+                  color: 'grey',
+                  display: 'none'
+              }
+          },
+          leftMsg: {
+              imgDiv: {
+                  float: 'left',
+                  marginLeft: 20,
+              },
+              imgIcon: {
+                  borderRadius: 50,
+                  borderWidth: 1,
+                  width: 40,
+                  height: 40
+              },
+              text: {
+                  marginLeft: 40,
+                  marginTop: 10,
+              },
+              bounds: {
+                  backgroundColor: '#e9ebee',
+                  width: 300,
+                  paddingTop: 10,
+                  paddingRight: 10,
+                  paddingBottom: 10,
+                  paddingLeft: 10,
+                  borderRadius: 10
+              },
+              senderDiv: {
+                color: 'grey'
+              }
+          },
+      },
+      bottom: {
         inputForm: {
-          width: 900
-        },
-        chatHeader: {
-          backgroundColor: '#e9ebee',
-          height: 59,
-          width: 900,
-          marginTop: 18,
-          marginLeft: 8,
-          borderRadius:15,
-          borderWidth: 1,
-          borderColor: 'black'
-        },
-        mainDiv: {
           position: 'fixed',
           bottom: 0,
-          backgroundColor: 'black',
-          width: 320 ,
-          height: 400,
-          zIndex:100,
-          marginLeft: 5
+          width: '60%',
         },
-        closeButton: {
-          visibility: 'none',
-          width: 20,
-          height: 20,
-          float: 'right',
-          marginTop: 4,
-          marginRight: 10
+        formControl: {
+          height: 50,
         },
-        topAvatar: {
-          display: 'inline',
-          marginLeft: 10
-        },
-        topHr: {
-          display: 'block',
-          marginTop: 10
+        iconButton: {
+          height: 40,
+          width: 80
         }
-    },
-    smallWindow: {
-        rightMsg: {
-          img: {
-            float: 'right',
-          },
-          text: {
-            marginRight: 40,
-            marginTop: 10,
-            textAlign: 'right'
-          }
-        },
-        leftMsg: {
-          img: {
-            float: 'left',
-          },
-          text: {
-            marginLeft: 40,
-            marginTop: 10
-          }
-        },
-        messageListDiv: {
-          width: 320,
-          height: 300,
-          overflow: 'scroll'
-        },
-        headerIcon: {
-          width: 20,
-          height: 20,
-          float: 'right',
-          marginTop: 4,
-          marginRight: 10
-        },
-        inputForm: {
-          width: 320
-        },
-        chatHeader: {
-          backgroundColor: '#BD081C',
-          color: 'white',
-          height: 30,
-          width: 320
-        },
-        chatHeaderGrey: {
-          backgroundColor: 'grey',
-          color: 'white',
-          height: 30,
-          width: 320
-        },
-        mainDiv: {
-          position: 'fixed',
-          bottom: 0,
-          backgroundColor: 'black',
-          width: 320 ,
-          height: 400,
-          zIndex:100,
-          marginLeft: 5
-        },
-        closeButton: {
-          visibility: 'inline',
-          width: 20,
-          height: 20,
-          float: 'right',
-          marginTop: 4,
-          marginRight: 10
-        },
-        topAvatar: {
-          display: 'none'
-        },
-        topHr: {
-          display: 'none'
-        }
+      },
     }
+}
+
+const smallWindow = (color) => {
+    return {
+      top: {
+          currentMainDiv: {
+              backgroundColor: color,
+              color: 'white',
+              height: 30,
+              width: 320
+          },
+          mainDiv: {
+              backgroundColor: 'grey',
+              color: 'white',
+              height: 30,
+              width: 320
+          },
+          iconImg: {
+              width: 20,
+              height: 20,
+              borderRadius: 50,
+              marginLeft: 5
+          },
+          iconGroupDiv: {
+              position: 'absolute',
+              right: 10,
+              top: 6
+          },
+          spliterHr: {
+            display: 'none',
+          },
+          displayLabel: {
+            fontSize: 15,
+            marginTop: 5,
+            marginLeft: 5
+          }
+      },
+      center: {
+          mainDiv: {
+            width: 320,
+            height: 300,
+            overflowY: 'scroll'
+          },
+          rightMsg: {
+              imgDiv: {
+                  float: 'right',
+              },
+              imgIcon: {
+                  borderRadius: 50,
+                  borderWidth: 1,
+                  width: 40,
+                  height: 40
+              },
+              text: {
+                  marginRight: 40,
+                  marginTop: 10,
+                  textAlign: 'left',
+              },
+              bounds: {
+                  backgroundColor: color,
+                  color: 'white',
+                  width: 200,
+                  paddingTop: 10,
+                  paddingRight: 10,
+                  paddingBottom: 10,
+                  paddingLeft: 10,
+                  borderRadius: 10,
+                  float: 'right',
+              },
+              senderDiv: {
+                  color: 'grey',
+                  display: 'none'
+              }
+          },
+          leftMsg: {
+              imgDiv: {
+                  float: 'left',
+              },
+              imgIcon: {
+                  borderRadius: 50,
+                  borderWidth: 1,
+                  width: 40,
+                  height: 40
+              },
+              text: {
+                  marginLeft: 15,
+              },
+              bounds: {
+                  backgroundColor: '#e0e0e0',
+                  width: 200,
+                  paddingTop: 10,
+                  paddingRight: 10,
+                  paddingBottom: 10,
+                  paddingLeft: 10,
+                  borderRadius: 10
+              },
+              senderDiv: {
+                color: 'grey'
+              }
+          },
+      },
+      bottom: {
+        inputForm: {
+          width: 320
+        },
+        inputDiv: {
+          width: '100%'
+        },
+        iconButton: {
+          fontSize: 13
+        }
+      },
+    }
+}
+
+const styles = (multipleWindow, themes) => {
+    if (!multipleWindow) {
+      return bigWindow(themes.highlighted.backgroundColor)
+    }
+    return smallWindow(themes.highlighted.backgroundColor)
 }
 
 export default styles
