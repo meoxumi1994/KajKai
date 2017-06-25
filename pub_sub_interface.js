@@ -194,7 +194,36 @@ export default {
     },
     comment: {
         sub: ['STORE.GetStore'],
-        pub: ['STORE.GetUser', 'STORE.AuthorizeToken']
+        pub: //['STORE.GetUser', 'STORE.AuthorizeToken']
+        [
+            {
+                event: 'COMMENT.FirstLayerCommentCreated',
+                fComment: {
+                        content: '',
+                        name: '',
+                        avatarUrl: '',
+                        commenterid: '',
+                        time: '',
+                        order: '',
+                        id: '',
+                        sellpostid: '',
+                        minorpostid: ''
+                }
+            },{
+                event: 'COMMENT.SecondLayerCommentCreated',
+                sComment: {
+                    content: '',
+                    name: '',
+                    avatarUrl: '',
+                    commenterid: '',
+                    time: '',
+                    id: '',
+                    sellpostid: '',
+                    minorpostid: '',
+                    leadercommentid: ''
+                }
+            }
+        ]
     },
     like: {
         sub: ['STORE.GetStore'],
