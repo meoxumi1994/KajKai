@@ -532,3 +532,8 @@ textarea#note {
 
 .decline { transition: all .08s ease-in-out; }
 .decline.declineing { transform: scale(0.97); }
+
+.btnn:active {
+    width: 70px;
+    height: 74px;
+}

@@ -90,7 +90,7 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 
 'client/LIKE' && 'global/LIKE' {
     type: 'store|sellpost|minorpost|leadercomment|comment'
-    status:
+    status: 'likeicon|love|haha|wow',
     storeid: ,
     sellpostid: ,
     minorpostid: ,

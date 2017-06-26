@@ -9,6 +9,7 @@ import App from '~/containers/App'
 import Webcam from 'react-webcam';
 import KeepImage from '~/containers/entity/thumnail/KeepImage'
 import AddPhoto from '~/containers/entity/thumnail/AddPhoto'
+import LikeShareComment from '~/containers/entity/row/LikeShareComment'
 
 class Comp extends React.Component {
     constructor(props){
@@ -97,102 +98,6 @@ const Components = () => (
     </BrowserRouter>
 )
 
-const LikeShareComment = ({ onLike, onComment, onShare, beLike }) => {
-    return(
-        <div className="container-fluid" style={{
-            width: 265,
-        }}>
-            <div className="row">
-                <div className="col col-xs-4" style={{ padding: 0, margin: 0 }}>
-                    <div className="btn btnn" style={{ padding: 4, width: 65 }}
-                        onClick={() => {
-                            this.like.className = "grow growing"
-                            setTimeout(() => {
-                                this.like.className = "grow"
-                            }, 170)
-                            this.liketext.className = "decline declineing"
-                            setTimeout(() => {
-                                this.liketext.className = "decline"
-                            }, 80)
-                        }}>
-                        <img
-                            ref={img=> this.like = img}
-                            style={{
-                                float: 'left',
-                                width: 14,
-                                height: 14,
-                            }} src={beLike?"/images/likehas.svg":"/images/like.svg"}
-                        />
-                        <div ref={ liketext => this.liketext = liketext}
-                            style={{
-                            marginTop: -3,
-                        }}><a style={{
-                            color: beLike?'#BD081C': '#3C3F45',
-                            fontSize: 13,
-                            fontWeight: 'bold',
-                        }}>{'Like'}</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="col col-xs-4" style={{ padding: 0, margin: 0 }}>
-                    <div className="btn" style={{ marginLeft: -7, padding: 4, width: 100 }}
-                        ref={img => this.cmt = img}
-                        onClick={() => {
-                            this.cmt.className = "btn decline declineing"
-                            setTimeout(() => {
-                                this.cmt.className = "btn decline"
-                            }, 80)
-                        }}>
-                        <img
-                            style={{
-                                float: 'left',
-                                width: 14,
-                                height: 14,
-                            }} src="/images/comment.svg"
-                        />
-                        <div style={{
-                            marginTop: -3,
-                        }}><a style={{
-                            color: '#3C3F45',
-                            fontSize: 13,
-                            fontWeight: 'bold',
-                        }}>{'Comment'}</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="col col-xs-4" style={{ padding: 0, margin: 0 }}>
-                    <div className="btn" style={{ marginLeft: 16, padding: 4, width: 74}}
-                        onClick={() => onShare()}
-                        ref={img => this.share = img}
-                        onClick={() => {
-                            this.share.className = "btn decline declineing"
-                            setTimeout(() => {
-                                this.share.className = "btn decline"
-                            }, 80)
-                        }}
-                        >
-                        <img
-                            style={{
-                                float: 'left',
-                                width: 14,
-                                height: 14,
-                            }} src={"/images/share.svg"}
-                        />
-                        <div style={{
-                            marginTop: -3,
-                        }}><a style={{
-                            color: '#3C3F45',
-                            fontSize: 13,
-                            fontWeight: 'bold',
-                        }}>{'Share'}</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
 const Compp = ({}) => (
     <div>
         {/* <Carousel key={'123'} style={{ width: 260, height: 260 }}
@@ -208,11 +113,7 @@ const Compp = ({}) => (
             isTop={true}
         /> */}
         {/* <AddPhoto/> */}
-        <LikeShareComment
-            onLike={() => onLike()}
-            onComment={() => onComment()}
-            onShare={() => onShare()}
-            beLike={true}/>
+
         {/* <Croppie
             DESCRIPTION={'scroll to zoom in and zoom out'}
             TITLE="Upload Photo"
@@ -256,4 +157,353 @@ const Compp = ({}) => (
     </div>
 )
 
-export default Components
+class LikeGroup extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    render(){
+        const { typeLikes, content, size } = this.props
+        return(
+            <div style={{ fontSize: 12.5, color: '#365899'}}>
+                {typeLikes.map((item, index) =>
+                    <div key={index}className="btn"
+                        style={{
+                            position: 'absolute',
+                            zIndex: 6-index,
+                            padding: 0}}>
+                        <img src={"/images/"+item+".svg"}
+                            style={{
+                                marginLeft: index*size*3/4 - 2,
+                                width: size, height: size }}
+                        />
+                    </div>
+                )}
+                <div className="btn" style={{ fontSize: 12.5,
+                    marginTop: 3,
+                    marginLeft: (typeLikes.length*size*3/4)+7, padding: 0}}>
+                    <a style={{ color: '#365899'}}>{content}</a>
+                </div>
+
+                {/* <div style={{ marginLeft: 24, marginTop: -18 }}>
+                    {names && names.map((item,index) => {
+                        return(
+                            <span key={index}>
+                                {' '}
+                                {item}
+                                {(index == names.length - 1)?' ':''}
+                                {(index == names.length - 1)?AND:','}
+                            </span>
+                        )
+                    })}
+                    {' '}
+                    {other}{' '}
+                    {(other && names) && OTHER}
+                </div> */}
+            </div>
+        )
+    }
+}
+
+class GroupComment extends React.Component {
+
+}
+
+class Comment extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            hover : false,
+            hoversetting: false,
+            clicksetting: false,
+        }
+    }
+    componentDidMount(){
+        // $(window).click((event) => {
+        //     console.log(event)
+        // });
+    }
+    render(){
+        const { isleader, avatar, name, time, numlikes, numreplys,
+            content, onReceive, onLike, onReply} = this.props
+        return(
+            <div
+                onMouseOver={() => this.setState({ hover: true })}
+                onMouseLeave={() => this.setState({ hover: false })}
+                style={{
+                marginLeft: isleader?0:38,
+                paddingLeft: isleader?0:10,
+                fontSize: 12.5,
+                borderLeft: isleader?undefined:'2px solid #4080FF'}}>
+                {this.state.hover &&
+                    <div
+                        onMouseOver={() => this.setState({ hoversetting: true })}
+                        onMouseLeave={() => this.setState({ hoversetting: false })}
+                        style={{ float: 'right', padding: 2 }}>
+                        <span width={14} height={14}
+                            style={{ color:'#BEC2C8' }}
+                            className="glyphicon glyphicon-menu-down"/>
+                        {this.state.hoversetting &&
+                            <div style={{
+                                borderRadius: 2.5,
+                                padding: '5px 10px 5px 10px',
+                                backgroundColor: 'black',
+                                color: 'white',
+                                position: 'absolute',
+                                marginTop: -50,
+                                marginLeft: -10,
+                            }}>
+                                Block, Report
+                                <img style={{
+                                        position: 'absolute',
+                                        left: 9,
+                                        top: 24,
+                                    }}
+                                    width={14}
+                                    height={7}
+                                    src="/images/arrowdown.svg"
+                                />
+                            </div>
+                        }
+                    </div>
+                }
+                {this.state.hover &&
+                    <div
+                        onMouseOver={() => this.setState({ hoversetting: true })}
+                        onMouseLeave={() => this.setState({ hoversetting: false })}
+                        style={{ float: 'right', padding: 2 }}>
+                        <span width={14} height={14}
+                            style={{ color:'#BEC2C8' }}
+                            className="glyphicon glyphicon-menu-down"/>
+                        {this.state.hoversetting &&
+                            <div style={{
+                                borderRadius: 2.5,
+                                padding: '5px 10px 5px 10px',
+                                backgroundColor: 'black',
+                                color: 'white',
+                                position: 'absolute',
+                                marginTop: -50,
+                                marginLeft: -10,
+                            }}>
+                                Block, Report
+                                <img style={{
+                                        position: 'absolute',
+                                        left: 9,
+                                        top: 24,
+                                    }}
+                                    width={14}
+                                    height={7}
+                                    src="/images/arrowdown.svg"
+                                />
+                            </div>
+                        }
+                    </div>
+                }
+                <img src={avatar} style={{
+                    width: isleader?40:20,
+                    height: isleader?40:20,
+                }}/>
+                <div style={{
+                    marginLeft: isleader?50:30,
+                    marginTop: isleader?-40:-20,
+                    paddingRight: 18 }}>
+                    <strong style={{ color: '#365899'}}>{name}</strong>{" "}
+                    <span>{content}</span>
+                    <div style={{ marginLeft: -2 }}>
+                        {onReceive &&
+                            <div className="btn" onClick={() => onReceive()}
+                                style={{  padding: '0px 1px 0px 1px' }}>
+                                <a style={{ fontSize: 12, color: '#365899' }}>Receive</a>
+                            </div>
+                        }
+                        {onReceive && "."}
+                        <div className="btn" onClick={() => onLike()}
+                            style={{ padding: '0px 1px 0px 1px'}}>
+                            <a style={{ fontSize: 12, color: '#365899' }}>Like</a>
+                        </div>
+                        {"."}
+                        <div className="btn" onClick={() => onReceive()}
+                            style={{ padding: '0px 1px 0px 1px'}}>
+                            <a style={{ fontSize: 12, color: '#365899' }}>Reply</a>
+                        </div>
+                        {"."}
+                        <div className="btn" onClick={() => onReceive()}
+                            style={{ padding: '0px 1px 0px 1px'}}>
+                            <a style={{ fontSize: 12, color: '#A7ABB1' }}>{time}</a>
+                        </div>
+                    </div>
+                </div>
+                <div style={{ height: 10 }}></div>
+            </div>
+        )
+    }
+}
+
+class CommentSuggest extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            hover: false
+        }
+    }
+    render(){
+        const { isleader, src, imgsrc, numreplys, content, onClick, time, end} = this.props
+        return(
+            <div>
+                <div style={{ marginTop: 3, marginRight: 10, color: '#A7ABB1',
+                    fontSize: 12.5, float: 'right'}}>
+                    {end}
+                </div>
+                <div onClick={() => onClick()}
+                    style={{
+                    marginLeft: isleader?0:38,
+                    marginBottom: 10,
+                    borderLeft: isleader?undefined:'2px solid #4080FF'}}>
+                    {!isleader &&
+                        <div className="btn" style={{
+                            marginLeft: 10,
+                            padding: 0,
+                            width: 30,
+                            fontSize: 12.5 }}>
+                            {src && <img src={src} width={10} height={10}/>}
+                        </div>
+                    }
+                    {imgsrc && <img src={imgsrc} width={20} height={20}
+                        style={{ marginRight: 8 }}/>}
+                    <div className="btn" style={{
+                        marginLeft: isleader?-1:-1,
+                        padding: 0,
+                        fontSize: 12.5 }}>
+                        <a style={{ marginLeft: 0 }}>
+                            {content && <span style={{ color: '#365899' }}>{content}</span>}
+                        </a>
+                        {time && " . "}
+                        {time && <span style={{ color: '#A7ABB1' }}>{time}</span>}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+class newComp extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            beLike: false
+        }
+    }
+    onLike(){
+        this.setState({ beLike: !this.state.beLike })
+    }
+    render(){
+        return(
+            <div style={{ backgroundColor: 'white', width: 500 }}>
+                <div style={{ height: 40, padding: '10px 0px 10px 0px'}}>
+                    <LikeShareComment
+                        onLike={() => this.onLike()}
+                        onComment={() => console.log('onComment')}
+                        onShare={() => console.log('onShare')}
+                        beLike={this.state.beLike}/>
+                </div>
+                <hr style={{ margin: 0}}/>
+                <div style={{ height: 38, padding: '9px 0px 9px 0px'}}>
+                    <LikeGroup
+                        size={20}
+                        content={'You, Nguyễn Ngọc Dưỡng and 3 others'}
+                        names={['You','Nam Hà','Nguyễn Hữu Nhật']}
+                        typeLikes={['likeicon','love','haha','wow']}
+                        other={19}
+                        />
+                </div>
+                <hr style={{ margin: 0}}/>
+                <div style={{ padding: '10px 0px 10px 0px'}}>
+                    <CommentSuggest
+                        isleader={true}
+                        content={'View more previous comments'}
+                        end={'3 of 18'}
+                        />
+                    <Comment
+                        isleader={true}
+                        onReceive={true}
+                        isStoreRepresent={true}
+                        avatar='/images/avatar.jpg'
+                        avatarsize={40}
+                        name='Phương Nguyễn‎'
+                        content='Tất cả các đơn síp đi rồi các bạn ạ ..'
+                        time='39 mins'
+                        />
+                    <Comment
+                        isStoreRepresent={true}
+                        avatar='/images/avatar.jpg'
+                        avatarsize={40}
+                        name='Phương Nguyễn‎'
+                        content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
+                        time='39 mins'
+                        />
+                    <Comment
+                        isStoreRepresent={true}
+                        avatar='/images/avatar.jpg'
+                        avatarsize={40}
+                        name='Phương Nguyễn‎'
+                        content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
+                        time='39 mins'
+                        />
+                    <CommentSuggest
+                        src='/images/reply.svg'
+                        isleader={false}
+                        imgsrc='/images/avatar.jpg'
+                        content={' Phương Nguyễn Replied . 2 Replies'}
+                        time={'1 hrs'}
+                        />
+                    <Comment
+                        isleader={true}
+                        onReceive={true}
+                        isStoreRepresent={true}
+                        avatar='/images/avatar.jpg'
+                        avatarsize={40}
+                        name='Phương Nguyễn‎'
+                        content='Tất cả các đơn síp đi rồi các bạn ạ ..'
+                        time='39 mins'
+                        />
+                    <Comment
+                        isStoreRepresent={true}
+                        avatar='/images/avatar.jpg'
+                        avatarsize={40}
+                        name='Phương Nguyễn‎'
+                        content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
+                        time='39 mins'
+                        />
+                    <Comment
+                        isStoreRepresent={true}
+                        avatar='/images/avatar.jpg'
+                        avatarsize={40}
+                        name='Phương Nguyễn‎'
+                        content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
+                        time='39 mins'
+                        />
+                    <Comment
+                        isleader={true}
+                        onReceive={true}
+                        isStoreRepresent={true}
+                        avatar='/images/avatar.jpg'
+                        avatarsize={40}
+                        name='Phương Nguyễn‎'
+                        content='Tất cả các đơn síp đi rồi các bạn ạ ..'
+                        time='39 mins'
+                        />
+                    <CommentSuggest
+                        isleader={false}
+                        src='/images/reply.svg'
+                        content={'8 Replies'}
+                        />
+                    <CommentSuggest
+                        isleader={true}
+                        content={'View more comments'}
+                        />
+                </div>
+            </div>
+        )
+    }
+}
+
+export default newComp
