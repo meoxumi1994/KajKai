@@ -2,7 +2,7 @@ import { addNewFirstLayerComment, getFirstLayerCommentInfo } from '../services/F
 import { addNewSecondLayerComment, getSecondLayerCommentInfo } from '../services/SecondLayerCommentService'
 
 export const addFirstLayerCommentSub = (message, next) => {
-    addNewFirstLayerComment(message, (fComment) => {
+    addNewFirstLayerComment(message.data, (fComment) => {
         if (fComment) {
             getFirstLayerCommentInfo(fComment, (fCommentInfo) => {
                 next({status: 'success', firstLayerComment: fCommentInfo})
@@ -14,7 +14,7 @@ export const addFirstLayerCommentSub = (message, next) => {
 };
 
 export const addSecondLayerCommentSub = (message, next) => {
-    addNewSecondLayerComment(message, (sComment) => {
+    addNewSecondLayerComment(message.data, (sComment) => {
         if (sComment) {
             getSecondLayerCommentInfo(sComment, (sCommentInfo) => {
                 next({status: 'success', secondLayerComment: sCommentInfo});
