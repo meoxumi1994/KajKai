@@ -200,14 +200,16 @@ export default {
                 event: 'COMMENT.FirstLayerCommentCreated',
                 fComment: {
                     posterId: '', order:'', time: '',
-                    postId:'', content: '', fCommentId: ''
+                    postId:'', content: '', fCommentId: '',
+                    sellPostId: '', minorPostId: ''
                 }
             },{
                 event: 'COMMENT.SecondLayerCommentCreated',
                 sComment: {
                     posterId:'', time: '',
                     postId:'', content: '', parentCommentId: '',
-                    sCommentId: ''
+                    sCommentId: '',
+                    sellPostId: '', minorPostId: ''
                 }
             }
         ]

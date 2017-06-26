@@ -5,6 +5,7 @@ import { getUser, getListUser, getStore, getStoreFromPostId, newSecondLayerComme
 
 const SECOND_COMMENT_GLOBAL_ID = globalId.SECOND_COMMENT_GLOBAL_ID;
 const USER_GLOBAL_ID = globalId.USER_GLOBAL_ID;
+const SELL_POST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID;
 
 export const getSecondCommentGlobalId = (id) => {
     return SECOND_COMMENT_GLOBAL_ID + id
@@ -84,9 +85,15 @@ export const getSecondLayerCommentById = (id, next) => {
 };
 
 export const getSecondLayerCommentPubInfo = (sComment) => {
-    return {posterId: sComment.posterId, time: sComment.time,
-        postId: sComment.postId, content: sComment.content, parentCommentId: sComment.parentCommentId,
-        sCommentId: getSecondCommentGlobalId(sComment._id)}
+    var data = {posterId: sComment.posterId, time: sComment.time,
+        content: sComment.content, parentCommentId: sComment.parentCommentId,
+        sCommentId: getSecondCommentGlobalId(sComment._id)};
+    if (sComment.startsWith(SELL_POST_GLOBAL_ID)) {
+        data = {...data, sellPostId: sComment.postId};
+    } else {
+        data = {...data, minorPostId: sComment.postId};
+    }
+    return data;
 };
 
 export const saveNewScondLayerComment = (posterId, time, postId, content, parentCommentId, next) => {

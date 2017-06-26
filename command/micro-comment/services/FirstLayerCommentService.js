@@ -7,6 +7,7 @@ import { newFirstLayerCommentCreated } from '../controllers/CommentPubController
 
 const FIRST_COMMENT_GLOBAL_ID = globalId.FIRST_COMMENT_GLOBAL_ID;
 const USER_GLOBAL_ID = globalId.USER_GLOBAL_ID;
+const SELL_POST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID
 
 export const getFirstCommentGlobalId = (id) => {
     return FIRST_COMMENT_GLOBAL_ID + id
@@ -165,10 +166,16 @@ export const getFirstLayerCommentById = (id, next) => {
 };
 
 export const getFirstLayerCommentPubInfo = (fComment) => {
-    return {
+    var data = {
         posterId: fComment.posterId, order: fComment.order, time: fComment.time,
-        postId: fComment.postId, content: fComment.content, fCommentId: getFirstCommentGlobalId(fComment._id)
+        content: fComment.content, fCommentId: getFirstCommentGlobalId(fComment._id)
+    };
+    if (fComment.startsWith(SELL_POST_GLOBAL_ID)) {
+        data = {...data, sellPostId: fComment.postId};
+    } else {
+        data = {...data, minorPostId: fComment.postId};
     }
+    return data;
 };
 
 export const saveNewFirstLayerComment = (posterId, order, time, postId, content, next) => {
