@@ -280,6 +280,7 @@ GET /sellpost/store/:storeid?offset=-1 { // length = 2
         },
       ],
       numlike: '23',
+      likestatus: ['like','love','haha','wow'],
       likes: [
         {
           userid: ,
@@ -293,7 +294,7 @@ GET /sellpost/store/:storeid?offset=-1 { // length = 2
           username: ,
         },
       ], // tối đa 5 thằng bạn
-      numcomment: ,
+      numleadercomment: ,
       numshare: ,
       leadercomments: [ // tối đa 5 thằng trong 1 giờ
         {
@@ -308,7 +309,8 @@ GET /sellpost/store/:storeid?offset=-1 { // length = 2
                 num: 2
               },
           ],
-          comments: [ // thằng đầu tiền là comment của leader
+          numcomment:
+          comments: [ // thằng đầu tiền là comment của leader // tối đa 2 thằng trong 1 giờ
             {
               id: ,
               ownerid: ,
@@ -318,6 +320,7 @@ GET /sellpost/store/:storeid?offset=-1 { // length = 2
               content: ,
               time: ,
               numlike: ,
+              likestatus: ['like','love','haha','wow'],
             }
           ]
         }
@@ -506,8 +509,6 @@ DELETE /postrows/product {
     productid:
 }
 
-
-
 GET /postrows/:sellpostid?offset=-1 { // numline = 30
     offset: ,
     postrows: [
@@ -545,26 +546,21 @@ GET /minorpost/:storeid?offset=-1 { // length = 3
       id: ,
       numline: , // numline chi lien quan den content
       storeid: ,
+      storename: ,
       time: , // last update
       content:,
-      images: [], //
+      images: [],
       video: ,
+      likestatus: ['like','love','haha','wow'],
       numlike: '23',
       likes: [
         {
           userid: ,
           username: ,
         },
-      ], // tối đa 5 thằng bạn
+      ], // tối đa 3 thằng bạn
       numfollow: '43',
-      follows: [
-        {
-          userid: ,
-          username: ,
-        },
-      ], // tối đa 5 thằng bạn
-      numcomment: ,
-      numshare: ,
+      numleadercomment: ,
       leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
         {
           id: 'leadercomment001',
@@ -588,6 +584,7 @@ GET /minorpost/:storeid?offset=-1 { // length = 3
               content: ,
               time: ,
               numlike: ,
+              likestatus: ['like','love','haha','wow'],
             }
           ]
         }
