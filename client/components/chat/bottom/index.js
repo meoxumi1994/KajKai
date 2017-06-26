@@ -33,10 +33,6 @@ const ChatBottom = ({mesId, userId, sendMessage, uploadImage, styles}) => {
             </button>
         </OverlayTrigger>
 
-
-
-        <ModalUploadImageContainer/>
-
       </form>
     </div>
   )

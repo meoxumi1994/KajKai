@@ -39,7 +39,6 @@ const left = (state = {
               }
             }
           )
-
           return {
             ...state,
             chatListKey: tempKey,
@@ -92,6 +91,7 @@ const left = (state = {
         }
     }
 }
+
 
 // const addNewChat = (state, action) => {
 //   const { mesId, person, message, time } = action.data.lastMessage

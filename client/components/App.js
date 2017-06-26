@@ -150,11 +150,6 @@ class App extends React.Component {
     componentDidMount(){
         this.props.onWho();
     }
-
-    componentWillMount() {
-      const path = this.props.location.pathname;
-    }
-
 }
 
 export default App

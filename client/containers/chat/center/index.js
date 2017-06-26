@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
     const { messagesKey, messagesMap, currentChat } = state.inst.chat.center
     const { catagory, currentThemes} = state.inst.chat.display.themes
     const themes = catagory[currentThemes]
-
+    const { isMultipleChat } = state.inst.chat.display
     return {
         user,
         chatListKey,
@@ -15,7 +15,8 @@ const mapStateToProps = (state, ownProps) => {
         messagesKey,
         messagesMap,
         currentChat,
-        themes
+        themes,
+        isMultipleChat
     }
 
 
@@ -24,6 +25,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   setCurrentChat: (mesId) => {
       dispatch({type: 'SET_CURRENT_CHAT', mesId})
+  },
+  setMultipleChat: (isMultipleChat) => {
+      dispatch({type: 'IS_MULTIPLE_CHAT', isMultipleChat: isMultipleChat})
   }
 })
 

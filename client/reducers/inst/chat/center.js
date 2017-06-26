@@ -2,7 +2,6 @@ const center = (state = {
   messagesKey: [],
   messagesMap: {},
   currentChat: '',
-  multipleChatWindow: false,
   lazyLoad: {
     offset: 0
   }
@@ -46,12 +45,6 @@ const center = (state = {
           messagesMap: tempMap,
         }
 
-
-      case 'MULTIPLE_CHAT':
-        return {
-          ...state,
-          multipleChatWindow: action.data
-        }
       // case 'client/INIT_MESSAGE':
       //   const { mesId, messages } = action.data
       //   const { id, avatarUrl, name } = action.data.user

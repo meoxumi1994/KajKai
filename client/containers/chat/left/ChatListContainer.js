@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
   const { currentChat } = state.inst.chat.center
   const { catagory, currentThemes} = state.inst.chat.display.themes
   const themes = catagory[currentThemes]
-  console.log('---STATE ', currentChat);
+  // console.log('---STATE ', state.inst.chat);
   return (
     {
       chatListMap,

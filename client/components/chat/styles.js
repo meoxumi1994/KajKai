@@ -103,6 +103,7 @@ const bigWindow = (color) => {
       bottom: {
         inputForm: {
           position: 'fixed',
+          backgroundColor: 'white',
           bottom: 0,
           width: '60%',
         },

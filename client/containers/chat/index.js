@@ -24,7 +24,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   setCurrentChat: (mesId) => {
       dispatch({type: 'SET_CURRENT_CHAT', mesId})
-  }
+  },
 })
 
 const ChatContainer = connect(

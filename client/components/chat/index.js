@@ -3,19 +3,28 @@ import { Col, Grid, Row } from 'react-bootstrap'
 import ChatCenterContainer from '~/containers/chat/center'
 import ChatLeft from './left'
 
-const Chat = ({ user, chatListMap, messagesKey, messagesMap, mesId, currentChat, path, setCurrentChat, themes }) => {
-  return(
-    <div style={styles.mainDiv} className="input-group">
-        <div style={Object.assign(styles.left, themes.normal.bounds)}>
-            <ChatLeft/>
+class Chat extends React.Component {
+
+    constructor(props) {
+      super(props)
+    }
+
+    render() {
+      let { themes } = this.props
+
+      return(
+        <div style={styles.mainDiv} className="input-group">
+            <div style={Object.assign(styles.left, themes.normal.bounds)}>
+                <ChatLeft/>
+            </div>
+            <div style={styles.spliter}>
+            </div>
+            <div style={Object.assign(styles.right, themes.normal.bounds)}>
+                <ChatCenterContainer/>
+            </div>
         </div>
-        <div style={styles.spliter}>
-        </div>
-        <div style={Object.assign(styles.right, themes.normal.bounds)}>
-            <ChatCenterContainer/>
-        </div>
-    </div>
-  )
+      )
+    }
 }
 
 export default Chat

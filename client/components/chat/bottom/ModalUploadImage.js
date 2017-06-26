@@ -1,10 +1,10 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
 
-const ModalUploadImage = ({ visibility,  imageList, mesId, user, isLoading, handleImageChange, close, sendImage }) => {
+const ModalUploadImage = ({imageList, mesId, user, isLoading, handleImageChange, close, sendImage}) => {
     return(
         <div>
-            <Modal style={{ marginTop: 120 }} show={visibility}>
+            <Modal style={{ marginTop: 120 }} show={false}>
                 <Modal.Header closeButton>
                 <Modal.Title> Upload Avatar </Modal.Title>
                 </Modal.Header>

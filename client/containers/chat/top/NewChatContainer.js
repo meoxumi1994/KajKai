@@ -2,11 +2,7 @@ import { connect } from 'react-redux'
 import NewChat from '~/components/chat/top/NewChat'
 
 const mapStateToProps = (state, ownProps) => {
-  return (
-    {
-      visibility: state.inst.chat.visibility.top.newChat
-    }
-  )
+  return state
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

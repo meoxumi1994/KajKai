@@ -39,41 +39,15 @@ const display = (state = {
       },
     },
     currentThemes: 'blue'
-  }
-
+  },
+  isMultipleChat: true
 }, action) => {
     switch (action.type) {
-
-        // case 'UPDATE_MESSAGELIST_VISIBILITY':
-        //     return {
-        //         ...state,
-        //         buttom: {
-        //           ...state.buttom,
-        //           sendMessage: getVisibility(action.display)
-        //         },
-        //         center: {
-        //           ...state.center,
-        //           messageList: getVisibility(action.display)
-        //         }
-        //     }
-        //
-        // case 'UPDATE_CREATECHAT_VISIBILITY':
-        //     return {
-        //       ...state,
-        //       top: {
-        //         ...state.top,
-        //         newChat: getVisibility(action.display)
-        //       }
-        //     }
-        //
-        // case 'UPDATE_UPLOADIMAGE_VISIBILITY':
-        //     return {
-        //       ...state,
-        //       buttom: {
-        //         ...state.buttom,
-        //         uploadImage: action.display
-        //       }
-        //     }
+        case 'IS_MULTIPLE_CHAT':
+          return {
+            ...state,
+            isMultipleChat: action.isMultipleChat
+          }
 
         default:
             return state
@@ -82,6 +56,6 @@ const display = (state = {
 
 export default display
 
-// const getVisibility = (display) => {
-//   return display? 'inline': 'none'
-// }
+const getVisibility = (display) => {
+    return display? 'inline': 'none'
+}

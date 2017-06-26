@@ -7,8 +7,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   createNewChat: () => {
-      // dispatch(updateMessageListVisibility(true))
-      // dispatch(updateCreateChatVisibility(true))
+    
   }
 })
 
