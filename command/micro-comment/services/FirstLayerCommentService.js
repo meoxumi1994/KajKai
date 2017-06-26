@@ -3,6 +3,7 @@ import { getCurrentTime } from '../utils/Utils'
 import { getOrder, getOrderInfo } from './OrderService'
 import globalId from '../config/globalId'
 import { getUser, getListUser, getStore, getStoreFromPostId } from '../controllers/CommentPubController'
+import { newFirstLayerCommentCreated } from '../controllers/CommentPubController'
 
 const FIRST_COMMENT_GLOBAL_ID = globalId.FIRST_COMMENT_GLOBAL_ID;
 const USER_GLOBAL_ID = globalId.USER_GLOBAL_ID;
@@ -163,12 +164,18 @@ export const getFirstLayerCommentById = (id, next) => {
     })
 };
 
-
+export const getFirstLayerCommentPubInfo = (fComment) => {
+    return {
+        posterId: fComment.posterId, order: fComment.order, time: fComment.time,
+        postId: fComment.postId, content: fComment.content, fCommentId: getFirstCommentGlobalId(fComment._id)
+    }
+};
 
 export const saveNewFirstLayerComment = (posterId, order, time, postId, content, next) => {
     var comment = new FirstLayerComment({posterId: posterId, order: order, time: time,
         postId: postId, content: content});
     comment.save(function (err) {
+        newFirstLayerCommentCreated(getFirstLayerCommentPubInfo(comment));
         next(comment);
     })
 };

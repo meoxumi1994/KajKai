@@ -199,28 +199,15 @@ export default {
             {
                 event: 'COMMENT.FirstLayerCommentCreated',
                 fComment: {
-                        content: '',
-                        name: '',
-                        avatarUrl: '',
-                        commenterid: '',
-                        time: '',
-                        order: '',
-                        id: '',
-                        sellpostid: '',
-                        minorpostid: ''
+                    posterId: '', order:'', time: '',
+                    postId:'', content: '', fCommentId: ''
                 }
             },{
                 event: 'COMMENT.SecondLayerCommentCreated',
                 sComment: {
-                    content: '',
-                    name: '',
-                    avatarUrl: '',
-                    commenterid: '',
-                    time: '',
-                    id: '',
-                    sellpostid: '',
-                    minorpostid: '',
-                    leadercommentid: ''
+                    posterId:'', time: '',
+                    postId:'', content: '', parentCommentId: '',
+                    sCommentId: ''
                 }
             }
         ]
@@ -228,6 +215,11 @@ export default {
     like: {
         sub: ['STORE.GetStore'],
         pub: ['STORE.GetUser', 'STORE.AuthorizeToken', 'COMMENT.AddLikeFir', 'COMMENT.AddLikeSec', 'STORE.AddLikeStore', 'STORE.AddLikePost']
+    },
+    socket: {
+        pub: [{
+
+        }]
     }
 
 }

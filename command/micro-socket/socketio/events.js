@@ -1,86 +1,39 @@
 export default {
-    'DEMO_EVENT': {
+    'server/JOIN_POST': {
         controller: 'CommentController',
-        method: 'handleSioDemo'
+        method: 'joinPostCon'
     },
-    'message': {
+    'server/JOIN_LEADERCOMMENT': {
         controller: 'CommentController',
-        method: 'textSockIO'
+        method: 'joinFirstLayerCommentCon'
     },
-    'nhantin': {
+    'server/LEAVE_POST': {
         controller: 'CommentController',
-        method: 'transerMessage'
+        method: 'leavePostCon'
     },
-    'subcribeRoom': {
+    'server/COMMENT': {
         controller: 'CommentController',
-        method: 'subcribe'
+        method: 'addNewSecondLayerCommentCon'
     },
-    'unSubcribeRoom': {
+    'server/GET_MORE_COMMENT': {
         controller: 'CommentController',
-        method: 'unsubcribe'
+        method: 'getSecondLayerCommentCon'
     },
-    'commentMessage': {
+    'server/COMMENT_ING': {
         controller: 'CommentController',
-        method: 'comment'
+        method: 'currentSecondLayerCommentCon'
     },
-    'server/hello': {
+    'server/LEADERCOMMENT': {
         controller: 'CommentController',
-        method: 'testToken'
+        method: 'addNewFirstLayerCommentCon'
     },
-    'server/CHANGE_STORE_POST': {
-        controller: 'StorePostController',
-        method: 'updateStorePost'
-    },
-    'server/JOIN_STORE_POST': {
-        controller: 'StorePostController',
-        method: 'joinPost'
-    },
-    'server/LEAVE_STORE_POST': {
-        controller: 'StorePostController',
-        method: 'leavePost'
-    },
-    'server/JOIN_CHAT': {
-        controller: 'ChatController',
-        method: 'joinChat'
-    },
-    'server/LEAVE_CHAT': {
-        controller: 'ChatController',
-        method: 'leaveChat'
-    },
-    'server/ADD_MESSAGE': {
-        controller: 'ChatController',
-        method: 'addMessage'
-    },
-    'server/JOIN_GROUPCOMMENTS': {
+    'server/GET_MORE_LEADERCOMMENT': {
         controller: 'CommentController',
-        method: 'joinGroupComment'
+        method: 'getFirstLayerCommentCon'
     },
-    'server/LEAVE_GROUPCOMMENTS': {
+    'server/LEADERCOMMENT_ING': {
         controller: 'CommentController',
-        method: 'leaveGroupComment'
+        method: 'currentFirstLayerCommentCon'
     },
-    'server/ADD_GROUPCOMMENTS': {
-        controller: 'CommentController',
-        method: 'addComment'
-    },
-    'server/JOIN_COMMENTS': {
-        controller: 'CommentController',
-        method: 'joinComment'
-    },
-    'server/LEAVE_COMMENTS': {
-        controller: 'CommentController',
-        method: 'leaveComment'
-    },
-    'server/ADD_COMMENTS': {
-        controller: 'CommentController',
-        method: 'addSubComment'
-    },
-    'server/CHAT_WAITING': {
-        controller: 'ChatController',
-        method: 'joinChatWaiting'
-    },
-    'server/STOP_CHAT_WAITING': {
-        controller: 'ChatController',
-        method: 'stopChatWaiting'
-    }
+    // 'server/'
 }

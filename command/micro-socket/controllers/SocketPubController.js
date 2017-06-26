@@ -40,3 +40,7 @@ export const authoriseToken = (token, next) => {
         }
     })
 };
+
+export const addNewSecondLayerCommentPub = (data, next) => {
+
+};

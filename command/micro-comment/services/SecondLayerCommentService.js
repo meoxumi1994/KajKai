@@ -1,7 +1,7 @@
 import { FirstLayerComment, SecondLayerComment } from '../models'
 import { getCurrentTime } from '../utils/Utils'
 import globalId from '../config/globalId'
-import { getUser, getListUser, getStore, getStoreFromPostId } from '../controllers/CommentPubController'
+import { getUser, getListUser, getStore, getStoreFromPostId, newSecondLayerCommentCreated } from '../controllers/CommentPubController'
 
 const SECOND_COMMENT_GLOBAL_ID = globalId.SECOND_COMMENT_GLOBAL_ID;
 const USER_GLOBAL_ID = globalId.USER_GLOBAL_ID;
@@ -83,10 +83,17 @@ export const getSecondLayerCommentById = (id, next) => {
     })
 };
 
+export const getSecondLayerCommentPubInfo = (sComment) => {
+    return {posterId: sComment.posterId, time: sComment.time,
+        postId: sComment.postId, content: sComment.content, parentCommentId: sComment.parentCommentId,
+        sCommentId: getSecondCommentGlobalId(sComment._id)}
+};
+
 export const saveNewScondLayerComment = (posterId, time, postId, content, parentCommentId, next) => {
     var comment = new FirstLayerComment({posterId: posterId, time: time,
         postId: postId, content: content, parentCommentId: parentCommentId});
     comment.save(function (err) {
+        newSecondLayerCommentCreated(getSecondLayerCommentPubInfo(comment));
         next(comment);
     })
 };
