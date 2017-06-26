@@ -3,9 +3,9 @@ import UserService from '../services/UserService'
 
 export const getChatBuddies = () => {
     return (req, res) => {
-        var id = req.decoded._id
-        var offset = req.body.offset
-        var length = req.body.length
+        var id = req.decoded._id;
+        var offset = req.body.offset;
+        var length = req.body.length;
         getChatList(id, offset, length, function (data) {
             if (!data) res.json({chatList : data})
             else {
