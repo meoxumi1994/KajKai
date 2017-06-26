@@ -256,4 +256,4 @@ const Compp = ({}) => (
     </div>
 )
 
-export default Compp
+export default Components

@@ -107,7 +107,7 @@ class App extends React.Component {
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
                     style={{ height: height - 48 }}>
                     { username && width > 1100 + 280 &&
-                        <div style={{ position: 'fixed',right: 0, top: 47, height: '100%', width: 280}}>
+                        <div style={{ position: 'fixed',right: 0, top: 47, height: '100%', width: '15%'}}>
                             <ContactHistory/>
                         </div>
                     }
@@ -150,11 +150,6 @@ class App extends React.Component {
     componentDidMount(){
         this.props.onWho();
     }
-
-    componentWillMount() {
-      const path = this.props.location.pathname;
-    }
-
 }
 
 export default App

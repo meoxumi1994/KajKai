@@ -1,34 +1,53 @@
 import React from 'react'
 import ChatTopContainer from '~/containers/chat/top'
-import MessageList from './MessageList'
+import MessageListContainer from '~/containers/chat/center/MessageListContainer'
 import ChatBottomContainer from '~/containers/chat/bottom'
 import styles from '../styles'
 
-const ChatCenter = ({ messagesMap, messagesKey, path, currentChat, user, mesId, chatListMap, setCurrentChat }) => {
+class ChatCenter extends React.Component {
 
-    if (messagesKey.length === 0) {
+    constructor(props) {
+      super(props)
+    }
+
+    render() {
+      let { messagesKey, path, currentChat, mesId, chatListMap, themes, setCurrentChat, isMultipleChat } = this.props
+
+      if (messagesKey.length === 0) {
+        return (
+          <div>WAIT!!!</div>
+        )
+      }
+
+      let chatStyle
+      if (path == '/chat' || path == undefined) {
+          mesId = currentChat
+          chatStyle = styles(false, themes)
+          // isMultipleChat(false)
+      } else {
+          chatStyle = styles(true, themes)
+          // isMultipleChat(true)
+      }
+
+      const { usersKey, usersMap } = chatListMap[mesId]
+
       return (
-        <div>WAIT!!!</div>
+        <div key={mesId} onClick={() => setCurrentChat(mesId)} style={{width: '100%', height: '100%'}}>
+            <ChatTopContainer
+                  usersMap={usersMap}
+                  usersKey={usersKey}
+                  mesId={mesId}
+                  styles={chatStyle.top}/>
+            <MessageListContainer
+                  usersMap={usersMap}
+                  mesId={mesId}
+                  styles={chatStyle.center}/>
+            <ChatBottomContainer
+                  mesId={mesId}
+                  styles={chatStyle.bottom}/>
+        </div>
       )
     }
-
-    let chatStyle
-    if (path == '/chat' || path == undefined) {
-        mesId = currentChat
-        chatStyle = styles.bigWindow
-    } else {
-        chatStyle = styles.smallWindow
-    }
-
-    const { usersKey, usersMap } = chatListMap[mesId]
-
-    return (
-      <div key={mesId} style={styles.mainDiv} onClick={() => setCurrentChat(mesId)}>
-          <ChatTopContainer currentChat={currentChat} mesId={mesId} usersMap={usersMap} usersKey={usersKey} user={user} styles={chatStyle}/>
-          <MessageList styles={chatStyle} messagesMap={messagesMap} user={user} mesId={mesId} usersMap={usersMap}/>
-          <ChatBottomContainer mesId={mesId} styles={chatStyle}/>
-      </div>
-    )
 }
 
 export default ChatCenter

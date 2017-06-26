@@ -1,18 +1,16 @@
 import { connect } from 'react-redux'
-import Head from '~/components/chat/left/Head'
+import StoreInDetails from '~/components/mapp/StoreInDetails'
 
 const mapStateToProps = (state, ownProps) => {
   return state
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  createNewChat: () => {
-    
-  }
+
 })
 
-const HeadContainer = connect(
+const StoreInDetailsContainerContainer = connect(
   mapStateToProps, mapDispatchToProps
-)(Head)
+)(StoreInDetails)
 
-export default HeadContainer
+export default StoreInDetailsContainerContainer

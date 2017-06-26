@@ -1,22 +1,13 @@
 import React from 'react'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import iconUtility from '~/config/iconUtility'
+import { getTime } from '~/containers/support'
 
 const Message = ({message, time, user, styles}) => {
-    // var regex = /\((.*?)\)/g
-    // var match = regex.exec(message);
-    //
-    // if (match && iconUtility.getIcon(match[1]) != null) {
-    //     message = message.split('('+match[1]+')').join('<img src="'+iconUtility.getIcon(match[1]).src+'" width="40" height="40"/>')
-    // }
-    //
-    // if (message == undefined) {
-    //   return (<div></div>)
-    // }
 
     const showTimePopup = (
       <Popover id="popover-trigger-hover-focus">
-          {Date(time*1000)}
+          {getTime(time)}
       </Popover>
     )
 
@@ -28,19 +19,23 @@ const Message = ({message, time, user, styles}) => {
 
     return (
       <div key={time}>
-          <div className="btn btn-transparent btn-xs" style={styles.img}>
+          <div className="btn btn-transparent btn-xs" style={styles.imgDiv}>
               <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={showTimePopup}>
-                  <img src={user.avatarUrl} width="33" height="33"/>
+                  <img src={user.avatarUrl} style={styles.imgIcon}/>
               </OverlayTrigger>
           </div>
-          <div style={styles.text}>
-              <div>
-                  <div dangerouslySetInnerHTML={{__html: message.text}} />
-                  <small style={{color: 'grey'}} className="text-muted" ><i><u>({user.name})</u></i></small>
-              </div>
+          <div>
+              <ul style={styles.text}>
+                  <small style={styles.senderDiv} className="text-muted" >{user.username}</small>
+                  <ul style={styles.bounds}>
+                      {message.text}
+                  </ul>
+              </ul>
           </div>
       </div>
     )
 }
+
+  // <div style={styles.bounds} dangerouslySetInnerHTML={{__html: message.text}}/>
 
 export default Message

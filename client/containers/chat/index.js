@@ -5,7 +5,9 @@ import { findName } from '../support'
 const mapStateToProps = (state, ownProps) => {
   const { user } = state
   const { chatListKey, chatListMap } = state.inst.chat.left
-  const { messagesKey, messagesMap, currentChat, multipleChatWindow } = state.inst.chat.center
+  const { messagesKey, messagesMap, currentChat } = state.inst.chat.center
+  const { catagory, currentThemes} = state.inst.chat.display.themes
+  const themes = catagory[currentThemes]
   return (
     {
       user,
@@ -14,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
       messagesKey,
       messagesMap,
       currentChat,
-      multipleChatWindow
+      themes
     }
   )
 }
@@ -22,7 +24,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   setCurrentChat: (mesId) => {
       dispatch({type: 'SET_CURRENT_CHAT', mesId})
-  }
+  },
 })
 
 const ChatContainer = connect(

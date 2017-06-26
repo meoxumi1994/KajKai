@@ -1,120 +1,50 @@
 const left = (state = {
-  chatListKey: [
-    '593bc3ff0607380b9934204e',
-    '593e4c1a2688d830be26fc66',
-    '593e4c1a2688d830be26fc00'
-  ],
-  chatListMap: {
-    '593e4c1a2688d830be26fc00': {
-      lastMessage: {
-        id: "593ea5bf0d346a0b68a88a74",
-        time: 1497089078194,
-        message: {
-          text: "hello",
-          type: "msg",
-          url: ""
-        }
-      },
-      mesId: "593e4c1a2688d830be26fc00",
-      displayName: "",
-      time: 1497089023326,
-      usersKey: [
-        '59302a009afeed1a7f37cac0',
-        '593ea5bf0d346a0b68a88a74',
-        '593234a11c75513e381e5c87'
-      ],
-      usersMap: {
-        '593234a11c75513e381e5c87': {
-          avatarUrl: "http://kajkai-avatar.s3-ap-southeast-1.amazonaws.com/78c5e183e31557c11a43239526a3c91b3b8d1608e4b32d4e3fa2f8ee.jpg",
-          id: "593234a11c75513e381e5c87",
-          name: "Long FU"
-        },
-        '59302a009afeed1a7f37cac0': {
-          avatarUrl: "http://kajkai-avatar.s3-ap-southeast-1.amazonaws.com/0cac73f7a1deefa900a203950924437e54fa5358be8c3d6b863b971a.jpg",
-          id: "59302a009afeed1a7f37cac0",
-          name: "Long Gmail"
-        },
-        '593ea5bf0d346a0b68a88a74': {
-          avatarUrl: "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/18920193_1939695522976279_4061663005610034505_n.jpg?oh=f66442aa2ca21a1ad4541feabe7b9d38&oe=59A53626",
-          id: "593ea5bf0d346a0b68a88a74",
-          name: "Long Ly"
-        }
-      }
-    },
-    '593bc3ff0607380b9934204e': {
-      lastMessage: {
-        id: "59302a009afeed1a7f37cac0",
-        time: 1497089078194,
-        message: {
-          text: "hello",
-          type: "msg",
-          url: ""
-        }
-      },
-      mesId: "593bc3ff0607380b9934204e",
-      displayName: "",
-      time: 1497089023326,
-      usersKey: [
-        '59302a009afeed1a7f37cac0',
-        '593ea5bf0d346a0b68a88a74'
-      ],
-      usersMap: {
-        '59302a009afeed1a7f37cac0': {
-          avatarUrl: "http://kajkai-avatar.s3-ap-southeast-1.amazonaws.com/0cac73f7a1deefa900a203950924437e54fa5358be8c3d6b863b971a.jpg",
-          id: "59302a009afeed1a7f37cac0",
-          name: "Long Gmail"
-        },
-        '593ea5bf0d346a0b68a88a74': {
-          avatarUrl: "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/18920193_1939695522976279_4061663005610034505_n.jpg?oh=f66442aa2ca21a1ad4541feabe7b9d38&oe=59A53626",
-          id: "593ea5bf0d346a0b68a88a74",
-          name: "Long Ly"
-        }
-      }
-    },
-    '593e4c1a2688d830be26fc66': {
-      lastMessage: {
-        id: "593234a11c75513e381e5c87",
-        time: 1497089078194,
-        message: {
-          text: "fuck u",
-          type: "msg",
-          url: ""
-        }
-      },
-      mesId: "593e4c1a2688d830be26fc66",
-      displayName: "",
-      time: 1497089023326,
-      usersKey: [
-        '593234a11c75513e381e5c87',
-        '593ea5bf0d346a0b68a88a74'
-      ],
-      usersMap: {
-        '593234a11c75513e381e5c87': {
-          avatarUrl: "http://kajkai-avatar.s3-ap-southeast-1.amazonaws.com/78c5e183e31557c11a43239526a3c91b3b8d1608e4b32d4e3fa2f8ee.jpg",
-          id: "593234a11c75513e381e5c87",
-          name: "Long FU"
-        },
-        '593ea5bf0d346a0b68a88a74': {
-          avatarUrl: "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/18920193_1939695522976279_4061663005610034505_n.jpg?oh=f66442aa2ca21a1ad4541feabe7b9d38&oe=59A53626",
-          id: "593ea5bf0d346a0b68a88a74",
-          name: "Long Ly"
-        }
-      }
-    }
-  },
-  unreadChat: [
-    '593e4c1a2688d830be26fc66',
-    '593e4c1a2688d830be26fc00'
-  ],
-  // chatListMap: {},
-  // chatListKey: [],
-  // unreadChat: [],
-  lazyLoad: {
-    offset: 0,
-    length: 10
+  chatListKey: [],
+  chatListMap: {},
+  unreadChat: {},
+  lazyload: {
+    offset: ''
   }
 }, action) => {
     switch (action.type) {
+
+      case 'INIT_CHAT_LIST':
+          if (action.data.length <= 0) {
+              return state
+          }
+          const tempKey = []
+          const tempMap = {}
+
+          action.data.map (
+            chat => {
+              tempKey.push(chat.mesId)
+              const tempUserKey = []
+              const tempUserMap = {}
+              let tempDisplayLabel = ''
+
+              chat.users.map(user => {
+                tempUserKey.push(user.id)
+                tempUserMap[user.id] = user
+                if (chat.displayLabel == undefined || chat.displayLabel == '') {
+                  tempDisplayLabel += user.username + ', '
+                }
+              })
+
+              tempMap[chat.mesId] = {
+                mesId: chat.mesId,
+                lastMessage: chat.lastMessage,
+                displayLabel: tempDisplayLabel.trim().substring(0, tempDisplayLabel.length - 2),
+                usersKey: tempUserKey,
+                usersMap: tempUserMap
+              }
+            }
+          )
+          return {
+            ...state,
+            chatListKey: tempKey,
+            chatListMap: tempMap
+          }
+
         case 'READ_CHAT':
           if (state.unreadChat.indexOf(action.mesId) == -1) {
             return state
@@ -126,40 +56,9 @@ const left = (state = {
             unreadChat: temp
           }
 
-
-        // case 'client/INIT_CHAT_LIST':
-        //     if (action.data.length <= 0) {
-        //       return state
-        //     }
-        //
-        //     const tempMap = {}
-        //     const tempKey = []
-        //
-        //     action.data.map(
-        //       chat => {
-        //         tempMap[chat.mesId] = chat
-        //         var key = {mesId: chat.mesId, userKey: []}
-        //         const tempUsers = {}
-        //         chat.users.map(
-        //           user => {
-        //             tempUsers[user.id] = user
-        //             key.userKey.push(user.id)
-        //           }
-        //         )
-        //         tempKey.push(key)
-        //         tempMap[chat.mesId].users = tempUsers
-        //       }
-        //     )
-        //
-        //     return {
-        //       ...state,
-        //       chatListMap: tempMap,
-        //       chatListKey: tempKey
-        //     }
-
-        case 'client/CHAT_WAITING':
-            console.log('CHAT_WAITING', action);
-            return state
+        // case 'client/CHAT_WAITING':
+        //     console.log('CHAT_WAITING', action);
+        //     return state
 
         // case 'LOAD_CHAT_LIST':
         //     return {
@@ -184,12 +83,19 @@ const left = (state = {
 
         default:
             return state
+
+      case 'global/UNREAD_CHAT':
+        return {
+          ...state,
+          unreadChat: action.data
+        }
     }
 }
 
+
 // const addNewChat = (state, action) => {
 //   const { mesId, person, message, time } = action.data.lastMessage
-//   const {avatarUrl, id, name} = action.data
+//   const {avatarUrl, id, username} = action.data
 //   return {
 //     ...state,
 //     chatList: [
@@ -197,7 +103,7 @@ const left = (state = {
 //       {
 //         avatarUrl,
 //         id,
-//         name,
+//         username,
 //         mesId,
 //         lastMessage: buildLastMessage(person, message, time)
 //       }

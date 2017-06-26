@@ -1,18 +1,18 @@
 import { connect } from 'react-redux'
-import Head from '~/components/chat/left/Head'
+import Store from '~/components/mapp/Store'
 
 const mapStateToProps = (state, ownProps) => {
   return state
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  createNewChat: () => {
-    
+  openStoreModal: () => {
+    console.log('openStoreModal');
   }
 })
 
-const HeadContainer = connect(
+const StoreContainer = connect(
   mapStateToProps, mapDispatchToProps
-)(Head)
+)(Store)
 
-export default HeadContainer
+export default StoreContainer
