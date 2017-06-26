@@ -69,21 +69,29 @@ export const getUserBasicStoreInfo = (user) => {
         avatarUrl: user.avatarUrl,
         coverUrl: user.coverUrl,
         id: getUserGlobalId(user._id) }
-}
+};
 
 export const getListUser = (ids, next) => {
-    var list = []
+    var list = [];
     for (var i = 0; i < ids.length; ++i) {
         list.push(mongoose.Types.ObjectId(getUserLocalId(ids[i])))
     }
     User.find({'_id': {$in: list}}, function(err, docs){
         next(docs)
     })
-}
+};
+
+export const getListUserBasicInfo = (userList) => {
+    var result = [];
+    for (var i = 0; i < userList.length; ++i) {
+        result.push(getUserBasicInfo(userList[i]));
+    }
+    return result;
+};
 
 export const getChatUserInfo = (user) => {
     return { id: getUserGlobalId(user._id), avatarUrl: user.avatarUrl, name: user.userName}
-}
+};
 
 export const getChatUserListInfo = (userList) => {
     var result = []

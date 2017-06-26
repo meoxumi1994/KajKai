@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Map from '~/components/mapp/map'
-import { updateCurrentPosition } from '~/actions/asyn/map/actions'
+// import { updateCurrentPosition } from '~/actions/asyn/map/actions'
 
 const mapStateToProps = (state, ownProps) => {
   console.log('---MAP ', state.inst.map.markers);
@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     updateCurrentLocation: (show, lat, lng) => {
-        dispatch(updateCurrentPosition(show, lat, lng))
+        // dispatch(updateCurrentPosition(show, lat, lng))
     },
     getStoreMarkers: (bounds) => {
         dispatch({type: 'GET_STORE_MARKERS', bounds: bounds})

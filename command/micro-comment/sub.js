@@ -2,13 +2,13 @@ import redis from 'redis'
 import config from './config/pubSubConfig'
 import allChannels from './channels'
 
-const sub = redis.createClient(config)
-const pub = redis.createClient(config)
+const sub = redis.createClient(config);
+const pub = redis.createClient(config);
 
 // subscribe all channels
 for(let mChannel in allChannels) {
 
-    let handler = allChannels[mChannel]
+    let handler = allChannels[mChannel];
     let method = require('./controllers/' + handler.controller)[handler.method]
 
     sub.on('message', (channel, message) => {
@@ -21,6 +21,6 @@ for(let mChannel in allChannels) {
                 pub.publish(channel + '.' + eventId, JSON.stringify(res))
             })
         }
-    })
+    });
     sub.subscribe(mChannel)
 }

@@ -107,7 +107,7 @@ export const blackList = () => {
                     idtype = 'storeid';
                     break;
                 case userId.startsWith(global.MESSAGE_GLOBAL_ID):
-                    idtype = 'mesid'
+                    idtype = 'mesid';
                     break
             }
             res.json({blockid: blockId, type: type, idtype: idtype, name: block.name})

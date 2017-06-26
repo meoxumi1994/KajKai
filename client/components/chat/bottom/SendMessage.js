@@ -1,12 +1,12 @@
 import React from 'react'
 import { FormGroup, FormControl, HelpBlock, ControlLabel, Button , OverlayTrigger, Popover, Nav, NavItem } from 'react-bootstrap'
 import ModalUploadImageContainer from '~/containers/chat/bottom/ModalUploadImageContainer'
-import EmoNavContainer from '~/containers/chat/bottom/IconPopOverContainer/EmoNavContainer'
+import EmoNavContainer from '~/containers/chat/bottom/EmoNavContainer'
 
-const SendMessage = ({mesId, userId, visibility, sendMessage, uploadImage}) => {
+const SendMessage = ({mesId, userId, sendMessage, uploadImage}) => {
   let msg
   return (
-    <div style={{padding: 10, display: visibility}}>
+    <div style={{padding: 10}}>
         <form style={{position: 'relative'}} onSubmit={e => {
           e.preventDefault()
           if (msg.value.trim()) {

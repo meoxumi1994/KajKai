@@ -1,10 +1,14 @@
 export default {
     'USER.AuthorizeToken': {
         controller: 'UserSubController',
-        method: 'authorizeToken'
+        method: 'authorizeTokenSub'
     },
     'USER.GetUser': {
         controller: 'UserSubController',
-        method: 'getUser'
+        method: 'getUserSub'
+    },
+    'USER.GetListUser': {
+        controller: 'UserSubController',
+        method: 'getListUserSub'
     }
 }

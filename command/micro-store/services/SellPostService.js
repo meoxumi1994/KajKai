@@ -1,9 +1,9 @@
 import { SellPost } from '../models'
 import globalId from '../config/globalId'
 import { getStore } from './StoreService'
-import { sellPostCreated, sellPostDeleted, sellPostUpdated} from '../controllers/StorePubController'
+import { sellPostCreated, sellPostDeleted, sellPostUpdated } from '../controllers/StorePubController'
 
-const SELLPOST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID
+const SELLPOST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID;
 
 export const getSellPostGlobalId = (id) => {
     return SELLPOST_GLOBAL_ID + id
@@ -89,4 +89,12 @@ export const getPubSellPostInfo = (sellPost, next) => {
             ship: sellPost.shippable, // store viết vào có thể un
         })
     });
+};
+
+export const getStoreFromSellPostId = (sellPostId, next) => {
+    getSellPostGlobalId(sellPostId, (sellPost) => {
+        getStore(sellPost.storeId, (store) => {
+            next(store);
+        })
+    })
 };

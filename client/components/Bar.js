@@ -18,7 +18,7 @@ const HandlerUser = ({ LOG_IN,
                             srcHas="/images/message.svg"
                             width="29" height="29" number="2"/>
                     </div>
-                    <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{backgroundColor: '#e9ebee', borderRadius: 15, borderWidth: 1, borderColor: 'black'}}>
+                    <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
                         <ChatListContainer/>
                     </ul>
                 </div>

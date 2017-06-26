@@ -194,11 +194,58 @@ export default {
     },
     comment: {
         sub: ['STORE.GetStore'],
-        pub: ['STORE.GetUser', 'STORE.AuthorizeToken']
+        pub: //['STORE.GetUser', 'STORE.AuthorizeToken']
+        [
+            {
+                event: 'COMMENT.FirstLayerCommentCreated',
+                fComment: {
+                    posterId: '', order:'', time: '',
+                    content: '', fCommentId: '',
+                    sellPostId: '', minorPostId: ''
+                }
+            },{
+                event: 'COMMENT.SecondLayerCommentCreated',
+                sComment: {
+                    posterId:'', time: '',
+                    content: '', parentCommentId: '',
+                    sCommentId: '',
+                    sellPostId: '', minorPostId: ''
+                }
+            }
+        ]
     },
     like: {
         sub: ['STORE.GetStore'],
         pub: ['STORE.GetUser', 'STORE.AuthorizeToken', 'COMMENT.AddLikeFir', 'COMMENT.AddLikeSec', 'STORE.AddLikeStore', 'STORE.AddLikePost']
+    },
+    socket: {
+        pub: [{
+            event: 'SOCKET.COMMENT.GetFirstLayerComments',
+            data: {
+                offset: '', //time
+                length: '',
+                sellPostId: '', minorPostId: ''
+            },
+            return: {
+                message: {
+                    comments: '....'
+                }
+            }
+
+        },{
+            event: 'SOCKET.COMMENT.GetSecondLayerComments',
+            data: {
+                offset: '',
+                length: '',
+                sellPostId: '', minorPostId: '',
+                fCommentId: ''
+            },
+            return: {
+                message: {
+                    comments: '....'
+                }
+            }
+        }]
     }
 
 }

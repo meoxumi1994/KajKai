@@ -21,10 +21,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onScroll : (scrollTop) => {
         dispatch({ type: 'ON_SCROLL', scrollTop: scrollTop })
-    },
-    setMultiChat: (value) => {
-        dispatch({type: 'MULTIPLE_CHAT', data: value})
-      }
+    }
 })
 
 const AppContainer = connect(

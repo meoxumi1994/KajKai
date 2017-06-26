@@ -2,7 +2,6 @@ const center = (state = {
   messagesKey: [],
   messagesMap: {},
   currentChat: '',
-  multipleChatWindow: false,
   lazyLoad: {
     offset: 0
   }
@@ -34,26 +33,18 @@ const center = (state = {
             },
             currentChat: action.data.mesId
           }
-        return state
 
       case 'REMOVE_CHAT':
         const tempKey = state.messagesKey
         tempKey.splice(tempKey.indexOf(action.mesId), 1)
         const tempMap = state.messagesMap
         delete tempMap[action.mesId]
-
         return {
           ...state,
           messagesKey: tempKey,
-          messagesMap: tempMap
+          messagesMap: tempMap,
         }
 
-
-      case 'MULTIPLE_CHAT':
-        return {
-          ...state,
-          multipleChatWindow: action.data
-        }
       // case 'client/INIT_MESSAGE':
       //   const { mesId, messages } = action.data
       //   const { id, avatarUrl, name } = action.data.user
