@@ -1,4 +1,4 @@
-import { addNewSecondLayerCommentPub, addNewFirstLayerCommentPub } from './SocketPubController'
+import { addNewSecondLayerCommentPub, addNewFirstLayerCommentPub, getMoreFirstLayerComments, getMoreSecondLayerComments } from './SocketPubController'
 
 export const joinPostCon = (action, sio, io) => {
     if (action.data.sellpostid) {
@@ -45,4 +45,16 @@ export const currentSecondLayerCommentCon = (action, sio, io) => {
 export const currentFirstLayerCommentCon = (action, sio, io) => {
     const postId = (action.data.sellpostid) ? action.data.sellpostid : action.data.minorpostid;
     sio.to(postId).emit({type: 'client/LEADERCOMMENT_ING', data: action.data})
+};
+
+export const getSecondLayerCommentCon = (action, sio, io) => {
+    getMoreSecondLayerComments(action.data, (comments) => {
+        sio.emit({type: 'client/GET_MORE_COMMEN', data: comments})
+    })
+};
+
+export const getFirstLayerCommentCon = (action, sio, io) => {
+    getMoreFirstLayerComments(action.data, (comments) => {
+        sio.emit({type: 'client/GET_MORE_LEADERCOMMENT', data: comments})
+    });
 };

@@ -200,14 +200,14 @@ export default {
                 event: 'COMMENT.FirstLayerCommentCreated',
                 fComment: {
                     posterId: '', order:'', time: '',
-                    postId:'', content: '', fCommentId: '',
+                    content: '', fCommentId: '',
                     sellPostId: '', minorPostId: ''
                 }
             },{
                 event: 'COMMENT.SecondLayerCommentCreated',
                 sComment: {
                     posterId:'', time: '',
-                    postId:'', content: '', parentCommentId: '',
+                    content: '', parentCommentId: '',
                     sCommentId: '',
                     sellPostId: '', minorPostId: ''
                 }
@@ -220,7 +220,31 @@ export default {
     },
     socket: {
         pub: [{
+            event: 'SOCKET.COMMENT.GetFirstLayerComments',
+            data: {
+                offset: '', //time
+                length: '',
+                sellPostId: '', minorPostId: ''
+            },
+            return: {
+                message: {
+                    comments: '....'
+                }
+            }
 
+        },{
+            event: 'SOCKET.COMMENT.GetSecondLayerComments',
+            data: {
+                offset: '',
+                length: '',
+                sellPostId: '', minorPostId: '',
+                fCommentId: ''
+            },
+            return: {
+                message: {
+                    comments: '....'
+                }
+            }
         }]
     }
 
