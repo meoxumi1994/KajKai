@@ -252,14 +252,19 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
     sellpostid: ,
 }
 
-
 // return when socket connected
-'global/UNREAD_CHAT_LIST': {
+'global/UNREAD_CHATS': {
     quantity: '2',
     messages: [
         "593e4c1a2688d830be26fc00",
         "593e4c1a2688d830be26fc66"
     ]
+}
+
+'server/RESET_UNREAD_CHATS_QUANTITY': {
+
+},'client/RESET_UNREAD_CHATS_QUANTITY': {
+    quantity: 0
 }
 
 // Remove a list of mesId from UNREAD_CHAT_LIST
