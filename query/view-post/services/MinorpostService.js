@@ -31,6 +31,19 @@ export const getMinorposts = (storeId, offset, next) => {
   })
 }
 
+export const getMinorpostContent = (id, next) => {
+  Minorpost.findOne({ id }, (err, minorpost) => {
+    if (err) {
+      next(null)
+    } else {
+      const { content } = minorpost
+      next({
+        content: content ? content.substr(200) : null
+      })
+    }
+  })
+}
+
 const getClientFormatMinorpost = (minorpost, offset) => {
   const { comments } = minorpost
 
@@ -40,7 +53,7 @@ const getClientFormatMinorpost = (minorpost, offset) => {
     storeid: minorpost.storeId,
     storename: minorpost.storeName,
     time: minorpost.time,
-    content: minorpost.content,
+    content: minorpost.content ? minorpost.content.substr(0, 200) : null,
     images: minorpost.images,
     video: minorpost.video,
     numlike: minorpost.numberOfLike ? minorpost.numberOfLike : 0,
