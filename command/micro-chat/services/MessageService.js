@@ -15,7 +15,7 @@ export const addNewMessage = (mesInfo, next) => {
                 arr.push(curMessage);
             }
             Message.insertMany(curMessage, (err, docs) => {
-                next();
+                next(message, group.members);
             })
         }
     })

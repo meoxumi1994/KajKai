@@ -189,8 +189,6 @@ export default {
                 productId: '',
             }
         }]
-
-
     },
     comment: {
         sub: ['STORE.GetStore'],
@@ -199,7 +197,14 @@ export default {
             {
                 event: 'COMMENT.FirstLayerCommentCreated',
                 fComment: {
-                    posterId: '', order:'', time: '',
+                    posterId: '', order: [{
+                        id: '',
+                        content: '',
+                        imageUrl: '',
+                        list: [''],
+                        num: ''
+                    }],
+                    time: '',
                     content: '', fCommentId: '',
                     sellPostId: '', minorPostId: ''
                 }

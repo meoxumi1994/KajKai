@@ -530,7 +530,7 @@ DELETE /postrows {
     id: ,
 }
 
-POST /postrows/product {
+POST /product {
     sellpostid:
     postrowsid:
     product: {
@@ -540,7 +540,7 @@ POST /postrows/product {
     },
 }
 
-PUT /postrows/product {
+PUT /product {
     sellpostid:
     postrowsid:
     productid:
@@ -551,7 +551,7 @@ PUT /postrows/product {
     },
 }
 
-DELETE /postrows/product {
+DELETE /product {
     sellpostid:
     postrowsid:
     products_order: []

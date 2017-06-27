@@ -1,7 +1,7 @@
 import auth from './middlewares/auth'
 
 export default {
-    '/postrows/product': {
+    '/product': {
         post: {
             controller: 'ProductController',
             middleware: [auth()],

@@ -125,3 +125,24 @@ export const getPubStoreInfo = (store) => {
         certificates: store.certificates
     }
 };
+
+export const getStoreListInfo = (storeList) => {
+    if (!storeList) {
+        return null;
+    }
+    var storeListInfo = [];
+    for (var i = 0; i < storeList.length; ++i) {
+        storeListInfo.push(getStoreListInfo(storeList[i]));
+    }
+};
+
+export const getListStore = (storeIdList, next) => {
+    var list = [];
+    for (var i = 0; i < storeIdList.length; ++i) {
+        list.push(mongoose.Type.ObjectId(getStoreLocalId(storeIdList[i])));
+    }
+    Store.find({_id: {$in: list}}, (err, docs) => {
+        next(getStoreListInfo(docs));
+    })
+};
+
