@@ -34,13 +34,15 @@ export const getGroupBasicInfo = (group) => {
     }
 };
 
-export const addMember = (groupId, memberId, next) => {
+export const addMember = (groupId, memberIds, next) => {
     getGroupMessage(groupId, (group) => {
         if (!group) next(null);
         else {
-            group.members.push(memberId);
+            group.members.push(memberIds);
             group.save((err) => {
-                next(group);
+                getInfoFromListId(memberIds, (infos) => {
+                    next(infos);
+                })
             })
         }
     })
@@ -50,18 +52,6 @@ export const removeMember = (groupId, memberId, next) => {
     getGroupMessage(groupId, (group) => {
         if (!group) next(null);
         else {
-            // var index = -1;
-            // for (var i = 0; i < group.members.length; ++i) {
-            //     if (group.members[i] === memberId) {
-            //         index = i;
-            //         break;
-            //     }
-            // }
-            // if (index !== -1) {
-            //     for (var i = index; i + 1 < group.members.length; ++i)
-            //         group.members[i] = group.members[i + 1];
-            //     group.members.pull();
-            // }
             group.members.pull(memberId);
             group.save((err) => {
                 next(group);

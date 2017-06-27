@@ -1,5 +1,6 @@
-import { addNewMessage } from '../services/MessageService'
-import { createGroup, getGroupMessage, getMessageGroupInfo, updateGroupInfo } from '../services/MessageGroupService'
+import { addNewMessage, getUnreadMessage, updateRead } from '../services/MessageService'
+import { createGroup, getGroupMessage, getMessageGroupInfo, updateGroupInfo, removeMember, addMember } from '../services/MessageGroupService'
+import { setCounter } from '../services/UnreadMessageCountService'
 
 export const addNewMessageSub = (message, next) => {
     addNewMessage(message.mesInfo, (chatMessage, listEmit) => {
@@ -37,4 +38,38 @@ export const updateGroupUISub = (message, next) => {
     })
 };
 
-// export const 
+export const getUnreadChatSub = (message, next) => {
+    getUnreadMessage(message.userId, (data) => {
+        if (data) {
+            next({status: 'success', unread: data});
+        } else {
+            next({status: 'failed'})
+        }
+    })
+};
+
+export const resetUnreadCounterSub = (message, next) => {
+    setCounter(message.userId, 0, () => {
+        next({status: 'success'})
+    })
+};
+
+export const messageRead = (message, next) => {
+    updateRead(message.userId, message.mesId, () => {
+        next({status: 'success', mesId: message.mesId})
+    })
+};
+
+export const memberRemovedFromGroup = (message, next) => {
+    removeMember(message.mesId, message.memberId, () => {
+        next({status: 'success', data: message})
+    })
+};
+
+export const memberAddedToGroup = (message, next) => {
+    addMember(message.mesId, message.members, (infos) => {
+        var data = message;
+        data.members = infos;
+        next({status: 'success', data: data});
+    })
+};
