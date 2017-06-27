@@ -23,10 +23,8 @@ class ChatCenter extends React.Component {
       if (path == '/chat' || path == undefined) {
           mesId = currentChat
           chatStyle = styles(false, themes)
-          // isMultipleChat(false)
       } else {
           chatStyle = styles(true, themes)
-          // isMultipleChat(true)
       }
 
       const { usersKey, usersMap } = chatListMap[mesId]
