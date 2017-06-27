@@ -3,6 +3,7 @@ import config from './config/pubSubConfig'
 import allChannels from './channels'
 
 const sub = redis.createClient(config)
+sub.setMaxListeners(Infinity)
 const pub = redis.createClient(config)
 
 // subscribe all channels
