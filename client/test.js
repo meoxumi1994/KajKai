@@ -275,7 +275,14 @@ const mockedChatList = {
             username: "Long FU"
           }
         ]
-      }
+      },
+      // {
+      //   lastMessage: {},
+      //   mesId: undefined,
+      //   displayLabel: "",
+      //   time: 1497089023326,
+      //   users: []
+      // }
     ]
 }
 

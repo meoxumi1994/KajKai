@@ -134,7 +134,7 @@ class App extends React.Component {
                                         zIndex:100,
                                         marginLeft: index * 325 + 5
                                       }}>
-                                          <ChatCenterContainer path={path} mesId={mesId}/>
+                                          <ChatCenterContainer mesId={mesId}/>
                                       </div>)
                                     })
                                   }

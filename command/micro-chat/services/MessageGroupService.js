@@ -1,6 +1,9 @@
 import { MessageGroup } from '../models'
 import globalId from '../config/globalId'
-const GLOBAL_GROUP_ID = globalId.MESSAGE_GROUP_GLOBAL_ID
+import { getInfoFromListId } from '../controllers/ChatPubController'
+
+const GLOBAL_GROUP_ID = globalId.MESSAGE_GROUP_GLOBAL_ID;
+const USER_GLOBAL_ID = globalId.USER_GLOBAL_ID;
 
 export const getLocalGroupId = (id) => {
     if (id.length <= 3) return id;
@@ -31,13 +34,15 @@ export const getGroupBasicInfo = (group) => {
     }
 };
 
-export const addMember = (groupId, memberId, next) => {
+export const addMember = (groupId, memberIds, next) => {
     getGroupMessage(groupId, (group) => {
         if (!group) next(null);
         else {
-            group.members.push(memberId);
+            group.members.push(memberIds);
             group.save((err) => {
-                next(group);
+                getInfoFromListId(memberIds, (infos) => {
+                    next(infos);
+                })
             })
         }
     })
@@ -47,18 +52,6 @@ export const removeMember = (groupId, memberId, next) => {
     getGroupMessage(groupId, (group) => {
         if (!group) next(null);
         else {
-            // var index = -1;
-            // for (var i = 0; i < group.members.length; ++i) {
-            //     if (group.members[i] === memberId) {
-            //         index = i;
-            //         break;
-            //     }
-            // }
-            // if (index !== -1) {
-            //     for (var i = index; i + 1 < group.members.length; ++i)
-            //         group.members[i] = group.members[i + 1];
-            //     group.members.pull();
-            // }
             group.members.pull(memberId);
             group.save((err) => {
                 next(group);
@@ -77,5 +70,23 @@ export const updateGroupInfo = (mesId, info, next) => {
                 next(group);
             })
         }
+    })
+};
+
+export const getMessageGroupInfo = (group, next) => {
+    getInfoFromListId(group.members, (membersInfo) => {
+        var basicInfo = [];
+        for (var i = 0; i < membersInfo.length; ++i) {
+            basicInfo.push({
+                id: membersInfo[i].id,
+                avatarUrl: membersInfo[i].id,
+                name: (membersInfo[i].userName) ? membersInfo[i].userName :
+                        membersInfo[i].storeName,
+            })
+        }
+        next({
+            mesId: getGlobalGroupId(group._id),
+            members: basicInfo,
+        })
     })
 };

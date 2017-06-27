@@ -27,7 +27,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   loadChat: (mesId) => {
       dispatch(getMessages(mesId, Date.now(), 10))
       dispatch(readChat(mesId))
-
   },
   getChatList: () => {
       dispatch(getChatList(Date.now(), 10))

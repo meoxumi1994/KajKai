@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import ChatCenter from '~/components/chat/center'
+import chatStyles from '~/components/chat/chatStyles'
 
 const mapStateToProps = (state, ownProps) => {
     const { user } = state
@@ -7,7 +8,17 @@ const mapStateToProps = (state, ownProps) => {
     const { messagesKey, messagesMap, currentChat } = state.inst.chat.center
     const { catagory, currentThemes} = state.inst.chat.display.themes
     const themes = catagory[currentThemes]
-    const { isMultipleChat } = state.inst.chat.display
+
+    let styles
+    let mesId
+    if (location.pathname == '/chat' || location.pathname == undefined) {
+        mesId = currentChat
+        styles = chatStyles.getBigWindow(themes)
+    } else {
+        mesId = ownProps.mesId
+        styles = chatStyles.getSmallWindow(themes)
+    }
+
     return {
         user,
         chatListKey,
@@ -16,7 +27,8 @@ const mapStateToProps = (state, ownProps) => {
         messagesMap,
         currentChat,
         themes,
-        isMultipleChat
+        mesId: mesId,
+        styles
     }
 
 

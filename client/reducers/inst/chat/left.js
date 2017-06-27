@@ -89,6 +89,12 @@ const left = (state = {
           ...state,
           unreadChat: action.data
         }
+
+      case 'ADD_NEW_CHAT':
+          return {
+              ...state,
+              chatListKey: Object.assign(state.chatListKey).push(undefined)
+          }
     }
 }
 

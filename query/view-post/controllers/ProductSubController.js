@@ -47,8 +47,9 @@ export const updateProduct = (message) => {
         if (postrow.id == postrowId) {
           const { products } = postrow
           for (let k = 0; k < products.length; k++) {
-            if (products[k].id == id) {
-              products[k] = { products[k], ...product }
+            let currentProduct = products[k]
+            if (currentProduct.id == id) {
+              products[k] = { currentProduct, ...product }
               postrow.products = products
 
               postrows[i] = postrow

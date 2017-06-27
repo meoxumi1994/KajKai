@@ -181,7 +181,7 @@ export const getFirstLayerCommentPubInfo = (fComment) => {
 export const saveNewFirstLayerComment = (posterId, order, time, postId, content, next) => {
     var comment = new FirstLayerComment({posterId: posterId, order: order, time: time,
         postId: postId, content: content});
-    comment.save(function (err) {
+    comment.save((err) => {
         newFirstLayerCommentCreated(getFirstLayerCommentPubInfo(comment));
         next(comment);
     })

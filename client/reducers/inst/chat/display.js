@@ -3,17 +3,16 @@ const display = (state = {
     left: {
 
     },
+    top: {
+
+    },
     center: {
-      messageList: 'inline',
+        displayLabel: 'inline',
+        toLabel: 'none'
     },
     buttom: {
-      sendMessage: 'inline',
-      uploadImage: false
+
     },
-    top: {
-      newChat: 'inline',
-      setting: 'inline'
-    }
   },
   themes: {
     catagory: {
@@ -43,11 +42,18 @@ const display = (state = {
   isMultipleChat: true
 }, action) => {
     switch (action.type) {
+
+        // case 'DISPLAY_TO_LABEL':
+        //   return {
+        //
+        //   }
+
         case 'IS_MULTIPLE_CHAT':
           return {
             ...state,
             isMultipleChat: action.isMultipleChat
           }
+
 
         default:
             return state

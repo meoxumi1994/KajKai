@@ -1,7 +1,9 @@
 import mongoose from '../datasource'
 
-const MessageSchema = new mongoose.Schema({
+const MessageGroupSchema = new mongoose.Schema({
     members: [String],
     groupName: {type: String},
     groupColor: {type: String}
 });
+
+export default MessageGroupSchema
