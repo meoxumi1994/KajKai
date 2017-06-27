@@ -19,19 +19,19 @@ export const updateHandler = () => (req, res) => {
   // })
 
 
-  Address.findById('59493a5aae88a8155cf374de', (err, address) => {
-    address.city = 'Quang Nam'
-    address.district = 'Dien Ban'
-    address.street = 'Truong Sa'
-    address.longitude = 123
-    address.latitude = 321
-
-    address.save((err, newAddress) => {
-      res.send({
-        err, newAddress
-      })
-    })
-  })
+  // Address.findById('59493a5aae88a8155cf374de', (err, address) => {
+  //   address.city = 'Quang Nam'
+  //   address.district = 'Dien Ban'
+  //   address.street = 'Truong Sa'
+  //   address.longitude = 123
+  //   address.latitude = 321
+  //
+  //   address.save((err, newAddress) => {
+  //     res.send({
+  //       err, newAddress
+  //     })
+  //   })
+  // })
 
   // const user = new User({
   //   _id: '5947f72603b3340ad4183857',
@@ -49,16 +49,17 @@ export const updateHandler = () => (req, res) => {
   // })
   // const { username, email } = req.body
   //
-  // const user = {}
-  // if(username) user.username = username
-  // if(email) user.email = email
+  const user = {}
+  user._id = '59493a5aae88a8155cf374kk'
+  user.username = 'abcdef'
+  user.email = 'xyztuv'
   //
   //
-  // User.findOneAndUpdate({
-  //   id: 'ey89dheify927f02buv3u'
-  // }, user, (a, b, c, d, e) => {
-  //   res.send({
-  //     a, b, c, d, e
-  //   })
-  // })
+  User.findOneAndUpdate({
+    id: 'ey89dheify927f02buv3u'
+  }, user, (a, b, c, d, e) => {
+    res.send({
+      a, b, c, d, e
+    })
+  })
 }

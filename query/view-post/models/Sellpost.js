@@ -22,8 +22,8 @@ const SellpostSchema = new mongoose.Schema({
   numerOfFollow: {type: Number},
   followers: [FollowerSchema],
   numberOfComment: {type: Number},
-  numberOfShare: {type: Number},
-  comments: [CommentSchema]
+  comments: [CommentSchema],
+  numberOfShare: {type: Number}
 })
 
 export default SellpostSchema

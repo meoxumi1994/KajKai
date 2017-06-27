@@ -50,7 +50,7 @@ export const updatePostrow = (message) => {
 }
 
 export const deletePostrow = (message) => {
-  const { postrowId: id, sellPostId: sellpostId } = message.sellpost
+  const { postrowId: id, sellPostId: sellpostId } = message.postrow
   Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
     if (sellpost) {
       const { postrows } = sellpost

@@ -20,7 +20,8 @@ export const getSellpostHandler = () => (req, res) => {
 export const getSellpostsHandler = () => (req, res) => {
   if (req.decoded) {
     const { id: storeId } = req.params
-    getSellposts(storeId, (sellposts) => {
+    const { offset } = req.query
+    getSellposts(storeId, offset ? offset : Date.now(), (sellposts) => {
       if (sellposts) {
         res.send(sellposts)
       } else {
