@@ -218,7 +218,7 @@ class Tooltip extends React.Component {
             <div style={{
                 borderRadius: 2.5,
                 padding: '5px 10px 5px 10px',
-                backgroundColor: 'black',
+                backgroundColor: '#282828',
                 color: 'white',
                 position: 'absolute',
                 marginLeft: -10,
@@ -242,34 +242,69 @@ class Tooltip extends React.Component {
     }
 }
 
-class Dropdown extends React.Component {
+class RowDropDown extends React.Component {
     constructor(props){
         super(props)
+        this.state = {
+            hover: false
+        }
     }
     render(){
-        const { contents } = this.props
+        const { item } = this.props
+        if(item == 'hr')
+            return <hr style={{ margin: 5 }}/>
+        return(
+            <div
+                onMouseOver={() => this.setState({ hover: true})}
+                onMouseLeave={() => this.setState({ hover: false })}
+                style={{
+                    borderTop: this.state.hover?'1px solid #282828':'1px solid white',
+                    borderBottom: this.state.hover?'1px solid #282828':'1px solid white',
+                    backgroundColor: this.state.hover?'#3B5998':'white',
+                    color: this.state.hover?'white':'black',
+                    padding: '5px 10px 5px 10px',
+                }}>
+                {item}
+            </div>
+        )
+    }
+}
+
+class DropDown extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            hover: {}
+        }
+    }
+    render(){
+        const { contents, width, onClick } = this.props
         return(
             <div style={{
                 borderRadius: 2.5,
-                padding: '5px 10px 5px 10px',
-                backgroundColor: 'black',
-                color: 'white',
+                border: '1px solid #B2B2B2',
+                boxShadow: '0px 0px 4px #B2B2B2',
+                padding: '5px 0px 5px 0px',
+                backgroundColor: 'white',
                 position: 'absolute',
-                marginLeft: -10,
-                marginTop: 10,
+                width: width,
+                marginLeft: -width + 16,
+                marginTop: 9,
                 fontSize: 12.5,
             }}>
                 {contents.map((item,index) =>
-                    <div key={index}>{item}</div>
+                    <div key={index} onClick={() => onClick(index)}>
+                        <RowDropDown item={item}/>
+                    </div>
                 )}
                 <img style={{
                         position: 'absolute',
-                        left: 7,
-                        bot: 0,
+                        right: 0,
+                        top: -6.8,
                     }}
                     width={18}
                     height={9}
-                    src="/images/arrowdown.svg"
+                    src="/images/arrowupdropdown.svg"
                 />
             </div>
         )
@@ -286,9 +321,26 @@ class Comment extends React.Component {
         }
     }
     componentDidMount(){
-        // $(window).click((event) => {
-        //     console.log(event)
-        // });
+        $(window).click((event) => {
+            this.setState({ clicksetting: false })
+        });
+    }
+    onHoverSetting(){
+        setTimeout(() => {
+
+        }, 1000)
+    }
+    onCLickSetting(event){
+        this.setState({
+            clicksetting: true,
+            hoversetting: false,
+        })
+        setTimeout(() => {
+            this.setState({
+                clicksetting: true,
+                hoversetting: false,
+            })
+        }, 1)
     }
     render(){
         const { isleader, avatar, name, time, numlikes, numreplys,
@@ -302,21 +354,28 @@ class Comment extends React.Component {
                 paddingLeft: isleader?0:10,
                 fontSize: 12.5,
                 borderLeft: isleader?undefined:'2px solid #4080FF'}}>
-                {this.state.hover &&
+                { (this.state.hover || this.state.clicksetting) &&
                     <div
-                        onMouseOver={() => this.setState({ hoversetting: true })}
-                        onMouseLeave={() => this.setState({ hoversetting: false })}
                         style={{ float: 'right', padding: 2}}>
                         <span width={14} height={14}
+                            onMouseOver={() => this.setState({ hoversetting: true })}
+                            onMouseLeave={() => this.setState({ hoversetting: false })}
+                            onClick={(event) => this.onCLickSetting(event)}
                             style={{ color:'#BEC2C8'}}
                             className="glyphicon glyphicon-menu-down"/>
-                        {this.state.hoversetting &&
-                            <Tooltip contents={[
-                                'Block, Report','me','Block, Report','me',
-                                'Block, Report','me','Block, Report','me']}/>
+                        {(this.state.hoversetting && !this.state.clicksetting)&&
+                            <Tooltip contents={['Block, Report']}/>
+                        }
+                        {this.state.clicksetting &&
+                            <DropDown
+                                width={130}
+                                onClick={(index) => console.log(index)}
+                                contents={['Block','hr','Report']}
+                            />
                         }
                     </div>
                 }
+
                 {this.state.hover &&
                     <div>
 
@@ -403,6 +462,35 @@ class CommentSuggest extends React.Component {
                         {time && " . "}
                         {time && <span style={{ color: '#A7ABB1' }}>{time}</span>}
                     </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+class MinorPost extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+        }
+    }
+    render(){
+        const { name, avatarUrl, time } = this.props
+        return(
+            <div style={{
+                backgroundColor: 'white',
+                width: 410,
+                padding: 10,
+                fontSize: 12.5,
+            }}>
+                <img src={avatarUrl} width={40} height={40}/>
+                <div style={{ marginTop: -40, marginLeft: 50 }}>{name}</div>
+                <div style={{
+                    fontSize: 12,
+                    marginTop: -20,
+                    marginLeft: 50,
+                    }}>
+                    {time}
                 </div>
             </div>
         )

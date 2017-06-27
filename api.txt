@@ -1,6 +1,6 @@
 //NEW NEW NEW
 
-GET /leadercomment/:leadercommentid?offset=1498555009220 {
+GET /groupcomment/:sellpostid || minorpostid?offset=1498555009220 {
     offset
     leadercomments: [
         {
@@ -27,7 +27,7 @@ GET /leadercomment/:leadercommentid?offset=1498555009220 {
     ]
 }
 
-GET /groupcomment/:sellpostid || minorpostid?offset=1498555009220 {
+GET /leadercomment/:leadercommentid?offset=1498555009220 {
     offset
     comments: [
         {
