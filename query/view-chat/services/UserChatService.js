@@ -1,6 +1,6 @@
 import { UserChat } from '../models'
 
-export const getChats = (userId, offset, length, next) => {
+export const getUserChats = (userId, offset, length, next) => {
 
   UserChat.findOne({ userId }, (err, userChat) => {
     if (err) {
