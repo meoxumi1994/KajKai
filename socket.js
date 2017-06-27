@@ -253,23 +253,23 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 }
 
 
-
-// return when connected
+// return when socket connected
 'global/UNREAD_CHAT_LIST': {
     quantity: '2',
-    messages: [           // INITIAL list of mesId count to show number unread
+    messages: [
         "593e4c1a2688d830be26fc00",
         "593e4c1a2688d830be26fc66"
     ]
 }
 
+// Remove a list of mesId from UNREAD_CHAT_LIST
 'server/READ_CHAT': [
     '593e4c1a2688d830be26fc00'  // mesId
-]
-,'client/READ_CHAT': [
+],
+// Return mesIds that were removed
+'client/READ_CHAT': [
     '593e4c1a2688d830be26fc00'
 ]
-
 
 // Send new message
 'server/SEND_MESSAGE': {
@@ -294,7 +294,7 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
      time: ''
  }
 
-// Add member to group
+// Add member to group or create new chat
 'server/ADD_MEMBER': {
     mesId: '',              // if mesId == null, create new one
     members: [
@@ -303,7 +303,7 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
     id: '',
     time: ''
 },
-'client/ADD_MEMBER': { // thang doi phuong khong duoc gi ca
+'client/ADD_MEMBER': {
     mesId: '',
     members: [
       {
