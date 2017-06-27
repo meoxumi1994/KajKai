@@ -189,8 +189,6 @@ export default {
                 productId: '',
             }
         }]
-
-
     },
     comment: {
         sub: ['STORE.GetStore'],

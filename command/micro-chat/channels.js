@@ -26,5 +26,9 @@ export default {
     'CHAT.MessageReadUpdated': {
         controller: '',
         method: ''
+    },
+    'CHAT.GetUnReadChat': {
+        controller: '',
+        method: ''
     }
 }
