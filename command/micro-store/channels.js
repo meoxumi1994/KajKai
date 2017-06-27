@@ -6,5 +6,9 @@ export default {
     'STORE.GetStoreFromPost': {
         controller: 'StoreSubController',
         method: 'getStoreFromPostSub'
+    },
+    'STORE.GetListStore': {
+        controller: 'StoreSubController',
+        method: 'getStoreListSub'
     }
 }

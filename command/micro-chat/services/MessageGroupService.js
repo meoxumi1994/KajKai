@@ -1,6 +1,9 @@
 import { MessageGroup } from '../models'
 import globalId from '../config/globalId'
-const GLOBAL_GROUP_ID = globalId.MESSAGE_GROUP_GLOBAL_ID
+import { getInfoFromListId } from '../controllers/ChatPubController'
+
+const GLOBAL_GROUP_ID = globalId.MESSAGE_GROUP_GLOBAL_ID;
+const USER_GLOBAL_ID = globalId.USER_GLOBAL_ID;
 
 export const getLocalGroupId = (id) => {
     if (id.length <= 3) return id;
@@ -77,5 +80,23 @@ export const updateGroupInfo = (mesId, info, next) => {
                 next(group);
             })
         }
+    })
+};
+
+export const getMessageGroupInfo = (group, next) => {
+    getInfoFromListId(group.members, (membersInfo) => {
+        var basicInfo = [];
+        for (var i = 0; i < membersInfo.length; ++i) {
+            basicInfo.push({
+                id: membersInfo[i].id,
+                avatarUrl: membersInfo[i].id,
+                name: (membersInfo[i].userName) ? membersInfo[i].userName :
+                        membersInfo[i].storeName,
+            })
+        }
+        next({
+            mesId: getGlobalGroupId(group._id),
+            members: basicInfo,
+        })
     })
 };

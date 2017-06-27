@@ -62,8 +62,8 @@ export const getBasicProductInfo = (product) => {
 export const getPubProductInfo = (product) => {
     return {
         sellPostId: product.sellPostId,
-        postrowsid: product.sellPostDetailId,
-        productid: getProductGlobalId(product._id),
+        postrowsId: product.sellPostDetailId,
+        productId: getProductGlobalId(product._id),
         product: {
             content: product.content,
             imageUrl: product.imageUrl,

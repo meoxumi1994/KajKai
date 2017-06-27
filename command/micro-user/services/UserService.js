@@ -25,7 +25,7 @@ export const getUserGlobalId = (id) => {
 };
 
 export const getUserLocalId = (id) => {
-    if (id.length <= 3) return id
+    if (id.length <= 3) return id;
     return id.substr(3, id.length)
 };
 
