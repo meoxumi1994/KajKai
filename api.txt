@@ -844,6 +844,11 @@ GET /messages/:mesid?offset=offset&length=length {
   ]
 }
 
+// id la id của thằng mình muốn chat
+GET /mesId/:id {
+  mesId: ''
+}
+
 GET /search/user?text='char' {
     users: [
         {

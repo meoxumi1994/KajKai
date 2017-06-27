@@ -530,4 +530,4 @@ class newComp extends React.Component {
     }
 }
 
-export default newComp
+export default Components
