@@ -1,4 +1,4 @@
-import { Sellpost, Store } from '../models'
+import { Sellpost, BasicStore } from '../models'
 
 export const createSellpost = (message) => {
   const { sellPostId: id, storeId, category, title, description, time, status: storeState, ship: shipStatus } = message.sellpost
@@ -15,9 +15,9 @@ export const createSellpost = (message) => {
   if (storeState) sellpost.storeState = storeState
   if (shipStatus) sellpost.shipStatus = shipStatus
 
-  Store.findOne({ id: storeId }, (err, store) => {
-    if (store) {
-      sellpost.storeName = store.storeName
+  BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+    if (basicStore) {
+      sellpost.storeName = basicStore.storeName
     }
     sellpost.save()
   })

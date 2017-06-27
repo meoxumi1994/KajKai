@@ -21,9 +21,9 @@ export const getStore = (id, next) => {
               phone: store.phone,
               certificates: store.certificates,
               numberOfLike: store.likeNumber,
-              likes: store.likers.slice(0, 5),
+              likes: store.likers ? store.likers.slice(0, 5) : null,
               numfollow: store.numerOfFollow,
-              follows: store.followers.slice(0, 5),
+              follows: store.followers ? store.followers.slice(0, 5) : null,
             })
         }
     })

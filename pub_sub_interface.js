@@ -161,8 +161,8 @@ export default {
             event: 'POSTROW.PRODUCT.Created',
             product: {
                 sellPostId: '',
-                postrowsid: '',
-                productid: '',
+                postrowsId: '',
+                productId: '',
                 product: {
                     content:'',
                     imageUrl:'', // 20x20
@@ -173,8 +173,8 @@ export default {
             event: 'POSTROW.PRODUCT.Updated',
             product: {
                 sellPostId: '',
-                postrowsid: '',
-                productid: '',
+                postrowsId: '',
+                productId: '',
                 product: {
                     content:'',
                     imageUrl:'', // 20x20
@@ -185,8 +185,8 @@ export default {
             event: 'POSTROW.PRODUCT.Deleted',
             product: {
                 sellPostId: '',
-                postrowsid: '',
-                productid: '',
+                postrowsId: '',
+                productId: '',
             }
         }]
 

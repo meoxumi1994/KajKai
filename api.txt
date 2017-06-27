@@ -1,3 +1,54 @@
+//NEW NEW NEW
+
+GET /leadercomment/:leadercommentid?offset=1498555009220 {
+    offset
+    leadercomments: [
+        {
+          id: '7586449578',
+          sellpostid: ,
+          order: [
+              {
+                id: 'product002',
+                content: ,
+                imageUrl: ,
+                list: [],
+                num: 2
+              },
+          ],
+          numleadercomment:
+          ownerid: ,
+          avatarUrl: // small size 40x40
+          name: ,
+          content: ,
+          time: ,
+          numlike: ,
+          likestatus: ['like','love','haha','wow'],
+        }
+    ]
+}
+
+GET /groupcomment/:sellpostid || minorpostid?offset=1498555009220 {
+    offset
+    comments: [
+        {
+          id: '7586449578',
+          leadercommentid: ,
+          sellpostid: ,
+          numcomment:
+          ownerid: ,
+          avatarUrl: // small size 20x20
+          name: ,
+          content: ,
+          time: ,
+          numlike: ,
+          likestatus: ['like','love','haha','wow'],
+        }
+    ]
+}
+
+//NEW NEW NEW
+
+
 GET /user/:id {
     username: 'charity',
     email: 'prominh@gmail.com',
@@ -380,12 +431,10 @@ GET /sellpost/:id {
     ], // tối đa 5 thằng bạn
     numcomment: ,
     numshare: ,
-    offsettop:,
-    offsetbottom:,
+    offsetleadercomments:,
     leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
         {
-          offsettop:,
-          offsetbottom:,
+          offset:,
           id: '7586449578',
           sellpostid: ,
           order: [
@@ -481,7 +530,7 @@ DELETE /postrows {
     id: ,
 }
 
-POST /postrows/product {
+POST /product {
     sellpostid:
     postrowsid:
     product: {
@@ -491,7 +540,7 @@ POST /postrows/product {
     },
 }
 
-PUT /postrows/product {
+PUT /product {
     sellpostid:
     postrowsid:
     productid:
@@ -502,7 +551,7 @@ PUT /postrows/product {
     },
 }
 
-DELETE /postrows/product {
+DELETE /product {
     sellpostid:
     postrowsid:
     products_order: []

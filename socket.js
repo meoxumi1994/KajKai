@@ -252,25 +252,31 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
     sellpostid: ,
 }
 
-
-
-
-
-
-
-'server/READ_CHAT': [
-    '593e4c1a2688d830be26fc00'  // mesId
-] // return global/UNREAD_CHAT
-,
-'global/UNREAD_CHAT': {
+// return when socket connected
+'global/UNREAD_CHATS': {
     quantity: '2',
-    messages: [           // INITIAL list of mesId count to show number unread
+    messages: [
         "593e4c1a2688d830be26fc00",
         "593e4c1a2688d830be26fc66"
     ]
 }
 
-// 4. [Socket.io] Send new message
+'server/RESET_UNREAD_CHATS_QUANTITY': {
+
+},'client/RESET_UNREAD_CHATS_QUANTITY': {
+    quantity: 0
+}
+
+// Remove a list of mesId from UNREAD_CHAT_LIST
+'server/READ_CHAT': [
+    '593e4c1a2688d830be26fc00'  // mesId
+],
+// Return mesIds that were removed
+'client/READ_CHAT': [
+    '593e4c1a2688d830be26fc00'
+]
+
+// Send new message
 'server/SEND_MESSAGE': {
     mesId: '',
     id: '',                      // senderId
@@ -293,7 +299,8 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
      time: ''
  }
 
-'server/JOIN_MEMBER': {
+// Add member to group or create new chat
+'server/ADD_MEMBER': {
     mesId: '',              // if mesId == null, create new one
     members: [
       ''
@@ -301,7 +308,7 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
     id: '',
     time: ''
 },
-'client/JOIN_MEMBER': { // thang doi phuong khong duoc gi ca
+'client/ADD_MEMBER': {
     mesId: '',
     members: [
       {
@@ -314,12 +321,13 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
     time: ''
 }
 
-'server/UPDATE_GROUP_MEMBERS': {
+// Remove member from group
+'server/REMOVE_MEMBER': {
     mesId: '',
     id: '',
     memberId: '', // if memberId == null => kick id
     time: ''
-},'client/UPDATE_GROUP_MEMBERS':  {
+},'client/REMOVE_MEMBER':  {
     mesId: '',
     id: '',
     memberId: '',
@@ -330,15 +338,13 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
     mesId: '',
     id: '',
     data: {
-        groupName: '',
-        groupColor: ''
+        groupName: ''
     }
 },'client/UPDATE_UI': {
     mesId: '',
     id: '',
     data: {
-        groupName: '',
-        groupColor: ''
+        groupName: ''
     }
 }
 

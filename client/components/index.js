@@ -208,6 +208,74 @@ class GroupComment extends React.Component {
 
 }
 
+class Tooltip extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    render(){
+        const { contents } = this.props
+        return(
+            <div style={{
+                borderRadius: 2.5,
+                padding: '5px 10px 5px 10px',
+                backgroundColor: 'black',
+                color: 'white',
+                position: 'absolute',
+                marginLeft: -10,
+                marginTop: -(16.8*contents.length+35),
+                fontSize: 12.5,
+            }}>
+                {contents.map((item,index) =>
+                    <div key={index}>{item}</div>
+                )}
+                <img style={{
+                        position: 'absolute',
+                        left: 7,
+                        bot: 0,
+                    }}
+                    width={18}
+                    height={9}
+                    src="/images/arrowdown.svg"
+                />
+            </div>
+        )
+    }
+}
+
+class Dropdown extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    render(){
+        const { contents } = this.props
+        return(
+            <div style={{
+                borderRadius: 2.5,
+                padding: '5px 10px 5px 10px',
+                backgroundColor: 'black',
+                color: 'white',
+                position: 'absolute',
+                marginLeft: -10,
+                marginTop: 10,
+                fontSize: 12.5,
+            }}>
+                {contents.map((item,index) =>
+                    <div key={index}>{item}</div>
+                )}
+                <img style={{
+                        position: 'absolute',
+                        left: 7,
+                        bot: 0,
+                    }}
+                    width={18}
+                    height={9}
+                    src="/images/arrowdown.svg"
+                />
+            </div>
+        )
+    }
+}
+
 class Comment extends React.Component {
     constructor(props){
         super(props)
@@ -238,64 +306,20 @@ class Comment extends React.Component {
                     <div
                         onMouseOver={() => this.setState({ hoversetting: true })}
                         onMouseLeave={() => this.setState({ hoversetting: false })}
-                        style={{ float: 'right', padding: 2 }}>
+                        style={{ float: 'right', padding: 2}}>
                         <span width={14} height={14}
-                            style={{ color:'#BEC2C8' }}
+                            style={{ color:'#BEC2C8'}}
                             className="glyphicon glyphicon-menu-down"/>
                         {this.state.hoversetting &&
-                            <div style={{
-                                borderRadius: 2.5,
-                                padding: '5px 10px 5px 10px',
-                                backgroundColor: 'black',
-                                color: 'white',
-                                position: 'absolute',
-                                marginTop: -50,
-                                marginLeft: -10,
-                            }}>
-                                Block, Report
-                                <img style={{
-                                        position: 'absolute',
-                                        left: 9,
-                                        top: 24,
-                                    }}
-                                    width={14}
-                                    height={7}
-                                    src="/images/arrowdown.svg"
-                                />
-                            </div>
+                            <Tooltip contents={[
+                                'Block, Report','me','Block, Report','me',
+                                'Block, Report','me','Block, Report','me']}/>
                         }
                     </div>
                 }
                 {this.state.hover &&
-                    <div
-                        onMouseOver={() => this.setState({ hoversetting: true })}
-                        onMouseLeave={() => this.setState({ hoversetting: false })}
-                        style={{ float: 'right', padding: 2 }}>
-                        <span width={14} height={14}
-                            style={{ color:'#BEC2C8' }}
-                            className="glyphicon glyphicon-menu-down"/>
-                        {this.state.hoversetting &&
-                            <div style={{
-                                borderRadius: 2.5,
-                                padding: '5px 10px 5px 10px',
-                                backgroundColor: 'black',
-                                color: 'white',
-                                position: 'absolute',
-                                marginTop: -50,
-                                marginLeft: -10,
-                            }}>
-                                Block, Report
-                                <img style={{
-                                        position: 'absolute',
-                                        left: 9,
-                                        top: 24,
-                                    }}
-                                    width={14}
-                                    height={7}
-                                    src="/images/arrowdown.svg"
-                                />
-                            </div>
-                        }
+                    <div>
+
                     </div>
                 }
                 <img src={avatar} style={{

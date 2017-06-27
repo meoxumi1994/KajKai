@@ -1,4 +1,4 @@
-import { getChats } from '../services/UserChatService.js'
+import { getUserChats } from '../services/UserChatService.js'
 
 export const getUserChatsHandler = () => (req, res) => {
   if (req.decoded) {

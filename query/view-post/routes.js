@@ -21,5 +21,12 @@ export default {
       middleware: [auth()],
       method: 'getPostrowsHandler'
     }
+  },
+  '/minorpost/:storeid': {
+    get: {
+      controller: 'MinorpostController',
+      middleware: [auth()],
+      method: 'getMinorpostsHandler'
+    }
   }
 }

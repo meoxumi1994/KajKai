@@ -1,8 +1,8 @@
 import mongoose from '../datasource'
 
-const StoreSchema = new mongoose.Schema({
+const BasicStoreSchema = new mongoose.Schema({
   id: {type: String},
   storeName: {type: String}
 })
 
-export default StoreSchema
+export default BasicStoreSchema

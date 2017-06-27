@@ -1,61 +1,137 @@
-import { Chat } from '../models'
+import { Chat, UserChat, BasicUser } from '../models'
 
 export const createChat = (message) => {
-  const { sellPostId: id, storeId, storeName, category, title, description, time, status: storeState, ship: shipStatus } = message.chat
+  const { id, name, users } = message.chat
 
-  const sellpost = new Sellpost({
-    id,
-    storeId
+  const chat = new Chat({
+    id
   })
 
-  if (storeName) sellpost.storeName = storeName
-  if (category) sellpost.category = category
-  if (title) sellpost.title = title
-  if (description) sellpost.description = description
-  if (time) sellpost.time = time
-  if (storeState) sellpost.storeState = storeState
-  if (shipStatus) sellpost.shipStatus = shipStatus
-
-  sellpost.save()
-}
-
-
-export const updateChat = (message) => {
-  const { sellPostId: id, category, title, description, time, status: storeState, ship: shipStatus, postrows_order: postrowOrder } = message.chat
-  const sellpost = {}
-
-  if (category) sellpost.category = category
-  if (title) sellpost.title = title
-  if (description) sellpost.description = description
-  if (time) sellpost.time = time
-  if (storeState) sellpost.storeState = storeState
-  if (shipStatus) sellpost.shipStatus = shipStatus
-
-
-  if (postrowOrder) {
-    Sellpost.findOne({ id }, (err, sellpost) => {
-      if (sellpost) {
-        const { postrows } = sellpost
-        const mPostrows = [], postrowsById = {}
-
-        postrows.map((postrow) => {
-          postrowsById[postrow.id] = postrow
+  if (name) chat.name = name
+  if (users) {
+    const mPromises = []
+    users.map((user) => {
+      mPromises.push(new Promise((resolve, reject) => {
+        BasicUser.findOne({ id: user }, (err, basicUser) => {
+          if (basicUser) {
+            resolve(basicUser)
+          } else {
+            reject(err)
+          }
         })
-
-        postrowOrder.map((id) => {
-          mPostrows.push(postrowsById[id])
-        })
-
-        sellpost.postrows = mPostrows
-        sellpost.save()
-      }
+      }))
     })
-  } else {
-    Sellpost.findOneAndUpdate({ id }, sellpost)
+
+    Promise.all(mPromises).then((basicUsers) => {
+      chat.users = basicUsers
+      chat.save()
+    }, err => {
+      console.log('error', err)
+    })
+
+    chat.users.map((user) => {
+      UserChat.findOne({ userId: user.id }, (err, userChat) => {
+        if (userChat) {
+          userChat.chats.push(chat)
+          userChat.save()
+        }
+      })
+    })
   }
 }
 
-export const deleteSellpost = (message) => {
-  const { sellPostId: id } = message.sellpost
-  Sellpost.remove({ id })
+export const updateChat = (message) => {
+  const { id, userId } = message.chat
+
+  if ('addMember') {
+    addMember(id, userId)
+  } else {
+    removeMember(id, userId)
+  }
+}
+
+const addMember = (id, userId) => {
+  Chat.findOne({ id }, (err, chat) => {
+    if (chat) {
+      BasicUser.findOne({ id: userId }, (err, basicUser) => {
+        if (basicUser) {
+          chat.users.push(basicUser)
+          chat.save()
+
+          chat.users.map((user) => {
+            UserChat.findOne({ userId: user.id }, (err, userChat) => {
+              if (userChat) {
+                const { chats } = userChat
+                if (user.id == userId) {
+                  if (!chats) {
+                    chats = []
+                  }
+                  chats.push(chat)
+
+                } else {
+                  for (let i = 0; i < chats.length; i++) {
+                    if (chats[i].id == id) {
+                      chats[i] = chat
+                      break
+                    }
+                  }
+                }
+
+                userChat.chats = chats
+                userChat.save()
+              }
+            })
+          })
+        }
+      })
+
+    }
+  })
+}
+
+const removeMember = (id, userId) => {
+  Chat.findOne({ id }, (err, chat) => {
+    if (chat) {
+      const { users } = chat
+      for (let i = 0; i < users.length; i++) {
+        let user = users[i]
+        if (user.id == userId) {
+          let oldUser = users.splice(i, 1)
+          chat.users = users
+          chat.save()
+
+          users.push(oldUser)
+
+          users.map((user) => {
+            UserChat.findOne({ userId: user.id }, (err, userChat) => {
+              if (userChat) {
+                const { chats } = userChat
+                if (user.id == userId) {
+                  for (let i = 0; i < chats.length; i++) {
+                    if (chats[i].id == id) {
+                      chats.splice(i, 1)
+                      break
+                    }
+                  }
+
+                } else {
+                  for (let i = 0; i < chats.length; i++) {
+                    if (chats[i].id == id) {
+                      chats[i] = chat
+                      break
+                    }
+                  }
+                }
+
+                userChat.chats = chats
+                userChat.save()
+              }
+            })
+          })
+
+          break
+        }
+      }
+    }
+  })
 }
