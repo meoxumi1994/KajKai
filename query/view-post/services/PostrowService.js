@@ -12,6 +12,11 @@ export const getPostrows = (sellpostId, offset, next) => {
 }
 
 export const getClientFormatPostrows = (postrows, offset) => {
+  if (!postrows) {
+    return {
+      postrows: []
+    }
+  }
   const postrowOrder = [], mPostrows = []
 
   let currentNumberOfLine = 0, postrowOffset = -1

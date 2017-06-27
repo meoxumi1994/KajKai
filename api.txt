@@ -1,6 +1,6 @@
 //NEW NEW NEW
 
-GET /groupcomment/:sellpostid || minorpostid?offset=1498555009220 {
+GET /groupcomment/'sellpost|minorpost'/:id?offset=1498555009220 {
     offset
     leadercomments: [
         {
