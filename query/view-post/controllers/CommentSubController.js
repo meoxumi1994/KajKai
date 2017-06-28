@@ -9,8 +9,13 @@ export const createComment = (message) => {
 
   if (sellpostId) comment.sellpostId = sellpostId
   if (minorpostId) comment.minorpostId = minorpostId
-  if (order) comment.order = order
-  if (time) comment.time = time
+  if (order) comment.order = order.map((product) => ({
+    id: product.id,
+    content: product.content,
+    imageUrl: product.imageUrl,
+    list: product.list,
+    numberOfOrder: product.num
+  }))
 
   BasicUser.findOne({ id: userId }, (err, basicUser) => {
     if (basicUser) {
@@ -27,11 +32,12 @@ export const createComment = (message) => {
 
       comment.replies = []
       comment.replies.push(reply)
+      comment.save()
 
       if (sellpostId) {
         Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
           if (sellpost) {
-            const { comments } = sellpost
+            let { comments } = sellpost
 
             if (!comments) {
               comments = []
@@ -39,13 +45,39 @@ export const createComment = (message) => {
             comments.push(comment)
             sellpost.numberOfComment = comments.length
             sellpost.comments = comments
+
+            if (order) {
+              const { postrows } = sellpost
+              for (let i = 0; i < postrows.length; i++) {
+                let { products } = postrows[i]
+                if (products) {
+                  for (let k = 0; k < products.length; k++) {
+                    let product = products[k]
+
+                    order.map((orderedProduct) => {
+                      if (orderedProduct.id == product.id) {
+                        if (product.numberOfOrder) {
+                          product.numberOfOrder += orderedProduct.numberOfOrder
+                        } else {
+                          product.numberOfOrder = orderedProduct.numberOfOrder
+                        }
+                      }
+                    })
+                    products[k] = product
+                  }
+                  postrows[i].products = products
+                }
+              }
+
+              sellpost.postrows = postrows
+            }
             sellpost.save()
           }
         })
       } else {
         Minorpost.findOne({ id: minorpostId }, (err, minorpost) => {
           if (minorpost) {
-            const { comments } = minorpost
+            let { comments } = minorpost
 
             if (!comments) {
               comments = []

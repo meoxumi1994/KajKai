@@ -204,10 +204,6 @@ class LikeGroup extends React.Component {
     }
 }
 
-class GroupComment extends React.Component {
-
-}
-
 class Tooltip extends React.Component {
     constructor(props){
         super(props)
@@ -468,36 +464,102 @@ class CommentSuggest extends React.Component {
     }
 }
 
-class MinorPost extends React.Component {
+class GroupComment extends React.Component {
     constructor(props){
         super(props)
-        this.state = {
-        }
     }
     render(){
-        const { name, avatarUrl, time } = this.props
         return(
-            <div style={{
-                backgroundColor: 'white',
-                width: 410,
-                padding: 10,
-                fontSize: 12.5,
-            }}>
-                <img src={avatarUrl} width={40} height={40}/>
-                <div style={{ marginTop: -40, marginLeft: 50 }}>{name}</div>
-                <div style={{
-                    fontSize: 12,
-                    marginTop: -20,
-                    marginLeft: 50,
-                    }}>
-                    {time}
-                </div>
+            <div style={{ padding: '10px 0px 10px 0px'}}>
+                <CommentSuggest
+                    isleader={true}
+                    content={'View more previous comments'}
+                    end={'3 of 18'}
+                    />
+                <Comment
+                    isleader={true}
+                    onReceive={true}
+                    isStoreRepresent={true}
+                    avatar='/images/avatar.jpg'
+                    avatarsize={40}
+                    name='Phương Nguyễn‎'
+                    content='Tất cả các đơn síp đi rồi các bạn ạ ..'
+                    time='39 mins'
+                    />
+                <Comment
+                    isStoreRepresent={true}
+                    avatar='/images/avatar.jpg'
+                    avatarsize={40}
+                    name='Phương Nguyễn‎'
+                    content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
+                    time='39 mins'
+                    />
+                <Comment
+                    isStoreRepresent={true}
+                    avatar='/images/avatar.jpg'
+                    avatarsize={40}
+                    name='Phương Nguyễn‎'
+                    content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
+                    time='39 mins'
+                    />
+                <CommentSuggest
+                    src='/images/reply.svg'
+                    isleader={false}
+                    imgsrc='/images/avatar.jpg'
+                    content={' Phương Nguyễn Replied . 2 Replies'}
+                    time={'1 hrs'}
+                    />
+                <Comment
+                    isleader={true}
+                    onReceive={true}
+                    isStoreRepresent={true}
+                    avatar='/images/avatar.jpg'
+                    avatarsize={40}
+                    name='Phương Nguyễn‎'
+                    content='Tất cả các đơn síp đi rồi các bạn ạ ..'
+                    time='39 mins'
+                    />
+                <Comment
+                    isStoreRepresent={true}
+                    avatar='/images/avatar.jpg'
+                    avatarsize={40}
+                    name='Phương Nguyễn‎'
+                    content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
+                    time='39 mins'
+                    />
+                <Comment
+                    isStoreRepresent={true}
+                    avatar='/images/avatar.jpg'
+                    avatarsize={40}
+                    name='Phương Nguyễn‎'
+                    content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
+                    time='39 mins'
+                    />
+                <Comment
+                    isleader={true}
+                    onReceive={true}
+                    isStoreRepresent={true}
+                    avatar='/images/avatar.jpg'
+                    avatarsize={40}
+                    name='Phương Nguyễn‎'
+                    content='Tất cả các đơn síp đi rồi các bạn ạ ..'
+                    time='39 mins'
+                    />
+                <CommentSuggest
+                    isleader={false}
+                    src='/images/reply.svg'
+                    content={'8 Replies'}
+                    />
+                <CommentSuggest
+                    isleader={true}
+                    content={'View more comments'}
+                    />
             </div>
         )
     }
 }
 
-class newComp extends React.Component {
+class MinorPost extends React.Component {
     constructor(props){
         super(props)
         this.state = {
@@ -507,9 +569,52 @@ class newComp extends React.Component {
     onLike(){
         this.setState({ beLike: !this.state.beLike })
     }
+
     render(){
+        const { name, avatarUrl, time, content } = this.props
+        const Urlify = ({text}) => {
+            var urlRegex = /(https?:\/\/[^\s]+)/g;
+            return(
+                <div>
+                    {text.split(urlRegex).map((item,index) => {
+                        if(urlRegex.test(item))
+                            return <a key={index} style={{ color:'#365899'}}
+                                      href={item} target="_blank">{item}</a>
+                        return <span key={index}>{item}</span>
+                    })}
+                </div>
+            )
+        }
         return(
-            <div style={{ backgroundColor: 'white', width: 500 }}>
+            <div style={{
+                borderRadius: 4,
+                border: '1px solid #B2B2B2',
+                boxShadow: '0px 0px 4px #B2B2B2',
+                backgroundColor: 'white',
+                width: 410, padding: 10,}}>
+                <div style={{ fontSize: 13 }}>
+                    <div>
+                        <img src={avatarUrl} width={40} height={40}/>
+                    </div>
+                    <div style={{ marginTop: -37,
+                        marginLeft: 50,
+                        color: '#365899',
+                        fontWeight: 'bold'}}>{name}</div>
+                    <div style={{
+                        fontSize: 12,
+                        marginLeft: 50,
+                        color: '#A7ABB1',
+                        }}>
+                        {time}
+                    </div>
+                    <div style={{ marginTop: 10, fontSize: 13.5 }}>
+                        {content.split('\n').map((item,index) => {
+                            if(item)
+                                return <Urlify key={index} text={item}/>
+                            else return <br key={index}/>
+                        })}
+                    </div>
+                </div>
                 <div style={{ height: 40, padding: '10px 0px 10px 0px'}}>
                     <LikeShareComment
                         onLike={() => this.onLike()}
@@ -528,94 +633,26 @@ class newComp extends React.Component {
                         />
                 </div>
                 <hr style={{ margin: 0}}/>
-                <div style={{ padding: '10px 0px 10px 0px'}}>
-                    <CommentSuggest
-                        isleader={true}
-                        content={'View more previous comments'}
-                        end={'3 of 18'}
-                        />
-                    <Comment
-                        isleader={true}
-                        onReceive={true}
-                        isStoreRepresent={true}
-                        avatar='/images/avatar.jpg'
-                        avatarsize={40}
-                        name='Phương Nguyễn‎'
-                        content='Tất cả các đơn síp đi rồi các bạn ạ ..'
-                        time='39 mins'
-                        />
-                    <Comment
-                        isStoreRepresent={true}
-                        avatar='/images/avatar.jpg'
-                        avatarsize={40}
-                        name='Phương Nguyễn‎'
-                        content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
-                        time='39 mins'
-                        />
-                    <Comment
-                        isStoreRepresent={true}
-                        avatar='/images/avatar.jpg'
-                        avatarsize={40}
-                        name='Phương Nguyễn‎'
-                        content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
-                        time='39 mins'
-                        />
-                    <CommentSuggest
-                        src='/images/reply.svg'
-                        isleader={false}
-                        imgsrc='/images/avatar.jpg'
-                        content={' Phương Nguyễn Replied . 2 Replies'}
-                        time={'1 hrs'}
-                        />
-                    <Comment
-                        isleader={true}
-                        onReceive={true}
-                        isStoreRepresent={true}
-                        avatar='/images/avatar.jpg'
-                        avatarsize={40}
-                        name='Phương Nguyễn‎'
-                        content='Tất cả các đơn síp đi rồi các bạn ạ ..'
-                        time='39 mins'
-                        />
-                    <Comment
-                        isStoreRepresent={true}
-                        avatar='/images/avatar.jpg'
-                        avatarsize={40}
-                        name='Phương Nguyễn‎'
-                        content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
-                        time='39 mins'
-                        />
-                    <Comment
-                        isStoreRepresent={true}
-                        avatar='/images/avatar.jpg'
-                        avatarsize={40}
-                        name='Phương Nguyễn‎'
-                        content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
-                        time='39 mins'
-                        />
-                    <Comment
-                        isleader={true}
-                        onReceive={true}
-                        isStoreRepresent={true}
-                        avatar='/images/avatar.jpg'
-                        avatarsize={40}
-                        name='Phương Nguyễn‎'
-                        content='Tất cả các đơn síp đi rồi các bạn ạ ..'
-                        time='39 mins'
-                        />
-                    <CommentSuggest
-                        isleader={false}
-                        src='/images/reply.svg'
-                        content={'8 Replies'}
-                        />
-                    <CommentSuggest
-                        isleader={true}
-                        content={'View more comments'}
-                        />
-                </div>
+                <GroupComment/>
             </div>
         )
     }
 }
 
-export default newComp
+const Reacting = (text) => {
+    return text.replace(':D','😀','')
+               .replace('^^','😄')
+}
+
+const newComp = () => (
+    <div>
+        <div style={{ fontSize: 12 }}>{Reacting(':D :C')}</div>
+        <MinorPost
+            name='Foody.vn‎'
+            avatarUrl='/images/storeavatar.jpg'
+            time='11 mins'
+            content='[Nhân dịp "SINH NHẬT 5 NĂM" - Tặng ngay ƯU ĐÃI 20% khi đặt món tại APP Foody] Đặt món: http://www.deliverynow.vn/ Chỉ cần một cái chạm tay nhẹ tại APP Foody, cả một thế giới đồ ăn, thức uống mở ra ngay trước mắt bạn. Mà hồi trước chỉ xem món được thôi hà, còn bây giờ thì chỉ cần ngồi tại chỗ đồ ngon nào cũng tới tận tay :3 Để mừng tháng SINH NHẬT, tặng mã FOODY5NAM giảm 20% khi đặt món qua APP Foody cho các Foodie thân thương đã cùng đồng hành suốt 5 năm qua nghen <3'/>
+    </div>
+)
+
+export default Components

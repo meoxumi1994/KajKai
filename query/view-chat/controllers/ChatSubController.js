@@ -61,7 +61,7 @@ const addMember = (id, userId) => {
           chat.users.map((user) => {
             UserChat.findOne({ userId: user.id }, (err, userChat) => {
               if (userChat) {
-                const { chats } = userChat
+                let { chats } = userChat
                 if (user.id == userId) {
                   if (!chats) {
                     chats = []

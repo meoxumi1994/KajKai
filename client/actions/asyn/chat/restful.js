@@ -1,7 +1,7 @@
 import { initChatList, addChat } from './actions'
 import { flem } from '../../support'
 
-export const getChatList = (offset, length) => dispatch => {
+export const getChatList = (offset, length, multiChat) => dispatch => {
     flem('/chatlist', {
       offset: offset,
       length: length
@@ -34,12 +34,15 @@ export const getChatList = (offset, length) => dispatch => {
       }
     )
     .then((response) => {
-        console.log('/getchatlist response ', response);
+        // console.log('/getchatlist response ', response);
         dispatch(initChatList(response.data, response.lazyLoad))
+        if (!multiChat) {
+          dispatch(getMessages(response.data[0].mesId, Date.now(), 10, false))
+        }
     })
 }
 
-export const getMessages = (mesId, offset, length) => dispatch => {
+export const getMessages = (mesId, offset, length, multiChat) => dispatch => {
     flem('/messages/'+mesId, {
       offset: offset,
       length: length
@@ -61,7 +64,6 @@ export const getMessages = (mesId, offset, length) => dispatch => {
         ]
 
     }).then((response) => {
-        // console.log('/getMessages response ', response);
-        dispatch(addChat(response.data))
+        dispatch(addChat(response.data, multiChat))
     })
 }

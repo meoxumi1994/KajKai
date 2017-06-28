@@ -14,6 +14,7 @@ export const createReply = (message) => {
     if (basicUser) {
       reply.username = basicUser.username
       reply.avatarUrl = basicUser.avatarUrl
+      reply.save()
 
       if (sellpostId) {
         Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {

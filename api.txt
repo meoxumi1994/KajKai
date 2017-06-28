@@ -1,6 +1,6 @@
 //NEW NEW NEW
 
-GET /groupcomment/:sellpostid || minorpostid?offset=1498555009220 {
+GET /groupcomment/'sellpost|minorpost'/:id?offset=1498555009220 {
     offset
     leadercomments: [
         {
@@ -842,6 +842,11 @@ GET /messages/:mesid?offset=offset&length=length {
       time: ''
     }
   ]
+}
+
+// id la id của thằng mình muốn chat
+GET /mesId/:id {
+  mesId: ''
 }
 
 GET /search/user?text='char' {

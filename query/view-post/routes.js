@@ -28,5 +28,26 @@ export default {
       middleware: [auth()],
       method: 'getMinorpostsHandler'
     }
+  },
+  '/content/:minorpostid': {
+    get: {
+      controller: 'MinorpostController',
+      middleware: [auth()],
+      method: 'getMinorpostContentHandler'
+    }
+  },
+  '/groupcomment/:posttype/:id': {
+    get: {
+      controller: 'CommentController',
+      middleware: [auth()],
+      method: 'getCommentsHandler'
+    }
+  },
+  '/leadercomment/:id': {
+    get: {
+      controller: 'ReplyController',
+      middleware: [auth()],
+      method: 'getRepliesHandler'
+    }
   }
 }

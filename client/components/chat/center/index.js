@@ -2,7 +2,7 @@ import React from 'react'
 import ChatTopContainer from '~/containers/chat/top'
 import MessageListContainer from '~/containers/chat/center/MessageListContainer'
 import ChatBottomContainer from '~/containers/chat/bottom'
-import styles from '../styles'
+// import chatStyles from '../chatStyles'
 
 class ChatCenter extends React.Component {
 
@@ -11,38 +11,30 @@ class ChatCenter extends React.Component {
     }
 
     render() {
-      let { messagesKey, path, currentChat, mesId, chatListMap, themes, setCurrentChat, isMultipleChat } = this.props
+      let { messagesKey, messagesMap, mesId, styles, chatListMap, setCurrentChat } = this.props
 
-      if (messagesKey.length === 0) {
+      if (mesId == undefined) {
         return (
           <div>WAIT!!!</div>
         )
       }
 
-      let chatStyle
-      if (path == '/chat' || path == undefined) {
-          mesId = currentChat
-          chatStyle = styles(false, themes)
-      } else {
-          chatStyle = styles(true, themes)
-      }
-
       const { usersKey, usersMap } = chatListMap[mesId]
-
       return (
         <div key={mesId} onClick={() => setCurrentChat(mesId)} style={{width: '100%', height: '100%'}}>
             <ChatTopContainer
                   usersMap={usersMap}
                   usersKey={usersKey}
                   mesId={mesId}
-                  styles={chatStyle.top}/>
+                  styles={styles.top}/>
             <MessageListContainer
                   usersMap={usersMap}
+                  messagesMap={messagesMap}
                   mesId={mesId}
-                  styles={chatStyle.center}/>
+                  styles={styles.center}/>
             <ChatBottomContainer
                   mesId={mesId}
-                  styles={chatStyle.bottom}/>
+                  styles={styles.bottom}/>
         </div>
       )
     }

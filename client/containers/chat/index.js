@@ -1,22 +1,21 @@
 import { connect } from 'react-redux'
 import Chat from '~/components/chat'
 import { findName } from '../support'
+import chatStyles from '~/components/chat/chatStyles'
 
 const mapStateToProps = (state, ownProps) => {
-  const { user } = state
-  const { chatListKey, chatListMap } = state.inst.chat.left
-  const { messagesKey, messagesMap, currentChat } = state.inst.chat.center
   const { catagory, currentThemes} = state.inst.chat.display.themes
   const themes = catagory[currentThemes]
+  const { messagesKey, messagesMap } = state.inst.chat.center.singleChat
+  let styles = chatStyles.getSingleChat(themes)
+
   return (
     {
-      user,
-      chatListKey,
-      chatListMap,
+      themes,
       messagesKey,
       messagesMap,
-      currentChat,
-      themes
+      multiChat: false,
+      styles,
     }
   )
 }
