@@ -2,7 +2,6 @@ import React from 'react'
 import ChatTopContainer from '~/containers/chat/top'
 import MessageListContainer from '~/containers/chat/center/MessageListContainer'
 import ChatBottomContainer from '~/containers/chat/bottom'
-// import chatStyles from '../chatStyles'
 
 class ChatCenter extends React.Component {
 
@@ -11,7 +10,7 @@ class ChatCenter extends React.Component {
     }
 
     render() {
-      let { messagesKey, messagesMap, mesId, styles, chatListMap, setCurrentChat } = this.props
+      let { messagesMap, mesId, styles, chatListMap, setCurrentChat } = this.props
 
       if (mesId == undefined) {
         return (

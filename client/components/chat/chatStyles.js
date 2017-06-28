@@ -51,7 +51,7 @@ const singleChat = (color) => {
                   borderRadius: 50,
                   borderWidth: 1,
                   width: 40,
-                  height: 40
+                  height: 40,
               },
               text: {
                   marginRight: 40,

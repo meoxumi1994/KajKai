@@ -1,9 +1,8 @@
-import React from 'react'
+ import React from 'react'
 import { Popover, Row } from 'react-bootstrap'
 import Message from './Message'
 
 const MessageList = ({ messagesMap, user, mesId, usersMap, styles }) => {
-    console.log('let start');
     let previousId
     return (
       <div style={styles.mainDiv}>

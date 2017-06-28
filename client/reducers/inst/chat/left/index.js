@@ -61,13 +61,39 @@ const left = (state = {
           unreadChat: action.data
         }
 
-      case 'ADD_NEW_CHAT':
-          return {
-              ...state,
-              chatListKey: Object.assign(state.chatListKey).push(undefined)
-          }
+      case 'ADD_CHAT':
+        let tempK = []
+        tempK = state.chatListKey
+        tempK.push(action.data.mesId)
+
+        let tempM = state.chatListMap
+
+        let tempUserKey = []
+        let tempUserMap
+        action.data.users.map(
+            user => {
+              tempUserKey.push(user.id)
+              tempUserMap[user.id] = user
+            }
+        )
+
+        tempM[action.data.mesId] = {
+          mesId: action.data.mesId,
+          lastMessage: action.data.lastMessage,
+          // displayLabel: tempDisplayLabel.trim().substring(0, tempDisplayLabel.length - 2),
+          usersKey: tempUserKey,
+          usersMap: tempUserMap
+        }
+        
+        return {
+            ...state,
+            chatListKey: tempK,
+            chatListMap: tempM
+        }
     }
 }
+
+
 
 const chatMap = (state = {
     displayLabel: '',

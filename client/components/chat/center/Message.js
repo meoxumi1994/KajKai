@@ -5,8 +5,6 @@ import { getTime } from '~/containers/support'
 
 const Message = ({message, time, user, styles, showAvatar}) => {
 
-    console.log('show ', showAvatar);
-
     const showTimePopup = (
       <Popover id="popover-trigger-hover-focus">
           {getTime(time)}

@@ -8,7 +8,13 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     createNewChat: () => {
-        dispatch({type: 'ADD_NEW_CHAT'})
+        dispatch({
+          type: 'ADD_SINGLE_CHAT',
+          data: {
+              mesId: 0,
+              messages: []
+          }
+        })
     }
 })
 
@@ -17,3 +23,24 @@ const HeadContainer = connect(
 )(Head)
 
 export default HeadContainer
+
+// const abc = {
+//     lastMessage: {
+//       id: "593234a11c75513e381e5c87",
+//       time: Date.now() - 1523000,
+//       message: {
+//         text: "fuck u",
+//         type: "msg",
+//         url: ""
+//       }
+//     },
+//     mesId: "593e4c1a2688d830be26fc66",
+//     displayLabel: "",
+//     users: [
+//       {
+//         avatarUrl: "http://kajkai-avatar.s3-ap-southeast-1.amazonaws.com/78c5e183e31557c11a43239526a3c91b3b8d1608e4b32d4e3fa2f8ee.jpg",
+//         id: "593234a11c75513e381e5c87",
+//         username: "Long FU"
+//       }
+//     ]
+// }
