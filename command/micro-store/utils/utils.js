@@ -1,3 +1,5 @@
+import { uuidv4 } from 'uuid/v4'
+
 const phoneRegrex = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/
 const emailRegrex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
@@ -41,8 +43,8 @@ export const getTokenSocketCookie = (str) => {
 
 export const getCurrentTime = () => {
     return (new Date()).getTime()
-}
+};
 
 export const getUUID = () => {
-    return 1
-}
+    return uuidv4();
+};

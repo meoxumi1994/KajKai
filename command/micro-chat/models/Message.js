@@ -1,4 +1,4 @@
-import MessageContentSchema from './Message'
+import MessageContentSchema from './MessageContent'
 import mongoose from '../datasource'
 
 const MessageSchema = new mongoose.Schema({
