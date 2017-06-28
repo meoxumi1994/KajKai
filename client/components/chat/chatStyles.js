@@ -1,8 +1,8 @@
 const mainColor= '#e9ebee'
 
-const bigWindow = (color) => {
+const singleChat = (color) => {
     return {
-      type: 'big',
+      type: 'singleChat',
       top: {
           currentMainDiv: {
               backgroundColor: 'white',
@@ -10,7 +10,9 @@ const bigWindow = (color) => {
               width: '100%',
           },
           mainDiv: {
-
+              backgroundColor: 'white',
+              height: '7.5%',
+              width: '100%',
           },
           iconImg: {
               width: 27,
@@ -23,7 +25,7 @@ const bigWindow = (color) => {
               position: 'absolute',
               right: 10,
               top: 6,
-              backgroundColor: mainColor
+              backgroundColor: '#e9ebee',
           },
           spliterHr: {
             marginTop: 18
@@ -31,7 +33,7 @@ const bigWindow = (color) => {
           displayLabel: {
             fontSize: 18,
             marginLeft: 20,
-            marginTop: 22
+            marginTop: 22,
           }
       },
       center: {
@@ -119,7 +121,7 @@ const bigWindow = (color) => {
     }
 }
 
-const smallWindow = (color) => {
+const multiChat = (color) => {
     return {
       type: 'small',
       top: {
@@ -234,11 +236,11 @@ const smallWindow = (color) => {
 }
 
 const chatStyles = {
-    getBigWindow: (themes) => {
-        return bigWindow(themes.highlighted.backgroundColor)
+    getSingleChat: (themes) => {
+        return singleChat(themes.highlighted.backgroundColor)
     },
-    getSmallWindow: (themes) => {
-        return smallWindow(themes.highlighted.backgroundColor)
+    getMultiCht: (themes) => {
+        return multiChat(themes.highlighted.backgroundColor)
     }
 }
 

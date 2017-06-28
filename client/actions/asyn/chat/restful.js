@@ -36,7 +36,7 @@ export const getChatList = (offset, length) => dispatch => {
     .then((response) => {
         // console.log('/getchatlist response ', response);
         dispatch(initChatList(response.data, response.lazyLoad))
-        dispatch(getMessages(response.data[0].mesId, Date.now(), 10))
+        dispatch(getMessages(response.data[0].mesId, Date.now(), 10, false))
     })
 }
 
@@ -62,7 +62,6 @@ export const getMessages = (mesId, offset, length, multiChat) => dispatch => {
         ]
 
     }).then((response) => {
-        // console.log('--- /getMessages response ', response);
         dispatch(addChat(response.data, multiChat))
     })
 }

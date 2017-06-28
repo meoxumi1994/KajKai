@@ -3,7 +3,7 @@ import ChatTop from '~/components/chat/top'
 
 const mapStateToProps = (state, ownProps) => {
     const { chatListMap } = state.inst.chat.left
-    const { currentChat } = state.inst.chat.center
+    const { currentChat } = state.inst.chat.center.currentChat
     const { user } = state
 
     return {

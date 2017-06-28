@@ -4,7 +4,8 @@ import chatStyles from '~/components/chat/chatStyles'
 
 const mapStateToProps = (state, ownProps) => {
     const { chatListMap } = state.inst.chat.left
-    const { messagesKey, currentChat } = state.inst.chat.center
+    const { messagesKey } = state.inst.chat.center.singleChat
+    const { currentChat } = state.inst.chat.center.currentChat
     const { catagory, currentThemes} = state.inst.chat.display.themes
     const themes = catagory[currentThemes]
 
@@ -13,15 +14,11 @@ const mapStateToProps = (state, ownProps) => {
     let styles
     let mesId
     let multiChat
-    if (location.pathname == '/chat') {
-        mesId = currentChat
-        styles = chatStyles.getBigWindow(themes)
-        multiChat = false
-    } else {
-        mesId = ownProps.mesId
-        styles = chatStyles.getSmallWindow(themes)
-        multiChat = true
-    }
+    mesId = currentChat
+    styles = chatStyles.getSingleChat(themes)
+    multiChat = false
+
+    console.log(styles);
 
     return {
         chatListMap,

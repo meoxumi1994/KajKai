@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
         username: state.user.username,
         auth: state.auth,
         children: ownProps.children,
-        chat: state.inst.chat.center
+        chat: state.inst.chat.center.singleChat
     })
 }
 
