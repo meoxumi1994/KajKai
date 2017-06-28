@@ -12,7 +12,7 @@ class ChatList extends React.Component {
     }
 
     render(){
-        const { chatListMap, chatListKey, user, currentChat, unreadChat, themes } = this.props
+        const { chatListMap, chatListKey, user, currentChat, unreadChat, themes, multiChat } = this.props
         const { createNewChat, loadChat } = this.props
         return(
           <div style={{textAlign: 'left', overflowY: 'scroll', height: 625}}>
@@ -24,7 +24,7 @@ class ChatList extends React.Component {
                   // let read = unreadChat.indexOf(mesId) != -1? false: true
 
                   return (
-                      <ul className="nav nav-tabs" key={mesId} onClick={() => loadChat(mesId)}
+                      <ul className="nav nav-tabs" key={mesId} onClick={() => loadChat(mesId, multiChat)}
                       style={styles.tab, {backgroundColor: getTabColor(mesId, currentChat, themes)}}>
                         <div className="container-fluid">
                           <div className="row">

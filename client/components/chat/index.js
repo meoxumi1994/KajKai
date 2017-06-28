@@ -9,6 +9,10 @@ class Chat extends React.Component {
       super(props)
     }
 
+    componentDidMount() {
+      // console.log('did fucking mount');
+    }
+
     render() {
       let { themes } = this.props
 

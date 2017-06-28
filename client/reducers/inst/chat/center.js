@@ -2,6 +2,16 @@ const center = (state = {
   messagesKey: [],
   messagesMap: {},
   currentChat: '',
+
+  singleChat: {
+    messagesKey: [],
+    messagesMap: {}
+  },
+  multiChat: {
+    messagesKey: [],
+    messagesMap: {}
+  },
+
   lazyLoad: {
     offset: 0
   }
@@ -15,24 +25,37 @@ const center = (state = {
         }
 
       case 'ADD_CHAT':
-          if (state.messagesKey.indexOf(action.data.mesId) != -1) {
-            return {
-              ...state,
-              currentChat: action.data.mesId
-            }
-          }
-          var tempMessagesKey = state.messagesKey
-          tempMessagesKey.push(action.data.mesId)
+          if (action.multiChat) {
+              if (state.messagesKey.indexOf(action.data.mesId) != -1) {
+                return {
+                  ...state,
+                  currentChat: action.data.mesId
+                }
+              }
+              var tempMessagesKey = state.messagesKey
+              tempMessagesKey.push(action.data.mesId)
 
-          return {
-            ...state,
-            messagesKey: tempMessagesKey,
-            messagesMap: {
-              ...state.messagesMap,
-              [action.data.mesId]: action.data.messages
-            },
-            currentChat: action.data.mesId
+              return {
+                ...state,
+                messagesKey: tempMessagesKey,
+                messagesMap: {
+                  ...state.messagesMap,
+                  [action.data.mesId]: action.data.messages
+                },
+                currentChat: action.data.mesId
+              }
+          } else {
+              return {
+                ...state,
+                currentChat: action.data.mesId,
+                messagesKey: [action.data.mesId],
+                messagesMap: {
+                  [action.data.mesId]: action.data.messages
+                }
+              }
           }
+
+
 
       case 'REMOVE_CHAT':
         const tempKey = state.messagesKey

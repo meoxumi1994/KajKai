@@ -10,7 +10,6 @@ const mapStateToProps = (state, ownProps) => {
   const { currentChat } = state.inst.chat.center
   const { catagory, currentThemes} = state.inst.chat.display.themes
   const themes = catagory[currentThemes]
-  // console.log('---STATE ', state.inst.chat);
   return (
     {
       chatListMap,
@@ -19,13 +18,14 @@ const mapStateToProps = (state, ownProps) => {
       currentChat,
       unreadChat: unreadChat.messages,
       themes,
+      multiChat: location.pathname == '/chat'? false: true
     }
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadChat: (mesId) => {
-      dispatch(getMessages(mesId, Date.now(), 10))
+  loadChat: (mesId, multiChat) => {
+      dispatch(getMessages(mesId, Date.now(), 10, multiChat))
       dispatch(readChat(mesId))
   },
   getChatList: () => {

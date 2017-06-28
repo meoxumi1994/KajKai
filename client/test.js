@@ -237,7 +237,7 @@ const mockedChatList = {
       {
         lastMessage: {
           id: "59302a009afeed1a7f37cac0",
-          time: 1497089078194,
+          time: Date.now(),
           message: {
             text: "hello",
             type: "msg",
@@ -246,7 +246,6 @@ const mockedChatList = {
         },
         mesId: "593bc3ff0607380b9934204e",
         displayLabel: "",
-        time: 1497089023326,
         users: [
           {
             avatarUrl: "http://kajkai-avatar.s3-ap-southeast-1.amazonaws.com/0cac73f7a1deefa900a203950924437e54fa5358be8c3d6b863b971a.jpg",
@@ -258,7 +257,7 @@ const mockedChatList = {
       {
         lastMessage: {
           id: "593234a11c75513e381e5c87",
-          time: 1497089078194,
+          time: Date.now() - 1523000,
           message: {
             text: "fuck u",
             type: "msg",
@@ -267,7 +266,6 @@ const mockedChatList = {
         },
         mesId: "593e4c1a2688d830be26fc66",
         displayLabel: "",
-        time: 1497089023326,
         users: [
           {
             avatarUrl: "http://kajkai-avatar.s3-ap-southeast-1.amazonaws.com/78c5e183e31557c11a43239526a3c91b3b8d1608e4b32d4e3fa2f8ee.jpg",
