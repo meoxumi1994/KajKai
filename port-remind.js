@@ -1,7 +1,8 @@
 "micro-user" : 8080
 "micro-store" : 8081
 "micro-comment": 8082
-"micro-like": 8083
+"micro-chat": 8083
+"micro-socket": 8084
 
 
 
