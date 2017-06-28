@@ -1,6 +1,6 @@
 import socketIo from 'socket.io'
 import allEvents from './events'
-import { getTokenSocketCookie } from '../utils/Utils'
+import { getTokenSocketCookie } from '../utils/utils'
 import { authoriseToken } from '../controllers/SocketPubController'
 
 const sockListen = (user, socket, io) => {
