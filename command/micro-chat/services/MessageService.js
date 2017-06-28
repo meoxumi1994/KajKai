@@ -2,6 +2,7 @@ import { Message } from '../models'
 import { getGroupMessage } from './MessageGroupService'
 import { getMessageContent } from './MessageContentService'
 import { updateCounterMultiple, getUnreadCounter, updateCounter } from './UnreadMessageCountService'
+import { messageCreatedPub, messageReadPub } from '../controllers/ChatPubController'
 import globalId from '../config/globalId'
 
 const MESSAGE_GLOBAL_ID = globalId.MESSAGE_GLOBAL_ID;
@@ -37,7 +38,8 @@ export const addNewMessage = (mesInfo, next) => {
                 Message.insertMany(curMessage, (err, docs) => {
                     next(message, group.members);
                 });
-            })
+            });
+            messageCreatedPub(message, group.members[i])
         }
     })
 };
@@ -63,6 +65,7 @@ export const getUnreadMessage = (userId, next) => {
 
 export const updateRead = (userId, mesId, next) => {
     Message.updateMany({owner: userId, read: false, mesId: mesId}, {$set: {read: true}}, () => {
+        messageReadPub(userId, mesId);
         updateCounter(userId, () => {
             next();
         })

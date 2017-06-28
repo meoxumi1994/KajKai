@@ -85,7 +85,7 @@ export const getListStore = (storeIdList, next) => {
     })
 };
 
-const getInfoFromListId = (idList, next) => {
+export const getInfoFromListId = (idList, next) => {
     var userIdList = [];
     var storeIdList = [];
     for (var i = 0; i < idList.length; ++i) {
@@ -107,4 +107,28 @@ const getInfoFromListId = (idList, next) => {
             })
         })
     }
+};
+
+export const chatGroupCreatedPub = (group) => {
+    const pub = redis.createClient(config);
+    pub.publish('CHATGROUP.Created', JSON.stringify({chatGroup: group}));
+    pub.quit();
+};
+
+export const chatGroupUpdatedPub = (group) => {
+    const pub = redis.createClient(config);
+    pub.publish('CHATGROUP.Updated', JSON.stringify({chatGroup: group}));
+    pub.quit();
+};
+
+export const messageCreatedPub = (message, receiverIds) => {
+    const pub = redis.createClient(config);
+    pub.publish('MESSAGE.Created', JSON.stringify({message: message, receiverIds: receiverIds}));
+    pub.quit();
+};
+
+export const messageReadPub = (userID, groupId) => {
+    const pub = redis.createClient(config);
+    pub.publish('MESSAGE.Created', JSON.stringify({userID: userID, groupId: groupId}));
+    pub.quit();
 };

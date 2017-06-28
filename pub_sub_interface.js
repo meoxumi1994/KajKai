@@ -251,6 +251,37 @@ export default {
                 }
             }
         }]
+    },
+    chat: {
+        pub: [{
+            event: 'CHATGROUP.Created',
+            chatGroup: {
+                members: [String], groupName: '', groupColor: '',
+                groupId: ''
+            }
+        },{
+            event: 'CHATGROUP.Updated',
+            chatGroup: {
+                members: [String], groupName: '', groupColor: '',
+                groupId: ''
+            }
+        },{
+            event: 'MESSAGE.Created',
+            message: {
+                mesId: '', senderId: '', time: '',
+                message: {
+                    text: '',
+                    url: '',
+                    type: ''
+                },
+                read: false
+            },
+            receiverIds: []
+        },{
+            event: 'MESSAGE.Read',
+            userId: '',
+            groupId: '' // mesId == groupId
+        }]
     }
 
 }
