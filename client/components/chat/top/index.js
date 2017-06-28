@@ -10,7 +10,7 @@ class ChatTop extends React.Component {
 
     render() {
 
-      const {chatListMap, currentChat, mesId, styles, close, setMultiChat} = this.props
+      const {chatListMap, currentChat, mesId, styles, close, loadChat} = this.props
 
       return (
         <div style={currentChat == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
@@ -19,7 +19,7 @@ class ChatTop extends React.Component {
 
           <div style={styles.iconGroupDiv}>
               <Link to="/chat">
-                  <img style={styles.iconImg} src="/images/chatWindow.png"/>
+                  <img style={styles.iconImg} src="/images/chatWindow.png" onClick={() => loadChat(mesId)}/>
               </Link>
               <SettingContainer styles={styles}/>
               <img style={styles.iconImg} src="/images/whiteAdd.png"/>

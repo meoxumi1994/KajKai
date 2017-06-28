@@ -24,7 +24,7 @@ class ChatList extends React.Component {
                   // let read = unreadChat.indexOf(mesId) != -1? false: true
 
                   return (
-                      <ul className="nav nav-tabs" key={mesId} onClick={() => loadChat(mesId, multiChat)}
+                      <ul className="nav nav-tabs" key={mesId} onClick={() => loadChat(mesId, location.pathname == '/chat'? false: true)}
                       style={styles.tab, {backgroundColor: getTabColor(mesId, currentChat, themes)}}>
                         <div className="container-fluid">
                           <div className="row">

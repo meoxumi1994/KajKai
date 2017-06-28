@@ -7,13 +7,9 @@ import { readChat } from '~/actions/asyn/chat/socket'
 const mapStateToProps = (state, ownProps) => {
   const { chatListMap, chatListKey, unreadChat } = state.inst.chat.left
   const { user } = state
-  //: TODO: not done yet
   const { currentChat } = state.inst.chat.center.currentChat
   const { catagory, currentThemes} = state.inst.chat.display.themes
   const themes = catagory[currentThemes]
-
-  console.log('---STATE ', state.inst.chat);
-
   return (
     {
       chatListMap,

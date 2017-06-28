@@ -21,7 +21,7 @@ const multiChat = (state = {
               },
             }
 
-        case 'REMOVE_MULTI_CHAT':
+        case 'REMOVE_CHAT':
           const tempKey = state.messagesKey
           tempKey.splice(tempKey.indexOf(action.mesId), 1)
           const tempMap = state.messagesMap
@@ -31,6 +31,7 @@ const multiChat = (state = {
             messagesKey: tempKey,
             messagesMap: tempMap,
           }
+          
         default:
           return state
     }

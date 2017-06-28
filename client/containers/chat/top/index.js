@@ -9,17 +9,16 @@ const mapStateToProps = (state, ownProps) => {
     return {
       chatListMap,
       currentChat,
-      user
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  close: (mesId) => {
-    dispatch({type: 'REMOVE_CHAT', mesId})
-  },
-  setMultiChat: (value) => {
-      dispatch({type: 'MULTIPLE_CHAT', data: value})
-  }
+    close: (mesId) => {
+        dispatch({type: 'REMOVE_CHAT', mesId})
+    },
+    loadChat: (mesId) => {
+        dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: mesId}})
+    }
 })
 
 const ChatTopContainer = connect(

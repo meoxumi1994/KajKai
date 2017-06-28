@@ -239,7 +239,7 @@ const chatStyles = {
     getSingleChat: (themes) => {
         return singleChat(themes.highlighted.backgroundColor)
     },
-    getMultiCht: (themes) => {
+    getMultiChat: (themes) => {
         return multiChat(themes.highlighted.backgroundColor)
     }
 }
