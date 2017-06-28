@@ -20,7 +20,13 @@ class Chat extends React.Component {
             <div style={mainStyles.spliter}>
             </div>
             <div style={Object.assign(mainStyles.right, themes.normal.bounds)}>
-                <ChatCenterContainer mesId={messagesKey[0]} themes={themes} messagesKey={messagesKey} messagesMap={messagesMap} multiChat={multiChat} styles={styles}/>
+            <ChatCenterContainer
+                  mesId={messagesKey[0]}
+                  themes={themes}
+                  messagesKey={messagesKey}
+                  messagesMap={messagesMap}
+                  multiChat={multiChat}
+                  styles={styles}/>
             </div>
         </div>
       )

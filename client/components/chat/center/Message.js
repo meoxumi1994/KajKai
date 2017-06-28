@@ -3,7 +3,9 @@ import { OverlayTrigger, Popover } from 'react-bootstrap'
 import iconUtility from '~/config/iconUtility'
 import { getTime } from '~/containers/support'
 
-const Message = ({message, time, user, styles}) => {
+const Message = ({message, time, user, styles, showAvatar}) => {
+
+    console.log('show ', showAvatar);
 
     const showTimePopup = (
       <Popover id="popover-trigger-hover-focus">
@@ -21,12 +23,12 @@ const Message = ({message, time, user, styles}) => {
       <div key={time}>
           <div className="btn btn-transparent btn-xs" style={styles.imgDiv}>
               <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={showTimePopup}>
-                  <img src={user.avatarUrl} style={styles.imgIcon}/>
+                  <img src={user.avatarUrl} style={showAvatar?styles.imgIcon:{display: 'none'}}/>
               </OverlayTrigger>
           </div>
           <div>
               <ul style={styles.text}>
-                  <small style={styles.senderDiv} className="text-muted" >{user.username}</small>
+                  <small style={showAvatar?styles.senderDiv:{display: 'none'}} className="text-muted" >{user.username}</small>
                   <ul style={styles.bounds}>
                       {message.text}
                   </ul>
