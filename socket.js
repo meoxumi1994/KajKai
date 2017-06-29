@@ -325,7 +325,7 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 'server/REMOVE_MEMBER': {
     mesId: '',
     id: '',
-    memberId: '', // if memberId == null => kick id
+    memberId: '',
     time: ''
 },'client/REMOVE_MEMBER':  {
     mesId: '',

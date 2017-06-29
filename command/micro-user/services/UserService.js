@@ -1,9 +1,9 @@
 import { User, Address } from '../models'
 import jwt from 'jsonwebtoken'
-import { Language } from '../enum'
 import mongoose from '../datasource'
 import { checkEmail } from '../utils/utils'
-const USER_GLOBAL_ID = '001'
+import { SocialType, Language, Sex } from '../enum'
+const USER_GLOBAL_ID = '001';
 
 export const getUser = (id, next) => {
     if (id.startsWith(USER_GLOBAL_ID)) {
@@ -122,7 +122,7 @@ export const getUserFromPhone = (_phone, next) => {
 }
 
 export const getUserFromFacebookId = (facebookId, next) => {
-    User.findOne({socialNetworkType: enums.FACEBOOK, socialNetworkId: facebookId}, function (err, user) {
+    User.findOne({socialNetworkType: SocialType.FACEBOOK, socialNetworkId: facebookId}, function (err, user) {
         if (err) {
             next(null)
         } else {
@@ -210,11 +210,11 @@ export const validateName = (username) => {
 }
 
 export const validateLanguage = (language) => {
-    return (language === enums.Language.VIETNAM || language === enums.Language.ENGLISH)
+    return (language === Language.VIETNAM || language === Language.ENGLISH)
 }
 
 export const validateSex = (sex) =>{
-    return (sex === enums.Sex.MALE || sex === enums.Sex.FEMALE)
+    return (sex === Sex.MALE || sex === Sex.FEMALE)
 }
 
 export const updateVerifyUser = (id, next) => {
@@ -240,11 +240,11 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
         if (!socialNetworkType) next(null)
     }
     if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) next(null);
-    // const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
-    //             socialNetworkId: socialNetworkId});
+    const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
+                socialNetworkId: socialNetworkId});
     // const user = new User({email: email, userName: userName, password: password});
-    console.log(email + ' ' + userName + ' ' + password);
-    const user = new User({email: email});
+    // console.log(email + ' ' + userName + ' ' + password);
+    // const user = new User({email: email});
     console.log(user);
     user.save(function (err) {
         if (err) {

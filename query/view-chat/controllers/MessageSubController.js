@@ -1,20 +1,41 @@
-import { Chat } from '../models'
+import { Chat, Message } from '../models'
 
 export const createMessage = (message) => {
-  // const { id, userId, message } = message.message
-  //
-  // const sellpost = new Sellpost({
-  //   id,
-  //   storeId
-  // })
-  //
-  // if (storeName) sellpost.storeName = storeName
-  // if (category) sellpost.category = category
-  // if (title) sellpost.title = title
-  // if (description) sellpost.description = description
-  // if (time) sellpost.time = time
-  // if (storeState) sellpost.storeState = storeState
-  // if (shipStatus) sellpost.shipStatus = shipStatus
-  //
-  // sellpost.save()
+  const { mesId: id, senderId: userId, message: content, time } = message.message
+
+  const mMessage = new Message({
+    userId
+  })
+
+  if (content) mMessage.content = content
+  if (time) mMessage.time = time
+
+  Chat.findOne({ id }, (err, chat) => {
+    if (chat) {
+      let { messages } = chat
+      if (!messages) {
+        messages = []
+      }
+      messages = [...messages, mMessage]
+      chat.lastMessageTime = mMessage.time
+      chat.save()
+
+      chat.users.map((user) => {
+        UserChat.findOne({ userId: user.id}, (err, userChat) => {
+          if (userChat) {
+            let { chats } = userChat
+            for (let i = 0; i < chats.length; i++) {
+              if (chats[i].id == chat.id) {
+                chats.splice(i, 1)
+                chats = [...chats, chat]
+                break
+              }
+            }
+            userChat.chats = chats
+            userChat.save()
+          }
+        })
+      })
+    }
+  })
 }

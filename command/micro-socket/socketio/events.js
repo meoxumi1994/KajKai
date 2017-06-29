@@ -1,4 +1,5 @@
 export default {
+    // post and comment
     'server/JOIN_POST': {
         controller: 'CommentController',
         method: 'joinPostCon'
@@ -35,5 +36,30 @@ export default {
         controller: 'CommentController',
         method: 'currentFirstLayerCommentCon'
     },
-    // 'server/'
+    // chat
+    'server/RESET_UNREAD_CHATS_QUANTITY': {
+        controller: 'ChatController',
+        method: 'resetChatCountCon'
+    },
+    'server/READ_CHAT': {
+        controller: 'ChatController',
+        method: 'readChatCon'
+    },
+    'server/SEND_MESSAGE': {
+        controller: 'ChatController',
+        method: 'addNewMessageCon'
+    },
+    'server/ADD_MEMBER': {
+        controller: 'ChatController',
+        method: 'addMemberCon'
+    },
+    'server/REMOVE_MEMBER': {
+        controller: 'ChatController',
+        method: 'removeMemberCon'
+    },
+    'server/UPDATE_UI': {
+        controller: 'ChatController',
+        method: 'updateUICon'
+    }
+
 }

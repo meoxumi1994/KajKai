@@ -1,6 +1,6 @@
 import { MessageGroup } from '../models'
 import globalId from '../config/globalId'
-import { getInfoFromListId } from '../controllers/ChatPubController'
+import { getInfoFromListId, chatGroupCreatedPub, chatGroupUpdatedPub } from '../controllers/ChatPubController'
 
 const GLOBAL_GROUP_ID = globalId.MESSAGE_GROUP_GLOBAL_ID;
 const USER_GLOBAL_ID = globalId.USER_GLOBAL_ID;
@@ -23,7 +23,8 @@ export const getGroupMessage = (id, next) => {
 export const createGroup = (members, groupName, groupColor, next) => {
     const group = new MessageGroup({members: members, groupName: groupName, groupColor: groupColor});
     group.save((err) => {
-        next(group)
+        next(getGroupBasicInfo(group));
+        chatGroupCreatedPub()
     })
 };
 
@@ -40,8 +41,9 @@ export const addMember = (groupId, memberIds, next) => {
         else {
             group.members.push(memberIds);
             group.save((err) => {
+                chatGroupUpdatedPub(getGroupBasicInfo(group));
                 getInfoFromListId(memberIds, (infos) => {
-                    next(infos);
+                    next(infos, group);
                 })
             })
         }
@@ -52,6 +54,7 @@ export const removeMember = (groupId, memberId, next) => {
     getGroupMessage(groupId, (group) => {
         if (!group) next(null);
         else {
+            chatGroupUpdatedPub(getGroupBasicInfo(group));
             group.members.pull(memberId);
             group.save((err) => {
                 next(group);
@@ -67,6 +70,7 @@ export const updateGroupInfo = (mesId, info, next) => {
             if (info.groupName) group.groupName = info.groupName;
             if (info.groupColor) group.groupColor = info.groupColor;
             group.save((err) => {
+                chatGroupUpdatedPub(getGroupBasicInfo(group));
                 next(group);
             })
         }

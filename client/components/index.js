@@ -766,11 +766,8 @@ const newComp = () => (
             name='Foody.vn‎'
             avatarUrl='/images/storeavatar.jpg'
             time='11 mins'
-            content='[Nhân dịp "SINH NHẬT 5 NĂM" - Tặng ngay ƯU ĐÃI 20% khi đặt món tại APP Foody]
-Đặt món: http://www.deliverynow.vn/
-Chỉ cần một cái chạm tay nhẹ tại APP Foody, cả một thế giới đồ ăn, thức uống mở ra ngay trước mắt bạn. Mà hồi trước chỉ xem món được thôi hà, còn bây giờ thì chỉ cần ngồi tại chỗ đồ ngon nào cũng tới tận tay :3 Để mừng tháng SINH NHẬT, tặng mã FOODY5NAM giảm 20% khi đặt món qua APP Foody cho các Foodie thân thương đã cùng đồng hành suốt 5 năm qua nghen <3'/>
+            content='[Nhân dịp "SINH NHẬT 5 NĂM" - Tặng ngay ƯU ĐÃI 20% khi đặt món tại APP Foody] Đặt món: http://www.deliverynow.vn/ Chỉ cần một cái chạm tay nhẹ tại APP Foody, cả một thế giới đồ ăn, thức uống mở ra ngay trước mắt bạn. Mà hồi trước chỉ xem món được thôi hà, còn bây giờ thì chỉ cần ngồi tại chỗ đồ ngon nào cũng tới tận tay :3 Để mừng tháng SINH NHẬT, tặng mã FOODY5NAM giảm 20% khi đặt món qua APP Foody cho các Foodie thân thương đã cùng đồng hành suốt 5 năm qua nghen <3'/>
     </div>
 )
-
 
 export default newComp

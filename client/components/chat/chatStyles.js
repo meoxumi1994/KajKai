@@ -1,7 +1,8 @@
 const mainColor= '#e9ebee'
 
-const bigWindow = (color) => {
+const singleChat = (color) => {
     return {
+      type: 'singleChat',
       top: {
           currentMainDiv: {
               backgroundColor: 'white',
@@ -9,7 +10,9 @@ const bigWindow = (color) => {
               width: '100%',
           },
           mainDiv: {
-
+              backgroundColor: 'white',
+              height: '7.5%',
+              width: '100%',
           },
           iconImg: {
               width: 27,
@@ -22,7 +25,7 @@ const bigWindow = (color) => {
               position: 'absolute',
               right: 10,
               top: 6,
-              backgroundColor: mainColor
+              backgroundColor: '#e9ebee',
           },
           spliterHr: {
             marginTop: 18
@@ -30,7 +33,7 @@ const bigWindow = (color) => {
           displayLabel: {
             fontSize: 18,
             marginLeft: 20,
-            marginTop: 22
+            marginTop: 22,
           }
       },
       center: {
@@ -48,7 +51,7 @@ const bigWindow = (color) => {
                   borderRadius: 50,
                   borderWidth: 1,
                   width: 40,
-                  height: 40
+                  height: 40,
               },
               text: {
                   marginRight: 40,
@@ -118,8 +121,9 @@ const bigWindow = (color) => {
     }
 }
 
-const smallWindow = (color) => {
+const multiChat = (color) => {
     return {
+      type: 'small',
       top: {
           currentMainDiv: {
               backgroundColor: color,
@@ -231,11 +235,13 @@ const smallWindow = (color) => {
     }
 }
 
-const styles = (multipleWindow, themes) => {
-    if (!multipleWindow) {
-      return bigWindow(themes.highlighted.backgroundColor)
+const chatStyles = {
+    getSingleChat: (themes) => {
+        return singleChat(themes.highlighted.backgroundColor)
+    },
+    getMultiChat: (themes) => {
+        return multiChat(themes.highlighted.backgroundColor)
     }
-    return smallWindow(themes.highlighted.backgroundColor)
 }
 
-export default styles
+export default chatStyles

@@ -1,5 +1,5 @@
 import { Store, Category, Certificate } from '../models'
-import { checkPhone } from '../utils/Utils'
+import { checkPhone } from '../utils/utils'
 import globalId from '../config/globalId'
 import { createStorePub, updateStorePub } from '../controllers/StorePubController'
 

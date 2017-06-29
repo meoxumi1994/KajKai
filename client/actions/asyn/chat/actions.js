@@ -9,7 +9,7 @@ export const readChat = (mesId) => ({
     mesId: mesId
 })
 
-export const addChat = (data) => ({
-    type: 'ADD_CHAT',
+export const addChat = (data, multiChat) => ({
+    type: multiChat? 'ADD_MULTI_CHAT': 'ADD_SINGLE_CHAT',
     data: data
 })

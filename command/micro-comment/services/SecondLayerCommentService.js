@@ -1,5 +1,5 @@
 import { FirstLayerComment, SecondLayerComment } from '../models'
-import { getCurrentTime } from '../utils/Utils'
+import { getCurrentTime } from '../utils/utils'
 import globalId from '../config/globalId'
 import { getUser, getListUser, getStore, getStoreFromPostId, newSecondLayerCommentCreated } from '../controllers/CommentPubController'
 

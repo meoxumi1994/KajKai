@@ -1,11 +1,13 @@
-import { config } from '../config/commonConfig'
+import config from '../config/commonConfig'
 import { getUserFromFacebookId, getUserBasicInfo, getUserToken, createUser, getUserFromEmail, getUserFromPhone } from '../services/UserService'
 import { checkPhone, checkEmail } from '../utils/utils'
 import { SocialType } from '../enum'
 import { createUserPub } from './UserPubController'
+import request from 'request'
 
 export const loginFacebook = () => {
     return (req, res) => {
+        console.log(req.body);
         const headers = {
             'User-Agent':       'Super Agent/0.0.1',
             'Content-Type':     'application/x-www-form-urlencoded'
@@ -22,20 +24,18 @@ export const loginFacebook = () => {
 
                 getUserFromFacebookId(body.id, function(user) {
                     if (user) {
-                        const token = getUserToken(user._id)
-                        console.log('facebook: ' + token)
-                        res.cookie('token', token)
+                        const token = getUserToken(user._id);
+                        console.log('facebook: ' + token);
+                        res.cookie('token', token);
                         getUserBasicInfo(user, function (data) {
                             res.json({user: data})
                         })
                     } else {
                         createUser(null, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, function (user) {
                             if (user) {
-                                createUserPub(user)
-                                res.cookie('token', getUserToken(user._id))
-                                getUserBasicInfo(user, function (data) {
-                                    res.json({user: data})
-                                })
+                                res.cookie('token', getUserToken(user._id));
+                                res.json({user: getUserBasicInfo(user)});
+                                createUserPub(user);
                             } else {
                                 res.json({error: error})
                             }
@@ -68,10 +68,10 @@ export const loginEmail = () => {
         if (email && password && checkEmail(email)) {
             getUserFromEmail(email, function(user) {
                 if (!user || user.password !== password || user.verified === 0) {
-                    res.json({status : 'failed'})
+                    res.json({status : 'failed'});
                     return
                 }
-                res.cookie('token', getUserToken(user._id))
+                res.cookie('token', getUserToken(user._id));
                 res.json({status: 'success'})
             })
         } else {
@@ -106,11 +106,9 @@ export const loginGoogle = () => {
                             if (!user) {
                                 res.json({error: 'error'})
                             } else {
-                                createUserPub(user)
-                                res.cookie('token', getUserToken(user._id))
-                                getUserBasicInfo(user, function (data) {
-                                    res.json({user: data})
-                                })
+                                res.cookie('token', getUserToken(user._id));
+                                res.json({user: getUserBasicInfo(user)});
+                                createUserPub(user);
                             }
                         })
                     }

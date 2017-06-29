@@ -31,7 +31,7 @@ export const joinMemberSub = (message, next) => {
 export const updateGroupUISub = (message, next) => {
     updateGroupInfo(message.mesId, message.data, (group) => {
         if (group) {
-            next({status: 'success', data: message});
+            next({status: 'success', data: message, receiverId: group.receiverId});
         } else {
             next({status: 'failed'})
         }
@@ -61,15 +61,15 @@ export const messageRead = (message, next) => {
 };
 
 export const memberRemovedFromGroup = (message, next) => {
-    removeMember(message.mesId, message.memberId, () => {
-        next({status: 'success', data: message})
+    removeMember(message.mesId, message.memberId, (group) => {
+        next({status: 'success', data: message, receiverId: group.members})
     })
 };
 
 export const memberAddedToGroup = (message, next) => {
-    addMember(message.mesId, message.members, (infos) => {
+    addMember(message.mesId, message.members, (infos, group) => {
         var data = message;
         data.members = infos;
-        next({status: 'success', data: data});
+        next({status: 'success', data: data, receiverId: group.members});
     })
 };
