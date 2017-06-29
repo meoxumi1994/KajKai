@@ -9,6 +9,10 @@ class ChatCenter extends React.Component {
       super(props)
     }
 
+    componentDidMount() {
+        this.props.getChatList()
+    }
+
     render() {
       let { messagesMap, mesId, styles, chatListMap, setCurrentChat, multiChat } = this.props
 

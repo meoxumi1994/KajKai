@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import ChatCenter from '~/components/chat/center'
 import chatStyles from '~/components/chat/chatStyles'
+import { getChatList } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
     const { chatListMap } = state.inst.chat.left
@@ -12,6 +13,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     setCurrentChat: (mesId) => {
         dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: mesId}})
+    },
+    getChatList: () => {
+        dispatch(getChatList(Date.now(), 10))
     }
 })
 

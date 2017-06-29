@@ -1,20 +1,30 @@
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+var webpack = require('webpack')
+var fs = require('fs')
 
 module.exports = {
-  entry: {
-    'bundle': './index.js'
-  },
+  entry: [
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://localhost:3000',
+      'webpack/hot/only-dev-server',
+      './index.js'
+  ],
   output: {
-    path: __dirname + '/dist',
-    filename: '[name].[chunkhash].js',
+    path: __dirname,
+    filename: 'bundle.js',
     publicPath: '/dist/',
-    chunkFilename: '[id].chunk.[chunkhash].js'
+    chunkFilename: '[id].chunk.js'
   },
   module: {
     rules: [
+        // {
+        //     test: /\.css$/,
+        //     use: [
+        //         'style-loader',
+        //         'css-loader?importLoader=1&modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+        //     ]
+        // },
       {
+        exclude: /(node_modules)/,
         test: /\.js$/,
         use: [
           {
@@ -26,56 +36,34 @@ module.exports = {
               ],
               plugins: [
                 'babel-plugin-root-import',
+                'react-hot-loader/babel',
                 'transform-object-rest-spread'
               ]
             }
           }
-        ],
-        exclude: /node_modules/
+        ]
       },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader"
-        })
-      }
+      // {test: /\.css$/, loader: 'style-loader!css-loader'},
+      // {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
+      // {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream'},
+      // {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'},
+      // {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml'}
     ]
+  },
+  devServer: {
+    // http: {
+    //   key: fs.readFileSync('./config/kajkai.key'),
+    //   cert: fs.readFileSync('./config/kajkai.crt')
+    // },
+    port: 3000,
+    historyApiFallback: true,
+    hot: true,
+    contentBase: __dirname,
+    publicPath: '/dist/'
   },
   devtool: 'eval',
   plugins: [
-    new ExtractTextPlugin({
-      filename: 'style.[contenthash].css',
-      allChunks: true,
-      ignoreOrder: true
-    }),
-    new HtmlWebpackPlugin({
-      filename: '../index.html',
-      template: './template.html'
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   minChunks: function (module) {
-    //     if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
-    //       return false
-    //     }
-    //     return module.context && module.context.indexOf("node_modules") !== -1
-    //     },
-        asyn: true,
-        children: true,
-        minChunks: Infinity,
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['manifest'],
-      minChunks: Infinity
-    }),
-    // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     'NODE_ENV': JSON.stringify('production')
-    //   }
-    // }),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   comments: false
-    // })
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
   ]
 }

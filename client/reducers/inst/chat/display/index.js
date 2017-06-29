@@ -28,16 +28,16 @@ const display = (state = {
       },
       red: {
         highlighted: {
-            backgroundColor: '#f76565',
+            backgroundColor: '#cc3333',
             color: 'white'
         },
         normal: {
-            backgroundColor: '#E9EBEE',
+            backgroundColor: 'white',
             color: 'black'
         }
       },
     },
-    currentThemes: 'blue'
+    currentThemes: 'red'
   },
   isMultipleChat: true
 }, action) => {

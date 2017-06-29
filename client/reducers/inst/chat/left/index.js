@@ -2,8 +2,21 @@ const left = (state = {
   chatListKey: [],
   chatListMap: {},
   unreadChat: {},
+  currentChat: {
+    mesId: '',
+    isNewMessage: false
+  }
 }, action) => {
     switch (action.type) {
+
+      case 'SET_CURRENT_CHAT':
+          return {
+            ...state,
+            currentChat: {
+                mesId: action.data.mesId,
+                isNewMessage: action.data.isNewMessage == undefined? state.currentChat.isNewMessage: action.data.isNewMessage
+            }
+          }
 
       case 'INIT_CHAT_LIST':
           if (action.data.length <= 0) {
@@ -64,7 +77,9 @@ const left = (state = {
 
       case 'NEW_CHAT':
         if (state.chatListKey.indexOf('0') != -1) {
-            return state
+            return {
+              ...state
+            }
         }
 
         var {chatListKey: tempKey} = state
@@ -82,7 +97,7 @@ const left = (state = {
         return {
             ...state,
             chatListKey: tempKey,
-            chatListMap: tempMap
+            chatListMap: tempMap,
         }
     }
 }

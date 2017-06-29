@@ -5,8 +5,7 @@ import { readChat } from '~/actions/asyn/chat/socket'
 
 
 const mapStateToProps = (state, ownProps) => {
-  const { chatListMap, chatListKey, unreadChat } = state.inst.chat.left
-  const { currentChat } = state.inst.chat.center.currentChat
+  const { chatListMap, chatListKey, unreadChat, currentChat } = state.inst.chat.left
   const { catagory, currentThemes} = state.inst.chat.display.themes
   const themes = catagory[currentThemes]
   console.log('--- state: ', state.inst.chat);
@@ -14,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
     {
       chatListMap,
       chatListKey,
-      currentChat,
+      currentChat: currentChat.mesId,
       unreadChat: unreadChat.messages,
       themes,
       multiChat: location.pathname == '/chat'? false: true
@@ -26,6 +25,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   loadChat: (mesId, multiChat) => {
       if (mesId == 0) {
           dispatch({type: 'NEW_CHAT'})
+          dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: 0, isNewMessage: true}})
       } else {
           dispatch(getMessages(mesId, Date.now(), 10, multiChat))
           dispatch(readChat(mesId))

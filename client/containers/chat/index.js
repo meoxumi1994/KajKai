@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import Chat from '~/components/chat'
 import { findName } from '../support'
-import { getChatList, getMessages } from '~/actions/asyn/chat/restful'
+import { getChatList } from '~/actions/asyn/chat/restful'
 import chatStyles from '~/components/chat/chatStyles'
 
 const mapStateToProps = (state, ownProps) => {

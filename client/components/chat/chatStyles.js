@@ -28,7 +28,7 @@ const singleChat = (color) => {
               backgroundColor: '#e9ebee',
           },
           spliterHr: {
-            marginTop: 18
+              marginTop: 18
           },
           displayLabel: {
             fontSize: 18,
