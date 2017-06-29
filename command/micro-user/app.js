@@ -14,7 +14,7 @@ const corsOptions = {
     credentials: true
 };
 
-app.options('*', cors())
+app.options('*', cors(corsOptions))
 app.use(compression())
 app.use(cors(corsOptions))
 app.use(cookieParser())
