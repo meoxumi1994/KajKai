@@ -1,4 +1,4 @@
-export const config = {
+const config = {
     SERVER_PORT: 7071,
     CLIENT_PORT: 3000,
     // EC2 : 13.228.23.106

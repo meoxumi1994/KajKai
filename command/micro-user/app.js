@@ -11,7 +11,7 @@ const app = express()
 const corsOptions = {
     origin: config.getClientDomain(),
     credentials: true
-}
+};
 
 app.use(compression())
 app.use(cors(corsOptions))
