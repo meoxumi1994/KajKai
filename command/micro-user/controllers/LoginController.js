@@ -6,6 +6,7 @@ import { createUserPub } from './UserPubController'
 
 export const loginFacebook = () => {
     return (req, res) => {
+        console.log(req.body);
         const headers = {
             'User-Agent':       'Super Agent/0.0.1',
             'Content-Type':     'application/x-www-form-urlencoded'
