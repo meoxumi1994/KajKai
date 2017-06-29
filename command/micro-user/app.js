@@ -9,7 +9,7 @@ import allRoutes from './routes'
 const app = express()
 
 const corsOptions = {
-    origin: 'fuck:3000',//config.getClientDomain(),
+    origin: config.getClientDomain(),
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
