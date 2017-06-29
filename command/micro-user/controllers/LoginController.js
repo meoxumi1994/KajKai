@@ -27,9 +27,7 @@ export const loginFacebook = () => {
                         const token = getUserToken(user._id);
                         console.log('facebook: ' + token);
                         res.cookie('token', token);
-                        getUserBasicInfo(user, function (data) {
-                            res.json({user: data})
-                        })
+                        res.json({user: getUserBasicInfo(user)});
                     } else {
                         createUser(null, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, function (user) {
                             if (user) {
@@ -94,13 +92,11 @@ export const loginGoogle = () => {
         }
         request(options, function(error, response, body) {
             if (!error && response.statusCode === 200) {
-                body = JSON.parse(body)
+                body = JSON.parse(body);
                 getUserFromEmail(body.email, function(user) {
                     if (user) {
-                        res.cookie('token', getUserToken(user._id))
-                        getUserBasicInfo(user, function (data) {
-                            res.json({user: data})
-                        })
+                        res.cookie('token', getUserToken(user._id));
+                        res.json({user: getUserBasicInfo(user)});
                     } else {
                         createUser(body.email, body.name, '1234', 1, null, SocialType.GOOGLE, null, function (user) {
                             if (!user) {
