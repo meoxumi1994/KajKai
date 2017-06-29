@@ -3,6 +3,7 @@ import { getUserFromFacebookId, getUserBasicInfo, getUserToken, createUser, getU
 import { checkPhone, checkEmail } from '../utils/utils'
 import { SocialType } from '../enum'
 import { createUserPub } from './UserPubController'
+import request from 'request'
 
 export const loginFacebook = () => {
     return (req, res) => {
