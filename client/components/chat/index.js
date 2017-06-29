@@ -9,6 +9,10 @@ class Chat extends React.Component {
       super(props)
     }
 
+    componentDidMount() {
+        this.props.getChatList()
+    }
+
     render() {
       let { themes, messagesKey, messagesMap, multiChat, styles } = this.props
 

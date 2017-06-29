@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import singleChat from './singleChat'
 import multiChat from './multiChat'
 
-export const currentChat = (state = {
+const currentChat = (state = {
     currentChat: ''
 }, action) => {
     switch (action.type) {
@@ -12,6 +12,12 @@ export const currentChat = (state = {
         return {
           ...state,
           currentChat: action.data.mesId
+        }
+
+      case 'NEW_CHAT':
+        return {
+          ...state,
+          currentChat: '0'
         }
 
       default:

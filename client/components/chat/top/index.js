@@ -15,7 +15,7 @@ class ChatTop extends React.Component {
       return (
         <div style={currentChat == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
 
-          <label style={styles.displayLabel}>{chatListMap[mesId].displayLabel}</label>
+          <input className="form-control" style={styles.displayLabel}/>
 
           <div style={styles.iconGroupDiv}>
               <Link to="/chat">
@@ -31,5 +31,6 @@ class ChatTop extends React.Component {
       )
     }
 }
+// <label style={styles.displayLabel}>{chatListMap[mesId].displayLabel}</label>
 
 export default ChatTop

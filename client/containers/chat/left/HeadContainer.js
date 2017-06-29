@@ -8,13 +8,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     createNewChat: () => {
-        dispatch({
-          type: 'ADD_SINGLE_CHAT',
-          data: {
-              mesId: 0,
-              messages: []
-          }
-        })
+        dispatch({type: 'NEW_CHAT'})
     }
 })
 
