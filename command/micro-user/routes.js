@@ -10,11 +10,11 @@ export default {
         }
     },
     '/user': {
-        get: {
-            controller: 'UserController',
-            middleware: [auth()],
-            method: 'getUserTrivial'
-        },
+        // get: {
+        //     controller: 'UserController',
+        //     middleware: [auth()],
+        //     method: 'getUserTrivial'
+        // },
         post: {
             controller: 'RegisterController',
             method: 'registerNewUser'
