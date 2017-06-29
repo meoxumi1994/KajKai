@@ -1,4 +1,4 @@
-import { config } from '../config/commonConfig'
+import config from '../config/commonConfig'
 import { getUserFromFacebookId, getUserBasicInfo, getUserToken, createUser, getUserFromEmail, getUserFromPhone } from '../services/UserService'
 import { checkPhone, checkEmail } from '../utils/utils'
 import { SocialType } from '../enum'
