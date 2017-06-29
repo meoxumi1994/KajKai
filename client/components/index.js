@@ -770,4 +770,4 @@ const newComp = () => (
     </div>
 )
 
-export default newComp
+export default Components
