@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>Happy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="54.5258621%" id="radialGradient-1">
+            <stop stop-color="#FFDC60" offset="0%"></stop>
+            <stop stop-color="#FFE060" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="50%" cy="50.6666835%" fx="50%" fy="50.6666835%" r="59.7151059%" id="radialGradient-2">
+            <stop stop-color="#E28756" stop-opacity="0.8" offset="0%"></stop>
+            <stop stop-color="#FFDD62" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="50%" cy="51.9362703%" fx="50%" fy="51.9362703%" r="58.4455191%" id="radialGradient-3">
+            <stop stop-color="#E28756" stop-opacity="0.800215127" offset="0%"></stop>
+            <stop stop-color="#FFDD62" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Happy">
+            <circle id="Face" fill="url(#radialGradient-1)" cx="50" cy="50" r="50"></circle>
+            <circle id="Blush" fill="url(#radialGradient-2)" style="mix-blend-mode: overlay;" cx="20.5357143" cy="50.8928571" r="18.75"></circle>
+            <circle id="Blush" fill="url(#radialGradient-3)" style="mix-blend-mode: overlay;" cx="74.1071429" cy="33.0357143" r="18.75"></circle>
+            <path d="M27.5623063,53.9555963 C31.7899464,57.2298923 37.0959661,59.1786515 42.8571429,59.1786515 C53.5167006,59.1786515 62.6180795,52.5072951 66.2137353,43.1121264" id="Mouth" stroke="#271900" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M33.7796682,33.9240285 C32.9276576,28.8589186 28.521621,25 23.2142857,25 C17.2969491,25 12.5,29.7969491 12.5,35.7142857 C12.5,36.9515183 12.7097081,38.1397709 13.0955183,39.2454375 L13.0955183,39.2454375" id="Eye" stroke="#200900" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M71.2796682,23.2298812 C70.4276576,18.1647713 66.021621,14.3058527 60.7142857,14.3058527 C54.7969491,14.3058527 50,19.1028018 50,25.0201384 C50,26.2573709 50.2097081,27.4456236 50.5955183,28.5512902 L50.5955183,28.5512902" id="Eye" stroke="#200900" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

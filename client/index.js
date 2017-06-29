@@ -23,7 +23,7 @@ function execute(action, emit, next, dispatch) {
     }
 }
 
-const socket = io(config.getDomain())
+const socket = io(config.getSocket())
 const socketIoMiddleware = createSocketIoMiddleware(socket, ["server/","client/"], { execute: execute });
 
 const store = createStore(
