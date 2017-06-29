@@ -33,11 +33,9 @@ export const loginFacebook = () => {
                     } else {
                         createUser(null, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, function (user) {
                             if (user) {
-                                createUserPub(user)
-                                res.cookie('token', getUserToken(user._id))
-                                getUserBasicInfo(user, function (data) {
-                                    res.json({user: data})
-                                })
+                                res.cookie('token', getUserToken(user._id));
+                                res.json({user: getUserBasicInfo(user)});
+                                createUserPub(user);
                             } else {
                                 res.json({error: error})
                             }
@@ -70,10 +68,10 @@ export const loginEmail = () => {
         if (email && password && checkEmail(email)) {
             getUserFromEmail(email, function(user) {
                 if (!user || user.password !== password || user.verified === 0) {
-                    res.json({status : 'failed'})
+                    res.json({status : 'failed'});
                     return
                 }
-                res.cookie('token', getUserToken(user._id))
+                res.cookie('token', getUserToken(user._id));
                 res.json({status: 'success'})
             })
         } else {
@@ -108,11 +106,9 @@ export const loginGoogle = () => {
                             if (!user) {
                                 res.json({error: 'error'})
                             } else {
-                                createUserPub(user)
-                                res.cookie('token', getUserToken(user._id))
-                                getUserBasicInfo(user, function (data) {
-                                    res.json({user: data})
-                                })
+                                res.cookie('token', getUserToken(user._id));
+                                res.json({user: getUserBasicInfo(user)});
+                                createUserPub(user);
                             }
                         })
                     }
