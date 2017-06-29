@@ -89,15 +89,6 @@ class Comp extends React.Component {
     }
 }
 
-
-const Components = () => (
-    <BrowserRouter>
-        <div>
-            <Route path="*" component={App}/>
-        </div>
-    </BrowserRouter>
-)
-
 const Compp = ({}) => (
     <div>
         {/* <Carousel key={'123'} style={{ width: 260, height: 260 }}
@@ -559,6 +550,136 @@ class GroupComment extends React.Component {
     }
 }
 
+const MakeUp = (text,search,change) => {
+    let newtext = ''
+    text.split(search).map((item,index) => {
+        if(index)
+            newtext += change
+        newtext += item
+    })
+    return newtext
+}
+
+const Emoji = (text) => {
+    let newtext = text
+    const emoji = [
+        [':D','<img width="14" src="/images/emoji/haha.svg"/>'],
+        [':-D','<img height="16" width="18.65625" src="/images/emoji/haha.svg"/>'],
+        ['8)','<img width="14" src="/images/emoji/pro.svg"/>'],
+        ['&lt;3','<img width="15.953125" src="/images/emoji/love.svg"/>'],
+        ['<3','<img width="15.953125" src="/images/emoji/love.svg"/>'],
+        [':o','<img width="11.671875" src="/images/emoji/wow.svg"/>'],
+        [':O','<img width="14.765625" src="/images/emoji/wow.svg"/>'],
+        [': )','<img width="12.4375" src="/images/emoji/smile.svg"/>'],
+        ['::))','<img height="16" width="17.09375" src="/images/emoji/smile.svg"/>'],
+        [':))','<img width="13.203125" src="/images/emoji/smile.svg"/>'],
+    ]
+    emoji.map((item,index) => {
+        newtext = MakeUp(newtext, item[0], item[1])
+    })
+    return newtext
+}
+
+const Urlify = (text) => {
+    let newtext = ''
+    text.split(/(https?:\/\/[^\s]+)/g).map((item,index) => {
+        if(/(https?:\/\/[^\s]+)/.test(item))
+            newtext += '<a key='+index+' style="color:#365899" href='+item+' target="_blank">'+item+'</a>'
+        else
+            newtext += item
+    })
+    return newtext
+}
+
+const EndLine = (text) => {
+    let newtext = ''
+    text.split('\n').map((item,index) => {
+        if(item)
+            newtext += '<div>'+item+'</div>'
+        else newtext += '<br\>'
+    })
+    return newtext
+}
+
+const MixMakeUp = (text) => {
+    let newtext = text
+    newtext = EndLine(newtext)
+    newtext = Emoji(newtext)
+    return newtext
+}
+
+const FilterText = (text) => {
+    let newtext = ''
+    text.map((item,index) => {
+
+    })
+}
+
+class ContentEditable extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            html: props.content?Urlify(props.content):'',
+            focus: false,
+            width: 0,
+        }
+    }
+    componentDidMount(){
+        this.contenteditable.innerHTML = this.props.content?MixMakeUp(Urlify(this.props.content)):''
+        this.setState({ width: this.display.getBoundingClientRect().width })
+    }
+    emitChange(e){
+        this.setState({
+            html: this.contenteditable.innerHTML,
+        })
+    }
+    render(){
+        const { canEdit, placehoder, padding } = this.props
+        return(
+            <div style={{
+                border: canEdit?'1px solid #D2D2D2':'1px solid transparent',
+                fontSize: 14,
+                backgroundColor: 'white',
+                padding: padding}}>
+                {canEdit &&
+                    <div
+                        autoComplete="off"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
+                        ref={contenteditable => this.contenteditable = contenteditable}
+                        onFocus={() => this.setState({ focus: true })}
+                        onInput={(e) => this.emitChange(e)}
+                        onBlur={(e) => {
+                            this.emitChange(e)
+                            this.setState({ focus: false })
+                        }}
+                        style={{
+                            position: 'absolute',
+                            outline: 'none',
+                            color: 'transparent',
+                            caretColor: '#1D2129',
+                            width: this.state.width,
+                        }}
+                        onPaste={() => {
+                            console.log('onPaste')
+                            setTimeout(()=>{
+                                console.log(this.contenteditable.innerHTML)
+                            },100)
+                        }}
+                        contentEditable>
+                    </div>
+                }
+                <div
+                    ref={display => this.display = display}
+                    style={{ color: this.state.html?undefined:(this.state.focus?'#BFC2C9':'#A7ABB1')}}
+                    dangerouslySetInnerHTML={{ __html: this.state.html?MixMakeUp(this.state.html):placehoder }}>
+                </div>
+            </div>
+        )
+    }
+}
+
 class MinorPost extends React.Component {
     constructor(props){
         super(props)
@@ -569,22 +690,11 @@ class MinorPost extends React.Component {
     onLike(){
         this.setState({ beLike: !this.state.beLike })
     }
-
+    componentDidMount(){
+        // console.log('span',this.span.getBoundingClientRect().width,this.span.getBoundingClientRect().height)
+    }
     render(){
         const { name, avatarUrl, time, content } = this.props
-        const Urlify = ({text}) => {
-            var urlRegex = /(https?:\/\/[^\s]+)/g;
-            return(
-                <div>
-                    {text.split(urlRegex).map((item,index) => {
-                        if(urlRegex.test(item))
-                            return <a key={index} style={{ color:'#365899'}}
-                                      href={item} target="_blank">{item}</a>
-                        return <span key={index}>{item}</span>
-                    })}
-                </div>
-            )
-        }
         return(
             <div style={{
                 borderRadius: 4,
@@ -592,7 +702,7 @@ class MinorPost extends React.Component {
                 boxShadow: '0px 0px 4px #B2B2B2',
                 backgroundColor: 'white',
                 width: 410, padding: 10,}}>
-                <div style={{ fontSize: 13 }}>
+                <div>
                     <div>
                         <img src={avatarUrl} width={40} height={40}/>
                     </div>
@@ -607,12 +717,13 @@ class MinorPost extends React.Component {
                         }}>
                         {time}
                     </div>
-                    <div style={{ marginTop: 10, fontSize: 13.5 }}>
-                        {content.split('\n').map((item,index) => {
-                            if(item)
-                                return <Urlify key={index} text={item}/>
-                            else return <br key={index}/>
-                        })}
+                    <div style={{ marginTop: 10 }}>
+                        <ContentEditable
+                            placehoder={'write your comments'}
+                            fontSize={13.5}
+                            canEdit={true}
+                            content={content}
+                        />
                     </div>
                 </div>
                 <div style={{ height: 40, padding: '10px 0px 10px 0px'}}>
@@ -639,14 +750,18 @@ class MinorPost extends React.Component {
     }
 }
 
-const Reacting = (text) => {
-    return text.replace(':D','😀','')
-               .replace('^^','😄')
-}
+const Components = () => (
+    <BrowserRouter>
+        <div>
+            <Route path="*" component={App}/>
+        </div>
+    </BrowserRouter>
+)
+
 
 const newComp = () => (
     <div>
-        <div style={{ fontSize: 12 }}>{Reacting(':D :C')}</div>
+        {/* <Test/> */}
         <MinorPost
             name='Foody.vn‎'
             avatarUrl='/images/storeavatar.jpg'
@@ -655,4 +770,4 @@ const newComp = () => (
     </div>
 )
 
-export default Components
+export default newComp
