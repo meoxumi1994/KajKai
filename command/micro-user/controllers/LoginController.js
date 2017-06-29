@@ -24,9 +24,9 @@ export const loginFacebook = () => {
 
                 getUserFromFacebookId(body.id, function(user) {
                     if (user) {
-                        const token = getUserToken(user._id)
-                        console.log('facebook: ' + token)
-                        res.cookie('token', token)
+                        const token = getUserToken(user._id);
+                        console.log('facebook: ' + token);
+                        res.cookie('token', token);
                         getUserBasicInfo(user, function (data) {
                             res.json({user: data})
                         })
