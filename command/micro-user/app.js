@@ -10,13 +10,11 @@ const app = express()
 
 const corsOptions = {
     origin: config.getClientDomain(),
-    preflightContinue: true,
     credentials: true
 };
 
 app.options('*', cors(corsOptions))
 app.use(compression())
-app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
