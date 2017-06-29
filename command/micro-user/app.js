@@ -10,7 +10,7 @@ const app = express()
 
 const corsOptions = {
     origin: config.getClientDomain(),
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: true,
     credentials: true
 };
 
