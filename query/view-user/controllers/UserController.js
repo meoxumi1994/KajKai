@@ -10,7 +10,7 @@ export const getUserHandler = () => (req, res) => {
 
     getUser(requestedId, (user) => {
       if (user) {
-        res.send(user)
+        res.json(user)
       } else {
         res.send({status: 'failed'})
       }
