@@ -7,7 +7,7 @@ export const getReplies = (id, offset, next) => {
         next(null)
       } else {
         next({
-          offset
+          offset,
           comments: []
         })
       }
@@ -21,7 +21,7 @@ export const getReplies = (id, offset, next) => {
 export const getClientFormatReplies = (replies, offset) => {
   if (!replies) {
     return {
-      offset
+      offset,
       comments: []
     }
   }

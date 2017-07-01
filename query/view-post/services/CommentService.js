@@ -40,7 +40,7 @@ export const getComments = (postType, id, offset, next) => {
 export const getClientFormatSellpostComments = (comments, offset) => {
   if (!comments) {
     return {
-      offset
+      offset,
       leadercomments: []
     }
   }
@@ -77,7 +77,7 @@ export const getClientFormatSellpostComments = (comments, offset) => {
 export const getClientFormatMinorpostComments = (comments, offset) => {
   if (!comments) {
     return {
-      offset
+      offset,
       leadercomments: []
     }
   }

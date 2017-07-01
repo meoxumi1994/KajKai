@@ -13,7 +13,7 @@ export const getUserChats = (userId, offset, length, next) => {
           lazyLoad: {
             offset
           },
-          data: []]
+          data: []
         })
       }
     } else {

@@ -7,7 +7,7 @@ export const getPostrows = (sellpostId, offset, next) => {
         next(null)
       } else {
         next({
-          offset
+          offset,
           postrows: []
         })
       }
@@ -21,7 +21,7 @@ export const getPostrows = (sellpostId, offset, next) => {
 export const getClientFormatPostrows = (postrows, offset) => {
   if (!postrows) {
     return {
-      offset
+      offset,
       postrows: []
     }
   }
