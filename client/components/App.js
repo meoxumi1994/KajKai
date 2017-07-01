@@ -88,19 +88,6 @@ class App extends React.Component {
         const path = this.props.location.pathname;
         const { width, height, username, onScroll } = this.props
         const { messagesKey, messagesMap, styles } = this.props
-        const Target = () => {
-            if(location.pathname.split('/')[1] == 'user')
-                return(
-                    <div>
-                        <Route path="*" component={User}/>
-                    </div>
-                )
-            return (
-                <div>
-                    <Route path="*" component={Store}/>
-                </div>
-            )
-        }
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
                 <Bar/>
@@ -144,7 +131,13 @@ class App extends React.Component {
                                   }
                                 </div>
                             </div>
-                        :   <Target/>
+                        :  location.pathname.split('/')[1] == 'user'?
+                            <div>
+                                <Route path="*" component={User}/>
+                            </div>
+                        :   <div>
+                                <Route path="*" component={Store}/>
+                            </div>
                         }
                     </div>
                 </div>

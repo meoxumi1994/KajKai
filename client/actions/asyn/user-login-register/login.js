@@ -33,8 +33,7 @@ export const logInFaceBook = (tokenId) => dispatch => {
         phone: undefined,
     })
     .then(({ user }) => {
-        console.log(user)
-        if(user.username){
+        if(user){
             dispatch(authData('LOGIN_SUCCESS', user))
         }else{
             dispatch(authAction('LOGIN_FAILED'))

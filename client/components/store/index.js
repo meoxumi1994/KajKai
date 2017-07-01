@@ -22,7 +22,6 @@ class Store extends React.Component {
             return <div></div>
         if(!isusername)
             return <Redirect to='/register'/>
-        console.log(location.pathname.split('/')[2])
         const Middle = () => {
             switch (location.pathname.split('/')[2]) {
                 case undefined:

@@ -85,6 +85,12 @@ const myString = {
     SAVE: ['Lưu','Save'],
     CROPPIE_DESCRIPTION: ['Cuộn để phóng to và thu nhỏ','scroll to zoom in and zoom out'],
     CROPPIE_TITLE: ['Tải ảnh lên','Upload Photo'],
+
+    // post
+    RECEIVE: ['Nhận','Receive'],
+    LIKE: ['Thích','Like'],
+    REPLY: ['Trả lời','Reply'],
+    WRITE_COMMENT_OR_ORDER: ['bình luận hoặc Đặt hàng...','Write a comment or order...'],
 }
 
 const allString = {
