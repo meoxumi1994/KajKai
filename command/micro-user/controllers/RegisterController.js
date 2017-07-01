@@ -50,7 +50,7 @@ export const confirmEmailVerification = () => {
                     res.redirect(redirectUrl + '/login')
                 } else {
                     res.cookie('token', getUserToken(decoded._id));
-                    res.redirect(redirectUrl + '/profile')
+                    res.redirect(redirectUrl + '/user/' + decoded._id)
                 }
             })
         }
