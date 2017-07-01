@@ -1,15 +1,11 @@
 import redis from 'redis'
 import config from '../config/pubSubConfig'
-// import { uuidv4 } from 'uuid/v4'
-
-const uuidv4 = () => {
-    return Math.random();
-}
+import { getUUID } from '../utils/utils'
 
 export const getUser = (userId, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const id = uuidv4();
+    const id = getUUID();
     const publicData = {userId: userId, eventId: id};
     pub.publish('USER.GetUser', JSON.stringify(publicData));
     sub.subscribe('USER.GetUser' + id);
@@ -29,7 +25,7 @@ export const getUser = (userId, next) => {
 export const authoriseToken = (token, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const publishData = {token: token, eventId: uuidv4()};
+    const publishData = {token: token, eventId: getUUID()};
     pub.publish('USER.AuthorizeToken', JSON.stringify(publishData));
     sub.subcribe('USER.AuthorizeToken' + publishData.eventId);
     sub.on('message', (channel, message) => {

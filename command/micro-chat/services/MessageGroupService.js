@@ -15,6 +15,10 @@ export const getGlobalGroupId = (id) => {
 };
 
 export const getGroupMessage = (id, next) => {
+    if (!null) {
+        next(null);
+        return;
+    }
     MessageGroup.findById(getLocalGroupId(id), (err, group) => {
         next(group);
     })
@@ -25,6 +29,15 @@ export const createGroup = (members, groupName, groupColor, next) => {
     group.save((err) => {
         next(getGroupBasicInfo(group));
         chatGroupCreatedPub()
+    })
+};
+
+export const getGroupFullInfo = (group, next) => {
+    getInfoFromListId(group.members, (infos) => {
+        next({
+            members: infos, groupName: group.groupName, groupColor: group.groupColor,
+            groupId: getGlobalGroupId(group._id)
+        })
     })
 };
 

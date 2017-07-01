@@ -1,16 +1,12 @@
 import redis from 'redis'
 import config from '../config/pubSubConfig'
-import uuidv4 from 'uuid/v4'
-// import { getUUID } from '../utils/utils'
+import { getUUID } from '../utils/utils'
 
-// const uuidv4 = () => {
-//     return Math.random();
-// }
 
 export const addNewMessagePub = (mesInfo, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const id = uuidv4();
+    const id = getUUID();
     const publicData = {mesInfo: mesInfo, eventId: id};
     pub.publish('CHAT.MessageCreated', JSON.stringify(publicData));
     sub.subscribe('CHAT.MessageCreated' + id);
@@ -30,7 +26,7 @@ export const addNewMessagePub = (mesInfo, next) => {
 export const getUnreadMessagePub = (userId, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const id = uuidv4();
+    const id = getUUID();
     const publicData = {userId: userId, eventId: id};
     pub.publish('CHAT.GetUnreadChat', JSON.stringify(publicData));
     sub.subscribe('CHAT.GetUnreadChat' + id);
@@ -50,7 +46,7 @@ export const getUnreadMessagePub = (userId, next) => {
 export const resetChatCountPub = (userId, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const id = uuidv4();
+    const id = getUUID();
     const publicData = {userId: userId, eventId: id};
     pub.publish('CHAT.ResetUnreadCounter', JSON.stringify(publicData));
     sub.subscribe('CHAT.ResetUnreadCounter' + id);
@@ -70,7 +66,7 @@ export const resetChatCountPub = (userId, next) => {
 export const readChatPub = (userId, mesId, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const id = uuidv4();
+    const id = getUUID();
     const publicData = {userId: userId, mesId: mesId, eventId: id};
     pub.publish('CHAT.MessageReadUpdated', JSON.stringify(publicData));
     sub.subscribe('CHAT.MessageReadUpdated' + id);
@@ -90,7 +86,7 @@ export const readChatPub = (userId, mesId, next) => {
 export const addMemberPub = (mesId, members, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const id = uuidv4();
+    const id = getUUID();
     const publicData = {members: members, mesId: mesId, eventId: id};
     pub.publish('CHAT.GroupMemberAdded', JSON.stringify(publicData));
     sub.subscribe('CHAT.GroupMemberAdded' + id);
@@ -110,7 +106,7 @@ export const addMemberPub = (mesId, members, next) => {
 export const removeMemberPub = (mesId, memberId, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const id = uuidv4();
+    const id = getUUID();
     const publicData = {memberId: memberId, mesId: mesId, eventId: id};
     pub.publish('CHAT.GroupMemberAdded', JSON.stringify(publicData));
     sub.subscribe('CHAT.GroupMemberAdded' + id);
@@ -130,7 +126,7 @@ export const removeMemberPub = (mesId, memberId, next) => {
 export const updateUIPub = (mesId, data, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const id = uuidv4();
+    const id = getUUID();
     const publicData = {data: data, mesId: mesId, eventId: id};
     pub.publish('CHAT.GroupUIUpdated', JSON.stringify(publicData));
     sub.subscribe('CHAT.GroupUIUpdated' + id);
