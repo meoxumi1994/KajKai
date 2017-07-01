@@ -1,6 +1,8 @@
 import { User, Black } from '../models'
 
 export const createUser = (message) => {
+  console.log(message, JSON.stringify(message));
+  console.log(message);
   const { id, username, email, avatarUrl } = message.user
   const user = new User({ id })
 
