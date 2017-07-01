@@ -95,9 +95,9 @@ const myString = {
 
 const allString = {
     get: (language, name) => {
-        if(language === 'VIETNAMESE')
+        if(language === 'vi')
             return myString[name][0]
-        if(language == 'ENGLISH')
+        if(language == 'en')
             return myString[name][1]
         return null
     }
@@ -105,9 +105,9 @@ const allString = {
 
 export const get = (language, name) => {
     if(!myString[name]) return null;
-    if(language === 'VIETNAMESE')
+    if(language === 'vi')
         return myString[name][0]
-    if(language == 'ENGLISH')
+    if(language == 'en')
         return myString[name][1]
     return null
 }

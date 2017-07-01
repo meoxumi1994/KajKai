@@ -2,6 +2,8 @@ import React from 'react'
 
 import Enlarge from '~/containers/entity/thumnail/Enlarge'
 
+import DisplayImage from '~/components/entity/thumnail/DisplayImage'
+
 class Magic extends React.Component {
     constructor(props){
         super(props)
@@ -14,17 +16,27 @@ class Magic extends React.Component {
         const { src, openModal, more, style } = this.props
         return(
             <div style={{ ...style, float: 'left'}} >
-                <div className="btn"
+                <DisplayImage
+                    src={src}
+                    width={200}
+                    height={300}
+                    // style={{
+                    //     opacity: (more || this.state.hover)?0.6:1,
+                    // }}
+                />
+                {/* <div className="btn"
                     onMouseOver={() => this.setState({ hover: true })}
                     onMouseLeave={() => this.setState({ hover: false })}
                     style={{ ...style, padding: 0 }}
                     onClick={() => openModal() }>
-                    <img src={src}
-                        style={{
-                        width: '100%',
-                        height: '100%',
-                        opacity: (more || this.state.hover)?0.6:1,
-                        }}/>
+                    <DisplayImage
+                        src={src}
+                        width={style.width}
+                        height={style.height}
+                        // style={{
+                        //     opacity: (more || this.state.hover)?0.6:1,
+                        // }}
+                    />
                     {more &&
                         <span style={{
                             marginTop: 63,
@@ -36,7 +48,7 @@ class Magic extends React.Component {
                             {"+"+ more}
                         </span>
                     }
-                </div>
+                </div> */}
             </div>
         )
     }

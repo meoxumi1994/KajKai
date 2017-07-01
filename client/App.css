@@ -12,9 +12,9 @@ body {
 .panel {
     border-color: #CCCCCC;
 }
-a {
+/*a {
     color: #999999;
-}
+}*/
 div.root {
     height: 100%;
 }

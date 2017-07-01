@@ -13,6 +13,9 @@ import LikeShareComment from '~/containers/entity/row/LikeShareComment'
 import Textarea from 'react-textarea-autosize'
 
 import MinorPost from '~/containers/entity/MinorPost'
+import DisplayImage from '~/components/entity/thumnail/DisplayImage'
+
+import GroupImage from '~/components/entity/thumnail/GroupImage'
 
 class Comp extends React.Component {
     constructor(props){
@@ -161,13 +164,16 @@ const Components = () => (
 
 const newComp = () => (
     <div>
-        <div  style={{
-                height: 40,
-                width: 40,
-                overflow: 'hidden'}}>
-            <img src="/images/flower004.jpg"  style={{ height: 40 , marginLeft: -20 }}/>
-        </div>
-
+        {/* <DisplayImage width={200} height={200} src="/images/garden.png"/>
+        <DisplayImage width={200} height={200} src="/images/flower005.jpg"/> */}
+        <GroupImage
+            EDIT='Edit'
+            onEdit={() => console.log('onEdit')}
+            images={['/images/garden.png','/images/flower005.jpg','/images/flower001.jpg']}
+            canEdit={false}
+            width={500}
+            height={500}
+        />
         {/* <span ref={me => {
             setTimeout(() => {
                 console.log(me.getBoundingClientRect().width)
@@ -186,4 +192,4 @@ Giải thưởng: 3 triệu tiền mặt, 6 điện thoại Pháp Wiko và 6 tri
     </div>
 )
 
-export default Components
+export default newComp

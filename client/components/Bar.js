@@ -78,23 +78,25 @@ const BarScreen = (props) => {
     const { SEARCH_PRODUCT, SEARCH_LOCATION, } = props
     return (
         <div className="container-fluid"
-            style={{ position: 'fixed', zIndex: 1, left: 0, top: 0, padding: 0, backgroundColor: "white" }}>
-            <div className="row" style={{ marginTop: 8, marginBottom: 8 }}>
-                <div className="col-xs-1 col-md-1 col-md-offset-1">
-                    <div style={{minWidth: 100 }}>
-                        <div className="btn btn-transparent btn-xs">
+            style={{ position: 'fixed', width: '100%',
+            backgroundColor: 'white',
+            zIndex: 1, left: 0, top: 0, padding: 0, }}>
+            <div className="row" style={{ margin: 'auto', width: 1100, marginTop: 8, marginBottom: 8 }}>
+                <div className="col-xs-1" style={{ padding: 0}}>
+                    <div>
+                        <div className="btn btn-transparent btn-xs" style={{ padding: 0 }}>
                             <Link to="/">
                                 <img src="/images/kajkai.svg" alt="Cinque Terre" width="27" height="27"/>
                             </Link>
                         </div>
-                        <div className="btn btn-transparent btn-xs">
+                        <div className="btn btn-transparent btn-xs" style={{ padding: 0, marginLeft: 10 }}>
                             <Link to="/map">
                                 <img src="/images/map.svg" alt="Cinque Terre" width="27" height="27"/>
                             </Link>
                         </div>
                     </div>
                 </div>
-                <div className="col-xs-5 col-md-4">
+                <div className="col-xs-4"  style={{ padding: 0}}>
                     <div className="input-group">
                       <div className="input-group-btn">
                         <button type="button" className="btn btn-default btn-sm dropdown-toggle"
@@ -117,8 +119,8 @@ const BarScreen = (props) => {
                       </span>
                     </div>
                 </div>
-                <div className="col-xs-2 col-md-2">
-                    <div className="input-group" style={{ minWidth: 200 }}>
+                <div className="col-xs-2"  style={{ padding: 0}}>
+                    <div className="input-group" style={{ marginLeft: 10 }}>
                         <input type="text" className="form-control input-sm" placeholder={SEARCH_LOCATION} />
                         <span className="input-group-btn">
                             <button className="btn btn-default btn-sm" type="button" >
@@ -127,8 +129,10 @@ const BarScreen = (props) => {
                         </span>
                     </div>
                 </div>
-                <div className="col-xs-3 col-md-3">
-                    <HandlerUser {...props}/>
+                <div className="col-xs-3"  style={{ padding: 0}}>
+                    <div style={{ position: 'absolute', right: 0}}>
+                        <HandlerUser {...props}/>
+                    </div>
                 </div>
             </div>
             <hr style={{ margin: 0 }}></hr>
