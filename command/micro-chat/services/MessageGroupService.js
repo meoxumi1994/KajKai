@@ -15,7 +15,7 @@ export const getGlobalGroupId = (id) => {
 };
 
 export const getGroupMessage = (id, next) => {
-    if (!null) {
+    if (!id) {
         next(null);
         return;
     }
