@@ -28,6 +28,10 @@ const init = (server) => {
         socket.on('disconnect', () => {
             console.log('a user disconnected')
         });
+
+        sio.emit({type:'client/a', data: 'heeloclient'});
+        sio.emit({type:'global/a', data: 'helloglobal'});
+
         // get user from token
         const token =  getTokenSocketCookie(socket.handshake.headers.cookie);
         if (token) {
