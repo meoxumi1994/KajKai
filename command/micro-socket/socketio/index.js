@@ -35,7 +35,7 @@ const init = (server) => {
             authoriseToken(token, (user) => {
                 if (user) {
                     console.log('user ' + user);
-                    socket.join(user.userid);
+                    socket.join(user.id);
                     sockListen(user, socket, sio);
                 } else sockListen(null, socket, sio)
             })
