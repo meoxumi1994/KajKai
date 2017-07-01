@@ -9,8 +9,11 @@ export const createUser = (message) => {
   if (username) user.username = username
   if (email) user.email = email
   if (avatarUrl) user.avatarUrl = avatarUrl
+  console.log('user', user);
 
-  user.save()
+  user.save((err) => {
+    console.log(err);
+  })
 }
 
 export const updateUser = (message) => {
