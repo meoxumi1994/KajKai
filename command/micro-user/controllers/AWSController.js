@@ -5,5 +5,5 @@ export const getS3PutObjectSignedUrl = () => (req, res) => {
     const fileType = req.body.filetype;
 	const fileName = req.body.filename;
   	const data = generateS3PutObjectSignedUrl(id, fileName, fileType);
-  	res.send(data);
+  	res.json(data);
 }

@@ -6,13 +6,13 @@ export const getStoreHandler = () => (req, res) => {
 
     getStore(id, (store) => {
       if (store) {
-        res.send(store)
+        res.json(store)
       } else {
-        res.send({status: 'failed'})
+        res.json({status: 'failed'})
       }
     })
     
   } else {
-    res.send({status: 'failed'})
+    res.json({status: 'failed'})
   }
 }

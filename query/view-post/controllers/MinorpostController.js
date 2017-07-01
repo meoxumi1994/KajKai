@@ -6,14 +6,14 @@ export const getMinorpostsHandler = () => (req, res) => {
     const { offset } = req.query
     getMinorposts(storeId, offset ? offset : Date.now(), (minorposts) => {
       if (minorposts) {
-        res.send(minorposts)
+        res.json(minorposts)
       } else {
-        res.send({status: 'failed'})
+        res.json({status: 'failed'})
       }
     })
 
   } else {
-    res.send({status: 'failed'})
+    res.json({status: 'failed'})
   }
 }
 
@@ -22,13 +22,13 @@ export const getMinorpostContentHandler = () => (req, res) => {
     const { minorpostid: id } = req.params
     getMinorpostContent(id, (content) => {
       if (content) {
-        res.send(content)
+        res.json(content)
       } else {
-        res.send({status: 'failed'})
+        res.json({status: 'failed'})
       }
     })
 
   } else {
-    res.send({status: 'failed'})
+    res.json({status: 'failed'})
   }
 }

@@ -3,7 +3,7 @@ import { User, Address } from '../models'
 export const queryHandler = () => (req, res) => {
   const id = '1234'
   User.findOne({ id }, (err, user) => {
-    res.send({
+    res.json({
       err, user
     })
   })
@@ -14,7 +14,7 @@ export const insertHandler = () => (req, res) => {
 
   user.save((err, newUser, num) => {
     console.log(err, newUser, num)
-    res.send({
+    res.json({
       err, newUser, num
     })
   })
@@ -36,7 +36,7 @@ export const updateHandler = () => (req, res) => {
   //   address.latitude = 321
   //
   //   address.save((err, newAddress) => {
-  //     res.send({
+  //     res.json({
   //       err, newAddress
   //     })
   //   })
@@ -51,7 +51,7 @@ export const updateHandler = () => (req, res) => {
   //   user.username = 'aaaxxx'
   //   user.save((err, newUser) => {
   //     console.log(err, newUser, num)
-  //     res.send({
+  //     res.json({
   //       err, newUser, num, a, b, c, d
   //     })
   //   })
@@ -67,7 +67,7 @@ export const updateHandler = () => (req, res) => {
   User.findOneAndUpdate({
     id: 'ey89dheify927f02buv3u'
   }, user, (a, b, c, d, e) => {
-    res.send({
+    res.json({
       a, b, c, d, e
     })
   })

@@ -7,13 +7,13 @@ export const getUserChatsHandler = () => (req, res) => {
 
     getUserChats(userId, offset, length, (chats) => {
       if (chats) {
-        res.send(chats)
+        res.json(chats)
       } else {
-        res.send({status: 'failed'})
+        res.json({status: 'failed'})
       }
     })
 
   } else {
-    res.send({status: 'failed'})
+    res.json({status: 'failed'})
   }
 }

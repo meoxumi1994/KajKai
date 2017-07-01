@@ -6,13 +6,13 @@ export const getRepliesHandler = () => (req, res) => {
     const { offset } = req.query
     getReplies(id, offset ? offset : Date.now(), (replies) => {
       if (replies) {
-        res.send(replies)
+        res.json(replies)
       } else {
-        res.send({status: 'failed'})
+        res.json({status: 'failed'})
       }
     })
 
   } else {
-    res.send({status: 'failed'})
+    res.json({status: 'failed'})
   }
 }

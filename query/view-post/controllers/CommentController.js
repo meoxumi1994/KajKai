@@ -6,13 +6,13 @@ export const getCommentsHandler = () => (req, res) => {
     const { offset } = req.query
     getComments(postType, id, offset ? offset : Date.now(), (comments) => {
       if (comments) {
-        res.send(comments)
+        res.json(comments)
       } else {
-        res.send({status: 'failed'})
+        res.json({status: 'failed'})
       }
     })
 
   } else {
-    res.send({status: 'failed'})
+    res.json({status: 'failed'})
   }
 }

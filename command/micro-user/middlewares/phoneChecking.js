@@ -6,7 +6,7 @@ const phoneCheck = () => {
       if (phone && phoneRegrex.test(phone)) {
         next()
       } else {
-        res.send({error: 'wrong phone format'})
+        res.json({error: 'wrong phone format'})
       }
   	}
 }
