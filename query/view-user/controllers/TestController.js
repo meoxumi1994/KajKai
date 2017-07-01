@@ -1,5 +1,14 @@
 import { User, Address } from '../models'
 
+export const queryHandler = () => (req, res) => {
+  const id = '4242324'
+  User.findOne({ id }, (err, user) => {
+    res.send({
+      err, user
+    })
+  })
+}
+
 export const insertHandler = () => (req, res) => {
   const user = new User(req.body)
 

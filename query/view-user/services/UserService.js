@@ -4,7 +4,13 @@ import jwt from 'jsonwebtoken'
 export const getUser = (id, next) => {
   User.findOne({ id }, function(err, user) {
       if (err || !user) {
+        if(err) {
           next(null)
+        } else {
+          next({
+            id
+          })
+        }
       } else {
           next({
             id: user.id,
@@ -27,7 +33,13 @@ export const getUser = (id, next) => {
 export const getUserPrivacy = (id, next) => {
   User.findOne({ id }, function(err, user) {
       if (err || !user) {
+        if(err) {
           next(null)
+        } else {
+          next({
+            id
+          })
+        }
       } else {
           next({
             id: user.id,

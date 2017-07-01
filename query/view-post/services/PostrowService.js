@@ -3,7 +3,14 @@ import { Sellpost } from '../models'
 export const getPostrows = (sellpostId, offset, next) => {
   Sellpost.find({ sellpostId }, (err, sellpost) => {
     if (err || !sellpost) {
-      next(null)
+      if(err) {
+        next(null)
+      } else {
+        next({
+          offset
+          postrows: []
+        })
+      }
     } else {
       const { postrows } = sellpost
       next(getClientFormatPostrows(postrows, offset))
@@ -14,6 +21,7 @@ export const getPostrows = (sellpostId, offset, next) => {
 export const getClientFormatPostrows = (postrows, offset) => {
   if (!postrows) {
     return {
+      offset
       postrows: []
     }
   }

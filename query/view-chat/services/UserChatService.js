@@ -6,7 +6,16 @@ export const getUserChats = (userId, offset, length, next) => {
   UserChat.findOne({ userId }, (err, userChat) => {
     console.log(err, userChat);
     if (err || !userChat) {
-      next(null)
+      if (err) {
+        next(null)
+      } else {
+        next({
+          lazyLoad: {
+            offset
+          },
+          data: []]
+        })
+      }
     } else {
       const { chats } = userChat
       const mChats = []

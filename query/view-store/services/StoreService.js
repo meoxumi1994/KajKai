@@ -4,7 +4,13 @@ import jwt from 'jsonwebtoken'
 export const getStore = (id, next) => {
     Store.findOne({ id },  (err, store) => {
         if (err || !store) {
+          if(err) {
             next(null)
+          } else {
+            next({
+              id
+            })
+          }
         } else {
             next({
               id: store.id,

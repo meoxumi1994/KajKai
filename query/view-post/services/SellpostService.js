@@ -6,7 +6,13 @@ import jwt from 'jsonwebtoken'
 export const getSellpost = (id, next) => {
   Sellpost.findOne({ id }, (err, sellpost) => {
     if (err || !sellpost) {
-      next(null)
+      if(err) {
+        next(null)
+      } else {
+        next({
+          storeid: storeId
+        })
+      }
     } else {
       next(getClientFormatSellpost(sellpost, Date.now()))
     }
@@ -16,7 +22,15 @@ export const getSellpost = (id, next) => {
 export const getSellposts = (storeId, offset, next) => {
   Sellpost.find({ storeId }, (err, sellposts) => {
     if (err || !sellposts) {
-      next(null)
+      if(err) {
+        next(null)
+      } else {
+        next({
+          offset,
+          storeid: storeId,
+          sellposts: []
+        })
+      }
     } else {
       const mSellposts = []
       let currentNumberOfSellpost = 0, mOffset = -1

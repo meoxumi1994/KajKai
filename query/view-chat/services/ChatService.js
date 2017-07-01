@@ -4,7 +4,17 @@ export const getChatMessages = (id, offset, length, next) => {
 
   Chat.findOne({ id }, (err, chat) => {
     if (err || !chat) {
-      next(null)
+      if (err) {
+        next(null)
+      } else {
+        next({
+          lazyLoad: {
+            offset
+          },
+          mesId: id,
+          messages: []
+        })
+      }
     } else {
       const { messages } = chat
       const mMessages = []
