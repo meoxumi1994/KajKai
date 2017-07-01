@@ -4,7 +4,7 @@ import { getClientFormatReplies } from './ReplyService'
 export const getComments = (postType, id, offset, next) => {
   if (postType == 'sellpost') {
     Sellpost.findOne({ id }, (err, sellpost) => {
-      if (err) {
+      if (err || !sellpost) {
         next(null)
       } else {
         const { comments } = sellpost
@@ -13,7 +13,7 @@ export const getComments = (postType, id, offset, next) => {
     })
   } else {
     Minorpost.findOne({ id }, (err, minorpost) => {
-      if (err) {
+      if (err || !minorpost) {
         next(null)
       } else {
         const { comments } = minorpost

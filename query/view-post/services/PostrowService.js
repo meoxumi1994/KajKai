@@ -2,7 +2,7 @@ import { Sellpost } from '../models'
 
 export const getPostrows = (sellpostId, offset, next) => {
   Sellpost.find({ sellpostId }, (err, sellpost) => {
-    if (err) {
+    if (err || !sellpost) {
       next(null)
     } else {
       const { postrows } = sellpost

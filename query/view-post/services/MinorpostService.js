@@ -3,7 +3,7 @@ import { getClientFormatMinorpostComments } from './CommentService'
 
 export const getMinorposts = (storeId, offset, next) => {
   Minorpost.find({ storeId }, (err, minorposts) => {
-    if (err) {
+    if (err || !minorposts) {
       next(null)
     } else {
       const mMinorposts = []

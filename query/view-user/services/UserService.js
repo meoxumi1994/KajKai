@@ -1,8 +1,9 @@
 import { User, Address } from '../models'
+import jwt from 'jsonwebtoken'
 
 export const getUser = (id, next) => {
   User.findOne({ id }, function(err, user) {
-      if (err) {
+      if (err || !user) {
           next(null)
       } else {
           next({
@@ -25,7 +26,7 @@ export const getUser = (id, next) => {
 
 export const getUserPrivacy = (id, next) => {
   User.findOne({ id }, function(err, user) {
-      if (err) {
+      if (err || !user) {
           next(null)
       } else {
           next({

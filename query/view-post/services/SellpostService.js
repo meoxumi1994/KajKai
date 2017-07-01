@@ -1,10 +1,11 @@
 import { Sellpost } from '../models'
 import { getClientFormatPostrows } from './PostrowService'
 import { getClientFormatSellpostComments } from './CommentService'
+import jwt from 'jsonwebtoken'
 
 export const getSellpost = (id, next) => {
   Sellpost.findOne({ id }, (err, sellpost) => {
-    if (err) {
+    if (err || !sellpost) {
       next(null)
     } else {
       next(getClientFormatSellpost(sellpost, Date.now()))
@@ -14,7 +15,7 @@ export const getSellpost = (id, next) => {
 
 export const getSellposts = (storeId, offset, next) => {
   Sellpost.find({ storeId }, (err, sellposts) => {
-    if (err) {
+    if (err || !sellposts) {
       next(null)
     } else {
       const mSellposts = []

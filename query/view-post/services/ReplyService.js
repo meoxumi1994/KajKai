@@ -2,7 +2,7 @@ import { Comment } from '../models'
 
 export const getReplies = (id, offset, next) => {
   Comment.findOne({ id }, (err, comment) => {
-    if (err) {
+    if (err || !comment) {
       next(null)
     } else {
       const { replies } = comment

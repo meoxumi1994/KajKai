@@ -1,8 +1,9 @@
 import { Store } from '../models'
+import jwt from 'jsonwebtoken'
 
 export const getStore = (id, next) => {
     Store.findOne({ id },  (err, store) => {
-        if (err) {
+        if (err || !store) {
             next(null)
         } else {
             next({

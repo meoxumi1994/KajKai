@@ -1,9 +1,11 @@
 import { UserChat } from '../models'
+import jwt from 'jsonwebtoken'
 
 export const getUserChats = (userId, offset, length, next) => {
 
   UserChat.findOne({ userId }, (err, userChat) => {
-    if (err) {
+    console.log(err, userChat);
+    if (err || !userChat) {
       next(null)
     } else {
       const { chats } = userChat
@@ -48,8 +50,10 @@ export const getUserChats = (userId, offset, length, next) => {
 export const verifyToken = (token) => {
     try {
         const decoded = jwt.verify(token, 'secret');
+        console.log('xxx = ', decoded);
         return decoded;
     } catch(err) {
+      console.log('err', err);
         return null;
     }
 }

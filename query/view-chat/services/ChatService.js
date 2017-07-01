@@ -3,7 +3,7 @@ import { Chat } from '../models'
 export const getChatMessages = (id, offset, length, next) => {
 
   Chat.findOne({ id }, (err, chat) => {
-    if (err) {
+    if (err || !chat) {
       next(null)
     } else {
       const { messages } = chat
