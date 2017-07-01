@@ -23,19 +23,19 @@ export const addNewMessage = (mesInfo, next) => {
         if (!group) {
             next(null)
         } else {
-            var arr = [];
-            for (var i = 0; i < group.members.length; ++i) {
+            let arr = [];
+            for (let i = 0; i < group.members.length; ++i) {
                 const curMessage = new Message({...message, owner: group.members[i], read: group.members[i] === mesInfo.id});
                 arr.push(curMessage);
             }
-            var arr = [];
-            for (var i = 0; i < group.members.length; ++i) {
+            let arr = [];
+            for (let i = 0; i < group.members.length; ++i) {
                 if (group.members[i] !== mesInfo.id) {
                     arr.push(group.members[i]);
                 }
             }
             updateCounterMultiple(arr, 1, () => {
-                Message.insertMany(curMessage, (err, docs) => {
+                Message.insertMany(arr, (err, docs) => {
                     next(message, group.members);
                 });
             });
