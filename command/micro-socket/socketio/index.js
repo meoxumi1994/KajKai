@@ -8,6 +8,7 @@ const sockListen = (user, socket, io) => {
         let handler = allEvents[e];
         let method = require('../controllers/' + handler.controller)[handler.method];
         socket.on(e, (action) => {
+            console.log('action' + action);
             if (user) {
                 if (action.data) {
                     action.data = {...action.data, user: user, userID: user.id}
@@ -30,12 +31,13 @@ const init = (server) => {
         // get user from token
         const token =  getTokenSocketCookie(socket.handshake.headers.cookie);
         if (token) {
+            console.log('token socket' + token);
             authoriseToken(token, (user) => {
                 if (user) {
-                    sockListen(user, socket, sio);
+                    console.log('user ' + user);
                     socket.join(user.userid);
-                }
-                else sockListen(null, socket, sio)
+                    sockListen(user, socket, sio);
+                } else sockListen(null, socket, sio)
             })
         } else {
             sockListen(null, socket, sio)
