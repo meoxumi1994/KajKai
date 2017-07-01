@@ -11,6 +11,17 @@ const singleChat = (state = {
                 [action.data.mesId]: action.data.messages
               }
             }
+
+        case 'NEW_CHAT':
+            return {
+              ...state,
+              messagesKey: ['0'],
+              messagesMap: {
+                mesId: '0',
+                messages: []
+              }
+            }
+
         default:
           return state
     }

@@ -2,13 +2,13 @@ import { connect } from 'react-redux'
 import ChatTop from '~/components/chat/top'
 
 const mapStateToProps = (state, ownProps) => {
-    const { chatListMap } = state.inst.chat.left
-    const { currentChat } = state.inst.chat.center.currentChat
+    const { chatListMap, currentChat } = state.inst.chat.left
     const { user } = state
 
     return {
       chatListMap,
-      currentChat,
+      currentChat: currentChat.mesId,
+      isNewMessage: currentChat.isNewMessage
     }
 }
 

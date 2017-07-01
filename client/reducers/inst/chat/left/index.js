@@ -2,8 +2,21 @@ const left = (state = {
   chatListKey: [],
   chatListMap: {},
   unreadChat: {},
+  currentChat: {
+    mesId: '',
+    isNewMessage: false
+  }
 }, action) => {
     switch (action.type) {
+
+      case 'SET_CURRENT_CHAT':
+          return {
+            ...state,
+            currentChat: {
+                mesId: action.data.mesId,
+                isNewMessage: action.data.isNewMessage == undefined? state.currentChat.isNewMessage: action.data.isNewMessage
+            }
+          }
 
       case 'INIT_CHAT_LIST':
           if (action.data.length <= 0) {
@@ -36,6 +49,7 @@ const left = (state = {
               }
             }
           )
+
           return {
             ...state,
             chatListKey: tempKey,
@@ -61,34 +75,29 @@ const left = (state = {
           unreadChat: action.data
         }
 
-      case 'ADD_CHAT':
-        let tempK = []
-        tempK = state.chatListKey
-        tempK.push(action.data.mesId)
-
-        let tempM = state.chatListMap
-
-        let tempUserKey = []
-        let tempUserMap
-        action.data.users.map(
-            user => {
-              tempUserKey.push(user.id)
-              tempUserMap[user.id] = user
+      case 'NEW_CHAT':
+        if (state.chatListKey.indexOf('0') != -1) {
+            return {
+              ...state
             }
-        )
-
-        tempM[action.data.mesId] = {
-          mesId: action.data.mesId,
-          lastMessage: action.data.lastMessage,
-          // displayLabel: tempDisplayLabel.trim().substring(0, tempDisplayLabel.length - 2),
-          usersKey: tempUserKey,
-          usersMap: tempUserMap
         }
-        
+
+        var {chatListKey: tempKey} = state
+        tempKey.unshift('0')
+
+        var {chatListMap: tempMap} = state
+        tempMap['0'] = {
+            displayLabel: 'Tin nhắn mới',
+            lastMessage: undefined,
+            mesId: '0',
+            usersKey: [],
+            usersMap: {}
+        }
+
         return {
             ...state,
-            chatListKey: tempK,
-            chatListMap: tempM
+            chatListKey: tempKey,
+            chatListMap: tempMap,
         }
     }
 }

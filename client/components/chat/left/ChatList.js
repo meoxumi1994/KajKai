@@ -7,12 +7,8 @@ class ChatList extends React.Component {
         super(props)
     }
 
-    componentDidMount() {
-        this.props.getChatList()
-    }
-
     render(){
-        const { chatListMap, chatListKey, user, currentChat, unreadChat, themes, multiChat } = this.props
+        const { chatListMap, chatListKey, currentChat, unreadChat, themes } = this.props
         const { createNewChat, loadChat } = this.props
         return(
           <div style={{textAlign: 'left', overflowY: 'scroll', height: 625}}>

@@ -7,6 +7,9 @@ const MessageList = ({ messagesMap, user, mesId, usersMap, styles }) => {
     return (
       <div style={styles.mainDiv}>
         {
+          messagesMap[mesId] == undefined?
+          <div></div>
+          :
           messagesMap[mesId].map(
             mes => {
               let showAvatar = previousId==mes.id?false:true
@@ -16,8 +19,7 @@ const MessageList = ({ messagesMap, user, mesId, usersMap, styles }) => {
                       {...mes}
                       user={mes.id == user.id? user: usersMap[mes.id]}
                       styles={mes.id === user.id? styles.rightMsg: styles.leftMsg}
-                      showAvatar={showAvatar}
-              />
+                      showAvatar={showAvatar}/>
               )
             }
           )

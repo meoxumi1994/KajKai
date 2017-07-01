@@ -9,7 +9,7 @@ const config = {
     // getServerDomain: () => ('https://dyrzutxpmw2we.cloudfront.net'),
     getClientDomain: () => ('http://localhost' + ':' + config.CLIENT_PORT),
     FACEBOOK_API_URL: 'https://graph.facebook.com/me?fields=id,name,picture.type(large)&access_token=',
-    GOOGLE_API_URL: 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='
+    GOOGLE_API_URL: 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=',
 };
 
 export default config

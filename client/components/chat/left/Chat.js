@@ -13,6 +13,9 @@ class Chat extends React.Component {
           <div className="row">
               <div className="col col-xs-2" style={styles.avatarDiv}>
                   {
+                    lastMessage == undefined?
+                    <img src='./images/avatardefault.png' style={styles.avatarImg}/>
+                    :
                     usersKey.length == 1?
                     <img src={usersMap[usersKey[0]].avatarUrl} key={usersKey[0]} style={styles.avatarImg}/>
                     :
@@ -23,6 +26,7 @@ class Chat extends React.Component {
               <div className="col col-xs-6" style={styles.messageDiv}>
                     <div style={{color: myThemes.color}}><b>{displayLabel}</b></div>
                     {
+                      lastMessage == undefined? undefined:
                       <div style={{marginTop: 5}}>
                         <small className="text-muted">
                           <div style={{color: myThemes.color}}>
@@ -35,11 +39,14 @@ class Chat extends React.Component {
                     }
               </div>
 
-              <div className="col col-xs-3" style={styles.timeDiv}>
-                  <small className="text-muted" style={{color: myThemes.color}}>
-                    {getTime(lastMessage.time)}
-                  </small>
-              </div>
+              {
+                lastMessage == undefined? undefined:
+                <div className="col col-xs-3" style={styles.timeDiv}>
+                    <small className="text-muted" style={{color: myThemes.color}}>
+                      {getTime(lastMessage.time)}
+                    </small>
+                </div>
+              }
           </div>
         )
     }
