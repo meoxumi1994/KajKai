@@ -39,7 +39,7 @@ export const addNewMessage = (mesInfo, next) => {
                     next(message, group.members);
                 });
             });
-            messageCreatedPub(message, group.members[i])
+            messageCreatedPub(message, group.members)
         }
     })
 };
