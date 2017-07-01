@@ -28,13 +28,13 @@ export const addNewMessage = (mesInfo, next) => {
                 const curMessage = new Message({...message, owner: group.members[i], read: group.members[i] === mesInfo.id});
                 arr.push(curMessage);
             }
-            let arr = [];
+            let userIds = [];
             for (let i = 0; i < group.members.length; ++i) {
                 if (group.members[i] !== mesInfo.id) {
-                    arr.push(group.members[i]);
+                    userIds.push(group.members[i]);
                 }
             }
-            updateCounterMultiple(arr, 1, () => {
+            updateCounterMultiple(userIds, 1, () => {
                 Message.insertMany(arr, (err, docs) => {
                     next(message, group.members);
                 });
