@@ -31,7 +31,10 @@ const init = (server) => {
         const token =  getTokenSocketCookie(socket.handshake.headers.cookie);
         if (token) {
             authoriseToken(token, (user) => {
-                if (user) sockListen(user, socket, sio);
+                if (user) {
+                    sockListen(user, socket, sio);
+                    socket.join(user.userid);
+                }
                 else sockListen(null, socket, sio)
             })
         } else {
