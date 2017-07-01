@@ -28,12 +28,11 @@ const init = (server) => {
         socket.on('disconnect', () => {
             console.log('a user disconnected')
         });
-
-        sio.emit({type:'client/a', data: 'heeloclient'});
-        sio.emit({type:'global/a', data: 'helloglobal'});
-
         // get user from token
         const token =  getTokenSocketCookie(socket.handshake.headers.cookie);
+
+        console.log('fuck cookie' + socket.handshake.headers.cookie);
+        console.log('fuck token');
         if (token) {
             console.log('token socket' + token);
             authoriseToken(token, (user) => {

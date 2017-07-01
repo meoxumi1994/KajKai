@@ -1,17 +1,7 @@
 import { addNewMessagePub, getUnreadMessagePub, resetChatCountPub, readChatPub, addMemberPub, removeMemberPub, updateUIPub } from './ChatSocketPubController'
 
-
-// io.to(data.mesId).emit('action', {type:'client/RECEIVE_MESSAGE', data: {
-//     mesId: data.mesId,
-//     time: data.time,
-//     message: data.message,
-//     person: myId
-// }})
-
 export const addNewMessageCon = (action, sio, io) => {
     console.log('action ' + JSON.stringify(action));
-    sio.emit('action', {type:'client/a', data: 'heeloclient'});
-    sio.emit('action', {type:'global/a', data: 'helloglobal'});
     addNewMessagePub(action.data, (mes, emitList) => {
         console.log('data ' + JSON.stringify({mes: mes, list: emitList}));
         for (let i = 0; i < emitList.length; ++i) {
