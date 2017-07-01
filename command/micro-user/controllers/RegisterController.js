@@ -33,6 +33,7 @@ export const registerNewUser = () => {
 export const confirmEmailVerification = () => {
     return (req, res) => {
         const token = req.params.token;
+        console.log('email token: ', token);
         const redirectUrl = config.getClientDomain();
         if (!token) {
             res.redirect(redirectUrl + '/login');
