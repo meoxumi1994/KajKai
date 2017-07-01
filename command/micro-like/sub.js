@@ -19,7 +19,7 @@ for(let mChannel in allChannels) {
             const eventId = eventMessage.eventId
 
             method(eventMessage, (res) => {
-                pub.publish(channel + '.' + eventId, JSON.stringify(res))
+                pub.publish(channel + eventId, JSON.stringify(res))
             })
         }
     })

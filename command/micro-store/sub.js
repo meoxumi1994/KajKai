@@ -15,11 +15,11 @@ for(let mChannel in allChannels) {
     sub.on('message', (channel, message) => {
         if(channel === mChannel) {
             console.log(mChannel, message);
-            const eventMessage = JSON.parse(message)
-            const eventId = eventMessage.eventId
+            const eventMessage = JSON.parse(message);
+            const eventId = eventMessage.eventId;
 
             method(eventMessage, (res) => {
-                pub.publish(channel + '.' + eventId, JSON.stringify(res))
+                pub.publish(channel + eventId, JSON.stringify(res))
             })
         }
     })
