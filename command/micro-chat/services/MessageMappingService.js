@@ -13,8 +13,8 @@ export const getMesIdFromTwoId = (id1, id2, next) => {
             next(mapping.mesId)
         } else {
             createGroup([id1, id2], null, null, (group) => {
-                addNewMapping(id1, id2, getGroupBasicInfo(group).groupId, (messageMapping) => {
-                    next(getGroupBasicInfo(group).groupId)
+                addNewMapping(id1, id2, group.groupId, (messageMapping) => {
+                    next(group.groupId);
                 })
             })
         }
