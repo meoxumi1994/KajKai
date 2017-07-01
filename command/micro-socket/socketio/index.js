@@ -30,7 +30,8 @@ const init = (server) => {
         });
         // get user from token
         const token =  getTokenSocketCookie(socket.handshake.headers.cookie);
-
+        console.log('fuck socket' + socket);
+        console.log('fuck handshake ' + socket.handshake);
         console.log('fuck cookie' + socket.handshake.headers.cookie);
         console.log('fuck token');
         if (token) {
