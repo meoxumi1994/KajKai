@@ -3,7 +3,7 @@ import { flet } from '../../support'
 
 export const register = (username, email, password) => dispatch => {
     dispatch(authAction('REGISTER_ING'))
-    flet('/register',{
+    flet('/user',{
         username : username,
         email: email,
         password: password,

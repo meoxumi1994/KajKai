@@ -4,7 +4,7 @@ console.log('config.ISTEST', config.ISTEST)
 
 export const flet = (url, body) => {
     let myurl = config.getDomain() + url
-    console.log(myurl, body)
+    console.log('POST',myurl, body)
     return fetch( myurl , {
         headers: {
             "Content-Type": "application/json",
@@ -14,11 +14,11 @@ export const flet = (url, body) => {
         body: JSON.stringify(body)
     }).then((response) => response.json())
     .then((res) => {
-        console.log(myurl, res)
+        console.log('POST',myurl, res)
         return res
     })
     .catch((error)=> {
-        console.error(myurl,error);
+        console.error('POST',myurl,error);
     })
 }
 
@@ -33,23 +33,23 @@ export const flem = (url, body) => {
         }
       }
     }
-    console.log(myurl)
+    console.log('GET',myurl)
     return fetch( myurl , {
         method: 'GET',
         credentials: 'include',
     }).then((response) => response.json())
     .then((res) => {
-        console.log(myurl, res)
+        console.log('GET',myurl, res)
         return res
     })
     .catch((error)=> {
-        console.error(myurl,error);
+        console.error('GET',myurl,error);
     })
 }
 
 export const fleu = (url, body) => {
     let myurl = config.getDomain() + url
-    console.log(myurl, body)
+    console.log('PUT',myurl, body)
     return fetch( myurl , {
         headers: {
             "Content-Type": "application/json",
@@ -59,10 +59,10 @@ export const fleu = (url, body) => {
         body: JSON.stringify(body)
     }).then((response) => response.json())
     .then((res) => {
-        console.log(myurl, res)
+        console.log('PUT',myurl, res)
         return res
     })
     .catch((error)=> {
-        console.error(myurl,error);
+        console.error('PUT',myurl,error);
     })
 }

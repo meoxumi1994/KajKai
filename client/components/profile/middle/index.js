@@ -96,11 +96,11 @@ class Middle extends React.Component {
                     style={{ minWidth: 540, height: 120, margin: 7}}
                     >
                     <div style={{ marginLeft: 20}} className="btn"
-                        onClick={()=> changeLanguage('VIETNAMESE')}>
+                        onClick={()=> changeLanguage('vi')}>
                         <a>Tiếng Việt</a>
                     </div>
                     <div className="btn"
-                        onClick={()=> changeLanguage('ENGLISH')}>
+                        onClick={()=> changeLanguage('en')}>
                         <a>English</a>
                     </div>
                 </div>

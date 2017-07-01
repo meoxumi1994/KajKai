@@ -12,46 +12,48 @@ const LoginRegister = ({
     if(iswhoing)
         return <div></div>
     if(isusername)
-        return <Redirect to={'/' + id}/>
+        return <Redirect to={'/user/' + id}/>
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <Col xs={6} sm={6} md={6} style={{ minHeight: 700-146, height: window.innerHeight - 146, backgroundColor: 'white'}}>
-                    <div className="text-center">
-                      <h2>
-                          KajKai<small>{KAJKAI_THANK}</small>
-                      </h2>
-                    </div>
-                    <div className="text-center">
-                        <img src="/images/world.svg" alt="Cinque Terre" width="75%"/>
-                    </div>
-                </Col>
-                <Col xs={6} sm={6} md={6} style={{ minHeight: 700-146, height: window.innerHeight - 146, width: 460 }}>
-                    {isregistersuccess?
-                        <VerifyContainer/>
-                    :isloading?
-                        <div style={{ pointerEvents: 'none', cursor: 'default' }}>
-                            <LoginContainer/>
-                            <hr style={{ borderColor: "#333333"}}/>
-                            <RegisterContainer/>
+        <div style={{ height: '100%' }}>
+            <div className="container-fluid" style={{ height: '100%'}}>
+                <div className="row" style={{ height: '80%'}}>
+                    <Col xs={6} sm={6} md={6} style={{ height: '100%', backgroundColor: 'white'}}>
+                        <div className="text-center">
+                          <h2>
+                              KajKai<small>{KAJKAI_THANK}</small>
+                          </h2>
                         </div>
-                      : <div>
-                            <LoginContainer/>
-                            <hr style={{ borderColor: "#333333"}}/>
-                            <RegisterContainer/>
+                        <div className="text-center">
+                            <img src="/images/world.svg" alt="Cinque Terre" width="75%"/>
                         </div>
-                    }
-                </Col>
-            </div>
-            <div className="row" style={{ height: 100, backgroundColor: 'white' }}>
-                <hr style={{margin: 0}}></hr>
-                <div style={{ marginLeft: 100}} className="btn"
-                    onClick={()=> changeLanguage('VIETNAMESE')}>
-                    <a>Tiếng Việt</a>
+                    </Col>
+                    <Col xs={6} sm={6} md={6} style={{ width: 460 }}>
+                        {isregistersuccess?
+                            <VerifyContainer/>
+                        :isloading?
+                            <div style={{ pointerEvents: 'none', cursor: 'default' }}>
+                                <LoginContainer/>
+                                <hr style={{ borderColor: "#333333"}}/>
+                                <RegisterContainer/>
+                            </div>
+                          : <div>
+                                <LoginContainer/>
+                                <hr style={{ borderColor: "#333333"}}/>
+                                <RegisterContainer/>
+                            </div>
+                        }
+                    </Col>
                 </div>
-                <div className="btn"
-                    onClick={()=> changeLanguage('ENGLISH')}>
-                    <a>English</a>
+                <div className="row" style={{ height: '20%', backgroundColor: 'white' }}>
+                    <hr style={{margin: 0}}></hr>
+                    <div style={{ marginLeft: 100}} className="btn"
+                        onClick={()=> changeLanguage('vi')}>
+                        <a>Tiếng Việt</a>
+                    </div>
+                    <div className="btn"
+                        onClick={()=> changeLanguage('en')}>
+                        <a>English</a>
+                    </div>
                 </div>
             </div>
         </div>

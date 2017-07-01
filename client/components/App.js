@@ -98,10 +98,10 @@ class App extends React.Component {
                             <ContactHistory/>
                         </div>
                     }
-                    <div style={{ marginTop: 48, marginRight: (width > 1100 + 280)? 280: 0 }}>
+                    <div style={{ paddingTop: 48, marginRight: (width > 1100 + 280)? 280: 0 }}>
                         {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
-                              <div>
+                              <div style={{ height: height - 48, width: Math.max(1100, width) }}>
                                   <Route exact path="/" component={Home}/>
                                   <Route path="/map" component={Mapp}/>
                                   <Route path="/register" component={UserLoginRegister}/>
@@ -148,20 +148,5 @@ class App extends React.Component {
         this.props.onWho();
     }
 }
-
-// messagesKey.length == 0? undefined:
-//  messagesKey.map((mesId,index) => {
-//      return (<div key={mesId} style={{
-//        position: 'fixed',
-//        bottom: 0,
-//        backgroundColor: 'white',
-//        width: 320 ,
-//        height: 400,
-//        zIndex:100,
-//        marginLeft: index * 325 + 5
-//      }}>
-//          <ChatCenterContainer mesId={mesId} styles={styles}/>
-//      </div>)
-//  })
 
 export default App
