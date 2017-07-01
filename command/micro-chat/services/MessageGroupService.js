@@ -26,6 +26,7 @@ export const getGroupMessage = (id, next) => {
 
 export const createGroup = (members, groupName, groupColor, next) => {
     const group = new MessageGroup({members: members, groupName: groupName, groupColor: groupColor});
+    console.log('this ' + group);
     group.save((err) => {
         next(getGroupBasicInfo(group));
         chatGroupCreatedPub()
