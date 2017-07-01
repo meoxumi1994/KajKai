@@ -2,6 +2,8 @@ import { addNewMessagePub, getUnreadMessagePub, resetChatCountPub, readChatPub, 
 
 export const addNewMessageCon = (action, sio, io) => {
     console.log('action ' + JSON.stringify(action));
+    sio.emit({type:'client/a', data: 'heeloclient'});
+    sio.emit({type:'global/a', data: 'helloglobal'});
     addNewMessagePub(action.data, (mes, emitList) => {
         console.log('data ' + JSON.stringify({mes: mes, list: emitList}));
         for (let i = 0; i < emitList.length; ++i) {
