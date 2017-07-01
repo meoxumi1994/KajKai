@@ -1,11 +1,11 @@
 import redis from 'redis'
 import config from '../config/pubSubConfig'
-import { getUUID } from '../utils/utils'
+import { uuidv4 } from 'uuid/v4'
 
 export const addNewFirstLayerCommentPub = (data, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const publishData = {data: data, eventId: getUUID()};
+    const publishData = {data: data, eventId: uuidv4()};
     pub.publish('COMMENT.FirstLayerCommentAdded', JSON.stringify(publishData));
     sub.subcribe('COMMENT.FirstLayerCommentAdded' + publishData.eventId);
     sub.on('message', (channel, message) => {
@@ -24,7 +24,7 @@ export const addNewFirstLayerCommentPub = (data, next) => {
 export const addNewSecondLayerCommentPub = (data, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const publishData = {data: data, eventId: getUUID()};
+    const publishData = {data: data, eventId: uuidv4()};
     pub.publish('COMMENT.SecondLayerCommentAdded', JSON.stringify(publishData));
     sub.subcribe('COMMENT.SecondLayerCommentAdded' + publishData.eventId);
     sub.on('message', (channel, message) => {
@@ -43,7 +43,7 @@ export const addNewSecondLayerCommentPub = (data, next) => {
 export const getMoreFirstLayerComments = (data, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const publishData = {data: data, eventId: getUUID()};
+    const publishData = {data: data, eventId: uuidv4()};
     pub.publish('SOCKET.COMMENT.GetFirstLayerComments', JSON.stringify(publishData));
     sub.subcribe('SOCKET.COMMENT.GetFirstLayerComments' + publishData.eventId);
     sub.on('message', (channel, message) => {
@@ -62,7 +62,7 @@ export const getMoreFirstLayerComments = (data, next) => {
 export const getMoreSecondLayerComments = (data, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
-    const publishData = {data: data, eventId: getUUID()};
+    const publishData = {data: data, eventId: uuidv4()};
     pub.publish('SOCKET.COMMENT.GetSecondLayerComments', JSON.stringify(publishData));
     sub.subcribe('SOCKET.COMMENT.GetSecondLayerComments' + publishData.eventId);
     sub.on('message', (channel, message) => {
@@ -76,6 +76,4 @@ export const getMoreSecondLayerComments = (data, next) => {
             next(null)
         }
     })
-};/**
- * Created by creatnx on 6/28/17.
- */
+};
