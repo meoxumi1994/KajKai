@@ -1,7 +1,11 @@
 import redis from 'redis'
 import config from '../config/pubSubConfig'
-import { uuidv4 } from 'uuid/v4'
+// import { uuidv4 } from 'uuid/v4'
 // import { getUUID } from '../utils/utils'
+
+const uuidv4 = () => {
+    return Math.random();
+}
 
 export const addNewMessagePub = (mesInfo, next) => {
     const sub = redis.createClient(config);
