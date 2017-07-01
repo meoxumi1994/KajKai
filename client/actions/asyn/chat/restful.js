@@ -34,7 +34,7 @@ export const getChatList = (offset, length, multiChat) => dispatch => {
       }
     )
     .then((response) => {
-        // console.log('/getchatlist response ', response);
+        console.log('/getchatlist response ', response);
         dispatch(initChatList(response.data, response.lazyLoad))
         if (!multiChat) {
           dispatch(getMessages(response.data[0].mesId, Date.now(), 10, false))

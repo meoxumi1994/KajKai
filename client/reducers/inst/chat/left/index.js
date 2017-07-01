@@ -99,6 +99,11 @@ const left = (state = {
             chatListKey: tempKey,
             chatListMap: tempMap,
         }
+
+      case 'client/ADD_MEMBER':
+        console.log('client/ADD_MEMBER ', action)
+        return state
+
     }
 }
 

@@ -9,12 +9,12 @@ class ChatCenter extends React.Component {
       super(props)
     }
 
-    componentDidMount() {
-        this.props.getChatList()
-    }
+    // componentWillMount() {
+    //     this.props.getChatList()
+    // }
 
     render() {
-      let { messagesMap, mesId, styles, chatListMap, setCurrentChat, multiChat } = this.props
+      let { messagesMap, mesId, styles, chatListMap, setCurrentChat, multiChat, visibility } = this.props
 
       if (mesId == undefined) {
         return (
@@ -28,6 +28,7 @@ class ChatCenter extends React.Component {
                   usersMap={usersMap}
                   usersKey={usersKey}
                   mesId={mesId}
+                  visibility={visibility}
                   styles={styles.top}/>
             <MessageListContainer
                   usersMap={usersMap}

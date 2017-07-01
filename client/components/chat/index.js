@@ -9,12 +9,12 @@ class Chat extends React.Component {
       super(props)
     }
 
-    // componentDidMount() {
-    //     this.props.getChatList()
-    // }
+    componentDidMount(){
+        this.props.getChatList()
+    }
 
     render() {
-      let { themes, messagesKey, messagesMap, multiChat, styles } = this.props
+      let { themes, messagesKey, messagesMap, visibility, multiChat, styles } = this.props
 
       return(
         <div style={mainStyles.mainDiv} className="input-group">
@@ -29,6 +29,7 @@ class Chat extends React.Component {
                   themes={themes}
                   messagesKey={messagesKey}
                   messagesMap={messagesMap}
+                  visibility={visibility}
                   multiChat={multiChat}
                   styles={styles}/>
             </div>

@@ -192,4 +192,4 @@ Giải thưởng: 3 triệu tiền mặt, 6 điện thoại Pháp Wiko và 6 tri
     </div>
 )
 
-export default newComp
+export default Components
