@@ -29,6 +29,7 @@ export const readChatCon = (action, sio, io) => {
 };
 
 export const addMemberCon = (action, sio, io) => {
+    console.log('action func ' + action);
     addMemberPub(action.data.mesId, action.data.members, (data, receiverId) => {
         for (var i = 0; i < receiverId.length; ++i) {
             sio.emit({type: 'client/ADD_MEMBER', data: data})
