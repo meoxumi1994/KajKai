@@ -6,6 +6,7 @@ export const addNewMessageSub = (message, next) => {
     console.log('mesInfo ' + JSON.stringify(message));
     addNewMessage(message.mesInfo, (chatMessage, listEmit) => {
         if (chatMessage) {
+            console.log('mesInfoChat ' + JSON.stringify({chatMessage, listEmit}));
             next({status: 'success', mes: chatMessage, emitList: listEmit})
         } else {
             next({status: 'failed'})

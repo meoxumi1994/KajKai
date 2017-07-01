@@ -12,6 +12,7 @@ export const addNewMessagePub = (mesInfo, next) => {
     sub.subscribe('CHAT.MessageCreated' + id);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
+        console.log('pub ' + JSON.stringify(message));
         if (message.status === 'success') {
             next(message.mes, message.emitList);
         } else {
