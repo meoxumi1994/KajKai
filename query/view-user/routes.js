@@ -30,6 +30,10 @@ export default {
     }
   },
   '/test': {
+    get: {
+      controller: 'TestController',
+      method: 'queryHandler'
+    },
     post: {
       controller: 'TestController',
       method: 'insertHandler'

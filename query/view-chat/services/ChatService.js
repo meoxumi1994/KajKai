@@ -3,8 +3,18 @@ import { Chat } from '../models'
 export const getChatMessages = (id, offset, length, next) => {
 
   Chat.findOne({ id }, (err, chat) => {
-    if (err) {
-      next(null)
+    if (err || !chat) {
+      if (err) {
+        next(null)
+      } else {
+        next({
+          lazyLoad: {
+            offset
+          },
+          mesId: id,
+          messages: []
+        })
+      }
     } else {
       const { messages } = chat
       const mMessages = []

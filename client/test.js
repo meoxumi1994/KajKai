@@ -52,26 +52,26 @@ app.get('/user',(req,res) => {
     const { id } = req.query
     if(id){
         console.log('/user', user.filter(item => item.id == id)[1])
-        res.send({
+        res.json({
             status: 'success',
             user: user.filter(item => item.id == id)[1],
         })
     }else{
-        res.send(user[1])
+        res.json(user[1])
     }
 })
 
 app.get('/getstore',(req,res) => {
     const { id } = req.query
     console.log('/getstore')
-    res.send({
+    res.json({
         status: 'success',
         store: store.filter(item => item.id == id)[0],
     })
 })
 
 app.get('/chatlist',(req,res) => {
-    res.send(mockedChatList)
+    res.json(mockedChatList)
 })
 
 app.get('/messages/:mesId', (req, res) => {
@@ -177,7 +177,7 @@ app.get('/messages/:mesId', (req, res) => {
         ]
       }
     }
-    res.send({data: response})
+    res.json({data: response})
 })
 
 let unreadMessages = [

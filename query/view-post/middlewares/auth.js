@@ -12,7 +12,7 @@ const auth = () => {
                 req.decoded = decoded
                 next()
             } else {
-                res.send({
+                res.json({
                     authorization: "FAILED"
                 })
             }

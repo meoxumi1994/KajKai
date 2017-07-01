@@ -7,13 +7,13 @@ export const getPostrowsHandler = () => (req, res) => {
 
     getPostrows(id, offset ? offset : -1, (postrows) => {
       if (postrows) {
-        res.send(postrows)
+        res.json(postrows)
       } else {
-        res.send({status: 'failed'})
+        res.json({status: 'failed'})
       }
     })
 
   } else {
-    res.send({status: 'failed'})
+    res.json({status: 'failed'})
   }
 }

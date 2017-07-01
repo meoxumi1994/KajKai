@@ -4,9 +4,9 @@ export const getCategory = () => {
     return (req, res) => {
         getCategoryList(function (categories) {
             if (categories) {
-                res.send({categories: categories, status: 'success'})
+                res.json({categories: categories, status: 'success'})
             } else {
-                res.send({status: 'failed'})
+                res.json({status: 'failed'})
             }
         })
     }

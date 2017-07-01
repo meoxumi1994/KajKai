@@ -2,8 +2,15 @@ import { Comment } from '../models'
 
 export const getReplies = (id, offset, next) => {
   Comment.findOne({ id }, (err, comment) => {
-    if (err) {
-      next(null)
+    if (err || !comment) {
+      if(err) {
+        next(null)
+      } else {
+        next({
+          offset,
+          comments: []
+        })
+      }
     } else {
       const { replies } = comment
       next(getClientFormatReplies(replies, offset))
@@ -14,6 +21,7 @@ export const getReplies = (id, offset, next) => {
 export const getClientFormatReplies = (replies, offset) => {
   if (!replies) {
     return {
+      offset,
       comments: []
     }
   }

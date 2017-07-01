@@ -4,8 +4,15 @@ import { getClientFormatReplies } from './ReplyService'
 export const getComments = (postType, id, offset, next) => {
   if (postType == 'sellpost') {
     Sellpost.findOne({ id }, (err, sellpost) => {
-      if (err) {
-        next(null)
+      if (err || !sellpost) {
+        if(err) {
+          next(null)
+        } else {
+          next({
+            offset,
+            leadercomments: []
+          })
+        }
       } else {
         const { comments } = sellpost
         next(getClientFormatSellpostComments(comments, offset))
@@ -13,8 +20,15 @@ export const getComments = (postType, id, offset, next) => {
     })
   } else {
     Minorpost.findOne({ id }, (err, minorpost) => {
-      if (err) {
-        next(null)
+      if (err || !minorpost) {
+        if(err) {
+          next(null)
+        } else {
+          next({
+            offset,
+            leadercomments: []
+          })
+        }
       } else {
         const { comments } = minorpost
         next(getClientFormatMinorpostComments(comments, offset))
@@ -26,6 +40,7 @@ export const getComments = (postType, id, offset, next) => {
 export const getClientFormatSellpostComments = (comments, offset) => {
   if (!comments) {
     return {
+      offset,
       leadercomments: []
     }
   }
@@ -62,6 +77,7 @@ export const getClientFormatSellpostComments = (comments, offset) => {
 export const getClientFormatMinorpostComments = (comments, offset) => {
   if (!comments) {
     return {
+      offset,
       leadercomments: []
     }
   }

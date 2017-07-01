@@ -11,10 +11,10 @@ export const updateUserPhone = () => (req, res) => {
       mNexmoVerifyPhone(phone)
         .then((status) => {
             console.log(status)
-            res.send({status})
+            res.json({status})
         }, (err) => {
           console.log(err)
-          res.send({
+          res.json({
             status: 'error'
           })
         })
@@ -31,10 +31,10 @@ export const verifyPhone = () => (req, res) => {
             mNexmoVerifyLogout(phone).then(res.json({'status': mstatus}))
           })
         } else {
-          res.send({status})
+          res.json({status})
         }
     }, (err) => {
-      res.send({
+      res.json({
         status: 'error'
       })
     })
@@ -44,9 +44,9 @@ export const verifyLogout = () => (req, res) => {
   const { phone } = req.body
     mNexmoVerifyLogout(phone)
     .then((status) => {
-        res.send({status})
+        res.json({status})
     }, (err) => {
-      res.send({
+      res.json({
         status: 'error'
       })
     })

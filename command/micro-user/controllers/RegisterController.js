@@ -33,21 +33,24 @@ export const registerNewUser = () => {
 export const confirmEmailVerification = () => {
     return (req, res) => {
         const token = req.params.token;
+        console.log('email token: ', token);
         const redirectUrl = config.getClientDomain();
         if (!token) {
             res.redirect(redirectUrl + '/login');
             return
         }
         const decoded = verifyToken(token);
+        console.log('decoded: ', decoded);
         if (!decoded) {
             res.redirect(redirectUrl + '/login')
         } else {
-            updateVerifyUser(decoded._id, (err) => {
-                if (err) {
+            updateVerifyUser(decoded._id, (status) => {
+                if (!status) {
+                  console.log('err: ', err);
                     res.redirect(redirectUrl + '/login')
                 } else {
                     res.cookie('token', getUserToken(decoded._id));
-                    res.redirect(redirectUrl + '/profile')
+                    res.redirect(redirectUrl + '/user/' + decoded._id)
                 }
             })
         }

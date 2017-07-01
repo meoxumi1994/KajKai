@@ -10,14 +10,14 @@ export const getUserHandler = () => (req, res) => {
 
     getUser(requestedId, (user) => {
       if (user) {
-        res.send(user)
+        res.json(user)
       } else {
-        res.send({status: 'failed'})
+        res.json({status: 'failed'})
       }
     })
 
   } else {
-    res.send({status: 'failed'})
+    res.json({status: 'failed'})
   }
 }
 
@@ -31,13 +31,13 @@ export const getUserPrivacyHandler = () => (req, res) => {
 
     getUser(requestedId, (userPrivacy) => {
       if (userPrivacy) {
-        res.send(userPrivacy)
+        res.json(userPrivacy)
       } else {
-        res.send({status: 'failed'})
+        res.json({status: 'failed'})
       }
     })
 
   } else {
-    res.send({status: 'failed'})
+    res.json({status: 'failed'})
   }
 }
