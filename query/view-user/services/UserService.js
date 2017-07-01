@@ -14,17 +14,17 @@ export const getUser = (id, next) => {
       } else {
           next({
             id: user.id,
-            username: user.userName,
-            email: user.email,
-            avatarUrl: user.avatarUrl,
-            coverUrl: user.coverUrl,
-            address: user.address,
-            phone: user.phone,
-            language: user.language,
-            sex: user.sex,
-            yearOfBirth: user.yearOfBirth,
-            lastUpdate: user.lastUpdate,
-            blacklist: user.blackList
+            username: user.userName ? user.userName : '',
+            email: user.email ? user.email : '',
+            avatarUrl: user.avatarUrl ? user.avatarUrl : '',
+            coverUrl: user.coverUrl ? user.coverUrl : '',
+            address: user.address ? user.address : '',
+            phone: user.phone ? user.phone : '',
+            language: user.language ? user.language : '',
+            sex: user.sex ? user.sex : '',
+            yearOfBirth: user.yearOfBirth ? user.yearOfBirth : '',
+            lastUpdate: user.lastUpdate ? user.lastUpdate : '',
+            blacklist: user.blackList ? user.blackList : ''
           })
       }
   })
