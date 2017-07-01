@@ -3,6 +3,7 @@ import { createGroup, getGroupMessage, getMessageGroupInfo, updateGroupInfo, rem
 import { setCounter } from '../services/UnreadMessageCountService'
 
 export const addNewMessageSub = (message, next) => {
+    console.log('mesInfo ' + JSON.stringify(message));
     addNewMessage(message.mesInfo, (chatMessage, listEmit) => {
         if (chatMessage) {
             next({status: 'success', mes: chatMessage, emitList: listEmit})

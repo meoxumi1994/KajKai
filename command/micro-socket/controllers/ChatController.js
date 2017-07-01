@@ -1,7 +1,9 @@
 import { addNewMessagePub, getUnreadMessagePub, resetChatCountPub, readChatPub, addMemberPub, removeMemberPub, updateUIPub } from './ChatSocketPubController'
 
 export const addNewMessageCon = (action, sio, io) => {
+    console.log('action ' + JSON.stringify(action));
     addNewMessagePub(action.data, (mes, emitList) => {
+        console.log('data ' + JSON.stringify({mes: mes, list: emitList}));
         for (var i = 0; i < emitList.length; ++i) {
             sio.to(emitList[i]).emit({type: 'global/RECEIVE_MESSAGE', data: mes})
         }
