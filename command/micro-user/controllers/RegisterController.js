@@ -44,8 +44,8 @@ export const confirmEmailVerification = () => {
         if (!decoded) {
             res.redirect(redirectUrl + '/login')
         } else {
-            updateVerifyUser(decoded._id, (err) => {
-                if (err) {
+            updateVerifyUser(decoded._id, (status) => {
+                if (!status) {
                   console.log('err: ', err);
                     res.redirect(redirectUrl + '/login')
                 } else {
