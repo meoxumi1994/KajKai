@@ -14,7 +14,7 @@ export const getUser = (id, next) => {
       } else {
           next({
             id: user.id,
-            username: user.userName ? user.userName : '',
+            username: user.username ? user.userName : '',
             email: user.email ? user.email : '',
             avatarUrl: user.avatarUrl ? user.avatarUrl : '',
             coverUrl: user.coverUrl ? user.coverUrl : '',
