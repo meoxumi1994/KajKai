@@ -57,7 +57,7 @@ export const loginEmail = () => {
                     res.json({status : 'failed'});
                     return
                 }
-                res.cookie('token', getUserToken(user._id))
+                res.cookie('token', getUserToken(user._id));
                 res.json({status: 'success'});
                 return
             })
