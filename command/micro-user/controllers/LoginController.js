@@ -17,10 +17,10 @@ export const loginFacebook = () => {
             method: 'GET',
             headers: headers
         };
-        request(options, function(error, response, body) {
+        request(options, (error, response, body) => {
             if (!error && response.statusCode === 200) {
-                body = JSON.parse(body)
-                console.log(body)
+                body = JSON.parse(body);
+                console.log(body);
 
                 getUserFromFacebookId(body.id, function(user) {
                     if (user) {
@@ -29,7 +29,7 @@ export const loginFacebook = () => {
                         res.cookie('token', token);
                         res.json({user: getUserBasicInfo(user)});
                     } else {
-                        createUser(null, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, function (user) {
+                        createUser(null, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, body.picture.data.url, (user) => {
                             if (user) {
                                 res.cookie('token', getUserToken(user._id));
                                 res.json({user: getUserBasicInfo(user)});
@@ -45,20 +45,20 @@ export const loginFacebook = () => {
             }
         })
     }
-}
+};
 
 export const loginEmail = () => {
     return (req, res) => {
-        const loginId = req.body.loginId
-        const password = req.body.password
+        const loginId = req.body.loginId;
+        const password = req.body.password;
         if (loginId && password && checkPhone(loginId)) {
             getUserFromPhone(loginId, function(user) {
                 if (!user || user.password !== password) {
-                    res.json({status : 'failed'})
+                    res.json({status : 'failed'});
                     return
                 }
                 res.cookie('token', getUserToken(user._id))
-                res.json({status: 'success'})
+                res.json({status: 'success'});
                 return
             })
         }
@@ -84,21 +84,21 @@ export const loginGoogle = () => {
         const headers = {
             'User-Agent':       'Super Agent/0.0.1',
             'Content-Type':     'application/x-www-form-urlencoded'
-        }
+        };
         const options = {
             url: config.GOOGLE_API_URL + req.body.tokenId,
             method: 'GET',
             headers: headers
-        }
-        request(options, function(error, response, body) {
+        };
+        request(options, (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 body = JSON.parse(body);
-                getUserFromEmail(body.email, function(user) {
+                getUserFromEmail(body.email, (user) => {
                     if (user) {
                         res.cookie('token', getUserToken(user._id));
                         res.json({user: getUserBasicInfo(user)});
                     } else {
-                        createUser(body.email, body.name, '1234', 1, null, SocialType.GOOGLE, null, function (user) {
+                        createUser(body.email, body.name, '1234', 1, null, SocialType.GOOGLE, null, body.picture, (user) => {
                             if (!user) {
                                 res.json({error: 'error'})
                             } else {
@@ -114,11 +114,11 @@ export const loginGoogle = () => {
             }
         })
     }
-}
+};
 
 export const logOutUser = () => {
     return (req, res) => {
-        res.cookie('token', 'invalid')
+        res.cookie('token', 'invalid');
         res.json({})
     }
-}
+};
