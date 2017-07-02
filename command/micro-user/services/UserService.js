@@ -46,7 +46,7 @@ export const getUserBasicInfo = (user) => {
         coverUrl: user.coverUrl,
         address: user.address,
         phone: user.phone,
-        language: user.language === Language.VIETNAM ? 'vi' : 'en',
+        language: user.language === Language.ENGLISH ? 'en' : 'vi',
         sex: user.sex,
         yearOfBirth: user.yearOfBirth,
         lastUpdate: {
