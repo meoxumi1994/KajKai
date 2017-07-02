@@ -29,23 +29,28 @@ const init = (server) => {
             console.log('a user disconnected')
         });
         // get user from token
-        const token =  getTokenSocketCookie(socket.handshake.headers.cookie);
-        console.log('fuck socket' + JSON.stringify(socket));
-        console.log('fuck handshake ' + JSON.stringify(socket.handshake));
-        console.log('fuck cookie' + socket.handshake.headers.cookie);
-        console.log('fuck token');
-        if (token) {
-            console.log('token socket' + token);
-            authoriseToken(token, (user) => {
-                if (user) {
-                    console.log('user ' + user);
-                    socket.join(user.id);
-                    sockListen(user, socket, sio);
-                } else sockListen(null, socket, sio)
-            })
-        } else {
-            sockListen(null, socket, sio)
-        }
+
+        socket.on('sendToken', (tokenId) => {
+            const token = tokenId;
+            // const token =  getTokenSocketCookie(socket.handshake.headers.cookie);
+            // console.log('fuck socket' + JSON.stringify(socket));
+            // console.log('fuck handshake ' + JSON.stringify(socket.handshake));
+            // console.log('fuck cookie' + socket.handshake.headers.cookie);
+            // console.log('fuck token');
+
+            if (token) {
+                console.log('token socket' + token);
+                authoriseToken(token, (user) => {
+                    if (user) {
+                        console.log('user ' + user);
+                        socket.join(user.id);
+                        sockListen(user, socket, sio);
+                    } else sockListen(null, socket, sio)
+                })
+            } else {
+                sockListen(null, socket, sio)
+            }
+        })
     });
     return sio
 };

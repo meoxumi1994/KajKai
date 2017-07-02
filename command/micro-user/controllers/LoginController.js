@@ -27,12 +27,13 @@ export const loginFacebook = () => {
                         const token = getUserToken(user._id);
                         console.log('facebook: ' + token);
                         res.cookie('token', token);
-                        res.json({user: getUserBasicInfo(user)});
+                        res.json({user: getUserBasicInfo(user), tokenId: token});
                     } else {
                         createUser(body.email, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, body.picture.data.url, (user) => {
                             if (user) {
-                                res.cookie('token', getUserToken(user._id));
-                                res.json({user: getUserBasicInfo(user)});
+                                const token = getUserToken(user._id);
+                                res.cookie('token', token);
+                                res.json({user: getUserBasicInfo(user), tokenId: token});
                                 createUserPub(user);
                             } else {
                                 res.json({error: error})
@@ -59,7 +60,6 @@ export const loginEmail = () => {
                 }
                 res.cookie('token', getUserToken(user._id));
                 res.json({status: 'success'});
-                return
             })
         }
         const email = req.body.email;
@@ -69,15 +69,16 @@ export const loginEmail = () => {
                     res.json({status : 'failed'});
                     return
                 }
-                res.cookie('token', getUserToken(user._id));
-                res.json({status: 'success', user: getUserBasicInfo(user)});
+                const token = getUserToken(user._id);
+                res.cookie('token', token);
+                res.json({status: 'success', user: getUserBasicInfo(user), tokenId: token});
             })
         } else {
             res.json({status: 'failed'})
         }
 
     }
-}
+};
 
 export const loginGoogle = () => {
     return (req, res) => {
@@ -95,15 +96,17 @@ export const loginGoogle = () => {
                 body = JSON.parse(body);
                 getUserFromEmail(body.email, (user) => {
                     if (user) {
-                        res.cookie('token', getUserToken(user._id));
-                        res.json({user: getUserBasicInfo(user)});
+                        const token = getUserToken(user._id);
+                        res.cookie('token', token);
+                        res.json({user: getUserBasicInfo(user), tokenId: token});
                     } else {
                         createUser(body.email, body.name, '1234', 1, null, SocialType.GOOGLE, null, body.picture, (user) => {
                             if (!user) {
                                 res.json({error: 'error'})
                             } else {
-                                res.cookie('token', getUserToken(user._id));
-                                res.json({user: getUserBasicInfo(user)});
+                                const token = getUserToken(user._id);
+                                res.cookie('token', token);
+                                res.json({user: getUserBasicInfo(user), tokenId: token});
                                 createUserPub(user);
                             }
                         })
