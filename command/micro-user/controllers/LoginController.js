@@ -29,7 +29,7 @@ export const loginFacebook = () => {
                         res.cookie('token', token);
                         res.json({user: getUserBasicInfo(user)});
                     } else {
-                        createUser(null, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, body.picture.data.url, (user) => {
+                        createUser(body.email, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, body.picture.data.url, (user) => {
                             if (user) {
                                 res.cookie('token', getUserToken(user._id));
                                 res.json({user: getUserBasicInfo(user)});
