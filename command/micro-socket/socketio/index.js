@@ -30,8 +30,8 @@ const init = (server) => {
         });
         // get user from token
 
-        socket.on('server/sendToken', (tokenId) => {
-            const token = tokenId;
+        socket.on('server/sendToken', (action) => {
+            const token = action.tokenId;
             // const token =  getTokenSocketCookie(socket.handshake.headers.cookie);
             // console.log('fuck socket' + JSON.stringify(socket));
             // console.log('fuck handshake ' + JSON.stringify(socket.handshake));
