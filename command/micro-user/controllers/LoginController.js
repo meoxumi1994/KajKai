@@ -62,7 +62,7 @@ export const loginEmail = () => {
                 return
             })
         }
-        const email = req.body.email
+        const email = req.body.email;
         if (email && password && checkEmail(email)) {
             getUserFromEmail(email, function(user) {
                 if (!user || user.password !== password || user.verified === 0) {
@@ -70,7 +70,7 @@ export const loginEmail = () => {
                     return
                 }
                 res.cookie('token', getUserToken(user._id));
-                res.json({status: 'success'})
+                res.json({status: 'success', user: getUserBasicInfo(user)});
             })
         } else {
             res.json({status: 'failed'})
