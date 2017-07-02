@@ -59,7 +59,6 @@ export const loginEmail = () => {
                 }
                 res.cookie('token', getUserToken(user._id));
                 res.json({status: 'success'});
-                return
             })
         }
         const email = req.body.email;
@@ -77,7 +76,7 @@ export const loginEmail = () => {
         }
 
     }
-}
+};
 
 export const loginGoogle = () => {
     return (req, res) => {
