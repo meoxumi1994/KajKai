@@ -10,7 +10,10 @@ export const getUserHandler = () => (req, res) => {
 
     getUser(requestedId, (user) => {
       if (user) {
-        res.json(user)
+        res.json({
+          tokenId: req.cookies.token,
+          ...user
+        })
       } else {
         res.json({status: 'failed'})
       }
