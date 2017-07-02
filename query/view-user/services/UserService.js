@@ -16,6 +16,7 @@ export const getUser = (id, next) => {
         }
       } else {
           next({
+            tokenId: req.cookies.token,
             status: 'success',
             user: {
               id: user.id,
