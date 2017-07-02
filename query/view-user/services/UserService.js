@@ -8,7 +8,10 @@ export const getUser = (id, next) => {
           next(null)
         } else {
           next({
-            id
+            status: 'nodata',
+            user: {
+              id
+            }
           })
         }
       } else {
