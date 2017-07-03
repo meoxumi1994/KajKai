@@ -5,6 +5,7 @@ import FullScreen from '~/containers/entity/thumnail/FullScreen'
 class Enlarge extends React.Component {
     constructor(props){
         super(props)
+        console.log('Enlarge',props)
         this.state = {
             hoverClose: false,
             hoverImage: false,
@@ -34,6 +35,7 @@ class Enlarge extends React.Component {
             <div onClick={() => this.close()}
                 style={{
                 position: 'fixed',
+                zIndex: 10,
                 top: 0,
                 left: 0,
                 height: height,

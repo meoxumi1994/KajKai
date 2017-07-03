@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     loadChat: (mesId) => {
         dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: mesId}})
+    },
+    addMemberVisibility: () => {
+        dispatch({type: 'ADD_MEMBER_VISIBILITY'})
     }
 })
 

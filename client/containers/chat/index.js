@@ -7,7 +7,7 @@ import chatStyles from '~/components/chat/chatStyles'
 const mapStateToProps = (state, ownProps) => {
   const { catagory, currentThemes} = state.inst.chat.display.themes
   const themes = catagory[currentThemes]
-  const { messagesKey, messagesMap } = state.inst.chat.center.singleChat
+  const { messagesKey, messagesMap, visibility } = state.inst.chat.center.singleChat
   let styles = chatStyles.getSingleChat(themes)
 
   return (
@@ -15,6 +15,7 @@ const mapStateToProps = (state, ownProps) => {
       themes,
       messagesKey,
       messagesMap,
+      visibility,
       multiChat: false,
       styles,
     }

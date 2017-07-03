@@ -2,6 +2,7 @@ import React from 'react'
 
 import Magic from '~/containers/entity/thumnail/Magic'
 import Enlarge from '~/containers/entity/thumnail/Enlarge'
+import classNames from 'classnames'
 
 class GroupImage extends React.Component {
     constructor(props){
@@ -47,11 +48,11 @@ class GroupImage extends React.Component {
                     return(
                         <div style={{ width: 520 }}>
                             <Magic src={images[0]} openModal={() => this.openModal(0)}
-                                style={{ width: width*2/3, height: height }}/>
+                                style={{ width: width, height: height*3/5 }}/>
                             <Magic src={images[1]} openModal={() => this.openModal(1)}
-                                style={{ height: height/2, width: width/3 }}/>
+                                style={{ height: height*2/5, width: width/2 }}/>
                             <Magic src={images[2]} openModal={() => this.openModal(2)}
-                                style={{ height: height/2, width: width/3 }}/>
+                                style={{ height: height*2/5, width: width/2 }}/>
                         </div>
                     )
                 case 4:
@@ -102,26 +103,24 @@ class GroupImage extends React.Component {
         }
         return(
             <div>
-                <Group/>
                 {canEdit &&
                     <div className="btn"
-                        onMouseOver={() => this.setState({ hoverEdit: true })}
-                        onMouseLeave={() => this.setState({ hoverEdit: false })}
                         onClick={() => onEdit()}
                         style={{
+                            padding: '2px 4px 2px 4px',
                             position: 'absolute',
-                            marginLeft: -50,
-                            marginTop: 4,
-                            opacity: this.state.hoverEdit?1:0.8,
+                            zIndex: 1,
+                            marginLeft: width - 30,
+                            marginTop: 10,
+                            backgroundColor: 'white',
+                            boxShadow: '0px 0px 4px #000000',
                         }}>
-                        <span style={{ color: 'white', textShadow: '1px 1px 0px #000000'}}>
-                            {EDIT}
-                        </span>
+                        <span className="glyphicon glyphicon-edit" style={{ color: 'black'}}></span>
                     </div>
                 }
+                <Group/>
                 {this.state.openModal &&
                     <Enlarge close={() => this.setState({ openModal: false })}
-                        FULL_SCREEN={'FUll Screen'}
                         imgHeight={this.state.imgHeight}
                         imgWidth={this.state.imgWidth}
                         images={images}

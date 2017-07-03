@@ -6,8 +6,9 @@ export const onWho = () => dispatch => {
     dispatch(authAction('WHO_ING'))
     flem('/user')
     .then((response) => {
-        if(response.username){
-            dispatch(authData('WHO_SUCCESS',response))
+        if(response.user){
+            dispatch(authData('WHO_SUCCESS',response.user))
+            dispatch({ type: 'server/sendToken', tokenId: response.tokenId })
         }else{
             dispatch(authAction('WHO_FAILED'))
         }

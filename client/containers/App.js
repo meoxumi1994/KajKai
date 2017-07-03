@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import chatStyles from '~/components/chat/chatStyles'
 import App from '../components/App'
 import { onWho } from '../actions/asyn/app'
+import { getChatList } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
     const { width, height } = state.inst.app
@@ -25,6 +26,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onScroll : (scrollTop) => {
         dispatch({ type: 'ON_SCROLL', scrollTop: scrollTop })
+    },
+    getChatList: () => {
+        dispatch(getChatList(Date.now(), 10))
     }
 })
 

@@ -36,7 +36,7 @@ class KeepImage extends React.Component {
         this.setState({ showView: false })
     }
     render(){
-        const { type, height, canEdit, style, images, imagesSuggest, ADD_PHOTO, SUGGEST_PHOTO, SEE_MORE } = this.props
+        const { type, height, canEdit, images, imagesSuggest, ADD_PHOTO, SUGGEST_PHOTO, SEE_MORE } = this.props
         return(
             <div>
                 {type=='Carousel' ?

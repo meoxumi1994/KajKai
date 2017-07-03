@@ -1,15 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import AddPhoto from '~/containers/entity/thumnail/AddPhoto'
 import ModalUploadImage from '~/containers/entity/modal/UploadImage'
 
 const Top = (props) => {
-    const { id, coverUrl, avatarUrl, name, onUploadImage, location} = props
+    const { yourid, id, coverUrl, avatarUrl, name, onUploadImage, location} = props
+    console.log(location)
     const ButtonLine = ({ title, last, link}) => {
         return (
             <Link to={"/user/"+id+link}>
                 <button type="button" className="btn btn-default"
-                    style={{ height: 46, width: 78, borderRadius: 0, borderRightWidth: last, fontSize: 16 }}>
+                    style={{ height: 46, width: 78, borderColor: '#DFE0E4',borderRadius: 0, borderRightWidth: last, fontSize: 16 }}>
                     {title}
                 </button>
                 {location.pathname.split('/')[3] == link.split('/')[1] &&
@@ -29,18 +31,28 @@ const Top = (props) => {
     }
 
     return(
-        <div className="panel panel-default"
-            style={{ margin: 0, borderWidth: 1 , borderRadius: '0px 0px 5px 5px'}}>
-            <img src={ coverUrl }
+        <div style={{ margin: 0,
+            backgroundColor: 'white',
+            border: '1px solid #DFE0E4',
+            borderRadius: '0px 0px 5px 5px',}}>
+            {/* <img src={ coverUrl }
             style={{
                 width: '100%',
                 height: '250px',
                 border: 0,
-            }}/>
-            <div className="btn btn-default btn-xs"
+            }}/> */}
+            {/* <div className="btn btn-default btn-xs"
                 style={{ position: 'fix', marginLeft: -37, marginTop: -210 }}
                 onClick={ () => onUploadImage('coverUrl') } >
                 <span className="glyphicon glyphicon-camera" style={{ fontSize: 20 }}></span>
+            </div> */}
+            <div style={{ marginLeft: -1, marginTop: -1 }}>
+                <AddPhoto style={{
+                    src: coverUrl,
+                    width: 938,
+                    height: 250,
+                    isTop: true,
+                }}/>
             </div>
             <div style={{
                 position: 'relative',
@@ -49,16 +61,24 @@ const Top = (props) => {
                 marginTop: -100,
                 height: 140,
             }}>
-                <div className="panel panel-default"
-                    style={{ padding: 4, width: 170, height: 170, float: 'left', marginTop: -35 }}>
-                    <img src={ avatarUrl } alt="Cinque Terre" width="100%" height="100%"/>
+                <div style={{ backgroundColor: 'white',
+                    borderRadius: 4,
+                    border: '1px solid #DFE0E4',
+                    padding: 3, float: 'left',
+                    marginTop: -35 }}>
+                    <AddPhoto style={{
+                        src: avatarUrl,
+                        width: 160,
+                        height: 160,
+                        isTop: false,
+                    }}/>
                 </div>
-                <div className="btn btn-default btn-xs"
+                {/* <div className="btn btn-default btn-xs"
                     style={{ position: 'absolute', marginLeft: -30, marginTop: -30 }}
                     onClick={() => onUploadImage('avatarUrl') }
                     >
                     <span className="glyphicon glyphicon-camera" style={{ fontSize: 15 }}></span>
-                </div>
+                </div> */}
                 <h3 style={{
                     position: 'static',
                     marginTop: 65,
@@ -75,9 +95,9 @@ const Top = (props) => {
                     <ButtonLine title="About" last="0" link="/about"/>
                     <ButtonLine title="Post" last="0" link="/post"/>
                     <ButtonLine title="Store" last="0" link="/store"/>
-                    <ButtonLine title="Contact" last="0" link="/contact"/>
-                    <ButtonLine title="Activity" last="0" link="/activity"/>
-                    <ButtonLine title="Setting" last="1px" link="/setting"/>
+                    <ButtonLine title="Contact" last={(yourid==id)?0:"1px"} link="/contact"/>
+                    {yourid == id && <ButtonLine title="Activity" last="0" link="/activity"/> }
+                    {yourid == id && <ButtonLine title="Setting" last="1px" link="/setting"/> }
                 </div>
             </div>
             <hr style={{ marginTop: 43, marginBottom: 0, borderColor: 'transparent'}}></hr>

@@ -16,57 +16,211 @@ var sio = socketIo(server)
 
 var user = [
     {
-        id: '5933bda8d5e8f76039403e06',
-        username: 'Duc Minh',
-        avatarUrl: 'https://scontent.xx.fbcdn.net/v/t1.0-1/s200x200/10354686_10150004552801856_220367501106153455_n.jpg?oh=9fd397c48503bf5c5946134de4d111ee&oe=59B05050',
+        id: 'user001',
+        username: 'Pornnappan Pornpenpipat',
+        avatarUrl: 'http://scontent.cdninstagram.com/t51.2885-15/s480x480/e35/c0.90.720.720/15535065_349275098765663_3988065271083433984_n.jpg?ig_cache_key=MTQwNjk1NDcxMjY5OTQ1MTgwMA%3D%3D.2.c',
+        coverUrl: 'http://www.trendycovers.com/covers/Hand_Heart_facebook_cover_1331287340.jpg',
         phone: '01655791021',
         address: '163 le quy don, daklak',
         age: 24,
     },
     {
-      avatarUrl: "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/18920193_1939695522976279_4061663005610034505_n.jpg?oh=f66442aa2ca21a1ad4541feabe7b9d38&oe=59A53626",
-      id: "593ea5bf0d346a0b68a88a74",
-      username: "Long Ly",
-      phone: '0989888999',
-      address: 'Kham Thien',
-      age: 100
-    }
+        avatarUrl: "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/18920193_1939695522976279_4061663005610034505_n.jpg?oh=f66442aa2ca21a1ad4541feabe7b9d38&oe=59A53626",
+        id: "593ea5bf0d346a0b68a88a74",
+        username: "Long Ly",
+        phone: '0989888999',
+        address: 'Kham Thien',
+        age: 100
+    },
+    {
+        id: 'user003',
+        username: 'Ho Quynh Nhi',
+        avatarUrl: 'http://lh5.googleusercontent.com/-OCkcBXO1NL8/Vfvmn7szzeI/AAAAAAAAZv4/q6477Ufg0_I/s1600/gaixinhxinh.com-nhi-quynh-ho-3.jpg',
+        coverUrl: 'http://www.trendycovers.com/covers/Hand_Heart_facebook_cover_1331287340.jpg',
+        phone: '01655791021',
+        address: '163 le quy don, daklak',
+        age: 24,
+    },
+    {
+        id: 'user004',
+        username: 'Mi du',
+        avatarUrl: 'http://kenh14cdn.com/zoom/280_175/2017/18319358-10155341077660967-1554452835277664692-o-1494429543888-71-266-700-1272-crop-1494429562469.jpg',
+        coverUrl: 'http://www.trendycovers.com/covers/Hand_Heart_facebook_cover_1331287340.jpg',
+        phone: '01655791021',
+        address: '163 le quy don, daklak',
+        age: 24,
+    },
+    {
+        id: 'user005',
+        username: 'Quynh Anh Shin',
+        avatarUrl: 'http://img.saobiz.net/d/2015/12/9c62ac46-3a41-4e0b-af6f-f9ea01685dbf_02.jpg',
+        coverUrl: 'http://www.trendycovers.com/covers/Hand_Heart_facebook_cover_1331287340.jpg',
+        phone: '01655791021',
+        address: '163 le quy don, daklak',
+        age: 24,
+    },
 ]
 
 let store = [
     {
-        userid: '5933bda8d5e8f76039403e06',
+        userid: 'user001',
         id: 'store001',
         storename: 'Forest',
-        avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-        coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
+        avatarUrl: 'https://media.timeout.com/images/102701457/image.jpg',
+        coverUrl: 'http://www.brandjam.it/wp-content/uploads/2016/03/cover-store.jpg',
         address: 'fpt university',
-        category: 'shirt',
-        latitute: 1,
-        longitute: 1,
+        addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
+        category: 'R-shirt',
         phone: '01655791025',
+        lastUpdate: {
+            storename: '21 mins',
+            phone: '19 days',
+            addressMap: '20 days',
+            address: '10 days',
+        },
+        categoryAuto: {
+            id: 'category001',
+            name: 'T-shirt',
+        },
+        latitute: '21.0258808',
+        longitute: '105.8320113',
+        certificates: {
+            images: ['http://hstatic.net/093/1000067093/10/2016/1-17/01_gcndk_238326.jpeg'],
+            content: 'giấy trứng nhận đăng ký nhãn hiệu',
+        },
+        numlike: '23',
+        likes: [
+          {
+              userid: 'user003',
+              username: 'Ho Quynh Nhi',
+              avatarUrl: 'http://lh5.googleusercontent.com/-OCkcBXO1NL8/Vfvmn7szzeI/AAAAAAAAZv4/q6477Ufg0_I/s1600/gaixinhxinh.com-nhi-quynh-ho-3.jpg',
+          },
+          {
+              userid: 'user004',
+              username: 'Mi du',
+              avatarUrl: 'http://kenh14cdn.com/zoom/280_175/2017/18319358-10155341077660967-1554452835277664692-o-1494429543888-71-266-700-1272-crop-1494429562469.jpg',
+          },
+          {
+              userid: 'user005',
+              username: 'Quynh Anh Shin',
+              avatarUrl: 'http://img.saobiz.net/d/2015/12/9c62ac46-3a41-4e0b-af6f-f9ea01685dbf_02.jpg',
+          }
+        ], // tối đa 3 thằng linh tinh
+        numfollow: '43',
+        follows: [
+            {
+                userid: 'user003',
+                username: 'Ho Quynh Nhi',
+                avatarUrl: 'http://lh5.googleusercontent.com/-OCkcBXO1NL8/Vfvmn7szzeI/AAAAAAAAZv4/q6477Ufg0_I/s1600/gaixinhxinh.com-nhi-quynh-ho-3.jpg',
+            },
+            {
+                userid: 'user004',
+                username: 'Mi du',
+                avatarUrl: 'http://kenh14cdn.com/zoom/280_175/2017/18319358-10155341077660967-1554452835277664692-o-1494429543888-71-266-700-1272-crop-1494429562469.jpg',
+            },
+            {
+                userid: 'user005',
+                username: 'Quynh Anh Shin',
+                avatarUrl: 'http://img.saobiz.net/d/2015/12/9c62ac46-3a41-4e0b-af6f-f9ea01685dbf_02.jpg',
+            }
+        ], // tối đa 5 thằng
+    },
+    {
+        userid: 'user003',
+        id: 'store002',
+        storename: 'Forest',
+        avatarUrl: 'https://media.timeout.com/images/102701457/image.jpg',
+        coverUrl: 'http://www.brandjam.it/wp-content/uploads/2016/03/cover-store.jpg',
+        address: 'fpt university',
+        addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
+        category: 'R-shirt',
+        phone: '01655791025',
+        lastUpdate: {
+            storename: '21 mins',
+            phone: '19 days',
+            addressMap: '20 days',
+            address: '10 days',
+        },
+        categoryAuto: {
+            id: 'category001',
+            name: 'T-shirt',
+        },
+        latitute: '21.0258808',
+        longitute: '105.8320113',
+        certificates: {
+            images: ['http://hstatic.net/093/1000067093/10/2016/1-17/01_gcndk_238326.jpeg'],
+            content: 'giấy trứng nhận đăng ký nhãn hiệu',
+        },
+        numlike: '23',
+        likes: [
+          {
+              userid: 'user003',
+              username: 'Ho Quynh Nhi',
+              avatarUrl: 'http://lh5.googleusercontent.com/-OCkcBXO1NL8/Vfvmn7szzeI/AAAAAAAAZv4/q6477Ufg0_I/s1600/gaixinhxinh.com-nhi-quynh-ho-3.jpg',
+          },
+          {
+              userid: 'user004',
+              username: 'Mi du',
+              avatarUrl: 'http://kenh14cdn.com/zoom/280_175/2017/18319358-10155341077660967-1554452835277664692-o-1494429543888-71-266-700-1272-crop-1494429562469.jpg',
+          },
+          {
+              userid: 'user005',
+              username: 'Quynh Anh Shin',
+              avatarUrl: 'http://img.saobiz.net/d/2015/12/9c62ac46-3a41-4e0b-af6f-f9ea01685dbf_02.jpg',
+          }
+        ], // tối đa 3 thằng linh tinh
+        numfollow: '43',
+        follows: [
+            {
+                userid: 'user003',
+                username: 'Ho Quynh Nhi',
+                avatarUrl: 'http://lh5.googleusercontent.com/-OCkcBXO1NL8/Vfvmn7szzeI/AAAAAAAAZv4/q6477Ufg0_I/s1600/gaixinhxinh.com-nhi-quynh-ho-3.jpg',
+            },
+            {
+                userid: 'user004',
+                username: 'Mi du',
+                avatarUrl: 'http://kenh14cdn.com/zoom/280_175/2017/18319358-10155341077660967-1554452835277664692-o-1494429543888-71-266-700-1272-crop-1494429562469.jpg',
+            },
+            {
+                userid: 'user005',
+                username: 'Quynh Anh Shin',
+                avatarUrl: 'http://img.saobiz.net/d/2015/12/9c62ac46-3a41-4e0b-af6f-f9ea01685dbf_02.jpg',
+            }
+        ], // tối đa 5 thằng
     }
 ]
 
 app.get('/user',(req,res) => {
     const { id } = req.query
     if(id){
-        console.log('/user', user.filter(item => item.id == id)[1])
+        console.log('/user', user.filter(item => item.id == id)[0])
         res.json({
             status: 'success',
-            user: user.filter(item => item.id == id)[1],
+            user: user.filter(item => item.id == id)[0],
         })
     }else{
-        res.json(user[1])
+        res.json({
+            status: 'success',
+            user: user[0]
+        })
     }
 })
 
-app.get('/getstore',(req,res) => {
+app.get('/store',(req,res) => {
     const { id } = req.query
-    console.log('/getstore')
+    console.log('/store', id, store.filter(item => item.id == id)[0])
     res.json({
         status: 'success',
         store: store.filter(item => item.id == id)[0],
+    })
+})
+
+app.get('/sellpost/store/:storeid?offset=-1', (req,res) => { // length = 2
+    const { storeid } = req.query
+    const { offset } = req.params
+    console.log(storeid, offset)
+    res.json({
+        status: 'success',
     })
 })
 

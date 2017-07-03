@@ -89,8 +89,17 @@ const myString = {
     // post
     RECEIVE: ['Nhận','Receive'],
     LIKE: ['Thích','Like'],
+    FOLLOW : ['Theo giõi','Follow'],
     REPLY: ['Trả lời','Reply'],
-    WRITE_COMMENT_OR_ORDER: ['bình luận hoặc Đặt hàng...','Write a comment or order...'],
+    WRITE_COMMENT_OR_ORDER: ['Bình luận hoặc Đặt hàng...','Write a comment or Order...'],
+    FULL_SCREEN: ['Phóng to','Full Screen'],
+    ADDRESSMAP : ['Địa chỉ theo google map', 'Address in googlemap'],
+    ANOTHER_PEOPLE: ['người khác','another people'],
+    PEOPLE: ['','people'],
+    CATEGORY : ['Loại hình', 'Category'],
+    BY: ['bởi', 'by'],
+    AND: ['và', 'and'],
+    THIS: ['điều này','this'],
 }
 
 const allString = {

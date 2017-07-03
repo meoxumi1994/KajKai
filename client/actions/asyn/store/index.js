@@ -2,7 +2,7 @@ import { flem, flet } from '~/actions/support'
 
 export const getStore = (id) => dispatch => {
     dispatch({ type: 'STORE_GET_ING' });
-    flem('/getstore',{
+    flem('/store',{
         id: id,
     })
     .then((response) => {
@@ -11,6 +11,21 @@ export const getStore = (id) => dispatch => {
             dispatch({ type: 'STORE_GET_SUCCESS', store })
         }else{
             dispatch({ type: 'STORE_GET_FAILED', store })
+        }
+    })
+}
+
+export const getSellPost = (storeid, offset) => dispatch => {
+    dispatch({ type: 'GET_SELLPOST_FROM_STORE_ING'})
+    flem('/sellpost/store/' + storeid,{
+        offset: offset,
+    })
+    .then((response) => {
+        const { status, sellpost } = response
+        if(status == 'success'){
+            console.log('success')
+        }else{
+
         }
     })
 }

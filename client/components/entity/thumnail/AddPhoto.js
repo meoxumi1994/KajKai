@@ -19,14 +19,14 @@ class AddPhoto extends React.Component {
         this.setState({ showModal: false })
     }
     render(){
-        const { TITLE, UPLOAD_PHOTO, TAKE_PHOTO, SUGGEST_PHOTO } = this.props
+        const { TITLE, UPLOAD_PHOTO, TAKE_PHOTO, SUGGEST_PHOTO, style } = this.props
         return(
             <div>
-                <OneImage style={{ width: 500, height: 170 }}
-                    src="/images/garden.png"
+                <OneImage style={{ width: style.width, height: style.height }}
+                    src={style.src}
                     onClick={() => this.open()}
                     textChange="Add photo"
-                    isTop={true}
+                    isTop={style.isTop}
                 />
                 <Modal show={this.state.showModal} onHide={() => this.close()}>
                     <div className="modal-content"

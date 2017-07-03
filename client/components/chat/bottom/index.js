@@ -3,7 +3,7 @@ import { FormGroup, FormControl, HelpBlock, ControlLabel, Button , OverlayTrigge
 import ModalUploadImageContainer from '~/containers/chat/bottom/ModalUploadImageContainer'
 import EmoNavContainer from '~/containers/chat/bottom/EmoNavContainer'
 
-const ChatBottom = ({mesId, userId, sendMessage, uploadImage, styles}) => {
+const ChatBottom = ({mesId, userId, sendMessage, styles}) => {
   let msg
   return (
     <div style={styles.inputForm}>
@@ -23,7 +23,7 @@ const ChatBottom = ({mesId, userId, sendMessage, uploadImage, styles}) => {
           />
         </div>
 
-        <button style={styles.iconButton} className="btn btn-default btn-md" onClick={() => uploadImage()}>
+        <button style={styles.iconButton} className="btn btn-default btn-md">
             <i className="glyphicon glyphicon-camera"></i>
         </button>
 
