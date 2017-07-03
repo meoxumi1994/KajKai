@@ -29,7 +29,7 @@ export const createGroup = (members, groupName, groupColor, next) => {
     console.log('this ' + group);
     group.save((err) => {
         next(getGroupBasicInfo(group));
-        chatGroupCreatedPub()
+        chatGroupCreatedPub(getGroupBasicInfo(group));
     })
 };
 
