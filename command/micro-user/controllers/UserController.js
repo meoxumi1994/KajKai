@@ -5,9 +5,9 @@ import global from '../config/globalId'
 
 export const getUserController = () => {
     return (req, res) => {
-        console.log(req.decoded)
+        console.log(req.decoded);
         if (req.decoded) {
-            const id = req.decoded._id
+            const id = req.decoded._id;
             getUser(id, (user) => {
                 if (user) {
                     getUserBasicInfo(user, (data) => {

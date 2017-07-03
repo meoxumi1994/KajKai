@@ -46,7 +46,7 @@ export const getUserBasicInfo = (user) => {
         coverUrl: user.coverUrl,
         address: user.address,
         phone: user.phone,
-        language: user.language === Language.VIETNAM ? 'vi' : 'en',
+        language: user.language === Language.ENGLISH ? 'en' : 'vi',
         sex: user.sex,
         yearOfBirth: user.yearOfBirth,
         lastUpdate: {
@@ -234,14 +234,14 @@ export const validateYearOfBirth = (year) => {
     return year >= 1900 && year <= (new Date()).getYear() + 1900
 }
 
-export const createUser = (email, userName, password, verified, yearOfBirth, socialNetworkType, socialNetworkId, next) => {
-    if (userName === null || !validateName(userName)) next(null)
+export const createUser = (email, userName, password, verified, yearOfBirth, socialNetworkType, socialNetworkId, avatarUrl, next) => {
+    if (userName === null || !validateName(userName)) next(null);
     if (email === null || !checkEmail(email)) {
         if (!socialNetworkType) next(null)
     }
     if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) next(null);
     const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
-                socialNetworkId: socialNetworkId});
+                socialNetworkId: socialNetworkId, avatarUrl: avatarUrl});
     // const user = new User({email: email, userName: userName, password: password});
     // console.log(email + ' ' + userName + ' ' + password);
     // const user = new User({email: email});

@@ -353,12 +353,12 @@ export const getGoogleUser = () => {
 		var headers = {
 		    'User-Agent':       'Super Agent/0.0.1',
 		    'Content-Type':     'application/x-www-form-urlencoded'
-		}
+		};
 		var options = {
 		    url: config.GOOGLE_API_URL + req.body.tokenId, 
 		    method: 'GET',
 		   	headers: headers
-		}
+		};
 		request(options, function(error, response, body) {
 			if (!error && response.statusCode == 200) {
 				body = JSON.parse(body)

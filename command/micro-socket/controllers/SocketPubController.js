@@ -27,10 +27,10 @@ export const authoriseToken = (token, next) => {
     const pub = redis.createClient(config);
     const publishData = {token: token, eventId: getUUID()};
     pub.publish('USER.AuthorizeToken', JSON.stringify(publishData));
-    sub.subcribe('USER.AuthorizeToken' + publishData.eventId);
+    sub.subscribe('USER.AuthorizeToken' + publishData.eventId);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
-        sub.unsubcribe();
+        sub.unsubscribe();
         sub.quit();
         pub.quit();
         if (message.status === 'success') {

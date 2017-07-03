@@ -89,7 +89,7 @@ export const getInfoFromListId = (idList, next) => {
     var userIdList = [];
     var storeIdList = [];
     for (var i = 0; i < idList.length; ++i) {
-        if (idList.startsWith(USER_GLOBAL_ID)) {
+        if (idList[i].startsWith(USER_GLOBAL_ID)) {
             userIdList.push(idList[i]);
         } else {
             storeIdList.push(idList[i]);

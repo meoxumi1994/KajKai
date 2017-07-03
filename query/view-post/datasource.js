@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost/kajkav-post', (err) => {
+mongoose.connect('mongodb://localhost/kajkav-post', { useMongoClient: true }, (err) => {
     if (err) {
         console.log('error login mongoose', err)
     }
