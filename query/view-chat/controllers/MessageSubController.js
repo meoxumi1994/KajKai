@@ -9,6 +9,8 @@ export const createMessage = (message) => {
 
   const mContent = {}
 
+  console.log('Content', Content);
+
   // const mContent = new Content({
   //   text: content.text,
   //   type: content.type,
