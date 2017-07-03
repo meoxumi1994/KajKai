@@ -7,11 +7,13 @@ export const createMessage = (message) => {
     userId
   })
 
-  const mContent = new Content({
-    text: content.text,
-    type: content.type,
-    url: content.url
-  })
+  const mContent = {}
+
+  // const mContent = new Content({
+  //   text: content.text,
+  //   type: content.type,
+  //   url: content.url
+  // })
 
   if (content) mMessage.content = mContent
   if (time) mMessage.time = time
