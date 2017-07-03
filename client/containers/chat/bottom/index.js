@@ -12,10 +12,19 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   sendMessage: (mesId, id, text, url, type) => {
-
-  },
-  uploadImage: () => {
-
+    dispatch({
+        type: 'server/SEND_MESSAGE',
+        data: {
+          mesId,
+          id,
+          message: {
+            text,
+            url: '',
+            type: 'message'
+          },
+          time: Date.now()
+        }
+       })
   }
 })
 

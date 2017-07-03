@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import NewChat from '~/components/chat/top/NewChat'
 import { addMember } from '~/actions/asyn/chat/socket'
+import { getMesId } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -10,15 +11,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onNewChatSubmit: (mesId, id, conversatorId) => {
-        dispatch({
-            type: 'server/ADD_MEMBER',
-            data: {
-                mesId,
-                id,
-                members: [conversatorId],
-                time: Date.now()
-            }
-        })
+        dispatch(getMesId(id, conversatorId))
+        dispatch({type: 'REMOVE_CHAT', data: {mesId}})
     }
 })
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Grid, Row } from 'react-bootstrap'
 import ChatCenterContainer from '~/containers/chat/center'
-import ChatLeft from './left'
+import ChatLeftContainer from '~/containers/chat/left'
 
 class Chat extends React.Component {
 
@@ -15,11 +15,10 @@ class Chat extends React.Component {
 
     render() {
       let { themes, messagesKey, messagesMap, visibility, multiChat, styles } = this.props
-
       return(
         <div style={mainStyles.mainDiv} className="input-group">
             <div style={Object.assign(mainStyles.left, themes.normal.bounds)}>
-                <ChatLeft/>
+                <ChatLeftContainer/>
             </div>
             <div style={mainStyles.spliter}>
             </div>
@@ -30,7 +29,6 @@ class Chat extends React.Component {
                   messagesKey={messagesKey}
                   messagesMap={messagesMap}
                   visibility={visibility}
-                  multiChat={multiChat}
                   styles={styles}/>
             </div>
         </div>

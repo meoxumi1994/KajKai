@@ -11,17 +11,14 @@ class ChatTop extends React.Component {
     }
 
     render() {
+      // console.log('render top');
       let conversator
       const {chatListMap, currentChat, mesId, styles, close, loadChat, isNewMessage, visibility, addMemberVisibility} = this.props
 
       return (
         <div style={currentChat == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
-          {
-           isNewMessage?
-              <NewChatContainer/>
-             :
-             <label style={styles.displayLabel}>{chatListMap[mesId].displayLabel}</label>
-         }
+
+          <NewChatContainer/>
 
          <div style={styles.iconGroupDiv}>
              <Link to="/chat">
@@ -32,13 +29,13 @@ class ChatTop extends React.Component {
              <img style={styles.iconImg} src="/images/whiteClose.png" onClick={() => close(mesId)}/>
          </div>
 
-
-
           { isNewMessage? undefined: <hr style={styles.spliterHr}/> }
 
         </div>
       )
     }
 }
+
+// <label style={styles.displayLabel}>{chatListMap[mesId].displayLabel}</label>
 
 export default ChatTop
