@@ -14,7 +14,6 @@ class DisplayImage extends React.Component {
         const img = new Image();
         const that = this
         const { width, height, src } = this.props
-        console.log({ width, height, src })
         img.onload = function() {
             if(that.props.width / that.props.height < this.width / this.height){
                 that.setState({
@@ -37,12 +36,11 @@ class DisplayImage extends React.Component {
     }
     render(){
         const { width, height, src } = this.props
-        console.log(this.state.width, this.state.height, src )
+        // console.log(this.state.width, this.state.height, src )
         return(
             <div  style={{
-                    // float: 'left',
-                    height: width,
-                    width: height,
+                    height: height,
+                    width: width,
                     overflow: 'hidden'}}>
                 <img src={src}
                     style={{

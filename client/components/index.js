@@ -16,6 +16,7 @@ import MinorPost from '~/containers/entity/MinorPost'
 import DisplayImage from '~/components/entity/thumnail/DisplayImage'
 
 import GroupImage from '~/components/entity/thumnail/GroupImage'
+import Carousel from '~/components/entity/thumnail/Carousel'
 
 class Comp extends React.Component {
     constructor(props){
@@ -164,16 +165,64 @@ const Components = () => (
 
 const newComp = () => (
     <div>
-        {/* <DisplayImage width={200} height={200} src="/images/garden.png"/>
-        <DisplayImage width={200} height={200} src="/images/flower005.jpg"/> */}
+        {/* <Carousel
+            EDIT='Edit'
+            onEdit={() => console.log('onEdit')}
+            images={[
+                '/images/garden.png',
+                '/images/flower005.jpg',
+                '/images/flower001.jpg',
+                '/images/garden.png',]}
+            canEdit={false}
+            style={{
+                width: 500,
+                height: 500,
+            }}
+            canEdit={true}
+            />
         <GroupImage
             EDIT='Edit'
             onEdit={() => console.log('onEdit')}
-            images={['/images/garden.png','/images/flower005.jpg','/images/flower001.jpg']}
+            images={[
+                '/images/garden.png',
+                '/images/flower005.jpg',
+                '/images/flower001.jpg',
+                '/images/garden.png',]}
             canEdit={false}
             width={500}
             height={500}
-        />
+            canEdit={true}
+        /> */}
+        {/* <KeepImage
+            type = 'Carousel'
+            height = {500}
+            canEdit = {true}
+            images={[
+                '/images/garden.png',
+                '/images/flower005.jpg',
+                '/images/flower001.jpg',
+                '/images/garden.png',]}
+            imagesSuggest
+            /> */}
+            {/* <KeepImage
+                type={'GroupImage'} // GroupImage || Carousel
+                images={["/images/flower001.jpg",
+                "/images/garden.png",
+                "/images/flower001.jpg", "/images/flower002.jpg",
+                "/images/flower004.jpg",
+                "/images/i love you.jpg"
+                ]}
+                height={500}
+                imagesSuggest={[
+                    "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
+                    "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
+                    "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
+                    "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
+                    "/images/flower001.jpg", "/images/flower002.jpg",
+                    "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
+                ]}
+                canEdit={true}
+            /> */}
         {/* <span ref={me => {
             setTimeout(() => {
                 console.log(me.getBoundingClientRect().width)

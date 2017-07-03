@@ -59,6 +59,10 @@ class User extends React.Component {
             </div>
         )
     }
+    shouldComponentUpdate(nextProps, nextState){
+        console.log('shouldComponentUpdate', nextProps.location.pathname, nextState)
+        return true
+    }
     componentDidMount(){
         const { onGetUser } = this.props
         onGetUser()

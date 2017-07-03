@@ -17,15 +17,13 @@ class OneImage extends React.Component {
                     this.setState({ hover: false })
                     onClick()
                 }}>
-                <img src={src} style={{ width: style.width, height: style.height }}/>
                 {this.state.hover ?
                     <div style={{
                         textAlign: 'left',
                         position: 'absolute',
                         width: style.width,
                         opacity: 0.6,
-                        top: isTop?0:undefined,
-                        marginTop: isTop?0:(- 16 - style.height / 8),
+                        marginTop: isTop?0:style.height*7/8 - 16,
                         backgroundColor: '#000000' }}>
                         <img src="/images/camera.svg" style={{ margin: 8 , height: style.height / 8 }}/>
                         <span style={{ marginLeft: 8, fontSize: 12, color: 'white'}}>{ADD_PHOTO}</span>
@@ -33,11 +31,12 @@ class OneImage extends React.Component {
                 :   <div  style={{
                         textAlign: 'left',
                         position: 'absolute',
-                        top: isTop?0:undefined,
-                        marginTop: isTop?0:(- 16 - style.height / 8), }}>
+                        marginTop: isTop?0:style.height*7/8 - 16,
+                        }}>
                         <img src="/images/camera.svg" style={{ margin: 12 ,height: style.height / 10 }}/>
                     </div>
                 }
+                <img src={src} style={{ width: style.width, height: style.height }}/>
             </div>
         )
 

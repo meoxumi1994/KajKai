@@ -6,6 +6,7 @@ import Bar from '~/components/Bar'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => allString.get(state.user.language, lang)
+    // const { width } = state.inst.app
     return ({
         LOG_IN: g('LOG_IN'),
         id: state.user.id,
@@ -14,7 +15,8 @@ const mapStateToProps = (state, ownProps) => {
         isusername: state.user.username,
         avatarUrl: state.user.avatarUrl,
         isloading: (state.auth == 'WHO_ING' || state.auth == 'LOGIN_ING'),
-        unreadChat: state.inst.chat.left.unreadChat
+        unreadChat: state.inst.chat.left.unreadChat,
+        // width: width,
     })
 }
 
