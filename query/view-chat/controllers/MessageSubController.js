@@ -7,15 +7,15 @@ export const createMessage = (message) => {
     userId
   })
 
-  const mContent = {}
+  // const mContent = {}
 
-  console.log('Content', Content);
+  // console.log('Content', Content);
 
-  // const mContent = new Content({
-  //   text: content.text,
-  //   type: content.type,
-  //   url: content.url
-  // })
+  const mContent = new Content({
+    text: content.text,
+    type: content.type,
+    url: content.url
+  })
 
   if (content) mMessage.content = mContent
   if (time) mMessage.time = time
