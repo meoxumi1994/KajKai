@@ -7,9 +7,13 @@ export const createMessage = (message) => {
     userId
   })
 
-  console.log('content', JSON.stringify(content));
+  const mContent = new Content({
+    text: content.text,
+    type: content.type,
+    url: content.url
+  })
 
-  if (content) mMessage.content = content
+  if (content) mMessage.content = mContent
   if (time) mMessage.time = time
 
   Chat.findOne({ id }, (err, chat) => {
