@@ -1,4 +1,4 @@
-import { UserChat, Chat, Message } from '../models'
+import { UserChat, Chat, Message, Content } from '../models'
 
 export const createMessage = (message) => {
   const { mesId: id, senderId: userId, message: content, time } = message.message
