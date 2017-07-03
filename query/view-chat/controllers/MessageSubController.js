@@ -7,6 +7,8 @@ export const createMessage = (message) => {
     userId
   })
 
+  console.log('content', JSON.stringify(content));
+
   if (content) mMessage.content = content
   if (time) mMessage.time = time
 
@@ -19,6 +21,8 @@ export const createMessage = (message) => {
       messages = [...messages, mMessage]
       chat.lastMessageTime = mMessage.time
       chat.messages = messages
+      console.log('messages', JSON.stringify(messages));
+      console.log('chat', JSON.stringify(chat));
       chat.save()
 
       chat.users.map((user) => {
