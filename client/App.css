@@ -5,8 +5,9 @@ html {
     height: 100%;
 }
 body {
-    overflow: 'scroll';
+    overflow: 'auto';
     background-color: #E9EBEE;
+    min-width: 1100;
     height: 100%;
 }
 .panel {
@@ -527,13 +528,12 @@ textarea#note {
     height: 200px;
 }
 
+.panel {
+    border-color: #DFE0E4;
+}
+
 .grow { transition: all .17s ease-in-out; }
 .grow.growing { transform: scale(1.3); }
 
 .decline { transition: all .08s ease-in-out; }
 .decline.declineing { transform: scale(0.97); }
-
-.btnn:active {
-    width: 70px;
-    height: 74px;
-}

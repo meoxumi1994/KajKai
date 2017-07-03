@@ -5,12 +5,14 @@ import Top from '~/components/store/Top'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
-    const { id, avatarUrl, coverUrl, storename } = state.inst.store.index
+    const { userid, id, avatarUrl, coverUrl, storename } = state.inst.store.index
     return({
         id : id,
         name: storename,
         avatarUrl: avatarUrl,
         coverUrl: coverUrl,
+        userid: userid,
+        yourid: state.user.id,
     })
 }
 

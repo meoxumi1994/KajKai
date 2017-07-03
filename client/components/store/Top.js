@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 import ModalUploadImage from '~/containers/entity/modal/UploadImage'
 
 const Top = (props) => {
-    const { id, coverUrl, avatarUrl, name, onUploadImage, location} = props
-    const ButtonLine = ({ title, last, link}) => {
+    const { id, userid, yourid, coverUrl, avatarUrl, name, onUploadImage, location} = props
+    const ButtonLine = ({ title, last, link }) => {
         return (
             <Link to={"/"+id + link}>
                 <button type="button" className="btn btn-default"
-                    style={{ height: 46, width: 78, borderRadius: 0, borderRightWidth: last, fontSize: 16 }}>
+                    style={{ height: 46, width: 78, borderRadius: 0, borderColor: '#DFE0E4',borderRightWidth: last, fontSize: 16 }}>
                     {title}
                 </button>
                 {location.pathname.split('/')[2] == link.split('/')[1] &&
@@ -76,9 +76,9 @@ const Top = (props) => {
                     <ButtonLine title="Post" last="0" link="/post"/>
                     <ButtonLine title="Photos" last="0" link="/photo"/>
                     <ButtonLine title="Videos" last="0" link="/video"/>
-                    <ButtonLine title="Contact" last="0" link="/contact"/>
-                    <ButtonLine title="Activity" last="0" link="/activity"/>
-                    <ButtonLine title="Setting" last="1px" link="/setting"/>
+                    <ButtonLine title="Contact" last={(userid == yourid) ? 0:'1px'} link="/contact"/>
+                    {(userid == yourid) && <ButtonLine title="Activity" last="0" link="/activity"/>}
+                    {(userid == yourid) && <ButtonLine title="Setting" last="1px" link="/setting"/>}
                 </div>
             </div>
             <hr style={{ marginTop: 43, marginBottom: 0, borderColor: 'transparent'}}></hr>

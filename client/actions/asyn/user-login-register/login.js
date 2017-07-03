@@ -12,9 +12,10 @@ export const logIn = (email, password) => dispatch => {
         address: undefined,
         phone: undefined,
     })
-    .then(({ user }) => {
+    .then(({ user, tokenId }) => {
         if(user.username){
             dispatch(authData('LOGIN_SUCCESS', user))
+            dispatch({ type: 'server/sendToken', tokenId: tokenId })
         }else{
             dispatch(authAction('LOGIN_FAILED'))
         }
@@ -32,9 +33,10 @@ export const logInFaceBook = (tokenId) => dispatch => {
         address: undefined,
         phone: undefined,
     })
-    .then(({ user }) => {
+    .then(({ user, tokenId }) => {
         if(user){
             dispatch(authData('LOGIN_SUCCESS', user))
+            dispatch({ type: 'server/sendToken', tokenId: tokenId })
         }else{
             dispatch(authAction('LOGIN_FAILED'))
         }
@@ -51,9 +53,10 @@ export const logInGoogle = (tokenId) => dispatch => {
         address: undefined,
         phone: undefined,
     })
-    .then(({ user }) => {
+    .then(({ user, tokenId }) => {
         if(user.username){
             dispatch(authData('LOGIN_SUCCESS', user))
+            dispatch({ type: 'server/sendToken', tokenId: tokenId })
         }else{
             dispatch(authAction('LOGIN_FAILED'))
         }

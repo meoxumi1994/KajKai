@@ -8,35 +8,13 @@ const HandlerUser = ({ LOG_IN,
     id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat}) => {
     if(isusername){
         return (
-            <div style={{ marginLeft: 60, width: 145, float: 'left'}}>
-                <div className="dropdown" style={{ float: 'left'}}>
-                    <div className="btn btn-default btn-xs dropdown-toggle" id="chatDropDown" data-toggle="dropdown"
-                        style={{ paddingLeft: 3, paddingRight: 3,
-                            borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
-                        <RiseUp
-                            src="/images/message.svg"
-                            srcHas="/images/message.svg"
-                            width="29" height="29" number="2"/>
-                    </div>
-                    <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
-                        <ChatListContainer/>
-                    </ul>
-                </div>
-
-                <div style={{marginLeft: 3, float: 'left'}}>
-                    <RiseUp
-                        src="/images/notification.svg"
-                        srcHas="/images/notification.svg"
-                        width="29" height="29" number="12"/>
-                </div>
-
-                <div className="dropdown" style={{ width : 15, float: 'right'}}>
-                  <div className="btn btn-default btn-xs  dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
-                      style={{ paddingLeft: 3, paddingRight: 3,
-                          borderColor: 'white', paddingTop: 0, paddingBottom: 0, height: 31}} >
-                      <img src="/images/setting.svg" alt="Cinque Terre" width="24" height="27"/>
-                </div>
-
+            <div>
+                <div className="dropdown" style={{ padding: 0, float: 'right'}}>
+                    <div className="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
+                        style={{ padding: 0, float: 'right', borderRadius: 0,
+                            borderColor: 'white'}} >
+                        <img src="/images/setting.svg" alt="Cinque Terre" style={{ height: 29 }}/>
+                  </div>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenu1"
                       style={{ marginLeft: -100 }}>
                       <li><a href="#" onClick={()=> onLogoutClick() }>create store</a></li>
@@ -45,12 +23,40 @@ const HandlerUser = ({ LOG_IN,
                   </ul>
               </div>
 
-              <div className="btn btn-transparent btn-xs" style={{ padding: 0, float: 'right'}}>
-                  <Link to={"/"+id} >
-                      <img src={avatarUrl} alt="Cinque Terre" width="29" height="29"/>
-                  </Link>
-              </div>
+                <div className="btn btn-transparent btn-xs" style={{ marginRight: 10, padding: 0, float: 'right'}}>
+                    <Link to={"/user/"+id} >
+                        <img src={avatarUrl} alt="Cinque Terre" width="29" height="29"/>
+                    </Link>
+                </div>
 
+                <div style={{ marginRight: 30, float: 'right' }}>
+                    <RiseUp
+                        src="/images/globe.svg"
+                        style={{
+                            width: 35,
+                            height: 29,
+                            imgWidth: 20,
+                            imgHeight: 20,
+                        }} number="12"/>
+                </div>
+
+                <div className="dropdown" style={{ marginRight: 10, float: 'right'}}>
+                    <div className="btn btn-default btn-xs dropdown-toggle" id="chatDropDown" data-toggle="dropdown"
+                        style={{ borderColor: 'white', padding: 0, height: 31}} >
+                        <RiseUp
+                            src="/images/message.svg"
+                            style={{
+                                width: 35,
+                                height: 29,
+                                imgWidth: 20,
+                                imgHeight: 20,
+                            }}
+                            number="2"/>
+                    </div>
+                    <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
+                        <ChatListContainer/>
+                    </ul>
+                </div>
             </div>
         )
     }
@@ -75,69 +81,71 @@ const HandlerUser = ({ LOG_IN,
 }
 
 const BarScreen = (props) => {
-    const { SEARCH_PRODUCT, SEARCH_LOCATION, } = props
+    const { SEARCH_PRODUCT, SEARCH_LOCATION } = props
     return (
-        <div className="container-fluid"
-            style={{ position: 'fixed', width: '100%',
+        <div
+            style={{ position: 'fixed',
+            width: '100%',
             backgroundColor: 'white',
-            zIndex: 1, left: 0, top: 0, padding: 0, }}>
-            <div className="row" style={{ margin: 'auto', width: 1100, marginTop: 8, marginBottom: 8 }}>
-                <div className="col-xs-1" style={{ padding: 0}}>
-                    <div>
-                        <div className="btn btn-transparent btn-xs" style={{ padding: 0 }}>
-                            <Link to="/">
-                                <img src="/images/kajkai.svg" alt="Cinque Terre" width="27" height="27"/>
-                            </Link>
-                        </div>
-                        <div className="btn btn-transparent btn-xs" style={{ padding: 0, marginLeft: 10 }}>
-                            <Link to="/map">
-                                <img src="/images/map.svg" alt="Cinque Terre" width="27" height="27"/>
-                            </Link>
+            zIndex: 10}}>
+            <div className="container-fluid">
+                <div className="row" style={{ margin: 'auto',  minWidth: 860, marginTop: 9, marginBottom: 9 }}>
+                    <div className="col-xs-1" style={{ padding: 0}}>
+                        <div>
+                            <div className="btn btn-transparent btn-xs" style={{ padding: 0 }}>
+                                <Link to="/">
+                                    <img src="/images/kajkai.svg" alt="Cinque Terre" width="27" height="27"/>
+                                </Link>
+                            </div>
+                            <div className="btn btn-transparent btn-xs" style={{ padding: 0, marginLeft: 10 }}>
+                                <Link to="/map">
+                                    <img src="/images/map.svg" alt="Cinque Terre" width="27" height="27"/>
+                                </Link>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="col-xs-4"  style={{ padding: 0}}>
-                    <div className="input-group">
-                      <div className="input-group-btn">
-                        <button type="button" className="btn btn-default btn-sm dropdown-toggle"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span className="caret"></span>
-                        </button>
-                        <ul className="dropdown-menu">
-                          <li><a href="#" key="1">Another action</a></li>
-                          <li><a href="#" key="2">Another</a></li>
-                          <li><a href="#" key="3">Something else here</a></li>
-                          <li role="separator" className="divider"></li>
-                          <li><a href="#">All</a></li>
-                        </ul>
-                      </div>
-                      <input type="text" className="form-control input-sm" placeholder={SEARCH_PRODUCT}/>
-                      <span className="input-group-btn">
-                          <button className="btn btn-default btn-sm" type="button">
-                              <i className="glyphicon glyphicon-search"></i>
-                          </button>
-                      </span>
-                    </div>
-                </div>
-                <div className="col-xs-2"  style={{ padding: 0}}>
-                    <div className="input-group" style={{ marginLeft: 10 }}>
-                        <input type="text" className="form-control input-sm" placeholder={SEARCH_LOCATION} />
-                        <span className="input-group-btn">
-                            <button className="btn btn-default btn-sm" type="button" >
-                                <i className="glyphicon glyphicon-map-marker"></i>
+                    <div className="col-xs-4"  style={{ padding: 0}}>
+                        <div className="input-group">
+                          <div className="input-group-btn">
+                            <button type="button" className="btn btn-default btn-sm dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span className="caret"></span>
                             </button>
-                        </span>
+                            <ul className="dropdown-menu">
+                              <li><a href="#" key="1">Another action</a></li>
+                              <li><a href="#" key="2">Another</a></li>
+                              <li><a href="#" key="3">Something else here</a></li>
+                              <li role="separator" className="divider"></li>
+                              <li><a href="#">All</a></li>
+                            </ul>
+                          </div>
+                          <input type="text" className="form-control input-sm" placeholder={SEARCH_PRODUCT}/>
+                          <span className="input-group-btn">
+                              <button className="btn btn-default btn-sm" type="button">
+                                  <i className="glyphicon glyphicon-search"></i>
+                              </button>
+                          </span>
+                        </div>
                     </div>
-                </div>
-                <div className="col-xs-3"  style={{ padding: 0}}>
-                    <div style={{ position: 'absolute', right: 0}}>
-                        <HandlerUser {...props}/>
+                    <div className="col-xs-3"  style={{ padding: 0}}>
+                        <div className="input-group" style={{ marginLeft: 10 }}>
+                            <input type="text" className="form-control input-sm" placeholder={SEARCH_LOCATION} />
+                            <span className="input-group-btn">
+                                <button className="btn btn-default btn-sm" type="button" >
+                                    <i className="glyphicon glyphicon-map-marker"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div className="col-xs-4"  style={{ padding: 0}}>
+                        <div style={{ position: 'absolute', right: 0}}>
+                            <HandlerUser {...props}/>
+                        </div>
                     </div>
                 </div>
             </div>
             <hr style={{ margin: 0 }}></hr>
         </div>
-
     )
 }
 

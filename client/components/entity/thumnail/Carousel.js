@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Enlarge from '~/containers/entity/thumnail/Enlarge'
+import DisplayImage from '~/components/entity/thumnail/DisplayImage'
 
 class Carousel extends React.Component {
     constructor(props){
@@ -10,20 +11,28 @@ class Carousel extends React.Component {
             openModal: false,
         }
     }
-    openModal(){
+    openModal(index){
         const img = new Image();
         const that = this
         img.onload = function() {
+            console.log({
+                openModal: true,
+                imgHeight: this.height,
+                imgWidth: this.width,
+                index: index,
+            })
             that.setState({
                 openModal: true,
                 imgHeight: this.height,
                 imgWidth: this.width,
+                index: index,
             })
         }
-        img.src = this.props.images[0];
+        img.src = this.props.images[index];
     }
     render(){
         const { EDIT, canEdit, images, style, onEdit, textChange } = this.props
+        console.log(this.state.index)
         return(
             <div style={{ width: style.width, height: style.height }}>
               <div id="myCarousel" className="carousel slide" data-ride="carousel">
@@ -31,11 +40,14 @@ class Carousel extends React.Component {
                     style={{ padding: 0 }}
                     onMouseOver={() => this.setState({ hover: true })}
                     onMouseLeave={() => this.setState({ hover: false })}
-                    onClick={() => this.openModal() }
+                    onClick={() => this.openModal(0) }
                     className="btn carousel-inner">
                     {images.map((item, index) =>
                         <div key={index} className={index?"item":"item active"}>
-                          <img key={index} src={item} style={{ width: style.width, height: style.height }}/>
+                          <DisplayImage
+                              src={item}
+                              width={style.width}
+                              height={style.height}/>
                         </div>
                     )}
                     {/* { (canEdit && onedit && this.state.hover) ?
@@ -89,12 +101,13 @@ class Carousel extends React.Component {
               }
               {this.state.openModal &&
                   <Enlarge close={() => this.setState({ openModal: false })}
-                      FULL_SCREEN={'Full Screen'}
-                      TITLE={images[0]}
-                      ratio={this.state.ratio}
                       imgHeight={this.state.imgHeight}
                       imgWidth={this.state.imgWidth}
-                      src={images[0]}/>
+                      images={images}
+                      index={this.state.index}
+                      left={() => this.openModal((this.state.index + images.length - 1 ) % images.length)}
+                      right={() => this.openModal((this.state.index + images.length + 1 ) % images.length)}
+                  />
               }
             </div>
         )

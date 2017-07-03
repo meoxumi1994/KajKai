@@ -6,8 +6,10 @@ import Top from '~/components/user/Top'
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const { id, avatarUrl, coverUrl, username } = state.inst.user.index
+    const user = state.user
     return({
         id : id,
+        yourid: user.id,
         name: username,
         avatarUrl: avatarUrl,
         coverUrl: coverUrl,

@@ -9,6 +9,7 @@ const mapStateToProps = (state, ownProps) => {
     return({
         height: height,
         width: width,
+        FULL_SCREEN: g('FULL_SCREEN'),
     })
 }
 

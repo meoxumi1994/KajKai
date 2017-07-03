@@ -15,40 +15,32 @@ class Magic extends React.Component {
     render(){
         const { src, openModal, more, style } = this.props
         return(
-            <div style={{ ...style, float: 'left'}} >
-                <DisplayImage
-                    src={src}
-                    width={200}
-                    height={300}
-                    // style={{
-                    //     opacity: (more || this.state.hover)?0.6:1,
-                    // }}
-                />
-                {/* <div className="btn"
-                    onMouseOver={() => this.setState({ hover: true })}
-                    onMouseLeave={() => this.setState({ hover: false })}
-                    style={{ ...style, padding: 0 }}
-                    onClick={() => openModal() }>
+            <div className="btn"
+                onMouseOver={() => this.setState({ hover: true })}
+                onMouseLeave={() => this.setState({ hover: false })}
+                style={{ ...style,
+                    padding: 0,
+                }}
+                onClick={() => openModal() }>
+                {more &&
+                    <span style={{
+                        marginTop: style.width/2 - 30,
+                        color: 'white',
+                        marginLeft: -15,
+                        zIndex: 1,
+                        fontSize: 37,
+                        textShadow: '0px 0px 4px #000000',
+                        position: 'absolute', }}>
+                        {"+"+ more}
+                    </span>
+                }
+                <div style={{ opacity: (this.state.hover)?0.6:1, }}>
                     <DisplayImage
                         src={src}
-                        width={style.width}
-                        height={style.height}
-                        // style={{
-                        //     opacity: (more || this.state.hover)?0.6:1,
-                        // }}
+                        width={style.width-1}
+                        height={style.height-1}
                     />
-                    {more &&
-                        <span style={{
-                            marginTop: 63,
-                            marginLeft: -107,
-                            color: 'white',
-                            fontSize: 37,
-                            textShadow: '2px 2px 4px #000000',
-                            position: 'absolute', }}>
-                            {"+"+ more}
-                        </span>
-                    }
-                </div> */}
+                </div>
             </div>
         )
     }

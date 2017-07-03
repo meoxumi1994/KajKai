@@ -1,8 +1,12 @@
 import React from 'react'
 
 import TimeLine from '~/components/entity/draw/TimeLine'
+import Link from 'react-router-dom'
 
-const Page = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeedSellPost, onNeedMinorPost}) => {
+const Page = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeedSellPost, onNeedMinorPost,
+    numlike, likes, numfollow, follows, address, addressMap, category, latitute, longitute, phone,
+    LIKE, FOLLOW, ADDRESSMAP, ADDRESS, CATEGORY, PHONE, BY, ANOTHER_PEOPLE, AND, THIS, PEOPLE,
+    }) => {
     let sellpost_marginTop = 0
     let minorpost_marginTop = 0
     if(this.sellpost){
@@ -15,6 +19,7 @@ const Page = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeed
         if(this.minorpost.getBoundingClientRect().bottom - height < 780)
             onNeedMinorPost()
     }
+    console.log(this.sellpost, this.minorpost)
     return (
         <div className="container-fluid">
             <div className="row">
@@ -42,7 +47,7 @@ const Page = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeed
                         <span style={{ marginTop: 10 }} id="loaderr"></span>
                     </div>
                 </div>
-                <div ref={ minorpost => this.minorpost = minorpost }
+                <div ref={ minorpost => { this.minorpost = minorpost }}
                     className="col col-xs-5"
                     style={{
                         height: this.minorpost_inside_height?this.minorpost_inside_height.offsetHeight: undefined,
@@ -55,6 +60,47 @@ const Page = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeed
                         marginLeft: minorpost_marginTop?(-scrollLeft-28):-28,
                         marginTop: minorpost_marginTop?(-this.minorpost_inside_height.offsetHeight + height - 343):0,
                         width: 410 }}>
+                        <div className="panel panel-default"
+                            style={{ margin: '10px 0px 0px 0px', padding: 10, fontSize: 13 }}>
+                            <div><span style={{ fontWeight: 'bold'}}>{ADDRESS}{" : "}</span>{address}</div>
+                            <div><span style={{ fontWeight: 'bold'}}>{ADDRESSMAP}{" : "}</span>{addressMap.map((item) => item+" ")}</div>
+                            <div><span style={{ fontWeight: 'bold'}}>{CATEGORY}{" : "}</span>{category}</div>
+                            <div><span style={{ fontWeight: 'bold'}}>{PHONE}{" : "}</span>{phone}</div>
+                            <div>
+                                <span style={{ fontWeight: 'bold'}}>{LIKE}{" "}{BY}{" : "}</span>
+                                {likes.map((item,index) =>
+                                    <div key={index} className="btn" style={{ padding: 0, fontSize: 13 }}>
+                                        <a>{index?", ":""}{item.username}</a>
+                                    </div>
+                                )}
+                                {likes.length? " "+AND+" ": ""}
+                                {numlike - likes.length}
+                                {" "}{likes.length?ANOTHER_PEOPLE:PEOPLE}
+                                {" "}{LIKE}
+                                {" "}{THIS}
+                                <div>
+                                    {likes.map((item,index) =>
+                                        <img key={index} width={17} height={17} style={{ margin: '4px 0px 4px 4px'}} src={item.avatarUrl}/>)}
+                                </div>
+                            </div>
+                            <div>
+                                <span style={{ fontWeight: 'bold'}}>{LIKE}{" "}{BY}{" : "}</span>
+                                {follows.map((item,index) =>
+                                    <div key={index} className="btn" style={{ padding: 0, fontSize: 13 }}>
+                                        <a>{index?", ":""}{item.username}</a>
+                                    </div>
+                                )}
+                                {follows.length? " "+AND+" ": ""}
+                                {numfollow - follows.length}
+                                {" "}{follows.length?ANOTHER_PEOPLE:PEOPLE}
+                                {" "}{FOLLOW}
+                                {" "}{THIS}
+                                <div>
+                                    {follows.map((item,index) =>
+                                        <img key={index} width={17} height={17} style={{ margin: '4px 0px 4px 4px'}} src={item.avatarUrl}/>)}
+                                </div>
+                            </div>
+                        </div>
                         {minorposts.map((intem,index) =>
                             // <div key={index} className="panel panel-default"
                             //     style={{ height: 400,margin: '10px 0px 0px 0px'}}>
