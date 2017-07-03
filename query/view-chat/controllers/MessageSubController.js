@@ -18,6 +18,7 @@ export const createMessage = (message) => {
       }
       messages = [...messages, mMessage]
       chat.lastMessageTime = mMessage.time
+      chat.messages = messages
       chat.save()
 
       chat.users.map((user) => {
