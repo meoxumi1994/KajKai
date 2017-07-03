@@ -3,7 +3,7 @@ import redis from 'redis'
 
 export const redisClient = redis.createClient()
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/kajkai-chat', (err) => {
+mongoose.connect('mongodb://localhost/kajkai-chat', { useMongoClient: true }, (err) => {
     if (err) {
         console.log('err', err)
     }
