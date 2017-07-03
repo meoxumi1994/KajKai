@@ -76,6 +76,4 @@ export const getMoreSecondLayerComments = (data, next) => {
             next(null)
         }
     })
-};/**
- * Created by creatnx on 6/28/17.
- */
+};

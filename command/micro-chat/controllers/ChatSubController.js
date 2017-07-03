@@ -1,10 +1,12 @@
 import { addNewMessage, getUnreadMessage, updateRead } from '../services/MessageService'
-import { createGroup, getGroupMessage, getMessageGroupInfo, updateGroupInfo, removeMember, addMember } from '../services/MessageGroupService'
+import { createGroup, getGroupMessage, getMessageGroupInfo, updateGroupInfo, removeMember, addMember, getGroupFullInfo } from '../services/MessageGroupService'
 import { setCounter } from '../services/UnreadMessageCountService'
 
 export const addNewMessageSub = (message, next) => {
+    console.log('mesInfo ' + JSON.stringify(message));
     addNewMessage(message.mesInfo, (chatMessage, listEmit) => {
         if (chatMessage) {
+            console.log('mesInfoChat ' + JSON.stringify({chatMessage, listEmit}));
             next({status: 'success', mes: chatMessage, emitList: listEmit})
         } else {
             next({status: 'failed'})
@@ -67,9 +69,17 @@ export const memberRemovedFromGroup = (message, next) => {
 };
 
 export const memberAddedToGroup = (message, next) => {
-    addMember(message.mesId, message.members, (infos, group) => {
-        var data = message;
-        data.members = infos;
-        next({status: 'success', data: data, receiverId: group.members});
-    })
+    if (message.mesId) {
+        addMember(message.mesId, message.members, (infos, group) => {
+            var data = message;
+            data.members = infos;
+            next({status: 'success', data: data, receiverId: group.members});
+        })
+    } else {
+        createGroup(message.members, '', '#65a9ed', (group) => {
+            getGroupFullInfo(group, (info) => {
+                next({status: 'success', data: info, receiverId: group.members});
+            })
+        })
+    }
 };

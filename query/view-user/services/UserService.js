@@ -8,23 +8,29 @@ export const getUser = (id, next) => {
           next(null)
         } else {
           next({
-            id
+            status: 'nodata',
+            user: {
+              id
+            }
           })
         }
       } else {
           next({
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            avatarUrl: user.avatarUrl,
-            coverUrl: user.coverUrl,
-            address: user.address,
-            phone: user.phone,
-            language: user.language,
-            sex: user.sex,
-            yearOfBirth: user.yearOfBirth,
-            lastUpdate: user.lastUpdate,
-            blacklist: user.blackList
+            status: 'success',
+            user: {
+              id: user.id,
+              username: user.username,
+              email: user.email,
+              avatarUrl: user.avatarUrl,
+              coverUrl: user.coverUrl,
+              address: user.address,
+              phone: user.phone,
+              language: user.language,
+              sex: user.sex,
+              yearOfBirth: user.yearOfBirth,
+              lastUpdate: user.lastUpdate,
+              blacklist: user.blackList
+            }
           })
       }
   })
