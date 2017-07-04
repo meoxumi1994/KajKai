@@ -7,6 +7,7 @@ export const getUserHandler = () => (req, res) => {
     if(!requestedId) {
       requestedId = req.decoded._id
     }
+    console.log('requestedId: ', requestedId);
 
     getUser(requestedId, (user) => {
       if (user) {
