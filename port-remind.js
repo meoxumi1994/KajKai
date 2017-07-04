@@ -16,3 +16,34 @@
 "view-store": 7071
 "view-post": 7072
 "view-chat": 7073
+
+// create auth user for new database
+use newdatabase
+db.createUser(
+  {
+    user: "admin",
+    pwd: "admin",
+    roles: [
+      { role: "readWriteAnyDatabase", db: "admin" } ,
+      { role: "userAdminAnyDatabase", db: "admin" },
+      { role: "dbAdminAnyDatabase", db: "admin" },
+      "readWrite",
+      "userAdmin",
+      "dbAdmin"
+    ]
+  }
+)
+
+// create admin, DONE: no need any more
+use admin
+db.createUser(
+  {
+    user: "admin",
+    pwd: "admin",
+    roles: [
+      "readWriteAnyDatabase",
+      "userAdminAnyDatabase",
+      "dbAdminAnyDatabase"
+     ]
+  }
+)
