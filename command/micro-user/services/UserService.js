@@ -223,7 +223,7 @@ export const validateSex = (sex) =>{
 export const updateVerifyUser = (id, next) => {
     getUser(id, (user) => {
         if (user) {
-            user.verified = 1
+            user.verified = 1;
             user.save(() => {
                 next(true)
             })

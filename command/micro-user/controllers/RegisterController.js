@@ -46,7 +46,7 @@ export const confirmEmailVerification = () => {
         } else {
             updateVerifyUser(decoded._id, (status) => {
                 if (!status) {
-                  console.log('err: ', err);
+                  // console.log('err: ', err);
                     res.redirect(redirectUrl + '/login')
                 } else {
                     res.cookie('token', getUserToken(decoded._id));
