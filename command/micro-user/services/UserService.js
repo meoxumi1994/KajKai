@@ -132,7 +132,9 @@ export const getUserFromFacebookId = (facebookId, next) => {
 }
 
 export const getUserToken = (id) => {
-    return jwt.sign({_id: getUserGlobalId(id)}, 'secret', { expiresIn: 60 * 60 * 60 });
+    let curId = id;
+    if (!id.startsWith(USER_GLOBAL_ID)) curId = getUserGlobalId(curId);
+    return jwt.sign({_id: curId}, 'secret', { expiresIn: 60 * 60 * 60 });
 }
 
 export const verifyToken = (token) => {
