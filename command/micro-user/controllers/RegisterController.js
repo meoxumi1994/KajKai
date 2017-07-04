@@ -49,7 +49,9 @@ export const confirmEmailVerification = () => {
                   // console.log('err: ', err);
                     res.redirect(redirectUrl + '/login')
                 } else {
-                    res.cookie('token', getUserToken(decoded._id));
+                    const token = getUserToken(decoded._id);
+                    res.cookie('token', token);
+                    console.log("this " + verifyToken(token).decoded._id);
                     res.redirect(redirectUrl + '/user/' + decoded._id)
                 }
             })
