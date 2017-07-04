@@ -122,6 +122,6 @@ export const loginGoogle = () => {
 export const logOutUser = () => {
     return (req, res) => {
         res.cookie('token', 'invalid');
-        res.json({})
+        res.json({status: 'success'});
     }
 };
