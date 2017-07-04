@@ -134,7 +134,7 @@ export const getUserFromFacebookId = (facebookId, next) => {
 export const getUserToken = (id) => {
     let curId = JSON.stringify(id);
     console.log(id + ' ' + curId);
-    if (curId.startsWith(USER_GLOBAL_ID)) curId = getUserGlobalId(curId);
+    if (!curId.startsWith(USER_GLOBAL_ID)) curId = getUserGlobalId(curId);
     console.log(id + ' ' + curId);
     return jwt.sign({_id: curId}, 'secret', { expiresIn: 60 * 60 * 60 });
 }
