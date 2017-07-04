@@ -3,15 +3,15 @@ import { UserChat, Chat, Message, Content } from '../models'
 export const createMessage = (message) => {
   const { mesId: id, senderId: userId, message: content, time } = message.message
 
-  const mMessage = new Message({
+  const mMessage = {
     userId
-  })
+  }
 
-  const mContent = new Content({
+  const mContent = {
     text: content.text,
     type: content.type,
     url: content.url
-  })
+  }
 
   if (content) mMessage.content = mContent
   if (time) mMessage.time = time
