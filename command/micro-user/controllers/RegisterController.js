@@ -51,7 +51,7 @@ export const confirmEmailVerification = () => {
                 } else {
                     const token = getUserToken(decoded._id);
                     res.cookie('token', token);
-                    console.log("this " + verifyToken(token).decoded._id);
+                    console.log("this " + JSON.stringify(verifyToken(token)));
                     res.redirect(redirectUrl + '/user/' + decoded._id)
                 }
             })
