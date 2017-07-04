@@ -253,7 +253,7 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
             next(user)
         }
     })
-}
+};
 
 export const updateUserInfo = (userId, info, next) => {
     getUser(userId, (user) => {

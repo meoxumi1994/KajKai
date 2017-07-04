@@ -104,13 +104,14 @@ export const loginGoogle = () => {
                         console.log("Im hrere");
                         createUser(body.email, body.name, '1234', 1, null, SocialType.GOOGLE, null, body.picture, (newUser) => {
                             console.log('shit ' + JSON.stringify(newUser));
-                            if (newUser) {
+                            if (newUser !== null) {
                                 console.log('fuck user');
                                 createUserPub(newUser);
                                 const token = getUserToken(newUser._id);
                                 res.cookie('token', token);
                                 res.json({user: getUserBasicInfo(newUser), tokenId: token});
                             } else {
+                                console.log('fuckshit error');
                                 res.json({error: 'error'})
                             }
                         })
