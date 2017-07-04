@@ -11,7 +11,7 @@
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.24.1",
-    "mongoose": "^4.10.7",
+    "mongoose": "4.11.1",
     "redis": "^2.7.1"
   }
 }
