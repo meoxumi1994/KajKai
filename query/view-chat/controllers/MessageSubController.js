@@ -27,24 +27,26 @@ export const createMessage = (message) => {
       chat.messages = messages
       console.log('messages', JSON.stringify(messages));
       console.log('chat', JSON.stringify(chat));
-      chat.save()
-
-      chat.users.map((user) => {
-        UserChat.findOne({ userId: user.id}, (err, userChat) => {
-          if (userChat) {
-            let { chats } = userChat
-            for (let i = 0; i < chats.length; i++) {
-              if (chats[i].id == chat.id) {
-                chats.splice(i, 1)
-                chats = [...chats, chat]
-                break
-              }
-            }
-            userChat.chats = chats
-            userChat.save()
-          }
-        })
+      chat.save((err) => {
+        console.log('error', err);
       })
+
+      // chat.users.map((user) => {
+      //   UserChat.findOne({ userId: user.id}, (err, userChat) => {
+      //     if (userChat) {
+      //       let { chats } = userChat
+      //       for (let i = 0; i < chats.length; i++) {
+      //         if (chats[i].id == chat.id) {
+      //           chats.splice(i, 1)
+      //           chats = [...chats, chat]
+      //           break
+      //         }
+      //       }
+      //       userChat.chats = chats
+      //       userChat.save()
+      //     }
+      //   })
+      // })
     }
   })
 }
