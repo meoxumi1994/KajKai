@@ -31,10 +31,10 @@ export const loginFacebook = () => {
                     } else {
                         createUser(body.email, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, body.picture.data.url, (user) => {
                             if (user) {
+                                createUserPub(user);
                                 const token = getUserToken(user._id);
                                 res.cookie('token', token);
                                 res.json({user: getUserBasicInfo(user), tokenId: token});
-                                createUserPub(user);
                             } else {
                                 res.json({error: error})
                             }
@@ -104,10 +104,10 @@ export const loginGoogle = () => {
                             if (!user) {
                                 res.json({error: 'error'})
                             } else {
+                                createUserPub(user);
                                 const token = getUserToken(user._id);
                                 res.cookie('token', token);
                                 res.json({user: getUserBasicInfo(user), tokenId: token});
-                                createUserPub(user);
                             }
                         })
                     }
