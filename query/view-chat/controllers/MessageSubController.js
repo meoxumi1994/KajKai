@@ -26,6 +26,7 @@ export const createMessage = (message) => {
       chat.lastMessageTime = mMessage.time
       chat.messages = messages
       console.log('messages', JSON.stringify(messages));
+      console.log('chat.messages', JSON.stringify(chat.messages));
       console.log('chat', JSON.stringify(chat));
       chat.save((err) => {
         console.log('error', err);
