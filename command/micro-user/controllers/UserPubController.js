@@ -7,7 +7,7 @@ import globalId from '../config/globalId'
 export const createUserPub = (user) => {
     const pub = redis.createClient(config);
     const publicData = {user: getUserBasicInfo(user)};
-    console.log('fuck User Created ' + publicData);
+    console.log('fuck User Created ' + JSON.stringify(publicData));
     pub.publish('USER.Created', JSON.stringify(publicData));
     pub.quit();
 };

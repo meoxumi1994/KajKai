@@ -103,6 +103,7 @@ export const loginGoogle = () => {
                     } else {
                         console.log("Im hrere");
                         createUser(body.email, body.name, '1234', 1, null, SocialType.GOOGLE, null, body.picture, (user) => {
+                            console.log('shit ' + JSON.stringify(user));
                             if (!user) {
                                 res.json({error: 'error'})
                             } else {
