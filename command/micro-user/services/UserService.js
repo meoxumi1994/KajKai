@@ -246,7 +246,7 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
     // console.log(email + ' ' + userName + ' ' + password);
     // const user = new User({email: email});
     console.log(user);
-    user.save(function (err) {
+    user.save((err) => {
         if (err) {
             next(null)
         } else {
