@@ -7,10 +7,6 @@ export const createMessage = (message) => {
     userId
   })
 
-  // const mContent = {}
-
-  // console.log('Content', Content);
-
   const mContent = new Content({
     text: content.text,
     type: content.type,

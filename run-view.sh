@@ -1,8 +1,8 @@
-mongo kajkas-event --eval "db.dropDatabase()" &&
-mongo kajkav-user --eval "db.dropDatabase()" &&
-mongo kajkav-store --eval "db.dropDatabase()" &&
-mongo kajkav-post --eval "db.dropDatabase()" &&
-mongo kajkav-chat --eval "db.dropDatabase()" &&
+mongo -u admin -p admin --authenticationDatabase admin kajkas-event --eval "db.dropDatabase()" &&
+mongo -u admin -p admin --authenticationDatabase admin kajkav-user --eval "db.dropDatabase()" &&
+mongo -u admin -p admin --authenticationDatabase admin kajkav-store --eval "db.dropDatabase()" &&
+mongo -u admin -p admin --authenticationDatabase admin kajkav-post --eval "db.dropDatabase()" &&
+mongo -u admin -p admin --authenticationDatabase admin kajkav-chat --eval "db.dropDatabase()" &&
 
 pm2 kill &&
 
