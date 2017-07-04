@@ -24,32 +24,25 @@ export const createMessage = (message) => {
       }
       messages = [...messages, mMessage]
       chat.lastMessageTime = mMessage.time
-      chat.messages = []
-      chat.messages.push(mMessage)
-      // chat.messages = messages
-      console.log('messages Long', JSON.stringify(messages));
-      console.log('chat.messages', JSON.stringify(chat.messages));
-      console.log('chat', JSON.stringify(chat));
-      chat.save((err) => {
-        console.log('error', err);
-      })
+      chat.messages = messages
+      chat.save()
 
-      // chat.users.map((user) => {
-      //   UserChat.findOne({ userId: user.id}, (err, userChat) => {
-      //     if (userChat) {
-      //       let { chats } = userChat
-      //       for (let i = 0; i < chats.length; i++) {
-      //         if (chats[i].id == chat.id) {
-      //           chats.splice(i, 1)
-      //           chats = [...chats, chat]
-      //           break
-      //         }
-      //       }
-      //       userChat.chats = chats
-      //       userChat.save()
-      //     }
-      //   })
-      // })
+      chat.users.map((user) => {
+        UserChat.findOne({ userId: user.id}, (err, userChat) => {
+          if (userChat) {
+            let { chats } = userChat
+            for (let i = 0; i < chats.length; i++) {
+              if (chats[i].id == chat.id) {
+                chats.splice(i, 1)
+                chats = [...chats, chat]
+                break
+              }
+            }
+            userChat.chats = chats
+            userChat.save()
+          }
+        })
+      })
     }
   })
 }
