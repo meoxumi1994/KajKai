@@ -245,7 +245,10 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
     // const user = new User({email: email, userName: userName, password: password});
     // console.log(email + ' ' + userName + ' ' + password);
     // const user = new User({email: email});
-    console.log(user);
+
+
+    console.log('func ' + user);
+    console.log('not func ' + JSON.stringify({email, userName, password, verified, yearOfBirth, socialNetworkType, socialNetworkId, avatarUrl}));
     user.save((err) => {
         if (err) {
             next(null)
