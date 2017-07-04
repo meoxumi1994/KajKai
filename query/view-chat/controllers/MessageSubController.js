@@ -24,9 +24,9 @@ export const createMessage = (message) => {
       }
       messages = [...messages, mMessage]
       chat.lastMessageTime = mMessage.time
-      chat.messages = messages
-      var test = messages;
-      console.log('test',  JSON.stringify(test));
+      chat.messages = []
+      chat.messages.push(mMessage)
+      // chat.messages = messages
       console.log('messages Long', JSON.stringify(messages));
       console.log('chat.messages', JSON.stringify(chat.messages));
       console.log('chat', JSON.stringify(chat));
