@@ -91,6 +91,7 @@ export const loginGoogle = () => {
             method: 'GET',
             headers: headers
         };
+        console.log(req.body.tokenId);
         request(options, (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 body = JSON.parse(body);
@@ -100,10 +101,12 @@ export const loginGoogle = () => {
                         res.cookie('token', token);
                         res.json({user: getUserBasicInfo(user), tokenId: token});
                     } else {
+                        console.log("Im hrere");
                         createUser(body.email, body.name, '1234', 1, null, SocialType.GOOGLE, null, body.picture, (user) => {
                             if (!user) {
                                 res.json({error: 'error'})
                             } else {
+                                console.log('fuck user');
                                 createUserPub(user);
                                 const token = getUserToken(user._id);
                                 res.cookie('token', token);
