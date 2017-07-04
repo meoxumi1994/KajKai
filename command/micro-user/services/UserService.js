@@ -235,11 +235,20 @@ export const validateYearOfBirth = (year) => {
 }
 
 export const createUser = (email, userName, password, verified, yearOfBirth, socialNetworkType, socialNetworkId, avatarUrl, next) => {
-    if (userName === null || !validateName(userName)) next(null);
-    if (email === null || !checkEmail(email)) {
-        if (!socialNetworkType) next(null)
+    if (userName === null || !validateName(userName)) {
+        next(null);
+        return;
     }
-    if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) next(null);
+    if (email === null || !checkEmail(email)) {
+        if (!socialNetworkType) {
+            next(null);
+            return;
+        }
+    }
+    if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) {
+        next(null);
+        return;
+    }
     const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
                 socialNetworkId: socialNetworkId, avatarUrl: avatarUrl});
     // const user = new User({email: email, userName: userName, password: password});
