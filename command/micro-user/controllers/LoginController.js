@@ -101,20 +101,15 @@ export const loginGoogle = () => {
                         res.cookie('token', token);
                         res.json({user: getUserBasicInfo(user), tokenId: token});
                     } else {
-                        console.log("Im hrere " + JSON.stringify(body) + ' ' + error + ' ' + JSON.stringify(response));
                         createUser(body.email, body.name, '1234678', 1, null, null, null, body.picture, (newUser) => {
-                            console.log('shit ' + JSON.stringify(newUser));
                             if (newUser !== null) {
-                                console.log('fuck user');
                                 createUserPub(newUser);
                                 const token = getUserToken(newUser._id);
                                 res.cookie('token', token);
                                 res.json({user: getUserBasicInfo(newUser), tokenId: token});
                             } else {
-                                console.log('fuckshit error');
                                 res.json({error: 'error'})
                             }
-                            return;
                         })
                     }
                 })

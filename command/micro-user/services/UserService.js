@@ -235,7 +235,7 @@ export const validateYearOfBirth = (year) => {
 }
 
 export const createUser = (email, userName, password, verified, yearOfBirth, socialNetworkType, socialNetworkId, avatarUrl, next) => {
-    if (userName === null || !validateName(userName)) {
+    if (userName === null) { // || !validateName(userName)) {
         next(null);
         return;
     }
@@ -251,13 +251,6 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
     }
     const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
                 socialNetworkId: socialNetworkId, avatarUrl: avatarUrl});
-    // const user = new User({email: email, userName: userName, password: password});
-    // console.log(email + ' ' + userName + ' ' + password);
-    // const user = new User({email: email});
-
-
-    console.log('func ' + user);
-    console.log('not func ' + JSON.stringify({email, userName, password, verified, yearOfBirth, socialNetworkType, socialNetworkId, avatarUrl}));
     user.save((err) => {
         if (err) {
             next(null)
