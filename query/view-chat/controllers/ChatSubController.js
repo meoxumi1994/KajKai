@@ -28,13 +28,20 @@ export const createChat = (message) => {
 
       chat.users.map((user) => {
         UserChat.findOne({ userId: user.id }, (err, userChat) => {
+          let mChat = chat
+          for (let i = 0; i < mChat.users.length; i++) {
+            if (mChat.users[i].id == user.id) {
+              mChat.users.splice(i, 1)
+              break
+            }
+          }
           if (userChat) {
-            userChat.chats.push(chat)
+            userChat.chats.push(mChat)
             userChat.save()
           } else {
             const mUserChat = new UserChat({
               userId: user.id,
-              chats: [chat]
+              chats: [mChat]
             })
             mUserChat.save()
           }
@@ -74,14 +81,21 @@ export const updateChat = (message) => {
 
           chat.users.map((user) => {
             UserChat.findOne({ userId: user.id }, (err, userChat) => {
+              let mChat = chat
+              for (let i = 0; i < mChat.users.length; i++) {
+                if (mChat.users[i].id == user.id) {
+                  mChat.users.splice(i, 1)
+                  break
+                }
+              }
               if (userChat) {
                 const { chats } = userChat
                 for (let i = 0; i < chats.length; i++) {
                   if (chats[i].id == chat.id) {
-                    chats[i] = chat
+                    chats[i] = mChat
                     break
                   } else if (i == chats.length - 1) {
-                    chats.push(chat)
+                    chats.push(mChat)
                   }
                 }
 
@@ -92,7 +106,7 @@ export const updateChat = (message) => {
           })
         }, err => {
           console.log('error', err)
-        })        
+        })
       }
     }
   })
