@@ -25,7 +25,7 @@ export const getChatMessages = (id, offset, length, next) => {
         if (message.time < offset) {
           if (currentNumberOfMessage < length) {
 
-            let mMessage = = 'abc'/* {}
+            let mMessage = 'abc'/* {}
             mMessage.id = message.userId
             mMessage.time = message.time
             mMessage.message = message.content*/
