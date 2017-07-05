@@ -24,11 +24,12 @@ export const createChat = (message) => {
 
     Promise.all(mPromises).then((basicUsers) => {
       chat.users = basicUsers
+      let copyChat = { ...chat}
       chat.save()
 
       chat.users.map((user) => {
         UserChat.findOne({ userId: user.id }, (err, userChat) => {
-          let mChat = { ...chat }
+          let mChat = { ...copyChat }
           console.log('mChat: ', JSON.stringify(mChat));
           for (let i = 0; i < mChat.users.length; i++) {
             if (mChat.users[i].id == user.id) {
@@ -82,7 +83,7 @@ export const updateChat = (message) => {
 
           chat.users.map((user) => {
             UserChat.findOne({ userId: user.id }, (err, userChat) => {
-              let mChat = { ...chat }
+              let mChat = { ...copyChat }
               for (let i = 0; i < mChat.users.length; i++) {
                 if (mChat.users[i].id == user.id) {
                   mChat.users.splice(i, 1)
