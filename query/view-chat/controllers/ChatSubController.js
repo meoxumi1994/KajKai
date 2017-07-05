@@ -29,6 +29,7 @@ export const createChat = (message) => {
       chat.users.map((user) => {
         UserChat.findOne({ userId: user.id }, (err, userChat) => {
           let mChat = { ...chat }
+          console.log('mChat: ', JSON.stringify(mChat));
           for (let i = 0; i < mChat.users.length; i++) {
             if (mChat.users[i].id == user.id) {
               mChat.users.splice(i, 1)
