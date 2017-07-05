@@ -29,7 +29,7 @@ export const getChatMessages = (id, offset, length, next) => {
             mMessage.id = message.userId
             mMessage.time = message.time
             let { url, type, text } = message.content
-            mMessage.message = 'abc' //{ url, type, text }
+            mMessage.message = { url, type, text }
 
             mMessages.push(mMessage)
 
