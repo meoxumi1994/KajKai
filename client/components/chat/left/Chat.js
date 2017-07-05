@@ -23,7 +23,7 @@ class Chat extends React.Component {
                   }
               </div>
 
-              <div className="col col-xs-6" style={styles.messageDiv}>
+              <div className="col col-xs-5" style={styles.messageDiv}>
                     <div style={{color: myThemes.color}}><b>{displayLabel}</b></div>
                     {
                       lastMessage == undefined? undefined:
@@ -41,9 +41,9 @@ class Chat extends React.Component {
 
               {
                 lastMessage == undefined? undefined:
-                <div className="col col-xs-3" style={styles.timeDiv}>
+                <div className="col col-xs-4" style={styles.timeDiv}>
                     <small className="text-muted" style={{color: myThemes.color}}>
-                      {getTime(lastMessage.time)}
+                      {lastMessage.time}
                     </small>
                 </div>
               }

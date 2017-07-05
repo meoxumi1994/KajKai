@@ -17,10 +17,11 @@ export const getMesId = (id, person) => dispatch => {
     person: person
   }, {}
   ).then((response) => {
-        dispatch({type: 'NEW_CHAT', data: {mesId: response.mesId, label: 'Đang chờ...'}})
+        console.log('--- getMesId ', response);
+        dispatch({type: 'ADD_CHAT', data: {mesId: response.mesId, label: 'Đang chờ...'}})
         dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: response.mesId}})
         dispatch(getMessages(response.mesId, Date.now(), 10, false, true))
-        dispatch(getUser(person, response.mesId))
+        // dispatch(getUser(person, response.mesId))
   })
 }
 
@@ -28,7 +29,7 @@ export const getMessages = (mesId, offset, length, multiChat, status) => dispatc
     // console.log('--- /getMessages ', mesId);
     flem('/messages/'+mesId, {
       offset: offset,
-      length: length
+      length: 7
     }, {
         lazyLoad: {
           offset: ''
@@ -47,7 +48,7 @@ export const getMessages = (mesId, offset, length, multiChat, status) => dispatc
 
     }).then((response) => {
         if (!status) {
-            dispatch({type: 'NEW_CHAT', data: {mesId: mesId, label: 'Tin nhắn mới'}})
+            dispatch({type: 'ADD_CHAT', data: {mesId: mesId, label: 'Tin nhắn mới'}})
             dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: mesId}})
         } else {
             console.log('/getMessages response ' , response);
@@ -90,7 +91,7 @@ export const getChatList = (offset, length, multiChat) => dispatch => {
       }
     )
     .then((response) => {
-        // console.log('/getchatlist response ', response);
+        console.log('----------- /getchatlist response ', response);
         dispatch(initChatList(response.data, response.lazyLoad))
         // if (!multiChat) {
         //   dispatch(getMessages(response.data[0].mesId, Date.now(), 10, false))

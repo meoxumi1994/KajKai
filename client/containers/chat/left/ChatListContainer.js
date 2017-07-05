@@ -6,7 +6,7 @@ const mapStateToProps = (state, ownProps) => {
   const { chatListMap, chatListKey, unreadChat, currentChat } = state.inst.chat.left
   const { catagory, currentThemes} = state.inst.chat.display.themes
   const themes = catagory[currentThemes]
-  console.log('--- state: ', state.inst.chat);
+  console.log('--- state: ', state);
   return (
     {
       chatListMap,
@@ -14,7 +14,8 @@ const mapStateToProps = (state, ownProps) => {
       currentChat: currentChat.mesId,
       unreadChat: unreadChat.messages,
       themes,
-      multiChat: location.pathname == '/chat'? false: true
+      multiChat: location.pathname == '/chat'? false: true,
+      auth: state.auth
     }
   )
 }
@@ -22,7 +23,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     loadChat: (mesId, status) => {
         dispatch(getMessages(mesId, Date.now(), 10, false, status))
-        dispatch({type: 'ADD_MEMBER_VISIBILITY', display: 'none'})
     },
     getChatList: () => {
         dispatch(getChatList(Date.now(), 10))

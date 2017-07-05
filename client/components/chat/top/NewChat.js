@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, FormControl } from 'react-bootstrap'
+import { WithContext as ReactTags } from 'react-tag-input'
 
 const NewChat = ({onNewChatSubmit, user}) => {
   let conversator

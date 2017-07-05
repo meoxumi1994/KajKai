@@ -10,6 +10,6 @@ export const readChat = (mesId) => ({
 })
 
 export const addChat = (data, multiChat) => ({
-    type: multiChat? 'ADD_MULTI_CHAT': 'ADD_SINGLE_CHAT',
+    type: multiChat? 'ADD_MULTI_CHAT': 'INIT_SINGLE_MESSAGES',
     data: data
 })

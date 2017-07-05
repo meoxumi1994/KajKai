@@ -11,7 +11,7 @@ class ChatCenter extends React.Component {
 
     render() {
       let { messagesMap, mesId, styles, chatListMap, setCurrentChat, visibility } = this.props
-      console.log('center: ', mesId);
+
       if (mesId == undefined) {
         return (
           <div style={{textAlign: 'center', marginTop: 80}}><i>No conversation</i></div>

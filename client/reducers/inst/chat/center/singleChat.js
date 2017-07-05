@@ -1,11 +1,6 @@
 const singleChat = (state = {
     messagesKey: [],
     messagesMap: {},
-    visibility: {
-      top: {
-        addMemberDiv: 'none'
-      }
-    }
 }, action) => {
     switch (action.type) {
 
@@ -13,32 +8,16 @@ const singleChat = (state = {
           console.log('global/RECEIVE_MESSAGE: ', action)
           return state
 
-        case 'ADD_MEMBER_VISIBILITY':
-            return {
-                ...state,
-                visibility: {
-                  ...state.visibility,
-                  top: {
-                    ...state.visibility.top,
-                    addMemberDiv: action.display ==undefined?
-                                  state.visibility.top.addMemberDiv == 'none'?
-                                      'inline'
-                                      : 'none'
-                                  : action.display
-                  }
-                }
-            }
-
-        case 'ADD_SINGLE_CHAT':
+        case 'INIT_SINGLE_MESSAGES':
             return {
               ...state,
               messagesKey: [action.data.mesId],
               messagesMap: {
-                [action.data.mesId]: action.data.messages
+                  [action.data.mesId]: action.data.messages.reverse()
               }
             }
 
-        case 'NEW_CHAT':
+        case 'ADD_CHAT':
             return {
               ...state,
               messagesKey: ['0'],

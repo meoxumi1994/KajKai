@@ -4,7 +4,6 @@ import Message from './Message'
 
 const MessageList = ({ messagesMap, user, mesId, usersMap, styles }) => {
     let previousId
-    // console.log('render MessageList');
 
     return (
       <div style={styles.mainDiv}>

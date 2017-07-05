@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     createNewChat: () => {
-        dispatch({type: 'NEW_CHAT', data: {mesId: 0, label: 'Tin nhắn mới'}})
+        dispatch({type: 'ADD_CHAT', data: {mesId: 0, label: 'Tin nhắn mới'}})
         dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: 0}})
     }
 })

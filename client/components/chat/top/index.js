@@ -3,6 +3,7 @@ import SettingContainer from '~/containers/chat/top/SettingContainer'
 import NewChatContainer from '~/containers/chat/top/NewChatContainer'
 import AddMemberContainer from '~/containers/chat/top/AddMemberContainer'
 import { Link } from 'react-router-dom'
+import { WithContext as ReactTags } from 'react-tag-input'
 
 class ChatTop extends React.Component {
 
@@ -11,31 +12,39 @@ class ChatTop extends React.Component {
     }
 
     render() {
-      // console.log('render top');
       let conversator
-      const {chatListMap, currentChat, mesId, styles, close, loadChat, isNewMessage, visibility, addMemberVisibility} = this.props
-
+      const { chatListMap, currentChat, mesId, styles, tags} = this.props
+      const { close, loadChat, handleDelete, handleAddition } = this.props
+      const status = chatListMap[mesId].status
       return (
         <div style={currentChat == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
-
-          <NewChatContainer/>
-
-         <div style={styles.iconGroupDiv}>
-             <Link to="/chat">
-                 <img style={styles.iconImg} src="/images/chatWindow.png" onClick={() => loadChat(mesId)}/>
-             </Link>
-             <SettingContainer styles={styles}/>
-             <img style={styles.iconImg} src="/images/whiteAdd.png" onClick={() => addMemberVisibility()}/>
-             <img style={styles.iconImg} src="/images/whiteClose.png" onClick={() => close(mesId)}/>
-         </div>
-
-          { isNewMessage? undefined: <hr style={styles.spliterHr}/> }
-
+            <label style={styles.displayLabel}>{chatListMap[mesId].displayLabel}</label>
+            <AddMemberContainer/>
         </div>
       )
     }
 }
 
-// <label style={styles.displayLabel}>{chatListMap[mesId].displayLabel}</label>
+// <hr style={styles.spliterHr}/>
+// <div style={styles.iconGroupDiv}>
+//    <SettingContainer styles={styles}/>
+//    <img style={styles.iconImg} src="/images/whiteAdd.png"/>
+// </div>
+// <AddMemberContainer/>
+
+// <div>
+//     <ReactTags tags={tags}
+//           handleDelete={handleDelete}
+//           handleAddition={handleAddition}
+//           placeholder="Nhập tên một người..."
+//      />
+// </div>
+
+//---------
+// <Link to="/chat">
+//     <img style={styles.iconImg} src="/images/chatWindow.png" onClick={() => loadChat(mesId)}/>
+// </Link>
+// <img style={styles.iconImg} src="/images/whiteClose.png" onClick={() => close(mesId)}/>
+//
 
 export default ChatTop

@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch({
         type: 'server/SEND_MESSAGE',
         data: {
-          mesId,
+          mesId, //'009595a873d53db3d0eefe711c0',
           id,
           message: {
             text,

@@ -67,7 +67,8 @@ const singleChat = (color) => {
                   paddingBottom: 10,
                   paddingLeft: 10,
                   borderRadius: 10,
-                  float: 'right',
+                  marginLeft: 300
+                  // float: 'right',
               },
               senderDiv: {
                   color: 'grey',

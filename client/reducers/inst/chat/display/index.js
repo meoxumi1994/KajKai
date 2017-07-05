@@ -7,8 +7,7 @@ const display = (state = {
 
     },
     center: {
-        displayLabel: 'inline',
-        toLabel: 'none'
+
     },
     buttom: {
 
@@ -41,7 +40,6 @@ const display = (state = {
   },
 }, action) => {
     switch (action.type) {
-        
 
         default:
             return state

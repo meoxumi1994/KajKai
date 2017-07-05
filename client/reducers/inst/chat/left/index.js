@@ -2,20 +2,12 @@ const left = (state = {
   chatListKey: [],
   chatListMap: {},
   unreadChat: {},
+  tags: [{ id: 1, text: "Thailand" }, { id: 2, text: "India" }],
   currentChat: {
-    mesId: ''
+    mesId: '',
   }
 }, action) => {
     switch (action.type) {
-
-      case 'UPDATE_CHAT':
-
-          return {
-            ...state,
-            chatListMap: Object.assign({}, state.chatListMap,
-              Object.assign({}, state.chatListMap[action.data.mesId], {displayLabel: 'Tin nhắn mới tới '})
-            )
-          }
 
       case 'SET_CURRENT_CHAT':
           return {
@@ -36,7 +28,7 @@ const left = (state = {
               chatListMap: tempMap
           }
 
-      case 'NEW_CHAT':
+      case 'ADD_CHAT':
         if (state.chatListKey.indexOf(action.data.mesId) != -1) {
             return {
               ...state
