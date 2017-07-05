@@ -7,7 +7,7 @@ export const getChatMessagesHandler = () => (req, res) => {
 
     getChatMessages(id, offset, length, (messages) => {
       if (messages) {
-        res.send(messages)
+        res.json(messages)
       } else {
         res.json({status: 'failed'})
       }
