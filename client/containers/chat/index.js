@@ -73,7 +73,7 @@ const styles = {
       center: {
           mainDiv: {
             overflowY: 'scroll',
-            height: '80%',
+            height: '68%',
             backgroundColor: 'white'
           },
           rightMsg: {

@@ -11,21 +11,21 @@ export const getUser = (person, mesId) => dispatch => {
 }
 
 export const getMesId = (id, person) => dispatch => {
-  console.log('get mesid ', id, person);
+  console.log('[API] /get mesid ', id, person);
   flem('/mesid', {
     id: id,
     person: person
   }, {}
   ).then((response) => {
         console.log('--- getMesId ', response);
-        dispatch({type: 'ADD_CHAT', data: {mesId: response.mesId, label: 'Gửi tin nhắn...'}})
+        dispatch({type: 'ADD_CHAT', data: {mesId: response.mesId, label: 'Xin chờ...'}})
         dispatch(setCurrentChat(response.mesId))
+        dispatch(getUser(person, response.mesId))
         dispatch(getMessages(response.mesId, Date.now(), 10, true))
   })
 }
 
 export const getMessages = (mesId, offset, length, status) => dispatch => {
-    // console.log('--- /getMessages ', mesId);
     flem('/messages/'+mesId, {
       offset: offset,
       length: 7
@@ -46,6 +46,7 @@ export const getMessages = (mesId, offset, length, status) => dispatch => {
         ]
 
     }).then((response) => {
+        // console.log('[API] /getMessages ', response);
         // !status: doesn't have mesId yet
         if (!status) {
             dispatch({type: 'ADD_CHAT', data: {mesId: mesId, label: 'Tin nhắn mới'}})
@@ -91,7 +92,7 @@ export const getChatList = (offset, length) => dispatch => {
       }
     )
     .then((response) => {
-        console.log('----------- /getchatlist response ', response);
+        console.log('[API] /getchatlist response ', response);
         const { data, lazyLoad } = response
         dispatch(initChatList(data, lazyLoad))
         dispatch(getMessages(data[0].mesId, Date.now(), 10, true))

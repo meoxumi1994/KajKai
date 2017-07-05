@@ -7,6 +7,7 @@ class Chat extends React.Component {
     }
 
     render() {
+
         const { chatListMap, mesId, user, currentChat } = this.props
         const { lastMessage, time, usersKey, usersMap, displayLabel, status } = chatListMap[mesId]
 
@@ -33,7 +34,7 @@ class Chat extends React.Component {
                       <div style={{marginTop: 5}}>
                         <small className="text-muted">
                           <div style={{color: textColor}}>
-                            {lastMessage.id == user.id ? 'You':usersMap[lastMessage.id].username}
+                            {lastMessage.id == user.id ? 'Bạn: ':usersMap[lastMessage.id].username}
                             :
                             {' '+ lastMessage.message.text.length > 40? lastMessage.message.text.substring(0, 40) + '...': lastMessage.message.text }
                           </div>

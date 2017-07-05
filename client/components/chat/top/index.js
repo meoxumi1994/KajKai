@@ -16,7 +16,6 @@ class ChatTop extends React.Component {
       const { chatListMap, currentChat, mesId, styles} = this.props
       const { close, loadChat } = this.props
 
-      console.log('mesId ', mesId);
       return (
         <div style={currentChat == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
             <label style={styles.displayLabel}>{chatListMap[mesId].displayLabel}</label>

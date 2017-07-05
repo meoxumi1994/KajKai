@@ -8,13 +8,66 @@ const left = (state = {
 }, action) => {
     switch (action.type) {
 
-      case 'global/RECEIVE_MESSAGE':
-          var map = state.chatListMap          
-          console.log();
-
+      case 'UPDATE_CHAT':
+          const id = action.data.mesId
+          const displayLabel = action.data.displayLabel
           return {
-            ...state
+            ...state,
+            chatListMap: {
+              ...state.chatListMap,
+              [id]: {
+                ...state.chatListMap[id],
+                displayLabel: 'Tin nhắn mới đến ' + displayLabel
+              }
+            }
           }
+
+      case 'global/RECEIVE_MESSAGE':
+          const { mesId, senderId, message, time} = action.data
+          console.log('global/RECEIVE_MESSAGE ', state.chatListMap[mesId]);
+          if (state.chatListMap[mesId] == undefined || state.chatListMap[mesId].status == false) {
+              console.log('create new ')
+              return {
+                ...state,
+                // chatListKey: [
+                //   ...state.chatListKey,
+                //     mesId
+                // ],
+                chatListMap: {
+                  ...state.chatListMap,
+                  [mesId]: {
+                    displayLabel: 'Test',
+                    lastMessage: {
+                      id: senderId,
+                      time,
+                      message
+                    },
+                    mesId: mesId,
+                    usersKey: [],
+                    usersMap: {},
+                    status: true
+                  }
+                }
+              }
+          } else {
+            console.log('update ', state.chatListMap[mesId]);
+              return {
+                ...state,
+                // chatListMap: {
+                //     ...state.chatListMap,
+                //     [mesId]: {
+                //         ...state.chatListMap[mesId],
+                //         lastMessage: {
+                //             id: senderId,
+                //             time,
+                //             message
+                //         }
+                //     }
+                // }
+
+              }
+          }
+
 
       case 'SET_CURRENT_CHAT':
           return {

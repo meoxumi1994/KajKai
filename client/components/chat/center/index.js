@@ -20,7 +20,7 @@ class ChatCenter extends React.Component {
       }
 
       return (
-        <div key={mesId} onClick={() => setCurrentChat(mesId)} style={{width: '100%', height: '100%'}}>
+        <div key={mesId} style={{width: '100%', height: '100%'}}>
             <ChatTopContainer
                   mesId={mesId}
                   styles={styles.top}/>

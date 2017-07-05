@@ -5,8 +5,26 @@ const singleChat = (state = {
     switch (action.type) {
 
         case 'global/RECEIVE_MESSAGE':
-          console.log('global/RECEIVE_MESSAGE: ', action)
-          return state
+          const { mesId, senderId, time, message } = action.data
+          const chat = state.messagesMap[mesId]
+          if (chat == undefined || chat == null) {
+            return state
+          }
+          console.log('message ', message);
+          return {
+            ...state,
+            messagesMap: {
+              ...state.messagesMap,
+              [mesId]: [
+                  ...state.messagesMap[mesId],
+                  {
+                      id: senderId,
+                      message,
+                      time
+                  }
+              ]
+            }
+          }
 
         case 'INIT_SINGLE_MESSAGES':
             return {
