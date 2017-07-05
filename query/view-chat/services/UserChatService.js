@@ -34,7 +34,11 @@ export const getUserChats = (userId, offset, length, next) => {
               message: lastMessage.content
             }
             mChat.displayLabel = chat.name
-            mChat.users = chat.users
+            mChat.users = chat.users.map((user) => {
+              if (user.id != userId) {
+                return user
+              }
+            })
 
             mChats.push(mChat)
 
