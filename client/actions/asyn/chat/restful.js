@@ -1,4 +1,4 @@
-import { initChatList, addChat } from './actions'
+import { initChatList, addChat, setCurrentChat } from './actions'
 import { flem } from '../../support'
 
 export const getUser = (person, mesId) => dispatch => {
@@ -18,14 +18,13 @@ export const getMesId = (id, person) => dispatch => {
   }, {}
   ).then((response) => {
         console.log('--- getMesId ', response);
-        dispatch({type: 'ADD_CHAT', data: {mesId: response.mesId, label: 'Đang chờ...'}})
-        dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: response.mesId}})
-        dispatch(getMessages(response.mesId, Date.now(), 10, false, true))
-        // dispatch(getUser(person, response.mesId))
+        dispatch({type: 'ADD_CHAT', data: {mesId: response.mesId, label: 'Gửi tin nhắn...'}})
+        dispatch(setCurrentChat(response.mesId))
+        dispatch(getMessages(response.mesId, Date.now(), 10, true))
   })
 }
 
-export const getMessages = (mesId, offset, length, multiChat, status) => dispatch => {
+export const getMessages = (mesId, offset, length, status) => dispatch => {
     // console.log('--- /getMessages ', mesId);
     flem('/messages/'+mesId, {
       offset: offset,
@@ -47,18 +46,19 @@ export const getMessages = (mesId, offset, length, multiChat, status) => dispatc
         ]
 
     }).then((response) => {
+        // !status: doesn't have mesId yet
         if (!status) {
             dispatch({type: 'ADD_CHAT', data: {mesId: mesId, label: 'Tin nhắn mới'}})
-            dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: mesId}})
+            dispatch(setCurrentChat(mesId))
         } else {
             console.log('/getMessages response ' , response);
-            dispatch(addChat(response, multiChat))
-            dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: response.mesId}})
+            dispatch(addChat(response, false))
+            dispatch(setCurrentChat(response.mesId))
         }
     })
 }
 
-export const getChatList = (offset, length, multiChat) => dispatch => {
+export const getChatList = (offset, length) => dispatch => {
     flem('/chatlist', {
       offset: offset,
       length: length
@@ -92,10 +92,9 @@ export const getChatList = (offset, length, multiChat) => dispatch => {
     )
     .then((response) => {
         console.log('----------- /getchatlist response ', response);
-        dispatch(initChatList(response.data, response.lazyLoad))
-        // if (!multiChat) {
-        //   dispatch(getMessages(response.data[0].mesId, Date.now(), 10, false))
-        //   dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: response.data[0].mesId, isNewMessage: false}})
-        // }
+        const { data, lazyLoad } = response
+        dispatch(initChatList(data, lazyLoad))
+        dispatch(getMessages(data[0].mesId, Date.now(), 10, true))
+        dispatch(setCurrentChat(data[0].mesId))
     })
 }

@@ -2,12 +2,19 @@ const left = (state = {
   chatListKey: [],
   chatListMap: {},
   unreadChat: {},
-  tags: [{ id: 1, text: "Thailand" }, { id: 2, text: "India" }],
   currentChat: {
     mesId: '',
   }
 }, action) => {
     switch (action.type) {
+
+      case 'global/RECEIVE_MESSAGE':
+          var map = state.chatListMap          
+          console.log();
+
+          return {
+            ...state
+          }
 
       case 'SET_CURRENT_CHAT':
           return {

@@ -4,9 +4,8 @@ import chatStyles from '~/components/chat/chatStyles'
 import { getChatList } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
-    const { chatListMap } = state.inst.chat.left
     return {
-        chatListMap,
+        state
     }
 }
 

@@ -2,8 +2,7 @@ import { connect } from 'react-redux'
 import Head from '~/components/chat/left/Head'
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log('---STATE ', state);
-  return state
+    return state
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

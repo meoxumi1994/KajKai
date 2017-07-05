@@ -11,11 +11,4 @@ const ChatLeft = ({chatListKey}) => {
   )
 }
 
-// {
-//     chatListKey.length == 0?
-//     <div style={{textAlign: 'left', height: 625, textAlign: 'center'}}>
-//         <i>No recent chat</i>
-//     </div>
-//     :
-
 export default ChatLeft

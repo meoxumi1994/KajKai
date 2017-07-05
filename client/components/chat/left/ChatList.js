@@ -8,28 +8,18 @@ class ChatList extends React.Component {
     }
 
     render(){
-        const { chatListMap, chatListKey, currentChat, unreadChat, themes} = this.props
+        const { chatListMap, chatListKey, currentChat, unreadChat} = this.props
         const { createNewChat, loadChat } = this.props
         return(
           <div style={{textAlign: 'left', overflowY: 'scroll', height: 625}}>
               {chatListKey.map(mesId =>
                 {
-                  const { lastMessage, time, usersKey, usersMap, displayLabel, status } = chatListMap[mesId]
-
-                  const myThemes = mesId == currentChat? themes.highlighted: themes.normal
-
+                  const { status } = chatListMap[mesId]
                   return (
                       <ul className="nav nav-tabs" key={mesId} onClick={() => loadChat(mesId, status)}
-                      style={styles.tab, {backgroundColor: getTabColor(mesId, currentChat, themes)}}>
+                      style={styles.tab, {backgroundColor: getTabColor(mesId, currentChat)}}>
                         <div className="container-fluid">
-                            <ChatContainer
-                                usersKey={usersKey}
-                                usersMap={usersMap}
-                                displayLabel={displayLabel}
-                                lastMessage={lastMessage}
-                                styles={styles}
-                                myThemes={myThemes}
-                                />
+                            <ChatContainer mesId={mesId}/>
                         </div>
                       </ul>
                   )
@@ -40,58 +30,14 @@ class ChatList extends React.Component {
     }
 }
 
-const getTabColor = (mesId, currentChat, themes) => {
+const getTabColor = (mesId, currentChat) => {
     if (mesId == currentChat) {
-      return themes.highlighted.backgroundColor
+      return '#cc3333'
     }
-    return themes.normal.backgroundColor
+    return 'white'
 }
 
 const styles = {
-  avatarDiv: {
-    float: 'left',
-    marginTop: 9,
-    marginRight: 10,
-    marginLeft: 10,
-    width: '18%',
-  },
-  avatarImg: {
-    width: 60,
-    height: 60,
-    borderRadius: 50,
-  },
-  messageDiv: {
-    height: 70,
-    marginTop: 15,
-    width: '50%',
-  },
-  timeDiv: {
-    marginTop: 15,
-    width: '25%',
-  },
-  read: {
-    name: {
-      fontWeight: 'normal'
-    },
-    msg: {
-
-    },
-    time: {
-      color: 'black'
-    }
-  },
-  unread: {
-    name: {
-      fontWeight: 'bold'
-    },
-    msg: {
-      fontWeight: 'bold'
-    },
-    time: {
-      color: 'red'
-    }
-  },
-
   tab: {
     borderWidth: 1,
     borderColor: 'grey',

@@ -7,7 +7,10 @@ class Chat extends React.Component {
     }
 
     render() {
-        const { usersKey, usersMap, displayLabel, lastMessage, styles, myThemes, user } = this.props
+        const { chatListMap, mesId, user, currentChat } = this.props
+        const { lastMessage, time, usersKey, usersMap, displayLabel, status } = chatListMap[mesId]
+
+        let textColor = mesId == currentChat? 'white': 'black'
 
         return (
           <div className="row">
@@ -24,12 +27,12 @@ class Chat extends React.Component {
               </div>
 
               <div className="col col-xs-5" style={styles.messageDiv}>
-                    <div style={{color: myThemes.color}}><b>{displayLabel}</b></div>
+                    <div style={{color: textColor}}><b>{displayLabel}</b></div>
                     {
                       lastMessage == undefined? undefined:
                       <div style={{marginTop: 5}}>
                         <small className="text-muted">
-                          <div style={{color: myThemes.color}}>
+                          <div style={{color: textColor}}>
                             {lastMessage.id == user.id ? 'You':usersMap[lastMessage.id].username}
                             :
                             {' '+ lastMessage.message.text.length > 40? lastMessage.message.text.substring(0, 40) + '...': lastMessage.message.text }
@@ -42,7 +45,7 @@ class Chat extends React.Component {
               {
                 lastMessage == undefined? undefined:
                 <div className="col col-xs-4" style={styles.timeDiv}>
-                    <small className="text-muted" style={{color: myThemes.color}}>
+                    <small className="text-muted" style={{color: textColor}}>
                       {lastMessage.time}
                     </small>
                 </div>
@@ -50,6 +53,52 @@ class Chat extends React.Component {
           </div>
         )
     }
+}
+
+const styles = {
+  avatarDiv: {
+    float: 'left',
+    marginTop: 9,
+    marginRight: 10,
+    marginLeft: 10,
+    width: '18%',
+  },
+  avatarImg: {
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+  },
+  messageDiv: {
+    height: 70,
+    marginTop: 15,
+    width: '50%',
+  },
+  timeDiv: {
+    marginTop: 15,
+    width: '25%',
+  },
+  read: {
+    name: {
+      fontWeight: 'normal'
+    },
+    msg: {
+
+    },
+    time: {
+      color: 'black'
+    }
+  },
+  unread: {
+    name: {
+      fontWeight: 'bold'
+    },
+    msg: {
+      fontWeight: 'bold'
+    },
+    time: {
+      color: 'red'
+    }
+  },
 }
 
 export default Chat

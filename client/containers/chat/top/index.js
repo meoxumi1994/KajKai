@@ -4,13 +4,10 @@ import ChatTop from '~/components/chat/top'
 const mapStateToProps = (state, ownProps) => {
     const { chatListMap, currentChat } = state.inst.chat.left
     const { user } = state
-    // console.log('--- tag: ', state.inst.chat.left);
-    // console.log('--- state ', state.inst.chat);
     return {
       chatListMap,
       currentChat: currentChat.mesId,
       isNewMessage: currentChat.isNewMessage,
-      tags: state.inst.chat.left.tags
     }
 }
 

@@ -3,8 +3,12 @@ import MessageList from '~/components/chat/center/MessageList'
 
 const mapStateToProps = (state, ownProps) => {
     const { user } = state
+    const { messagesMap } = state.inst.chat.center.singleChat
+    const { chatListMap } = state.inst.chat.left
     return {
-        user
+        user,
+        messagesMap,
+        chatListMap
     }
 }
 
