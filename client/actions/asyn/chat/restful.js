@@ -3,9 +3,25 @@ import { flem } from '../../support'
 
 export const getUser = (person, mesId) => dispatch => {
     flem('/user/'+person, {}, {}).then((response) => {
+        console.log('[API] /user ', response);
+        const { avatarUrl, username, id } = response.user
         dispatch({type: 'UPDATE_CHAT', data: {
-            mesId: mesId,
-            displayLabel: response.user.username
+            mesId,
+            username,
+            avatarUrl,
+            id
+        }})
+    })
+}
+
+export const getUser2 = (person, mesId) => dispatch => {
+    flem('/user/'+person, {}, {}).then((response) => {
+        console.log('[API] /user2 ', response);
+        dispatch({type: 'UPDATE_CHAT', data: {
+          mesId,
+          username,
+          avatarUrl,
+          id
         }})
     })
 }
@@ -95,7 +111,9 @@ export const getChatList = (offset, length) => dispatch => {
         console.log('[API] /getchatlist response ', response);
         const { data, lazyLoad } = response
         dispatch(initChatList(data, lazyLoad))
-        dispatch(getMessages(data[0].mesId, Date.now(), 10, true))
-        dispatch(setCurrentChat(data[0].mesId))
+        if (data.length > 0) {
+            dispatch(getMessages(data[0].mesId, Date.now(), 10, true))
+            dispatch(setCurrentChat(data[0].mesId))
+        }
     })
 }

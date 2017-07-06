@@ -4,7 +4,7 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 //// NEW NEW NEW NEW NEW
 
 'client/sendToken' {
-    tokenId: 
+    tokenId:
 }
 
 'client/JOIN_POST' {
@@ -293,14 +293,18 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
    }
 ),
 'global/RECEIVE_MESSAGE': {
-     mesId: '',
-     id: '',                      // senderId
+     mesId,
+     user: {
+       id,
+       avatarUrl,
+       username
+     },                      // senderId
      message: {
-         text: '',
-         url: '',
-         type: ''
+         text,
+         url,
+         type
      },
-     time: ''
+     time
  }
 
 // Add member to group or create new chat
