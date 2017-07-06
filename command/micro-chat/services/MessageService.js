@@ -2,7 +2,7 @@ import { Message } from '../models'
 import { getGroupMessage } from './MessageGroupService'
 import { getMessageContent } from './MessageContentService'
 import { updateCounterMultiple, getUnreadCounter, updateCounter } from './UnreadMessageCountService'
-import { messageCreatedPub, messageReadPub } from '../controllers/ChatPubController'
+import { messageCreatedPub, messageReadPub, getInfoFromListId } from '../controllers/ChatPubController'
 import globalId from '../config/globalId'
 
 const MESSAGE_GLOBAL_ID = globalId.MESSAGE_GLOBAL_ID;
@@ -39,7 +39,15 @@ export const addNewMessage = (mesInfo, next) => {
                     next(message, group.members);
                 });
             });
-            messageCreatedPub(message, group.members)
+            getInfoFromListId([message.senderId], (info) => {
+                let curMessage = {
+                    mesId: message.mesId,
+                    time: message.time,
+                    message: message.message,
+                    user: info[0]
+                };
+                messageCreatedPub(curMessage, group.members)
+            });
         }
     })
 };
