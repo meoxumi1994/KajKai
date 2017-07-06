@@ -15,3 +15,29 @@ export const SellPostDetail = mongoose.model('SellPostDetail', SellPostDetailSch
 export const SellPost = mongoose.model('SellPost', SellPostSchema);
 export const Store = mongoose.model('Store', StoreSchema);
 
+
+let fs = require('fs');
+fs.readFile('./data/category.json', 'utf8', (err, data) => {
+	if (err) {
+		console.log('fuck')
+	}
+	let obj = JSON.parse(data);
+	obj.forEach((e) => {
+		// console.log(e);
+		let sub = e.subcategory;
+
+		let subCategories = [];
+		sub.forEach((subcat) => {
+			// console.log(subcat);
+			let subCategory = new SubCategory({name: subcat.name});
+			subCategories.push(subCategory)
+		});
+
+		let category = new Category({name: e.name, subcategory: subCategories});
+		Category.findOne({name: e.name}, (err, data) => {
+		    if (err || !data) {
+		        category.save();
+            }
+        });
+	});
+});

@@ -43,24 +43,3 @@ module.exports = {
     SecondLayerComment
 }
 
-// var fs = require('fs')
-// fs.readFile('./data/category.json', 'utf8', function(err, data){
-// 	if (err) {
-// 		console.log('fuck')
-// 	}
-// 	var obj = JSON.parse(data)
-// 	obj.forEach(function(e) {
-// 		console.log(e)
-// 		var sub = e.subcategory
-//
-// 		var subCategories = []
-// 		sub.forEach(function(subcat){
-// 			console.log(subcat)
-// 			var subCategory = new SubCategory({name: subcat.name})
-// 			subCategories.push(subCategory)
-// 		})
-//
-// 		var category = new Category({name: e.name, subcategory: subCategories})
-// 		category.save()
-// 	})
-// })
