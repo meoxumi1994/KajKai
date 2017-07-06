@@ -1,9 +1,9 @@
+pm2 kill &&
+
 mongo -u admin -p admin --authenticationDatabase admin kajkai-user --eval "db.dropDatabase()" &&
-mongo -u admin -p admin --authenticationDatabase admin kajkai-store --eval "db.dropDatabase()" &&
+mongo -u admin -p admin --authenticationDatabase admin kajkai-store --eval "db.dropDatabase() && db.getCollection('categories').createIndex( { name: \"text\" } )" &&
 mongo -u admin -p admin --authenticationDatabase admin kajkai-comment --eval "db.dropDatabase()" &&
 mongo -u admin -p admin --authenticationDatabase admin kajkai-chat --eval "db.dropDatabase()" &&
-
-pm2 kill &&
 
 pm2 start ./command/micro-user/index-user.js &&
 pm2 start ./command/micro-store/index-store.js &&

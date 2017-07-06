@@ -8,7 +8,7 @@ export const getCategoryList = (next) => {
 			next(categories)
 		}
 	})
-}
+};
 
 // export const findCategoryByName = (name, next) => {
 // 	Category.find({name: name}, function (err) {

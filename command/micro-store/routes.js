@@ -63,5 +63,17 @@ export default {
             middleware: [auth()],
             method: 'deleteSellPostCon'
         }
+    },
+    '/categorylist': {
+        get: {
+            controller: 'CategoryController',
+            method: 'getCategoryListCon'
+        }
+    },
+    '/search/category/:keyword': {
+        get: {
+            controller: 'CategoryController',
+            method: 'searchCategoryCon'
+        }
     }
 }
