@@ -15,7 +15,7 @@ export const insertHandler = () => (req, res) => {
   user.save((err, newUser, num) => {
     console.log(err, newUser, num)
     res.json({
-      err, newUser, num
+      err, xxx: newUser.lastUpdate.phone.getTime(), num
     })
   })
 }

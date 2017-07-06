@@ -30,7 +30,7 @@ export const getUserChats = (userId, offset, length, next) => {
             mChat.mesId = chat.id
             mChat.lastMessage = {
               id: lastMessage.userId,
-              time: lastMessage.time,
+              time: lastMessage.time.getTime(),
               message: lastMessage.content
             }
             mChat.displayLabel = chat.name
