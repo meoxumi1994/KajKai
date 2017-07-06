@@ -909,15 +909,15 @@ GET /categorylist { // language la current language cua thang days
 }
 
 GET search/category/:keyword {
-status: 'success',
-categories: [
-    {
-        id: 'category001',
-        name: 'Shirt',
-    },
-    {
-        id: 'category002',
-        name: 'Food',
-    },
-]
+    status: 'success',
+    categories: [
+        {
+            id: 'category001',
+            name: 'Shirt',
+        },
+        {
+            id: 'category002',
+            name: 'Food',
+        },
+    ]
 }
