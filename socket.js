@@ -3,6 +3,10 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 
 //// NEW NEW NEW NEW NEW
 
+'client/sendToken' {
+    tokenId: 
+}
+
 'client/JOIN_POST' {
     sellpostid || minorpostid:
 }

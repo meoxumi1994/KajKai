@@ -18,6 +18,7 @@ class Page extends React.Component {
             offsetSellPost, offsetMinorPost,
             numlike, likes, numfollow, follows, address, addressMap, category, latitute, longitute, phone,
             LIKE, FOLLOW, ADDRESSMAP, ADDRESS, CATEGORY, PHONE, BY, ANOTHER_PEOPLE, AND, THIS, PEOPLE,
+            CREATE_SELLPOST,
         } = this.props
         return(
             <div className="container-fluid">
@@ -55,10 +56,6 @@ class Page extends React.Component {
                                         title={"Create Sell Post"}
                                         showModal={this.state.showEditSellPost}
                                         close={() => this.setState({ showEditSellPost: false })}/>
-                                    <div>{CREATE_SELLPOST_DESCRIPTTION}</div>
-                                    <div style={{ marginLeft: 10, color: '#4B4F56', fontSize: 13 }}>{". "}{CREATE_SELLPOST_DESCRIPTTION_1}</div>
-                                    <div style={{ marginLeft: 10, color: '#4B4F56', fontSize: 13 }}>{". "}{CREATE_SELLPOST_DESCRIPTTION_2}</div>
-                                    <div style={{ marginLeft: 10, color: '#4B4F56', fontSize: 13 }}>{". "}{CREATE_SELLPOST_DESCRIPTTION_3}</div>
                                 </div>
                             }
                             {sellposts.map((item, index) =>
