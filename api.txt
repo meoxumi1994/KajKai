@@ -875,25 +875,49 @@ GET /comment/like {
 
 
 GET /categorylist { // language la current language cua thang days
-    listCategories: [
+    status: 'success',
+    categories: [
         {
-            id: ,
-            name: ,
-            listSecondCategories: [
+            id: 'category001',
+            name: 'Shirt',
+            secondCategories: [
                 {
-                    id: ,
-                    name: ,
+                    id: 'secondcategory001',
+                    name: 'R-shirt',
+                },
+                {
+                    id: 'secondcategory002',
+                    name: 'T-shirt',
                 }
             ]
-        }
+        },
+        {
+            id: 'category002',
+            name: 'Food',
+            secondCategories: [
+                {
+                    id: 'secondcategory003',
+                    name: 'Fast Food',
+                },
+                {
+                    id: 'secondcategory004',
+                    name: 'Nutri Food',
+                }
+            ]
+        },
     ]
 }
 
 GET search/category/:keyword {
-    listCategories: [
+    status: 'success',
+    categories: [
         {
-            id: ,
-            name: ,
-        }
+            id: 'category001',
+            name: 'Shirt',
+        },
+        {
+            id: 'category002',
+            name: 'Food',
+        },
     ]
 }

@@ -513,6 +513,42 @@ app.get('/minorpost/store/:storeid', (req,res) => { // length = 2
     })
 })
 
+app.get('/categorylist', (req,res) => {
+    res.json({
+        status: 'success',
+        categories: [
+            {
+                id: 'category001',
+                name: 'Shirt',
+                secondCategories: [
+                    {
+                        id: 'secondcategory001',
+                        name: 'R-shirt',
+                    },
+                    {
+                        id: 'secondcategory002',
+                        name: 'T-shirt',
+                    }
+                ]
+            },
+            {
+                id: 'category002',
+                name: 'Food',
+                secondCategories: [
+                    {
+                        id: 'secondcategory003',
+                        name: 'Fast Food',
+                    },
+                    {
+                        id: 'secondcategory004',
+                        name: 'Nutri Food',
+                    }
+                ]
+            },
+        ]
+    })
+})
+
 app.get('/chatlist',(req,res) => {
     res.json(mockedChatList)
 })
