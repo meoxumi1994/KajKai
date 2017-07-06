@@ -86,9 +86,9 @@ export const getListStore = (storeIdList, next) => {
 };
 
 export const getInfoFromListId = (idList, next) => {
-    var userIdList = [];
-    var storeIdList = [];
-    for (var i = 0; i < idList.length; ++i) {
+    let userIdList = [];
+    let storeIdList = [];
+    for (let i = 0; i < idList.length; ++i) {
         if (idList[i].startsWith(USER_GLOBAL_ID)) {
             userIdList.push(idList[i]);
         } else {
