@@ -1,3 +1,5 @@
+import { getUser2 } from '~/actions/asyn/chat/restful'
+
 const left = (state = {
   chatListKey: [],
   chatListMap: {},
@@ -9,61 +11,75 @@ const left = (state = {
     switch (action.type) {
 
       case 'UPDATE_CHAT':
-          const id = action.data.mesId
-          const displayLabel = action.data.displayLabel
+          const { username, avatarUrl, id } = action.data
+          const mesid = action.data.mesId
           return {
             ...state,
             chatListMap: {
               ...state.chatListMap,
-              [id]: {
-                ...state.chatListMap[id],
-                displayLabel: 'Tin nhắn mới đến ' + displayLabel
+              [mesid]: {
+                ...state.chatListMap[mesid],
+                displayLabel: username,
+                usersKey: [
+                  ...state.chatListMap[mesid].usersKey,
+                  id
+                ],
+                usersMap: {
+                  ...state.chatListMap[mesid].usersMap,
+                  [id]: {
+                    id,
+                    avatarUrl,
+                    username
+                  }
+                },
+              }
+            }
+          }
+
+      case 'UPDATE_CHAT_2':
+          return {
+            ...state,
+            chatListKey: [
+                mesId
+            ],
+            chatListMap: {
+              [mesId]: {
+                displayLabel: 'Test',
+                lastMessage: {
+                  id: senderId,
+                  time,
+                  message
+                },
+                mesId: mesId,
+                usersKey: [],
+                usersMap: {},
+                status: true
               }
             }
           }
 
       case 'global/RECEIVE_MESSAGE':
           const { mesId, senderId, message, time} = action.data
-          console.log('global/RECEIVE_MESSAGE ', state.chatListMap[mesId]);
+
+          console.log('global/RECEIVE_MESSAGE ', action.data)
+
           if (state.chatListMap[mesId] == undefined || state.chatListMap[mesId].status == false) {
-              console.log('create new ')
-              return {
-                ...state,
-                // chatListKey: [
-                //   ...state.chatListKey,
-                //     mesId
-                // ],
-                chatListMap: {
-                  ...state.chatListMap,
-                  [mesId]: {
-                    displayLabel: 'Test',
-                    lastMessage: {
-                      id: senderId,
-                      time,
-                      message
-                    },
-                    mesId: mesId,
-                    usersKey: [],
-                    usersMap: {},
-                    status: true
-                  }
-                }
-              }
+              return state
           } else {
             console.log('update ', state.chatListMap[mesId]);
               return {
                 ...state,
-                // chatListMap: {
-                //     ...state.chatListMap,
-                //     [mesId]: {
-                //         ...state.chatListMap[mesId],
-                //         lastMessage: {
-                //             id: senderId,
-                //             time,
-                //             message
-                //         }
-                //     }
-                // }
+                chatListMap: {
+                    ...state.chatListMap,
+                    [mesId]: {
+                        ...state.chatListMap[mesId],
+                        lastMessage: {
+                            id: senderId,
+                            time,
+                            message
+                        }
+                    }
+                }
 
               }
           }

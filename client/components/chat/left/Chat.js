@@ -34,9 +34,9 @@ class Chat extends React.Component {
                       <div style={{marginTop: 5}}>
                         <small className="text-muted">
                           <div style={{color: textColor}}>
-                            {lastMessage.id == user.id ? 'Bạn: ':usersMap[lastMessage.id].username}
+                            {lastMessage.id == user.id ? 'Bạn':usersMap[lastMessage.id].username}
                             :
-                            {' '+ lastMessage.message.text.length > 40? lastMessage.message.text.substring(0, 40) + '...': lastMessage.message.text }
+                            {'  '+ lastMessage.message.text.length > 40? lastMessage.message.text.substring(0, 40) + '...': lastMessage.message.text }
                           </div>
                         </small>
                       </div>
