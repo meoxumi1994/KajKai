@@ -20,6 +20,7 @@ let fs = require('fs');
 fs.readFile('./data/category.json', 'utf8', (err, data) => {
 	if (err) {
 		console.log('fuck')
+        return;
 	}
 	let obj = JSON.parse(data);
 	obj.forEach((e) => {
