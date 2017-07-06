@@ -34,11 +34,6 @@ export const addNewMessage = (mesInfo, next) => {
                     userIds.push(group.members[i]);
                 }
             }
-            updateCounterMultiple(userIds, 1, () => {
-                Message.insertMany(arr, (err, docs) => {
-                    next(message, group.members);
-                });
-            });
             getInfoFromListId([message.senderId], (info) => {
                 let curMessage = {
                     mesId: message.mesId,
@@ -46,8 +41,14 @@ export const addNewMessage = (mesInfo, next) => {
                     message: message.message,
                     user: info[0]
                 };
-                messageCreatedPub(curMessage, group.members)
+                updateCounterMultiple(userIds, 1, () => {
+                    Message.insertMany(arr, (err, docs) => {
+                        next(curMessage, group.members);
+                    });
+                });
             });
+
+            messageCreatedPub(message, group.members)
         }
     })
 };
