@@ -1,23 +1,22 @@
 import { connect } from 'react-redux'
-import NewChat from '~/components/chat/top/NewChat'
-import { addMember } from '~/actions/asyn/chat/socket'
+import AddMember from '~/components/chat/top/AddMember'
 import { getMesId } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
-    return {
-        user: state.user
-    }
+  return {
+    user: state.user
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onNewChatSubmit: (mesId, id, conversatorId) => {
+    addMember: (mesId, id, conversatorId) => {
         dispatch(getMesId(id, conversatorId))
         dispatch({type: 'REMOVE_CHAT', data: {mesId}})
     }
 })
 
-const NewChatContainer = connect(
+const AddMemberContainer = connect(
   mapStateToProps, mapDispatchToProps
-)(NewChat)
+)(AddMember)
 
-export default NewChatContainer
+export default AddMemberContainer

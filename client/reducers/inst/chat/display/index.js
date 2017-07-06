@@ -7,8 +7,7 @@ const display = (state = {
 
     },
     center: {
-        displayLabel: 'inline',
-        toLabel: 'none'
+
     },
     buttom: {
 
@@ -39,21 +38,8 @@ const display = (state = {
     },
     currentThemes: 'red'
   },
-  isMultipleChat: true
 }, action) => {
     switch (action.type) {
-
-        // case 'DISPLAY_TO_LABEL':
-        //   return {
-        //
-        //   }
-
-        case 'IS_MULTIPLE_CHAT':
-          return {
-            ...state,
-            isMultipleChat: action.isMultipleChat
-          }
-
 
         default:
             return state

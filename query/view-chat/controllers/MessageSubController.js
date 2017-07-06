@@ -1,4 +1,4 @@
-import { Chat, Message } from '../models'
+import { UserChat, Chat, Message, Content } from '../models'
 
 export const createMessage = (message) => {
   const { mesId: id, senderId: userId, message: content, time } = message.message
@@ -7,7 +7,13 @@ export const createMessage = (message) => {
     userId
   })
 
-  if (content) mMessage.content = content
+  const mContent = new Content({
+    text: content.text,
+    type: content.type,
+    url: content.url
+  })
+
+  if (content) mMessage.content = mContent
   if (time) mMessage.time = time
 
   Chat.findOne({ id }, (err, chat) => {
@@ -18,6 +24,7 @@ export const createMessage = (message) => {
       }
       messages = [...messages, mMessage]
       chat.lastMessageTime = mMessage.time
+      chat.messages = messages
       chat.save()
 
       chat.users.map((user) => {

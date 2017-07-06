@@ -7,7 +7,7 @@ const Message = ({message, time, user, styles, showAvatar}) => {
 
     const showTimePopup = (
       <Popover id="popover-trigger-hover-focus">
-          {getTime(time)}
+          {time}
       </Popover>
     )
 
@@ -17,18 +17,21 @@ const Message = ({message, time, user, styles, showAvatar}) => {
       </Popover>
     )
 
+    const { avatarUrl, username } = user
+    const { text, url, type } = message
+
     return (
       <div key={time}>
           <div className="btn btn-transparent btn-xs" style={styles.imgDiv}>
               <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={showTimePopup}>
-                  <img src={user.avatarUrl} style={showAvatar?styles.imgIcon:{display: 'none'}}/>
+                  <img src={avatarUrl} style={showAvatar?styles.imgIcon:{display: 'none'}}/>
               </OverlayTrigger>
           </div>
           <div>
               <ul style={styles.text}>
-                  <small style={showAvatar?styles.senderDiv:{display: 'none'}} className="text-muted" >{user.username}</small>
+                  <small style={showAvatar?styles.senderDiv:{display: 'none'}} className="text-muted" >{username}</small>
                   <ul style={styles.bounds}>
-                      {message.text}
+                      {text}
                   </ul>
               </ul>
           </div>

@@ -1,8 +1,7 @@
-mongo kajkai-user --eval "db.dropDatabase()" &&
-mongo kajkai-store --eval "db.dropDatabase()" &&
-mongo kajkai-socket --eval "db.dropDatabase()" &&
-mongo kajkai-comment --eval "db.dropDatabase()" &&
-mongo kajkai-chat --eval "db.dropDatabase()" &&
+mongo -u admin -p admin --authenticationDatabase admin kajkai-user --eval "db.dropDatabase()" &&
+mongo -u admin -p admin --authenticationDatabase admin kajkai-store --eval "db.dropDatabase()" &&
+mongo -u admin -p admin --authenticationDatabase admin kajkai-comment --eval "db.dropDatabase()" &&
+mongo -u admin -p admin --authenticationDatabase admin kajkai-chat --eval "db.dropDatabase()" &&
 
 pm2 kill &&
 

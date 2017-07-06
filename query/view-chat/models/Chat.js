@@ -1,6 +1,6 @@
 import mongoose from '../datasource'
 import BasicUserSchema from './BasicUser'
-import MessageSchema from './Content'
+import MessageSchema from './Message'
 
 const ChatSchema = new mongoose.Schema({
   id: {type: String},

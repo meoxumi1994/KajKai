@@ -3,16 +3,39 @@ const singleChat = (state = {
     messagesMap: {},
 }, action) => {
     switch (action.type) {
-        case 'ADD_SINGLE_CHAT':
+
+        case 'global/RECEIVE_MESSAGE':
+          const { mesId, senderId, time, message } = action.data
+          const chat = state.messagesMap[mesId]
+          if (chat == undefined || chat == null) {
+            return state
+          }
+          console.log('message ', message);
+          return {
+            ...state,
+            messagesMap: {
+              ...state.messagesMap,
+              [mesId]: [
+                  ...state.messagesMap[mesId],
+                  {
+                      id: senderId,
+                      message,
+                      time
+                  }
+              ]
+            }
+          }
+
+        case 'INIT_SINGLE_MESSAGES':
             return {
               ...state,
               messagesKey: [action.data.mesId],
               messagesMap: {
-                [action.data.mesId]: action.data.messages
+                  [action.data.mesId]: action.data.messages.reverse()
               }
             }
 
-        case 'NEW_CHAT':
+        case 'ADD_CHAT':
             return {
               ...state,
               messagesKey: ['0'],

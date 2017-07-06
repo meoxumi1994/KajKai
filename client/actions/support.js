@@ -35,6 +35,9 @@ export const flem = (url, body) => {
     }
     console.log('GET',myurl)
     return fetch( myurl , {
+        headers: {
+            "Accept-Encoding": "application/json"
+        },
         method: 'GET',
         credentials: 'include',
     }).then((response) => response.json())

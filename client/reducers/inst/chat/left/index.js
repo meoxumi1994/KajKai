@@ -4,19 +4,114 @@ const left = (state = {
   unreadChat: {},
   currentChat: {
     mesId: '',
-    isNewMessage: false
   }
 }, action) => {
     switch (action.type) {
+
+      case 'UPDATE_CHAT':
+          const id = action.data.mesId
+          const displayLabel = action.data.displayLabel
+          return {
+            ...state,
+            chatListMap: {
+              ...state.chatListMap,
+              [id]: {
+                ...state.chatListMap[id],
+                displayLabel: 'Tin nhắn mới đến ' + displayLabel
+              }
+            }
+          }
+
+      case 'global/RECEIVE_MESSAGE':
+          const { mesId, senderId, message, time} = action.data
+          console.log('global/RECEIVE_MESSAGE ', state.chatListMap[mesId]);
+          if (state.chatListMap[mesId] == undefined || state.chatListMap[mesId].status == false) {
+              console.log('create new ')
+              return {
+                ...state,
+                // chatListKey: [
+                //   ...state.chatListKey,
+                //     mesId
+                // ],
+                chatListMap: {
+                  ...state.chatListMap,
+                  [mesId]: {
+                    displayLabel: 'Test',
+                    lastMessage: {
+                      id: senderId,
+                      time,
+                      message
+                    },
+                    mesId: mesId,
+                    usersKey: [],
+                    usersMap: {},
+                    status: true
+                  }
+                }
+              }
+          } else {
+            console.log('update ', state.chatListMap[mesId]);
+              return {
+                ...state,
+                // chatListMap: {
+                //     ...state.chatListMap,
+                //     [mesId]: {
+                //         ...state.chatListMap[mesId],
+                //         lastMessage: {
+                //             id: senderId,
+                //             time,
+                //             message
+                //         }
+                //     }
+                // }
+
+              }
+          }
+
 
       case 'SET_CURRENT_CHAT':
           return {
             ...state,
             currentChat: {
-                mesId: action.data.mesId,
-                isNewMessage: action.data.isNewMessage == undefined? state.currentChat.isNewMessage: action.data.isNewMessage
+                mesId: action.data.mesId
             }
           }
+
+      case 'REMOVE_CHAT':
+          var tempKey = state.chatListKey
+          var tempMap = state.chatListMap
+          tempKey.splice(action.data.mesId, 1)
+          delete tempMap[action.data.mesId]
+          return {
+              ...state,
+              chatListKey: tempKey,
+              chatListMap: tempMap
+          }
+
+      case 'ADD_CHAT':
+        if (state.chatListKey.indexOf(action.data.mesId) != -1) {
+            return {
+              ...state
+            }
+        }
+        var tempKey = state.chatListKey
+        tempKey.unshift(action.data.mesId)
+
+        var tempMap = state.chatListMap
+        tempMap[action.data.mesId] = {
+            displayLabel: action.data.label,
+            lastMessage: undefined,
+            mesId: action.data.mesId,
+            usersKey: [],
+            usersMap: {},
+            status: false
+        }
+
+        return {
+            ...state,
+            chatListKey: tempKey,
+            chatListMap: tempMap,
+        }
 
       case 'INIT_CHAT_LIST':
           if (action.data.length <= 0) {
@@ -45,7 +140,8 @@ const left = (state = {
                 lastMessage: chat.lastMessage,
                 displayLabel: tempDisplayLabel.trim().substring(0, tempDisplayLabel.length - 2),
                 usersKey: tempUserKey,
-                usersMap: tempUserMap
+                usersMap: tempUserMap,
+                status: true
               }
             }
           )
@@ -56,49 +152,9 @@ const left = (state = {
             chatListMap: tempMap
           }
 
-        case 'READ_CHAT':
-          if (state.unreadChat.indexOf(action.mesId) == -1) {
-            return state
-          }
-          const temp = state.unreadChat
-          temp.splice(temp.indexOf(action.mesId), 1)
-          return {
-            ...state,
-            unreadChat: temp
-          }
         default:
-            return state
+          return state
 
-      case 'global/UNREAD_CHAT':
-        return {
-          ...state,
-          unreadChat: action.data
-        }
-
-      case 'NEW_CHAT':
-        if (state.chatListKey.indexOf('0') != -1) {
-            return {
-              ...state
-            }
-        }
-
-        var {chatListKey: tempKey} = state
-        tempKey.unshift('0')
-
-        var {chatListMap: tempMap} = state
-        tempMap['0'] = {
-            displayLabel: 'Tin nhắn mới',
-            lastMessage: undefined,
-            mesId: '0',
-            usersKey: [],
-            usersMap: {}
-        }
-
-        return {
-            ...state,
-            chatListKey: tempKey,
-            chatListMap: tempMap,
-        }
     }
 }
 

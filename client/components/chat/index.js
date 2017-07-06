@@ -1,25 +1,25 @@
 import React from 'react'
 import { Col, Grid, Row } from 'react-bootstrap'
 import ChatCenterContainer from '~/containers/chat/center'
-import ChatLeft from './left'
-
+import ChatLeftContainer from '~/containers/chat/left'
+import { Route, Redirect } from 'react-router'
 class Chat extends React.Component {
 
     constructor(props) {
       super(props)
     }
 
-    // componentDidMount() {
-    //     this.props.getChatList()
-    // }
+    componentDidMount(){
+        this.props.getChatList()
+    }
 
     render() {
-      let { themes, messagesKey, messagesMap, multiChat, styles } = this.props
+      let { themes, messagesKey, messagesMap, visibility, multiChat, styles } = this.props
 
       return(
         <div style={mainStyles.mainDiv} className="input-group">
             <div style={Object.assign(mainStyles.left, themes.normal.bounds)}>
-                <ChatLeft/>
+                <ChatLeftContainer/>
             </div>
             <div style={mainStyles.spliter}>
             </div>
@@ -29,7 +29,7 @@ class Chat extends React.Component {
                   themes={themes}
                   messagesKey={messagesKey}
                   messagesMap={messagesMap}
-                  multiChat={multiChat}
+                  visibility={visibility}
                   styles={styles}/>
             </div>
         </div>

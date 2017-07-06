@@ -132,7 +132,11 @@ export const getUserFromFacebookId = (facebookId, next) => {
 }
 
 export const getUserToken = (id) => {
-    return jwt.sign({_id: getUserGlobalId(id)}, 'secret', { expiresIn: 60 * 60 * 60 });
+    let curId = id.toString();
+    console.log(id + ' ' + curId);
+    if (!curId.startsWith(USER_GLOBAL_ID)) curId = getUserGlobalId(curId);
+    console.log(id + ' ' + curId);
+    return jwt.sign({_id: curId}, 'secret', { expiresIn: 60 * 60 * 60 });
 }
 
 export const verifyToken = (token) => {
@@ -220,7 +224,7 @@ export const validateSex = (sex) =>{
 export const updateVerifyUser = (id, next) => {
     getUser(id, (user) => {
         if (user) {
-            user.verified = 1
+            user.verified = 1;
             user.save(() => {
                 next(true)
             })
@@ -235,25 +239,30 @@ export const validateYearOfBirth = (year) => {
 }
 
 export const createUser = (email, userName, password, verified, yearOfBirth, socialNetworkType, socialNetworkId, avatarUrl, next) => {
-    if (userName === null || !validateName(userName)) next(null);
-    if (email === null || !checkEmail(email)) {
-        if (!socialNetworkType) next(null)
+    if (userName === null) { // || !validateName(userName)) {
+        next(null);
+        return;
     }
-    if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) next(null);
+    if (email === null || !checkEmail(email)) {
+        if (!socialNetworkType) {
+            next(null);
+            return;
+        }
+    }
+    if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) {
+        next(null);
+        return;
+    }
     const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
                 socialNetworkId: socialNetworkId, avatarUrl: avatarUrl});
-    // const user = new User({email: email, userName: userName, password: password});
-    // console.log(email + ' ' + userName + ' ' + password);
-    // const user = new User({email: email});
-    console.log(user);
-    user.save(function (err) {
+    user.save((err) => {
         if (err) {
             next(null)
         } else {
             next(user)
         }
     })
-}
+};
 
 export const updateUserInfo = (userId, info, next) => {
     getUser(userId, (user) => {

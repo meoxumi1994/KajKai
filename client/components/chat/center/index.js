@@ -9,29 +9,22 @@ class ChatCenter extends React.Component {
       super(props)
     }
 
-    componentDidMount() {
-        this.props.getChatList()
-    }
-
     render() {
-      let { messagesMap, mesId, styles, chatListMap, setCurrentChat, multiChat } = this.props
+      let { mesId, styles } = this.props
+      let { setCurrentChat } = this.props
 
       if (mesId == undefined) {
         return (
-          <div>WAIT!!!</div>
+          <div style={{textAlign: 'center', marginTop: 80}}><i>No conversation</i></div>
         )
       }
-      const { usersKey, usersMap } = chatListMap[mesId]
+
       return (
-        <div key={mesId} onClick={() => setCurrentChat(mesId)} style={{width: '100%', height: '100%'}}>
+        <div key={mesId} style={{width: '100%', height: '100%'}}>
             <ChatTopContainer
-                  usersMap={usersMap}
-                  usersKey={usersKey}
                   mesId={mesId}
                   styles={styles.top}/>
             <MessageListContainer
-                  usersMap={usersMap}
-                  messagesMap={messagesMap}
                   mesId={mesId}
                   styles={styles.center}/>
             <ChatBottomContainer

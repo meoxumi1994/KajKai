@@ -20,7 +20,7 @@
     "express": "^4.15.3",
     "jsonwebtoken": "7.4.1",
     "lodash": "^4.17.4",
-    "mongoose": "^4.10.7",
+    "mongoose": "4.11.1",
     "redis": "^2.7.1"
   }
 }

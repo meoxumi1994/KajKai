@@ -146,7 +146,7 @@ class App extends React.Component {
         )
     }
     componentDidMount(){
-        this.props.onWho();
+        this.props.onWho()
     }
 }
 

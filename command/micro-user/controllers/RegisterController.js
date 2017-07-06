@@ -46,10 +46,12 @@ export const confirmEmailVerification = () => {
         } else {
             updateVerifyUser(decoded._id, (status) => {
                 if (!status) {
-                  console.log('err: ', err);
+                  // console.log('err: ', err);
                     res.redirect(redirectUrl + '/login')
                 } else {
-                    res.cookie('token', getUserToken(decoded._id));
+                    const token = getUserToken(decoded._id);
+                    res.cookie('token', token);
+                    console.log("this " + JSON.stringify(verifyToken(token)));
                     res.redirect(redirectUrl + '/user/' + decoded._id)
                 }
             })

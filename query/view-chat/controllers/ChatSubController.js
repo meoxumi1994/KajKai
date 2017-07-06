@@ -25,17 +25,23 @@ export const createChat = (message) => {
     Promise.all(mPromises).then((basicUsers) => {
       chat.users = basicUsers
       chat.save()
+
+      chat.users.map((user) => {
+        UserChat.findOne({ userId: user.id }, (err, userChat) => {
+          if (userChat) {
+            userChat.chats.push(chat)
+            userChat.save()
+          } else {
+            const mUserChat = new UserChat({
+              userId: user.id,
+              chats: [chat]
+            })
+            mUserChat.save()
+          }
+        })
+      })
     }, err => {
       console.log('error', err)
-    })
-
-    chat.users.map((user) => {
-      UserChat.findOne({ userId: user.id }, (err, userChat) => {
-        if (userChat) {
-          userChat.chats.push(chat)
-          userChat.save()
-        }
-      })
     })
   }
 }
@@ -65,27 +71,27 @@ export const updateChat = (message) => {
             chat.name = name
           }
           chat.save()
+
+          chat.users.map((user) => {
+            UserChat.findOne({ userId: user.id }, (err, userChat) => {
+              if (userChat) {
+                const { chats } = userChat
+                for (let i = 0; i < chats.length; i++) {
+                  if (chats[i].id == chat.id) {
+                    chats[i] = chat
+                    break
+                  } else if (i == chats.length - 1) {
+                    chats.push(chat)
+                  }
+                }
+
+                userChat.chats = chats
+                userChat.save()
+              }
+            })
+          })
         }, err => {
           console.log('error', err)
-        })
-
-        chat.users.map((user) => {
-          UserChat.findOne({ userId: user.id }, (err, userChat) => {
-            if (userChat) {
-              const { chats } = userChat
-              for (let i = 0; i < chats.length; i++) {
-                if (chats[i].id == chat.id) {
-                  chats[i] = chat
-                  break
-                } else if (i == chats.length - 1) {
-                  chats.push(chat)
-                }
-              }
-
-              userChat.chats = chats
-              userChat.save()
-            }
-          })
         })
       }
     }

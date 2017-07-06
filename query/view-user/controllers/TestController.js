@@ -22,6 +22,21 @@ export const insertHandler = () => (req, res) => {
 
 export const updateHandler = () => (req, res) => {
 
+  User.findOne({ id: 'ey89dheify927f02buv3u'}, (err, user) => {
+    if (user) {
+      user.username = 'What the hell is going on?'
+      user.save((err, xxx) => {
+        res.json({
+          err, xxx
+        })
+      })
+    } else {
+      res.json({
+        err
+      })
+    }
+  })
+
 
   // const address = new Address({
   //   _id: "59493a5aae88a8155cf374de"
@@ -58,17 +73,17 @@ export const updateHandler = () => (req, res) => {
   // })
   // const { username, email } = req.body
   //
-  const user = {}
-  user._id = '59493a5aae88a8155cf374kk'
-  user.username = 'abcdef'
-  user.email = 'xyztuv'
-  //
-  //
-  User.findOneAndUpdate({
-    id: 'ey89dheify927f02buv3u'
-  }, user, (a, b, c, d, e) => {
-    res.json({
-      a, b, c, d, e
-    })
-  })
+  // const user = {}
+  // user._id = '59493a5aae88a8155cf374kk'
+  // user.username = 'abcdef'
+  // user.email = 'xyztuv'
+  // //
+  // //
+  // User.findOneAndUpdate({
+  //   id: 'ey89dheify927f02buv3u'
+  // }, user, (a, b, c, d, e) => {
+  //   res.json({
+  //     a, b, c, d, e
+  //   })
+  // })
 }
