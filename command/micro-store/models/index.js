@@ -6,6 +6,7 @@ import SellPostDetailSchema from './SellPostDetail'
 import SellPostSchema from './SellPost'
 import StoreSchema from './Store'
 import CertificateSchema from './Certificate'
+import path from 'path'
 
 export const Certificate = mongoose.model('Certificate', CertificateSchema);
 export const SubCategory = mongoose.model('SubCategory', SubCategorySchema);
@@ -17,9 +18,9 @@ export const Store = mongoose.model('Store', StoreSchema);
 
 
 let fs = require('fs');
-fs.readFile('./data/category.json', 'utf8', (err, data) => {
+fs.readFile(path.resolve(__dirname, '../data/category.json'), 'utf8', (err, data) => {
 	if (err) {
-		console.log('fuck')
+		console.log('fuck');
         return;
 	}
 	let obj = JSON.parse(data);
