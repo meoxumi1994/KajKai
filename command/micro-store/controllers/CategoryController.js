@@ -3,7 +3,11 @@ import { getCategoryList, getListCategoryInfo, searchCategory } from '../service
 export const getCategoryListCon = () => {
     return (req, res) => {
         getCategoryList((list) => {
-            res.json({listCategories: getListCategoryInfo(list)});
+            if (list && list.length > 0) {
+                res.json({listCategories: getListCategoryInfo(list), status: 'success'});
+            } else {
+                res.json({status: 'failed'})
+            }
         })
     }
 };
@@ -12,7 +16,11 @@ export const searchCategoryCon = () => {
     return (req, res) => {
         const keyword = req.params.keyword;
         searchCategory(keyword, (list) => {
-            res.json({listCategories: getListCategoryInfo(list)});
+            if (list && list.length > 0) {
+                res.json({listCategories: getListCategoryInfo(list), status: 'success'});
+            } else {
+                res.json({status: 'failed'})
+            }
         })
     }
 };
