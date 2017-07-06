@@ -12,6 +12,29 @@ import Left from '~/containers/store/Left'
 import Contact from '~/containers/store/Contact'
 import Activity from '~/containers/store/Activity'
 
+const Middle = ({id}) => {
+    switch (location.pathname.split('/')[2]) {
+        case undefined:
+            return <Page id={id}/>
+        case 'about':
+            return <About/>
+        case 'photo':
+            return <Photo/>
+        case 'video':
+            return <Video/>
+        case 'post':
+            return <Post/>
+        case 'contact':
+            return <Contact/>
+        case 'activity':
+            return <Activity/>
+        case 'setting':
+            return <Setting/>
+        default:
+            return <div></div>
+    }
+}
+
 class Store extends React.Component {
     constructor(props){
         super(props)
@@ -22,28 +45,7 @@ class Store extends React.Component {
             return <div></div>
         if(!isusername)
             return <Redirect to='/register'/>
-        const Middle = () => {
-            switch (location.pathname.split('/')[2]) {
-                case undefined:
-                    return <Page/>
-                case 'about':
-                    return <About/>
-                case 'photo':
-                    return <Photo/>
-                case 'video':
-                    return <Video/>
-                case 'post':
-                    return <Post/>
-                case 'contact':
-                    return <Contact/>
-                case 'activity':
-                    return <Activity/>
-                case 'setting':
-                    return <Setting/>
-                default:
-                    return <div></div>
-            }
-        }
+        const id = location.pathname.split('/')[1]
         return(
             <div style={{ width: 1100, margin: 'auto' }}>
                 <div style={{ marginLeft: 160, float: 'left', width: 940 }}>
@@ -55,7 +57,7 @@ class Store extends React.Component {
                             <Left/>
                         </div>
                         <div className="col col-xs-10" style={{ padding: 0, margin: 0}}>
-                            <Middle/>
+                            <Middle id={id}/>
                         </div>
                     </div>
                 </div>

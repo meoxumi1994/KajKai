@@ -6,7 +6,6 @@ import ModalUploadImage from '~/containers/entity/modal/UploadImage'
 
 const Top = (props) => {
     const { yourid, id, coverUrl, avatarUrl, name, onUploadImage, location} = props
-    console.log(location)
     const ButtonLine = ({ title, last, link}) => {
         return (
             <Link to={"/user/"+id+link}>

@@ -5,7 +5,6 @@ import FullScreen from '~/containers/entity/thumnail/FullScreen'
 class Enlarge extends React.Component {
     constructor(props){
         super(props)
-        console.log('Enlarge',props)
         this.state = {
             hoverClose: false,
             hoverImage: false,

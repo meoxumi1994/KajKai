@@ -100,6 +100,13 @@ const myString = {
     BY: ['bởi', 'by'],
     AND: ['và', 'and'],
     THIS: ['điều này','this'],
+    // store
+    CREATE_SELLPOST: ['', 'Tạo Một Bài Đăng Bán Hàng'],
+    CREATE_SELLPOST_DESCRIPTTION: ['Before creating a sale\'s post  you need to keep in mind:','Trước khi tạo bài đăng bán hàng bạn cần lưu ý:'],
+    CREATE_SELLPOST_DESCRIPTTION_1: ['You do not need to recreate a sale\'s post for a new product or start selling again, but you can instead re-edit your old post.','Bạn không cần tạo lại bài đăng bán hàng khi có thêm sản phẩm mới hay bắt đầu bán lại, thay vào đó bạn có thể chỉnh sửa lại bài đăng cũ.'],
+    CREATE_SELLPOST_DESCRIPTTION_2: ['You create more sale\'s posts when making sure your store adds a new type of business.','Bạn tạo thêm bài đăng bán hàng khi chắc chắn rằng cửa hàng của bạn thêm một loại hình kinh doanh mới.'],
+    CREATE_SELLPOST_DESCRIPTTION_3: ['You should not create too many sale\'s posts because the "likes", "follow", "shares" will be scattered.','Bạn không nên tạo quá nhiều bài đăng bán hàng vì số lượng "thích","theo dõi","chia sẻ" sẽ bị phân tán.'],
+    CREATE_SELLPOST_DESCRIPTTION_4: ['If you want to post a video, add a new photo or write more to attract customers, you should create a minor post.','Nếu bạn muốn đăng video, thêm ảnh mới hoặc viết thêm để thu hút khách hàng, bạn nên tạo một bài đăng phụ.']
 }
 
 const allString = {

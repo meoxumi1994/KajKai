@@ -22,9 +22,8 @@ class OneImage extends React.Component {
                         textAlign: 'left',
                         position: 'absolute',
                         width: style.width,
-                        opacity: 0.6,
                         marginTop: isTop?0:style.height*7/8 - 16,
-                        backgroundColor: '#000000' }}>
+                        backgroundColor: 'rgba(0,0,0,0.5)' }}>
                         <img src="/images/camera.svg" style={{ margin: 8 , height: style.height / 8 }}/>
                         <span style={{ marginLeft: 8, fontSize: 12, color: 'white'}}>{ADD_PHOTO}</span>
                     </div>

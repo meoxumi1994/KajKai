@@ -21,11 +21,26 @@ export const getSellPost = (storeid, offset) => dispatch => {
         offset: offset,
     })
     .then((response) => {
-        const { status, sellpost } = response
+        const { status, offset, sellposts } = response
         if(status == 'success'){
-            console.log('success')
+            dispatch({ type: 'GET_SELLPOST_FROM_STORE_SUCCESS', offset, sellposts })
         }else{
+            dispatch({ type: 'GET_SELLPOST_FROM_STORE_FAILED'})
+        }
+    })
+}
 
+export const getMinorPost = (storeid, offset) => dispatch => {
+    dispatch({ type: 'GET_MINORPOST_FROM_STORE_ING'})
+    flem('/minorpost/store/' + storeid,{
+        offset: offset,
+    })
+    .then((response) => {
+        const { status, offset, minorposts } = response
+        if(status == 'success'){
+            dispatch({ type: 'GET_MINORPOST_FROM_STORE_SUCCESS', offset, minorposts })
+        }else{
+            dispatch({ type: 'GET_MINORPOST_FROM_STORE_FAILED'})
         }
     })
 }

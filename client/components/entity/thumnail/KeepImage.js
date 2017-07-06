@@ -36,23 +36,22 @@ class KeepImage extends React.Component {
         this.setState({ showView: false })
     }
     render(){
-        const { type, height, canEdit, images, imagesSuggest, ADD_PHOTO, SUGGEST_PHOTO, SEE_MORE } = this.props
+        const { type, width, canEdit, images, imagesSuggest, ADD_PHOTO, SUGGEST_PHOTO, SEE_MORE } = this.props
         return(
             <div>
                 {type=='Carousel' ?
                     <Carousel
-                        style={{ width: 260, height: 260 }}
+                        style={{ width: width, height: width }}
+                        onEdit={() => this.open()}
                         images={images}
                         canEdit={canEdit}
-                        onEdit={() => this.open()}
                         textChange="Add photo"
                     />
                 :   <GroupImage
                         canEdit={canEdit}
                         onEdit={() => this.open()}
                         images={images}
-                        width={520}
-                        height={360}
+                        width={width}
                     />
                 }
                 <Modal show={this.state.showModal}>

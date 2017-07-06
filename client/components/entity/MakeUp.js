@@ -8,10 +8,30 @@ export const MakeUp = (text,search,change) => {
     return newtext
 }
 
+export const EmojiShow = (text, height) => {
+    let newtext = text
+    const emoji = [
+        [':D','<img height='+ height +' src="/images/emoji/haha.svg"/>'],
+        [':-D','<img height='+ height +' src="/images/emoji/haha.svg"/>'],
+        ['8)','<img height='+ height +' src="/images/emoji/pro.svg"/>'],
+        ['&lt;3','<img height='+ height +' src="/images/emoji/love.svg"/>'],
+        ['<3','<img height='+ height +' src="/images/emoji/love.svg"/>'],
+        [':o','<img height='+ height +' src="/images/emoji/wow.svg"/>'],
+        [':O','<img height='+ height +' src="/images/emoji/wow.svg"/>'],
+        [': )','<img height='+ height +' src="/images/emoji/smile.svg"/>'],
+        ['::))','<img height='+ height +' src="/images/emoji/smile.svg"/>'],
+        [':))','<img height='+ height +' src="/images/emoji/smile.svg"/>'],
+    ]
+    emoji.map((item,index) => {
+        newtext = MakeUp(newtext, item[0], item[1])
+    })
+    return newtext
+}
+
 export const Emoji = (text) => {
     let newtext = text
     const emoji = [
-        [':D','<img width="14" src="/images/emoji/haha.svg"/>'],
+        [':D','<img width="16" src="/images/emoji/haha.svg"/>'],
         [':-D','<img height="16" width="18.65625" src="/images/emoji/haha.svg"/>'],
         ['8)','<img width="14" src="/images/emoji/pro.svg"/>'],
         ['&lt;3','<img width="15.953125" src="/images/emoji/love.svg"/>'],
@@ -62,4 +82,12 @@ export const FilterText = (text) => {
     text.split('>').map((item) =>{
         item.split('<')[0]
     })
+}
+
+export const MixMakeUpShow = (text, height) => {
+    let newtext = text
+    newtext = Urlify(newtext)
+    newtext = EndLine(newtext)
+    newtext = EmojiShow(newtext, height)
+    return newtext
 }

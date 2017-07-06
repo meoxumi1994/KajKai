@@ -35,7 +35,6 @@ const store = createStore(
 )
 
 window.addEventListener('resize', () => {
-    console.log(window.innerWidth, window.innerHeight)
     store.dispatch({ type: 'SCREEN_RESIZE', width: window.innerWidth, height: window.innerHeight });
 });
 

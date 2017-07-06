@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
 
+import page from './page'
+
 const index = (state = {
 
 }, action) => {
@@ -14,7 +16,8 @@ const index = (state = {
 }
 
 const store = combineReducers({
-    index
+    index,
+    page,
 })
 
 export default store

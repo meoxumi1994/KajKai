@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import SellPost from '~/components/entity/SellPost'
+import MinorPost from '~/components/entity/post/MinorPost'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
@@ -13,8 +13,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 })
 
-const SellPostContainer = connect(
+const MinorPostContainer = connect(
     mapStateToProps, mapDispatchToProps
-)(SellPost)
+)(MinorPost)
 
-export default SellPostContainer
+export default MinorPostContainer

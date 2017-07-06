@@ -15,12 +15,6 @@ class Carousel extends React.Component {
         const img = new Image();
         const that = this
         img.onload = function() {
-            console.log({
-                openModal: true,
-                imgHeight: this.height,
-                imgWidth: this.width,
-                index: index,
-            })
             that.setState({
                 openModal: true,
                 imgHeight: this.height,
@@ -32,7 +26,6 @@ class Carousel extends React.Component {
     }
     render(){
         const { EDIT, canEdit, images, style, onEdit, textChange } = this.props
-        console.log(this.state.index)
         return(
             <div style={{ width: style.width, height: style.height }}>
               <div id="myCarousel" className="carousel slide" data-ride="carousel">

@@ -88,6 +88,7 @@ class App extends React.Component {
         const path = this.props.location.pathname;
         const { width, height, username, onScroll } = this.props
         const { messagesKey, messagesMap, styles } = this.props
+        // console.log(this.props)
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
                 <Bar/>
@@ -109,7 +110,7 @@ class App extends React.Component {
                                   <Route path="/registerstore" component={RegisterStore}/>
                                   <Route path="/chat" component={Chat}/>
                               </div>
-                              <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>
+                              {/* <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>
                                   {
                                      messagesKey.length == 0? undefined:
                                      messagesKey.map((mesId,index) => {
@@ -129,7 +130,7 @@ class App extends React.Component {
                                           </div>)
                                      })
                                   }
-                                </div>
+                                </div> */}
                             </div>
                         :  location.pathname.split('/')[1] == 'user'?
                             <div>

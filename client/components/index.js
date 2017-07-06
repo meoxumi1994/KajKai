@@ -12,9 +12,10 @@ import AddPhoto from '~/containers/entity/thumnail/AddPhoto'
 import LikeShareComment from '~/containers/entity/row/LikeShareComment'
 import Textarea from 'react-textarea-autosize'
 
-import MinorPost from '~/containers/entity/MinorPost'
 import DisplayImage from '~/components/entity/thumnail/DisplayImage'
 
+import MinorPost from '~/containers/entity/post/MinorPost'
+import SellPost from '~/containers/entity/post/SellPost'
 import GroupImage from '~/components/entity/thumnail/GroupImage'
 import Carousel from '~/components/entity/thumnail/Carousel'
 
@@ -228,16 +229,18 @@ const newComp = () => (
                 console.log(me.getBoundingClientRect().width)
             },200)
         }} style={{ fontSize: 14 }}>{''}</span> */}
-        {/* <MinorPost
+        <MinorPost
             name='Foody.vn‎'
             avatarUrl='/images/storeavatar.jpg'
             time='11 mins'
-            content='[Ăn như 1 vị thần với ”PIZZA KHỔNG LỒ” để giựt giải thưởng 33 triệu]
+            content='[Ăn như 1 vị thần với ”PIZZA KHỔNG LỒ” để giựt giải thưởng 33 triệu] :D
 Đăng kí: https://goo.gl/3XtzMk
 Chi tiết: https://goo.gl/zn4mMT
 Hình thức thi: 2 team (6 người/team) thách đấu cùng chiến 1 pizza dài 1m5. Trong đó 1 team gồm 6 bạn đã thắng giải Foody Challenge các kì trước.
 Số lượng đăng kí: 2 người/team. Sau đó sẽ ghép thành đội 6 người.
-Giải thưởng: 3 triệu tiền mặt, 6 điện thoại Pháp Wiko và 6 triệu Voucher. Tài trợ Pizza: 4Gs Texas'/> */}
+Giải thưởng: 3 triệu tiền mặt, 6 điện thoại Pháp Wiko và 6 triệu Voucher. Tài trợ Pizza: 4Gs Texas <3'/>
+        <SellPost
+            />
     </div>
 )
 

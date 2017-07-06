@@ -36,7 +36,6 @@ class DisplayImage extends React.Component {
     }
     render(){
         const { width, height, src } = this.props
-        // console.log(this.state.width, this.state.height, src )
         return(
             <div  style={{
                     height: height,

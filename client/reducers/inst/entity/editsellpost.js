@@ -1,5 +1,12 @@
-const sellpost = (state = {
-
+const editsellpost = (state = {
+    default : {
+        category: '',
+        description: '',
+        status: '',
+        ship: '',
+        postrows_order: [],
+        postrows: [],
+    }
 }, action) => {
     switch (action.type) {
         case 'GET_SELLPOST_FROM_STORE_SUCCESS':
@@ -15,4 +22,4 @@ const sellpost = (state = {
             return state
     }
 }
-export default sellpost
+export default editsellpost

@@ -1,15 +1,13 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import PostRow from '~/components/entity/row/PostRow'
+import PostRow from '~/components/entity/post/PostRow'
 
 const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
-    const postrow = state.inst.entity.row.postrow
-    const data = postrow[id] || postrow.default
+    const postrow = state.inst.entity.postrow[id]
     return({
-        id: id,
-        data: data,
+        ...postrow,
     })
 }
 

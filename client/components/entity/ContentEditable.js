@@ -16,35 +16,33 @@ class ContentEditable extends React.Component {
         this.setState({ width: this.display.getBoundingClientRect().width })
     }
     render(){
-        const { canEdit, placehoder, content, handleChange, padding } = this.props
+        const { placehoder, content, handleChange, padding, minRows } = this.props
         return(
             <div style={{
-                outline: canEdit?'1px solid #D2D2D2':'1px solid transparent',
+                outline: '1px solid #D2D2D2',
                 fontSize: 14,
                 backgroundColor: 'white',
                 padding: padding}}>
-                {canEdit &&
-                    <Textarea
-                        autoComplete="off"
-                        autoCorrect="off"
-                        autoCapitalize="off"
-                        spellCheck={false}
-                        style={{
-                            caretColor: '#1D2129',
-                            backgroundColor: 'transparent',
-                            position: 'absolute',
-                            color: 'transparent',
-                            borderWidth: 0,
-                            resize: 'none',
-                            fontSize: 14,
-                            padding: 0,
-                            width: this.state.width,
-                            outline: 'none',
-                        }}
-                        minRows={1}
-                        value={content}
-                        onChange={(e) => handleChange(e)} />
-                }
+                <Textarea
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    style={{
+                        caretColor: '#1D2129',
+                        backgroundColor: 'transparent',
+                        position: 'absolute',
+                        color: 'transparent',
+                        borderWidth: 0,
+                        resize: 'none',
+                        fontSize: 14,
+                        padding: 0,
+                        width: this.state.width,
+                        outline: 'none',
+                    }}
+                    minRows={minRows}
+                    value={content}
+                    onChange={(e) => handleChange(e)} />
                 <div
                     ref={display => this.display = display}
                     style={{ color: content?undefined:(this.state.focus?'#BFC2C9':'#A7ABB1')}}

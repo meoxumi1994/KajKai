@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import MinorPost from '~/components/entity/MinorPost'
+import ListProduct from '~/components/entity/post/ListProduct'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     return({
     })
@@ -13,8 +13,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 })
 
-const MinorPostContainer = connect(
+const ListProductContainer = connect(
     mapStateToProps, mapDispatchToProps
-)(MinorPost)
+)(ListProduct)
 
-export default MinorPostContainer
+export default ListProductContainer

@@ -25,7 +25,9 @@ class GroupImage extends React.Component {
         img.src = this.props.images[index];
     }
     render(){
-        const { EDIT, onEdit, images, canEdit, width, height } = this.props
+        const { EDIT, onEdit, images, canEdit } = this.props
+        const width = this.props.width - ((images.length>1)? 1 : 2);
+        const height = width * 2/ 3;
         const Group = () => {
             switch (images.length) {
                 case 1:
@@ -102,7 +104,7 @@ class GroupImage extends React.Component {
             }
         }
         return(
-            <div>
+            <div style={{ marginLeft: -1 }}>
                 {canEdit &&
                     <div className="btn"
                         onClick={() => onEdit()}

@@ -1,5 +1,6 @@
 import React from 'react'
 
+import ContentShow from '~/components/entity/ContentShow'
 import ContentEditable from '~/components/entity/ContentEditable'
 import DropDown from '~/components/entity/DropDown'
 import LikeShareComment from '~/components/entity/LikeShareComment'
@@ -76,10 +77,9 @@ class MinorPost extends React.Component {
                         {time}
                     </div>
                     <div style={{ marginTop: 10 }}>
-                        <ContentEditable
-                            placehoder={'write your comments'}
+                        <ContentShow
                             fontSize={13.5}
-                            canEdit={true}
+                            heightEachRow={16}
                             content={content}
                             handleChange={(e) => this.setState({ })}
                         />

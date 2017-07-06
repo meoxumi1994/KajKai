@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import ModalUploadImage from '~/containers/entity/modal/UploadImage'
+import AddPhoto from '~/containers/entity/thumnail/AddPhoto'
 
 const Top = (props) => {
     const { id, userid, yourid, coverUrl, avatarUrl, name, onUploadImage, location} = props
@@ -31,7 +32,7 @@ const Top = (props) => {
     return(
         <div className="panel panel-default"
             style={{ margin: 0, borderWidth: 1 , borderRadius: '0px 0px 5px 5px'}}>
-            <img src={ coverUrl }
+            {/* <img src={ coverUrl }
             style={{
                 width: '100%',
                 height: '250px',
@@ -41,6 +42,14 @@ const Top = (props) => {
                 style={{ position: 'fix', marginLeft: -37, marginTop: -210 }}
                 onClick={ () => onUploadImage('coverUrl') } >
                 <span className="glyphicon glyphicon-camera" style={{ fontSize: 20 }}></span>
+            </div> */}
+            <div style={{ marginLeft: -1, marginTop: -1 }}>
+                <AddPhoto style={{
+                    src: coverUrl,
+                    width: 938,
+                    height: 250,
+                    isTop: true,
+                }}/>
             </div>
             <div style={{
                 position: 'relative',
@@ -49,16 +58,28 @@ const Top = (props) => {
                 marginTop: -100,
                 height: 140,
             }}>
-                <div className="panel panel-default"
+                <div style={{ backgroundColor: 'white',
+                    borderRadius: 4,
+                    border: '1px solid #DFE0E4',
+                    padding: 3, float: 'left',
+                    marginTop: -35 }}>
+                    <AddPhoto style={{
+                        src: avatarUrl,
+                        width: 160,
+                        height: 160,
+                        isTop: false,
+                    }}/>
+                </div>
+                {/* <div className="panel panel-default"
                     style={{ padding: 4, width: 170, height: 170, float: 'left', marginTop: -35 }}>
                     <img src={ avatarUrl } alt="Cinque Terre" width="100%" height="100%"/>
-                </div>
-                <div className="btn btn-default btn-xs"
+                </div> */}
+                {/* <div className="btn btn-default btn-xs"
                     style={{ position: 'absolute', marginLeft: -30, marginTop: -30 }}
                     onClick={() => onUploadImage('avatarUrl') }
                     >
                     <span className="glyphicon glyphicon-camera" style={{ fontSize: 15 }}></span>
-                </div>
+                </div> */}
                 <h3 style={{
                     position: 'static',
                     marginTop: 65,

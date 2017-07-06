@@ -14,7 +14,7 @@ class LikeGroup extends React.Component {
                             position: 'absolute',
                             zIndex: 6-index,
                             padding: 0}}>
-                        <img src={"/images/"+item+".svg"}
+                        <img src={"/images/reactting/"+item+".svg"}
                             style={{
                                 marginLeft: index*size*3/4 - 2,
                                 width: size, height: size }}

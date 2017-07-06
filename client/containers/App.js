@@ -6,16 +6,16 @@ import { onWho } from '../actions/asyn/app'
 const mapStateToProps = (state, ownProps) => {
     const { width, height } = state.inst.app
     const { catagory, currentThemes} = state.inst.chat.display.themes
-    let styles = chatStyles.getMultiChat(catagory[currentThemes])
+    // let styles = chatStyles.getMultiChat(catagory[currentThemes])
     return ({
         width: width,
         height: height,
         username: state.user.username,
         auth: state.auth,
         children: ownProps.children,
-        messagesKey: state.inst.chat.center.multiChat.messagesKey,
-        messagesMap: state.inst.chat.center.multiChat.messagesMap,
-        styles
+        // messagesKey: state.inst.chat.center.multiChat.messagesKey,
+        // messagesMap: state.inst.chat.center.multiChat.messagesMap,
+        // styles
     })
 }
 

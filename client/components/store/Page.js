@@ -1,119 +1,168 @@
 import React from 'react'
 
+import SellPost from '~/containers/entity/post/SellPost'
+import MinorPost from '~/containers/entity/post/MinorPost'
 import TimeLine from '~/components/entity/draw/TimeLine'
+import EditSellPost from '~/containers/entity/post/EditSellPost'
 import Link from 'react-router-dom'
 
-const Page = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeedSellPost, onNeedMinorPost,
-    numlike, likes, numfollow, follows, address, addressMap, category, latitute, longitute, phone,
-    LIKE, FOLLOW, ADDRESSMAP, ADDRESS, CATEGORY, PHONE, BY, ANOTHER_PEOPLE, AND, THIS, PEOPLE,
-    }) => {
-    let sellpost_marginTop = 0
-    let minorpost_marginTop = 0
-    if(this.sellpost){
-        sellpost_marginTop = height - this.sellpost.getBoundingClientRect().bottom > 0
-        if(this.sellpost.getBoundingClientRect().bottom - height < 780)
-            onNeedSellPost()
+class Page extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            showEditSellPost: false,
+        }
     }
-    if(this.minorpost){
-        minorpost_marginTop = height - this.minorpost.getBoundingClientRect().bottom > 0
-        if(this.minorpost.getBoundingClientRect().bottom - height < 780)
-            onNeedMinorPost()
-    }
-    console.log(this.sellpost, this.minorpost)
-    return (
-        <div className="container-fluid">
-            <div className="row">
-                <div ref={ sellpost => this.sellpost = sellpost }
-                    className="col col-xs-7"
-                    style={{
-                        height: this.sellpost_inside_height?this.sellpost_inside_height.offsetHeight: undefined,
-                        margin: 0,
-                        padding: 0,
-                    }}
-                    >
-                    <div ref= { sellpost_inside => { this.sellpost_inside_height = sellpost_inside } }
+    render(){
+        const { isOwner, id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeedSellPost, onNeedMinorPost,
+            offsetSellPost, offsetMinorPost,
+            numlike, likes, numfollow, follows, address, addressMap, category, latitute, longitute, phone,
+            LIKE, FOLLOW, ADDRESSMAP, ADDRESS, CATEGORY, PHONE, BY, ANOTHER_PEOPLE, AND, THIS, PEOPLE,
+        } = this.props
+        return(
+            <div className="container-fluid">
+                <div className="row">
+                    <div ref={ sellpost => this.sellpost = sellpost }
+                        className="col col-xs-7"
                         style={{
-                        position: sellpost_marginTop?'fixed':'static',
-                        marginLeft: sellpost_marginTop?(-scrollLeft-24):-24,
-                        marginTop: sellpost_marginTop?(-this.sellpost_inside_height.offsetHeight + height - 343):0,
-                        width: 520 }}>
-                        {sellposts.map((item, index) =>
-                            // <div key={index} className="panel panel-default"
-                            //     style={{ height: 600,margin: '10px 0px 0px 0px'}}>
-                            //     123123123
-                            // </div>
-                            <TimeLine style={{ height: 600, margin: '10px 0px 0px 0px'}} key={index}/>
-                        )}
-                        <span style={{ marginTop: 10 }} id="loaderr"></span>
-                    </div>
-                </div>
-                <div ref={ minorpost => { this.minorpost = minorpost }}
-                    className="col col-xs-5"
-                    style={{
-                        height: this.minorpost_inside_height?this.minorpost_inside_height.offsetHeight: undefined,
-                        margin: 0,
-                        padding: 0,
-                    }}>
-                    <div ref= { minorpost_inside => { this.minorpost_inside_height = minorpost_inside } }
-                        style={{
-                        position: minorpost_marginTop?'fixed':'static',
-                        marginLeft: minorpost_marginTop?(-scrollLeft-28):-28,
-                        marginTop: minorpost_marginTop?(-this.minorpost_inside_height.offsetHeight + height - 343):0,
-                        width: 410 }}>
-                        <div className="panel panel-default"
-                            style={{ margin: '10px 0px 0px 0px', padding: 10, fontSize: 13 }}>
-                            <div><span style={{ fontWeight: 'bold'}}>{ADDRESS}{" : "}</span>{address}</div>
-                            <div><span style={{ fontWeight: 'bold'}}>{ADDRESSMAP}{" : "}</span>{addressMap.map((item) => item+" ")}</div>
-                            <div><span style={{ fontWeight: 'bold'}}>{CATEGORY}{" : "}</span>{category}</div>
-                            <div><span style={{ fontWeight: 'bold'}}>{PHONE}{" : "}</span>{phone}</div>
-                            <div>
-                                <span style={{ fontWeight: 'bold'}}>{LIKE}{" "}{BY}{" : "}</span>
-                                {likes.map((item,index) =>
-                                    <div key={index} className="btn" style={{ padding: 0, fontSize: 13 }}>
-                                        <a>{index?", ":""}{item.username}</a>
+                            height: this.sellpost_inside_height?this.sellpost_inside_height.offsetHeight: undefined,
+                            margin: 0,
+                            padding: 0,
+                        }}>
+                        <div ref= { sellpost_inside => { this.sellpost_inside_height = sellpost_inside } }
+                            style={{
+                            position: this.sellpost_marginTop?'fixed':'static',
+                            marginLeft: this.sellpost_marginTop?(-scrollLeft-24):-24,
+                            marginTop: this.sellpost_marginTop?(-this.sellpost_inside_height.offsetHeight + height - 343):0,
+                            minHeight: height - 48,
+                            width: 520 }}>
+                            {isOwner &&
+                                <div style={{
+                                    marginTop: 10,
+                                    borderRadius: 4,
+                                    border: '1px solid #CCCCCC',
+                                    boxShadow: '0px 0px 4px #CCCCCC',
+                                    backgroundColor: 'white',
+                                    width: 520, padding: 10,}}>
+                                    <div className="btn btn-default" style={{
+                                        backgroundColor: '#BD081C',
+                                        color: 'white', borderWidth: 0 }}
+                                        onClick={() => this.setState({ showEditSellPost: true })}
+                                        >
+                                        {CREATE_SELLPOST}
                                     </div>
-                                )}
-                                {likes.length? " "+AND+" ": ""}
-                                {numlike - likes.length}
-                                {" "}{likes.length?ANOTHER_PEOPLE:PEOPLE}
-                                {" "}{LIKE}
-                                {" "}{THIS}
-                                <div>
-                                    {likes.map((item,index) =>
-                                        <img key={index} width={17} height={17} style={{ margin: '4px 0px 4px 4px'}} src={item.avatarUrl}/>)}
+                                    <EditSellPost
+                                        title={"Create Sell Post"}
+                                        showModal={this.state.showEditSellPost}
+                                        close={() => this.setState({ showEditSellPost: false })}/>
+                                    <div>{CREATE_SELLPOST_DESCRIPTTION}</div>
+                                    <div style={{ marginLeft: 10, color: '#4B4F56', fontSize: 13 }}>{". "}{CREATE_SELLPOST_DESCRIPTTION_1}</div>
+                                    <div style={{ marginLeft: 10, color: '#4B4F56', fontSize: 13 }}>{". "}{CREATE_SELLPOST_DESCRIPTTION_2}</div>
+                                    <div style={{ marginLeft: 10, color: '#4B4F56', fontSize: 13 }}>{". "}{CREATE_SELLPOST_DESCRIPTTION_3}</div>
                                 </div>
-                            </div>
-                            <div>
-                                <span style={{ fontWeight: 'bold'}}>{LIKE}{" "}{BY}{" : "}</span>
-                                {follows.map((item,index) =>
-                                    <div key={index} className="btn" style={{ padding: 0, fontSize: 13 }}>
-                                        <a>{index?", ":""}{item.username}</a>
-                                    </div>
-                                )}
-                                {follows.length? " "+AND+" ": ""}
-                                {numfollow - follows.length}
-                                {" "}{follows.length?ANOTHER_PEOPLE:PEOPLE}
-                                {" "}{FOLLOW}
-                                {" "}{THIS}
-                                <div>
-                                    {follows.map((item,index) =>
-                                        <img key={index} width={17} height={17} style={{ margin: '4px 0px 4px 4px'}} src={item.avatarUrl}/>)}
+                            }
+                            {sellposts.map((item, index) =>
+                                // <div key={index} className="panel panel-default"
+                                //     style={{ height: 600,margin: '10px 0px 0px 0px'}}>
+                                //     123123123
+                                // </div>
+                                <div key={index} style={{ paddingTop: 10 }}>
+                                    <SellPost id={item}/>
                                 </div>
-                            </div>
+                                // <TimeLine style={{ height: 600, margin: '10px 0px 0px 0px'}} key={index}/>
+                            )}
+                            {offsetSellPost != -2 && <span style={{ marginTop: 10 }} id="loaderr"></span>}
                         </div>
-                        {minorposts.map((intem,index) =>
-                            // <div key={index} className="panel panel-default"
-                            //     style={{ height: 400,margin: '10px 0px 0px 0px'}}>
-                            //     123123123
-                            // </div>
-                            <TimeLine key={index} style={{ height: 400, width: 410, margin: '10px 0px 0px 0px'}}/>
-                        )}
-                        <div style={{ marginTop: 10 }} id="loaderr"></div>
+                    </div>
+                    <div ref={ minorpost => this.minorpost = minorpost }
+                        className="col col-xs-5"
+                        style={{
+                            height: this.minorpost_inside_height?this.minorpost_inside_height.offsetHeight: undefined,
+                            margin: 0,
+                            padding: 0,
+                        }}>
+                        <div ref= { minorpost_inside => { this.minorpost_inside_height = minorpost_inside } }
+                            style={{
+                            position: this.minorpost_marginTop?'fixed':'static',
+                            marginLeft: this.minorpost_marginTop?(-scrollLeft-28):-28,
+                            marginTop: this.minorpost_marginTop?(-this.minorpost_inside_height.offsetHeight + height - 343):0,
+                            minHeight: height - 48,
+                            width: 410 }}>
+                            <div className="panel panel-default"
+                                style={{ margin: '10px 0px 0px 0px', padding: 10, fontSize: 13 }}>
+                                <div><span style={{ fontWeight: 'bold'}}>{ADDRESS}{" : "}</span>{address}</div>
+                                <div><span style={{ fontWeight: 'bold'}}>{ADDRESSMAP}{" : "}</span>{addressMap.map((item) => item+" ")}</div>
+                                <div><span style={{ fontWeight: 'bold'}}>{CATEGORY}{" : "}</span>{category}</div>
+                                <div><span style={{ fontWeight: 'bold'}}>{PHONE}{" : "}</span>{phone}</div>
+                                <div>
+                                    <span style={{ fontWeight: 'bold'}}>{LIKE}{" "}{BY}{" : "}</span>
+                                    {likes.map((item,index) =>
+                                        <div key={index} className="btn" style={{ padding: 0, fontSize: 13 }}>
+                                            <a>{index?", ":""}{item.username}</a>
+                                        </div>
+                                    )}
+                                    {likes.length? " "+AND+" ": ""}
+                                    {numlike - likes.length}
+                                    {" "}{likes.length?ANOTHER_PEOPLE:PEOPLE}
+                                    {" "}{LIKE}
+                                    {" "}{THIS}
+                                    <div>
+                                        {likes.map((item,index) =>
+                                            <img key={index} width={17} height={17} style={{ margin: '4px 0px 4px 4px'}} src={item.avatarUrl}/>)}
+                                    </div>
+                                </div>
+                                <div>
+                                    <span style={{ fontWeight: 'bold'}}>{LIKE}{" "}{BY}{" : "}</span>
+                                    {follows.map((item,index) =>
+                                        <div key={index} className="btn" style={{ padding: 0, fontSize: 13 }}>
+                                            <a>{index?", ":""}{item.username}</a>
+                                        </div>
+                                    )}
+                                    {follows.length? " "+AND+" ": ""}
+                                    {numfollow - follows.length}
+                                    {" "}{follows.length?ANOTHER_PEOPLE:PEOPLE}
+                                    {" "}{FOLLOW}
+                                    {" "}{THIS}
+                                    <div>
+                                        {follows.map((item,index) =>
+                                            <img key={index} width={17} height={17} style={{ margin: '4px 0px 4px 4px'}} src={item.avatarUrl}/>)}
+                                    </div>
+                                </div>
+                            </div>
+                            {minorposts.map((intem,index) =>
+                                // <div key={index} className="panel panel-default"
+                                //     style={{ height: 400,margin: '10px 0px 0px 0px'}}>
+                                //     123123123
+                                // </div>
+                                <TimeLine key={index} style={{ height: 400, width: 410, margin: '10px 0px 0px 0px'}}/>
+                            )}
+                            {offsetMinorPost != -2 && <div style={{ marginTop: 10 }} id="loaderr"></div>}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+    componentWillUpdate(){
+        this.sellpost_marginTop = 0
+        this.minorpost_marginTop = 0
+        if(this.sellpost){
+            this.sellpost_marginTop = this.props.height - this.sellpost.getBoundingClientRect().bottom > 0
+            if(this.props.sellposts.length>=2 && this.sellpost.getBoundingClientRect().bottom - this.props.height < 780){
+                this.props.onNeedSellPost()
+            }
+        }
+        if(this.minorpost){
+            this.minorpost_marginTop = this.props.height - this.minorpost.getBoundingClientRect().bottom > 0
+            if(this.props.sellposts.length>=2 && this.minorpost.getBoundingClientRect().bottom - this.props.height < 780){
+                this.props.onNeedMinorPost()
+            }
+        }
+    }
+    componentDidMount(){
+        this.props.onNeedSellPost();
+        this.props.onNeedMinorPost();
+    }
 }
 
 export default Page
