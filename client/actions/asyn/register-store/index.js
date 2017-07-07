@@ -41,16 +41,16 @@ export const updatePhone = (phone) => dispatch => {
     })
     .then(({status}) => {
         if(status == 'pending')
-            dispatch(updateuserAction('UPDATE_PHONE_PENDING'))
+            dispatch(dispatch({ type: 'UPDATE_PHONE_PENDING'}))
         if(status == 'used' )
-            dispatch(updateuserAction('UPDATE_PHONE_USED'))
+            dispatch(dispatch({ type: 'UPDATE_PHONE_USED'}))
         if(status == 'error')
-            dispatch(updateuserAction('UPDATE_PHONE_FAILED'))
+            dispatch(dispatch({ type: 'UPDATE_PHONE_FAILED'}))
     })
 }
 
 export const verifyPhone = (phone, code) => dispatch => {
-    dispatch(updateuserAction('VERIFY_PHONE_ING'))
+    dispatch(dispatch({ type: 'VERIFY_PHONE_ING'}))
     flet('/verifyphone',{
         phone: phone,
         code: code,
@@ -59,8 +59,8 @@ export const verifyPhone = (phone, code) => dispatch => {
     })
     .then(({status}) => {
         if(status == 'verified')
-            dispatch(updateuserData('VERIFY_PHONE_SUCCESS', {phone}))
+            dispatch(dispatch({ type: 'VERIFY_PHONE_SUCCESS' }))
         if(status == 'error')
-            dispatch(updateuserAction('VERIFY_PHONE_FAILED'))
+            dispatch(dispatch({ type: 'VERIFY_PHONE_FAILED' }))
     })
 }

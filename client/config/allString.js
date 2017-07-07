@@ -41,9 +41,10 @@ const myString = {
     PHONE_USED: ['Số điện thoại này đã được sử dụng, xin vui lòng nhập một số khác',
     'This number was used to use, xin vui lòng nhập một số khác'],
     PHONE_FAILED: ['Số điện thoài này hiện không có thực, xin vui lòng nhập một số khác',
-    'This number of electronic phone does not exist, xin vui lòng nhập một số khác'],
+    'This number of electronic phone does not exist, Please enter another one'],
     PHONE_VERIFY: ['Chúng tôi đã gửi mã xác nhận đến số máy này, vui lòng xác nhận mã số để tiếp tục (mã sỗ gồm 4 ký tự):',
     'We have sent a confirmation code to this number, please confirm the code to continue (4 character code):'],
+    CODE_FAILED: ['nhập mã sai', 'this code is failed'],
     NOTE_PHONE: ['Số điện thoại cần thiết khi bạn đặt hàng và đừng lo lắng vì chỉ có duy nhất cửa hàng nơi bạn đặt hàng mới xem được số điện thoại của bạn. Chúng tôi mặc định với +84(vietname), nếu bạn ở khu vực khác nhớ thêm mã vùng ở đầu ví dụ +66876548291 với thailand',
     'The phone number is needed when ordering and do not worry because only the store where you order can see your phone number. We default to +84 (vietname), if you are in another area remember to add the area code at the top, for example +66876548291 with thailand'],
     ADDRESS: ['Địa chỉ','Address'],
@@ -119,6 +120,8 @@ const myString = {
     CREATE_STORE_DESCRIPTION_6: ['Số điện thoại này là số để khách hàng liên lạc đến cửa hàng','This phone number is the phone number for customers to contact the store'],
     CREATE_STORE_DESCRIPTION_7: ['Số điện thoại này sẽ luôn được công khai','Phone number will always be public'],
     CATEGORY: ['Loại Hình Kinh Doanh','Category'],
+    CONFIRM: ['Xác Nhận','Confirm'],
+    CHOOSE_ANOTHER: ['Chọn lại', 'Choose Another'],
 }
 
 const allString = {

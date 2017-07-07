@@ -873,7 +873,6 @@ GET /comment/like {
 
 //// -------------- SEARCH CATEGORY -------------------
 
-
 GET /categorylist { // language la current language cua thang days
     status: 'success',
     categories: [
@@ -921,3 +920,11 @@ GET search/category/:keyword {
         },
     ]
 }
+
+GET '/updatephone' {
+    status: 'pending|used|error'
+})
+
+GET '/verifyphone' {
+    status: 'verified|error'
+})

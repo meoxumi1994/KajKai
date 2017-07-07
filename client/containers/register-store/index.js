@@ -25,6 +25,8 @@ const mapStateToProps = (state, ownProps) => {
         CREATE_STORE_DESCRIPTION_7: g('CREATE_STORE_DESCRIPTION_7'),
         CATEGORY: g('CATEGORY'),
         PHONE: g('PHONE'),
+        CONFIRM: g('CONFIRM'), 
+        CHOOSE_ANOTHER: g('CHOOSE_ANOTHER'),
         ...registerstore,
     })
 }

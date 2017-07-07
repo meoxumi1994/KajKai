@@ -1,5 +1,4 @@
 const phone = (state = 'WAIT', action) => {
-    console.log(action)
     switch (action.type) {
         case 'UPDATE_PHONE_ING':
         case 'UPDATE_PHONE_PENDING':

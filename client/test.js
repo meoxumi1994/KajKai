@@ -1,5 +1,6 @@
 var express = require("express")
 var app = express()
+var bodyParser = require('body-parser');
 var cors = require('cors')
 var http = require('http')
 var socketIo =  require("socket.io")
@@ -10,6 +11,8 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 var server = http.Server(app)
 var sio = socketIo(server)
@@ -550,21 +553,20 @@ app.get('/categorylist', (req,res) => {
 })
 
 app.post('/updatephone', (req,res) => {
-    console.log(req.body)
     setTimeout(function(){
         res.send({
-            status: 'success',
+            status: 'pending',
         })
-    }, 1500)
+    }, 1000)
 })
 
 app.post('/verifyphone', (req,res) => {
-    console.log(req.body)
     setTimeout(function(){
-        res.send({
-            status: 'success',
-        })
-    }, 1500)
+        if(req.body.code == '1234')
+            res.send({ status: 'verified' })
+        else
+            res.send({ status: 'error' })
+    }, 1000)
 })
 
 app.get('/chatlist',(req,res) => {

@@ -24,7 +24,7 @@ class RegisterStore extends React.Component {
     }
     render(){
         const {
-            STORE,
+            STORE, CONFIRM, CHOOSE_ANOTHER,
             CREATE_STORE,
             CREATE_STORE_DESCRIPTION,
             CREATE_STORE_DESCRIPTION_0,
@@ -35,7 +35,7 @@ class RegisterStore extends React.Component {
             CREATE_STORE_DESCRIPTION_5,
             CREATE_STORE_DESCRIPTION_6,
             CREATE_STORE_DESCRIPTION_7,
-            CATEGORY, PHONE,
+            CATEGORY, PHONE, isConfirmPhone,
             categories, chooseCategory, chooseSecondCategory, chooseCategoryId, phone, onChangePhone,
             isusername, iswhoing, onOpenStore, registerStoreOK, onGetCategory, updatePhone,
             onChooseCategory, onChooseSecondCategory, onChangeCategoryInputValue, categoryInputValue} = this.props
@@ -120,33 +120,50 @@ class RegisterStore extends React.Component {
                     <div style={{ marginTop: 15, fontWeight: 'bold'}}>
                         {PHONE}
                     </div>
-                    <input
-                        onChange={(e) => onChangePhone(e)}
-                        value={phone}
-                        placeholder={"enter your phone"+" ..."} style={{
-                        marginLeft: 350,
-                        width: 200,
-                        fontSize: 12.5,
-                        marginTop: 5,
-                        paddingLeft: 5,}}/>
-                    <div className="btn btn-default btn-xs"
-                        disabled={checkPhone(phone)}
-                        onClick={() => {
-                            if(!checkPhone(phone)){
-                                updatePhone()
-                                this.setState({ showModalPhone: true })
-                            }
-                        }}
-                        style={{ marginLeft: 10 }}>
-                        Confirm
-                    </div>
-                    <VerifyPhone
-                        showModal={this.state.showModalPhone}
-                        close={() => this.setState({ showModalPhone: false })}/>
-                    <div style={{ marginTop: -25, width: 340 }}>
+                    {!isConfirmPhone ?
+                        <input
+                            onChange={(e) => onChangePhone(e)}
+                            value={phone}
+                            placeholder={"enter your phone"+" ..."} style={{
+                            marginLeft: 350,
+                            width: 200,
+                            fontSize: 12.5,
+                            marginTop: 5,
+                            paddingLeft: 5,}}/>
+                    :   <div style={{ display: 'inline',marginLeft: 350, paddingLeft: 5, height: 28, width: 200, }}>
+                            {phone}
+                        </div>
+                    }
+                    {!isConfirmPhone ?
+                        <div className="btn btn-default btn-xs"
+                            disabled={checkPhone(phone)}
+                            onClick={() => {
+                                if(!checkPhone(phone)){
+                                    updatePhone()
+                                    this.setState({ showModalPhone: true })
+                                }
+                            }}
+                            style={{ marginLeft: 10 }}>
+                            {CONFIRM}
+                        </div>
+                    :   <div className="btn btn-default btn-xs"
+                            style={{ marginLeft: 10 }}>
+                            {CHOOSE_ANOTHER}
+                        </div>
+                    }
+
+                    {!isConfirmPhone &&
+                        <VerifyPhone
+                            phone={phone}
+                            showModal={this.state.showModalPhone}
+                            close={() => this.setState({ showModalPhone: false })}/>
+                    }
+                    <div style={{ marginTop: isConfirmPhone?-19: -25, width: 340 }}>
                         <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_6}</div>
                         <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_7}</div>
                     </div>
+
+
                 </div>
             </div>
         )

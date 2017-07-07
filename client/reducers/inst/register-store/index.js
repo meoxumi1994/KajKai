@@ -10,6 +10,7 @@ const index = (state = {
     chooseSecondCategoryId: '',
     categoryInputValue: '',
     phone: '',
+    isConfirmPhone: false,
 }, action) => {
     switch (action.type) {
         case 'GET_LIST_CATEGORY_SUCCESS':
@@ -28,6 +29,10 @@ const index = (state = {
             return {...state, categoryInputValue: action.value }
         case 'INST_REGISTER_STORE_CHANGE_PHONE':
             return {...state, phone: action.value }
+        case 'UPDATE_PHONE_ING':
+            return {...state, isConfirmPhone: false }
+        case 'VERIFY_PHONE_SUCCESS':
+            return {...state, isConfirmPhone: true }
         default:
             return state
     }
