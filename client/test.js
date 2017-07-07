@@ -549,6 +549,24 @@ app.get('/categorylist', (req,res) => {
     })
 })
 
+app.post('/updatephone', (req,res) => {
+    console.log(req.body)
+    setTimeout(function(){
+        res.send({
+            status: 'success',
+        })
+    }, 1500)
+})
+
+app.post('/verifyphone', (req,res) => {
+    console.log(req.body)
+    setTimeout(function(){
+        res.send({
+            status: 'success',
+        })
+    }, 1500)
+})
+
 app.get('/chatlist',(req,res) => {
     res.json(mockedChatList)
 })

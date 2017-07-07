@@ -20,16 +20,47 @@ export const registerStore = (newindex, store) => dispatch => {
 
 export const getCategory = () => dispatch => {
     dispatch({ type: 'GET_LIST_CATEGORY_ING'})
-    console.log('getCategory')
     flem('/categorylist',{
 
     })
-    .then(({ status, categorylist }) => {
+    .then(({ status, categories }) => {
         if(status == 'success'){
-            dispatch({ type: 'GET_LIST_CATEGORY_ING', categorylist: categorylist })
-            console.log(categorylist)
+            dispatch({ type: 'GET_LIST_CATEGORY_SUCCESS', categories: categories })
         }else{
-            dispatch({ type: 'GET_LIST_CATEGORY_ING', categorylist: categorylist })
+            dispatch({ type: 'GET_LIST_CATEGORY_FAILED'})
         }
+    })
+}
+
+export const updatePhone = (phone) => dispatch => {
+    dispatch({ type: 'UPDATE_PHONE_ING', newvalue: phone })
+    flet('/updatephone',{
+        phone: phone
+    },{
+        status: 'pending|used|error'
+    })
+    .then(({status}) => {
+        if(status == 'pending')
+            dispatch(updateuserAction('UPDATE_PHONE_PENDING'))
+        if(status == 'used' )
+            dispatch(updateuserAction('UPDATE_PHONE_USED'))
+        if(status == 'error')
+            dispatch(updateuserAction('UPDATE_PHONE_FAILED'))
+    })
+}
+
+export const verifyPhone = (phone, code) => dispatch => {
+    dispatch(updateuserAction('VERIFY_PHONE_ING'))
+    flet('/verifyphone',{
+        phone: phone,
+        code: code,
+    },{
+        status: 'verified|error'
+    })
+    .then(({status}) => {
+        if(status == 'verified')
+            dispatch(updateuserData('VERIFY_PHONE_SUCCESS', {phone}))
+        if(status == 'error')
+            dispatch(updateuserAction('VERIFY_PHONE_FAILED'))
     })
 }
