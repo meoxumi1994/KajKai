@@ -39,26 +39,29 @@ const left = (state = {
 
       case 'global/RECEIVE_MESSAGE':
           const { mesId, user, message, time} = action.data
-
-          if (state.chatListMap[mesId] == undefined || state.chatListMap[mesId].status == false) {
+          if (state.chatListKey.indexOf(mesId) == -1) {
               const newChat = {
                   ...state,
+                    chatListKey: [
+                        ...state.chatListKey,
+                        mesId
+                    ],
                     chatListMap: {
                       ...state.chatListMap,
                       [mesId]: {
                           mesId,
                           displayLabel: user.username,
-                          lastMessage: message,
+                          lastMessage: {
+                              id: user.id,
+                              message,
+                              time
+                          },
                           status: true,
                           usersKey: [
                               user.id
                           ],
                           usersMap: {
-                              [user.id]: {
-                                  avatarUrl: user.avatarUrl,
-                                  id: user.id,
-                                  username: user.username
-                              }
+                              [user.id]: user
                           }
 
                       }
