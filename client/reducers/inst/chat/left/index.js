@@ -1,4 +1,3 @@
-import { getUser2 } from '~/actions/asyn/chat/restful'
 
 const left = (state = {
   chatListKey: [],
@@ -10,10 +9,10 @@ const left = (state = {
 }, action) => {
     switch (action.type) {
 
-      case 'UPDATE_CHAT':
+      case 'UPDATE_CHAT_USER':
           const { username, avatarUrl, id } = action.data
           const mesid = action.data.mesId
-          return {
+          const updateChat = {
             ...state,
             chatListMap: {
               ...state.chatListMap,
@@ -35,99 +34,109 @@ const left = (state = {
               }
             }
           }
-
-      case 'UPDATE_CHAT_2':
-          return {
-            ...state,
-            chatListKey: [
-                mesId
-            ],
-            chatListMap: {
-              [mesId]: {
-                displayLabel: 'Test',
-                lastMessage: {
-                  id: senderId,
-                  time,
-                  message
-                },
-                mesId: mesId,
-                usersKey: [],
-                usersMap: {},
-                status: true
-              }
-            }
-          }
+          console.log('\n[Reducer Left] UPDATE_CHAT ', action, updateChat)
+          return updateChat
 
       case 'global/RECEIVE_MESSAGE':
-          const { mesId, senderId, message, time} = action.data
-
-          console.log('global/RECEIVE_MESSAGE ', action.data)
+          const { mesId, user, message, time} = action.data
 
           if (state.chatListMap[mesId] == undefined || state.chatListMap[mesId].status == false) {
-              return state
+              const newChat = {
+                  ...state,
+                    chatListMap: {
+                      ...state.chatListMap,
+                      [mesId]: {
+                          mesId,
+                          displayLabel: user.username,
+                          lastMessage: message,
+                          status: true,
+                          usersKey: [
+                              user.id
+                          ],
+                          usersMap: {
+                              [user.id]: {
+                                  avatarUrl: user.avatarUrl,
+                                  id: user.id,
+                                  username: user.username
+                              }
+                          }
+
+                      }
+                  }
+              }
+              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---newChat ', action, newChat)
+              return newChat
           } else {
-            console.log('update ', state.chatListMap[mesId]);
-              return {
+              const updateChat = {
                 ...state,
                 chatListMap: {
                     ...state.chatListMap,
                     [mesId]: {
                         ...state.chatListMap[mesId],
                         lastMessage: {
-                            id: senderId,
+                            id: user.id,
                             time,
                             message
                         }
                     }
                 }
-
               }
+              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
+              return updateChat
           }
 
 
       case 'SET_CURRENT_CHAT':
-          return {
+          const setCurrentChat = {
             ...state,
             currentChat: {
                 mesId: action.data.mesId
             }
           }
+          console.log('\n[Reducer Left] SET_CURRENT_CHAT', action, setCurrentChat)
+          return setCurrentChat
 
       case 'REMOVE_CHAT':
           var tempKey = state.chatListKey
           var tempMap = state.chatListMap
           tempKey.splice(action.data.mesId, 1)
-          delete tempMap[action.data.mesId]
-          return {
+          // delete tempMap[action.data.mesId]
+          const removeChat = {
               ...state,
               chatListKey: tempKey,
               chatListMap: tempMap
           }
+          console.log('\n[Reducer Left] REMOVE_CHAT ', action, removeChat)
+          return removeChat
 
       case 'ADD_CHAT':
         if (state.chatListKey.indexOf(action.data.mesId) != -1) {
-            return {
+            const dontAdd = {
               ...state
             }
+            console.log('\n[Reducer Left] ADD_CHAT ---dontAdd ', action, dontAdd)
+            return dontAdd
         }
-        var tempKey = state.chatListKey
-        tempKey.unshift(action.data.mesId)
-
-        var tempMap = state.chatListMap
-        tempMap[action.data.mesId] = {
-            displayLabel: action.data.label,
-            lastMessage: undefined,
-            mesId: action.data.mesId,
-            usersKey: [],
-            usersMap: {},
-            status: false
-        }
-
-        return {
+        const addChat = {
             ...state,
-            chatListKey: tempKey,
-            chatListMap: tempMap,
+            chatListKey: [
+                action.data.mesId,
+                ...state.chatListKey,
+            ],
+            chatListMap: {
+                ...state.chatListMap,
+                [action.data.mesId]: {
+                  displayLabel: action.data.label,
+                  lastMessage: undefined,
+                  mesId: action.data.mesId,
+                  usersKey: [],
+                  usersMap: {},
+                  status: false
+                }
+            },
         }
+        console.log('\n[Reducer Left] ADD_CHAT ---add ', action, addChat)
+        return addChat
 
       case 'INIT_CHAT_LIST':
           if (action.data.length <= 0) {
@@ -162,38 +171,18 @@ const left = (state = {
             }
           )
 
-          return {
+          const initChatlist = {
             ...state,
             chatListKey: tempKey,
             chatListMap: tempMap
           }
+          console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
+          return initChatlist
 
         default:
           return state
 
     }
-}
-
-
-
-const chatMap = (state = {
-    displayLabel: '',
-    lastMessage: {
-        id: '',
-        time: '',
-        message: {
-          text: '',
-          type: '',
-          url: ''
-        }
-    },
-    mesId: '',
-    usersKey: [],
-    usersMap: {
-
-    }
-}, action) => {
-
 }
 
 export default left
