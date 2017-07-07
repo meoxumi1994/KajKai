@@ -5,37 +5,43 @@ const singleChat = (state = {
     switch (action.type) {
 
         case 'global/RECEIVE_MESSAGE':
-          const { mesId, senderId, time, message } = action.data
-          const chat = state.messagesMap[mesId]
-          if (chat == undefined || chat == null) {
-            return state
-          }
-          console.log('message ', message);
-          return {
-            ...state,
-            messagesMap: {
-              ...state.messagesMap,
-              [mesId]: [
-                  ...state.messagesMap[mesId],
-                  {
-                      id: senderId,
-                      message,
-                      time
-                  }
-              ]
+            const { mesId, user, time, message } = action.data
+            const chat = state.messagesMap[mesId]
+            if (chat == undefined || chat == null) {
+              return state
             }
-          }
+            const msg = {
+              ...state,
+              messagesMap: {
+                ...state.messagesMap,
+                [mesId]: [
+                    ...state.messagesMap[mesId],
+                    {
+                        id: user.id,
+                        message,
+                        time
+                    }
+                ]
+              }
+            }
+            console.log('\n[Reducer Center] global/RECEIVE_MESSAGE ', action, msg)
+            return msg
 
         case 'INIT_SINGLE_MESSAGES':
-            return {
+            const initSingleMessages = {
               ...state,
               messagesKey: [action.data.mesId],
               messagesMap: {
                   [action.data.mesId]: action.data.messages.reverse()
               }
             }
+            console.log('\n[Reducer Center] INIT_SINGLE_MESSAGES', action, msg);
+            return initSingleMessages
 
         case 'ADD_CHAT':
+            if (action.data.mesId != 0) {
+              return state
+            }
             return {
               ...state,
               messagesKey: ['0'],

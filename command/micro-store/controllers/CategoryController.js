@@ -4,7 +4,7 @@ export const getCategoryListCon = () => {
     return (req, res) => {
         getCategoryList((list) => {
             if (list && list.length > 0) {
-                res.json({listCategories: getListCategoryInfo(list), status: 'success'});
+                res.json({categories: getListCategoryInfo(list), status: 'success'});
             } else {
                 res.json({status: 'failed'})
             }
@@ -17,7 +17,7 @@ export const searchCategoryCon = () => {
         const keyword = req.params.keyword;
         searchCategory(keyword, (list) => {
             if (list && list.length > 0) {
-                res.json({listCategories: getListCategoryInfo(list), status: 'success'});
+                res.json({categories: getListCategoryInfo(list), status: 'success'});
             } else {
                 res.json({status: 'failed'})
             }

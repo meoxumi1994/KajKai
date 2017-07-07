@@ -27,7 +27,7 @@ export const getListCategoryInfo = (lists) => {
         res.push({
             id: lists[i]._id,
             name: lists[i].name,
-            listSecondCategories: getSubListCategoryInfo(lists[i].subcategory)
+            secondCategories: getSubListCategoryInfo(lists[i].subcategory)
         })
     }
     return res;
