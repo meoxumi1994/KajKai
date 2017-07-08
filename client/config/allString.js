@@ -122,6 +122,12 @@ const myString = {
     CATEGORY: ['Loại Hình Kinh Doanh','Category'],
     CONFIRM: ['Xác Nhận','Confirm'],
     CHOOSE_ANOTHER: ['Chọn lại', 'Choose Another'],
+    POSITION_IN_MAP: ['Vị trí trên Google Map',
+        'Position in google map'],
+    ADDRESS_DESCRIPTION: ['Địa chỉ của bạn, bạn nên viết chính xác vì người dùng sẽ sử dụng nó để tìm ra của hàng của bạn',
+        'Your address should you write correctly because the user will use it to find out your store'],
+    STORE_NAME: ['Tên cửa hàng', 'Store name'],
+    GET_CURRENT_POSITION: ['Đến vị trí hiện tại','Get current Position'],
 }
 
 const allString = {

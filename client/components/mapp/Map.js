@@ -12,7 +12,7 @@ const GettingStartedGoogleMap = withGoogleMap(props => (
         defaultCenter={props.defaultCenter}
         onIdle={props.onMapIdle}
         >
-        {props.markers.map((marker, index) => (
+        {/* {props.markers.map((marker, index) => (
             <Marker position={marker.position} key={index}
                {...marker}
              >
@@ -33,7 +33,7 @@ const GettingStartedGoogleMap = withGoogleMap(props => (
                    </div>
                </InfoWindow>
              </Marker>
-    ))}
+    ))} */}
     </GoogleMap>
 ));
 
