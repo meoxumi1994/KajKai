@@ -43,7 +43,7 @@ const init = (server) => {
                 authoriseToken(token, (user) => {
                     if (user) {
                         console.log('user ' + JSON.stringify(user));
-                        sio.join(user.id);
+                        socket.join(user.id);
                         sockListen(user, socket, sio);
                     } else sockListen(null, socket, sio)
                 })
