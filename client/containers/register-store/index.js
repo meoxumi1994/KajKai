@@ -23,10 +23,16 @@ const mapStateToProps = (state, ownProps) => {
         CREATE_STORE_DESCRIPTION_5: g('CREATE_STORE_DESCRIPTION_5'),
         CREATE_STORE_DESCRIPTION_6: g('CREATE_STORE_DESCRIPTION_6'),
         CREATE_STORE_DESCRIPTION_7: g('CREATE_STORE_DESCRIPTION_7'),
+        STORE_NAME: g('STORE_NAME'),
+        POSITION_IN_MAP: g('POSITION_IN_MAP'),
+        POSITION_IN_MAP_DESCRIPTION: g('POSITION_IN_MAP_DESCRIPTION'),
+        ADDRESS: g('ADDRESS'),
+        ADDRESS_DESCRIPTION: g('ADDRESS_DESCRIPTION'),
         CATEGORY: g('CATEGORY'),
         PHONE: g('PHONE'),
-        CONFIRM: g('CONFIRM'), 
+        CONFIRM: g('CONFIRM'),
         CHOOSE_ANOTHER: g('CHOOSE_ANOTHER'),
+        SAVE: g('SAVE'),
         ...registerstore,
     })
 }
@@ -57,6 +63,16 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     updatePhone: (phone) => {
         dispatch(updatePhone(phone))
+    },
+    chooseAnother: () => {
+        dispatch({ type: 'INST_REGISTER_STORE_CHOOSE_ANOTHER_PHONE'})
+    },
+    onOpenModalPhone: (value) => {
+        dispatch({ type: 'INST_REGISTER_STORE_CHOOSE_OPEN_MODAL_PHONE', value: value })
+    },
+    onChangePosition: (position) => {
+        console.log('onChangePosition', position)
+        dispatch({ type: 'INST_REGISTER_STORE_CHOOSE_POSITION', position: position })
     }
 })
 

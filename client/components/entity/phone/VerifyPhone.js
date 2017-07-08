@@ -4,17 +4,9 @@ import { Modal } from 'react-bootstrap'
 class VerifyPhone extends React.Component {
     constructor(props){
         super(props)
-        this.state = {
-            code: '',
-        }
-    }
-    onChangeCode(e){
-        this.setState({
-            code: e.target.value
-        })
     }
     render(){
-        const { VERIFY_PHONE, statePhone, onVerifyPhone, phone,
+        const { VERIFY_PHONE, statePhone, onVerifyPhone, phone, code, onChangeCode,
             PHONE_FAILED, PHONE_USED, CONFIRM, CODE_FAILED,
             PHONE_VERIFY, CLOSE, showModal, close } = this.props
         return(
@@ -35,8 +27,8 @@ class VerifyPhone extends React.Component {
                     {statePhone != 'UPDATE_PHONE_ING' &&
                         <div style={{ padding: 10 }}>
                             <input
-                                onChange={(e) => this.onChangeCode(e)}
-                                value={this.state.code}
+                                onChange={(e) => onChangeCode(e)}
+                                value={code}
                                 placeholder={"enter code"+" ..."} style={{
                                 fontSize: 15,
                                 marginTop: 5,
@@ -46,7 +38,7 @@ class VerifyPhone extends React.Component {
                                 <div style={{ marginTop: -20, marginLeft: 200 }} id="loaderr"></div>
                             :
                                 <div className="btn btn-default btn-xs"
-                                    onClick={() => onVerifyPhone(this.state.code)}
+                                    onClick={() => onVerifyPhone(code)}
                                     style={{ marginLeft: 10 }}>
                                     {CONFIRM}
                                 </div>

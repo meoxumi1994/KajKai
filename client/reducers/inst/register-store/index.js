@@ -9,8 +9,10 @@ const index = (state = {
     chooseSecondCategory: '',
     chooseSecondCategoryId: '',
     categoryInputValue: '',
+    openModalPhone: false,
     phone: '',
     isConfirmPhone: false,
+    position: undefined,
 }, action) => {
     switch (action.type) {
         case 'GET_LIST_CATEGORY_SUCCESS':
@@ -32,7 +34,13 @@ const index = (state = {
         case 'UPDATE_PHONE_ING':
             return {...state, isConfirmPhone: false }
         case 'VERIFY_PHONE_SUCCESS':
-            return {...state, isConfirmPhone: true }
+            return {...state, isConfirmPhone: true, openModalPhone: false }
+        case 'INST_REGISTER_STORE_CHOOSE_OPEN_MODAL_PHONE':
+            return {...state, openModalPhone: action.value }
+        case 'INST_REGISTER_STORE_CHOOSE_ANOTHER_PHONE':
+            return {...state, phone: '', isConfirmPhone: false }
+        case 'INST_REGISTER_STORE_CHOOSE_POSITION':
+            return {...state, position: action.position }
         default:
             return state
     }

@@ -5,6 +5,7 @@ import Left from '~/containers/register-store/Left'
 import Right from '~/containers/register-store/Right'
 import DropDownCategory from '~/components/entity/DropDownCategory'
 import VerifyPhone from '~/containers/entity/phone/VerifyPhone'
+import ShowInMap from '~/containers/entity/map/ShowInMap'
 
 const checkPhone = (phone) => {
     if(!phone) return 'error'
@@ -19,23 +20,20 @@ class RegisterStore extends React.Component {
         this.state = {
             showDropDown: false,
             showSecondDropDown: false,
-            showModalPhone: false,
         }
     }
     render(){
         const {
-            STORE, CONFIRM, CHOOSE_ANOTHER,
-            CREATE_STORE,
-            CREATE_STORE_DESCRIPTION,
-            CREATE_STORE_DESCRIPTION_0,
-            CREATE_STORE_DESCRIPTION_1,
-            CREATE_STORE_DESCRIPTION_2,
-            CREATE_STORE_DESCRIPTION_3,
-            CREATE_STORE_DESCRIPTION_4,
-            CREATE_STORE_DESCRIPTION_5,
-            CREATE_STORE_DESCRIPTION_6,
-            CREATE_STORE_DESCRIPTION_7,
-            CATEGORY, PHONE, isConfirmPhone,
+            STORE, CONFIRM, CHOOSE_ANOTHER, CREATE_STORE,
+            CREATE_STORE_DESCRIPTION, CREATE_STORE_DESCRIPTION_0,
+            CREATE_STORE_DESCRIPTION_1, CREATE_STORE_DESCRIPTION_2,
+            CREATE_STORE_DESCRIPTION_3, CREATE_STORE_DESCRIPTION_4,
+            CREATE_STORE_DESCRIPTION_5, CREATE_STORE_DESCRIPTION_6,
+            CREATE_STORE_DESCRIPTION_7, CATEGORY, PHONE,
+            POSITION_IN_MAP, POSITION_IN_MAP_DESCRIPTION,
+            ADDRESS, ADDRESS_DESCRIPTION, STORE_NAME, SAVE,
+            onChangeName, name, isConfirmPhone, chooseAnother, openModalPhone, onChangePosition,
+            onOpenModalPhone, address, onChangeAdress, position,
             categories, chooseCategory, chooseSecondCategory, chooseCategoryId, phone, onChangePhone,
             isusername, iswhoing, onOpenStore, registerStoreOK, onGetCategory, updatePhone,
             onChooseCategory, onChooseSecondCategory, onChangeCategoryInputValue, categoryInputValue} = this.props
@@ -55,7 +53,7 @@ class RegisterStore extends React.Component {
             return <Redirect to="/store"/>
         }
         return(
-            <div style={{ marginLeft: 200, marginRight: 200, height: '100%'}}>
+            <div style={{ marginLeft: 200, marginRight: 200 }}>
                 <div style={{ padding: 15, backgroundColor: 'white', width: 700, height: '100%'}}>
                     <div style={{ fontSize: 25 }}>Create A New Store</div>
                     <div>{CREATE_STORE_DESCRIPTION}:</div>
@@ -63,7 +61,20 @@ class RegisterStore extends React.Component {
                     <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_1}</div>
                     <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_2}</div>
                     <div style={{ marginTop: 15, fontWeight: 'bold'}}>
-                        {CATEGORY}
+                        {STORE_NAME}{" :"}
+                    </div>
+                    <div>
+                        <input
+                            onChange={(e) => onChangeName(e)}
+                            value={name}
+                            placeholder={"enter your store name"+" ..."} style={{
+                            width: 400,
+                            fontSize: 12.5,
+                            marginTop: 5,
+                            paddingLeft: 5,}}/>
+                    </div>
+                    <div style={{ marginTop: 15, fontWeight: 'bold'}}>
+                        {CATEGORY}{" :"}
                     </div>
                     <div style={{  marginLeft: 350, height: 150, width: 300 }}>
                         <div className="btn btn-default btn-xs" style={{ marginTop: 5, width: 300 , fontSize: 12.5 }}
@@ -118,7 +129,7 @@ class RegisterStore extends React.Component {
                         <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_5}</div>
                     </div>
                     <div style={{ marginTop: 15, fontWeight: 'bold'}}>
-                        {PHONE}
+                        {PHONE}{" :"}
                     </div>
                     {!isConfirmPhone ?
                         <input
@@ -140,30 +151,62 @@ class RegisterStore extends React.Component {
                             onClick={() => {
                                 if(!checkPhone(phone)){
                                     updatePhone()
-                                    this.setState({ showModalPhone: true })
+                                    onOpenModalPhone(true)
                                 }
                             }}
                             style={{ marginLeft: 10 }}>
                             {CONFIRM}
                         </div>
                     :   <div className="btn btn-default btn-xs"
-                            style={{ marginLeft: 10 }}>
+                            style={{ marginLeft: 10 }}
+                            onClick={() => chooseAnother()}>
                             {CHOOSE_ANOTHER}
                         </div>
                     }
-
-                    {!isConfirmPhone &&
-                        <VerifyPhone
-                            phone={phone}
-                            showModal={this.state.showModalPhone}
-                            close={() => this.setState({ showModalPhone: false })}/>
-                    }
+                    <VerifyPhone
+                        phone={phone}
+                        showModal={openModalPhone}
+                        close={() => onOpenModalPhone(false)}/>
                     <div style={{ marginTop: isConfirmPhone?-19: -25, width: 340 }}>
                         <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_6}</div>
                         <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_7}</div>
                     </div>
-
-
+                    <div style={{ marginTop: 15, fontWeight: 'bold'}}>
+                        {POSITION_IN_MAP}{" :"}
+                    </div>
+                    <div>
+                        <ShowInMap
+                            width={300} height={200}
+                            position={position}
+                            onChangePosition={(position) => onChangePosition(position)}
+                        />
+                    </div>
+                    <div style={{ marginTop: 15, fontWeight: 'bold'}}>
+                        {ADDRESS}{" :"}
+                    </div>
+                    <div>
+                        {". "}{ADDRESS_DESCRIPTION}
+                    </div>
+                    <div>
+                        <input
+                            onChange={(e) => onChangeAdress(e)}
+                            value={address}
+                            placeholder={"enter your address"+" ..."} style={{
+                            width: 400,
+                            fontSize: 12.5,
+                            marginTop: 5,
+                            paddingLeft: 5,}}/>
+                    </div>
+                    <div style={{ height: 40 }}>
+                        <div className="btn btn-default btn-sm"
+                            style={{ float: 'right',
+                            color: '#5D9149',
+                            borderColor: '#5D9149',
+                            marginRight: 10,
+                            marginTop: 10 }}>
+                            {CREATE_STORE}
+                        </div>
+                    </div>
                 </div>
             </div>
         )
