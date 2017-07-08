@@ -71,7 +71,7 @@ export const memberRemovedFromGroup = (message, next) => {
 export const memberAddedToGroup = (message, next) => {
     if (message.mesId) {
         addMember(message.mesId, message.members, (infos, group) => {
-            var data = message;
+            let data = message;
             data.members = infos;
             next({status: 'success', data: data, receiverId: group.members});
         })
