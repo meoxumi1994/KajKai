@@ -32,9 +32,10 @@ export const readChatCon = (action, sio, io) => {
 };
 
 export const addMemberCon = (action, sio, io) => {
-    console.log('action func ' + action);
+    console.log('action func ' + JSON.stringify(action));
     addMemberPub(action.data.mesId, action.data.members, (data, receiverId) => {
-        for (var i = 0; i < receiverId.length; ++i) {
+        data = {...data, id: action.data.id};
+        for (let i = 0; i < receiverId.length; ++i) {
             sio.emit('action', {type: 'client/ADD_MEMBER', data: data})
         }
     })
@@ -42,7 +43,7 @@ export const addMemberCon = (action, sio, io) => {
 
 export const removeMemberCon = (action, sio, io) => {
     removeMemberPub(action.data.mesId, action.data.memberId, (data, receiverId) => {
-        for (var i = 0; i < receiverId.length; ++i) {
+        for (let i = 0; i < receiverId.length; ++i) {
             sio.to(receiverId[i]).emit('action', {type: 'client/REMOVE_MEMBER', data: action.data})
         }
     })
