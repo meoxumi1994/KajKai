@@ -35,6 +35,8 @@ export const addMemberCon = (action, sio, io) => {
     console.log('action func ' + JSON.stringify(action));
     addMemberPub(action.data.mesId, action.data.members, (data, receiverId) => {
         data = {...data, id: action.data.id};
+        console.log(receiverId);
+        console.log('data ' + JSON.stringify(data));
         for (let i = 0; i < receiverId.length; ++i) {
             sio.to(receiverId[i]).emit('action', {type: 'client/ADD_MEMBER', data: data})
         }
