@@ -36,7 +36,7 @@ export const addMemberCon = (action, sio, io) => {
     addMemberPub(action.data.mesId, action.data.members, (data, receiverId) => {
         data = {...data, id: action.data.id};
         for (let i = 0; i < receiverId.length; ++i) {
-            sio.emit('action', {type: 'client/ADD_MEMBER', data: data})
+            sio.to(receiverId[i]).emit('action', {type: 'client/ADD_MEMBER', data: data})
         }
     })
 };
@@ -51,7 +51,7 @@ export const removeMemberCon = (action, sio, io) => {
 
 export const updateUICon = (action, sio, io) => {
     updateUIPub(action.data.mesId, action.data.data, (data, receiverId) => {
-        for (var i = 0; i < receiverId.length; ++i) {
+        for (let i = 0; i < receiverId.length; ++i) {
             sio.to(receiverId[i]).emit('action', {type: 'server/UPDATE_UI', data: action.data})
         }
     })
