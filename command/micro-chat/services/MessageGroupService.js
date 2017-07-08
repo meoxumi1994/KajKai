@@ -53,7 +53,9 @@ export const addMember = (groupId, memberIds, next) => {
     getGroupMessage(groupId, (group) => {
         if (!group) next(null);
         else {
-            group.members.push(memberIds);
+            for (let i = 0; i < memberIds.length; ++i) {
+                group.members.push(memberIds[i]);
+            }
             group.save((err) => {
                 chatGroupUpdatedPub(getGroupBasicInfo(group));
                 getInfoFromListId(memberIds, (infos) => {

@@ -5,9 +5,10 @@ export const addNewMessageCon = (action, sio, io) => {
     addNewMessagePub(action.data, (mes, emitList) => {
         console.log('data ' + JSON.stringify({mes: mes, list: emitList}));
         for (let i = 0; i < emitList.length; ++i) {
-            sio.to(emitList[i]).emit('action', {type: 'global/RECEIVE_MESSAGE', data: mes})
+            console.log(emitList[i]);
+            io.to(emitList[i]).emit('action', {type: 'global/RECEIVE_MESSAGE', data: mes})
         }
-        sio.emit('action', {type: 'global/RECEIVE_MESSAGE', data: mes})
+        // sio.emit('action', {type: 'global/RECEIVE_MESSAGE', data: mes})
     })
 };
 
@@ -32,26 +33,29 @@ export const readChatCon = (action, sio, io) => {
 };
 
 export const addMemberCon = (action, sio, io) => {
-    console.log('action func ' + action);
+    console.log('action func ' + JSON.stringify(action));
     addMemberPub(action.data.mesId, action.data.members, (data, receiverId) => {
-        for (var i = 0; i < receiverId.length; ++i) {
-            sio.emit('action', {type: 'client/ADD_MEMBER', data: data})
+        data = {...data, id: action.data.id};
+        console.log(receiverId);
+        console.log('data ' + JSON.stringify(data));
+        for (let i = 0; i < receiverId.length; ++i) {
+            io.to(receiverId[i]).emit('action', {type: 'client/ADD_MEMBER', data: data})
         }
     })
 };
 
 export const removeMemberCon = (action, sio, io) => {
     removeMemberPub(action.data.mesId, action.data.memberId, (data, receiverId) => {
-        for (var i = 0; i < receiverId.length; ++i) {
-            sio.to(receiverId[i]).emit('action', {type: 'client/REMOVE_MEMBER', data: action.data})
+        for (let i = 0; i < receiverId.length; ++i) {
+            io.to(receiverId[i]).emit('action', {type: 'client/REMOVE_MEMBER', data: action.data})
         }
     })
 };
 
 export const updateUICon = (action, sio, io) => {
     updateUIPub(action.data.mesId, action.data.data, (data, receiverId) => {
-        for (var i = 0; i < receiverId.length; ++i) {
-            sio.to(receiverId[i]).emit('action', {type: 'server/UPDATE_UI', data: action.data})
+        for (let i = 0; i < receiverId.length; ++i) {
+            io.to(receiverId[i]).emit('action', {type: 'server/UPDATE_UI', data: action.data})
         }
     })
 };
