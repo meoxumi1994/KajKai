@@ -5,6 +5,7 @@ export const addNewMessageCon = (action, sio, io) => {
     addNewMessagePub(action.data, (mes, emitList) => {
         console.log('data ' + JSON.stringify({mes: mes, list: emitList}));
         for (let i = 0; i < emitList.length; ++i) {
+            console.log(emitList[i]);
             io.to(emitList[i]).emit('action', {type: 'global/RECEIVE_MESSAGE', data: mes})
         }
         // sio.emit('action', {type: 'global/RECEIVE_MESSAGE', data: mes})
