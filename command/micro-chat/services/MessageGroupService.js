@@ -37,7 +37,7 @@ export const getGroupFullInfo = (group, next) => {
     getInfoFromListId(group.members, (infos) => {
         next({
             members: infos, groupName: group.groupName, groupColor: group.groupColor,
-            mesId: getGlobalGroupId(group._id)
+            mesId: getGlobalGroupId(group._id ? group._id : group.id)
         })
     })
 };
@@ -95,8 +95,8 @@ export const updateGroupInfo = (mesId, info, next) => {
 
 export const getMessageGroupInfo = (group, next) => {
     getInfoFromListId(group.members, (membersInfo) => {
-        var basicInfo = [];
-        for (var i = 0; i < membersInfo.length; ++i) {
+        let basicInfo = [];
+        for (let i = 0; i < membersInfo.length; ++i) {
             basicInfo.push({
                 id: membersInfo[i].id,
                 avatarUrl: membersInfo[i].id,
