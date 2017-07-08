@@ -111,13 +111,6 @@ PUT /password {
     status: 'failed|success',
 }
 
-PUT /phone/user {
-    code: '1234', // code == undefined is need get verifi-code
-    phone: '0987654321'
-},{
-    status: 'pending|used|error|success',
-}
-
 PUT /blacklist { // blockid co thi delete ko co thi add
     blockid: ,
 },{
@@ -873,7 +866,6 @@ GET /comment/like {
 
 //// -------------- SEARCH CATEGORY -------------------
 
-
 GET /categorylist { // language la current language cua thang days
     status: 'success',
     categories: [
@@ -920,4 +912,17 @@ GET search/category/:keyword {
             name: 'Food',
         },
     ]
+}
+
+POST /phoneverification {  //server kiểm tra xem có user hay store nào dùng số phone này chưa -> server requests to Nexmo để gửi code tới số phone
+  phone: '0123456789'
+}, {
+  'pending|used|error'
+}
+
+POST /phonecodeverification { // server requests to Nexmo để check code cho số phone
+  phone: '0123456789',
+  code: '1234'
+}, {
+  'verified|error'
 }

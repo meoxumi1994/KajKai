@@ -10,12 +10,14 @@ import editsellpost from './editsellpost'
 import callcomment from './callcomment'
 import postrow from './postrow'
 import product from './product'
+import phone from './phone'
 
 const entity = combineReducers({
     modal,
     input,
     row,
     group,
+    phone,
     minorpost,
     sellpost,
     callcomment,

@@ -9,10 +9,16 @@ class Chat extends React.Component {
     render() {
 
         const { chatListMap, mesId, user, currentChat } = this.props
+
+        if (chatListMap[mesId] == undefined) {
+          return (
+            <div></div>
+          )
+        }
+
         const { lastMessage, time, usersKey, usersMap, displayLabel, status } = chatListMap[mesId]
 
         let textColor = mesId == currentChat? 'white': 'black'
-
         return (
           <div className="row">
               <div className="col col-xs-2" style={styles.avatarDiv}>

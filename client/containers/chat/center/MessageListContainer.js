@@ -5,7 +5,6 @@ const mapStateToProps = (state, ownProps) => {
     const { user } = state
     const { messagesMap } = state.inst.chat.center.singleChat
     const { chatListMap } = state.inst.chat.left
-    console.log('--- state ', state.inst.chat);
     return {
         user,
         messagesMap,
