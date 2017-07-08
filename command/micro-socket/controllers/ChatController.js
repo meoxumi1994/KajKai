@@ -39,7 +39,7 @@ export const addMemberCon = (action, sio, io) => {
         console.log(receiverId);
         console.log('data ' + JSON.stringify(data));
         for (let i = 0; i < receiverId.length; ++i) {
-            sio.to(receiverId[i]).emit('action', {type: 'client/ADD_MEMBER', data: data})
+            io.to(receiverId[i]).emit('action', {type: 'client/ADD_MEMBER', data: data})
         }
     })
 };
@@ -47,7 +47,7 @@ export const addMemberCon = (action, sio, io) => {
 export const removeMemberCon = (action, sio, io) => {
     removeMemberPub(action.data.mesId, action.data.memberId, (data, receiverId) => {
         for (let i = 0; i < receiverId.length; ++i) {
-            sio.to(receiverId[i]).emit('action', {type: 'client/REMOVE_MEMBER', data: action.data})
+            io.to(receiverId[i]).emit('action', {type: 'client/REMOVE_MEMBER', data: action.data})
         }
     })
 };
@@ -55,7 +55,7 @@ export const removeMemberCon = (action, sio, io) => {
 export const updateUICon = (action, sio, io) => {
     updateUIPub(action.data.mesId, action.data.data, (data, receiverId) => {
         for (let i = 0; i < receiverId.length; ++i) {
-            sio.to(receiverId[i]).emit('action', {type: 'server/UPDATE_UI', data: action.data})
+            io.to(receiverId[i]).emit('action', {type: 'server/UPDATE_UI', data: action.data})
         }
     })
 };
