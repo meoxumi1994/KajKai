@@ -37,7 +37,7 @@ export const getGroupFullInfo = (group, next) => {
     getInfoFromListId(group.members, (infos) => {
         next({
             members: infos, groupName: group.groupName, groupColor: group.groupColor,
-            groupId: getGlobalGroupId(group._id)
+            mesId: getGlobalGroupId(group._id)
         })
     })
 };
@@ -45,7 +45,7 @@ export const getGroupFullInfo = (group, next) => {
 export const getGroupBasicInfo = (group) => {
     return {
         members: group.members, groupName: group.groupName, groupColor: group.groupColor,
-        groupId: getGlobalGroupId(group._id)
+        groupId: getGlobalGroupId(group._id ? group._id : group.id)
     }
 };
 
