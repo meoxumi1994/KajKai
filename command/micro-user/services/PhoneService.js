@@ -1,8 +1,8 @@
 import NexmoVerify from 'verify-javascript-sdk'
 
 const Nexmo = new NexmoVerify({
-    appId: '7a554b88-84b8-430e-8dc5-e2dda5336528',
-    sharedSecret: '34e97d5e30dd40d'
+    appId: '7c26c15b-1ed8-4096-9d9f-64f43805f893',
+    sharedSecret: '54835f9f46a5653'
 })
 
 export const mNexmoVerifyPhone = (phone) => (

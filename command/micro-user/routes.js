@@ -41,11 +41,18 @@ export default {
         }
     },
     '/phoneverification': {
-        put: {
+        post: {
           controller: 'PhoneController',
           middleware: [auth(), phoneCheck()],
-          method: 'verifyPhone'
+          method: 'verifyPhoneHandler'
         }
+    },
+    '/phonecodeverification': {
+      post: {
+        controller: 'PhoneController',
+        middleware: [auth(), phoneCheck()],
+        method: 'verifyPhoneCodeHandler'
+      }
     },
     '/login': {
        post: {
@@ -78,5 +85,11 @@ export default {
             middleware: [auth()],
             method: 'blackList'
         }
+    },
+    '/logoutphone': {
+      post: {
+        controller: 'PhoneController',
+        method: 'out'
+      }
     }
 }
