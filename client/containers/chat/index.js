@@ -47,8 +47,8 @@ const styles = {
               width: '100%',
           },
           iconImg: {
-              width: 27,
-              height: 27,
+              width: 35,
+              height: 35,
               borderRadius: 50,
               marginRight: 10,
               marginTop: 15
@@ -57,12 +57,10 @@ const styles = {
               position: 'absolute',
               right: 10,
               top: 6,
-              backgroundColor: '#e9ebee',
+              backgroundColor: 'white',
           },
           spliterHr: {
               marginTop: 18
-              // position: 'fixed',
-              // top: 200
           },
           displayLabel: {
             fontSize: 18,
@@ -73,8 +71,9 @@ const styles = {
       center: {
           mainDiv: {
             overflowY: 'scroll',
-            height: '68%',
-            backgroundColor: 'white'
+            height: '74%',
+            backgroundColor: 'white',
+
           },
           rightMsg: {
               imgDiv: {
@@ -101,8 +100,7 @@ const styles = {
                   paddingBottom: 10,
                   paddingLeft: 10,
                   borderRadius: 10,
-                  marginLeft: 520
-                  // float: 'right',
+                  marginLeft: '68%'
               },
               senderDiv: {
                   color: 'grey',

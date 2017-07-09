@@ -10,6 +10,13 @@ class ChatList extends React.Component {
     render(){
         const { chatListMap, chatListKey, currentChat, unreadChat} = this.props
         const { createNewChat, loadChat } = this.props
+
+        // chatListKey.sort(function(a, b) {
+        //     if (chatListMap[a].mesId == 0) return
+        //     if (chatListMap[a].lastMessage.time > chatListMap[b].lastMessage.time) return -1
+        //     if (chatListMap[a].lastMessage.time < chatListMap[b].lastMessage.time) return 1
+        // })
+
         return(
           <div style={{textAlign: 'left', overflowY: 'scroll', height: 625}}>
               {chatListKey.map(mesId =>

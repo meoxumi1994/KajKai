@@ -31,7 +31,7 @@ export const getMesId = (id, person) => dispatch => {
 export const getMessages = (mesId, offset, length, status) => dispatch => {
     flem('/messages/'+mesId, {
       offset: offset,
-      length: 7
+      length: 20
     }, {}).then((response) => {
         console.log('\n[API] /getMessages ', response);
         // !status: doesn't have mesId yet

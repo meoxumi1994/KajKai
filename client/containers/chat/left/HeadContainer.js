@@ -9,6 +9,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     createNewChat: () => {
         dispatch({type: 'ADD_CHAT', data: {mesId: 0, label: 'Tin nhắn mới'}})
         dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: 0}})
+        dispatch({type: 'DISPLAY_ADD_MEMBER', data: {mesId: 0, value: true}})
     }
 })
 

@@ -18,11 +18,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     loadChat: (mesId) => {
         dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: mesId}})
     },
-    handleDelete: (tag) => {
-        dispatch({type: 'REMOVE_TAG', tag: tag})
-    },
-    handleAddition: (tag) => {
-        dispatch({type: 'ADD_TAG', tag: tag})
+    displayAddMember: (mesId) => {
+        // console.log(mesId);
+        dispatch({type: 'DISPLAY_ADD_MEMBER', data: {mesId, value: 'toggle'}})
     }
 })
 

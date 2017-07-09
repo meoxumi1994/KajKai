@@ -14,37 +14,46 @@ class ChatTop extends React.Component {
     render() {
       let conversator
       const { chatListMap, currentChat, mesId, styles} = this.props
-      const { close, loadChat } = this.props
-
+      const { displayAddMember } = this.props
+      // const displayAdd = chatListMap[mesId].display.addMember
+      // console.log('displayAdd ', displayAdd);
       return (
         <div style={currentChat == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
             <label style={styles.displayLabel}>{chatListMap[mesId].displayLabel}</label>
-            <AddMemberContainer/>
+            <div style={styles.iconGroupDiv}>
+                <img style={styles.iconImg} src="/images/plus.ico" onClick={() => displayAddMember(mesId)}/>
+                <img style={styles.iconImg} src="/images/newSetting.png" onClick={() => close(mesId)}/>
+            </div>
+            <AddMemberContainer mesId={mesId}/>
+
         </div>
       )
     }
 }
 
-// <hr style={styles.spliterHr}/>
+// {
+//     displayAdd? <AddMemberContainer mesId={mesId}/>: undefined
+// }
+// {
+//     displayAdd? <hr style={styles.spliterHr, {display: 'none'}}/>: <hr style={styles.spliterHr}/>
+// }
+
+
+// <Link to="/chat">
+//     <img style={styles.iconImg} src="/images/chatWindow.png" onClick={() => loadChat(mesId)}/>
+// </Link>
+
+//
+
+
 // <div style={styles.iconGroupDiv}>
 //    <SettingContainer styles={styles}/>
 //    <img style={styles.iconImg} src="/images/whiteAdd.png"/>
 // </div>
 // <AddMemberContainer/>
 
-// <div>
-//     <ReactTags tags={tags}
-//           handleDelete={handleDelete}
-//           handleAddition={handleAddition}
-//           placeholder="Nhập tên một người..."
-//      />
-// </div>
-
 //---------
-// <Link to="/chat">
-//     <img style={styles.iconImg} src="/images/chatWindow.png" onClick={() => loadChat(mesId)}/>
-// </Link>
-// <img style={styles.iconImg} src="/images/whiteClose.png" onClick={() => close(mesId)}/>
+
 //
 
 export default ChatTop
