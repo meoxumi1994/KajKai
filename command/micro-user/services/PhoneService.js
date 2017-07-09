@@ -1,8 +1,8 @@
 import NexmoVerify from 'verify-javascript-sdk'
 
 const Nexmo = new NexmoVerify({
-    appId: '7c26c15b-1ed8-4096-9d9f-64f43805f893',
-    sharedSecret: '54835f9f46a5653'
+    appId: 'd68d052b-38e9-4bae-a099-0f610ac0b4b4',
+    sharedSecret: 'dfe41a5d6a06d73'
 })
 
 export const mNexmoVerifyPhone = (phone) => (
@@ -53,6 +53,18 @@ export const mNexmoVerifyCancel = (phone) => (
     return status
   }, (err) => {
     console.log('cancel_error', err)
+    throw err
+  })
+)
+
+export const mNexmoVerifySearch = (phone) => (
+  Nexmo.verifySearch({
+    number: phone
+  }).then((status) => {
+    console.log('search_status', status)
+    return status
+  }, (err) => {
+    console.log('search_error', err)
     throw err
   })
 )

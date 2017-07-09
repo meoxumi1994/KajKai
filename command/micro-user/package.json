@@ -26,6 +26,6 @@
     "redis": "^2.7.1",
     "request": "2.81.0",
     "uuid": "^3.1.0",
-    "verify-javascript-sdk": "^0.2.4"
+    "verify-javascript-sdk": "0.2.4"
   }
 }

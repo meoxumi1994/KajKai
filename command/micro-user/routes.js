@@ -47,6 +47,13 @@ export default {
           method: 'verifyPhoneHandler'
         }
     },
+    '/phonereverification': {
+        post: {
+          controller: 'PhoneController',
+          middleware: [auth(), phoneCheck()],
+          method: 'reverifyPhoneHandler'
+        }
+    },
     '/phonecodeverification': {
       post: {
         controller: 'PhoneController',
@@ -86,10 +93,22 @@ export default {
             method: 'blackList'
         }
     },
-    '/logoutphone': {
+    '/phone/logout': {
       post: {
         controller: 'PhoneController',
         method: 'out'
+      }
+    },
+    '/phone/cancel': {
+      post: {
+        controller: 'PhoneController',
+        method: 'cancel'
+      }
+    },
+    '/phone/search': {
+      post: {
+        controller: 'PhoneController',
+        method: 'search'
       }
     }
 }
