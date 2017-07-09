@@ -1,5 +1,5 @@
 import { getUserFromPhone, updateUserPhone } from '../services/UserService.js'
-import { mNexmoVerifyPhone, mNexmoVerifyCheck, mNexmoVerifyLogout } from '../services/PhoneService'
+import { mNexmoVerifyPhone, mNexmoVerifyCheck, mNexmoVerifyLogout, mNexmoVerifyCancel } from '../services/PhoneService'
 
 export const updateUserPhoneController = () => (req, res) => {
     const { phone } = req.body
@@ -63,6 +63,7 @@ export const verifyLogout = () => (req, res) => {
 
 export const verifyPhoneHandler = () => (req, res) => {
   const { phone } = req.body
+  console.log('phone', phone)
   mNexmoVerifyPhone(phone).then((status) => {
     console.log('status verify 1', status)
     if (status == 'verified') {
@@ -97,30 +98,40 @@ export const verifyPhoneHandler = () => (req, res) => {
         })
       })
     } else if (status == 'pending') {
-      mNexmoVerifyPhone(phone).then((status) => {
-        console.log('status verify 3', status)
-        if (status == 'pending') {
-          res.json({
-            status: 'success'
-          })
-        } else {
+      mNexmoVerifyCancel(phone).then((status) => {
+        console.log('status cancel', status)
+        mNexmoVerifyPhone(phone).then((status) => {
+          console.log('status verify 2', status)
+          if (status == 'pending') {
+            res.json({
+              status: 'success'
+            })
+          } else {
+            res.json({
+              status: 'error',
+              number: 4
+            })
+          }
+
+        }, (err) => {
+          console.log('Nexmo error err', err)
           res.json({
             status: 'error',
-            number: 4
+            number: 5
           })
-        }
+        })
 
       }, (err) => {
         console.log('Nexmo error err', err)
         res.json({
           status: 'error',
-          number: 5
+          number: 6
         })
       })
     } else {
       res.json({
         status: 'error',
-        number: 6
+        number: 7
       })
     }
 
@@ -128,13 +139,14 @@ export const verifyPhoneHandler = () => (req, res) => {
     console.log('Nexmo error err', err)
     res.json({
       status: 'error',
-      number: 7
+      number: 8
     })
   })
 }
 
 export const verifyPhoneCodeHandler = () => (req, res) => {
   const { phone, code } = req.body
+  console.log('phone check', phone)
   mNexmoVerifyCheck(phone, code).then((status) => {
     console.log('status check', status)
     if (status == 'verified') {

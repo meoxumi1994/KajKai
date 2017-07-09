@@ -43,3 +43,16 @@ export const mNexmoVerifyLogout = (phone) => (
         throw err
     })
 )
+
+export const mNexmoVerifyCancel = (phone) => (
+  Nexmo.verifyControl({
+    number: phone,
+    cmd: 'cancel'
+  }).then((status) => {
+    console.log('cancel_status', status)
+    return status
+  }, (err) => {
+    console.log('cancel_error', err)
+    throw err
+  })
+)

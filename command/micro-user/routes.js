@@ -43,14 +43,14 @@ export default {
     '/phoneverification': {
         post: {
           controller: 'PhoneController',
-          middleware: [auth(), phoneCheck()],
+          // middleware: [auth(), phoneCheck()],
           method: 'verifyPhoneHandler'
         }
     },
     '/phonecodeverification': {
       post: {
         controller: 'PhoneController',
-        middleware: [auth(), phoneCheck()],
+        // middleware: [auth(), phoneCheck()],
         method: 'verifyPhoneCodeHandler'
       }
     },
