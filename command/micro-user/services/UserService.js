@@ -161,14 +161,13 @@ export const getUserFromToken = (token, next) => {
 export const updateUserPhone = (id, phone, next) => {
     getUser(id, function(user){
         if (user) {
-            let oldPhone = user.phone
             user.phone = phone
             user.phoneLastUpdateAt = new Date()
-            user.save(function(err){
+            user.save((err) => {
                 if (err) {
                     next('failed')
                 } else {
-                    next('success', oldPhone)
+                    next('success')
                 }
             })
         } else {

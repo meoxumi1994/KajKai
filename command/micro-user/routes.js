@@ -33,11 +33,11 @@ export default {
             method: 'updateUserPassword'
         }
     },
-    '/phone': {
+    '/phone/user': {
         put: {
             controller: 'PhoneController',
             middleware: [auth()],
-            method: 'updateUserPhoneController'
+            method: 'updateUserPhoneHandler'
         }
     },
     '/phoneverification': {
