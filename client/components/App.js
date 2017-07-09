@@ -110,27 +110,31 @@ class App extends React.Component {
                                   <Route path="/registerstore" component={RegisterStore}/>
                                   <Route path="/chat" component={Chat}/>
                               </div>
-                              {/* <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>
-                                  {
-                                     messagesKey.length == 0? undefined:
-                                     messagesKey.map((mesId,index) => {
-                                       return (<div key={mesId} style={{
-                                            position: 'fixed',
-                                            bottom: 0,
-                                            backgroundColor: 'white',
-                                            width: 320 ,
-                                            height: 400,
-                                            zIndex:100,
-                                            marginLeft: index * 325 + 5
-                                          }}>
-                                              <ChatCenterContainer
-                                                mesId={mesId}
-                                                styles={styles}
-                                                messagesMap={messagesMap}/>
-                                          </div>)
-                                     })
-                                  }
-                                </div> */}
+                              {
+                                <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>
+                                      { messagesKey.map(
+                                          (mesId, index) => {
+                                              return (
+                                                <div key={mesId} style={{
+                                                  position: 'fixed',
+                                                  bottom: 0,
+                                                  backgroundColor: 'white',
+                                                  width: 320 ,
+                                                  height: 400,
+                                                  zIndex:100,
+                                                  marginLeft: index * 325 + 5
+                                                }}>
+                                                    <ChatCenterContainer
+                                                        mesId={mesId}
+                                                        styles={styles}
+                                                        messagesMap={messagesMap}/>
+                                                </div>
+                                              )
+                                          }
+
+                                      )}
+                                </div>
+                              }
                             </div>
                         :  location.pathname.split('/')[1] == 'user'?
                             <div>
@@ -147,6 +151,7 @@ class App extends React.Component {
     }
     componentDidMount(){
         this.props.onWho()
+        // this.props.getChatList()
     }
 }
 

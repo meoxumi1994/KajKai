@@ -5,17 +5,12 @@ import { getChatList } from '~/actions/asyn/chat/restful'
 import { getSingleChat } from '~/components/chat/chatStyles'
 
 const mapStateToProps = (state, ownProps) => {
-  const { catagory, currentThemes} = state.inst.chat.display.themes
-  const themes = catagory[currentThemes]
-  const { messagesKey, messagesMap, visibility } = state.inst.chat.center.singleChat
+  const { messagesKey, messagesMap } = state.inst.chat.center.singleChat
   return (
     {
-      themes,
       messagesKey,
       messagesMap,
-      visibility,
-      multiChat: false,
-      styles,
+      styles
     }
   )
 }
@@ -24,7 +19,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   setCurrentChat: (mesId) => {
       dispatch({type: 'SET_CURRENT_CHAT', mesId})
   },
-  getChatList: () => {
+  getChatList: (id) => {
       dispatch(getChatList(Date.now(), 10))
   }
 })

@@ -8,7 +8,7 @@ export const getUser = (id) => dispatch => {
         if(status == 'success'){
             console.log('user ', user);
             dispatch({ type: 'USER_GET_SUCCESS', user })
-            dispatch({ type: 'CHAT_USER', user})
+            dispatch({ type: 'SET_USER_ID', data: {id : user.id}})
         }else{
             dispatch({ type: 'USER_GET_FAILED', user })
         }

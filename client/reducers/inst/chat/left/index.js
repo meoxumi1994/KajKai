@@ -10,15 +10,28 @@ const left = (state = {
 }, action) => {
     switch (action.type) {
 
-      case 'CHAT_USER':
-          console.log(action);
-          return {
+      case 'SET_USER_ID':
+          const setUserId = {
               ...state,
               currentChat: {
                   ...state.currentChat,
-                  id: action.user.id
+                  id: action.data.id
               }
           }
+          console.log('\n[Reducer Left] SET_USER_ID', action, setUserId)
+          return setUserId
+
+
+      case 'SET_CURRENT_CHAT':
+          const setCurrentChat = {
+            ...state,
+            currentChat: {
+                ...state.currentChat,
+                mesId: action.data.mesId
+            }
+          }
+          console.log('\n[Reducer Left] SET_CURRENT_CHAT', action, setCurrentChat)
+          return setCurrentChat
 
       case 'DISPLAY_ADD_MEMBER':
           return {
@@ -196,16 +209,7 @@ const left = (state = {
           }
 
 
-      case 'SET_CURRENT_CHAT':
-          const setCurrentChat = {
-            ...state,
-            currentChat: {
-                ...state.currentChat,
-                mesId: action.data.mesId
-            }
-          }
-          console.log('\n[Reducer Left] SET_CURRENT_CHAT', action, setCurrentChat)
-          return setCurrentChat
+
 
       case 'REMOVE_CHAT':
           var tempKey = state.chatListKey
