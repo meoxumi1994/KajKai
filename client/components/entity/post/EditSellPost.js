@@ -2,22 +2,32 @@ import React from 'react'
 
 import { Modal } from 'react-bootstrap'
 import ContentEditable from '~/components/entity/ContentEditable'
+import ChoosePostRow from '~/components/entity/post/ChoosePostRow'
+import EditPostRow from '~/containers/entity/post/EditPostRow'
 
 class EditSellPost extends React.Component {
     constructor(props){
         super(props)
+        this.state = {
+            showModal: false
+        }
     }
     render(){
         const {
             title, showModal, close, height,
             avatarUrl, ship, storename, category,
             description, time,
-            postrows_order} = this.props
+            postrows_order,
+            addPostRow, onChangePostRow,
+        } = this.props
         return (
-            <Modal show={showModal} onHide={() => close()}>
+            <Modal show={showModal} bsSize="sm" onHide={() => close()}>
                 <div className="modal-content" style={{
-                    width: 600,
-                    height: height - 70}}>
+                    width: 520,
+                    marginLeft: -125,
+                    marginTop: -1,
+                    minHeight: height - 70
+                }}>
                     <div style={{ padding: 10 }}>
                         {title}
                     </div>
@@ -35,13 +45,15 @@ class EditSellPost extends React.Component {
                                 <a style={{ color: '#BD081C', fontWeight: 'bold'}}>{storename}</a>
                             </div>
                             {" : "}
+                            <input style={{ height: 18, outline: 'none'}}/>
                             <div className="btn" style={{ padding: 0 }}>
                                 <a style={{ color: '#BD081C' }}>{category}</a>
                             </div>
                         </div>
                         <div style={{ marginLeft: 70, marginTop: -3, }}>
-                            <span style={{ color: '#516EA7', fontWeight: 'bold'}} >Ship</span>
+                            <span style={{ color: '#516EA7', fontWeight: 'bold'}}>Ship</span>
                             <span>{": "}</span>
+                            <input style={{ height: 18, width: 350, outline: 'none'}}/>
                             <span style={{ fontSize: 12.5 }}>{ship}</span>
                         </div>
                         <div style={{
@@ -49,21 +61,47 @@ class EditSellPost extends React.Component {
                             marginLeft: 70,
                             color: '#A7ABB1',
                             }}>
-                            {time}{" . "}{description}
+                            time{" . "}<input style={{ height: 18, width: 355, outline: 'none' }}/>
+                            {description}
                         </div>
                     </div>
-
-                    <div style={{ position: 'absolute', width: '100%', bottom: 0, paddingBottom: 10 }}>
-                        <hr style={{ margin: 0 }}/>
-                        <div style={{ marginTop: 10, marginRight: 10 }}>
-                            <div className="btn btn-default btn-sm"
-                                onClick={() => close()}
-                                style={{ float: 'right'}}>
-                                Close
+                    <div>
+                        {postrows_order.map((item, index) =>
+                            <div key={index} style={{ paddingLeft: 10, paddingBottom: 10, paddingRight: 10 }}>
+                                <EditPostRow
+                                    id={item}
+                                    // {...postrows[item]}
+                                    // onChange={(key, value) => onChangePostRow(item,key,value)}
+                                />
                             </div>
-                            <div className="btn btn-default btn-sm" style={{
-                                float: 'right', backgroundColor: '#BD081C', marginRight: 10, borderWidth: 0, color: 'white'}}>
-                                Create SellPost
+                        )}
+                    </div>
+                    <div className="btn btn-default btn-xs" style={{ marginLeft: 10, marginBottom: 10 }}
+                        onClick={() => this.setState({ showModal : true })}>
+                        add new content
+                    </div>
+                    <ChoosePostRow
+                        showModal={this.state.showModal}
+                        close={() => this.setState({ showModal: false })}
+                        onChoose={(item) => {
+                            this.setState({ showModal: false })
+                            addPostRow(item, postrows_order.length )
+                        }}
+                    />
+                    <div style={{ height: 50,}}>
+                        <div style={{ position: 'absolute', width: '100%', bottom: 0, paddingBottom: 10 }}>
+                            <hr style={{ margin: 0 }}/>
+                            <div style={{ marginTop: 10, marginRight: 10 }}>
+                                <div className="btn btn-default btn-sm"
+                                    onClick={() => close()}
+                                    style={{ float: 'right'}}>
+                                    Close
+                                </div>
+                                <div className="btn btn-default btn-sm"
+                                    style={{
+                                    float: 'right', backgroundColor: '#BD081C', marginRight: 10, borderWidth: 0, color: 'white'}}>
+                                    Create SellPost
+                                </div>
                             </div>
                         </div>
                     </div>

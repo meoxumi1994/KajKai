@@ -31,7 +31,7 @@ export const EmojiShow = (text, height) => {
 export const Emoji = (text) => {
     let newtext = text
     const emoji = [
-        [':D','<img width="16" src="/images/emoji/haha.svg"/>'],
+        [':D','<img width="14" src="/images/emoji/haha.svg"/>'],
         [':-D','<img height="16" width="18.65625" src="/images/emoji/haha.svg"/>'],
         ['8)','<img width="14" src="/images/emoji/pro.svg"/>'],
         ['&lt;3','<img width="15.953125" src="/images/emoji/love.svg"/>'],

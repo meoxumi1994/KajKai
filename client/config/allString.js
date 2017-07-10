@@ -116,7 +116,7 @@ const myString = {
     CREATE_STORE_DESCRIPTION_2: ['Luôn luôn đảm bảo một sản phẩm tốt, giá cả hợp lý sẽ là tiêu trí để đưa cửa hàng của bạn phát triển','Always ensure a good product, reasonable price will be the place to put your store development'],
     CREATE_STORE_DESCRIPTION_3: ['Cám ơn các bạn đã quan tâm đến KajKai','Thank you for your interest in KajKai'],
     CREATE_STORE_DESCRIPTION_4: ['Chọn loại mặt hàng mà cửa hàng cửa bạn kinh doanh, việc này rất quan trọng vì liên quan đến khả năng tìm kiếm của người dùng','Choose the type of item your store is selling, which is important because it is relevant to the user\'s search capabilities'],
-    CREATE_STORE_DESCRIPTION_5: ['Bạn chọn loại hình kinh doanh trung mà chúng gợi ý trước, sau đó điền chi tiết loại mặt hàng mà cửa hàng của bạn bán','You choose the type of medium business that they recommend first, then fill in the type of item your store sells'],
+    CREATE_STORE_DESCRIPTION_5: ['Bạn chọn loại hình kinh doanh chung mà chúng tôi gợi ý trước, sau đó điền chi tiết loại mặt hàng mà cửa hàng của bạn bán','You choose a general business type that we recommend first, then enter details of the type of items that your store sells'],
     CREATE_STORE_DESCRIPTION_6: ['Số điện thoại này là số để khách hàng liên lạc đến cửa hàng','This phone number is the phone number for customers to contact the store'],
     CREATE_STORE_DESCRIPTION_7: ['Số điện thoại này sẽ luôn được công khai','Phone number will always be public'],
     CATEGORY: ['Loại Hình Kinh Doanh','Category'],
@@ -128,6 +128,20 @@ const myString = {
         'Your address should you write correctly because the user will use it to find out your store'],
     STORE_NAME: ['Tên cửa hàng', 'Store name'],
     GET_CURRENT_POSITION: ['Đến vị trí hiện tại','Get current Position'],
+    ENTER_YOUR_STORE_NAME: ['Nhập tên cửa hàng của bạn', 'Enter your store name'],
+    ENTER_YOUR_PHONE: ['Nhập điện thoại của bạn', 'Enter your phone'],
+    ENTER_YOUR_ADDRESS: ['Nhập địa chỉ của bạn', 'Enter your address'],
+    STORE_URL: ['Tên url của cửa hàng','url name of store'],
+    ENTER_URL_STORE: ['Nhập tên url', 'Enter url name'],
+
+    STORE_NAME_FAILED: ['bạn chưa nhập tên cửa hàng hoặc tên cửa hàng quá ngắn', 'You have not entered a store name or store name that is too short'],
+    CATEGORY_FAILED: ['bạn chưa nhập category hoặc độ dài category quá ngắn', 'You have not entered a category or category too short'],
+    PHONE_FAILED: ['số điện thoại không hợp lệ','invalid phone number'],
+    POSITION_FAILED: ['bạn chưa chọn vị trí của cửa hàng trên map','You have not selected the location of the store on the map'],
+    ADDRESS_FAILED: ['bạn chưa nhập địa chỉ hoặc địa chỉ quá ngắn','You have not entered an address or address that is too short'],
+    URL_NAME_SHORT: ['bạn chưa nhập tên url hoặc tên url quá ngắn','You have not entered the url or url name too short'],
+    URL_NAME_FAILED: ['tên url không hợp lệ, tên của bạn nhập quá đặc biệt','Invalid url name, your name is too special'],
+    URL_NAME_SPECIAL: ['tên url của bạn không chỉ được dùng chữ cái thường hoặc dấu gạch dưới', 'Your url name is not only used with lowercase letters or underscores'],
 }
 
 const allString = {

@@ -1,20 +1,19 @@
 import { authAction, authData} from '~/actions/sync/auth'
 import { flet, flem } from '~/actions/support'
 
-export const registerStore = (newindex, store) => dispatch => {
-    dispatch(authAction('REGISTER_STORE_ING'))
-    flet('/registerstore',{
+export const registerStore = (store) => dispatch => {
+    dispatch({ type: 'REGISTER_STORE_ING' })
+    flet('/store',{
         ...store,
-        longitude: 1,
-        latitude: 1,
     },{
-        status: 'success|error'
+        status: 'success|error',
+        storeid: '',
     })
-    .then(({ status, store}) => {
+    .then(({ status, storeid }) => {
         if(status == 'success')
-            dispatch(authData('REGISTER_STORE_SUCCESS', { newindex, store: store }))
+            dispatch({ type: 'REGISTER_STORE_SUCCESS', storeid: storeid })
         else if(status == 'error')
-            dispatch(authAction('REGISTER_STORE_FAILED'))
+            dispatch({ type: 'REGISTER_STORE_FAILED' })
     })
 }
 
@@ -32,26 +31,45 @@ export const getCategory = () => dispatch => {
     })
 }
 
-export const updatePhone = (phone) => dispatch => {
+export const reUpdatePhone = (phone) => dispatch => {
     dispatch({ type: 'UPDATE_PHONE_ING', newvalue: phone })
-    flet('/updatephone',{
+    flet('/phonereverification',{
         phone: phone
     },{
         status: 'pending|used|error'
     })
     .then(({status}) => {
-        if(status == 'pending')
-            dispatch(dispatch({ type: 'UPDATE_PHONE_PENDING'}))
+        if(status == 'pending'){
+            dispatch({ type: 'UPDATE_PHONE_PENDING'})
+        }
         if(status == 'used' )
-            dispatch(dispatch({ type: 'UPDATE_PHONE_USED'}))
+            dispatch({ type: 'UPDATE_PHONE_USED'})
         if(status == 'error')
-            dispatch(dispatch({ type: 'UPDATE_PHONE_FAILED'}))
+            dispatch({ type: 'UPDATE_PHONE_FAILED'})
+    })
+}
+
+export const updatePhone = (phone) => dispatch => {
+    dispatch({ type: 'UPDATE_PHONE_ING', newvalue: phone })
+    flet('/phoneverification',{
+        phone: phone
+    },{
+        status: 'pending|used|error'
+    })
+    .then(({status}) => {
+        if(status == 'pending'){
+            dispatch({ type: 'UPDATE_PHONE_PENDING'})
+        }
+        if(status == 'used' )
+            dispatch({ type: 'UPDATE_PHONE_USED'})
+        if(status == 'error')
+            dispatch({ type: 'UPDATE_PHONE_FAILED'})
     })
 }
 
 export const verifyPhone = (phone, code) => dispatch => {
     dispatch(dispatch({ type: 'VERIFY_PHONE_ING'}))
-    flet('/verifyphone',{
+    flet('/phonecodeverification',{
         phone: phone,
         code: code,
     },{
@@ -59,8 +77,8 @@ export const verifyPhone = (phone, code) => dispatch => {
     })
     .then(({status}) => {
         if(status == 'verified')
-            dispatch(dispatch({ type: 'VERIFY_PHONE_SUCCESS' }))
+            dispatch({ type: 'VERIFY_PHONE_SUCCESS' })
         if(status == 'error')
-            dispatch(dispatch({ type: 'VERIFY_PHONE_FAILED' }))
+            dispatch({ type: 'VERIFY_PHONE_FAILED' })
     })
 }

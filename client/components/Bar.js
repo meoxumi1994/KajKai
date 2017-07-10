@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import RiseUp from '~/components/entity/draw/RiseUp'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 // import ChatListContainer from '~/containers/chat/left/ChatListContainer'
-import ChatLeftContainer from '~/containers/chat/left'
+// import ChatLeftContainer from '~/containers/chat/left'
 
 const HandlerUser = ({ LOG_IN,
     id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat}) => {
@@ -55,7 +55,7 @@ const HandlerUser = ({ LOG_IN,
                             number="2"/>
                     </div>
                     <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
-                        <ChatLeftContainer multiChat={true}/>
+                        {/* <ChatLeftContainer multiChat={true}/> */}
                     </ul>
                 </div>
             </div>
@@ -81,8 +81,18 @@ const HandlerUser = ({ LOG_IN,
     )
 }
 
-const BarScreen = (props) => {
-    const { SEARCH_PRODUCT, SEARCH_LOCATION } = props
+export default class BarScreen extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  componentDidMount(){
+      this.props.onLoadCategory()
+  }
+
+  render() {
+    const { SEARCH_PRODUCT, SEARCH_LOCATION, categories } = this.props
+    console.log('categories: ', categories);
     return (
         <div
             style={{ position: 'fixed',
@@ -113,14 +123,25 @@ const BarScreen = (props) => {
                                 <span className="caret"></span>
                             </button>
                             <ul className="dropdown-menu">
-                              <li><a href="#" key="1">Another action</a></li>
-                              <li><a href="#" key="2">Another</a></li>
-                              <li><a href="#" key="3">Something else here</a></li>
-                              <li role="separator" className="divider"></li>
-                              <li><a href="#">All</a></li>
+                              <li key="-1"><a>ALL CATEGORY</a></li>
+                              {categories.map(category =>
+                                <ul>
+                                  <li key={category.id}><a>{category.name}</a></li>
+                                  {category.secondCategories.map(secondCategory =>
+                                    <li key={secondCategory.id} style={{ marginLeft: 13}}><a>{secondCategory.name}</a></li>
+                                  )}
+                                </ul>
+                              )}
+                              <li key="-2"><a>STORE</a></li>
+                              <li key="-3"><a>USER</a></li>
                             </ul>
                           </div>
-                          <input type="text" className="form-control input-sm" placeholder={SEARCH_PRODUCT}/>
+                          <input
+                            type="text"
+                            className="form-control input-sm"
+                            placeholder={SEARCH_PRODUCT}
+
+                          />
                           <span className="input-group-btn">
                               <button className="btn btn-default btn-sm" type="button">
                                   <i className="glyphicon glyphicon-search"></i>
@@ -140,7 +161,7 @@ const BarScreen = (props) => {
                     </div>
                     <div className="col-xs-4"  style={{ padding: 0}}>
                         <div style={{ position: 'absolute', right: 0}}>
-                            <HandlerUser {...props}/>
+                            <HandlerUser {...this.props}/>
                         </div>
                     </div>
                 </div>
@@ -148,6 +169,5 @@ const BarScreen = (props) => {
             <hr style={{ margin: 0 }}></hr>
         </div>
     )
+  }
 }
-
-export default BarScreen;

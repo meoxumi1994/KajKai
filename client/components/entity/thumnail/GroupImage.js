@@ -12,17 +12,21 @@ class GroupImage extends React.Component {
         }
     }
     openModal(index){
-        const img = new Image();
-        const that = this
-        img.onload = function() {
-            that.setState({
-                openModal: true,
-                imgHeight: this.height,
-                imgWidth: this.width,
-                index: index
-            })
+        if(this.props.canEdit){
+            this.props.onEdit()
+        }else{
+            const img = new Image();
+            const that = this
+            img.onload = function() {
+                that.setState({
+                    openModal: true,
+                    imgHeight: this.height,
+                    imgWidth: this.width,
+                    index: index
+                })
+            }
+            img.src = this.props.images[index];
         }
-        img.src = this.props.images[index];
     }
     render(){
         const { EDIT, onEdit, images, canEdit } = this.props
@@ -105,7 +109,7 @@ class GroupImage extends React.Component {
         }
         return(
             <div style={{ marginLeft: -1 }}>
-                {canEdit &&
+                {/* {canEdit &&
                     <div className="btn"
                         onClick={() => onEdit()}
                         style={{
@@ -119,7 +123,7 @@ class GroupImage extends React.Component {
                         }}>
                         <span className="glyphicon glyphicon-edit" style={{ color: 'black'}}></span>
                     </div>
-                }
+                } */}
                 <Group/>
                 {this.state.openModal &&
                     <Enlarge close={() => this.setState({ openModal: false })}
