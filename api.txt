@@ -201,25 +201,21 @@ GET /store/:id {
   storename: 'Forest',
   avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
   coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
-  lastUpdate: {
-      storename: ,
-      phone: ,
-      addressMap:,
-      address: ,
-  }
+  storename: 'Forest',
+  urlname: ,
   address: ,
   addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
   category: ,
-  categoryAuto: {
-      id: ,
-      name: ,
-  },
-  latitute: '1423424',
-  longitute: '453535',
+  firstCategoryId: ,
+  secondCategoryId: ,
+  position: {
+    latitute: '1423424',
+    longitute: '453535',
+  }
   phone: '01655791025',
-  certificates: {
-      images: [],
-      content: ,
+  certificates: { // co the null
+    images: [],
+    content: ,
   },
   numlike: '23',
   likes: [
@@ -252,37 +248,29 @@ POST /store {
         longitute: '453535',
     }
     phone: '01655791025',
-    certificates: { // co the null
-        images: [],
-        content: ,
-    },
 }
 
 PUT /store {
-  id: , //store id
-  storename: 'Forest',
-  avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-  coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
-  lastUpdate: {
-      storename: ,
-      phone: ,
-      addressMap:,
-      address: ,
-  }
-  address: ,
-  addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
-  category: ,
-  categoryAuto: {
-      id: ,
-      name: ,
-  },
-  latitute: '1423424',
-  longitute: '453535',
-  phone: '01655791025',
-  certificates: {
+    id: , //store id
+    storename: 'Forest',
+    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+    coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
+    storename: 'Forest',
+    urlname: ,
+    address: ,
+    addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
+    category: ,
+    firstCategoryId: ,
+    secondCategoryId: ,
+    position: {
+      latitute: '1423424',
+      longitute: '453535',
+    }
+    phone: '01655791025',
+    certificates: { // co the null
       images: [],
       content: ,
-  },
+    },
 }
 
 GET /sellpost/store/:storeid?offset=-1 { // length = 2
