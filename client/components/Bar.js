@@ -91,7 +91,7 @@ export default class BarScreen extends React.Component {
   }
 
   render() {
-    const { SEARCH_PRODUCT, SEARCH_LOCATION, categories } = this.props
+    const { SEARCH_PRODUCT, SEARCH_LOCATION, categories, onSe } = this.props
     console.log('categories: ', categories);
     return (
         <div

@@ -3,6 +3,7 @@ import allString from '~/config/allString'
 
 import { logOut } from '~/actions/asyn/user-login-register/login'
 import { loadCategory } from '~/actions/asyn/category'
+import { selectSearchType } from '~/actions/sync/search'
 import Bar from '~/components/Bar'
 
 const mapStateToProps = (state, ownProps) => {
@@ -31,6 +32,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onLoadCategory: () => {
       dispatch(loadCategory())
+    },
+    onSearchTypeSelected: (id) => {
+      dispatch(selectSearchType(id))
     }
 })
 
