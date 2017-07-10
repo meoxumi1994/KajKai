@@ -4,7 +4,7 @@ const display = (state = {
 
     },
     top: {
-
+        settings: false
     },
     center: {
 
@@ -13,33 +13,20 @@ const display = (state = {
 
     },
   },
-  themes: {
-    catagory: {
-      blue: {
-        highlighted: {
-            backgroundColor: '#65a9ed',
-            color: 'white'
-        },
-        normal: {
-            backgroundColor: 'white',
-            color: 'black'
-        }
-      },
-      red: {
-        highlighted: {
-            backgroundColor: '#cc3333',
-            color: 'white'
-        },
-        normal: {
-            backgroundColor: 'white',
-            color: 'black'
-        }
-      },
-    },
-    currentThemes: 'red'
-  },
 }, action) => {
     switch (action.type) {
+
+        case 'DISPLAY_SETTINGS':
+            return {
+                ...state,
+                visibility: {
+                    ...state.visibility,
+                    top: {
+                        ...state.visibility.top,
+                        settings: action.data.display
+                    }
+                }
+            }
 
         default:
             return state

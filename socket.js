@@ -256,6 +256,7 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
     sellpostid: ,
 }
 
+
 // return when socket connected
 'global/UNREAD_CHATS': {
     quantity: '2',

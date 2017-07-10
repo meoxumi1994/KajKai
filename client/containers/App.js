@@ -6,14 +6,14 @@ import { getChatList } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
     const { width, height } = state.inst.app
-    const { messagesKey, messagesMap } = state.inst.chat.center.multiChat
+    const { multipleKey, messagesMap } = state.inst.chat.center
     return ({
         width: width,
         height: height,
         username: state.user.username,
         auth: state.auth,
         children: ownProps.children,
-        messagesKey,
+        messagesKey: multipleKey,
         messagesMap,
         styles,
     })
@@ -33,10 +33,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 const styles = {
-  type: 'small',
+  type: 'multiChat',
   top: {
       currentMainDiv: {
-          backgroundColor: '#cc3333',
+          backgroundColor: '#c90c0c',
           color: 'white',
           height: 30,
           width: 320
@@ -48,6 +48,12 @@ const styles = {
           width: 320
       },
       iconImg: {
+          width: 20,
+          height: 20,
+          borderRadius: 50,
+          marginLeft: 5
+      },
+      closeImg: {
           width: 20,
           height: 20,
           borderRadius: 50,
@@ -65,6 +71,10 @@ const styles = {
         fontSize: 15,
         marginTop: 5,
         marginLeft: 5
+      },
+      addMemberDiv: {
+        position: 'absolute',
+        bottom: -40
       }
   },
   center: {
