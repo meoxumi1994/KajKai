@@ -6,6 +6,7 @@ import Right from '~/containers/register-store/Right'
 import DropDownCategory from '~/components/entity/DropDownCategory'
 import VerifyPhone from '~/containers/entity/phone/VerifyPhone'
 import ShowInMap from '~/containers/entity/map/ShowInMap'
+import WarningModal from '~/containers/entity/modal/WarningModal'
 
 const checkPhone = (phone) => {
     if(!phone) return 'error'
@@ -40,7 +41,9 @@ class RegisterStore extends React.Component {
             categories, chooseCategory, chooseSecondCategory, chooseCategoryId, phone, onChangePhone,
             isusername, iswhoing, onOpenStore, registerStoreOK, onGetCategory, updatePhone,
             urlname, onChangeUrlName,
-            onChooseCategory, onChooseSecondCategory, onChangeCategoryInputValue, categoryInputValue} = this.props
+            onChooseCategory, onChooseSecondCategory, onChangeCategoryInputValue, categoryInputValue,
+            openModalWarning, contentModalWarning, closeModalWarning,
+            } = this.props
         const categoriesName = categories.map((item) => item.name)
         let secondCategoriesName = []
         for(let i=0; i< categories.length; i++ ){
@@ -227,6 +230,11 @@ class RegisterStore extends React.Component {
                             {CREATE_STORE}
                         </div>
                     </div>
+                    <WarningModal
+                        showModal={openModalWarning}
+                        content={contentModalWarning}
+                        close={() => closeModalWarning()}
+                    />
                     <hr style={{ margin: 0, marginTop: 10 }}/>
                     <div style={{ marginLeft: 0, padding: 5 }} className="btn"
                         onClick={()=> changeLanguage('vi')}>

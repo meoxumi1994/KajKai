@@ -195,7 +195,7 @@ GET /logout {
     status: 'success|failed'
 }
 
-GET /store/:id {
+GET /store/:id { // id co the urlname
   id: , //store id
   userid: ,//owner
   storename: 'Forest',
@@ -208,7 +208,9 @@ GET /store/:id {
   addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
   category: ,
   firstCategoryId: ,
+  firstCategory: ,
   secondCategoryId: ,
+  secondCategory: ,
   position: {
     latitute: '1423424',
     longitute: '453535',
