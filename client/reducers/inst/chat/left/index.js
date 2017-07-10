@@ -10,6 +10,16 @@ const left = (state = {
 }, action) => {
     switch (action.type) {
 
+      case 'client/REMOVE_MEMBER':
+          console.log('\n[Reducer Left] client/REMOVE_MEMBER', action)
+          return {
+              ...state,
+          }
+
+      case 'global/UNREAD_CHATS':
+          console.log('\n[Reducer Left] global/UNREAD_CHATS', action)
+          return state
+
       case 'SET_USER_ID':
           const setUserId = {
               ...state,
@@ -18,7 +28,7 @@ const left = (state = {
                   id: action.data.id
               }
           }
-          console.log('\n[Reducer Left] SET_USER_ID', action, setUserId)
+          // console.log('\n[Reducer Left] SET_USER_ID', action, setUserId)
           return setUserId
 
 
@@ -30,11 +40,11 @@ const left = (state = {
                 mesId: action.data.mesId
             }
           }
-          console.log('\n[Reducer Left] SET_CURRENT_CHAT', action, setCurrentChat)
+          // console.log('\n[Reducer Left] SET_CURRENT_CHAT', action, setCurrentChat)
           return setCurrentChat
 
       case 'DISPLAY_ADD_MEMBER':
-          return {
+          const displayAddMember = {
               ...state,
               chatListMap: {
                   ...state.chatListMap,
@@ -47,16 +57,19 @@ const left = (state = {
                   }
               }
           }
+          // console.log('\n[Reducer Left] DISPLAY_ADD_MEMBER', action, displayAddMember)
+          return displayAddMember
 
       case 'client/ADD_MEMBER':
-
           if (state.chatListKey.indexOf(action.data.mesId) == -1) {
               let sKey = []
               let sMap = {}
               let label = ''
               for ( let i in action.data.members) {
                   const member = action.data.members[i]
-                  console.log('current chat ', state.currentChat.id);
+                  // console.log('---------------------------------');
+                  // console.log('current chat ', state.currentChat.id);
+                  // console.log('member ', member);
                   if (sKey.indexOf(member.id) == -1 && member.id != state.currentChat.id) {
                       sKey.push(member.id)
                       sMap[member.id] = {
@@ -153,7 +166,7 @@ const left = (state = {
               }
             }
           }
-          console.log('\n[Reducer Left] UPDATE_CHAT ', action, updateChat)
+          // console.log('\n[Reducer Left] UPDATE_CHAT ', action, updateChat)
           return updateChat
 
       case 'global/RECEIVE_MESSAGE':
@@ -181,12 +194,14 @@ const left = (state = {
                           ],
                           usersMap: {
                               [user.id]: user
+                          },
+                          display: {
+                              addMember: false
                           }
-
                       }
                   }
               }
-              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---newChat ', action, newChat)
+              // console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---newChat ', action, newChat)
               return newChat
           } else {
               const updateChat = {
@@ -203,7 +218,7 @@ const left = (state = {
                     }
                 }
               }
-              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
+              // console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
               return updateChat
           }
 
@@ -220,7 +235,7 @@ const left = (state = {
               chatListKey: tempKey,
               chatListMap: tempMap
           }
-          console.log('\n[Reducer Left] REMOVE_CHAT ', action, removeChat)
+          // console.log('\n[Reducer Left] REMOVE_CHAT ', action, removeChat)
           return removeChat
 
       case 'ADD_CHAT':
@@ -228,7 +243,7 @@ const left = (state = {
             const dontAdd = {
               ...state
             }
-            console.log('\n[Reducer Left] ADD_CHAT ---dontAdd ', action, dontAdd)
+            // console.log('\n[Reducer Left] ADD_CHAT ---dontAdd ', action, dontAdd)
             return dontAdd
         }
         const addChat = {
@@ -245,11 +260,14 @@ const left = (state = {
                   mesId: action.data.mesId,
                   usersKey: [],
                   usersMap: {},
-                  status: false
+                  status: false,
+                  display: {
+                      addMember: false
+                  }
                 }
             },
         }
-        console.log('\n[Reducer Left] ADD_CHAT ---add ', action, addChat)
+        // console.log('\n[Reducer Left] ADD_CHAT ---add ', action, addChat)
         return addChat
 
       case 'INIT_CHAT_LIST':
@@ -293,7 +311,7 @@ const left = (state = {
             chatListKey: tempKey,
             chatListMap: tempMap
           }
-          console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
+          // console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
           return initChatlist
 
         default:

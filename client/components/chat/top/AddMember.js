@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button, FormControl } from 'react-bootstrap'
 
-const AddMember = ({addMember, user, mesId, chatListMap}) => {
+const AddMember = ({addMember, user, mesId, chatListMap, styles}) => {
   let conversator
   return (
-    <form style={{position: 'relative', width: '100%'}} onSubmit={e => {
+    <form style={styles.addMemberDiv} onSubmit={e => {
       e.preventDefault()
       if (conversator.value.trim()) {
           addMember(mesId, user.id, conversator.value, chatListMap[mesId].usersKey)
@@ -23,6 +23,5 @@ const AddMember = ({addMember, user, mesId, chatListMap}) => {
     </form>
   )
 }
-
 
 export default AddMember

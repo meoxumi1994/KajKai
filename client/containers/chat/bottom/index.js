@@ -12,6 +12,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   sendMessage: (mesId, id, text, url, type) => {
+      if (mesId == 0) {
+          mesId = null
+      }
       dispatch({
           type: 'server/SEND_MESSAGE',
           data: {

@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import allString from '~/config/allString'
 
 import { logOut } from '~/actions/asyn/user-login-register/login'
+import { loadCategory } from '~/actions/asyn/category'
 import Bar from '~/components/Bar'
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,6 +18,7 @@ const mapStateToProps = (state, ownProps) => {
         isloading: (state.auth == 'WHO_ING' || state.auth == 'LOGIN_ING'),
         unreadChat: state.inst.chat.left.unreadChat,
         // width: width,
+        categories: state.inst.category
     })
 }
 
@@ -26,6 +28,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     setMultiChat: (value) => {
         dispatch({type: 'MULTIPLE_CHAT', data: value})
+    },
+    onLoadCategory: () => {
+      dispatch(loadCategory())
     }
 })
 

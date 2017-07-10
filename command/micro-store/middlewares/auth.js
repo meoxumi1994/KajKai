@@ -9,7 +9,7 @@ const auth = () => {
         } else {
             authoriseToken(token, (user) => {
                 if (user) {
-                    res.user = user;
+                    req.user = user;
                     next()
                 } else {
                     res.json({ authorization: "FAILED" })

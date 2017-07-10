@@ -9,6 +9,7 @@ const mapStateToProps = (state, ownProps) => {
       chatListMap,
       chatListKey,
       currentChat: currentChat.mesId,
+      userId: state.user.id
     }
   )
 }
@@ -19,6 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     getChatList: () => {
         dispatch(getChatList(Date.now(), 10))
+    },
+    setUserId: (id) => {
+        dispatch({type: 'SET_USER_ID', data: {id: id}})
     }
 })
 
