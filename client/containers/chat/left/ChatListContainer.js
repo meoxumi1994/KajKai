@@ -4,11 +4,16 @@ import { getChatList, getMessages } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
   const { chatListMap, chatListKey, currentChat } = state.inst.chat.left
+<<<<<<< Updated upstream
+=======
+  // console.log('[State] ', state);
+>>>>>>> Stashed changes
   return (
     {
       chatListMap,
       chatListKey,
       currentChat: currentChat.mesId,
+      userId: state.user.id
     }
   )
 }
@@ -19,6 +24,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     getChatList: () => {
         dispatch(getChatList(Date.now(), 10))
+    },
+    setUserId: (id) => {
+        dispatch({type: 'SET_USER_ID', data: {id: id}})
     }
 })
 

@@ -5,10 +5,10 @@ import { getChatList } from '~/actions/asyn/chat/restful'
 import { getSingleChat } from '~/components/chat/chatStyles'
 
 const mapStateToProps = (state, ownProps) => {
-  const { messagesKey, messagesMap } = state.inst.chat.center.singleChat
+  const { singleKey, messagesMap } = state.inst.chat.center
   return (
     {
-      messagesKey,
+      messagesKey: singleKey,
       messagesMap,
       styles
     }
@@ -48,6 +48,9 @@ const styles = {
               marginRight: 10,
               marginTop: 15
           },
+          closeImg: {
+              display: 'none'
+          },
           iconGroupDiv: {
               position: 'absolute',
               right: 10,
@@ -61,6 +64,10 @@ const styles = {
             fontSize: 18,
             marginLeft: 20,
             marginTop: 22,
+          },
+          addMemberDiv: {
+            position: 'relative',
+            width: '100%'
           }
       },
       center: {

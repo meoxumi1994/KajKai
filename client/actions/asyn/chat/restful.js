@@ -35,15 +35,14 @@ export const getMessages = (mesId, offset, length, status, multiChat) => dispatc
     }, {}).then((response) => {
         console.log('\n[API] /getMessages ', response);
         if (multiChat) {
-            dispatch(addChat(response, true))
+            dispatch(addChat(response, multiChat))
             dispatch(setCurrentChat(response.mesId))
         } else {
-            // !status: doesn't have mesId yet
             if (!status) {
                 dispatch({type: 'ADD_CHAT', data: {mesId: mesId, label: 'Tin nhắn mới'}})
                 dispatch(setCurrentChat(mesId))
             } else {
-                dispatch(addChat(response, false))
+                dispatch(addChat(response, multiChat))
                 dispatch(setCurrentChat(response.mesId))
             }
         }
