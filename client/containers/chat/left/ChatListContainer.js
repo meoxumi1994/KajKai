@@ -4,7 +4,6 @@ import { getChatList, getMessages } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
   const { chatListMap, chatListKey, currentChat } = state.inst.chat.left
-  console.log('[State] ', state.inst.chat);
   return (
     {
       chatListMap,

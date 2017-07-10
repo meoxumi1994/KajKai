@@ -20,6 +20,7 @@ class RegisterStore extends React.Component {
         this.state = {
             showDropDown: false,
             showSecondDropDown: false,
+            showPostRow: false,
         }
     }
     render(){
@@ -30,12 +31,15 @@ class RegisterStore extends React.Component {
             CREATE_STORE_DESCRIPTION_3, CREATE_STORE_DESCRIPTION_4,
             CREATE_STORE_DESCRIPTION_5, CREATE_STORE_DESCRIPTION_6,
             CREATE_STORE_DESCRIPTION_7, CATEGORY, PHONE,
-            POSITION_IN_MAP, POSITION_IN_MAP_DESCRIPTION,
-            ADDRESS, ADDRESS_DESCRIPTION, STORE_NAME, SAVE,
+            POSITION_IN_MAP, POSITION_IN_MAP_DESCRIPTION, ADDRESS,
+            ADDRESS_DESCRIPTION, STORE_NAME, STORE_URL,  SAVE, NAME_BY_URL ,
+            ENTER_YOUR_STORE_NAME, ENTER_YOUR_PHONE, ENTER_YOUR_ADDRESS, ENTER_URL_STORE,
+            onChangeAddress, onChangeStoreName,
             onChangeName, name, isConfirmPhone, chooseAnother, openModalPhone, onChangePosition,
-            onOpenModalPhone, address, onChangeAdress, position,
+            onOpenModalPhone, address, onChangeAdress, position, changeLanguage, createStore,
             categories, chooseCategory, chooseSecondCategory, chooseCategoryId, phone, onChangePhone,
             isusername, iswhoing, onOpenStore, registerStoreOK, onGetCategory, updatePhone,
+            urlname, onChangeUrlName,
             onChooseCategory, onChooseSecondCategory, onChangeCategoryInputValue, categoryInputValue} = this.props
         const categoriesName = categories.map((item) => item.name)
         let secondCategoriesName = []
@@ -55,7 +59,7 @@ class RegisterStore extends React.Component {
         return(
             <div style={{ marginLeft: 200, marginRight: 200 }}>
                 <div style={{ padding: 15, backgroundColor: 'white', width: 700, height: '100%'}}>
-                    <div style={{ fontSize: 25 }}>Create A New Store</div>
+                    <div style={{ fontSize: 25 }}>{CREATE_STORE}</div>
                     <div>{CREATE_STORE_DESCRIPTION}:</div>
                     <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_0}</div>
                     <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_1}</div>
@@ -65,9 +69,23 @@ class RegisterStore extends React.Component {
                     </div>
                     <div>
                         <input
-                            onChange={(e) => onChangeName(e)}
+                            onChange={(e) => onChangeStoreName(e)}
                             value={name}
-                            placeholder={"enter your store name"+" ..."} style={{
+                            placeholder={ENTER_YOUR_STORE_NAME+" ..."} style={{
+                            width: 400,
+                            fontSize: 12.5,
+                            marginTop: 5,
+                            paddingLeft: 5,}}/>
+                    </div>
+                    <div style={{ marginTop: 15, fontWeight: 'bold'}}>
+                        {STORE_URL}{" :"}
+                    </div>
+                    <div>
+                        www.kajkai.com/{" "}
+                        <input
+                            onChange={(e) => onChangeUrlName(e)}
+                            value={urlname}
+                            placeholder={ENTER_URL_STORE+" ..."} style={{
                             width: 400,
                             fontSize: 12.5,
                             marginTop: 5,
@@ -117,7 +135,7 @@ class RegisterStore extends React.Component {
                                 onChange={(e) => onChangeCategoryInputValue(e)}
                                 value={categoryInputValue}
                                 ref={input =>  this.input = input}
-                                placeholder={"enter your category"+" ..."} style={{
+                                placeholder={ENTER_YOUR_PHONE+" ..."} style={{
                                 fontSize: 12.5,
                                 marginTop: 5,
                                 paddingLeft: 5,
@@ -135,7 +153,7 @@ class RegisterStore extends React.Component {
                         <input
                             onChange={(e) => onChangePhone(e)}
                             value={phone}
-                            placeholder={"enter your phone"+" ..."} style={{
+                            placeholder={ENTER_YOUR_PHONE+" ..."} style={{
                             marginLeft: 350,
                             width: 200,
                             fontSize: 12.5,
@@ -150,7 +168,7 @@ class RegisterStore extends React.Component {
                             disabled={checkPhone(phone)}
                             onClick={() => {
                                 if(!checkPhone(phone)){
-                                    updatePhone()
+                                    updatePhone(phone)
                                     onOpenModalPhone(true)
                                 }
                             }}
@@ -176,7 +194,7 @@ class RegisterStore extends React.Component {
                     </div>
                     <div>
                         <ShowInMap
-                            width={300} height={200}
+                            width={400} height={200}
                             position={position}
                             onChangePosition={(position) => onChangePosition(position)}
                         />
@@ -189,9 +207,9 @@ class RegisterStore extends React.Component {
                     </div>
                     <div>
                         <input
-                            onChange={(e) => onChangeAdress(e)}
+                            onChange={(e) => onChangeAddress(e)}
                             value={address}
-                            placeholder={"enter your address"+" ..."} style={{
+                            placeholder={ENTER_YOUR_ADDRESS+" ..."} style={{
                             width: 400,
                             fontSize: 12.5,
                             marginTop: 5,
@@ -203,9 +221,20 @@ class RegisterStore extends React.Component {
                             color: '#5D9149',
                             borderColor: '#5D9149',
                             marginRight: 10,
-                            marginTop: 10 }}>
+                            marginTop: 10 }}
+                            onClick={() => createStore()}
+                            >
                             {CREATE_STORE}
                         </div>
+                    </div>
+                    <hr style={{ margin: 0, marginTop: 10 }}/>
+                    <div style={{ marginLeft: 0, padding: 5 }} className="btn"
+                        onClick={()=> changeLanguage('vi')}>
+                        <a>Tiếng Việt</a>
+                    </div>
+                    <div className="btn"
+                        onClick={()=> changeLanguage('en')}>
+                        <a>English</a>
                     </div>
                 </div>
             </div>

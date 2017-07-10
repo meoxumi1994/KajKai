@@ -30,10 +30,15 @@ class Carousel extends React.Component {
             <div style={{ width: style.width, height: style.height }}>
               <div id="myCarousel" className="carousel slide" data-ride="carousel">
                 <div
-                    style={{ padding: 0 }}
+                    style={{ padding: 0, borderRadius: 0, opacity: this.state.hover?0.5:1 }}
                     onMouseOver={() => this.setState({ hover: true })}
                     onMouseLeave={() => this.setState({ hover: false })}
-                    onClick={() => this.openModal(0) }
+                    onClick={() => {
+                        if(canEdit)
+                            onEdit()
+                        else
+                            this.openModal(0)
+                    }}
                     className="btn carousel-inner">
                     {images.map((item, index) =>
                         <div key={index} className={index?"item":"item active"}>
@@ -76,7 +81,7 @@ class Carousel extends React.Component {
                     </a>
                 }
               </div>
-              {canEdit &&
+              {/* {canEdit &&
                   <div className="btn"
                       onMouseOver={() => this.setState({ hoverEdit: true })}
                       onMouseLeave={() => this.setState({ hoverEdit: false })}
@@ -91,7 +96,7 @@ class Carousel extends React.Component {
                           {EDIT}
                       </span>
                   </div>
-              }
+              } */}
               {this.state.openModal &&
                   <Enlarge close={() => this.setState({ openModal: false })}
                       imgHeight={this.state.imgHeight}

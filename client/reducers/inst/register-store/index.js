@@ -10,9 +10,12 @@ const index = (state = {
     chooseSecondCategoryId: '',
     categoryInputValue: '',
     openModalPhone: false,
-    phone: '',
-    isConfirmPhone: false,
+    phone: '01655791021',
+    isConfirmPhone: true,
     position: undefined,
+    storename: '',
+    address: '',
+    urlname: '',
 }, action) => {
     switch (action.type) {
         case 'GET_LIST_CATEGORY_SUCCESS':
@@ -41,6 +44,12 @@ const index = (state = {
             return {...state, phone: '', isConfirmPhone: false }
         case 'INST_REGISTER_STORE_CHOOSE_POSITION':
             return {...state, position: action.position }
+        case 'INST_REGISTER_STORE_CHANGE_STORENAME':
+            return {...state, storename: action.storename }
+        case 'INST_REGISTER_STORE_CHANGE_ADDRESS':
+            return {...state, address: action.address }
+        case 'INST_REGISTER_STORE_CHANGE_URLNAME':
+            return {...state, urlname: action.urlname}
         default:
             return state
     }

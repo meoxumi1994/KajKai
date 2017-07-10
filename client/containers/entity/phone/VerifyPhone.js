@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import { verifyPhone } from '~/actions/asyn/register-store'
+import { verifyPhone, reUpdatePhone } from '~/actions/asyn/register-store'
+import { FilteringPhoneDefaultVietName } from '~/containers/support'
 
 import VerifyPhone from '~/components/entity/phone/VerifyPhone'
 
@@ -23,15 +24,35 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, { phone }) => ({
     onVerifyPhone: (code) => {
-        dispatch(verifyPhone(phone, code))
+        dispatch(verifyPhone(FilteringPhoneDefaultVietName(phone), code))
     },
     onChangeCode: (e) => {
         dispatch({ type: 'INST_ENTITY_PHONE_ON_CHANGE_CODE', value: e.target.value })
+    },
+    downTimeWait: (timewait) => {
+        dispatch({ type: 'ENTITY_PHONE_VERITY_PHONE', timewait: timewait - 1 })
+    },
+    onReUpdatePhone: () => {
+        dispatch(reUpdatePhone(FilteringPhoneDefaultVietName(phone)))
     }
 })
 
+const mergerProps = (stateProps, dispatchProps, ownProps) => {
+    const { timewait, ...anotherState } = stateProps
+    const { downTimeWait, ...anotherDispatch } = dispatchProps
+    return({
+        downTimeWait: () => {
+            downTimeWait(timewait)
+        },
+        timewait: timewait,
+        ...ownProps,
+        ...anotherState,
+        ...anotherDispatch,
+    })
+}
+
 const VerifyPhoneContainer = connect(
-    mapStateToProps, mapDispatchToProps
+    mapStateToProps, mapDispatchToProps, mergerProps
 )(VerifyPhone)
 
 export default VerifyPhoneContainer

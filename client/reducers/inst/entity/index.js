@@ -7,6 +7,7 @@ import group from './group'
 import minorpost from './minorpost'
 import sellpost from './sellpost'
 import editsellpost from './editsellpost'
+import editpostrow from './editpostrow'
 import callcomment from './callcomment'
 import postrow from './postrow'
 import product from './product'
@@ -23,6 +24,8 @@ const entity = combineReducers({
     callcomment,
     postrow,
     product,
+    editsellpost,
+    editpostrow,
 })
 
 export default entity
