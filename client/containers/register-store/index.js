@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const registerstore = state.inst.registerstore.index
     return({
+        language: state.user.language,
         isloading: (state.auth == 'REGISTER_STORE_ING'),
         iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT'),
         isusername: state.user.username,
@@ -92,47 +93,21 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     changeLanguage: (language) => {
         dispatch(changeLanguage(language))
     },
-    onCreateStore: (store, isConfirmPhone) => {
-        if(store.storename.length < 6){
-            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('STORE_NAME_FAILED') })
-            return;
-        }
-        if(!store.chooseCategoryId || !store.chooseSecondCategoryId || store.categoryInputValue.length < 3){
-            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('CATEGORY_FAILED') })
-            return;
-        }
-        if(!isConfirmPhone){
-            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('PHONE_FAILED') })
-            return;
-        }
-        if(!store.position){
-            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('POSITION_FAILED') })
-            return;
-        }
-        if(!store.address.length < 6){
-            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('ADDRESS_FAILED') })
-            return;
-        }
-        if(store.urlname.length < 4){
-            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('URL_NAME_SHORT') })
-            return;
-        }
-        if( !(/^[a-z]*$/.test(store.urlname)) && store.urlname != '_' ){
-            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('URL_NAME_SPECIAL') })
-            return;
-        }
-        const path = store.urlname
-        if((path == "chat" || path == "map" || path == "register" || path == "store" || path == "profile" || path == "registerstore" )){
-            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('URL_NAME_FAILED') })
-            return;
-        }
+    closeModalWarning: () => {
+        dispatch({ type: 'INST_REGISTER_STORE_CLOSE_MODAL_WARNING' })
+    },
+    onFailStore: (content) => {
+        dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: content })
+    },
+    onRegisterStore: (store) => {
         dispatch(registerStore(store))
     }
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
+    const g = (lang) => get(stateProps.language, lang)
     const { chooseCategoryId, categories, ...anotherState } = stateProps
-    const { onChooseCategory, onChooseSecondCategory, onCreateStore, ...anotherDispatch } = dispatchProps
+    const { onChooseCategory, onChooseSecondCategory, onRegisterStore, onFailStore, ...anotherDispatch } = dispatchProps
     return({
         onChooseCategory: (id) => {
             onChooseCategory(categories[id].name, categories[id].id)
@@ -152,7 +127,41 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
                 secondCategoryId: stateProps.chooseSecondCategoryId,
                 category: stateProps.categoryInputValue,
             }
-            onCreateStore(store, stateProps.isConfirmPhone)
+            const isConfirmPhone = stateProps.isConfirmPhone
+            // if(store.storename.length < 6){
+            //     onFailStore(g('STORE_NAME_FAILED'))
+            //     return;
+            // }
+            // if(store.urlname.length < 4){
+            //     onFailStore(g('URL_NAME_SHORT'))
+            //     return;
+            // }
+            // if( !(/^[a-z]*$/.test(store.urlname)) && store.urlname != '_' ){
+            //     onFailStore(g('URL_NAME_SPECIAL'))
+            //     return;
+            // }
+            // const path = store.urlname
+            // if((path == "chat" || path == "map" || path == "register" || path == "store" || path == "profile" || path == "registerstore" )){
+            //     onFailStore(g('URL_NAME_FAILED'))
+            //     return;
+            // }
+            // if(!store.firstCategoryId || !store.secondCategoryId || store.category.length < 3){
+            //     onFailStore(g('CATEGORY_FAILED'))
+            //     return;
+            // }
+            // if(!isConfirmPhone){
+            //     onFailStore(g('PHONE_FAILED'))
+            //     return;
+            // }
+            // if(!store.position){
+            //     onFailStore(g('POSITION_FAILED'))
+            //     return;
+            // }
+            // if(store.address.length < 6){
+            //     onFailStore(g('ADDRESS_FAILED'))
+            //     return;
+            // }
+            onRegisterStore(store)
         },
         chooseCategoryId: chooseCategoryId,
         categories: categories,
