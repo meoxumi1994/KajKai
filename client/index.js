@@ -30,7 +30,7 @@ const socketIoMiddleware = createSocketIoMiddleware(socket, ["server/","client/"
 const store = createStore(
     reducers,
     applyMiddleware(
-        logger,
+        // logger,
         thunkMiddleware,
         socketIoMiddleware
     )
