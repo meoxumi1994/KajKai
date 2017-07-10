@@ -8,7 +8,7 @@ export const getUser = (userId, next) => {
     const id = getUUID();
     const publicData = {userId: userId, eventId: id};
     pub.publish('USER.GetUser', JSON.stringify(publicData));
-    sub.subscribe('STORE.GetUser' + id);
+    sub.subscribe('USER.GetUser' + id);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
         if (message.status === 'success') {
