@@ -218,6 +218,12 @@ GET /store/:id {
     images: [],
     content: ,
   },
+  lastUpdate: {
+      storename: ,
+      urlname: ,
+      avatarUrl: ,
+      coverUrl: ,
+  }
   numlike: '23',
   likes: [
     {
@@ -254,17 +260,12 @@ POST /store {
 
 PUT /store {
     id: , //store id
-    time: ,
     storename: 'Forest',
     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
     coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
-    storename: 'Forest',
     urlname: ,
     address: ,
     addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
-    category: ,
-    firstCategoryId: ,
-    secondCategoryId: ,
     position: {
       latitute: '1423424',
       longitute: '453535',
@@ -274,6 +275,12 @@ PUT /store {
       images: [],
       content: ,
     },
+    lastUpdate: {
+        storename: ,
+        urlname: ,
+        avatarUrl: ,
+        coverUrl: ,
+    }
 }
 
 GET /sellpost/store/:storeid?offset=-1 { // length = 2
