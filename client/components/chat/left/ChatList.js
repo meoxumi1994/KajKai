@@ -2,15 +2,12 @@ import React from 'react'
 import ChatContainer from '~/containers/chat/left/ChatContainer'
 
 class ChatList extends React.Component {
-
     constructor(props){
         super(props)
     }
-
     componentDidMount(){
         this.props.getChatList()
     }
-
     render(){
         const { chatListMap, chatListKey, currentChat, multiChat} = this.props
         const { createNewChat, loadChat } = this.props

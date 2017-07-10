@@ -142,6 +142,7 @@ const myString = {
     URL_NAME_SHORT: ['bạn chưa nhập tên url hoặc tên url quá ngắn','You have not entered the url or url name too short'],
     URL_NAME_FAILED: ['tên url không hợp lệ, tên của bạn nhập quá đặc biệt','Invalid url name, your name is too special'],
     URL_NAME_SPECIAL: ['tên url của bạn không chỉ được dùng chữ cái thường hoặc dấu gạch dưới', 'Your url name is not only used with lowercase letters or underscores'],
+    WARNING_MODAL: ['Cảnh Báo', 'Warning'],
 }
 
 const allString = {

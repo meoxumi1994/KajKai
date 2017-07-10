@@ -16,6 +16,8 @@ const index = (state = {
     storename: '',
     address: '',
     urlname: '',
+    openModalWarning: false,
+    contentModalWarning: '',
 }, action) => {
     switch (action.type) {
         case 'GET_LIST_CATEGORY_SUCCESS':
@@ -50,6 +52,10 @@ const index = (state = {
             return {...state, address: action.address }
         case 'INST_REGISTER_STORE_CHANGE_URLNAME':
             return {...state, urlname: action.urlname}
+        case 'INST_REGISTER_STORE_CLOSE_MODAL_WARNING':
+            return {...state, openModalWarning: false }
+        case 'INST_REGISTER_STORE_SHOW_MODAL_FAILED':
+            return {...state, openModalWarning: true, contentModalWarning: action.content}
         default:
             return state
     }
