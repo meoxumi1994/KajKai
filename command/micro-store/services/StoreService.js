@@ -58,7 +58,7 @@ export const validateStore = (store) => {
 
 export const createStore = (storeInfo, next) => {
 
-    if (storeInfo.storename.length < 6) {
+    if (!storeInfo.storename || storeInfo.storename.length < 6) {
         next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
         return;
     }

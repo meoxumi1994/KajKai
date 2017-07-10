@@ -4,6 +4,7 @@ export const addStoreCon = () => {
     return (req, res) => {
         console.log(JSON.stringify(req.body));
         createStore({...req.body, userid: req.user.id}, (store) => {
+            console.log(store instanceof String);
             if (store instanceof String) {
                 res.json({error: store})
             } else {
