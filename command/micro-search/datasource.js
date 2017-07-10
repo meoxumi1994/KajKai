@@ -1,11 +1,9 @@
-import mongoose from 'mongoose'
+import elasticsearch from 'elasticsearch'
+import searchConfig from './config/elasticConfig'
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://admin:admin@localhost/kajkai-user', {
-  useMongoClient: true
-}, (err) => {
-    if (err) {
-        console.log('error login mongoose', err)
-    }
-})
-export default mongoose
+const searchClient = new elasticsearch.Client({
+    host: searchConfig.url,
+    log: 'trace'
+});
+
+export default searchClient;
