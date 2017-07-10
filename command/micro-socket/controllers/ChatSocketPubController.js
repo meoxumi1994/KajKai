@@ -109,8 +109,8 @@ export const removeMemberPub = (mesId, memberId, next) => {
     const pub = redis.createClient(config);
     const id = getUUID();
     const publicData = {memberId: memberId, mesId: mesId, eventId: id};
-    pub.publish('CHAT.GroupMemberAdded', JSON.stringify(publicData));
-    sub.subscribe('CHAT.GroupMemberAdded' + id);
+    pub.publish('CHAT.GroupMemberRemoved', JSON.stringify(publicData));
+    sub.subscribe('CHAT.GroupMemberRemoved' + id);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
         if (message.status === 'success') {
