@@ -4,10 +4,6 @@ import { getChatList, getMessages } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
   const { chatListMap, chatListKey, currentChat } = state.inst.chat.left
-<<<<<<< Updated upstream
-=======
-  // console.log('[State] ', state);
->>>>>>> Stashed changes
   return (
     {
       chatListMap,
