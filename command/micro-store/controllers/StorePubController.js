@@ -30,7 +30,7 @@ export const authoriseToken = (token, next) => {
     sub.subscribe('USER.AuthorizeToken' + publishData.eventId);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
-        sub.unsubcribe();
+        sub.unsubscribe();
         sub.quit();
         pub.quit();
         if (message.status === 'success') {
