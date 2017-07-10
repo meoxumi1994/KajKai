@@ -30,20 +30,21 @@ const addPostRow = (item) => {
     }
 }
 
-const editsellpost = (state = {
-    category: '',
-    description: '',
-    status: '',
-    ship: '',
-    postrows_order: [],
-}, action) => {
+const editpostrow = (state = {}, action) => {
     switch (action.type) {
         case 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_POST_ROW':
             return {...state,
-                postrows_order: [...state.postrows_order, 'postrow' + state.postrows_order.length],
+                ['postrow' + action.newid] : addPostRow(action.item)
+            }
+        case 'INST_ENTITY_POST_EDIT_SELL_POST_CHANGE_POST_ROW':
+            return {...state,
+                [action.item] : {...state[action.item],
+                    [action.key] : action.value
+                }
             }
         default:
             return state
     }
 }
-export default editsellpost
+
+export default editpostrow

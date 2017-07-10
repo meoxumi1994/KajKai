@@ -1,8 +1,10 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
+import { FilteringPhoneDefaultVietName } from '~/containers/support'
+import { changeLanguage } from '~/actions/asyn/user-login-register'
 import { authAction } from '~/actions/sync/auth'
-import { getCategory, updatePhone, verifyPhone } from '~/actions/asyn/register-store'
+import { getCategory, updatePhone, verifyPhone, registerStore } from '~/actions/asyn/register-store'
 import Registerstore from '~/components/register-store'
 
 const mapStateToProps = (state, ownProps) => {
@@ -33,6 +35,11 @@ const mapStateToProps = (state, ownProps) => {
         CONFIRM: g('CONFIRM'),
         CHOOSE_ANOTHER: g('CHOOSE_ANOTHER'),
         SAVE: g('SAVE'),
+        ENTER_YOUR_STORE_NAME: g('ENTER_YOUR_STORE_NAME'),
+        ENTER_YOUR_PHONE: g('ENTER_YOUR_STORE_NAME'),
+        ENTER_YOUR_ADDRESS: g('ENTER_YOUR_ADDRESS'),
+        STORE_URL: g('STORE_URL'),
+        ENTER_URL_STORE: g('ENTER_URL_STORE'),
         ...registerstore,
     })
 }
@@ -62,7 +69,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch({ type: 'INST_REGISTER_STORE_CHANGE_PHONE', value: e.target.value })
     },
     updatePhone: (phone) => {
-        dispatch(updatePhone(phone))
+        dispatch(updatePhone(FilteringPhoneDefaultVietName(phone)))
     },
     chooseAnother: () => {
         dispatch({ type: 'INST_REGISTER_STORE_CHOOSE_ANOTHER_PHONE'})
@@ -71,14 +78,61 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch({ type: 'INST_REGISTER_STORE_CHOOSE_OPEN_MODAL_PHONE', value: value })
     },
     onChangePosition: (position) => {
-        console.log('onChangePosition', position)
         dispatch({ type: 'INST_REGISTER_STORE_CHOOSE_POSITION', position: position })
+    },
+    onChangeAddress: (e) => {
+        dispatch({ type: 'INST_REGISTER_STORE_CHANGE_ADDRESS', address: e.target.value })
+    },
+    onChangeStoreName: (e) => {
+        dispatch({ type: 'INST_REGISTER_STORE_CHANGE_STORENAME', storename: e.target.value })
+    },
+    onChangeUrlName: (e) => {
+        dispatch({ type: 'INST_REGISTER_STORE_CHANGE_URLNAME', urlname: e.target.value })
+    },
+    changeLanguage: (language) => {
+        dispatch(changeLanguage(language))
+    },
+    onCreateStore: (store, isConfirmPhone) => {
+        if(store.storename.length < 6){
+            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('STORE_NAME_FAILED') })
+            return;
+        }
+        if(!store.chooseCategoryId || !store.chooseSecondCategoryId || store.categoryInputValue.length < 3){
+            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('CATEGORY_FAILED') })
+            return;
+        }
+        if(!isConfirmPhone){
+            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('PHONE_FAILED') })
+            return;
+        }
+        if(!store.position){
+            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('POSITION_FAILED') })
+            return;
+        }
+        if(!store.address.length < 6){
+            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('ADDRESS_FAILED') })
+            return;
+        }
+        if(store.urlname.length < 4){
+            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('URL_NAME_SHORT') })
+            return;
+        }
+        if( !(/^[a-z]*$/.test(store.urlname)) && store.urlname != '_' ){
+            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('URL_NAME_SPECIAL') })
+            return;
+        }
+        const path = store.urlname
+        if((path == "chat" || path == "map" || path == "register" || path == "store" || path == "profile" || path == "registerstore" )){
+            dispatch({ type: 'INST_REGISTER_STORE_SHOW_MODAL_FAILED', content: g('URL_NAME_FAILED') })
+            return;
+        }
+        dispatch(registerStore(store))
     }
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
     const { chooseCategoryId, categories, ...anotherState } = stateProps
-    const { onChooseCategory, onChooseSecondCategory, ...anotherDispatch } = dispatchProps
+    const { onChooseCategory, onChooseSecondCategory, onCreateStore, ...anotherDispatch } = dispatchProps
     return({
         onChooseCategory: (id) => {
             onChooseCategory(categories[id].name, categories[id].id)
@@ -86,6 +140,19 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
         onChooseSecondCategory: (id) => {
             const secondCate = categories.filter((item) => item.id == chooseCategoryId)[0].secondCategories
             onChooseSecondCategory(secondCate[id].name, secondCate[id].id)
+        },
+        createStore: () => {
+            const store = {
+                storename: stateProps.storename,
+                phone: stateProps.phone,
+                position: stateProps.position,
+                address: stateProps.address,
+                urlname: stateProps.urlname,
+                firstCategoryId: stateProps.chooseCategoryId,
+                secondCategoryId: stateProps.chooseSecondCategoryId,
+                category: stateProps.categoryInputValue,
+            }
+            onCreateStore(store, stateProps.isConfirmPhone)
         },
         chooseCategoryId: chooseCategoryId,
         categories: categories,

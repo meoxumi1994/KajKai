@@ -17,7 +17,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+    addPostRow: (item, newid) => {
+        dispatch({ type: 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_POST_ROW', item: item, newid: newid})
+    },
 })
 
 const EditSellPostContainer = connect(

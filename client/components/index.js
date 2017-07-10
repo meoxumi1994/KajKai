@@ -99,6 +99,11 @@ class Comp extends React.Component {
 
 const Compp = ({}) => (
     <div>
+        <KeepImage
+            type="Carousel"
+            width={499}
+            images={[]}
+            imagesSuggest={[]}/>
         {/* <Carousel key={'123'} style={{ width: 260, height: 260 }}
             images={["/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg"]}
             onClick={() => console.log('onClick')}
@@ -224,12 +229,12 @@ const newComp = () => (
                 ]}
                 canEdit={true}
             /> */}
-        {/* <span ref={me => {
+        <span ref={me => {
             setTimeout(() => {
                 console.log(me.getBoundingClientRect().width)
             },200)
-        }} style={{ fontSize: 14 }}>{''}</span> */}
-        <MinorPost
+        }} style={{ fontSize: 14 }}>{':D'}</span>
+        {/* <MinorPost
             name='Foody.vn‎'
             avatarUrl='/images/storeavatar.jpg'
             time='11 mins'
@@ -240,7 +245,7 @@ Hình thức thi: 2 team (6 người/team) thách đấu cùng chiến 1 pizza d
 Số lượng đăng kí: 2 người/team. Sau đó sẽ ghép thành đội 6 người.
 Giải thưởng: 3 triệu tiền mặt, 6 điện thoại Pháp Wiko và 6 triệu Voucher. Tài trợ Pizza: 4Gs Texas <3'/>
         <SellPost
-            />
+            /> */}
     </div>
 )
 

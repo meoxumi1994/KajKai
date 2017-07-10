@@ -16,12 +16,12 @@ class ContentEditable extends React.Component {
         this.setState({ width: this.display.getBoundingClientRect().width })
     }
     render(){
-        const { placehoder, content, handleChange, padding, minRows } = this.props
+        const { placehoder, width, content, handleChange, padding, minRows } = this.props
         return(
             <div style={{
                 outline: '1px solid #D2D2D2',
                 fontSize: 14,
-                backgroundColor: 'white',
+                // backgroundColor: 'white',
                 padding: padding}}>
                 <Textarea
                     autoComplete="off"
@@ -45,7 +45,11 @@ class ContentEditable extends React.Component {
                     onChange={(e) => handleChange(e)} />
                 <div
                     ref={display => this.display = display}
-                    style={{ color: content?undefined:(this.state.focus?'#BFC2C9':'#A7ABB1')}}
+                    style={{
+                        color: content?undefined:(this.state.focus?'#BFC2C9':'#A7ABB1'),
+                        minHeight: minRows*20,
+                        width: width,
+                    }}
                     dangerouslySetInnerHTML={{ __html: content?MixMakeUp(content):placehoder }}>
                 </div>
             </div>

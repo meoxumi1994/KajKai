@@ -552,7 +552,7 @@ app.get('/categorylist', (req,res) => {
     })
 })
 
-app.post('/updatephone', (req,res) => {
+app.post('/phoneverification', (req,res) => {
     setTimeout(function(){
         res.send({
             status: 'pending',
@@ -560,7 +560,15 @@ app.post('/updatephone', (req,res) => {
     }, 1000)
 })
 
-app.post('/verifyphone', (req,res) => {
+app.post('/phonereverification', (req,res) => {
+    setTimeout(function(){
+        res.send({
+            status: 'pending',
+        })
+    }, 1000)
+})
+
+app.post('/phonecodeverification', (req,res) => {
     setTimeout(function(){
         if(req.body.code == '1234')
             res.send({ status: 'verified' })
