@@ -924,7 +924,7 @@ GET /search/user?keyword='chariiiiiiity' { // search user by username
   ]
 }
 
-GET /search/store?ketword='Forrrrrrest | táo tàu' { search store by keyword là store name hoặc category name
+GET /search/store?keyword='Forrrrrrest | táo tàu' { search store by keyword là store name hoặc category name
   stores: [
     {
       storeId: '',
@@ -934,7 +934,7 @@ GET /search/store?ketword='Forrrrrrest | táo tàu' { search store by keyword l�
   ]
 }
 
-GET /search/category?id=-1&keyword='đồ chơi trẻ em' { // id = -1: ALL CATEGORY, keyword là category, trả về store và các sellpost
+GET /search/category?id=-1&longitude='74'&latitude='47'&keyword='đồ chơi trẻ em' { // id = -1: ALL CATEGORY, keyword là category, trả về store và các sellpost
   stores: [        // các store có name tương tự keyword hoặc bán các loại category tương tự keyword
     {
       storeId: '',
