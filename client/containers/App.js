@@ -84,11 +84,12 @@ const styles = {
               height: 40
           },
           text: {
-              marginRight: 40,
+              marginRight: 51,
               marginTop: 10,
               textAlign: 'left',
           },
           bounds: {
+              marginTop: 5,
               backgroundColor: '#cc3333',
               color: 'white',
               width: 200,

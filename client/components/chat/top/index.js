@@ -24,13 +24,13 @@ class ChatTop extends React.Component {
                 <img style={styles.iconImg} src="/images/plus.ico" onClick={() => displayAddMember(mesId)}/>
                 <img style={styles.iconImg} src="/images/newSetting.png" onClick={() => close(mesId)}/>
             </div>
-
+            <AddMemberContainer mesId={mesId}/>
         </div>
       )
     }
 }
 
-// <AddMemberContainer mesId={mesId}/>
+
 
 
 // {

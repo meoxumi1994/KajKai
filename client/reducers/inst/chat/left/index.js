@@ -49,16 +49,15 @@ const left = (state = {
           }
 
       case 'client/ADD_MEMBER':
+
           if (state.chatListKey.indexOf(action.data.mesId) == -1) {
               let sKey = []
               let sMap = {}
               let label = ''
               for ( let i in action.data.members) {
                   const member = action.data.members[i]
-                  console.log('member ', member);
                   console.log('current chat ', state.currentChat.id);
                   if (sKey.indexOf(member.id) == -1 && member.id != state.currentChat.id) {
-                      console.log('---add');
                       sKey.push(member.id)
                       sMap[member.id] = {
                           avatarUrl: member.avatarUrl,

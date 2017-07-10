@@ -43,35 +43,20 @@ const multiChat = (state = {
             console.log('\n[Reducer Center] global/RECEIVE_MESSAGE ', action, msg)
             return msg
 
-        // case 'ADD_MULTI_CHAT':
-        //     if (state.messagesKey.indexOf(action.data.mesId) != -1) {
-        //       return {
-        //         ...state,
-        //       }
-        //     }
-        //     var tempMessagesKey = state.messagesKey
-        //     tempMessagesKey.push(action.data.mesId)
-        //
-        //     return {
-        //       ...state,
-        //       messagesKey: tempMessagesKey,
-        //       messagesMap: {
-        //         ...state.messagesMap,
-        //         [action.data.mesId]: action.data.messages
-        //       },
-        //     }
-        //
-        // case 'REMOVE_CHAT':
-        //   const tempKey = state.messagesKey
-        //   tempKey.splice(tempKey.indexOf(action.mesId), 1)
-        //   const tempMap = state.messagesMap
-        //   delete tempMap[action.mesId]
-        //   return {
-        //     ...state,
-        //     messagesKey: tempKey,
-        //     messagesMap: tempMap,
-        //   }
 
+        case 'ADD_CHAT':
+            if (action.data.mesId != 0) {
+              return state
+            }
+            return {
+              ...state,
+              messagesKey: ['0'],
+              messagesMap: {
+                mesId: '0',
+                messages: []
+              }
+            }
+      
         default:
           return state
     }
