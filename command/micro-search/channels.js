@@ -1,14 +1,10 @@
 export default {
-    'USER.AuthorizeToken': {
-        controller: 'UserSubController',
-        method: 'authorizeTokenSub'
+    'USER.Created': {
+        controller: 'SearchSubController',
+        method: 'createUser'
     },
-    'USER.GetUser': {
-        controller: 'UserSubController',
-        method: 'getUserSub'
-    },
-    'USER.GetListUser': {
-        controller: 'UserSubController',
-        method: 'getListUserSub'
+    'USER.Updated': {
+        controller: 'SearchSubController',
+        method: 'updateUser'
     }
 }

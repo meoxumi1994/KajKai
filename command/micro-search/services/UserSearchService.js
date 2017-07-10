@@ -1,4 +1,5 @@
 
-export const insertUser = (user) => {
+
+export const createUser = (user) => {
 
 };
