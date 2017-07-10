@@ -58,7 +58,7 @@ export const addMember = (groupId, memberIds, next) => {
             }
             group.save((err) => {
                 chatGroupUpdatedPub(getGroupBasicInfo(group));
-                getInfoFromListId(memberIds, (infos) => {
+                getInfoFromListId(group.members, (infos) => {
                     next(infos, group);
                 })
             })
