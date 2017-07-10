@@ -6,7 +6,7 @@ const sockListen = (user, socket, io) => {
     for(let e in allEvents){
         let handler = allEvents[e];
         let method = require('../controllers/' + handler.controller)[handler.method];
-        socket.removeListener(e);
+        socket.removeListener(e, method);
         socket.on(e, (action) => {
             console.log('action' + action);
             if (user) {
