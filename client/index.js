@@ -10,6 +10,7 @@ import { AppContainer } from 'react-hot-loader'
 import reducers from './reducers'
 import Components from './components'
 // import './App.css'
+import logger from 'redux-logger'
 
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client'
@@ -29,6 +30,7 @@ const socketIoMiddleware = createSocketIoMiddleware(socket, ["server/","client/"
 const store = createStore(
     reducers,
     applyMiddleware(
+        logger,
         thunkMiddleware,
         socketIoMiddleware
     )

@@ -939,7 +939,7 @@ GET /search/store?ketword='Forrrrrrest | táo tàu' { search store by keyword l�
   ]
 }
 
-GET /search/category?keyword='đồ chơi trẻ em' { // keyword là category, trả về store và các sellpost
+GET /search/category?id=-1&keyword='đồ chơi trẻ em' { // id = -1: ALL CATEGORY, keyword là category, trả về store và các sellpost
   stores: [        // các store có name tương tự keyword hoặc bán các loại category tương tự keyword
     {
       storeId: '',

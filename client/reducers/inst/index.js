@@ -10,6 +10,8 @@ import app from './app'
 import store from './store'
 import map from './map'
 import user from './user'
+import category from './category'
+import search from './search'
 
 const inst = combineReducers({
     userloginregister,
@@ -21,7 +23,9 @@ const inst = combineReducers({
     chat,
     app,
     map,
-    user
+    user,
+    category,
+    search
 })
 
 export default inst
