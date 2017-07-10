@@ -4,6 +4,17 @@ const singleChat = (state = {
 }, action) => {
     switch (action.type) {
 
+        case 'INIT_SINGLE_MESSAGES':
+            const initSingleMessages = {
+              ...state,
+              messagesKey: [action.data.mesId],
+              messagesMap: {
+                  [action.data.mesId]: action.data.messages.reverse()
+              }
+            }
+            console.log('\n[Reducer Center] INIT_SINGLE_MESSAGES', action, initSingleMessages);
+            return initSingleMessages
+
         case 'global/RECEIVE_MESSAGE':
             const { mesId, user, time, message } = action.data
             const chat = state.messagesMap[mesId]
@@ -27,16 +38,6 @@ const singleChat = (state = {
             console.log('\n[Reducer Center] global/RECEIVE_MESSAGE ', action, msg)
             return msg
 
-        case 'INIT_SINGLE_MESSAGES':
-            const initSingleMessages = {
-              ...state,
-              messagesKey: [action.data.mesId],
-              messagesMap: {
-                  [action.data.mesId]: action.data.messages.reverse()
-              }
-            }
-            console.log('\n[Reducer Center] INIT_SINGLE_MESSAGES', action, msg);
-            return initSingleMessages
 
         case 'ADD_CHAT':
             if (action.data.mesId != 0) {

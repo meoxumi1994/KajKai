@@ -10,7 +10,7 @@ class ChatCenter extends React.Component {
     }
 
     render() {
-      let { mesId, styles } = this.props
+      let { mesId, styles, messagesMap } = this.props
       let { setCurrentChat } = this.props
 
       if (mesId == undefined) {
@@ -20,12 +20,13 @@ class ChatCenter extends React.Component {
       }
 
       return (
-        <div key={mesId} style={{width: '100%', height: '100%'}}>
+        <div key={mesId} style={{width: '100%', height: '100%'}} onClick={() => setCurrentChat(mesId)}>
             <ChatTopContainer
                   mesId={mesId}
                   styles={styles.top}/>
             <MessageListContainer
                   mesId={mesId}
+                  messagesMap={messagesMap}
                   styles={styles.center}/>
             <ChatBottomContainer
                   mesId={mesId}

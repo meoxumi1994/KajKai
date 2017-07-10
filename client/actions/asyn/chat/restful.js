@@ -28,19 +28,24 @@ export const getMesId = (id, person) => dispatch => {
   })
 }
 
-export const getMessages = (mesId, offset, length, status) => dispatch => {
+export const getMessages = (mesId, offset, length, status, multiChat) => dispatch => {
     flem('/messages/'+mesId, {
       offset: offset,
-      length: 7
+      length: 20
     }, {}).then((response) => {
         console.log('\n[API] /getMessages ', response);
-        // !status: doesn't have mesId yet
-        if (!status) {
-            dispatch({type: 'ADD_CHAT', data: {mesId: mesId, label: 'Tin nhắn mới'}})
-            dispatch(setCurrentChat(mesId))
-        } else {
-            dispatch(addChat(response, false))
+        if (multiChat) {
+            dispatch(addChat(response, true))
             dispatch(setCurrentChat(response.mesId))
+        } else {
+            // !status: doesn't have mesId yet
+            if (!status) {
+                dispatch({type: 'ADD_CHAT', data: {mesId: mesId, label: 'Tin nhắn mới'}})
+                dispatch(setCurrentChat(mesId))
+            } else {
+                dispatch(addChat(response, false))
+                dispatch(setCurrentChat(response.mesId))
+            }
         }
     })
 }

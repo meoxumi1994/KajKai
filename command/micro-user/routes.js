@@ -33,19 +33,33 @@ export default {
             method: 'updateUserPassword'
         }
     },
-    '/phone': {
+    '/phone/user': {
         put: {
             controller: 'PhoneController',
             middleware: [auth()],
-            method: 'updateUserPhoneController'
+            method: 'updateUserPhoneHandler'
         }
     },
     '/phoneverification': {
-        put: {
+        post: {
           controller: 'PhoneController',
           middleware: [auth(), phoneCheck()],
-          method: 'verifyPhone'
+          method: 'verifyPhoneHandler'
         }
+    },
+    '/phonereverification': {
+        post: {
+          controller: 'PhoneController',
+          middleware: [auth(), phoneCheck()],
+          method: 'reverifyPhoneHandler'
+        }
+    },
+    '/phonecodeverification': {
+      post: {
+        controller: 'PhoneController',
+        middleware: [auth(), phoneCheck()],
+        method: 'verifyPhoneCodeHandler'
+      }
     },
     '/login': {
        post: {
@@ -78,5 +92,23 @@ export default {
             middleware: [auth()],
             method: 'blackList'
         }
+    },
+    '/phone/logout': {
+      post: {
+        controller: 'PhoneController',
+        method: 'out'
+      }
+    },
+    '/phone/cancel': {
+      post: {
+        controller: 'PhoneController',
+        method: 'cancel'
+      }
+    },
+    '/phone/search': {
+      post: {
+        controller: 'PhoneController',
+        method: 'search'
+      }
     }
 }
