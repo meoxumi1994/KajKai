@@ -5,9 +5,128 @@ const left = (state = {
   unreadChat: {},
   currentChat: {
     mesId: '',
-  }
+    id: ''
+  },
 }, action) => {
     switch (action.type) {
+
+      case 'SET_USER_ID':
+          const setUserId = {
+              ...state,
+              currentChat: {
+                  ...state.currentChat,
+                  id: action.data.id
+              }
+          }
+          console.log('\n[Reducer Left] SET_USER_ID', action, setUserId)
+          return setUserId
+
+
+      case 'SET_CURRENT_CHAT':
+          const setCurrentChat = {
+            ...state,
+            currentChat: {
+                ...state.currentChat,
+                mesId: action.data.mesId
+            }
+          }
+          console.log('\n[Reducer Left] SET_CURRENT_CHAT', action, setCurrentChat)
+          return setCurrentChat
+
+      case 'DISPLAY_ADD_MEMBER':
+          return {
+              ...state,
+              chatListMap: {
+                  ...state.chatListMap,
+                  [action.data.mesId]: {
+                      ...state.chatListMap[action.data.mesId],
+                      display: {
+                          ...state.chatListMap[action.data.mesId].display,
+                          addMember: action.data.value == 'toggle'? !state.chatListMap[action.data.mesId].display.addMember: action.data.value
+                      }
+                  }
+              }
+          }
+
+      case 'client/ADD_MEMBER':
+
+          if (state.chatListKey.indexOf(action.data.mesId) == -1) {
+              let sKey = []
+              let sMap = {}
+              let label = ''
+              for ( let i in action.data.members) {
+                  const member = action.data.members[i]
+                  console.log('current chat ', state.currentChat.id);
+                  if (sKey.indexOf(member.id) == -1 && member.id != state.currentChat.id) {
+                      sKey.push(member.id)
+                      sMap[member.id] = {
+                          avatarUrl: member.avatarUrl,
+                          id: member.id,
+                          username: member.username
+                      }
+                      label += member.username + ', '
+                  }
+              }
+              const newChat = {
+                  ...state,
+                  currentChat: {
+                      ...state.currentChat,
+                      mesId: action.data.mesId
+                  },
+                  chatListKey: [
+                      ...state.chatListKey,
+                      action.data.mesId
+                  ],
+                  chatListMap: {
+                      ...state.chatListMap,
+                      [action.data.mesId]: {
+                        mesId: action.data.mesId,
+                        lastMessage: action.message,
+                        displayLabel: label.substring(0, label.length - 2),
+                        usersKey: sKey,
+                        usersMap: sMap,
+                        status: true,
+                        display: {
+                            addMember: false
+                        }
+                      }
+                  }
+              }
+              console.log('\n[Reducer Left] client/ADD_MEMBER --newChat ', action, newChat)
+              return newChat
+          } else {
+              let mKey = state.chatListMap[action.data.mesId].usersKey
+              let mMap = state.chatListMap[action.data.mesId].usersMap
+              let displayLabel = state.chatListMap[action.data.mesId].displayLabel
+
+              for (let i in action.data.members) {
+                  const member = action.data.members[i]
+                  if (mKey.indexOf(member.id) == -1 && member.id != state.currentChat.id) {
+                      mKey.push(member.id)
+                      mMap[member.id] = {
+                          avatarUrl: member.avatarUrl,
+                          id: member.id,
+                          username: member.username
+                      }
+                      displayLabel += ', ' + member.username
+                  }
+              }
+              const addMember = {
+                  ...state,
+                  chatListMap: {
+                      ...state.chatListMap,
+                      [action.data.mesId]: {
+                          ...state.chatListMap[action.data.mesId],
+                          displayLabel,
+                          usersKey: mKey,
+                          usersMap: mMap
+                      }
+                  }
+              }
+              console.log('\n[Reducer Left] client/ADD_MEMBER --addMember ', action, addMember)
+              return addMember
+          }
+
 
       case 'UPDATE_CHAT_USER':
           const { username, avatarUrl, id } = action.data
@@ -89,15 +208,7 @@ const left = (state = {
           }
 
 
-      case 'SET_CURRENT_CHAT':
-          const setCurrentChat = {
-            ...state,
-            currentChat: {
-                mesId: action.data.mesId
-            }
-          }
-          console.log('\n[Reducer Left] SET_CURRENT_CHAT', action, setCurrentChat)
-          return setCurrentChat
+
 
       case 'REMOVE_CHAT':
           var tempKey = state.chatListKey
@@ -159,7 +270,7 @@ const left = (state = {
                 tempUserKey.push(user.id)
                 tempUserMap[user.id] = user
                 if (chat.displayLabel == undefined || chat.displayLabel == '') {
-                  tempDisplayLabel += user.username + ', '
+                    tempDisplayLabel += user.username + ', '
                 }
               })
 
@@ -169,7 +280,10 @@ const left = (state = {
                 displayLabel: tempDisplayLabel.trim().substring(0, tempDisplayLabel.length - 2),
                 usersKey: tempUserKey,
                 usersMap: tempUserMap,
-                status: true
+                status: true,
+                display: {
+                    addMember: false
+                }
               }
             }
           )

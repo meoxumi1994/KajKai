@@ -4,6 +4,7 @@ import { getChatList, getMessages } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
   const { chatListMap, chatListKey, currentChat } = state.inst.chat.left
+  console.log('[State] ', state.inst.chat);
   return (
     {
       chatListMap,
@@ -14,8 +15,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    loadChat: (mesId, status) => {
-        dispatch(getMessages(mesId, Date.now(), 10, status))
+    loadChat: (mesId, status, multiChat) => {
+        dispatch(getMessages(mesId, Date.now(), 10, status, multiChat))
     },
     getChatList: () => {
         dispatch(getChatList(Date.now(), 10))

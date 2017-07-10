@@ -57,7 +57,7 @@ export const validateStore = (store) => {
 
 
 export const createStore = (storeInfo, next) => {
-    var certificate = null;
+    let certificate = null;
     if (storeInfo.certificates) {
         certificate = new Certificate(storeInfo.certificates);
     }
@@ -71,9 +71,11 @@ export const createStore = (storeInfo, next) => {
                             latitude: storeInfo.latitude,
                             certificates: certificate
                         });
+    console.log('store ' + JSON.stringify(store));
+    console.log('storeInfo ' + JSON.stringify(storeInfo));
     store.save(() => {
-        createStorePub(getPubStoreInfo(store));
         next(store)
+        createStorePub(getPubStoreInfo(store));
     })
 };
 

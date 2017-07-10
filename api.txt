@@ -898,21 +898,13 @@ GET /categorylist { // language la current language cua thang days
     ]
 }
 
-GET search/category/:keyword {
-    status: 'success',
-    categories: [
-        {
-            id: 'category001',
-            name: 'Shirt',
-        },
-        {
-            id: 'category002',
-            name: 'Food',
-        },
-    ]
+POST /phoneverification {  //server kiểm tra xem có user hay store nào dùng số phone này chưa -> server requests to Nexmo để gửi code tới số phone
+  phone: '0123456789'
+}, {
+  'pending|used|error'
 }
 
-POST /phoneverification {  //server kiểm tra xem có user hay store nào dùng số phone này chưa -> server requests to Nexmo để gửi code tới số phone
+POST /phonereverification {  // chờ sau 30s
   phone: '0123456789'
 }, {
   'pending|used|error'
@@ -923,4 +915,41 @@ POST /phonecodeverification { // server requests to Nexmo để check code cho s
   code: '1234'
 }, {
   'verified|error'
+}
+
+GET /search/user?keyword='chariiiiiiity' { // search user by username
+  users: [
+    {
+      userId: '',
+      username: '',
+      avatarUrl: ''
+    },
+  ]
+}
+
+GET /search/store?ketword='Forrrrrrest | táo tàu' { search store by keyword là store name hoặc category name
+  stores: [
+    {
+      storeId: '',
+      storeName: '',
+      avatarUrl: ''
+    },
+  ]
+}
+
+GET /search/category?keyword='đồ chơi trẻ em' { // keyword là category, trả về store và các sellpost
+  stores: [        // các store có name tương tự keyword hoặc bán các loại category tương tự keyword
+    {
+      storeId: '',
+      storeName: '',
+      avatarUrl: ''
+    },
+  ],
+  sellposts: [
+    {
+      sellpostId: '',
+      avatarUrl: '', // avatarUrl của store có sellpost này
+      title: ''
+    },
+  ]
 }

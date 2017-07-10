@@ -10,26 +10,23 @@ class Chat extends React.Component {
     }
 
     componentDidMount(){
-        this.props.getChatList()
+        // this.props.getChatList()
     }
 
     render() {
-      let { themes, messagesKey, messagesMap, visibility, multiChat, styles } = this.props
+      let { messagesKey, messagesMap, styles, multiChat } = this.props
 
       return(
         <div style={mainStyles.mainDiv} className="input-group">
-            <div style={Object.assign(mainStyles.left, themes.normal.bounds)}>
-                <ChatLeftContainer/>
+            <div style={mainStyles.left}>
+                <ChatLeftContainer multiChat={false}/>
             </div>
             <div style={mainStyles.spliter}>
             </div>
-            <div style={Object.assign(mainStyles.right, themes.normal.bounds)}>
+            <div style={mainStyles.right}>
             <ChatCenterContainer
                   mesId={messagesKey[0]}
-                  themes={themes}
-                  messagesKey={messagesKey}
                   messagesMap={messagesMap}
-                  visibility={visibility}
                   styles={styles}/>
             </div>
         </div>
