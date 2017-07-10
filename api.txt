@@ -199,6 +199,7 @@ GET /store/:id {
   id: , //store id
   userid: ,//owner
   storename: 'Forest',
+  time: ,
   avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
   coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
   storename: 'Forest',
@@ -236,6 +237,7 @@ GET /store/:id {
 }
 
 POST /store {
+    time: ,
     storename: 'Forest',
     urlname: ,
     address: ,
@@ -252,6 +254,7 @@ POST /store {
 
 PUT /store {
     id: , //store id
+    time: ,
     storename: 'Forest',
     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
     coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
