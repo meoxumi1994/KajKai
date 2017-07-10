@@ -57,41 +57,88 @@ export const validateStore = (store) => {
 
 
 export const createStore = (storeInfo, next) => {
+
+    if (storeInfo.storename.length < 6) {
+        next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+        return;
+    }
+    if (!storeInfo.firstCategoryId || !storeInfo.secondCategoryId || !storeInfo.category || storeInfo.category.length < 3) {
+        next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+        return;
+    }
+    if (!storeInfo.phone){
+        next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+        return;
+    }
+    if (!storeInfo.address.length || storeInfo.address.length < 6) {
+        next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+        return;
+    }
+    if (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' ) {
+        next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+        return;
+    }
+
     let certificate = null;
     if (storeInfo.certificates) {
         certificate = new Certificate(storeInfo.certificates);
     }
     const store = new Store({storeName: storeInfo.storename, phone: storeInfo.phone,
-                            category: storeInfo.category, owner: storeInfo.userid,
-                            avatarUrl: storeInfo.avatarUrl,
-                            coverUrl: storeInfo.coverUrl,
-                            address: storeInfo.address,
-                            addressMap: storeInfo.addressMap,
-                            longitude: storeInfo.longitude,
-                            latitude: storeInfo.latitude,
-                            certificates: certificate
-                        });
+        category: storeInfo.category, owner: storeInfo.userid,
+        firstCategoryId: storeInfo.firstCategoryId, secondCategoryId: storeInfo.secondCategoryId,
+        avatarUrl: storeInfo.avatarUrl,
+        coverUrl: storeInfo.coverUrl,
+        address: storeInfo.address,
+        addressMap: storeInfo.addressMap,
+        longitude: storeInfo.position ? storeInfo.position.longitude : null,
+        latitude: storeInfo.position ? storeInfo.position.latitude : null,
+        certificates: certificate,
+        createdAt: storeInfo.time,
+        urlName: storeInfo.urlname
+    });
     console.log('store ' + JSON.stringify(store));
     console.log('storeInfo ' + JSON.stringify(storeInfo));
     store.save(() => {
-        next(store)
+        next(store);
         createStorePub(getPubStoreInfo(store));
     })
 };
 
 export const updateStore = (storeInfo, next) => {
     getStore(storeInfo.id, (store) => {
-        if (storeInfo.storename) store.storeName = storeInfo.storename;
-        if (storeInfo.phone) store.phone = storeInfo.phone;
-        if (storeInfo.category) store.category = storeInfo.category;
+        if (storeInfo.storename) {
+            store.storeName = storeInfo.storename;
+            if (storeInfo.storename.length < 6) {
+                next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+                return;
+            }
+        }
+        if (storeInfo.phone) {
+            store.phone = storeInfo.phone;
+            if (!storeInfo.phone){
+                next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+                return;
+            }
+        }
         if (storeInfo.avatarUrl) store.avatarUrl = storeInfo.avatarUrl;
         if (storeInfo.coverUrl) store.coverUrl = storeInfo.coverUrl;
-        if (storeInfo.address) store.address = storeInfo.address;
+        if (storeInfo.address) {
+            store.address = storeInfo.address;
+            if (!storeInfo.address.length || storeInfo.address.length < 6) {
+                next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+                return;
+            }
+        }
         if (storeInfo.addressMap) store.addressMap = storeInfo.addressMap;
-        if (store.longitude) store.longitude = storeInfo.longitude;
-        if (store.latitude) store.latitude = storeInfo.latitude;
-        if (store.certificates) {
+        if (storeInfo.longitude) store.longitude = storeInfo.longitude;
+        if (storeInfo.latitude) store.latitude = storeInfo.latitude;
+        if (storeInfo.certificates) {
             store.certificates = new Certificate(storeInfo.certificates);
+        }
+        if (storeInfo.lastUpdate) {
+            if (storeInfo.lastUpdate.storename) store.lastUpdateStoreName = storeInfo.lastUpdate.storename;
+            if (storeInfo.lastUpdate.avatarUrl) store.lastUpdateAvatarUrl = storeInfo.lastUpdate.avatarUrl;
+            if (storeInfo.lastUpdate.coverUrl) store.lastUpdateCoverUrl = storeInfo.lastUpdate.coverUrl;
         }
         store.save(() => {
             updateStorePub(getPubStoreInfo(store));
@@ -121,10 +168,19 @@ export const getPubStoreInfo = (store) => {
         address: store.address,
         addressMap: store.addressMap,
         category: store.category,
+        firstCategoryId: store.firstCategoryId,
+        secondCategoryId: store.secondCategoryId,
         longitude: store.longitude,
         latitude: store.latitude,
         phone: store.phone,
-        certificates: store.certificates
+        certificates: store.certificates,
+        urlName: store.urlName,
+        createdAt: store.createdAt,
+        lastUpdate: {
+            lastUpdateStoreName: store.lastUpdateStoreName,
+            lastUpdateAvatarUrl: store.lastUpdateAvatarUrl,
+            lastUpdateCoverUrl: store.lastUpdateCoverUrl
+        }
     }
 };
 

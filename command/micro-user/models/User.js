@@ -25,6 +25,6 @@ const UserSchema = new mongoose.Schema({
     phoneLastUpdateAt: {type: Date},
     privacyAEP: {type: String, enum: _.values(PrivacyAEP)},
     privacyOthers: {type: String, enum: _.values(PrivacyOthers)}
-})
+});
 
 export default UserSchema

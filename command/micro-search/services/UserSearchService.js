@@ -1,14 +1,14 @@
 import config from '../config/elasticConfig'
 import searchClient from '../datasource'
 
-export const createUser = (user, next) => {
+export const createUser = (user) => {
     searchClient.index({
         index: config.INDEX,
         type: config.TYPE_USER,
         id: user.userId,
         body: user
-    }, function (error, response) {
-
+    }, (error, response) => {
+        console.log('error ' + error, 'response ' + JSON.stringify(response));
     });
 };
 

@@ -46,38 +46,50 @@ export default {
             event: 'STORE.Created',
             store: {
                 id: '',
-                owner:'',
+                owner: '',
                 storeName: '',
                 avatarUrl: '',
                 coverUrl: '',
                 address: '',
                 addressMap: '',
                 category: '',
+                firstCategoryId: '',
+                secondCategoryId:'',
                 longitude: '',
                 latitude: '',
                 phone: '',
-                certificates: {
-                    images: [],
-                    content: ''
+                certificates: '',
+                urlName: '',
+                createdAt: '',
+                lastUpdate: {
+                    lastUpdateStoreName: '',
+                    lastUpdateAvatarUrl: '',
+                    lastUpdateCoverUrl: ''
                 }
             }
         },{
             event: 'STORE.Updated',
             store: {
                 id: '',
-                owner:'',
+                owner: '',
                 storeName: '',
                 avatarUrl: '',
                 coverUrl: '',
                 address: '',
                 addressMap: '',
                 category: '',
+                firstCategoryId: '',
+                secondCategoryId:'',
                 longitude: '',
                 latitude: '',
                 phone: '',
-                certificates: {
-                    images: [],
-                    content: ''
+                certificates: '',
+                urlName: '',
+                createdAt: '',
+                lastUpdate: {
+                    lastUpdateStoreName: '',
+                    lastUpdateAvatarUrl: '',
+                    lastUpdateCoverUrl: ''
                 }
             }
         },{
