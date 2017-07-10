@@ -2,6 +2,7 @@ import { createStore, updateStore, getStoreBasicInfoService } from '../services/
 
 export const addStoreCon = () => {
     return (req, res) => {
+        console.log(JSON.stringify(req.body));
         createStore(req.body, (store) => {
             res.json({...req.body, storeId: getStoreBasicInfoService(store).storeId})
         })
