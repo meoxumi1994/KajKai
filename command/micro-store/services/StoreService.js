@@ -78,6 +78,10 @@ export const createStore = (storeInfo, next) => {
         next('urlname');
         return;
     }
+    if (!storeInfo.position) {
+        next('position');
+        return;
+    }
 
     let certificate = null;
     if (storeInfo.certificates) {
