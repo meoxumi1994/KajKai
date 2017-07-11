@@ -24,6 +24,16 @@ export const flet = (url, body) => {
 
 export const flem = (url, body) => {
     let myurl = config.getDomain() + url
+    if (myurl.includes('/search')) {
+      let path = ''
+      for(let i = 0; i < myurl.length; i++) {
+        if (myurl.substr(i, 7) == '/search') {
+          path = myurl.substr(i)
+          break
+        }
+      }
+      myurl = 'http://localhost:3001' + path
+    }
     if (body) {
       let ch = '?'
       for (let qr in body) {

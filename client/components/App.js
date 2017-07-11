@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 
 import Bar from '~/containers/Bar'
 import Bundle from '../common/Bundle'
-import loadHome from 'bundle-loader?lazy!./home/Home'
+import loadHome from 'bundle-loader?lazy!../containers/home/HomeContainer'
 // import loadMapp from 'bundle-loader?lazy!./mapp/Map'
 import loadUserLoginRegister from 'bundle-loader?lazy!../containers/user-login-register'
 import MapContainer from 'bundle-loader?lazy!../containers/mapp/MapContainer'
