@@ -9,7 +9,7 @@ export const loadCategory = () => dispatch => {
         categories
       })
     } else {
-      alert('LOAD CATEGORY FAILED! response: ', response)
+      // alert('LOAD CATEGORY FAILED! response: ', response)
       dispatch({
         type: 'My name is Charity'
       })
