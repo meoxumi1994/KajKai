@@ -1,5 +1,9 @@
 import { flem } from '~/actions/support'
 
+export const selectSearchType = (id) => ({
+
+})
+
 export const loadCategory = () => dispatch => {
   flem('/categorylist').then((response) => {
     const { categories } = response
@@ -9,7 +13,7 @@ export const loadCategory = () => dispatch => {
         categories
       })
     } else {
-      // alert('LOAD CATEGORY FAILED! response: ', response)
+      alert('LOAD CATEGORY FAILED! response: ', response)
       dispatch({
         type: 'My name is Charity'
       })

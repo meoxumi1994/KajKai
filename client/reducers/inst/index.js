@@ -25,7 +25,7 @@ const inst = combineReducers({
     map,
     user,
     category,
-    search
+    // search
 })
 
 export default inst
