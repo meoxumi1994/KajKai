@@ -18,6 +18,11 @@ class Chat extends React.Component {
 
         const { lastMessage, time, usersKey, usersMap, displayLabel, status } = chatListMap[mesId]
 
+        if (lastMessage == undefined) {
+          console.log('lastMessage ', lastMessage);
+          console.log('chatListMap', chatListMap);
+        }
+
         let textColor = mesId == currentChat? 'white': 'black'
         return (
           <div className="row">
@@ -36,16 +41,17 @@ class Chat extends React.Component {
               <div className="col col-xs-5" style={styles.messageDiv}>
                     <div style={{color: textColor}}><b>{displayLabel}</b></div>
                     {
-                      lastMessage == undefined? undefined:
+                      lastMessage != undefined?
                       <div style={{marginTop: 5}}>
                         <small className="text-muted">
                           <div style={{color: textColor}}>
-                            {lastMessage.id == user.id ? 'Bạn':usersMap[lastMessage.id].username}
-                            :
-                            {'  '+ lastMessage.message.text.length > 40? lastMessage.message.text.substring(0, 40) + '...': lastMessage.message.text }
+                            {lastMessage.id == user.id ? 'Bạn': usersMap[lastMessage.id].username}
+                            {':  '+ lastMessage.message.text.length > 40? lastMessage.message.text.substring(0, 40) + '...': lastMessage.message.text }
                           </div>
                         </small>
                       </div>
+                      :
+                      undefined
                     }
               </div>
 

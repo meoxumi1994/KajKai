@@ -143,6 +143,86 @@ const left = (state = {
           }
 
 
+      case 'UPDATE_CHAT_USER':
+          const { username, avatarUrl, id } = action.data
+          const mesid = action.data.mesId
+          const updateChat = {
+            ...state,
+            chatListMap: {
+              ...state.chatListMap,
+              [mesid]: {
+                ...state.chatListMap[mesid],
+                displayLabel: username,
+                usersKey: [
+                  ...state.chatListMap[mesid].usersKey,
+                  id
+                ],
+                usersMap: {
+                  ...state.chatListMap[mesid].usersMap,
+                  [id]: {
+                    id,
+                    avatarUrl,
+                    username
+                  }
+                },
+              }
+            }
+          }
+          // console.log('\n[Reducer Left] UPDATE_CHAT ', action, updateChat)
+          return updateChat
+
+      case 'global/RECEIVE_MESSAGE':
+          const { mesId, user, message, time} = action.data
+          if (state.chatListKey.indexOf(mesId) == -1) {
+              const newChat = {
+                  ...state,
+                    chatListKey: [
+                        ...state.chatListKey,
+                        mesId
+                    ],
+                    chatListMap: {
+                      ...state.chatListMap,
+                      [mesId]: {
+                          mesId,
+                          displayLabel: user.username,
+                          lastMessage: {
+                              id: user.id,
+                              message,
+                              time
+                          },
+                          status: true,
+                          usersKey: [
+                              user.id
+                          ],
+                          usersMap: {
+                              [user.id]: user
+                          },
+                          display: {
+                              addMember: false
+                          }
+                      }
+                  }
+              }
+              // console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---newChat ', action, newChat)
+              return newChat
+          } else {
+              const updateChat = {
+                ...state,
+                chatListMap: {
+                    ...state.chatListMap,
+                    [mesId]: {
+                        ...state.chatListMap[mesId],
+                        lastMessage: {
+                            id: user.id,
+                            time,
+                            message
+                        }
+                    }
+                }
+              }
+              // console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
+              return updateChat
+          }
 
 
 
@@ -192,81 +272,48 @@ const left = (state = {
         // console.log('\n[Reducer Left] ADD_CHAT ---add ', action, addChat)
         return addChat
 
-//------------------------------------------------------------------------------
       case 'INIT_CHAT_LIST':
           if (action.data.length <= 0) {
               return state
           }
+          const tempMap = {}
+
+          action.data.map (
+            chat => {
+              const tempUserKey = []
+              const tempUserMap = {}
+              let tempDisplayLabel = ''
+
+              chat.users.map(user => {
+                tempUserKey.push(user.id)
+                tempUserMap[user.id] = user
+                if (chat.displayLabel == undefined || chat.displayLabel == '') {
+                    tempDisplayLabel += user.username + ', '
+                }
+              })
+
+              tempMap[chat.mesId] = {
+                mesId: chat.mesId,
+                lastMessage: chat.lastMessage,
+                displayLabel: tempDisplayLabel.trim().substring(0, tempDisplayLabel.length - 2),
+                usersKey: tempUserKey,
+                usersMap: tempUserMap,
+                status: true,
+                display: {
+                    addMember: false
+                }
+              }
+            }
+          )
+
           const initChatlist = {
             ...state,
             chatListKey: action.data.map(chat => chat.mesId),
-            chatListMap: utils.chatListMap(action),
+            chatListMap: tempMap,
+            testMap: utils.chatListMap(action)
           }
           console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
           return initChatlist
-
-//------------------------------------------------------------------------------
-      case 'global/RECEIVE_MESSAGE':
-          if (state.chatListKey.indexOf(action.data.mesId) == -1) {
-              const newChat = {
-                  ...state,
-                    chatListKey: [
-                        ...state.chatListKey,
-                        action.data.mesId
-                    ],
-                    chatListMap: {
-                      ...state.chatListMap,
-                      [action.data.mesId]: chatMap(undefined, action)
-                  }
-              }
-              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---newChat ', action, newChat)
-              return newChat
-          } else {
-              const updateChat = {
-                ...state,
-                chatListMap: {
-                    ...state.chatListMap,
-                    [action.data.mesId]: {
-                        ...state.chatListMap[action.data.mesId],
-                        lastMessage: {
-                            id: action.data.user.id,
-                            time: action.data.time,
-                            message: action.data.message
-                        }
-                    }
-                }
-              }
-              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
-              return updateChat
-          }
-
-//------------------------------------------------------------------------------
-      case 'UPDATE_CHAT_USER':
-          const updateChat = {
-            ...state,
-            chatListMap: {
-              ...state.chatListMap,
-              [action.data.mesId]: {
-                ...state.chatListMap[action.data.mesId],
-                displayLabel: action.data.username,
-                usersKey: [
-                  ...state.chatListMap[action.data.mesId].usersKey,
-                  action.data.id
-                ],
-                usersMap: {
-                  ...state.chatListMap[action.data.mesId].usersMap,
-                  [action.data.id]: {
-                    id: action.data.id,
-                    avatarUrl: action.data.avatarUrl,
-                    username: action.data.username
-                  }
-                }
-              },
-              test: chatMap(undefined, action)
-            }
-          }
-          console.log('\n[Reducer Left] UPDATE_CHAT ', action, updateChat)
-          return updateChat
 
         default:
           return state
