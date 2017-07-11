@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import RiseUp from '~/components/entity/draw/RiseUp'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 // import ChatListContainer from '~/containers/chat/left/ChatListContainer'
-// import ChatLeftContainer from '~/containers/chat/left'
+import ChatLeftContainer from '~/containers/chat/left'
 
 const HandlerUser = ({ LOG_IN,
     id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat}) => {
@@ -55,7 +55,7 @@ const HandlerUser = ({ LOG_IN,
                             number="2"/>
                     </div>
                     <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
-                        {/* <ChatLeftContainer multiChat={true}/> */}
+                        <ChatLeftContainer multiChat={true}/>
                     </ul>
                 </div>
             </div>
@@ -92,7 +92,7 @@ export default class BarScreen extends React.Component {
 
   render() {
     const { SEARCH_PRODUCT, SEARCH_LOCATION, categories, onSe } = this.props
-    console.log('categories: ', categories);
+    // console.log('categories: ', categories);
     return (
         <div
             style={{ position: 'fixed',
@@ -125,7 +125,7 @@ export default class BarScreen extends React.Component {
                             <ul className="dropdown-menu">
                               <li key="-1"><a>ALL CATEGORY</a></li>
                               {categories.map(category =>
-                                <ul>
+                                <ul key={category.id}>
                                   <li key={category.id}><a>{category.name}</a></li>
                                   {category.secondCategories.map(secondCategory =>
                                     <li key={secondCategory.id} style={{ marginLeft: 13}}><a>{secondCategory.name}</a></li>
