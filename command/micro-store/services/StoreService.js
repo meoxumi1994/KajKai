@@ -59,23 +59,23 @@ export const validateStore = (store) => {
 export const createStore = (storeInfo, next) => {
 
     if (!storeInfo.storename || storeInfo.storename.length < 6) {
-        next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+        next('name');
         return;
     }
     if (!storeInfo.firstCategoryId || !storeInfo.secondCategoryId || !storeInfo.category || storeInfo.category.length < 3) {
-        next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+        next('category');
         return;
     }
     if (!storeInfo.phone){
-        next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+        next('phone');
         return;
     }
     if (!storeInfo.address.length || storeInfo.address.length < 6) {
-        next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+        next('address');
         return;
     }
     if (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' ) {
-        next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+        next('urlname');
         return;
     }
 
@@ -109,14 +109,14 @@ export const updateStore = (storeInfo, next) => {
         if (storeInfo.storename) {
             store.storeName = storeInfo.storename;
             if (storeInfo.storename.length < 6) {
-                next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+                next('name');
                 return;
             }
         }
         if (storeInfo.phone) {
             store.phone = storeInfo.phone;
             if (!storeInfo.phone){
-                next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+                next('phone');
                 return;
             }
         }
@@ -125,7 +125,7 @@ export const updateStore = (storeInfo, next) => {
         if (storeInfo.address) {
             store.address = storeInfo.address;
             if (!storeInfo.address.length || storeInfo.address.length < 6) {
-                next('INST_REGISTER_STORE_SHOW_MODAL_FAILED');
+                next('address');
                 return;
             }
         }
