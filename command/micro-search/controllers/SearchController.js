@@ -1,4 +1,5 @@
 import { searchUser } from '../services/UserSearchService'
+import { searchStore } from '../services/StoreSearchService'
 
 export const searchUserCon = () => {
     return (req, res) => {
@@ -7,5 +8,15 @@ export const searchUserCon = () => {
         searchUser(keyword, offset, length, (data) => {
             res.json(data)
         });
+    }
+};
+
+export const searchStoreCon = () => {
+    return (req, res) => {
+        const { keyword, offset, length } = req.query;
+        console.log(req.query);
+        searchStore(keyword, offset, length, (data) => {
+            res.json(data);
+        })
     }
 };

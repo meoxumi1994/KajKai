@@ -41,11 +41,14 @@ export const searchCategory = (str, next) => {
 };
 
 export const getCategoryName = (idParent, idChild, next) => {
+    console.log(idParent, idChild);
     Category.findById(idParent, (err, docs) => {
+        console.log('category ', err, docs);
         let parentName = docs.name;
         let childName = '';
         for (let i = 0; i < docs.subcategory.length; ++i) {
-            if (docs.subcategory[i]._id === idChild) {
+            console.log('fuck shit ', docs.subcategory[i], idChild);
+            if (docs.subcategory[i]._id.toString() === idChild) {
                 childName = docs.subcategory[i].name;
             }
         }

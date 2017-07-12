@@ -75,38 +75,47 @@ export const createStore = (storeInfo, next) => {
         next('address');
         return;
     }
-    if (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' ) {
-        next('urlname');
-        return;
-    }
     if (!storeInfo.position) {
         next('position');
         return;
     }
 
-    let certificate = null;
-    if (storeInfo.certificates) {
-        certificate = new Certificate(storeInfo.certificates);
+    if (!storeInfo.urlname || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )) {
+        next('urlname');
+        return;
+    } else {
+        Store.findOne({urlName: storeInfo.urlname}, (err, docs) => {
+            if (docs) {
+                next('urlname');
+                return;
+            }
+            let certificate = null;
+            if (storeInfo.certificates) {
+                certificate = new Certificate(storeInfo.certificates);
+            }
+            const store = new Store({storeName: storeInfo.storename, phone: storeInfo.phone,
+                category: storeInfo.category, owner: storeInfo.userid,
+                firstCategoryId: storeInfo.firstCategoryId, secondCategoryId: storeInfo.secondCategoryId,
+                avatarUrl: storeInfo.avatarUrl,
+                coverUrl: storeInfo.coverUrl,
+                address: storeInfo.address,
+                addressMap: storeInfo.addressMap,
+                longitude: storeInfo.position ? storeInfo.position.longitude : null,
+                latitude: storeInfo.position ? storeInfo.position.latitude : null,
+                certificates: certificate,
+                createdAt: storeInfo.time,
+                urlName: storeInfo.urlname
+            });
+            // console.log('store ' + JSON.stringify(store));
+            // console.log('storeInfo ' + JSON.stringify(storeInfo));
+            store.save(() => {
+                next(store);
+                getPubStoreInfo(store, (info) => {
+                    createStorePub(info);
+                });
+            })
+        })
     }
-    const store = new Store({storeName: storeInfo.storename, phone: storeInfo.phone,
-        category: storeInfo.category, owner: storeInfo.userid,
-        firstCategoryId: storeInfo.firstCategoryId, secondCategoryId: storeInfo.secondCategoryId,
-        avatarUrl: storeInfo.avatarUrl,
-        coverUrl: storeInfo.coverUrl,
-        address: storeInfo.address,
-        addressMap: storeInfo.addressMap,
-        longitude: storeInfo.position ? storeInfo.position.longitude : null,
-        latitude: storeInfo.position ? storeInfo.position.latitude : null,
-        certificates: certificate,
-        createdAt: storeInfo.time,
-        urlName: storeInfo.urlname
-    });
-    console.log('store ' + JSON.stringify(store));
-    console.log('storeInfo ' + JSON.stringify(storeInfo));
-    store.save(() => {
-        next(store);
-        createStorePub(getPubStoreInfo(store));
-    })
 };
 
 export const updateStore = (storeInfo, next) => {
@@ -146,7 +155,9 @@ export const updateStore = (storeInfo, next) => {
             if (storeInfo.lastUpdate.coverUrl) store.lastUpdateCoverUrl = storeInfo.lastUpdate.coverUrl;
         }
         store.save(() => {
-            updateStorePub(getPubStoreInfo(store));
+            getPubStoreInfo(store, (info) => {
+                updateStorePub(info);
+            });
             next(store);
         })
     })
@@ -154,7 +165,7 @@ export const updateStore = (storeInfo, next) => {
 
 export const getStoreByPostId = (id, next) => {
     getPost(id, function (storePost) {
-        if (!storePost) next(null)
+        if (!storePost) next(null);
         else {
             getStore(storePost.storeId, function (store) {
                 next(store)
@@ -164,7 +175,7 @@ export const getStoreByPostId = (id, next) => {
 };
 
 export const getPubStoreInfo = (store, next) => {
-    getCategoryName(store.firstCategoryId, store.secondCategoryId, (pName, cName) => {
+    getCategoryName(store.firstCategoryId, store.secondCategoryId, (names) => {
         next({
             id: getStoreGlobalId(store._id),
             owner: store.owner,
@@ -187,8 +198,8 @@ export const getPubStoreInfo = (store, next) => {
                 lastUpdateAvatarUrl: store.lastUpdateAvatarUrl,
                 lastUpdateCoverUrl: store.lastUpdateCoverUrl
             },
-            firstCategoryName: pName,
-            secondCategoryName: cName
+            firstCategoryName: names.parentName,
+            secondCategoryName: names.childName
         })
     });
     return {
@@ -200,15 +211,15 @@ export const getStoreListInfo = (storeList) => {
     if (!storeList) {
         return null;
     }
-    var storeListInfo = [];
-    for (var i = 0; i < storeList.length; ++i) {
+    let storeListInfo = [];
+    for (let i = 0; i < storeList.length; ++i) {
         storeListInfo.push(getStoreListInfo(storeList[i]));
     }
 };
 
 export const getListStore = (storeIdList, next) => {
-    var list = [];
-    for (var i = 0; i < storeIdList.length; ++i) {
+    let list = [];
+    for (let i = 0; i < storeIdList.length; ++i) {
         list.push(mongoose.Type.ObjectId(getStoreLocalId(storeIdList[i])));
     }
     Store.find({_id: {$in: list}}, (err, docs) => {
