@@ -34,3 +34,29 @@ export const updateStore = (message, next) => {
     const storeName = store.storeName;
     const avatarUrl = store.avatarUrl;
 };
+
+// store: {
+//     id: '',
+//         owner: '',
+//         storeName: '',
+//         avatarUrl: '',
+//         coverUrl: '',
+//         address: '',
+//         addressMap: '',
+//         category: '',
+//         firstCategoryId: '',
+//         secondCategoryId:'',
+//         longitude: '',
+//         latitude: '',
+//         phone: '',
+//         certificates: '',
+//         urlName: '',
+//         createdAt: '',
+//         lastUpdate: {
+//         lastUpdateStoreName: '',
+//             lastUpdateAvatarUrl: '',
+//             lastUpdateCoverUrl: ''
+//     },
+//     firstCategoryName: '',
+//         secondCategoryName: ''
+// }

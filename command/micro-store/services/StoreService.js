@@ -105,7 +105,9 @@ export const createStore = (storeInfo, next) => {
     console.log('storeInfo ' + JSON.stringify(storeInfo));
     store.save(() => {
         next(store);
-        createStorePub(getPubStoreInfo(store));
+        getPubStoreInfo(store, (info) => {
+            createStorePub(info);
+        });
     })
 };
 
@@ -146,7 +148,9 @@ export const updateStore = (storeInfo, next) => {
             if (storeInfo.lastUpdate.coverUrl) store.lastUpdateCoverUrl = storeInfo.lastUpdate.coverUrl;
         }
         store.save(() => {
-            updateStorePub(getPubStoreInfo(store));
+            getPubStoreInfo(store, (info) => {
+                updateStorePub(info);
+            });
             next(store);
         })
     })
@@ -200,15 +204,15 @@ export const getStoreListInfo = (storeList) => {
     if (!storeList) {
         return null;
     }
-    var storeListInfo = [];
-    for (var i = 0; i < storeList.length; ++i) {
+    let storeListInfo = [];
+    for (let i = 0; i < storeList.length; ++i) {
         storeListInfo.push(getStoreListInfo(storeList[i]));
     }
 };
 
 export const getListStore = (storeIdList, next) => {
-    var list = [];
-    for (var i = 0; i < storeIdList.length; ++i) {
+    let list = [];
+    for (let i = 0; i < storeIdList.length; ++i) {
         list.push(mongoose.Type.ObjectId(getStoreLocalId(storeIdList[i])));
     }
     Store.find({_id: {$in: list}}, (err, docs) => {
