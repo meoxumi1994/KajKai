@@ -44,7 +44,7 @@ export const getStore = (id, next) => {
                   longitute: store.longitude,
                 },
                 certificates: store.certificates,
-                numberOfLike: store.likeNumber ? store.likeNumber : 0,
+                numlike: store.likeNumber ? store.likeNumber : 0,
                 likes: store.likers ? store.likers.slice(0, 5) : [],
                 numfollow: store.numerOfFollow ? store.numerOfFollow : 0,
                 follows: store.followers ? store.followers.slice(0, 5) : [],
