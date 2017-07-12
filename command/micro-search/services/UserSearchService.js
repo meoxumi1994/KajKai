@@ -30,7 +30,7 @@ export const searchUser = (userName, next) => {
         body: {
             query: {
                 match: {
-                    body: userName
+                    username: userName
                 }
             }
         }
