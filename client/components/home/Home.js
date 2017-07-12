@@ -9,13 +9,13 @@ export default class Home extends React.Component {
   }
 
   componentDidMount(){
-    const { searchResult, ...searchQuery } = this.props.search
+    const { searchResult, scrollTop, ...searchQuery } = this.props.search
       this.props.onSearchQueryUpdated(searchQuery)
   }
 
   componentWillReceiveProps(nextProps) {
-    const { searchResult, ...searchQuery } = this.props.search
-    const { searchResult: abcxyz, ...nextSearchQuery } = nextProps.search
+    const { searchResult, scrollTop, ...searchQuery } = this.props.search
+    const { searchResult: abc, scrollTop: xyz, ...nextSearchQuery } = nextProps.search
     if (JSON.stringify(nextSearchQuery) != JSON.stringify(searchQuery)) {
       this.props.onSearchQueryUpdated(nextSearchQuery)
     }
@@ -23,7 +23,6 @@ export default class Home extends React.Component {
 
   render() {
     const { searchType, searchResult } = this.props.search
-    console.log(searchResult);
     return (
       <div className="container-fluid">
           <div className="row">

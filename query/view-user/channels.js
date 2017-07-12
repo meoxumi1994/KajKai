@@ -13,6 +13,10 @@ export default {
   },
   'STORE.Created': {
     controller: 'StoreSubController',
-    method: 'updateStoreIdList'
+    method: 'addStore'
+  },
+  'STORE.Updated': {
+    controller: 'StoreSubController',
+    method: 'updateStoreList'
   }
 }

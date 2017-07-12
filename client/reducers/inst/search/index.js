@@ -5,6 +5,7 @@ const search = (state = {
   id: '-1',
   offset: 0,
   length: 7,
+  scrollTop: 0,
   searchResult: {
     users: [
       {
@@ -78,10 +79,16 @@ const search = (state = {
       const { location } = action
       return { ...state, location }
     case 'ON_SCROLL_BODY':
-      let { offset, length } = state
-      offset += length
-      length = 1
-      return { ...state, offset, length }
+      let { nScrollTop } = state
+      let { offset, length, scrollTop } = state
+      if (nScrollTop < scrollTop) {
+        nScrollTop = scrollTop
+      } else if (nScrollTop - scrollTop > 400) {
+        offset += length
+        length = 1
+        scrollTop = nScrollTop
+      }
+      return { ...state, offset, length, scrollTop }
     default:
       return state
   }
