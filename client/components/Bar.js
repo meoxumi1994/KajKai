@@ -150,7 +150,7 @@ export default class BarScreen extends React.Component {
                           </span>
                         </div>
                     </div>
-                    <div className="col-xs-3"  style={{ padding: 0}}>
+                    {/* <div className="col-xs-3"  style={{ padding: 0}}>
                         <div className="input-group" style={{ marginLeft: 10 }}>
                             <input ref={node => { inputSearchLocation = node }}
                               type="text"
@@ -169,7 +169,7 @@ export default class BarScreen extends React.Component {
                                 </button>
                             </span>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="col-xs-4"  style={{ padding: 0}}>
                         <div style={{ position: 'absolute', right: 0}}>
                             <HandlerUser {...this.props}/>
