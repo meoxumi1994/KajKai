@@ -23,6 +23,8 @@ export default class Home extends React.Component {
 
   render() {
     const { searchType, searchResult } = this.props.search
+
+    // Cái prop này để lấy thêm kết quả search, ví dụ: onNeedMoreSearchResult(5) sẽ lấy thêm 5 kết quả search
     const { onNeedMoreSearchResult } = this.props
     return (
       <div className="container-fluid">

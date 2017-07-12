@@ -47,14 +47,11 @@ const search = (state = {
   switch (action.type) {
     case 'LOADED_SEARCHRESULT':
       const { searchResult } = action
-      console.log('state.searchResult: ', state.searchResult);
-      console.log(searchResult);
       if (state.offset == 0) {
         return { ...state, searchResult }
       }
       const { searchResult: mSearchResult } = state
       for (let property in searchResult) {
-        console.log('property: ', property);
         if (searchResult[property]) {
           mSearchResult[property] = [ ...mSearchResult[property], ...searchResult[property]]
         }
@@ -70,15 +67,19 @@ const search = (state = {
       } else {
         searchType = 'CATEGORY'
       }
-      return { ...state, id, searchType }
+      return { ...state, id, searchType, offset: 0, length: 7 }
     case 'CHANGE_KEYWORD':
       const { keyword } = action
-      return { ...state, keyword }
+      return { ...state, keyword, offset: 0, length: 7 }
     case 'CHANGE_LOCATION':
       const { location } = action
-      return { ...state, location }
+      return { ...state, location, offset: 0, length: 7 }
     case 'NEED_MORE_SEARCHRESULT':
-      return state
+      const { more } = action
+      let { offset, length } = state
+      offset = length
+      length = more
+      return { ...state, offset, length }
     default:
       return state
   }
