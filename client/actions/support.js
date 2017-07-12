@@ -32,7 +32,8 @@ export const flem = (url, body) => {
           break
         }
       }
-      myurl = 'http://10.20.16.133:3001' + path
+      myurl = 'http://10.20.16.147:3001' + path
+      // myurl = 'http://localhost:3001' + path
     }
     if (body) {
       let ch = '?'
@@ -43,7 +44,7 @@ export const flem = (url, body) => {
         }
       }
     }
-    // console.log('GET',myurl)
+    console.log('GET',myurl)
     return fetch( myurl , {
         headers: {
             "Accept-Encoding": "application/json"

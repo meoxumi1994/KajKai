@@ -11,6 +11,7 @@ export const createStore = (message) => {
 
   if (storeName) store.storeName = storeName
   if (urlName) store.urlName = urlName
+  else store.urlName = id
   if (createdAt) store.createdAt = createdAt
   if (avatarUrl) store.avatarUrl = avatarUrl
   if (coverUrl) store.coverUrl = coverUrl
