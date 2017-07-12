@@ -23,11 +23,13 @@ export const updateUser = (user) => {
     });
 };
 
-export const searchUser = (userName, next) => {
+export const searchUser = (userName, offset, length, next) => {
     searchClient.search({
         index: config.INDEX,
         type: config.TYPE_USER,
         body: {
+            from: offset,
+            size: length,
             query: {
                 match: {
                     username: {
@@ -41,6 +43,15 @@ export const searchUser = (userName, next) => {
         }
     }, (error, response) => {
         console.log('search ' + error, 'response ' + JSON.stringify(response));
-        next(response);
+        next(getHitResult(response));
     })
+};
+
+export const getHitResult = (result) => {
+    let res = [];
+    let hits = result.hits.hits;
+    for (let i = 0; i < hits.length; ++i) {
+        res.push(hits[i]._source);
+    }
+    return res;
 };
