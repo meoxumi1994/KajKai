@@ -48,7 +48,7 @@ export const getCategoryName = (idParent, idChild, next) => {
         let childName = '';
         for (let i = 0; i < docs.subcategory.length; ++i) {
             console.log('fuck shit ', docs.subcategory[i], idChild);
-            if (docs.subcategory[i]._id === idChild) {
+            if (docs.subcategory[i]._id.toString() === idChild) {
                 childName = docs.subcategory[i].name;
             }
         }
