@@ -6,6 +6,7 @@ mongo -u admin -p dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu --authenticationDat
 mongo -u admin -p dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu --authenticationDatabase admin kajkav-post --eval "db.dropDatabase()" &&
 mongo -u admin -p dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu --authenticationDatabase admin kajkav-chat --eval "db.dropDatabase()" &&
 
+pm2 flush &&
 pm2 start ./event-store/indes-event.js &&
 pm2 start ./query/view-user/indev-user.js &&
 pm2 start ./query/view-store/indev-store.js &&
