@@ -12,17 +12,21 @@ const chatMap = (state={
     usersKey: [],
     usersMap: {},
     status: true,
+    disabled: false,
     display: {
-        addMember: false
+        addMember: false,
+        setting: false
     }
-}, action) => {
-    switch (action.type) {
+}, action, subAction) => {
+
+    switch (action.type || subAction.type) {
       case 'INIT_CHAT_LIST':
           return {
               ...state,
               mesId: action.data.mesId,
               lastMessage: action.data.lastMessage,
-              displayLabel: utils.displayLabel(action.data.users),
+              // displayLabel: utils.displayLabel(action.data.users),
+              displayLabel: action.data.displayLabel,
               usersKey: action.data.users.map(user => user.id),
               usersMap: utils.usersMap(action, action.data.users)
           }
@@ -44,29 +48,47 @@ const chatMap = (state={
               }
           }
 
-      case 'UPDATE_CHAT_USER':
+      case 'NEW_CHAT':
           return {
               ...state,
+              lastMessage: undefined,
               mesId: action.data.mesId,
-              displayLabel: action.data.username,
-              usersKey: [
-                  ...state.usersKey,
-                  action.data.id
-              ],
-              usersMap: {
-                ...state.usersMap,
-                [action.data.id]: {
-                    ...state.usersMap[action.data.id],
-                    id: action.data.id,
-                    avatarUrl: action.data.avatarUrl,
-                    username: action.data.username
-                }
-              },
+              usersKey: [],
+              usersMap: {},
+          }
+
+      case 'client/ADD_MEMBER':
+          if (subAction.type == 'NEW_GROUP') {
+              return {
+                  ...state,
+                  mesId: action.data.mesId,
+                  lastMessage: undefined,
+                  displayLabel: utils.groupDisplayLabel(action.data.members, subAction.data.id),
+                  usersKey: utils.groupUsersKey(action, action.data.members, subAction.data.id),
+                  usersMap: utils.groupUsersMap(action, action.data.members, subAction.data.id),
+                  status: false,
+              }
+          } else {
+            return {
+                ...state
+            }
           }
 
 
-      default:
-          return state
+      case 'client/REMOVE_MEMBER':
+          return {
+              ...state,
+              usersMap: {
+                  ...state.usersMap,
+                  [action.data.memberId]: {
+                      ...state.usersMap[action.data.memberId],
+                      disabled: true
+                  },
+              },
+          }
+
+        default:
+            return state
     }
 }
 

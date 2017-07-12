@@ -5,6 +5,7 @@ import Message from './Message'
 const MessageList = ({ messagesMap, user, mesId, chatListMap, styles }) => {
     let previousId
     const { usersMap } = chatListMap[mesId]
+
     return (
       <div style={styles.mainDiv}>
         {

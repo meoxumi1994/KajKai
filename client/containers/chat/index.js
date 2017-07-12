@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
     {
       messagesKey: singleKey,
       messagesMap,
-      styles
+      styles,
     }
   )
 }

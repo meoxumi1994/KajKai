@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     setCurrentChat: (mesId) => {
-        // dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: mesId}})        
+        dispatch({type: 'SET_CURRENT_CHAT', data: {mesId: mesId}})        
     },
     getChatList: () => {
         dispatch(getChatList(Date.now(), 10))
