@@ -4,6 +4,7 @@ import RiseUp from '~/components/entity/draw/RiseUp'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 // import ChatListContainer from '~/containers/chat/left/ChatListContainer'
 import ChatLeftContainer from '~/containers/chat/left'
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 const HandlerUser = ({ LOG_IN,
     id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat}) => {
@@ -84,6 +85,8 @@ const HandlerUser = ({ LOG_IN,
 export default class BarScreen extends React.Component {
   constructor(props) {
     super(props)
+    this.state = { address: 'San Francisco, CA' }
+    this.onChange = (address) => this.setState({ address })
   }
 
   componentDidMount(){
@@ -93,6 +96,17 @@ export default class BarScreen extends React.Component {
   render() {
     const { SEARCH_PRODUCT, SEARCH_LOCATION, categories, onSearchTypeSelected, onKeyWordChanged, onLocationChanged } = this.props
     let inputSearchKeyWord, inputSearchLocation
+    const inputProps = {
+      value: this.state.address,
+      onChange: this.onChange,
+    }
+    const myStyles = {
+      root: { marginLeft: 10,  padding: 0 },
+      input: { width: '30%' },
+      autocompleteContainer: { backgroundColor: 'green' },
+      autocompleteItem: { color: 'black' },
+      autocompleteItemActive: { color: 'blue' }
+    }
     return (
         <div
             style={{ position: 'fixed',
@@ -150,7 +164,12 @@ export default class BarScreen extends React.Component {
                           </span>
                         </div>
                     </div>
-                    <div className="col-xs-3"  style={{ padding: 0}}>
+                    <PlacesAutocomplete ref={node => { inputSearchLocation = node }}
+                      onKeyDown={(e) => { if(e.keyCode == 13) inputSearchLocation.blur() }}
+                      inputProps={inputProps}
+                       styles={myStyles}
+                    />
+                    {/* <div className="col-xs-3"  style={{ padding: 0}}>
                         <div className="input-group" style={{ marginLeft: 10 }}>
                             <input ref={node => { inputSearchLocation = node }}
                               type="text"
@@ -169,7 +188,7 @@ export default class BarScreen extends React.Component {
                                 </button>
                             </span>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="col-xs-4"  style={{ padding: 0}}>
                         <div style={{ position: 'absolute', right: 0}}>
                             <HandlerUser {...this.props}/>
