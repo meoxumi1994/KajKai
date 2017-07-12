@@ -14,8 +14,8 @@ export default class Home extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { searchResult, scrollTop, ...searchQuery } = this.props.search
-    const { searchResult: abc, scrollTop: xyz, ...nextSearchQuery } = nextProps.search
+    const { searchResult, ...searchQuery } = this.props.search
+    const { searchResult: abcxyz, ...nextSearchQuery } = nextProps.search
     if (JSON.stringify(nextSearchQuery) != JSON.stringify(searchQuery)) {
       this.props.onSearchQueryUpdated(nextSearchQuery)
     }

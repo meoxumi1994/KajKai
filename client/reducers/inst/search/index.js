@@ -5,7 +5,6 @@ const search = (state = {
   id: '-1',
   offset: 0,
   length: 7,
-  scrollTop: 0,
   searchResult: {
     users: [
       {
@@ -57,7 +56,7 @@ const search = (state = {
       for (let property in searchResult) {
         console.log('property: ', property);
         if (searchResult[property]) {
-          mSearchResult[property] = [ ...mSearchResult[property], searchResult[property]]
+          mSearchResult[property] = [ ...mSearchResult[property], ...searchResult[property]]
         }
       }
       return { ...state, searchResult: mSearchResult }
@@ -78,17 +77,16 @@ const search = (state = {
     case 'CHANGE_LOCATION':
       const { location } = action
       return { ...state, location }
-    case 'ON_SCROLL_BODY':
-      let { nScrollTop } = state
-      let { offset, length, scrollTop } = state
-      if (nScrollTop < scrollTop) {
-        nScrollTop = scrollTop
-      } else if (nScrollTop - scrollTop > 400) {
-        offset += length
-        length = 1
-        scrollTop = nScrollTop
-      }
-      return { ...state, offset, length, scrollTop }
+    case 'UPDATE_QUERY':
+      // let { scrollTop: nScrollTop } = action
+      // let { offset, length, scrollTop } = state
+      // // if (nScrollTop == scrollTop) {
+      //   offset += length
+      //   length = 1
+      // // }
+      // // scrollTop = nScrollTop
+      // return { ...state, offset, length }
+      // return abc
     default:
       return state
   }
