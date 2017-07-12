@@ -23,7 +23,7 @@ use newdatabase
 db.createUser(
   {
     user: "admin",
-    pwd: "admin",
+    pwd: "dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu",
     roles: [
       { role: "readWriteAnyDatabase", db: "admin" } ,
       { role: "userAdminAnyDatabase", db: "admin" },
@@ -40,7 +40,7 @@ use admin
 db.createUser(
   {
     user: "admin",
-    pwd: "admin",
+    pwd: "dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu",
     roles: [
       "readWriteAnyDatabase",
       "userAdminAnyDatabase",
