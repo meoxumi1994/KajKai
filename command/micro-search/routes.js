@@ -4,6 +4,12 @@ export default {
             controller: 'SearchController',
             method: 'searchUserCon'
         }
+    },
+    '/search/store': {
+        get: {
+            controller: 'SearchController',
+            method: 'searchStoreCon'
+        }
     }
 
 }
