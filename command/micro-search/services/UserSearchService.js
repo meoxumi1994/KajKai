@@ -32,7 +32,7 @@ export const searchUser = (userName, next) => {
                 match: {
                     username: {
                         query: userName,
-                        fuzziness: 2,
+                        fuzziness: 1,
                         prefix_length: 0,
                         max_expansions: 20
                     }
