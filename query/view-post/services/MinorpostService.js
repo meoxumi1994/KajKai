@@ -16,7 +16,7 @@ export const getMinorposts = (storeId, offset, next) => {
       }
     } else {
       const mMinorposts = []
-      let currentNumberOfMinorpost = 0, mOffset = -1
+      let currentNumberOfMinorpost = 0, mOffset = -2
       for (let i = minorposts.length - 1; i >= 0; i--) {
         let minorpost = minorposts[i]
         if (minorpost.time < offset) {

@@ -3,8 +3,11 @@ import { getMinorposts, getMinorpostContent } from '../services/MinorpostService
 export const getMinorpostsHandler = () => (req, res) => {
   if (req.decoded) {
     const { storeid: storeId } = req.params
-    const { offset } = req.query
-    getMinorposts(storeId, offset ? offset : Date.now(), (minorposts) => {
+    let { offset } = req.query
+    if (offset == '-1') {
+      offset =  Date.now()
+    }
+    getMinorposts(storeId, offset, (minorposts) => {
       if (minorposts) {
         res.json(minorposts)
       } else {
