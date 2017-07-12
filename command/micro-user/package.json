@@ -21,7 +21,7 @@
     "express": "^4.15.3",
     "gmail-send": "^1.2.10",
     "jsonwebtoken": "^7.4.1",
-    "md5": "^2.2.1",
+    "md5": "2.2.1",
     "mongoose": "4.11.1",
     "redis": "^2.7.1",
     "request": "2.81.0",
