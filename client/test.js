@@ -484,8 +484,8 @@ app.get('/user/:id',(req,res) => {
     })
 })
 
-app.get('/store',(req,res) => {
-    const { id } = req.query
+app.get('/store/:id',(req,res) => {
+    const { id } = req.params
     // console.log('/store', id, store.filter(item => item.id == id)[0])
     res.json({
         status: 'success',

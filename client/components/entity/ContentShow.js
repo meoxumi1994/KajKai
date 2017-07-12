@@ -19,7 +19,7 @@ class ContentShow extends React.Component {
         const { heightEachRow, content, padding, fontWeight, fontSize } = this.props
         return(
             <div style={{
-                outline: '1px solid transparent',
+                // outline: '1px solid transparent',
                 fontSize: fontSize,
                 fontWeight: fontWeight,
                 backgroundColor: 'white',

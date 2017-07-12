@@ -11,8 +11,10 @@ const mapStateToProps = (state, { id }) => {
     })
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-
+const mapDispatchToProps = (dispatch, { id }) => ({
+    onChange : (key, value) => {
+        dispatch({ type: 'INST_ENTITY_PRODUCT_CHANGE', id: id, key: key, value: value })
+    }
 })
 
 const ProductContainer = connect(

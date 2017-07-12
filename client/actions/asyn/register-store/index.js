@@ -1,5 +1,6 @@
 import { authAction, authData} from '~/actions/sync/auth'
 import { flet, flem } from '~/actions/support'
+import { getUser } from '~/actions/asyn/user'
 
 export const registerStore = (store) => dispatch => {
     dispatch({ type: 'REGISTER_STORE_ING' })
@@ -10,8 +11,10 @@ export const registerStore = (store) => dispatch => {
         storeid: '',
     })
     .then(({ status, storeid }) => {
-        if(status == 'success')
+        if(status == 'success'){
             dispatch({ type: 'REGISTER_STORE_SUCCESS', storeid: storeid })
+            dispatch(getUser())
+        }
         else if(status == 'error')
             dispatch({ type: 'REGISTER_STORE_FAILED' })
     })

@@ -1,8 +1,9 @@
 export const MakeUp = (text,search,change) => {
     let newtext = ''
     text.split(search).map((item,index) => {
-        if(index)
+        if(index){
             newtext += change
+        }
         newtext += item
     })
     return newtext
@@ -43,8 +44,15 @@ export const Emoji = (text) => {
         [':))','<img width="13.203125" src="/images/emoji/smile.svg"/>'],
     ]
     emoji.map((item,index) => {
-        newtext = MakeUp(newtext, item[0], item[1])
+        newtext = MakeUp(newtext, " "+item[0]+" ", " "+item[1]+" ")
     })
+    emoji.map((item,index) => {
+        newtext = MakeUp(newtext, " "+item[0]+" ", " "+item[1]+" ")
+    })
+    emoji.map((item,index) => {
+        newtext = MakeUp(newtext, ">"+item[0]+" ", ">"+item[1]+" ")
+    })
+    newtext = MakeUp(newtext, "  ", " &nbsp;")
     return newtext
 }
 

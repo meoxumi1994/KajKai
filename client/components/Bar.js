@@ -56,7 +56,7 @@ const HandlerUser = ({ LOG_IN,
                             number="2"/>
                     </div>
                     <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
-                        <ChatLeftContainer multiChat={true}/>
+                        {/* <ChatLeftContainer multiChat={true}/> */}
                     </ul>
                 </div>
             </div>
@@ -141,8 +141,10 @@ export default class BarScreen extends React.Component {
                             type="text"
                             className="form-control input-sm"
                             placeholder={SEARCH_PRODUCT}
-                            onChange={() => onKeyWordChanged(inputSearchKeyWord.value.trim())}
-                            onKeyDown={(e) => { if(e.keyCode == 13) inputSearchKeyWord.blur() }}
+                            onKeyDown={(e) => { if(e.keyCode == 13) {
+                                inputSearchKeyWord.blur()
+                                onKeyWordChanged(inputSearchKeyWord.value.trim())
+                            }}}
                           />
                           <span className="input-group-btn">
                               <button className="btn btn-default btn-sm" type="button">

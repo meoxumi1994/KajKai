@@ -15,6 +15,9 @@ class ContentEditable extends React.Component {
     componentDidMount(){
         this.setState({ width: this.display.getBoundingClientRect().width })
     }
+    // componentWillUpdate(){
+    //     this.setState({ width: this.display.getBoundingClientRect().width })
+    // }
     render(){
         const { placehoder, width, content, handleChange, padding, minRows } = this.props
         return(
@@ -47,7 +50,8 @@ class ContentEditable extends React.Component {
                     ref={display => this.display = display}
                     style={{
                         color: content?undefined:(this.state.focus?'#BFC2C9':'#A7ABB1'),
-                        minHeight: minRows*20,
+                        minHeight: minRows? minRows*20: undefined,
+                        wordWrap: 'break-word',
                         width: width,
                     }}
                     dangerouslySetInnerHTML={{ __html: content?MixMakeUp(content):placehoder }}>

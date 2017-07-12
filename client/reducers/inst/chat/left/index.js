@@ -13,13 +13,13 @@ const left = (state = {
     switch (action.type) {
 
       case 'client/REMOVE_MEMBER':
-          console.log('\n[Reducer Left] client/REMOVE_MEMBER', action)
+        //   console.log('\n[Reducer Left] client/REMOVE_MEMBER', action)
           return {
               ...state,
           }
 
       case 'global/UNREAD_CHATS':
-          console.log('\n[Reducer Left] global/UNREAD_CHATS', action)
+        //   console.log('\n[Reducer Left] global/UNREAD_CHATS', action)
           return state
 
       case 'SET_USER_ID':
@@ -107,7 +107,7 @@ const left = (state = {
                       }
                   }
               }
-              console.log('\n[Reducer Left] client/ADD_MEMBER --newChat ', action, newChat)
+            //   console.log('\n[Reducer Left] client/ADD_MEMBER --newChat ', action, newChat)
               return newChat
           } else {
               let mKey = state.chatListMap[action.data.mesId].usersKey
@@ -138,7 +138,7 @@ const left = (state = {
                       }
                   }
               }
-              console.log('\n[Reducer Left] client/ADD_MEMBER --addMember ', action, addMember)
+            //   console.log('\n[Reducer Left] client/ADD_MEMBER --addMember ', action, addMember)
               return addMember
           }
 
@@ -202,7 +202,7 @@ const left = (state = {
             chatListKey: action.data.map(chat => chat.mesId),
             chatListMap: utils.chatListMap(action),
           }
-          console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
+        //   console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
           return initChatlist
 
 //------------------------------------------------------------------------------
@@ -219,7 +219,7 @@ const left = (state = {
                       [action.data.mesId]: chatMap(undefined, action)
                   }
               }
-              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---newChat ', action, newChat)
+            //   console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---newChat ', action, newChat)
               return newChat
           } else {
               const updateChat = {
@@ -236,7 +236,7 @@ const left = (state = {
                     }
                 }
               }
-              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
+            //   console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
               return updateChat
           }
 
@@ -265,7 +265,7 @@ const left = (state = {
               test: chatMap(undefined, action)
             }
           }
-          console.log('\n[Reducer Left] UPDATE_CHAT ', action, updateChat)
+        //   console.log('\n[Reducer Left] UPDATE_CHAT ', action, updateChat)
           return updateChat
 
         default:
