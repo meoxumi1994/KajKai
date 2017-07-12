@@ -80,7 +80,7 @@ export const createStore = (storeInfo, next) => {
         return;
     }
 
-    if (!storeInfo.urlName || (!(/^[a-z]*$/.test(storeInfo.urlname)) || storeInfo.urlname !== '_' )) {
+    if (!storeInfo.urlName || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )) {
         next('urlname');
         return;
     } else {
