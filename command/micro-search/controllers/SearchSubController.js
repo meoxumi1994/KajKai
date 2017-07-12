@@ -1,6 +1,7 @@
 import { createUser, updateUser } from '../services/UserSearchService'
+import { createStore, updateStore } from '../services/StoreSearchService'
 
-export const createUserSub = (message, next) => {
+export const createUserSub = (message) => {
     console.log(message, JSON.stringify(message));
     const user = message.user;
     const userId = user.id;
@@ -9,7 +10,7 @@ export const createUserSub = (message, next) => {
     createUser({userId, username, avatarUrl});
 };
 
-export const updateUserSub = (message, next) => {
+export const updateUserSub = (message) => {
     console.log(message, JSON.stringify(message));
     const user = message.user;
     const userId = user.id;
@@ -18,45 +19,29 @@ export const updateUserSub = (message, next) => {
     updateUser({userId, username, avatarUrl});
 };
 
-export const createStore = (message, next) => {
+export const createStoreSub = (message, next) => {
     console.log(message, JSON.stringify(message));
     const store = message.store;
     const storeId = store.id;
     const storeName = store.storeName;
     const avatarUrl = store.avatarUrl;
+    const address = store.address;
+    const category = store.category;
+    const firstCategoryName = store.firstCategoryName;
+    const secondCategoryName = store.secondCategoryName;
+    createStore({storeId, storeName, avatarUrl, address, category, firstCategoryName, secondCategoryName});
 
 };
 
-export const updateStore = (message, next) => {
+export const updateStoreSub = (message, next) => {
     console.log(message, JSON.stringify(message));
     const store = message.store;
     const storeId = store.id;
     const storeName = store.storeName;
     const avatarUrl = store.avatarUrl;
+    const address = store.address;
+    const category = store.category;
+    const firstCategoryName = store.firstCategoryName;
+    const secondCategoryName = store.secondCategoryName;
+    updateStore({storeId, storeName, avatarUrl, address, category, firstCategoryName, secondCategoryName});
 };
-
-// store: {
-//     id: '',
-//         owner: '',
-//         storeName: '',
-//         avatarUrl: '',
-//         coverUrl: '',
-//         address: '',
-//         addressMap: '',
-//         category: '',
-//         firstCategoryId: '',
-//         secondCategoryId:'',
-//         longitude: '',
-//         latitude: '',
-//         phone: '',
-//         certificates: '',
-//         urlName: '',
-//         createdAt: '',
-//         lastUpdate: {
-//         lastUpdateStoreName: '',
-//             lastUpdateAvatarUrl: '',
-//             lastUpdateCoverUrl: ''
-//     },
-//     firstCategoryName: '',
-//         secondCategoryName: ''
-// }
