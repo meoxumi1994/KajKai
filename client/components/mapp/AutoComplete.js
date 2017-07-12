@@ -27,9 +27,7 @@ export default class AutoComplete extends React.Component {
     const { SEARCH_LOCATION, searchType, onLocationChanged } = this.props
     let inputSearchLocation
     return (
-      <div id="locationField">
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv-w2J9O0JzXzIV2Rgx9LSF1OWXRXeCZw&libraries=places&callback=initAutocomplete"
-        async defer></script>
+      <div>
         <input ref={node => { inputSearchLocation = node}}
           disabled={searchType == 'STORE' || searchType == 'USER'}
           id="autocomplete"
