@@ -17,7 +17,7 @@ export const getStore = (id, next) => {
         } else {
           const { lastUpdate } = store
             next({
-              status: success,
+              status: 'success',
               store: {
                 id: store.id,
                 userid: store.userId,
