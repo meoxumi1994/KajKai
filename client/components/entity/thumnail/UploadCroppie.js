@@ -63,7 +63,7 @@ class UploadCroppie extends React.Component {
                     <div className="modal-content" style={{
                         position: 'fixed', marginTop: -4,
                         width: style.width + 2, marginLeft: -85 }}>
-                        <Modal.Header closeButton>
+                        <Modal.Header>
                             <strong>{CROPPIE_TITLE}</strong>
                         </Modal.Header>
                         <Croppie

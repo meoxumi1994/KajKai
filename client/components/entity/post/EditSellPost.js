@@ -17,8 +17,9 @@ class EditSellPost extends React.Component {
             title, showModal, close, height,
             avatarUrl, ship, storename, category,
             description, time,
-            postrows_order,
+            postrows_order, onChange,
             addPostRow, onChangePostRow,
+            onCreateSellPost,
         } = this.props
         return (
             <Modal show={showModal} bsSize="sm" onHide={() => close()}>
@@ -45,24 +46,30 @@ class EditSellPost extends React.Component {
                                 <a style={{ color: '#BD081C', fontWeight: 'bold'}}>{storename}</a>
                             </div>
                             {" : "}
-                            <input style={{ height: 18, outline: 'none'}}/>
-                            <div className="btn" style={{ padding: 0 }}>
-                                <a style={{ color: '#BD081C' }}>{category}</a>
-                            </div>
+                            <input style={{ height: 18, outline: 'none'}}
+                                value={category}
+                                onChange={(e) => onChange('category',e.target.value)}
+                            />
                         </div>
                         <div style={{ marginLeft: 70, marginTop: -3, }}>
                             <span style={{ color: '#516EA7', fontWeight: 'bold'}}>Ship</span>
                             <span>{": "}</span>
-                            <input style={{ height: 18, width: 350, outline: 'none'}}/>
-                            <span style={{ fontSize: 12.5 }}>{ship}</span>
+                            <input style={{ height: 18, width: 350, outline: 'none'}}
+                                value={ship}
+                                onChange={(e) => onChange('ship',e.target.value)}
+                            />
                         </div>
                         <div style={{
                             fontSize: 12,
                             marginLeft: 70,
                             color: '#A7ABB1',
                             }}>
-                            time{" . "}<input style={{ height: 18, width: 355, outline: 'none' }}/>
-                            {description}
+                            time{" . "}
+                            <input
+                                value={description}
+                                style={{ height: 18, width: 355, outline: 'none' }}
+                                onChange={(e) => onChange('description',e.target.value)}
+                            />
                         </div>
                     </div>
                     <div>
@@ -98,6 +105,7 @@ class EditSellPost extends React.Component {
                                     Close
                                 </div>
                                 <div className="btn btn-default btn-sm"
+                                    onClick={() => onCreateSellPost()}
                                     style={{
                                     float: 'right', backgroundColor: '#BD081C', marginRight: 10, borderWidth: 0, color: 'white'}}>
                                     Create SellPost

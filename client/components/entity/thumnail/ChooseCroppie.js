@@ -30,7 +30,7 @@ class ChooseCroppie extends React.Component {
                         style={{
                             marginTop: -4, position: 'fixed',
                             width: style.width + 2, marginLeft: -85 }}>
-                        <Modal.Header closeButton>
+                        <Modal.Header>
                             <strong>{CROPPIE_TITLE}</strong>
                         </Modal.Header>
                         <Croppie

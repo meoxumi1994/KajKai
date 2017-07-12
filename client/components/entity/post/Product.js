@@ -9,7 +9,7 @@ class Product extends React.Component {
         super(props)
     }
     render(){
-        const { id, list, detail, canEdit, onChange } = this.props
+        const { id, list, detail, canEdit, onChange, width } = this.props
         return(
             <tr>
                 {list.map((item,index) => {
@@ -38,7 +38,7 @@ class Product extends React.Component {
                                         }}
                                         minRows={1}
                                         content={item}
-                                        width={120}
+                                        width={width}
                                         padding={0}
                                     />
                                 </div>
@@ -52,17 +52,22 @@ class Product extends React.Component {
                     </div>
                 </td>
                 <td>
-                    <OverlayTrigger placement="right" overlay={(
-                        <Popover id="popover-positioned-bottom" title={list[0]}>
-                            {list.map((item,index) => {
-                                if(index) return (<div key={index}>{item}</div>)
-                                return undefined
-                            })}
-                            <img src={detail.image} alt="Cinque Terre" width="200" height="200"/>
-                        </Popover>
-                    )}>
-                        <img width={15} height={15} src={detail.image} />
-                    </OverlayTrigger>
+                    {!canEdit ?
+                        <OverlayTrigger placement="right" overlay={(
+                            <Popover id="popover-positioned-bottom" title={list[0]}>
+                                {list.map((item,index) => {
+                                    if(index) return (<div key={index}>{item}</div>)
+                                    return undefined
+                                })}
+                                <img src={detail.image} alt="Cinque Terre" width="200" height="200"/>
+                            </Popover>
+                        )}>
+                            <img width={15} height={15} src={detail.image} />
+                        </OverlayTrigger>
+                    :   <div className="btn" style={{ padding: 0 }}>
+                            <img width={15} src={detail.image? detail.image: '/images/plusimage.svg'} />
+                        </div>
+                    }
                 </td>
             </tr>
         )

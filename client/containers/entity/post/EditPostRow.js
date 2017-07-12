@@ -8,6 +8,7 @@ const mapStateToProps = (state, { id }) => {
     const editpostrow = state.inst.entity.editpostrow[id]
     return({
         ...editpostrow,
+        ADD: g('ADD'),
     })
 }
 
@@ -15,6 +16,18 @@ const mapDispatchToProps = (dispatch, { id }) => ({
     onChange: (key,value) => {
         dispatch({ type: 'INST_ENTITY_POST_EDIT_SELL_POST_CHANGE_POST_ROW', item: id, key: key, value: value })
     },
+    onAddProduct: (product_order) => {
+        const time = (new Date()).getTime()
+        dispatch({
+            type: 'INST_ENTITY_POST_EDIT_SELL_POST_CHANGE_POST_ROW',
+            item: id, key: 'product_order',
+            value: [...product_order, time]
+        })
+        dispatch({
+            type: 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_PRODUCT',
+            id: time,
+        })
+    }
 })
 
 const EditPostRowContainer = connect(

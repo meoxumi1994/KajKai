@@ -249,14 +249,14 @@ Số lượng đăng kí: 2 người/team. Sau đó sẽ ghép thành đội 6 n
 Giải thưởng: 3 triệu tiền mặt, 6 điện thoại Pháp Wiko và 6 triệu Voucher. Tài trợ Pizza: 4Gs Texas <3'/>
         <SellPost
             /> */}
-        <div style={{ width: 150, backgroundColor: 'red', wordWrap: 'normal'}}>
+        {/* <div style={{ width: 150, backgroundColor: 'red', wordWrap: 'normal'}}>
             3l1231 fsd123
             <span>{" "}</span>
             <span style={{  wordWrap: 'break-word' }}>
                 :D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D
             </span>
             <span>{" "}</span>123123
-        </div>
+        </div> */}
             {/* <ContentEditable
                 width={100}
                 canEdit={true}
@@ -269,6 +269,15 @@ Giải thưởng: 3 triệu tiền mặt, 6 điện thoại Pháp Wiko và 6 tri
                 content={'dfsdaf osda flkdjas klfaskld fjklsdjfk lsdjafkls ajfkls ajfkldsjf'}
                 padding={0}
             /> */}
+            <Cropper
+            // ref='cropper'
+            src='https://cdn.athemes.com/wp-content/uploads/Original-JPG-Image.jpg'
+            style={{height: 400, width: 800 }}
+            // Cropper.js options
+            aspectRatio={16 / 9}
+            guides={false}
+            // crop={this._crop.bind(this)}
+            />
     </div>
 )
 

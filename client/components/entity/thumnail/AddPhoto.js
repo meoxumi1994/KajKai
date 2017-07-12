@@ -4,6 +4,7 @@ import { Modal } from 'react-bootstrap'
 import WebcamCapture from '~/containers/entity/thumnail/WebcamCapture'
 import UploadCroppie from '~/containers/entity/thumnail/UploadCroppie'
 import OneImage from '~/containers/entity/thumnail/OneImage'
+import ChooseCroppie from '~/containers/entity/thumnail/ChooseCroppie'
 
 class AddPhoto extends React.Component {
     constructor(props){
@@ -19,7 +20,12 @@ class AddPhoto extends React.Component {
         this.setState({ showModal: false })
     }
     render(){
-        const { TITLE, UPLOAD_PHOTO, TAKE_PHOTO, SUGGEST_PHOTO, style } = this.props
+        const { TITLE, SUGGEST_PHOTO, style } = this.props
+        const imagesSuggest = [
+            'https://beebom-redkapmedia.netdna-ssl.com/wp-content/uploads/2016/01/Reverse-Image-Search-Engines-Apps-And-Its-Uses-2016.jpg',
+            'http://www.jqueryscript.net/images/jQuery-Plugin-For-Fullscreen-Image-Viewer-Chroma-Gallery.jpg',
+            'https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg',
+        ]
         return(
             <div>
                 <OneImage style={{ width: style.width, height: style.height }}
@@ -36,7 +42,6 @@ class AddPhoto extends React.Component {
                         <Modal.Header>
                             <div onClick={() => this.close()} style={{ padding: 0, float: 'right'}}
                                 className="btn btn-transperant">
-                                <span className="glyphicon glyphicon-remove text-muted"></span>
                             </div>
                             <strong>{TITLE}</strong>
                         </Modal.Header>
@@ -71,11 +76,36 @@ class AddPhoto extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div style={{ padding: 8 }}>
-                                <span className="text-muted"
-                                    fontSize={17}>{SUGGEST_PHOTO}</span>
-                            </div>
                         </Modal.Body>
+                        <hr style={{ margin: 0, padding: 0 }}/>
+                        <div style={{ backgroundColor: '#F6F7F9', padding: '2px 0px 2px 15px' }}>
+                            <strong className="text-muted">{SUGGEST_PHOTO}</strong>
+                        </div>
+                        <hr style={{ margin: 0, padding: 0 }}/>
+                        <div style={{ maxHeight: 500, overflowY: 'scroll'}}>
+                            <div style={{ padding: '4px 4px 28px 10px'}}>
+                                {imagesSuggest.map((item, index) => {
+                                    if(index >= this.state.maxSuggest) return
+                                    return(
+                                        <div key={index} style={{ float: 'left', padding: 4 }}>
+                                            <ChooseCroppie key={index}
+                                                src={item}
+                                                SAVE={'save'}
+                                                style={{ width: 780, height: 440 }}
+                                                imgstyle={{ width: 100, height: 100 }}
+                                            />
+                                        </div>
+                                    )
+                                })}
+                                {imagesSuggest.length > this.state.maxSuggest &&
+                                    <div className="btn btn-transperant btn-xs"
+                                        onClick={() => this.moreSuggest()}
+                                        style={{ color: '#3B5998', fontSize: 14, float: 'right', marginRight: 10 }}>
+                                        {SEE_MORE}
+                                    </div>
+                                }
+                            </div>
+                        </div>
                         <Modal.Footer>
                             <div className="btn btn-default btn-sm" onClick={() => this.close()}>Close</div>
                         </Modal.Footer>

@@ -140,8 +140,10 @@ export default class BarScreen extends React.Component {
                             type="text"
                             className="form-control input-sm"
                             placeholder={SEARCH_PRODUCT}
-                            onChange={() => onKeyWordChanged(inputSearchKeyWord.value.trim())}
-                            onKeyDown={(e) => { if(e.keyCode == 13) inputSearchKeyWord.blur() }}
+                            onKeyDown={(e) => { if(e.keyCode == 13) {
+                                inputSearchKeyWord.blur()
+                                onKeyWordChanged(inputSearchKeyWord.value.trim())
+                            }}}
                           />
                           <span className="input-group-btn">
                               <button className="btn btn-default btn-sm" type="button">
