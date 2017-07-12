@@ -6,7 +6,7 @@ import bodyParser from 'body-parser'
 import config from './config/commonConfig'
 import allRoutes from './routes'
 
-const app = express()
+const app = express();
 
 const corsOptions = {
     origin: config.getClientDomain(),
@@ -14,17 +14,17 @@ const corsOptions = {
 }
 
 // app.use(compression())
-app.use(cors(corsOptions))
-app.use(cookieParser())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors(corsOptions));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // load all routes
 for(let link in allRoutes){
-  let allMethods = allRoutes[link]
+  let allMethods = allRoutes[link];
   for(let requestMethod in allMethods){
-    let handler = allMethods[requestMethod]
-    let method = require('./controllers/' + handler.controller)[handler.method]
+    let handler = allMethods[requestMethod];
+    let method = require('./controllers/' + handler.controller)[handler.method];
 
     app[requestMethod](link, handler.middleware || [], method())
   }

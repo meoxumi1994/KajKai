@@ -1,21 +1,24 @@
+import { createUser, updateUser } from '../services/UserSearchService'
 
-export const createUser = (message, next) => {
+export const createUserSub = (message, next) => {
     console.log(message, JSON.stringify(message));
     if (message.status === 'success') {
         const user = message.user;
         const userId = user.id;
         const username = user.username;
         const avatarUrl = user.avatarUrl;
+        createUser({userId, username, avatarUrl});
     }
 };
 
-export const updateUser = (message, next) => {
+export const updateUserSub = (message, next) => {
     console.log(message, JSON.stringify(message));
     if (message.status === 'success') {
         const user = message.user;
         const userId = user.id;
         const username = user.username;
         const avatarUrl = user.avatarUrl;
+        updateUser({userId, username, avatarUrl});
     }
 };
 
