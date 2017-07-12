@@ -87,8 +87,8 @@ class App extends React.Component {
     render(){
         const path = this.props.location.pathname;
         const { width, height, username, onScroll } = this.props
-        const { messagesKey, messagesMap, styles } = this.props
-        // console.log(this.props)
+        const { chat, styles } = this.props
+        const { multipleKey, messagesMap } = chat
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
                 <Bar/>
@@ -112,7 +112,7 @@ class App extends React.Component {
                               </div>
                               {
                                 <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>
-                                      { messagesKey.map(
+                                      { multipleKey.map(
                                           (mesId, index) => {
                                               return (
                                                 <div key={mesId} style={{

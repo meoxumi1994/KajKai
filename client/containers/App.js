@@ -5,17 +5,15 @@ import { onWho } from '../actions/asyn/app'
 import { getChatList } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
-    const { width, height } = state.inst.app
-    const { multipleKey, messagesMap } = state.inst.chat.center
+    const { width, height } = state.inst.app     
     return ({
         width: width,
         height: height,
         username: state.user.username,
         auth: state.auth,
         children: ownProps.children,
-        messagesKey: multipleKey,
-        messagesMap,
         styles,
+        chat: state.inst.chat.center
     })
 }
 

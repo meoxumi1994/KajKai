@@ -17,4 +17,24 @@ export const setCurrentChat = (mesId) => ({
     }
 })
 
+export const addMember = (mesId, id, members) => ({
+    type: 'server/ADD_MEMBER',
+    data: {
+        mesId,
+        id,
+        members,
+        time: Date.now()
+    }
+})
+
+export const updateUserInfo = (mesId, id, username, avatarUrl) => ({
+    type: 'UPDATE_USER_INFO',
+    data: {
+        mesId,
+        id,
+        username,
+        avatarUrl,
+    }
+})
+
 // center

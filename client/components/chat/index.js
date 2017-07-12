@@ -27,6 +27,7 @@ class Chat extends React.Component {
             <ChatCenterContainer
                   mesId={messagesKey[0]}
                   messagesMap={messagesMap}
+                  multiChat={multiChat}
                   styles={styles}/>
             </div>
         </div>

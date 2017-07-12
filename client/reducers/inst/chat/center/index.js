@@ -16,6 +16,10 @@ const center = (state = {
             const addMember = {
                 ...state,
                 singleKey: [action.data.mesId],
+                multipleKey: [
+                    ...state.multipleKey,
+                    action.data.mesId
+                ],
                 messagesMap: {
                     [action.data.mesId]: []
                 }
@@ -24,9 +28,11 @@ const center = (state = {
             return addMember
 
         case 'REMOVE_CHAT':
+        case 'CLOSE_CHAT':
+            // console.log('REMOVE_CHAT ', action);
             const mKey = state.multipleKey
-            const mMap = state.messagesMap
             mKey.splice(mKey.indexOf(action.data.mesId), 1)
+            const mMap = state.messagesMap
             delete mMap[action.data.mesId]
             return {
                 ...state,
@@ -42,7 +48,7 @@ const center = (state = {
                   [action.data.mesId]: action.data.messages.reverse()
               }
             }
-            // console.log('\n[Reducer Center] INIT_SINGLE_MESSAGES', action, initSingleMessages);
+            console.log('\n[Reducer Center] INIT_SINGLE_MESSAGES', action, initSingleMessages);
             return initSingleMessages
 
         case 'INIT_MULTI_MESSAGES':
@@ -60,7 +66,7 @@ const center = (state = {
                   [action.data.mesId]: action.data.messages.reverse()
               }
             }
-            // console.log('\n[Reducer Center] INIT_MULTI_MESSAGES', action, initMultiMessages);
+            console.log('\n[Reducer Center] INIT_MULTI_MESSAGES', action, initMultiMessages);
             return initMultiMessages
 
 
@@ -89,11 +95,11 @@ const center = (state = {
             return msg
 
 
-        case 'ADD_CHAT':
+        case 'NEW_CHAT':
             if (action.data.mesId != 0 || state.multipleKey.indexOf('0') != -1) {
               return state
             }
-            return {
+            const newChat = {
                 ...state,
                 singleKey: ['0'],
                 multipleKey: [
@@ -105,6 +111,8 @@ const center = (state = {
                     '0': []
                 }
             }
+            console.log('\n[Reducer Center] NEW_CHAT ', action, newChat)
+            return newChat
 
         default:
           return state
