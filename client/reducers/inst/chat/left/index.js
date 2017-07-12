@@ -127,11 +127,7 @@ const left = (state = {
               }
             }
           }
-<<<<<<< Updated upstream
-        //   console.log('\n[Reducer Left] UPDATE_CHAT ', action, updateChat)
-=======
           console.log('\n[Reducer Left] UPDATE_USER_INFO ', action, updateChat)
->>>>>>> Stashed changes
           return updateChat
 
 //------------------------------------------------------------------------------

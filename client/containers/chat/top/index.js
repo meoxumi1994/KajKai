@@ -14,6 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     close: (mesId, chatListKey) => {
+        console.log('mesId ', mesId);
         dispatch({type: 'CLOSE_CHAT', data: {mesId: mesId}})
     },
     loadChat: (mesId) => {
