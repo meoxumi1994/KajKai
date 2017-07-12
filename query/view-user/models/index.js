@@ -1,11 +1,13 @@
 import mongoose from '../datasource'
 import AddressSchema from './Address'
+import BasicStoreSchema from './BasicStore'
 import BlackSchema from './Black'
 import LastUpdateSchema from './LastUpdate'
 import PrivacySchema from './Privacy'
 import UserSchema from './User'
 
 export const Address = mongoose.model('Address', AddressSchema)
+export const BasicStore = mongoose.model('BasicStore', BasicStoreSchema)
 export const Black = mongoose.model('Black', BlackSchema)
 export const LastUpdate = mongoose.model('LastUpdate', LastUpdateSchema)
 export const Privacy = mongoose.model('Privacy', PrivacySchema)

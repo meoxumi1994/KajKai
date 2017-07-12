@@ -2,6 +2,7 @@ import mongoose from '../datasource'
 import _ from 'lodash'
 import { Sex, Language } from '../enum'
 import AddressSchema from './Address'
+import BasicStoreSchema from './BasicStore'
 import BlackSchema from './Black'
 import LastUpdateSchema from './LastUpdate'
 import PrivacySchema from './Privacy'
@@ -20,7 +21,7 @@ const UserSchema = new mongoose.Schema({
   lastUpdate: {type: LastUpdateSchema},
   blackList: [BlackSchema],
   privacy: {type: PrivacySchema},
-  storeIdList: [String]
+  storeList: [BasicStoreSchema]
 })
 
 export default UserSchema
