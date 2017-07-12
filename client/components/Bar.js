@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import RiseUp from '~/components/entity/draw/RiseUp'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 // import ChatListContainer from '~/containers/chat/left/ChatListContainer'
-// import ChatLeftContainer from '~/containers/chat/left'
+import ChatLeftContainer from '~/containers/chat/left'
+import AutoCompleteContainer from '~/containers/mapp/AutoCompleteContainer'
 
 const HandlerUser = ({ LOG_IN,
     id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat}) => {
@@ -152,6 +153,14 @@ export default class BarScreen extends React.Component {
                           </span>
                         </div>
                     </div>
+                    <AutoCompleteContainer SEARCH_LOCATION={SEARCH_LOCATION}
+                      onLocationChanged={onLocationChanged}
+                    />
+                    <span className="input-group-btn">
+                        <button className="btn btn-default btn-sm" type="button" >
+                            <i className="glyphicon glyphicon-map-marker"></i>
+                        </button>
+                    </span>
                     {/* <div className="col-xs-3"  style={{ padding: 0}}>
                         <div className="input-group" style={{ marginLeft: 10 }}>
                             <input ref={node => { inputSearchLocation = node }}

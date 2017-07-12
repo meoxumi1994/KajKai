@@ -10,11 +10,15 @@ export const getSellpost = (id, next) => {
         next(null)
       } else {
         next({
+          status: 'nodata',
           storeid: storeId
         })
       }
     } else {
-      next(getClientFormatSellpost(sellpost, Date.now()))
+      next({
+        status: 'success',
+        ...getClientFormatSellpost(sellpost, Date.now())
+      })
     }
   })
 }
@@ -26,6 +30,7 @@ export const getSellposts = (storeId, offset, next) => {
         next(null)
       } else {
         next({
+          status: 'nodata',
           offset,
           storeid: storeId,
           sellposts: []
@@ -33,7 +38,7 @@ export const getSellposts = (storeId, offset, next) => {
       }
     } else {
       const mSellposts = []
-      let currentNumberOfSellpost = 0, mOffset = -1
+      let currentNumberOfSellpost = 0, mOffset = -2
       for (let i = sellposts.length - 1; i >= 0; i--) {
         let sellpost = sellposts[i]
         if (sellpost.time < offset) {
@@ -49,6 +54,7 @@ export const getSellposts = (storeId, offset, next) => {
       }
 
       next({
+        status: 'success',
         offset: mOffset,
         storeid: storeId,
         sellposts: mSellposts
