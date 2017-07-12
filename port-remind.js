@@ -3,6 +3,7 @@
 "micro-comment": 8082
 "micro-chat": 8083
 "micro-socket": 8084
+"micro-search": 8085
 
 
 

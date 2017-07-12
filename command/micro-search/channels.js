@@ -1,10 +1,10 @@
 export default {
     'USER.Created': {
         controller: 'SearchSubController',
-        method: 'createUser'
+        method: 'createUserSub'
     },
     'USER.Updated': {
         controller: 'SearchSubController',
-        method: 'updateUser'
+        method: 'updateUserSub'
     }
 }
