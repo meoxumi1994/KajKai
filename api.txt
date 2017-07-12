@@ -980,3 +980,16 @@ GET /search/category?offset=0&length=5&id=-1&location='Cầu Giấy'&keyword='đ
     },
   ]
 }
+
+
+GET /listImage/user?offset=-1 { // list ảnh theo thứ tự thời gian gần nhất
+                                // tính tất cả các ảnh mà thằng user đấy gửi lên theo link getawsimageurl
+                                // mỗi lần lấy 14 ảnh
+    offset: ,
+    status: 'success|failed'
+    listImage : [
+        {
+            imageUrl: '',
+        }
+    ]
+}
