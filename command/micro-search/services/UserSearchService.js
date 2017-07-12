@@ -30,10 +30,12 @@ export const searchUser = (userName, next) => {
         body: {
             query: {
                 match: {
-                    username: userName,
-                    fuzziness: 2,
-                    prefix_length : 0,
-                    max_expansions: 20
+                    username: {
+                        query: userName,
+                        fuzziness: 2,
+                        prefix_length: 0,
+                        max_expansions: 20
+                    }
                 }
             }
         }
