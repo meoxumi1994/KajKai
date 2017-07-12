@@ -5,7 +5,7 @@ export default {
             method: 'searchUserCon'
         }
     },
-    'search/store': {
+    '/search/store': {
         get: {
             controller: 'SearchController',
             method: 'searchStoreCon'
