@@ -16,8 +16,14 @@ const product = (state = {
                 })
             })
             return newstate
+        case 'INST_ENTITY_PRODUCT_CHANGE':
+            return {...state, [action.id]: {
+                ...state[action.id],
+                [action.key] : action.value
+            }}
         default:
             return state
     }
 }
+
 export default product

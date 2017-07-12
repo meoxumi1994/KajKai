@@ -19,6 +19,8 @@ import SellPost from '~/containers/entity/post/SellPost'
 import GroupImage from '~/components/entity/thumnail/GroupImage'
 import Carousel from '~/components/entity/thumnail/Carousel'
 
+import ContentEditable from '~/components/entity/ContentEditable'
+
 class Comp extends React.Component {
     constructor(props){
         super(props)
@@ -229,11 +231,12 @@ const newComp = () => (
                 ]}
                 canEdit={true}
             /> */}
-        <span ref={me => {
+        {/* <span ref={me => {
             setTimeout(() => {
                 console.log(me.getBoundingClientRect().width)
             },200)
         }} style={{ fontSize: 14 }}>{':D'}</span>
+        <input style={{ resize: 'horizontal' }} /> */}
         {/* <MinorPost
             name='Foody.vn‎'
             avatarUrl='/images/storeavatar.jpg'
@@ -245,6 +248,26 @@ Hình thức thi: 2 team (6 người/team) thách đấu cùng chiến 1 pizza d
 Số lượng đăng kí: 2 người/team. Sau đó sẽ ghép thành đội 6 người.
 Giải thưởng: 3 triệu tiền mặt, 6 điện thoại Pháp Wiko và 6 triệu Voucher. Tài trợ Pizza: 4Gs Texas <3'/>
         <SellPost
+            /> */}
+        <div style={{ width: 150, backgroundColor: 'red', wordWrap: 'normal'}}>
+            3l1231 fsd123
+            <span>{" "}</span>
+            <span style={{  wordWrap: 'break-word' }}>
+                :D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D
+            </span>
+            <span>{" "}</span>123123
+        </div>
+            {/* <ContentEditable
+                width={100}
+                canEdit={true}
+                placehoder={"fdsaiojfkdsajfklsdajflksajdlkfjaskldjfklsajdlfk"}
+                handleChange={(e) => {
+                    const newlist = [...list]
+                    newlist[index] = e.target.value
+                    onChange('list', newlist)
+                }}
+                content={'dfsdaf osda flkdjas klfaskld fjklsdjfk lsdjafkls ajfkls ajfkldsjf'}
+                padding={0}
             /> */}
     </div>
 )

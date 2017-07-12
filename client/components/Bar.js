@@ -125,7 +125,7 @@ export default class BarScreen extends React.Component {
                             <ul className="dropdown-menu">
                               <li key="-1"><a>ALL CATEGORY</a></li>
                               {categories.map(category =>
-                                <ul>
+                                <ul key={category.id}>
                                   <li key={category.id}><a>{category.name}</a></li>
                                   {category.secondCategories.map(secondCategory =>
                                     <li key={secondCategory.id} style={{ marginLeft: 13}}><a>{secondCategory.name}</a></li>

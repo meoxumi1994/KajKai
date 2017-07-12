@@ -57,7 +57,7 @@ class RegisterStore extends React.Component {
         if(!isusername)
             return <Redirect to="/register"/>
         if(registerStoreOK){
-            return <Redirect to="/store"/>
+            return <Redirect to={"/"+urlname}/>
         }
         return(
             <div style={{ marginLeft: 200, marginRight: 200 }}>

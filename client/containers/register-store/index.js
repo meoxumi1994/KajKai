@@ -128,39 +128,39 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
                 category: stateProps.categoryInputValue,
             }
             const isConfirmPhone = stateProps.isConfirmPhone
-            // if(store.storename.length < 6){
-            //     onFailStore(g('STORE_NAME_FAILED'))
-            //     return;
-            // }
-            // if(store.urlname.length < 4){
-            //     onFailStore(g('URL_NAME_SHORT'))
-            //     return;
-            // }
-            // if( !(/^[a-z]*$/.test(store.urlname)) && store.urlname != '_' ){
-            //     onFailStore(g('URL_NAME_SPECIAL'))
-            //     return;
-            // }
-            // const path = store.urlname
-            // if((path == "chat" || path == "map" || path == "register" || path == "store" || path == "profile" || path == "registerstore" )){
-            //     onFailStore(g('URL_NAME_FAILED'))
-            //     return;
-            // }
-            // if(!store.firstCategoryId || !store.secondCategoryId || store.category.length < 3){
-            //     onFailStore(g('CATEGORY_FAILED'))
-            //     return;
-            // }
-            // if(!isConfirmPhone){
-            //     onFailStore(g('PHONE_FAILED'))
-            //     return;
-            // }
-            // if(!store.position){
-            //     onFailStore(g('POSITION_FAILED'))
-            //     return;
-            // }
-            // if(store.address.length < 6){
-            //     onFailStore(g('ADDRESS_FAILED'))
-            //     return;
-            // }
+            if(store.storename.length < 6){
+                onFailStore(g('STORE_NAME_FAILED'))
+                return;
+            }
+            if(store.urlname.length < 4){
+                onFailStore(g('URL_NAME_SHORT'))
+                return;
+            }
+            if( !(/^[a-z]*$/.test(store.urlname)) && store.urlname != '_' ){
+                onFailStore(g('URL_NAME_SPECIAL'))
+                return;
+            }
+            const path = store.urlname
+            if((path == "chat" || path == "map" || path == "register" || path == "store" || path == "profile" || path == "registerstore" )){
+                onFailStore(g('URL_NAME_FAILED'))
+                return;
+            }
+            if(!store.firstCategoryId || !store.secondCategoryId || store.category.length < 3){
+                onFailStore(g('CATEGORY_FAILED'))
+                return;
+            }
+            if(!isConfirmPhone){
+                onFailStore(g('PHONE_FAILED'))
+                return;
+            }
+            if(!store.position){
+                onFailStore(g('POSITION_FAILED'))
+                return;
+            }
+            if(store.address.length < 6){
+                onFailStore(g('ADDRESS_FAILED'))
+                return;
+            }
             onRegisterStore(store)
         },
         chooseCategoryId: chooseCategoryId,
