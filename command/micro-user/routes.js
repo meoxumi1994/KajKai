@@ -111,8 +111,8 @@ export default {
         method: 'search'
       }
     },
-    'getawsimageurl': {
-      get: {
+    'awsimageurl': {
+      post: {
         controller: 'AWSController',
         middleware: [auth()],
         method: 'getS3PutObjectSignedUrl'
