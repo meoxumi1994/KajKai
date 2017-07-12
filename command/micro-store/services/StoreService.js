@@ -75,40 +75,47 @@ export const createStore = (storeInfo, next) => {
         next('address');
         return;
     }
-    if (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' ) {
-        next('urlname');
-        return;
-    }
     if (!storeInfo.position) {
         next('position');
         return;
     }
 
-    let certificate = null;
-    if (storeInfo.certificates) {
-        certificate = new Certificate(storeInfo.certificates);
+    if (!storeInfo.urlName || !(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' ) {
+        next('urlname');
+        return;
+    } else {
+        Store.findOne({urlName: storeInfo.urlName}, (err, docs) => {
+            if (docs) {
+                next('urlname');
+                return;
+            }
+            let certificate = null;
+            if (storeInfo.certificates) {
+                certificate = new Certificate(storeInfo.certificates);
+            }
+            const store = new Store({storeName: storeInfo.storename, phone: storeInfo.phone,
+                category: storeInfo.category, owner: storeInfo.userid,
+                firstCategoryId: storeInfo.firstCategoryId, secondCategoryId: storeInfo.secondCategoryId,
+                avatarUrl: storeInfo.avatarUrl,
+                coverUrl: storeInfo.coverUrl,
+                address: storeInfo.address,
+                addressMap: storeInfo.addressMap,
+                longitude: storeInfo.position ? storeInfo.position.longitude : null,
+                latitude: storeInfo.position ? storeInfo.position.latitude : null,
+                certificates: certificate,
+                createdAt: storeInfo.time,
+                urlName: storeInfo.urlname
+            });
+            console.log('store ' + JSON.stringify(store));
+            console.log('storeInfo ' + JSON.stringify(storeInfo));
+            store.save(() => {
+                next(store);
+                getPubStoreInfo(store, (info) => {
+                    createStorePub(info);
+                });
+            })
+        })
     }
-    const store = new Store({storeName: storeInfo.storename, phone: storeInfo.phone,
-        category: storeInfo.category, owner: storeInfo.userid,
-        firstCategoryId: storeInfo.firstCategoryId, secondCategoryId: storeInfo.secondCategoryId,
-        avatarUrl: storeInfo.avatarUrl,
-        coverUrl: storeInfo.coverUrl,
-        address: storeInfo.address,
-        addressMap: storeInfo.addressMap,
-        longitude: storeInfo.position ? storeInfo.position.longitude : null,
-        latitude: storeInfo.position ? storeInfo.position.latitude : null,
-        certificates: certificate,
-        createdAt: storeInfo.time,
-        urlName: storeInfo.urlname
-    });
-    console.log('store ' + JSON.stringify(store));
-    console.log('storeInfo ' + JSON.stringify(storeInfo));
-    store.save(() => {
-        next(store);
-        getPubStoreInfo(store, (info) => {
-            createStorePub(info);
-        });
-    })
 };
 
 export const updateStore = (storeInfo, next) => {
