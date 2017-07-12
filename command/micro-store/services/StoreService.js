@@ -85,6 +85,7 @@ export const createStore = (storeInfo, next) => {
         return;
     } else {
         Store.findOne({urlName: storeInfo.urlName}, (err, docs) => {
+            console.log('this ', err, docs);
             if (docs) {
                 next('urlname');
                 return;
@@ -165,7 +166,7 @@ export const updateStore = (storeInfo, next) => {
 
 export const getStoreByPostId = (id, next) => {
     getPost(id, function (storePost) {
-        if (!storePost) next(null)
+        if (!storePost) next(null);
         else {
             getStore(storePost.storeId, function (store) {
                 next(store)
