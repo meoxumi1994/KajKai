@@ -2,6 +2,7 @@ import { Store, Category, Certificate } from '../models'
 import { checkPhone } from '../utils/utils'
 import globalId from '../config/globalId'
 import { createStorePub, updateStorePub } from '../controllers/StorePubController'
+import { getCategoryName } from './CategoryService'
 
 const GLOBAL_STORE_ID = globalId.STORE_GLOBAL_ID;
 
@@ -162,29 +163,36 @@ export const getStoreByPostId = (id, next) => {
     })
 };
 
-export const getPubStoreInfo = (store) => {
+export const getPubStoreInfo = (store, next) => {
+    getCategoryName(store.firstCategoryId, store.secondCategoryId, (pName, cName) => {
+        next({
+            id: getStoreGlobalId(store._id),
+            owner: store.owner,
+            storeName: store.storeName,
+            avatarUrl: store.avatarUrl,
+            coverUrl: store.coverUrl,
+            address: store.address,
+            addressMap: store.addressMap,
+            category: store.category,
+            firstCategoryId: store.firstCategoryId,
+            secondCategoryId: store.secondCategoryId,
+            longitude: store.longitude,
+            latitude: store.latitude,
+            phone: store.phone,
+            certificates: store.certificates,
+            urlName: store.urlName,
+            createdAt: store.createdAt,
+            lastUpdate: {
+                lastUpdateStoreName: store.lastUpdateStoreName,
+                lastUpdateAvatarUrl: store.lastUpdateAvatarUrl,
+                lastUpdateCoverUrl: store.lastUpdateCoverUrl
+            },
+            firstCategoryName: pName,
+            secondCategoryName: cName
+        })
+    });
     return {
-        id: getStoreGlobalId(store._id),
-        owner: store.owner,
-        storeName: store.storeName,
-        avatarUrl: store.avatarUrl,
-        coverUrl: store.coverUrl,
-        address: store.address,
-        addressMap: store.addressMap,
-        category: store.category,
-        firstCategoryId: store.firstCategoryId,
-        secondCategoryId: store.secondCategoryId,
-        longitude: store.longitude,
-        latitude: store.latitude,
-        phone: store.phone,
-        certificates: store.certificates,
-        urlName: store.urlName,
-        createdAt: store.createdAt,
-        lastUpdate: {
-            lastUpdateStoreName: store.lastUpdateStoreName,
-            lastUpdateAvatarUrl: store.lastUpdateAvatarUrl,
-            lastUpdateCoverUrl: store.lastUpdateCoverUrl
-        }
+
     }
 };
 
