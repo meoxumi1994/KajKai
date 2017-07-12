@@ -42,6 +42,7 @@ export const searchCategory = (str, next) => {
 
 export const getCategoryName = (idParent, idChild, next) => {
     Category.findById(idParent, (err, docs) => {
+        console.log('category ', err, docs);
         let parentName = docs.name;
         let childName = '';
         for (let i = 0; i < docs.subcategory.length; ++i) {

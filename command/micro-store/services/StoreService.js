@@ -85,7 +85,6 @@ export const createStore = (storeInfo, next) => {
         return;
     } else {
         Store.findOne({urlName: storeInfo.urlname}, (err, docs) => {
-            console.log('this ', err, docs);
             if (docs) {
                 next('urlname');
                 return;
@@ -107,8 +106,8 @@ export const createStore = (storeInfo, next) => {
                 createdAt: storeInfo.time,
                 urlName: storeInfo.urlname
             });
-            console.log('store ' + JSON.stringify(store));
-            console.log('storeInfo ' + JSON.stringify(storeInfo));
+            // console.log('store ' + JSON.stringify(store));
+            // console.log('storeInfo ' + JSON.stringify(storeInfo));
             store.save(() => {
                 next(store);
                 getPubStoreInfo(store, (info) => {
