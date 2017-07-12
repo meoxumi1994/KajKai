@@ -71,6 +71,7 @@ GET /user/:id {
             type: 'userid|storeid|mesid',
             name: ,
         }],
+        storeList: [],
     }
 }
 
