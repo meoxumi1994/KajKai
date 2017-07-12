@@ -65,7 +65,9 @@ export default {
                     lastUpdateStoreName: '',
                     lastUpdateAvatarUrl: '',
                     lastUpdateCoverUrl: ''
-                }
+                },
+                firstCategoryName: '',
+                secondCategoryName: ''
             }
         },{
             event: 'STORE.Updated',
@@ -90,7 +92,9 @@ export default {
                     lastUpdateStoreName: '',
                     lastUpdateAvatarUrl: '',
                     lastUpdateCoverUrl: ''
-                }
+                },
+                firstCategoryName: '',
+                secondCategoryName: ''
             }
         },{
             event: 'SELLPOST.Updated',

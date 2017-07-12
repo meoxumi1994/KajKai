@@ -23,3 +23,35 @@ export const updateUser = (user) => {
     });
 };
 
+export const searchUser = (userName, offset, length, next) => {
+    searchClient.search({
+        index: config.INDEX,
+        type: config.TYPE_USER,
+        body: {
+            from: offset,
+            size: length,
+            query: {
+                match: {
+                    username: {
+                        query: userName,
+                        fuzziness: 1,
+                        prefix_length: 0,
+                        max_expansions: 20
+                    }
+                }
+            }
+        }
+    }, (error, response) => {
+        console.log('search ' + error, 'response ' + JSON.stringify(response));
+        next(getHitResult(response));
+    })
+};
+
+export const getHitResult = (result) => {
+    let res = [];
+    let hits = result.hits.hits;
+    for (let i = 0; i < hits.length; ++i) {
+        res.push(hits[i]._source);
+    }
+    return res;
+};

@@ -942,7 +942,7 @@ POST /phonecodeverification { // server requests to Nexmo để check code cho s
   'verified|error'
 }
 
-GET /search/user?keyword='chariiiiiiity' { // search user by username
+GET /search/user?offset=0&length=5&keyword='chariiiiiiity' { // search user by username, trả kết quả users index start from offset lết tối đa length users hoặc đến cuối
   users: [
     {
       userId: '',
@@ -952,7 +952,8 @@ GET /search/user?keyword='chariiiiiiity' { // search user by username
   ]
 }
 
-GET /search/store?keyword='Forrrrrrest | táo tàu' { search store by keyword là store name hoặc category name
+GET /search/store?offset=0&length=5&keyword='Forrrrrrest | táo tàu' { // search store by keyword là store name hoặc category name
+                                                                      //  trả kết quả stores index start from offset lết tối đa length stores hoặc đến cuối
   stores: [
     {
       storeId: '',
@@ -962,14 +963,10 @@ GET /search/store?keyword='Forrrrrrest | táo tàu' { search store by keyword l�
   ]
 }
 
-GET /search/category?id=-1&location='Cầu Giấy'&keyword='đồ chơi trẻ em' { // id = -1: ALL CATEGORY, keyword là category, trả về store và các sellpost
-  stores: [        // các store có name tương tự keyword hoặc bán các loại category tương tự keyword
-    {
-      storeId: '',
-      storeName: '',
-      avatarUrl: ''
-    },
-  ],
+GET /search/category?offset=0&length=5&id=-1&location='Cầu Giấy'&keyword='đồ chơi trẻ em' { // id = -1: ALL CATEGORY, keyword là category, trả về store và các sellpost
+                                            // các store có name tương tự keyword hoặc bán các loại category tương tự keyword
+                                              //  trả kết quả sellposts index start from offset lết tối đa length sellposts hoặc đến cuối
+
   sellposts: [
     {
       sellpostId: '',
