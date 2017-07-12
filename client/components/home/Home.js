@@ -23,6 +23,7 @@ export default class Home extends React.Component {
 
   render() {
     const { searchType, searchResult } = this.props.search
+    console.log(searchResult);
     return (
       <div className="container-fluid">
           <div className="row">

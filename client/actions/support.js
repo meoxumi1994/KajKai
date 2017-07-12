@@ -32,7 +32,7 @@ export const flem = (url, body) => {
           break
         }
       }
-      myurl = 'http://10.20.16.142:3001' + path
+      myurl = 'http://10.20.16.136:3001' + path
       // myurl = 'http://localhost:3001' + path
     }
     if (body) {

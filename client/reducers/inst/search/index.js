@@ -3,6 +3,8 @@ const search = (state = {
   keyword: '',
   location: '',
   id: '-1',
+  offset: 0,
+  length: 7,
   searchResult: {
     users: [
       {
@@ -45,7 +47,19 @@ const search = (state = {
   switch (action.type) {
     case 'LOADED_SEARCHRESULT':
       const { searchResult } = action
-      return { ...state, searchResult }
+      console.log('state.searchResult: ', state.searchResult);
+      console.log(searchResult);
+      if (state.offset == 0) {
+        return { ...state, searchResult }
+      }
+      const { searchResult: mSearchResult } = state
+      for (let property in searchResult) {
+        console.log('property: ', property);
+        if (searchResult[property]) {
+          mSearchResult[property] = [ ...mSearchResult[property], searchResult[property]]
+        }
+      }
+      return { ...state, searchResult: mSearchResult }
     case 'SELECT_SEARCHTYPE':
       const { id } = action
       let searchType
@@ -63,6 +77,11 @@ const search = (state = {
     case 'CHANGE_LOCATION':
       const { location } = action
       return { ...state, location }
+    case 'ON_SCROLL_BODY':
+      let { offset, length } = state
+      offset += length
+      length = 1
+      return { ...state, offset, length }
     default:
       return state
   }
