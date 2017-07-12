@@ -10,5 +10,9 @@ export default {
   'USER.BlackListUpdated': {
     controller: 'UserSubController',
     method: 'updateBlackList'
+  },
+  'STORE.Created': {
+    controller: 'StoreSubController',
+    method: 'updateStoreIdList'
   }
 }

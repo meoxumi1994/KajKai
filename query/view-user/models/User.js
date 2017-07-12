@@ -19,7 +19,8 @@ const UserSchema = new mongoose.Schema({
   yearOfBirth: {type: Number},
   lastUpdate: {type: LastUpdateSchema},
   blackList: [BlackSchema],
-  privacy: {type: PrivacySchema}
+  privacy: {type: PrivacySchema},
+  storeIdList: [String]
 })
 
 export default UserSchema
