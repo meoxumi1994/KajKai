@@ -8,11 +8,15 @@ export default class Home extends React.Component {
     super(props)
   }
 
+  componentDidMount(){
+    const { searchResult, ...searchQuery } = this.props.search
+      this.props.onSearchQueryUpdated(searchQuery)
+  }
+
   componentWillReceiveProps(nextProps) {
     const { searchResult, ...searchQuery } = this.props.search
     const { searchResult: abcxyz, ...nextSearchQuery } = nextProps.search
     if (JSON.stringify(nextSearchQuery) != JSON.stringify(searchQuery)) {
-      console.log('dnakldhash');
       this.props.onSearchQueryUpdated(nextSearchQuery)
     }
   }
