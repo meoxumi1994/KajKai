@@ -175,7 +175,7 @@ export const getStoreByPostId = (id, next) => {
 };
 
 export const getPubStoreInfo = (store, next) => {
-    getCategoryName(store.firstCategoryId, store.secondCategoryId, (pName, cName) => {
+    getCategoryName(store.firstCategoryId, store.secondCategoryId, (names) => {
         next({
             id: getStoreGlobalId(store._id),
             owner: store.owner,
@@ -198,8 +198,8 @@ export const getPubStoreInfo = (store, next) => {
                 lastUpdateAvatarUrl: store.lastUpdateAvatarUrl,
                 lastUpdateCoverUrl: store.lastUpdateCoverUrl
             },
-            firstCategoryName: pName,
-            secondCategoryName: cName
+            firstCategoryName: names.parentName,
+            secondCategoryName: names.childName
         })
     });
     return {
