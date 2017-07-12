@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import RiseUp from '~/components/entity/draw/RiseUp'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 // import ChatListContainer from '~/containers/chat/left/ChatListContainer'
-// import ChatLeftContainer from '~/containers/chat/left'
+import ChatLeftContainer from '~/containers/chat/left'
 
 const HandlerUser = ({ LOG_IN,
     id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat}) => {
@@ -55,7 +55,7 @@ const HandlerUser = ({ LOG_IN,
                             number="2"/>
                     </div>
                     <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
-                        {/* <ChatLeftContainer multiChat={true}/> */}
+                        <ChatLeftContainer multiChat={true}/>
                     </ul>
                 </div>
             </div>
@@ -91,8 +91,8 @@ export default class BarScreen extends React.Component {
   }
 
   render() {
-    const { SEARCH_PRODUCT, SEARCH_LOCATION, categories } = this.props
-    console.log('categories: ', categories);
+    const { SEARCH_PRODUCT, SEARCH_LOCATION, categories, onSearchTypeSelected, onKeyWordChanged, onLocationChanged } = this.props
+    let inputSearchKeyWord, inputSearchLocation
     return (
         <div
             style={{ position: 'fixed',
@@ -123,24 +123,29 @@ export default class BarScreen extends React.Component {
                                 <span className="caret"></span>
                             </button>
                             <ul className="dropdown-menu">
-                              <li key="-1"><a>ALL CATEGORY</a></li>
+                              <li key="-1" onClick={() => onSearchTypeSelected('-1')}><a>ALL CATEGORY</a></li>
                               {categories.map(category =>
                                 <ul key={category.id}>
+<<<<<<< HEAD
                                   <li key={category.id}><a>{category.name}</a></li>
+=======
+                                  <li key={category.id} onClick={() => onSearchTypeSelected(category.id)}><a>{category.name}</a></li>
+>>>>>>> 7d09ea05ef25e0efba51f7f89988499dc42c2dab
                                   {category.secondCategories.map(secondCategory =>
-                                    <li key={secondCategory.id} style={{ marginLeft: 13}}><a>{secondCategory.name}</a></li>
+                                    <li key={secondCategory.id} onClick={() => onSearchTypeSelected(secondCategory.id)} style={{ marginLeft: 13}}><a>{secondCategory.name}</a></li>
                                   )}
                                 </ul>
                               )}
-                              <li key="-2"><a>STORE</a></li>
-                              <li key="-3"><a>USER</a></li>
+                              <li key="-2" onClick={() => onSearchTypeSelected('-2')}><a>STORE</a></li>
+                              <li key="-3" onClick={() => onSearchTypeSelected('-3')}><a>USER</a></li>
                             </ul>
                           </div>
-                          <input
+                          <input ref={node => { inputSearchKeyWord = node }}
                             type="text"
                             className="form-control input-sm"
                             placeholder={SEARCH_PRODUCT}
-
+                            onChange={() => onKeyWordChanged(inputSearchKeyWord.value.trim())}
+                            onKeyDown={(e) => { if(e.keyCode == 13) inputSearchKeyWord.blur() }}
                           />
                           <span className="input-group-btn">
                               <button className="btn btn-default btn-sm" type="button">
@@ -151,7 +156,17 @@ export default class BarScreen extends React.Component {
                     </div>
                     <div className="col-xs-3"  style={{ padding: 0}}>
                         <div className="input-group" style={{ marginLeft: 10 }}>
-                            <input type="text" className="form-control input-sm" placeholder={SEARCH_LOCATION} />
+                            <input ref={node => { inputSearchLocation = node }}
+                              type="text"
+                              className="form-control input-sm"
+                              placeholder={SEARCH_LOCATION}
+                              onKeyDown={(e) => {
+                                if(e.keyCode == 13) {
+                                  onLocationChanged(inputSearchLocation.value.trim())
+                                  inputSearchLocation.blur()
+                                }
+                              }}
+                            />
                             <span className="input-group-btn">
                                 <button className="btn btn-default btn-sm" type="button" >
                                     <i className="glyphicon glyphicon-map-marker"></i>

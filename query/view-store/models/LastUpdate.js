@@ -2,9 +2,8 @@ import mongoose from '../datasource'
 
 const LastUpdateSchema = new mongoose.Schema({
   storeName: {type: Date},
-  phone: {type: Date},
-  addressMap:{type: Date},
-  address: {type: Date}
+  avatarUrl: {type: Date},
+  coverUrl: {type: Date}
 })
 
 export default LastUpdateSchema
