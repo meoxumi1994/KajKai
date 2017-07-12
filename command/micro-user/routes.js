@@ -111,7 +111,7 @@ export default {
         method: 'search'
       }
     },
-    'awsimageurl': {
+    '/awsimageurl': {
       post: {
         controller: 'AWSController',
         middleware: [auth()],
