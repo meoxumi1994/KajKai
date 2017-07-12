@@ -80,11 +80,11 @@ export const createStore = (storeInfo, next) => {
         return;
     }
 
-    if (!storeInfo.urlName || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )) {
+    if (!storeInfo.urlname || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )) {
         next('urlname');
         return;
     } else {
-        Store.findOne({urlName: storeInfo.urlName}, (err, docs) => {
+        Store.findOne({urlName: storeInfo.urlname}, (err, docs) => {
             console.log('this ', err, docs);
             if (docs) {
                 next('urlname');
