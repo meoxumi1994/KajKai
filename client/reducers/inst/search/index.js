@@ -1,23 +1,68 @@
 const search = (state = {
   searchType: 'CATEGORY',
-  id: '-1',
   keyword: '',
+  location: '',
+  id: '-1',
   searchResult: {
-    users: [],
-    stores: [],
-    sellposts: []
+    users: [
+      {
+        userId: '4y281462314124o',
+        username: 'Charity',
+        avatarUrl: 'https://d3g3aygbu50f7h.cloudfront.net/liuyifei.jpg'
+      },
+      {
+        userId: '4y2814ggegw62314124o',
+        username: 'LiuYiFei',
+        avatarUrl: 'https://d3g3aygbu50f7h.cloudfront.net/liuyifei.jpg'
+      }
+    ],
+    stores: [
+      {
+        storeId: 'u02ry23fu2y04',
+        storeName: 'Đây là storeName',
+        avatarUrl: 'https://d3g3aygbu50f7h.cloudfront.net/liuyifei.jpg'
+      },
+      {
+        storeId: 'u02ry23fugdgdg2y04',
+        storeName: 'Táo Tàu (Minh KHÔNG GAY)',
+        avatarUrl: 'https://d3g3aygbu50f7h.cloudfront.net/liuyifei.jpg'
+      }
+    ],
+    sellposts: [
+      {
+        sellpostId: 'fmslhf230fup',
+        title: 'BÁN HÀNG TĂNG GIÁ',
+        avatarUrl: 'https://d3g3aygbu50f7h.cloudfront.net/liuyifei.jpg'
+      },
+      {
+        sellpostId: 'fjalsfhh2odgdgdg0fh',
+        title: 'Đây là title của cái sellpost này :D :) :)))',
+        avatarUrl: 'https://d3g3aygbu50f7h.cloudfront.net/liuyifei.jpg'
+      }
+    ]
   }
 }, action) => {
   switch (action.type) {
+    case 'LOADED_SEARCHRESULT':
+      const { searchResult } = action
+      return { ...state, searchResult }
     case 'SELECT_SEARCHTYPE':
       const { id } = action
       let searchType
-      if (id == '-1') {
-        searchType = 'CATEGORY'
+      if (id == '-3') {
+        searchType = 'USER'
       } else if (id == '-2') {
-        
+        searchType = 'STORE'
+      } else {
+        searchType = 'CATEGORY'
       }
-      return { ...state, id }
+      return { ...state, id, searchType }
+    case 'CHANGE_KEYWORD':
+      const { keyword } = action
+      return { ...state, keyword }
+    case 'CHANGE_LOCATION':
+      const { location } = action
+      return { ...state, location }
     default:
       return state
   }
