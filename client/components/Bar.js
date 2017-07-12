@@ -4,7 +4,6 @@ import RiseUp from '~/components/entity/draw/RiseUp'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 // import ChatListContainer from '~/containers/chat/left/ChatListContainer'
 import ChatLeftContainer from '~/containers/chat/left'
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 const HandlerUser = ({ LOG_IN,
     id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat}) => {
@@ -85,8 +84,6 @@ const HandlerUser = ({ LOG_IN,
 export default class BarScreen extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { address: 'San Francisco, CA' }
-    this.onChange = (address) => this.setState({ address })
   }
 
   componentDidMount(){
@@ -164,11 +161,6 @@ export default class BarScreen extends React.Component {
                           </span>
                         </div>
                     </div>
-                    <PlacesAutocomplete ref={node => { inputSearchLocation = node }}
-                      onKeyDown={(e) => { if(e.keyCode == 13) inputSearchLocation.blur() }}
-                      inputProps={inputProps}
-                       styles={myStyles}
-                    />
                     {/* <div className="col-xs-3"  style={{ padding: 0}}>
                         <div className="input-group" style={{ marginLeft: 10 }}>
                             <input ref={node => { inputSearchLocation = node }}
