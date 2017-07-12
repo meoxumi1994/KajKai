@@ -22,7 +22,7 @@ export default {
       method: 'getPostrowsHandler'
     }
   },
-  '/minorpost/:storeid': {
+  '/minorpost/store/:storeid': {
     get: {
       controller: 'MinorpostController',
       middleware: [auth()],
