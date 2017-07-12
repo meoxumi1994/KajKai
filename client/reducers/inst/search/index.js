@@ -77,16 +77,8 @@ const search = (state = {
     case 'CHANGE_LOCATION':
       const { location } = action
       return { ...state, location }
-    case 'UPDATE_QUERY':
-      // let { scrollTop: nScrollTop } = action
-      // let { offset, length, scrollTop } = state
-      // // if (nScrollTop == scrollTop) {
-      //   offset += length
-      //   length = 1
-      // // }
-      // // scrollTop = nScrollTop
-      // return { ...state, offset, length }
-      // return abc
+    case 'NEED_MORE_SEARCHRESULT':
+      return state
     default:
       return state
   }

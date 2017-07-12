@@ -12,3 +12,8 @@ export const changeLocation = (location) => ({
   type: 'CHANGE_LOCATION',
   location
 })
+
+export const needMoreSearch = (more) => ({
+  type: 'NEED_MORE',
+  more
+})

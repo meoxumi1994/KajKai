@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import Home from '~/components/home/Home'
 import { search } from '~/actions/asyn/search'
+import { needMoreSearch } from '~/actions/sync/search'
 
 const mapStateToProps = (state, ownProps) => {
     return ({
@@ -11,6 +12,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSearchQueryUpdated: (searchQuery) => {
     dispatch(search(searchQuery))
+  },
+  onNeedMoreSearchResult: (more) => {
+    dispatch(needMoreSearch(more))
   }
 })
 
