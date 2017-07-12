@@ -23,3 +23,19 @@ export const updateUser = (user) => {
     });
 };
 
+export const searchUser = (userName, next) => {
+    searchClient.search({
+        index: config.INDEX,
+        type: config.TYPE_USER,
+        body: {
+            query: {
+                match: {
+                    body: userName
+                }
+            }
+        }
+    }, (error, response) => {
+        console.log('search ' + error, 'response ' + JSON.stringify(response));
+        next(response);
+    })
+};
