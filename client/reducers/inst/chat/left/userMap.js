@@ -4,7 +4,7 @@ const userMap = ( state={
     avatarUrl: '',
     disabled: false
 }, action) => {
-    console.log('action ', action);
+    // console.log('action ', action);
     switch (action.type) {
       case 'INIT_CHAT_LIST':
           return {
@@ -15,7 +15,7 @@ const userMap = ( state={
           }
 
       case 'global/RECEIVE_MESSAGE':
-          console.log('usermap ', action);
+        //   console.log('usermap ', action);
           return {
             ...state,
             id: action.data.user.id,

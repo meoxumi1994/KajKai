@@ -3,7 +3,7 @@ import { flem } from '../../support'
 
 export const getUser = (person, mesId) => dispatch => {
     flem('/user/'+person, {}, {}).then((response) => {
-        console.log('\n[API] /user ', response);
+        // console.log('\n[API] /user ', response);
         const { avatarUrl, username, id } = response.user
         dispatch({type: 'UPDATE_CHAT_USER', data: {
             mesId,
@@ -20,7 +20,7 @@ export const getMesId = (id, person) => dispatch => {
     person: person
   }, {}
   ).then((response) => {
-        console.log('\n[API] /getMesId ', response);
+        // console.log('\n[API] /getMesId ', response);
         dispatch({type: 'ADD_CHAT', data: {mesId: response.mesId, label: 'Xin chờ...'}})
         dispatch(setCurrentChat(response.mesId))
         dispatch(getUser(person, response.mesId))
@@ -33,7 +33,7 @@ export const getMessages = (mesId, offset, length, status, multiChat) => dispatc
       offset: offset,
       length: 20
     }, {}).then((response) => {
-        console.log('\n[API] /getMessages ', response);
+        // console.log('\n[API] /getMessages ', response);
         if (multiChat) {
             dispatch(addChat(response, multiChat))
             dispatch(setCurrentChat(response.mesId))
@@ -56,7 +56,7 @@ export const getChatList = (offset, length) => dispatch => {
     }, {}
     )
     .then((response) => {
-        console.log('\n[API] /getChatList ', response);
+        // console.log('\n[API] /getChatList ', response);
         const { data, lazyLoad } = response
         dispatch(initChatList(data, lazyLoad))
         if (data.length > 0) {
