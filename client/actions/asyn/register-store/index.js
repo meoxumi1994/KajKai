@@ -1,6 +1,6 @@
 import { authAction, authData} from '~/actions/sync/auth'
 import { flet, flem } from '~/actions/support'
-import { getUser } from '~/actions/asyn/user'
+import { onWho } from '~/actions/asyn/app'
 
 export const registerStore = (store) => dispatch => {
     dispatch({ type: 'REGISTER_STORE_ING' })
@@ -13,7 +13,7 @@ export const registerStore = (store) => dispatch => {
     .then(({ status, storeid }) => {
         if(status == 'success'){
             dispatch({ type: 'REGISTER_STORE_SUCCESS', storeid: storeid })
-            dispatch(getUser())
+            dispatch(onWho())
         }
         else if(status == 'error')
             dispatch({ type: 'REGISTER_STORE_FAILED' })

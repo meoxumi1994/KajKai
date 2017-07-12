@@ -11,6 +11,7 @@ const mapStateToProps = (state, { id }) => {
     const { scrollTop, scrollLeft, height } = state.inst.app
     const { stateSellPost, stateMinorPost, sellposts, offsetSellPost, offsetMinorPost, minorposts} = state.inst.store.page
     let isOwner = false
+
     for(let i=0; i<= state.user.storeList.length ; i++){
         if(state.user.storeList[i] == id){
             isOwner = true

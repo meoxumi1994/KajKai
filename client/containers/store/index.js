@@ -5,7 +5,7 @@ import { getStore } from '~/actions/asyn/store'
 
 const mapStateToProps = (state, ownProps ) => {
     return({
-        store: state.inst.store,
+        store: state.inst.store.index,
         iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT'),
         isusername: state.user.username,
     })

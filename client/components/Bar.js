@@ -153,14 +153,18 @@ export default class BarScreen extends React.Component {
                           </span>
                         </div>
                     </div>
-                    <AutoCompleteContainer SEARCH_LOCATION={SEARCH_LOCATION}
-                      onLocationChanged={onLocationChanged}
-                    />
-                    <span className="input-group-btn">
-                        <button className="btn btn-default btn-sm" type="button" >
-                            <i className="glyphicon glyphicon-map-marker"></i>
-                        </button>
-                    </span>
+                    <div className="col-xs-3"  style={{ padding: 0}}>
+                        <div className="input-group" style={{ marginLeft: 10 }}>
+                            <AutoCompleteContainer SEARCH_LOCATION={SEARCH_LOCATION}
+                              onLocationChanged={onLocationChanged}
+                            />
+                            <span className="input-group-btn">
+                                <button className="btn btn-default btn-sm" type="button" >
+                                    <i className="glyphicon glyphicon-map-marker"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
                     {/* <div className="col-xs-3"  style={{ padding: 0}}>
                         <div className="input-group" style={{ marginLeft: 10 }}>
                             <input ref={node => { inputSearchLocation = node }}

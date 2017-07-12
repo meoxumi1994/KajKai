@@ -12,7 +12,7 @@ export default class AutoComplete extends React.Component {
         {types: ['geocode']}
       )
     }
-    this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyDv-w2J9O0JzXzIV2Rgx9LSF1OWXRXeCZw&libraries=places&callback=initAutocomplete')
+    this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyDEy3sjvl8Sq5bsInBAU61uu_u4_fK3zvk&libraries=places&callback=initAutocomplete')
   }
 
   loadJS(src) {
@@ -27,20 +27,16 @@ export default class AutoComplete extends React.Component {
     const { SEARCH_LOCATION, searchType, onLocationChanged } = this.props
     let inputSearchLocation
     return (
-      <div id="locationField">
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDv-w2J9O0JzXzIV2Rgx9LSF1OWXRXeCZw&libraries=places&callback=initAutocomplete"
-        async defer></script>
-        <input ref={node => { inputSearchLocation = node}}
-          disabled={searchType == 'STORE' || searchType == 'USER'}
-          id="autocomplete"
-          placeholder={SEARCH_LOCATION}
-          type="text"
-          onBlur={() => onLocationChanged(inputSearchLocation.value.trim())}
-          onKeyDown={(e) => { if(e.keyCode == 13) {
-           inputSearchLocation.blur()
-          }}}
-        />
-      </div>
+      <input className="form-control input-sm" ref={node => { inputSearchLocation = node}}
+        disabled={searchType == 'STORE' || searchType == 'USER'}
+        id="autocomplete"
+        placeholder={SEARCH_LOCATION}
+        type="text"
+        onBlur={() => onLocationChanged(inputSearchLocation.value.trim())}
+        onKeyDown={(e) => { if(e.keyCode == 13) {
+         inputSearchLocation.blur()
+        }}}
+      />
     )
   }
 }
