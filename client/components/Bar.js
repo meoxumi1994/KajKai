@@ -93,17 +93,6 @@ export default class BarScreen extends React.Component {
   render() {
     const { SEARCH_PRODUCT, SEARCH_LOCATION, categories, onSearchTypeSelected, onKeyWordChanged, onLocationChanged } = this.props
     let inputSearchKeyWord, inputSearchLocation
-    const inputProps = {
-      value: this.state.address,
-      onChange: this.onChange,
-    }
-    const myStyles = {
-      root: { marginLeft: 10,  padding: 0 },
-      input: { width: '30%' },
-      autocompleteContainer: { backgroundColor: 'green' },
-      autocompleteItem: { color: 'black' },
-      autocompleteItemActive: { color: 'blue' }
-    }
     return (
         <div
             style={{ position: 'fixed',
