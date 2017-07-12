@@ -29,7 +29,8 @@ export const getUser = (id, next) => {
               sex: user.sex,
               yearOfBirth: user.yearOfBirth,
               lastUpdate: user.lastUpdate,
-              blacklist: user.blackList
+              blacklist: user.blackList,
+              storeList: user.storeIdList ? user.storeIdList : []
             }
           })
       }
