@@ -8,6 +8,7 @@ export const getMinorposts = (storeId, offset, next) => {
         next(null)
       } else {
         next({
+          status: 'nodata',
           offset,
           storeid: storeId,
           minorposts: []
@@ -31,6 +32,7 @@ export const getMinorposts = (storeId, offset, next) => {
       }
 
       next({
+        status: 'success',
         offset: mOffset,
         storeid: storeId,
         minorposts: mMinorposts
