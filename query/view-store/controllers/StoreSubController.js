@@ -2,7 +2,7 @@ import { Store } from '../models'
 
 export const createStore = (message) => {
   const { id, owner: userId, storeName, createdAt, urlName, avatarUrl, coverUrl, address, addressMap, phone,
-    category, firstCategoryId, secondCategoryId, firstCategory, secondCategory, longitude, latitude, certificates, lastUpdate } = message.store
+    category, firstCategoryId, secondCategoryId, firstCategoryName: firstCategory, secondCategoryName: secondCategory, longitude, latitude, certificates, lastUpdate } = message.store
 
   const store = new Store({
     id,
