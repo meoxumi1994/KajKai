@@ -44,6 +44,11 @@ const page = (state = {
                 minorposts: [],
                 sellposts: [],
             }
+        case 'CREATE_SELL_POST_SUCCESS':
+            return {
+                ...state,
+                sellposts: [action.sellpost, ...state.sellposts]
+            }
         default:
             return state
     }

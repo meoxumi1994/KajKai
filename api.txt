@@ -997,3 +997,27 @@ GET /imagelist/store?offset=-1 { // list ảnh theo thứ tự thời gian gần
     status: 'success|failed'
     listImage : ['','','']
 }
+
+GET /imagelist/postrow?offset=-1 { // list ảnh theo thứ tự thời gian gần nhất
+                                // tính tất cả các ảnh mà thằng user đấy gửi lên theo link getawsimageurl
+                                // mỗi lần lấy 14 ảnh
+    offset: ,
+    status: 'success|failed'
+    listImage : ['','','']
+}
+
+GET /imagelist/product?offset=-1 { // list ảnh theo thứ tự thời gian gần nhất
+                                // tính tất cả các ảnh mà thằng user đấy gửi lên theo link getawsimageurl
+                                // mỗi lần lấy 14 ảnh
+    offset: ,
+    status: 'success|failed'
+    listImage : ['','','']
+}
+
+GET /imagelist/minorpost?offset=-1 { // list ảnh theo thứ tự thời gian gần nhất
+                                // tính tất cả các ảnh mà thằng user đấy gửi lên theo link getawsimageurl
+                                // mỗi lần lấy 14 ảnh
+    offset: ,
+    status: 'success|failed'
+    listImage : ['','','']
+}
