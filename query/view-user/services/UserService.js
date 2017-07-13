@@ -81,7 +81,7 @@ export const getUserImageList = (id, offset, next) => {
       } else {
         const { imageList } = user
         const mImageList = []
-        let currentNumberOfImage = 0, mOffset = -2
+        let currentNumberOfImage = 0, mOffset, lastIndex
         for (let i = imageList.length - 1; i >= 0; i--) {
           let image = imageList[i]
           if (image.time < offset) {
@@ -89,12 +89,18 @@ export const getUserImageList = (id, offset, next) => {
               mImageList.push(image.url)
 
               mOffset = image.time
+              lastIndex = i
               currentNumberOfImage++
             } else {
               break
             }
           }
         }
+
+        if (currentNumberOfSellpost < 14 || lastIndex == 0) {
+          mOffset = -2
+        }
+
         next({
           offset: mOffset,
           status: 'success',
