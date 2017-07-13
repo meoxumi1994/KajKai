@@ -15,7 +15,6 @@ export const getUser = (id, next) => {
           })
         }
       } else {
-        console.log(user);
         next({
           status: 'success',
           user: {
@@ -32,8 +31,9 @@ export const getUser = (id, next) => {
             lastUpdate: user.lastUpdate,
             blacklist: user.blackList,
             storeList: user.storeList ? (user.storeList.map((basicStore) => ({
-              ...basicStore,
-              storename: basicStore.storeName
+              id: basicStore.id,
+              storename: basicStore.storeName,
+              avatarUrl: basicStore.avatarUrl
             }))) : []
           }
         })
