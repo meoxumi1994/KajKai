@@ -23,7 +23,7 @@ export const getClientFormatPostrows = (postrows, offset) => {
     return {
       postrows_offset: offset,
       postrows: [],
-      postrow_order: []
+      postrows_order: []
     }
   }
   const postrowOrder = [], mPostrows = []
@@ -62,7 +62,7 @@ export const getClientFormatPostrows = (postrows, offset) => {
 
   return ({
     postrows_offset: postrowOffset,
-    postrow_order: postrowOrder,
+    postrows_order: postrowOrder,
     postrows: mPostrows
   })
 }
