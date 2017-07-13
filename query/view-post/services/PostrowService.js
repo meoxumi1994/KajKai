@@ -21,8 +21,9 @@ export const getPostrows = (sellpostId, offset, next) => {
 export const getClientFormatPostrows = (postrows, offset) => {
   if (!postrows) {
     return {
-      offset,
-      postrows: []
+      postrows_offset: offset,
+      postrows: [],
+      postrow_order: []
     }
   }
   const postrowOrder = [], mPostrows = []

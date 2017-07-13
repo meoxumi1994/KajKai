@@ -48,15 +48,58 @@ export const getUserPrivacy = (id, next) => {
           next(null)
         } else {
           next({
-            id
+            status: 'nodata',
+            user: {
+              id
+            }
           })
         }
       } else {
           next({
-            id: user.id,
-            address_email_phone: user.privacy.address_email_phone,
-            another: user.privacy.others
+            status: 'success',
+            privacy: {
+              id: user.id,
+              address_email_phone: user.privacy.address_email_phone,
+              another: user.privacy.others
+            }
           })
+      }
+  })
+}
+
+export const getUserImageList = (id, offset, next) => {
+  User.findOne({ id }, function(err, user) {
+      if (err || !user) {
+        if(err) {
+          next(null)
+        } else {
+          next({
+            status: 'nodata',
+            listImage: []
+          })
+        }
+      } else {
+        const { imageList } = user
+        const mImageList = []
+        let currentNumberOfImage = 0, mOffset = -2
+        for (let i = sellposts.length - 1; i >= 0; i--) {
+          let image = imageList[i]
+          if (image.time < offset) {
+            if (currentNumberOfImage < 14) {
+              mImageList.push(image.url)
+
+              mOffset = image.time
+              currentNumberOfImage++
+            } else {
+              break
+            }
+          }
+        }
+        next({
+          offset: mOffset,
+          status: 'success',
+          listImage : mImageList
+        })
       }
   })
 }
