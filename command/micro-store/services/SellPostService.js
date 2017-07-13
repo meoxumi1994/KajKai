@@ -37,7 +37,7 @@ export const getSellPostBasicInfo = (sellPost) => {
 
 export const addSellPost = (sellPostInfo, next) => {
     const sellPost = new SellPost({storeId: sellPostInfo.storeid, category: sellPostInfo.category,
-        title: sellPostInfo.title, description: sellPostInfo.description, time: sellPostInfo.time,
+        title: sellPostInfo.title, description: sellPostInfo.description, time: sellPostInfo.time ? sellPostInfo.time : (new Date()).getTime(),
         status: sellPostInfo.status, shippable: sellPostInfo.ship});
     sellPost.save(() => {
         getPubSellPostInfo(sellPost, (info) => {
