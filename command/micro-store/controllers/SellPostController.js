@@ -4,7 +4,7 @@ export const addSellPostCon = () => {
     return (req, res) => {
         console.log('fuck sell post ' + JSON.stringify(req.body));
         addSellPost(req.body, (sellPost) => {
-            res.json({...req.body, id: getSellPostBasicInfo(sellPost).sellpostid})
+            res.json({sellpost: {...req.body, id: getSellPostBasicInfo(sellPost).sellpostid}, status: 'success'})
         })
     }
 };
