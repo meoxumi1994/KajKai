@@ -20,7 +20,7 @@ class AddPhoto extends React.Component {
         this.setState({ showModal: false })
     }
     render(){
-        const { TITLE, SUGGEST_PHOTO, style } = this.props
+        const { TITLE, SUGGEST_PHOTO, style, action } = this.props
         const imagesSuggest = [
             'https://beebom-redkapmedia.netdna-ssl.com/wp-content/uploads/2016/01/Reverse-Image-Search-Engines-Apps-And-Its-Uses-2016.jpg',
             'http://www.jqueryscript.net/images/jQuery-Plugin-For-Fullscreen-Image-Viewer-Chroma-Gallery.jpg',
@@ -58,6 +58,8 @@ class AddPhoto extends React.Component {
                                                 height: 110,
                                                 fontSize: 17,
                                             }}
+                                            upNow={false}
+                                            action={action}
                                         />
                                     </div>
                                     <div className="col col-xs-6" style={{ padding: 0}}>
