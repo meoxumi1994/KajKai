@@ -5,8 +5,7 @@ export const addSellPostCon = () => {
         addSellPost(req.body, (sellPost, sellPostDetail) => {
             res.json({
                 sellpost: {
-                    ...req.body,
-                    id: getSellPostBasicInfo(sellPost).sellpostid,
+                    ...getSellPostBasicInfo(sellPost),
                     postrows: sellPostDetail
                 },
                 status: 'success'

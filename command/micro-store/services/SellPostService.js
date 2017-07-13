@@ -31,7 +31,7 @@ export const getSellPostBasicInfo = (sellPost) => {
         status: sellPost.status,
         shippable: sellPost.shippable,
         sellPostDetailOrders: sellPost.sellPostDetailOrders,
-        sellpostid: getSellPostGlobalId(sellPost._id),
+        id: getSellPostGlobalId(sellPost._id),
         likes: [],
         numlike: 0,
         follows: [],
