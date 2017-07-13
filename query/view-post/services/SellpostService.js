@@ -43,7 +43,6 @@ export const getSellposts = (storeId, offset, next) => {
         let sellpost = sellposts[i]
         if (sellpost.time < offset) {
           if (currentNumberOfSellpost < 2) {
-            console.log('sellpost', sellpost);
             mSellposts.push(getClientFormatSellpost(sellpost, Date.now()))
 
             mOffset = sellpost.time.getTime()
@@ -80,7 +79,6 @@ export const verifyToken = (token) => {
 
 const getClientFormatSellpost = (sellpost, offset) => {
   const { postrows, comments } = sellpost
-  console.log('postrows: ', postrows);
 
   return ({
     id: sellpost.id,
