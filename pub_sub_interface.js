@@ -121,7 +121,8 @@ export default {
                 description:'',
                 time:'', // last update
                 status: 'notyet|open|sleep',
-                ship: '', // store viết vào có thể un
+                ship: '', // store viết vào có thể un,
+                postrows_order: [],
             }
         },{
             event: 'SELLPOST.Deleted',

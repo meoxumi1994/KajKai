@@ -24,7 +24,7 @@ export const getSellPost = (sellPostId, next) => {
 export const addSellPost = (sellPostInfo, next) => {
     const sellPost = new SellPost({storeId: sellPostInfo.storeid, category: sellPostInfo.category,
         title: sellPostInfo.title, description: sellPostInfo.description, time: sellPostInfo.time ? sellPostInfo.time : (new Date()).getTime(),
-        status: sellPostInfo.status, shippable: sellPostInfo.ship});
+        status: sellPostInfo.status, shippable: sellPostInfo.ship, sellPostDetailOrders: []});
     sellPost.save(() => {
         getPubSellPostInfo(sellPost, (info) => {
             sellPostCreated(info);
@@ -32,7 +32,12 @@ export const addSellPost = (sellPostInfo, next) => {
         let sellPostDetail = sellPostInfo.postrows;
         if (sellPostDetail && sellPostDetail.length > 0) {
             createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), (sellPostDetail) => {
-                next(sellPost, sellPostDetail);
+                sellPost.sellPostDetailOrders = [];
+                for (let i = 0; i < sellPostDetail.length; ++i)
+                    sellPost.sellPostDetailOrders.push(sellPostDetail[i].id);
+                sellPost.save(() => {
+                    next(sellPost, sellPostDetail);
+                });
             });
         } else {
             next(sellPost, null);
@@ -100,7 +105,8 @@ export const getPubSellPostInfo = (sellPost, next) => {
             description: sellPost.description,
             time: sellPost.time,
             status: sellPost.status ? sellPost.status : 'notyet',
-            ship: sellPost.shippable, // store viết vào có thể un
+            ship: sellPost.shippable, // store viết vào có thể un,
+            postrows_order: sellPost.sellPostDetailOrders,
         })
     });
 };
