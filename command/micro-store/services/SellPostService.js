@@ -45,8 +45,7 @@ export const addSellPost = (sellPostInfo, next) => {
         });
         let sellPostDetail = sellPostInfo.postrows;
         if (sellPostDetail && sellPostDetail.length > 0) {
-            sellPostDetail.sellPostId = getSellPostGlobalId(sellPost._id);
-            createMultiplePostDetail(sellPostDetail, (sellPostDetail) => {
+            createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), (sellPostDetail) => {
                 next(sellPost, sellPostDetail);
             });
         } else {
