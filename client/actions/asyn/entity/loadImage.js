@@ -5,7 +5,7 @@ export const loadImage = (ACTION_NAME, file, src) => dispatch => {
     if(file){
         const fileName = file.name.split('.')[file.name.split('.').length - 2].toLowerCase()
         const fileExtension = file.name.split('.')[file.name.split('.').length - 1].toLowerCase()
-        flet('/getawsimageurl',{
+        flet('/awsimageurl',{
             filetype: fileExtension,
             filename: fileName,
         })
@@ -18,13 +18,15 @@ export const loadImage = (ACTION_NAME, file, src) => dispatch => {
                     body: reader.result
                 })
                 .then( res => {
+                    console.log('LOAD_IMAGE_SUCCESS', urlreal)
+                    dispatch({ type: 'LOAD_IMAGE_SUCCESS', url: urlreal })
                     dispatch({ type: ACTION_NAME, url: urlreal })
                 })
             }
         })
         .catch( error => console.log(error))
     }else{
-        flet('/getawsimageurl',{
+        flet('/awsimageurl',{
             filetype: 'jpg',
             filename: fileName,
         })

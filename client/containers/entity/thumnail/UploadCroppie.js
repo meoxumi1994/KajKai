@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
+import { loadImage } from '~/actions/asyn/entity/loadImage'
+
 import UploadCroppie from '~/components/entity/thumnail/UploadCroppie'
 
 const mapStateToProps = (state, ownProps) => {
@@ -11,7 +13,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+    onLoadImage: (file) => {
+        dispatch(loadImage('ACTION', file, undefined))
+    }
 })
 
 const UploadCroppieContainer = connect(

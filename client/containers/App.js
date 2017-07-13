@@ -7,6 +7,7 @@ import { getChatList } from '~/actions/asyn/chat/restful'
 const mapStateToProps = (state, ownProps) => {
     const { width, height } = state.inst.app
     const { multipleKey, messagesMap } = state.inst.chat.center
+    const { showModal } = state.inst.entity.progress
     return ({
         width: width,
         height: height,
@@ -14,6 +15,7 @@ const mapStateToProps = (state, ownProps) => {
         auth: state.auth,
         children: ownProps.children,
         messagesKey: multipleKey,
+        showProgress: showModal,
         messagesMap,
         styles,
     })
@@ -29,6 +31,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     getChatList: (id) => {
         dispatch(getChatList(Date.now(), 10))
         dispatch({type: 'SET_USER_ID', data: {id: id}})
+    },
+    closeProgress: () => {
+        dispatch({ type: 'PROGRESS_CLOSE' })
     }
 })
 

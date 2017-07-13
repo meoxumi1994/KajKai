@@ -23,6 +23,7 @@ class UploadCroppie extends React.Component {
     }
     readURL(){
         const file = this.refs.imagefile.files[0];
+        this.props.onLoadImage(file)
         const reader = new FileReader();
         const url = reader.readAsDataURL(file);
         reader.onloadend = (e) => {
@@ -59,7 +60,7 @@ class UploadCroppie extends React.Component {
                     width: 0,
                     height: 0,
                 }} accept="image/*" type="file" id="myinput_file"/>
-                <Modal show={this.state.showModal} onHide={() => this.close()}>
+                {/* <Modal show={this.state.showModal} onHide={() => this.close()}>
                     <div className="modal-content" style={{
                         position: 'fixed', marginTop: -4,
                         width: style.width + 2, marginLeft: -85 }}>
@@ -71,7 +72,7 @@ class UploadCroppie extends React.Component {
                             style={style}
                         />
                     </div>
-                </Modal>
+                </Modal> */}
             </div>
         );
     }

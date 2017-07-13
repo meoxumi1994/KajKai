@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
     const editsellpost = state.inst.entity.editsellpost
     const editpostrow = state.inst.entity.editpostrow
     const product = state.inst.entity.product
-    const { avatarUrl, storename } = state.inst.store.index
+    const { avatarUrl, storename, id } = state.inst.store.index
     const { height } = state.inst.app
     return({
         ...editsellpost,
@@ -18,6 +18,7 @@ const mapStateToProps = (state, ownProps) => {
         height: height,
         avatarUrl: avatarUrl,
         storename: storename,
+        id: id,
     })
 }
 
@@ -34,7 +35,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 const mergerProp = (stateProps, dispatchProps, ownProps) => {
-    const { editpostrow, product, ...anotherState } = stateProps
+    const { editpostrow, product, id, ...anotherState } = stateProps
     const { createSellPost, ...anotherDispatch } = dispatchProps
     return({
         onCreateSellPost: () => {
@@ -57,6 +58,7 @@ const mergerProp = (stateProps, dispatchProps, ownProps) => {
             const store = {
                 ...stateProps,
                 postrows: postrows,
+                storeid: id,
             }
             createSellPost(store)
         },
