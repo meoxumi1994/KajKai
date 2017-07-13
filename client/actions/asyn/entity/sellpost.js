@@ -5,9 +5,9 @@ export const postSellPost = (sellpost) => dispatch => {
     flet('/sellpost',{
         ...sellpost,
     })
-    .then(({ status }) => {
+    .then(({ status, sellpost }) => {
         if(status == 'success'){
-            dispatch({ type: 'CREATE_SELL_POST_SUCCESS'})
+            dispatch({ type: 'CREATE_SELL_POST_SUCCESS', sellpost: sellpost})
         }else {
             dispatch({ type: 'CREATE_SELL_POST_FAILED'})
         }

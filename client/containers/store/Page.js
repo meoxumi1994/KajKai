@@ -13,7 +13,7 @@ const mapStateToProps = (state, { id }) => {
     let isOwner = false
 
     for(let i=0; i<= state.user.storeList.length ; i++){
-        if(state.user.storeList[i] == id){
+        if(state.user.storeList[i].id == id){
             isOwner = true
             break
         }

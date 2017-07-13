@@ -3,6 +3,7 @@ import { authAction, authData } from '../sync/auth'
 import { flem } from '../support'
 
 export const onWho = () => dispatch => {
+    // console.log('ON_WHO ON_WHO ON_WHO')
     dispatch(authAction('WHO_ING'))
     flem('/user')
     .then((response) => {

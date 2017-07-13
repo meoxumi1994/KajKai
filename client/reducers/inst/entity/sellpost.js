@@ -11,6 +11,11 @@ const sellpost = (state = {
                 }
             })
             return newstate
+        case 'CREATE_SELL_POST_SUCCESS':
+            return {
+                ...state,
+                [action.sellpost.id] : action.sellpost.id,
+            }
         default:
             return state
     }

@@ -17,6 +17,8 @@ import ContactHistory from '~/containers/contacthistory'
 import ChatCenterContainer from '~/containers/chat/center'
 import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 
+import Progress from '~/containers/entity/thumnail/Progress'
+
 const Home = () => (
   <Bundle load={loadHome}>
     {(Comp) => (Comp
@@ -87,6 +89,7 @@ class App extends React.Component {
     render(){
         const path = this.props.location.pathname;
         const { width, height, username, onScroll } = this.props
+        const { messagesKey, messagesMap, styles, showProgress, closeProgress } = this.props
         const { chat, styles } = this.props
         const { multipleKey, messagesMap } = chat
         return(
@@ -146,6 +149,7 @@ class App extends React.Component {
                         }
                     </div>
                 </div>
+                <Progress showModal={showProgress} close={() => closeProgress()}/>
             </div>
         )
     }
