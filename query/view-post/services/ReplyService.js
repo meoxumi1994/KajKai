@@ -55,6 +55,6 @@ const getClientFormatReply = (reply) => ({
   avatarUrl: reply.avatarUrl,
   name: reply.username,
   content: reply.content,
-  time: reply.time,
+  time: reply.time.getTime(),
   numlike: reply.numberOfLike,
 })

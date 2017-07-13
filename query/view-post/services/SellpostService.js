@@ -58,6 +58,10 @@ export const getSellposts = (storeId, offset, next) => {
         mOffset = -2
       }
 
+      if (mOffset != -2) {
+        mOffset = mOffset.getTime()
+      }
+
       next({
         status: 'success',
         offset: mOffset,
@@ -87,7 +91,7 @@ const getClientFormatSellpost = (sellpost, offset) => {
     category: sellpost.category,
     title: sellpost.title,
     description: sellpost.description,
-    time: sellpost.time,
+    time: sellpost.time.getTime(),
     status: sellpost.storeState,
     ship: sellpost.shipStatus,
     ...getClientFormatPostrows(postrows, -1),

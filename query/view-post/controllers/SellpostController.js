@@ -23,6 +23,8 @@ export const getSellpostsHandler = () => (req, res) => {
     let { offset } = req.query
     if (offset == '-1') {
       offset =  Date.now()
+    } else {
+      offset = new Date(offset)
     }
     getSellposts(storeId, offset, (sellposts) => {
       if (sellposts) {
