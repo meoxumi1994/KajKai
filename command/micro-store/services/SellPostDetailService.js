@@ -84,7 +84,7 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
             productOrders: sellPostInfo.products_order, type: sellPostInfo.type});
         docs.push(sellPostDetail);
     }
-    SellPostDetail.insert(docs, () => {
+    SellPostDetail.insertMany(docs, () => {
         let res = [];
         for (let i = 0; i < docs.length; ++i) {
             res.push(getSellPostDetailBasicInfo(docs[i]));
