@@ -57,6 +57,8 @@ export const getUserImageListHandler = () => (req, res) => {
     let { offset } = req.query
     if (offset == '-1') {
       offset =  Date.now()
+    } else {
+      offset = new Date(parseInt(offset))
     }
 
     getUserImageList(requestedId, offset, (userImageList) => {

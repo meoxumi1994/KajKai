@@ -45,7 +45,7 @@ export const getSellposts = (storeId, offset, next) => {
           if (currentNumberOfSellpost < 2) {
             mSellposts.push(getClientFormatSellpost(sellpost, Date.now()))
 
-            mOffset = sellpost.time
+            mOffset = sellpost.time.getTime()
             lastIndex = i
             currentNumberOfSellpost++
           } else {
@@ -56,10 +56,6 @@ export const getSellposts = (storeId, offset, next) => {
 
       if (currentNumberOfSellpost < 2 || lastIndex == 0) {
         mOffset = -2
-      }
-
-      if (mOffset != -2) {
-        mOffset = mOffset.getTime()
       }
 
       next({

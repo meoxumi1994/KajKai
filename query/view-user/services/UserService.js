@@ -88,7 +88,7 @@ export const getUserImageList = (id, offset, next) => {
             if (currentNumberOfImage < 14) {
               mImageList.push(image.url)
 
-              mOffset = image.time
+              mOffset = image.time.getTime()
               lastIndex = i
               currentNumberOfImage++
             } else {
