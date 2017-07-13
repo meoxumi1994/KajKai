@@ -2,17 +2,23 @@ import { addSellPost, deleteSellPost, updateSellPost, getSellPostBasicInfo } fro
 
 export const addSellPostCon = () => {
     return (req, res) => {
-        console.log('fuck sell post ' + JSON.stringify(req.body));
-        addSellPost(req.body, (sellPost) => {
-            res.json({...req.body, id: getSellPostBasicInfo(sellPost).sellpostid})
-        })
+        addSellPost(req.body, (sellPost, sellPostDetail) => {
+            res.json({
+                sellpost: {
+                    ...req.body,
+                    id: getSellPostBasicInfo(sellPost).sellpostid,
+                    postrows: sellPostDetail
+                },
+                status: 'success'
+            })
+        });
     }
 };
 
 export const updateSellPostCon = () => {
     return (req, res) => {
         updateSellPost(req.body, (sellPost) => {
-            res.json(req.body)
+            res.json({sellpost: req.body, status: 'success'})
         })
     }
 };
@@ -20,7 +26,7 @@ export const updateSellPostCon = () => {
 export const deleteSellPostCon = () => {
     return (req, res) => {
         deleteSellPost(req.body.sellpostid, () => {
-            res.join(req.body)
+            res.join({sellpost: req.body, status: 'success'})
         })
     }
 };

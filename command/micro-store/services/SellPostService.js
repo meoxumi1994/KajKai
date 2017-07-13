@@ -2,6 +2,7 @@ import { SellPost } from '../models'
 import globalId from '../config/globalId'
 import { getStore } from './StoreService'
 import { sellPostCreated, sellPostDeleted, sellPostUpdated } from '../controllers/StorePubController'
+import { createMultiplePostDetail } from './SellPostDetailService'
 
 const SELLPOST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID;
 
@@ -29,20 +30,27 @@ export const getSellPostBasicInfo = (sellPost) => {
         time: sellPost.time,
         status: sellPost.status,
         shippable: sellPost.shippable,
-        sellPostDetailOrders: sellPost.sellPostDetailOrders
+        sellPostDetailOrders: sellPost.sellPostDetailOrders,
+        sellpostid: getSellPostGlobalId(sellPost._id)
     };
 };
 
 export const addSellPost = (sellPostInfo, next) => {
     const sellPost = new SellPost({storeId: sellPostInfo.storeid, category: sellPostInfo.category,
-        title: sellPostInfo.title, description: sellPostInfo.description, time: sellPostInfo.time,
+        title: sellPostInfo.title, description: sellPostInfo.description, time: sellPostInfo.time ? sellPostInfo.time : (new Date()).getTime(),
         status: sellPostInfo.status, shippable: sellPostInfo.ship});
     sellPost.save(() => {
         getPubSellPostInfo(sellPost, (info) => {
-            console.log('this pub ' + JSON.stringify(info));
             sellPostCreated(info);
         });
-        next(sellPost)
+        let sellPostDetail = sellPostInfo.postrows;
+        if (sellPostDetail && sellPostDetail.length > 0) {
+            createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), (sellPostDetail) => {
+                next(sellPost, sellPostDetail);
+            });
+        } else {
+            next(sellPost, null);
+        }
     })
 };
 

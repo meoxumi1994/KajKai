@@ -75,6 +75,24 @@ export const createSellPostDetail = (sellPostInfo, next) => {
     })
 };
 
+export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => {
+    let docs = [];
+    for (let i = 0; i < listSellPostInfo.length; ++i) {
+        let sellPostInfo = listSellPostInfo[i];
+        const sellPostDetail = new SellPostDetail({sellPostId: sellPostId, content: sellPostInfo.content,
+            line: sellPostInfo.numline, imageURLs: sellPostInfo.images, titlesOrder: sellPostInfo.titles_order,
+            productOrders: sellPostInfo.products_order, type: sellPostInfo.type});
+        docs.push(sellPostDetail);
+    }
+    SellPostDetail.insertMany(docs, () => {
+        let res = [];
+        for (let i = 0; i < docs.length; ++i) {
+            res.push(getSellPostDetailBasicInfo(docs[i]));
+        }
+        next(res);
+    });
+};
+
 export const getPubBasicSellPostDetailInfo = (sellPostDetail) => {
     return {
         sellPostId: sellPostDetail.sellPostId,
