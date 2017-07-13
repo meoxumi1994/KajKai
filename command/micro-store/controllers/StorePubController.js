@@ -79,21 +79,21 @@ export const sellPostDeleted = (storeId, sellPostId) => {
 
 export const postRowCreatedPub = (postRow) => {
     const pub = redis.createClient(config);
-    const publishData = {postRow: postRow};
+    const publishData = {postrow: postRow};
     pub.publish('POSTROW.Created', JSON.stringify(publishData));
     pub.quit();
 };
 
 export const postRowUpdatedPub = (postRow) => {
     const pub = redis.createClient(config);
-    const publishData = {postRow: postRow};
+    const publishData = {postrow: postRow};
     pub.publish('POSTROW.Updated', JSON.stringify(publishData));
     pub.quit();
 };
 
 export const postRowDeletedPub = (postRowId, sellPostId) => {
     const pub = redis.createClient(config);
-    const publishData = {postRow: {
+    const publishData = {postrow: {
         postrowId: postRowId,
         sellPostId: sellPostId
     }};
