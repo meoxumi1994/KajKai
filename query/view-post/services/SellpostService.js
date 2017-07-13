@@ -38,7 +38,7 @@ export const getSellposts = (storeId, offset, next) => {
       }
     } else {
       const mSellposts = []
-      let currentNumberOfSellpost = 0, mOffset = -2
+      let currentNumberOfSellpost = 0, mOffset, lastIndex
       for (let i = sellposts.length - 1; i >= 0; i--) {
         let sellpost = sellposts[i]
         if (sellpost.time < offset) {
@@ -46,11 +46,16 @@ export const getSellposts = (storeId, offset, next) => {
             mSellposts.push(getClientFormatSellpost(sellpost, Date.now()))
 
             mOffset = sellpost.time
+            lastIndex = i
             currentNumberOfSellpost++
           } else {
             break
           }
         }
+      }
+
+      if (currentNumberOfSellpost < 2 || lastIndex == 0) {
+        mOffset = -2
       }
 
       next({
