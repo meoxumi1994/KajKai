@@ -14,7 +14,7 @@ export const getSellPostDetailGlobalId = (id) => {
 };
 
 export const getSellPostDetail = (sellPostDetailId, next) => {
-    SellPostDetail.findById(getSellPostDetailLocalId(sellPostDetalId), (err, sellPostDetail) => {
+    SellPostDetail.findById(getSellPostDetailLocalId(sellPostDetailId), (err, sellPostDetail) => {
         next(sellPostDetail)
     })
 };
