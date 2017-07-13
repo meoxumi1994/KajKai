@@ -87,6 +87,7 @@ const getClientFormatSellpost = (sellpost, offset) => {
     ship: sellpost.shipStatus,
     ...getClientFormatPostrows(postrows, -1),
     numlike: sellpost.numberOfLike ? sellpost.numberOfLike : 0,
+    likestatus: ['like','love','haha'],
     likes: sellpost.likers ? sellpost.likers.slice(0, 5) : null,
     numfollow: sellpost.numerOfFollow ? sellpost.numerOfFollow : 0,
     follows: sellpost.followers ? sellpost.followers.slice(0, 5) : null,
