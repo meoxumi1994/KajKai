@@ -82,7 +82,7 @@ export const getUserImageList = (id, offset, next) => {
         const { imageList } = user
         const mImageList = []
         let currentNumberOfImage = 0, mOffset = -2
-        for (let i = sellposts.length - 1; i >= 0; i--) {
+        for (let i = imageList.length - 1; i >= 0; i--) {
           let image = imageList[i]
           if (image.time < offset) {
             if (currentNumberOfImage < 14) {
