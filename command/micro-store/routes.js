@@ -48,12 +48,12 @@ export default {
         }
     },
     '/sellpost': {
-        put: {
+        post: {
             controller: 'SellPostController',
             middleware: [auth()],
             method: 'addSellPostCon'
         },
-        post: {
+        put: {
             controller: 'SellPostController',
             middleware: [auth()],
             method: 'updateSellPostCon'

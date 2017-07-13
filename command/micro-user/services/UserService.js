@@ -73,8 +73,8 @@ export const getUserBasicStoreInfo = (user) => {
 };
 
 export const getListUser = (ids, next) => {
-    var list = [];
-    for (var i = 0; i < ids.length; ++i) {
+    let list = [];
+    for (let i = 0; i < ids.length; ++i) {
         list.push(mongoose.Types.ObjectId(getUserLocalId(ids[i])))
     }
     User.find({'_id': {$in: list}}, function(err, docs){
@@ -83,8 +83,8 @@ export const getListUser = (ids, next) => {
 };
 
 export const getListUserBasicInfo = (userList) => {
-    var result = [];
-    for (var i = 0; i < userList.length; ++i) {
+    let result = [];
+    for (let i = 0; i < userList.length; ++i) {
         result.push(getUserBasicInfo(userList[i]));
     }
     return result;
@@ -95,8 +95,8 @@ export const getChatUserInfo = (user) => {
 };
 
 export const getChatUserListInfo = (userList) => {
-    var result = []
-    for (var i = 0; i < userList.length; ++i) {
+    let result = []
+    for (let i = 0; i < userList.length; ++i) {
         result.push(getChatUserInfo(userList[i]))
     }
     return result
@@ -110,7 +110,7 @@ export const getUserFromEmail = (_email, next) => {
             next(user)
         }
     })
-}
+};
 
 export const getUserFromPhone = (_phone, next) => {
     User.findOne({phone: _phone}, function (err, user) {
