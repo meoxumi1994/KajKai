@@ -3,13 +3,13 @@ import { User, Black } from '../models'
 export const createUser = (message) => {
   console.log(message, JSON.stringify(message));
   console.log(message);
-  const { id, username, email, avatarUrl } = message.user
+  const { id, username, email, avatarUrl, imageUrls: imageList } = message.user
   const user = new User({ id })
 
   if (username) user.username = username
   if (email) user.email = email
   if (avatarUrl) user.avatarUrl = avatarUrl
-  console.log('user', user);
+  if (imageList) user.imageList = imageList
 
   user.save((err) => {
     console.log(err);
@@ -17,12 +17,13 @@ export const createUser = (message) => {
 }
 
 export const updateUser = (message) => {
-  const { id, username, avatarUrl, coverUrl, address, phone, language, sex, yearOfBirth, lastUpdate } = message.user
+  const { id, username, avatarUrl, coverUrl, imageUrls: imageList, address, phone, language, sex, yearOfBirth, lastUpdate } = message.user
   const user = {}
 
   if (username) user.username = username
   if (avatarUrl) user.avatarUrl = avatarUrl
   if (coverUrl) user.coverUrl = coverUrl
+  if (imageList) user.imageList = imageList
   if (address) user.address = address
   if (phone) user.phone = phone
   if (language) user.language = language

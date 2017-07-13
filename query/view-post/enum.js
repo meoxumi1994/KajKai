@@ -1,7 +1,7 @@
 export const StoreState = {
   NOTYET: 'notyet',
   OPENING: 'open',
-  closing: 'sleep'
+  CLOSING: 'sleep'
 }
 export const PostrowType = {
   TITLE: 'title',
