@@ -2,6 +2,7 @@ import { SellPost } from '../models'
 import globalId from '../config/globalId'
 import { getStore } from './StoreService'
 import { sellPostCreated, sellPostDeleted, sellPostUpdated } from '../controllers/StorePubController'
+import { createMultiplePostDetail } from './SellPostDetailService'
 
 const SELLPOST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID;
 
@@ -42,7 +43,15 @@ export const addSellPost = (sellPostInfo, next) => {
         getPubSellPostInfo(sellPost, (info) => {
             sellPostCreated(info);
         });
-        next(sellPost)
+        let sellPostDetail = sellPostInfo.postrows;
+        if (sellPostDetail && sellPostDetail.length > 0) {
+            sellPostDetail.sellPostId = getSellPostGlobalId(sellPost._id);
+            createMultiplePostDetail(sellPostDetail, (sellPostDetail) => {
+                next(sellPost, sellPostDetail);
+            });
+        } else {
+            next(sellPost, null);
+        }
     })
 };
 

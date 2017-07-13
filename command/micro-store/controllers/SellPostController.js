@@ -2,8 +2,15 @@ import { addSellPost, deleteSellPost, updateSellPost, getSellPostBasicInfo } fro
 
 export const addSellPostCon = () => {
     return (req, res) => {
-        addSellPost(req.body, (sellPost) => {
-            res.json({sellpost: {...req.body, id: getSellPostBasicInfo(sellPost).sellpostid}, status: 'success'})
+        addSellPost(req.body, (sellPost, sellPostDetail) => {
+            res.json({
+                sellpost: {
+                    ...req.body,
+                    id: getSellPostBasicInfo(sellPost).sellpostid,
+                    postrows: sellPostDetail
+                },
+                status: 'success'
+            })
         });
     }
 };
