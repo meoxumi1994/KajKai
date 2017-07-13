@@ -21,24 +21,6 @@ export const getSellPost = (sellPostId, next) => {
     })
 };
 
-export const getSellPostBasicInfo = (sellPost) => {
-    return {
-        storeId: sellPost.storeId,
-        category: sellPost.category,
-        title: sellPost.title,
-        description: sellPost.description,
-        time: sellPost.time,
-        status: sellPost.status,
-        shippable: sellPost.shippable,
-        sellPostDetailOrders: sellPost.sellPostDetailOrders,
-        id: getSellPostGlobalId(sellPost._id),
-        likes: [],
-        numlike: 0,
-        follows: [],
-        follow: 0
-    };
-};
-
 export const addSellPost = (sellPostInfo, next) => {
     const sellPost = new SellPost({storeId: sellPostInfo.storeid, category: sellPostInfo.category,
         title: sellPostInfo.title, description: sellPostInfo.description, time: sellPostInfo.time ? sellPostInfo.time : (new Date()).getTime(),
@@ -74,6 +56,24 @@ export const updateSellPost = (sellpostInfo, next) => {
             next(sellPost);
         })
     })
+};
+
+export const getSellPostBasicInfo = (sellPost) => {
+    return {
+        storeid: sellPost.storeId,
+        category: sellPost.category,
+        title: sellPost.title,
+        description: sellPost.description,
+        time: sellPost.time,
+        status: sellPost.status,
+        ship: sellPost.shippable,
+        postrows_order: sellPost.sellPostDetailOrders,
+        id: getSellPostGlobalId(sellPost._id),
+        likes: [],
+        numlike: 0,
+        follows: [],
+        follow: 0
+    };
 };
 
 export const deleteSellPost = (sellpostid, next) => {
