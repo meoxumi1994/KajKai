@@ -54,6 +54,7 @@ export const getUserBasicInfo = (user) => {
             phone: user.phoneLastUpdateAt,
             address: user.addressLastUpdateAt,
         },
+        imageUrls: user.imageUrl,
         // blacklist: [{
         //     id:,
         //     type: 'userid|storeid|mesid',
@@ -252,9 +253,12 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
         next(null);
         return;
     }
+    let imageUrl = [];
+    if (avatarUrl) imageUrl = [avatarUrl];
     const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
-                socialNetworkId: socialNetworkId, avatarUrl: avatarUrl});
+                socialNetworkId: socialNetworkId, avatarUrl: avatarUrl, imageUrl: imageUrl});
     user.save((err) => {
+        console.log('NEW USER CREATED: ' + JSON.stringify(user));
         if (err) {
             next(null)
         } else {
@@ -269,9 +273,9 @@ export const updateUserInfo = (userId, info, next) => {
             next('user err', null);
             return
         }
-        var updateName = false;
-        var updateAddress = false;
-        var updateYOB = false;
+        let updateName = false;
+        let updateAddress = false;
+        let updateYOB = false;
         if (info.username) {
             if (validateName(info.username)) {
                 user.userName = info.username;

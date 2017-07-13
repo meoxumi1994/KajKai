@@ -4,11 +4,13 @@ export default {
         pub: //['USER.Created', 'USER.Updated', 'USER.PasswordUpdated', 'USER.PhoneUpdated', 'USER.BlackList'],{
             [{
                 event: 'USER.Created',
-                user: {
-                            username: '',
-                            email: '',
-                            avatarUrl: '',
-                            id: ''
+                user:
+                    {
+                        username: '',
+                        email: '',
+                        avatarUrl: '',
+                        id: '',
+                        imageUrls: [''],
                     }
                 },
                 {
@@ -17,6 +19,7 @@ export default {
                         username: '',
                         avatarUrl: '',
                         coverUrl: '',
+                        imageUrls: [''],
                         address: '',
                         phone:'',
                         language: '',

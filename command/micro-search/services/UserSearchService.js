@@ -53,5 +53,5 @@ export const getHitResult = (result) => {
     for (let i = 0; i < hits.length; ++i) {
         res.push(hits[i]._source);
     }
-    return res;
+    return {users: res};
 };
