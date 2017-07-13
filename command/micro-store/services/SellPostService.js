@@ -99,7 +99,7 @@ export const getPubSellPostInfo = (sellPost, next) => {
             title: sellPost.title,
             description: sellPost.description,
             time: sellPost.time,
-            status: sellPost.time,
+            status: sellPost.status ? sellPost.status : 'notyet',
             ship: sellPost.shippable, // store viết vào có thể un
         })
     });

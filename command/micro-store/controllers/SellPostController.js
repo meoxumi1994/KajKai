@@ -2,6 +2,7 @@ import { addSellPost, deleteSellPost, updateSellPost, getSellPostBasicInfo } fro
 
 export const addSellPostCon = () => {
     return (req, res) => {
+        console.log('add sell post ' + JSON.stringify(req.body));
         addSellPost(req.body, (sellPost, sellPostDetail) => {
             res.json({
                 sellpost: {
