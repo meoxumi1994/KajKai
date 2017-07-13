@@ -110,5 +110,12 @@ export default {
         controller: 'PhoneController',
         method: 'search'
       }
+    },
+    '/awsimageurl': {
+      post: {
+        controller: 'AWSController',
+        middleware: [auth()],
+        method: 'getS3PutObjectSignedUrl'
+      }
     }
 }

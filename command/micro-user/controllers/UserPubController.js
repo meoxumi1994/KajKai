@@ -14,7 +14,7 @@ export const createUserPub = (user) => {
 
 export const updateUserPub = (user) => {
     const pub = redis.createClient(config);
-    const publishData = ({user: getUserBasicInfo(user)});
+    const publishData = {user: getUserBasicInfo(user)};
     pub.publish('USER.Updated', JSON.stringify(publishData));
     pub.quit();
 };

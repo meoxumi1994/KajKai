@@ -5,8 +5,10 @@ class Settings extends React.Component {
 
     render() {
 
-      const { mesId, userId, settings, usersKey, usersMap } = this.props
+      const { mesId, settings, userId, chatListMap } = this.props
       const { displaySettings, changeGroupName, removeUser } = this.props
+
+      const { usersKey, usersMap } = chatListMap[mesId]
 
       return(
           <div>
@@ -35,12 +37,22 @@ class Settings extends React.Component {
                                               memberId => <div key={memberId}>
                                                   <img src={usersMap[memberId].avatarUrl} width="40" height="40"/>
                                                   <label>{usersMap[memberId].username}</label>
-                                                  <button
-                                                        onClick={() => removeUser(mesId, userId, memberId)}
-                                                        className="btn btn-danger"
-                                                        style={{position: 'absolute', right: 50, marginBottom: 10}}>
-                                                        Remove
-                                                  </button>
+                                                  {
+                                                      usersMap[memberId].disabled?
+                                                      <button
+                                                            disabled={true}
+                                                            className="btn"
+                                                            style={{position: 'absolute', right: 50, marginBottom: 10}}>
+                                                            Removed
+                                                      </button>
+                                                      :
+                                                      <button
+                                                            onClick={() => removeUser(mesId, userId, memberId)}
+                                                            className="btn btn-danger"
+                                                            style={{position: 'absolute', right: 50, marginBottom: 10}}>
+                                                            Remove
+                                                      </button>
+                                                  }
                                               </div>
                                             )}
                                           </div>

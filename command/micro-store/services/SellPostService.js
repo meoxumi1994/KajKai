@@ -39,7 +39,8 @@ export const addSellPost = (sellPostInfo, next) => {
         status: sellPostInfo.status, shippable: sellPostInfo.ship});
     sellPost.save(() => {
         getPubSellPostInfo(sellPost, (info) => {
-           sellPostCreated(info);
+            console.log('this pub ' + JSON.stringify(info));
+            sellPostCreated(info);
         });
         next(sellPost)
     })
@@ -77,6 +78,7 @@ export const deleteSellPost = (sellpostid, next) => {
 
 export const getPubSellPostInfo = (sellPost, next) => {
     getStore(sellPost.storeId, (store) => {
+        console.log('this store ' + JSON.stringify(store));
         next({
             sellPostId: getSellPostGlobalId(sellPost._id),
             storeId: sellPost.storeId,

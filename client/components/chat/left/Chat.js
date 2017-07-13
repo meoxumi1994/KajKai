@@ -18,9 +18,19 @@ class Chat extends React.Component {
 
         const { lastMessage, time, usersKey, usersMap, displayLabel, status } = chatListMap[mesId]
 
-        if (lastMessage == undefined) {
-          console.log('lastMessage ', lastMessage);
-          console.log('chatListMap', chatListMap);
+        let label = displayLabel
+        if (label == undefined || label == '') {
+            if (usersKey.length == 0) {
+                label = 'Tin nhắn mới'
+            } else {
+                label = ''
+                for (let i in usersKey) {
+                    if (!usersMap[usersKey[i]].disabled) {
+                        label += usersMap[usersKey[i]].username + ', '
+                    }
+                }
+                label = label.substring(0, label.length - 2)
+            }
         }
 
         let textColor = mesId == currentChat? 'white': 'black'
@@ -39,7 +49,7 @@ class Chat extends React.Component {
               </div>
 
               <div className="col col-xs-5" style={styles.messageDiv}>
-                    <div style={{color: textColor}}><b>{displayLabel}</b></div>
+                    <div style={{color: textColor}}><b>{label}</b></div>
                     {
                       lastMessage != undefined?
                       <div style={{marginTop: 5}}>

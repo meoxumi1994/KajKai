@@ -5,7 +5,6 @@ const search = (state = {
   id: '-1',
   offset: 0,
   length: 7,
-  scrollTop: 0,
   searchResult: {
     users: [
       {
@@ -48,16 +47,13 @@ const search = (state = {
   switch (action.type) {
     case 'LOADED_SEARCHRESULT':
       const { searchResult } = action
-      console.log('state.searchResult: ', state.searchResult);
-      console.log(searchResult);
       if (state.offset == 0) {
         return { ...state, searchResult }
       }
       const { searchResult: mSearchResult } = state
       for (let property in searchResult) {
-        console.log('property: ', property);
         if (searchResult[property]) {
-          mSearchResult[property] = [ ...mSearchResult[property], searchResult[property]]
+          mSearchResult[property] = [ ...mSearchResult[property], ...searchResult[property]]
         }
       }
       return { ...state, searchResult: mSearchResult }
@@ -71,24 +67,19 @@ const search = (state = {
       } else {
         searchType = 'CATEGORY'
       }
-      return { ...state, id, searchType }
+      return { ...state, id, searchType, offset: 0, length: 7 }
     case 'CHANGE_KEYWORD':
       const { keyword } = action
-      return { ...state, keyword }
+      return { ...state, keyword, offset: 0, length: 7 }
     case 'CHANGE_LOCATION':
       const { location } = action
-      return { ...state, location }
-    case 'ON_SCROLL_BODY':
-      let { nScrollTop } = state
-      let { offset, length, scrollTop } = state
-      if (nScrollTop < scrollTop) {
-        nScrollTop = scrollTop
-      } else if (nScrollTop - scrollTop > 400) {
-        offset += length
-        length = 1
-        scrollTop = nScrollTop
-      }
-      return { ...state, offset, length, scrollTop }
+      return { ...state, location, offset: 0, length: 7 }
+    case 'NEED_MORE_SEARCHRESULT':
+      const { more } = action
+      let { offset, length } = state
+      offset = length
+      length = more
+      return { ...state, offset, length }
     default:
       return state
   }

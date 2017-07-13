@@ -18,6 +18,7 @@ const mapStateToProps = (state, ownProps) => {
         showProgress: showModal,
         messagesMap,
         styles,
+        chat: state.inst.chat.center
     })
 }
 

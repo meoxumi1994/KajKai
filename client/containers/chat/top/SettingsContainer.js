@@ -3,11 +3,10 @@ import Settings from '~/components/chat/top/Settings'
 
 const mapStateToProps = (state, ownProps) => {
     const { settings } = state.inst.chat.display.visibility.top
-    const { usersKey, usersMap } = state.inst.chat.left.chatListMap[ownProps.mesId]
+    const { chatListMap } = state.inst.chat.left
     return {
         settings,
-        usersKey,
-        usersMap,
+        chatListMap,
         userId: state.user.id
     }
 }

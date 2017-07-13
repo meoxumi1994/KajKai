@@ -14,8 +14,8 @@ export default class Home extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { searchResult, scrollTop, ...searchQuery } = this.props.search
-    const { searchResult: abc, scrollTop: xyz, ...nextSearchQuery } = nextProps.search
+    const { searchResult, ...searchQuery } = this.props.search
+    const { searchResult: abcxyz, ...nextSearchQuery } = nextProps.search
     if (JSON.stringify(nextSearchQuery) != JSON.stringify(searchQuery)) {
       this.props.onSearchQueryUpdated(nextSearchQuery)
     }
@@ -23,6 +23,9 @@ export default class Home extends React.Component {
 
   render() {
     const { searchType, searchResult } = this.props.search
+
+    // Cái prop này để lấy thêm kết quả search, ví dụ: onNeedMoreSearchResult(5) sẽ lấy thêm 5 kết quả search
+    const { onNeedMoreSearchResult } = this.props
     return (
       <div className="container-fluid">
           <div className="row">

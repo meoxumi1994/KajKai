@@ -10,11 +10,11 @@ import MapContainer from 'bundle-loader?lazy!../containers/mapp/MapContainer'
 
 import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
-// import loadChat from 'bundle-loader?lazy!../containers/chat'
+import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Store from '~/containers/store'
 import User from '~/containers/user'
 import ContactHistory from '~/containers/contacthistory'
-// import ChatCenterContainer from '~/containers/chat/center'
+import ChatCenterContainer from '~/containers/chat/center'
 import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 
 import Progress from '~/containers/entity/thumnail/Progress'
@@ -64,14 +64,14 @@ const RegisterStore = () => (
     </Bundle>
 )
 
-// const Chat = ({ id }) => (
-//     <Bundle load={loadChat}>
-//         {(Comp) => (Comp
-//           ? <Comp/>
-//           : null
-//         )}
-//     </Bundle>
-// )
+const Chat = ({ id }) => (
+    <Bundle load={loadChat}>
+        {(Comp) => (Comp
+          ? <Comp/>
+          : null
+        )}
+    </Bundle>
+)
 
 // const Target = ({ id }) => (
 //     <Bundle load={loadTarget}>
@@ -90,6 +90,8 @@ class App extends React.Component {
         const path = this.props.location.pathname;
         const { width, height, username, onScroll } = this.props
         const { messagesKey, messagesMap, styles, showProgress, closeProgress } = this.props
+        const { chat, styles } = this.props
+        const { multipleKey, messagesMap } = chat
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
                 <Bar/>
@@ -109,11 +111,11 @@ class App extends React.Component {
                                   <Route path="/register" component={UserLoginRegister}/>
                                   <Route path="/profile" component={Profile}/>
                                   <Route path="/registerstore" component={RegisterStore}/>
-                                  {/* <Route path="/chat" component={Chat}/> */}
+                                  <Route path="/chat" component={Chat}/>
                               </div>
                               {
                                 <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>
-                                      { messagesKey.map(
+                                      { multipleKey.map(
                                           (mesId, index) => {
                                               return (
                                                 <div key={mesId} style={{

@@ -54,6 +54,7 @@ export const getUserBasicInfo = (user) => {
             phone: user.phoneLastUpdateAt,
             address: user.addressLastUpdateAt,
         },
+        imageUrls: user.imageUrl,
         // blacklist: [{
         //     id:,
         //     type: 'userid|storeid|mesid',
@@ -72,8 +73,8 @@ export const getUserBasicStoreInfo = (user) => {
 };
 
 export const getListUser = (ids, next) => {
-    var list = [];
-    for (var i = 0; i < ids.length; ++i) {
+    let list = [];
+    for (let i = 0; i < ids.length; ++i) {
         list.push(mongoose.Types.ObjectId(getUserLocalId(ids[i])))
     }
     User.find({'_id': {$in: list}}, function(err, docs){
@@ -82,8 +83,8 @@ export const getListUser = (ids, next) => {
 };
 
 export const getListUserBasicInfo = (userList) => {
-    var result = [];
-    for (var i = 0; i < userList.length; ++i) {
+    let result = [];
+    for (let i = 0; i < userList.length; ++i) {
         result.push(getUserBasicInfo(userList[i]));
     }
     return result;
@@ -94,8 +95,8 @@ export const getChatUserInfo = (user) => {
 };
 
 export const getChatUserListInfo = (userList) => {
-    var result = []
-    for (var i = 0; i < userList.length; ++i) {
+    let result = []
+    for (let i = 0; i < userList.length; ++i) {
         result.push(getChatUserInfo(userList[i]))
     }
     return result
@@ -109,7 +110,7 @@ export const getUserFromEmail = (_email, next) => {
             next(user)
         }
     })
-}
+};
 
 export const getUserFromPhone = (_phone, next) => {
     User.findOne({phone: _phone}, function (err, user) {
@@ -252,9 +253,12 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
         next(null);
         return;
     }
+    let imageUrl = [];
+    if (avatarUrl) imageUrl = [avatarUrl];
     const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
-                socialNetworkId: socialNetworkId, avatarUrl: avatarUrl});
+                socialNetworkId: socialNetworkId, avatarUrl: avatarUrl, imageUrl: imageUrl});
     user.save((err) => {
+        console.log('NEW USER CREATED: ' + JSON.stringify(user));
         if (err) {
             next(null)
         } else {
@@ -269,9 +273,9 @@ export const updateUserInfo = (userId, info, next) => {
             next('user err', null);
             return
         }
-        var updateName = false;
-        var updateAddress = false;
-        var updateYOB = false;
+        let updateName = false;
+        let updateAddress = false;
+        let updateYOB = false;
         if (info.username) {
             if (validateName(info.username)) {
                 user.userName = info.username;

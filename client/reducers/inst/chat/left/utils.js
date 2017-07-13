@@ -22,7 +22,37 @@ const utils = {
             displayLabel += users[i].username + ', '
         }
         return displayLabel.substring(0, displayLabel.length - 2)
-    }
+    },
+    /**
+    ** GROUP
+    **/
+    groupUsersKey: (action, members, id) => {
+        const groupUsersKey = []
+        for (let i in members) {
+          if (members[i].id != id) {
+              groupUsersKey.push(members[i].id)
+          }
+        }
+        return groupUsersKey
+    },
+    groupUsersMap: (action, members, id) => {
+        const groupUsersMap = {}
+        for (let i in members) {
+            if (members[i].id != id) {
+                groupUsersMap[members[i].id] = userMap(undefined, {type: action.type, data: members[i]})
+            }
+        }
+        return groupUsersMap
+    },
+    groupDisplayLabel: (members, usersKey, id) => {
+        let groupDisplayLabel = ''
+        for (let i in members) {
+            if (usersKey.indexOf(members[i].id) == -1 && members[i].id != id) {
+                groupDisplayLabel += members[i].username + ', '
+            }
+        }
+        return groupDisplayLabel.substring(0, groupDisplayLabel.length - 2)
+    },
 }
 
 export default utils

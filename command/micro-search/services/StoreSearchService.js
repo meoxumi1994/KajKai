@@ -57,5 +57,5 @@ export const getHitResult = (result) => {
         };
         res.push(store);
     }
-    return res;
+    return {stores: res};
 };
