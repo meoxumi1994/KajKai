@@ -50,7 +50,7 @@ export const getClientFormatPostrows = (postrows, offset) => {
         list: product.list,
         totalnum: product.numberOfOrder
       }))
-      mPostrows.type = postrow.type
+      mPostrow.type = postrow.type
 
       mPostrows.push(mPostrow)
       currentNumberOfLine += postrow.numberOfLine
