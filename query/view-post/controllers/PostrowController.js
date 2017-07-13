@@ -5,7 +5,7 @@ export const getPostrowsHandler = () => (req, res) => {
     const { sellpostid: sellpostId } = req.params
     const { offset } = req.query
 
-    getPostrows(id, offset ? offset : -1, (postrows) => {
+    getPostrows(id, offset ? parseInt(offset) : -1, (postrows) => {
       if (postrows) {
         res.json(postrows)
       } else {
