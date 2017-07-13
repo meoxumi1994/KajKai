@@ -57,14 +57,14 @@ export const updateStorePub = (store) => {
 
 export const sellPostUpdated = (sellPost) => {
     const pub = redis.createClient(config);
-    const publishData = {sellPost: sellPost};
+    const publishData = {sellpost: sellPost};
     pub.publish('SELLPOST.Updated', JSON.stringify(publishData));
     pub.quit();
 };
 
 export const sellPostCreated = (sellPost) => {
     const pub = redis.createClient(config);
-    const publishData = {sellPost: sellPost};
+    const publishData = {sellpost: sellPost};
     console.log('publishData ' + JSON.stringify(publishData));
     pub.publish('SELLPOST.Created', JSON.stringify(publishData));
     pub.quit();
@@ -72,9 +72,9 @@ export const sellPostCreated = (sellPost) => {
 
 export const sellPostDeleted = (storeId, sellPostId) => {
     const pub = redis.createClient(config);
-    const publishData = {sellPost:
+    const publishData = {sellpost:
         {storeId: storeId, sellPostId: sellPostId}};
-    pub.publish('SELLPOST.Created', JSON.stringify(publishData));
+    pub.publish('SELLPOST.Deleted', JSON.stringify(publishData));
     pub.quit();
 };
 
