@@ -29,7 +29,8 @@ export const getSellPostBasicInfo = (sellPost) => {
         time: sellPost.time,
         status: sellPost.status,
         shippable: sellPost.shippable,
-        sellPostDetailOrders: sellPost.sellPostDetailOrders
+        sellPostDetailOrders: sellPost.sellPostDetailOrders,
+        sellpostid: getSellPostGlobalId(sellPost._id)
     };
 };
 
@@ -39,7 +40,6 @@ export const addSellPost = (sellPostInfo, next) => {
         status: sellPostInfo.status, shippable: sellPostInfo.ship});
     sellPost.save(() => {
         getPubSellPostInfo(sellPost, (info) => {
-            console.log('this pub ' + JSON.stringify(info));
             sellPostCreated(info);
         });
         next(sellPost)

@@ -65,7 +65,6 @@ export const sellPostUpdated = (sellPost) => {
 export const sellPostCreated = (sellPost) => {
     const pub = redis.createClient(config);
     const publishData = {sellpost: sellPost};
-    console.log('publishData ' + JSON.stringify(publishData));
     pub.publish('SELLPOST.Created', JSON.stringify(publishData));
     pub.quit();
 };
