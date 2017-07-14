@@ -41,7 +41,7 @@ export const updateUser = (message) => {
     if(username) mLastUpdate.username = username
     if(phone) mLastUpdate.phone = phone
     if(address) mLastUpdate.address = address
-    store.lastUpdate = mLastUpdate
+    user.lastUpdate = mLastUpdate
   }
 
   User.findOneAndUpdate({ id }, user)
