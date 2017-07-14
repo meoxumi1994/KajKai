@@ -84,11 +84,11 @@ export const updateUserPassword = () => {
 
 export const changeUserProfile = () => {
     return (req, res) => {
-        updateUserInfo(req.decoded._id,req.body, (status, user) => {
+        updateUserInfo(req.decoded._id, req.body, (status, user) => {
             if (user) {
                 updateUserPub(user)
             }
-            res.json({status: status})
+            res.json({status: status, user: req.body});
         })
     }
 };
