@@ -1,4 +1,4 @@
-import { User, Address } from '../models'
+import { User, Address, Image } from '../models'
 import jwt from 'jsonwebtoken'
 import mongoose from '../datasource'
 import { checkEmail } from '../utils/utils'
@@ -254,7 +254,10 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
         return;
     }
     let imageUrl = [];
-    if (avatarUrl) imageUrl = [avatarUrl];
+    if (avatarUrl) {
+        let img = new Image({url: avatarUrl, time: (new Date()).getTime()});
+        imageUrl = [img];
+    }
     const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
                 socialNetworkId: socialNetworkId, avatarUrl: avatarUrl, imageUrl: imageUrl});
     user.save((err) => {
@@ -287,22 +290,28 @@ export const updateUserInfo = (userId, info, next) => {
         }
         if (info.avatarUrl) {
             user.avatarUrl = info.avatarUrl;
-            if (!user.imageUrl) {
-                user.imageUrl = [info.avatarUrl]
-            } else {
-                if (user.imageUrl.indexOf(info.avatarUrl) === -1) {
-                    user.imageUrl.push(user.avatarUrl)
+            let found = -1;
+            for (let i = 0; i < user.imageUrl.length; ++i) {
+                if (user.imageUrl[i].url === info.avatarUrl) {
+                    found = i;
+                    break;
                 }
+            }
+            if (found === -1) {
+                user.imageUrl.push(new Image({url: info.avatarUrl, time: (new Date()).getTime()}));
             }
         }
         if (info.coverUrl) {
             user.coverUrl = info.coverUrl;
-            if (!user.imageUrl) {
-                user.imageUrl = [info.coverUrl]
-            } else {
-                if (user.imageUrl.indexOf(info.coverUrl) === -1) {
-                    user.imageUrl.push(info.coverUrl)
+            let found = -1;
+            for (let i = 0; i < user.imageUrl.length; ++i) {
+                if (user.imageUrl[i].url === info.coverUrl) {
+                    found = i;
+                    break;
                 }
+            }
+            if (found === -1) {
+                user.imageUrl.push(new Image({url: info.coverUrl, time: (new Date()).getTime()}));
             }
         }
         if (info.address) { // TO DO
