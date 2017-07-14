@@ -39,7 +39,7 @@ export const createPostrow = (message) => {
             }, 1000)
           }
         })
-      }, 1000)
+      }, 500)
     }
   })
 }
