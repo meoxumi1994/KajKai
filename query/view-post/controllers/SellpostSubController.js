@@ -5,27 +5,7 @@ export const createSellpost = (message) => {
 
   Sellpost.findOne({ id }, (err, sellpost) => {
     if (sellpost) {
-      const mSellpost = {}
-      if (storeId) mSellpost.storeId = storeId
-      if (category) mSellpost.category = category
-      if (title) mSellpost.title = title
-      if (description) mSellpost.description = description
-      if (time) mSellpost.time = time
-      if (storeState) mSellpost.storeState = storeState
-      if (shipStatus) mSellpost.shipStatus = shipStatus
-
-      BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-        if (basicStore) {
-          mSellpost.storeName = basicStore.storeName
-        }
-        sellpost.save()
-      })
-    } else {
-      const sellpost = new Sellpost({
-        id,
-        storeId
-      })
-
+      if (storeId) sellpost.storeId = storeId
       if (category) sellpost.category = category
       if (title) sellpost.title = title
       if (description) sellpost.description = description
@@ -37,7 +17,26 @@ export const createSellpost = (message) => {
         if (basicStore) {
           sellpost.storeName = basicStore.storeName
         }
-        Sellpost.findOneAndUpdate({ id }, mSellpost)
+        sellpost.save()
+      })
+    } else {
+      const mSellpost = new Sellpost({
+        id,
+        storeId
+      })
+
+      if (category) mSellpost.category = category
+      if (title) mSellpost.title = title
+      if (description) mSellpost.description = description
+      if (time) mSellpost.time = time
+      if (storeState) mSellpost.storeState = storeState
+      if (shipStatus) mSellpost.shipStatus = shipStatus
+
+      BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+        if (basicStore) {
+          mSellpost.storeName = basicStore.storeName
+        }
+        mSellpost.save()
       })
     }
   })
