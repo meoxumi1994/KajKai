@@ -2,12 +2,14 @@ import React from 'react'
 import { Button, FormControl } from 'react-bootstrap'
 
 const AddMember = ({addMember, user, mesId, chatListMap, styles}) => {
+  // console.log('fuck',mesId);
+  // console.log('chatListMap',chatListMap[mesId].usersKey);
   let conversator
   return (
     <form style={styles.addMemberDiv} onSubmit={e => {
       e.preventDefault()
       if (conversator.value.trim()) {
-          addMember(mesId, user.id, conversator.value, chatListMap[mesId].usersKey)
+          addMember(mesId, user.id, conversator.value)
           conversator = ''
       }
     }}>

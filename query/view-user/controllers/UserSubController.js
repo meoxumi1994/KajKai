@@ -2,8 +2,7 @@ import { User, Black } from '../models'
 
 export const createUser = (message) => {
   const { id, username, email, avatarUrl, imageUrls: imageList } = message.user
-  // const user = new User({ id })
-  const user = { id }
+  const user = new User({ id })
 
   if (username) user.username = username
   if (email) user.email = email
@@ -13,7 +12,7 @@ export const createUser = (message) => {
     time: image.time
   }))
 
-  user.save()
+  user.save(() => {})
 }
 
 export const updateUser = (message) => {
@@ -41,7 +40,7 @@ export const updateUser = (message) => {
     user.lastUpdate = mLastUpdate
   }
 
-  User.findOneAndUpdate({ id }, user)
+  User.findOneAndUpdate({ id }, user, () => {})
 }
 
 export const updateBlackList = (message) => {
@@ -63,7 +62,7 @@ export const updateBlackList = (message) => {
             blackList.push(black)
 
             user.blackList = blackList
-            user.save()
+            user.save(() => {})
           }
         })
       } else {
@@ -75,7 +74,7 @@ export const updateBlackList = (message) => {
         }
 
         user.blackList = blackList
-        user.save()
+        user.save(() => {})
       }
     }
   })

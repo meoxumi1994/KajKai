@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import ChatBottom from '~/components/chat/bottom'
+import { sendMessage } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
   return (
@@ -15,20 +16,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       if (mesId == 0) {
           mesId = null
       }
-      dispatch({
-          type: 'server/SEND_MESSAGE',
-          data: {
-            mesId,
-            id,
-            message: {
-              text,
-              url: '',
-              type: 'message'
-            },
-            time: Date.now()
-          }
-         })
-  }
+      dispatch(sendMessage(mesId, id, text, url, 'message'))
+  },
+
 })
 
 const ChatBottomContainer = connect(

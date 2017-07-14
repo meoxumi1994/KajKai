@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    addMember: (mesId, id, conversatorId, userList) => {
+    addMember: (mesId, id, conversatorId) => {
         let type = ''
         if (mesId == 0) {
             if (conversatorId.indexOf(";") == -1) {
