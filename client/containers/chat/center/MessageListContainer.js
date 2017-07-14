@@ -11,7 +11,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+    getMessages: (mesId, multiChat) => {
+        dispatch(getMessages(mesId, Date.now(), multiChat))
+    },
 })
 
 const MessageListContainer = connect(

@@ -13,15 +13,15 @@ class ChatTop extends React.Component {
 
     render() {
       let conversator
-      const { chatListMap, chatListKey, currentChat, mesId, styles } = this.props
+      const { chatListMap, currentChat, mesId, styles, multipleKey } = this.props
       const { displayAddMember, loadChat, displaySettings, close } = this.props
 
       const { usersKey, usersMap } = chatListMap[mesId]
 
-      const displayAdd = chatListMap[mesId].display.addMember
+      const addMember = true//chatListMap[mesId].display.addMember
 
       return (
-        <div style={currentChat == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
+        <div style={currentChat.mesId == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
             <label style={styles.displayLabel}>{usersKey.length == 0?'Tin nhắn mới':usersKey.map(uKey => usersMap[uKey].username + ', ')}</label>
             <div style={styles.iconGroupDiv}>
                 <Link to={"/chat"} >
@@ -29,10 +29,10 @@ class ChatTop extends React.Component {
                 </Link>
                 <img style={styles.iconImg} src="/images/plus.ico" onClick={() => displayAddMember(mesId)}/>
                 <img style={styles.iconImg} src="/images/newSetting.png" onClick={() => displaySettings()}/>
-                <img style={styles.closeImg} src="/images/blackClose.png" onClick={() => close(mesId, chatListKey)}/>
+                <img style={styles.closeImg} src="/images/blackClose.png" onClick={() => close(mesId, multipleKey)}/>
             </div>
             {
-                displayAdd? <AddMemberContainer styles={styles} mesId={mesId}/>: <hr style={styles.spliterHr}/>
+                addMember? <AddMemberContainer styles={styles} mesId={mesId}/>: <hr style={styles.spliterHr}/>
             }
             <SettingsContainer mesId={mesId}/>
         </div>

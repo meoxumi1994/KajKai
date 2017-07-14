@@ -3,25 +3,25 @@ import ChatTop from '~/components/chat/top'
 import { getMessages } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
-    const { chatListMap, chatListKey, currentChat } = state.inst.chat.left
+    const { chatListMap, currentChat } = state.inst.chat.left
+    const { multipleKey } = state.inst.chat.center
     return {
       chatListMap,
-      chatListKey,
-      currentChat: currentChat.mesId,
+      multipleKey,
+      currentChat,
       userId: state.user.id
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    close: (mesId, chatListKey) => {
-        console.log('mesId ', mesId);
-        dispatch({type: 'CLOSE_CHAT', data: {mesId: mesId}})
+    close: (mesId, multipleKey) => {
+        dispatch({type: 'CLOSE_CHAT', data: {mesId, newMesId: multipleKey[multipleKey.length - 2]}})
     },
     loadChat: (mesId) => {
         dispatch(getMessages(mesId, Date.now(), 10))
     },
     displayAddMember: (mesId) => {
-        dispatch({type: 'USER_DISPLAY/ADD_MEMBER', data: {mesId, value: 'toggle'}})
+        // dispatch({type: 'USER_DISPLAY/ADD_MEMBER', data: {mesId, value: 'toggle'}})
     },
     setUserId: (id) => {
         dispatch({type: 'SET_USER_ID', data: {id: id}})

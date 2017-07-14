@@ -11,17 +11,16 @@ export const getMesId = (id, person) => dispatch => {
           dispatch({type: 'NEW_CHAT', data: {mesId: response.mesId}})
           dispatch(getUser(person, response.mesId))
           dispatch(getMessages(response.mesId, Date.now()))
-          dispatch(getMessages(response.mesId, Date.now()))
     })
 }
 
 export const getMessages = (mesId, offset, multiChat) => dispatch => {
     flem('/messages/'+mesId, {
         offset: offset,
-        length: 20
+        length: 10
     }, {}).then((response) => {
-            dispatch(addChat(response, multiChat))
-            dispatch(setCurrentChat(response.mesId))
+          dispatch(addChat(response, multiChat))
+          dispatch(setCurrentChat(response.mesId))
     })
 }
 
