@@ -11,7 +11,24 @@ export const getStoreHandler = () => (req, res) => {
         res.json({status: 'failed'})
       }
     })
-    
+
+  } else {
+    res.json({status: 'failed'})
+  }
+}
+
+export const getStoresHandler = () => (req, res) => {
+  if (req.decoded) {
+    const { swlat, swlng, nelat, nelng, length } = req.params
+
+    getStores(swlat, swlng, nelat, nelng, length, (stores) => {
+      if (stores) {
+        res.json(stores)
+      } else {
+        res.json({status: 'failed'})
+      }
+    })
+
   } else {
     res.json({status: 'failed'})
   }
