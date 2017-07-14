@@ -40,7 +40,7 @@ export const updateUser = (message) => {
     user.lastUpdate = mLastUpdate
   }
 
-  User.findOneAndUpdate({ id }, user, () => {})
+  User.findOneAndUpdate({ id }, user)
 }
 
 export const updateBlackList = (message) => {
