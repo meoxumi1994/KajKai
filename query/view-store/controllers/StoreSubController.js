@@ -75,5 +75,5 @@ export const updateStore = (message) => {
   }
 
 
-  Store.findOneAndUpdate({ id }, store)
+  Store.findOneAndUpdate({ id }, store, () => {})
 }
