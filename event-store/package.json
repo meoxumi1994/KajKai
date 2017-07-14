@@ -4,7 +4,8 @@
   "description": "",
   "main": "event-store.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 delete indes-event.js && pm2 start indes-event.js"
   },
   "author": "",
   "license": "ISC",
