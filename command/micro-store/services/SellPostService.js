@@ -36,6 +36,7 @@ export const addSellPost = (sellPostInfo, next) => {
                     sellPost.save(() => {
                         next(sellPost, sellPostDetail);
                     });
+                    info.postrows_order = sellPost.sellPostDetailOrders;
                     sellPostCreated(info);
                 });
             } else {
