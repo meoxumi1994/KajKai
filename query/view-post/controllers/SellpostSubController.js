@@ -21,7 +21,6 @@ export const createSellpost = (message) => {
     }
     sellpost.save()
   })
-
 }
 
 
