@@ -19,7 +19,7 @@ export const createSellpost = (message) => {
     if (basicStore) {
       sellpost.storeName = basicStore.storeName
     }
-    sellpost.save()
+    sellpost.save(() => {})
   })
 }
 
@@ -51,7 +51,7 @@ export const updateSellpost = (message) => {
         })
 
         sellpost.postrows = mPostrows
-        sellpost.save()
+        sellpost.save(() => {})
       }
     })
   } else {

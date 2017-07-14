@@ -32,7 +32,7 @@ export const createComment = (message) => {
 
       comment.replies = []
       comment.replies.push(reply)
-      comment.save()
+      comment.save(() => {})
 
       if (sellpostId) {
         Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
@@ -71,7 +71,7 @@ export const createComment = (message) => {
 
               sellpost.postrows = postrows
             }
-            sellpost.save()
+            sellpost.save(() => {})
           }
         })
       } else {
@@ -85,7 +85,7 @@ export const createComment = (message) => {
             comments.push(comment)
             minorpost.numberOfComment = comments.length
             minorpost.comments = comments
-            minorpost.save()
+            minorpost.save(() => {})
           }
         })
       }

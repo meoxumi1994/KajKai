@@ -12,7 +12,7 @@ export const createUser = (message) => {
     time: image.time
   }))
 
-  user.save()
+  user.save(() => {})
 }
 
 export const updateUser = (message) => {
@@ -40,7 +40,7 @@ export const updateUser = (message) => {
     user.lastUpdate = mLastUpdate
   }
 
-  User.findOneAndUpdate({ id }, user)
+  User.findOneAndUpdate({ id }, user, () => {})
 }
 
 export const updateBlackList = (message) => {
@@ -62,7 +62,7 @@ export const updateBlackList = (message) => {
             blackList.push(black)
 
             user.blackList = blackList
-            user.save()
+            user.save(() => {})
           }
         })
       } else {
@@ -74,7 +74,7 @@ export const updateBlackList = (message) => {
         }
 
         user.blackList = blackList
-        user.save()
+        user.save(() => {})
       }
     }
   })

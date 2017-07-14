@@ -7,7 +7,7 @@ export const createBasicUser = (message) => {
   if (username) basicUser.username = username
   if (avatarUrl) basicUser.avatarUrl = avatarUrl
 
-  basicUser.save()
+  basicUser.save(() => {})
 }
 
 export const updateBasicUser = (message) => {
@@ -17,5 +17,5 @@ export const updateBasicUser = (message) => {
   if (avatarUrl) basicUser.avatarUrl = avatarUrl
   if (username) basicUser.username = username
 
-  BasicUser.findOneAndUpdate({ id }, basicUser)
+  BasicUser.findOneAndUpdate({ id }, basicUser, () => {})
 }
