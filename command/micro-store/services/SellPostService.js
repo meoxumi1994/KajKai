@@ -27,7 +27,6 @@ export const addSellPost = (sellPostInfo, next) => {
         status: sellPostInfo.status, shippable: sellPostInfo.ship, sellPostDetailOrders: []});
     sellPost.save(() => {
         getPubSellPostInfo(sellPost, (info) => {
-            sellPostCreated(info);
             let sellPostDetail = sellPostInfo.postrows;
             if (sellPostDetail && sellPostDetail.length > 0) {
                 createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), (sellPostDetail) => {
@@ -37,6 +36,7 @@ export const addSellPost = (sellPostInfo, next) => {
                     sellPost.save(() => {
                         next(sellPost, sellPostDetail);
                     });
+                    sellPostCreated(info);
                 });
             } else {
                 next(sellPost, null);

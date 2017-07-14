@@ -1,5 +1,6 @@
 import { createUser, updateUser } from '../services/UserSearchService'
 import { createStore, updateStore } from '../services/StoreSearchService'
+import { getStore } from '../controllers/SearchPubController'
 
 export const createUserSub = (message) => {
     console.log(message, JSON.stringify(message));
@@ -19,7 +20,7 @@ export const updateUserSub = (message) => {
     updateUser({userId, username, avatarUrl});
 };
 
-export const createStoreSub = (message, next) => {
+export const createStoreSub = (message) => {
     console.log(message, JSON.stringify(message));
     const store = message.store;
     const storeId = store.id;
@@ -33,7 +34,7 @@ export const createStoreSub = (message, next) => {
 
 };
 
-export const updateStoreSub = (message, next) => {
+export const updateStoreSub = (message) => {
     console.log(message, JSON.stringify(message));
     const store = message.store;
     const storeId = store.id;
@@ -44,4 +45,30 @@ export const updateStoreSub = (message, next) => {
     const firstCategoryName = store.firstCategoryName;
     const secondCategoryName = store.secondCategoryName;
     updateStore({storeId, storeName, avatarUrl, address, category, firstCategoryName, secondCategoryName});
+};
+
+export const createSellPostSub = (message) => {
+    console.log(message, JSON.stringify(message));
+    const sellpost = message.sellpost;
+    const sellPostId = sellpost.sellPostId;
+    const storeId = sellpost.storeId;
+    const title = sellpost.title;
+    const category = sellpost.category;
+    getStore(storeId, (store) => {
+        const address = store.address;
+        const firstCategoryId = store.firstCategoryId;
+        const secondCategoryId = store.secondCategoryId;
+        const firstCategoryName = store.firstCategoryName;
+        const secondCategoryName = store.secondCategoryName;
+        const avatarUrl = store.avatarUrl;
+
+    })
+};
+
+export const updateSellPostSub = (message) => {
+    console.log(message, JSON.stringify(message));
+    const sellpost = message.sellpost;
+    const title = sellpost.title;
+    const category = sellpost.category;
+
 };
