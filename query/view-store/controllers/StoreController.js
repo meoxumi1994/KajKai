@@ -1,4 +1,4 @@
-import { getStore } from '../services/StoreService.js'
+import { getStore, getStores } from '../services/StoreService.js'
 
 export const getStoreHandler = () => (req, res) => {
   if (req.decoded) {
