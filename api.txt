@@ -1022,9 +1022,8 @@ GET /imagelist/minorpost?offset=-1 { // list ảnh theo thứ tự thời gian g
     listImage : ['','','']
 }
 
-GET /store?nelat=0&nelng=0&swlat=0&swlng=0 {    //NE=NorthEast SW=SouthWest
+GET /store?nelat=0&nelng=0&swlat=0&swlng=0&length=30 {    //NE=NorthEast SW=SouthWest
     status: 'success|failed',
-    length: 30, // 1 follow = 2 likes
     stores: [
         {
             id: ,                 //store id
