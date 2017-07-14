@@ -88,7 +88,7 @@ export const changeUserProfile = () => {
             if (user) {
                 updateUserPub(user)
             }
-            res.json({status: status, user: req.body});
+            res.json({status: status, user: {...req.body, id: req.decoded._id}});
         })
     }
 };
