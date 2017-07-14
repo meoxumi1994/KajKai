@@ -22,7 +22,7 @@ const saveEvent = (channel, message) => {
     message
   })
 
-  event.save()
+  event.save(() => {})
 }
 
 export default saveEvent
