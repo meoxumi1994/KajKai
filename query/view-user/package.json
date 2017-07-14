@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "git pull && pm2 delete indev-user.js && pm2 start indev-user.js"
+    "start": "pm2 delete indev-user.js && pm2 start indev-user.js"
   },
   "author": "",
   "license": "ISC",
