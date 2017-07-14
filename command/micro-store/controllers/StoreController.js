@@ -20,7 +20,7 @@ export const updateStoreCon = () => {
             if (typeof store === 'string') {
                 res.json({error: store})
             } else {
-                res.json({...req.body, status: 'success'});
+                res.json({store: req.body, status: 'success'});
             }
         })
     }
