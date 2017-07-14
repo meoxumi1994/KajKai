@@ -1,19 +1,22 @@
-import { Sellpost } from '../models'
+import { Postrow } from '../models'
 
 export const getPostrows = (sellpostId, offset, next) => {
-  Sellpost.find({ sellpostId }, (err, sellpost) => {
-    if (err || !sellpost) {
+  Postrow.find({ sellpostId }, (err, postrows) => {
+    if (err || !postrows) {
       if(err) {
         next(null)
       } else {
         next({
+          status: 'nodata',
           offset,
           postrows: []
         })
       }
     } else {
-      const { postrows } = sellpost
-      next(getClientFormatPostrows(postrows, offset))
+      next({
+        status: 'success',
+        ...getClientFormatPostrows(postrows, offset)
+      })
     }
   })
 }
@@ -22,18 +25,16 @@ export const getClientFormatPostrows = (postrows, offset) => {
   if (!postrows) {
     return {
       postrows_offset: offset,
-      postrows: [],
-      postrows_order: []
+      postrows: []
     }
   }
-  const postrowOrder = [], mPostrows = []
+  const mPostrows = []
 
   let currentNumberOfLine = 0, postrowOffset = -1
 
   for (let i = offset + 1; i < postrows.length; i++) {
     let postrow = postrows[i]
     if (currentNumberOfLine + 0.5 * postrow.numberOfLine < 30) {
-      postrowOrder.push(postrow.id)
 
       let mPostrow = {}
       mPostrow.sellpostid = postrow.sellpostId
@@ -62,7 +63,6 @@ export const getClientFormatPostrows = (postrows, offset) => {
 
   return ({
     postrows_offset: postrowOffset,
-    postrows_order: postrowOrder,
     postrows: mPostrows
   })
 }

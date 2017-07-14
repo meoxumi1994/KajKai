@@ -1,4 +1,4 @@
-import { Sellpost } from '../models'
+import { Sellpost, Postrow } from '../models'
 import { getClientFormatPostrows } from './PostrowService'
 import { getClientFormatSellpostComments } from './CommentService'
 import jwt from 'jsonwebtoken'
@@ -15,9 +15,17 @@ export const getSellpost = (id, next) => {
         })
       }
     } else {
-      next({
-        status: 'success',
-        ...getClientFormatSellpost(sellpost, Date.now())
+      Postrow.find({ sellpostId: id }, (err, postrows) => {
+        if (postrows) {
+          sellpost.postrows = postrows
+        } else {
+          sellpost.postrows = []
+        }
+
+        next({
+          status: 'success',
+          ...getClientFormatSellpost(sellpost, Date.now())
+        })
       })
     }
   })
@@ -37,32 +45,53 @@ export const getSellposts = (storeId, offset, next) => {
         })
       }
     } else {
-      const mSellposts = []
-      let currentNumberOfSellpost = 0, mOffset, lastIndex
-      for (let i = sellposts.length - 1; i >= 0; i--) {
-        let sellpost = sellposts[i]
-        if (sellpost.time < offset) {
-          if (currentNumberOfSellpost < 2) {
-            mSellposts.push(getClientFormatSellpost(sellpost, Date.now()))
+      const mPromises = [], sellpostById = {}
+      sellposts.map((sellpost, index) => {
+        sellpostById[sellpost.id] = index
+      })
+      sellposts.map((sellpost) => {
+        mPromises.push(new Promise((resolve, reject) => {
+          Postrow.find({ sellpostId: sellpost.id }, (err, postrows) => {
+            if (postrows) {
+              sellposts[sellpostById[sellpost.id]].postrows = postrows
+              resolve(postrows)
+            } else {
+              reject(err)
+            }
+          })
+        }))
+      })
+      Promise.all(mPromises).then((postrowses) => {
+        const mSellposts = []
+        let currentNumberOfSellpost = 0, mOffset, lastIndex
+        for (let i = sellposts.length - 1; i >= 0; i--) {
+          let sellpost = sellposts[i]
+          if (sellpost.time < offset) {
+            if (currentNumberOfSellpost < 2) {
+              mSellposts.push(getClientFormatSellpost(sellpost, Date.now()))
 
-            mOffset = sellpost.time.getTime()
-            lastIndex = i
-            currentNumberOfSellpost++
-          } else {
-            break
+              mOffset = sellpost.time.getTime()
+              lastIndex = i
+              currentNumberOfSellpost++
+            } else {
+              break
+            }
           }
         }
-      }
 
-      if (currentNumberOfSellpost < 2 || lastIndex == 0) {
-        mOffset = -2
-      }
+        if (currentNumberOfSellpost < 2 || lastIndex == 0) {
+          mOffset = -2
+        }
 
-      next({
-        status: 'success',
-        offset: mOffset,
-        storeid: storeId,
-        sellposts: mSellposts
+        next({
+          status: 'success',
+          offset: mOffset,
+          storeid: storeId,
+          sellposts: mSellposts
+        })
+
+      }, err => {
+        console.log('error', err)
       })
     }
   })
@@ -90,6 +119,7 @@ const getClientFormatSellpost = (sellpost, offset) => {
     time: sellpost.time.getTime(),
     status: sellpost.storeState,
     ship: sellpost.shipStatus,
+    postrows_order: sellpost.postrowsOrder ? sellpost.postrowsOrder : [],
     ...getClientFormatPostrows(postrows, -1),
     numlike: sellpost.numberOfLike ? sellpost.numberOfLike : 0,
     likestatus: ['like','love','haha'],

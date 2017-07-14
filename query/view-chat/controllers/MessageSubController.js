@@ -25,7 +25,7 @@ export const createMessage = (message) => {
       messages = [...messages, mMessage]
       chat.lastMessageTime = mMessage.time
       chat.messages = messages
-      chat.save()
+      chat.save(() => {})
 
       chat.users.map((user) => {
         UserChat.findOne({ userId: user.id}, (err, userChat) => {
@@ -39,7 +39,7 @@ export const createMessage = (message) => {
               }
             }
             userChat.chats = chats
-            userChat.save()
+            userChat.save(() => {})
           }
         })
       })

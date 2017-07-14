@@ -1,8 +1,6 @@
 import { User, Black } from '../models'
 
 export const createUser = (message) => {
-  console.log(message, JSON.stringify(message));
-  console.log(message);
   const { id, username, email, avatarUrl, imageUrls: imageList } = message.user
   const user = new User({ id })
 
@@ -14,9 +12,7 @@ export const createUser = (message) => {
     time: image.time
   }))
 
-  user.save((err) => {
-    console.log(err);
-  })
+  user.save()
 }
 
 export const updateUser = (message) => {

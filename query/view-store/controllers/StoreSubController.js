@@ -37,7 +37,7 @@ export const createStore = (message) => {
     store.lastUpdate = mLastUpdate
   }
 
-  store.save()
+  store.save(() => {})
 }
 
 export const updateStore = (message) => {
@@ -74,5 +74,6 @@ export const updateStore = (message) => {
     store.lastUpdate = mLastUpdate
   }
 
-  Store.findOneAndUpdate({ id }, store)
+
+  Store.findOneAndUpdate({ id }, store, () => {})
 }

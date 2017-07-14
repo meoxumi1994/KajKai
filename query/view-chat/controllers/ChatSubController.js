@@ -24,19 +24,19 @@ export const createChat = (message) => {
 
     Promise.all(mPromises).then((basicUsers) => {
       chat.users = basicUsers
-      chat.save()
+      chat.save(() => {})
 
       chat.users.map((user) => {
         UserChat.findOne({ userId: user.id }, (err, userChat) => {
           if (userChat) {
             userChat.chats.push(chat)
-            userChat.save()
+            userChat.save(() => {})
           } else {
             const mUserChat = new UserChat({
               userId: user.id,
               chats: [chat]
             })
-            mUserChat.save()
+            mUserChat.save(() => {})
           }
         })
       })
@@ -70,7 +70,7 @@ export const updateChat = (message) => {
           if (name) {
             chat.name = name
           }
-          chat.save()
+          chat.save(() => {})
 
           chat.users.map((user) => {
             UserChat.findOne({ userId: user.id }, (err, userChat) => {
@@ -86,7 +86,7 @@ export const updateChat = (message) => {
                 }
 
                 userChat.chats = chats
-                userChat.save()
+                userChat.save(() => {})
               }
             })
           })

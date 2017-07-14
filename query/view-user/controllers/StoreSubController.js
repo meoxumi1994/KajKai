@@ -19,7 +19,7 @@ export const addStore = (message) => {
       storeList.push(basicStore)
 
       user.storeList = storeList
-      user.save()
+      user.save(() => {})
     }
   })
 }
@@ -38,7 +38,7 @@ export const updateStoreList = (message) => {
       }
 
       user.storeList = storeList
-      user.save()
+      user.save(() => {})
     }
   })
 }
