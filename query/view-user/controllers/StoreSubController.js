@@ -35,7 +35,8 @@ export const updateStoreList = (message) => {
       }
       for (let i = 0; i < storeList.length; i++){
         if (storeList[i].id == storeId) {
-          storeList[i] = { ...storeList[i], storeName, avatarUrl }
+          storeList[i].storeName = storeName
+          storeList[i].avatarUrl = avatarUrl
           break
         }
       }
