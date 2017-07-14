@@ -3,23 +3,43 @@ import { Sellpost, BasicStore } from '../models'
 export const createSellpost = (message) => {
   const { sellPostId: id, storeId, category, title, description, time, status: storeState, ship: shipStatus } = message.sellpost
 
-  const sellpost = new Sellpost({
-    id,
-    storeId
-  })
+  Sellpost.findOne({ id }, (err, sellpost) => {
+    if (sellpost) {
+      const mSellpost = {}
+      if (storeId) mSellpost.storeId = storeId
+      if (category) mSellpost.category = category
+      if (title) mSellpost.title = title
+      if (description) mSellpost.description = description
+      if (time) mSellpost.time = time
+      if (storeState) mSellpost.storeState = storeState
+      if (shipStatus) mSellpost.shipStatus = shipStatus
 
-  if (category) sellpost.category = category
-  if (title) sellpost.title = title
-  if (description) sellpost.description = description
-  if (time) sellpost.time = time
-  if (storeState) sellpost.storeState = storeState
-  if (shipStatus) sellpost.shipStatus = shipStatus
+      BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+        if (basicStore) {
+          mSellpost.storeName = basicStore.storeName
+        }
+        sellpost.save()
+      })
+    } else {
+      const sellpost = new Sellpost({
+        id,
+        storeId
+      })
 
-  BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-    if (basicStore) {
-      sellpost.storeName = basicStore.storeName
+      if (category) sellpost.category = category
+      if (title) sellpost.title = title
+      if (description) sellpost.description = description
+      if (time) sellpost.time = time
+      if (storeState) sellpost.storeState = storeState
+      if (shipStatus) sellpost.shipStatus = shipStatus
+
+      BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+        if (basicStore) {
+          sellpost.storeName = basicStore.storeName
+        }
+        Sellpost.findOneAndUpdate({ id }, mSellpost)
+      })
     }
-    sellpost.save()
   })
 
 }
