@@ -35,7 +35,14 @@ export const updateUser = (message) => {
   if (language) user.language = language
   if (sex) user.sex = sex
   if (yearOfBirth) user.yearOfBirth = yearOfBirth
-  if (lastUpdate) user.lastUpdate = lastUpdate
+  if (lastUpdate) {
+    const mLastUpdate = {}
+    const { username, phone, address } = lastUpdate
+    if(username) mLastUpdate.username = username
+    if(phone) mLastUpdate.phone = phone
+    if(address) mLastUpdate.address = address
+    store.lastUpdate = mLastUpdate
+  }
 
   User.findOneAndUpdate({ id }, user)
 }
