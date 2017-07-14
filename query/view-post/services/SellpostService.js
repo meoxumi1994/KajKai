@@ -1,4 +1,4 @@
-import { Sellpost } from '../models'
+import { Sellpost, Postrow } from '../models'
 import { getClientFormatPostrows } from './PostrowService'
 import { getClientFormatSellpostComments } from './CommentService'
 import jwt from 'jsonwebtoken'

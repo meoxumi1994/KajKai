@@ -1,19 +1,22 @@
-import { Sellpost } from '../models'
+import { Postrow } from '../models'
 
 export const getPostrows = (sellpostId, offset, next) => {
-  Sellpost.find({ sellpostId }, (err, sellpost) => {
-    if (err || !sellpost) {
+  Postrow.find({ sellpostId }, (err, postrows) => {
+    if (err || !postrows) {
       if(err) {
         next(null)
       } else {
         next({
+          status: 'nodata',
           offset,
           postrows: []
         })
       }
     } else {
-      const { postrows } = sellpost
-      next(getClientFormatPostrows(postrows, offset))
+      next({
+        status: 'success',
+        ...getClientFormatPostrows(postrows, offset)
+      })
     }
   })
 }
