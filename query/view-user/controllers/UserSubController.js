@@ -1,8 +1,6 @@
 import { User, Black } from '../models'
 
 export const createUser = (message) => {
-  console.log(message, JSON.stringify(message));
-  console.log(message);
   const { id, username, email, avatarUrl, imageUrls: imageList } = message.user
   const user = new User({ id })
 
@@ -14,14 +12,11 @@ export const createUser = (message) => {
     time: image.time
   }))
 
-  user.save((err) => {
-    console.log(err);
-  })
+  user.save()
 }
 
 export const updateUser = (message) => {
   const { id, username, avatarUrl, coverUrl, imageUrls: imageList, address, phone, language, sex, yearOfBirth, lastUpdate } = message.user
-  console.log('message.user: ', message.user);
   const user = {}
 
   if (username) user.username = username
@@ -45,12 +40,7 @@ export const updateUser = (message) => {
     user.lastUpdate = mLastUpdate
   }
 
-  console.log('user: ', user);
-
-  User.findOneAndUpdate({ id }, user, (err, doc) => {
-    console.log('err: ', err);
-    console.log('doc: ', doc);
-  })
+  User.findOneAndUpdate({ id }, user)
 }
 
 export const updateBlackList = (message) => {
