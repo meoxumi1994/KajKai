@@ -2,6 +2,7 @@ import mongoose from '../datasource'
 import { SocialType, Language, PrivacyAEP, PrivacyOthers } from '../enum'
 import _ from 'lodash'
 import AddressSchema from './Address'
+import ImageSchema from './Image'
 
 const UserSchema = new mongoose.Schema({
     userName: {type: String},
@@ -9,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     password: {type: String},
     socialNetworkType: {type: String, enum: _.values(SocialType)},
     socialNetworkId: {type: String},
-    imageUrl: [String],
+    imageUrl: [ImageSchema],
     avatarUrl: {type: String},
     coverUrl: {type: String},
     phone: {type: String},
