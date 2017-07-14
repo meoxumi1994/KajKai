@@ -38,19 +38,24 @@ export const getSellposts = (storeId, offset, next) => {
       }
     } else {
       const mSellposts = []
-      let currentNumberOfSellpost = 0, mOffset = -2
+      let currentNumberOfSellpost = 0, mOffset, lastIndex
       for (let i = sellposts.length - 1; i >= 0; i--) {
         let sellpost = sellposts[i]
         if (sellpost.time < offset) {
           if (currentNumberOfSellpost < 2) {
             mSellposts.push(getClientFormatSellpost(sellpost, Date.now()))
 
-            mOffset = sellpost.time
+            mOffset = sellpost.time.getTime()
+            lastIndex = i
             currentNumberOfSellpost++
           } else {
             break
           }
         }
+      }
+
+      if (currentNumberOfSellpost < 2 || lastIndex == 0) {
+        mOffset = -2
       }
 
       next({
@@ -82,11 +87,12 @@ const getClientFormatSellpost = (sellpost, offset) => {
     category: sellpost.category,
     title: sellpost.title,
     description: sellpost.description,
-    time: sellpost.time,
+    time: sellpost.time.getTime(),
     status: sellpost.storeState,
     ship: sellpost.shipStatus,
     ...getClientFormatPostrows(postrows, -1),
     numlike: sellpost.numberOfLike ? sellpost.numberOfLike : 0,
+    likestatus: ['like','love','haha'],
     likes: sellpost.likers ? sellpost.likers.slice(0, 5) : null,
     numfollow: sellpost.numerOfFollow ? sellpost.numerOfFollow : 0,
     follows: sellpost.followers ? sellpost.followers.slice(0, 5) : null,

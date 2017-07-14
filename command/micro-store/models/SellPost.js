@@ -8,7 +8,7 @@ const SellPostSchema = new mongoose.Schema({
     time: {type: String},
     status: {type: String}, //'notyet|open|sleep',
     shippable: {type: String},
-    sellPostDetailOrders: [Number]
+    sellPostDetailOrders: [String]
 });
 
 export default SellPostSchema

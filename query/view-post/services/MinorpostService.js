@@ -68,7 +68,7 @@ const getClientFormatMinorpost = (minorpost, offset) => {
     numline: minorpost.numberOfLine,
     storeid: minorpost.storeId,
     storename: minorpost.storeName,
-    time: minorpost.time,
+    time: minorpost.time.getTime(),
     content: minorpost.content ? minorpost.content.substr(0, 200) : null,
     images: minorpost.images,
     video: minorpost.video,

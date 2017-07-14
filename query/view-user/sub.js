@@ -14,7 +14,6 @@ for(let mChannel in allChannels) {
 
     sub.on('message', (channel, message) => {
         if(channel === mChannel) {
-            console.log(mChannel, message)
             const eventMessage = JSON.parse(message)
 
             method(eventMessage)

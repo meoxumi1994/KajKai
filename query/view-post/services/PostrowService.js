@@ -23,7 +23,7 @@ export const getClientFormatPostrows = (postrows, offset) => {
     return {
       postrows_offset: offset,
       postrows: [],
-      postrow_order: []
+      postrows_order: []
     }
   }
   const postrowOrder = [], mPostrows = []
@@ -50,7 +50,7 @@ export const getClientFormatPostrows = (postrows, offset) => {
         list: product.list,
         totalnum: product.numberOfOrder
       }))
-      mPostrows.type = postrow.type
+      mPostrow.type = postrow.type
 
       mPostrows.push(mPostrow)
       currentNumberOfLine += postrow.numberOfLine
@@ -62,7 +62,7 @@ export const getClientFormatPostrows = (postrows, offset) => {
 
   return ({
     postrows_offset: postrowOffset,
-    postrow_order: postrowOrder,
+    postrows_order: postrowOrder,
     postrows: mPostrows
   })
 }
