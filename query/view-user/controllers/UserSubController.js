@@ -9,10 +9,10 @@ export const createUser = (message) => {
   if (username) user.username = username
   if (email) user.email = email
   if (avatarUrl) user.avatarUrl = avatarUrl
-  if (imageList) user.imageList = imageList.map((image) => {
+  if (imageList) user.imageList = imageList.map((image) => ({
     url: image.url,
     time: image.time
-  })
+  }))
 
   user.save((err) => {
     console.log(err);
@@ -26,10 +26,10 @@ export const updateUser = (message) => {
   if (username) user.username = username
   if (avatarUrl) user.avatarUrl = avatarUrl
   if (coverUrl) user.coverUrl = coverUrl
-  if (imageList) user.imageList = imageList.map((image) => {
+  if (imageList) user.imageList = imageList.map((image) => ({
     url: image.url,
     time: image.time
-  })
+  }))
   if (address) user.address = address
   if (phone) user.phone = phone
   if (language) user.language = language
