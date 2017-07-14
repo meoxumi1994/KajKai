@@ -28,20 +28,20 @@ export const addSellPost = (sellPostInfo, next) => {
     sellPost.save(() => {
         getPubSellPostInfo(sellPost, (info) => {
             sellPostCreated(info);
-        });
-        let sellPostDetail = sellPostInfo.postrows;
-        if (sellPostDetail && sellPostDetail.length > 0) {
-            createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), (sellPostDetail) => {
-                sellPost.sellPostDetailOrders = [];
-                for (let i = 0; i < sellPostDetail.length; ++i)
-                    sellPost.sellPostDetailOrders.push(sellPostDetail[i].id);
-                sellPost.save(() => {
-                    next(sellPost, sellPostDetail);
+            let sellPostDetail = sellPostInfo.postrows;
+            if (sellPostDetail && sellPostDetail.length > 0) {
+                createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), (sellPostDetail) => {
+                    sellPost.sellPostDetailOrders = [];
+                    for (let i = 0; i < sellPostDetail.length; ++i)
+                        sellPost.sellPostDetailOrders.push(sellPostDetail[i].id);
+                    sellPost.save(() => {
+                        next(sellPost, sellPostDetail);
+                    });
                 });
-            });
-        } else {
-            next(sellPost, null);
-        }
+            } else {
+                next(sellPost, null);
+            }
+        });
     })
 };
 
