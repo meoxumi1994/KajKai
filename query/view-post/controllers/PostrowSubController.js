@@ -24,10 +24,10 @@ export const createPostrow = (message) => {
       sellpost.save()
     } else {
       const sellpost = new Sellpost({
-        id: sellpostId
+        id: sellpostId,
         postrows: [postrow]
       })
-      sellpost.save()      
+      sellpost.save()
     }
   })
 }
