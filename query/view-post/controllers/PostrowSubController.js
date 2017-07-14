@@ -17,11 +17,24 @@ export const createPostrow = (message) => {
     if (sellpost) {
       let { postrows } = sellpost
       if (!postrows) {
-        postrows = []
+        setTimeout(() => {
+          Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
+            if (sellpost) {
+              let { postrows } = sellpost
+              if (!postrows) {
+                postrows = []
+              }
+              postrows.push(postrow)
+              sellpost.postrows = postrows
+              sellpost.save()
+            }
+          })
+        }, 200)
+      } else {
+        postrows.push(postrow)
+        sellpost.postrows = postrows
+        sellpost.save()
       }
-      postrows.push(postrow)
-      sellpost.postrows = postrows
-      sellpost.save()
     } else {
       setTimeout(() => {
         Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
@@ -35,7 +48,7 @@ export const createPostrow = (message) => {
             sellpost.save()
           }
         })
-      }, 500)
+      }, 200)
     }
   })
 }

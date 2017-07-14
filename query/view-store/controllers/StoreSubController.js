@@ -74,5 +74,5 @@ export const updateStore = (message) => {
     store.lastUpdate = mLastUpdate
   }
 
-  Store.findOneAndUpdate({ id }, store)
+  setTimeout(() => { Store.findOneAndUpdate({ id }, store) })
 }
