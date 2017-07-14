@@ -23,11 +23,19 @@ export const createPostrow = (message) => {
       sellpost.postrows = postrows
       sellpost.save()
     } else {
-      const sellpost = new Sellpost({
-        id: sellpostId,
-        postrows: [postrow]
-      })
-      sellpost.save()
+      setTimeout(() => {
+        Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
+          if (sellpost) {
+            let { postrows } = sellpost
+            if (!postrows) {
+              postrows = []
+            }
+            postrows.push(postrow)
+            sellpost.postrows = postrows
+            sellpost.save()
+          }
+        })
+      }, 500)
     }
   })
 }
