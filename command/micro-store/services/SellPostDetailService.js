@@ -80,7 +80,7 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
     for (let i = 0; i < listSellPostInfo.length; ++i) {
         let sellPostInfo = listSellPostInfo[i];
         const sellPostDetail = new SellPostDetail({sellPostId: sellPostId, content: sellPostInfo.content,
-            line: sellPostInfo.numline, imageURLs: sellPostInfo.images, titlesOrder: sellPostInfo.titles_order,
+            line: sellPostInfo.numline, imageURLs: sellPostInfo.images ? sellPostInfo.images : [], titlesOrder: sellPostInfo.titles_order,
             productOrders: sellPostInfo.products_order, type: sellPostInfo.type});
         docs.push(sellPostDetail);
     }
