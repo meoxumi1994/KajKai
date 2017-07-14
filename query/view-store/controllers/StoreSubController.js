@@ -30,9 +30,10 @@ export const createStore = (message) => {
 
   if (lastUpdate) {
     const mLastUpdate = {}
-    if(storeName) mLastUpdate.storeName = lastUpdate.lastUpdateStoreName
-    if(avatarUrl) mLastUpdate.avatarUrl = lastUpdate.lastUpdateAvatarUrl
-    if(coverUrl) mLastUpdate.coverUrl = lastUpdate.lastUpdateCoverUrl
+    const { lastUpdateStoreName, lastUpdateAvatarUrl, lastUpdateCoverUrl } = lastUpdate
+    if(lastUpdateStoreName) mLastUpdate.storeName = lastUpdateStoreName
+    if(lastUpdateAvatarUrl) mLastUpdate.avatarUrl = lastUpdateAvatarUrl
+    if(lastUpdateCoverUrl) mLastUpdate.coverUrl = lastUpdateCoverUrl
     store.lastUpdate = mLastUpdate
   }
 
@@ -66,9 +67,10 @@ export const updateStore = (message) => {
 
   if (lastUpdate) {
     const mLastUpdate = {}
-    mLastUpdate.storeName = lastUpdateStoreName
-    mLastUpdate.avatarUrl = lastUpdateAvatarUrl
-    mLastUpdate.coverUrl = lastUpdateCoverUrl
+    const { lastUpdateStoreName, lastUpdateAvatarUrl, lastUpdateCoverUrl } = lastUpdate
+    if(lastUpdateStoreName) mLastUpdate.storeName = lastUpdateStoreName
+    if(lastUpdateAvatarUrl) mLastUpdate.avatarUrl = lastUpdateAvatarUrl
+    if(lastUpdateCoverUrl) mLastUpdate.coverUrl = lastUpdateCoverUrl
     store.lastUpdate = mLastUpdate
   }
 
