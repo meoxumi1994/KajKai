@@ -2,8 +2,7 @@ import { User, Black } from '../models'
 
 export const createUser = (message) => {
   const { id, username, email, avatarUrl, imageUrls: imageList } = message.user
-  // const user = new User({ id })
-  const user = { id }
+  const user = new User({ id })
 
   if (username) user.username = username
   if (email) user.email = email

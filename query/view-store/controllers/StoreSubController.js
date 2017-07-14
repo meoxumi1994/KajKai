@@ -4,15 +4,10 @@ export const createStore = (message) => {
   const { id, owner: userId, storeName, createdAt, urlName, avatarUrl, coverUrl, address, addressMap, phone,
     category, firstCategoryId, secondCategoryId, firstCategoryName: firstCategory, secondCategoryName: secondCategory, longitude, latitude, certificates, lastUpdate } = message.store
 
-  // const store = new Store({
-  //   id,
-  //   userId
-  // })
-
-  const store = {
+  const store = new Store({
     id,
     userId
-  }
+  })
 
   if (storeName) store.storeName = storeName
   if (urlName) store.urlName = urlName
@@ -78,6 +73,7 @@ export const updateStore = (message) => {
     if(lastUpdateCoverUrl) mLastUpdate.coverUrl = lastUpdateCoverUrl
     store.lastUpdate = mLastUpdate
   }
+
 
   Store.findOneAndUpdate({ id }, store, () => {})
 }
