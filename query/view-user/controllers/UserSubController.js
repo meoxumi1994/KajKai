@@ -21,6 +21,7 @@ export const createUser = (message) => {
 
 export const updateUser = (message) => {
   const { id, username, avatarUrl, coverUrl, imageUrls: imageList, address, phone, language, sex, yearOfBirth, lastUpdate } = message.user
+  console.log('message.user: ', message.user);
   const user = {}
 
   if (username) user.username = username
@@ -44,7 +45,12 @@ export const updateUser = (message) => {
     user.lastUpdate = mLastUpdate
   }
 
-  User.findOneAndUpdate({ id }, user)
+  console.log('user: ', user);
+
+  User.findOneAndUpdate({ id }, user, (err, doc) => {
+    console.log('err: ', err);
+    console.log('doc: ', doc);
+  })
 }
 
 export const updateBlackList = (message) => {
