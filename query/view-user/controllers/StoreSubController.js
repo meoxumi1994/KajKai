@@ -30,6 +30,9 @@ export const updateStoreList = (message) => {
   User.findOne({ id }, (err, user) => {
     if (user) {
       let { storeList } = user
+      if (!storeList) {
+        storeList = []
+      }
       for (let i = 0; i < storeList.length; i++){
         if (storeList[i].id == storeId) {
           storeList[i] = { ...storeList[i], storeName, avatarUrl }
