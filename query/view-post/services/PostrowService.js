@@ -22,18 +22,16 @@ export const getClientFormatPostrows = (postrows, offset) => {
   if (!postrows) {
     return {
       postrows_offset: offset,
-      postrows: [],
-      postrows_order: []
+      postrows: []
     }
   }
-  const postrowOrder = [], mPostrows = []
+  const mPostrows = []
 
   let currentNumberOfLine = 0, postrowOffset = -1
 
   for (let i = offset + 1; i < postrows.length; i++) {
     let postrow = postrows[i]
     if (currentNumberOfLine + 0.5 * postrow.numberOfLine < 30) {
-      postrowOrder.push(postrow.id)
 
       let mPostrow = {}
       mPostrow.sellpostid = postrow.sellpostId
@@ -62,7 +60,6 @@ export const getClientFormatPostrows = (postrows, offset) => {
 
   return ({
     postrows_offset: postrowOffset,
-    postrows_order: postrowOrder,
     postrows: mPostrows
   })
 }
