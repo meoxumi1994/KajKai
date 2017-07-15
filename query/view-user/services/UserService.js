@@ -33,7 +33,8 @@ export const getUser = (id, next) => {
             storeList: user.storeList ? (user.storeList.map((basicStore) => ({
               id: basicStore.id,
               storename: basicStore.storeName,
-              avatarUrl: basicStore.avatarUrl
+              avatarUrl: basicStore.avatarUrl,
+              urlname: basicStore.urlName
             }))) : []
           }
         })
