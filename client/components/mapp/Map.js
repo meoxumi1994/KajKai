@@ -39,17 +39,17 @@ const GettingStartedGoogleMap = withGoogleMap(props => (
 
 class Map extends React.Component {
     constructor(props){
-
         super(props);
     }
 
     componentDidMount() {
-        navigator.geolocation.getCurrentPosition((pos) => {
-            const coords = pos.coords;
-            if (coords != null && coords != undefined) {
-                this.props.updateCurrentLocation(coords.latitude, coords.longitude)
-            }
-        })
+        // navigator.geolocation.getCurrentPosition((pos) => {
+        //     const coords = pos.coords;
+        //     if (coords != null && coords != undefined) {
+        //         this.props.updateCurrentLocation(coords.latitude, coords.longitude)
+        //     }
+        // })
+
     }
 
     render() {
@@ -70,7 +70,10 @@ class Map extends React.Component {
                 }}
 
                 onMapIdle={()=> {
-                  getStoreMarkers(myMap.getBounds())
+                    this.props.getStores(myMap.getBounds().getNorthEast().lat(),
+                                         myMap.getBounds().getNorthEast().lng(),
+                                         myMap.getBounds().getSouthWest().lat(),
+                                         myMap.getBounds().getSouthWest().lng())
                 }}
             />
           </div>

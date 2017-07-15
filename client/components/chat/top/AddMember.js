@@ -2,8 +2,6 @@ import React from 'react'
 import { Button, FormControl } from 'react-bootstrap'
 
 const AddMember = ({addMember, user, mesId, chatListMap, styles}) => {
-  // console.log('fuck',mesId);
-  // console.log('chatListMap',chatListMap[mesId].usersKey);
   let conversator
   return (
     <form style={styles.addMemberDiv} onSubmit={e => {
@@ -18,7 +16,7 @@ const AddMember = ({addMember, user, mesId, chatListMap, styles}) => {
               <FormControl
                 inputRef={ref => {conversator = ref}}
                 placeholder="Thêm thành viên..."
-                style={{width: '100%', height: 40, marginTop: 18, fontSize: 15}}
+                style={{width: '100%', height: 40, fontSize: 15}}
               />
         </div>
       </span>

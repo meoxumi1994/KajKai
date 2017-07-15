@@ -1,19 +1,18 @@
 import { connect } from 'react-redux'
 import Settings from '~/components/chat/top/Settings'
+import { changeDisplay } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
-    const { settings } = state.inst.chat.display.visibility.top
     const { chatListMap } = state.inst.chat.left
     return {
-        settings,
         chatListMap,
         userId: state.user.id
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    displaySettings: () => {
-        dispatch({type: 'DISPLAY_SETTINGS', data: {display: false}})
+    close: (mesId) => {
+        dispatch(changeDisplay('SETTING', mesId, false))
     },
     changeGroupName: () => {
 

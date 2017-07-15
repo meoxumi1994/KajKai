@@ -56,31 +56,41 @@ const styles = {
       iconImg: {
           width: 20,
           height: 20,
-          borderRadius: 50,
-          marginLeft: 5
       },
-      closeImg: {
+      hiddenImg: {
           width: 20,
           height: 20,
-          borderRadius: 50,
-          marginLeft: 5
+      },
+      button: {
+          backgroundColor: '#c90c0c',
+          width: 25,
+          height: 25,
+          paddingTop: 2,
+          paddingLeft: 2
+      },
+      hiddenButton: {
+          backgroundColor: '#c90c0c',
+          width: 25,
+          height: 25,
+          paddingTop: 2,
+          paddingLeft: 2
       },
       iconGroupDiv: {
           position: 'absolute',
           right: 10,
-          top: 6
+          top: 2
       },
       spliterHr: {
-        display: 'none',
+          display: 'none',
       },
       displayLabel: {
-        fontSize: 15,
-        marginTop: 5,
-        marginLeft: 5
+          fontSize: 15,
+          marginTop: 5,
+          marginLeft: 5
       },
       addMemberDiv: {
-        position: 'absolute',
-        bottom: -40
+          position: 'absolute',
+          bottom: -40,
       }
   },
   center: {
