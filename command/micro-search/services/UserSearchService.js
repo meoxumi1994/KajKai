@@ -49,9 +49,21 @@ export const searchUser = (userName, offset, length, next) => {
 
 export const getHitResult = (result) => {
     let res = [];
+    if (!result || !result.hits || !result.hits.hits) {
+        return {users: []}
+    }
     let hits = result.hits.hits;
     for (let i = 0; i < hits.length; ++i) {
         res.push(hits[i]._source);
     }
     return {users: res};
+};
+
+export const delIndex = (next) => {
+    searchClient.indices.delete({
+        index: config.INDEX
+    }, (error, response) => {
+        console.log(error, response);
+        next(error, response);
+    });
 };

@@ -6,6 +6,6 @@ const AddressSchema = new mongoose.Schema({
     street: {type: String},
     longitute: {type: Number},
     latitute: {type: Number}
-})
+});
 
 export default AddressSchema

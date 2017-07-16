@@ -75,5 +75,15 @@ export default {
             controller: 'CategoryController',
             method: 'searchCategoryCon'
         }
+    },
+    'minorpost': {
+        post: {
+            controller: 'MinorPostController',
+            method: 'createNewMinorPostCon'
+        },
+        put: {
+            controller: 'MinorPostController',
+            method: 'updateNewMinorPostCon'
+        }
     }
 }

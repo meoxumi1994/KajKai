@@ -9,7 +9,7 @@ export const createStore = (message) => {
 
   if (storeName) basicStore.storeName = storeName
 
-  basicStore.save()
+  basicStore.save(() => {})
 }
 
 export const updateStore = (message) => {
@@ -18,5 +18,5 @@ export const updateStore = (message) => {
 
   if (storeName) basicStore.storeName = storeName
 
-  BasicStore.findOneAndUpdate({ id }, basicStore)
+  BasicStore.findOneAndUpdate({ id }, basicStore, () => {})
 }

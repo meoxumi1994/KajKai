@@ -48,7 +48,13 @@ const styles = {
               marginRight: 10,
               marginTop: 15
           },
-          closeImg: {
+          hiddenImg: {
+              display: 'none'
+          },
+          button: {
+              backgroundColor: 'white',
+          },
+          hiddenButton: {
               display: 'none'
           },
           iconGroupDiv: {

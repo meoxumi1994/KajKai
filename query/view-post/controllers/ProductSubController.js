@@ -21,7 +21,7 @@ export const createProduct = (message) => {
           postrow.products.push(product)
           postrows[i] = postrow
           sellpost.postrows = postrows
-          sellpost.save()
+          sellpost.save(() => {})
           break
         }
       }
@@ -55,7 +55,7 @@ export const updateProduct = (message) => {
               postrows[i] = postrow
               sellpost.postrows = postrows
 
-              sellpost.save()
+              sellpost.save(() => {})
               break
             }
           }
@@ -83,7 +83,7 @@ export const deleteProduct = (message) => {
               postrows[i] = postrow
               sellpost.postrows = postrows
 
-              sellpost.save()
+              sellpost.save(() => {})
               break
             }
           }

@@ -20,7 +20,7 @@ const left = (state = {
             chatListKey: action.data.map(chat => chat.mesId),
             chatListMap: utils.chatListMap(action),
           }
-          // console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
+          console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
           return initChatlist
 
 //------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ const left = (state = {
                       [action.data.mesId]: chatMap(undefined, action)
                   }
               }
-              // console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---newChat ', action, newChat)
+              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---newChat ', action, newChat)
               return newChat
           } else {
               const updateChat = {
@@ -54,7 +54,7 @@ const left = (state = {
                     }
                 }
               }
-              // console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
+              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
               return updateChat
           }
 
@@ -100,7 +100,7 @@ const left = (state = {
               chatListKey: tempKey,
               chatListMap: tempMap
           }
-          // console.log('\n[Reducer Left] REMOVE_CHAT ', action, removeChat)
+          console.log('\n[Reducer Left] REMOVE_CHAT ', action, removeChat)
           return removeChat
 
 //------------------------------------------------------------------------------
@@ -131,22 +131,14 @@ const left = (state = {
           return updateChat
 
 //------------------------------------------------------------------------------
-      case 'USER_DISPLAY/ADD_MEMBER':
-          const displayAddMember = {
-              ...state,
-              chatListMap: {
-                  ...state.chatListMap,
-                  [action.data.mesId]: {
-                      ...state.chatListMap[action.data.mesId],
-                      display: {
-                          ...state.chatListMap[action.data.mesId].display,
-                          addMember: action.data.value == 'toggle'? !state.chatListMap[action.data.mesId].display.addMember: action.data.value
-                      }
-                  }
-              }
+      case 'CHANGE_DISPLAY':
+          return {
+            ...state,
+            chatListMap: {
+                ...state.chatListMap,
+                [action.data.mesId]: chatMap(state.chatListMap[action.data.mesId], action)
+            }
           }
-          // console.log('\n[Reducer Left] UPDATE_USER_INFO/ADD_MEMBER', action, displayAddMember)
-          return displayAddMember
 
 //------------------------------------------------------------------------------
       case 'SET_USER_ID':
@@ -157,7 +149,7 @@ const left = (state = {
                   id: action.data.id
               }
           }
-          // console.log('\n[Reducer Left] SET_USER_ID', action, setUserId)
+          console.log('\n[Reducer Left] SET_USER_ID', action, setUserId)
           return setUserId
 
 //------------------------------------------------------------------------------
@@ -169,7 +161,7 @@ const left = (state = {
                 mesId: action.data.mesId
             }
           }
-          // console.log('\n[Reducer Left] SET_CURRENT_CHAT', action, setCurrentChat)
+          console.log('\n[Reducer Left] SET_CURRENT_CHAT', action, setCurrentChat)
           return setCurrentChat
 
 //------------------------------------------------------------------------------
@@ -199,7 +191,6 @@ const left = (state = {
                       ...state.chatListMap,
                       [action.data.mesId]: {
                           ...state.chatListMap[action.data.mesId],
-                          // displayLabel: utils.groupDisplayLabel(action.data.members, state.currentChat.id),
                           usersKey: utils.groupUsersKey(action, action.data.members, state.currentChat.id),
                           usersMap: utils.groupUsersMap(action, action.data.members, state.currentChat.id)
                       }
@@ -233,6 +224,17 @@ const left = (state = {
           }
           console.log('\n[Reducer Left] client/REMOVE_MEMBER remove', action, removeMember)
           return removeMember
+
+//------------------------------------------------------------------------------
+      case 'CLOSE_CHAT':
+          const closeChat = {
+              ...state,
+              currentChat: {
+                  ...state.currentChat,
+                  mesId: action.data.newMesId
+              }
+          }
+          console.log('\n[Reducer Left] CLOSE_CHAT', action, closeChat)
 
         default:
           return state

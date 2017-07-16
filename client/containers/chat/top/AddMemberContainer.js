@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    addMember: (mesId, id, conversatorId, userList) => {
+    addMember: (mesId, id, conversatorId) => {
         let type = ''
         if (mesId == 0) {
             if (conversatorId.indexOf(";") == -1) {
@@ -22,7 +22,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         } else {
             type = 'add_member'
         }
-
         switch (type) {
             case 'new_chat':
                 dispatch(getMesId(id, conversatorId))

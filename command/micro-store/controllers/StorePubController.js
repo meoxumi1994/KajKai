@@ -79,21 +79,21 @@ export const sellPostDeleted = (storeId, sellPostId) => {
 
 export const postRowCreatedPub = (postRow) => {
     const pub = redis.createClient(config);
-    const publishData = {postRow: postRow};
+    const publishData = {postrow: postRow};
     pub.publish('POSTROW.Created', JSON.stringify(publishData));
     pub.quit();
 };
 
 export const postRowUpdatedPub = (postRow) => {
     const pub = redis.createClient(config);
-    const publishData = {postRow: postRow};
+    const publishData = {postrow: postRow};
     pub.publish('POSTROW.Updated', JSON.stringify(publishData));
     pub.quit();
 };
 
 export const postRowDeletedPub = (postRowId, sellPostId) => {
     const pub = redis.createClient(config);
-    const publishData = {postRow: {
+    const publishData = {postrow: {
         postrowId: postRowId,
         sellPostId: sellPostId
     }};
@@ -122,6 +122,20 @@ export const productDeletedPub = (sellPostId, postrowsId, productId) => {
         postrowsId: postrowsId,
         productId: productId
     }};
-    pub.publish('POSTROW.PRODUCT.Updated', JSON.stringify(publishData));
+    pub.publish('POSTROW.PRODUCT.Deleted', JSON.stringify(publishData));
+    pub.quit();
+};
+
+export const minorPostCreatedPub = (minorPost) => {
+    const pub = redis.createClient(config);
+    const publishData = {minorPost: minorPost};
+    pub.publish('MINORPOST.Created', JSON.stringify(publishData));
+    pub.quit();
+};
+
+export const minorPostUpdatedPub = (minorPost) => {
+    const pub = redis.createClient(config);
+    const publishData = {minorPost: minorPost};
+    pub.publish('MINORPOST.Updated', JSON.stringify(publishData));
     pub.quit();
 };

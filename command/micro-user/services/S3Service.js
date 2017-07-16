@@ -16,6 +16,6 @@ export const generateS3PutObjectSignedUrl = (id, fileName, fileExtension) => {
     }
 
     const url = s3.getSignedUrl('putObject', params)
-    const viewUrl = 'http://d1z4p30mgj29.cloudfront.net/' + key
+    const viewUrl = 'https://d1z4p30mgj29.cloudfront.net/' + key
     return {urlload: url, urlreal: viewUrl}
 }

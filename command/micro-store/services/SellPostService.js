@@ -21,36 +21,28 @@ export const getSellPost = (sellPostId, next) => {
     })
 };
 
-export const getSellPostBasicInfo = (sellPost) => {
-    return {
-        storeId: sellPost.storeId,
-        category: sellPost.category,
-        title: sellPost.title,
-        description: sellPost.description,
-        time: sellPost.time,
-        status: sellPost.status,
-        shippable: sellPost.shippable,
-        sellPostDetailOrders: sellPost.sellPostDetailOrders,
-        sellpostid: getSellPostGlobalId(sellPost._id)
-    };
-};
-
 export const addSellPost = (sellPostInfo, next) => {
     const sellPost = new SellPost({storeId: sellPostInfo.storeid, category: sellPostInfo.category,
         title: sellPostInfo.title, description: sellPostInfo.description, time: sellPostInfo.time ? sellPostInfo.time : (new Date()).getTime(),
-        status: sellPostInfo.status, shippable: sellPostInfo.ship});
+        status: sellPostInfo.status, shippable: sellPostInfo.ship, sellPostDetailOrders: []});
     sellPost.save(() => {
         getPubSellPostInfo(sellPost, (info) => {
-            sellPostCreated(info);
+            let sellPostDetail = sellPostInfo.postrows;
+            if (sellPostDetail && sellPostDetail.length > 0) {
+                createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), (sellPostDetail) => {
+                    sellPost.sellPostDetailOrders = [];
+                    for (let i = 0; i < sellPostDetail.length; ++i)
+                        sellPost.sellPostDetailOrders.push(sellPostDetail[i].id);
+                    sellPost.save(() => {
+                        next(sellPost, sellPostDetail);
+                    });
+                    info.postrows_order = sellPost.sellPostDetailOrders;
+                    sellPostCreated(info);
+                });
+            } else {
+                next(sellPost, null);
+            }
         });
-        let sellPostDetail = sellPostInfo.postrows;
-        if (sellPostDetail && sellPostDetail.length > 0) {
-            createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), (sellPostDetail) => {
-                next(sellPost, sellPostDetail);
-            });
-        } else {
-            next(sellPost, null);
-        }
     })
 };
 
@@ -70,6 +62,25 @@ export const updateSellPost = (sellpostInfo, next) => {
             next(sellPost);
         })
     })
+};
+
+export const getSellPostBasicInfo = (sellPost) => {
+    return {
+        storeid: sellPost.storeId,
+        category: sellPost.category,
+        title: sellPost.title,
+        description: sellPost.description,
+        time: sellPost.time,
+        status: sellPost.status,
+        ship: sellPost.shippable,
+        postrows_order: sellPost.sellPostDetailOrders,
+        id: getSellPostGlobalId(sellPost._id),
+        likes: [],
+        numlike: 0,
+        likestatus: ['like','love','haha'],
+        follows: [],
+        follow: 0
+    };
 };
 
 export const deleteSellPost = (sellpostid, next) => {
@@ -95,8 +106,9 @@ export const getPubSellPostInfo = (sellPost, next) => {
             title: sellPost.title,
             description: sellPost.description,
             time: sellPost.time,
-            status: sellPost.time,
-            ship: sellPost.shippable, // store viết vào có thể un
+            status: sellPost.status ? sellPost.status : 'notyet',
+            ship: sellPost.shippable, // store viết vào có thể un,
+            postrows_order: sellPost.sellPostDetailOrders,
         })
     });
 };

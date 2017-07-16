@@ -1,36 +1,46 @@
 import { User, Black } from '../models'
 
 export const createUser = (message) => {
-  console.log(message, JSON.stringify(message));
-  console.log(message);
-  const { id, username, email, avatarUrl } = message.user
+  const { id, username, email, avatarUrl, imageUrls: imageList } = message.user
   const user = new User({ id })
 
   if (username) user.username = username
   if (email) user.email = email
   if (avatarUrl) user.avatarUrl = avatarUrl
-  console.log('user', user);
+  if (imageList) user.imageList = imageList.map((image) => ({
+    url: image.url,
+    time: image.time
+  }))
 
-  user.save((err) => {
-    console.log(err);
-  })
+  user.save(() => {})
 }
 
 export const updateUser = (message) => {
-  const { id, username, avatarUrl, coverUrl, address, phone, language, sex, yearOfBirth, lastUpdate } = message.user
+  const { id, username, avatarUrl, coverUrl, imageUrls: imageList, address, phone, language, sex, yearOfBirth, lastUpdate } = message.user
   const user = {}
 
   if (username) user.username = username
   if (avatarUrl) user.avatarUrl = avatarUrl
   if (coverUrl) user.coverUrl = coverUrl
+  if (imageList) user.imageList = imageList.map((image) => ({
+    url: image.url,
+    time: image.time
+  }))
   if (address) user.address = address
   if (phone) user.phone = phone
   if (language) user.language = language
   if (sex) user.sex = sex
   if (yearOfBirth) user.yearOfBirth = yearOfBirth
-  if (lastUpdate) user.lastUpdate = lastUpdate
+  if (lastUpdate) {
+    const mLastUpdate = {}
+    const { username, phone, address } = lastUpdate
+    if(username) mLastUpdate.username = username
+    if(phone) mLastUpdate.phone = phone
+    if(address) mLastUpdate.address = address
+    user.lastUpdate = mLastUpdate
+  }
 
-  User.findOneAndUpdate({ id }, user)
+  User.findOneAndUpdate({ id }, user, () => {})
 }
 
 export const updateBlackList = (message) => {
@@ -52,7 +62,7 @@ export const updateBlackList = (message) => {
             blackList.push(black)
 
             user.blackList = blackList
-            user.save()
+            user.save(() => {})
           }
         })
       } else {
@@ -64,7 +74,7 @@ export const updateBlackList = (message) => {
         }
 
         user.blackList = blackList
-        user.save()
+        user.save(() => {})
       }
     }
   })

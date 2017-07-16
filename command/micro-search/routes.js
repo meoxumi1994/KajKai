@@ -10,6 +10,12 @@ export default {
             controller: 'SearchController',
             method: 'searchStoreCon'
         }
+    },
+    '/deleteindex': {
+        get: {
+            controller: 'SearchController',
+            method: 'deleteIndexCon'
+        }
     }
 
 }

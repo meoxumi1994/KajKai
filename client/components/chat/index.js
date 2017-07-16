@@ -15,7 +15,6 @@ class Chat extends React.Component {
 
     render() {
       let { messagesKey, messagesMap, styles, multiChat } = this.props
-
       return(
         <div style={mainStyles.mainDiv} className="input-group">
             <div style={mainStyles.left}>

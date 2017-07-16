@@ -29,7 +29,7 @@ const StoreSchema = new mongoose.Schema({
   certificates: {type: CertificateSchema},
   numberOfLike: {type: Number},
   likers: [LikerSchema],
-  numerOfFollow: {type: Number},
+  numberOfFollow: {type: Number},
   followers: [FollowerSchema]
 })
 

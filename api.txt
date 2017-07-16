@@ -612,6 +612,47 @@ GET /postrows/:sellpostid?offset=-1 { // numline = 30
     ]
 }
 
+POST /minorpost {
+    storeid,
+    numline,
+    content,
+    time: ,
+    images: ,
+    video
+} => {
+    status: 'success',
+    minorpost: {
+        storeid,
+        numline,
+        content,
+        time: ,
+        images: ,
+        video,
+        id
+    }
+}
+
+PUT /minorpost {
+    id,
+    storeid,
+    numline,
+    content,
+    time: ,
+    images: ,
+    video
+} => {
+    status: 'success',
+    minorpost: {
+        storeid,
+        numline,
+        content,
+        time: ,
+        images: ,
+        video,
+        id
+    }
+}
+
 GET /minorpost/store/:storeid?offset=-1 { // length = 3
   offset: ,
   minorposts: [ // lay 200 ky tu dau tien cua content
@@ -1020,4 +1061,34 @@ GET /imagelist/minorpost?offset=-1 { // list ảnh theo thứ tự thời gian g
     offset: ,
     status: 'success|failed'
     listImage : ['','','']
+}
+
+GET /store?nelat=0&nelng=0&swlat=0&swlng=0&length=30 {    //NE=NorthEast SW=SouthWest
+    status: 'success|failed',
+    stores: [
+        {
+            id: ,                 //store id
+            userid: ,             //owner
+            storename: 'Forest',
+            time: ,               //time tao store
+            avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+            storename: 'Forest',
+            urlname: ,            // kajkai.com/Forest
+            address: ,            // Dia chi cua hang
+            category: ,           // Loai sp
+            position: {
+              latitute: '1423424',
+              longitute: '453535',
+            }
+            phone: '01655791025',
+            lastUpdate: {
+                storename: ,
+                urlname: ,
+                avatarUrl: ,
+                coverUrl: ,
+            }
+            numlike: '23',
+            numfollow: '43',
+        }
+    ]
 }

@@ -7,7 +7,7 @@ const AddMember = ({addMember, user, mesId, chatListMap, styles}) => {
     <form style={styles.addMemberDiv} onSubmit={e => {
       e.preventDefault()
       if (conversator.value.trim()) {
-          addMember(mesId, user.id, conversator.value, chatListMap[mesId].usersKey)
+          addMember(mesId, user.id, conversator.value)
           conversator = ''
       }
     }}>
@@ -16,7 +16,7 @@ const AddMember = ({addMember, user, mesId, chatListMap, styles}) => {
               <FormControl
                 inputRef={ref => {conversator = ref}}
                 placeholder="Thêm thành viên..."
-                style={{width: '100%', height: 40, marginTop: 18, fontSize: 15}}
+                style={{width: '100%', height: 40, fontSize: 15}}
               />
         </div>
       </span>

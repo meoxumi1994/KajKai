@@ -1,6 +1,4 @@
 import { combineReducers } from 'redux'
-import singleChat from './singleChat'
-import multiChat from './multiChat'
 
 const center = (state = {
     singleKey: [],
@@ -29,7 +27,7 @@ const center = (state = {
 
         case 'REMOVE_CHAT':
         case 'CLOSE_CHAT':
-            // console.log('REMOVE_CHAT ', action);
+            console.log('REMOVE_CHAT ', action);
             const mKey = state.multipleKey
             mKey.splice(mKey.indexOf(action.data.mesId), 1)
             const mMap = state.messagesMap
@@ -45,6 +43,7 @@ const center = (state = {
               ...state,
               singleKey: [action.data.mesId],
               messagesMap: {
+                  ...state.messagesMap,
                   [action.data.mesId]: action.data.messages.reverse()
               }
             }

@@ -14,7 +14,7 @@ export const createReply = (message) => {
     if (basicUser) {
       reply.username = basicUser.username
       reply.avatarUrl = basicUser.avatarUrl
-      reply.save()
+      reply.save(() => {})
 
       if (sellpostId) {
         Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
@@ -31,7 +31,7 @@ export const createReply = (message) => {
 
             comments.numberOfReply = comments.replies.length
             sellpost.comments = comments
-            sellpost.save()
+            sellpost.save(() => {})
           }
         })
       } else {
@@ -49,7 +49,7 @@ export const createReply = (message) => {
 
             comments.numberOfReply = comments.replies.length
             minorpost.comments = comments
-            minorpost.save()
+            minorpost.save(() => {})
           }
         })
       }

@@ -14,7 +14,7 @@ export const getSellPostDetailGlobalId = (id) => {
 };
 
 export const getSellPostDetail = (sellPostDetailId, next) => {
-    SellPostDetail.findById(getSellPostDetailLocalId(sellPostDetalId), (err, sellPostDetail) => {
+    SellPostDetail.findById(getSellPostDetailLocalId(sellPostDetailId), (err, sellPostDetail) => {
         next(sellPostDetail)
     })
 };
@@ -24,7 +24,7 @@ export const getSellPostDetailBasicInfo = (sellPostDetail) => {
         sellPostId: sellPostDetail.sellPostId,
         content: sellPostDetail.content,
         line: sellPostDetail.line,
-        imageUrl: sellPostDetail.imageURLs,
+        images: sellPostDetail.imageURLs,
         titleOrder: sellPostDetail.titleOrder,
         titles: sellPostDetail.titles,
         productOrders: sellPostDetail.productOrders,
@@ -45,8 +45,8 @@ export const updateSellPostDetail = (sellPostDetailId, updateInfo, next) => {
             if (updateInfo.products_order) sellPostDetail.productOrders = updateInfo.products_order;
             if (updateInfo.type) sellPostDetail.type = updateInfo.type;
             sellPostDetail.save(() => {
-                updateSellPostDetail(getPubBasicSellPostDetailInfo(sellPostDetail));
-                next(sellPostDetail)
+                postRowUpdatedPub(getPubBasicSellPostDetailInfo(sellPostDetail));
+                next(sellPostDetail);
             })
         }
     })
@@ -80,7 +80,7 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
     for (let i = 0; i < listSellPostInfo.length; ++i) {
         let sellPostInfo = listSellPostInfo[i];
         const sellPostDetail = new SellPostDetail({sellPostId: sellPostId, content: sellPostInfo.content,
-            line: sellPostInfo.numline, imageURLs: sellPostInfo.images, titlesOrder: sellPostInfo.titles_order,
+            line: sellPostInfo.numline, imageURLs: sellPostInfo.images ? sellPostInfo.images : [], titlesOrder: sellPostInfo.titles_order,
             productOrders: sellPostInfo.products_order, type: sellPostInfo.type});
         docs.push(sellPostDetail);
     }
@@ -88,6 +88,7 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
         let res = [];
         for (let i = 0; i < docs.length; ++i) {
             res.push(getSellPostDetailBasicInfo(docs[i]));
+            postRowCreatedPub(getPubBasicSellPostDetailInfo(docs[i]));
         }
         next(res);
     });

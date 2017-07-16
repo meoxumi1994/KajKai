@@ -36,7 +36,11 @@ export const getStoreInfoService = (store) => {
         longitude: store.longitude,
         latitude: store.latitude,
         certificates: store.certificates,
-        storeId: getStoreGlobalId(store._id)
+        storeId: getStoreGlobalId(store._id),
+        firstCategoryId: store.firstCategoryId,
+        secondCategoryId: store.secondCategoryId,
+        firstCategoryName: store.firstCategoryName,
+        secondCategoryName: store.secondCategoryName
     }
 };
 
@@ -82,7 +86,6 @@ export const createStore = (storeInfo, next) => {
 
     if (!storeInfo.urlname || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )) {
         next('urlname');
-        return;
     } else {
         Store.findOne({urlName: storeInfo.urlname}, (err, docs) => {
             if (docs) {
@@ -202,9 +205,6 @@ export const getPubStoreInfo = (store, next) => {
             secondCategoryName: names.childName
         })
     });
-    return {
-
-    }
 };
 
 export const getStoreListInfo = (storeList) => {

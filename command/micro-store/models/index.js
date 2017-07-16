@@ -6,6 +6,7 @@ import SellPostDetailSchema from './SellPostDetail'
 import SellPostSchema from './SellPost'
 import StoreSchema from './Store'
 import CertificateSchema from './Certificate'
+import MinorPostSchema from './MinorPost'
 import path from 'path'
 
 export const Certificate = mongoose.model('Certificate', CertificateSchema);
@@ -15,6 +16,7 @@ export const Product = mongoose.model('Product', ProductSchema);
 export const SellPostDetail = mongoose.model('SellPostDetail', SellPostDetailSchema);
 export const SellPost = mongoose.model('SellPost', SellPostSchema);
 export const Store = mongoose.model('Store', StoreSchema);
+export const MinorPost = mongoose.model('MinorPost', MinorPostSchema);
 
 
 let fs = require('fs');

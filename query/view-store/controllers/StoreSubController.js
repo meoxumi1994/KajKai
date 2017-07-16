@@ -30,13 +30,14 @@ export const createStore = (message) => {
 
   if (lastUpdate) {
     const mLastUpdate = {}
-    mLastUpdate.storeName = lastUpdate.lastUpdateStoreName
-    mLastUpdate.avatarUrl = lastUpdate.lastUpdateAvatarUrl
-    mLastUpdate.coverUrl = lastUpdate.lastUpdateCoverUrl
+    const { lastUpdateStoreName, lastUpdateAvatarUrl, lastUpdateCoverUrl } = lastUpdate
+    if(lastUpdateStoreName) mLastUpdate.storeName = lastUpdateStoreName
+    if(lastUpdateAvatarUrl) mLastUpdate.avatarUrl = lastUpdateAvatarUrl
+    if(lastUpdateCoverUrl) mLastUpdate.coverUrl = lastUpdateCoverUrl
     store.lastUpdate = mLastUpdate
   }
 
-  store.save()
+  store.save(() => {})
 }
 
 export const updateStore = (message) => {
@@ -63,14 +64,15 @@ export const updateStore = (message) => {
   if (latitude) store.latitude = latitude
   if (certificates) store.certificates = certificates
 
-
   if (lastUpdate) {
     const mLastUpdate = {}
-    mLastUpdate.storeName = lastUpdateStoreName
-    mLastUpdate.avatarUrl = lastUpdateAvatarUrl
-    mLastUpdate.coverUrl = lastUpdateCoverUrl
+    const { lastUpdateStoreName, lastUpdateAvatarUrl, lastUpdateCoverUrl } = lastUpdate
+    if(lastUpdateStoreName) mLastUpdate.storeName = lastUpdateStoreName
+    if(lastUpdateAvatarUrl) mLastUpdate.avatarUrl = lastUpdateAvatarUrl
+    if(lastUpdateCoverUrl) mLastUpdate.coverUrl = lastUpdateCoverUrl
     store.lastUpdate = mLastUpdate
   }
 
-  Store.findOneAndUpdate({ id }, store)
+
+  Store.findOneAndUpdate({ id }, store, () => {})
 }

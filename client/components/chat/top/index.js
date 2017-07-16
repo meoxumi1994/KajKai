@@ -13,34 +13,55 @@ class ChatTop extends React.Component {
 
     render() {
       let conversator
-      const { chatListMap, chatListKey, currentChat, mesId, styles } = this.props
+      const { chatListMap, currentChat, mesId, styles, multipleKey } = this.props
       const { displayAddMember, loadChat, displaySettings, close } = this.props
 
-      const { usersKey, usersMap } = chatListMap[mesId]
+      const { usersKey, usersMap, displayLabel } = chatListMap[mesId]
 
-      const displayAdd = chatListMap[mesId].display.addMember
+      const { addMember } = chatListMap[mesId].display
+
+      let label = displayLabel
+      if (label == undefined || label == '') {
+          if (usersKey.length == 0) {
+              label = 'Tin nhắn mới'
+          } else {
+              label = ''
+              for (let i in usersKey) {
+                  if (!usersMap[usersKey[i]].disabled) {
+                      label += usersMap[usersKey[i]].username + ', '
+                  }
+              }
+              label = label.substring(0, label.length - 2)
+          }
+      }
 
       return (
-        <div style={currentChat == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
-            <label style={styles.displayLabel}>{usersKey.length == 0?'Tin nhắn mới':usersKey.map(uKey => usersMap[uKey].username + ', ')}</label>
+        <div style={currentChat.mesId == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
+            <label style={styles.displayLabel}>{label}</label>
+
             <div style={styles.iconGroupDiv}>
-                <Link to={"/chat"} >
-                    <img style={styles.closeImg} src="./images/blackChat.png"/>
-                </Link>
-                <img style={styles.iconImg} src="/images/plus.ico" onClick={() => displayAddMember(mesId)}/>
-                <img style={styles.iconImg} src="/images/newSetting.png" onClick={() => displaySettings()}/>
-                <img style={styles.closeImg} src="/images/blackClose.png" onClick={() => close(mesId, chatListKey)}/>
+                <button className="btn" style={styles.hiddenButton}>
+                    <Link to={"/chat"} >
+                        <img style={styles.hiddenImg} src="./images/blackChat.png"/>
+                    </Link>
+                </button>
+                <button className="btn" style={styles.button} onClick={() => displayAddMember(mesId)}>
+                    <img style={styles.iconImg} src="/images/plus.ico"/>
+                </button>
+                <button className="btn" style={styles.button} onClick={() => displaySettings(mesId)}>
+                    <img style={styles.iconImg} src="/images/newSetting.png"/>
+                </button>
+                <button className="btn" style={styles.button} onClick={() => close(mesId, multipleKey)}>
+                    <img style={styles.hiddenImg} src="/images/blackClose.png"/>
+                </button>
             </div>
             {
-                displayAdd? <AddMemberContainer styles={styles} mesId={mesId}/>: <hr style={styles.spliterHr}/>
+                addMember? <AddMemberContainer styles={styles} mesId={mesId}/>: <hr style={styles.spliterHr}/>
             }
             <SettingsContainer mesId={mesId}/>
         </div>
       )
     }
 }
-
-//
-
 
 export default ChatTop

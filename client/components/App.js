@@ -4,13 +4,13 @@ import { Route } from 'react-router-dom'
 import Bar from '~/containers/Bar'
 import Bundle from '../common/Bundle'
 import loadHome from 'bundle-loader?lazy!../containers/home/HomeContainer'
-// import loadMapp from 'bundle-loader?lazy!./mapp/Map'
+import loadMapp from 'bundle-loader?lazy!./mapp/Map'
 import loadUserLoginRegister from 'bundle-loader?lazy!../containers/user-login-register'
 import MapContainer from 'bundle-loader?lazy!../containers/mapp/MapContainer'
 
 import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
-// import loadChat from 'bundle-loader?lazy!../containers/chat'
+import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Store from '~/containers/store'
 import User from '~/containers/user'
 import ContactHistory from '~/containers/contacthistory'
@@ -64,14 +64,14 @@ const RegisterStore = () => (
     </Bundle>
 )
 
-// const Chat = ({ id }) => (
-//     <Bundle load={loadChat}>
-//         {(Comp) => (Comp
-//           ? <Comp/>
-//           : null
-//         )}
-//     </Bundle>
-// )
+const Chat = ({ id }) => (
+    <Bundle load={loadChat}>
+        {(Comp) => (Comp
+          ? <Comp/>
+          : null
+        )}
+    </Bundle>
+)
 
 // const Target = ({ id }) => (
 //     <Bundle load={loadTarget}>
@@ -155,7 +155,7 @@ class App extends React.Component {
     }
     componentDidMount(){
         this.props.onWho()
-        // this.props.getChatList()
+        this.props.getChatList()
     }
 }
 

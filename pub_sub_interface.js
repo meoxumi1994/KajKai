@@ -121,7 +121,8 @@ export default {
                 description:'',
                 time:'', // last update
                 status: 'notyet|open|sleep',
-                ship: '', // store viết vào có thể un
+                ship: '', // store viết vào có thể un,
+                postrows_order: [],
             }
         },{
             event: 'SELLPOST.Deleted',
@@ -206,6 +207,22 @@ export default {
                 sellPostId: '',
                 postrowsId: '',
                 productId: '',
+            }
+        },{
+            event: 'MINORPOST.Created',
+            minorPost: {
+
+            }
+        },{
+            event: 'MINORPOST.Updated',
+            minorPost: {
+                minorPostId: '',
+                storeId: '',
+                lineCount: '',
+                content: '',
+                time: '',
+                images: '',
+                video: ''
             }
         }]
     },

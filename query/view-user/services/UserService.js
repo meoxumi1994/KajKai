@@ -33,7 +33,8 @@ export const getUser = (id, next) => {
             storeList: user.storeList ? (user.storeList.map((basicStore) => ({
               id: basicStore.id,
               storename: basicStore.storeName,
-              avatarUrl: basicStore.avatarUrl
+              avatarUrl: basicStore.avatarUrl,
+              urlname: basicStore.urlName
             }))) : []
           }
         })
@@ -48,15 +49,64 @@ export const getUserPrivacy = (id, next) => {
           next(null)
         } else {
           next({
-            id
+            status: 'nodata',
+            user: {
+              id
+            }
           })
         }
       } else {
           next({
-            id: user.id,
-            address_email_phone: user.privacy.address_email_phone,
-            another: user.privacy.others
+            status: 'success',
+            privacy: {
+              id: user.id,
+              address_email_phone: user.privacy.address_email_phone,
+              another: user.privacy.others
+            }
           })
+      }
+  })
+}
+
+export const getUserImageList = (id, offset, next) => {
+  User.findOne({ id }, function(err, user) {
+      if (err || !user) {
+        if(err) {
+          next(null)
+        } else {
+          next({
+            status: 'nodata',
+            listImage: []
+          })
+        }
+      } else {
+        const { imageList } = user
+        const mImageList = []
+        let currentNumberOfImage = 0, mOffset, lastIndex
+        for (let i = imageList.length - 1; i >= 0; i--) {
+          let image = imageList[i]
+          if (image.time < offset) {
+            if (currentNumberOfImage < 14) {
+              mImageList.push(image.url)
+
+              mOffset = image.time.getTime()
+              lastIndex = i
+              currentNumberOfImage++
+            } else {
+              break
+            }
+          }
+        }
+
+        if (currentNumberOfSellpost < 14 || lastIndex == 0) {
+          mOffset = -2
+        }
+
+        next({
+          offset: mOffset,
+          status: 'success',
+          listImage : mImageList
+        })
       }
   })
 }
