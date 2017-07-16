@@ -78,6 +78,7 @@ export const EndLine = (text) => {
 }
 
 export const MixMakeUp = (text) => {
+    if(!text) return ""
     let newtext = text
     newtext = Urlify(newtext)
     newtext = EndLine(newtext)
@@ -93,6 +94,7 @@ export const FilterText = (text) => {
 }
 
 export const MixMakeUpShow = (text, height) => {
+    if(!text) return ""
     let newtext = text
     newtext = Urlify(newtext)
     newtext = EndLine(newtext)

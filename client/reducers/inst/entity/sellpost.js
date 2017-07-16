@@ -14,8 +14,27 @@ const sellpost = (state = {
         case 'CREATE_SELL_POST_SUCCESS':
             return {
                 ...state,
-                [action.sellpost.id] : action.sellpost.id,
+                [action.sellpost.id] : action.sellpost,
             }
+        case 'INST_ENTITY_SELL_POST_CHANGE':
+            return {
+                ...state,
+                [action.id] : {
+                    ...state[action.id],
+                    [action.key] : action.value,
+                }
+            }
+        case 'SCREEN_CLICK':
+            let nstate = {}
+            for(let item in state){
+                nstate = {...nstate,
+                    [item] : {
+                        ...state[item],
+                        clicksetting : false,
+                    }
+                }
+            }
+            return nstate
         default:
             return state
     }

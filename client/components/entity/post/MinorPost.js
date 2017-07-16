@@ -19,19 +19,13 @@ class MinorPost extends React.Component {
     onLike(){
         this.setState({ beLike: !this.state.beLike })
     }
-    componentDidMount(){
-        $(window).click((event) => {
-            this.setState({ clicksetting: false })
-        });
-        // console.log('span',this.span.getBoundingClientRect().width,this.span.getBoundingClientRect().height)
-    }
     clickSetting(){
         setTimeout(()=>{
-            this.setState({ clicksetting: true })
+            onChange('clicksetting', true)
         },1)
     }
     render(){
-        const { name, avatarUrl, time, content } = this.props
+        const { name, avatarUrl, time, content, clicksetting, onChange } = this.props
         return(
             <div style={{
                 borderRadius: 4,
@@ -54,7 +48,7 @@ class MinorPost extends React.Component {
                                 fontSize: 12,
                             }}
                         />
-                        {this.state.clicksetting &&
+                        {clicksetting &&
                             <DropDown
                                 contents={['Report post','Block store']}
                                 onClick={(index) => console.log(index)}

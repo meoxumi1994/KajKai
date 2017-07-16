@@ -5,7 +5,9 @@ import Left from '~/components/store/Left'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
+    const user = state.user
     return({
+        storeList: user.storeList
     })
 }
 

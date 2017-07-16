@@ -98,7 +98,7 @@ export default class BarScreen extends React.Component {
             style={{ position: 'fixed',
             width: '100%',
             backgroundColor: 'white',
-            zIndex: 10}}>
+            zIndex: 10 }}>
             <div className="container-fluid">
                 <div className="row" style={{ margin: 'auto',  minWidth: 860, marginTop: 9, marginBottom: 9 }}>
                     <div className="col-xs-1" style={{ padding: 0}}>
@@ -108,11 +108,11 @@ export default class BarScreen extends React.Component {
                                     <img src="/images/kajkai.svg" alt="Cinque Terre" width="27" height="27"/>
                                 </Link>
                             </div>
-                            <div className="btn btn-transparent btn-xs" style={{ padding: 0, marginLeft: 10 }}>
+                            {/* <div className="btn btn-transparent btn-xs" style={{ padding: 0, marginLeft: 10 }}>
                                 <Link to="/map">
                                     <img src="/images/map.svg" alt="Cinque Terre" width="27" height="27"/>
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="col-xs-4"  style={{ padding: 0}}>

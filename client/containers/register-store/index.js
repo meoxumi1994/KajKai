@@ -101,6 +101,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onRegisterStore: (store) => {
         dispatch(registerStore(store))
+    },
+    onChange: (key, value) => {
+        dispatch({ type: 'INST_REGISTER_STORE_CHANGE', key: key, value: value })
     }
 })
 

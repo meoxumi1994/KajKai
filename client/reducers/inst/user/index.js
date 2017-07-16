@@ -8,6 +8,10 @@ const index = (state = {
             return {}
         case 'USER_GET_SUCCESS':
             return action.user
+        case 'UPDATE_USER_SUCCESS':
+            if(state.id == action.user.id)
+                return {...state, ...action.user}
+            return state
         default:
             return state
     }

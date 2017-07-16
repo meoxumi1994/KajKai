@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 import ContentEditable from '~/components/entity/ContentEditable'
 import DropDown from '~/components/entity/DropDown'
@@ -44,20 +45,15 @@ class SellPost extends React.Component {
             content: '',
         }
     }
-    componentDidMount(){
-        $(window).click((event) => {
-            this.setState({ clicksetting: false })
-        });
-    }
     clickSetting(){
         setTimeout(()=>{
-            this.setState({ clicksetting: true })
+            this.props.onChange('clicksetting', true )
         },1)
     }
     render(){
-        const { isOwner, ship, status, category, description, storename, avatarUrl, time,
+        const { urlname, isOwner, ship, status, category, description, storename, avatarUrl, time,
             numfollow, likestatus, likeGroupContent, likes, numlike, yourid, beLike,
-            onLike, postrows, postrows_order,
+            onLike, postrows, postrows_order, clicksetting,
         } = this.props
         return(
             <div style={{
@@ -81,7 +77,7 @@ class SellPost extends React.Component {
                                 fontSize: 12,
                             }}
                         />
-                        {this.state.clicksetting &&
+                        {clicksetting &&
                             <DropDown
                                 contents={['Report post','Block store']}
                                 onClick={(index) => console.log(index)}
@@ -93,12 +89,12 @@ class SellPost extends React.Component {
                         <img src={avatarUrl} width={ship?60:40} height={ship?60:40}/>
                     </div>
                     <div style={{
-                        marginTop: -57,
-                        marginLeft: 70,
+                        marginTop: ship?-57:-40,
+                        marginLeft: ship?70:50,
                         color: '#A7ABB1',
                         fontWeight: 'bold'}}>
                         <div className="btn" style={{ padding: 0 }}>
-                            <a style={{ color: '#BD081C', fontWeight: 'bold'}}>{storename}</a>
+                            <a href={"/"+urlname} style={{ color: '#BD081C', fontWeight: 'bold'}}>{storename}</a>
                         </div>
                         {" : "}
                         <div className="btn" style={{ padding: 0 }}>
@@ -106,7 +102,7 @@ class SellPost extends React.Component {
                         </div>
                     </div>
                     {ship &&
-                        <div style={{ marginLeft: 70, marginTop: -3, }}>
+                        <div style={{ marginLeft: ship?70:50, marginTop: -3, }}>
                             <span style={{ color: '#516EA7', fontWeight: 'bold'}} >Ship</span>
                             <span>{": "}</span>
                             <span style={{ fontSize: 12.5 }}>{ship}</span>
@@ -114,7 +110,7 @@ class SellPost extends React.Component {
                     }
                     <div style={{
                         fontSize: 12,
-                        marginLeft: 70,
+                        marginLeft: ship?70:50,
                         color: '#A7ABB1',
                         }}>
                         {time}{" . "}{description}
@@ -125,15 +121,15 @@ class SellPost extends React.Component {
                         <PostRow id={item}/>
                     </div>
                 )}
-                <hr style={{ margin: 0}}/>
-                <div style={{ padding: '6px 0px 6px 0px'}}>
+                <hr style={{ margin: 0, marginTop: 10 }}/>
+                {/* <div style={{ padding: '6px 0px 6px 0px'}}>
                     <LikeShareComment
                         onLike={onLike}
                         onComment={() => console.log('onComment')}
                         onShare={() => console.log('onShare')}
                         beLike={getBeLike(likes, yourid)}/>
-                </div>
-                <hr style={{ margin: 0}}/>
+                </div> */}
+                {/* <hr style={{ margin: 0}}/>
                 <div style={{ padding: '8px 0px 8px 0px'}}>
                     <LikeGroup
                         size={20}
@@ -141,8 +137,8 @@ class SellPost extends React.Component {
                         typeLikes={likestatus}
                         other={19}
                         />
-                </div>
-                <hr style={{ margin: 0}}/>
+                </div> */}
+                <hr style={{ margin: 0, marginTop: 25}}/>
                 <GroupComment/>
             </div>
         )

@@ -13,8 +13,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onLoadImage: (file) => {
-        dispatch(loadImage('ACTION', file, undefined))
+    onLoadImage: (action, file) => {
+        dispatch(loadImage(action, file, undefined))
     }
 })
 

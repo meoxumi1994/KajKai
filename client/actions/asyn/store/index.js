@@ -1,4 +1,18 @@
-import { flem, flet } from '~/actions/support'
+import { flem, flet, fleu} from '~/actions/support'
+
+export const updateStore = (store) => dispatch => {
+    dispatch({ type: 'UPDATE_STORE_ING'})
+    fleu('/store',{
+        ...store
+    })
+    .then(({ status, store }) => {
+        if(status == 'success'){
+            dispatch({ type: 'UPDATE_STORE_SUCCESS', store: store })
+        }else{
+            dispatch({ type: 'UPDATE_STORE_FAILED' })
+        }
+    })
+}
 
 export const getStore = (id) => dispatch => {
     dispatch({ type: 'STORE_GET_ING' });

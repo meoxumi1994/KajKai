@@ -16,10 +16,11 @@ class ContentShow extends React.Component {
         this.setState({ width: this.display.getBoundingClientRect().width })
     }
     render(){
-        const { heightEachRow, content, padding, fontWeight, fontSize } = this.props
+        const { heightEachRow, content, padding, fontWeight, fontSize, minHeight } = this.props
         return(
             <div style={{
                 // outline: '1px solid transparent',
+                minHeight: minHeight,
                 fontSize: fontSize,
                 fontWeight: fontWeight,
                 backgroundColor: 'white',

@@ -24,7 +24,7 @@ class UploadCroppie extends React.Component {
     readURL(){
         const file = this.refs.imagefile.files[0];
         if(this.props.upNow){
-            this.props.onLoadImage(action, file)
+            this.props.onLoadImage(this.props.action, file)
         }else{
             const reader = new FileReader();
             const url = reader.readAsDataURL(file);
@@ -43,7 +43,7 @@ class UploadCroppie extends React.Component {
         this.setState({ showModal: false })
     }
     render() {
-        const { style, CROPPIE_TITLE, btnstyle, upNow } = this.props
+        const { style, CROPPIE_TITLE, btnstyle, upNow, action, aspectRatio} = this.props
         return (
             <div>
                 <button type="button" className="btn btn-default"
@@ -71,6 +71,8 @@ class UploadCroppie extends React.Component {
                             <strong>{CROPPIE_TITLE}</strong>
                         </Modal.Header>
                         <Croppie
+                            aspectRatio={aspectRatio}
+                            action={action}
                             cropper_src={this.state.cropper_src}
                             style={style}
                         />

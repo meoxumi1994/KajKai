@@ -16,7 +16,7 @@ class Progress extends React.Component {
         const { showModal, close, ratio } = this.props
         return(
             <Modal show={showModal} onHide={() => {
-                if(ratio >= 0)
+                if(ratio >= 95)
                     close()
             }}>
                 <div className="progress" style={{ height: 500, padding: '245px 20px 0px 20px'}}>

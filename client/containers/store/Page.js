@@ -9,10 +9,8 @@ const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     const store = state.inst.store.index
     const { scrollTop, scrollLeft, height } = state.inst.app
-    const { stateSellPost, stateMinorPost, sellposts, offsetSellPost, offsetMinorPost, minorposts} = state.inst.store.page
     let isOwner = false
-
-    for(let i=0; i<= state.user.storeList.length ; i++){
+    for(let i=0; i< state.user.storeList.length ; i++){
         if(state.user.storeList[i].id == id){
             isOwner = true
             break
@@ -20,16 +18,11 @@ const mapStateToProps = (state, { id }) => {
     }
     return({
         ...store,
+        ...state.inst.store.page,
         isOwner: isOwner,
-        stateSellPost: stateSellPost,
-        stateMinorPost: stateMinorPost,
-        offsetSellPost: offsetSellPost,
-        offsetMinorPost: offsetMinorPost,
         scrollTop: scrollTop,
         scrollLeft: scrollLeft,
         height: height,
-        sellposts: sellposts,
-        minorposts: minorposts,
         BY: g('BY'),
         LIKE : g('LIKE'),
         FOLLOW : g('FOLLOW'),
@@ -42,6 +35,7 @@ const mapStateToProps = (state, { id }) => {
         THIS: g('THIS'),
         PEOPLE: g('PEOPLE'),
         CREATE_SELLPOST: g('CREATE_SELLPOST'),
+        CREATE_MINORPOST: g('CREATE_MINORPOST'),
         CREATE_SELLPOST_DESCRIPTTION: g('CREATE_SELLPOST_DESCRIPTTION'),
         CREATE_SELLPOST_DESCRIPTTION_1: g('CREATE_SELLPOST_DESCRIPTTION_1'),
         CREATE_SELLPOST_DESCRIPTTION_2: g('CREATE_SELLPOST_DESCRIPTTION_2'),
@@ -55,6 +49,9 @@ const mapDispatchToProps = (dispatch, props) => ({
     },
     needMinorPost: (id, offsetMinorPost) => {
         dispatch(getMinorPost(id, offsetMinorPost))
+    },
+    onChange: (key, value) => {
+        dispatch({ type: 'INST_STORE_PAGE_CHANGE', key: key, value: value })
     }
 })
 

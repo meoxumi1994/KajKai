@@ -40,14 +40,18 @@ window.addEventListener('resize', () => {
     store.dispatch({ type: 'SCREEN_RESIZE', width: window.innerWidth, height: window.innerHeight });
 });
 
+$(window).click(function() {
+    store.dispatch({ type: 'SCREEN_CLICK'})
+});
+
 document.getElementsByTagName("BODY")[0].onscroll = () => {
     store.dispatch({ type: 'ON_SCROLL_BODY',
         scrollTop: document.getElementsByTagName("BODY")[0].scrollTop,
         scrollLeft: document.getElementsByTagName("BODY")[0].scrollLeft, })
 }
 
-store.dispatch({ type: 'server/hello'})
-store.dispatch({ type: 'server/TestController'})
+// store.dispatch({ type: 'server/hello'})
+// store.dispatch({ type: 'server/TestController'})
 
 ReactDOM.render(
     <AppContainer>

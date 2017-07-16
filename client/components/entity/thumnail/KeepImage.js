@@ -36,7 +36,7 @@ class KeepImage extends React.Component {
         this.setState({ showView: false })
     }
     render(){
-        const { type, width, images, canEdit, imagesSuggest, ADD_PHOTO, SUGGEST_PHOTO, SEE_MORE } = this.props
+        const { type, width, images, canEdit, imagesSuggest, action, ADD_PHOTO, SUGGEST_PHOTO, SEE_MORE } = this.props
         return(
             <div>
                 {type=='Carousel' ?
@@ -80,6 +80,8 @@ class KeepImage extends React.Component {
                                         <UploadCroppie
                                             src="/images/flower005.jpg"
                                             style={{ width: 780, height: 440 }}
+                                            upNow={true}
+                                            action={action}
                                             btnstyle={{
                                                 width: '100%',
                                                 height: 81,

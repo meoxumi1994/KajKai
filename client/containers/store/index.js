@@ -4,10 +4,14 @@ import Store from '~/components/store'
 import { getStore } from '~/actions/asyn/store'
 
 const mapStateToProps = (state, ownProps ) => {
+    const { scrollTop, scrollLeft, height } = state.inst.app
     return({
         store: state.inst.store.index,
         iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT'),
         isusername: state.user.username,
+        scrollTop: scrollTop,
+        scrollLeft: scrollLeft,
+        height: height,
     })
 }
 

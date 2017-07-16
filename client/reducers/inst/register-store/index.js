@@ -20,6 +20,11 @@ const index = (state = {
     contentModalWarning: '',
 }, action) => {
     switch (action.type) {
+        case 'SCREEN_CLICK':
+            return {...state,
+                showDropDown: false,
+                showSecondDropDown: false,
+            }
         case 'GET_LIST_CATEGORY_SUCCESS':
             return {...state, categories: action.categories }
         case 'INST_REGISTER_STORE_CHOOSE_CATEGORY':
@@ -54,6 +59,8 @@ const index = (state = {
             return {...state, urlname: action.urlname}
         case 'INST_REGISTER_STORE_CLOSE_MODAL_WARNING':
             return {...state, openModalWarning: false }
+        case 'INST_REGISTER_STORE_CHANGE':
+            return {...state, [action.key] : action.value}
         case 'INST_REGISTER_STORE_SHOW_MODAL_FAILED':
             return {...state, openModalWarning: true, contentModalWarning: action.content}
         default:

@@ -8,11 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     const { id, avatarUrl, coverUrl, username } = state.inst.user.index
     const user = state.user
     return({
-        id : id,
-        yourid: user.id,
-        name: username,
-        avatarUrl: avatarUrl,
-        coverUrl: coverUrl,
+        ...state.inst.user.index
     })
 }
 

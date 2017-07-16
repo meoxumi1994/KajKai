@@ -1,4 +1,5 @@
 const page = (state = {
+    showEditSellPost: false,
     stateSellPost: 'WAIT',
     offsetSellPost: -1,
     stateMinorPost: 'WAIT',
@@ -47,7 +48,13 @@ const page = (state = {
         case 'CREATE_SELL_POST_SUCCESS':
             return {
                 ...state,
-                sellposts: [action.sellpost, ...state.sellposts]
+                sellposts: [action.sellpost.id, ...state.sellposts],
+                showEditSellPost: false,
+            }
+        case 'INST_STORE_PAGE_CHANGE':
+            return {
+                ...state,
+                [action.key] : action.value,
             }
         default:
             return state

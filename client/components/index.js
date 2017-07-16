@@ -12,8 +12,6 @@ import AddPhoto from '~/containers/entity/thumnail/AddPhoto'
 import LikeShareComment from '~/containers/entity/row/LikeShareComment'
 import Textarea from 'react-textarea-autosize'
 
-import DisplayImage from '~/components/entity/thumnail/DisplayImage'
-
 import MinorPost from '~/containers/entity/post/MinorPost'
 import SellPost from '~/containers/entity/post/SellPost'
 import GroupImage from '~/components/entity/thumnail/GroupImage'

@@ -5,7 +5,7 @@ import Progress from '~/components/entity/thumnail/Progress'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
-    const progress = state.inst.entity.progress
+    const progress = state.inst.entity.thumnail.progress
     return({
         ...progress
     })

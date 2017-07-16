@@ -4,6 +4,82 @@ import Magic from '~/containers/entity/thumnail/Magic'
 import Enlarge from '~/containers/entity/thumnail/Enlarge'
 import classNames from 'classnames'
 
+const Group = ({ images, width, height, openModal }) => {
+    switch (images.length) {
+        case 1:
+            return(
+                <div>
+                    <Magic src={images[0]} openModal={() => openModal(0)}
+                        style={{ width: width, height: height }}/>
+                </div>
+            )
+        case 2:
+            return(
+                <div>
+                    <Magic src={images[0]} openModal={() => openModal(0)}
+                        style={{ width: width/2, height: height }}/>
+                    <Magic src={images[1]} openModal={() => openModal(1)}
+                        style={{ width: width/2, height: height }}/>
+                </div>
+            )
+        case 3:
+            return(
+                <div style={{ width: 520 }}>
+                    <Magic src={images[0]} openModal={() => openModal(0)}
+                        style={{ width: width, height: height*3/5 }}/>
+                    <Magic src={images[1]} openModal={() => openModal(1)}
+                        style={{ height: height*2/5, width: width/2 }}/>
+                    <Magic src={images[2]} openModal={() => openModal(2)}
+                        style={{ height: height*2/5, width: width/2 }}/>
+                </div>
+            )
+        case 4:
+            return(
+                <div style={{ width: 520 }}>
+                    <Magic src={images[0]} openModal={() => openModal(0)}
+                        style={{ height: height/2, width: width/2 }}/>
+                    <Magic src={images[1]} openModal={() => openModal(1)}
+                        style={{ height: height/2, width: width/2 }}/>
+                    <Magic src={images[2]} openModal={() => openModal(2)}
+                        style={{ height: height/2, width: width/2 }}/>
+                    <Magic src={images[3]} openModal={() => openModal(3)}
+                        style={{ height: height/2, width: width/2 }}/>
+                </div>
+            )
+        case 5:
+            return(
+                <div style={{ width: 520 }}>
+                    <Magic src={images[0]} openModal={() => openModal(0)}
+                        style={{ height: height*2/3, width: width/2 }}/>
+                    <Magic src={images[1]} openModal={() => openModal(1)}
+                        style={{ height: height*2/3, width: width/2 }}/>
+                    <Magic src={images[2]} openModal={() => openModal(2)}
+                        style={{ height: width/3, width: width/3 }}/>
+                    <Magic src={images[3]} openModal={() => openModal(3)}
+                        style={{ height: width/3, width: width/3 }}/>
+                    <Magic src={images[4]} openModal={() => openModal(4)}
+                        style={{ height: width/3, width: width/3 }}/>
+                </div>
+            )
+        default:
+            return(
+                <div style={{ width: 520 }}>
+                    <Magic src={images[0]} openModal={() => openModal(0)}
+                        style={{ height: height*2/3, width: width/2 }}/>
+                    <Magic src={images[1]} openModal={() => openModal(1)}
+                        style={{ height: height*2/3, width: width/2 }}/>
+                    <Magic src={images[2]} openModal={() => openModal(2)}
+                        style={{ height: width/3, width: width/3 }}/>
+                    <Magic src={images[3]} openModal={() => openModal(3)}
+                        style={{ height: width/3, width: width/3 }}/>
+                    <Magic src={images[4]} openModal={() => openModal(4)}
+                        more={images.length - 5}
+                        style={{ height: width/3, width: width/3 }}/>
+                </div>
+            )
+    }
+}
+
 class GroupImage extends React.Component {
     constructor(props){
         super(props)
@@ -32,99 +108,10 @@ class GroupImage extends React.Component {
         const { EDIT, onEdit, images, canEdit } = this.props
         const width = this.props.width - ((images.length>1)? 1 : 2);
         const height = width * 2/ 3;
-        const Group = () => {
-            switch (images.length) {
-                case 1:
-                    return(
-                        <div>
-                            <Magic src={images[0]} openModal={() => this.openModal(0)}
-                                style={{ width: width, height: height }}/>
-                        </div>
-                    )
-                case 2:
-                    return(
-                        <div>
-                            <Magic src={images[0]} openModal={() => this.openModal(0)}
-                                style={{ width: width/2, height: height }}/>
-                            <Magic src={images[1]} openModal={() => this.openModal(1)}
-                                style={{ width: width/2, height: height }}/>
-                        </div>
-                    )
-                case 3:
-                    return(
-                        <div style={{ width: 520 }}>
-                            <Magic src={images[0]} openModal={() => this.openModal(0)}
-                                style={{ width: width, height: height*3/5 }}/>
-                            <Magic src={images[1]} openModal={() => this.openModal(1)}
-                                style={{ height: height*2/5, width: width/2 }}/>
-                            <Magic src={images[2]} openModal={() => this.openModal(2)}
-                                style={{ height: height*2/5, width: width/2 }}/>
-                        </div>
-                    )
-                case 4:
-                    return(
-                        <div style={{ width: 520 }}>
-                            <Magic src={images[0]} openModal={() => this.openModal(0)}
-                                style={{ height: height/2, width: width/2 }}/>
-                            <Magic src={images[1]} openModal={() => this.openModal(1)}
-                                style={{ height: height/2, width: width/2 }}/>
-                            <Magic src={images[2]} openModal={() => this.openModal(2)}
-                                style={{ height: height/2, width: width/2 }}/>
-                            <Magic src={images[3]} openModal={() => this.openModal(3)}
-                                style={{ height: height/2, width: width/2 }}/>
-                        </div>
-                    )
-                case 5:
-                    return(
-                        <div style={{ width: 520 }}>
-                            <Magic src={images[0]} openModal={() => this.openModal(0)}
-                                style={{ height: height*2/3, width: width/2 }}/>
-                            <Magic src={images[1]} openModal={() => this.openModal(1)}
-                                style={{ height: height*2/3, width: width/2 }}/>
-                            <Magic src={images[2]} openModal={() => this.openModal(2)}
-                                style={{ height: width/3, width: width/3 }}/>
-                            <Magic src={images[3]} openModal={() => this.openModal(3)}
-                                style={{ height: width/3, width: width/3 }}/>
-                            <Magic src={images[4]} openModal={() => this.openModal(4)}
-                                style={{ height: width/3, width: width/3 }}/>
-                        </div>
-                    )
-                default:
-                    return(
-                        <div style={{ width: 520 }}>
-                            <Magic src={images[0]} openModal={() => this.openModal(0)}
-                                style={{ height: height*2/3, width: width/2 }}/>
-                            <Magic src={images[1]} openModal={() => this.openModal(1)}
-                                style={{ height: height*2/3, width: width/2 }}/>
-                            <Magic src={images[2]} openModal={() => this.openModal(2)}
-                                style={{ height: width/3, width: width/3 }}/>
-                            <Magic src={images[3]} openModal={() => this.openModal(3)}
-                                style={{ height: width/3, width: width/3 }}/>
-                            <Magic src={images[4]} openModal={() => this.openModal(4)}
-                                more={images.length - 5}
-                                style={{ height: width/3, width: width/3 }}/>
-                        </div>
-                    )
-            }
-        }
+
         return(
             <div style={{ marginLeft: -1 }}>
-                {/* {canEdit &&
-                    <div className="btn"
-                        onClick={() => onEdit()}
-                        style={{
-                            padding: '2px 4px 2px 4px',
-                            position: 'absolute',
-                            zIndex: 1,
-                            marginLeft: width - 30,
-                            marginTop: 10,
-                            backgroundColor: 'white',
-                            boxShadow: '0px 0px 4px #000000',
-                        }}>
-                        <span className="glyphicon glyphicon-edit" style={{ color: 'black'}}></span>
-                    </div>
-                } */}
-                <Group/>
+                <Group width={width} height={height} images={images} openModal={(index) => this.openModal(index)}/>
                 {this.state.openModal &&
                     <Enlarge close={() => this.setState({ openModal: false })}
                         imgHeight={this.state.imgHeight}

@@ -11,6 +11,27 @@ import Left from '~/containers/user/Left'
 import Contact from '~/containers/user/Contact'
 import Activity from '~/containers/user/Activity'
 
+const Middle = ({location}) => {
+    switch (location.pathname.split('/')[3]) {
+        case undefined:
+            return <Interest/>
+        case 'about':
+            return <About/>
+        case 'store':
+            return <Store/>
+        case 'post':
+            return <Post/>
+        case 'contact':
+            return <Contact/>
+        case 'activity':
+            return <Activity/>
+        case 'setting':
+            return <Setting/>
+        default:
+            return <div></div>
+    }
+}
+
 class User extends React.Component {
     constructor(props){
         super(props)
@@ -21,26 +42,7 @@ class User extends React.Component {
             return <div></div>
         if(!isusername)
             return <Redirect to='/register'/>
-        const Middle = () => {
-            switch (location.pathname.split('/')[3]) {
-                case undefined:
-                    return <Interest/>
-                case 'about':
-                    return <About/>
-                case 'store':
-                    return <Store/>
-                case 'post':
-                    return <Post/>
-                case 'contact':
-                    return <Contact/>
-                case 'activity':
-                    return <Activity/>
-                case 'setting':
-                    return <Setting/>
-                default:
-                    return <div></div>
-            }
-        }
+
         return(
             <div style={{ width: 1100, margin: 'auto' }}>
                 <div style={{ marginLeft: 160, float: 'left', width: 940 }}>
@@ -52,16 +54,12 @@ class User extends React.Component {
                             <Left/>
                         </div>
                         <div className="col col-xs-10" style={{ padding: 0, margin: 0}}>
-                            <Middle/>
+                            <Middle location={location}/>
                         </div>
                     </div>
                 </div>
             </div>
         )
-    }
-    shouldComponentUpdate(nextProps, nextState){
-        console.log('shouldComponentUpdate', nextProps.location.pathname, nextState)
-        return true
     }
     componentDidMount(){
         const { onGetUser } = this.props
