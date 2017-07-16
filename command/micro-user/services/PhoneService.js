@@ -1,70 +1,43 @@
-import NexmoVerify from 'verify-javascript-sdk'
+import twilio from 'twilio'
+import { Phone } from '../models'
 
-const Nexmo = new NexmoVerify({
-    appId: 'd68d052b-38e9-4bae-a099-0f610ac0b4b4',
-    sharedSecret: 'dfe41a5d6a06d73'
-})
+export const sendPhoneVerificationCode = (phone, next) => {
+  const client = twilio('AC9d56fa868509534d25f79d014bce9d3a', '7a88c013ff38584546f7e9c3d5d2476f')
+  const code = parseInt(Math.random() * 10000)
+  console.log('phone: ', phone)
 
-export const mNexmoVerifyPhone = (phone) => (
-    Nexmo.verify({
-        number: phone
+  Phone.findOne({ phone }, (err, mPhone) => {
+    if (mPhone) {
+      mPhone.code = code
+    } else {
+      mPhone = new Phone({
+        phone, code
+      })
+    }
 
-    }).then((status) => {
-        console.log('verify_status', status)
-        return status
-
-    }, (err) => {
-        console.log('verify_error', err)
-        throw err
+    mPhone.save(() => {
+      client.api.messages
+        .create({
+          body: 'KAJKAI code: ' + code,
+          to: phone,
+          from: '+12017204676',
+        }).then((data) => {
+          console.log('send code success')
+          next('pending')
+        }, (err) => {
+          console.error('send code err: ', err)
+          next('error')
+        })
     })
-)
-
-export const mNexmoVerifyCheck = (phone, code) => (
-    Nexmo.verifyCheck({
-        number: phone,
-        code: code
-    }).then((status) => {
-        console.log('check_status', status)
-        return status
-    }, (err) => {
-        console.log('check_error', err)
-        throw err
-    })
-)
-
-export const mNexmoVerifyLogout = (phone) => (
-    Nexmo.verifyLogout({
-        number: phone
-    }).then((status) => {
-        console.log('logout_status', status)
-        return status
-    }, (err) => {
-        console.log('logout_error', err)
-        throw err
-    })
-)
-
-export const mNexmoVerifyCancel = (phone) => (
-  Nexmo.verifyControl({
-    number: phone,
-    cmd: 'cancel'
-  }).then((status) => {
-    console.log('cancel_status', status)
-    return status
-  }, (err) => {
-    console.log('cancel_error', err)
-    throw err
   })
-)
+}
 
-export const mNexmoVerifySearch = (phone) => (
-  Nexmo.verifySearch({
-    number: phone
-  }).then((status) => {
-    console.log('search_status', status)
-    return status
-  }, (err) => {
-    console.log('search_error', err)
-    throw err
+export const checkPhoneVerificationCode = (phone, code, next) => {
+  Phone.findOne({ phone }, (err, mPhone) => {
+    if (mPhone && mPhone.code == code) {
+      next('verified')
+    } else {
+      next('error')
+    }
   })
-)
+}
