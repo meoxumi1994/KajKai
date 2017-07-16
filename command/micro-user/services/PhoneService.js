@@ -33,6 +33,8 @@ export const sendPhoneVerificationCode = (phone, next) => {
 }
 
 export const checkPhoneVerificationCode = (phone, code, next) => {
+  console.log('phone: ', phone)
+  console.log('code: ', code)
   Phone.findOne({ phone }, (err, mPhone) => {
     if (mPhone && mPhone.code == code) {
       next('verified')
