@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import ChatTop from '~/components/chat/top'
 import { getMessages } from '~/actions/asyn/chat/restful'
+import { changeDisplay } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
     const { chatListMap, currentChat } = state.inst.chat.left
@@ -20,14 +21,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     loadChat: (mesId) => {
         dispatch(getMessages(mesId, Date.now(), 10))
     },
-    displayAddMember: (mesId) => {
-        // dispatch({type: 'USER_DISPLAY/ADD_MEMBER', data: {mesId, value: 'toggle'}})
-    },
     setUserId: (id) => {
         dispatch({type: 'SET_USER_ID', data: {id: id}})
     },
-    displaySettings: () => {
-        dispatch({type: 'DISPLAY_SETTINGS', data: {display: true}})
+    displayAddMember: (mesId) => {
+        dispatch(changeDisplay('ADD_MEMBER', mesId, 'toggle'))
+    },
+    displaySettings: (mesId) => {
+        dispatch(changeDisplay('SETTING', mesId, true))
     }
 })
 

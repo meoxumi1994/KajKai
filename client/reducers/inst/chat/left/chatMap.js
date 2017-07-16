@@ -87,6 +87,28 @@ const chatMap = (state={
               },
           }
 
+      case 'CHANGE_DISPLAY':
+          switch (action.subType) {
+              case 'ADD_MEMBER':
+                  return {
+                      ...state,
+                      display: {
+                          ...state.display,
+                          addMember: action.data.value == 'toggle'? !state.display.addMember: action.data.value
+                      }
+                  }
+              case 'SETTING':
+                  return {
+                      ...state,
+                      display: {
+                          ...state.display,
+                          setting: action.data.value == 'toggle'? !state.display.setting: action.data.value
+                      }
+                  }
+            default:
+              return state
+          }
+
         default:
             return state
     }

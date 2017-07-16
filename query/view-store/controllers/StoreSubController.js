@@ -64,7 +64,6 @@ export const updateStore = (message) => {
   if (latitude) store.latitude = latitude
   if (certificates) store.certificates = certificates
 
-
   if (lastUpdate) {
     const mLastUpdate = {}
     const { lastUpdateStoreName, lastUpdateAvatarUrl, lastUpdateCoverUrl } = lastUpdate

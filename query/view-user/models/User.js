@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
   address: {type: AddressSchema},
   language: {type: String, enum: _.values(Language)},
   sex: {type: String, enum: _.values(Sex)},
-  yearOfBirth: {type: Number},
+  yearOfBirth: {type: Date},
   lastUpdate: {type: LastUpdateSchema},
   blackList: [BlackSchema],
   privacy: {type: PrivacySchema},

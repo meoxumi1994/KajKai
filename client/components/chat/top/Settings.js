@@ -4,15 +4,13 @@ import { Modal, Button } from 'react-bootstrap'
 class Settings extends React.Component {
 
     render() {
-
-      const { mesId, settings, userId, chatListMap } = this.props
-      const { displaySettings, changeGroupName, removeUser } = this.props
-
+      const { mesId, userId, chatListMap } = this.props
+      const { close, changeGroupName, removeUser } = this.props
       const { usersKey, usersMap } = chatListMap[mesId]
-
+      const show = chatListMap[mesId].display.setting
       return(
           <div>
-              <Modal style={{ marginTop: 120 }} show={settings}>
+              <Modal style={{ marginTop: 120 }} show={show} onHide={() => close(mesId)}>
                   <Modal.Header closeButton>
                   <Modal.Title> Setting </Modal.Title>
                   </Modal.Header>
@@ -63,8 +61,7 @@ class Settings extends React.Component {
                       </div>
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button>SEND</Button>
-                    <Button onClick={() => displaySettings()}>CLOSE</Button>
+                    <Button onClick={() => close(mesId)}>CLOSE</Button>
                   </Modal.Footer>
               </Modal>
           </div>

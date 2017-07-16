@@ -37,6 +37,15 @@ export const updateUserInfo = (mesId, id, username, avatarUrl) => ({
     }
 })
 
+export const changeDisplay = (subType, mesId, value) => ({
+    type: 'CHANGE_DISPLAY',
+    subType,
+    data: {
+        mesId,
+        value
+    }
+})
+
 // bottom
 export const sendMessage = (mesId, id, text, url, type) => ({
   type: 'server/SEND_MESSAGE',

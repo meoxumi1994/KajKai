@@ -1,12 +1,13 @@
 import { User, BasicStore } from '../models'
 
 export const addStore = (message) => {
-  const { id: storeId, owner: id, storeName, avatarUrl } = message.store
+  const { id: storeId, owner: id, storeName, avatarUrl, urlName } = message.store
 
   const basicStore = new BasicStore({
     id: storeId,
     storeName,
-    avatarUrl
+    avatarUrl,
+    urlName
   })
 
   User.findOne({ id }, (err, user) => {
@@ -25,7 +26,7 @@ export const addStore = (message) => {
 }
 
 export const updateStoreList = (message) => {
-  const { id: storeId, owner: id, storeName, avatarUrl } = message.store
+  const { id: storeId, owner: id, storeName, avatarUrl, urlName } = message.store
 
   User.findOne({ id }, (err, user) => {
     if (user) {
@@ -37,6 +38,7 @@ export const updateStoreList = (message) => {
         if (storeList[i].id == storeId) {
           storeList[i].storeName = storeName
           storeList[i].avatarUrl = avatarUrl
+          storeList[i].urlName = urlName
           break
         }
       }

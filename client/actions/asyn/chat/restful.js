@@ -10,7 +10,8 @@ export const getMesId = (id, person) => dispatch => {
           console.log('\n[API] /getMesId ', response);
           dispatch({type: 'NEW_CHAT', data: {mesId: response.mesId}})
           dispatch(getUser(person, response.mesId))
-          dispatch(getMessages(response.mesId, Date.now()))
+          dispatch(getMessages(response.mesId, Date.now()), false)
+          dispatch(getMessages(response.mesId, Date.now()), true)
     })
 }
 
@@ -25,7 +26,8 @@ export const getMessages = (mesId, offset, multiChat) => dispatch => {
 }
 
 export const getUser = (person, mesId) => dispatch => {
-    flem('/user/'+person, {}, {}).then((response) => {
+    flem('/user/'+person, {}, {})
+    .then((response) => {
           console.log('\n[API] /user ', response);
           const { avatarUrl, username, id } = response.user
           dispatch(updateUserInfo(mesId, id, username, avatarUrl))
@@ -46,5 +48,16 @@ export const getChatList = (offset) => dispatch => {
               dispatch(getMessages(data[0].mesId, Date.now()))
               dispatch(setCurrentChat(data[0].mesId))
           }
+    })
+}
+
+export const searchUser = (keyword) => {
+    flem('/search/user/', {
+        offset: 0,
+        length: 10,
+        keyword
+    }, {})
+    .then((response) => {
+          console.log('\n[API] /searchUser ', response);
     })
 }
