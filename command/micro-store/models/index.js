@@ -6,7 +6,7 @@ import SellPostDetailSchema from './SellPostDetail'
 import SellPostSchema from './SellPost'
 import StoreSchema from './Store'
 import CertificateSchema from './Certificate'
-import MinorPostSchema from './MinorPostSchema'
+import MinorPostSchema from './MinorPost'
 import path from 'path'
 
 export const Certificate = mongoose.model('Certificate', CertificateSchema);
