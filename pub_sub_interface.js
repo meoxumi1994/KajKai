@@ -208,6 +208,22 @@ export default {
                 postrowsId: '',
                 productId: '',
             }
+        },{
+            event: 'MINORPOST.Created',
+            minorPost: {
+
+            }
+        },{
+            event: 'MINORPOST.Updated',
+            minorPost: {
+                minorPostId: '',
+                storeId: '',
+                lineCount: '',
+                content: '',
+                time: '',
+                images: '',
+                video: ''
+            }
         }]
     },
     comment: {

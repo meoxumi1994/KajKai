@@ -612,6 +612,47 @@ GET /postrows/:sellpostid?offset=-1 { // numline = 30
     ]
 }
 
+POST /minorpost {
+    storeid,
+    numline,
+    content,
+    time: ,
+    images: ,
+    video
+} => {
+    status: 'success',
+    minorpost: {
+        storeid,
+        numline,
+        content,
+        time: ,
+        images: ,
+        video,
+        id
+    }
+}
+
+PUT /minorpost {
+    id,
+    storeid,
+    numline,
+    content,
+    time: ,
+    images: ,
+    video
+} => {
+    status: 'success',
+    minorpost: {
+        storeid,
+        numline,
+        content,
+        time: ,
+        images: ,
+        video,
+        id
+    }
+}
+
 GET /minorpost/store/:storeid?offset=-1 { // length = 3
   offset: ,
   minorposts: [ // lay 200 ky tu dau tien cua content

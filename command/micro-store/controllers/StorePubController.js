@@ -122,6 +122,20 @@ export const productDeletedPub = (sellPostId, postrowsId, productId) => {
         postrowsId: postrowsId,
         productId: productId
     }};
-    pub.publish('POSTROW.PRODUCT.Updated', JSON.stringify(publishData));
+    pub.publish('POSTROW.PRODUCT.Deleted', JSON.stringify(publishData));
+    pub.quit();
+};
+
+export const minorPostCreatedPub = (minorPost) => {
+    const pub = redis.createClient(config);
+    const publishData = {minorPost: minorPost};
+    pub.publish('MINORPOST.Created', JSON.stringify(publishData));
+    pub.quit();
+};
+
+export const minorPostUpdatedPub = (minorPost) => {
+    const pub = redis.createClient(config);
+    const publishData = {minorPost: minorPost};
+    pub.publish('MINORPOST.Updated', JSON.stringify(publishData));
     pub.quit();
 };
