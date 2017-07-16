@@ -11,7 +11,7 @@ export default {
             method: 'searchStoreCon'
         }
     },
-    'deleteindex': {
+    '/deleteindex': {
         get: {
             controller: 'SearchController',
             method: 'deleteIndexCon'
