@@ -57,7 +57,10 @@ export const getHitResult = (result) => {
 };
 
 export const delIndex = (next) => {
-    searchClient.indices.delete('*', () => {
-        next();
+    searchClient.indices.delete({
+        index: config.INDEX
+    }, (error, response) => {
+        console.log(error, response);
+        next(error, response);
     });
 };

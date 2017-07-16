@@ -23,8 +23,8 @@ export const searchStoreCon = () => {
 
 export const deleteIndexCon = () => {
     return (req, res) => {
-        delIndex(() => {
-            res.json({status: 'success'});
+        delIndex((error, response) => {
+            res.json({error: error, response: response});
         });
     }
 };
