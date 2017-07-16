@@ -55,3 +55,9 @@ export const getHitResult = (result) => {
     }
     return {users: res};
 };
+
+export const delIndex = (next) => {
+    searchClient.indices.delete('*', () => {
+        next();
+    });
+};

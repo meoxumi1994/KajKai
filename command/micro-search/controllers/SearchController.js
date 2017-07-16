@@ -1,4 +1,4 @@
-import { searchUser } from '../services/UserSearchService'
+import { searchUser, delIndex } from '../services/UserSearchService'
 import { searchStore } from '../services/StoreSearchService'
 
 export const searchUserCon = () => {
@@ -18,5 +18,13 @@ export const searchStoreCon = () => {
         searchStore(keyword, offset, length, (data) => {
             res.json(data);
         })
+    }
+};
+
+export const deleteIndexCon = () => {
+    return (req, res) => {
+        delIndex(() => {
+            res.json({status: 'success'});
+        });
     }
 };
