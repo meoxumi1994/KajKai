@@ -48,6 +48,9 @@ export const searchStore = (keyword, offset, length, next) => {
 
 export const getHitResult = (result) => {
     let res = [];
+    if (!result || !result.hits || !result.hits.hits) {
+        return {stores: []};
+    }
     let hits = result.hits.hits;
     for (let i = 0; i < hits.length; ++i) {
         let store = {
