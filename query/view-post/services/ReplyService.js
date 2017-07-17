@@ -43,6 +43,8 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
     if (replies.length == 0 || currentNumberOfReply == replies.length) {
       rOffset = -2
     }
+
+    mReplies = [getClientFormatReply(replies[0]), ...mReplies]
   } else {
     for(let k = replies.length - 1; k > 0; k--) {
       let reply = replies[k]
@@ -58,12 +60,10 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
         }
       }
     }
-    if (lastIndex == 0) {
+    if (lastIndex == 1) {
       rOffset = -2
     }
   }
-
-  mReplies = [getClientFormatReply(replies[0]), ...mReplies]
 
   return {
     offset: rOffset,
