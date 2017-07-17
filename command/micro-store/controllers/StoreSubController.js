@@ -27,7 +27,7 @@ export const getStoreFromPostSub = (message, next) => {
 
 export const getStoreListSub = (message, next) => {
     getListStore(message.storeIdList, (stores) => {
-        if (store) {
+        if (stores) {
             next({status: 'success', stores: stores});
         } else {
             next({status: 'failed'});
