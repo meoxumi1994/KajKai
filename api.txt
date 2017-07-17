@@ -975,11 +975,6 @@ POST /phoneverification {  //server kiểm tra xem có user hay store nào dùng
   'pending|used|error'
 }
 
-POST /phonereverification {  // chờ sau 30s
-  phone: '0123456789'
-}, {
-  'pending|used|error'
-}
 
 POST /phonecodeverification { // server requests to Nexmo để check code cho số phone
   phone: '0123456789',

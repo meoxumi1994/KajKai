@@ -59,6 +59,7 @@ const mergerProp = (stateProps, dispatchProps, ownProps) => {
                 ...stateProps,
                 postrows: postrows,
                 storeid: id,
+                status: 'notyet',
             }
             createSellPost(store)
         },

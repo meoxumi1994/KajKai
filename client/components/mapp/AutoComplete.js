@@ -9,7 +9,7 @@ export default class AutoComplete extends React.Component {
     window.initAutocomplete = () => {
       this.autocomplete = new google.maps.places.Autocomplete(
         (document.getElementById('autocomplete')),
-        {types: ['geocode']}
+        { types: [] }
       )
     }
     this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyDEy3sjvl8Sq5bsInBAU61uu_u4_fK3zvk&libraries=places&callback=initAutocomplete')

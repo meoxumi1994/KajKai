@@ -4,21 +4,19 @@ import SellPost from '~/containers/entity/post/SellPost'
 import MinorPost from '~/containers/entity/post/MinorPost'
 import TimeLine from '~/components/entity/draw/TimeLine'
 import EditSellPost from '~/containers/entity/post/EditSellPost'
+import EditMinorPost from '~/containers/entity/post/EditMinorPost'
 import Link from 'react-router-dom'
 
 class Page extends React.Component {
     constructor(props){
         super(props)
-        this.state = {
-            showEditSellPost: false,
-        }
     }
     render(){
-        const { isOwner, id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeedSellPost, onNeedMinorPost,
-            offsetSellPost, offsetMinorPost,
+        const { isOwner, id, height, scrollTop, scrollLeft, sellposts, minorposts,  onNeedSellPost, onNeedMinorPost,
+            offsetSellPost, offsetMinorPost, showEditSellPost, showEditMinorPost, onChange,
             numlike, likes, numfollow, follows, address, addressMap, category, latitute, longitute, phone,
             LIKE, FOLLOW, ADDRESSMAP, ADDRESS, CATEGORY, PHONE, BY, ANOTHER_PEOPLE, AND, THIS, PEOPLE,
-            CREATE_SELLPOST,
+            CREATE_SELLPOST, CREATE_MINORPOST,
         } = this.props
         return(
             <div className="container-fluid">
@@ -36,10 +34,10 @@ class Page extends React.Component {
                             marginLeft: this.sellpost_marginTop?(-scrollLeft-24):-24,
                             marginTop: this.sellpost_marginTop?(-this.sellpost_inside_height.offsetHeight + height - 343):0,
                             minHeight: height - 48,
+                            paddingTop: 10,
                             width: 520 }}>
                             {isOwner &&
                                 <div style={{
-                                    marginTop: 10,
                                     borderRadius: 4,
                                     border: '1px solid #CCCCCC',
                                     boxShadow: '0px 0px 4px #CCCCCC',
@@ -48,25 +46,20 @@ class Page extends React.Component {
                                     <div className="btn btn-default" style={{
                                         backgroundColor: '#BD081C',
                                         color: 'white', borderWidth: 0 }}
-                                        onClick={() => this.setState({ showEditSellPost: true })}
+                                        onClick={() => onChange('showEditSellPost', true)}
                                         >
                                         {CREATE_SELLPOST}
                                     </div>
                                     <EditSellPost
-                                        title={"Create Sell Post"}
-                                        showModal={this.state.showEditSellPost}
-                                        close={() => this.setState({ showEditSellPost: false })}/>
+                                        title={CREATE_SELLPOST}
+                                        showModal={showEditSellPost}
+                                        close={() => onChange('showEditSellPost', false)}/>
                                 </div>
                             }
                             {sellposts.map((item, index) =>
-                                // <div key={index} className="panel panel-default"
-                                //     style={{ height: 600,margin: '10px 0px 0px 0px'}}>
-                                //     123123123
-                                // </div>
                                 <div key={index} style={{ paddingTop: 10 }}>
                                     <SellPost id={item}/>
                                 </div>
-                                // <TimeLine style={{ height: 600, margin: '10px 0px 0px 0px'}} key={index}/>
                             )}
                             {offsetSellPost != -2 && <span style={{ marginTop: 10 }} id="loaderr"></span>}
                         </div>
@@ -126,11 +119,27 @@ class Page extends React.Component {
                                     </div>
                                 </div>
                             </div>
+                            {/* {isOwner &&
+                                <div style={{
+                                    marginTop: 10,
+                                    borderRadius: 4,
+                                    border: '1px solid #CCCCCC',
+                                    boxShadow: '0px 0px 4px #CCCCCC',
+                                    backgroundColor: 'white',
+                                    width: 410, padding: 10,}}>
+                                    <div className="btn btn-default" style={{
+                                        backgroundColor: '#BD081C',
+                                        color: 'white', borderWidth: 0 }}
+                                        onClick={() => onChange('showEditMinorPost', true)}>
+                                        {CREATE_MINORPOST}
+                                    </div>
+                                    <EditMinorPost
+                                        title={CREATE_MINORPOST}
+                                        showModal={showEditMinorPost}
+                                        close={() => onChange('showEditMinorPost', false)}/>
+                                </div>
+                            } */}
                             {minorposts.map((intem,index) =>
-                                // <div key={index} className="panel panel-default"
-                                //     style={{ height: 400,margin: '10px 0px 0px 0px'}}>
-                                //     123123123
-                                // </div>
                                 <TimeLine key={index} style={{ height: 400, width: 410, margin: '10px 0px 0px 0px'}}/>
                             )}
                             {offsetMinorPost != -2 && <div style={{ marginTop: 10 }} id="loaderr"></div>}

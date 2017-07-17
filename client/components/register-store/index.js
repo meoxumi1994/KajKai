@@ -19,8 +19,6 @@ class RegisterStore extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            showDropDown: false,
-            showSecondDropDown: false,
             showPostRow: false,
         }
     }
@@ -43,6 +41,7 @@ class RegisterStore extends React.Component {
             urlname, onChangeUrlName,
             onChooseCategory, onChooseSecondCategory, onChangeCategoryInputValue, categoryInputValue,
             openModalWarning, contentModalWarning, closeModalWarning,
+            showDropDown, showSecondDropDown, onChange,
             } = this.props
         const categoriesName = categories.map((item) => item.name)
         let secondCategoriesName = []
@@ -101,12 +100,12 @@ class RegisterStore extends React.Component {
                         <div className="btn btn-default btn-xs" style={{ marginTop: 5, width: 300 , fontSize: 12.5 }}
                             onClick={() => {
                                 setTimeout(() => {
-                                    this.setState({ showDropDown: true })
+                                    onChange('showDropDown', true)
                                 },1)
                             }}>
                             {chooseCategory || 'chooseCategory'}
                         </div>
-                        {this.state.showDropDown &&
+                        {showDropDown &&
                             <DropDownCategory
                                 width={300}
                                 contents={categoriesName}
@@ -116,13 +115,13 @@ class RegisterStore extends React.Component {
                             <div className="btn btn-default btn-xs" style={{ marginTop: 5, width: 300, fontSize: 12.5 }}
                                 onClick={() => {
                                     setTimeout(() => {
-                                        this.setState({ showSecondDropDown: true })
+                                        onChange('showSecondDropDown', true)
                                     },1)
                                 }}>
                                 {chooseSecondCategory || 'chooseSecondCategory'}
                             </div>
                         }
-                        { (chooseCategory && this.state.showSecondDropDown) &&
+                        { (chooseCategory && showSecondDropDown) &&
                             <DropDownCategory
                                 width={300}
                                 contents={secondCategoriesName}
@@ -249,13 +248,6 @@ class RegisterStore extends React.Component {
         )
     }
     componentDidMount(){
-        const that = this
-        $(window).click(function() {
-            that.setState({
-                showDropDown: false,
-                showSecondDropDown: false,
-            })
-        });
         this.props.onGetCategory();
     }
 }

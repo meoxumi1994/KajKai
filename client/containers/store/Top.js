@@ -7,6 +7,7 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const { userid, id, avatarUrl, coverUrl, storename } = state.inst.store.index
     return({
+        ...state.inst.store.index,
         id : id,
         name: storename,
         avatarUrl: avatarUrl,

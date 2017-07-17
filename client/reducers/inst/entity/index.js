@@ -6,13 +6,15 @@ import row from './row'
 import group from './group'
 import minorpost from './minorpost'
 import sellpost from './sellpost'
+import editminorpost from './editminorpost'
 import editsellpost from './editsellpost'
 import editpostrow from './editpostrow'
 import callcomment from './callcomment'
+import comment from './comment'
 import postrow from './postrow'
 import product from './product'
 import phone from './phone'
-import progress from './progress'
+import thumnail from './thumnail'
 
 const entity = combineReducers({
     modal,
@@ -25,9 +27,11 @@ const entity = combineReducers({
     callcomment,
     postrow,
     product,
+    editminorpost,
     editsellpost,
     editpostrow,
-    progress,
+    thumnail,
+    comment,
 })
 
 export default entity

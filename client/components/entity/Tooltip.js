@@ -14,7 +14,7 @@ class Tooltip extends React.Component {
                 color: 'white',
                 position: 'absolute',
                 marginLeft: -10,
-                marginTop: -(16.8*contents.length+35),
+                marginTop: -(16.8*contents.length+50),
                 fontSize: 12.5,
             }}>
                 {contents.map((item,index) =>

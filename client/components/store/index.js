@@ -40,7 +40,7 @@ class Store extends React.Component {
         super(props)
     }
     render(){
-        const { iswhoing, isusername, location, store } = this.props
+        const { iswhoing, isusername, location, store, scrollTop, scrollLeft, height } = this.props
         if(iswhoing || (location.pathname.split('/')[1] != store.id && location.pathname.split('/')[1] != store.urlname ))
             return <div></div>
         if(!isusername)
@@ -53,8 +53,22 @@ class Store extends React.Component {
                 </div>
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col col-xs-2" style={{ padding: 0, margin: 0}}>
-                            <Left/>
+                        <div ref={ left => this.left = left }
+                            style={{
+                            height: this.left_inside_height?this.left_inside_height.offsetHeight: undefined,
+                            padding: 0,
+                            margin: 0 }}
+                            className="col col-xs-2">
+                            <div ref= { left_inside => { this.left_inside_height = left_inside } }
+                                style={{
+                                position: this.left_marginTop?'fixed':'static',
+                                marginLeft: this.left_marginTop?(-scrollLeft):0,
+                                marginTop: this.left_marginTop?(-this.left_inside_height.offsetHeight + height - 343):0,
+                                minHeight: height - 48,
+                                paddingTop: 10,
+                                }}>
+                                <Left/>
+                            </div>
                         </div>
                         <div className="col col-xs-10" style={{ padding: 0, margin: 0}}>
                             <Middle id={id}/>
@@ -63,6 +77,12 @@ class Store extends React.Component {
                 </div>
             </div>
         )
+    }
+    componentWillUpdate(){
+        this.left_marginTop = 0
+        if(this.left){
+            this.left_marginTop = this.props.height - this.left.getBoundingClientRect().bottom > 0
+        }
     }
     componentDidMount(){
         const { onGetStore } = this.props

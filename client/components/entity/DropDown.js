@@ -46,7 +46,7 @@ class DropDown extends React.Component {
                 padding: '5px 0px 5px 0px',
                 backgroundColor: 'white',
                 position: 'absolute',
-                zIndex: 100,
+                zIndex: 1,
                 width: width,
                 marginLeft: -width + 16,
                 marginTop: 9,

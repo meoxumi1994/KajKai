@@ -14,6 +14,12 @@ class ContentEditable extends React.Component {
     }
     componentDidMount(){
         this.setState({ width: this.display.getBoundingClientRect().width })
+        if(this.props.getLine)
+            this.props.getLine(this.textarea.state.height / 20)
+    }
+    componentDidUpdate(){
+        if(this.props.getLine)
+            this.props.getLine(this.textarea.state.height / 20)
     }
     // componentWillUpdate(){
     //     this.setState({ width: this.display.getBoundingClientRect().width })
@@ -27,6 +33,7 @@ class ContentEditable extends React.Component {
                 // backgroundColor: 'white',
                 padding: padding}}>
                 <Textarea
+                    ref={ textarea => this.textarea = textarea }
                     autoComplete="off"
                     autoCorrect="off"
                     autoCapitalize="off"

@@ -97,13 +97,13 @@ const myString = {
     FULL_SCREEN: ['Phóng to','Full Screen'],
     ADDRESSMAP : ['Địa chỉ theo google map', 'Address in googlemap'],
     ANOTHER_PEOPLE: ['người khác','another people'],
-    PEOPLE: ['','people'],
+    PEOPLE: ['người','people'],
     CATEGORY : ['Loại hình', 'Category'],
     BY: ['bởi', 'by'],
     AND: ['và', 'and'],
     THIS: ['điều này','this'],
     // store
-    CREATE_SELLPOST: ['', 'Tạo Một Bài Đăng Bán Hàng'],
+    CREATE_SELLPOST: ['Tạo Một Bài Đăng Bán Hàng', 'Create a Sell Post'],
     CREATE_SELLPOST_DESCRIPTTION: ['Before creating a sale\'s post  you need to keep in mind:','Trước khi tạo bài đăng bán hàng bạn cần lưu ý:'],
     CREATE_SELLPOST_DESCRIPTTION_1: ['You do not need to recreate a sale\'s post for a new product or start selling again, but you can instead re-edit your old post.','Bạn không cần tạo lại bài đăng bán hàng khi có thêm sản phẩm mới hay bắt đầu bán lại, thay vào đó bạn có thể chỉnh sửa lại bài đăng cũ.'],
     CREATE_SELLPOST_DESCRIPTTION_2: ['You create more sale\'s posts when making sure your store adds a new type of business.','Bạn tạo thêm bài đăng bán hàng khi chắc chắn rằng cửa hàng của bạn thêm một loại hình kinh doanh mới.'],
@@ -134,6 +134,7 @@ const myString = {
     STORE_URL: ['Tên url của cửa hàng','url name of store'],
     ENTER_URL_STORE: ['Nhập tên url', 'Enter url name'],
 
+    CREATE_MINORPOST: ['Tạo bài đăng phụ','Create a Minor Post'],
     STORE_NAME_FAILED: ['bạn chưa nhập tên cửa hàng hoặc tên cửa hàng quá ngắn', 'You have not entered a store name or store name that is too short'],
     CATEGORY_FAILED: ['bạn chưa nhập category hoặc độ dài category quá ngắn', 'You have not entered a category or category too short'],
     PHONE_FAILED: ['số điện thoại không hợp lệ','invalid phone number'],

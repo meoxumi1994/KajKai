@@ -41,6 +41,7 @@ const Row = ({ type, id, products, product_order, content, images, onAddProduct,
                         placehoder={" "}
                         content={content}
                         handleChange={(e) => onChange('content', e.target.value)}
+                        getLine={(line) => onChange('numline', line)}
                     />
                 </div>
             )
@@ -52,6 +53,7 @@ const Row = ({ type, id, products, product_order, content, images, onAddProduct,
                         placehoder={" "}
                         content={content}
                         handleChange={(e) => onChange('content', e.target.value)}
+                        getLine={(line) => onChange('numline', line)}
                     />
                 </div>
             )
@@ -60,6 +62,11 @@ const Row = ({ type, id, products, product_order, content, images, onAddProduct,
                 <div>
                     <div style={{ float: 'left', marginTop: -2, marginLeft: -1 }}>
                         <KeepImage
+                            action={{
+                                type: 'UPDATE_POST_ROW',
+                                id: id,
+                                images: images,
+                            }}
                             canEdit={true}
                             type="Carousel"
                             width={242}
@@ -73,6 +80,7 @@ const Row = ({ type, id, products, product_order, content, images, onAddProduct,
                             width={248}
                             content={content}
                             handleChange={(e) => onChange('content', e.target.value)}
+                            getLine={(line) => onChange('numline', line)}
                         />
                     </div>
                 </div>
@@ -82,6 +90,11 @@ const Row = ({ type, id, products, product_order, content, images, onAddProduct,
                 <div>
                     <div style={{ float: 'right', marginTop: -2, marginRight: -2 }}>
                         <KeepImage
+                            action={{
+                                type: 'UPDATE_POST_ROW',
+                                id: id,
+                                images: images,
+                            }}
                             canEdit={true}
                             type="Carousel"
                             width={242}
@@ -95,6 +108,7 @@ const Row = ({ type, id, products, product_order, content, images, onAddProduct,
                             width={248}
                             content={content}
                             handleChange={(e) => onChange('content', e.target.value)}
+                            getLine={(line) => onChange('numline', line)}
                         />
                     </div>
                 </div>
@@ -103,6 +117,11 @@ const Row = ({ type, id, products, product_order, content, images, onAddProduct,
             return(
                 <div>
                     <KeepImage
+                        action={{
+                            type: 'UPDATE_POST_ROW',
+                            id: id,
+                            images: images,
+                        }}
                         canEdit={true}
                         type="GroupImage"
                         width={499}

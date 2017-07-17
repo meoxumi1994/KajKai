@@ -9,18 +9,10 @@ import ChooseCroppie from '~/containers/entity/thumnail/ChooseCroppie'
 class AddPhoto extends React.Component {
     constructor(props){
         super(props)
-        this.state = ({
-            showModal: false
-        })
-    }
-    open(){
-        this.setState({ showModal: true })
-    }
-    close(){
-        this.setState({ showModal: false })
+        this.state = {}
     }
     render(){
-        const { TITLE, SUGGEST_PHOTO, style, action } = this.props
+        const { TITLE, SUGGEST_PHOTO, style, action, onChange, id, aspectRatio} = this.props
         const imagesSuggest = [
             'https://beebom-redkapmedia.netdna-ssl.com/wp-content/uploads/2016/01/Reverse-Image-Search-Engines-Apps-And-Its-Uses-2016.jpg',
             'http://www.jqueryscript.net/images/jQuery-Plugin-For-Fullscreen-Image-Viewer-Chroma-Gallery.jpg',
@@ -30,17 +22,17 @@ class AddPhoto extends React.Component {
             <div>
                 <OneImage style={{ width: style.width, height: style.height }}
                     src={style.src}
-                    onClick={() => this.open()}
+                    onClick={() => onChange('showModal'+id, true)}
                     textChange="Add photo"
                     isTop={style.isTop}
                 />
-                <Modal show={this.state.showModal} onHide={() => this.close()}>
+                <Modal show={this.props['showModal'+id]} onHide={() => onChange('showModal'+id, false)}>
                     <div className="modal-content"
                         style={{
                             marginTop: -4,position: 'fixed',
                             width: 790, marginLeft: -100 }} >
                         <Modal.Header>
-                            <div onClick={() => this.close()} style={{ padding: 0, float: 'right'}}
+                            <div onClick={() => onChange('showModal'+id, false)} style={{ padding: 0, float: 'right'}}
                                 className="btn btn-transperant">
                             </div>
                             <strong>{TITLE}</strong>
@@ -50,6 +42,7 @@ class AddPhoto extends React.Component {
                                 <div className="row">
                                     <div className="col col-xs-6" style={{ padding: 0}}>
                                         <UploadCroppie
+                                            aspectRatio={aspectRatio}
                                             TITLE="Upload Photo"
                                             src="/images/flower005.jpg"
                                             style={{ width: 780, height: 440 }}
@@ -109,7 +102,7 @@ class AddPhoto extends React.Component {
                             </div>
                         </div>
                         <Modal.Footer>
-                            <div className="btn btn-default btn-sm" onClick={() => this.close()}>Close</div>
+                            <div className="btn btn-default btn-sm" onClick={() => onChange('showModal'+id, false)}>Close</div>
                         </Modal.Footer>
                     </div>
                 </Modal>

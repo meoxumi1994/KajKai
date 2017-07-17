@@ -8,10 +8,10 @@ class Croppie extends React.Component {
         super(props)
     }
     onSave(){
-        // console.log(this.cropper.getCroppedCanvas().toDataURL())
+        this.props.onLoadImage(this.props.action, this.cropper.getCroppedCanvas().toDataURL())
     }
     render(){
-        const { SAVE, CROPPIE_DESCRIPTION, cropper_src, style } = this.props
+        const { SAVE, CROPPIE_DESCRIPTION, cropper_src, style, aspectRatio} = this.props
         return(
             <div>
                 <Modal.Body style={{ padding: 0 }}>
@@ -20,7 +20,7 @@ class Croppie extends React.Component {
                         viewMode= {1}
                         dragMode= 'move'
                         src={cropper_src}
-                        aspectRatio= {1}
+                        aspectRatio= {aspectRatio}
                         style={{
                             width: style.width,
                             height: style.height

@@ -47,13 +47,16 @@ class PostRow extends React.Component {
                 case 'imagetext':
                     return(
                         <div>
-                            <KeepImage
-                                type="Carousel"
-                                width={245}
-                                images={images}
-                                imagesSuggest={images}/>
-                            <div style={{ marginLeft: 255, marginTop: -245 }}>
+                            <div style={{ float: 'left', marginTop: -2, marginLeft: -1 }}>
+                                <KeepImage
+                                    type="Carousel"
+                                    width={245}
+                                    images={images}
+                                    imagesSuggest={images}/>
+                            </div>
+                            <div style={{ width: 248, marginLeft: 250 }}>
                                 <ContentShow
+                                    minHeight={245}
                                     fontSize={13.5}
                                     heightEachRow={16}
                                     content={content}
@@ -65,18 +68,21 @@ class PostRow extends React.Component {
                 case 'textimage':
                     return(
                         <div>
-                            <ContentShow
-                                fontSize={13.5}
-                                heightEachRow={16}
-                                content={content}
-                                handleChange={(e) => this.setState({ })}
-                            />
-                            <div style={{ marginLeft: 255, marginTop: -245 }}>
+                            <div style={{ float: 'right', marginTop: -2, marginRight: -2 }}>
                                 <KeepImage
                                     type="Carousel"
                                     width={245}
                                     images={images}
                                     imagesSuggest={images}/>
+                            </div>
+                            <div style={{ width: 248 }}>
+                                <ContentShow
+                                    minHeight={245}
+                                    fontSize={13.5}
+                                    heightEachRow={16}
+                                    content={content}
+                                    handleChange={(e) => this.setState({ })}
+                                />
                             </div>
                         </div>
                     )

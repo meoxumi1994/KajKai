@@ -12,6 +12,15 @@ const postrow = (state = {
                 })
             })
             return newstate
+        case 'CREATE_SELL_POST_SUCCESS':
+            let nstate = state
+            action.sellpost.postrows.map((pr) => {
+                nstate = {
+                    ...nstate,
+                    [pr.id] : pr,
+                }
+            })
+            return nstate
         default:
             return state
     }

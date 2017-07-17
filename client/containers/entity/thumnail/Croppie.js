@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
+import { loadImage } from '~/actions/asyn/entity/loadImage'
 import Croppie from '~/components/entity/thumnail/Croppie'
 
 const mapStateToProps = (state, ownProps) => {
@@ -12,7 +13,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+    onLoadImage: (action, src) => {
+        dispatch(loadImage(action, undefined, src))
+    }
 })
 
 const CroppieContainer = connect(
