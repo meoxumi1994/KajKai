@@ -15,7 +15,9 @@ export const getStoreSub = (message, next) => {
 export const getStoreFromPostSub = (message, next) => {
     const id = message.postId;
     if (id.toString().startsWith(config.SELLPOST_GLOBAL_ID)) {
+        console.log('this ' + JSON.stringify(id));
         getStoreFromSellPostId(id, (store) => {
+            console.log('this ' + JSON.stringify(store));
             if (store) {
                 next({status: 'success', store: getStoreInfoService(store)});
             } else {
