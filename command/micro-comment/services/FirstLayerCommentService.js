@@ -32,11 +32,11 @@ export const getListFirstComment = (postId, time, length, next) => {
 };
 
 export const getFirstLayerCommentInfo = (fComment, next) => {
-    if (fComment.posterId.toString().startsWith(USER_GLOBAL_ID)) {
+    if (fComment.posterId.startsWith(USER_GLOBAL_ID)) {
         getUser(fComment.posterId, (user) => {
             if (!user) next(null);
             else {
-                var info = {
+                let info = {
                     content: fComment.content,
                     name: user.userName,
                     avatarUrl: user.avatarUrl,
@@ -58,7 +58,7 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
         getStore(fComment.posterId, (store) => {
             if (!store) next(null);
             else {
-                var info = {
+                let info = {
                     content: fComment.content,
                     name: store.storeName,
                     avatarUrl: store.avatarUrl,
@@ -179,8 +179,9 @@ export const getFirstLayerCommentPubInfo = (fComment) => {
 };
 
 export const saveNewFirstLayerComment = (posterId, order, time, postId, content, next) => {
-    var comment = new FirstLayerComment({posterId: posterId, order: order, time: time,
-        postId: postId, content: content});
+    let comment = new FirstLayerComment({ posterId: posterId, order: order, time: time,
+        postId: postId, content: content });
+    console.log('fuck ' + JSON.stringify(comment));
     comment.save((err) => {
         newFirstLayerCommentCreated(getFirstLayerCommentPubInfo(comment));
         next(comment);
@@ -198,7 +199,7 @@ export const addNewFirstLayerComment = (data, next) => {
                 next(comment)
             })
         } else {
-            saveNewFirstLayerComment(data.userId, order, data.time, data.sellpostid, data.content, (comment) => {
+            saveNewFirstLayerComment(data.userID, order, data.time, data.sellpostid, data.content, (comment) => {
                 next(comment);
             })
         }
