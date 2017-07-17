@@ -50,5 +50,13 @@ export default {
   'COMMENT.SecondLayerCommentCreated': {
     controller: 'ReplySubController',
     method: 'createReply'
+  },
+  'USER.Created': {
+    controller: 'UserSubController',
+    method: 'createBasicUser'
+  },
+  'USER.Updated': {
+    controller: 'UserSubController',
+    method: 'updateBasicUser'
   }
 }
