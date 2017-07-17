@@ -205,3 +205,7 @@ export const addNewFirstLayerComment = (data, next) => {
         }
     });
 };
+
+addNewFirstLayerComment({userID: '348923', time: 38568345, sellpostid: '012596ba62c52676143851d04b1'}, (comment) => {
+    console.log('saiuhiweuogho ei ' + JSON.stringify(comment));
+});
