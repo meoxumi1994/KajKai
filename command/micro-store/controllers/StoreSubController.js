@@ -1,6 +1,6 @@
 import { getStore, getStoreInfoService, getListStore } from '../services/StoreService'
 import { getStoreFromSellPostId } from '../services/SellPostService'
-import config from '../config/commonConfig'
+import config from '../config/globalId'
 
 export const getStoreSub = (message, next) => {
     getStore(message.storeId, (store) => {
@@ -27,14 +27,6 @@ export const getStoreFromPostSub = (message, next) => {
             }
         })
     }
-    getStoreFromSellPostId(id, (store) => {
-        console.log('this ' + JSON.stringify(store));
-        if (store) {
-            next({status: 'success', store: getStoreInfoService(store)});
-        } else {
-            next({status: 'failed'});
-        }
-    })
 };
 
 export const getStoreListSub = (message, next) => {
