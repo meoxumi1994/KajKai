@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   getChatList: (id) => {
       dispatch(getChatList(Date.now(), 10))
-  }
+  },
 })
 
 const ChatContainer = connect(
@@ -45,7 +45,6 @@ const styles = {
               width: 35,
               height: 35,
               borderRadius: 50,
-              marginRight: 10,
               marginTop: 15
           },
           hiddenImg: {
@@ -73,7 +72,8 @@ const styles = {
           },
           addMemberDiv: {
             position: 'relative',
-            width: '100%'
+            width: '100%',
+            marginTop: 18
           }
       },
       center: {

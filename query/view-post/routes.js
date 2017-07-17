@@ -11,7 +11,7 @@ export default {
   '/sellpost/store/:id': {
     get: {
         controller: 'SellpostController',
-        middleware: [auth()],
+        // middleware: [auth()],
         method: 'getSellpostsHandler'
     }
   },

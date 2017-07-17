@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "pm2 delete index-user.js && pm2 start index-user.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,7 +25,7 @@
     "mongoose": "4.11.1",
     "redis": "^2.7.1",
     "request": "2.81.0",
-    "uuid": "^3.1.0",
-    "verify-javascript-sdk": "0.2.4"
+    "twilio": "3.5.0",
+    "uuid": "^3.1.0"
   }
 }

@@ -7,7 +7,7 @@ import { newFirstLayerCommentCreated } from '../controllers/CommentPubController
 
 const FIRST_COMMENT_GLOBAL_ID = globalId.FIRST_COMMENT_GLOBAL_ID;
 const USER_GLOBAL_ID = globalId.USER_GLOBAL_ID;
-const SELL_POST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID
+const SELL_POST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID;
 
 export const getFirstCommentGlobalId = (id) => {
     return FIRST_COMMENT_GLOBAL_ID + id
@@ -36,7 +36,7 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
         getUser(fComment.posterId, (user) => {
             if (!user) next(null);
             else {
-                var info = {
+                let info = {
                     content: fComment.content,
                     name: user.userName,
                     avatarUrl: user.avatarUrl,
@@ -58,15 +58,16 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
         getStore(fComment.posterId, (store) => {
             if (!store) next(null);
             else {
-                var info = {
+                let info = {
                     content: fComment.content,
                     name: store.storeName,
                     avatarUrl: store.avatarUrl,
-                    commenterid: store.id,
+                    commenterid: store.storeId,
                     time: fComment.time,
                     order: getOrderInfo(fComment.order),
                     id: getFirstCommentGlobalId(fComment._id),
-                    like: fComment.likeCounter
+                    like: fComment.likeCounter,
+                    urlname: store.urlName
                 };
                 if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     info = {...info, sellpostid: fComment.postId}
@@ -83,7 +84,7 @@ export const getListFirstLayerCommentInfo = (fCommentList, next) => {
     var userIdList = [];
     var storeId = null;
     for (var i = 0; i < fCommentList.length; ++i) {
-        if (fCommentList[i].posterId.startsWith(USER_GLOBAL_ID)) {
+        if (fCommentList[i].posterId.toString().startsWith(USER_GLOBAL_ID)) {
             userIdList.push(fCommentList[i].posterId);
         } else {
             storeId = fCommentList[i].posterId;
@@ -103,7 +104,7 @@ export const getListFirstLayerCommentInfo = (fCommentList, next) => {
                     time: fComment.time,
                     order: getOrderInfo(fComment.order)
                 };
-                if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
+                if (fComment.postId.toString().startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     curInfo = {...curInfo, sellpostid: fComment.postId}
                 } else {
                     curInfo = {...curInfo, minorpostid: fComment.postId};
@@ -118,7 +119,7 @@ export const getListFirstLayerCommentInfo = (fCommentList, next) => {
                 var j = 0;
                 var info = [];
                 for (var i = 0; i < fCommentList.length; ++i) {
-                    if (fCommentList[i].posterId.startsWith(USER_GLOBAL_ID)) {
+                    if (fCommentList[i].posterId.toString().startsWith(USER_GLOBAL_ID)) {
                         const fComment = fCommentList[i];
                         const user = users[j++];
                         var curInfo = {
@@ -129,7 +130,7 @@ export const getListFirstLayerCommentInfo = (fCommentList, next) => {
                             time: fComment.time,
                             order: getOrderInfo(fComment.order)
                         };
-                        if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
+                        if (fComment.postId.toString().startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                             curInfo = {...curInfo, sellpostid: fComment.postId}
                         } else {
                             curInfo = {...curInfo, minorpostid: fComment.postId};
@@ -145,7 +146,7 @@ export const getListFirstLayerCommentInfo = (fCommentList, next) => {
                             time: fComment.time,
                             order: getOrderInfo(fComment.order)
                         };
-                        if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
+                        if (fComment.postId.toString().startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                             curInfo = {...curInfo, sellpostid: fComment.postId}
                         } else {
                             curInfo = {...curInfo, minorpostid: fComment.postId};
@@ -166,11 +167,11 @@ export const getFirstLayerCommentById = (id, next) => {
 };
 
 export const getFirstLayerCommentPubInfo = (fComment) => {
-    var data = {
+    let data = {
         posterId: fComment.posterId, order: fComment.order, time: fComment.time,
-        content: fComment.content, fCommentId: getFirstCommentGlobalId(fComment._id)
+        content: fComment.content, fCommentId: getFirstCommentGlobalId(fComment._id),
     };
-    if (fComment.startsWith(SELL_POST_GLOBAL_ID)) {
+    if (fComment.postId.startsWith(SELL_POST_GLOBAL_ID)) {
         data = {...data, sellPostId: fComment.postId};
     } else {
         data = {...data, minorPostId: fComment.postId};
@@ -179,8 +180,9 @@ export const getFirstLayerCommentPubInfo = (fComment) => {
 };
 
 export const saveNewFirstLayerComment = (posterId, order, time, postId, content, next) => {
-    var comment = new FirstLayerComment({posterId: posterId, order: order, time: time,
-        postId: postId, content: content});
+    let comment = new FirstLayerComment({ posterId: posterId, order: order, time: time,
+        postId: postId, content: content });
+    console.log('fuck ' + JSON.stringify(comment));
     comment.save((err) => {
         newFirstLayerCommentCreated(getFirstLayerCommentPubInfo(comment));
         next(comment);
@@ -188,18 +190,23 @@ export const saveNewFirstLayerComment = (posterId, order, time, postId, content,
 };
 
 export const addNewFirstLayerComment = (data, next) => {
-    var order = null;
-    if (data.products.length > 0) order = getOrder(data.products);
+    let order = null;
+    if (data.products && data.products.length > 0) order = getOrder(data.products);
 
-    getStoreFromPostId(data.postId, (store) => {
-        if (data.userId === store.owner) {
-            saveNewFirstLayerComment(store.id, order, data.time, data.postId, data.content, (comment) => {
+    getStoreFromPostId(data.sellpostid, (store) => {
+        console.log('store ' + JSON.stringify(store));
+        if (data.userID.toString() === store.owner.toString()) {
+            saveNewFirstLayerComment(store.storeId, order, data.time, data.sellpostid, data.content, (comment) => {
                 next(comment)
             })
         } else {
-            saveNewFirstLayerComment(data.userId, order, data.time, data.postId, data.content, (comment) => {
+            saveNewFirstLayerComment(data.userID, order, data.time, data.sellpostid, data.content, (comment) => {
                 next(comment);
             })
         }
     });
 };
+
+// addNewFirstLayerComment({userID: '348923', time: 38568345, sellpostid: '012596ba62c52676143851d04b1'}, (comment) => {
+//     console.log('saiuhiweuogho ei ' + JSON.stringify(comment));
+// });

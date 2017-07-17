@@ -22,7 +22,7 @@ const center = (state = {
                     [action.data.mesId]: []
                 }
             }
-            console.log('\n[Reducer Center] client/ADD_MEMBER', action, addMember);
+            // console.log('\n[Reducer Center] client/ADD_MEMBER', action, addMember);
             return addMember
 
         case 'REMOVE_CHAT':
@@ -47,7 +47,7 @@ const center = (state = {
                   [action.data.mesId]: action.data.messages.reverse()
               }
             }
-            console.log('\n[Reducer Center] INIT_SINGLE_MESSAGES', action, initSingleMessages);
+            // console.log('\n[Reducer Center] INIT_SINGLE_MESSAGES', action, initSingleMessages);
             return initSingleMessages
 
         case 'INIT_MULTI_MESSAGES':
@@ -65,7 +65,7 @@ const center = (state = {
                   [action.data.mesId]: action.data.messages.reverse()
               }
             }
-            console.log('\n[Reducer Center] INIT_MULTI_MESSAGES', action, initMultiMessages);
+            // console.log('\n[Reducer Center] INIT_MULTI_MESSAGES', action, initMultiMessages);
             return initMultiMessages
 
 
@@ -90,7 +90,7 @@ const center = (state = {
                 ]
               }
             }
-            console.log('\n[Reducer Center] global/RECEIVE_MESSAGE ', action, msg)
+            // console.log('\n[Reducer Center] global/RECEIVE_MESSAGE ', action, msg)
             return msg
 
 
@@ -110,7 +110,7 @@ const center = (state = {
                     '0': []
                 }
             }
-            console.log('\n[Reducer Center] NEW_CHAT ', action, newChat)
+            // console.log('\n[Reducer Center] NEW_CHAT ', action, newChat)
             return newChat
 
         default:

@@ -2,6 +2,8 @@ import mongoose from '../datasource'
 
 const ReplySchema = new mongoose.Schema({
   commentId: {type: String},
+  type: {type: String},
+  urlName: {type: String},
   id: {type: String},
   userId: {type: String},
   username: {type: String},

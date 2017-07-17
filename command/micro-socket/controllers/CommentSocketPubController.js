@@ -7,10 +7,10 @@ export const addNewFirstLayerCommentPub = (data, next) => {
     const pub = redis.createClient(config);
     const publishData = {data: data, eventId: getUUID()};
     pub.publish('COMMENT.FirstLayerCommentAdded', JSON.stringify(publishData));
-    sub.subcribe('COMMENT.FirstLayerCommentAdded' + publishData.eventId);
+    sub.subscribe('COMMENT.FirstLayerCommentAdded' + publishData.eventId);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
-        sub.unsubcribe();
+        sub.unsubscribe();
         sub.quit();
         pub.quit();
         if (message.status === 'success') {
@@ -26,10 +26,10 @@ export const addNewSecondLayerCommentPub = (data, next) => {
     const pub = redis.createClient(config);
     const publishData = {data: data, eventId: getUUID()};
     pub.publish('COMMENT.SecondLayerCommentAdded', JSON.stringify(publishData));
-    sub.subcribe('COMMENT.SecondLayerCommentAdded' + publishData.eventId);
+    sub.subscribe('COMMENT.SecondLayerCommentAdded' + publishData.eventId);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
-        sub.unsubcribe();
+        sub.unsubscribe();
         sub.quit();
         pub.quit();
         if (message.status === 'success') {
@@ -45,10 +45,10 @@ export const getMoreFirstLayerComments = (data, next) => {
     const pub = redis.createClient(config);
     const publishData = {data: data, eventId: getUUID()};
     pub.publish('SOCKET.COMMENT.GetFirstLayerComments', JSON.stringify(publishData));
-    sub.subcribe('SOCKET.COMMENT.GetFirstLayerComments' + publishData.eventId);
+    sub.subscribe('SOCKET.COMMENT.GetFirstLayerComments' + publishData.eventId);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
-        sub.unsubcribe();
+        sub.unsubscribe();
         sub.quit();
         pub.quit();
         if (message.status === 'success') {
@@ -64,10 +64,10 @@ export const getMoreSecondLayerComments = (data, next) => {
     const pub = redis.createClient(config);
     const publishData = {data: data, eventId: getUUID()};
     pub.publish('SOCKET.COMMENT.GetSecondLayerComments', JSON.stringify(publishData));
-    sub.subcribe('SOCKET.COMMENT.GetSecondLayerComments' + publishData.eventId);
+    sub.subscribe('SOCKET.COMMENT.GetSecondLayerComments' + publishData.eventId);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
-        sub.unsubcribe();
+        sub.unsubscribe();
         sub.quit();
         pub.quit();
         if (message.status === 'success') {

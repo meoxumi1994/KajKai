@@ -1,6 +1,7 @@
 import React from 'react'
 import SettingsContainer from '~/containers/chat/top/SettingsContainer'
 import AddMemberContainer from '~/containers/chat/top/AddMemberContainer'
+import DisplayLabelContainer from '~/containers/chat/top/DisplayLabelContainer'
 import { Link } from 'react-router-dom'
 import { WithContext as ReactTags } from 'react-tag-input'
 import Settings from './Settings'
@@ -13,32 +14,19 @@ class ChatTop extends React.Component {
 
     render() {
       let conversator
-      const { chatListMap, currentChat, mesId, styles, multipleKey } = this.props
-      const { displayAddMember, loadChat, displaySettings, close } = this.props
+      const {
+              mesId, styles,
+              chatListMap, currentChat, multipleKey,
+              displayAddMember, displaySettings, close
+            } = this.props
 
-      const { usersKey, usersMap, displayLabel } = chatListMap[mesId]
+      const { usersKey, usersMap, display } = chatListMap[mesId]
 
       const { addMember } = chatListMap[mesId].display
 
-      let label = displayLabel
-      if (label == undefined || label == '') {
-          if (usersKey.length == 0) {
-              label = 'Tin nhắn mới'
-          } else {
-              label = ''
-              for (let i in usersKey) {
-                  if (!usersMap[usersKey[i]].disabled) {
-                      label += usersMap[usersKey[i]].username + ', '
-                  }
-              }
-              label = label.substring(0, label.length - 2)
-          }
-      }
-
       return (
         <div style={currentChat.mesId == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
-            <label style={styles.displayLabel}>{label}</label>
-
+            <DisplayLabelContainer mesId={mesId} styles={styles}/>
             <div style={styles.iconGroupDiv}>
                 <button className="btn" style={styles.hiddenButton}>
                     <Link to={"/chat"} >
