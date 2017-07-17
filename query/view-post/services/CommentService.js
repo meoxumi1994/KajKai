@@ -64,7 +64,7 @@ export const getClientFormatSellpostComments = (comments, offset) => {
 
       mComments = [mComment, ...mComments]
 
-      cOffset = comment.time
+      cOffset = comment.time.getTime()
       currentNumberOfComment++
     } else {
       break

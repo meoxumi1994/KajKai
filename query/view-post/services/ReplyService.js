@@ -34,7 +34,7 @@ export const getClientFormatReplies = (replies, offset) => {
     if (offset - reply.time <= oneHour && currentNumberOfReply < 2) {
       mReplies = [getClientFormatReply(reply), ...mReplies]
 
-      rOffset = reply.time
+      rOffset = reply.time.getTime()
       lastIndex = k
       currentNumberOfReply++
     } else {
