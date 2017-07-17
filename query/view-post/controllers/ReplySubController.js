@@ -25,12 +25,13 @@ export const createReply = (message) => {
               for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i]
                 if (comment.id == commentId) {
-                  comments.replies.push(reply)
+                  comment.replies.push(reply)
+                  comment.numberOfReply = comment.replies.length - 1
+                  comments[i] = comment
                   break
                 }
               }
 
-              comments.numberOfReply = comments.replies.length
               sellpost.comments = comments
               sellpost.save(() => {})
             }
@@ -43,12 +44,13 @@ export const createReply = (message) => {
               for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i]
                 if (comment.id == commentId) {
-                  comments.replies.push(reply)
+                  comment.replies.push(reply)
+                  comment.numberOfReply = comment.replies.length - 1
+                  comments[i] = comment
                   break
                 }
               }
 
-              comments.numberOfReply = comments.replies.length
               minorpost.comments = comments
               minorpost.save(() => {})
             }
@@ -60,6 +62,7 @@ export const createReply = (message) => {
     reply.type = 'store'
     BasicStore.findOne({ id: userId }, (err, basicStore) => {
       if (basicStore) {
+        reply.urlName = basicStore.urlName
         reply.username = basicStore.storeName
         reply.avatarUrl = basicStore.avatarUrl
 
@@ -71,12 +74,13 @@ export const createReply = (message) => {
               for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i]
                 if (comment.id == commentId) {
-                  comments.replies.push(reply)
+                  comment.replies.push(reply)
+                  comment.numberOfReply = comment.replies.length - 1
+                  comments[i] = comment
                   break
                 }
               }
 
-              comments.numberOfReply = comments.replies.length
               sellpost.comments = comments
               sellpost.save(() => {})
             }
@@ -89,12 +93,14 @@ export const createReply = (message) => {
               for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i]
                 if (comment.id == commentId) {
-                  comments.replies.push(reply)
+                  comment.replies.push(reply)
+                  comment.numberOfReply = comment.replies.length - 1
+                  comments[i] = comment
                   break
                 }
               }
 
-              comments.numberOfReply = comments.replies.length
+
               minorpost.comments = comments
               minorpost.save(() => {})
             }

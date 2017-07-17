@@ -99,6 +99,7 @@ export const createComment = (message) => {
         const reply = new Reply({
           commentId: id,
           type: 'store',
+          urlname: basicStore.urlName,
           id,
           userId,
           username: basicStore.storeName,
@@ -110,7 +111,6 @@ export const createComment = (message) => {
 
         comment.replies = []
         comment.replies.push(reply)
-        comment.save(() => {})
 
         if (sellpostId) {
           Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
