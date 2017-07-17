@@ -24,7 +24,8 @@ export const leavePostCon = (action, sio, io) => {
 
 export const addNewSecondLayerCommentCon = (action, sio, io) => {
     addNewSecondLayerCommentPub(action.data, (sComment) => {
-        io.to(action.data.sellpostid).emit('action', {type: 'client/COMMENT', data: sComment})
+        io.to(action.data.sellpostid).emit('action', {type: 'client/COMMENT', data: sComment});
+        sio.emit('action', {type: 'global/COMMENT', data: sComment});
     })
 };
 
@@ -36,6 +37,7 @@ export const addNewFirstLayerCommentCon = (action, sio, io) => {
         } else {
             io.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
         }
+        sio.emit('action', {type: 'global/LEADERCOMMENT', data: fComment});
     })
 };
 
