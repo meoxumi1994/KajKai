@@ -71,7 +71,7 @@ export const createReply = (message) => {
               for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i]
                 if (comment.id == commentId) {
-                  comment.replies.push(reply)
+                  comments[i].replies.push(reply)
                   break
                 }
               }
