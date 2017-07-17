@@ -6,7 +6,7 @@ import { addNewFirstLayerCommentCon } from '../controllers/CommentController'
 addNewFirstLayerCommentCon({data: {
     sellpostid: '012596a126a6b65f85ca45969b5',
     userID: '0015969d791adcfc42c2b3af016',
-    contetn: 'ajoiewjg'
+    content: 'ajoiewjg'
 }}, null, null);
 
 const sockListen = (user, socket, io) => {
