@@ -30,13 +30,11 @@ export const addNewSecondLayerCommentCon = (action, sio, io) => {
 
 export const addNewFirstLayerCommentCon = (action, sio, io) => {
     addNewFirstLayerCommentPub(action.data, (fComment) => {
-        console.log("oiergjoiejw ojeorgn " + JSON.stringify(fComment));
-        if (sio != null) {
-            if (action.data.sellpostid) {
-                sio.to(action.data.sellpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
-            } else {
-                sio.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
-            }
+        console.log("new first comment " + JSON.stringify(fComment));
+        if (action.data.sellpostid) {
+            sio.to(action.data.sellpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
+        } else {
+            sio.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
         }
     })
 };
