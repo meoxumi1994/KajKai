@@ -34,7 +34,7 @@ export const getSecondLayerCommentInfo = (sComment, next) => {
         getUser(sComment.posterId, (user) => {
             if (!user) next(null);
             else {
-                var info = {
+                let info = {
                     content: sComment.content,
                     name: user.userName,
                     avatarUrl: user.avatarUrl,
@@ -56,7 +56,7 @@ export const getSecondLayerCommentInfo = (sComment, next) => {
         getStore(sComment.posterId, (store) => {
             if (!store) next(null);
             else {
-                var info = {
+                let info = {
                     content: sComment.content,
                     name: store.storeName,
                     avatarUrl: store.avatarUrl,
@@ -85,10 +85,10 @@ export const getSecondLayerCommentById = (id, next) => {
 };
 
 export const getSecondLayerCommentPubInfo = (sComment) => {
-    var data = {posterId: sComment.posterId, time: sComment.time,
+    let data = {posterId: sComment.posterId, time: sComment.time,
         content: sComment.content, parentCommentId: sComment.parentCommentId,
         sCommentId: getSecondCommentGlobalId(sComment._id)};
-    if (sComment.startsWith(SELL_POST_GLOBAL_ID)) {
+    if (sComment.postId.startsWith(SELL_POST_GLOBAL_ID)) {
         data = {...data, sellPostId: sComment.postId};
     } else {
         data = {...data, minorPostId: sComment.postId};
@@ -97,7 +97,7 @@ export const getSecondLayerCommentPubInfo = (sComment) => {
 };
 
 export const saveNewScondLayerComment = (posterId, time, postId, content, parentCommentId, next) => {
-    var comment = new FirstLayerComment({posterId: posterId, time: time,
+    let comment = new FirstLayerComment({posterId: posterId, time: time,
         postId: postId, content: content, parentCommentId: parentCommentId});
     comment.save(function (err) {
         newSecondLayerCommentCreated(getSecondLayerCommentPubInfo(comment));
@@ -106,13 +106,14 @@ export const saveNewScondLayerComment = (posterId, time, postId, content, parent
 };
 
 export const addNewSecondLayerComment = (data, next) => {
-    getStoreFromPostId(data.postId, (store) => {
-        if (data.userId === store.owner) {
-            saveNewScondLayerComment(store.id, data.time, data.postId, data.content, data.leadercommentid, (comment) => {
+    console.log('thisss ' + JSON.stringify(data));
+    getStoreFromPostId(data.sellpostid, (store) => {
+        if (data.userID === store.owner) {
+            saveNewScondLayerComment(store.storeId, data.time, data.sellpostid, data.content, data.leadercommentid, (comment) => {
                 next(comment)
             })
         } else {
-            saveNewScondLayerComment(data.userId, data.time, data.postId, data.content, data.leadercommentid, (comment) => {
+            saveNewScondLayerComment(data.userID, data.time, data.sellpostid, data.content, data.leadercommentid, (comment) => {
                 next(comment);
             })
         }

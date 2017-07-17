@@ -168,7 +168,7 @@ export const getFirstLayerCommentById = (id, next) => {
 export const getFirstLayerCommentPubInfo = (fComment) => {
     let data = {
         posterId: fComment.posterId, order: fComment.order, time: fComment.time,
-        content: fComment.content, fCommentId: getFirstCommentGlobalId(fComment._id)
+        content: fComment.content, fCommentId: getFirstCommentGlobalId(fComment._id),
     };
     if (fComment.postId.startsWith(SELL_POST_GLOBAL_ID)) {
         data = {...data, sellPostId: fComment.postId};
