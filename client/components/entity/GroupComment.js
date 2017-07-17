@@ -1,18 +1,37 @@
 import React from 'react'
 
 import CommentSuggest from '~/containers/entity/CommentSuggest'
-import Comment from '~/containers/entity/Comment'
+import LeaderComment from '~/containers/entity/LeaderComment'
 import CallComment from '~/containers/entity/CallComment'
 
 class GroupComment extends React.Component {
     constructor(props){
         super(props)
     }
+    componentDidMount(){
+        this.props.onJoin()
+    }
+    componentWillUnmount(){
+        this.props.onLeave()
+    }
     render(){
-        const { WRITE_COMMENT_OR_ORDER, comments, leadercomments } = this.props
+        const { WRITE_COMMENT_OR_ORDER, WRITE_COMMENT, numleadercomment , leadercomments, content, onChange, id, onEnter, avatarUrl } = this.props
+        console.log('numleadercomment', numleadercomment)
         return(
             <div style={{ padding: '10px 0px 10px 0px'}}>
                 <CommentSuggest
+                    id={3}
+                    isleader={true}
+                    content={'View more comments'}
+                    end={leadercomments.length + ' of '+numleadercomment}
+                    />
+                {leadercomments.map((item, index) =>
+                    <LeaderComment
+                        key={index}
+                        id={item.id}
+                        />
+                )}
+                {/* <CommentSuggest
                     id={0}
                     isleader={true}
                     content={'View more previous comments'}
@@ -110,6 +129,15 @@ class GroupComment extends React.Component {
                     id={3}
                     isleader={true}
                     content={'View more comments'}
+                    /> */}
+                <CallComment
+                    onEnter={() => onEnter()}
+                    id={id}
+                    handleChange={(e) => onChange('content', e.target.value)}
+                    content={content}
+                    isleader={true}
+                    avatarUrl={avatarUrl}
+                    placehoder={WRITE_COMMENT}
                     />
             </div>
         )

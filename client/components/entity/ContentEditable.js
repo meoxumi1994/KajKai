@@ -10,6 +10,7 @@ class ContentEditable extends React.Component {
         this.state = {
             focus: false,
             width: 0,
+            enter: false,
         }
     }
     componentDidMount(){
@@ -21,11 +22,9 @@ class ContentEditable extends React.Component {
         if(this.props.getLine)
             this.props.getLine(this.textarea.state.height / 20)
     }
-    // componentWillUpdate(){
-    //     this.setState({ width: this.display.getBoundingClientRect().width })
-    // }
     render(){
-        const { placehoder, width, content, handleChange, padding, minRows } = this.props
+        const { placehoder, width, content, handleChange, padding, minRows, onEnter } = this.props
+        // console.log(this.state.enter)
         return(
             <div style={{
                 outline: '1px solid #D2D2D2',
@@ -52,7 +51,19 @@ class ContentEditable extends React.Component {
                     }}
                     minRows={minRows}
                     value={content}
-                    onChange={(e) => handleChange(e)} />
+                    onKeyPress={(e) => {
+                        if(onEnter && e.key == "Enter"){
+                            this.setState({ enter: true })
+                            onEnter()
+                        }
+                    }}
+                    onChange={(e) => {
+                        if(this.state.enter){
+                            this.setState({ enter: false })
+                        }else{
+                            handleChange(e)
+                        }
+                    }}/>
                 <div
                     ref={display => this.display = display}
                     style={{

@@ -7,7 +7,7 @@ class CallComment extends React.Component {
         super(props)
     }
     render(){
-        const { isleader, avatarUrl, placehoder, handleChange, content } = this.props
+        const { isleader, avatarUrl, placehoder, handleChange, content, onEnter } = this.props
         return(
             <div style={{
                 marginLeft: isleader?0:38,
@@ -23,7 +23,7 @@ class CallComment extends React.Component {
                     marginLeft: isleader?50:30,
                 }}>
                     <ContentEditable
-                        canEdit={true}
+                        onEnter={() => onEnter()}
                         placehoder={placehoder}
                         handleChange={(e) => handleChange(e)}
                         content={content}

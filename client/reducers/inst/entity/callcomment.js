@@ -1,7 +1,5 @@
 const callcomment = (state = {
-    default : {
-        content: '',
-    }
+    
 }, action) => {
     switch (action.type) {
         case 'INST_ENTITY_CALLCOMMENT':

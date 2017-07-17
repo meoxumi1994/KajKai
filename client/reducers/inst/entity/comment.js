@@ -2,13 +2,23 @@ const comment = (state = {
 
 }, action) => {
     switch (action.type) {
+        case 'client/COMMENT':
+        case 'client/LEADERCOMMENT':
+            return {...state,
+                [action.data.id]: action.data
+            }
         case 'GET_SELLPOST_FROM_STORE_SUCCESS':
-            console.log(action.sellposts)
             let nstate = state
-            // action.sellposts.leadercomments.map((item) =>
-            //     item.comments.map((cm) => )
-            // )
-            return state
+            action.sellposts.map((sp) => {
+                sp.leadercomments.map((item) => {
+                    item.comments.map((cm) => {
+                        nstate = {...nstate,
+                            [cm.id] : cm
+                        }
+                    })
+                })
+            })
+            return nstate
         case 'INST_ENTITY_COMMENT_CHANGE':
             return {...state,
                 [action.id] : {

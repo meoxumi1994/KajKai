@@ -94,6 +94,7 @@ const myString = {
     FOLLOW : ['Theo giõi','Follow'],
     REPLY: ['Trả lời','Reply'],
     WRITE_COMMENT_OR_ORDER: ['Bình luận hoặc Đặt hàng...','Write a comment or Order...'],
+    WRITE_COMMENT: ['Bình luận','Write a comment'],
     FULL_SCREEN: ['Phóng to','Full Screen'],
     ADDRESSMAP : ['Địa chỉ theo google map', 'Address in googlemap'],
     ANOTHER_PEOPLE: ['người khác','another people'],

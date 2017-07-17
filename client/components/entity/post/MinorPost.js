@@ -75,7 +75,6 @@ class MinorPost extends React.Component {
                             fontSize={13.5}
                             heightEachRow={16}
                             content={content}
-                            handleChange={(e) => this.setState({ })}
                         />
                     </div>
                 </div>

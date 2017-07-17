@@ -2,6 +2,8 @@ import React from 'react'
 
 import Tooltip from '~/components/entity/Tooltip'
 import DropDown from '~/components/entity/DropDown'
+import ContentShow from '~/components/entity/ContentShow'
+
 
 class Comment extends React.Component {
     constructor(props){
@@ -22,7 +24,7 @@ class Comment extends React.Component {
     render(){
         const {
             RECEIVE, LIKE, REPLY, clicksetting,
-            isleader, avatar, name, time, numlikes, numreplys,
+            isleader, avatarUrl, name, time, numlikes, numreplys,
             content, onReceive, onLike, onReply} = this.props
         return(
             <div
@@ -54,12 +56,7 @@ class Comment extends React.Component {
                         }
                     </div>
                 }
-                {this.state.hover &&
-                    <div>
-
-                    </div>
-                }
-                <img src={avatar} style={{
+                <img src={avatarUrl} style={{
                     width: isleader?40:20,
                     height: isleader?40:20,
                 }}/>
@@ -68,7 +65,11 @@ class Comment extends React.Component {
                     marginTop: isleader?-40:-20,
                     paddingRight: 18 }}>
                     <strong style={{ color: '#365899'}}>{name}</strong>{" "}
-                    <span>{content}</span>
+                    <ContentShow
+                        fontSize={13.5}
+                        heightEachRow={16}
+                        content={content}
+                    />
                     <div style={{ marginLeft: -2 }}>
                         {onReceive &&
                             <div className="btn" onClick={() => onReceive()}
@@ -82,13 +83,12 @@ class Comment extends React.Component {
                             <a style={{ fontSize: 12, color: '#365899' }}>{LIKE}</a>
                         </div>
                         {"."} */}
-                        <div className="btn" onClick={() => onReceive()}
+                        <div className="btn" onClick={() => onReply()}
                             style={{ padding: '0px 1px 0px 1px'}}>
                             <a style={{ fontSize: 12, color: '#365899' }}>{REPLY}</a>
                         </div>
                         {"."}
-                        <div className="btn" onClick={() => onReceive()}
-                            style={{ padding: '0px 1px 0px 1px'}}>
+                        <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
                             <a style={{ fontSize: 12, color: '#A7ABB1' }}>{time}</a>
                         </div>
                     </div>

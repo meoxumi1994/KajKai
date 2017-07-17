@@ -53,7 +53,7 @@ class SellPost extends React.Component {
     render(){
         const { urlname, isOwner, ship, status, category, description, storename, avatarUrl, time,
             numfollow, likestatus, likeGroupContent, likes, numlike, yourid, beLike,
-            onLike, postrows, postrows_order, clicksetting,
+            onLike, postrows, postrows_order, clicksetting, id,
         } = this.props
         return(
             <div style={{
@@ -139,7 +139,7 @@ class SellPost extends React.Component {
                         />
                 </div> */}
                 <hr style={{ margin: 0, marginTop: 25}}/>
-                <GroupComment/>
+                <GroupComment id={id}/>
             </div>
         )
     }

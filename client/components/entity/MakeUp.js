@@ -9,6 +9,17 @@ export const MakeUp = (text,search,change) => {
     return newtext
 }
 
+// export const InsertA = (text, list) => {
+//     let newtext = text
+//     if(text.split('[').length > 1){
+//         text.split('[').map((item) => {
+//             if(item.split(']').length > 1){
+//                 item.split(']')[0]
+//             }
+//         })
+//     }
+// }
+
 export const EmojiShow = (text, height) => {
     let newtext = text
     const emoji = [
