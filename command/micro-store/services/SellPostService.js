@@ -114,7 +114,7 @@ export const getPubSellPostInfo = (sellPost, next) => {
 };
 
 export const getStoreFromSellPostId = (sellPostId, next) => {
-    getSellPostGlobalId(sellPostId, (sellPost) => {
+    getSellPost(sellPostId, (sellPost) => {
         getStore(sellPost.storeId, (store) => {
             next(store);
         })
