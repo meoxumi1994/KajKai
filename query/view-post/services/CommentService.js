@@ -48,7 +48,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
   }
   const oneHour = 3600000
 
-  let currentNumberOfComment = 0, cOffset, lastIndex
+  let currentNumberOfComment = 0, cOffset = Date.now(), lastIndex = -1
   let mComments = []
 
   if (isFirst) {
@@ -71,7 +71,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
         break
       }
     }
-    if (lastIndex == 0) {
+    if (comments.length == 0 || currentNumberOfComment == comments.length) {
       cOffset = -2
     }
   } else {
@@ -90,6 +90,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
           mComments = [mComment, ...mComments]
 
           cOffset = comment.time.getTime()
+          lastIndex = i
           currentNumberOfComment++
         } else {
           break

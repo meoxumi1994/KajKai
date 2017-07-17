@@ -26,7 +26,7 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
     }
   }
   const oneHour = 3600000
-  let currentNumberOfReply = 0, rOffset, lastIndex
+  let currentNumberOfReply = 0, rOffset = Date.now(), lastIndex = -1
   let mReplies = []
   if (isFirst) {
     for(let k = replies.length - 1; k > 0; k--) {
@@ -35,11 +35,13 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
         mReplies = [getClientFormatReply(reply), ...mReplies]
 
         rOffset = reply.time.getTime()
-        lastIndex = k
         currentNumberOfReply++
       } else {
         break
       }
+    }
+    if (replies.length == 0 || currentNumberOfReply == replies.length) {
+      rOffset = -2
     }
   } else {
     for(let k = replies.length - 1; k > 0; k--) {
@@ -56,11 +58,11 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
         }
       }
     }
+    if (lastIndex == 0) {
+      rOffset = -2
+    }
   }
 
-  if (lastIndex == 1) {
-    rOffset = -2
-  }
   mReplies = [getClientFormatReply(replies[0]), ...mReplies]
 
   return {

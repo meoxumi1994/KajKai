@@ -63,7 +63,7 @@ export const getSellposts = (storeId, offset, next) => {
       })
       Promise.all(mPromises).then((postrowses) => {
         const mSellposts = []
-        let currentNumberOfSellpost = 0, mOffset, lastIndex
+        let currentNumberOfSellpost = 0, mOffset = -2, lastIndex = -1
         for (let i = sellposts.length - 1; i >= 0; i--) {
           let sellpost = sellposts[i]
           if (sellpost.time < offset) {
