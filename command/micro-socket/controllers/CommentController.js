@@ -62,8 +62,3 @@ export const getFirstLayerCommentCon = (action, sio, io) => {
     });
 };
 
-addNewFirstLayerCommentCon({data: {
-    sellpostid: '012596a126a6b65f85ca45969b5',
-    userID: '0015969d791adcfc42c2b3af016',
-    contetn: 'ajoiewjg'
-}}, null, null);
