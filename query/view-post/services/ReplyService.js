@@ -13,7 +13,7 @@ export const getReplies = (id, offset, next) => {
       }
     } else {
       const { replies } = comment
-      next(getClientFormatReplies(replies, offset, isFirst))
+      next(getClientFormatReplies(replies, offset, false))
     }
   })
 }
