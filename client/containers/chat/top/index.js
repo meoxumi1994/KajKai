@@ -10,19 +10,13 @@ const mapStateToProps = (state, ownProps) => {
       chatListMap,
       multipleKey,
       currentChat,
-      userId: state.user.id
+      userId: state.user.id,
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     close: (mesId, multipleKey) => {
         dispatch({type: 'CLOSE_CHAT', data: {mesId, newMesId: multipleKey[multipleKey.length - 2]}})
-    },
-    loadChat: (mesId) => {
-        dispatch(getMessages(mesId, Date.now(), 10))
-    },
-    setUserId: (id) => {
-        dispatch({type: 'SET_USER_ID', data: {id: id}})
     },
     displayAddMember: (mesId) => {
         dispatch(changeDisplay('ADD_MEMBER', mesId, 'toggle'))

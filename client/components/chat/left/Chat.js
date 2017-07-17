@@ -18,9 +18,9 @@ class Chat extends React.Component {
 
         const { lastMessage, time, usersKey, usersMap, displayLabel, status } = chatListMap[mesId]
 
-        console.log('\nchatListMap',chatListMap)
-        console.log('mesId',lastMessage)
-        console.log('user',user);
+        // console.log('\nchatListMap',chatListMap)
+        // console.log('mesId',lastMessage)
+        // console.log('user',user);
 
         let label = displayLabel
         if (label == undefined || label == '') {

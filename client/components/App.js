@@ -111,7 +111,7 @@ class App extends React.Component {
                                   <Route path="/register" component={UserLoginRegister}/>
                                   <Route path="/profile" component={Profile}/>
                                   <Route path="/registerstore" component={RegisterStore}/>
-                                  {/* <Route path="/chat" component={Chat}/> */}
+                                  <Route path="/chat" component={Chat}/>
                               </div>
                               {
                                 <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>

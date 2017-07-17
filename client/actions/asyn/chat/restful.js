@@ -51,13 +51,14 @@ export const getChatList = (offset) => dispatch => {
     })
 }
 
-export const searchUser = (keyword) => {
-    flem('/search/user/', {
+export const searchUser = (keyword) => dispatch => {
+    flem('/search/user', {
         offset: 0,
         length: 10,
         keyword
     }, {})
     .then((response) => {
           console.log('\n[API] /searchUser ', response);
+          dispatch({type: 'SEARCH/ADD_SUGGESTIONS', data: {users: response.users}})
     })
 }

@@ -3,15 +3,39 @@ import { Col, Grid, Row } from 'react-bootstrap'
 import ChatCenterContainer from '~/containers/chat/center'
 import ChatLeftContainer from '~/containers/chat/left'
 import { Route, Redirect } from 'react-router'
+
+import TagsInput from 'react-tagsinput'
+
 class Chat extends React.Component {
 
     constructor(props) {
-      super(props)
+        super(props)
+        // this.state = {tags: []}
     }
 
     componentDidMount(){
         // this.props.getChatList()
     }
+
+    // handleChange(tags) {
+    //     this.setState({tags})
+    // }
+    //
+    // render() {
+    //     return <TagsInput
+    //               value={this.state.tags}
+    //               onChange={(tags) => this.handleChange(tags)}
+    //               inputValue={this.state.tag}
+    //               inputProps={{
+    //                   placeholder: 'Add a fucking tag'
+    //               }}
+    //               tagProps={{
+    //                   className: 'btn btn-default',
+    //                   classNameRemove: 'glyphicon glyphicon-remove white'
+    //               }}
+    //               preventSubmit={true}
+    //             />
+    // }
 
     render() {
       let { messagesKey, messagesMap, styles, multiChat } = this.props

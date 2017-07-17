@@ -20,7 +20,7 @@ const left = (state = {
             chatListKey: action.data.map(chat => chat.mesId),
             chatListMap: utils.chatListMap(action),
           }
-          console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
+          // console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
           return initChatlist
 
 //------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ const left = (state = {
                       [action.data.mesId]: chatMap(undefined, action)
                   }
               }
-              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---newChat ', action, newChat)
+              // console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---newChat ', action, newChat)
               return newChat
           } else {
               const updateChat = {
@@ -54,7 +54,7 @@ const left = (state = {
                     }
                 }
               }
-              console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
+              // console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
               return updateChat
           }
 
@@ -68,7 +68,7 @@ const left = (state = {
                 mesId: action.data.mesId
               }
             }
-            console.log('\n[Reducer Left] ADD_CHAT ---dontAdd ', action, dontAdd)
+            // console.log('\n[Reducer Left] ADD_CHAT ---dontAdd ', action, dontAdd)
             return dontAdd
         }
         const addChat = {
@@ -86,7 +86,7 @@ const left = (state = {
               mesId: action.data.mesId
             }
         }
-        console.log('\n[Reducer Left] ADD_CHAT ---add ', action, addChat)
+        // console.log('\n[Reducer Left] ADD_CHAT ---add ', action, addChat)
         return addChat
 
 //------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ const left = (state = {
               chatListKey: tempKey,
               chatListMap: tempMap
           }
-          console.log('\n[Reducer Left] REMOVE_CHAT ', action, removeChat)
+          // console.log('\n[Reducer Left] REMOVE_CHAT ', action, removeChat)
           return removeChat
 
 //------------------------------------------------------------------------------
@@ -127,7 +127,7 @@ const left = (state = {
               }
             }
           }
-          console.log('\n[Reducer Left] UPDATE_USER_INFO ', action, updateChat)
+          // console.log('\n[Reducer Left] UPDATE_USER_INFO ', action, updateChat)
           return updateChat
 
 //------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ const left = (state = {
                   id: action.data.id
               }
           }
-          console.log('\n[Reducer Left] SET_USER_ID', action, setUserId)
+          // console.log('\n[Reducer Left] SET_USER_ID', action, setUserId)
           return setUserId
 
 //------------------------------------------------------------------------------
@@ -161,7 +161,7 @@ const left = (state = {
                 mesId: action.data.mesId
             }
           }
-          console.log('\n[Reducer Left] SET_CURRENT_CHAT', action, setCurrentChat)
+          // console.log('\n[Reducer Left] SET_CURRENT_CHAT', action, setCurrentChat)
           return setCurrentChat
 
 //------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ const left = (state = {
                       [action.data.mesId]: chatMap(undefined, action, {type: 'NEW_GROUP', data: {id: state.currentChat.id}})
                   },
               }
-              console.log('\n[Reducer Left] client/ADD_MEMBER --NEW_GROUP ', action, newChat)
+              // console.log('\n[Reducer Left] client/ADD_MEMBER --NEW_GROUP ', action, newChat)
               return newChat
           } else {
               const addMember = {
@@ -196,7 +196,7 @@ const left = (state = {
                       }
                   }
               }
-              console.log('\n[Reducer Left] client/ADD_MEMBER --UPDATE_GROUP ', action, addMember)
+              // console.log('\n[Reducer Left] client/ADD_MEMBER --UPDATE_GROUP ', action, addMember)
               return addMember
           }
 
@@ -213,7 +213,7 @@ const left = (state = {
                       }
                   }
               }
-              console.log('\n[Reducer Left] client/REMOVE_MEMBER disable chat', action, disabledChat)
+              // console.log('\n[Reducer Left] client/REMOVE_MEMBER disable chat', action, disabledChat)
           }
           const removeMember = {
               ...state,
@@ -222,7 +222,7 @@ const left = (state = {
                   [action.data.mesId]: chatMap(state.chatListMap[action.data.mesId], action)
               }
           }
-          console.log('\n[Reducer Left] client/REMOVE_MEMBER remove', action, removeMember)
+          // console.log('\n[Reducer Left] client/REMOVE_MEMBER remove', action, removeMember)
           return removeMember
 
 //------------------------------------------------------------------------------
@@ -234,7 +234,7 @@ const left = (state = {
                   mesId: action.data.newMesId
               }
           }
-          console.log('\n[Reducer Left] CLOSE_CHAT', action, closeChat)
+          // console.log('\n[Reducer Left] CLOSE_CHAT', action, closeChat)
 
         default:
           return state
