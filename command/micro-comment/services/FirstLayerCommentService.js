@@ -68,7 +68,7 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
                     id: getFirstCommentGlobalId(fComment._id),
                     like: fComment.likeCounter
                 };
-                if (fComment.postId.toString().startsWith(globalId.SELLPOST_GLOBAL_ID)) {
+                if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     info = {...info, sellpostid: fComment.postId}
                 } else {
                     info = {...info, minorpostid: fComment.postId};
