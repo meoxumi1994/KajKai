@@ -36,6 +36,7 @@ export const getStoreInfoService = (store) => {
         longitude: store.longitude,
         latitude: store.latitude,
         certificates: store.certificates,
+        urlName: store.urlName,
         storeId: getStoreGlobalId(store._id),
         firstCategoryId: store.firstCategoryId,
         secondCategoryId: store.secondCategoryId,

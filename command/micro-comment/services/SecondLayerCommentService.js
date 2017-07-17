@@ -63,7 +63,8 @@ export const getSecondLayerCommentInfo = (sComment, next) => {
                     time: sComment.time,
                     id: getSecondCommentGlobalId(sComment._id),
                     leadercommentid: sComment.parentCommentId,
-                    like: sComment.likeCounter
+                    like: sComment.likeCounter,
+                    urlname: store.urlName
                 };
                 if (sComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     info = {...info, sellpostid: sComment.postId}
