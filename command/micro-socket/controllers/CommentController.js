@@ -24,7 +24,7 @@ export const leavePostCon = (action, sio, io) => {
 
 export const addNewSecondLayerCommentCon = (action, sio, io) => {
     addNewSecondLayerCommentPub(action.data, (sComment) => {
-        io.to(action.data.leadercommentid).emit('action', {type: 'client/COMMENT', data: sComment})
+        io.to(action.data.sellpostid).emit('action', {type: 'client/COMMENT', data: sComment})
     })
 };
 
