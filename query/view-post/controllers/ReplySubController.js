@@ -69,6 +69,7 @@ export const createReply = (message) => {
               const { comments } = sellpost
 
               console.log('comments: ', comments);
+              console.log('replies: ', replies);
 
               for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i]
