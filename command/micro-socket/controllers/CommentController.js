@@ -30,10 +30,13 @@ export const addNewSecondLayerCommentCon = (action, sio, io) => {
 
 export const addNewFirstLayerCommentCon = (action, sio, io) => {
     addNewFirstLayerCommentPub(action.data, (fComment) => {
-        if (action.data.sellpostid) {
-            sio.to(action.data.sellpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
-        } else {
-            sio.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
+        console.log("oiergjoiejw ojeorgn " + JSON.stringify(fComment));
+        if (sio != null) {
+            if (action.data.sellpostid) {
+                sio.to(action.data.sellpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
+            } else {
+                sio.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
+            }
         }
     })
 };
@@ -58,3 +61,9 @@ export const getFirstLayerCommentCon = (action, sio, io) => {
         sio.emit('action', {type: 'client/GET_MORE_LEADERCOMMENT', data: comments})
     });
 };
+
+addNewFirstLayerCommentCon({data: {
+    sellpostid: '012596a126a6b65f85ca45969b5',
+    userID: '0015969d791adcfc42c2b3af016',
+    contetn: 'ajoiewjg'
+}}, null, null);
