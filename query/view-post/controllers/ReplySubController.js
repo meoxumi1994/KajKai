@@ -68,6 +68,8 @@ export const createReply = (message) => {
             if (sellpost) {
               const { comments } = sellpost
 
+              console.log('comments: ', comments);
+
               for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i]
                 if (comment.id == commentId) {
