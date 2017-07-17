@@ -16,6 +16,7 @@ export const createComment = (message) => {
     list: product.list,
     numberOfOrder: product.num
   }))
+  if (time) comment.time = time
 
   if(userId.substr(0, 3) == '001') {
     BasicUser.findOne({ id: userId }, (err, basicUser) => {
