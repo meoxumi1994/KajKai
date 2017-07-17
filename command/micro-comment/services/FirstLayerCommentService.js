@@ -193,11 +193,11 @@ export const addNewFirstLayerComment = (data, next) => {
 
     getStoreFromPostId(data.postId, (store) => {
         if (data.userId === store.owner) {
-            saveNewFirstLayerComment(store.id, order, data.time, data.postId, data.content, (comment) => {
+            saveNewFirstLayerComment(store.id, order, data.time, data.sellpostid, data.content, (comment) => {
                 next(comment)
             })
         } else {
-            saveNewFirstLayerComment(data.userId, order, data.time, data.postId, data.content, (comment) => {
+            saveNewFirstLayerComment(data.userId, order, data.time, data.sellpostid, data.content, (comment) => {
                 next(comment);
             })
         }
