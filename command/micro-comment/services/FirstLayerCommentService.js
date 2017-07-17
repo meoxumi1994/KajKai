@@ -192,7 +192,8 @@ export const addNewFirstLayerComment = (data, next) => {
     if (data.products && data.products.length > 0) order = getOrder(data.products);
 
     getStoreFromPostId(data.postId, (store) => {
-        if (data.userId === store.owner) {
+        console.log('store ' + JSON.stringify(store));
+        if (data.userID === store.owner) {
             saveNewFirstLayerComment(store.id, order, data.time, data.sellpostid, data.content, (comment) => {
                 next(comment)
             })
@@ -203,3 +204,5 @@ export const addNewFirstLayerComment = (data, next) => {
         }
     });
 };
+
+addNewFirstLayerComment({postId: '012596a126a6b65f85ca45969b5'});
