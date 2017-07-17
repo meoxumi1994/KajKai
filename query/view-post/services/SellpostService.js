@@ -79,7 +79,7 @@ export const getSellposts = (storeId, offset, next) => {
           }
         }
 
-        if (currentNumberOfSellpost < 2 || lastIndex == 0) {
+        if (lastIndex == 0) {
           mOffset = -2
         }
 
