@@ -14,6 +14,7 @@ export const getStoreSub = (message, next) => {
 
 export const getStoreFromPostSub = (message, next) => {
     const id = message.postId;
+    console.log('fuck this shit ' + JSON.stringify(message));
     if (id.toString().startsWith(config.SELLPOST_GLOBAL_ID)) {
         console.log('this ' + JSON.stringify(id));
         getStoreFromSellPostId(id, (store) => {
