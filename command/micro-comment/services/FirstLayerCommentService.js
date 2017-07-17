@@ -170,7 +170,7 @@ export const getFirstLayerCommentPubInfo = (fComment) => {
         posterId: fComment.posterId, order: fComment.order, time: fComment.time,
         content: fComment.content, fCommentId: getFirstCommentGlobalId(fComment._id)
     };
-    if (fComment.toString().startsWith(SELL_POST_GLOBAL_ID)) {
+    if (fComment.postId.startsWith(SELL_POST_GLOBAL_ID)) {
         data = {...data, sellPostId: fComment.postId};
     } else {
         data = {...data, minorPostId: fComment.postId};
