@@ -51,6 +51,7 @@ export const getClientFormatReplies = (replies, offset) => {
 const getClientFormatReply = (reply) => ({
   id: reply.id,
   type: reply.type,
+  urlname: reply.urlName,
   ownerid: reply.userId,
   leadercommentid: reply.commentId,
   avatarUrl: reply.avatarUrl,

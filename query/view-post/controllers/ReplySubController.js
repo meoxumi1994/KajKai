@@ -62,6 +62,7 @@ export const createReply = (message) => {
     reply.type = 'store'
     BasicStore.findOne({ id: userId }, (err, basicStore) => {
       if (basicStore) {
+        reply.urlName = basicStore.urlName
         reply.username = basicStore.storeName
         reply.avatarUrl = basicStore.avatarUrl
 
