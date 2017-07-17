@@ -58,7 +58,7 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
     }
   }
 
-  if (currentNumberOfReply < 2 || lastIndex == 0) {
+  if (currentNumberOfReply < 2 || lastIndex == 1) {
     rOffset = -2
   }
   mReplies = [getClientFormatReply(replies[0]), ...mReplies]
