@@ -71,7 +71,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
         break
       }
     }
-    if (currentNumberOfComment < 5 || lastIndex == 0) {
+    if (lastIndex == 0) {
       cOffset = -2
     }
   } else {
@@ -96,7 +96,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
         }
       }
     }
-    if (currentNumberOfComment < 10 || lastIndex == 0) {
+    if (lastIndex == 0) {
       cOffset = -2
     }
   }
