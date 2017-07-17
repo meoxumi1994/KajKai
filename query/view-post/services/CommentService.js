@@ -10,6 +10,7 @@ export const getComments = (postType, id, offset, next) => {
         } else {
           next({
             offset,
+            id,
             leadercomments: []
           })
         }
@@ -26,6 +27,7 @@ export const getComments = (postType, id, offset, next) => {
         } else {
           next({
             offset,
+            id,
             leadercomments: []
           })
         }
