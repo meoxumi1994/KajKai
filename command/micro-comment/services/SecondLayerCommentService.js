@@ -1,5 +1,4 @@
-import { FirstLayerComment, SecondLayerComment } from '../models'
-import { getCurrentTime } from '../utils/utils'
+import { SecondLayerComment } from '../models'
 import globalId from '../config/globalId'
 import { getUser, getListUser, getStore, getStoreFromPostId, newSecondLayerCommentCreated } from '../controllers/CommentPubController'
 
@@ -97,7 +96,7 @@ export const getSecondLayerCommentPubInfo = (sComment) => {
 };
 
 export const saveNewScondLayerComment = (posterId, time, postId, content, parentCommentId, next) => {
-    let comment = new FirstLayerComment({posterId: posterId, time: time,
+    let comment = new SecondLayerComment({posterId: posterId, time: time,
         postId: postId, content: content, parentCommentId: parentCommentId});
     comment.save(function (err) {
         newSecondLayerCommentCreated(getSecondLayerCommentPubInfo(comment));
