@@ -191,7 +191,7 @@ export const addNewFirstLayerComment = (data, next) => {
     let order = null;
     if (data.products && data.products.length > 0) order = getOrder(data.products);
 
-    getStoreFromPostId(data.postId, (store) => {
+    getStoreFromPostId(data.sellpostid, (store) => {
         console.log('store ' + JSON.stringify(store));
         if (data.userID.toString() === store.owner.toString()) {
             saveNewFirstLayerComment(store.id, order, data.time, data.sellpostid, data.content, (comment) => {
