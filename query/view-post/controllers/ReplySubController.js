@@ -25,12 +25,13 @@ export const createReply = (message) => {
               for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i]
                 if (comment.id == commentId) {
-                  comments.replies.push(reply)
+                  comment.replies.push(reply)
+                  comment.numberOfReply = comment.replies.length - 1
+                  comments[i] = comment
                   break
                 }
               }
 
-              comments.numberOfReply = comments.replies.length
               sellpost.comments = comments
               sellpost.save(() => {})
             }
@@ -43,12 +44,13 @@ export const createReply = (message) => {
               for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i]
                 if (comment.id == commentId) {
-                  comments.replies.push(reply)
+                  comment.replies.push(reply)
+                  comment.numberOfReply = comment.replies.length - 1
+                  comments[i] = comment
                   break
                 }
               }
 
-              comments.numberOfReply = comments.replies.length
               minorpost.comments = comments
               minorpost.save(() => {})
             }
@@ -71,12 +73,13 @@ export const createReply = (message) => {
               for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i]
                 if (comment.id == commentId) {
-                  comments[i].replies.push(reply)
+                  comment.replies.push(reply)
+                  comment.numberOfReply = comment.replies.length - 1
+                  comments[i] = comment
                   break
                 }
               }
 
-              comments.numberOfReply = comments.replies.length
               sellpost.comments = comments
               sellpost.save(() => {})
             }
@@ -89,12 +92,14 @@ export const createReply = (message) => {
               for (let i = 0; i < comments.length; i++) {
                 let comment = comments[i]
                 if (comment.id == commentId) {
-                  comments.replies.push(reply)
+                  comment.replies.push(reply)
+                  comment.numberOfReply = comment.replies.length - 1
+                  comments[i] = comment
                   break
                 }
               }
 
-              comments.numberOfReply = comments.replies.length
+
               minorpost.comments = comments
               minorpost.save(() => {})
             }
