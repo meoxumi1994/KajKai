@@ -46,28 +46,30 @@ export const getClientFormatSellpostComments = (comments, offset) => {
       leadercomments: []
     }
   }
-  const oneHour = 3600000
+  // const oneHour = 3600000
 
   let currentNumberOfComment = 0, cOffset = -1
   let mComments = []
 
   for (let i = comments.length - 1; i >= 0; i--) {
     let comment = comments[i]
-    if (offset - comment.time <= oneHour && currentNumberOfComment < 5) {
-      let { replies } = comment
-      let mComment = getClientFormatReplies(replies, Date.now())
+    if (comment.time < offset) {
+      if (currentNumberOfComment < 5) {
+        let { replies } = comment
+        let mComment = getClientFormatReplies(replies, Date.now())
 
-      mComment.id = comment.id
-      mComment.sellpostid = comment.sellpostId
-      mComment.order = comment.order
-      mComment.numcomment = comment.numberOfReply
+        mComment.id = comment.id
+        mComment.sellpostid = comment.sellpostId
+        mComment.order = comment.order
+        mComment.numcomment = comment.numberOfReply
 
-      mComments = [mComment, ...mComments]
+        mComments = [mComment, ...mComments]
 
-      cOffset = comment.time.getTime()
-      currentNumberOfComment++
-    } else {
-      break
+        cOffset = comment.time.getTime()
+        currentNumberOfComment++
+      } else {
+        break
+      }
     }
   }
   return {
@@ -83,29 +85,31 @@ export const getClientFormatMinorpostComments = (comments, offset) => {
       leadercomments: []
     }
   }
-  const oneHour = 3600000
+  // const oneHour = 3600000
 
   let currentNumberOfComment = 0, cOffset, lastIndex
   let mComments = []
 
   for (let i = comments.length - 1; i >= 0; i--) {
     let comment = comments[i]
-    if (offset - comment.time <= oneHour && currentNumberOfComment < 5) {
-      let { replies } = comment
-      let mComment = getClientFormatReplies(replies, Date.now())
+    if (comment.time < offset) {
+      if (currentNumberOfComment < 5) {
+        let { replies } = comment
+        let mComment = getClientFormatReplies(replies, Date.now())
 
-      mComment.id = comment.id
-      mComment.minorpostid = comment.minorPostId
-      mComment.numcomment = comment.numberOfReply
+        mComment.id = comment.id
+        mComment.minorpostid = comment.minorPostId
+        mComment.numcomment = comment.numberOfReply
 
-      mComments = [mComment, ...mComments]
+        mComments = [mComment, ...mComments]
 
-      cOffset = comment.time
-      lastIndex = i
-      currentNumberOfComment++
-    } else {
-      break
-    }
+        cOffset = comment.time
+        lastIndex = i
+        currentNumberOfComment++
+      } else {
+        break
+      }
+    }    
   }
 
   if (currentNumberOfComment < 5 || lastIndex == 0) {
