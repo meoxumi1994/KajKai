@@ -7,7 +7,7 @@ import { newFirstLayerCommentCreated } from '../controllers/CommentPubController
 
 const FIRST_COMMENT_GLOBAL_ID = globalId.FIRST_COMMENT_GLOBAL_ID;
 const USER_GLOBAL_ID = globalId.USER_GLOBAL_ID;
-const SELL_POST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID
+const SELL_POST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID;
 
 export const getFirstCommentGlobalId = (id) => {
     return FIRST_COMMENT_GLOBAL_ID + id
@@ -46,7 +46,7 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
                     id: getFirstCommentGlobalId(fComment._id),
                     like: fComment.likeCounter
                 };
-                if (fComment.postId.toString().startsWith(globalId.SELLPOST_GLOBAL_ID)) {
+                if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     info = {...info, sellpostid: fComment.postId}
                 } else {
                     info = {...info, minorpostid: fComment.postId};
@@ -195,7 +195,7 @@ export const addNewFirstLayerComment = (data, next) => {
     getStoreFromPostId(data.sellpostid, (store) => {
         console.log('store ' + JSON.stringify(store));
         if (data.userID.toString() === store.owner.toString()) {
-            saveNewFirstLayerComment(store.id, order, data.time, data.sellpostid, data.content, (comment) => {
+            saveNewFirstLayerComment(store.storeId, order, data.time, data.sellpostid, data.content, (comment) => {
                 next(comment)
             })
         } else {
@@ -206,6 +206,6 @@ export const addNewFirstLayerComment = (data, next) => {
     });
 };
 
-addNewFirstLayerComment({userID: '348923', time: 38568345, sellpostid: '012596ba62c52676143851d04b1'}, (comment) => {
-    console.log('saiuhiweuogho ei ' + JSON.stringify(comment));
-});
+// addNewFirstLayerComment({userID: '348923', time: 38568345, sellpostid: '012596ba62c52676143851d04b1'}, (comment) => {
+//     console.log('saiuhiweuogho ei ' + JSON.stringify(comment));
+// });
