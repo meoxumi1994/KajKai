@@ -7,7 +7,7 @@ const USER_GLOBAL_ID = '001';
 
 export const getUser = (id, next) => {
     if (id.startsWith(USER_GLOBAL_ID)) {
-        id = getUserLocalId(id)
+        id = getUserLocalId(id);
         User.findById(id, function(err, user) {
             if (err) {
                 next(null)
@@ -95,12 +95,12 @@ export const getChatUserInfo = (user) => {
 };
 
 export const getChatUserListInfo = (userList) => {
-    let result = []
+    let result = [];
     for (let i = 0; i < userList.length; ++i) {
         result.push(getChatUserInfo(userList[i]))
     }
     return result
-}
+};
 
 export const getUserFromEmail = (_email, next) => {
     User.findOne({email: _email}, function (err, user) {
@@ -120,7 +120,7 @@ export const getUserFromPhone = (_phone, next) => {
             next(user)
         }
     })
-}
+};
 
 export const getUserFromFacebookId = (facebookId, next) => {
     User.findOne({socialNetworkType: SocialType.FACEBOOK, socialNetworkId: facebookId}, function (err, user) {
@@ -130,7 +130,7 @@ export const getUserFromFacebookId = (facebookId, next) => {
             next(user)
         }
     })
-}
+};
 
 export const getUserToken = (id) => {
     let curId = id.toString();
@@ -138,7 +138,7 @@ export const getUserToken = (id) => {
     if (!curId.startsWith(USER_GLOBAL_ID)) curId = getUserGlobalId(curId);
     console.log(id + ' ' + curId);
     return jwt.sign({_id: curId}, 'secret', { expiresIn: 60 * 60 * 60 });
-}
+};
 
 export const verifyToken = (token) => {
     try {
@@ -147,23 +147,23 @@ export const verifyToken = (token) => {
     } catch(err) {
         return null;
     }
-}
+};
 
 export const getUserFromToken = (token, next) => {
-    const decoded = verifyToken(token)
-    if (!decoded) next(null)
+    const decoded = verifyToken(token);
+    if (!decoded) next(null);
     else {
         getUser(decoded._id, function (user) {
             next(user)
         })
     }
-}
+};
 
 export const updateUserPhone = (id, phone, next) => {
     getUser(id, function(user){
         if (user) {
-            user.phone = phone
-            user.phoneLastUpdateAt = new Date()
+            user.phone = phone;
+            user.phoneLastUpdateAt = new Date();
             user.save((err) => {
                 if (err) {
                     next('failed')
@@ -175,15 +175,15 @@ export const updateUserPhone = (id, phone, next) => {
             next('failed')
         }
     })
-}
+};
 
 export const verifyCharacterVietname = (username) => {
     username = username.toUpperCase();
     const VIETNAMESE_DIACRITIC_CHARACTERS = "ẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ";
 
-    var numspace = 0;
-    var curdisspace = 0;
-    var minspace = 10;
+    let numspace = 0;
+    let curdisspace = 0;
+    let minspace = 10;
     for (let i = 0; i < username.length; i++) {
         let ok = false;
         if( username[i] === " ") {
@@ -205,21 +205,21 @@ export const verifyCharacterVietname = (username) => {
     }
     const isTwoSpace = username.search("  ") !== -1;
     return !(isTwoSpace || numspace > 5 || minspace < 2)
-}
+};
 
 
 export const validateName = (username) => {
     const length = username.length;
     return (length >= 5 && length <= 45 && verifyCharacterVietname(username))
-}
+};
 
 export const validateLanguage = (language) => {
     return (language === Language.VIETNAM || language === Language.ENGLISH)
-}
+};
 
 export const validateSex = (sex) =>{
     return (sex === Sex.MALE || sex === Sex.FEMALE)
-}
+};
 
 export const updateVerifyUser = (id, next) => {
     getUser(id, (user) => {
@@ -232,11 +232,11 @@ export const updateVerifyUser = (id, next) => {
             next(null)
         }
     })
-}
+};
 
 export const validateYearOfBirth = (year) => {
     return year >= 1900 && year <= (new Date()).getYear() + 1900
-}
+};
 
 export const createUser = (email, userName, password, verified, yearOfBirth, socialNetworkType, socialNetworkId, avatarUrl, next) => {
     if (userName === null) { // || !validateName(userName)) {
@@ -337,7 +337,7 @@ export const updateUserInfo = (userId, info, next) => {
 
         if (info.yearOfBirth) {
             try{
-                const year = parseInt(info.yearOfBirth)
+                const year = parseInt(info.yearOfBirth);
                 if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
                     user.yearOfBirth = year;
                     updateYOB = true
