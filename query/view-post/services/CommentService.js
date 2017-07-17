@@ -88,7 +88,7 @@ export const getClientFormatMinorpostComments = (comments, offset) => {
 
   for (let i = comments.length - 1; i >= 0; i--) {
     let comment = comments[i]
-    if (now - comment.time <= oneHour && currentNumberOfComment < 5) {
+    if (offset - comment.time <= oneHour && currentNumberOfComment < 5) {
       let { replies } = comment
       let mComment = getClientFormatReplies(replies, Date.now())
 
