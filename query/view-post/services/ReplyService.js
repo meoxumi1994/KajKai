@@ -13,12 +13,12 @@ export const getReplies = (id, offset, next) => {
       }
     } else {
       const { replies } = comment
-      next(getClientFormatReplies(replies, offset))
+      next(getClientFormatReplies(replies, offset, isFirst))
     }
   })
 }
 
-export const getClientFormatReplies = (replies, offset) => {
+export const getClientFormatReplies = (replies, offset, isFirst) => {
   if (!replies) {
     return {
       offset,
@@ -28,19 +28,36 @@ export const getClientFormatReplies = (replies, offset) => {
   const oneHour = 3600000
   let currentNumberOfReply = 0, rOffset, lastIndex
   let mReplies = []
+  if (isFirst) {
+    for(let k = replies.length - 1; k > 0; k--) {
+      let reply = replies[k]
+      if (offset - reply.time <= oneHour && currentNumberOfReply < 2) {
+        mReplies = [getClientFormatReply(reply), ...mReplies]
 
-  for(let k = replies.length - 1; k > 0; k--) {
-    let reply = replies[k]
-    if (offset - reply.time <= oneHour && currentNumberOfReply < 2) {
-      mReplies = [getClientFormatReply(reply), ...mReplies]
+        rOffset = reply.time.getTime()
+        lastIndex = k
+        currentNumberOfReply++
+      } else {
+        break
+      }
+    }
+  } else {
+    for(let k = replies.length - 1; k > 0; k--) {
+      let reply = replies[k]
+      if (reply.time < offset) {
+        if (currentNumberOfReply < 2) {
+          mReplies = [getClientFormatReply(reply), ...mReplies]
 
-      rOffset = reply.time.getTime()
-      lastIndex = k
-      currentNumberOfReply++
-    } else {
-      break
+          rOffset = reply.time.getTime()
+          lastIndex = k
+          currentNumberOfReply++
+        } else {
+          break
+        }
+      }
     }
   }
+
   if (currentNumberOfReply < 2 || lastIndex == 0) {
     rOffset = -2
   }

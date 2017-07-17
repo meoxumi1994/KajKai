@@ -128,6 +128,6 @@ const getClientFormatSellpost = (sellpost, offset) => {
     follows: sellpost.followers ? sellpost.followers.slice(0, 5) : null,
     numleadercomment: sellpost.numberOfComment ? sellpost.numberOfComment : 0,
     numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
-    ...getClientFormatSellpostComments(comments, offset)
+    ...getClientFormatSellpostComments(comments, offset, true)
   })
 }
