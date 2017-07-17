@@ -62,7 +62,7 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
                     content: fComment.content,
                     name: store.storeName,
                     avatarUrl: store.avatarUrl,
-                    commenterid: store.id,
+                    commenterid: store.storeId,
                     time: fComment.time,
                     order: getOrderInfo(fComment.order),
                     id: getFirstCommentGlobalId(fComment._id),
