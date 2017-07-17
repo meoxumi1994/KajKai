@@ -32,9 +32,9 @@ export const addNewFirstLayerCommentCon = (action, sio, io) => {
     addNewFirstLayerCommentPub(action.data, (fComment) => {
         console.log("new first comment " + JSON.stringify(fComment));
         if (action.data.sellpostid) {
-            sio.to(action.data.sellpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
+            io.to(action.data.sellpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
         } else {
-            sio.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
+            io.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
         }
     })
 };
