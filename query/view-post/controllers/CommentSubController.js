@@ -35,6 +35,7 @@ export const createComment = (message) => {
 
         comment.replies = []
         comment.replies.push(reply)
+        comment.save(() => {})
 
         if (sellpostId) {
           Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
@@ -111,6 +112,7 @@ export const createComment = (message) => {
 
         comment.replies = []
         comment.replies.push(reply)
+        comment.save(() => {})
 
         if (sellpostId) {
           Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {

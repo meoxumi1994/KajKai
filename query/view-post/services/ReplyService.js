@@ -7,6 +7,7 @@ export const getReplies = (id, offset, next) => {
         next(null)
       } else {
         next({
+          id,
           status: 'nodata',
           offset,
           comments: []
@@ -14,7 +15,10 @@ export const getReplies = (id, offset, next) => {
       }
     } else {
       const { replies } = comment
-      next(getClientFormatReplies(replies, offset, false))
+      next({
+        id,
+        ...getClientFormatReplies(replies, offset, false)
+      })
     }
   })
 }
