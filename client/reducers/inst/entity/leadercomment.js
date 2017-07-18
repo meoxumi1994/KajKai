@@ -6,6 +6,7 @@ const leadercomment = (state = {
             return {...state,
                 [action.data.leadercommentid]: {
                     ...state[action.data.leadercommentid],
+                    numcomment: state[action.data.leadercommentid].numcomment + 1,
                     comments: [...state[action.data.leadercommentid].comments,
                         {
                             id: action.data.id,
@@ -23,6 +24,28 @@ const leadercomment = (state = {
                     comments: [action.data],
                 }
             }
+        case 'GET_MORE_COMMENT_SUCCESS':
+            return {...state,
+                [action.id] : {
+                    ...state[action.id],
+                    comments : [
+                        ...state[action.id].comments,
+                        ...action.comments,
+                    ]
+                }
+            }
+        case 'GET_MORE_LEADERCOMMENT_SUCCESS':
+            let mystate = state
+            action.leadercomments.map((item) => {
+                mystate = {...mystate,
+                    [item.comments[0].id] : {
+                        ...item,
+                        contentedit : '',
+                        isReply: false,
+                    }
+                }
+            })
+            return mystate
         case 'GET_SELLPOST_FROM_STORE_SUCCESS':
             let newstate = state
             action.sellposts.map((sp) => {

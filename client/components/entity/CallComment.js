@@ -9,26 +9,28 @@ class CallComment extends React.Component {
     render(){
         const { isleader, avatarUrl, placehoder, handleChange, content, onEnter } = this.props
         return(
-            <div style={{
-                marginLeft: isleader?0:38,
-                paddingLeft: isleader?0:10,
-                borderLeft: isleader?undefined:'2px solid #4080FF'
-            }}>
-                <img src={avatarUrl} style={{
-                    width: isleader?40:20,
-                    height: isleader?40:20,
-                }}/>
+            <div style={{ paddingBottom: 10 }}>
                 <div style={{
-                    marginTop: isleader?-40:-20,
-                    marginLeft: isleader?50:30,
+                    marginLeft: isleader?0:38,
+                    paddingLeft: isleader?0:10,
+                    borderLeft: isleader?undefined:'2px solid #4080FF',
                 }}>
-                    <ContentEditable
-                        onEnter={() => onEnter()}
-                        placehoder={placehoder}
-                        handleChange={(e) => handleChange(e)}
-                        content={content}
-                        padding={isleader?5:0}
-                    />
+                    <img src={avatarUrl} style={{
+                        width: isleader?40:20,
+                        height: isleader?40:20,
+                    }}/>
+                    <div style={{
+                        marginTop: isleader?-40:-20,
+                        marginLeft: isleader?50:30,
+                    }}>
+                        <ContentEditable
+                            onEnter={() => onEnter()}
+                            placehoder={placehoder}
+                            handleChange={(e) => handleChange(e)}
+                            content={content}
+                            padding={isleader?5:0}
+                        />
+                    </div>
                 </div>
             </div>
         )

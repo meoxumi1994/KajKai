@@ -15,16 +15,19 @@ class GroupComment extends React.Component {
         this.props.onLeave()
     }
     render(){
-        const { WRITE_COMMENT_OR_ORDER, WRITE_COMMENT, numleadercomment , leadercomments, content, onChange, id, onEnter, avatarUrl } = this.props
-        console.log('numleadercomment', numleadercomment)
+        const { WRITE_COMMENT_OR_ORDER, WRITE_COMMENT, numleadercomment , leadercomments, content, onChange, id,
+            onEnter, avatarUrl, onGetMore, offset } = this.props
         return(
-            <div style={{ padding: '10px 0px 10px 0px'}}>
-                <CommentSuggest
-                    id={3}
-                    isleader={true}
-                    content={'View more comments'}
-                    end={leadercomments.length + ' of '+numleadercomment}
-                    />
+            <div style={{ padding: '10px 0px 0px 0px'}}>
+                {(offset != -2 && numleadercomment > leadercomments.length) &&
+                    <CommentSuggest
+                        id={3}
+                        isleader={true}
+                        onClick={() => onGetMore()}
+                        content={'View more '+ (numleadercomment - leadercomments.length) +' comments'}
+                        end={leadercomments.length + ' of '+numleadercomment}
+                        />
+                }
                 {leadercomments.map((item, index) =>
                     <LeaderComment
                         key={index}
