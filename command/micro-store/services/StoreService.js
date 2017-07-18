@@ -104,8 +104,8 @@ export const createStore = (storeInfo, next) => {
                 coverUrl: storeInfo.coverUrl,
                 address: storeInfo.address,
                 addressMap: storeInfo.addressMap,
-                longitude: storeInfo.position ? storeInfo.position.longitude : null,
-                latitude: storeInfo.position ? storeInfo.position.latitude : null,
+                longitude: storeInfo.position ? storeInfo.position.lng : null,
+                latitude: storeInfo.position ? storeInfo.position.lat : null,
                 certificates: certificate,
                 createdAt: storeInfo.time,
                 urlName: storeInfo.urlname
@@ -148,8 +148,10 @@ export const updateStore = (storeInfo, next) => {
             }
         }
         if (storeInfo.addressMap) store.addressMap = storeInfo.addressMap;
-        if (storeInfo.longitude) store.longitude = storeInfo.longitude;
-        if (storeInfo.latitude) store.latitude = storeInfo.latitude;
+        if (storeInfo.position) {
+            if (storeInfo.position.lng) store.longitude = storeInfo.position.lng;
+            if (storeInfo.position.lat) store.latitude = storeInfo.position.lat;
+        }
         if (storeInfo.certificates) {
             store.certificates = new Certificate(storeInfo.certificates);
         }

@@ -2,7 +2,7 @@ import twilio from 'twilio'
 import { Phone } from '../models'
 
 export const sendPhoneVerificationCode = (phone, next) => {
-  const client = twilio('AC9d56fa868509534d25f79d014bce9d3a', '7a88c013ff38584546f7e9c3d5d2476f')
+  const client = twilio('AC4bd0eab0ac039e1c779c2ea64bf82a43', '6f9c24783885cc9181eaa722f30f4c3e')
   const code = parseInt(Math.random() * 10000)
   console.log('phone: ', phone)
 
@@ -20,7 +20,8 @@ export const sendPhoneVerificationCode = (phone, next) => {
         .create({
           body: 'KAJKAI code: ' + code,
           to: phone,
-          from: '+12017204676',
+          // from: '+12017204676',
+          from: '+13139864864',
         }).then((data) => {
           console.log('send code success')
           next('pending')
