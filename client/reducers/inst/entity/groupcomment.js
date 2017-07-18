@@ -2,13 +2,30 @@ const groupcomment = (state = {
 
 }, action) => {
     switch (action.type) {
+        // case 'C':
+        //     return {
+        //
+        //     }
         case 'client/LEADERCOMMENT':
             return {...state,
                 [action.data.sellpostid]: {
+                    ...state[action.data.sellpostid],
+                    numleadercomment: state[action.data.sellpostid].numleadercomment + 1,
                     leadercomments: [...state[action.data.sellpostid].leadercomments,
                         {
                             id: action.data.id,
                         }
+                    ]
+                }
+            }
+        case 'GET_MORE_LEADERCOMMENT_SUCCESS':
+            return {...state,
+                [action.id] : {
+                    ...state[action.id],
+                    offset: action.offset,
+                    leadercomments: [
+                        ...action.leadercomments,
+                        ...state[action.id].leadercomments,
                     ]
                 }
             }
@@ -18,6 +35,7 @@ const groupcomment = (state = {
                 newstate = {...newstate,
                     [sp.id] : {
                         id: sp.id,
+                        offset: sp.offset,
                         leadercomments: sp.leadercomments,
                         numleadercomment: sp.numleadercomment,
                         content: '',

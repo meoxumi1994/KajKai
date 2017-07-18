@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
 import GroupComment from '~/components/entity/GroupComment'
+import { getMoreLeaderComment } from '~/actions/asyn/entity/comment'
 
 const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
@@ -16,6 +17,7 @@ const mapStateToProps = (state, { id }) => {
             break
         }
     }
+    // console.log(groupcomment)
     return({
         ...groupcomment,
         ...user,
@@ -31,8 +33,9 @@ const mapDispatchToProps = (dispatch, { id }) => ({
     onChange: (key, value) => {
         dispatch({ type: 'INST_ENTITY_GROUPCOMMENT_CHANGE', id: id, key: key, value: value })
     },
-    onGetMore: (offset) => {
-        console.log(offset, id)
+    onGetMoreLeaderComment: (offset) => {
+        if(offset != -2)
+            dispatch(getMoreLeaderComment('sellpost',offset,id))
     },
     onEnterProps: (content) => {
         if(content)
@@ -54,11 +57,14 @@ const mapDispatchToProps = (dispatch, { id }) => ({
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { content, ...anotherState } = stateProps
-    const { onEnterProps, ...anotherDispatch } = dispatchProps
+    const { offset, content, ...anotherState } = stateProps
+    const { onGetMoreLeaderComment, onEnterProps, ...anotherDispatch } = dispatchProps
     return({
         onEnter: () => {
             onEnterProps(content)
+        },
+        onGetMore: () => {
+            onGetMoreLeaderComment(offset)
         },
         content: content,
         ...ownProps,
