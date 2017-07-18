@@ -9,6 +9,7 @@ export const getComments = (postType, id, offset, next) => {
           next(null)
         } else {
           next({
+            status: 'nodata',
             offset,
             id,
             leadercomments: []
@@ -42,6 +43,7 @@ export const getComments = (postType, id, offset, next) => {
 export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
   if (!comments) {
     return {
+      status: 'success',
       offset,
       leadercomments: []
     }
@@ -103,6 +105,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
   }
 
   return {
+    status: 'success',
     offset: cOffset,
     leadercomments: mComments
   }

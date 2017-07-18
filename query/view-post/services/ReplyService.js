@@ -7,6 +7,7 @@ export const getReplies = (id, offset, next) => {
         next(null)
       } else {
         next({
+          status: 'nodata',
           offset,
           comments: []
         })
@@ -21,6 +22,7 @@ export const getReplies = (id, offset, next) => {
 export const getClientFormatReplies = (replies, offset, isFirst) => {
   if (!replies) {
     return {
+      status: 'success',
       offset,
       comments: []
     }
@@ -66,6 +68,7 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
   }
 
   return {
+    status: 'success',
     offset: rOffset,
     comments: mReplies
   }
