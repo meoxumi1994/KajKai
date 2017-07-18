@@ -3,7 +3,11 @@ import { Phone } from '../models'
 
 export const sendPhoneVerificationCode = (phone, next) => {
   const client = twilio('AC4bd0eab0ac039e1c779c2ea64bf82a43', '6f9c24783885cc9181eaa722f30f4c3e')
-  const code = parseInt(Math.random() * 10000)
+  let code = parseInt(Math.random() * 10000)
+  if (code < 1000) {
+    code += 1000
+  }
+  console.log('code: ', code);
   console.log('phone: ', phone)
 
   Phone.findOne({ phone }, (err, mPhone) => {
@@ -26,6 +30,7 @@ export const sendPhoneVerificationCode = (phone, next) => {
           console.log('send code success')
           next('pending')
         }, (err) => {
+          console.log('err: ', err);
           console.error('send code err: ', err)
           next('error')
         })

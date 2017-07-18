@@ -18,7 +18,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 function execute(action, emit, next, dispatch) {
     console.log('socket.io',{...action})
-    if(action.type.substr(0,6) == 'client'){
+    if(action.type.substr(0,6) == 'client' || action.type.substr(0,6) == 'global'){
         next(action)
     }else{
         emit(action.type, action)
@@ -26,7 +26,7 @@ function execute(action, emit, next, dispatch) {
 }
 
 const socket = io(config.getSocket())
-const socketIoMiddleware = createSocketIoMiddleware(socket, ["server/","client/"], { execute: execute });
+const socketIoMiddleware = createSocketIoMiddleware(socket, ["server/","client/","global/"], { execute: execute });
 
 const store = createStore(
     reducers,
@@ -44,6 +44,10 @@ window.addEventListener('resize', () => {
 $(window).click(function() {
     store.dispatch({ type: 'SCREEN_CLICK'})
 });
+
+setInterval(() => {
+    store.dispatch({ type: 'TIME_DOWN'})
+},1000)
 
 document.getElementsByTagName("BODY")[0].onscroll = () => {
     store.dispatch({ type: 'ON_SCROLL_BODY',

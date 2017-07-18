@@ -146,6 +146,7 @@ const myString = {
     URL_NAME_SPECIAL: ['tên url của bạn không chỉ được dùng chữ cái thường hoặc dấu gạch dưới', 'Your url name is not only used with lowercase letters or underscores'],
     WARNING_MODAL: ['Cảnh Báo', 'Warning'],
     ADD: ['Thêm','Add'],
+    HOME: ['Trang chủ','Home'],
 }
 
 const allString = {

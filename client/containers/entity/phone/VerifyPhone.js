@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch, { phone }) => ({
         dispatch({ type: 'ENTITY_PHONE_VERITY_PHONE', timewait: timewait - 1 })
     },
     onReUpdatePhone: () => {
-        dispatch(reUpdatePhone(FilteringPhoneDefaultVietName(phone)))
+        dispatch(updatePhone(FilteringPhoneDefaultVietName(phone)))
     }
 })
 

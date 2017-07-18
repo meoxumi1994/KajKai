@@ -70,6 +70,7 @@ const mergerProp = (stateProps, dispatchProps, ownProps) => {
             }
         },
         id: id,
+        stateSellPost: stateSellPost,
         offsetSellPost: offsetSellPost,
         offsetMinorPost: offsetMinorPost,
         ...anotherState,
