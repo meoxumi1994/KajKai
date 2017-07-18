@@ -4,6 +4,8 @@ export const createStore = (message) => {
   const { id, owner: userId, storeName, createdAt, urlName, avatarUrl, coverUrl, address, addressMap, phone,
     category, firstCategoryId, secondCategoryId, firstCategoryName: firstCategory, secondCategoryName: secondCategory, longitude, latitude, certificates, lastUpdate } = message.store
 
+console.log('longitude: ', longitude)
+console.log('latitude: ', latitude);
   const store = new Store({
     id,
     userId
