@@ -79,7 +79,8 @@ export const getSellPostBasicInfo = (sellPost) => {
         numlike: 0,
         likestatus: ['like','love','haha'],
         follows: [],
-        follow: 0
+        follow: 0,
+        leadercomments: []
     };
 };
 

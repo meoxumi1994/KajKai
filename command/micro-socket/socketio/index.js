@@ -28,14 +28,9 @@ const init = (server) => {
         socket.on('disconnect', () => {
             console.log('a user disconnected')
         });
-        // get user from token
 
         socket.on('server/sendToken', (action) => {
             const token = action.tokenId;
-            // const token =  getTokenSocketCookie(socket.handshake.headers.cookie);
-            // console.log('fuck socket' + JSON.stringify(socket));
-            // console.log('fuck handshake ' + JSON.stringify(socket.handshake));
-            // console.log('fuck cookie' + socket.handshake.headers.cookie);
             console.log('fuck token ' + token);
 
             if (token) {
