@@ -55,7 +55,7 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
     for(let k = replies.length - 1; k > 0; k--) {
       let reply = replies[k]
       if (reply.time < offset) {
-        if (currentNumberOfReply < 2) {
+        if (currentNumberOfReply < 10) {
           mReplies = [getClientFormatReply(reply), ...mReplies]
 
           rOffset = reply.time.getTime()
