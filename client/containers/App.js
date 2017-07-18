@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import chatStyles from '~/components/chat/chatStyles'
+import chatStyles from '~/containers/chat/chatStyles'
 import App from '../components/App'
 import { onWho } from '../actions/asyn/app'
 import { getChatList } from '~/actions/asyn/chat/restful'
@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     getChatList: (id) => {
         dispatch(getChatList(Date.now(), 10))
-        dispatch({type: 'SET_USER_ID', data: {id: id}})
+        dispatch({type: 'CURRENT_CHAT', subType: 'SET_USER_ID', data: {id: id}})
     },
     closeProgress: () => {
         dispatch({ type: 'PROGRESS_CLOSE' })

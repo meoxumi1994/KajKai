@@ -1,27 +1,21 @@
 import { connect } from 'react-redux'
 import Chat from '~/components/chat'
-import { findName } from '../support'
-import { getChatList } from '~/actions/asyn/chat/restful'
-import { getSingleChat } from '~/components/chat/chatStyles'
+import chatStyles from './chatStyles'
 
 const mapStateToProps = (state, ownProps) => {
-  const { singleKey, messagesMap } = state.inst.chat.center
-  return (
-    {
-      messagesKey: singleKey,
-      messagesMap,
-      styles,
-    }
-  )
+    const { singleKey, messagesMap } = state.inst.chat.center
+    return (
+        {
+          messagesKey: singleKey,
+          messagesMap,
+          styles,
+          multiChat: false
+        }
+    )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  setCurrentChat: (mesId) => {
-      dispatch({type: 'SET_CURRENT_CHAT', mesId})
-  },
-  getChatList: (id) => {
-      dispatch(getChatList(Date.now(), 10))
-  },
+
 })
 
 const ChatContainer = connect(

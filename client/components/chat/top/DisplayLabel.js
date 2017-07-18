@@ -10,11 +10,13 @@ class DisplayLabel extends React.Component {
 
         const {
                 mesId, styles,
-                chatListMap, results,
+                chatListMap,
                 removeUser
               } = this.props
 
-        const { usersKey, usersMap, displayLabel, display } = chatListMap[mesId]
+        const { usersKey, usersMap, displayLabel, display, search } = chatListMap[mesId]
+
+        const { results } = search
 
         let label = displayLabel
         if (label == undefined || label == '') {
@@ -37,7 +39,7 @@ class DisplayLabel extends React.Component {
                       results.keyy.map(uKey =>
                       <label key={uKey}>
                           <button style={{height: 40, marginTop: 11, marginLeft: 15}} className="btn btn-primary">{results.mapp[uKey].username}</button>
-                          <button style={{height: 40, marginTop: 11}} className="btn btn-primary" onClick={() => removeUser(uKey)}>x</button>
+                          <button style={{height: 40, marginTop: 11}} className="btn btn-primary" onClick={() => removeUser(mesId, uKey)}>x</button>
                       </label>
                     )
                   }

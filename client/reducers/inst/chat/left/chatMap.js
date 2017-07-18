@@ -15,7 +15,18 @@ const chatMap = (state={
     disabled: false,
     display: {
         addMember: false,
-        setting: false
+        setting: false,
+        search: false
+    },
+    search: {
+        results: {
+            keyy: [],
+            mapp: {}
+        },
+        suggestions: {
+            keyy: [],
+            mapp: {}
+        }
     }
 }, action, subAction) => {
 
@@ -25,7 +36,6 @@ const chatMap = (state={
               ...state,
               mesId: action.data.mesId,
               lastMessage: action.data.lastMessage,
-              // displayLabel: utils.displayLabel(action.data.users),
               displayLabel: action.data.displayLabel,
               usersKey: action.data.users.map(user => user.id),
               usersMap: utils.usersMap(action, action.data.users)
@@ -74,7 +84,6 @@ const chatMap = (state={
             }
           }
 
-
       case 'client/REMOVE_MEMBER':
           return {
               ...state,
@@ -105,8 +114,80 @@ const chatMap = (state={
                           setting: action.data.value == 'toggle'? !state.display.setting: action.data.value
                       }
                   }
+              case 'SEARCH':
+                  return {
+                      ...state,
+                      display: {
+                          ...state.display,
+                          search: action.data.value == 'toggle'? !state.display.setting: action.data.value
+                      }
+                  }
             default:
               return state
+          }
+
+      case 'SEARCH':
+          switch (action.subType) {
+            case 'ADD_SUGGESTIONS':
+                return {
+                    ...state,
+                    search: {
+                        ...state.search,
+                        suggestions:{
+                            keyy: action.data.users.map(user => user.userId),
+                            mapp: utils.searchUsersMap(action, action.data.users)
+                        }
+                    }
+                }
+            case 'ADD_MEMBER':
+                return {
+                    ...state,
+                    search: {
+                        ...state.search,
+                        results: {
+                            keyy: [
+                                ...state.search.results.keyy,
+                                action.data.user.id
+                            ],
+                            mapp: {
+                                ...state.search.results.mapp,
+                                [action.data.user.id]: userMap(undefined, action)
+                            }
+                        }
+                    }
+                }
+                
+            case 'REMOVE_MEMBER':
+                const tempKeyResult = state.search.results.keyy
+                const tempMapResult = state.search.results.mapp
+
+                tempKeyResult.splice(tempKeyResult.indexOf(action.data.id), 1)
+                delete tempMapResult[action.data.id]
+
+                return {
+                    ...state,
+                    search: {
+                        ...state.search,
+                        results: {
+                            keyy: tempKeyResult,
+                            mapp: tempMapResult
+                        }
+                    }
+                }
+
+            case 'RESET_RESULTS':
+                return {
+                    ...state,
+                    search: {
+                        ...state.search,
+                        results: {
+                            keyy: [],
+                            mapp: {}
+                        }
+                    }
+                }
+            default:
+
           }
 
         default:

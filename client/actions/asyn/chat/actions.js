@@ -1,4 +1,3 @@
-// left
 export const initChatList = (data, lazyLoad) => ({
     type: 'INIT_CHAT_LIST',
     data: data,
@@ -11,19 +10,18 @@ export const addChat = (data, multiChat) => ({
 })
 
 export const setCurrentChat = (mesId) => ({
-    type: 'SET_CURRENT_CHAT',
+    type: 'CURRENT_CHAT',
+    subType: 'SET_CURRENT_CHAT',
     data: {
       mesId
     }
 })
 
-export const addMember = (mesId, id, members) => ({
-    type: 'server/ADD_MEMBER',
+export const setUserId = (id) => ({
+    type: 'CURRENT_CHAT',
+    subType: 'SET_USER_ID',
     data: {
-        mesId,
-        id,
-        members,
-        time: Date.now()
+        id
     }
 })
 
@@ -46,17 +44,35 @@ export const changeDisplay = (subType, mesId, value) => ({
     }
 })
 
-// bottom
-export const sendMessage = (mesId, id, text, url, type) => ({
-  type: 'server/SEND_MESSAGE',
-  data: {
-      mesId,
-      id,
-      message: {
-          text,
-          url,
-          type
-      },
-      time: Date.now()
-  }
+export const removeChat = (mesId) => ({
+    type: 'REMOVE_CHAT',
+    data: {
+        mesId
+    }
+})
+
+/**
+ ** SEARCH
+**/
+export const search_addMember = (mesId, user) => ({
+    type: 'SEARCH',
+    subType: 'ADD_MEMBER',
+    data: {
+        mesId: mesId,
+        user: user
+    }
+})
+
+export const search_removeMember = (mesId, id) => ({
+    type: 'SEARCH',
+    subType: 'REMOVE_MEMBER',
+    data: {
+        mesId,
+        id
+    }
+})
+
+export const search_resetResult = () => ({
+    type: 'SEARCH',
+    subType: 'RESET_RESULTS'
 })

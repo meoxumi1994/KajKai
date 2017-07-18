@@ -7,15 +7,17 @@ import loadHome from 'bundle-loader?lazy!../containers/home/HomeContainer'
 import loadMapp from 'bundle-loader?lazy!./mapp/Map'
 import loadUserLoginRegister from 'bundle-loader?lazy!../containers/user-login-register'
 import MapContainer from 'bundle-loader?lazy!../containers/mapp/MapContainer'
-
 import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
-// import loadChat from 'bundle-loader?lazy!../containers/chat'
+import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Store from '~/containers/store'
 import User from '~/containers/user'
 import ContactHistory from '~/containers/contacthistory'
-// import ChatCenterContainer from '~/containers/chat/center'
+import ChatCenterContainer from '~/containers/chat/center'
 import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
+
+import AdminContainer from '~/containers/admin/'
+import loadAdmin from 'bundle-loader?lazy!../containers/admin'
 
 import Progress from '~/containers/entity/thumnail/Progress'
 
@@ -46,6 +48,15 @@ const Profile = () => (
     </Bundle>
 )
 
+const Admin = () => (
+    <Bundle load={loadAdmin}>
+      {(Comp) => (Comp
+        ? <Comp/>
+        : null
+      )}
+    </Bundle>
+)
+
 const UserLoginRegister = () => (
     <Bundle load={loadUserLoginRegister}>
         {(Comp) => (Comp
@@ -64,14 +75,14 @@ const RegisterStore = () => (
     </Bundle>
 )
 
-// const Chat = ({ id }) => (
-//     <Bundle load={loadChat}>
-//         {(Comp) => (Comp
-//           ? <Comp/>
-//           : null
-//         )}
-//     </Bundle>
-// )
+const Chat = ({ id }) => (
+    <Bundle load={loadChat}>
+        {(Comp) => (Comp
+          ? <Comp/>
+          : null
+        )}
+    </Bundle>
+)
 
 // const Target = ({ id }) => (
 //     <Bundle load={loadTarget}>
@@ -91,19 +102,20 @@ class App extends React.Component {
         const { width, height, username, onScroll } = this.props
         const { messagesKey, messagesMap, showProgress, closeProgress } = this.props
         const { chat, styles } = this.props
-        // const { multipleKey  } = chat
+        const { multipleKey  } = chat
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
                 <Bar/>
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
                     style={{ height: height - 48 }}>
-                    { username && width > 1100 + 280 &&
-                        <div style={{ position: 'fixed',right: 0, top: 47, height: '100%', width: '15%'}}>
-                            <ContactHistory/>
-                        </div>
+                    {
+                      username && width > 1100 + 280 &&
+                          <div style={{ position: 'fixed',right: 0, top: 47, height: '100%', width: '15%'}}>
+                              <ContactHistory/>
+                          </div>
                     }
                     <div style={{ paddingTop: 48, marginRight: (width > 1100 + 280)? 280: 0 }}>
-                        {(path == "/" || path == "/chat" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
+                        {(path == "/" || path == "/chat" || path == "/admin" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
                               <div style={{ height: height - 48, width: Math.max(1100, width) }}>
                                   <Route exact path="/" component={Home}/>
@@ -111,9 +123,10 @@ class App extends React.Component {
                                   <Route path="/register" component={UserLoginRegister}/>
                                   <Route path="/profile" component={Profile}/>
                                   <Route path="/registerstore" component={RegisterStore}/>
-                                  {/* <Route path="/chat" component={Chat}/> */}
+                                  <Route path="/chat" component={Chat}/>
+                                  <Route path="/admin" component={Admin}/>
                               </div>
-                              {/* {
+                              {
                                 <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>
                                       { multipleKey.map(
                                           (mesId, index) => {
@@ -137,7 +150,7 @@ class App extends React.Component {
 
                                       )}
                                 </div>
-                              } */}
+                              }
                             </div>
                         :  location.pathname.split('/')[1] == 'user'?
                             <div>
@@ -155,7 +168,7 @@ class App extends React.Component {
     }
     componentDidMount(){
         this.props.onWho()
-        // this.props.getChatList()
+        this.props.getChatList()
     }
 }
 
