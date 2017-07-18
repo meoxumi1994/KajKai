@@ -27,8 +27,8 @@ console.log('latitude: ', latitude);
   if (firstCategory) store.firstCategory = firstCategory
   if (secondCategory) store.secondCategory = secondCategory
   console.log('2./ store: ', store);
-  if (longitude) store.longitude = parseFloat(longitude)
-  if (latitude) store.latitude = parseFloat(latitude)
+  if (longitude) store.longitude = longitude
+  if (latitude) store.latitude = latitude
   if (certificates) store.certificates = certificates
 
   console.log('3./ store: ', store);
