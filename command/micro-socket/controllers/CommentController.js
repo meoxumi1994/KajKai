@@ -27,7 +27,10 @@ export const addNewSecondLayerCommentCon = (action, sio, io) => {
         console.log('new second comment ' + JSON.stringify(sComment));
         io.to(action.data.sellpostid).emit('action', {type: 'client/COMMENT', data: sComment});
         getListFollower(action.data.sellpostid, (list) => {
-            list.push(sComment.user ? sComment.user : sComment.commenterid);
+            const newId = sComment.user ? sComment.user : sComment.commenterid;
+            if (list.indexOf(newId) === -1) {
+                list.push(newId);
+            }
             for (let i = 0; i < list.length; ++i) {
                 io.to(list[i]).emit('action', {type: 'global/COMMENT', data: sComment});
             }
@@ -49,7 +52,10 @@ export const addNewFirstLayerCommentCon = (action, sio, io) => {
             io.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
         }
         getListFollower(action.data.sellpostid, (list) => {
-            list.push(fComment.user ? fComment.user : fComment.commenterid);
+            const newId = fComment.user ? fComment.user : fComment.commenterid;
+            if (list.indexOf(newId) === -1) {
+                list.push(newId);
+            }
             for (let i = 0; i < list.length; ++i) {
                 io.to(list[i]).emit('action', {type: 'global/LEADERCOMMENT', data: fComment});
             }
