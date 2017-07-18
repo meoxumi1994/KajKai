@@ -17,7 +17,10 @@ export const getComments = (postType, id, offset, next) => {
         }
       } else {
         const { comments } = sellpost
-        next(getClientFormatSellpostComments(comments, offset, false))
+        next({
+          id,
+          ...getClientFormatSellpostComments(comments, offset, false)
+        })
       }
     })
   } else {
