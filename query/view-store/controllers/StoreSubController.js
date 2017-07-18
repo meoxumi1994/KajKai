@@ -23,8 +23,8 @@ export const createStore = (message) => {
   if (secondCategoryId) store.secondCategoryId = secondCategoryId
   if (firstCategory) store.firstCategory = firstCategory
   if (secondCategory) store.secondCategory = secondCategory
-  if (longitude) store.longitude = longitude
-  if (latitude) store.latitude = latitude
+  if (longitude) store.longitude = parseFloat(longitude)
+  if (latitude) store.latitude = parseFloat(latitude)
   if (certificates) store.certificates = certificates
 
 
