@@ -1,7 +1,8 @@
 //NEW NEW NEW
 
 GET /groupcomment/'sellpost|minorpost'/:id?offset=1498555009220 {
-    offset
+    offset:
+    id:
     leadercomments: [
         {
           id: '7586449578',
@@ -28,6 +29,7 @@ GET /groupcomment/'sellpost|minorpost'/:id?offset=1498555009220 {
 }
 
 GET /leadercomment/:leadercommentid?offset=1498555009220 {
+    id
     offset
     comments: [
         {

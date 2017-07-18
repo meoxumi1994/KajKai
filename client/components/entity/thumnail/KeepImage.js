@@ -78,7 +78,6 @@ class KeepImage extends React.Component {
                                         width: 260, height: 260, float: 'left', padding: 4 }}>
                                     <div style={{ width: '100%', marginBottom: 4 }}>
                                         <UploadCroppie
-                                            src="/images/flower005.jpg"
                                             style={{ width: 780, height: 440 }}
                                             upNow={true}
                                             action={action}
@@ -92,6 +91,8 @@ class KeepImage extends React.Component {
                                     <div style={{ width: '100%', marginBottom: 4 }}>
                                         <WebcamCapture
                                             style={{ width: 590 }}
+                                            action={action}
+                                            upNow={true}
                                             btnstyle={{
                                                 width: '100%',
                                                 height: 81,

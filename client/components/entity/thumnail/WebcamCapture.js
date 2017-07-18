@@ -2,6 +2,8 @@ import React from 'react'
 import { Modal } from 'react-bootstrap'
 import Webcam from 'react-webcam'
 
+import Croppie from '~/containers/entity/thumnail/Croppie'
+
 class WebcamCapture extends React.Component {
     constructor(props){
         super(props)
@@ -10,6 +12,7 @@ class WebcamCapture extends React.Component {
             iswaitting: false,
             cowndown: undefined,
             showModal: false,
+            showChange: false,
         }
     }
     capture(){
@@ -18,6 +21,8 @@ class WebcamCapture extends React.Component {
             iswaitting: true,
             cowndown: 3,
         })
+        const imageSrc = this.webcam.getScreenshot()
+        this.imageSrc = imageSrc
         const myInterval = setInterval(() => {
             this.setState({
                 cowndown: this.state.cowndown - 1,
@@ -29,15 +34,18 @@ class WebcamCapture extends React.Component {
                     iswaitting: false,
                     cowndown: undefined,
                 })
-                const imageSrc = this.webcam.getScreenshot()
-                const imgData = document.getElementById("imgData")
-                imgData.src = imageSrc
+                document.getElementById("imgData").src = imageSrc
             }
         },1000)
     }
     onSave(){
-        if(this.state.iswaitting) return;
-        console.log('onSave')
+        if(this.props.upNow){
+            this.props.onLoadImage(this.props.action, this.imageSrc)
+        }else{
+            this.setState({
+                showChange: true,
+            })
+        }
     }
     close(){
         this.setState({ showModal: false })
@@ -51,7 +59,7 @@ class WebcamCapture extends React.Component {
         })
     }
     render() {
-        const { style, btnstyle, TAKE_PHOTO, WEBCAM_DESCRIPTION, CAPTURE_PHOTO, SAVE , RETAKE_PHOTO} = this.props
+        const { style, btnstyle, action, aspectRatio, CROPPIE_TITLE, TAKE_PHOTO, WEBCAM_DESCRIPTION, CAPTURE_PHOTO, SAVE , RETAKE_PHOTO} = this.props
         return (
             <div>
                 <button type="button" className="btn btn-default"
@@ -89,7 +97,7 @@ class WebcamCapture extends React.Component {
                             }}>
                                 <strong style={{
                                     marginLeft: style.width / 2,
-                                    fontSize: 30,
+                                    fontSize: 35,
                                     textShadow: '1px 1px 0px #000000',
                                     color: 'white'}}>
                                     {this.state.cowndown}
@@ -130,6 +138,21 @@ class WebcamCapture extends React.Component {
                                 </div>
                             }
                         </Modal.Footer>
+                    </div>
+                </Modal>
+                <Modal show={this.state.showChange} onHide={() => this.close()}>
+                    <div className="modal-content" style={{
+                        position: 'fixed', marginTop: -4,
+                        width: style.width + 2, marginLeft: -85 }}>
+                        <Modal.Header>
+                            <strong>{CROPPIE_TITLE}</strong>
+                        </Modal.Header>
+                        <Croppie
+                            aspectRatio={aspectRatio}
+                            action={action}
+                            cropper_src={this.imageSrc}
+                            style={style}
+                        />
                     </div>
                 </Modal>
             </div>

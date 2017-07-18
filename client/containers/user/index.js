@@ -4,9 +4,13 @@ import User from '~/components/user'
 import { getUser } from '~/actions/asyn/user'
 
 const mapStateToProps = (state, ownProps ) => {
+    const { scrollTop, scrollLeft, height } = state.inst.app
     return({
         iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT'),
         isusername: state.user.username,
+        scrollTop: scrollTop,
+        scrollLeft: scrollLeft,
+        height: height,
     })
 }
 

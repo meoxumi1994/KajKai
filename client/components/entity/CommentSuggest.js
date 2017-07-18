@@ -18,7 +18,7 @@ class CommentSuggest extends React.Component {
                 <div onClick={() => onClick()}
                     style={{
                     marginLeft: isleader?0:38,
-                    marginBottom: 10,
+                    paddingBottom: 10,
                     borderLeft: isleader?undefined:'2px solid #4080FF'}}>
                     {!isleader &&
                         <div className="btn" style={{

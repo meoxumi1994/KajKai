@@ -43,8 +43,6 @@ class AddPhoto extends React.Component {
                                     <div className="col col-xs-6" style={{ padding: 0}}>
                                         <UploadCroppie
                                             aspectRatio={aspectRatio}
-                                            TITLE="Upload Photo"
-                                            src="/images/flower005.jpg"
                                             style={{ width: 780, height: 440 }}
                                             btnstyle={{
                                                 width: 380,
@@ -57,12 +55,10 @@ class AddPhoto extends React.Component {
                                     </div>
                                     <div className="col col-xs-6" style={{ padding: 0}}>
                                         <WebcamCapture
-                                            TITLE='Take Photo'
-                                            DESCRIPTION='Your current profile picture is always public.'
-                                            CAPTURE_PHOTO='Capture Photo'
-                                            RETAKE_PHOTO='Retake Photo'
-                                            SAVE='Save'
+                                            aspectRatio={aspectRatio}
                                             style={{ width: 590 }}
+                                            action={action}
+                                            upNow={false}
                                             btnstyle={{
                                                 width: 380,
                                                 height: 110,

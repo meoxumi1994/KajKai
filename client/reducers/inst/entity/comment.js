@@ -7,6 +7,24 @@ const comment = (state = {
             return {...state,
                 [action.data.id]: action.data
             }
+        case 'GET_MORE_COMMENT_SUCCESS':
+            let cstate = state
+            action.comments.map((cm) => {
+                cstate = {...cstate,
+                    [cm.id] : cm
+                }
+            })
+            return cstate
+        case 'GET_MORE_LEADERCOMMENT_SUCCESS':
+            let mystate = state
+            action.leadercomments.map((item) => {
+                item.comments.map((cm) => {
+                    mystate = {...mystate,
+                        [cm.id] : cm
+                    }
+                })
+            })
+            return mystate
         case 'GET_SELLPOST_FROM_STORE_SUCCESS':
             let nstate = state
             action.sellposts.map((sp) => {

@@ -9,9 +9,11 @@ class LeaderComment extends React.Component {
         super(props)
     }
     render(){
-        const { WRITE_COMMENT, comments, order, isReply, id, contentedit, avatarUrl, onReply, onChange, onEnter } = this.props
+        const { WRITE_COMMENT, comments, order, isReply, id, contentedit, avatarUrl, onReply, onChange,
+            onEnter, offset, numcomment, onGetMore } = this.props
         return(
             <div>
+
                 {comments.map((cm, index) => {
                     if(index){
                         return(
@@ -25,13 +27,23 @@ class LeaderComment extends React.Component {
                         )
                     }else{
                         return(
-                            <Comment
-                                key={cm.id}
-                                id={cm.id}
-                                onReply={() => onReply(index, cm.commenterid)}
-                                isStoreRepresent={false}
-                                isleader={true}
-                                />
+                            <div key={cm.id}>
+                                <Comment
+                                    id={cm.id}
+                                    onReply={() => onReply(index, cm.commenterid)}
+                                    isStoreRepresent={false}
+                                    isleader={true}
+                                    />
+                                { (offset != -2 && numcomment > comments.length - 1 && comments.length > 1 ) &&
+                                    <CommentSuggest
+                                        id={3}
+                                        isleader={false}
+                                        onClick={() => onGetMore()}
+                                        content={'View more '+ (numcomment - comments.length + 1 )+' comments'}
+                                        // end={comments.length + ' of '+numcomment}
+                                        />
+                                }
+                            </div>
                         )
                     }
                 }

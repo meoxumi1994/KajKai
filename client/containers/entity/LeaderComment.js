@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
 import LeaderComment from '~/components/entity/LeaderComment'
+import { getMoreComment } from '~/actions/asyn/entity/comment'
 
 const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
@@ -35,24 +36,28 @@ const mapDispatchToProps = (dispatch, { id }) => ({
             })
         dispatch({ type: 'INST_ENTITY_LEADERCOMMENT_CHANGE', id: id, key: 'contentedit', value: '' })
     },
+    onGetMoreComment: (offset) => {
+        if(offset != -2)
+            dispatch(getMoreComment(offset,id))
+    },
     onChange: (key, value) => {
         dispatch({ type: 'INST_ENTITY_LEADERCOMMENT_CHANGE', id: id, key: key, value: value })
     },
     onReplyProps: (index, commenterid, contentedit) => {
-        if(!index)
-            dispatch({ type: 'INST_ENTITY_LEADERCOMMENT_CHANGE', id: id, key: 'isReply', value: true })
-        else
+        dispatch({ type: 'INST_ENTITY_LEADERCOMMENT_CHANGE', id: id, key: 'isReply', value: true })
+        if(index)
             dispatch({
                 type: 'INST_ENTITY_LEADERCOMMENT_CHANGE',
                 id: id,
                 key: 'contentedit',
-                value: (contentedit + '[' + commenterid + ']') })
+                value: (contentedit + '[' + commenterid + ']')
+            })
     }
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { sellpostid, contentedit, ...anotherState } = stateProps
-    const { onReplyProps, onCreateComment, ...anotherDispatch } = dispatchProps
+    const { offset, sellpostid, contentedit, ...anotherState } = stateProps
+    const { onGetMoreComment, onReplyProps, onCreateComment, ...anotherDispatch } = dispatchProps
     return({
         onEnter: () => {
             onCreateComment(sellpostid, contentedit)
@@ -60,6 +65,10 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
         onReply: (index, commenterid) => {
             onReplyProps(index,commenterid,contentedit)
         },
+        onGetMore: () => {
+            onGetMoreComment(offset)
+        },
+        offset: offset,
         contentedit: contentedit,
         ...ownProps,
         ...anotherState,
