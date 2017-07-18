@@ -8,6 +8,7 @@ export const createStore = (message) => {
     id,
     userId
   })
+  console.log('1./ store: ', store);
 
   if (storeName) store.storeName = storeName
   if (urlName) store.urlName = urlName
@@ -23,11 +24,12 @@ export const createStore = (message) => {
   if (secondCategoryId) store.secondCategoryId = secondCategoryId
   if (firstCategory) store.firstCategory = firstCategory
   if (secondCategory) store.secondCategory = secondCategory
+  console.log('2./ store: ', store);
   if (longitude) store.longitude = parseFloat(longitude)
   if (latitude) store.latitude = parseFloat(latitude)
   if (certificates) store.certificates = certificates
 
-
+  console.log('3./ store: ', store);
   if (lastUpdate) {
     const mLastUpdate = {}
     const { lastUpdateStoreName, lastUpdateAvatarUrl, lastUpdateCoverUrl } = lastUpdate
@@ -37,7 +39,7 @@ export const createStore = (message) => {
     store.lastUpdate = mLastUpdate
   }
 
-  console.log(store);
+  console.log('4./ store: ', store);
 
   store.save((err) => {console.log('err: ', err);})
 }
