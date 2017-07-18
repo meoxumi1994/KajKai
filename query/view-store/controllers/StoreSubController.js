@@ -37,7 +37,9 @@ export const createStore = (message) => {
     store.lastUpdate = mLastUpdate
   }
 
-  store.save(() => {})
+  console.log(store);
+
+  store.save((err) => {console.log('err: ', err);})
 }
 
 export const updateStore = (message) => {
