@@ -1,4 +1,4 @@
-import { addNewSecondLayerCommentPub, addNewFirstLayerCommentPub, getMoreFirstLayerComments, getMoreSecondLayerComments } from './CommentSocketPubController'
+import { addNewSecondLayerCommentPub, addNewFirstLayerCommentPub, getMoreFirstLayerComments, getMoreSecondLayerComments, addNewFollow, getListFollower } from './CommentSocketPubController'
 
 export const joinPostCon = (action, sio, io) => {
     if (action.data.sellpostid) {
@@ -24,8 +24,19 @@ export const leavePostCon = (action, sio, io) => {
 
 export const addNewSecondLayerCommentCon = (action, sio, io) => {
     addNewSecondLayerCommentPub(action.data, (sComment) => {
+        console.log('new second comment ' + JSON.stringify(sComment));
         io.to(action.data.sellpostid).emit('action', {type: 'client/COMMENT', data: sComment});
-        sio.emit('action', {type: 'global/COMMENT', data: sComment});
+        getListFollower(action.data.sellpostid, (list) => {
+            list.push(sComment.user ? sComment.user : sComment.commenterid);
+            for (let i = 0; i < list.length; ++i) {
+                io.to(list[i]).emit('action', {type: 'global/COMMENT', data: sComment});
+            }
+        });
+        if (sComment.user) {
+            addNewFollow(sComment.user, action.data.sellpostid);
+        } else {
+            addNewFollow(sComment.commenterid, action.data.sellpostid);
+        }
     })
 };
 
@@ -37,7 +48,17 @@ export const addNewFirstLayerCommentCon = (action, sio, io) => {
         } else {
             io.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
         }
-        sio.emit('action', {type: 'global/LEADERCOMMENT', data: fComment});
+        getListFollower(action.data.sellpostid, (list) => {
+            list.push(fComment.user ? fComment.user : fComment.commenterid);
+            for (let i = 0; i < list.length; ++i) {
+                io.to(list[i]).emit('action', {type: 'global/LEADERCOMMENT', data: fComment});
+            }
+        });
+        if (fComment.user) {
+            addNewFollow(fComment.user, action.data.sellpostid);
+        } else {
+            addNewFollow(fComment.commenterid, action.data.sellpostid);
+        }
     })
 };
 

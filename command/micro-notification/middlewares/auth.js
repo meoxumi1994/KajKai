@@ -1,4 +1,4 @@
-import { authoriseToken } from '../controllers/StorePubController'
+import { authoriseToken } from '../controllers/NotificationPubController'
 
 const auth = () => {
     return (req, res, next) => {
