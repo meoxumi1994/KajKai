@@ -63,7 +63,7 @@ export const getSellposts = (storeId, offset, next) => {
       })
       Promise.all(mPromises).then((postrowses) => {
         const mSellposts = []
-        let currentNumberOfSellpost = 0, mOffset, lastIndex
+        let currentNumberOfSellpost = 0, mOffset = -2, lastIndex = -1
         for (let i = sellposts.length - 1; i >= 0; i--) {
           let sellpost = sellposts[i]
           if (sellpost.time < offset) {
@@ -79,7 +79,7 @@ export const getSellposts = (storeId, offset, next) => {
           }
         }
 
-        if (currentNumberOfSellpost < 2 || lastIndex == 0) {
+        if (lastIndex == 0) {
           mOffset = -2
         }
 
@@ -128,6 +128,6 @@ const getClientFormatSellpost = (sellpost, offset) => {
     follows: sellpost.followers ? sellpost.followers.slice(0, 5) : null,
     numleadercomment: sellpost.numberOfComment ? sellpost.numberOfComment : 0,
     numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
-    ...getClientFormatSellpostComments(comments, offset)
+    ...getClientFormatSellpostComments(comments, offset, true)
   })
 }

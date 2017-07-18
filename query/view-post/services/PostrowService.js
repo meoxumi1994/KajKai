@@ -8,7 +8,7 @@ export const getPostrows = (sellpostId, offset, next) => {
       } else {
         next({
           status: 'nodata',
-          offset,
+          postrows_offset: offset,
           postrows: []
         })
       }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, FormControl, ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap'
-import TagsInput from 'react-tagsinput'
+// import TagsInput from 'react-tagsinput'
 
 class AddMember extends React.Component {
     constructor(props) {

@@ -9,13 +9,18 @@ export const getComments = (postType, id, offset, next) => {
           next(null)
         } else {
           next({
+            status: 'nodata',
             offset,
+            id,
             leadercomments: []
           })
         }
       } else {
         const { comments } = sellpost
-        next(getClientFormatSellpostComments(comments, offset))
+        next({
+          id,
+          ...getClientFormatSellpostComments(comments, offset, false)
+        })
       }
     })
   } else {
@@ -26,6 +31,7 @@ export const getComments = (postType, id, offset, next) => {
         } else {
           next({
             offset,
+            id,
             leadercomments: []
           })
         }
@@ -37,38 +43,72 @@ export const getComments = (postType, id, offset, next) => {
   }
 }
 
-export const getClientFormatSellpostComments = (comments, offset) => {
+export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
   if (!comments) {
     return {
+      status: 'success',
       offset,
       leadercomments: []
     }
   }
   const oneHour = 3600000
 
-  let currentNumberOfComment = 0, cOffset = -1
+  let currentNumberOfComment = 0, cOffset = Date.now(), lastIndex = -1
   let mComments = []
 
-  for (let i = comments.length - 1; i >= 0; i--) {
-    let comment = comments[i]
-    if (offset - comment.time <= oneHour && currentNumberOfComment < 5) {
-      let { replies } = comment
-      let mComment = getClientFormatReplies(replies, Date.now())
+  if (isFirst) {
+    for (let i = comments.length - 1; i >= 0; i--) {
+      let comment = comments[i]
+      if (offset - comment.time <= oneHour && currentNumberOfComment < 5) {
+        let { replies } = comment
+        let mComment = getClientFormatReplies(replies, Date.now(), true)
 
-      mComment.id = comment.id
-      mComment.sellpostid = comment.sellpostId
-      mComment.order = comment.order
-      mComment.numcomment = comment.numberOfReply
+        mComment.id = comment.id
+        mComment.sellpostid = comment.sellpostId
+        mComment.order = comment.order
+        mComment.numcomment = comment.numberOfReply
 
-      mComments = [mComment, ...mComments]
+        mComments = [mComment, ...mComments]
 
-      cOffset = comment.time
-      currentNumberOfComment++
-    } else {
-      break
+        cOffset = comment.time.getTime()
+        currentNumberOfComment++
+      } else {
+        break
+      }
+    }
+    if (comments.length == 0 || currentNumberOfComment == comments.length) {
+      cOffset = -2
+    }
+  } else {
+    for (let i = comments.length - 1; i >= 0; i--) {
+      let comment = comments[i]
+      if (comment.time < offset) {
+        if (currentNumberOfComment < 10) {
+          let { replies } = comment
+          let mComment = getClientFormatReplies(replies, Date.now(), true)
+
+          mComment.id = comment.id
+          mComment.sellpostid = comment.sellpostId
+          mComment.order = comment.order
+          mComment.numcomment = comment.numberOfReply
+
+          mComments = [mComment, ...mComments]
+
+          cOffset = comment.time.getTime()
+          lastIndex = i
+          currentNumberOfComment++
+        } else {
+          break
+        }
+      }
+    }
+    if (lastIndex == 0) {
+      cOffset = -2
     }
   }
+
   return {
+    status: 'success',
     offset: cOffset,
     leadercomments: mComments
   }

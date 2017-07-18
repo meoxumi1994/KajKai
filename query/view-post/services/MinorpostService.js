@@ -23,7 +23,7 @@ export const getMinorposts = (storeId, offset, next) => {
           if (currentNumberOfMinorpost < 3) {
             mMinorposts.push(getClientFormatMinorpost(minorpost, Date.now()))
 
-            mOffset = minorpost.time
+            mOffset = minorpost.time.getTime()
             currentNumberOfMinorpost++
           } else {
             break

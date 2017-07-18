@@ -17,6 +17,14 @@ export const createReply = (message) => {
         reply.username = basicUser.username
         reply.avatarUrl = basicUser.avatarUrl
 
+        Comment.findOne({ id: commentId }, (err, comment) => {
+          if (comment) {
+            comment.replies.push(reply)
+            comment.numberOfReply = comment.replies.length - 1
+            comment.save(() => {})
+          }
+        })
+
         if (sellpostId) {
           Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
             if (sellpost) {
@@ -65,6 +73,14 @@ export const createReply = (message) => {
         reply.urlName = basicStore.urlName
         reply.username = basicStore.storeName
         reply.avatarUrl = basicStore.avatarUrl
+
+        Comment.findOne({ id: commentId }, (err, comment) => {
+          if (comment) {
+            comment.replies.push(reply)
+            comment.numberOfReply = comment.replies.length - 1
+            comment.save(() => {})
+          }
+        })
 
         if (sellpostId) {
           Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {

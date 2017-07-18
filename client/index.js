@@ -14,6 +14,7 @@ import logger from 'redux-logger'
 
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 function execute(action, emit, next, dispatch) {
     console.log('socket.io',{...action})
@@ -29,11 +30,11 @@ const socketIoMiddleware = createSocketIoMiddleware(socket, ["server/","client/"
 
 const store = createStore(
     reducers,
-    applyMiddleware(
+    composeWithDevTools(applyMiddleware(
         // logger,
         thunkMiddleware,
         socketIoMiddleware
-    )
+    ))
 )
 
 window.addEventListener('resize', () => {
