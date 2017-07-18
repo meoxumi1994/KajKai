@@ -5,16 +5,20 @@ import MinorPost from '~/containers/entity/post/MinorPost'
 import TimeLine from '~/components/entity/draw/TimeLine'
 import EditSellPost from '~/containers/entity/post/EditSellPost'
 import EditMinorPost from '~/containers/entity/post/EditMinorPost'
+import ShowInMap from '~/containers/entity/map/ShowInMap.js'
 import Link from 'react-router-dom'
 
 class Page extends React.Component {
     constructor(props){
         super(props)
+        this.state = {
+            currentSellposts: false,
+        }
     }
     render(){
         const { isOwner, id, height, scrollTop, scrollLeft, sellposts, minorposts,  onNeedSellPost, onNeedMinorPost,
-            offsetSellPost, offsetMinorPost, showEditSellPost, showEditMinorPost, onChange,
-            numlike, likes, numfollow, follows, address, addressMap, category, latitute, longitute, phone,
+            offsetSellPost, offsetMinorPost, showEditSellPost, showEditMinorPost, onChange, stateSellPost,
+            numlike, likes, numfollow, follows, address, addressMap, category, position , phone,
             LIKE, FOLLOW, ADDRESSMAP, ADDRESS, CATEGORY, PHONE, BY, ANOTHER_PEOPLE, AND, THIS, PEOPLE,
             CREATE_SELLPOST, CREATE_MINORPOST,
         } = this.props
@@ -57,7 +61,7 @@ class Page extends React.Component {
                                 </div>
                             }
                             {sellposts.map((item, index) =>
-                                <div key={index} style={{ paddingTop: 10 }}>
+                                <div key={item} style={{ paddingTop: 10 }}>
                                     <SellPost id={item}/>
                                 </div>
                             )}
@@ -117,6 +121,12 @@ class Page extends React.Component {
                                         {follows.map((item,index) =>
                                             <img key={index} width={17} height={17} style={{ margin: '4px 0px 4px 4px'}} src={item.avatarUrl}/>)}
                                     </div>
+                                    <div style={{ marginLeft: -2, paddingTop: 2 }}>
+                                        <ShowInMap
+                                            width={390} height={200}
+                                            position={position}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             {/* {isOwner &&
@@ -140,7 +150,7 @@ class Page extends React.Component {
                                 </div>
                             } */}
                             {minorposts.map((intem,index) =>
-                                <TimeLine key={index} style={{ height: 400, width: 410, margin: '10px 0px 0px 0px'}}/>
+                                <TimeLine key={item} style={{ height: 400, width: 410, margin: '10px 0px 0px 0px'}}/>
                             )}
                             {offsetMinorPost != -2 && <div style={{ marginTop: 10 }} id="loaderr"></div>}
                         </div>
@@ -149,7 +159,7 @@ class Page extends React.Component {
             </div>
         )
     }
-    componentWillUpdate(){
+    componentDidUpdate(){
         this.sellpost_marginTop = 0
         this.minorpost_marginTop = 0
         if(this.sellpost){
@@ -166,6 +176,7 @@ class Page extends React.Component {
         }
     }
     componentDidMount(){
+        this.setState({ currentSellposts: this.props.sellposts })
         this.props.onNeedSellPost();
         this.props.onNeedMinorPost();
     }

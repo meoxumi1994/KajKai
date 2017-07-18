@@ -4,7 +4,7 @@ const Left = ({ storeList }) => {
     return(
         <div>
             {storeList.map((item, index) =>
-                <div key={index}>
+                <div key={index} style={{ paddingBottom: 10 }}>
                     <a href={"/"+item.urlname}>
                         <div className="btn"
                             style={{
@@ -16,7 +16,6 @@ const Left = ({ storeList }) => {
                         </div>
                     </a>
                 </div>
-
             )}
         </div>
     )

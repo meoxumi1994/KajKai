@@ -45,6 +45,10 @@ $(window).click(function() {
     store.dispatch({ type: 'SCREEN_CLICK'})
 });
 
+setInterval(() => {
+    store.dispatch({ type: 'TIME_DOWN'})
+},1000)
+
 document.getElementsByTagName("BODY")[0].onscroll = () => {
     store.dispatch({ type: 'ON_SCROLL_BODY',
         scrollTop: document.getElementsByTagName("BODY")[0].scrollTop,

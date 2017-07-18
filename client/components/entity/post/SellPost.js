@@ -47,7 +47,7 @@ class SellPost extends React.Component {
     }
     clickSetting(){
         setTimeout(()=>{
-            this.props.onChange('clicksetting', true )
+            this.props.onChange('clicksetting', true)
         },1)
     }
     render(){
