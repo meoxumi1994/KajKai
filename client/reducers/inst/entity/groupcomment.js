@@ -2,10 +2,11 @@ const groupcomment = (state = {
 
 }, action) => {
     switch (action.type) {
-        // case 'C':
-        //     return {
-        //
-        //     }
+        case 'CREATE_SELL_POST_SUCCESS':
+            return {
+                ...state,
+                [action.sellpost.id] : action.sellpost,
+            }
         case 'client/LEADERCOMMENT':
             return {...state,
                 [action.data.sellpostid]: {

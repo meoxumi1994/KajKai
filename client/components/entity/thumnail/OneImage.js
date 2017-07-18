@@ -1,5 +1,7 @@
 import React from 'react'
 
+import DisplayImage from '~/components/entity/thumnail/DisplayImage'
+
 class OneImage extends React.Component {
     constructor(props){
         super(props)
@@ -35,7 +37,8 @@ class OneImage extends React.Component {
                         <img src="/images/camera.svg" style={{ margin: 12 ,height: style.height / 10 }}/>
                     </div>
                 }
-                <img src={src} style={{ width: style.width, height: style.height }}/>
+                <img src={src} width={style.width} height={style.height}/>
+                {/* <DisplayImage src={src} width={style.width} height={style.height}/> */}
             </div>
         )
 
