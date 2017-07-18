@@ -1,8 +1,9 @@
 import React from 'react'
 
-const Left = ({ storeList }) => {
+const Left = ({ storeList, STORE }) => {
     return(
         <div>
+            {STORE}
             {storeList.map((item, index) =>
                 <div key={index}>
                     <a href={"/"+item.urlname}>
