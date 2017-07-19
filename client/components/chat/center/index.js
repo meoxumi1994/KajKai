@@ -10,9 +10,10 @@ class ChatCenter extends React.Component {
     }
 
     render() {
-      let { mesId, styles, messagesMap } = this.props
-      let { setCurrentChat } = this.props
-      
+      const { mesId, styles, messagesMap,
+              setCurrentChat
+            } = this.props
+
       if (mesId == undefined) {
         return (
           <div style={{textAlign: 'center', marginTop: 80}}><i>No conversation</i></div>
@@ -35,7 +36,5 @@ class ChatCenter extends React.Component {
       )
     }
 }
-
-
 
 export default ChatCenter

@@ -2,6 +2,9 @@ import chatMap from './chatMap'
 import userMap from './userMap'
 
 const utils = {
+    /**
+    ** INITIAL CHAT
+    **/
     chatListMap: (action) => {
         const chatListMap = {}
         for (let i in action.data) {
@@ -24,7 +27,7 @@ const utils = {
         return displayLabel.substring(0, displayLabel.length - 2)
     },
     /**
-    ** GROUP
+    ** GROUP CHAT
     **/
     groupUsersKey: (action, members, id) => {
         const groupUsersKey = []
@@ -52,6 +55,16 @@ const utils = {
             }
         }
         return groupDisplayLabel.substring(0, groupDisplayLabel.length - 2)
+    },
+    /**
+    ** SEARCH
+    **/
+    searchUsersMap: (action, users) => {
+        const usersMap = {}
+        for (let i in users) {
+            usersMap[users[i].userId] = userMap(undefined, {type: action.type, subType: action.subType, data: users[i]})
+        }
+        return usersMap
     },
 }
 

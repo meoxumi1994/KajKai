@@ -7,10 +7,9 @@ const mapStateToProps = (state, ownProps) => {
     const { chatListMap, currentChat } = state.inst.chat.left
     const { multipleKey } = state.inst.chat.center
     return {
-      chatListMap,
-      multipleKey,
-      currentChat,
-      userId: state.user.id,
+        chatListMap,
+        multipleKey,
+        currentChat,
     }
 }
 
