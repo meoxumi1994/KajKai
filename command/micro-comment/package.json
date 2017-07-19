@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "pm2 delete index-comment.js && pm2 start index-comment.js"
   },
   "author": "",
   "license": "ISC",

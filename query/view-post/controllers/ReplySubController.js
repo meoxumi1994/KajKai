@@ -16,6 +16,7 @@ export const createReply = (message) => {
       if (basicUser) {
         reply.username = basicUser.username
         reply.avatarUrl = basicUser.avatarUrl
+        reply.save(() => {})
 
         Comment.findOne({ id: commentId }, (err, comment) => {
           if (comment) {
@@ -73,6 +74,7 @@ export const createReply = (message) => {
         reply.urlName = basicStore.urlName
         reply.username = basicStore.storeName
         reply.avatarUrl = basicStore.avatarUrl
+        reply.save(() => {})
 
         Comment.findOne({ id: commentId }, (err, comment) => {
           if (comment) {
