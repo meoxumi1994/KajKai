@@ -1,12 +1,12 @@
 export default {
-  'CHATGROUP.Created': {
-    controller: 'ChatSubController',
-    method: 'createChat'
-  },
-  'CHATGROUP.Updated': {
-    controller: 'ChatSubController',
-    method: 'updateChat'
-  },
+  // 'CHATGROUP.Created': {
+  //   controller: 'ChatSubController',
+  //   method: 'createChat'
+  // },
+  // 'CHATGROUP.Updated': {
+  //   controller: 'ChatSubController',
+  //   method: 'updateChat'
+  // },
   'MESSAGE.Created': {
     controller: 'MessageSubController',
     method: 'createMessage'
