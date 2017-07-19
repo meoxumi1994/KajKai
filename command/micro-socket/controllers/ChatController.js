@@ -55,8 +55,7 @@ export const removeMemberCon = (action, sio, io) => {
 export const updateUICon = (action, sio, io) => {
     updateUIPub(action.data.mesId, action.data.data, (data, receiverId) => {
         for (let i = 0; i < receiverId.length; ++i) {
-            io.to(receiverId[i]).emit('action', {type: 'server/UPDATE_UI', data: action.data})
+            io.to(receiverId[i]).emit('action', {type: 'client/UPDATE_UI', data: action.data})
         }
     })
 };
-
