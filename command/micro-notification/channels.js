@@ -11,11 +11,11 @@ export default {
         controller: 'NotificationSubController',
         method: 'removeFollowCon'
     },
-    'LIKE.AddLike': {
+    'NOTI.LIKE.AddLike': {
         controller: 'NotificationSubController',
         method: 'addLikeCon'
     },
-    'LIKE.RemoveLike': {
+    'NOTI.LIKE.RemoveLike': {
         controller: 'NotificationSubController',
         method: 'removeLikeCon'
     }
