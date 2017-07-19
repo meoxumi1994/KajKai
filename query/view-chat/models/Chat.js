@@ -7,7 +7,7 @@ const ChatSchema = new mongoose.Schema({
   name: {type: String},
   users: [BasicUserSchema],
   messages: [MessageSchema],
-  lastMessageTime: {type: Date}
+  lastMessageTime: {type: Date},
 })
 
 export default ChatSchema

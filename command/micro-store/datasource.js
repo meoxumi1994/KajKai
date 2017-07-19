@@ -8,5 +8,5 @@ mongoose.connect(config.getDataSource(), {
     if (err) {
         console.log('error login mongoose', err)
     }
-})
+});
 export default mongoose
