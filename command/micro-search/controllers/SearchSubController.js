@@ -72,3 +72,17 @@ export const updateSellPostSub = (message) => {
     const category = sellpost.category;
 
 };
+
+export const createSellPostProductSub = (message) => {
+    console.log(message, JSON.stringify(message));
+    const product = message.product;
+    const content = product.content;
+    const sellPostId = message.sellPostId;
+};
+
+export const updateSellPostProduct = (message) => {
+    console.log(message, JSON.stringify(message));
+    const product = message.product;
+    const content = product.content;
+    const sellPostID = message.sellPostId;
+};
