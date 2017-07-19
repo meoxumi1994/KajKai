@@ -111,7 +111,10 @@ class App extends React.Component {
                     {
                       username && width > 1100 + 280 &&
                           <div style={{ position: 'fixed',right: 0, top: 47, height: '100%', width: '15%'}}>
-                              <ContactHistory/>
+                              {
+                                  path == '/admin'? undefined:
+                                  <ContactHistory/>
+                              }
                           </div>
                     }
                     <div style={{ paddingTop: 48, marginRight: (width > 1100 + 280)? 280: 0 }}>

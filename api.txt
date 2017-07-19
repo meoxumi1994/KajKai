@@ -887,6 +887,7 @@ GET /chatlist?offset=offset&length=length: { // thứ tự trả về như thế
             avatarUrl: '',
             id: '',
             username: '',
+            status:             // default = true
           }
         ]
       }

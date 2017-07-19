@@ -1,7 +1,6 @@
 import React from 'react'
 import DashboardContainer from '~/containers/admin/dashboard'
 import UserContainer from '~/containers/admin/user'
-import StoreContainer from '~/containers/admin/store'
 
 class Admin extends React.Component {
     constructor(props) {
@@ -21,9 +20,6 @@ class Admin extends React.Component {
                             <li style={styles.left.ul} className="active">
                                 <a data-toggle="tab" href="#user">User</a>
                             </li>
-                            <li style={styles.left.ul} >
-                                <a data-toggle="tab" href="#store">Store</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -36,10 +32,6 @@ class Admin extends React.Component {
                           <div id="user" className="tab-pane fade in active" style={styles.center.mainDiv}>
                               <div style={styles.center.header}><h4>User</h4></div>
                               <UserContainer/>
-                          </div>
-                          <div id="store" className="tab-pane fade" style={styles.center.mainDiv}>
-                              <div style={styles.center.header}><h4>Store</h4></div>
-                              <StoreContainer/>
                           </div>
                     </div>
                 </div>

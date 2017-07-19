@@ -19,7 +19,7 @@ class Settings extends React.Component {
                       <div>
                       <form onSubmit={ (e) => {
                           e.preventDefault()
-                          if (groupName.value != '') {
+                          if (groupName.value && groupName.value.trim() != '') {
                               changeGroupName(mesId, user.id, groupName.value)
                           }
                       }}>
