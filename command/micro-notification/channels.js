@@ -10,5 +10,13 @@ export default {
     'NOTI.RemoveFollow': {
         controller: 'NotificationSubController',
         method: 'removeFollowCon'
+    },
+    'LIKE.AddLike': {
+        controller: 'NotificationSubController',
+        method: 'addLikeCon'
+    },
+    'LIKE.RemoveLike': {
+        controller: 'NotificationSubController',
+        method: 'removeLikeCon'
     }
 }

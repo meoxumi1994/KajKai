@@ -20,3 +20,17 @@ export const authoriseToken = (token, next) => {
         }
     })
 };
+
+export const addlikePub = (likeInfo) => {
+    const pub = redis.createClient(config);
+    const publishData = {like: likeInfo};
+    pub.publish('LIKE.AddLike', JSON.stringify(publishData));
+    pub.quit();
+};
+
+export const removeLikePub = (likeInfo) => {
+    const pub = redis.createClient(config);
+    const publishData = {like: likeInfo};
+    pub.publish('LIKE.RemoveLike', JSON.stringify(publishData));
+    pub.quit();
+};
