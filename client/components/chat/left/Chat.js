@@ -10,17 +10,17 @@ class Chat extends React.Component {
 
         const { chatListMap, mesId, user, currentChat } = this.props
 
-        if (chatListMap[mesId] == undefined) {
-          return (
-            <div></div>
-          )
+        if (chatListMap[mesId] == undefined || user.id == undefined) {
+            return (
+              <div></div>
+            )
         }
 
-        const { lastMessage, time, usersKey, usersMap, displayLabel, status } = chatListMap[mesId]
-
-        // console.log('\nchatListMap',chatListMap)
-        // console.log('mesId',lastMessage)
+        // console.log('chatListMap', chatListMap);
+        // console.log('mesId',mesId);
         // console.log('user',user);
+
+        const { lastMessage, time, usersKey, usersMap, displayLabel, status } = chatListMap[mesId]
 
         let label = displayLabel
         if (label == undefined || label == '') {
@@ -53,14 +53,14 @@ class Chat extends React.Component {
               </div>
 
               <div className="col col-xs-5" style={styles.messageDiv}>
-                    <div style={{color: textColor}}><b>{label}</b></div>
+                    <div style={{color: textColor}}><b>{label.length > 25? label.substring(0, 25) + '...': label}</b></div>
                     {
                       lastMessage != undefined?
                       <div style={{marginTop: 5}}>
                         <small className="text-muted">
                           <div style={{color: textColor}}>
-                            {lastMessage.id != user.id ? usersMap[lastMessage.id].username: 'Bạn'}
-                            {':  '+ lastMessage.message.text.length > 40? lastMessage.message.text.substring(0, 40) + '...': lastMessage.message.text }
+                            {lastMessage.id != user.id ? usersMap[lastMessage.id].username + ': ' : 'Bạn: '}
+                            { lastMessage.message.text.length > 65? lastMessage.message.text.substring(0, 65) + '...': lastMessage.message.text }
                           </div>
                         </small>
                       </div>
@@ -83,49 +83,27 @@ class Chat extends React.Component {
 }
 
 const styles = {
-  avatarDiv: {
-    float: 'left',
-    marginTop: 9,
-    marginRight: 10,
-    marginLeft: 10,
-    width: '18%',
-  },
-  avatarImg: {
-    width: 60,
-    height: 60,
-    borderRadius: 50,
-  },
-  messageDiv: {
-    height: 70,
-    marginTop: 15,
-    width: '50%',
-  },
-  timeDiv: {
-    marginTop: 15,
-    width: '25%',
-  },
-  read: {
-    name: {
-      fontWeight: 'normal'
+    avatarDiv: {
+        float: 'left',
+        marginTop: 9,
+        marginRight: 10,
+        marginLeft: 10,
+        width: '18%',
     },
-    msg: {
-
+    avatarImg: {
+        width: 60,
+        height: 60,
+        borderRadius: 50,
     },
-    time: {
-      color: 'black'
-    }
-  },
-  unread: {
-    name: {
-      fontWeight: 'bold'
+    messageDiv: {
+        height: 70,
+        marginTop: 15,
+        width: '50%',
     },
-    msg: {
-      fontWeight: 'bold'
+    timeDiv: {
+        marginTop: 15,
+        width: '25%',
     },
-    time: {
-      color: 'red'
-    }
-  },
 }
 
 export default Chat

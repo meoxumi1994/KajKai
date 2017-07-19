@@ -6,7 +6,6 @@ class ChatList extends React.Component {
         super(props)
     }
     componentDidMount() {
-        // this.props.getChatList()
         this.props.setUserId(this.props.userId)
     }
     render(){
@@ -25,7 +24,7 @@ class ChatList extends React.Component {
                 {
                   return (
                       <ul className="nav nav-tabs" key={mesId} onClick={() => getMessages(mesId, multiChat)}
-                      style={styles.tab, {backgroundColor: getTabColor(mesId, currentChat)}}>
+                      style={{backgroundColor: mesId == currentChat? '#cc3333': 'white'}}>
                         <div className="container-fluid">
                             <ChatContainer mesId={mesId}/>
                         </div>
@@ -36,22 +35,6 @@ class ChatList extends React.Component {
           </div>
         )
     }
-}
-
-const getTabColor = (mesId, currentChat) => {
-    if (mesId == currentChat) {
-      return '#cc3333'
-    }
-    return 'white'
-}
-
-const styles = {
-  tab: {
-    borderWidth: 1,
-    borderColor: 'grey',
-    width:400,
-    height: 70,
-  },
 }
 
 export default ChatList

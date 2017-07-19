@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import RiseUp from '~/components/entity/draw/RiseUp'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 // import DropDown from '~/components/entity/DropDown'
-// import ChatLeftContainer from '~/containers/chat/left'
+import ChatLeftContainer from '~/containers/chat/left'
 import AutoCompleteContainer from '~/containers/mapp/AutoCompleteContainer'
 
 const HandlerUser = ({ LOG_IN,
@@ -56,7 +56,7 @@ const HandlerUser = ({ LOG_IN,
                             number="2"/>
                     </div>
                     <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
-                        {/* <ChatLeftContainer multiChat={true}/> */}
+                        <ChatLeftContainer multiChat={true}/>
                     </ul>
                 </div>
             </div>

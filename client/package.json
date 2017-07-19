@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "body-parser": "^1.17.2",
+    "bootstrap-vertical-tabs": "^1.2.2",
     "classnames": "^2.2.5",
     "cors": "^2.8.3",
     "cropperjs": "1.0.0-rc.2",

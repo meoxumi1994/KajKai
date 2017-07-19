@@ -7,7 +7,6 @@ export const getUser = (id) => dispatch => {
         const { status, user } = response
         if(status == 'success'){
             dispatch({ type: 'USER_GET_SUCCESS', user })
-            // dispatch({ type: 'SET_USER_ID', data: {id : user.id}})
         }else{
             dispatch({ type: 'USER_GET_FAILED', user })
         }

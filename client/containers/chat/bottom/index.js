@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ChatBottom from '~/components/chat/bottom'
-import { sendMessage } from '~/actions/asyn/chat/actions'
+import { sendMessage } from '~/actions/asyn/chat/socket'
 
 const mapStateToProps = (state, ownProps) => {
   return (

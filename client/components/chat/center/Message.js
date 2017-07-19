@@ -39,6 +39,4 @@ const Message = ({message, time, user, styles, showAvatar}) => {
     )
 }
 
-  // <div style={styles.bounds} dangerouslySetInnerHTML={{__html: message.text}}/>
-
 export default Message

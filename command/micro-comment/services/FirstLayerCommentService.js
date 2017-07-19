@@ -67,7 +67,8 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
                     order: getOrderInfo(fComment.order),
                     id: getFirstCommentGlobalId(fComment._id),
                     like: fComment.likeCounter,
-                    urlname: store.urlName
+                    urlname: store.urlName,
+                    user: store.owner
                 };
                 if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     info = {...info, sellpostid: fComment.postId}

@@ -1089,3 +1089,28 @@ GET /store?nelat=0&nelng=0&swlat=0&swlng=0&length=30 {    //NE=NorthEast SW=Sout
         }
     ]
 }
+
+GET /users?offset=0&length=10 {   // offset = index
+    status: 'success|failed',
+    users: [
+        {
+          id,
+          username,
+          avatarUrl,
+          status: true | false // true = hoat dong bt, false = bi chan quyen su dung
+          email
+        }
+    ]
+}
+
+GET /stores?offset=0&length=10 {
+    status: 'success|failed',
+    stores: [
+        {
+          id,                 //store id
+          userid,             //owner
+          storename',
+          avatarUrl,
+        }
+    ]
+}

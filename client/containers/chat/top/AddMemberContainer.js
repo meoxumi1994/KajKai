@@ -1,58 +1,55 @@
 import { connect } from 'react-redux'
 import AddMember from '~/components/chat/top/AddMember'
 import { getMesId, searchUser } from '~/actions/asyn/chat/restful'
-import { addMember } from '~/actions/asyn/chat/actions'
+import { changeDisplay, removeChat, search_addMember, search_resetResult } from '~/actions/asyn/chat/actions'
+import { addMember } from '~/actions/asyn/chat/socket'
 
 const mapStateToProps = (state, ownProps) => {
     const { user } = state
     const { chatListMap } = state.inst.chat.left
-    const { results, suggestions, display } = state.inst.chat.search
     return {
         user,
         chatListMap,
-        results,
-        suggestions,
-        searchDisplay: display
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    addMember: (mesId, id, conversatorId) => {
-        console.log('add member');
-        // let type = ''
-        // if (mesId == 0) {
-        //     if (conversatorId.indexOf(";") == -1) {
-        //         type = 'new_chat'
-        //     } else {
-        //         type = 'new_group'
-        //     }
-        // } else {
-        //     type = 'add_member'
-        // }
-        // switch (type) {
-        //     case 'new_chat':
-        //         dispatch(getMesId(id, conversatorId))
-        //         dispatch({type: 'REMOVE_CHAT', data: {mesId: null}})
-        //         break;
-        //     case 'new_group':
-        //         const members = conversatorId.split(';')
-        //         members.push(id)
-        //         dispatch(addMember(null, id, members))
-        //         dispatch({type: 'REMOVE_CHAT', data: {mesId: null}})
-        //         break;
-        //     case 'add_member':
-        //         dispatch(addMember(mesId, id,  conversatorId.split(';')))
-        //         break;
-        // }
-        // dispatch({type: 'USER_DISPLAY/ADD_MEMBER', data: {mesId, value: false}})
+    addMember: (mesId, id, conversatorIds) => {
+        let type = ''
+        if (mesId == 0) {
+            if (conversatorIds.length == 1) {
+                type = 'new_chat'
+            } else {
+                type = 'new_group'
+            }
+        } else {
+            type = 'add_member'
+        }
+        console.log('type ',type);
+        switch (type) {
+            case 'new_chat':
+                dispatch(getMesId(id, conversatorIds[0]))
+                dispatch(removeChat(null))
+                break;
+            case 'new_group':
+                conversatorIds.push(id)
+                dispatch(addMember(null, id, conversatorIds))
+                dispatch(removeChat(null))
+                break;
+            case 'add_member':
+                dispatch(addMember(mesId, id, conversatorIds))
+                break;
+        }
+        dispatch(changeDisplay('ADD_MEMBER', mesId, false))
+        // dispatch(search_resetResult())
     },
-    userSearch: (keyword) => {
-        dispatch({type: 'SEARCH/DISPLAY', data: {display: true}})
-        dispatch(searchUser(keyword))
+    userSearch: (mesId, keyword) => {
+        dispatch(changeDisplay('SEARCH', mesId, true))
+        dispatch(searchUser(mesId, keyword))
     },
-    add: (user) => {
-        dispatch({type: 'SEARCH/ADD_MEMBER', data: {user: user}})
-        dispatch({type: 'SEARCH/DISPLAY', data: {display: false}})
+    searchAdd: (mesId, user) => {
+        dispatch(search_addMember(mesId, user))
+        dispatch(changeDisplay('SEARCH', mesId, false))
     }
 })
 

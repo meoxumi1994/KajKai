@@ -21,8 +21,7 @@ class ChatTop extends React.Component {
             } = this.props
 
       const { usersKey, usersMap, display } = chatListMap[mesId]
-
-      const { addMember } = chatListMap[mesId].display
+      const { addMember } = display
 
       return (
         <div style={currentChat.mesId == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
