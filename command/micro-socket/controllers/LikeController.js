@@ -2,12 +2,13 @@ import { addLikePub, removeLikePub } from './LikePubController'
 
 export const likeAct = (action, sio, io) => {
     const likerId = action.data.userID;
-    let likenId;
-    if (action.data.commentid) likenId = action.data.commentid;
+    let likenType;
+    if (action.data.commentid)
+        likenType = 'comment';
     else {
-        if (action.data.leadercommentid) likenId = action.data.leadercommentid;
+        if (action.data.leadercommentid) likenType = 'leadercomment';
         else {
-            if (action.data.sellpostid) likenId = action.data.sellpostid;
+            if (action.data.sellpostid) likenType = 'sellpost';
         }
     }
     addLikePub(likerId, action.data.sellpostid, action.data.leadercommentid, action.data.commentid, (like) => {
@@ -20,7 +21,8 @@ export const likeAct = (action, sio, io) => {
                 sellpostid: like.sellPostId,
                 leadercommentid: like.fCommentId,
                 commentid: like.sCommentId,
-                type: like.type
+                status: like.type,
+                type: likenType
             }});
         sio.emit('action', {type: 'client/LIKE', data: {
             userId: likerId,
@@ -29,7 +31,8 @@ export const likeAct = (action, sio, io) => {
             sellpostid: like.sellPostId,
             leadercommentid: like.fCommentId,
             commentid: like.sCommentId,
-            type: like.type
+            status: like.type,
+            type: likenType
         }});
     })
 };
