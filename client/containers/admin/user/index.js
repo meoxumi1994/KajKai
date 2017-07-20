@@ -14,6 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getUsers: () => {
+        // console.log('get user');
         dispatch(getUsers())
     },
     onDetails: (id) => {

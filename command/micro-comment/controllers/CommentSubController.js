@@ -1,4 +1,4 @@
-import { addNewFirstLayerComment, getFirstLayerCommentInfo } from '../services/FirstLayerCommentService'
+import { addNewFirstLayerComment, getFirstLayerCommentInfo, getFComment } from '../services/FirstLayerCommentService'
 import { addNewSecondLayerComment, getSecondLayerCommentInfo } from '../services/SecondLayerCommentService'
 
 export const addFirstLayerCommentSub = (message, next) => {
@@ -23,5 +23,15 @@ export const addSecondLayerCommentSub = (message, next) => {
             next({status: 'failed'})
         }
     })
+};
+
+export const getSellPostIdFromComment = (message, next) => {
+    getFComment(message.fCommentId, (comment) => {
+        if (comment) {
+            next({status: 'success', sellPostId: comment.postId});
+        } else {
+            next({status: 'failed'})
+        }
+    });
 };
 

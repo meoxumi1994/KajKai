@@ -334,5 +334,4 @@ export default {
             }
         }]
     }
-
 }

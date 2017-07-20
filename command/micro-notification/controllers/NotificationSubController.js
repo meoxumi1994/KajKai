@@ -20,7 +20,7 @@ export const removeFollowCon = (message, next) => {
 };
 
 export const addLikeCon = (message, next) => {
-    addNewLike(message.likerId, message.likenId, (like) => {
+    addNewLike(message.likerId, message.sellPostId, message.fCommentId, message.sCommentId, (like) => {
         if (like) {
             next({status: 'success', like: like});
         } else {

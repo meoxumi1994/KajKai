@@ -6,5 +6,9 @@ export default {
     'COMMENT.SecondLayerCommentAdded': {
         controller: 'CommentSubController',
         method: 'addSecondLayerCommentSub'
+    },
+    'COMMENT.GetSellPostId': {
+        controller: 'CommentSubController',
+        method: 'getSellPostIdFromComment'
     }
 }
