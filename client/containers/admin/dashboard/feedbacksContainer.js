@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Feedbacks from '~/components/admin/dashboard/feedbacks'
+import Feedbacks from '~/components/admin/dashboard/Feedbacks'
 
 const mapStateToProps = (state, ownProps) => {
     const { mapp } = state.inst.admin.dashboard
