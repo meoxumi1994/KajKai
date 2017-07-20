@@ -11,6 +11,10 @@ const left = (state = {
 }, action) => {
     switch (action.type) {
 
+      case 'global/UNREAD_CHATS':
+          console.log('---global/UNREAD_CHATS', action);
+          return state
+
 /**
  ** INITIAL
 **/

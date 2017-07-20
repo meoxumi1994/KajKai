@@ -7,7 +7,7 @@ import ChatLeftContainer from '~/containers/chat/left'
 import AutoCompleteContainer from '~/containers/mapp/AutoCompleteContainer'
 
 const HandlerUser = ({ LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
-    id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat, clicksetting, clickSetting}) => {
+    id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat, clicksetting, clickSetting, unreadChat}) => {
     if(isusername){
         return (
             <div>
@@ -71,7 +71,7 @@ const HandlerUser = ({ LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
                                 imgWidth: 20,
                                 imgHeight: 20,
                             }}
-                            number="2"/>
+                            number={unreadChat.quantity}/>
                     </div>
                     <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
                         <ChatLeftContainer multiChat={true}/>
