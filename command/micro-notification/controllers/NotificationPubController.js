@@ -35,7 +35,7 @@ export const removeLikePub = (likeInfo) => {
     pub.quit();
 };
 
-export const getSellPostId = (fCommentId) => {
+export const getSellPostId = (fCommentId, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
     const publishData = {fCommentId: fCommentId, eventId: getUUID()};
