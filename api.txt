@@ -82,8 +82,26 @@ GET /user/:id {
     numUnreaded: ,
     notifications: [
         {
-            avatarUrl: ,
+            type: 'like|comment|leadercomment|sellpost|minorpost|store'
+
+            // tra ve nhieu nhat co the nhung thong tin o ben duoi
+            id: , // day la cai id cua notification
+            commentid: ,
+            leadercommentid: ,
+            sellpostid: ,
+            minorpostid: ,
+            numcomment: ,
+            ownerid: , // id cua thang gay ra hanh dong
+            avatarUrl: // small size 40x40 , // avatar cua thang gay ra hanh dong
+            name: ,
             content: ,
+            time: ,
+            numlike: ,
+            likes: [], // con thang nao khac like nua thi` random vai thang :D
+            likestatus: ['like','love','haha','wow'], // ko lam` thi de mac dinh 'like', fuck u
+            // hanh` dong gay ra o store nao`
+            storename: ,
+            urlname: ,
         }
     ]
 }
