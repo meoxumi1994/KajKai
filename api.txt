@@ -107,6 +107,13 @@ PUT /user { // tat ca cac gia tri co the undefined, thang nao co thi update
         phone: ,
         address: ,
     }
+    numUnreaded: ,
+    notifications: [
+        {
+            avatarUrl: ,
+            content: ,
+        }
+    ]
 },{
     status: 'failed|success',
 }

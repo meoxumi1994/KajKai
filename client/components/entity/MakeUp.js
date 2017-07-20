@@ -9,16 +9,15 @@ export const MakeUp = (text,search,change) => {
     return newtext
 }
 
-// export const InsertA = (text, list) => {
-//     let newtext = text
-//     if(text.split('[').length > 1){
-//         text.split('[').map((item) => {
-//             if(item.split(']').length > 1){
-//                 item.split(']')[0]
-//             }
-//         })
-//     }
-// }
+export const InsertTagA = (text, match) => {
+    let newtext = text
+    if(match){
+        match.map((item) => {
+          newtext = MakeUp(newtext, '['+item.name+']', ' <a href="'+item.link+'">'+item.name+'</a> ')
+        })
+    }
+    return newtext
+}
 
 export const EmojiShow = (text, height) => {
     let newtext = text
@@ -63,7 +62,8 @@ export const Emoji = (text) => {
     emoji.map((item,index) => {
         newtext = MakeUp(newtext, ">"+item[0]+" ", ">"+item[1]+" ")
     })
-    newtext = MakeUp(newtext, "  ", " &nbsp;")
+    newtext = MakeUp(newtext, "  ", ' &#160')
+    // newtext = MakeUp(newtext, "  ", '<span class="barcode"> </span><span class="barcode"> </span>')
     return newtext
 }
 
@@ -88,12 +88,14 @@ export const EndLine = (text) => {
     return newtext
 }
 
-export const MixMakeUp = (text) => {
+export const MixMakeUp = (text, match) => {
     if(!text) return ""
     let newtext = text
     newtext = Urlify(newtext)
     newtext = EndLine(newtext)
     newtext = Emoji(newtext)
+    newtext = InsertTagA(newtext,match)
+    // console.log(newtext)
     return newtext
 }
 
@@ -104,11 +106,12 @@ export const FilterText = (text) => {
     })
 }
 
-export const MixMakeUpShow = (text, height) => {
+export const MixMakeUpShow = (text, height, match) => {
     if(!text) return ""
     let newtext = text
     newtext = Urlify(newtext)
     newtext = EndLine(newtext)
     newtext = EmojiShow(newtext, height)
+    newtext = InsertTagA(newtext,match)
     return newtext
 }

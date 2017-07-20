@@ -8,8 +8,10 @@ import Bar from '~/components/Bar'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => allString.get(state.user.language, lang)
+    const bar = state.inst.bar
     // const { width } = state.inst.app
     return ({
+        ...bar,
         LOG_IN: g('LOG_IN'),
         id: state.user.id,
         SEARCH_PRODUCT: g('SEARCH_PRODUCT'),
@@ -20,7 +22,11 @@ const mapStateToProps = (state, ownProps) => {
         unreadChat: state.inst.chat.left.unreadChat,
         // width: width,
         categories: state.inst.category,
-        search: state.inst.search
+        search: state.inst.search,
+        CREATE_STORE: g('CREATE_STORE'),
+        HOME: g('HOME'),
+        SETTING: g('SETTING'),
+        LOG_OUT: g('LOG_OUT'),
     })
 }
 
@@ -42,6 +48,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onLocationChanged: (location) => {
       dispatch(changeLocation(location))
+    },
+    onChange: (key, value) => {
+        dispatch({ type: 'INST_BAR_CHANGE', key: key, value: value })
     }
 })
 

@@ -9,7 +9,9 @@ const index = (state = {
         case 'STORE_GET_ING':
             return {}
         case 'STORE_GET_SUCCESS':
-            return action.store
+            return {
+                ...action.store,
+            }
         case 'UPDATE_STORE_SUCCESS':
             if(state.id == action.store.id)
                 return {...state, ...action.store}

@@ -13,6 +13,10 @@ body {
 .panel {
     border-color: #CCCCCC;
 }
+span.barcode {
+    word-wrap: break-word;
+    white-space: pre;
+}
 /*a {
     color: #999999;
 }*/

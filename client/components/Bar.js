@@ -2,16 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import RiseUp from '~/components/entity/draw/RiseUp'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
-// import DropDown from '~/components/entity/DropDown'
+import DropDownSettingBar from '~/containers/entity/DropDownSettingBar'
 // import ChatLeftContainer from '~/containers/chat/left'
 import AutoCompleteContainer from '~/containers/mapp/AutoCompleteContainer'
 
-const HandlerUser = ({ LOG_IN,
-    id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat}) => {
+const HandlerUser = ({ LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
+    id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat, clicksetting, clickSetting}) => {
     if(isusername){
         return (
             <div>
-                <div className="dropdown" style={{ padding: 0, float: 'right'}}>
+                {/* <div className="dropdown" style={{ padding: 0, float: 'right'}}>
                     <div className="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
                         style={{ padding: 0, float: 'right', borderRadius: 0,
                             borderColor: 'white'}} >
@@ -23,7 +23,25 @@ const HandlerUser = ({ LOG_IN,
                       <li><a href="#" onClick={()=> onLogoutClick() }>setting</a></li>
                       <li><a href="#" onClick={()=> onLogoutClick() }>log out</a></li>
                   </ul>
-              </div>
+              </div> */}
+                  {clicksetting &&
+                      <div style={{ position: 'absolute', right: 20, top: 30  }}>
+                          <DropDownSettingBar
+                              contents={[ CREATE_STORE, HOME, SETTING, LOG_OUT]}
+                              onClick={(index) => {
+                                  if(index==3)
+                                    onLogoutClick()
+                              }}
+                          />
+                      </div>
+                    }
+                  <div className="btn btn-default"
+                      style={{ padding: 0, float: 'right', borderRadius: 0,
+                          borderColor: 'white'}}
+                      onClick={() => clickSetting()} >
+                      <img src="/images/setting.svg" alt="Cinque Terre" style={{ height: 29 }}/>
+                  </div>
+
 
                 <div className="btn btn-transparent btn-xs" style={{ marginRight: 10, padding: 0, float: 'right'}}>
                     <Link to={"/user/"+id} >
@@ -65,10 +83,11 @@ const HandlerUser = ({ LOG_IN,
 
     if(isloading){
         return (
-            <div style={{ paddingTop: 4, paddingBottom: 3, paddingLeft: 10, paddingRight: 10 }}>
-                <div className="clocker" >
+            <div style={{ paddingTop: 5, addingBottom: 3 }}>
+                {/* <div className="clocker" >
                     <img src="/images/loader.svg" alt="Cinque Terre" width="22px" height="22px"/>
-                </div>
+                </div> */}
+                <div style={{ marginLeft: -40 }} id="loaderr"></div>
             </div>
         )
     }
@@ -86,14 +105,18 @@ export default class BarScreen extends React.Component {
   constructor(props) {
     super(props)
   }
-
   componentDidMount(){
       this.props.onLoadCategory()
   }
-
+  clickSetting(){
+      setTimeout(()=>{
+          this.props.onChange('clicksetting', true)
+      },1)
+  }
   render() {
-    const { SEARCH_PRODUCT, SEARCH_LOCATION, categories, onSearchTypeSelected, onKeyWordChanged, onLocationChanged } = this.props
-    let inputSearchKeyWord, inputSearchLocation
+    const { SEARCH_PRODUCT, SEARCH_LOCATION, categories, onSearchTypeSelected, onKeyWordChanged,
+         onLocationChanged, clicksetting } = this.props
+    let inputSearchKeyWord
     return (
         <div
             style={{ position: 'fixed',
@@ -187,7 +210,7 @@ export default class BarScreen extends React.Component {
                     </div> */}
                     <div className="col-xs-4"  style={{ padding: 0}}>
                         <div style={{ position: 'absolute', right: 0}}>
-                            <HandlerUser {...this.props}/>
+                            <HandlerUser {...this.props} clickSetting={() => this.clickSetting()}/>
                         </div>
                     </div>
                 </div>

@@ -1,11 +1,15 @@
 import React from 'react'
 
-const Left = ({ storeList, STORE }) => {
+const Left = ({ storeList, STORE, HOME, CREATE_STORE }) => {
     return(
         <div>
-            {STORE}
+            <div style={{ paddingBottom: 10 }}>
+                <div style={{ margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
+                    {STORE}
+                </div>
+            </div>
             {storeList.map((item, index) =>
-                <div key={index}>
+                <div key={index} style={{ paddingBottom: 10 }}>
                     <a href={"/"+item.urlname}>
                         <div className="btn"
                             style={{
@@ -17,8 +21,25 @@ const Left = ({ storeList, STORE }) => {
                         </div>
                     </a>
                 </div>
-
             )}
+            <div style={{ paddingBottom: 10 }}>
+                <div className="btn"
+                    style={{
+                        textAlign: 'left',
+                        display: 'inline-block',
+                        margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
+                    <a href={"/"} style={{ fontSize: 13}}>{HOME}</a>
+                </div>
+            </div>
+            <div style={{ paddingBottom: 10 }}>
+                <div className="btn"
+                    style={{
+                        textAlign: 'left',
+                        display: 'inline-block',
+                        margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
+                    <a href={"/registerstore"} style={{ fontSize: 13}}>{CREATE_STORE}</a>
+                </div>
+            </div>
         </div>
     )
 }

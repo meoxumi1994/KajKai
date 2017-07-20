@@ -147,6 +147,8 @@ const myString = {
     WARNING_MODAL: ['Cảnh Báo', 'Warning'],
     ADD: ['Thêm','Add'],
     HOME: ['Trang chủ','Home'],
+    LOG_OUT: ['Đăng xuất', 'Logout'],
+    SETTING: ['Cài đặt', 'Setting']
 }
 
 const allString = {
