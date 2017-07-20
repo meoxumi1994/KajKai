@@ -8,7 +8,6 @@ const sockListen = (user, socket, io) => {
         let method = require('../controllers/' + handler.controller)[handler.method];
         socket.removeListener(e, method);
         socket.on(e, (action) => {
-            console.log('action' + JSON.stringify(action));
             if (user) {
                 if (action.data) {
                     action.data = {...action.data, user: user, userID: user.id}
@@ -16,6 +15,7 @@ const sockListen = (user, socket, io) => {
                     action.data = {user: user, userID: user.id}
                 }
             }
+            console.log('action' + JSON.stringify(action));
             method(action, socket, io)
         })
     }

@@ -66,8 +66,8 @@ export default {
         controller: 'LikeController',
         method: 'likeAct'
     },
-    'server/UNLIKE': {
-        controller: 'LikeController',
-        method: 'unlikeAct'
-    }
+    // 'server/UNLIKE': {
+    //     controller: 'LikeController',
+    //     method: 'unlikeAct'
+    // }
 }
