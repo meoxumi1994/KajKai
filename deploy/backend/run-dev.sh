@@ -54,4 +54,15 @@ cp ./dev/src/view-post.js ../../query/view-post/config/commonConfig.js &&
 cp ./dev/src/view-store.js ../../query/view-store/config/commonConfig.js &&
 cp ./dev/src/view-user.js ../../query/view-user/config/commonConfig.js &&
 
-aws s3 sync ./dev/build s3://kajkai-backend/dev --delete
+aws s3 sync ./dev/build s3://kajkai-backend/dev --delete &&
+
+aws lambda update-function-code --function-name dev-micro-chat --s3-bucket kajkai-backend --s3-key dev/micro-chat.zip &&
+aws lambda update-function-code --function-name dev-micro-comment --s3-bucket kajkai-backend --s3-key dev/micro-comment.zip &&
+aws lambda update-function-code --function-name dev-micro-notification --s3-bucket kajkai-backend --s3-key dev/micro-notification.zip &&
+aws lambda update-function-code --function-name dev-micro-search --s3-bucket kajkai-backend --s3-key dev/micro-search.zip &&
+aws lambda update-function-code --function-name dev-micro-store --s3-bucket kajkai-backend --s3-key dev/micro-store.zip &&
+aws lambda update-function-code --function-name dev-micro-user --s3-bucket kajkai-backend --s3-key dev/micro-user.zip &&
+aws lambda update-function-code --function-name dev-view-chat --s3-bucket kajkai-backend --s3-key dev/view-chat.zip &&
+aws lambda update-function-code --function-name dev-view-post --s3-bucket kajkai-backend --s3-key dev/view-post.zip &&
+aws lambda update-function-code --function-name dev-view-store --s3-bucket kajkai-backend --s3-key dev/view-store.zip &&
+aws lambda update-function-code --function-name dev-view-user --s3-bucket kajkai-backend --s3-key dev/view-user.zip
