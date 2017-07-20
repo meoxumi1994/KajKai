@@ -209,7 +209,7 @@ export const addNewFirstLayerComment = (data, next) => {
 };
 
 export const getFComment = (id, next) => {
-    FirstLayerComment.findOne(getFirstCommentLocalId(id), (err, fComment) => {
+    FirstLayerComment.findById(getFirstCommentLocalId(id), (err, fComment) => {
         next(fComment);
     })
 };
