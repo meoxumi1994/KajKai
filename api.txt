@@ -483,6 +483,7 @@ GET /sellpost/:id {
               content: ,
               time: ,
               numlike: ,
+              likes: [],
             }
           ]
         }

@@ -94,12 +94,12 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 
 'client/LIKE' && 'global/LIKE' {
     type: 'store|sellpost|minorpost|leadercomment|comment'
-    status: 'likeicon|love|haha|wow',
+    status: 'like|love|haha|wow',
     storeid: ,
     sellpostid: ,
     minorpostid: ,
     leadcommentid: ,
-    subcommentid:,
+    commentid:,
 }
 
 

@@ -7,6 +7,17 @@ const comment = (state = {
             return {...state,
                 [action.data.id]: action.data
             }
+        case 'client/LIKE':
+            if(action.data.type=='comment' || action.data.type=='leadercomment'){
+                const id = action.data.commentid || action.data.leadercommentid
+                return {...state,
+                    [id] : {
+                        ...state[id],
+                        numlike: (state[id].numlike?state[id].numlike:0) + (action.data.status=='like'?1:-1),
+                    }
+                }
+            }
+            return state
         case 'GET_MORE_COMMENT_SUCCESS':
             let cstate = state
             action.comments.map((cm) => {
