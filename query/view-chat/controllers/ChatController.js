@@ -5,7 +5,7 @@ export const getChatMessagesHandler = () => (req, res) => {
     const { chatid: id } = req.params
     const { offset, length } = req.query
 
-    getChatMessages(id, offset, length, (messages) => {
+    getChatMessages(id, parseInt(offset), length, (messages) => {
       if (messages) {
         res.json(messages)
       } else {

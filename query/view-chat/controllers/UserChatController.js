@@ -5,7 +5,7 @@ export const getUserChatsHandler = () => (req, res) => {
     const { _id: userId } = req.decoded
     const { offset, length } = req.query
 
-    getUserChats(userId, offset, length, (chats) => {
+    getUserChats(userId, parseInt(offset), length, (chats) => {
       if (chats) {
         res.json(chats)
       } else {
