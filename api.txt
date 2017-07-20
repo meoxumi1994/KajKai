@@ -82,8 +82,7 @@ GET /user/:id {
     numUnreaded: ,
     notifications: [
         {
-            type: 'like|comment|leadercomment|sellpost|minorpost|store'
-
+            type: 'like|comment|leadercomment|createsellpost|editsellpost|createminorpost'
             // tra ve nhieu nhat co the nhung thong tin o ben duoi
             id: , // day la cai id cua notification
             commentid: ,
