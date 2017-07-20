@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import User from '~/components/admin/User'
+import User from '~/components/admin/user'
 import { getUsers, getUser } from '~/actions/asyn/admin/user/restful'
 
 const mapStateToProps = (state, ownProps) => {
