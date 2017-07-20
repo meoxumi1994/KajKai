@@ -11,6 +11,17 @@ const sellpost = (state = {
                 }
             })
             return newstate
+        case 'client/LIKE':
+            if(action.data.type=='sellpost'){
+                const id = action.data.sellpostid
+                return {...state,
+                    [id] : {
+                        ...state[id],
+                        numlike: (state[id].numlike?state[id].numlike:0) + (action.data.status=='like'?1:-1),
+                    }
+                }
+            }
+            return state
         case 'CREATE_SELL_POST_SUCCESS':
             return {
                 ...state,

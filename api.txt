@@ -398,6 +398,12 @@ GET /sellpost/store/:storeid?offset=-1 { // length = 2
               content: ,
               time: ,
               numlike: ,
+              likes: [
+                {
+                  userid: ,
+                  username: ,
+                },
+              ]
               likestatus: ['like','love','haha','wow'],
             }
           ]
@@ -483,7 +489,10 @@ GET /sellpost/:id {
               content: ,
               time: ,
               numlike: ,
-              likes: [],
+              likes: [{
+                userid: ,
+                username: ,
+              }],
             }
           ]
         }
