@@ -12,23 +12,23 @@ export const likeAct = (action, sio, io) => {
     }
     addLikePub(likerId, action.data.sellpostid, action.data.leadercommentid, action.data.commentid, (like) => {
         console.log('like ' + like, JSON.stringify(like));
-        if (like.sellpostid)
-            io.to(like.sellpostid).emit('action', {type: 'global/LIKE', data: {
+        if (like.sellPostId)
+            io.to(like.sellPostId).emit('action', {type: 'global/LIKE', data: {
                 userId: likerId,
                 userName: action.data.user.username,
                 avatarUrl: action.data.user.avatarUrl,
-                sellpostid: like.sellpostid,
-                leadercommentid: like.leadercommentid,
-                commentid: like.commentid,
+                sellpostid: like.sellPostId,
+                leadercommentid: like.fCommentId,
+                commentid: like.sCommentId,
                 type: like.type
             }});
         sio.emit('action', {type: 'client/LIKE', data: {
             userId: likerId,
             userName: action.data.user.username,
             avatarUrl: action.data.user.avatarUrl,
-            sellpostid: like.sellpostid,
-            leadercommentid: like.leadercommentid,
-            commentid: like.commentid,
+            sellpostid: like.sellPostId,
+            leadercommentid: like.fCommentId,
+            commentid: like.sCommentId,
             type: like.type
         }});
     })
