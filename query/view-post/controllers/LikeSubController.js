@@ -67,7 +67,8 @@ export const addLike = (message) => {
                 const { replies } = comment
                 for (let i = 0; i < replies.length; i++) {
                   if (replies[i].id == likenId) {
-                    replies[i] = reply
+                    replies[i].likers = likers
+                    replies[i].numberOfLike = likers.length
                     break
                   }
                 }
@@ -79,7 +80,7 @@ export const addLike = (message) => {
                     const { comments } = sellpost
                     for (let i = 0; i < comments.length; i++) {
                       if (comments[i].id == likenId) {
-                        comments[i] = comment
+                        comments[i].replies = replies
                         break
                       }
                     }
@@ -135,7 +136,8 @@ export const removeLike = (message) => {
                 const { comments } = sellpost
                 for (let i = 0; i < comments.length; i++) {
                   if (comments[i].id == likenId) {
-                    comments[i] = comment
+                    comments[i].replies[0].likers = likers
+                    comments[i].replies[0].numberOfLike = likers.length
                     break
                   }
                 }
@@ -164,7 +166,8 @@ export const removeLike = (message) => {
                 const { replies } = comment
                 for (let i = 0; i < replies.length; i++) {
                   if (replies[i].id == likenId) {
-                    replies[i] = reply
+                    replies[i].likers = likers
+                    replies[i].numberOfLike = likers.length
                     break
                   }
                 }
@@ -176,7 +179,7 @@ export const removeLike = (message) => {
                     const { comments } = sellpost
                     for (let i = 0; i < comments.length; i++) {
                       if (comments[i].id == likenId) {
-                        comments[i] = comment
+                        comments[i].replies = replies
                         break
                       }
                     }
