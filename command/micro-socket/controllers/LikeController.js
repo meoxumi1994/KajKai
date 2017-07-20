@@ -15,8 +15,8 @@ export const likeAct = (action, sio, io) => {
         if (like.sellpostid)
             io.to(like.sellpostid).emit('action', {type: 'global/LIKE', data: {
                 userId: likerId,
-                userName: action.user.username,
-                avatarUrl: action.user.avatarUrl,
+                userName: action.data.user.username,
+                avatarUrl: action.data.user.avatarUrl,
                 sellpostid: like.sellpostid,
                 leadercommentid: like.leadercommentid,
                 commentid: like.commentid,
@@ -24,8 +24,8 @@ export const likeAct = (action, sio, io) => {
             }});
         sio.emit('action', {type: 'client/LIKE', data: {
             userId: likerId,
-            userName: action.user.username,
-            avatarUrl: action.user.avatarUrl,
+            userName: action.data.user.username,
+            avatarUrl: action.data.user.avatarUrl,
             sellpostid: like.sellpostid,
             leadercommentid: like.leadercommentid,
             commentid: like.commentid,
