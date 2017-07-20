@@ -121,15 +121,16 @@ class SellPost extends React.Component {
                         <PostRow id={item}/>
                     </div>
                 )}
-                <hr style={{ margin: 0, marginTop: 10 }}/>
-                {/* <div style={{ padding: '6px 0px 6px 0px'}}>
+                <div style={{ height: 10 }}></div>
+                <hr style={{ margin: 0 }}/>
+                <div style={{ padding: '6px 0px 6px 0px'}}>
                     <LikeShareComment
                         onLike={onLike}
                         onComment={() => console.log('onComment')}
                         onShare={() => console.log('onShare')}
                         beLike={getBeLike(likes, yourid)}/>
-                </div> */}
-                {/* <hr style={{ margin: 0}}/>
+                </div>
+                <hr style={{ margin: 0}}/>
                 <div style={{ padding: '8px 0px 8px 0px'}}>
                     <LikeGroup
                         size={20}
@@ -137,8 +138,8 @@ class SellPost extends React.Component {
                         typeLikes={likestatus}
                         other={19}
                         />
-                </div> */}
-                <hr style={{ margin: 0, marginTop: 25}}/>
+                </div>
+                <hr style={{ margin: 0 }}/>
                 <GroupComment id={id}/>
             </div>
         )

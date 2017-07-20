@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Map from '~/components/mapp/map'
+import Map from '~/components/mapp/Map'
 import { getStores } from '~/actions/asyn/map/restful'
 
 const mapStateToProps = (state, ownProps) => {

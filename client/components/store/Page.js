@@ -81,9 +81,10 @@ class Page extends React.Component {
                             marginLeft: this.minorpost_marginTop?(-scrollLeft-28):-28,
                             marginTop: this.minorpost_marginTop?(-this.minorpost_inside_height.offsetHeight + height - 343):0,
                             minHeight: height - 48,
+                            paddingTop: 10,
                             width: 410 }}>
                             <div className="panel panel-default"
-                                style={{ margin: '10px 0px 0px 0px', padding: 10, fontSize: 13 }}>
+                                style={{ margin: '0px 0px 0px 0px', padding: 10, fontSize: 13 }}>
                                 <div><span style={{ fontWeight: 'bold'}}>{ADDRESS}{" : "}</span>{address}</div>
                                 <div><span style={{ fontWeight: 'bold'}}>{ADDRESSMAP}{" : "}</span>{addressMap.map((item) => item+" ")}</div>
                                 <div><span style={{ fontWeight: 'bold'}}>{CATEGORY}{" : "}</span>{category}</div>

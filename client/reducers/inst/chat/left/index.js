@@ -10,6 +10,7 @@ const left = (state = {
   },
 }, action) => {
     switch (action.type) {
+
 /**
  ** INITIAL
 **/

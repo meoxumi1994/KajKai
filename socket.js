@@ -330,7 +330,7 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
     time: ''
 }
 
-// Remove member from group
+// Remove member from group     // status thang bi xoa == false
 'server/REMOVE_MEMBER': {
     mesId: '',
     id: '',

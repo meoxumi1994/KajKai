@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
 import EditMinorPost from '~/components/entity/post/EditMinorPost'
-import { postMinorPost } from '~/actions/asyn/entity/Minorpost'
+import { postMinorPost } from '~/actions/asyn/entity/minorpost'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)

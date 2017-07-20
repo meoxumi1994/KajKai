@@ -7,7 +7,10 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const user = state.user
     return({
-        storeList: user.storeList
+        storeList: user.storeList,
+        STORE: g('STORE'),
+        HOME: g('HOME'),
+        CREATE_STORE: g('CREATE_STORE'),
     })
 }
 

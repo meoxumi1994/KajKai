@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import Addphoto from '~/components/entity/thumnail/Addphoto'
+import Addphoto from '~/components/entity/thumnail/AddPhoto'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)

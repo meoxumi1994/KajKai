@@ -23,8 +23,7 @@ class ContentEditable extends React.Component {
             this.props.getLine(this.textarea.state.height / 20)
     }
     render(){
-        const { placehoder, width, content, handleChange, padding, minRows, onEnter } = this.props
-        // console.log(this.state.enter)
+        const { placehoder, width, content, handleChange, padding, minRows, onEnter, match } = this.props
         return(
             <div style={{
                 outline: '1px solid #D2D2D2',
@@ -69,10 +68,9 @@ class ContentEditable extends React.Component {
                     style={{
                         color: content?undefined:(this.state.focus?'#BFC2C9':'#A7ABB1'),
                         minHeight: minRows? minRows*20: undefined,
-                        wordWrap: 'break-word',
                         width: width,
                     }}
-                    dangerouslySetInnerHTML={{ __html: content?MixMakeUp(content):placehoder }}>
+                    dangerouslySetInnerHTML={{ __html: content?MixMakeUp(content, match):placehoder }}>
                 </div>
             </div>
         )

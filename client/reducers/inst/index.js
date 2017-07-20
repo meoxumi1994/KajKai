@@ -12,6 +12,7 @@ import map from './map'
 import user from './user'
 import category from './category'
 import search from './search'
+import bar from './bar'
 import admin from './admin'
 
 const inst = combineReducers({
@@ -27,7 +28,8 @@ const inst = combineReducers({
     user,
     category,
     search,
-    admin
+    bar,
+    admin,
 })
 
 export default inst

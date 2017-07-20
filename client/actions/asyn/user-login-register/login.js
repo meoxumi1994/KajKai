@@ -1,5 +1,6 @@
-import { authAction, authData } from '../../sync/auth'
+import { authAction, authData} from '../../sync/auth'
 import { flet,flem } from '../../support'
+import { onWho } from '~/actions/asyn/app'
 
 export const logIn = (email, password) => dispatch => {
     dispatch(authAction('LOGIN_ING'))
@@ -15,6 +16,7 @@ export const logIn = (email, password) => dispatch => {
     .then(({ user, tokenId }) => {
         if(user.username){
             dispatch(authData('LOGIN_SUCCESS', user))
+            dispatch(onWho())
             dispatch({ type: 'server/sendToken', tokenId: tokenId })
         }else{
             dispatch(authAction('LOGIN_FAILED'))
@@ -36,6 +38,7 @@ export const logInFaceBook = (tokenId) => dispatch => {
     .then(({ user, tokenId }) => {
         if(user){
             dispatch(authData('LOGIN_SUCCESS', user))
+            dispatch(onWho())
             dispatch({ type: 'server/sendToken', tokenId: tokenId })
         }else{
             dispatch(authAction('LOGIN_FAILED'))
@@ -56,6 +59,7 @@ export const logInGoogle = (tokenId) => dispatch => {
     .then(({ user, tokenId }) => {
         if(user.username){
             dispatch(authData('LOGIN_SUCCESS', user))
+            dispatch(onWho())
             dispatch({ type: 'server/sendToken', tokenId: tokenId })
         }else{
             dispatch(authAction('LOGIN_FAILED'))

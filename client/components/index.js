@@ -19,6 +19,8 @@ import Carousel from '~/components/entity/thumnail/Carousel'
 
 import ContentEditable from '~/components/entity/ContentEditable'
 
+import Notification from '~/containers/entity/Notification'
+
 class Comp extends React.Component {
     constructor(props){
         super(props)
@@ -171,111 +173,38 @@ const Components = () => (
 
 const newComp = () => (
     <div>
-        {/* <Carousel
-            EDIT='Edit'
-            onEdit={() => console.log('onEdit')}
-            images={[
-                '/images/garden.png',
-                '/images/flower005.jpg',
-                '/images/flower001.jpg',
-                '/images/garden.png',]}
-            canEdit={false}
-            style={{
-                width: 500,
-                height: 500,
-            }}
-            canEdit={true}
-            />
-        <GroupImage
-            EDIT='Edit'
-            onEdit={() => console.log('onEdit')}
-            images={[
-                '/images/garden.png',
-                '/images/flower005.jpg',
-                '/images/flower001.jpg',
-                '/images/garden.png',]}
-            canEdit={false}
-            width={500}
-            height={500}
-            canEdit={true}
-        /> */}
-        {/* <KeepImage
-            type = 'Carousel'
-            height = {500}
-            canEdit = {true}
-            images={[
-                '/images/garden.png',
-                '/images/flower005.jpg',
-                '/images/flower001.jpg',
-                '/images/garden.png',]}
-            imagesSuggest
-            /> */}
-            {/* <KeepImage
-                type={'GroupImage'} // GroupImage || Carousel
-                images={["/images/flower001.jpg",
-                "/images/garden.png",
-                "/images/flower001.jpg", "/images/flower002.jpg",
-                "/images/flower004.jpg",
-                "/images/i love you.jpg"
-                ]}
-                height={500}
-                imagesSuggest={[
-                    "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
-                    "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
-                    "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
-                    "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
-                    "/images/flower001.jpg", "/images/flower002.jpg",
-                    "/images/flower001.jpg", "/images/flower002.jpg", "/images/flower004.jpg",
-                ]}
-                canEdit={true}
-            /> */}
-        {/* <span ref={me => {
-            setTimeout(() => {
-                console.log(me.getBoundingClientRect().width)
-            },200)
-        }} style={{ fontSize: 14 }}>{':D'}</span>
-        <input style={{ resize: 'horizontal' }} /> */}
-        {/* <MinorPost
-            name='Foody.vn‎'
-            avatarUrl='/images/storeavatar.jpg'
-            time='11 mins'
-            content='[Ăn như 1 vị thần với ”PIZZA KHỔNG LỒ” để giựt giải thưởng 33 triệu] :D
-Đăng kí: https://goo.gl/3XtzMk
-Chi tiết: https://goo.gl/zn4mMT
-Hình thức thi: 2 team (6 người/team) thách đấu cùng chiến 1 pizza dài 1m5. Trong đó 1 team gồm 6 bạn đã thắng giải Foody Challenge các kì trước.
-Số lượng đăng kí: 2 người/team. Sau đó sẽ ghép thành đội 6 người.
-Giải thưởng: 3 triệu tiền mặt, 6 điện thoại Pháp Wiko và 6 triệu Voucher. Tài trợ Pizza: 4Gs Texas <3'/>
-        <SellPost
-            /> */}
-        {/* <div style={{ width: 150, backgroundColor: 'red', wordWrap: 'normal'}}>
-            3l1231 fsd123
-            <span>{" "}</span>
-            <span style={{  wordWrap: 'break-word' }}>
-                :D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D:D
-            </span>
-            <span>{" "}</span>123123
+        {/* <div style={{ margin: 0, padding: 0, }}
+            dangerouslySetInnerHTML={{ __html: ""}}>
         </div> */}
-            {/* <ContentEditable
-                width={100}
-                canEdit={true}
-                placehoder={"fdsaiojfkdsajfklsdajflksajdlkfjaskldjfklsajdlfk"}
-                handleChange={(e) => {
-                    const newlist = [...list]
-                    newlist[index] = e.target.value
-                    onChange('list', newlist)
-                }}
-                content={'dfsdaf osda flkdjas klfaskld fjklsdjfk lsdjafkls ajfkls ajfkldsjf'}
-                padding={0}
-            /> */}
-            <Cropper
-            // ref='cropper'
-            src='https://cdn.athemes.com/wp-content/uploads/Original-JPG-Image.jpg'
-            style={{height: 400, width: 800 }}
-            // Cropper.js options
-            aspectRatio={16 / 9}
-            guides={false}
-            // crop={this._crop.bind(this)}
-            />
+        <pre>1231 23 1231 312 31 3123</pre>
+        {/* <span className="barcode" style={{ wordWrap: 'break-word' }}>212312312312 </span>
+        <span className="barcode" style={{ wordWrap: 'break-word' }}>212312312312 </span>
+        <span className="barcode" style={{ wordWrap: 'break-word' }}>212312312312 </span> */}
+        {/* <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>3</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>4</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>1</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>2</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>3</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>4</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>1</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>2</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>3</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>4</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>1</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>2</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>3</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>4</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>1</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>2</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>3</span>
+        <span className="barcode" style={{ whiteSpace: 'pre', wordWrap: 'break-word' }}>4</span> */}
+        {/* <div style={{ width: 500 }}>
+            <Notification
+                notification={{
+                    src: "/images/avatar.png" ,
+                    content: 'Single "Cơn Mưa Ngang Qua" tổng hợp 3 part của chính bài hit này cùng bản Instrumental tặng kèm.'
+                }}/>
+        </div> */}
     </div>
 )
 
