@@ -1,0 +1,567 @@
+* {
+    font-family: "Lucida Grande/Tahoma", Sans-serif;
+}
+html {
+    height: 100%;
+}
+body {
+    overflow: 'auto';
+    background-color: #E9EBEE;
+    min-width: 1100;
+    height: 100%;
+}
+.panel {
+    border-color: #CCCCCC;
+}
+span.barcode {
+    word-wrap: break-word;
+    white-space: pre;
+}
+/*a {
+    color: #999999;
+}*/
+div.root {
+    height: 100%;
+}
+hr {
+    border-color: #CCCCCC;
+}
+.facebookcolor{
+    color: #3b5998;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+}
+
+btnn:active{
+    background:transparent;
+}
+btnn:focus{
+    background:transparent;
+}
+
+.clocker {
+  width: 22px;
+  height: 22px;
+  -webkit-animation: 1s clock infinite steps(1);
+}
+
+textarea#note {
+	width:100%;
+	box-sizing:border-box;
+	direction:rtl;
+	display:block;
+	max-width:100%;
+	line-height:1.5;
+	padding:15px 15px 30px;
+	border-radius:3px;
+	border:1px solid #F7E98D;
+	font:13px Tahoma, cursive;
+	transition:box-shadow 0.5s ease;
+	box-shadow:0 4px 6px rgba(0,0,0,0.1);
+	font-smoothing:subpixel-antialiased;
+	background:linear-gradient(#F9EFAF, #F7E98D);
+	background:-o-linear-gradient(#F9EFAF, #F7E98D);
+	background:-ms-linear-gradient(#F9EFAF, #F7E98D);
+	background:-moz-linear-gradient(#F9EFAF, #F7E98D);
+	background:-webkit-linear-gradient(#F9EFAF, #F7E98D);
+}
+/*.dropdown-menu:before {
+  position: absolute;
+  top: -7px;
+  left: 126px;
+  display: inline-block;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-left: 7px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  text: '';
+}
+
+.dropdown-menu:after {
+  position: absolute;
+  top: -6px;
+  left: 127px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  border-left: 6px solid transparent;
+  text: '';
+}*/
+
+@-webkit-keyframes clock {
+  0% { transform: rotate(0deg); }
+  8.333333% { transform: rotate(30deg); }
+  16.666667% { transform: rotate(60deg); }
+  25% { transform: rotate(90deg); }
+  33.333333% { transform: rotate(120deg); }
+  41.666667% { transform: rotate(150deg); }
+  50% { transform: rotate(180deg); }
+  58.333333% { transform: rotate(210deg); }
+  66.666667% { transform: rotate(240deg); }
+  75% { transform: rotate(270deg); }
+  83.333333% { transform: rotate(300deg); }
+  91.666667% { transform: rotate(330deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader {
+  border: 2px solid #BD081C;
+  border-radius: 100%;
+  border-top: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 0.8s linear infinite;
+}
+
+.loader-small {
+    border: 2px solid #BD081C;
+    border-radius: 100%;
+    border-top: 2px solid #f2f2f2;
+    border-right: 2px solid #f2f2f2;
+    width: 17px;
+    height: 17px;
+    -webkit-animation: spin 0.4s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+.btn-social{position:relative;padding-left:44px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.btn-social>:first-child{position:absolute;left:0;top:0;bottom:0;width:32px;line-height:34px;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
+.btn-social.btn-lg{padding-left:61px}.btn-social.btn-lg>:first-child{line-height:45px;width:45px;font-size:1.8em}
+.btn-social.btn-sm{padding-left:38px}.btn-social.btn-sm>:first-child{line-height:28px;width:28px;font-size:1.4em}
+.btn-social.btn-xs{padding-left:30px}.btn-social.btn-xs>:first-child{line-height:20px;width:20px;font-size:1.2em}
+.btn-social-icon{position:relative;padding-left:44px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:34px;width:34px;padding:0}.btn-social-icon>:first-child{position:absolute;left:0;top:0;bottom:0;width:32px;line-height:34px;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
+.btn-social-icon.btn-lg{padding-left:61px}.btn-social-icon.btn-lg>:first-child{line-height:45px;width:45px;font-size:1.8em}
+.btn-social-icon.btn-sm{padding-left:38px}.btn-social-icon.btn-sm>:first-child{line-height:28px;width:28px;font-size:1.4em}
+.btn-social-icon.btn-xs{padding-left:30px}.btn-social-icon.btn-xs>:first-child{line-height:20px;width:20px;font-size:1.2em}
+.btn-social-icon>:first-child{border:none;text-align:center;width:100% !important}
+.btn-social-icon.btn-lg{height:45px;width:45px;padding-left:0;padding-right:0}
+.btn-social-icon.btn-sm{height:30px;width:30px;padding-left:0;padding-right:0}
+.btn-social-icon.btn-xs{height:22px;width:22px;padding-left:0;padding-right:0}
+
+.btn-facebook{color:#fff;background-color:#3b5998;border-color:rgba(0,0,0,0.2)}.btn-facebook:focus,.btn-facebook.focus{color:#fff;background-color:#2d4373;border-color:rgba(0,0,0,0.2)}
+.btn-facebook:hover{color:#fff;background-color:#2d4373;border-color:rgba(0,0,0,0.2)}
+.btn-facebook:active,.btn-facebook.active,.open>.dropdown-toggle.btn-facebook{color:#fff;background-color:#2d4373;border-color:rgba(0,0,0,0.2)}.btn-facebook:active:hover,.btn-facebook.active:hover,.open>.dropdown-toggle.btn-facebook:hover,.btn-facebook:active:focus,.btn-facebook.active:focus,.open>.dropdown-toggle.btn-facebook:focus,.btn-facebook:active.focus,.btn-facebook.active.focus,.open>.dropdown-toggle.btn-facebook.focus{color:#fff;background-color:#23345a;border-color:rgba(0,0,0,0.2)}
+.btn-facebook:active,.btn-facebook.active,.open>.dropdown-toggle.btn-facebook{background-image:none}
+.btn-facebook.disabled:hover,.btn-facebook[disabled]:hover,fieldset[disabled] .btn-facebook:hover,.btn-facebook.disabled:focus,.btn-facebook[disabled]:focus,fieldset[disabled] .btn-facebook:focus,.btn-facebook.disabled.focus,.btn-facebook[disabled].focus,fieldset[disabled] .btn-facebook.focus{background-color:#3b5998;border-color:rgba(0,0,0,0.2)}
+.btn-facebook .badge{color:#3b5998;background-color:#fff}
+
+.btn-google{color:#fff;background-color:#dd4b39;border-color:rgba(0,0,0,0.2)}.btn-google:focus,.btn-google.focus{color:#fff;background-color:#c23321;border-color:rgba(0,0,0,0.2)}
+.btn-google:hover{color:#fff;background-color:#c23321;border-color:rgba(0,0,0,0.2)}
+.btn-google:active,.btn-google.active,.open>.dropdown-toggle.btn-google{color:#fff;background-color:#c23321;border-color:rgba(0,0,0,0.2)}.btn-google:active:hover,.btn-google.active:hover,.open>.dropdown-toggle.btn-google:hover,.btn-google:active:focus,.btn-google.active:focus,.open>.dropdown-toggle.btn-google:focus,.btn-google:active.focus,.btn-google.active.focus,.open>.dropdown-toggle.btn-google.focus{color:#fff;background-color:#a32b1c;border-color:rgba(0,0,0,0.2)}
+.btn-google:active,.btn-google.active,.open>.dropdown-toggle.btn-google{background-image:none}
+.btn-google.disabled:hover,.btn-google[disabled]:hover,fieldset[disabled] .btn-google:hover,.btn-google.disabled:focus,.btn-google[disabled]:focus,fieldset[disabled] .btn-google:focus,.btn-google.disabled.focus,.btn-google[disabled].focus,fieldset[disabled] .btn-google.focus{background-color:#dd4b39;border-color:rgba(0,0,0,0.2)}
+.btn-google .badge{color:#dd4b39;background-color:#fff}
+
+
+#loaderr{
+  zoom:1;/* Increase this for a bigger symbole*/
+
+  display:block;
+
+  width:16px;
+  height:16px;
+
+  margin: auto;
+
+  animation: wait .80s steps(1, start) infinite;
+
+  background: linear-gradient(0deg, #BD081C 1px, transparent 0, transparent 8px, #BD081C 8px),   /* 6  */
+              linear-gradient(90deg, #BD081C 1px, #BD081C 0, #BD081C 3px, #BD081C 3px),
+
+              linear-gradient(0deg, #BD081C 1px, transparent 0, transparent 8px, #BD081C 8px),   /* 5  */
+              linear-gradient(90deg, #BD081C 1px, #BD081C 0, #BD081C 3px, #BD081C 3px),
+
+              linear-gradient(0deg, #BD081C 1px, transparent 0, transparent 8px, #BD081C 8px),   /* 4  */
+              linear-gradient(90deg, #BD081C 1px, #BD081C 0, #BD081C 3px, #BD081C 3px),
+
+              linear-gradient(0deg, #BD081C 1px, transparent 0, transparent 10px, #BD081C 10px), /* 3  */
+              linear-gradient(90deg, #BD081C 1px, #BD081C 0, #BD081C 3px, #BD081C 3px),
+
+              linear-gradient(0deg, #BD081C 1px, transparent 0, transparent 15px, #BD081C 15px), /* 2  */
+              linear-gradient(90deg, #BD081C 1px, #BD081C 0, #BD081C 3px, #BD081C 3px),
+
+              linear-gradient(0deg, #BD081C 1px, transparent 0, transparent 15px, #BD081C 15px), /* 1  */
+              linear-gradient(90deg, #BD081C 1px, #BD081C 0, #BD081C 3px, #BD081C 3px);
+
+  background-repeat: no-repeat;
+
+  background-size: 4px 9px,   /* 6 */
+                   4px 9px,
+
+                   4px 9px,   /* 5 */
+                   4px 9px,
+
+                   4px 9px,   /* 4 */
+                   4px 9px,
+
+                   4px 11px,  /* 3 */
+                   4px 11px,
+
+                   4px 16px,  /* 2 */
+                   4px 16px,
+
+                   4px 16px,  /* 1 */
+                   4px 16px;
+
+  background-position:-4px 3px, -4px 3px, -4px 3px, -4px 3px, -4px 3px, -4px 3px, -4px 2px, -4px 2px, -4px 0, -4px 0, -4px 0, -4px 0;
+
+}
+
+@keyframes wait{
+  12.5%{
+    background-position:   -4px,  /* 6 */
+                           -4px,
+
+                           -4px,  /* 5 */
+                           -4px,
+
+                           -4px,  /* 4 */
+                           -4px,
+
+                           -4px,  /* 3 */
+                           -4px,
+
+                           -4px,  /* 2 */
+                           -4px,
+
+                              0 ,  /* 1 */
+                              0 ;
+  }
+  25%{
+    background-position: -4px,  /* 6 */
+                           -4px,
+
+                           -4px,  /* 5 */
+                           -4px,
+
+                           -4px,  /* 4 */
+                           -4px,
+
+                           -4px,  /* 3 */
+                           -4px,
+
+                              0,  /* 2 */
+                              0,
+
+                            6px,  /* 1 */
+                            6px;
+  }
+  37.5%{
+    background-position: -4px,  /* 6 */
+                           -4px,
+
+                           -4px,  /* 5 */
+                           -4px,
+
+                           -4px,  /* 4 */
+                           -4px,
+
+                               0,  /* 3 */
+                               0,
+
+                             6px,  /* 2 */
+                             6px,
+
+                            12px,  /* 1 */
+                            12px;
+  }
+  50%{
+    background-position: -4px,  /* 6 */
+                           -4px,
+
+                           -4px,  /* 5 */
+                           -4px,
+
+                               0,  /* 4 */
+                               0,
+
+                             6px,  /* 3 */
+                             6px,
+
+                            12px,  /* 2 */
+                            12px,
+
+                            -4px,  /* 1 */
+                            -4px;
+  }
+  62.5%{
+    background-position: -4px,  /* 6 */
+                           -4px,
+
+                               0,  /* 5 */
+                               0,
+
+                             6px,  /* 4 */
+                             6px,
+
+                            12px,  /* 3 */
+                            12px,
+
+                            -4px,  /* 2 */
+                            -4px,
+
+                            -4px,  /* 1 */
+                            -4px;
+  }
+  75%{
+    background-position:     0,  /* 6 */
+                               0,
+
+                             6px,  /* 5 */
+                             6px,
+
+                            12px,  /* 4 */
+                            12px,
+
+                            -4px,  /* 3 */
+                            -4px,
+
+                            -4px,  /* 2 */
+                            -4px,
+
+                            -4px,  /* 1 */
+                            -4px;
+  }
+  87.5%{
+    background-position:   6px,  /* 6 */
+                             6px,
+
+                            12px,  /* 5 */
+                            12px,
+
+                            -4px,  /* 4 */
+                            -4px,
+
+                            -4px,  /* 3 */
+                            -4px,
+
+                            -4px,  /* 2 */
+                            -4px,
+
+                            -4px,  /* 1 */
+                            -4px;
+  }
+  100%{
+    background-position:    12px,  /* 6 */
+                            12px,
+
+                            -4px,  /* 5 */
+                            -4px,
+
+                            -4px,  /* 4 */
+                            -4px,
+
+                            -4px,  /* 3 */
+                            -4px,
+
+                            -4px,  /* 2 */
+                            -4px,
+
+                            -4px,  /* 1 */
+                            -4px;
+  }
+}
+
+
+.timeline-item {
+    background: #fff;
+    border: 1px solid;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    border-radius: 3px;
+    padding: 12px;
+
+    margin: 0 auto;
+    max-width: 530px;
+    min-height: 200px;
+}
+
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    height: 96px;
+    position: relative;
+}
+
+.background-masker {
+    background: #fff;
+    position: absolute;
+}
+
+/* Every thing below this is just positioning */
+
+.background-masker.header-top,
+.background-masker.header-bottom,
+.background-masker.subheader-bottom {
+    top: 0;
+    left: 40px;
+    right: 0;
+    height: 10px;
+}
+
+.background-masker.header-left,
+.background-masker.subheader-left,
+.background-masker.header-right,
+.background-masker.subheader-right {
+    top: 10px;
+    left: 40px;
+    height: 8px;
+    width: 10px;
+}
+
+.background-masker.header-bottom {
+    top: 18px;
+    height: 6px;
+}
+
+.background-masker.subheader-left,
+.background-masker.subheader-right {
+    top: 24px;
+    height: 6px;
+}
+
+
+.background-masker.header-right,
+.background-masker.subheader-right {
+    width: auto;
+    left: 300px;
+    right: 0;
+}
+
+.background-masker.subheader-right {
+    left: 230px;
+}
+
+.background-masker.subheader-bottom {
+    top: 30px;
+    height: 10px;
+}
+
+.background-masker.content-top,
+.background-masker.content-second-line,
+.background-masker.content-third-line,
+.background-masker.content-second-end,
+.background-masker.content-third-end,
+.background-masker.content-first-end {
+    top: 40px;
+    left: 0;
+    right: 0;
+    height: 6px;
+}
+
+.background-masker.content-top {
+    height:20px;
+}
+
+.background-masker.content-first-end,
+.background-masker.content-second-end,
+.background-masker.content-third-end{
+    width: auto;
+    left: 380px;
+    right: 0;
+    top: 60px;
+    height: 8px;
+}
+
+.background-masker.content-second-line  {
+    top: 68px;
+}
+
+.background-masker.content-second-end {
+    left: 420px;
+    top: 74px;
+}
+
+.background-masker.content-third-line {
+    top: 82px;
+}
+
+.background-masker.content-third-end {
+    left: 300px;
+    top: 88px;
+}
+
+.colorhover:hover {
+    background:#53a7ea;
+}
+
+
+/*.fileupload {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: ...; /* and other things to make it pretty */
+}*/
+
+.fileupload input {
+    position: absolute;
+    top: 0;
+    right: 0; /* not left, because only the right part of the input seems to
+                 be clickable in some browser I can't remember */
+    cursor: pointer;
+    opacity: 0.0;
+    filter: alpha(opacity=0); /* and all the other old opacity stuff you
+                                 want to support */
+    font-size: 300px; /* wtf, but apparently the most reliable way to make
+                         a large part of the input clickable in most browsers */
+    height: 200px;
+}
+
+.panel {
+    border-color: #DFE0E4;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.grow { transition: all .17s ease-in-out; }
+.grow.growing { transform: scale(1.3); }
+
+.decline { transition: all .08s ease-in-out; }
+.decline.declineing { transform: scale(0.97); }
