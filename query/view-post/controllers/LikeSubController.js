@@ -1,6 +1,6 @@
 import { BasicUser, Liker, Sellpost, Comment, Reply } from '../models'
 
-export const AddLike = (message) => {
+export const addLike = (message) => {
   const { likenId, likerId: userId } = message.like
 
   BasicUser.findOne({ id: userId }, (err, basicUser) => {
@@ -95,7 +95,7 @@ export const AddLike = (message) => {
   })
 }
 
-export const RemoveLike = (message) => {
+export const removeLike = (message) => {
   const { likenId, likerId: userId } = message.like
 
   BasicUser.findOne({ id: userId }, (err, basicUser) => {
