@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import Admin from '~/components/admin'
 
 const mapStateToProps = (state, ownProps) => {
-    console.log('---STATE', state.inst.admin);
+    // console.log('---STATE', state.inst.admin);
     return state
 }
 

@@ -14,10 +14,10 @@ class Admin extends React.Component {
                     <div style={styles.left.leftHeader}><h4>KAJKAI ADMINSTRATION</h4></div>
                     <div style={{width: '100%', height: '100%', borderStyle: 'solid', borderWidth: 1}}>
                         <ul className="nav nav-tabs nav-pills" style={{width: '100%', height: '100%'}}>
-                            <li style={styles.left.ul} >
+                            <li style={styles.left.ul} className="active">
                                 <a data-toggle="tab" href="#dashboard">Dashboard</a>
                             </li>
-                            <li style={styles.left.ul} className="active">
+                            <li style={styles.left.ul}>
                                 <a data-toggle="tab" href="#user">User</a>
                             </li>
                         </ul>
@@ -25,11 +25,11 @@ class Admin extends React.Component {
                 </div>
                 <div style={{width: '85%', height: '100%', position: 'fixed', left: '15%'}}>
                     <div className="tab-content" style={{width: '100%', height: '100%'}}>
-                          <div id="dashboard" className="tab-pane fade " style={styles.center.mainDiv}>
+                          <div id="dashboard" className="tab-pane fade in active" style={styles.center.mainDiv}>
                               <div style={styles.center.header}><h4>Dashboard</h4></div>
                               <DashboardContainer/>
                           </div>
-                          <div id="user" className="tab-pane fade in active" style={styles.center.mainDiv}>
+                          <div id="user" className="tab-pane fade" style={styles.center.mainDiv}>
                               <div style={styles.center.header}><h4>User</h4></div>
                               <UserContainer/>
                           </div>
@@ -47,7 +47,7 @@ const styles = {
         },
         leftHeader: {
             width: '100%',
-            height: '10%',
+            height: '5%',
             textAlign: 'center',
             borderStyle: 'solid',
             borderWidth: 1
@@ -60,7 +60,7 @@ const styles = {
         },
         header: {
             width: '100%',
-            height: '10%',
+            height: '5%',
             textAlign: 'center',
             borderStyle: 'solid',
             borderWidth: 1,

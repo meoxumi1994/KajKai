@@ -21,6 +21,7 @@ class Settings extends React.Component {
                           e.preventDefault()
                           if (groupName.value && groupName.value.trim() != '') {
                               changeGroupName(mesId, user.id, groupName.value)
+                              groupName.value = ''
                           }
                       }}>
                           <table>
