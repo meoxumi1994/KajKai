@@ -12,14 +12,15 @@ export const likeAct = (action, sio, io) => {
     }
     addLikePub(likerId, likenId, (like) => {
         console.log('like ' + like, JSON.stringify(like));
-        io.to(like.sellpostid).emit('action', {type: 'global/LIKE', data: {
-            userId: likerId,
-            userName: action.user.userName,
-            avatarUrl: action.user.avatarUrl,
-            sellpostid: action.data.sellpostid,
-            leadercommentid: action.data.leadercommentid,
-            commentid: action.data.commentid
-        }});
+        if (like.sellpostid)
+            io.to(like.sellpostid).emit('action', {type: 'global/LIKE', data: {
+                userId: likerId,
+                userName: action.user.userName,
+                avatarUrl: action.user.avatarUrl,
+                sellpostid: action.data.sellpostid,
+                leadercommentid: action.data.leadercommentid,
+                commentid: action.data.commentid
+            }});
         sio.emit('action', {type: 'client/LIKE', data: {
             userId: likerId,
             userName: action.user.userName,
@@ -43,14 +44,15 @@ export const unlikeAct = (action, sio, io) => {
     }
     removeLikePub(likerId, likenId, (like) => {
         console.log('like ' + like, JSON.stringify(like));
-        io.to(like.sellpostid).emit('action', {type: 'global/UNLIKE', data: {
-            userId: likerId,
-            userName: action.user.userName,
-            avatarUrl: action.user.avatarUrl,
-            sellpostid: action.data.sellpostid,
-            leadercommentid: action.data.leadercommentid,
-            commentid: action.data.commentid
-        }});
+        if (like.sellpostid)
+            io.to(like.sellpostid).emit('action', {type: 'global/UNLIKE', data: {
+                userId: likerId,
+                userName: action.user.userName,
+                avatarUrl: action.user.avatarUrl,
+                sellpostid: action.data.sellpostid,
+                leadercommentid: action.data.leadercommentid,
+                commentid: action.data.commentid
+            }});
         sio.emit('action', {type: 'client/UNLIKE', data: {
             userId: likerId,
             userName: action.user.userName,
