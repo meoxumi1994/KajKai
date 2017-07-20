@@ -12,7 +12,7 @@ export const addNewLike = (likerId, sellPostId, fCommentId, sCommentId, next) =>
             newLike.save(() => {
                 addlikePub(getLikePubInfo(newLike));
                 if (sellPostId)
-                    next({likerId, sellPostId, fCommentId, sCommentId});
+                    next({likerId, sellPostId, fCommentId, sCommentId, type: 'like'});
                 else {
                     getSellPostId(fCommentId, (gotSellPostId) => {
                         next({likerId, sellPostId: gotSellPostId, fCommentId, sCommentId, type: 'like'});
@@ -23,7 +23,7 @@ export const addNewLike = (likerId, sellPostId, fCommentId, sCommentId, next) =>
             Like.remove({likerId, likenId}, () => {
                 removeLikePub(getLikePubInfo({likerId, likenId}));
                 if (sellPostId)
-                    next({likerId, sellPostId, fCommentId, sCommentId});
+                    next({likerId, sellPostId, fCommentId, sCommentId, type: 'unlike'});
                 else {
                     getSellPostId(fCommentId, (gotSellPostId) => {
                         next({likerId, sellPostId: gotSellPostId, fCommentId, sCommentId, type: 'unlike'});
