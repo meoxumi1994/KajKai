@@ -318,6 +318,21 @@ export default {
             userId: '',
             groupId: '' // mesId == groupId
         }]
+    },
+    notification: {
+        pub: [{
+            event: 'LIKE.AddLike',
+            like: {
+                likenId: '',
+                likerId: ''
+            }
+        },{
+            event: 'LIKE.RemoveLike',
+            like: {
+                likenId: '',
+                likerId: ''
+            }
+        }]
     }
 
 }

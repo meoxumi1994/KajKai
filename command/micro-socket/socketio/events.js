@@ -60,6 +60,14 @@ export default {
     'server/UPDATE_UI': {
         controller: 'ChatController',
         method: 'updateUICon'
+    },
+    // like
+    'server/LIKE': {
+        controller: 'LikeController',
+        method: 'likeAct'
+    },
+    'server/UNLIKE': {
+        controller: 'LikeController',
+        method: 'unlikeAct'
     }
-
 }

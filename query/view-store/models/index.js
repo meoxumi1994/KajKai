@@ -1,5 +1,6 @@
 import mongoose from '../datasource'
 import AddressSchema from './Address'
+import BasicUserSchema from './BasicUser'
 import CategorySchema from './Category'
 import CategoryAutoSchema from './CategoryAuto'
 import CertificateSchema from './Certificate'
@@ -10,6 +11,7 @@ import StoreSchema from './Store'
 import SubCategorySchema from './SubCategory'
 
 export const Address = mongoose.model('Address', AddressSchema)
+export const BasicUser = mongoose.model('BasicUser', BasicUserSchema)
 export const Category = mongoose.model('Category', CategorySchema)
 export const CategoryAuto = mongoose.model('CategoryAuto', CategoryAutoSchema)
 export const Certificate = mongoose.model('Certificate', CertificateSchema)

@@ -1,19 +1,17 @@
 import { connect } from 'react-redux'
 import DisplayLabel from '~/components/chat/top/DisplayLabel'
+import { search_removeMember } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
     const { chatListMap, currentChat } = state.inst.chat.left
-    const { results, suggestions } = state.inst.chat.search
     return {
         chatListMap,
-        results,
-        suggestions
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    removeUser: (id) => {
-        dispatch({type: 'SEARCH/REMOVE_MEMBER', data: {id}})
+    removeUser: (mesId, id) => {
+        dispatch(search_removeMember(mesId, id))
     }
 })
 

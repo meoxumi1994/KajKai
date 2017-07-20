@@ -7,6 +7,7 @@ export const sendPhoneVerificationCode = (phone, next) => {
   if (code < 1000) {
     code += 1000
   }
+  console.log('code: ', code);
   console.log('phone: ', phone)
 
   Phone.findOne({ phone }, (err, mPhone) => {
@@ -26,7 +27,6 @@ export const sendPhoneVerificationCode = (phone, next) => {
           // from: '+12017204676',
           from: '+13139864864',
         }).then((data) => {
-          console.log('data: ', data);
           console.log('send code success')
           next('pending')
         }, (err) => {

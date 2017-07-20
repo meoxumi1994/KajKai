@@ -33,7 +33,7 @@ export const joinMemberSub = (message, next) => {
 export const updateGroupUISub = (message, next) => {
     updateGroupInfo(message.mesId, message.data, (group) => {
         if (group) {
-            next({status: 'success', data: message, receiverId: group.receiverId});
+            next({status: 'success', data: message, receiverId: group.members});
         } else {
             next({status: 'failed'})
         }

@@ -4,13 +4,10 @@ export const createStore = (message) => {
   const { id, owner: userId, storeName, createdAt, urlName, avatarUrl, coverUrl, address, addressMap, phone,
     category, firstCategoryId, secondCategoryId, firstCategoryName: firstCategory, secondCategoryName: secondCategory, longitude, latitude, certificates, lastUpdate } = message.store
 
-console.log('longitude: ', longitude)
-console.log('latitude: ', latitude);
   const store = new Store({
     id,
     userId
   })
-  console.log('1./ store: ', store);
 
   if (storeName) store.storeName = storeName
   if (urlName) store.urlName = urlName
@@ -26,12 +23,10 @@ console.log('latitude: ', latitude);
   if (secondCategoryId) store.secondCategoryId = secondCategoryId
   if (firstCategory) store.firstCategory = firstCategory
   if (secondCategory) store.secondCategory = secondCategory
-  console.log('2./ store: ', store);
-  if (longitude) store.longitude = parseFloat(longitude)
-  if (latitude) store.latitude = parseFloat(latitude)
+  if (longitude) store.longitude = longitude
+  if (latitude) store.latitude = latitude
   if (certificates) store.certificates = certificates
 
-  console.log('3./ store: ', store);
   if (lastUpdate) {
     const mLastUpdate = {}
     const { lastUpdateStoreName, lastUpdateAvatarUrl, lastUpdateCoverUrl } = lastUpdate
@@ -41,9 +36,7 @@ console.log('latitude: ', latitude);
     store.lastUpdate = mLastUpdate
   }
 
-  console.log('4./ store: ', store);
-
-  store.save((err) => {console.log('err: ', err);})
+  store.save(() => {})
 }
 
 export const updateStore = (message) => {

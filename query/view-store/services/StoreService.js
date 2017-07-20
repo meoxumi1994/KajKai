@@ -99,8 +99,8 @@ const getClientFormatStore = (store) => {
     secondCategoryId: store.secondCategoryId,
     secondCategory: store.secondCategory,
     position: {
-      latitute: store.latitude,
-      longitute: store.longitude,
+      lat: store.latitude,
+      lng: store.longitude,
     },
     certificates: store.certificates,
     numlike: store.numberOfLike ? store.numberOfLike : 0,

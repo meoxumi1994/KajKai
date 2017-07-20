@@ -4,6 +4,7 @@
 "micro-chat": 8083
 "micro-socket": 8084
 "micro-search": 8085
+"micro-notification": 8086
 
 
 

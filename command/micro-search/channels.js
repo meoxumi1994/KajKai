@@ -15,4 +15,20 @@ export default {
         controller: 'SearchSubController',
         method: 'updateStoreSub'
     },
+    'SELLPOST.Created': {
+        controller: 'SearchSubController',
+        method: 'createSellPostSub'
+    },
+    'SELLPOST.Updated': {
+        controller: 'SearchSubController',
+        method: 'updateSellPostSub'
+    },
+    'POSTROW.PRODUCT.Created': {
+        controller: 'SearchSubController',
+        method: 'createSellPostProductSub'
+    },
+    'POSTROW.PRODUCT.Updated': {
+        controller: 'SearchSubController',
+        method: 'updateSellPostProduct'
+    }
 }
