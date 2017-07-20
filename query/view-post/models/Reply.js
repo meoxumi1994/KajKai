@@ -1,4 +1,5 @@
 import mongoose from '../datasource'
+import LikerSchema from './Liker'
 
 const ReplySchema = new mongoose.Schema({
   commentId: {type: String},
@@ -10,7 +11,8 @@ const ReplySchema = new mongoose.Schema({
   avatarUrl: {type: String},
   content: {type: String},
   time: {type: Date},
-  numberOfLike: {type: Number}
+  numberOfLike: {type: Number},
+  likers: [LikerSchema]
 })
 
 export default ReplySchema

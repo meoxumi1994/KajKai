@@ -89,4 +89,5 @@ const getClientFormatReply = (reply) => ({
   content: reply.content,
   time: reply.time.getTime(),
   numlike: reply.numberOfLike,
+  likers: reply.likers
 })
