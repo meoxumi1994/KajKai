@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(changeDisplay('SETTING', mesId, false))
     },
     changeGroupName: (mesId, id, groupName) => {
-        console.log('fuck')
+        console.log('fuck ', groupName)
         dispatch({
             type: 'server/UPDATE_UI',
             data: {
