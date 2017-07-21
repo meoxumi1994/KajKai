@@ -1,7 +1,7 @@
 const comment = (state = { default: {
     id: undefined,
     content: 'give me 2 cakes more, please',
-    numlikes: 2,
+    numlike: 2,
     likes: ['meoxumi','meomun'],
     numreplys: 3,
     replys: ['meoxumi','meomun','meobeo'],

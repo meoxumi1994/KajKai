@@ -9,7 +9,6 @@ import Bar from '~/components/Bar'
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => allString.get(state.user.language, lang)
     const bar = state.inst.bar
-    console.log('state', state.inst.bar.unreadChat);
     // const { width } = state.inst.app
     return ({
         ...bar,

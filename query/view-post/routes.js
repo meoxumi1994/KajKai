@@ -11,7 +11,7 @@ export default {
   '/sellpost/store/:id': {
     get: {
         controller: 'SellpostController',
-        // middleware: [auth()],
+        middleware: [auth()],
         method: 'getSellpostsHandler'
     }
   },
@@ -39,14 +39,14 @@ export default {
   '/groupcomment/:posttype/:id': {
     get: {
       controller: 'CommentController',
-      // middleware: [auth()],
+      middleware: [auth()],
       method: 'getCommentsHandler'
     }
   },
   '/leadercomment/:id': {
     get: {
       controller: 'ReplyController',
-      // middleware: [auth()],
+      middleware: [auth()],
       method: 'getRepliesHandler'
     }
   }

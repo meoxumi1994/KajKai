@@ -18,6 +18,7 @@ class LeaderComment extends React.Component {
                     if(index){
                         return(
                             <Comment
+                                leadercommentid={comments[0].id}
                                 key={cm.id}
                                 id={cm.id}
                                 onReply={() => onReply(index, cm.commenterid)}

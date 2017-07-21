@@ -5,9 +5,9 @@ class LikeGroup extends React.Component {
         super(props)
     }
     render(){
-        const { typeLikes, content, size } = this.props
+        const { typeLikes, content, size  } = this.props
         return(
-            <div style={{ fontSize: 12.5, color: '#365899'}}>
+            <div style={{ fontSize: 12.5, display: 'inline-block', color: '#365899'}}>
                 {typeLikes.map((item, index) =>
                     <div key={index} className="btn"
                         style={{

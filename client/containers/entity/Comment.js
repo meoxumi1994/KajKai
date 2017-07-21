@@ -8,7 +8,7 @@ const mapStateToProps = (state, {id}) => {
     const g = (lang) => get(state.user.language, lang)
     const comment = state.inst.entity.comment[id]
     let isyour = true
-    
+
     return({
         ...comment,
         time: getTime(comment.time),
@@ -18,9 +18,25 @@ const mapStateToProps = (state, {id}) => {
     })
 }
 
-const mapDispatchToProps = (dispatch, {id}) => ({
+const mapDispatchToProps = (dispatch, {id, isleader, leadercommentid }) => ({
     onChange : (key, value) => {
         dispatch({ type: 'INST_ENTITY_COMMENT_CHANGE', id: id, key: key, value: value })
+    },
+    onLike: () => {
+        if(isleader){
+            dispatch({ type: 'server/LIKE', data: {
+                type: 'comment',
+                status: 'like',
+                leadercommentid: id,
+            }})
+        }else{
+            dispatch({ type: 'server/LIKE', data: {
+                type: 'comment',
+                status: 'like',
+                commentid: id,
+                leadercommentid: leadercommentid,
+            }})
+        }
     }
 })
 

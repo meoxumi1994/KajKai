@@ -3,7 +3,7 @@ import React from 'react'
 import Tooltip from '~/components/entity/Tooltip'
 import DropDown from '~/components/entity/DropDown'
 import ContentShow from '~/components/entity/ContentShow'
-
+import LikeGroup from '~/components/entity/LikeGroup'
 
 class Comment extends React.Component {
     constructor(props){
@@ -24,8 +24,9 @@ class Comment extends React.Component {
     render(){
         const {
             RECEIVE, LIKE, REPLY, clicksetting,
-            isleader, avatarUrl, name, time, numlikes, numreplys,
+            isleader, avatarUrl, name, time, numlike, numreplys,
             content, onReceive, onLike, onReply} = this.props
+        console.log(numlike)
         return(
             <div
                 onMouseOver={() => this.setState({ hover: true })}
@@ -78,15 +79,26 @@ class Comment extends React.Component {
                             </div>
                         }
                         {onReceive && "."}
-                        {/* <div className="btn" onClick={() => onLike()}
+                        <div className="btn" onClick={() => onLike()}
                             style={{ padding: '0px 1px 0px 1px'}}>
                             <a style={{ fontSize: 12, color: '#365899' }}>{LIKE}</a>
                         </div>
-                        {"."} */}
+                        {"."}
                         <div className="btn" onClick={() => onReply()}
                             style={{ padding: '0px 1px 0px 1px'}}>
                             <a style={{ fontSize: 12, color: '#365899' }}>{REPLY}</a>
                         </div>
+                        {numlike> 0 && "."}
+                        {numlike> 0 &&
+                            <div style={{ display: 'inline-block', padding: '0px 1px 0px 1px'}}>
+                                <LikeGroup
+                                    size={18}
+                                    content={numlike}
+                                    typeLikes={["like"]}
+                                    other={19}
+                                    />
+                            </div>
+                        }
                         {"."}
                         <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
                             <a style={{ fontSize: 12, color: '#A7ABB1' }}>{time}</a>

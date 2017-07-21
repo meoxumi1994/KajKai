@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Comment = ({ avatar, avatarsize, name, time, likes, numlikes, numreplys, content, onLikeClick, onReplyClick}) => {
+const Comment = ({ avatar, avatarsize, name, time, likes, numlike, numreplys, content, onLikeClick, onReplyClick}) => {
     return(
         <div className="row">
             <div className="col-xs-1">
@@ -10,7 +10,7 @@ const Comment = ({ avatar, avatarsize, name, time, likes, numlikes, numreplys, c
                 <strong >{name}</strong>{" "}
                 <span>{content}</span>
                 <div>
-                    <div className="btn btn-transparent btn-xs" onClick={() => onLikeClick()}><a>Like</a>{" " + numlikes}</div>
+                    <div className="btn btn-transparent btn-xs" onClick={() => onLikeClick()}><a>Like</a>{" " + numlike}</div>
                     <div className="btn btn-transparent btn-xs" onClick={() => onReplyClick()}><a>Reply</a>{" " + numreplys}</div>
                     <small className="text-muted">{" "+time}</small>
                 </div>

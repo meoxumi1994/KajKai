@@ -1,7 +1,7 @@
 import { getReplies } from '../services/ReplyService.js'
 
 export const getRepliesHandler = () => (req, res) => {
-  // if (req.decoded) {
+  if (req.decoded) {
     const { id } = req.params
     let { offset } = req.query
     if (!offset || offset == '-1') {
@@ -17,7 +17,7 @@ export const getRepliesHandler = () => (req, res) => {
       }
     })
 
-  // } else {
-  //   res.json({status: 'failed'})
-  // }
+  } else {
+    res.json({status: 'failed'})
+  }
 }

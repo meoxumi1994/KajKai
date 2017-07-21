@@ -19,15 +19,29 @@ const mapStateToProps = (state, { id }) => {
 
 const mapDispatchToProps = (dispatch, { id }) => ({
     onLike: () => {
-        // console.log('onLike')
+        dispatch({ type: 'server/LIKE', data: {
+            type: 'sellpost',
+            status: 'like',
+            sellpostid: id,
+        }})
     },
     onChange: (key, value) => {
         dispatch({ type: 'INST_ENTITY_SELL_POST_CHANGE', id: id, key: key, value: value })
     }
 })
 
+const mergerProps = (stateProps, dispatchProps, ownProps) => {
+    const { ...anotherState } = stateProps
+    const { ...anotherDispatch } = dispatchProps
+    return({
+        ...ownProps,
+        ...anotherState,
+        ...anotherDispatch,
+    })
+}
+
 const SellPostContainer = connect(
-    mapStateToProps, mapDispatchToProps
+    mapStateToProps, mapDispatchToProps, mergerProps
 )(SellPost)
 
 export default SellPostContainer

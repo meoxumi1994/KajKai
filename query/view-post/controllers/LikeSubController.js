@@ -1,15 +1,15 @@
 import { BasicUser, Liker, Sellpost, Comment, Reply } from '../models'
 
-export const AddLike = (message) => {
+export const addLike = (message) => {
   const { likenId, likerId: userId } = message.like
 
   BasicUser.findOne({ id: userId }, (err, basicUser) => {
     if (basicUser) {
+      const liker = new Liker({
+        userId,
+        username: basicUser.username
+      })
       if (likenId.substr(0, 3) == '012') { // sellpost
-        const liker = new Liker({
-          userId,
-          username: basicUser.username
-        })
         Sellpost.findOne({ id: likenId }, (err, sellpost) => {
           if (sellpost) {
             let { likers } = sellpost
@@ -25,11 +25,13 @@ export const AddLike = (message) => {
       } else if (likenId.substr(0, 3) == '004') { // comment
         Comment.findOne({ id: likenId }, (err, comment) => {
           if (comment) {
-            if (comment.replies[0].numberOfLike) {
-              comment.replies[0].numberOfLike++
-            } else {
-              comment.replies[0].numberOfLike = 1
+            let { likers } = comment.replies[0]
+            if (!likers) {
+              likers = []
             }
+            likers.push(liker)
+            comment.replies[0].likers = likers
+            comment.replies[0].numberOfLike = likers.length
             comment.save(() => {})
 
             Sellpost.findOne({ id: comment.sellpostId }, (err, sellpost) => {
@@ -37,7 +39,8 @@ export const AddLike = (message) => {
                 const { comments } = sellpost
                 for (let i = 0; i < comments.length; i++) {
                   if (comments[i].id == likenId) {
-                    comments[i] = comment
+                    comments[i].replies[0].likers = likers
+                    comments[i].replies[0].numberOfLike = likers.length
                     break
                   }
                 }
@@ -50,11 +53,13 @@ export const AddLike = (message) => {
       } else { // 005 reply
         Reply.findOne({ id:  likenId }, (err, reply) => {
           if (reply) {
-            if (reply.numberOfLike) {
-              reply.numberOfLike++
-            } else {
-              comment.numberOfLike = 1
+            let { likers } = reply
+            if (!likers) {
+              likers = []
             }
+            likers.push(liker)
+            reply.likers = likers
+            reply.numberOfLike = likers.length
             reply.save(() => {})
 
             Comment.findOne({ id: reply.commentId }, (err, comment) => {
@@ -62,7 +67,8 @@ export const AddLike = (message) => {
                 const { replies } = comment
                 for (let i = 0; i < replies.length; i++) {
                   if (replies[i].id == likenId) {
-                    replies[i] = reply
+                    replies[i].likers = likers
+                    replies[i].numberOfLike = likers.length
                     break
                   }
                 }
@@ -74,7 +80,7 @@ export const AddLike = (message) => {
                     const { comments } = sellpost
                     for (let i = 0; i < comments.length; i++) {
                       if (comments[i].id == likenId) {
-                        comments[i] = comment
+                        comments[i].replies = replies
                         break
                       }
                     }
@@ -91,7 +97,7 @@ export const AddLike = (message) => {
   })
 }
 
-export const RemoveLike = (message) => {
+export const removeLike = (message) => {
   const { likenId, likerId: userId } = message.like
 
   BasicUser.findOne({ id: userId }, (err, basicUser) => {
@@ -114,7 +120,15 @@ export const RemoveLike = (message) => {
       } else if (likenId.substr(0, 3) == '004') { // comment
         Comment.findOne({ id: likenId }, (err, comment) => {
           if (comment) {
-            comment.replies[0].numberOfLike--
+            let { likers } = comment.replies[0]
+            for (let i = 0; i < likers.length; i++) {
+              if (likers[i].userId == userId) {
+                likers.splice(i, 1)
+                break
+              }
+            }
+            comment.replies[0].likers = likers
+            comment.replies[0].numberOfLike = likers.length
             comment.save(() => {})
 
             Sellpost.findOne({ id: comment.sellpostId }, (err, sellpost) => {
@@ -122,7 +136,8 @@ export const RemoveLike = (message) => {
                 const { comments } = sellpost
                 for (let i = 0; i < comments.length; i++) {
                   if (comments[i].id == likenId) {
-                    comments[i] = comment
+                    comments[i].replies[0].likers = likers
+                    comments[i].replies[0].numberOfLike = likers.length
                     break
                   }
                 }
@@ -135,7 +150,15 @@ export const RemoveLike = (message) => {
       } else { // 005 reply
         Reply.findOne({ id:  likenId }, (err, reply) => {
           if (reply) {
-            reply.numberOfLike--
+            let { likers } = reply
+            for (let i = 0; i < likers.length; i++) {
+              if (likers[i].userId == userId) {
+                likers.splice(i, 1)
+                break
+              }
+            }
+            reply.likers = likers
+            reply.numberOfLike = likers.length
             reply.save(() => {})
 
             Comment.findOne({ id: reply.commentId }, (err, comment) => {
@@ -143,7 +166,8 @@ export const RemoveLike = (message) => {
                 const { replies } = comment
                 for (let i = 0; i < replies.length; i++) {
                   if (replies[i].id == likenId) {
-                    replies[i] = reply
+                    replies[i].likers = likers
+                    replies[i].numberOfLike = likers.length
                     break
                   }
                 }
@@ -155,7 +179,7 @@ export const RemoveLike = (message) => {
                     const { comments } = sellpost
                     for (let i = 0; i < comments.length; i++) {
                       if (comments[i].id == likenId) {
-                        comments[i] = comment
+                        comments[i].replies = replies
                         break
                       }
                     }
