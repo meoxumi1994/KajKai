@@ -18,7 +18,7 @@ export const getSellpostHandler = () => (req, res) => {
 }
 
 export const getSellpostsHandler = () => (req, res) => {
-  // if (req.decoded) {
+  if (req.decoded) {
     const { id: storeId } = req.params
     let { offset } = req.query
     if (!offset || offset == '-1') {
@@ -34,7 +34,7 @@ export const getSellpostsHandler = () => (req, res) => {
       }
     })
 
-  // } else {
-  //   res.json({status: 'failed'})
-  // }
+  } else {
+    res.json({status: 'failed'})
+  }
 }

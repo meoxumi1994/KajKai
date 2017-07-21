@@ -89,7 +89,7 @@ const getClientFormatReply = (reply) => ({
   content: reply.content,
   time: reply.time.getTime(),
   numlike: reply.numberOfLike,
-  likers: reply.likers ? reply.likers.map((liker) => ({
+  likes: reply.likers ? reply.likers.map((liker) => ({
     userid: liker.userId,
     username: liker.username
   })) : null
