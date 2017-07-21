@@ -17,6 +17,7 @@ export const updateCounter = (userId, val, next) => {
     UnreadMessageCount.findOne({userId: userId}, (err, doc) => {
         if (!doc) {
             const counter = new UnreadMessageCount({userId: userId, counter: val});
+            if (counter.counter < 0) counter.counter = 0;
             counter.save((err) => {
                 next(val);
             })
