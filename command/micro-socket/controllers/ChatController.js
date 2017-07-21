@@ -12,8 +12,8 @@ export const addNewMessageCon = (action, sio, io) => {
     })
 };
 
-export const getUnreadMessageCon = (action, sio, io) => {
-    getUnreadMessagePub(action.data.userID, (data) => {
+export const getUnreadMessageCon = (userID, sio, io) => {
+    getUnreadMessagePub(userID, (data) => {
         sio.emit('action', {type: 'global/UNREAD_CHATS', data: data})
     })
 };
