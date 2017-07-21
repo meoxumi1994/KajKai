@@ -13,13 +13,13 @@ export const addNewMessageCon = (action, sio, io) => {
 };
 
 export const getUnreadMessageCon = (action, sio, io) => {
-    getUnreadMessagePub(action.data.userId, (data) => {
+    getUnreadMessagePub(action.data.userID, (data) => {
         sio.emit('action', {type: 'global/UNREAD_CHATS', data: data})
     })
 };
 
 export const resetChatCountCon = (action, sio, io) => {
-    resetChatCountPub(action.data.userId, (res) => {
+    resetChatCountPub(action.data.userID, (res) => {
         sio.emit('action', {type: 'client/RESET_UNREAD_CHATS_QUANTITY', data: {
             quantity: 0,
         }})
@@ -27,7 +27,7 @@ export const resetChatCountCon = (action, sio, io) => {
 };
 
 export const readChatCon = (action, sio, io) => {
-    readChatPub(action.data.userId, action.data.mesId, (mesId) => {
+    readChatPub(action.data.userID, action.data.mesId, (mesId) => {
         sio.emit('action', {type: 'client/READ_CHAT', data: [mesId]})
     })
 };

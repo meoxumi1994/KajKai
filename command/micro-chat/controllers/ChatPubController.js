@@ -129,6 +129,6 @@ export const messageCreatedPub = (message, receiverIds) => {
 
 export const messageReadPub = (userID, groupId) => {
     const pub = redis.createClient(config);
-    pub.publish('MESSAGE.Created', JSON.stringify({userID: userID, groupId: groupId}));
+    pub.publish('MESSAGE.Read', JSON.stringify({userID: userID, groupId: groupId}));
     pub.quit();
 };
