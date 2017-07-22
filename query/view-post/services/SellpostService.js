@@ -11,7 +11,7 @@ export const getSellpost = (id, next) => {
       } else {
         next({
           status: 'nodata',
-          storeid: storeId
+          id
         })
       }
     } else {
