@@ -1,20 +1,10 @@
 {
   "name": "view-post",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "pm2 delete indev-post.js && pm2 start indev-post.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "aws-serverless-express": "3.0.2",
-    "babel-loader": "7.1.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-register": "^6.24.1",
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
@@ -23,7 +13,6 @@
     "jsonwebtoken": "7.4.1",
     "lodash": "^4.17.4",
     "mongoose": "4.11.1",
-    "redis": "^2.7.1",
-    "webpack-node-externals": "1.6.0"
+    "redis": "^2.7.1"
   }
 }

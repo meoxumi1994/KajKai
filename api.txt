@@ -1041,8 +1041,8 @@ GET /search/store?offset=0&length=5&keyword='Forrrrrrest | táo tàu' { // searc
   ]
 }
 
-GET /search/category?offset=0&length=5&id=-1&location='Cầu Giấy'&keyword='đồ chơi trẻ em' { // id = -1: ALL CATEGORY, keyword là category, trả về store và các sellpost
-                                            // các store có name tương tự keyword hoặc bán các loại category tương tự keyword
+GET /search/category?offset=0&length=5&id=-1&location='Cầu Giấy'&keyword='đồ chơi trẻ em' { // id = -1: ALL CATEGORY, keyword là category, trả về các sellpost thuộc store
+                                            // có category tương tự keyword 
                                               //  trả kết quả sellposts index start from offset lết tối đa length sellposts hoặc đến cuối
 
   sellposts: [
