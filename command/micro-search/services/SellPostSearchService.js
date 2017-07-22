@@ -19,7 +19,7 @@ export const getSellPost = (sellPostId, next) => {
         type: config.TYPE_SELL_POST,
         id: sellPostId
     }, (error, response) => {
-        console.log('get sell post: ', 'error ' + error, 'response ' + JSON.string(response));
+        console.log('get sell post: ', 'error ' + error, 'response ' + JSON.stringify(response));
         let res = getHitResult(response);
         if (res.sellPosts.length > 0) {
             next(res.sellPosts[0]);
