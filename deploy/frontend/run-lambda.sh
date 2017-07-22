@@ -1,4 +1,4 @@
-cp ../../client/config/index.js temp.js && cp config.js ../../client/config/index.js &&
+cp ../../client/config/index.js temp.js && cp config-lambda.js ../../client/config/index.js &&
 rm -rf kajkai.com && mkdir kajkai.com &&
 
 cd ../../client && rm -rf dist &&
