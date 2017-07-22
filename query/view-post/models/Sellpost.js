@@ -9,6 +9,7 @@ const SellpostSchema = new mongoose.Schema({
   id: {type: String},
   storeId: {type: String},
   storeName: {type: String},
+  avatarUrl: {type: String},
   category: {type: String},
   title: {type: String},
   description: {type: String},
