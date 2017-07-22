@@ -87,7 +87,7 @@ export const updateProduct = (product) => {
 
 export const searchSellPost = (offset, length, categoryId, location, keyword, next) => {
     if (location) {
-        searchWithLocation(offset, length, categoryId, keyword, (res) => {
+        searchWithLocation(offset, length, categoryId, location, keyword, (res) => {
             next(getDisplayResult(res));
         })
     } else {
@@ -190,7 +190,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
     }
 };
 
-export const searchWithLocation = (offset, length, categoryId, keyword, next) => {
+export const searchWithLocation = (offset, length, categoryId, location, keyword, next) => {
     if (categoryId !== -1) {
         if (!keyword || keyword.length === 0) {
             searchClient.search({
