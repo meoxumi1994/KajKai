@@ -14,6 +14,7 @@ import category from './category'
 import search from './search'
 import bar from './bar'
 import admin from './admin'
+import home from './home'
 
 const inst = combineReducers({
     userloginregister,
@@ -30,6 +31,7 @@ const inst = combineReducers({
     search,
     bar,
     admin,
+    home
 })
 
 export default inst

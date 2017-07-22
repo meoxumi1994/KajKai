@@ -41,7 +41,7 @@ export const getChatList = (offset) => dispatch => {
     }, {}
     )
     .then((response) => {
-          console.log('\n[API] /getChatList ', response);
+        //   console.log('\n[API] /getChatList ', response);
           const { data, lazyLoad } = response
           dispatch(initChatList(data, lazyLoad))
           if (data.length > 0) {

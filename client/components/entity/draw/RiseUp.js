@@ -4,7 +4,7 @@ const RiseUp = ({ src, style, number }) => {
     if(!number){
         return(
             <div>
-                <img src={src} width={width} height={height}/>
+                <img src={src} width={style.width} height={style.height}/>
             </div>
         )
     }

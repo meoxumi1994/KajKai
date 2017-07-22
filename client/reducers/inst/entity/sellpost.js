@@ -1,7 +1,15 @@
+import { updateLikes } from '~/reducers/support'
+
 const sellpost = (state = {
 
 }, action) => {
     switch (action.type) {
+        case 'GET_SELL_POST_SUCCESS':
+            return {...state,
+                [action.data.sellpost.id] : {
+                    ...action.data.sellpost
+                }
+            }
         case 'GET_SELLPOST_FROM_STORE_SUCCESS':
             let newstate = state
             action.sellposts.map((item) => {
@@ -18,6 +26,7 @@ const sellpost = (state = {
                     [id] : {
                         ...state[id],
                         numlike: (state[id].numlike?state[id].numlike:0) + (action.data.status=='like'?1:-1),
+                        likes: updateLikes(state[id].likes, action.data.userId, action.data.userName )
                     }
                 }
             }

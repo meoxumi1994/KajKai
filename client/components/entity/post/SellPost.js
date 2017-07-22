@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
+import TimeLine from '~/components/entity/draw/TimeLine'
+
 import ContentEditable from '~/components/entity/ContentEditable'
 import DropDown from '~/components/entity/DropDown'
 import LikeShareComment from '~/components/entity/LikeShareComment'
@@ -8,35 +10,6 @@ import LikeGroup from '~/components/entity/LikeGroup'
 import GroupComment from '~/containers/entity/GroupComment'
 import CallComment from '~/containers/entity/CallComment'
 import PostRow from '~/containers/entity/post/PostRow'
-
-const getLikeContent = (likes, numlike, yourid ) => {
-    let likeContent = '';
-    for(let i=0; i< likes.length; i++){
-        if( likes[i].userid ==  yourid ){
-            likeContent = 'You'
-            break;
-        }
-    }
-    for(let i=0; i< likes.length; i++){
-        if( likes[i].userid !=  yourid ){
-            if(likeContent != '') likeContent += ', '
-            likeContent += likes[i].username
-        }
-    }
-    if(likeContent != '') {
-        likeContent += ' and ' + (numlike - likes.length) + ' another people'
-    }else{
-        likeContent += (numlike - likes.length) + ' people'
-    }
-    return likeContent;
-}
-
-const getBeLike = (likes, yourid) => {
-    for(let i = 0; i< likes.length; i++)
-        if( likes[i].userid ==  yourid )
-            return true;
-    return false;
-}
 
 class SellPost extends React.Component {
     constructor(props){
@@ -52,9 +25,16 @@ class SellPost extends React.Component {
     }
     render(){
         const { urlname, isOwner, ship, status, category, description, storename, avatarUrl, time,
-            numfollow, likestatus, likeGroupContent, likes, numlike, yourid, beLike,
+            numfollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
             onLike, postrows, postrows_order, clicksetting, id,
         } = this.props
+        console.log(likes)
+        if(!likes)
+            return (
+                <div>
+                    <TimeLine style={{ height: 520, width: 520, margin: '0px 0px 0px 0px'}}/>
+                </div>
+            )
         return(
             <div style={{
                 borderRadius: 4,
@@ -128,13 +108,13 @@ class SellPost extends React.Component {
                         onLike={onLike}
                         onComment={() => console.log('onComment')}
                         onShare={() => console.log('onShare')}
-                        beLike={getBeLike(likes, yourid)}/>
+                        beLike={beLike}/>
                 </div>
                 <hr style={{ margin: 0}}/>
                 <div style={{ padding: '8px 0px 8px 0px'}}>
                     <LikeGroup
                         size={20}
-                        content={getLikeContent(likes, numlike, yourid)}
+                        content={likeContent}
                         typeLikes={likestatus}
                         other={19}
                         />
@@ -143,6 +123,11 @@ class SellPost extends React.Component {
                 <GroupComment id={id}/>
             </div>
         )
+    }
+    componentDidMount(){
+        if(this.props.needGetSellPost){
+            this.props.onGetSellpost()
+        }
     }
 }
 

@@ -4,70 +4,68 @@ import Advertisement from './Advertisement';
 import { DropdownButton,  MenuItem, Grid, Row, Col  } from 'react-bootstrap'
 
 export default class Home extends React.Component {
-  constructor(props) {
+    constructor(props) {
     super(props)
-  }
-
-  componentDidMount(){
-    const { searchResult, scrollTop, ...searchQuery } = this.props.search
-      this.props.onSearchQueryUpdated(searchQuery)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { searchResult, ...searchQuery } = this.props.search
-    const { searchResult: abcxyz, ...nextSearchQuery } = nextProps.search
-    if (JSON.stringify(nextSearchQuery) != JSON.stringify(searchQuery)) {
-      this.props.onSearchQueryUpdated(nextSearchQuery)
     }
-  }
+    // componentWillReceiveProps(nextProps) {
+    //   const { searchResult, ...searchQuery } = this.props.search
+    //   const { searchResult: abcxyz, ...nextSearchQuery } = nextProps.search
+    //   if (JSON.stringify(nextSearchQuery) != JSON.stringify(searchQuery)) {
+    //     this.props.onSearchQueryUpdated(nextSearchQuery)
+    //   }
+    // }
 
-  render() {
-    const { searchType, searchResult } = this.props.search
+    render() {
+        const { searchType, searchResult } = this.props.search
+        
+        // Cái prop này để lấy thêm kết quả search, ví dụ: onNeedMoreSearchResult(5) sẽ lấy thêm 5 kết quả search
+        const { onNeedMoreSearchResult } = this.props
+        return (
+          <div className="container-fluid">
+              <div className="row">
+                  <div className="col-sm-0 col-md-2" style={{ padding: 0}}>
+                  </div>
+                  <div className="col-sm-6 col-md-5" style={{ padding: 0}}>
+                      <div>
+                        {searchType == 'CATEGORY' ?
+                          <ul>
+                            {searchResult.sellposts.map(sellpost =>
+                              <div key={sellpost.sellpostId}>
+                                <div>{sellpost.title}</div>
+                                <img src={sellpost.avatarUrl} alt="Cinque Terre" width="29" height="29"/>
+                              </div>
+                            )}
+                          </ul>
+                          : (
+                            searchType == 'STORE' ?
+                            <ul>
+                              {searchResult.stores.map(store =>
+                                <div key={store.storeId}>
+                                  <div>{store.storeName}</div>
+                                  <img src={store.avatarUrl} alt="Cinque Terre" width="29" height="29"/>
+                                </div>
+                              )}
+                            </ul>
+                            : <ul>
+                              {searchResult.users.map(user =>
+                                <div key={user.userId}>
+                                  <div>{user.username}</div>
+                                  <img src={user.avatarUrl} alt="Cinque Terre" width="29" height="29"/>
+                                </div>
+                              )}
+                            </ul>
+                          )}
+                      </div>
+                  </div>
+                  <div className="col-sm-3 col-md-2" style={{ padding: 0}}>
 
-    // Cái prop này để lấy thêm kết quả search, ví dụ: onNeedMoreSearchResult(5) sẽ lấy thêm 5 kết quả search
-    const { onNeedMoreSearchResult } = this.props
-    return (
-      <div className="container-fluid">
-          <div className="row">
-              <div className="col-sm-0 col-md-2" style={{ padding: 0}}>
-              </div>
-              <div className="col-sm-6 col-md-5" style={{ padding: 0}}>
-                  <div>
-                    {searchType == 'CATEGORY' ?
-                      <ul>
-                        {searchResult.sellposts.map(sellpost =>
-                          <div key={sellpost.sellpostId}>
-                            <div>{sellpost.title}</div>
-                            <img src={sellpost.avatarUrl} alt="Cinque Terre" width="29" height="29"/>
-                          </div>
-                        )}
-                      </ul>
-                      : (
-                        searchType == 'STORE' ?
-                        <ul>
-                          {searchResult.stores.map(store =>
-                            <div key={store.storeId}>
-                              <div>{store.storeName}</div>
-                              <img src={store.avatarUrl} alt="Cinque Terre" width="29" height="29"/>
-                            </div>
-                          )}
-                        </ul>
-                        : <ul>
-                          {searchResult.users.map(user =>
-                            <div key={user.userId}>
-                              <div>{user.username}</div>
-                              <img src={user.avatarUrl} alt="Cinque Terre" width="29" height="29"/>
-                            </div>
-                          )}
-                        </ul>
-                      )}
                   </div>
               </div>
-              <div className="col-sm-3 col-md-2" style={{ padding: 0}}>
-
-              </div>
           </div>
-      </div>
-    )
-  }
+        )
+    }
+    componentDidMount(){
+        const { searchResult, scrollTop, ...searchQuery } = this.props.search
+        this.props.onSearchQueryUpdated(searchQuery)
+    }
 }
