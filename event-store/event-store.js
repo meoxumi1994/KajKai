@@ -8,10 +8,7 @@ sub.on('pmessage', (pattern, channel, message) => {
   //save this to event-store table
   console.log(pattern, channel, message)
   if (!channel.includes('USER.AuthorizeToken') && !channel.includes('Get')) {
-    saveEvent(channel, {
-      ...(JSON.parse(message)),
-      time: Date.now()
-    })
+    saveEvent(channel, message)
   }
 })
 

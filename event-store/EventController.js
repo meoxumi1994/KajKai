@@ -19,7 +19,8 @@ const Event = mongoose.model('Event', EventSchema)
 const saveEvent = (channel, message) => {
   const event = new Event({
     channel,
-    message
+    message,
+    time: Date.now()
   })
 
   event.save(() => {})
