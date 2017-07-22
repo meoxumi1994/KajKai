@@ -80,7 +80,7 @@ export const updateProduct = (product) => {
         let content = oldSellPost.productContent;
         let f = content.indexOf(product.sellPostId + ':&');
         if (f === -1) return;
-        console.log('product id not valid ' + JSON.string(product));
+        console.log('product id not valid ' + JSON.stringify(product));
         let s = content.indexOf(';&', f);
         oldSellPost.content = content.substring(0, f) + product.sellPostId + ':&' + product.content + content.substring(s, content.length);
         indexSellPost(oldSellPost);
@@ -112,7 +112,7 @@ export const updateSellPostThroughStore = (storeId, avatarUrl) => {
         }
     }, (error, response) => {
         if (response.hits && response.hits.hits) {
-            console.log(JSON.string(response.hits.hits));
+            console.log(JSON.stringify(response.hits.hits));
             for (let i = 0; i < response.hits.hits.length; ++i) {
                 updateSellPost({sellPostId: response.hits.hits[i]._source.sellPostId, avatarUrl: avatarUrl})
             }
