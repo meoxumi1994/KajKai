@@ -16,6 +16,11 @@ export default {
             controller: 'SearchController',
             method: 'deleteIndexCon'
         }
+    },
+    '/search/category': {
+        get: {
+            controller: 'SearchController',
+            method: 'searchSellPostCon'
+        }
     }
-
 }
