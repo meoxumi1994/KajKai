@@ -1,7 +1,7 @@
 import { getComments } from '../services/CommentService.js'
 
 export const getCommentsHandler = () => (req, res) => {
-  // if (req.decoded) {
+  if (req.decoded) {
     const { posttype: postType, id } = req.params
     let { offset } = req.query
     if (!offset || offset == '-1') {
@@ -17,7 +17,7 @@ export const getCommentsHandler = () => (req, res) => {
       }
     })
 
-  // } else {
-  //   res.json({status: 'failed'})
-  // }
+  } else {
+    res.json({status: 'failed'})
+  }
 }

@@ -73,9 +73,11 @@ export const getUnreadMessage = (userId, next) => {
 
 
 export const updateRead = (userId, mesId, next) => {
-    Message.updateMany({owner: userId, read: false, mesId: mesId}, {$set: {read: true}}, () => {
+    Message.updateMany({owner: userId, read: false, mesId: mesId}, {$set: {read: true}}, (err, docs) => {
         messageReadPub(userId, mesId);
-        updateCounter(userId, () => {
+        let count = -1;
+        if (docs) count = -docs.length;
+        updateCounter(userId, count, () => {
             next();
         })
     })

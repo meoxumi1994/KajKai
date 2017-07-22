@@ -46,5 +46,5 @@ export const getCurrentTime = () => {
 }
 
 export const getUUID = () => {
-    return uuidV4()
+    return uuidv4()
 }

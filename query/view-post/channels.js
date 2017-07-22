@@ -58,13 +58,13 @@ export default {
   'USER.Updated': {
     controller: 'UserSubController',
     method: 'updateBasicUser'
-  },  
+  },
   'LIKE.AddLike': {
     controller: 'LikeSubController',
     method: 'addLike'
   },
   'LIKE.RemoveLike': {
     controller: 'LikeSubController',
-    method: 'RemoveLike'
+    method: 'removeLike'
   },
 }

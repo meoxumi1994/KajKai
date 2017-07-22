@@ -11,7 +11,7 @@ export const getSellpost = (id, next) => {
       } else {
         next({
           status: 'nodata',
-          storeid: storeId
+          id
         })
       }
     } else {
@@ -123,9 +123,15 @@ const getClientFormatSellpost = (sellpost, offset) => {
     ...getClientFormatPostrows(postrows, -1),
     numlike: sellpost.numberOfLike ? sellpost.numberOfLike : 0,
     likestatus: ['like','love','haha'],
-    likes: sellpost.likers ? sellpost.likers.slice(0, 5) : null,
+    likes: sellpost.likers ? sellpost.likers.slice(0, 5).map((liker) => ({
+      userid: liker.userId,
+      username: liker.username
+    })) : null,
     numfollow: sellpost.numerOfFollow ? sellpost.numerOfFollow : 0,
-    follows: sellpost.followers ? sellpost.followers.slice(0, 5) : null,
+    follows: sellpost.followers ? sellpost.followers.slice(0, 5).map((follower) => ({
+      userid: follower.userId,
+      username: follower.username
+    })) : null,
     numleadercomment: sellpost.numberOfComment ? sellpost.numberOfComment : 0,
     numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
     ...getClientFormatSellpostComments(comments, offset, true)

@@ -1,8 +1,8 @@
 const config = {
     SERVER_PORT: 7072,
-    getServerDomain: () => ('https://g9fd0yor1e.execute-api.ap-southeast-1.amazonaws.com/kajkai'),
+    getServerDomain: () => ('https://3cle5jdlb0.execute-api.ap-southeast-1.amazonaws.com/kajkai_dev'),
     getClientDomain: () => ('http://localhost:3000'),
-    getDataSource: () => ('mongodb://admin:dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu@localhost/kajkav-post')
+    getDataSource: () => ('mongodb://admin:dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu@54.255.192.30/kajkav-post')
 }
 
 export default config

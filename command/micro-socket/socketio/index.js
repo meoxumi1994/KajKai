@@ -1,6 +1,7 @@
 import socketIo from 'socket.io'
 import allEvents from './events'
 import { authoriseToken } from '../controllers/SocketPubController'
+import { getUnreadMessageCon } from '../controllers/ChatController'
 
 const sockListen = (user, socket, io) => {
     for(let e in allEvents){
@@ -40,6 +41,7 @@ const init = (server) => {
                         console.log('user ' + JSON.stringify(user));
                         socket.join(user.id);
                         sockListen(user, socket, sio);
+                        getUnreadMessageCon(user.id, socket, sio);
                     } else sockListen(null, socket, sio)
                 })
             } else {
