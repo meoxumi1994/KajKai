@@ -1,4 +1,4 @@
-import { BasicStore } from '../models'
+import { Sellpost, BasicStore } from '../models'
 
 export const createStore = (message) => {
   const { id, storeName, avatarUrl, urlName } = message.store
@@ -23,4 +23,5 @@ export const updateStore = (message) => {
   if (urlName) basicStore.urlName = urlName
 
   BasicStore.findOneAndUpdate({ id }, basicStore, () => {})
+  Sellpost.findOneAndUpdate( { storeId: id }, { storeName, avatarUrl }, () => {})
 }
