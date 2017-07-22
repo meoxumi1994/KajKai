@@ -86,7 +86,7 @@ export const updateProduct = (product) => {
 };
 
 export const searchSellPost = (offset, length, categoryId, location, keyword, next) => {
-    if (location) {
+    if (location && location.length > 0) {
         searchWithLocation(offset, length, categoryId, location, keyword, (res) => {
             next(getDisplayResult(res));
         })
