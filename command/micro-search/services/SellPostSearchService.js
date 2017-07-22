@@ -20,9 +20,9 @@ export const getSellPost = (sellPostId, next) => {
         id: sellPostId
     }, (error, response) => {
         console.log('get sell post: ', 'error ' + error, 'response ' + JSON.stringify(response));
-        let res = getHitResult(response);
-        if (res.sellPosts.length > 0) {
-            next(res.sellPosts[0]);
+        // let res = getHitResult(response);
+        if (response.found) {
+            next(response._source);
         } else {
             next(null);
         }
