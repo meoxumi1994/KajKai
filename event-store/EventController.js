@@ -11,7 +11,8 @@ mongoose.connect('mongodb://admin:dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu@loc
 
 const EventSchema = new mongoose.Schema({
   channel: {type: String},
-  message: {type: mongoose.Schema.Types.Mixed}
+  message: {type: mongoose.Schema.Types.Mixed},
+  time: {type: Date}
 })
 
 const Event = mongoose.model('Event', EventSchema)
