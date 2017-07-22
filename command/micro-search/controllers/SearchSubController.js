@@ -1,6 +1,7 @@
 import { createUser, updateUser } from '../services/UserSearchService'
 import { createStore, updateStore } from '../services/StoreSearchService'
 import { getStore } from '../controllers/SearchPubController'
+import { indexSellPost, updateSellPost, updateProduct, addNewProduct } from '../services/SellPostSearchService'
 
 export const createUserSub = (message) => {
     console.log(message, JSON.stringify(message));
@@ -61,7 +62,8 @@ export const createSellPostSub = (message) => {
         const firstCategoryName = store.firstCategoryName;
         const secondCategoryName = store.secondCategoryName;
         const avatarUrl = store.avatarUrl;
-
+        const productContent = '';
+        indexSellPost({sellPostId, storeId, title, category, address, firstCategoryId, secondCategoryId, firstCategoryName, secondCategoryName, avatarUrl, productContent});
     })
 };
 
@@ -70,19 +72,25 @@ export const updateSellPostSub = (message) => {
     const sellpost = message.sellpost;
     const title = sellpost.title;
     const category = sellpost.category;
+    const sellPostId = sellpost.sellPostId;
+    updateSellPost({sellPostId, category, title});
 
 };
 
 export const createSellPostProductSub = (message) => {
     console.log(message, JSON.stringify(message));
     const product = message.product;
-    const content = product.content;
-    const sellPostId = message.sellPostId;
+    const content = product.product.content;
+    const sellPostId = product.sellPostId;
+    const productId = product.productId;
+    addNewProduct({sellPostId, content, productId});
 };
 
-export const updateSellPostProduct = (message) => {
+export const updateSellPostProductSub = (message) => {
     console.log(message, JSON.stringify(message));
     const product = message.product;
-    const content = product.content;
-    const sellPostID = message.sellPostId;
+    const content = product.product.content;
+    const sellPostId = product.sellPostId;
+    const productId = product.productId;
+    updateProduct({sellPostId, content, productId});
 };

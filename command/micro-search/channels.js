@@ -29,6 +29,6 @@ export default {
     },
     'POSTROW.PRODUCT.Updated': {
         controller: 'SearchSubController',
-        method: 'updateSellPostProduct'
+        method: 'updateSellPostProductSub'
     }
 }
