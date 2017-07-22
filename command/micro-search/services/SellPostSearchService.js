@@ -190,7 +190,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
     }
 };
 
-export const searchWithLocation = (offset, length, categoryId, location, keyword, next) => {
+export const searchWithLocation = (offset, length, categoryId, keyword, next) => {
     if (categoryId !== -1) {
         if (!keyword || keyword.length === 0) {
             searchClient.search({
