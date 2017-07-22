@@ -24,6 +24,14 @@ export const flet = (url, body) => {
 
 export const flem = (url, body) => {
     let myurl = config.getDomain() + url
+    if (myurl.includes('/search')) {
+      for (let i = 0; i < myurl.length; i++) {
+        if (myurl.substr(i, 7) == '/search') {
+          myurl = 'http://10.20.16.136:3001' + myurl.substr(i)
+          break
+        }
+      }
+    }
     if (body) {
       let ch = '?'
       for (let qr in body) {

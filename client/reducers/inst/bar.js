@@ -18,7 +18,7 @@ const bar = (state = {
                 [action.key] : action.value,
             }
         case 'global/UNREAD_CHATS':
-            console.log('global/UNREAD_CHATS', action);
+            // console.log('global/UNREAD_CHATS', action);
             return state
         default:
             return state

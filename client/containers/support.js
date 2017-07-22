@@ -115,3 +115,34 @@ export const getTime = (time) => {
     const days = Math.floor(((new Date()).getTime() - time) / 86400000);
     return days+' days'
 }
+
+export const getLikeContent = (likes, numlike, yourid ) => {
+    let likeContent = '';
+    for(let i=0; i< likes.length; i++){
+        if( likes[i].userid ==  yourid ){
+            likeContent = 'You'
+            break;
+        }
+    }
+    for(let i=0; i< likes.length; i++){
+        if( likes[i].userid !=  yourid ){
+            if(likeContent != '') likeContent += ', '
+            likeContent += likes[i].username
+        }
+    }
+    if(numlike - likes.length > 0 ){
+        if(likeContent != '') {
+            likeContent += ' and ' + (numlike - likes.length) + ' another people'
+        }else{
+            likeContent += (numlike - likes.length) + ' people'
+        }
+    }
+    return likeContent;
+}
+
+export const getBeLike = (likes, yourid) => {
+    for(let i = 0; i< likes.length; i++)
+        if( likes[i].userid ==  yourid )
+            return true;
+    return false;
+}

@@ -25,8 +25,7 @@ class Comment extends React.Component {
         const {
             RECEIVE, LIKE, REPLY, clicksetting,
             isleader, avatarUrl, name, time, numlike, numreplys,
-            content, onReceive, onLike, onReply} = this.props
-        console.log(numlike)
+            content, onReceive, onLike, onReply, beLike } = this.props
         return(
             <div
                 onMouseOver={() => this.setState({ hover: true })}
@@ -80,7 +79,7 @@ class Comment extends React.Component {
                         }
                         {onReceive && "."}
                         <div className="btn" onClick={() => onLike()}
-                            style={{ padding: '0px 1px 0px 1px'}}>
+                            style={{ padding: '0px 1px 0px 1px', fontWeight: beLike?'bold':'normal'}}>
                             <a style={{ fontSize: 12, color: '#365899' }}>{LIKE}</a>
                         </div>
                         {"."}

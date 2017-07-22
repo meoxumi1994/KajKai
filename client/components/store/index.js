@@ -78,7 +78,7 @@ class Store extends React.Component {
             </div>
         )
     }
-    componentWillUpdate(){
+    componentDidUpdate(){
         this.left_marginTop = 0
         if(this.left){
             this.left_marginTop = this.props.height - this.left.getBoundingClientRect().bottom > 0
