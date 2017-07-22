@@ -125,7 +125,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                         multi_match: {
                             query: keyword,
                             fuzziness: 1,
-                            prefix_length: 0,
+                            prefix_length: 3,
                             max_expansions: 20,
                             fields: ['title', 'category', 'productContent', 'firstCategoryName', 'secondCategoryName']
                         }
@@ -169,7 +169,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 multi_match: {
                                     query: keyword,
                                     fuzziness: 1,
-                                    prefix_length: 0,
+                                    prefix_length: 3,
                                     max_expansions: 20,
                                     fields: ['title', 'category', 'productContent']
                                 }
@@ -206,7 +206,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                             address: {
                                 query: location,
                                 fuzziness: 1,
-                                prefix_length: 0,
+                                prefix_length: 3,
                                 max_expansions: 20
                             }
                         }
@@ -231,7 +231,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     boost: 1.5,
                                     query: keyword,
                                     fuzziness: 1,
-                                    prefix_length: 0,
+                                    prefix_length: 3,
                                     max_expansions: 20,
                                     fields: ['title', 'category', 'productContent']
                                 }
@@ -240,7 +240,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     address: {
                                         query: location,
                                         fuzziness: 1,
-                                        prefix_length: 0,
+                                        prefix_length: 3,
                                         max_expansions: 5,
                                         boost: 5
                                     }
@@ -277,7 +277,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     address: {
                                         query: location,
                                         fuzziness: 1,
-                                        prefix_length: 0,
+                                        prefix_length: 3,
                                         max_expansions: 5,
                                         boost: 3
                                     }
@@ -305,7 +305,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                 multi_match: {
                                     query: keyword,
                                     fuzziness: 1,
-                                    prefix_length: 0,
+                                    prefix_length: 3,
                                     max_expansions: 20,
                                     fields: ['title', 'category', 'productContent']
                                 }
@@ -320,7 +320,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     address: {
                                         query: location,
                                         fuzziness: 1,
-                                        prefix_length: 0,
+                                        prefix_length: 3,
                                         max_expansions: 5,
                                         boost: 10
                                     }
