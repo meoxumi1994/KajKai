@@ -49,8 +49,8 @@ export const getDisplayResult = (hitsResult) => {
     for (let i = 0; i < hitsResult.sellPosts.length; ++i) {
         let sellPost = {
             sellPostId: hitsResult.sellPosts[i].sellPostId,
-            avatarUrl: hitsResult.sellPostId[i].avatarUrl,
-            title: hitsResult.sellPostId[i].title
+            avatarUrl: hitsResult.sellPosts[i].avatarUrl,
+            title: hitsResult.sellPosts[i].title
         };
         res.push(sellPost);
     }
@@ -162,23 +162,25 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                 body: {
                     from: offset,
                     size: length,
-                    dis_max: {
-                        tie_breaker: 0.1,
-                        queries: [{
-                            multi_match: {
-                                query: keyword,
-                                fuzziness: 1,
-                                prefix_length: 0,
-                                max_expansions: 20,
-                                fields: ['title', 'category', 'productContent']
-                            }
-                        }, {
-                            multi_match: {
-                                query: categoryId,
-                                fields: ['firstCategoryId', 'secondCategoryId'],
-                                boost: 5,
-                            }
-                        }]
+                    query: {
+                        dis_max: {
+                            tie_breaker: 0.1,
+                            queries: [{
+                                multi_match: {
+                                    query: keyword,
+                                    fuzziness: 1,
+                                    prefix_length: 0,
+                                    max_expansions: 20,
+                                    fields: ['title', 'category', 'productContent']
+                                }
+                            }, {
+                                multi_match: {
+                                    query: categoryId,
+                                    fields: ['firstCategoryId', 'secondCategoryId'],
+                                    boost: 5,
+                                }
+                            }]
+                        }
                     },
                     min_score: 0.5
                 }
@@ -221,28 +223,30 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                 body: {
                     from: offset,
                     size: length,
-                    dis_max: {
-                        tie_breaker: 0.1,
-                        queries: [{
-                            multi_match: {
-                                boost: 1.5,
-                                query: keyword,
-                                fuzziness: 1,
-                                prefix_length: 0,
-                                max_expansions: 20,
-                                fields: ['title', 'category', 'productContent']
-                            }
-                        }, {
-                            match: {
-                                address: {
-                                    query: location,
+                    query: {
+                        dis_max: {
+                            tie_breaker: 0.1,
+                            queries: [{
+                                multi_match: {
+                                    boost: 1.5,
+                                    query: keyword,
                                     fuzziness: 1,
                                     prefix_length: 0,
-                                    max_expansions: 5,
-                                    boost: 5
+                                    max_expansions: 20,
+                                    fields: ['title', 'category', 'productContent']
                                 }
-                            }
-                        }]
+                            }, {
+                                match: {
+                                    address: {
+                                        query: location,
+                                        fuzziness: 1,
+                                        prefix_length: 0,
+                                        max_expansions: 5,
+                                        boost: 5
+                                    }
+                                }
+                            }]
+                        }
                     },
                     min_score: 0.5
                 }
@@ -259,25 +263,27 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                 body: {
                     from: offset,
                     size: length,
-                    dis_max: {
-                        tie_breaker: 0.1,
-                        queries: [{
-                            multi_match: {
-                                query: categoryId,
-                                fields: ['firstCategoryId', 'secondCategoryId'],
-                                boost: 2.5,
-                            }
-                        }, {
-                            match: {
-                                address: {
-                                    query: location,
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 5,
-                                    boost: 3
+                    query: {
+                        dis_max: {
+                            tie_breaker: 0.1,
+                            queries: [{
+                                multi_match: {
+                                    query: categoryId,
+                                    fields: ['firstCategoryId', 'secondCategoryId'],
+                                    boost: 2.5,
                                 }
-                            }
-                        }]
+                            }, {
+                                match: {
+                                    address: {
+                                        query: location,
+                                        fuzziness: 1,
+                                        prefix_length: 0,
+                                        max_expansions: 5,
+                                        boost: 3
+                                    }
+                                }
+                            }]
+                        }
                     },
                     min_score: 0.5
                 }
@@ -292,33 +298,35 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                 body: {
                     from: offset,
                     size: length,
-                    dis_max: {
-                        tie_breaker: 0.1,
-                        queries: [{
-                            multi_match: {
-                                query: keyword,
-                                fuzziness: 1,
-                                prefix_length: 0,
-                                max_expansions: 20,
-                                fields: ['title', 'category', 'productContent']
-                            }
-                        }, {
-                            multi_match: {
-                                query: categoryId,
-                                fields: ['firstCategoryId', 'secondCategoryId'],
-                                boost: 10,
-                            }
-                        }, {
-                            match: {
-                                address: {
-                                    query: location,
+                    query: {
+                        dis_max: {
+                            tie_breaker: 0.1,
+                            queries: [{
+                                multi_match: {
+                                    query: keyword,
                                     fuzziness: 1,
                                     prefix_length: 0,
-                                    max_expansions: 5,
-                                    boost: 10
+                                    max_expansions: 20,
+                                    fields: ['title', 'category', 'productContent']
                                 }
-                            }
-                        }]
+                            }, {
+                                multi_match: {
+                                    query: categoryId,
+                                    fields: ['firstCategoryId', 'secondCategoryId'],
+                                    boost: 10,
+                                }
+                            }, {
+                                match: {
+                                    address: {
+                                        query: location,
+                                        fuzziness: 1,
+                                        prefix_length: 0,
+                                        max_expansions: 5,
+                                        boost: 10
+                                    }
+                                }
+                            }]
+                        }
                     },
                     min_score: 1
                 }
