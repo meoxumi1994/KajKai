@@ -58,6 +58,7 @@ export const getDisplayResult = (hitsResult) => {
 };
 
 export const updateSellPost = (sellpost) => {
+    console.log('this sellpost ' + JSON.stringify(sellpost));
     getSellPost(sellpost.sellPostId, (oldSellPost) => {
         if (sellpost.category) oldSellPost.category = sellpost.category;
         if (sellpost.title) oldSellPost.title = sellpost.title;
@@ -111,6 +112,7 @@ export const updateSellPostThroughStore = (storeId, avatarUrl) => {
         }
     }, (error, response) => {
         if (response.hits && response.hits.hits) {
+            console.log(JSON.string(response.hits.hits));
             for (let i = 0; i < response.hits.hits.length; ++i) {
                 updateSellPost({sellPostId: response.hits.hits[i]._source.sellPostId, avatarUrl: avatarUrl})
             }
