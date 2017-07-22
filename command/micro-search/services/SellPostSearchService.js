@@ -180,7 +180,8 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent']
+                                    fields: ['title', 'category', 'productContent'],
+                                    boost: 10
                                 }
                             }, {
                                 multi_match: {
@@ -190,7 +191,8 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 }
                             }, {
                                 match_phrase_prefix: {
-                                    category: keyword
+                                    category: keyword,
+                                    boost: 10
                                 }
                             }]
                         }
@@ -241,7 +243,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                             tie_breaker: 0.1,
                             queries: [{
                                 multi_match: {
-                                    boost: 1.5,
+                                    boost: 5,
                                     query: keyword,
                                     fuzziness: 1,
                                     prefix_length: 0,
@@ -255,12 +257,13 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                         fuzziness: 1,
                                         prefix_length: 0,
                                         max_expansions: 5,
-                                        boost: 5
+                                        boost: 2
                                     }
                                 }
                             }, {
                                 match_phrase_prefix: {
-                                    category: keyword
+                                    category: keyword,
+                                    boost: 10
                                 }
                             }]
                         }
@@ -287,7 +290,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                 multi_match: {
                                     query: categoryId,
                                     fields: ['firstCategoryId', 'secondCategoryId'],
-                                    boost: 2.5,
+                                    boost: 5,
                                 }
                             }, {
                                 match: {
@@ -296,7 +299,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                         fuzziness: 1,
                                         prefix_length: 0,
                                         max_expansions: 5,
-                                        boost: 3
+                                        boost: 2
                                     }
                                 }
                             }]
@@ -324,13 +327,14 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent']
+                                    fields: ['title', 'category', 'productContent'],
+                                    boost: 10
                                 }
                             }, {
                                 multi_match: {
                                     query: categoryId,
                                     fields: ['firstCategoryId', 'secondCategoryId'],
-                                    boost: 10,
+                                    boost: 5,
                                 }
                             }, {
                                 match: {
@@ -339,12 +343,13 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                         fuzziness: 1,
                                         prefix_length: 0,
                                         max_expansions: 5,
-                                        boost: 10
+                                        boost: 2
                                     }
                                 }
                             }, {
                                 match_phrase_prefix: {
-                                    category: keyword
+                                    category: keyword,
+                                    boost: 10
                                 }
                             }]
                         }
