@@ -24,7 +24,7 @@ export const getSellpost = (id, next) => {
 
         next({
           status: 'success',
-          ...getClientFormatSellpost(sellpost, Date.now())
+          sellpost: getClientFormatSellpost(sellpost, Date.now())
         })
       })
     }
