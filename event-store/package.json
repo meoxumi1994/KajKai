@@ -1,14 +1,8 @@
 {
   "name": "event-store",
-  "version": "1.0.0",
-  "description": "",
-  "main": "event-store.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "pm2 delete indes-event.js && pm2 start indes-event.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.24.1",
