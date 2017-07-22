@@ -1,4 +1,4 @@
-import { Sellpost, Postrow, BasicStore } from '../models'
+import { Sellpost, Postrow } from '../models'
 import { getClientFormatPostrows } from './PostrowService'
 import { getClientFormatSellpostComments } from './CommentService'
 import jwt from 'jsonwebtoken'
@@ -109,34 +109,32 @@ export const verifyToken = (token) => {
 const getClientFormatSellpost = (sellpost, offset) => {
   const { postrows, comments } = sellpost
 
-  BasicStore.findOne({ id: sellpost.storeId }, (err, store) => {
-    return ({
-      id: sellpost.id,
-      storeid: sellpost.storeId,
-      storename: sellpost.storeName,
-      avatarUrl: store ? store.avatarUrl : '',
-      category: sellpost.category,
-      title: sellpost.title,
-      description: sellpost.description,
-      time: sellpost.time.getTime(),
-      status: sellpost.storeState,
-      ship: sellpost.shipStatus,
-      postrows_order: sellpost.postrowsOrder ? sellpost.postrowsOrder : [],
-      ...getClientFormatPostrows(postrows, -1),
-      numlike: sellpost.numberOfLike ? sellpost.numberOfLike : 0,
-      likestatus: ['like','love','haha'],
-      likes: sellpost.likers ? sellpost.likers.slice(0, 5).map((liker) => ({
-        userid: liker.userId,
-        username: liker.username
-      })) : null,
-      numfollow: sellpost.numerOfFollow ? sellpost.numerOfFollow : 0,
-      follows: sellpost.followers ? sellpost.followers.slice(0, 5).map((follower) => ({
-        userid: follower.userId,
-        username: follower.username
-      })) : null,
-      numleadercomment: sellpost.numberOfComment ? sellpost.numberOfComment : 0,
-      numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
-      ...getClientFormatSellpostComments(comments, offset, true)
-    })
+  return ({
+    id: sellpost.id,
+    storeid: sellpost.storeId,
+    storename: sellpost.storeName,
+    avatarUrl: sellpost.avatarUrl,
+    category: sellpost.category,
+    title: sellpost.title,
+    description: sellpost.description,
+    time: sellpost.time.getTime(),
+    status: sellpost.storeState,
+    ship: sellpost.shipStatus,
+    postrows_order: sellpost.postrowsOrder ? sellpost.postrowsOrder : [],
+    ...getClientFormatPostrows(postrows, -1),
+    numlike: sellpost.numberOfLike ? sellpost.numberOfLike : 0,
+    likestatus: ['like','love','haha'],
+    likes: sellpost.likers ? sellpost.likers.slice(0, 5).map((liker) => ({
+      userid: liker.userId,
+      username: liker.username
+    })) : null,
+    numfollow: sellpost.numerOfFollow ? sellpost.numerOfFollow : 0,
+    follows: sellpost.followers ? sellpost.followers.slice(0, 5).map((follower) => ({
+      userid: follower.userId,
+      username: follower.username
+    })) : null,
+    numleadercomment: sellpost.numberOfComment ? sellpost.numberOfComment : 0,
+    numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
+    ...getClientFormatSellpostComments(comments, offset, true)
   })
 }
