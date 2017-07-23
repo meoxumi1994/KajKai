@@ -1,7 +1,7 @@
 import { createUser, updateUser } from '../services/UserSearchService'
 import { createStore, updateStore } from '../services/StoreSearchService'
 import { getStore } from '../controllers/SearchPubController'
-import { indexSellPost, updateSellPost, updateProduct, addNewProduct } from '../services/SellPostSearchService'
+import { indexSellPost, updateSellPost, updateProduct, addNewProduct, updateSellPostThroughStore } from '../services/SellPostSearchService'
 
 export const createUserSub = (message) => {
     console.log(message, JSON.stringify(message));
@@ -32,7 +32,9 @@ export const createStoreSub = (message) => {
     const firstCategoryName = store.firstCategoryName;
     const secondCategoryName = store.secondCategoryName;
     createStore({storeId, storeName, avatarUrl, address, category, firstCategoryName, secondCategoryName});
-
+    if (avatarUrl) {
+        updateSellPostThroughStore(storeId, avatarUrl)
+    }
 };
 
 export const updateStoreSub = (message) => {
@@ -46,6 +48,9 @@ export const updateStoreSub = (message) => {
     const firstCategoryName = store.firstCategoryName;
     const secondCategoryName = store.secondCategoryName;
     updateStore({storeId, storeName, avatarUrl, address, category, firstCategoryName, secondCategoryName});
+    if (avatarUrl) {
+        updateSellPostThroughStore(storeId, avatarUrl)
+    }
 };
 
 export const createSellPostSub = (message) => {

@@ -19,10 +19,10 @@ export const getSellPost = (sellPostId, next) => {
         type: config.TYPE_SELL_POST,
         id: sellPostId
     }, (error, response) => {
-        console.log('get sell post: ', 'error ' + error, 'response ' + JSON.string(response));
-        let res = getHitResult(response);
-        if (res.sellPosts.length > 0) {
-            next(res.sellPosts[0]);
+        console.log('get sell post: ', 'error ' + error, 'response ' + JSON.stringify(response));
+        // let res = getHitResult(response);
+        if (response.found) {
+            next(response._source);
         } else {
             next(null);
         }
@@ -50,7 +50,7 @@ export const getDisplayResult = (hitsResult) => {
         let sellPost = {
             sellPostId: hitsResult.sellPosts[i].sellPostId,
             avatarUrl: hitsResult.sellPosts[i].avatarUrl,
-            title: hitsResult.sellPosts[i].title
+            title: hitsResult.sellPosts[i].category
         };
         res.push(sellPost);
     }
@@ -58,9 +58,11 @@ export const getDisplayResult = (hitsResult) => {
 };
 
 export const updateSellPost = (sellpost) => {
+    console.log('this sellpost ' + JSON.stringify(sellpost));
     getSellPost(sellpost.sellPostId, (oldSellPost) => {
-        oldSellPost.category = sellpost.category;
-        oldSellPost.title = sellpost.title;
+        if (sellpost.category) oldSellPost.category = sellpost.category;
+        if (sellpost.title) oldSellPost.title = sellpost.title;
+        if (sellpost.avatarUrl) oldSellPost.avatarUrl = sellpost.avatarUrl;
         indexSellPost(oldSellPost);
     })
 };
@@ -78,7 +80,7 @@ export const updateProduct = (product) => {
         let content = oldSellPost.productContent;
         let f = content.indexOf(product.sellPostId + ':&');
         if (f === -1) return;
-        console.log('product id not valid ' + JSON.string(product));
+        console.log('product id not valid ' + JSON.stringify(product));
         let s = content.indexOf(';&', f);
         oldSellPost.content = content.substring(0, f) + product.sellPostId + ':&' + product.content + content.substring(s, content.length);
         indexSellPost(oldSellPost);
@@ -95,6 +97,27 @@ export const searchSellPost = (offset, length, categoryId, location, keyword, ne
             next(getDisplayResult(res));
         })
     }
+};
+
+export const updateSellPostThroughStore = (storeId, avatarUrl) => {
+    searchClient.search({
+        index: config.INDEX,
+        type: config.TYPE_SELL_POST,
+        body: {
+            query: {
+                match: {
+                    storeId: storeId
+                }
+            }
+        }
+    }, (error, response) => {
+        if (response.hits && response.hits.hits) {
+            console.log(JSON.stringify(response.hits.hits));
+            for (let i = 0; i < response.hits.hits.length; ++i) {
+                updateSellPost({sellPostId: response.hits.hits[i]._source.sellPostId, avatarUrl: avatarUrl})
+            }
+        }
+    })
 };
 
 export const searchWithoutLocation = (offset, length, categoryId, keyword, next) => {
