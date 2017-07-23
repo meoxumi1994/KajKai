@@ -21,7 +21,7 @@ export const updateFollowPub = (userId, storeId, sellPostId, next) => {
     })
 };
 
-export const getFollowListPub = (userId) => {
+export const getFollowListPub = (userId, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
     const publishData = {followerId: userId, eventId: getUUID()};
