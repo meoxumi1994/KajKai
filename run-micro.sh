@@ -13,4 +13,5 @@ pm2 start ./command/micro-socket/index-socket.js &&
 pm2 start ./command/micro-comment/index-comment.js &&
 pm2 start ./command/micro-chat/index-chat.js &&
 pm2 start ./command/micro-search/index-search.js &&
+
 pm2 start ./command/micro-notification/index-notification.js
