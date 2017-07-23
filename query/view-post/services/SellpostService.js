@@ -24,7 +24,7 @@ export const getSellpost = (id, next) => {
 
         next({
           status: 'success',
-          ...getClientFormatSellpost(sellpost, Date.now())
+          sellpost: getClientFormatSellpost(sellpost, Date.now())
         })
       })
     }
@@ -113,6 +113,7 @@ const getClientFormatSellpost = (sellpost, offset) => {
     id: sellpost.id,
     storeid: sellpost.storeId,
     storename: sellpost.storeName,
+    avatarUrl: sellpost.avatarUrl,
     category: sellpost.category,
     title: sellpost.title,
     description: sellpost.description,
