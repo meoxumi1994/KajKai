@@ -93,7 +93,9 @@ export const updatePostrow = (message) => {
             if (!postrowImageList) {
               postrowImageList = []
             }
+            console.log('mPostrowImageList: ', mPostrowImageList);
             postrowImageList = [...postrowImageList, ...mPostrowImageList]
+            console.log('postrowImageList: ', postrowImageList);
             basicStore.postrowImageList = postrowImageList
 
             basicStore.save(() => {})
