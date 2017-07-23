@@ -1,7 +1,7 @@
 import { User, Address } from '../models'
 import jwt from 'jsonwebtoken'
 
-export const getUser = (id, next) => {
+export const getUser = (requesterId, id, next) => {
   User.findOne({ id }, function(err, user) {
       if (err || !user) {
         if(err) {
@@ -68,7 +68,7 @@ export const getUserPrivacy = (id, next) => {
   })
 }
 
-export const getUserImageList = (id, offset, next) => {
+export const getUserImageList = (requesterId, id, offset, next) => {
   User.findOne({ id }, function(err, user) {
       if (err || !user) {
         if(err) {

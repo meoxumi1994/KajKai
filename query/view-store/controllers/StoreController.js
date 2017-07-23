@@ -1,20 +1,16 @@
 import { getStore, getStores } from '../services/StoreService.js'
 
 export const getStoreHandler = () => (req, res) => {
-  if (req.decoded) {
-    const { id } = req.params
+  const { id } = req.params
+  const requesterId = req.decoded._id
 
-    getStore(id, (store) => {
-      if (store) {
-        res.json(store)
-      } else {
-        res.json({status: 'failed'})
-      }
-    })
-
-  } else {
-    res.json({status: 'failed'})
-  }
+  getStore(requesterId, id, (store) => {
+    if (store) {
+      res.json(store)
+    } else {
+      res.json({status: 'failed'})
+    }
+  })
 }
 
 export const getStoresHandler = () => (req, res) => {

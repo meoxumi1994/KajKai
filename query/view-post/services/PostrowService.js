@@ -1,6 +1,6 @@
 import { Postrow } from '../models'
 
-export const getPostrows = (sellpostId, offset, next) => {
+export const getPostrows = (requesterId, sellpostId, offset, next) => {
   Postrow.find({ sellpostId }, (err, postrows) => {
     if (err || !postrows) {
       if(err) {

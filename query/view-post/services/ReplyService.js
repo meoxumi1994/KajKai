@@ -1,6 +1,6 @@
 import { Comment } from '../models'
 
-export const getReplies = (id, offset, next) => {
+export const getReplies = (requesterId, id, offset, next) => {
   Comment.findOne({ id }, (err, comment) => {
     if (err || !comment) {
       if(err) {

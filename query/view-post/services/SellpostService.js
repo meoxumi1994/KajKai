@@ -3,7 +3,7 @@ import { getClientFormatPostrows } from './PostrowService'
 import { getClientFormatSellpostComments } from './CommentService'
 import jwt from 'jsonwebtoken'
 
-export const getSellpost = (id, next) => {
+export const getSellpost = (requesterId, id, next) => {
   Sellpost.findOne({ id }, (err, sellpost) => {
     if (err || !sellpost) {
       if(err) {
@@ -31,7 +31,7 @@ export const getSellpost = (id, next) => {
   })
 }
 
-export const getSellposts = (storeId, offset, next) => {
+export const getSellposts = (requesterId, storeId, offset, next) => {
   Sellpost.find({ storeId }, (err, sellposts) => {
     if (err || !sellposts) {
       if(err) {
