@@ -1,7 +1,7 @@
 import { Sellpost, Postrow, Image, BasicStore } from '../models'
 
 export const createPostrow = (message) => {
-  const { sellPostId: sellpostId, postrowId: id, content, numline: numberOfLine, images, titles, products, type } = message.postrow
+  const { storeId, sellPostId: sellpostId, postrowId: id, content, numline: numberOfLine, images, titles, products, type } = message.postrow
   const postrow = new Postrow({
     sellpostId, id
   })
@@ -19,20 +19,16 @@ export const createPostrow = (message) => {
       })
     ))
 
-    Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
-      if (sellpost) {
-        BasicStore.findOne({ id: sellpost.storeId }, (err, basicStore) => {
-          if (basicStore) {
-            let { postrowImageList } = basicStore
-            if (!postrowImageList) {
-              postrowImageList = []
-            }
-            postrowImageList = [...postrowImageList, ...mPostrowImageList]
-            basicStore.postrowImageList = postrowImageList
+    BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+      if (basicStore) {
+        let { postrowImageList } = basicStore
+        if (!postrowImageList) {
+          postrowImageList = []
+        }
+        postrowImageList = [...postrowImageList, ...mPostrowImageList]
+        basicStore.postrowImageList = postrowImageList
 
-            basicStore.save(() => {})
-          }
-        })
+        basicStore.save(() => {})
       }
     })
   }
@@ -46,20 +42,16 @@ export const createPostrow = (message) => {
       })
     ))
 
-    Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
-      if (sellpost) {
-        BasicStore.findOne({ id: sellpost.storeId }, (err, basicStore) => {
-          if (basicStore) {
-            let { productImageList } = basicStore
-            if (!productImageList) {
-              productImageList = []
-            }
-            productImageList = [...productImageList, ...mProductImageList]
-            basicStore.productImageList = productImageList
+    BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+      if (basicStore) {
+        let { productImageList } = basicStore
+        if (!productImageList) {
+          productImageList = []
+        }
+        productImageList = [...productImageList, ...mProductImageList]
+        basicStore.productImageList = productImageList
 
-            basicStore.save(() => {})
-          }
-        })
+        basicStore.save(() => {})
       }
     })
   }
@@ -93,9 +85,7 @@ export const updatePostrow = (message) => {
             if (!postrowImageList) {
               postrowImageList = []
             }
-            console.log('mPostrowImageList: ', mPostrowImageList);
             postrowImageList = [...postrowImageList, ...mPostrowImageList]
-            console.log('postrowImageList: ', postrowImageList);
             basicStore.postrowImageList = postrowImageList
 
             basicStore.save(() => {})
