@@ -2,7 +2,7 @@ import { Store } from '../models'
 import { checkInside } from '../utils'
 import jwt from 'jsonwebtoken'
 
-export const getStore = (id, next) => {
+export const getStore = (requesterId, id, next) => {
     Store.findOne({ urlName: id },  (err, store) => {
         if (err || !store) {
           if(err) {
@@ -18,7 +18,7 @@ export const getStore = (id, next) => {
         } else {
             next({
               status: 'success',
-              store: getClientFormatStore(store)
+              store: getClientFormatStore(requesterId, store)
             })
         }
     })
@@ -74,8 +74,40 @@ export const verifyToken = (token) => {
     }
 }
 
-const getClientFormatStore = (store) => {
+const getClientFormatStore = (requesterId, store) => {
   const { lastUpdate } = store
+  let { followers } = store
+  if (!followers) {
+    followers = []
+  }
+  let follows = []
+
+  if (requesterId == 'Guest') {
+    follows = followers.slice(0, 5)
+  } else {
+    for (let i = 0; i < follwers.length; i++) {
+      let follower = followers[i]
+      if (follower.userId == requesterId) {
+        follows.push({
+          userid: follower.userId,
+          username: follower.username,
+          avatarUrl: follower.avatarUrl
+        })
+        break
+      }
+    }
+
+    for (let i = 0; i < followers.length && follows.length < 5; i++) {
+      let follower = followers[i]
+      if (follower.userId != requesterId) {
+        follows.push({
+          userid: follower.userId,
+          username: follower.username,
+          avatarUrl: follower.avatarUrl
+        })
+      }
+    }
+  }
 
   return ({
     id: store.id,
@@ -106,6 +138,6 @@ const getClientFormatStore = (store) => {
     numlike: store.numberOfLike ? store.numberOfLike : 0,
     likes: store.likers ? store.likers.slice(0, 5) : [],
     numfollow: store.numberOfFollow ? store.numerOfFollow : 0,
-    follows: store.followers ? store.followers.slice(0, 5) : [],
+    follows
   })
 }

@@ -1,9 +1,9 @@
 import mongoose from '../datasource'
 
 const FollowerSchema = new mongoose.Schema({
-  avatarUrl: {type: String},
   userId: {type: String},
-  username: {type: String}
+  username: {type: String},
+  avatarUrl: {type: String}
 })
 
 export default FollowerSchema
