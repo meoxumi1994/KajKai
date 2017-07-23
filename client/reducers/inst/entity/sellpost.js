@@ -4,12 +4,6 @@ const sellpost = (state = {
 
 }, action) => {
     switch (action.type) {
-        case 'GET_SELL_POST_SUCCESS':
-            return {...state,
-                [action.data.sellpost.id] : {
-                    ...action.data.sellpost
-                }
-            }
         case 'GET_SELLPOST_FROM_STORE_SUCCESS':
             let newstate = state
             action.sellposts.map((item) => {
@@ -31,6 +25,7 @@ const sellpost = (state = {
                 }
             }
             return state
+        case 'GET_SELL_POST_SUCCESS':
         case 'CREATE_SELL_POST_SUCCESS':
             return {
                 ...state,

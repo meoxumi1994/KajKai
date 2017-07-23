@@ -5,7 +5,8 @@ const newfeed = (state = {
         case 'SEARCH_SUCCESS':
             return {
                 ...state,
-                ...action.searchResult,
+                sellposts: action.sellPosts,
+                // ...action.searchResult,
             }
         default:
             return state

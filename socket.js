@@ -3,6 +3,17 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 
 //// NEW NEW NEW NEW NEW
 
+'server/FOLLOW' {
+    type: 'store|sellpost|minorpost'
+    id:
+}
+'client/FOLLOW' {
+    type: 'store|sellpost|minorpost'
+    id:
+}
+
+//// NEW NEW NEW NEW NEW
+
 'client/sendToken' {
     tokenId:
 }

@@ -8,19 +8,20 @@ class NewFeed extends React.Component {
     }
     render(){
         const { sellposts } = this.props
+        console.log(sellposts)
         if(!sellposts)
             return <div></div>
         return(
             <div>
-                {sellposts.map((item,index) =>
-                    <div key={item.sellpostId}>
-                        <div key={item} style={{ paddingTop: 10 }}>
+                {sellposts.map((item,index) => {
+                    return(
+                        <div key={item.sellPostId} style={{ paddingBottom: 10 }}>
                             <SellPost
                                 needGetSellPost={true}
-                                id={item.sellpostId}/>
+                                id={item.sellPostId}/>
                         </div>
-                    </div>
-                )}
+                    )
+                })}
             </div>
         )
     }

@@ -12,6 +12,7 @@ const postrow = (state = {
                 })
             })
             return newstate
+        case 'GET_SELL_POST_SUCCESS':
         case 'CREATE_SELL_POST_SUCCESS':
             let nstate = state
             action.sellpost.postrows.map((pr) => {

@@ -26,13 +26,13 @@ class SellPost extends React.Component {
     render(){
         const { urlname, isOwner, ship, status, category, description, storename, avatarUrl, time,
             numfollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
-            onLike, postrows, postrows_order, clicksetting, id,
+            onLike, postrows, postrows_order, clicksetting, id, onFollow,
         } = this.props
-        console.log(likes)
+        console.log(this.props)
         if(!likes)
             return (
                 <div>
-                    <TimeLine style={{ height: 520, width: 520, margin: '0px 0px 0px 0px'}}/>
+                    <TimeLine style={{ height: 400, width: 520, margin: '0px 0px 0px 0px'}}/>
                 </div>
             )
         return(
@@ -47,6 +47,10 @@ class SellPost extends React.Component {
                         className="btn" style={{
                         float: 'right',
                         padding: 0}}>
+                        <div className="btn btn-default" style={{ marginTop: -10, marginRight: 10 }}
+                            onClick={() => onFollow()}>
+                            follow
+                        </div>
                         <span
                             onMouseOver={() => this.setState({ hoversetting: true })}
                             onMouseLeave={() => this.setState({ hoversetting: false })}
@@ -125,6 +129,7 @@ class SellPost extends React.Component {
         )
     }
     componentDidMount(){
+        console.log('componentDidMount')
         if(this.props.needGetSellPost){
             this.props.onGetSellpost()
         }
