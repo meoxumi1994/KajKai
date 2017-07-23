@@ -101,7 +101,7 @@ export const loginGoogle = () => {
                         res.cookie('token', token);
                         res.json({user: getUserBasicInfo(user), tokenId: token});
                     } else {
-                        createUser(body.email, body.name, '1234678', 1, null, null, null, body.picture, (newUser) => {
+                        createUser(body.email.toLowerCase(), body.name, '1234678', 1, null, null, null, body.picture, (newUser) => {
                             if (newUser !== null) {
                                 createUserPub(newUser);
                                 const token = getUserToken(newUser._id);
