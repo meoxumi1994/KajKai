@@ -2,7 +2,7 @@ import { User, Address } from '../models'
 import jwt from 'jsonwebtoken'
 
 export const getUser = (requesterId, id, next) => {
-  User.findOne({ id }, function(err, user) {
+  User.findOne({ id }, (err, user) => {
       if (err || !user) {
         if(err) {
           next(null)
@@ -43,7 +43,7 @@ export const getUser = (requesterId, id, next) => {
 }
 
 export const getUserPrivacy = (id, next) => {
-  User.findOne({ id }, function(err, user) {
+  User.findOne({ id }, (err, user) => {
       if (err || !user) {
         if(err) {
           next(null)
@@ -69,7 +69,7 @@ export const getUserPrivacy = (id, next) => {
 }
 
 export const getUserImageList = (requesterId, id, offset, next) => {
-  User.findOne({ id }, function(err, user) {
+  User.findOne({ id }, (err, user) => {
       if (err || !user) {
         if(err) {
           next(null)
@@ -87,7 +87,10 @@ export const getUserImageList = (requesterId, id, offset, next) => {
           let image = imageList[i]
           if (image.time < offset) {
             if (currentNumberOfImage < 14) {
-              mImageList.push(image.url)
+              mImageList.push({
+                url: image.url,
+                time: image.time
+              })
 
               mOffset = image.time.getTime()
               lastIndex = i
@@ -98,7 +101,7 @@ export const getUserImageList = (requesterId, id, offset, next) => {
           }
         }
 
-        if (currentNumberOfSellpost < 14 || lastIndex == 0) {
+        if (currentNumberOfImage < 14 || lastIndex == 0) {
           mOffset = -2
         }
 

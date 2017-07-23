@@ -65,6 +65,52 @@ export const getStores = (swlat, swlng, nelat, nelng, length, next) => {
   })
 }
 
+export const getStoreImageList = (requesterId, id, offset, next) => {
+  Store.findOne({ id }, (err, store) => {
+      if (err || !store) {
+        if(err) {
+          next(null)
+        } else {
+          next({
+            status: 'nodata',
+            listImage: []
+          })
+        }
+      } else {
+        const { imageList } = store
+        const mImageList = []
+        let currentNumberOfImage = 0, mOffset, lastIndex
+        for (let i = imageList.length - 1; i >= 0; i--) {
+          let image = imageList[i]
+          if (image.time < offset) {
+            if (currentNumberOfImage < 14) {
+              mImageList.push({
+                url: image.url,
+                time: image.time
+              })
+
+              mOffset = image.time.getTime()
+              lastIndex = i
+              currentNumberOfImage++
+            } else {
+              break
+            }
+          }
+        }
+
+        if (currentNumberOfImage < 14 || lastIndex == 0) {
+          mOffset = -2
+        }
+
+        next({
+          offset: mOffset,
+          status: 'success',
+          listImage : mImageList
+        })
+      }
+  })
+}
+
 export const verifyToken = (token) => {
     try {
         const decoded = jwt.verify(token, 'secret');

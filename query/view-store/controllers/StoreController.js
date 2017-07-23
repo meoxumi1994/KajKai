@@ -1,4 +1,4 @@
-import { getStore, getStores } from '../services/StoreService.js'
+import { getStore, getStores, getStoreImageList } from '../services/StoreService.js'
 
 export const getStoreHandler = () => (req, res) => {
   const { id } = req.params
@@ -28,4 +28,28 @@ export const getStoresHandler = () => (req, res) => {
   } else {
     res.json({status: 'failed'})
   }
+}
+
+export const getStoreImageListHandler = () => (req, res) => {
+  let { id: requestedId } = req.params
+  let requesterId = req.decoded._id
+
+  if(!requestedId) {
+    requestedId = requesterId
+  }
+
+  let { offset } = req.query
+  if (!offset || offset == '-1') {
+    offset =  Date.now()
+  } else {
+    offset = new Date(parseInt(offset))
+  }
+
+  getStoreImageList(requesterId, requestedId, offset, (storeImageList) => {
+    if (storeImageList) {
+      res.json(storeImageList)
+    } else {
+      res.json({status: 'failed'})
+    }
+  })
 }

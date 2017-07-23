@@ -5,6 +5,7 @@ import CategorySchema from './Category'
 import CategoryAutoSchema from './CategoryAuto'
 import CertificateSchema from './Certificate'
 import FollowerSchema from './Follower'
+import ImageSchema from './Image'
 import LastUpdateSchema from './LastUpdate'
 import LikerSchema from './Liker'
 import StoreSchema from './Store'
@@ -16,6 +17,7 @@ export const Category = mongoose.model('Category', CategorySchema)
 export const CategoryAuto = mongoose.model('CategoryAuto', CategoryAutoSchema)
 export const Certificate = mongoose.model('Certificate', CertificateSchema)
 export const Follower = mongoose.model('Follower', FollowerSchema)
+export const Image = mongoose.model('Image', ImageSchema)
 export const LastUpdate = mongoose.model('LastUpdate', LastUpdateSchema)
 export const Liker = mongoose.model('Liker', LikerSchema)
 export const Store = mongoose.model('Store', StoreSchema)

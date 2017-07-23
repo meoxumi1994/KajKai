@@ -14,5 +14,12 @@ export default {
       middleware: [auth()],
       method: 'getStoresHandler'
     }
+  },
+  '/imagelist/store/:id': {
+    get: {
+      controller: 'StoreController',
+      middleware: [auth()],
+      method: 'getStoreImageListHandler'
+    }
   }
 }
