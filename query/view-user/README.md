@@ -4,4 +4,4 @@
 
 #### Setup testing
 - Run `npm install`
-- Run `npm install babel babel-core babel-preset-es2015`
+- Run `npm install babel babel-core babel-preset-es2015 babel-polyfill babel-plugin-transform-object-rest-spread`
