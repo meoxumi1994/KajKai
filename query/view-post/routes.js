@@ -51,13 +51,17 @@ export default {
     }
   },
   '/imagelist/postrow/:storeid': {
-    controller: 'PostrowController',
-    middleware: [auth()],
-    method: 'getPostrowImageListHandler'
+    get: {
+      controller: 'PostrowController',
+      middleware: [auth()],
+      method: 'getPostrowImageListHandler'
+    }
   },
   '/imagelist/product/:storeid': {
-    controller: 'ProductController',
-    middleware: [auth()],
-    method: 'getProductImageListHandler'
+    get: {
+      controller: 'ProductController',
+      middleware: [auth()],
+      method: 'getProductImageListHandler'
+    }
   }
 }
