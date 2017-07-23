@@ -53,3 +53,17 @@ export const getSellPostId = (fCommentId, next) => {
         }
     })
 };
+
+export const addFollowPub = (followInfo) => {
+    const pub = redis.createClient(config);
+    const publishData = {follow: followInfo};
+    pub.publish('FOLLOW.AddFollow', JSON.stringify(publishData));
+    pub.quit();
+};
+
+export const removeFollowPub = (followInfo) => {
+    const pub = redis.createClient(config);
+    const publishData = {follow: followInfo};
+    pub.publish('FOLLOW.RemoveFollow', JSON.stringify(publishData));
+    pub.quit();
+};

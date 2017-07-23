@@ -332,6 +332,18 @@ export default {
                 likenId: '',
                 likerId: ''
             }
+        },{
+            event: 'FOLLOW.AddFollow',
+            follow: {
+                followerId: '',
+                followeeId: ''
+            }
+        }, {
+            event: 'FOLLOW.RemoveFollow',
+            follow: {
+                followerId: '',
+                followeeId: ''
+            }
         }]
     }
 }
