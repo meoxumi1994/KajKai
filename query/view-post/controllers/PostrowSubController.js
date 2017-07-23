@@ -1,4 +1,4 @@
-import { Sellpost, Postrow } from '../models'
+import { Sellpost, Postrow, Image, BasicStore } from '../models'
 
 export const createPostrow = (message) => {
   const { sellPostId: sellpostId, postrowId: id, content, numline: numberOfLine, images, titles, products, type } = message.postrow
@@ -6,11 +6,63 @@ export const createPostrow = (message) => {
     sellpostId, id
   })
 
+  let mPostrowImageList = [], mProductImageList = []
+
   if (content) postrow.content = content
   if (numberOfLine) postrow.numberOfLine = numberOfLine
-  if (images) postrow.images = images
+  if (images && images.length > 0) {
+    postrow.images = images
+    mPostrowImageList = images.map((image) => (
+      new Image({
+        url: image.url,
+        time: Date.now()
+      })
+    ))
+
+    Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
+      if (sellpost) {
+        BasicStore.findOne({ id: sellpost.storeId }, (err, basicStore) => {
+          if (basicStore) {
+            let { postrowImageList } = basicStore
+            if (!postrowImageList) {
+              postrowImageList = []
+            }
+            postrowImageList = [...postrowImageList, ...mPostrowImageList]
+            basicStore.postrowImageList = postrowImageList
+
+            basicStore.save(() => {})
+          }
+        })
+      }
+    })
+  }
   if (titles) postrow.titles = titles
-  if (products) postrow.products = products
+  if (products && products.length > 0) {
+    postrow.products = products
+    mProductImageList = products.map((product) => (
+      new Image({
+        url: product.imageUrl,
+        time: Date.now()
+      })
+    ))
+
+    Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
+      if (sellpost) {
+        BasicStore.findOne({ id: sellpost.storeId }, (err, basicStore) => {
+          if (basicStore) {
+            let { productImageList } = basicStore
+            if (!productImageList) {
+              productImageList = []
+            }
+            productImageList = [...productImageList, ...mProductImageList]
+            basicStore.productImageList = productImageList
+
+            basicStore.save(() => {})
+          }
+        })
+      }
+    })
+  }
   if (type) postrow.type = type
 
   postrow.save(() => {})
@@ -19,13 +71,64 @@ export const createPostrow = (message) => {
 export const updatePostrow = (message) => {
   const { postrowId: id, sellPostId: sellpostId, content, numline: numberOfLine, images, titles, products, type } = message.postrow
   const mPostrow = {}
+  let mPostrowImageList = [], mProductImageList = []
 
   if (sellpostId) mPostrow.sellpostId = sellpostId
   if (content) mPostrow.content = content
   if (numberOfLine) mPostrow.numberOfLine = numberOfLine
-  if (images) mPostrow.images = images
+  if (images && images.length > 0) {
+    mPostrow.images = images
+    mPostrowImageList = images.map((image) => (
+      new Image({
+        url: image.url,
+        time: Date.now()
+      })
+    ))
+
+    Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
+      if (sellpost) {
+        BasicStore.findOne({ id: sellpost.storeId }, (err, basicStore) => {
+          if (basicStore) {
+            let { postrowImageList } = basicStore
+            if (!postrowImageList) {
+              postrowImageList = []
+            }
+            postrowImageList = [...postrowImageList, ...mPostrowImageList]
+            basicStore.postrowImageList = postrowImageList
+
+            basicStore.save(() => {})
+          }
+        })
+      }
+    })
+  }
   if (titles) mPostrow.titles = titles
-  if (products) mPostrow.products = products
+  if (products && products.length > 0) {
+    mPostrow.products = products
+    mProductImageList = products.map((product) => (
+      new Image({
+        url: product.imageUrl,
+        time: Date.now()
+      })
+    ))
+
+    Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
+      if (sellpost) {
+        BasicStore.findOne({ id: sellpost.storeId }, (err, basicStore) => {
+          if (basicStore) {
+            let { productImageList } = basicStore
+            if (!productImageList) {
+              productImageList = []
+            }
+            productImageList = [...productImageList, ...mProductImageList]
+            basicStore.productImageList = productImageList
+
+            basicStore.save(() => {})
+          }
+        })
+      }
+    })
+  }
   if (type) mPostrow.type = type
 
   Postrow.findOneAndUpdate({ id }, mPostrow, () => {})

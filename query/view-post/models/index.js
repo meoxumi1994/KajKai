@@ -3,6 +3,7 @@ import BasicStoreSchema from './BasicStore'
 import BasicUserSchema from './BasicUser'
 import CommentSchema from './Comment'
 import FollowerSchema from './Follower'
+import ImageSchema from './Image'
 import LikerSchema from './Liker'
 import MinorpostSchema from './Minorpost'
 import PostrowSchema from './Postrow'
@@ -15,6 +16,7 @@ export const BasicStore = mongoose.model('BasicStore', BasicStoreSchema)
 export const BasicUser = mongoose.model('BasicUser', BasicUserSchema)
 export const Comment = mongoose.model('Comment', CommentSchema)
 export const Follower = mongoose.model('Follower', FollowerSchema)
+export const Image = mongoose.model('Image', ImageSchema)
 export const Liker = mongoose.model('Liker', LikerSchema)
 export const Minorpost = mongoose.model('Minorpost', MinorpostSchema)
 export const Postrow = mongoose.model('Postrow', PostrowSchema)

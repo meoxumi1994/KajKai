@@ -29,6 +29,13 @@ export default {
       method: 'getUserPrivacyHandler'
     }
   },
+  '/imagelist/user': {
+    get: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'getUserImageListHandler'
+    }
+  },
   '/imagelist/user/:id': {
     get: {
       controller: 'UserController',

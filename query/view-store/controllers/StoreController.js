@@ -34,10 +34,6 @@ export const getStoreImageListHandler = () => (req, res) => {
   let { id: requestedId } = req.params
   let requesterId = req.decoded._id
 
-  if(!requestedId) {
-    requestedId = requesterId
-  }
-
   let { offset } = req.query
   if (!offset || offset == '-1') {
     offset =  Date.now()

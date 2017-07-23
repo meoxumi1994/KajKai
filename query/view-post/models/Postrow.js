@@ -1,8 +1,8 @@
 import mongoose from '../datasource'
 import _ from 'lodash'
 import { PostrowType } from '../enum'
-import TitleSchema from './Title'
 import ProductSchema from './Product'
+import TitleSchema from './Title'
 
 const PostrowSchema = new mongoose.Schema({
   sellpostId: {type: String},

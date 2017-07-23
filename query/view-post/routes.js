@@ -49,5 +49,15 @@ export default {
       middleware: [auth()],
       method: 'getRepliesHandler'
     }
+  },
+  '/imagelist/postrow/:storeid': {
+    controller: 'PostrowController',
+    middleware: [auth()],
+    method: 'getPostrowImageListHandler'
+  },
+  '/imagelist/product/:storeid': {
+    controller: 'ProductController',
+    middleware: [auth()],
+    method: 'getProductImageListHandler'
   }
 }

@@ -80,7 +80,10 @@ export const getUserImageList = (requesterId, id, offset, next) => {
           })
         }
       } else {
-        const { imageList } = user
+        let { imageList } = user
+        if (!imageList) {
+          imageList = []
+        }
         const mImageList = []
         let currentNumberOfImage = 0, mOffset, lastIndex
         for (let i = imageList.length - 1; i >= 0; i--) {
