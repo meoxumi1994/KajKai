@@ -35,7 +35,9 @@ export const confirmEmailVerification = () => {
         const token = req.params.token;
         console.log('email token: ', token);
         let redirectUrl = config.getClientDomain();
+        console.log('host: ', req.get('host'));
         if (req.get('host').includes('g9fd0yor1e.execute-api.ap-southeast-1.amazonaws.com')) {
+          console.log('fsfsf');
           redirectUrl = 'http://localhost:3000'
         }
         if (!token) {
@@ -45,13 +47,15 @@ export const confirmEmailVerification = () => {
         const decoded = verifyToken(token);
         console.log('decoded: ', decoded);
         if (!decoded) {
+          console.log('log1 ');
             res.redirect(redirectUrl + '/login')
         } else {
+          console.log('log2 ');
             updateVerifyUser(decoded._id, (status) => {
-                if (!status) {
+                if (!status) {console.log('log3 ');
                   // console.log('err: ', err);
                     res.redirect(redirectUrl + '/login')
-                } else {
+                } else { console.log('log4 ');
                     const token = getUserToken(decoded._id);
                     res.cookie('token', token);
                     console.log("this " + JSON.stringify(verifyToken(token)));

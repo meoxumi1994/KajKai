@@ -6,7 +6,7 @@ export const sendVerifyEmail = (email, token, next) => {
         pass: 'verifykajkai',
         to:   email,
         subject: 'KAJKAI REGISTRATION',
-        text:    'Please click on following link to finish you registration: \n' +
+        text:    'Please click on the following link to finish you registration: \n' +
         config.getServerDomain() + '/emailverification/' + token
     });
     send({}, function(err, res){
