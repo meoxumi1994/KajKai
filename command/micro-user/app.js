@@ -18,6 +18,7 @@ const corsOptions = {
 app.use(function(req, res, next) {
   const allowedOrigins = ['http://localhost:3000', 'https://www.kajkai.com']
   const origin = req.headers.origin
+  console.log('origin: ', origin);
   if(allowedOrigins.indexOf(origin) > -1) {
        res.set('Access-Control-Allow-Origin', origin)
   }
