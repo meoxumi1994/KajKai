@@ -119,3 +119,9 @@ export const verifyToken = (token) => {
         return null;
     }
 }
+
+export const testAsync = (next) => {
+  setTimeout(() => {
+    next('testAsync')
+  }, 200)
+}
