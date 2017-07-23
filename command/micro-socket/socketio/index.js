@@ -7,9 +7,10 @@ import { getFollowListPub } from '../controllers/FollowPubController'
 const sockListen = (user, socket, io) => {
     if (user) {
         getFollowListPub(user.id, (list) => {
+            console.log('followeeList: ' + JSON.stringify(list));
             if (list !== null && list.length > 0) {
                 for (let i = 0; i < list.length; ++i) {
-                    socket.join(list[i]);
+                    socket.join(list[i].followeeId);
                 }
             }
         })
