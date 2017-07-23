@@ -2,7 +2,7 @@ import {  BasicStore } from '../models'
 
 export const getProductImageList = (requesterId, storeId, offset, next) => {
   BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-      if (err || !store) {
+      if (err || !basicStore) {
         if(err) {
           next(null)
         } else {

@@ -23,7 +23,7 @@ export const getPostrows = (requesterId, sellpostId, offset, next) => {
 
 export const getPostrowImageList = (requesterId, storeId, offset, next) => {
   BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-      if (err || !store) {
+      if (err || !basicStore) {
         if(err) {
           next(null)
         } else {
