@@ -9,11 +9,11 @@ export const registerNewUser = () => {
         if (req.body) {
             const body = req.body;
             if (checkEmail(body.email)) {
-                getUserFromEmail(body.email, (user) => {
+                getUserFromEmail(body.email.toLowerCase(), (user) => {
                     if (user) {
                         res.json({status: 'used'})
                     } else {
-                        createUser(body.email, body.username, body.password, 0, null, null, null, null, (user) => {
+                        createUser(body.email.toLowerCase(), body.username, body.password, 0, null, null, null, null, (user) => {
                             if (!user) {
                                 res.json({status: 'failed'})
                             } else {
