@@ -50,7 +50,8 @@ export const getDisplayResult = (hitsResult) => {
         let sellPost = {
             sellPostId: hitsResult.sellPosts[i].sellPostId,
             avatarUrl: hitsResult.sellPosts[i].avatarUrl,
-            title: hitsResult.sellPosts[i].category
+            title: hitsResult.sellPosts[i].category,
+            storeId: hitsResult.sellPostId[i].storeId
         };
         res.push(sellPost);
     }
