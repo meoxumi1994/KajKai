@@ -34,7 +34,10 @@ export const confirmEmailVerification = () => {
     return (req, res) => {
         const token = req.params.token;
         console.log('email token: ', token);
-        const redirectUrl = config.getClientDomain();
+        let redirectUrl = config.getClientDomain();
+        if (req.get('host').includes('g9fd0yor1e.execute-api.ap-southeast-1.amazonaws.com')) {
+          redirectUrl = 'http://localhost:3000'
+        }
         if (!token) {
             res.redirect(redirectUrl + '/login');
             return
