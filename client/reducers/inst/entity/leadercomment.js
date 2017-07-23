@@ -46,6 +46,18 @@ const leadercomment = (state = {
                 }
             })
             return mystate
+        case 'GET_SELL_POST_SUCCESS':
+            let mstate = state
+            action.sellpost.leadercomments.map((item) => {
+                mstate = {...mstate,
+                    [item.comments[0].id] : {
+                        ...item,
+                        contentedit : '',
+                        isReply: false,
+                    }
+                }
+            })
+            return mstate
         case 'GET_SELLPOST_FROM_STORE_SUCCESS':
             let newstate = state
             action.sellposts.map((sp) => {

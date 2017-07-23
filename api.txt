@@ -1,3 +1,1155 @@
+<<<<<<< HEAD
+//NEW NEW NEW
+
+GET /groupcomment/'sellpost|minorpost'/:id?offset=1498555009220 {
+    offset:
+    id:
+    leadercomments: [
+        {
+          id: '7586449578',
+          sellpostid: ,
+          order: [
+              {
+                id: 'product002',
+                content: ,
+                imageUrl: ,
+                list: [],
+                num: 2
+              },
+          ],
+          numleadercomment:
+          ownerid: ,
+          avatarUrl: // small size 40x40
+          name: ,
+          content: ,
+          time: ,
+          numlike: ,
+          likestatus: ['like','love','haha','wow'],
+        }
+    ]
+}
+
+GET /leadercomment/:leadercommentid?offset=1498555009220 {
+    id
+    offset
+    comments: [
+        {
+          id: '7586449578',
+          leadercommentid: ,
+          sellpostid: ,
+          numcomment:
+          ownerid: ,
+          avatarUrl: // small size 20x20
+          name: ,
+          content: ,
+          time: ,
+          numlike: ,
+          likestatus: ['like','love','haha','wow'],
+        }
+    ]
+}
+
+//NEW NEW NEW
+
+
+GET /user/:id {
+    status:,
+    user: {
+        username: 'charity',
+        email: 'prominh@gmail.com',
+        avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/abcxyz.png',
+        coverUrl: 'https://d1z4p30mgj29.cloudfront.net/xyzabc.png',
+        address: undefined,
+        phone: undefined,
+        language: 'vi|en',
+        sex: 'MALE|FEMALE',
+        yearOfBirth: '6462636',
+        lastUpdate: {
+            username: ,
+            phone: ,
+            address: ,
+        },
+        blacklist: [{
+            id:,
+            type: 'userid|storeid|mesid',
+            name: ,
+        }],
+        storeList: [{
+            id: '',
+            storename: '',
+            avatarUrl: '',
+        }],
+    },
+    numUnreaded: ,
+    notifications: [
+        {
+            type: 'like|comment|leadercomment|createsellpost|editsellpost|createminorpost'
+            // tra ve nhieu nhat co the nhung thong tin o ben duoi
+            id: , // day la cai id cua notification
+            commentid: ,
+            leadercommentid: ,
+            sellpostid: ,
+            minorpostid: ,
+            numcomment: ,
+            ownerid: , // id cua thang gay ra hanh dong
+            avatarUrl: // small size 40x40 , // avatar cua thang gay ra hanh dong
+            name: ,
+            content: ,
+            time: ,
+            numlike: ,
+            likes: [], // con thang nao khac like nua thi` random vai thang :D
+            likestatus: ['like','love','haha','wow'], // ko lam` thi de mac dinh 'like', fuck u
+            // hanh` dong gay ra o store nao`
+            storename: ,
+            urlname: ,
+        }
+    ]
+}
+
+GET /privacy/user/:id {
+    address_email_phone: 'comment_store|no_one',
+    another: 'yes|no'
+}
+
+POST /user {
+    username: ,
+    email: 'prominh@gmail.com',
+    password:
+},{
+    status: 'success|used|error'
+}
+
+PUT /user { // tat ca cac gia tri co the undefined, thang nao co thi update
+    username: 'charity',
+    avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/abcxyz.png',
+    coverUrl: 'https://d1z4p30mgj29.cloudfront.net/xyzabc.png',
+    address: undefined,
+    language: 'vi|en',
+    sex: 'MALE|FEMALE',
+    yearOfBirth: '6462636',
+    lastUpdate: {
+        username: ,
+        phone: ,
+        address: ,
+    }
+},{
+    status: 'failed|success',
+}
+
+PUT /password {
+    password: '123456',
+    newpassword: '654321',
+},{
+    status: 'failed|success',
+}
+
+PUT /blacklist { // blockid co thi delete ko co thi add
+    blockid: ,
+},{
+    blockid: ,
+    type: 'REMOVE|ADD'
+    idtype: 'storeid|userid|mesid' ,
+    name: , // name of blockid
+}
+
+POST /login {
+    phone: '',                              //
+    email: 'thiennvtse90219@fpt.edu.vn',    // email hoac phone co the undefined
+    password: '123456',
+},{
+    username: 'charity',
+    avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/abcxyz.png',
+    coverUrl: 'https://d1z4p30mgj29.cloudfront.net/xyzabc.png',
+    address: undefined,
+    phone: undefined,
+    language: 'vi|en',
+    sex: 'MALE|FEMALE',
+    yearOfBirth: '6462636',
+    lastUpdate: {
+        username: ,
+        phone: ,
+        address: ,
+    },
+    blacklist: [{
+        id:,
+        type: 'userid|storeid|mesid',
+        name: ,
+    }],
+}
+
+POST /loginfacebook {
+    tokenId: 'djhkayr389rbqcfacebook3bqkvrtq39ry3xbr92ycr2r9'
+},{
+    username: 'charity',
+    avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/abcxyz.png',
+    coverUrl: 'https://d1z4p30mgj29.cloudfront.net/xyzabc.png',
+    address: undefined,
+    phone: undefined,
+    language: 'vi|en',
+    sex: 'MALE|FEMALE',
+    yearOfBirth: '6462636',
+    lastUpdate: {
+        username: ,
+        phone: ,
+        address: ,
+    },
+    blacklist: [{
+        id:,
+        type: 'userid|storeid|mesid',
+        name: ,
+    }],
+}
+POST /logingoogle {
+    tokenId: 'djhkayr389rbqcfrgooglebqkvrtq39ry3xbr92ycr2r9'
+},{
+    username: 'charity',
+    avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/abcxyz.png',
+    coverUrl: 'https://d1z4p30mgj29.cloudfront.net/xyzabc.png',
+    address: undefined,
+    phone: undefined,
+    language: 'vi|en',
+    sex: 'MALE|FEMALE',
+    yearOfBirth: '6462636',
+    lastUpdate: {
+        username: ,
+        phone: ,
+        address: ,
+    },
+    blacklist: [{
+        id:,
+        type: 'userid|storeid|mesid',
+        name: ,
+    }],
+}
+
+
+GET /logout {
+    status: 'success|failed'
+}
+
+GET /store/:id { // id co the urlname
+    status: 'success|failed',
+    store: {
+        id: , //store id
+        userid: ,//owner
+        storename: 'Forest',
+        time: ,
+        avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+        coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
+        storename: 'Forest',
+        urlname: ,
+        address: ,
+        addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
+        category: ,
+        firstCategoryId: ,
+        firstCategory: ,
+        secondCategoryId: ,
+        secondCategory: ,
+        position: {
+          latitute: '1423424',
+          longitute: '453535',
+        }
+        phone: '01655791025',
+        certificates: { // co the null
+          images: [],
+          content: ,
+        },
+        lastUpdate: {
+            storename: ,
+            urlname: ,
+            avatarUrl: ,
+            coverUrl: ,
+        }
+        numlike: '23',
+        likes: [
+          {
+            avatarUrl: ,// small size 20x20
+            userid: ,
+            username: ,
+          },
+        ], // tối đa 5 thằng linh tinh
+        numfollow: '43',
+        follows: [
+          {
+            avatarUrl: // small size 20x20
+            userid:
+            username:
+          },
+        ], // tối đa 5 thằng
+    }
+}
+
+POST /store {
+    time: ,
+    storename: 'Forest',
+    urlname: ,
+    address: ,
+    addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
+    category: ,
+    firstCategoryId: ,
+    secondCategoryId: ,
+    position: {
+        latitute: '1423424',
+        longitute: '453535',
+    }
+    phone: '01655791025',
+}
+
+PUT /store {
+    id: , //store id
+    storename: 'Forest',
+    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+    coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
+    address: ,
+    addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
+    position: {
+      latitute: '1423424',
+      longitute: '453535',
+    }
+    phone: '01655791025',
+    certificates: { // co the null
+      images: [],
+      content: ,
+    },
+    lastUpdate: {
+        storename: ,
+        urlname: ,
+        avatarUrl: ,
+        coverUrl: ,
+    }
+}
+
+GET /sellpost/store/:storeid?offset=-1 { // length = 2
+  offset: ,
+  storeid: ,
+  sellposts: [
+    {
+      id: ,
+      storeid: ,
+      storename: ,
+      category: ,
+      title: ,
+      description: ,
+      time: , // last update
+      status: 'notyet|open|sleep',
+      ship: '', // store viết vào có thể un
+      postrows_order: [],
+      postrows: [ // tables lấy những thằng đầu có tổng hàng <= 30, nếu quá nửa thằng cuối thì trả về cả thằng cuối
+        {
+            id: , //
+            content: ,
+            numline: , // numline of row <= 30
+            images: [
+            // list of imageUrl
+            ], // textimage|imagetext|groupimage
+            titles_order: [],
+            titles: [ // for product|listproduct otherwise  null
+
+            ],
+            products: [ // for product|listproduct otherwise  null
+                {
+                  id: 'product002',
+                  content: ,
+                  imageUrl: , // 20x20
+                  list: [],
+                  totalnum: // số lần được gọi trong leadercomment
+                },
+            ],
+            type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+        },
+      ],
+      numlike: '23',
+      likestatus: ['like','love','haha','wow'],
+      likes: [
+        {
+          userid: ,
+          username: ,
+        },
+      ], // tối đa 5 thằng bạn
+      numfollow: '43',
+      follows: [
+        {
+          userid: ,
+          username: ,
+        },
+      ], // tối đa 5 thằng bạn
+      numleadercomment: ,
+      numshare: ,
+      leadercomments: [ // tối đa 5 thằng trong 1 giờ
+        {
+          id: '7586449578',
+          sellpostid: ,
+          order: [
+              {
+                id: 'product002',
+                content: ,
+                imageUrl: ,
+                list: [],
+                num: 2
+              },
+          ],
+          numcomment:
+          comments: [ // thằng đầu tiền là comment của leader // tối đa 2 thằng trong 1 giờ
+            {
+              id: ,
+              ownerid: ,
+              leadercommentid: ,//
+              avatarUrl: // small size 20x20
+              name: ,
+              content: ,
+              time: ,
+              numlike: ,
+              likes: [
+                {
+                  userid: ,
+                  username: ,
+                },
+              ]
+              likestatus: ['like','love','haha','wow'],
+            }
+          ]
+        }
+      ]
+    },
+  ],
+}
+
+GET /sellpost/:id {
+    storeid: ,
+    storename: ,
+    category: ,
+    title: ,
+    description: ,
+    time: , // last update
+    status: 'notyet|open|sleep',
+    ship: '', // store viết vào có thể un
+    postrows_offset: ,
+    postrows_order: [],
+    postrows: [ // tables lấy những thằng đầu có tổng hàng <= 30, nếu quá nửa thằng cuối thì trả về cả thằng cuối
+    {
+        id: , //
+        content: ,
+        numline: , // numline of row <= 30
+        images: [
+        // list of imageUrl
+        ], // textimage|imagetext|groupimage
+        titles_order: [],
+        titles: [ // for product|listproduct otherwise  null
+
+        ],
+        products: [ // for product|listproduct otherwise  null
+            {
+              id: 'product002',
+              content: ,
+              imageUrl: , // 20x20
+              list: [],
+              totalnum: // số lần được gọi trong leadercomment
+            },
+        ],
+        type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+    },
+    ],
+    numlike: '23',
+    likes: [
+    {
+      userid: ,
+      username: ,
+    },
+    ], // tối đa 5 thằng bạn
+    numfollow: '43',
+    follows: [
+    {
+      userid: ,
+      username: ,
+    },
+    ], // tối đa 5 thằng bạn
+    numcomment: ,
+    numshare: ,
+    offsetleadercomments:,
+    leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
+        {
+          offset:,
+          id: '7586449578',
+          sellpostid: ,
+          order: [
+              {
+                id: 'product002',
+                content: ,
+                imageUrl: ,
+                list: [],
+                num: 2
+              },
+          ],
+          comments: [ // thằng đầu tiền là comment của leader // lay tat ca trong 1 gio gan day toi da 2
+            {
+              id: ,
+              ownerid: ,
+              leadercommentid: ,//
+              avatarUrl: // small size 20x20
+              name: ,
+              content: ,
+              time: ,
+              numlike: ,
+              likes: [{
+                userid: ,
+                username: ,
+              }],
+            }
+          ]
+        }
+    ]
+}
+
+PUT /sellpost {
+    category: ,
+    title: ,
+    description: ,
+    time: , // last update
+    status: 'notyet|open|sleep',
+    ship: '', // store viết vào có thể un
+    postrows_order: [],
+}
+
+POST /sellpost {
+    storeid: ,
+    category: ,
+    title: ,
+    description: ,
+    time: , // last update
+    status: 'notyet|open|sleep',
+    ship: '', // store viết vào có thể un
+    postrows: [
+        {
+            sellpostid: ,
+            content: ,
+            numline: , // numline of row <= 30
+            images: [
+            // list of imageUrl
+            ], // textimage|imagetext|groupimage
+            titles_order: [],
+            titles: [ // for product|listproduct otherwise  null
+
+            ],
+            products_order: [],
+            products: [ // for product|listproduct otherwise  null
+                {
+                  content: ,
+                  imageUrl: , // 20x20
+                  list: [],
+                },
+            ],
+            type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+        }
+    ]
+}
+
+DELETE /sellpost {
+    storeid:
+    sellpostid:
+}
+
+POST /postrows {
+    sellpostid: ,
+    content: ,
+    numline: , // numline of row <= 30
+    images: [
+    // list of imageUrl
+    ], // textimage|imagetext|groupimage
+    titles_order: [],
+    titles: [ // for product|listproduct otherwise  null
+
+    ],
+    products_order: [],
+    products: [ // for product|listproduct otherwise  null
+        {
+          content: ,
+          imageUrl: , // 20x20
+          list: [],
+        },
+    ],
+    type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+}
+
+PUT /postrows {
+    id: ,
+    content: ,
+    numline: , // numline of row <= 30
+    images: [
+    // list of imageUrl
+    ], // textimage|imagetext|groupimage
+    titles_order: [],
+    titles: [ // for product|listproduct otherwise  null
+
+    ],
+    products_order: [],
+    type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+}
+
+DELETE /postrows {
+    sellpostid: ,
+    postrows_order: [],
+    id: ,
+}
+
+POST /product {
+    sellpostid:
+    postrowsid:
+    product: {
+      content: ,
+      imageUrl: , // 20x20
+      list: [],
+    },
+}
+
+PUT /product {
+    sellpostid:
+    postrowsid:
+    productid:
+    product: {
+        content: ,
+        imageUrl: , // 20x20
+        list: [],
+    },
+}
+
+DELETE /product {
+    sellpostid:
+    postrowsid:
+    products_order: []
+    productid:
+}
+
+GET /postrows/:sellpostid?offset=-1 { // numline = 30
+    offset: ,
+    postrows: [
+        {
+          sellpostid:,
+          id: , //
+          content: ,
+          numline: , // numline of row <= 30
+          images: [
+            // list of imageUrl
+          ], // textimage|imagetext|groupimage
+          titles: [ // for product|listproduct otherwise  null
+
+          ],
+          products_order: [],
+          products: [ // for product|listproduct otherwise  null
+            {
+              id: 'product002',
+              content: ,
+              imageUrl: , // 20x20
+              list: [],
+              totalnum: // số lần được gọi trong leadercomment
+            },
+          ],
+          type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+
+        },
+    ]
+}
+
+POST /minorpost {
+    storeid,
+    numline,
+    content,
+    time: ,
+    images: ,
+    video
+} => {
+    status: 'success',
+    minorpost: {
+        storeid,
+        numline,
+        content,
+        time: ,
+        images: ,
+        video,
+        id
+    }
+}
+
+PUT /minorpost {
+    id,
+    storeid,
+    numline,
+    content,
+    time: ,
+    images: ,
+    video
+} => {
+    status: 'success',
+    minorpost: {
+        storeid,
+        numline,
+        content,
+        time: ,
+        images: ,
+        video,
+        id
+    }
+}
+
+GET /minorpost/store/:storeid?offset=-1 { // length = 3
+  offset: ,
+  minorposts: [ // lay 200 ky tu dau tien cua content
+    {
+      id: ,
+      numline: , // numline chi lien quan den content
+      storeid: ,
+      storename: ,
+      time: , // last update
+      content:,
+      images: [],
+      video: ,
+      likestatus: ['like','love','haha','wow'],
+      numlike: '23',
+      likes: [
+        {
+          userid: ,
+          username: ,
+        },
+      ], // tối đa 3 thằng bạn
+      numfollow: '43',
+      numleadercomment: ,
+      leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
+        {
+          id: 'leadercomment001',
+          sellpostid: ,
+          order: [
+              {
+                id: 'product002',
+                content: ,
+                imageUrl: ,
+                list: [],
+                num: 2
+              },
+          ],
+          comments: [ // thằng đầu tiền là comment của leader // lay trong 1h gan day tối đa 2 thằng
+            {
+              id: ,
+              ownerid: , // null
+              leadercommentid: ,//
+              avatarUrl: // small size 20x20
+              name: ,
+              content: ,
+              time: ,
+              numlike: ,
+              likestatus: ['like','love','haha','wow'],
+            }
+          ]
+        }
+      ]
+    },
+  ],
+}
+
+GET /post/user/:userid?offset=-1 { // length = 2
+  offset: ,
+  data: [
+      {
+          storeid: ,
+          sellpost:
+            {
+              id: ,
+              storeid: ,
+              storename: ,
+              category: ,
+              title: ,
+              description: ,
+              time: , // last update
+              status: 'notyet|open|sleep',
+              ship: '', // store viết vào có thể un
+              postrows_order: [],
+              postrows: [ // tables lấy những thằng đầu có tổng hàng <= 30, nếu quá nửa thằng cuối thì trả về cả thằng cuối
+                {
+                    id: , //
+                    content: ,
+                    numline: , // numline of row <= 30
+                    images: [
+                    // list of imageUrl
+                    ], // textimage|imagetext|groupimage
+                    titles_order: [],
+                    titles: [ // for product|listproduct otherwise  null
+
+                    ],
+                    products: [ // for product|listproduct otherwise  null
+                        {
+                          id: 'product002',
+                          content: ,
+                          imageUrl: , // 20x20
+                          list: [],
+                          totalnum: // số lần được gọi trong leadercomment
+                        },
+                    ],
+                    type: 'title|normal|product|listproduct|textimage|imagetext|groupimage',
+                },
+              ],
+              numlike: '23',
+              likes: [
+                {
+                  userid: ,
+                  username: ,
+                },
+              ], // tối đa 5 thằng bạn
+              numfollow: '43',
+              follows: [
+                {
+                  userid: ,
+                  username: ,
+                },
+              ], // tối đa 5 thằng bạn
+              numcomment: ,
+              numshare: ,
+              leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
+                {
+                  id: '7586449578',
+                  sellpostid: ,
+                  order: [
+                      {
+                        id: 'product002',
+                        content: ,
+                        imageUrl: ,
+                        list: [],
+                        num: 2
+                      },
+                  ],
+                  comments: [ // thằng đầu tiền là comment của leader // toi da 2 thang trong 1h
+                    {
+                      id: ,
+                      ownerid: ,
+                      leadercommentid: ,//
+                      avatarUrl: // small size 20x20
+                      name: ,
+                      content: ,
+                      time: ,
+                      numlike: ,
+                    }
+                  ]
+                }
+              ]
+            },
+          minorpost: // lay 200 ky tu dau tien cua content
+            {
+              id: ,
+              numline: , // numline chi lien quan den content
+              storeid: ,
+              time: , // last update
+              content:,
+              images: [], //
+              video: ,
+              numlike: '23',
+              likes: [
+                {
+                  userid: ,
+                  username: ,
+                },
+              ], // tối đa 5 thằng bạn
+              numfollow: '43',
+              follows: [
+                {
+                  userid: ,
+                  username: ,
+                },
+              ], // tối đa 5 thằng bạn
+              numcomment: ,
+              numshare: ,
+              leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
+                {
+                  id: 'leadercomment001',
+                  sellpostid: ,
+                  order: [
+                      {
+                        id: 'product002',
+                        content: ,
+                        imageUrl: ,
+                        list: [],
+                        num: 2
+                      },
+                  ],
+                  comments: [ // thằng đầu tiền là comment của leader // toi da 2 thang trong 1h
+                    {
+                      id: ,
+                      ownerid: , // null
+                      leadercommentid: ,//
+                      avatarUrl: // small size 20x20
+                      name: ,
+                      content: ,
+                      time: ,
+                      numlike: ,
+                    }
+                  ]
+                }
+              ]
+            },
+      }
+  ]
+}
+
+GET /content/:minorpostid {
+    content: '', // lay phan con lai cua content
+}
+
+
+GET /product/:id {
+  id: ,
+  postrowid: ,
+  imageUrl: ,
+  content: ,
+  list: [],
+  totalnum: // số lần được gọi trong leadercomment
+}
+
+GET /chatlist?offset=offset&length=length: { // thứ tự trả về như thế nào ? và nếu tạo nhóm nhưng chưa chat thì có lấy về không?
+    lazyLoad: {
+      offset: ''
+    },
+    data: [
+      {
+        mesId: '',
+        lastMessage: {
+          id: '',                // Sender id
+          time: '',
+          message: {
+            text: '',
+            type: '',
+            url: ''
+          }
+        },
+        displayLabel: '',
+        users: [                 // Not included requester
+          {
+            avatarUrl: '',
+            id: '',
+            username: '',
+            status:             // default = true
+          }
+        ]
+      }
+    ]
+}
+
+GET /messages/:mesid?offset=offset&length=length {
+  lazyLoad: {
+    offset: ''
+  },
+  mesId: '',
+  messages: [
+    {
+      id: //userId cái thằng mà chat cái mesage này hay còn gọi là sendId
+      message: {
+        text: '',
+        url: '',
+        type: ''
+      },
+      time: ''
+    }
+  ]
+}
+
+// id la id của thằng mình muốn chat
+GET /mesId/:id {
+  mesId: ''
+}
+
+GET /search/user?text='char' {
+    users: [
+        {
+            id: '',
+            avatarUrl: '',
+            username: ''
+        }
+    ]
+}
+
+GET /comment/like {
+    commentid: // co the undefined
+    leadercommentid: // co the undefined
+    likes: [
+        name
+    ]
+}
+
+
+//// -------------- SEARCH CATEGORY -------------------
+
+GET /categorylist { // language la current language cua thang days
+    status: 'success',
+    categories: [
+        {
+            id: 'category001',
+            name: 'Shirt',
+            secondCategories: [
+                {
+                    id: 'secondcategory001',
+                    name: 'R-shirt',
+                },
+                {
+                    id: 'secondcategory002',
+                    name: 'T-shirt',
+                }
+            ]
+        },
+        {
+            id: 'category002',
+            name: 'Food',
+            secondCategories: [
+                {
+                    id: 'secondcategory003',
+                    name: 'Fast Food',
+                },
+                {
+                    id: 'secondcategory004',
+                    name: 'Nutri Food',
+                }
+            ]
+        },
+    ]
+}
+
+POST /phoneverification {  //server kiểm tra xem có user hay store nào dùng số phone này chưa -> server requests to Nexmo để gửi code tới số phone
+  phone: '0123456789'
+}, {
+  'pending|used|error'
+}
+
+
+POST /phonecodeverification { // server requests to Nexmo để check code cho số phone
+  phone: '0123456789',
+  code: '1234'
+}, {
+  'verified|error'
+}
+
+GET /search/user?offset=0&length=5&keyword='chariiiiiiity' { // search user by username, trả kết quả users index start from offset lết tối đa length users hoặc đến cuối
+  users: [
+    {
+      userId: '',
+      username: '',
+      avatarUrl: ''
+    },
+  ]
+}
+
+GET /search/store?offset=0&length=5&keyword='Forrrrrrest | táo tàu' { // search store by keyword là store name hoặc category name
+                                                                      //  trả kết quả stores index start from offset lết tối đa length stores hoặc đến cuối
+  stores: [
+    {
+      storeId: '',
+      storeName: '',
+      avatarUrl: ''
+    },
+  ]
+}
+
+GET /search/category?offset=0&length=5&id=-1&location='Cầu Giấy'&keyword='đồ chơi trẻ em' { // id = -1: ALL CATEGORY, keyword là category, trả về các sellpost thuộc store
+                                            // có category tương tự keyword
+                                              //  trả kết quả sellposts index start from offset lết tối đa length sellposts hoặc đến cuối
+  sellposts: [
+    {
+      sellpostId: '',
+      avatarUrl: '', // avatarUrl của store có sellpost này
+      title: ''
+    },
+  ]
+}
+
+
+GET /imagelist/user?offset=-1 { // list ảnh theo thứ tự thời gian gần nhất
+                                // tính tất cả các ảnh mà thằng user đấy gửi lên theo link getawsimageurl
+                                // mỗi lần lấy 14 ảnh
+    offset: ,
+    status: 'success|failed'
+    listImage : ['','','']
+}
+
+GET /imagelist/store?offset=-1 { // list ảnh theo thứ tự thời gian gần nhất
+                                // tính tất cả các ảnh mà thằng user đấy gửi lên theo link getawsimageurl
+                                // mỗi lần lấy 14 ảnh
+    offset: ,
+    status: 'success|failed'
+    listImage : ['','','']
+}
+
+GET /imagelist/postrow?offset=-1 { // list ảnh theo thứ tự thời gian gần nhất
+                                // tính tất cả các ảnh mà thằng user đấy gửi lên theo link getawsimageurl
+                                // mỗi lần lấy 14 ảnh
+    offset: ,
+    status: 'success|failed'
+    listImage : ['','','']
+}
+
+GET /imagelist/product?offset=-1 { // list ảnh theo thứ tự thời gian gần nhất
+                                // tính tất cả các ảnh mà thằng user đấy gửi lên theo link getawsimageurl
+                                // mỗi lần lấy 14 ảnh
+    offset: ,
+    status: 'success|failed'
+    listImage : ['','','']
+}
+
+GET /imagelist/minorpost?offset=-1 { // list ảnh theo thứ tự thời gian gần nhất
+                                // tính tất cả các ảnh mà thằng user đấy gửi lên theo link getawsimageurl
+                                // mỗi lần lấy 14 ảnh
+    offset: ,
+    status: 'success|failed'
+    listImage : ['','','']
+}
+
+GET /store?nelat=0&nelng=0&swlat=0&swlng=0&length=30 {    //NE=NorthEast SW=SouthWest
+    status: 'success|failed',
+    stores: [
+        {
+            id: ,                 //store id
+            userid: ,             //owner
+            storename: 'Forest',
+            time: ,               //time tao store
+            avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+            storename: 'Forest',
+            urlname: ,            // kajkai.com/Forest
+            address: ,            // Dia chi cua hang
+            category: ,           // Loai sp
+            position: {
+              latitute: '1423424',
+              longitute: '453535',
+            }
+            phone: '01655791025',
+            lastUpdate: {
+                storename: ,
+                urlname: ,
+                avatarUrl: ,
+                coverUrl: ,
+            }
+            numlike: '23',
+            numfollow: '43',
+        }
+    ]
+}
+
+GET /users?offset=0&length=10 {   // offset = index
+    status: 'success|failed',
+    users: [
+        {
+          id,
+          username,
+          avatarUrl,
+          status: true | false // true = hoat dong bt, false = bi chan quyen su dung
+          email
+        }
+    ]
+}
+
+GET /stores?offset=0&length=10 {
+    status: 'success|failed',
+    stores: [
+        {
+          id,                 //store id
+          userid,             //owner
+          storename',
+          avatarUrl,
+        }
+    ]
+}
+=======
 //NEW NEW NEW
 
 GET /groupcomment/'sellpost|minorpost'/:id?offset=1498555009220 {
@@ -1149,3 +2301,4 @@ GET /stores?offset=0&length=10 {
         }
     ]
 }
+>>>>>>> 39aaa60670cbf7fab949dd5617886eca3f5e19c2

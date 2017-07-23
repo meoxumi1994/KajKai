@@ -10,6 +10,6 @@ cp index.html ../deploy/frontend/kajkai.com/index.html &&
 cp App.css ../deploy/frontend/kajkai.com/App.css &&
 cp cropper.css ../deploy/frontend/kajkai.com/cropper.css &&
 cp -r images ../deploy/frontend/kajkai.com &&
-cp -r dist ../deploy/frontend/kajkai.com &&
+cp -r dist ../deploy/frontend/kajkai.com  #&&
 
-aws s3 sync ../deploy/frontend/kajkai.com s3://kajkai-frontend --delete
+# aws s3 sync ../deploy/frontend/kajkai.com s3://kajkai-frontend --delete

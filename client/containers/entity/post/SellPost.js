@@ -37,6 +37,12 @@ const mapDispatchToProps = (dispatch, { id }) => ({
     },
     onGetSellpost: () => {
         dispatch(getSellPost(id))
+    },
+    onFollow: () => {
+        dispatch({ type: 'server/FOLLOW', data: {
+            id: id,
+            type: 'sellpost',
+        }})
     }
 })
 

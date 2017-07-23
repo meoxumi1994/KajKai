@@ -117,6 +117,7 @@ export const getTime = (time) => {
 }
 
 export const getLikeContent = (likes, numlike, yourid ) => {
+    if(!likes) return '';
     let likeContent = '';
     for(let i=0; i< likes.length; i++){
         if( likes[i].userid ==  yourid ){
@@ -141,6 +142,7 @@ export const getLikeContent = (likes, numlike, yourid ) => {
 }
 
 export const getBeLike = (likes, yourid) => {
+    if(!likes) return false
     for(let i = 0; i< likes.length; i++)
         if( likes[i].userid ==  yourid )
             return true;

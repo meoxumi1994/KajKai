@@ -44,9 +44,9 @@ const HandlerUser = ({ LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
 
 
                 <div className="btn btn-transparent btn-xs" style={{ marginRight: 10, padding: 0, float: 'right'}}>
-                    <Link to={"/user/"+id} >
+                    <a href={"/user/"+id}>
                         <img src={avatarUrl} alt="Cinque Terre" width="29" height="29"/>
-                    </Link>
+                    </a>
                 </div>
 
                 <div style={{ marginRight: 30, float: 'right' }}>
@@ -93,11 +93,11 @@ const HandlerUser = ({ LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
     }
 
     return (
-        <Link to="/register">
+        <a href={"/register"}>
             <button className="btn btn-default btn-sm" type="button" >
                 {LOG_IN}
             </button>
-        </Link>
+        </a>
     )
 }
 
@@ -128,9 +128,9 @@ export default class BarScreen extends React.Component {
                     <div className="col-xs-1" style={{ padding: 0}}>
                         <div>
                             <div className="btn btn-transparent btn-xs" style={{ padding: 0 }}>
-                                <Link to="/">
+                                <a href="/">
                                     <img src="/images/kajkai.svg" alt="Cinque Terre" width="27" height="27"/>
-                                </Link>
+                                </a>
                             </div>
                             {/* <div className="btn btn-transparent btn-xs" style={{ padding: 0, marginLeft: 10 }}>
                                 <Link to="/map">

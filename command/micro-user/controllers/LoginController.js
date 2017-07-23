@@ -29,7 +29,7 @@ export const loginFacebook = () => {
                         res.cookie('token', token);
                         res.json({user: getUserBasicInfo(user), tokenId: token});
                     } else {
-                        createUser(body.email, body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, body.picture.data.url, (user) => {
+                        createUser(body.email.toLowerCase(), body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, body.picture.data.url, (user) => {
                             if (user) {
                                 createUserPub(user);
                                 const token = getUserToken(user._id);
@@ -62,7 +62,7 @@ export const loginEmail = () => {
                 res.json({status: 'success'});
             })
         }
-        const email = req.body.email;
+        const email = req.body.email.toLowerCase();
         if (email && password && checkEmail(email)) {
             getUserFromEmail(email, function(user) {
                 if (!user || user.password !== password || user.verified === 0) {
@@ -95,13 +95,13 @@ export const loginGoogle = () => {
         request(options, (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 body = JSON.parse(body);
-                getUserFromEmail(body.email, (user) => {
+                getUserFromEmail(body.email.toLowerCase(), (user) => {
                     if (user) {
                         const token = getUserToken(user._id);
                         res.cookie('token', token);
                         res.json({user: getUserBasicInfo(user), tokenId: token});
                     } else {
-                        createUser(body.email, body.name, '1234678', 1, null, null, null, body.picture, (newUser) => {
+                        createUser(body.email.toLowerCase(), body.name, '1234678', 1, null, null, null, body.picture, (newUser) => {
                             if (newUser !== null) {
                                 createUserPub(newUser);
                                 const token = getUserToken(newUser._id);

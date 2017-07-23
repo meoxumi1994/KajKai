@@ -2,8 +2,8 @@ const groupcomment = (state = {
 
 }, action) => {
     switch (action.type) {
+        case 'GET_SELL_POST_SUCCESS':
         case 'CREATE_SELL_POST_SUCCESS':
-            console.log(action)
             return {
                 ...state,
                 [action.sellpost.id] : action.sellpost,

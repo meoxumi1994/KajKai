@@ -39,6 +39,16 @@ const comment = (state = {
                 })
             })
             return mystate
+        case 'GET_SELL_POST_SUCCESS':
+            let mstate = state
+            action.sellpost.leadercomments.map((item) => {
+                item.comments.map((cm) => {
+                    mstate = {...mstate,
+                        [cm.id] : cm
+                    }
+                })
+            })
+            return mstate
         case 'GET_SELLPOST_FROM_STORE_SUCCESS':
             let nstate = state
             action.sellposts.map((sp) => {

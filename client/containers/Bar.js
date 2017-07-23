@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(selectSearchType(id))
     },
     onKeyWordEnter: (searchType, keyword, offset) => {
-        dispatch(search({searchType: searchType, keyword: keyword, id: -1, offset: offset, length: 2 }))
+        dispatch(search({ keyword: keyword, id: -1, offset: offset, length: 2 }))
         dispatch(changeKeyWord(keyword))
     },
     onLocationChanged: (location) => {

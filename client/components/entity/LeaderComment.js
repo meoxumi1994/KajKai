@@ -35,7 +35,7 @@ class LeaderComment extends React.Component {
                                     isStoreRepresent={false}
                                     isleader={true}
                                     />
-                                { (offset != -2 && numcomment > comments.length - 1 && comments.length > 1 ) &&
+                                {( offset != -2 && numcomment > comments.length - 1 && comments.length > 1 ) &&
                                     <CommentSuggest
                                         id={3}
                                         isleader={false}
