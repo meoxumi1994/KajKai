@@ -1,6 +1,6 @@
 import { getProductImageList } from '../services/PostrowService.js'
 
-export const getProductImageListHandler () => (req, res) => {
+export const getProductImageListHandler = () => (req, res) => {
   let { storeid: requestedId } = req.params
   let requesterId = req.decoded._id
 
