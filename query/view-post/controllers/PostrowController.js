@@ -14,7 +14,7 @@ export const getPostrowsHandler = () => (req, res) => {
   })
 }
 
-export const getPostrowImageListHandler () => (req, res) => {
+export const getPostrowImageListHandler = () => (req, res) => {
   let { storeid: requestedId } = req.params
   let requesterId = req.decoded._id
 
