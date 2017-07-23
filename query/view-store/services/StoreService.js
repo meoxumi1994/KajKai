@@ -85,7 +85,7 @@ const getClientFormatStore = (requesterId, store) => {
   if (requesterId == 'Guest') {
     follows = followers.slice(0, 5)
   } else {
-    for (let i = 0; i < follwers.length; i++) {
+    for (let i = 0; i < followers.length; i++) {
       let follower = followers[i]
       if (follower.userId == requesterId) {
         follows.push({
