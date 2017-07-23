@@ -17,21 +17,21 @@ export const createStore = (message) => {
   if (createdAt) store.createdAt = createdAt
   if (avatarUrl) {
     store.avatarUrl = avatarUrl
-    imageList.push({
+    imageList.push(
       new Image({
         url: avatarUrl,
         time: Date.now()
       })
-    })
+    )
   }
   if (coverUrl) {
     store.coverUrl = coverUrl
-    imageList.push({
+    imageList.push(
       new Image({
         url: coverUrl,
         time: Date.now()
       })
-    })
+    )
   }
 
   store.imageList = imageList
@@ -71,21 +71,21 @@ export const updateStore = (message) => {
       if (createdAt) store.createdAt = createdAt
       if (avatarUrl) {
         store.avatarUrl = avatarUrl
-        store.imageList.push({
+        store.imageList.push(
           new Image({
             url: avatarUrl,
             time: Date.now()
           })
-        })
+        )
       }
       if (coverUrl) {
         store.coverUrl = coverUrl
-        store.imageList.push({
+        store.imageList.push(
           new Image({
             url: coverUrl,
             time: Date.now()
           })
-        })
+        )
       }
       if (address) store.address = address
       if (addressMap) store.addressMap = addressMap
