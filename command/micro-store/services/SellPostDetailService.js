@@ -30,7 +30,7 @@ export const getPubSellPostDetailBasicInfo = (sellPostDetail) => {
         titles: sellPostDetail.titles,
         productOrders: sellPostDetail.productOrders,
         type: sellPostDetail.type,
-        id: getSellPostDetailGlobalId(sellPostDetail._id),
+        postrowId: getSellPostDetailGlobalId(sellPostDetail._id),
         products: sellPostDetail.products
     }
 };
