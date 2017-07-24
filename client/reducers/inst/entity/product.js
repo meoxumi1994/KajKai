@@ -24,18 +24,14 @@ const product = (state = {
         case 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_POST_ROW':
             return {...state, [action.time]: {
                 list: [''],
-                detail: {
-                    image: '',
-                    content: '',
-                }
+                imageUrl: '',
+                content: '',
             }}
         case 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_PRODUCT':
             return {...state, [action.id]: {
                 list: [''],
-                detail: {
-                    image: '',
-                    content: '',
-                }
+                imageUrl: '',
+                content: '',
             }}
         default:
             return state

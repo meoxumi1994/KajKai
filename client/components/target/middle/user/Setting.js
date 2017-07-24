@@ -7,18 +7,19 @@ import PhoneInfo from '~/containers/profile/middle/PhoneInfo'
 import ModalUploadAvatar from '~/containers/profile/middle/ModalUploadAvatar'
 import ModalUploadCover from '~/containers/profile/middle/ModalUploadCover'
 
-const Setting = ({ changeLanguage, onUpdateAvatar, onUpdateCover, INFO, PRIVACY, SECURITY }) => {
+const Setting = ({ INFO, PRIVACY, SECURITY }) => {
+    console.log('Setting Setting Setting Setting')
     return(
-        <div style={{  width: '100%'}} >
+        <div style={{  width: '100%', marginLeft: -23, marginTop: 10, height: 786 }} >
             <div className="panel panel-default"
-                style={{ width: 850, margin: 7, marginTop: 20}}>
+                style={{ width: 938 }}>
                 <div className="panel-heading">{INFO}</div>
                 <RowInfo
                     title={'USER_NAME'}
                     itemType={'username'}
                     itemId={0}
                 />
-                <RowInfo
+                {/* <RowInfo
                     title={'PHONE'}
                     itemType={'phone'}
                     itemId={1}
@@ -32,22 +33,22 @@ const Setting = ({ changeLanguage, onUpdateAvatar, onUpdateCover, INFO, PRIVACY,
                     title={'AGE'}
                     itemType={'yearOfBirth'}
                     itemId={3}
-                />
-                <PhoneInfo/>
+                /> */} 
+                {/* <PhoneInfo/>
             </div>
             <div className="panel panel-default"
-                style={{ width: 850, margin: 7, marginTop: 20}}>
+                style={{ width: 938, marginTop: 10 }}>
                 <div className="panel-heading">{PRIVACY}</div>
                 {/* <RowPrivacy/> */}
             </div>
             <div className="panel panel-default"
-                style={{ width: 850,  margin: 7, marginTop: 20}}>
+                style={{ width: 938, marginTop: 10}}>
                 <div className="panel-heading">{SECURITY}</div>
-                <RowSecurity
+                {/* <RowSecurity
                     title={'PASSWORD'}
                     itemType={'password'}
                     itemID={4}
-                />
+                /> */}
             </div>
         </div>
     )

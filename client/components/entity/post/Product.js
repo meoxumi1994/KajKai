@@ -9,7 +9,7 @@ class Product extends React.Component {
         super(props)
     }
     render(){
-        const { id, list, detail, canEdit, onChange, width } = this.props
+        const { id, list, imageUrl, canEdit, onChange, width } = this.props
         return(
             <tr>
                 {list.map((item,index) => {
@@ -59,13 +59,13 @@ class Product extends React.Component {
                                     if(index) return (<div key={index}>{item}</div>)
                                     return undefined
                                 })}
-                                <img src={detail.image} alt="Cinque Terre" width="200" height="200"/>
+                                <img src={imageUrl} alt="Cinque Terre" width="200" height="200"/>
                             </Popover>
                         )}>
-                            <img width={15} height={15} src={detail.image} />
+                            <img width={15} height={15} src={imageUrl} />
                         </OverlayTrigger>
                     :   <div className="btn" style={{ padding: 0 }}>
-                            <img width={15} src={detail.image? detail.image: '/images/plusimage.svg'} />
+                            <img width={15} src={imageUrl? imageUrl: '/images/plusimage.svg'} />
                         </div>
                     }
                 </td>

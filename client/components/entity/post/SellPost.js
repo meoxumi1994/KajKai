@@ -28,7 +28,6 @@ class SellPost extends React.Component {
             numfollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
             onLike, postrows, postrows_order, clicksetting, id, onFollow,
         } = this.props
-        console.log(this.props)
         if(!likes)
             return (
                 <div>
@@ -47,9 +46,9 @@ class SellPost extends React.Component {
                         className="btn" style={{
                         float: 'right',
                         padding: 0}}>
-                        <div className="btn btn-default" style={{ marginTop: -10, marginRight: 10 }}
+                        <div className="btn" style={{margin: 0, marginTop: -13, marginRight: 10, padding: 0 }}
                             onClick={() => onFollow()}>
-                            follow
+                            <img src="/images/hasfollow.svg" width={25}/>
                         </div>
                         <span
                             onMouseOver={() => this.setState({ hoversetting: true })}

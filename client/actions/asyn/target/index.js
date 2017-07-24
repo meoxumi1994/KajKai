@@ -1,4 +1,4 @@
-import { flet } from '~/actions/support'
+import { flet, fleu } from '~/actions/support'
 import { targetAction, targetData } from '~/actions/sync/target'
 
 export const getTarget = (id) => dispatch => {
@@ -27,7 +27,7 @@ export const getTarget = (id) => dispatch => {
 
 export const updateStore = (store) => dispatch => {
     dispatch(updateUser('UPDATE_STORE_ING'))
-    flet('/updatestore',{
+    flet('/store',{
         store: store
     },{
         status: 'success|failed'
@@ -43,7 +43,7 @@ export const updateStore = (store) => dispatch => {
 
 export const updateUser = (user) => dispatch => {
     dispatch(updateuserAction('UPDATE_USER_ING'))
-    fleu('/updateuser',{
+    fleu('/user',{
         ...user
     },{
         status: 'failed|success',
