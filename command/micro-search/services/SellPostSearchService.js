@@ -51,7 +51,7 @@ export const getDisplayResult = (hitsResult) => {
             sellPostId: hitsResult.sellPosts[i].sellPostId,
             avatarUrl: hitsResult.sellPosts[i].avatarUrl,
             title: hitsResult.sellPosts[i].category,
-            storeId: hitsResult.sellPostId[i].storeId
+            storeId: hitsResult.sellPosts[i].storeId
         };
         res.push(sellPost);
     }
