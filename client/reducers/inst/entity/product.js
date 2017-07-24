@@ -1,6 +1,20 @@
 const product = (state = {
 }, action) => {
     switch (action.type) {
+        case 'CREATE_SELL_POST_SUCCESS':
+        case 'GET_SELL_POST_SUCCESS':
+            let mystate = state
+            action.sellpost.postrows.map((pr) => {
+                if(pr.type=='product' || pr.type=='groupproduct'){
+                    pr.products.map((pro) => {
+                        mystate = {
+                            ...mystate,
+                            [pro.id] : pro
+                        }
+                    })
+                }
+            })
+            return mystate
         case 'GET_SELLPOST_FROM_STORE_SUCCESS':
             let newstate = state
             action.sellposts.map((item) => {
@@ -24,18 +38,14 @@ const product = (state = {
         case 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_POST_ROW':
             return {...state, [action.time]: {
                 list: [''],
-                detail: {
-                    image: '',
-                    content: '',
-                }
+                imageUrl: '',
+                content: '',
             }}
         case 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_PRODUCT':
             return {...state, [action.id]: {
                 list: [''],
-                detail: {
-                    image: '',
-                    content: '',
-                }
+                imageUrl: '',
+                content: '',
             }}
         default:
             return state

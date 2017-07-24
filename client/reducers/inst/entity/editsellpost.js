@@ -21,7 +21,7 @@ const addPostRow = (item) => {
                     id: 'product001',
                     list: [''],
                 }],
-                product_order: ['product001'],
+                products_order: ['product001'],
             };
         case 'groupimage':
             return {

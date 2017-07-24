@@ -14,15 +14,22 @@ const addPostRow = (item, time) => {
                 images: [],
             }
         case 'product':
+            return {
+                type: item,
+                products_order: [time],
+                numline: 1,
+            }
         case 'listproduct':
             return {
                 type: item,
-                product_order: [time],
+                products_order: [time],
+                numline: 6,
             }
         case 'groupimage':
             return {
                 type: item,
                 images: [],
+                numline: 12,
             }
         default:
             return;

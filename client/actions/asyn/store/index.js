@@ -56,3 +56,27 @@ export const getMinorPost = (storeid, offset) => dispatch => {
         }
     })
 }
+
+//GET /imagelist/user?offset=-1
+// GET /imagelist/store?offset=-1 {
+//     offset: ,
+//     status: 'success|failed'
+//     listImage : ['','','']
+// }
+// GET /imagelist/postrow?offset=-1
+// GET /imagelist/product?offset=-1
+// GET /imagelist/minorpost?offset=-1
+
+export const getListImage = (type, id, offset) => dispatch => {
+    dispatch({ type: 'GET_PHOTO_ING' })
+    flem('/imagelist/'+type+'/'+id,{
+        offset: offset,
+    })
+    .then(({ status, listImage }) => {
+        if(status == 'success'){
+            dispatch({ type: 'GET_PHOTO_SUCCESS', listImage: listImage })
+        }else{
+            dispatch({ type: 'GET_PHOTO_FAILED' })
+        }
+    })
+}

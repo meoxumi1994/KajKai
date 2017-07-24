@@ -37,7 +37,7 @@ class ShowInMap extends React.Component {
         }
     }
     render(){
-        const { CLOSE, GET_CURRENT_POSITION, position, width, height, onChangePosition } = this.props
+        const { CLOSE, GET_CURRENT_POSITION, position, width, height, onChangePosition, canEdit } = this.props
         const marker = position ? { position: position } : undefined
         const currentPosition = position ? position : { lat: 20.969133867372143, lng: 105.86288452148438 }
         return(
@@ -79,10 +79,14 @@ class ShowInMap extends React.Component {
                                defaultCenter={currentPosition}
                                onMapLoad={() => undefined}
                                center={this.state.centerModal}
-                               onMapClick={(e) => onChangePosition({
-                                   lat: e.latLng.lat(),
-                                   lng: e.latLng.lng(),
-                               })}
+                               onMapClick={(e) => {
+                                   if(canEdit){
+                                       onChangePosition({
+                                           lat: e.latLng.lat(),
+                                           lng: e.latLng.lng(),
+                                       })
+                                   }
+                               }}
                                marker={marker}
                              />
                         </div>
@@ -91,7 +95,6 @@ class ShowInMap extends React.Component {
                                 style={{ marginTop: 10 }}
                                 onClick={() => {
                                     const that = this
-
                                     navigator.geolocation.getCurrentPosition((pos) => {
                                         const coords = pos.coords;
                                         that.setState({

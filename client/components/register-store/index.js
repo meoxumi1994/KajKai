@@ -196,6 +196,7 @@ class RegisterStore extends React.Component {
                     </div>
                     <div>
                         <ShowInMap
+                            canEdit={true}
                             width={400} height={200}
                             position={position}
                             onChangePosition={(position) => onChangePosition(position)}
