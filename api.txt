@@ -1208,11 +1208,11 @@ POST /ban {
     reason: '',
     time: ''
 }, {
-  status: true | false,
-  adminId: '',
-  defendantId: '',
-  reason: '',
-  time: ''
+    status: true | false,
+    adminId: '',
+    defendantId: '',
+    reason: '',
+    time: ''
 }
 
 POST /feedback {
@@ -1243,12 +1243,7 @@ GET /feedbacks?offset=0&length=10 {
                   username,
                   avatarUrl
               },
-              store: {
-                  id,
-                  storename,
-                  avatarUrl,
-                  url
-              }
+              sellpostId: ''
           },
           ban: {
               admin: {
@@ -1258,6 +1253,7 @@ GET /feedbacks?offset=0&length=10 {
               status: true | false,
               reason
           },
+          status: false | true
           time: Date.now(),
         }
     ]

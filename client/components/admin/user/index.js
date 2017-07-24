@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import UserDetailsContainer from '~/containers/admin/user/UserDetailsContainer'
 
 class User extends React.Component {
 
@@ -12,11 +13,12 @@ class User extends React.Component {
     }
 
     render() {
-        const { keyy, mapp,
-                onDetails
+        const { keyy, mapp, adminId,
+                onDetails, disable
               } = this.props
         return (
             <div style={{width: '100%', height: '100%', borderWidth: 1, borderStyle: 'solid'}}>
+                <UserDetailsContainer/>
                 <table className="table table-bordered">
                     <thead className="thead-default">
                         <tr style={styles.tr}>
@@ -36,20 +38,16 @@ class User extends React.Component {
                               <tr key={userId}>
                                   <th scope="row">{index+1}</th>
                                   <td>
-                                    <Link to={"/user/"+id} >
-                                        <img src={avatarUrl} style={{width: 40, height: 40, marginRight: 10, borderRadius: 50}}/>
-                                        {username}
-                                    </Link>
+                                      <img src={avatarUrl} style={{width: 40, height: 40, marginRight: 10, borderRadius: 50}}/>
+                                      {username}
                                   </td>
                                   <td>
                                       {
                                         stores.map(store =>
-                                            <div key={store.id}>
-                                                <Link to={"/store/"+store.id} >
-                                                    <img src={store.avatarUrl} style={{width: 40, height: 40, marginRight: 10, marginBottom: 10, borderRadius: 50}}/>
-                                                    {store.storename}
-                                                </Link>
-                                            </div>
+                                          <div key={store.id}>
+                                                  <img src={store.avatarUrl} style={{width: 40, height: 40, marginRight: 10, marginBottom: 10, borderRadius: 50}}/>
+                                                  {store.storename}
+                                          </div>
                                         )
                                       }
                                   </td>
@@ -57,10 +55,10 @@ class User extends React.Component {
                                     {email}
                                   </td>
                                   <td>
-                                      {status? 'Activated': 'Deactived'}
+                                      {status? 'Deactived': 'Activated'}
                                   </td>
                                   <td>
-                                      { status? <button className="btn btn-danger">Disable</button> : <button className="btn btn-primary">Enable</button> }
+                                      { status? <button className="btn btn-primary" onClick={() => disable(false, adminId, userId, 'Thien gay')}>Enable</button> : <button className="btn btn-danger" onClick={() => disable(true, adminId, userId, 'Thien gay')}>Disable</button> }
                                   </td>
                               </tr>
                             )
