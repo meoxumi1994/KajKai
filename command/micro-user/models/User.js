@@ -26,7 +26,8 @@ const UserSchema = new mongoose.Schema({
     phoneLastUpdateAt: {type: Date},
     privacyAEP: {type: String, enum: _.values(PrivacyAEP)},
     privacyOthers: {type: String, enum: _.values(PrivacyOthers)},
-    banned: {type: Number}
+    banned: {type: Number},
+    banReason: {type: String}
 });
 
 export default UserSchema

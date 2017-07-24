@@ -3,7 +3,7 @@ import config from './config/pubSubConfig'
 import allChannels from './channels'
 
 const sub = redis.createClient(config);
-sub.setMaxListeners(Infinity)
+sub.setMaxListeners(Infinity);
 const pub = redis.createClient(config);
 
 // subscribe all channels
@@ -19,7 +19,9 @@ for(let mChannel in allChannels) {
             const eventId = eventMessage.eventId;
 
             method(eventMessage, (res) => {
-                pub.publish(channel + eventId, JSON.stringify(res))
+                if (res && eventId) {
+                    pub.publish(channel + eventId, JSON.stringify(res))
+                }
             })
         }
     });

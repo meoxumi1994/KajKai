@@ -1,4 +1,4 @@
-import { getUserFromToken, getUserBasicStoreInfo, getUser, getListUser, getListUserBasicInfo } from '../services/UserService'
+import { getUserFromToken, getUserBasicStoreInfo, getUser, getListUser, getListUserBasicInfo, addBan, removeBan } from '../services/UserService'
 
 export const authorizeTokenSub = (message, next) => {
     getUserFromToken(message.token, function (user) {
@@ -28,4 +28,16 @@ export const getListUserSub = (message, next) => {
             next({status: 'failed'})
         }
     })
+};
+
+export const addBanCon = (message, next) => {
+    addBan(message.userId, message.reason, () => {
+        next(null);
+    });
+};
+
+export const removeBanCon = (message, next) => {
+    removeBan(message.userId, message.reason, () => {
+        next(null);
+    });
 };
