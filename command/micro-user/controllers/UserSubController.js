@@ -31,13 +31,13 @@ export const getListUserSub = (message, next) => {
 };
 
 export const addBanCon = (message, next) => {
-    addBan(message.userId, message.reason, () => {
+    addBan(message.ban.userId, message.ban.reason, () => {
         next(null);
     });
 };
 
 export const removeBanCon = (message, next) => {
-    removeBan(message.userId, message.reason, () => {
+    removeBan(message.ban.userId, message.ban.reason, () => {
         next(null);
     });
 };
