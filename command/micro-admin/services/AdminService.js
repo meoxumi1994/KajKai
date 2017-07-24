@@ -1,5 +1,6 @@
 import { Admin, User, Feedback } from '../models'
 import { sendBanEmail, sendUnBanEmail } from './EmailService'
+import { addBanPub, removeBanPub } from './BanPubService'
 import jwt from 'jsonwebtoken'
 
 export const getAdmin = (adminName, password, next) => {
@@ -102,8 +103,10 @@ export const banUser = (banned, adminId, userId, reason, next) => {
     if (user) {
       if (!user.banned || user.banned != banned) {
         if (banned == 0) {
+          removeBanPub(userId, reason)
           sendUnBanEmail(user.username, user.email, reason)
         } else {
+          addBanPub(userId, reason)
           sendBanEmail(user.username, user.email, reason)
         }
         user.banned = banned
