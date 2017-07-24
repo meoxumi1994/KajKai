@@ -23,7 +23,6 @@ class User extends React.Component {
                             <th>#</th>
                             {cols.map(col =>
                               <th key={col.label}>
-                                  <img src={col.icon} style={styles.theadIcon}/>
                                   {col.label}
                               </th>
                             )}
@@ -78,23 +77,23 @@ class User extends React.Component {
 const cols = [
     {
         icon: "./images/admin/avatar.png",
-        label: "USER"
+        label: "User"
     },
     {
         icon: "./images/admin/store.png",
-        label: "STORES"
+        label: "Stores"
     },
     {
         icon: "./images/admin/email.png",
-        label: "EMAIL"
+        label: "Email"
     },
     {
         icon: "./images/admin/status.png",
-        label: "STATUS"
+        label: "Status"
     },
     {
         icon: "./images/admin/action.png",
-        label: "ACTION"
+        label: "Action"
     },
 ]
 

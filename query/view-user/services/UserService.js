@@ -1,8 +1,8 @@
 import { User, Address } from '../models'
 import jwt from 'jsonwebtoken'
 
-export const getUser = (id, next) => {
-  User.findOne({ id }, function(err, user) {
+export const getUser = (requesterId, id, next) => {
+  User.findOne({ id }, (err, user) => {
       if (err || !user) {
         if(err) {
           next(null)
@@ -43,7 +43,7 @@ export const getUser = (id, next) => {
 }
 
 export const getUserPrivacy = (id, next) => {
-  User.findOne({ id }, function(err, user) {
+  User.findOne({ id }, (err, user) => {
       if (err || !user) {
         if(err) {
           next(null)
@@ -68,8 +68,8 @@ export const getUserPrivacy = (id, next) => {
   })
 }
 
-export const getUserImageList = (id, offset, next) => {
-  User.findOne({ id }, function(err, user) {
+export const getUserImageList = (requesterId, id, offset, next) => {
+  User.findOne({ id }, (err, user) => {
       if (err || !user) {
         if(err) {
           next(null)
@@ -80,14 +80,20 @@ export const getUserImageList = (id, offset, next) => {
           })
         }
       } else {
-        const { imageList } = user
+        let { imageList } = user
+        if (!imageList) {
+          imageList = []
+        }
         const mImageList = []
         let currentNumberOfImage = 0, mOffset, lastIndex
         for (let i = imageList.length - 1; i >= 0; i--) {
           let image = imageList[i]
           if (image.time < offset) {
             if (currentNumberOfImage < 14) {
-              mImageList.push(image.url)
+              mImageList.push({
+                url: image.url,
+                time: image.time
+              })
 
               mOffset = image.time.getTime()
               lastIndex = i
@@ -98,7 +104,7 @@ export const getUserImageList = (id, offset, next) => {
           }
         }
 
-        if (currentNumberOfSellpost < 14 || lastIndex == 0) {
+        if (currentNumberOfImage < 14 || lastIndex == 0) {
           mOffset = -2
         }
 

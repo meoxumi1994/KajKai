@@ -4,6 +4,7 @@ import CategorySchema from './Category'
 import CategoryAutoSchema from './CategoryAuto'
 import CertificateSchema from './Certificate'
 import FollowerSchema from './Follower'
+import ImageSchema from './Image'
 import LastUpdateSchema from './LastUpdate'
 import LikerSchema from './Liker'
 
@@ -15,6 +16,7 @@ const StoreSchema = new mongoose.Schema({
   urlName: {type: String},
   avatarUrl: {type: String},
   coverUrl: {type: String},
+  imageList: [ImageSchema],
   lastUpdate: {type: LastUpdateSchema},
   address: {type: String},
   addressMap: [String],

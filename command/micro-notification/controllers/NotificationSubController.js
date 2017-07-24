@@ -1,9 +1,15 @@
-import { getListFollower, addNewFollow, removeFollow } from '../services/FollowService'
-import { addNewLike, removeLike } from '../services/LikeService'
+import { getListFollower, addNewFollow, removeFollow, modifyFollow, getListFollowee } from '../services/FollowService'
+import { addNewLike } from '../services/LikeService'
 
 export const getListFollowerCon = (message, next) => {
     getListFollower(message.followeeId, (list) => {
         next({status: 'success', followerList: list});
+    })
+};
+
+export const getListFolloweeCon = (message, next) => {
+    getListFollowee(message.followerId, (list) => {
+        next({status: 'success', followeeList: list})
     })
 };
 
@@ -16,6 +22,18 @@ export const addNewFollowCon = (message, next) => {
 export const removeFollowCon = (message, next) => {
     removeFollow(message.followerId, message.followeeId, () => {
         //
+    })
+};
+
+export const updateFollowCon = (message, next) => {
+    let followerId = message.userId;
+    let followeeId = (message.storeId) ? message.storeId : message.sellPostId;
+    modifyFollow(followerId, followeeId, (follow) => {
+        if (follow) {
+            next({status: 'success', follow: follow})
+        } else {
+            next({status: 'failed'})
+        }
     })
 };
 

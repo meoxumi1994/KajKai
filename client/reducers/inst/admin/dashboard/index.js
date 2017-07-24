@@ -6,7 +6,11 @@ const dashboard = (state = {
         solved: [],
         all: []
     },
-    mapp: {}
+    mapp: {},
+    current: {
+        display: false,
+        id: ''
+    }
 }, action) => {
     switch (action.type) {
 
@@ -20,7 +24,6 @@ const dashboard = (state = {
                   all.push(feedback.id)
               }
           )
-
           return {
               ...state,
               keyy: {
@@ -31,6 +34,14 @@ const dashboard = (state = {
               mapp: utils.getFeedbacksMap(action)
           }
 
+      case 'ADMIN/DASHBOARD/CURRENT':
+          return {
+              ...state,
+              current: {
+                  display: action.data.display,
+                  id: action.data.id
+              }
+          }
       default:
           return state
     }

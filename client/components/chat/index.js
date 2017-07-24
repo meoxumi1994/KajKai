@@ -4,8 +4,6 @@ import ChatCenterContainer from '~/containers/chat/center'
 import ChatLeftContainer from '~/containers/chat/left'
 import { Route, Redirect } from 'react-router'
 
-// import TagsInput from 'react-tagsinput'
-
 class Chat extends React.Component {
 
     constructor(props) {
@@ -13,7 +11,7 @@ class Chat extends React.Component {
     }
 
     render() {
-      let { messagesKey, messagesMap, styles, multiChat } = this.props
+      let { messagesKey, messagesMap, styles } = this.props
       return(
         <div style={mainStyles.mainDiv} className="input-group">
             <div style={mainStyles.left}>
@@ -25,7 +23,6 @@ class Chat extends React.Component {
                 <ChatCenterContainer
                     mesId={messagesKey[0]}
                     messagesMap={messagesMap}
-                    multiChat={multiChat}
                     styles={styles}/>
             </div>
         </div>

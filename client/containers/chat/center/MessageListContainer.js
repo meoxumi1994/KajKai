@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import MessageList from '~/components/chat/center/MessageList'
+import { getMessages } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
     const { user } = state
@@ -11,8 +12,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    getMessages: (mesId, multiChat) => {
-        dispatch(getMessages(mesId, Date.now(), multiChat))
+    getMessages: (mesId, offset) => {
+        dispatch(getMessages(mesId, offset, 'update'))
     },
 })
 

@@ -3,6 +3,10 @@ export default {
         controller: 'NotificationSubController',
         method: 'getListFollowerCon'
     },
+    'NOTI.GetListFollowee': {
+        controller: 'NotificationSubController',
+        method: 'getListFolloweeCon'
+    },
     'NOTI.AddNewFollow': {
         controller: 'NotificationSubController',
         method: 'addNewFollowCon'
@@ -10,6 +14,10 @@ export default {
     'NOTI.RemoveFollow': {
         controller: 'NotificationSubController',
         method: 'removeFollowCon'
+    },
+    'NOTI.UpdateFollow': {
+        controller: 'NotificationSubController',
+        method: 'updateFollowCon'
     },
     'NOTI.LIKE.AddLike': {
         controller: 'NotificationSubController',

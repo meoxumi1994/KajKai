@@ -88,7 +88,9 @@ export const createSellPostProductSub = (message) => {
     const content = product.product.content;
     const sellPostId = product.sellPostId;
     const productId = product.productId;
-    addNewProduct({sellPostId, content, productId});
+    setTimeout(function(){
+        addNewProduct({sellPostId, content, productId});
+    }, 30000);
 };
 
 export const updateSellPostProductSub = (message) => {
@@ -97,5 +99,7 @@ export const updateSellPostProductSub = (message) => {
     const content = product.product.content;
     const sellPostId = product.sellPostId;
     const productId = product.productId;
-    updateProduct({sellPostId, content, productId});
+    setTimeout(function(){
+        updateProduct({sellPostId, content, productId});
+    }, 30000);
 };

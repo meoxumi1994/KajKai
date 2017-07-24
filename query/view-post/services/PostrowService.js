@@ -1,6 +1,6 @@
-import { Postrow } from '../models'
+import { Postrow, BasicStore } from '../models'
 
-export const getPostrows = (sellpostId, offset, next) => {
+export const getPostrows = (requesterId, sellpostId, offset, next) => {
   Postrow.find({ sellpostId }, (err, postrows) => {
     if (err || !postrows) {
       if(err) {
@@ -18,6 +18,55 @@ export const getPostrows = (sellpostId, offset, next) => {
         ...getClientFormatPostrows(postrows, offset)
       })
     }
+  })
+}
+
+export const getPostrowImageList = (requesterId, storeId, offset, next) => {
+  BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+      if (err || !basicStore) {
+        if(err) {
+          next(null)
+        } else {
+          next({
+            status: 'nodata',
+            listImage: []
+          })
+        }
+      } else {
+        let { postrowImageList } = basicStore
+        if (!postrowImageList) {
+          postrowImageList = []
+        }
+        const mImageList = []
+        let currentNumberOfImage = 0, mOffset, lastIndex
+        for (let i = postrowImageList.length - 1; i >= 0; i--) {
+          let image = postrowImageList[i]
+          if (image.time < offset) {
+            if (currentNumberOfImage < 14) {
+              mImageList.push({
+                url: image.url,
+                time: image.time
+              })
+
+              mOffset = image.time.getTime()
+              lastIndex = i
+              currentNumberOfImage++
+            } else {
+              break
+            }
+          }
+        }
+
+        if (currentNumberOfImage < 14 || lastIndex == 0) {
+          mOffset = -2
+        }
+
+        next({
+          offset: mOffset,
+          status: 'success',
+          listImage : mImageList
+        })
+      }
   })
 }
 
@@ -42,15 +91,16 @@ export const getClientFormatPostrows = (postrows, offset) => {
       mPostrow.content = postrow.content
       mPostrow.numline = postrow.numberOfLine
       mPostrow.images = postrow.images
-      mPostrow.titles_order = postrow.titles.map(title => title.id)
+      mPostrow.titles_order = postrow.titles ? postrow.titles.map(title => title.id) : []
       mPostrow.titles = postrow.titles
-      mPostrow.products = postrow.products.map(product => ({
+      mPostrow.products_order = postrow.products ? postrow.products.map(product => product.id) : []
+      mPostrow.products = postrow.products ? postrow.products.map(product => ({
         id: product.id,
         content: product.content,
         imageUrl: product.imageUrl,
-        list: product.list,
+        list: product.list ? product.list : [],
         totalnum: product.numberOfOrder
-      }))
+      })) : []
       mPostrow.type = postrow.type
 
       mPostrows.push(mPostrow)

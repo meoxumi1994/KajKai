@@ -5,7 +5,7 @@ class Settings extends React.Component {
 
     render() {
       const { mesId, user, chatListMap } = this.props
-      const { close, changeGroupName, removeUser } = this.props
+      const { close, changeGroupName } = this.props
       const { usersKey, usersMap } = chatListMap[mesId]
       const show = chatListMap[mesId].display.setting
       let groupName = ''
@@ -24,8 +24,8 @@ class Settings extends React.Component {
                               groupName.value = ''
                           }
                       }}>
-                          <table>
-                              <tbody>
+                          <table className="table">
+                              <tbody className="default-thead">
                                   <tr>
                                       <td style={{width: 200}}>Group name</td>
                                       <td>
@@ -50,21 +50,12 @@ class Settings extends React.Component {
                                                   <img src={usersMap[memberId].avatarUrl} width="40" height="40"/>
                                                   <label>{usersMap[memberId].username}</label>
                                                   {
-                                                      usersMap[memberId].disabled?
                                                       <button
                                                             type="button"
                                                             disabled={true}
                                                             className="btn"
                                                             style={{position: 'absolute', right: 50, marginBottom: 10}}>
                                                             Removed
-                                                      </button>
-                                                      :
-                                                      <button
-                                                            type="button"
-                                                            onClick={() => removeUser(mesId, user.id, memberId)}
-                                                            className="btn btn-danger"
-                                                            style={{position: 'absolute', right: 50, marginBottom: 10}}>
-                                                            Remove
                                                       </button>
                                                   }
                                               </div>

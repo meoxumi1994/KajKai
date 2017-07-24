@@ -1,7 +1,7 @@
 import { Sellpost, Minorpost } from '../models'
 import { getClientFormatReplies } from './ReplyService'
 
-export const getComments = (postType, id, offset, next) => {
+export const getComments = (requesterId, postType, id, offset, next) => {
   if (postType == 'sellpost') {
     Sellpost.findOne({ id }, (err, sellpost) => {
       if (err || !sellpost) {

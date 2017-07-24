@@ -14,5 +14,13 @@ export default {
   'USER.Updated': {
     controller: 'UserSubController',
     method: 'updateBasicUser'
+  },
+  'FOLLOW.AddFollow': {
+    controller: 'FollowSubController',
+    method: 'addFollow'
+  },
+  'FOLLOW.RemoveFollow': {
+    controller: 'FollowSubController',
+    method: 'removeFollow'
   }
 }

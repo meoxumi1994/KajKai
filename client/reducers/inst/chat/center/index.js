@@ -27,7 +27,6 @@ const center = (state = {
 
         case 'REMOVE_CHAT':
         case 'CLOSE_CHAT':
-            console.log('REMOVE_CHAT ', action);
             const mKey = state.multipleKey
             mKey.splice(mKey.indexOf(action.data.mesId), 1)
             const mMap = state.messagesMap
@@ -62,7 +61,7 @@ const center = (state = {
               ],
               messagesMap: {
                   ...state.messagesMap,
-                  [action.data.mesId]: action.data.messages.reverse()
+                  [action.data.mesId]: action.data.messages
               }
             }
             // console.log('\n[Reducer Center] INIT_MULTI_MESSAGES', action, initMultiMessages);
@@ -112,6 +111,20 @@ const center = (state = {
             }
             // console.log('\n[Reducer Center] NEW_CHAT ', action, newChat)
             return newChat
+
+        case 'UPDATE_MESSAGE':
+            const updateMessage = {
+                ...state,
+                messagesMap: {
+                    ...state.messagesMap,
+                    [action.data.mesId]: [
+                        ...action.data.messages.reverse(),
+                        ...state.messagesMap[action.data.mesId],
+                    ]
+                }
+            }
+            console.log('\n[Reducer Center] UPDATE_MESSAGE ', action, updateMessage)
+            return updateMessage
 
         default:
           return state

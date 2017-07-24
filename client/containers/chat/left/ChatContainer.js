@@ -12,7 +12,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+    removeNewChat: () => {
+        dispatch({type: 'REMOVE_CHAT', data: {mesId: 0}})
+    }
 })
 
 const ChatContainer = connect(

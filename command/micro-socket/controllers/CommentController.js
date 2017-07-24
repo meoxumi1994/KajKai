@@ -1,4 +1,5 @@
-import { addNewSecondLayerCommentPub, addNewFirstLayerCommentPub, getMoreFirstLayerComments, getMoreSecondLayerComments, addNewFollow, getListFollower } from './CommentSocketPubController'
+import { addNewSecondLayerCommentPub, addNewFirstLayerCommentPub, getMoreFirstLayerComments, getMoreSecondLayerComments, addNewFollow } from './CommentSocketPubController'
+import { getListFollower } from './FollowPubController'
 
 export const joinPostCon = (action, sio, io) => {
     if (action.data.sellpostid) {

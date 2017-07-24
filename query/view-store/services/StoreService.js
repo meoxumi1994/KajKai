@@ -2,7 +2,7 @@ import { Store } from '../models'
 import { checkInside } from '../utils'
 import jwt from 'jsonwebtoken'
 
-export const getStore = (id, next) => {
+export const getStore = (requesterId, id, next) => {
     Store.findOne({ urlName: id },  (err, store) => {
         if (err || !store) {
           if(err) {
@@ -18,7 +18,7 @@ export const getStore = (id, next) => {
         } else {
             next({
               status: 'success',
-              store: getClientFormatStore(store)
+              store: getClientFormatStore(requesterId, store)
             })
         }
     })
@@ -65,6 +65,55 @@ export const getStores = (swlat, swlng, nelat, nelng, length, next) => {
   })
 }
 
+export const getStoreImageList = (requesterId, id, offset, next) => {
+  Store.findOne({ id }, (err, store) => {
+      if (err || !store) {
+        if(err) {
+          next(null)
+        } else {
+          next({
+            status: 'nodata',
+            listImage: []
+          })
+        }
+      } else {
+        let { imageList } = store
+        if (!imageList) {
+          imageList = []
+        }
+        const mImageList = []
+        let currentNumberOfImage = 0, mOffset, lastIndex
+        for (let i = imageList.length - 1; i >= 0; i--) {
+          let image = imageList[i]
+          if (image.time < offset) {
+            if (currentNumberOfImage < 14) {
+              mImageList.push({
+                url: image.url,
+                time: image.time
+              })
+
+              mOffset = image.time.getTime()
+              lastIndex = i
+              currentNumberOfImage++
+            } else {
+              break
+            }
+          }
+        }
+
+        if (currentNumberOfImage < 14 || lastIndex == 0) {
+          mOffset = -2
+        }
+
+        next({
+          offset: mOffset,
+          status: 'success',
+          listImage : mImageList
+        })
+      }
+  })
+}
+
 export const verifyToken = (token) => {
     try {
         const decoded = jwt.verify(token, 'secret');
@@ -74,8 +123,40 @@ export const verifyToken = (token) => {
     }
 }
 
-const getClientFormatStore = (store) => {
+const getClientFormatStore = (requesterId, store) => {
   const { lastUpdate } = store
+  let { followers } = store
+  if (!followers) {
+    followers = []
+  }
+  let follows = []
+
+  if (requesterId == 'Guest') {
+    follows = followers.slice(0, 5)
+  } else {
+    for (let i = 0; i < followers.length; i++) {
+      let follower = followers[i]
+      if (follower.userId == requesterId) {
+        follows.push({
+          userid: follower.userId,
+          username: follower.username,
+          avatarUrl: follower.avatarUrl
+        })
+        break
+      }
+    }
+
+    for (let i = 0; i < followers.length && follows.length < 5; i++) {
+      let follower = followers[i]
+      if (follower.userId != requesterId) {
+        follows.push({
+          userid: follower.userId,
+          username: follower.username,
+          avatarUrl: follower.avatarUrl
+        })
+      }
+    }
+  }
 
   return ({
     id: store.id,
@@ -106,6 +187,6 @@ const getClientFormatStore = (store) => {
     numlike: store.numberOfLike ? store.numberOfLike : 0,
     likes: store.likers ? store.likers.slice(0, 5) : [],
     numfollow: store.numberOfFollow ? store.numerOfFollow : 0,
-    follows: store.followers ? store.followers.slice(0, 5) : [],
+    follows
   })
 }

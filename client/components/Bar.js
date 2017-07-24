@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import RiseUp from '~/components/entity/draw/RiseUp'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
 import DropDownSettingBar from '~/containers/entity/DropDownSettingBar'
-// import ChatLeftContainer from '~/containers/chat/left'
+import ChatLeftContainer from '~/containers/chat/left'
 import AutoCompleteContainer from '~/containers/mapp/AutoCompleteContainer'
 
 const HandlerUser = ({ LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
-    id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat, clicksetting, clickSetting, unreadChat}) => {
+    id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat, clicksetting, clickSetting, unreadChat, resetChatQuantity}) => {
     if(isusername){
         return (
             <div>
@@ -60,7 +60,7 @@ const HandlerUser = ({ LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
                         }} number="12"/>
                 </div>
 
-                <div className="dropdown" style={{ marginRight: 10, float: 'right'}}>
+                <div className="dropdown" style={{ marginRight: 10, float: 'right'}} onClick={() => resetChatQuantity()}>
                     <div className="btn btn-default btn-xs dropdown-toggle" id="chatDropDown" data-toggle="dropdown"
                         style={{ borderColor: 'white', padding: 0, height: 31}} >
                         <RiseUp
@@ -74,7 +74,7 @@ const HandlerUser = ({ LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
                             number={unreadChat.quantity}/>
                     </div>
                     <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
-                        {/* <ChatLeftContainer multiChat={true}/> */}
+                        <ChatLeftContainer multiChat={true}/>
                     </ul>
                 </div>
             </div>

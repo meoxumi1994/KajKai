@@ -2,8 +2,19 @@ import socketIo from 'socket.io'
 import allEvents from './events'
 import { authoriseToken } from '../controllers/SocketPubController'
 import { getUnreadMessageCon } from '../controllers/ChatController'
+import { getFollowListPub } from '../controllers/FollowPubController'
 
 const sockListen = (user, socket, io) => {
+    if (user) {
+        getFollowListPub(user.id, (list) => {
+            console.log('followeeList: ' + JSON.stringify(list));
+            if (list !== null && list.length > 0) {
+                for (let i = 0; i < list.length; ++i) {
+                    socket.join(list[i]);
+                }
+            }
+        })
+    }
     for(let e in allEvents){
         let handler = allEvents[e];
         let method = require('../controllers/' + handler.controller)[handler.method];

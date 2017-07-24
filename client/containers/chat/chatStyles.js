@@ -1,5 +1,3 @@
-const mainColor= '#e9ebee'
-
 const singleChat = {
       type: 'singleChat',
       top: {
@@ -133,11 +131,6 @@ const singleChat = {
       }
 }
 
-
-const chatStyles = {
-    getSingleChat: () => {
-        return singleChat
-    },
+export const chatStyles = () => {
+    return singleChat
 }
-
-export default chatStyles

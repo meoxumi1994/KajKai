@@ -156,7 +156,7 @@ const chatMap = (state={
                         }
                     }
                 }
-                
+
             case 'REMOVE_MEMBER':
                 const tempKeyResult = state.search.results.keyy
                 const tempMapResult = state.search.results.mapp
@@ -187,7 +187,7 @@ const chatMap = (state={
                     }
                 }
             default:
-
+              return state
           }
 
         default:

@@ -44,10 +44,10 @@ module.exports = {
     ]
   },
   devServer: {
-    http: {
-      key: fs.readFileSync('./config/kajkai.key'),
-      cert: fs.readFileSync('./config/kajkai.crt')
-    },
+    // http: {
+    //   key: fs.readFileSync('./config/kajkai.key'),
+    //   cert: fs.readFileSync('./config/kajkai.crt')
+    // },
     port: 3000,
     historyApiFallback: true,
     hot: true,

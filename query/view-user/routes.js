@@ -36,6 +36,13 @@ export default {
       method: 'getUserImageListHandler'
     }
   },
+  '/imagelist/user/:id': {
+    get: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'getUserImageListHandler'
+    }
+  },
   '/test': {
     get: {
       controller: 'TestController',

@@ -85,22 +85,3 @@ export const addNewFollow = (followerId, followeeId) => {
     pub.publish('NOTI.AddNewFollow', JSON.stringify(publishData));
     pub.quit();
 };
-
-export const getListFollower = (followeeId, next) => {
-    const sub = redis.createClient(config);
-    const pub = redis.createClient(config);
-    const publishData = {followeeId: followeeId, eventId: getUUID()};
-    pub.publish('NOTI.GetListFollower', JSON.stringify(publishData));
-    sub.subscribe('NOTI.GetListFollower' + publishData.eventId);
-    sub.on('message', (channel, message) => {
-        message = JSON.parse(message);
-        sub.unsubscribe();
-        sub.quit();
-        pub.quit();
-        if (message.status === 'success') {
-            next(message.followerList)
-        } else {
-            next(null)
-        }
-    })
-};

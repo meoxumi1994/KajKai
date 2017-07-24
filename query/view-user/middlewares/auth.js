@@ -5,16 +5,16 @@ const auth = () => {
         const token = req.cookies.token
         console.log('token: ' + token)
         if (!token) {
-            res.json({ authorization: "FAILED" })
+            req.decoded = { _id: 'Guest' }
+            next()
         } else {
             let decoded = verifyToken(token)
             if (decoded) {
                 req.decoded = decoded
                 next()
             } else {
-                res.json({
-                    authorization: "FAILED"
-                })
+              req.decoded = { _id: 'Guest' }
+              next()
             }
         }
     }
