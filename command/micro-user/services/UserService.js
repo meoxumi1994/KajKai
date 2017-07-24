@@ -258,7 +258,7 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
         let img = new Image({url: avatarUrl, time: (new Date()).getTime()});
         imageUrl = [img];
     }
-    const user = new User({email: email, userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
+    const user = new User({email: email.toLowerCase(), userName: userName, password: password, verified: verified, yearOfBirth: yearOfBirth, socialNetworkType: socialNetworkType,
                 socialNetworkId: socialNetworkId, avatarUrl: avatarUrl, imageUrl: imageUrl});
     user.save((err) => {
         console.log('NEW USER CREATED: ' + JSON.stringify(user));
@@ -367,5 +367,28 @@ export const updateUserInfo = (userId, info, next) => {
                 next('success', user)
             }
         })
+    })
+};
+
+export const addBan = (userId, reason, next) => {
+    getUser(userId, (user) => {
+        if (user) {
+            user.ban = 1;
+            user.banReason = reason;
+            user.save(() => {
+                next();
+            });
+        }
+    })
+};
+
+export const removeBan = (userId, reason, next) => {
+    getUser(userId, (user) => {
+        if (user) {
+            user.ban = 0;
+            user.save(() => {
+                next();
+            });
+        }
     })
 };
