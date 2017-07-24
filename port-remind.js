@@ -5,6 +5,7 @@
 "micro-socket": 8084
 "micro-search": 8085
 "micro-notification": 8086
+"micro-admin": 8087
 
 
 
