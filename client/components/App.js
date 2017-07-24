@@ -9,11 +9,11 @@ import loadUserLoginRegister from 'bundle-loader?lazy!../containers/user-login-r
 import MapContainer from 'bundle-loader?lazy!../containers/mapp/MapContainer'
 import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
-// import loadChat from 'bundle-loader?lazy!../containers/chat'
+import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Store from '~/containers/store'
 import User from '~/containers/user'
 import ContactHistory from '~/containers/contacthistory'
-// import ChatCenterContainer from '~/containers/chat/center'
+import ChatCenterContainer from '~/containers/chat/center'
 import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 
 import AdminContainer from '~/containers/admin/'
@@ -75,14 +75,14 @@ const RegisterStore = () => (
     </Bundle>
 )
 
-// const Chat = ({ id }) => (
-//     <Bundle load={loadChat}>
-//         {(Comp) => (Comp
-//           ? <Comp/>
-//           : null
-//         )}
-//     </Bundle>
-// )
+const Chat = ({ id }) => (
+    <Bundle load={loadChat}>
+        {(Comp) => (Comp
+          ? <Comp/>
+          : null
+        )}
+    </Bundle>
+)
 
 // const Target = ({ id }) => (
 //     <Bundle load={loadTarget}>
@@ -126,7 +126,7 @@ class App extends React.Component {
                                   <Route path="/register" component={UserLoginRegister}/>
                                   <Route path="/profile" component={Profile}/>
                                   <Route path="/registerstore" component={RegisterStore}/>
-                                  {/* <Route path="/chat" component={Chat}/> */}
+                                  <Route path="/chat" component={Chat}/>
                                   <Route path="/admin" component={Admin}/>
                               </div>
                               {
@@ -143,10 +143,10 @@ class App extends React.Component {
                                                   zIndex:100,
                                                   marginLeft: index * 325 + 5
                                                 }}>
-                                                    {/* <ChatCenterContainer
+                                                    <ChatCenterContainer
                                                         mesId={mesId}
                                                         styles={styles}
-                                                        messagesMap={messagesMap}/> */}
+                                                        messagesMap={messagesMap}/>
                                                 </div>
                                               )
                                           }

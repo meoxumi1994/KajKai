@@ -27,14 +27,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             }
         })
     },
-    removeUser: (mesId, id, memberId) => {
-        dispatch({type: 'server/REMOVE_MEMBER', data: {
-            mesId,
-            id,
-            memberId,
-            time: Date.now()
-        }})
-    }
 })
 
 const SettingsContainer = connect(

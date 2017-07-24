@@ -1,12 +1,5 @@
 const bar = (state = {
-    clicksetting: false,
-    unreadChat: {
-        quantity: '10',
-        messages: [
-            "593e4c1a2688d830be26fc00",
-            "593e4c1a2688d830be26fc66"
-        ]
-    }
+    clicksetting: false
 }, action) => {
     switch (action.type) {
         case 'SCREEN_CLICK':
@@ -17,9 +10,6 @@ const bar = (state = {
             return {...state,
                 [action.key] : action.value,
             }
-        case 'global/UNREAD_CHATS':
-            // console.log('global/UNREAD_CHATS', action);
-            return state
         default:
             return state
     }

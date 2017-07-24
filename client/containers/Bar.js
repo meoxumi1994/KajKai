@@ -30,7 +30,7 @@ const mapStateToProps = (state, ownProps) => {
         HOME: g('HOME'),
         SETTING: g('SETTING'),
         LOG_OUT: g('LOG_OUT'),
-        unreadChat: state.inst.bar.unreadChat
+        unreadChat: state.inst.chat.unread
     })
 }
 
@@ -38,9 +38,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onLogoutClick: () => {
         dispatch(logOut())
     },
-    setMultiChat: (value) => {
-        dispatch({type: 'MULTIPLE_CHAT', data: value})
-    },
+    // setMultiChat: (value) => {
+    //     dispatch({type: 'MULTIPLE_CHAT', data: value})
+    // },
     onLoadCategory: () => {
         dispatch(loadCategory())
     },
@@ -58,6 +58,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     onChange: (key, value) => {
         dispatch({ type: 'INST_BAR_CHANGE', key: key, value: value })
+    },
+    resetChatQuantity: () => {
+        dispatch({type: 'server/RESET_UNREAD_CHATS_QUANTITY'})
     }
 })
 

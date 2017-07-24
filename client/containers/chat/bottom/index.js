@@ -17,6 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
           mesId = null
       }
       dispatch(sendMessage(mesId, id, text, url, 'message'))
+      dispatch({type: 'server/READ_CHAT', data: {mesId: mesId}})
   },
 
 })

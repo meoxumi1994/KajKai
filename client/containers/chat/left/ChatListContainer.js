@@ -10,14 +10,16 @@ const mapStateToProps = (state, ownProps) => {
       chatListMap,
       chatListKey,
       currentChat: currentChat.mesId,
-      userId: state.user.id
+      userId: state.user.id,
+      unread: state.inst.chat.unread
     }
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getMessages: (mesId, multiChat) => {
-        dispatch(getMessages(mesId, Date.now(), multiChat))
+        dispatch(getMessages(mesId, Date.now(), 'load'))
+        dispatch({type: 'server/READ_CHAT', data: {mesId: mesId}})
     },
     setUserId: (id) => {
         dispatch(setUserId(id))

@@ -8,7 +8,7 @@ class Chat extends React.Component {
 
     render() {
 
-        const { chatListMap, mesId, user, currentChat } = this.props
+        const { chatListMap, mesId, user, currentChat, removeNewChat } = this.props
 
         if (chatListMap[mesId] == undefined || user.id == undefined) {
             return (
@@ -16,11 +16,7 @@ class Chat extends React.Component {
             )
         }
 
-        // console.log('chatListMap', chatListMap);
-        // console.log('mesId',mesId);
-        // console.log('user',user);
-
-        const { lastMessage, time, usersKey, usersMap, displayLabel, status } = chatListMap[mesId]
+        const { lastMessage, time, usersKey, usersMap, displayLabel } = chatListMap[mesId]
 
         let label = displayLabel
         if (label == undefined || label == '') {
@@ -76,6 +72,14 @@ class Chat extends React.Component {
                       {lastMessage.time}
                     </small>
                 </div>
+              }
+
+              {
+                mesId == 0?
+                <button style={{backgroundColor: '#cc3333', marginTop: 5, marginLeft: 60}} className="btn">
+                    <img src="./images/cancel.png" style={{width: 20, height: 20, backgroundColor: '#cc3333'}}/>
+                </button>
+                : undefined
               }
           </div>
         )

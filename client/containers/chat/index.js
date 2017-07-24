@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import Chat from '~/components/chat'
-import chatStyles from './chatStyles'
 
 const mapStateToProps = (state, ownProps) => {
     const { singleKey, messagesMap } = state.inst.chat.center
@@ -9,7 +8,6 @@ const mapStateToProps = (state, ownProps) => {
           messagesKey: singleKey,
           messagesMap,
           styles,
-          multiChat: false
         }
     )
 }
