@@ -1187,7 +1187,8 @@ GET /users?offset=0&length=10 {   // offset = index
               admin: {
                   id,
                   username,
-              }
+              },
+              reason: ''
           },
           stores: [
               {

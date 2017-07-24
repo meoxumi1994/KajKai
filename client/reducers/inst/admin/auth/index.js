@@ -1,5 +1,5 @@
 const auth = (state={
-    status: false,
+    status: true,
     id: '597612080b080d79757e39bf',
     adminName: 'admin',
 }, action) => {
