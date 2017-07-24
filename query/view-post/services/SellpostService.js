@@ -106,7 +106,7 @@ export const verifyToken = (token) => {
     }
 }
 
-const getClientFormatSellpost = (sellpost, offset) => {
+const getClientFormatSellpost = (requesterId, sellpost, offset) => {
   const { postrows, comments } = sellpost
 
   let { followers } = sellpost
