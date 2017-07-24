@@ -7,7 +7,7 @@ const SellPostDetailSchema = new mongoose.Schema({
     imageURLs: [String],
     titlesOrder: [Number],
     titles: [String],
-    productOrders: [Number],
+    productOrders: [String],
     type: {type: String}
 });
 
