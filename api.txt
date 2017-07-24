@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //NEW NEW NEW
 
 GET /groupcomment/'sellpost|minorpost'/:id?offset=1498555009220 {
@@ -1171,4 +1170,55 @@ DELETE /interest {
 }, {
   status: 'success|failed',
   id:
+}
+
+GET /users?offset=0&length=10 {   // offset = index
+    status: 'success|failed',
+    data: [
+        {
+          id,
+          username,
+          avatarUrl,
+          status: true | false // true = hoat dong bt, false = bi chan quyen su dung
+          email,
+          stores: [
+              {
+                id,
+                storename,
+                avatarUrl,
+                url
+              }
+          ]
+        }
+    ]
+}
+
+GET /feedbacks?offset=0&length=10 {
+    status: 'success|failed',
+    data: [
+        {
+          id,
+          reporter: {
+              id,
+              username,
+              avatarUrl
+              url
+          },
+          defendant: {
+              id,
+              username,
+              avatarUrl
+              url
+          },
+          store: {
+              id,
+              storename,
+              avatarUrl,
+              url
+          }
+          reason: "",
+          time: Date.now(),
+          status: true
+        }
+    ]
 }

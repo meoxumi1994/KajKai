@@ -34,7 +34,7 @@ export const getNewFeed = (offset, length) => dispatch => {
                 },
                 defendant: {
                     id: 23402456454,
-                    username: 'Minh gay',
+                    username: 'Mr.A',
                     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
                 },
                 reason: "Minh gay sida 2",
@@ -50,7 +50,7 @@ export const getNewFeed = (offset, length) => dispatch => {
                 },
                 defendant: {
                     id: 23402456454,
-                    username: 'Minh gay',
+                    username: 'Mr.B',
                     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
                 },
                 reason: "Minh gay sida 4",
@@ -66,7 +66,7 @@ export const getNewFeed = (offset, length) => dispatch => {
                 },
                 defendant: {
                     id: 23402456454,
-                    username: 'Minh gay',
+                    username: 'Mr.FUCKer',
                     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
                 },
                 reason: "Minh gay sida 3",

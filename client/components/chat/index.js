@@ -13,7 +13,7 @@ class Chat extends React.Component {
     }
 
     render() {
-      let { messagesKey, messagesMap, styles, multiChat } = this.props
+      let { messagesKey, messagesMap, styles } = this.props
       return(
         <div style={mainStyles.mainDiv} className="input-group">
             <div style={mainStyles.left}>
@@ -25,7 +25,6 @@ class Chat extends React.Component {
                 <ChatCenterContainer
                     mesId={messagesKey[0]}
                     messagesMap={messagesMap}
-                    multiChat={multiChat}
                     styles={styles}/>
             </div>
         </div>

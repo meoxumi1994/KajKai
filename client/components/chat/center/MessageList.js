@@ -8,6 +8,19 @@ class MessageList extends React.Component {
         super(props)
     }
 
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        this.scrollToBottom();
+    }
+
+    scrollToBottom() {
+      const { thing } = this.refs;
+      thing.scrollTop = thing.scrollHeight - thing.clientHeight;
+    }
+
     render() {
         const { mesId, messagesMap, styles,
                 user, chatListMap,
@@ -18,13 +31,16 @@ class MessageList extends React.Component {
         const { usersMap } = chatListMap[mesId]
 
         return (
-          <div style={styles.mainDiv}>
+          <div style={styles.mainDiv} ref={"thing"}>
             {
               messagesMap[mesId] == undefined?
               <div></div>
               :
               <div>
-                  {messagesMap[mesId].length > 0? <p style={{textAlign:'center'}} onClick={() => getMessages(mesId, true, 'update')}><i>(Show more)</i></p> : undefined}
+                  {messagesMap[mesId].length > 0?
+                    <p style={{textAlign:'center'}} onClick={() => getMessages(mesId, messagesMap[mesId][0].time)}><i>(Show more)</i></p>
+                    : undefined
+                  }
                   {messagesMap[mesId].map(
                     mes => {
                       let showAvatar = previousId==mes.id?false:true
