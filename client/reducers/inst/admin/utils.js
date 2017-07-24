@@ -4,9 +4,10 @@ import feedbackMap from './dashboard/feedbackMap'
 const utils = {
     getUsersMap: (action) => {
         const usersMap = {}
-        action.data.map(user =>
-            usersMap[user.id] = userMap(undefined, {type: action.type, data: user})
-        )
+        action.data.map(element => {
+            // console.log('element', element)
+            usersMap[element.user.id] = userMap(undefined, {type: action.type, data: {user: element.user, ban: element.ban, stores: element.stores}})
+        })
         return usersMap
     },
     getFeedbacksMap: (action) => {
