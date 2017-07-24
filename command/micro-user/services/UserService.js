@@ -373,7 +373,7 @@ export const updateUserInfo = (userId, info, next) => {
 export const addBan = (userId, reason, next) => {
     getUser(userId, (user) => {
         if (user) {
-            user.ban = 1;
+            user.banned = 1;
             user.banReason = reason;
             user.save(() => {
                 next();
@@ -385,7 +385,7 @@ export const addBan = (userId, reason, next) => {
 export const removeBan = (userId, reason, next) => {
     getUser(userId, (user) => {
         if (user) {
-            user.ban = 0;
+            user.banned = 0;
             user.save(() => {
                 next();
             });
