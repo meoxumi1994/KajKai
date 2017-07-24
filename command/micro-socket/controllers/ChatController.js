@@ -13,7 +13,7 @@ export const addNewMessageCon = (action, sio, io) => {
 };
 
 export const getUnreadMessageCon = (userID, sio, io) => {
-    if (!action.data.userID) return;
+    if (!userID) return;
     getUnreadMessagePub(userID, (data) => {
         sio.emit('action', {type: 'global/UNREAD_CHATS', data: data})
     })
