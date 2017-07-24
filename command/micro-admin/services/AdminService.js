@@ -24,7 +24,7 @@ export const getUsers = (offset, length, next) => {
             email: user.email
           },
           ban: {
-            status: banned != 0,
+            status: user.banned != 0,
             admin: user.bannedById ? {
                 id: user.bannedById,
                 username: user.bannedByAdminName
