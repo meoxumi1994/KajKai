@@ -109,7 +109,7 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
                 for (let i = 0; i < docs.length; ++i) {
                     let cur = docs[i];
                     cur.products = [];
-                    while (j < productList.length && productList[j].sellPostId === getSellPostDetailGlobalId(docs[i]._id)) {
+                    while (j < productList.length && productList[j].sellPostDetailId === getSellPostDetailGlobalId(docs[i]._id)) {
                         cur.products.push(getBasicProductInfo(productList[j]));
 
                         j++;
