@@ -39,12 +39,20 @@ export const modifyFollow = (followerId, followeeId, next) => {
 
 export const getListFollower = (followeeId, next) => {
     Follow.find({followeeId}, (err, listId) => {
-        next(listId);
+        let res = [];
+        for (let i = 0; i < listId.length; ++i) {
+            res.push(listId[i].followerId)
+        }
+        next(res);
     })
 };
 
 export const getListFollowee = (followerId, next) => {
     Follow.find({followerId}, (err, listId) => {
-        next(listId)
+        let res = [];
+        for (let i = 0; i < listId.length; ++i) {
+            res.push(listId[i].followeeId)
+        }
+        next(res)
     })
 };

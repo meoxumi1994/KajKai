@@ -24,7 +24,7 @@ export const getSellpost = (requesterId, id, next) => {
 
         next({
           status: 'success',
-          sellpost: getClientFormatSellpost(sellpost, Date.now())
+          sellpost: getClientFormatSellpost(requesterId, sellpost, Date.now())
         })
       })
     }
@@ -68,7 +68,7 @@ export const getSellposts = (requesterId, storeId, offset, next) => {
           let sellpost = sellposts[i]
           if (sellpost.time < offset) {
             if (currentNumberOfSellpost < 2) {
-              mSellposts.push(getClientFormatSellpost(sellpost, Date.now()))
+              mSellposts.push(getClientFormatSellpost(requesterId, sellpost, Date.now()))
 
               mOffset = sellpost.time.getTime()
               lastIndex = i
@@ -109,6 +109,37 @@ export const verifyToken = (token) => {
 const getClientFormatSellpost = (sellpost, offset) => {
   const { postrows, comments } = sellpost
 
+  let { followers } = sellpost
+  if (!followers) {
+    followers = []
+  }
+  let follows = []
+
+  if (requesterId == 'Guest') {
+    follows = followers.slice(0, 5)
+  } else {
+    for (let i = 0; i < followers.length; i++) {
+      let follower = followers[i]
+      if (follower.userId == requesterId) {
+        follows.push({
+          userid: follower.userId,
+          username: follower.username
+        })
+        break
+      }
+    }
+
+    for (let i = 0; i < followers.length && follows.length < 5; i++) {
+      let follower = followers[i]
+      if (follower.userId != requesterId) {
+        follows.push({
+          userid: follower.userId,
+          username: follower.username
+        })
+      }
+    }
+  }
+
   return ({
     id: sellpost.id,
     storeid: sellpost.storeId,
@@ -129,10 +160,7 @@ const getClientFormatSellpost = (sellpost, offset) => {
       username: liker.username
     })) : null,
     numfollow: sellpost.numerOfFollow ? sellpost.numerOfFollow : 0,
-    follows: sellpost.followers ? sellpost.followers.slice(0, 5).map((follower) => ({
-      userid: follower.userId,
-      username: follower.username
-    })) : null,
+    follows,
     numleadercomment: sellpost.numberOfComment ? sellpost.numberOfComment : 0,
     numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
     ...getClientFormatSellpostComments(comments, offset, true)
