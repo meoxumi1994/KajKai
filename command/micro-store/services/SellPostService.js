@@ -33,10 +33,10 @@ export const addSellPost = (sellPostInfo, next) => {
                     sellPost.sellPostDetailOrders = [];
                     for (let i = 0; i < sellPostDetail.length; ++i)
                         sellPost.sellPostDetailOrders.push(sellPostDetail[i].id);
+                    info.postrows_order = sellPost.sellPostDetailOrders;
                     sellPost.save(() => {
                         next(sellPost, sellPostDetail);
                     });
-                    info.postrows_order = sellPost.sellPostDetailOrders;
                     sellPostCreated(info);
                 });
             } else {
