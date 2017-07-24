@@ -1201,12 +1201,18 @@ GET /users?offset=0&length=10 {   // offset = index
     ]
 }
 
-POST /user/ban:id {
+POST /ban/:userid {
     status: true | false,
     adminId: '',
     defendantId: '',
     reason: '',
     time: ''
+}, {
+  status: true | false,
+  adminId: '',
+  defendantId: '',
+  reason: '',
+  time: ''
 }
 
 GET /feedbacks?offset=0&length=10 {
