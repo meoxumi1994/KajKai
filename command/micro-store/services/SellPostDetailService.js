@@ -109,18 +109,15 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
                 for (let i = 0; i < docs.length; ++i) {
                     let cur = docs[i];
                     cur.products = [];
-                    cur.products_order = [];
+                    cur.productOrders = [];
                     while (j < productList.length && productList[j].sellPostDetailId === getSellPostDetailGlobalId(docs[i]._id)) {
                         cur.products.push(getBasicProductInfo(productList[j]));
-                        cur.products_order.push(getBasicProductInfo(productList[j]).id);
+                        cur.productOrders.push(getBasicProductInfo(productList[j]).id);
                         j++;
                     }
                     res.push(getPubBasicSellPostDetailInfo(cur));
                     postRowCreatedPub(getPubBasicSellPostDetailInfo(docs[i]));
                 }
-                console.log(JSON.stringify(productList));
-                console.log(JSON.stringify(docs));
-                console.log(JSON.stringify(res));
                 next(res);
             })
         }
