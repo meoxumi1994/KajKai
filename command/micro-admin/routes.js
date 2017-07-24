@@ -25,7 +25,7 @@ export default {
       post: {
         controller: 'AdminController',
         middleware: [authAdmin()],
-        method: 'banHandler'
+        method: 'banUserHandler'
       }
     }
 }

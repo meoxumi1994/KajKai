@@ -25,9 +25,9 @@ export const getUsers = (offset, length, next) => {
           },
           ban: {
             status: banned != 0,
-            admin: user.bannedBy ? {
-                id: user.bannedBy._id,
-                username: user.bannedBy.adminName
+            admin: user.bannedById ? {
+                id: user.bannedById,
+                username: user.bannedByAdminName
             } : {}
           },
           stores: user.storeList ? user.storeList.map((basicStore) => ({
@@ -67,7 +67,14 @@ export banUser = (banned, adminId, userId, reason, next) => {
         user.banned = banned
         Admin.findById(adminId, (err, admin) => {
           if (admin) {
-            
+            const user = {
+              banned,
+              bannedById: admin._id.toString(),
+              bannedByAdminName: admin.adminName,
+            }
+
+            User.findOneAndUpdate({ id: userId }, user, () => {})
+            next('success')
           } else {
             next('noAdminData')
           }
