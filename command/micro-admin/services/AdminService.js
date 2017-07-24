@@ -1,4 +1,4 @@
-import { Admin, User, Feedback } from '../models'
+import { Admin, BasicUser, User, Feedback } from '../models'
 import { sendBanEmail, sendUnBanEmail } from './EmailService'
 import { addBanPub, removeBanPub } from './BanPubService'
 import jwt from 'jsonwebtoken'
@@ -30,7 +30,8 @@ export const getUsers = (offset, length, next) => {
             admin: user.bannedById ? {
                 id: user.bannedById,
                 username: user.bannedByAdminName
-            } : {}
+            } : {},
+            reason: user.lastReason
           },
           stores: user.storeList ? user.storeList.map((basicStore) => ({
             id: basicStore.id,
@@ -71,21 +72,17 @@ export const getFeedbacks = (offet, length, next) => {
               username: fb.reportee.username,
               avatarUrl: fb.reportee.avatarUrl
             },
-            store: {
-              id: store.id,
-              storename: store.storeName,
-              avatarUrl: store.avatarUrl,
-              url: store.urlName
-            }
+            sellpostId: fb.sellpostId
           },
           ban: {
             admin: {
-              id: fb.bannedBy._id,
-              username: fb.bannedBy.adminName
+              id: fb.bannedById,
+              username: fb.bannedByAdminName
             },
             status: fb.bannedBy != null,
             reason: fb.reason
           },
+          status: fb.status != 0,
           time: fb.time.getTime()
         }))
       })
@@ -98,7 +95,7 @@ export const getFeedbacks = (offet, length, next) => {
   })
 }
 
-export const banUser = (banned, adminId, userId, reason, next) => {
+export const banUser = (feedbackId, banned, adminId, userId, reason, next) => {
   User.findOne({ id: userId }, (err, user) => {
     if (user) {
       if (!user.banned || user.banned != banned) {
@@ -116,9 +113,21 @@ export const banUser = (banned, adminId, userId, reason, next) => {
               banned,
               bannedById: admin._id.toString(),
               bannedByAdminName: admin.adminName,
+              lastReason: reason
+            }
+            User.findOneAndUpdate({ id: userId }, user, () => {})
+
+            if (feedbackId) {
+              const feedback = {
+                status: 1,
+                bannedById:  admin._id.toString(),
+                bannedByAdminName: admin.adminName,
+                reason,
+                time: Date.now()
+              }
+              Feedback.findByIdAndUpdate(feedbackId, feedback, () => {})
             }
 
-            User.findOneAndUpdate({ id: userId }, user, () => {})
             next('success')
           } else {
             next('noAdminData')
@@ -129,6 +138,39 @@ export const banUser = (banned, adminId, userId, reason, next) => {
       }
     } else {
       next('noUserData')
+    }
+  })
+}
+
+export const createFeedback = (userId, ownerId, content, sellpostId, next) => {
+  BasicUser.findOne({ id: userId }, (err, reporter) => {
+    if (reporter) {
+      BasicUser.findOne({ id: ownerId }, (err, reportee) => {
+        if (reportee) {
+          const feedback = new Feedback({
+            reporter: {
+              id: reporter.id,
+              username: reporter.username,
+              avatarUrl: reporter.avatarUrl
+            },
+            content,
+            reportee: {
+              id: reportee.id,
+              username: reportee.username,
+              avatarUrl: reportee.avatarUrl
+            },
+            sellpostId,
+            status: 0,
+            time: Date.now()
+          })
+          feedback.save(() => {})
+          next('success')
+        } else {
+          next('failed')
+        }
+      })
+    } else {
+      next('failed')
     }
   })
 }
