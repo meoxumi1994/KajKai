@@ -128,7 +128,7 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
 export const getBasicSellPostDetailInfo = (sellPostDetail) => {
     return {
         sellPostId: sellPostDetail.sellPostId,
-        postrowId: getSellPostDetailGlobalId(sellPostDetail._id),
+        id: getSellPostDetailGlobalId(sellPostDetail._id),
         content: sellPostDetail.content,
         numline: sellPostDetail.line,
         images: sellPostDetail.imageURLs,
