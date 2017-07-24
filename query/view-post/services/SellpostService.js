@@ -49,7 +49,7 @@ export const getSellposts = (requesterId, storeId, offset, next) => {
       sellposts.map((sellpost, index) => {
         sellpostById[sellpost.id] = index
       })
-      console.log('sellposts': sellposts);
+      console.log('sellposts: ', sellposts);
       sellposts.map((sellpost) => {
         mPromises.push(new Promise((resolve, reject) => {
           Postrow.find({ sellpostId: sellpost.id }, (err, postrows) => {
@@ -64,7 +64,7 @@ export const getSellposts = (requesterId, storeId, offset, next) => {
         }))
       })
       Promise.all(mPromises).then((postrowses) => {
-        console.log('sellposts then': sellposts);
+        console.log('sellposts then:', sellposts);
         const mSellposts = []
         let currentNumberOfSellpost = 0, mOffset = -2, lastIndex = -1
         for (let i = sellposts.length - 1; i >= 0; i--) {
