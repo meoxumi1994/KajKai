@@ -90,7 +90,7 @@ export const loginGoogle = () => {
                     } else {
                         createUser(body.email.toLowerCase(), body.name, '1234678', 1, null, null, null, body.picture, (newUser) => {
                             login(res, newUser);
-                            createUserPub(user);
+                            createUserPub(newUser);
                         })
                     }
                 })
