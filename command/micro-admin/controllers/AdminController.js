@@ -50,7 +50,6 @@ export const getFeedbacksHandler = () => (req, res) => {
 }
 
 export const banUserHandler = () => (req, res) => {
-  const { userid: userId } = req.params
   let { status, adminId, defendantId: userId, reason } = req.body
   let banned = status ? 1 : 0
   banUser(banned, adminId, userId, reason, (result) => {

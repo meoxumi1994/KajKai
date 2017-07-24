@@ -21,7 +21,7 @@ export default {
         method: 'getFeedbacksHandler'
       }
     },
-    '/ban:userid': {
+    '/ban': {
       post: {
         controller: 'AdminController',
         middleware: [authAdmin()],

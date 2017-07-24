@@ -1201,7 +1201,7 @@ GET /users?offset=0&length=10 {   // offset = index
     ]
 }
 
-POST /ban/:userid {
+POST /ban {
     status: true | false,
     adminId: '',
     defendantId: '',
