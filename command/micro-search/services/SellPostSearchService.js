@@ -1,6 +1,5 @@
 import config from '../config/elasticConfig'
 import searchClient from '../datasource'
-import category from "../../../client/reducers/inst/category/index";
 
 export const indexSellPost = (sellpost) => {
     searchClient.index({
