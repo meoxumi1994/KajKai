@@ -9,7 +9,7 @@ class Product extends React.Component {
         super(props)
     }
     render(){
-        const { id, list, imageUrl, canEdit, onChange, width } = this.props
+        const { id, list, imageUrl, content, canEdit, onChange, width, onAddProduct, canRemove, onRemoveProduct} = this.props
         return(
             <tr>
                 {list.map((item,index) => {
@@ -47,9 +47,16 @@ class Product extends React.Component {
                     }
                 })}
                 <td style={{ paddingRight: 10 }}>
-                    <div className="btn" style={{ padding: 0 }}>
-                        <img width={15} src="/images/plus.svg"/>
-                    </div>
+                    {canRemove ?
+                        <div className="btn" style={{ padding: 0 }}
+                            onClick={() => onRemoveProduct()}>
+                            <img width={15} src="/images/minus.svg"/>
+                        </div>
+                    :   <div className="btn" style={{ padding: 0 }}
+                            onClick={() => onAddProduct()}>
+                            <img width={15} src="/images/plus.svg"/>
+                        </div>
+                    }
                 </td>
                 <td>
                     {!canEdit ?

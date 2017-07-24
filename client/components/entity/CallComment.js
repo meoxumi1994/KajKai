@@ -1,13 +1,14 @@
 import React from 'react'
 
 import ContentEditable from '~/components/entity/ContentEditable'
+import Product from '~/containers/entity/post/Product'
 
 class CallComment extends React.Component {
     constructor(props){
         super(props)
     }
     render(){
-        const { isleader, avatarUrl, placehoder, handleChange, content, onEnter } = this.props
+        const { isleader, avatarUrl, placehoder, id, handleChange, content, onEnter, order } = this.props
         return(
             <div style={{ paddingBottom: 10 }}>
                 <div style={{
@@ -23,6 +24,14 @@ class CallComment extends React.Component {
                         marginTop: isleader?-40:-20,
                         marginLeft: isleader?50:30,
                     }}>
+                        {order.map((item,index) => {
+                            return (
+                                <div key={item.id+index} style={{ marginBottom: 5 }}>
+                                    <Product id={item.id} sellpostId={id} index={index}
+                                        canRemove={true} width={index?120:160}/>
+                                </div>
+                            )
+                        })}
                         <ContentEditable
                             onEnter={() => onEnter()}
                             placehoder={placehoder}

@@ -37,16 +37,18 @@ const mapDispatchToProps = (dispatch, { id }) => ({
         if(offset != -2)
             dispatch(getMoreLeaderComment('sellpost',offset,id))
     },
-    onEnterProps: (content) => {
-        if(content)
+    onEnterProps: (content, order) => {
+        console.log(content, order)
+        if(content || (order && order.length))
             dispatch({ type: 'server/LEADERCOMMENT', data: {
                     sellpostid: id,
                     content: content,
                     time: (new Date().getTime()),
-                    order: [],
+                    order: order,
                 }
             })
         dispatch({ type: 'INST_ENTITY_GROUPCOMMENT_CHANGE', id: id, key: 'content', value: '' })
+        dispatch({ type: 'INST_ENTITY_GROUPCOMMENT_CHANGE', id: id, key: 'order', value: [] })
     },
     onJoin: () => {
         dispatch({ type: 'server/JOIN_POST', data: { sellpostid: id }})
@@ -57,15 +59,16 @@ const mapDispatchToProps = (dispatch, { id }) => ({
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { offset, content, ...anotherState } = stateProps
+    const { offset, content, order, ...anotherState } = stateProps
     const { onGetMoreLeaderComment, onEnterProps, ...anotherDispatch } = dispatchProps
     return({
         onEnter: () => {
-            onEnterProps(content)
+            onEnterProps(content, order)
         },
         onGetMore: () => {
             onGetMoreLeaderComment(offset)
         },
+        order: order,
         content: content,
         ...ownProps,
         ...anotherState,

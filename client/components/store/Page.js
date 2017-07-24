@@ -123,10 +123,10 @@ class Page extends React.Component {
                                             <img key={index} width={17} height={17} style={{ margin: '4px 0px 4px 4px'}} src={item.avatarUrl}/>)}
                                     </div>
                                     <div style={{ marginLeft: -2, paddingTop: 2 }}>
-                                        <ShowInMap
+                                        {/* <ShowInMap
                                             width={390} height={200}
                                             position={position}
-                                        />
+                                        /> */}
                                     </div>
                                 </div>
                             </div>

@@ -2,7 +2,7 @@ import { flem, flet, fleu } from '~/actions/support'
 
 export const getUser = (id) => dispatch => {
     dispatch({ type: 'USER_GET_ING' });
-    flem('/user/'+id)
+    return flem('/user/'+id)
     .then((response) => {
         const { status, user } = response
         if(status == 'success'){
@@ -15,7 +15,7 @@ export const getUser = (id) => dispatch => {
 
 export const updateUser = (user) => dispatch => {
     dispatch({ type: 'UPDATE_USER_ING'})
-    fleu('/user',{
+    return fleu('/user',{
         ...user
     })
     .then(({ status, user }) => {

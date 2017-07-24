@@ -1,7 +1,175 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`About should render self and subcomponents 1`] = `
-<div>
-  About
+<div
+  style={
+    Object {
+      "backgroundColor": "white",
+      "border": "1px solid #CCCCCC",
+      "borderRadius": 4,
+      "boxShadow": "0px 0px 4px #CCCCCC",
+      "marginLeft": -23,
+      "marginTop": 10,
+      "width": 938,
+    }
+  }
+>
+  <div
+    className="btn btn-default"
+    onClick={[Function]}
+  >
+    click me
+  </div>
+  <div
+    style={
+      Object {
+        "backgroundColor": "#F6F7F9",
+        "fontSize": 20,
+        "padding": 10,
+      }
+    }
+  >
+    About
+  </div>
+  <hr
+    style={
+      Object {
+        "margin": 0,
+        "padding": 0,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "padding": 10,
+      }
+    }
+  >
+    <span
+      style={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+    >
+      User name : 
+    </span>
+    <span />
+  </div>
+  <hr
+    style={
+      Object {
+        "margin": 0,
+        "padding": 0,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "padding": 10,
+      }
+    }
+  >
+    <span
+      style={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Email : 
+    </span>
+    <span />
+  </div>
+  <hr
+    style={
+      Object {
+        "margin": 0,
+        "padding": 0,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "padding": 10,
+      }
+    }
+  >
+    <span
+      style={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Language : 
+    </span>
+    <span>
+      vietnam
+    </span>
+  </div>
+  <hr
+    style={
+      Object {
+        "margin": 0,
+        "padding": 0,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "padding": 10,
+      }
+    }
+  >
+    <span
+      style={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Address : 
+    </span>
+    <span />
+  </div>
+  <hr
+    style={
+      Object {
+        "margin": 0,
+        "padding": 0,
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "padding": 10,
+      }
+    }
+  >
+    <span
+      style={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Age : 
+    </span>
+    <span />
+  </div>
+  <hr
+    style={
+      Object {
+        "margin": 0,
+        "padding": 0,
+      }
+    }
+  />
 </div>
 `;

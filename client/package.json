@@ -17,6 +17,7 @@
     "cors": "^2.8.3",
     "cropperjs": "1.0.0-rc.2",
     "draft-js": "^0.10.1",
+    "enzyme": "^2.9.1",
     "express": "^4.15.2",
     "react-contenteditable": "^2.0.2",
     "react-input-autosize": "^1.1.4",

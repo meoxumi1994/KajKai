@@ -101,7 +101,7 @@ class SellPost extends React.Component {
                 </div>
                 {postrows_order.map((item,index) =>
                     <div key={index} style={{ paddingTop: 10 }}>
-                        <PostRow id={item}/>
+                        <PostRow id={item} sellpostId={id}/>
                     </div>
                 )}
                 <div style={{ height: 10 }}></div>

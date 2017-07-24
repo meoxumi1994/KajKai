@@ -7,13 +7,13 @@ class ListProduct extends React.Component {
         super(props)
     }
     render(){
-        const { products, product_order, canEdit } = this.props
+        const { products, products_order, canEdit, sellpostId } = this.props
         return(
             <div>
                 <table>
-                    {product_order.map((item, index) =>
+                    {products_order.map((item, index) =>
                         <tbody key={index}>
-                            <Product id={item} canEdit={canEdit} width={index?120:160}/>
+                            <Product id={item} sellpostId={sellpostId} canEdit={canEdit} width={index?120:160}/>
                         </tbody>
                     )}
                 </table>

@@ -10,15 +10,19 @@ class PostRow extends React.Component {
         super(props)
     }
     render(){
-        const { id, type, products, product_order, content, images, canEdit } = this.props
+        const { id, type, products, sellpostId, products_order, content, images, canEdit } = this.props
+        console.log(this.props)
         const Row = () => {
             switch (type) {
+                case 'listproduct':
                 case 'product':
                     return(
                         <div>
                             <ListProduct id={id}
                                 products={products}
-                                product_order={product_order}/>
+                                products_order={products_order}
+                                sellpostId={sellpostId}
+                                />
                         </div>
                     )
                 case 'title':
