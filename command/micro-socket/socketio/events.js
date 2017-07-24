@@ -1,3 +1,5 @@
+import {Follow} from "../../micro-notification/models/index";
+
 export default {
     // post and comment
     'server/JOIN_POST': {
@@ -69,5 +71,9 @@ export default {
     // 'server/UNLIKE': {
     //     controller: 'LikeController',
     //     method: 'unlikeAct'
-    // }
+    // },
+    'server/FOLLOW': {
+        controller: 'FollowController',
+        method: 'updateFollowCon'
+    }
 }
