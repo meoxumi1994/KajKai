@@ -1216,6 +1216,7 @@ POST /ban {
 }
 
 POST /feedback {
+  ownerId: '',
   storeId: '',
   sellpostId: '',
   content: ''

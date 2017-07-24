@@ -64,3 +64,12 @@ export const banUserHandler = () => (req, res) => {
     })
   })
 }
+
+export const createFeedbackHandler = () => (req, res) => {
+  const { storeId, sellpostId, content, ownerId } = req.body
+  const userId = req.decoded._id
+
+  createFeedback(userId, ownerId, content, )
+
+
+}
