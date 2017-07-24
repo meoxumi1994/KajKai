@@ -60,7 +60,7 @@ export const getFeedbacks = (offet, length, next) => {
   })
 }
 
-export banUser = (banned, adminId, userId, reason, next) => {
+export const banUser = (banned, adminId, userId, reason, next) => {
   User.findOne({ id: userId }, (err, user) => {
     if (user) {
       if (!user.banned || user.banned != banned) {
