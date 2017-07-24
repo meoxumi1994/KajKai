@@ -15,11 +15,19 @@ export const getNewFeed = (offset, length) => dispatch => {
                     id: 234024,
                     username: 'Long Ly',
                     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
                 },
                 defendant: {
                     id: 23402456454,
                     username: 'Minh gay',
                     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
+                },
+                store: {
+                    id: 2342353,
+                    storename: 'Store B',
+                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
                 },
                 reason: "Minh gay sida",
                 time: Date.now(),
@@ -31,11 +39,19 @@ export const getNewFeed = (offset, length) => dispatch => {
                     id: 234024,
                     username: 'Long Ly',
                     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
                 },
                 defendant: {
                     id: 23402456454,
                     username: 'Mr.A',
                     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
+                },
+                store: {
+                    id: 2342353,
+                    storename: 'Store B',
+                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
                 },
                 reason: "Minh gay sida 2",
                 time: Date.now(),
@@ -47,11 +63,19 @@ export const getNewFeed = (offset, length) => dispatch => {
                     id: 234024,
                     username: 'Long Ly',
                     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
                 },
                 defendant: {
                     id: 23402456454,
                     username: 'Mr.B',
                     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
+                },
+                store: {
+                    id: 2342353,
+                    storename: 'Store B',
+                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
                 },
                 reason: "Minh gay sida 4",
                 time: Date.now(),
@@ -63,11 +87,19 @@ export const getNewFeed = (offset, length) => dispatch => {
                     id: 234024,
                     username: 'Long Ly',
                     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
                 },
                 defendant: {
                     id: 23402456454,
                     username: 'Mr.FUCKer',
                     avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
+                },
+                store: {
+                    id: 2342353,
+                    storename: 'Store B',
+                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
+                    url: ''
                 },
                 reason: "Minh gay sida 3",
                 time: Date.now(),
@@ -75,6 +107,6 @@ export const getNewFeed = (offset, length) => dispatch => {
               }
           ]
         }
-        dispatch({type: 'ADMIN/DASHBOARD/INIT_FEEDBACK', data: response.data})
+        // dispatch({type: 'ADMIN/DASHBOARD/INIT_FEEDBACK', data: response.data})
     })
 }

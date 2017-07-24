@@ -1,13 +1,15 @@
 import { connect } from 'react-redux'
 import User from '~/components/admin/user'
-import { getUsers, getUser } from '~/actions/asyn/admin/user/restful'
+import { getUsers, banUser } from '~/actions/asyn/admin/user/restful'
 
 const mapStateToProps = (state, ownProps) => {
     const { keyy, mapp } = state.inst.admin.user
-
+    const { id } = state.inst.admin.auth
+    // console.log('state', state.inst.admin);
     return {
         keyy,
-        mapp
+        mapp,
+        adminId: id
     }
 
 }
@@ -18,7 +20,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(getUsers())
     },
     onDetails: (id) => {
-        dispatch(getUser(id))
+
+    },
+    disable: (status, id, defendantId, reason) => {
+        dispatch(banUser(status, id, defendantId, reason))
     }
 })
 

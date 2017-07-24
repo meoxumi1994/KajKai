@@ -8,7 +8,8 @@ import thunkMiddleware from 'redux-thunk'
 // AppContainer is a necessary wrapper component for HMR
 import { AppContainer } from 'react-hot-loader'
 import reducers from './reducers'
-import Components from './components/admin'
+import Components from './containers/admin'
+// import Components from './components/admin'
 // import './App.css'
 import logger from 'redux-logger'
 
