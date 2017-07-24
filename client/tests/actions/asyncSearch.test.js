@@ -30,7 +30,7 @@ describe('async search actions', () => {
       { type: 'SEARCH_SUCCESS', searchResult }
     ]
     const store = mockStore()
-    
+
     return store.dispatch(actions.search(searchQuery)).then(() => {
       expect(store.getActions()).toEqual(expectedActions)
     })

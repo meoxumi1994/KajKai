@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "jest tests/**/*.test.js"
+    "test": "jest tests/**/*.test.js --verbose"
   },
   "author": "KajKai",
   "license": "UNLICENSED",
