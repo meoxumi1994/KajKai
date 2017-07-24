@@ -53,7 +53,7 @@ export const getSellposts = (requesterId, storeId, offset, next) => {
       sellposts.map((sellpost) => {
         mPromises.push(new Promise((resolve, reject) => {
           Postrow.find({ sellpostId: sellpost.id }, (err, postrows) => {
-            console.log('postrows': postrows);
+            console.log('postrows: ', postrows);
             if (postrows) {
               sellposts[sellpostById[sellpost.id]].postrows = postrows
               resolve(postrows)
