@@ -4,8 +4,6 @@ import ChatCenterContainer from '~/containers/chat/center'
 import ChatLeftContainer from '~/containers/chat/left'
 import { Route, Redirect } from 'react-router'
 
-// import TagsInput from 'react-tagsinput'
-
 class Chat extends React.Component {
 
     constructor(props) {
