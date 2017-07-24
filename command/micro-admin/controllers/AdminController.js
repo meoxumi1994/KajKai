@@ -10,6 +10,7 @@ export const loginAdmin = () => (req, res) => {
       res.json({
         status: 'success',
         admin: {
+          id: admin._id,
           adminName: admin.adminName
         }
       })

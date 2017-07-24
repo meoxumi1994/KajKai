@@ -50,7 +50,43 @@ export const getUsers = (offset, length, next) => {
 export const getFeedbacks = (offet, length, next) => {
   Feedback.find({}, (err, feedbacks) => {
     if (feedbacks) {
-
+      let fbs = offet >= feedbacks.length ? [] : feedbacks.slice(offet, length)
+      next({
+        status: 'success',
+        data: fbs.map((fb) => ({
+          id: fb._id,
+          reporter: {
+            user: {
+              id: fb.reporter.id,
+              username: fb.reporter.username,
+              avatarUrl: fb.reporter.avatarUrl
+            },
+            content: fb.content
+          },
+          defendant: {
+            user: {
+              id: fb.reportee.id,
+              username: fb.reportee.username,
+              avatarUrl: fb.reportee.avatarUrl
+            },
+            store: {
+              id: store.id,
+              storename: store.storeName,
+              avatarUrl: store.avatarUrl,
+              url: store.urlName
+            }
+          },
+          ban: {
+            admin: {
+              id: fb.bannedBy._id,
+              username: fb.bannedBy.adminName
+            },
+            status: fb.bannedBy != null,
+            reason: fb.reason
+          },
+          time: fb.time.getTime()
+        }))
+      })
     } else {
       next({
         status: 'nodata',
