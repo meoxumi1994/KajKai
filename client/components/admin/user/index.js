@@ -14,7 +14,7 @@ class User extends React.Component {
 
     render() {
         const { keyy, mapp, adminId,
-                onDetails, disable
+                onUserDetails
               } = this.props
         return (
             <div style={{width: '100%', height: '100%', borderWidth: 1, borderStyle: 'solid'}}>
@@ -33,13 +33,13 @@ class User extends React.Component {
                     <tbody>
                         {keyy.map(
                           (userId, index) => {
-                            const { id, username, avatarUrl, status, email, stores } = mapp[userId]
+                            const { user, ban, stores } = mapp[userId]
                             return (
                               <tr key={userId}>
                                   <th scope="row">{index+1}</th>
                                   <td>
-                                      <img src={avatarUrl} style={{width: 40, height: 40, marginRight: 10, borderRadius: 50}}/>
-                                      {username}
+                                      <img src={user.avatarUrl} style={{width: 40, height: 40, marginRight: 10, borderRadius: 50}}/>
+                                      {user.username}
                                   </td>
                                   <td>
                                       {
@@ -52,13 +52,13 @@ class User extends React.Component {
                                       }
                                   </td>
                                   <td>
-                                    {email}
+                                    {user.email}
                                   </td>
                                   <td>
-                                      {status? 'Deactived': 'Activated'}
+                                      {ban.status? 'Deactived': 'Activated'}
                                   </td>
                                   <td>
-                                      { status? <button className="btn btn-primary" onClick={() => disable(false, adminId, userId, 'Thien gay')}>Enable</button> : <button className="btn btn-danger" onClick={() => disable(true, adminId, userId, 'Thien gay')}>Disable</button> }
+                                        <button onClick={() => onUserDetails(user.id)} className={ban.status?"btn btn-primary":"btn btn-danger"}>{ban.status?'Active':'Deactive'}</button>
                                   </td>
                               </tr>
                             )

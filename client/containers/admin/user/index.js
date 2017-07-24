@@ -16,14 +16,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getUsers: () => {
-        // console.log('get user');
         dispatch(getUsers())
     },
-    onDetails: (id) => {
-
-    },
-    disable: (status, id, defendantId, reason) => {
-        dispatch(banUser(status, id, defendantId, reason))
+    onUserDetails: (id) => {
+        dispatch({type: 'ADMIN/USER/DISPLAY', data: { display: true, id }})
     }
 })
 
