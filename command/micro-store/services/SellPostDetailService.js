@@ -31,6 +31,7 @@ export const getPubSellPostDetailBasicInfo = (sellPostDetail) => {
         productOrders: sellPostDetail.productOrders,
         type: sellPostDetail.type,
         id: getSellPostDetailGlobalId(sellPostDetail._id),
+        products: sellPostDetail.products
     }
 };
 
@@ -116,7 +117,7 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
                         j++;
                     }
                     res.push(getBasicSellPostDetailInfo(cur));
-                    postRowCreatedPub(getPubSellPostDetailBasicInfo(docs[i]));
+                    postRowCreatedPub(getPubSellPostDetailBasicInfo(cur));
                 }
                 next(res);
             })
@@ -127,7 +128,7 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
 export const getBasicSellPostDetailInfo = (sellPostDetail) => {
     return {
         sellPostId: sellPostDetail.sellPostId,
-        postrowId: getSellPostDetailGlobalId(sellPostDetail._id),
+        id: getSellPostDetailGlobalId(sellPostDetail._id),
         content: sellPostDetail.content,
         numline: sellPostDetail.line,
         images: sellPostDetail.imageURLs,
