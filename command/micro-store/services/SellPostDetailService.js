@@ -24,7 +24,7 @@ export const getPubSellPostDetailBasicInfo = (sellPostDetail) => {
     return {
         sellPostId: sellPostDetail.sellPostId,
         content: sellPostDetail.content,
-        line: sellPostDetail.line,
+        numline: sellPostDetail.line,
         images: sellPostDetail.imageURLs,
         titleOrder: sellPostDetail.titleOrder,
         titles: sellPostDetail.titles,
