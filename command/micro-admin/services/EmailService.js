@@ -1,17 +1,29 @@
 import config from '../config/commonConfig'
 
-export const sendBanEmail = (email, token, next) => {
+export const sendBanEmail = (username, email, reason) => {
     var send = require('gmail-send')({
         user: 'kajkaiverify@gmail.com',
         pass: 'verifykajkai',
         to:   email,
-        subject: 'KAJKAI REGISTRATION',
-        text:    'Please click on the following link to finish you registration: \n' +
-        config.getServerDomain() + '/emailverification/' + token
+        subject: 'KAJKAI BAN',
+        text: 'Hi ' + username + '\n' +
+        'We would like to inform that your account has been banned! \n' +
+        'Reason: ' + reason + '\n' +
+        'KAJKAI TEAM :D'
     });
-    send({}, function(err, res){
-        // console.log('* [example1] send(): err:', err, '; res:', res);
-        // console.log('done');
-        next()
-    })
+    send({}, (err, res) => {})
+}
+
+export const sendUnBanEmail = (username, email, reason, next) => {
+    var send = require('gmail-send')({
+        user: 'kajkaiverify@gmail.com',
+        pass: 'verifykajkai',
+        to:   email,
+        subject: 'KAJKAI BAN',
+        text: 'Hi ' + username + '\n' +
+        'We would like to inform that now you can loin to your KAJKAI account normally! \n' +
+        'Reason: ' + reason + '\n' +
+        'KAJKAI TEAM :D'
+    });
+    send({}, (err, res) => {})
 }
