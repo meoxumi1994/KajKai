@@ -1,7 +1,7 @@
 import { Product } from '../models/index'
 import { productCreatedPub, productDeletedPub, productUpdatedPub } from '../controllers/StorePubController'
 
-const PRODUCT_GLOBAL_ID = require('../config/globalId').default.PRODUCT_GLOBAL_ID
+const PRODUCT_GLOBAL_ID = require('../config/globalId').default.PRODUCT_GLOBAL_ID;
 
 export const getProductGlobalId = (id) => {
     return PRODUCT_GLOBAL_ID + id
@@ -50,9 +50,18 @@ export const createProduct = (sellPostId, postRowId, productInfo, next) => {
     })
 };
 
+export const createMultipleProduct = (productList, next) => {
+    Product.insertMany(productList, () => {
+        next();
+        for (let i = 0; i < productList.length; ++i) {
+            productCreatedPub(getPubProductInfo(productList[i]));
+        }
+    })
+};
+
 export const getBasicProductInfo = (product) => {
     return {
-        id: getBasicProductInfo(product._id),
+        id: getProductGlobalId(product._id),
         content: product.content,
         imageUrl: product.imageUrl,
         list: product.list
