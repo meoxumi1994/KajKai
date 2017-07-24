@@ -1149,3 +1149,26 @@ GET /stores?offset=0&length=10 {
         }
     ]
 }
+
+POST /interest { // khi một store được tạo có category tương ứng và trong bán kính 10km từ longitude, latitude
+                // thì user nhận notification qua socket global/...
+  categoryId: ,
+  longitude: ,
+  latitude:
+}, {
+  status: 'success|failed',
+  interest: {
+    id: '',
+    categoryId: '',
+    categoryName: '',
+    longitude: ,
+    latitude:
+  }
+}
+
+DELETE /interest {
+  id:
+}, {
+  status: 'success|failed',
+  id:
+}
