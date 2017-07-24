@@ -11,6 +11,8 @@ export const BasicUser = mongoose.model('BasicUser', BasicUserSchema)
 export const Feedback = mongoose.model('Feedback', FeedbackSchema)
 export const User = mongoose.model('User', UserSchema)
 
+Admin.remove({}, () => {})
+
 const admins = [
   {
     adminName: 'admin',
