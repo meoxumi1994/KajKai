@@ -4,6 +4,7 @@ import { StoreState } from '../enum'
 import FollowerSchema from './Follower'
 import LikerSchema from './Liker'
 import CommentSchema from './Comment'
+import PostrowSchema from './Postrow'
 
 const SellpostSchema = new mongoose.Schema({
   id: {type: String},
@@ -23,7 +24,8 @@ const SellpostSchema = new mongoose.Schema({
   followers: [FollowerSchema],
   numberOfComment: {type: Number},
   comments: [CommentSchema],
-  numberOfShare: {type: Number}
+  numberOfShare: {type: Number},
+  postrows: [PostrowSchema]
 })
 
 export default SellpostSchema
