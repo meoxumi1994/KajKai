@@ -1,8 +1,6 @@
-import auth from './middlewares/auth'
-import phoneCheck from './middlewares/phoneChecking'
+import authAdmin from './middlewares/authAdmin'
 
 export default {
-
     '/loginadmin': {
       post: {
         controller: 'AdminController',
@@ -16,4 +14,11 @@ export default {
         method: 'getUsersHandler'
       }
     },
+    '/feedbacks': {
+      get: {
+        controller: 'AdminController',
+        middleware: [authAdmin()].
+        method: 'getFeedbacksHandler'
+      }
+    }
 }

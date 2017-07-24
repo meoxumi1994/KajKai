@@ -14,14 +14,33 @@ export const getAdmin = (adminName, password, next) => {
 export const getUsers = (offset, length, next) => {
   User.find({}, (err, users) => {
     if (users) {
-
+      next({
+        status: 'success',
+        data: offset >= users.length ? [] : users.slice(offset, length).map((user) => ({
+          id: user.id,
+          username: user.username,
+          avatarUrl: user.avatarUrl,
+          status: user.banned == 0,
+          email: user.email,
+          stores: user.storeList ? user.storeList.map((basicStore) => ({
+            id: basicStore.id,
+            storename: basicStore.storeName,
+            avatarUrl: basicStore.avatarUrl,
+            url: basicStore.urlName
+          })) : []
+        }))
+      })
     } else {
       next({
         status: 'nodata',
-
+        data: []
       })
     }
   })
+}
+
+export const getFeedbacks = (offet, length, next) => {
+  
 }
 
 export const verifyAdminToken = (token) => {

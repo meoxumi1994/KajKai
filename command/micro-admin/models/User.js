@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
   email: {type: String},
   avatarUrl: {type: String},
   banned: {type: Number},
+  bannedBy: {type: String},
   storeList: [BasicStoreSchema]
 })
 

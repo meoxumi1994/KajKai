@@ -1,14 +1,18 @@
 export default {
-    'USER.AuthorizeToken': {
-        controller: 'UserSubController',
-        method: 'authorizeTokenSub'
-    },
-    'USER.GetUser': {
-        controller: 'UserSubController',
-        method: 'getUserSub'
-    },
-    'USER.GetListUser': {
-        controller: 'UserSubController',
-        method: 'getListUserSub'
-    }
+  'USER.Created': {
+    controller: 'UserSubController',
+    method: 'createUser'
+  },
+  'USER.Updated': {
+    controller: 'UserSubController',
+    method: 'updateUser'
+  },
+  'STORE.Created': {
+    controller: 'StoreSubController',
+    method: 'addStore'
+  },
+  'STORE.Updated': {
+    controller: 'StoreSubController',
+    method: 'updateStoreList'
+  }
 }

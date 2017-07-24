@@ -1,4 +1,4 @@
-import { getAdmin, getAdminToken, getUsers } from '../services/AdminService'
+import { getAdmin, getAdminToken, getUsers, getFeedbacks } from '../services/AdminService'
 
 export const loginAdmin = () => (req, res) => {
   const { adminName, password } = req.body
@@ -29,10 +29,22 @@ export const getUsersHandler = () => (req, res) => {
     })
   } else {
     getUsers(offset, length, (users) => {
-      res.json({
-        status: 'success',
-        data: users
-      })
+      res.json(users)
+    })
+  }
+}
+
+export const getFeedbacksHandler = () => (req, res) => {
+  const { offset, length } = req.query
+  const requesterId = req.decoded._id
+
+  if (requesterId == 'Guest') {
+    res.json({
+      status: 'failed'
+    })
+  } else {
+    getFeedbacks(offset, length, (feedbacks) => {
+      res.json(feedbacks)
     })
   }
 }
