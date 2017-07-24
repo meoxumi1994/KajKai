@@ -1176,11 +1176,19 @@ GET /users?offset=0&length=10 {   // offset = index
     status: 'success|failed',
     data: [
         {
-          id,
-          username,
-          avatarUrl,
-          status: true | false // true = hoat dong bt, false = bi chan quyen su dung
-          email,
+          user: {
+              id,
+              username,
+              avatarUrl,
+              email,
+          },
+          ban: {
+              status: true | false,
+              admin: {
+                  id,
+                  username,
+              }
+          },
           stores: [
               {
                 id,
@@ -1193,32 +1201,65 @@ GET /users?offset=0&length=10 {   // offset = index
     ]
 }
 
+POST /ban/:userid {
+    status: true | false,
+    adminId: '',
+    defendantId: '',
+    reason: '',
+    time: ''
+}, {
+  status: true | false,
+  adminId: '',
+  defendantId: '',
+  reason: '',
+  time: ''
+}
+
 GET /feedbacks?offset=0&length=10 {
     status: 'success|failed',
     data: [
         {
           id,
           reporter: {
-              id,
-              username,
-              avatarUrl
-              url
+              user: {
+                  id,
+                  username,
+                  avatarUrl
+              },
+              content: ''
           },
           defendant: {
-              id,
-              username,
-              avatarUrl
-              url
+              user: {
+                  id,
+                  username,
+                  avatarUrl
+              },
+              store: {
+                  id,
+                  storename,
+                  avatarUrl,
+                  url
+              }
           },
-          store: {
-              id,
-              storename,
-              avatarUrl,
-              url
-          }
-          reason: "",
+          ban: {
+              admin: {
+                  id,
+                  username,
+              },
+              status: true | false,
+              reason
+          },
           time: Date.now(),
-          status: true
         }
     ]
+}
+
+POST /loginadmin {
+  adminName: ,
+  password:
+}, {
+  status: 'success|failed'
+  admin: {
+    adminName
+  }
 }
