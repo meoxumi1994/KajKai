@@ -86,11 +86,8 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
             productOrders: sellPostInfo.products_order, type: sellPostInfo.type});
         docs.push(sellPostDetail);
         if (sellPostInfo.products) {
-            console.log('this ' + JSON.stringify(sellPostInfo));
-            console.log('this ' + JSON.stringify(sellPostInfo.products));
             for (let j = 0; j < sellPostInfo.products.length; ++j) {
-                let curProduct = sellPostInfo.products[i];
-                console.log('fuck ' + JSON.stringify(curProduct));
+                let curProduct = sellPostInfo.products[j];
                 productList.push(new Product({content: curProduct.content, imageUrl: curProduct.imageUrl, list: curProduct.list, sellPostId: sellPostId,
                     sellPostDetailId: getSellPostDetailGlobalId(sellPostDetail._id)}));
             }
