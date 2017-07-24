@@ -20,7 +20,7 @@ export const getSellPostDetail = (sellPostDetailId, next) => {
     })
 };
 
-export const getSellPostDetailBasicInfo = (sellPostDetail) => {
+export const getPubSellPostDetailBasicInfo = (sellPostDetail) => {
     return {
         sellPostId: sellPostDetail.sellPostId,
         content: sellPostDetail.content,
@@ -30,7 +30,7 @@ export const getSellPostDetailBasicInfo = (sellPostDetail) => {
         titles: sellPostDetail.titles,
         productOrders: sellPostDetail.productOrders,
         type: sellPostDetail.type,
-        id: getSellPostDetailGlobalId(sellPostDetail._id)
+        id: getSellPostDetailGlobalId(sellPostDetail._id),
     }
 };
 
@@ -46,7 +46,7 @@ export const updateSellPostDetail = (sellPostDetailId, updateInfo, next) => {
             if (updateInfo.products_order) sellPostDetail.productOrders = updateInfo.products_order;
             if (updateInfo.type) sellPostDetail.type = updateInfo.type;
             sellPostDetail.save(() => {
-                postRowUpdatedPub(getPubBasicSellPostDetailInfo(sellPostDetail));
+                postRowUpdatedPub(getPubSellPostDetailBasicInfo(sellPostDetail));
                 next(sellPostDetail);
             })
         }
@@ -71,7 +71,7 @@ export const createSellPostDetail = (sellPostInfo, next) => {
                     line: sellPostInfo.numline, imageURLs: sellPostInfo.images, titlesOrder: sellPostInfo.titles_order,
                     productOrders: sellPostInfo.products_order, type: sellPostInfo.type});
     sellPostDetail.save(() => {
-        postRowCreatedPub(getPubBasicSellPostDetailInfo(sellPostDetail));
+        postRowCreatedPub(getPubSellPostDetailBasicInfo(sellPostDetail));
         next(sellPostInfo)
     })
 };
@@ -98,8 +98,8 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
         if (productList.length === 0) {
             let res = [];
             for (let i = 0; i < docs.length; ++i) {
-                res.push(getSellPostDetailBasicInfo(docs[i]));
-                postRowCreatedPub(getPubBasicSellPostDetailInfo(docs[i]));
+                res.push(getBasicSellPostDetailInfo(docs[i]));
+                postRowCreatedPub(getPubSellPostDetailBasicInfo(docs[i]));
             }
             next(res);
         } else {
@@ -115,8 +115,8 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
                         cur.productOrders.push(getBasicProductInfo(productList[j]).id);
                         j++;
                     }
-                    res.push(getPubBasicSellPostDetailInfo(cur));
-                    postRowCreatedPub(getPubBasicSellPostDetailInfo(docs[i]));
+                    res.push(getBasicSellPostDetailInfo(cur));
+                    postRowCreatedPub(getPubSellPostDetailBasicInfo(docs[i]));
                 }
                 next(res);
             })
@@ -124,7 +124,7 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
     });
 };
 
-export const getPubBasicSellPostDetailInfo = (sellPostDetail) => {
+export const getBasicSellPostDetailInfo = (sellPostDetail) => {
     return {
         sellPostId: sellPostDetail.sellPostId,
         postrowId: getSellPostDetailGlobalId(sellPostDetail._id),
