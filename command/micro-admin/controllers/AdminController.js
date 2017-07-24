@@ -1,4 +1,4 @@
-import { getAdmin, getAdminToken, getUsers, getFeedbacks } from '../services/AdminService'
+import { getAdmin, getAdminToken, getUsers, getFeedbacks, banUser } from '../services/AdminService'
 
 export const loginAdmin = () => (req, res) => {
   const { adminName, password } = req.body
@@ -47,4 +47,20 @@ export const getFeedbacksHandler = () => (req, res) => {
       res.json(feedbacks)
     })
   }
+}
+
+export const banHandler = () => (req, res) => {
+  const { userid: userId } = req.params
+  let { status, adminId, defendantId: userId, reason } = req.body
+  let banned = status ? 1 : 0
+  banUser(banned, adminId, userId, reason, (result) => {
+    res.json({
+      result,
+      status,
+      adminId,
+      defendantId: userId,
+      reason,
+      time: Date.now()
+    })
+  })
 }

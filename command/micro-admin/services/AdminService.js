@@ -1,4 +1,4 @@
-import { Admin, User } from '../models'
+import { Admin, User, Feedback } from '../models'
 import jwt from 'jsonwebtoken'
 
 export const getAdmin = (adminName, password, next) => {
@@ -17,11 +17,19 @@ export const getUsers = (offset, length, next) => {
       next({
         status: 'success',
         data: offset >= users.length ? [] : users.slice(offset, length).map((user) => ({
-          id: user.id,
-          username: user.username,
-          avatarUrl: user.avatarUrl,
-          status: user.banned == 0,
-          email: user.email,
+          user: {
+            id: user.id,
+            username: user.username,
+            avatarUrl: user.avatarUrl,
+            email: user.email
+          },
+          ban: {
+            status: banned != 0,
+            admin: user.bannedBy ? {
+                id: user.bannedBy._id,
+                username: user.bannedBy.adminName
+            } : {}
+          },
           stores: user.storeList ? user.storeList.map((basicStore) => ({
             id: basicStore.id,
             storename: basicStore.storeName,
@@ -40,7 +48,37 @@ export const getUsers = (offset, length, next) => {
 }
 
 export const getFeedbacks = (offet, length, next) => {
-  
+  Feedback.find({}, (err, feedbacks) => {
+    if (feedbacks) {
+
+    } else {
+      next({
+        status: 'nodata',
+        data: []
+      })
+    }
+  })
+}
+
+export banUser = (banned, adminId, userId, reason, next) => {
+  User.findOne({ id: userId }, (err, user) => {
+    if (user) {
+      if (!user.banned || user.banned != banned) {
+        user.banned = banned
+        Admin.findById(adminId, (err, admin) => {
+          if (admin) {
+            
+          } else {
+            next('noAdminData')
+          }
+        })
+      } else {
+        next('failed')
+      }
+    } else {
+      next('noUserData')
+    }
+  })
 }
 
 export const verifyAdminToken = (token) => {
