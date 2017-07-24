@@ -38,6 +38,7 @@ class DisplayImage extends React.Component {
         const { width, height, src } = this.props
         return(
             <div  style={{
+                    display: 'inline-block',
                     height: height,
                     width: width,
                     overflow: 'hidden'}}>

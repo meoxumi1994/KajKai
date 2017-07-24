@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 import page from './page'
+import photo from './photo'
 
 const index = (state = {
 
@@ -24,6 +25,7 @@ const index = (state = {
 const store = combineReducers({
     index,
     page,
+    photo,
 })
 
 export default store

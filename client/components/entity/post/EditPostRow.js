@@ -5,16 +5,19 @@ import BasicInput from '~/containers/entity/input/BasicInput'
 import KeepImage from '~/containers/entity/thumnail/KeepImage'
 import ListProduct from '~/containers/entity/post/ListProduct'
 
-const Row = ({ type, id, products, product_order, content, images, onAddProduct, onChange, ADD }) => {
+const Row = ({ type, id, products, products_order, content, images, numline, onAddProduct, onChange, ADD }) => {
     switch (type) {
         case 'product':
             return(
                 <div>
-                    <ListProduct id={id} products={products} product_order={product_order} canEdit={true}/>
+                    <ListProduct id={id} products={products}
+                        products_order={products_order}
+                        canEdit={true}/>
                     <div className="btn"
                         style={{ padding: 0, }}
                         onClick={() => {
-                            onAddProduct(product_order)
+                            onAddProduct(products_order)
+                            onChange('numline', numline + 1)
                         }}>
                         <a>{ADD}</a>
                     </div>
@@ -23,11 +26,11 @@ const Row = ({ type, id, products, product_order, content, images, onAddProduct,
         case 'listproduct':
             return(
                 <div>
-                    <ListProduct id={id} products={products} product_order={product_order} canEdit={true}/>
+                    <ListProduct id={id} products={products} products_order={products_order} canEdit={true}/>
                     <div className="btn"
                         style={{ padding: 0, }}
                         onClick={() => {
-                            onAddProduct(product_order)
+                            onAddProduct(products_order)
                         }}>
                         <a>{ADD}</a>
                     </div>
@@ -139,7 +142,7 @@ class EditPostRow extends React.Component {
         super(props)
     }
     render(){
-        const { id, type, products, product_order, content, images, onChange } = this.props
+        const { id, type, products, products_order, content, images, onChange } = this.props
         return <Row {...this.props}/>
     }
 }

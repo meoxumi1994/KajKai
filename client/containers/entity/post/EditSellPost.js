@@ -43,7 +43,7 @@ const mergerProp = (stateProps, dispatchProps, ownProps) => {
             stateProps.postrows_order.map((item) => {
                     if(editpostrow[item].type == 'product'){
                         let products = []
-                        editpostrow[item].product_order.map((item) => {
+                        editpostrow[item].products_order.map((item) => {
                             products = [...products, product[item] ]
                         })
                         postrows = [...postrows, {

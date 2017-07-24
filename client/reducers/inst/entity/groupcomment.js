@@ -46,6 +46,25 @@ const groupcomment = (state = {
                 }
             })
             return newstate
+        case 'INST_ENTITY_PRODUCT_CLICK_ADD':
+            return {...state,
+                [action.sellpostId] : {
+                    ...state[action.sellpostId],
+                    order: [
+                        ...state[action.sellpostId].order,
+                        action.product,
+                    ],
+                }
+            }
+        case 'INST_ENTITY_PRODUCT_CLICK_REMOVE':
+            const order = state[action.sellpostId].order
+            const index = action.index
+            return {...state,
+                [action.sellpostId] : {
+                    ...state[action.sellpostId],
+                    order: [...order.slice(0,index), ...order.slice(index+1,order.length)],
+                }
+            }
         case 'INST_ENTITY_GROUPCOMMENT_CHANGE':
             return {...state,
                 [action.id] : {...state[action.id],

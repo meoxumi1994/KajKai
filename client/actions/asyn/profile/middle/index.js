@@ -4,7 +4,7 @@ import { fleu, flet, flem } from '~/actions/support'
 
 export const changeLanguage = (language) => dispatch => {
     dispatch(updateuserData('LANGUAGE', { language : language }))
-    fleu('/updateuser',{
+    fleu('/user',{
         language: language
     },{
         status: 'failed|success'
@@ -13,38 +13,38 @@ export const changeLanguage = (language) => dispatch => {
     })
 }
 
-export const updatePhone = (phone) => dispatch => {
-    dispatch({ type: 'UPDATE_PHONE_ING', newvalue: phone })
-    fleu('/updatephone',{
-        phone: phone
-    },{
-        status: 'pending|used|error'
-    })
-    .then(({status}) => {
-        if(status == 'pending')
-            dispatch(updateuserAction('UPDATE_PHONE_PENDING'))
-        if(status == 'used' )
-            dispatch(updateuserAction('UPDATE_PHONE_USED'))
-        if(status == 'error')
-            dispatch(updateuserAction('UPDATE_PHONE_FAILED'))
-    })
-}
-
-export const verifyPhone = (phone, code) => dispatch => {
-    dispatch(updateuserAction('VERIFY_PHONE_ING'))
-    fleu('/verifyphone',{
-        phone: phone,
-        code: code,
-    },{
-        status: 'verified|error'
-    })
-    .then(({status}) => {
-        if(status == 'verified')
-            dispatch(updateuserData('VERIFY_PHONE_SUCCESS', {phone}))
-        if(status == 'error')
-            dispatch(updateuserAction('VERIFY_PHONE_FAILED'))
-    })
-}
+// export const updatePhone = (phone) => dispatch => {
+//     dispatch({ type: 'UPDATE_PHONE_ING', newvalue: phone })
+//     fleu('/phone',{
+//         phone: phone
+//     },{
+//         status: 'pending|used|error'
+//     })
+//     .then(({status}) => {
+//         if(status == 'pending')
+//             dispatch(updateuserAction('UPDATE_PHONE_PENDING'))
+//         if(status == 'used' )
+//             dispatch(updateuserAction('UPDATE_PHONE_USED'))
+//         if(status == 'error')
+//             dispatch(updateuserAction('UPDATE_PHONE_FAILED'))
+//     })
+// }
+//
+// export const verifyPhone = (phone, code) => dispatch => {
+//     dispatch(updateuserAction('VERIFY_PHONE_ING'))
+//     fleu('/verifyphone',{
+//         phone: phone,
+//         code: code,
+//     },{
+//         status: 'verified|error'
+//     })
+//     .then(({status}) => {
+//         if(status == 'verified')
+//             dispatch(updateuserData('VERIFY_PHONE_SUCCESS', {phone}))
+//         if(status == 'error')
+//             dispatch(updateuserAction('VERIFY_PHONE_FAILED'))
+//     })
+// }
 
 export const updatePassword = (password, newpassword) => dispatch =>{
     dispatch(updateuserAction('UPDATE_PASSWORD_ING'))
@@ -64,7 +64,8 @@ export const updatePassword = (password, newpassword) => dispatch =>{
 
 export const updateUser = (user) => dispatch => {
     dispatch(updateuserAction('UPDATE_USER_ING'))
-    fleu('/updateuser',{
+    console.log('123123123 123 123 123 12312')
+    fleu('/user',{
         ...user
     },{
         status: 'failed|success',

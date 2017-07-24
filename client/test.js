@@ -142,7 +142,7 @@ let postrow =  [
         id: 'postrow001',
         titles_order: [],
         titles: undefined,
-        product_order: ['product001','product002','product003','product004','product005','product005','product006'],
+        products_order: ['product001','product002','product003','product004','product005','product005','product006'],
         products: product.filter((item) => item.postrowid == 'postrow001'),
         type: 'product',
     },
