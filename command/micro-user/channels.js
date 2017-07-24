@@ -10,5 +10,13 @@ export default {
     'USER.GetListUser': {
         controller: 'UserSubController',
         method: 'getListUserSub'
+    },
+    'BAN.AddBan': {
+        controller: 'UserSubController',
+        method: 'addBanCon'
+    },
+    'BAN.RemoveBan': {
+        controller: 'UserSubController',
+        method: 'removeBanCon'
     }
 }

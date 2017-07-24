@@ -1,7 +1,7 @@
 {
   "name": "micro-user",
   "scripts": {
-    "start": "pm2 delete index-user.js && pm2 start index-user.js"
+    "start": "pm2 delete index-admin.js && pm2 start index-admin.js"
   },
   "dependencies": {
     "aws-sdk": "^2.71.0",

@@ -1,30 +1,31 @@
 import utils from '../utils'
+import userMap from './userMap'
 
 const user = (state = {
     keyy: [],
     mapp: {},
-    details: {
-      id: '',
-      stores: {
-          keyy: [],
-          mapp: {}
-      }
+    current: {
+        display: false,
+        id: ''
     }
 }, action) => {
     switch (action.type) {
 
       case 'ADMIN/USER/INIT_USERS':
+          // console.log('action', action.data);
           return {
               ...state,
-              keyy: action.data.map(user => user.id),
+              keyy: action.data.map(d => d.user.id),
               mapp: utils.getUsersMap(action)
           }
 
-      case 'ADMIN/USER/USER_DETAILS':
+      case 'ADMIN/USER/BAN':
+          const { defendantId } = action.data
           return {
               ...state,
-              details: {
-                  ...state.details,
+              mapp: {
+                  ...state.mapp,
+                  [defendantId]: userMap(state.mapp[defendantId], action)
               }
           }
 

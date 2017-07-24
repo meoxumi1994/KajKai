@@ -10,6 +10,7 @@ export const loginAdmin = () => (req, res) => {
       res.json({
         status: 'success',
         admin: {
+          id: admin._id,
           adminName: admin.adminName
         }
       })
@@ -49,8 +50,7 @@ export const getFeedbacksHandler = () => (req, res) => {
   }
 }
 
-export const banHandler = () => (req, res) => {
-  const { userid: userId } = req.params
+export const banUserHandler = () => (req, res) => {
   let { status, adminId, defendantId: userId, reason } = req.body
   let banned = status ? 1 : 0
   banUser(banned, adminId, userId, reason, (result) => {

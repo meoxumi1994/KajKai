@@ -1,4 +1,6 @@
 import { Admin, User, Feedback } from '../models'
+import { sendBanEmail, sendUnBanEmail } from './EmailService'
+import { addBanPub, removeBanPub } from './BanPubService'
 import jwt from 'jsonwebtoken'
 
 export const getAdmin = (adminName, password, next) => {
@@ -24,10 +26,10 @@ export const getUsers = (offset, length, next) => {
             email: user.email
           },
           ban: {
-            status: banned != 0,
-            admin: user.bannedBy ? {
-                id: user.bannedBy._id,
-                username: user.bannedBy.adminName
+            status: user.banned != 0,
+            admin: user.bannedById ? {
+                id: user.bannedById,
+                username: user.bannedByAdminName
             } : {}
           },
           stores: user.storeList ? user.storeList.map((basicStore) => ({
@@ -50,7 +52,43 @@ export const getUsers = (offset, length, next) => {
 export const getFeedbacks = (offet, length, next) => {
   Feedback.find({}, (err, feedbacks) => {
     if (feedbacks) {
-
+      let fbs = offet >= feedbacks.length ? [] : feedbacks.slice(offet, length)
+      next({
+        status: 'success',
+        data: fbs.map((fb) => ({
+          id: fb._id,
+          reporter: {
+            user: {
+              id: fb.reporter.id,
+              username: fb.reporter.username,
+              avatarUrl: fb.reporter.avatarUrl
+            },
+            content: fb.content
+          },
+          defendant: {
+            user: {
+              id: fb.reportee.id,
+              username: fb.reportee.username,
+              avatarUrl: fb.reportee.avatarUrl
+            },
+            store: {
+              id: store.id,
+              storename: store.storeName,
+              avatarUrl: store.avatarUrl,
+              url: store.urlName
+            }
+          },
+          ban: {
+            admin: {
+              id: fb.bannedBy._id,
+              username: fb.bannedBy.adminName
+            },
+            status: fb.bannedBy != null,
+            reason: fb.reason
+          },
+          time: fb.time.getTime()
+        }))
+      })
     } else {
       next({
         status: 'nodata',
@@ -60,14 +98,28 @@ export const getFeedbacks = (offet, length, next) => {
   })
 }
 
-export banUser = (banned, adminId, userId, reason, next) => {
+export const banUser = (banned, adminId, userId, reason, next) => {
   User.findOne({ id: userId }, (err, user) => {
     if (user) {
       if (!user.banned || user.banned != banned) {
+        if (banned == 0) {
+          removeBanPub(userId, reason)
+          sendUnBanEmail(user.username, user.email, reason)
+        } else {
+          addBanPub(userId, reason)
+          sendBanEmail(user.username, user.email, reason)
+        }
         user.banned = banned
         Admin.findById(adminId, (err, admin) => {
           if (admin) {
-            
+            const user = {
+              banned,
+              bannedById: admin._id.toString(),
+              bannedByAdminName: admin.adminName,
+            }
+
+            User.findOneAndUpdate({ id: userId }, user, () => {})
+            next('success')
           } else {
             next('noAdminData')
           }

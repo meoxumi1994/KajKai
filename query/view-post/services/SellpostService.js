@@ -49,9 +49,11 @@ export const getSellposts = (requesterId, storeId, offset, next) => {
       sellposts.map((sellpost, index) => {
         sellpostById[sellpost.id] = index
       })
+      // console.log('sellposts: ', sellposts);
       sellposts.map((sellpost) => {
         mPromises.push(new Promise((resolve, reject) => {
           Postrow.find({ sellpostId: sellpost.id }, (err, postrows) => {
+            // console.log('postrows: ', postrows);
             if (postrows) {
               sellposts[sellpostById[sellpost.id]].postrows = postrows
               resolve(postrows)
@@ -62,6 +64,7 @@ export const getSellposts = (requesterId, storeId, offset, next) => {
         }))
       })
       Promise.all(mPromises).then((postrowses) => {
+        // console.log('sellposts then:', sellposts);
         const mSellposts = []
         let currentNumberOfSellpost = 0, mOffset = -2, lastIndex = -1
         for (let i = sellposts.length - 1; i >= 0; i--) {
@@ -108,6 +111,8 @@ export const verifyToken = (token) => {
 
 const getClientFormatSellpost = (requesterId, sellpost, offset) => {
   const { postrows, comments } = sellpost
+
+  console.log('postrows: ', postrows);
 
   let { followers } = sellpost
   if (!followers) {

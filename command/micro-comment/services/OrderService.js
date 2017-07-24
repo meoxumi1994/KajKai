@@ -4,8 +4,8 @@ import { getOrderDetail, getOrderDetailInfo} from './OrderDetailService'
 export const getOrder = (raw) => {
     const length = raw.length;
     // var totalPrice = 0
-    var listOrderDetail = [];
-    for (var i = 0; i < length; ++i) {
+    let listOrderDetail = [];
+    for (let i = 0; i < length; ++i) {
         const orderDetail = getOrderDetail(raw[i]);
         // totalPrice += getTotalPrice(orderDetail);
         listOrderDetail.push(orderDetail)
@@ -16,8 +16,8 @@ export const getOrder = (raw) => {
 
 export const getOrderInfo = (order) => {
     if (!order) return order;
-    var orderInfo = [];
-    for (var i = 0; i < order.length; ++i) {
+    let orderInfo = [];
+    for (let i = 0; i < order.length; ++i) {
         orderInfo.push(getOrderDetailInfo(order[i]));
     }
     return orderInfo;

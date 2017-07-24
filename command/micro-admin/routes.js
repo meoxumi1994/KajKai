@@ -17,15 +17,15 @@ export default {
     '/feedbacks': {
       get: {
         controller: 'AdminController',
-        middleware: [authAdmin()].
+        middleware: [authAdmin()],
         method: 'getFeedbacksHandler'
       }
     },
-    '/ban:userid': {
+    '/ban': {
       post: {
         controller: 'AdminController',
         middleware: [authAdmin()],
-        method: 'banHandler'
+        method: 'banUserHandler'
       }
     }
 }

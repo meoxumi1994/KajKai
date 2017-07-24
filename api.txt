@@ -1201,18 +1201,26 @@ GET /users?offset=0&length=10 {   // offset = index
     ]
 }
 
-POST /ban/:userid {
+POST /ban {
     status: true | false,
     adminId: '',
     defendantId: '',
     reason: '',
     time: ''
 }, {
-  status: true | false,
-  adminId: '',
-  defendantId: '',
-  reason: '',
-  time: ''
+    status: true | false,
+    adminId: '',
+    defendantId: '',
+    reason: '',
+    time: ''
+}
+
+POST /feedback {
+  storeId: '',
+  sellpostId: '',
+  content: ''
+}, {
+  status: 'success|failed'
 }
 
 GET /feedbacks?offset=0&length=10 {
@@ -1234,12 +1242,7 @@ GET /feedbacks?offset=0&length=10 {
                   username,
                   avatarUrl
               },
-              store: {
-                  id,
-                  storename,
-                  avatarUrl,
-                  url
-              }
+              sellpostId: ''
           },
           ban: {
               admin: {
@@ -1249,6 +1252,7 @@ GET /feedbacks?offset=0&length=10 {
               status: true | false,
               reason
           },
+          status: false | true
           time: Date.now(),
         }
     ]

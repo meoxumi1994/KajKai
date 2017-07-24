@@ -1,6 +1,7 @@
 import mongoose from '../datasource'
 import BasicStoreSchema from './BasicStore'
 import BasicUserSchema from './BasicUser'
+import AdminSchema from './Admin'
 
 const FeedbackSchema = new mongoose.Schema({
   reporter: {type: BasicUserSchema},

@@ -1,13 +1,14 @@
 import { connect } from 'react-redux'
-import Admin from '~/components/admin'
+import Admin from '~/components/admin/'
 
 const mapStateToProps = (state, ownProps) => {
-    // console.log('---STATE', state.inst.admin);
-    return state
+    const { auth } = state.inst.admin
+    return {
+        auth
+    }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
 })
 
 const AdminContainer = connect(

@@ -24,20 +24,11 @@ export const loginFacebook = () => {
 
                 getUserFromFacebookId(body.id, function(user) {
                     if (user) {
-                        const token = getUserToken(user._id);
-                        console.log('facebook: ' + token);
-                        res.cookie('token', token);
-                        res.json({user: getUserBasicInfo(user), tokenId: token});
+                        login(res, user);
                     } else {
                         createUser(body.email.toLowerCase(), body.name, '1234', 1, null, SocialType.FACEBOOK, body.id, body.picture.data.url, (user) => {
-                            if (user) {
-                                createUserPub(user);
-                                const token = getUserToken(user._id);
-                                res.cookie('token', token);
-                                res.json({user: getUserBasicInfo(user), tokenId: token});
-                            } else {
-                                res.json({error: error})
-                            }
+                            login(res, user);
+                            createUserPub(user);
                         })
                     }
                 })
@@ -69,9 +60,7 @@ export const loginEmail = () => {
                     res.json({status : 'failed'});
                     return
                 }
-                const token = getUserToken(user._id);
-                res.cookie('token', token);
-                res.json({status: 'success', user: getUserBasicInfo(user), tokenId: token});
+                login(res, user);
             })
         } else {
             res.json({status: 'failed'})
@@ -97,19 +86,11 @@ export const loginGoogle = () => {
                 body = JSON.parse(body);
                 getUserFromEmail(body.email.toLowerCase(), (user) => {
                     if (user) {
-                        const token = getUserToken(user._id);
-                        res.cookie('token', token);
-                        res.json({user: getUserBasicInfo(user), tokenId: token});
+                        login(res, user);
                     } else {
                         createUser(body.email.toLowerCase(), body.name, '1234678', 1, null, null, null, body.picture, (newUser) => {
-                            if (newUser !== null) {
-                                createUserPub(newUser);
-                                const token = getUserToken(newUser._id);
-                                res.cookie('token', token);
-                                res.json({user: getUserBasicInfo(newUser), tokenId: token});
-                            } else {
-                                res.json({error: 'error'})
-                            }
+                            login(res, newUser);
+                            createUserPub(newUser);
                         })
                     }
                 })
@@ -124,5 +105,19 @@ export const logOutUser = () => {
     return (req, res) => {
         res.cookie('token', 'invalid');
         res.json({status: 'success'});
+    }
+};
+
+export const login = (res, user) => {
+    if (!user) {
+        res.json({error: 'error'});
+    } else {
+        if (user.banned === 1) {
+            res.json({error: 'error', banReason: user.banReason})
+        } else {
+            const token = getUserToken(user._id);
+            res.cookie('token', token);
+            res.json({user: getUserBasicInfo(user), tokenId: token});
+        }
     }
 };
