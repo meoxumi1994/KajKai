@@ -117,6 +117,9 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
                     res.push(getPubBasicSellPostDetailInfo(cur));
                     postRowCreatedPub(getPubBasicSellPostDetailInfo(docs[i]));
                 }
+                console.log(JSON.stringify(productList));
+                console.log(JSON.stringify(docs));
+                console.log(JSON.stringify(res));
                 next(res);
             })
         }
