@@ -17,7 +17,7 @@ export default {
     '/feedbacks': {
       get: {
         controller: 'AdminController',
-        middleware: [authAdmin()].
+        middleware: [authAdmin()],
         method: 'getFeedbacksHandler'
       }
     },
