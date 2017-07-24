@@ -13,7 +13,7 @@ class ChatList extends React.Component {
         const { createNewChat, getMessages } = this.props
 
         chatListKey.sort(function(a, b) {
-            if (chatListMap[a].mesId == 0 || chatListMap[a].lastMessage == undefined) return
+            if (chatListMap[a].mesId == 0 || chatListMap[a].lastMessage == undefined || chatListMap[b].lastMessage == undefined) return
             if (chatListMap[a].lastMessage.time > chatListMap[b].lastMessage.time) return -1
             if (chatListMap[a].lastMessage.time < chatListMap[b].lastMessage.time) return 1
         })

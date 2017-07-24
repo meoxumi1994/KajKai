@@ -121,7 +121,6 @@ const left = (state = {
 **/
 //------------------------------------------------------------------------------
       case 'SEARCH':
-          console.log('action',action);
           return {
               ...state,
               chatListMap: {

@@ -10,7 +10,7 @@ export const getMesId = (id, person) => dispatch => {
           console.log('\n[API] /getMesId ', response);
           dispatch({type: 'NEW_CHAT', data: {mesId: response.mesId}})
           dispatch(getUser(person, response.mesId))
-          dispatch(getMessages(response.mesId, Date.now()), 'load')
+          dispatch(getMessages(response.mesId, Date.now(), 'load'))
     })
 }
 
