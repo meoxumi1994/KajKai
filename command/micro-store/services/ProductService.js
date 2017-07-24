@@ -61,7 +61,7 @@ export const createMultipleProduct = (productList, next) => {
 
 export const getBasicProductInfo = (product) => {
     return {
-        id: getBasicProductInfo(product._id),
+        id: getProductGlobalId(product._id),
         content: product.content,
         imageUrl: product.imageUrl,
         list: product.list
