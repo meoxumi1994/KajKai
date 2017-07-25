@@ -50,6 +50,41 @@ GET /leadercomment/:leadercommentid?offset=1498555009220 {
 
 //NEW NEW NEW
 
+GET /notification?offset=-1 {
+    numUnreaded: ,
+    offset: ,
+    notifications: [
+        {
+            type: 'like|comment|leadercomment|createsellpost|editsellpost|createminorpost'
+            // tra ve nhieu nhat co the nhung thong tin o ben duoi
+            id: , // day la cai id cua notification
+            commentid: ,
+            leadercommentid: ,
+            sellpostid: ,
+            minorpostid: ,
+            numcomment: ,
+            ownerid: , // id cua thang gay ra hanh dong
+            avatarUrl: // small size 40x40 , // avatar cua thang gay ra hanh dong
+            name: ,
+            content: ,
+            time: ,
+            numlike: ,
+            likes: [
+              {
+                avatarUrl: ,// small size 20x20
+                userid: ,
+                username: ,
+                storeid: ,
+                storename: ,
+              },
+            ], // con thang nao khac like nua thi` random vai thang :D
+            likestatus: ['like','love','haha','wow'], // ko lam` thi de mac dinh 'like', fuck u
+            // hanh` dong gay ra o store nao`
+            storename: ,
+            urlname: ,
+        }
+    ]
+}
 
 GET /user/:id {
     status:,
@@ -79,30 +114,6 @@ GET /user/:id {
             avatarUrl: '',
         }],
     },
-    numUnreaded: ,
-    notifications: [
-        {
-            type: 'like|comment|leadercomment|createsellpost|editsellpost|createminorpost'
-            // tra ve nhieu nhat co the nhung thong tin o ben duoi
-            id: , // day la cai id cua notification
-            commentid: ,
-            leadercommentid: ,
-            sellpostid: ,
-            minorpostid: ,
-            numcomment: ,
-            ownerid: , // id cua thang gay ra hanh dong
-            avatarUrl: // small size 40x40 , // avatar cua thang gay ra hanh dong
-            name: ,
-            content: ,
-            time: ,
-            numlike: ,
-            likes: [], // con thang nao khac like nua thi` random vai thang :D
-            likestatus: ['like','love','haha','wow'], // ko lam` thi de mac dinh 'like', fuck u
-            // hanh` dong gay ra o store nao`
-            storename: ,
-            urlname: ,
-        }
-    ]
 }
 
 GET /privacy/user/:id {
@@ -265,6 +276,8 @@ GET /store/:id { // id co the urlname
             avatarUrl: ,// small size 20x20
             userid: ,
             username: ,
+            storeid: ,
+            storename: ,
           },
         ], // tối đa 5 thằng linh tinh
         numfollow: '43',
