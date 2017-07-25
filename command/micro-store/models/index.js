@@ -8,6 +8,7 @@ import StoreSchema from './Store'
 import CertificateSchema from './Certificate'
 import MinorPostSchema from './MinorPost'
 import path from 'path'
+import config from '../config/pubSubConfig'
 
 export const Certificate = mongoose.model('Certificate', CertificateSchema);
 export const SubCategory = mongoose.model('SubCategory', SubCategorySchema);
@@ -20,7 +21,10 @@ export const MinorPost = mongoose.model('MinorPost', MinorPostSchema);
 
 
 let fs = require('fs');
+let redis = require('redis');
+let redisClient = redis.createClient(config);
 fs.readFile(path.resolve(__dirname, '../data/category.json'), 'utf8', (err, data) => {
+    console.log('CATEGORY GET CALLED');
 	if (err) {
 		console.log('fuck');
         return;
@@ -41,6 +45,13 @@ fs.readFile(path.resolve(__dirname, '../data/category.json'), 'utf8', (err, data
 		Category.findOne({name: e.name}, (err, data) => {
 		    if (err || !data) {
 		        category.save();
+		        category.subcategory.forEach((sub) => {
+		            redisClient.hset('category', sub._id.toString(), sub.name);
+                })
+            } else {
+		        data.subcategory.forEach((sub) => {
+                    redisClient.hset('category', sub._id.toString(), sub.name);
+                })
             }
         });
 	});
