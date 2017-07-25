@@ -1217,27 +1217,35 @@ GET /users?offset=0&length=10 {   // offset = index
 }
 
 POST /ban {
-    feedbackId: '',
-    adminId: '',
-    status,   // status cua feedback
-    reason: '',
-    time: ''
+    admin: {
+      id: '',
+      reason: '',
+      time: ''
+    },
+    feedback: {
+      id: '',
+      status,
+    },
     users: [
       {
         status: true | false,
-        userId: '',
+        id: '',
       }
     ]
 }, {
-    feedbackId: '',
-    adminId: '',
-    status,   // status cua feedback
-    reason: '',
-    time: ''
+    admin: {
+      id: '',
+      reason: '',
+      time: ''
+    },
+    feedback: {
+      id: '',
+      status,
+    },
     users: [
       {
         status: true | false,
-        userId: '',
+        id: '',
       }
     ]
 }
