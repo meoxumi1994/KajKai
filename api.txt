@@ -1226,12 +1226,14 @@ POST /ban {
       id: '',
       status,
     },
-    users: [
-      {
-        status: true | false,
-        id: '',
-      }
-    ]
+    reporter: {
+      status: true | false,
+      id: '',
+    },
+    defendant: {
+      status: true | false,
+      id: '',
+    }
 }, {
     status: "success|failed",
     data: {
@@ -1244,12 +1246,14 @@ POST /ban {
           id: '',
           status,
         },
-        users: [
-          {
-            status: true | false,
-            id: '',
-          }
-        ]
+        reporter: {
+          status: true | false,
+          id: '',
+        },
+        defendant: {
+          status: true | false,
+          id: '',
+        }
     }
 }
 
