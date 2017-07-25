@@ -98,7 +98,7 @@ export const addLike = (message) => {
       }
     })
   } else if (userId.substr(0, 3) == '002') { // store
-    BasicUser.findOne({ id: userId }, (err, basicStore) => {
+    BasicStore.findOne({ id: userId }, (err, basicStore) => {
       if (basicStore) {
         const liker = new Liker({
           storeId: userId,
