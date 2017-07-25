@@ -21,7 +21,6 @@ const mapStateToProps = (state, { id }) => {
         likeContent = getLikeContent(likes, numlike, yourid)
         time = getTime(sellpost.time)
     }
-    console.log('mergerProps mergerProps mergerProps mergerProps mapStatemergerPropsToProps')
     return({
         ...store,
         ...sellpost,
@@ -50,13 +49,15 @@ const mapDispatchToProps = (dispatch, { id }) => ({
             id: id,
             type: 'sellpost',
         }})
+    },
+    feedBack: () => {
+        dispatch({ type: 'FEED_BACK_ING'})
     }
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
     const { ...anotherState } = stateProps
     const { ...anotherDispatch } = dispatchProps
-    console.log('mergerProps mergerProps mergerProps mergerProps mapStatemergerPropsToProps')
     return({
         ...ownProps,
         ...anotherState,

@@ -1,4 +1,4 @@
-export const updateLikes = (likes, id, name) => {
+export const updateLikes = (likes = [], id, name) => {
     let has = false
     let newLikes = []
     likes.map((item) => {

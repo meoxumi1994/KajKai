@@ -9,7 +9,6 @@ class Photo extends React.Component {
     }
     render(){
         const { storePhotos, postPhotos, productPhotos } = this.props
-        console.log('Photo', this.props)
         return (
             <div>
                 <div style={{
