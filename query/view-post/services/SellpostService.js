@@ -162,7 +162,7 @@ const getClientFormatSellpost = (requesterId, sellpost, offset) => {
       storename: liker.storeName,
       avatarUrl: liker.avatarUrl
     })) : null,
-    numfollow: sellpost.numerOfFollow ? sellpost.numerOfFollow : 0,
+    numfollow: sellpost.numberOfFollow ? sellpost.numberOfFollow : 0,
     follows,
     numleadercomment: sellpost.numberOfComment ? sellpost.numberOfComment : 0,
     numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
