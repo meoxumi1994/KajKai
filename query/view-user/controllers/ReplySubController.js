@@ -66,7 +66,7 @@ export const createReplyNotification = (message) => {
                       commentId,
                       replyId,
                       sellpostId,
-                      ...replier
+                      ...replier,
                       content,
                       time: Date.now(),
                       storeName: basicStore.storeName,

@@ -65,7 +65,7 @@ export const createCommentNotification = (message) => {
                         type: NotificationType.COMMENT,
                         commentId,
                         sellpostId,
-                        ...commenter
+                        ...commenter,
                         content,
                         time: Date.now(),
                         storeName: basicStore.storeName,
