@@ -59,7 +59,7 @@ class FeedbackDetails extends React.Component {
                               <td>{time}</td>
                           </tr>
                           <tr>
-                              <th>Decision</th>
+                              <th>Reason</th>
                               <td>
                                   <FormControl style={{height: 100}} componentClass="textarea" placeholder="Please type decision" />
                               </td>

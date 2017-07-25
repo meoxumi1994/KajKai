@@ -1187,7 +1187,8 @@ GET /users?offset=0&length=10 {   // offset = index
               admin: {
                   id,
                   username,
-              }
+              },
+              reason: ''
           },
           stores: [
               {
@@ -1202,12 +1203,14 @@ GET /users?offset=0&length=10 {   // offset = index
 }
 
 POST /ban {
+    feedbackId: '',
     status: true | false,
     adminId: '',
     defendantId: '',
     reason: '',
     time: ''
 }, {
+    feedbackId: '',
     status: true | false,
     adminId: '',
     defendantId: '',
@@ -1216,7 +1219,7 @@ POST /ban {
 }
 
 POST /feedback {
-  storeId: '',
+  ownerId: '',
   sellpostId: '',
   content: ''
 }, {
