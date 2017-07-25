@@ -14,7 +14,7 @@ export const createPostrow = (message) => {
     postrow.images = images
     mPostrowImageList = images.map((image) => (
       new Image({
-        url: image.url,
+        url: image,
         time: Date.now()
       })
     ))
