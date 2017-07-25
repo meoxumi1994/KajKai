@@ -46,7 +46,7 @@ export default {
   '/notification': {
     get: {
       controller: 'UserController',
-      middleware: [auth()]
+      middleware: [auth()],
       method: 'getNotificationsHandler'
     },
     put: {
