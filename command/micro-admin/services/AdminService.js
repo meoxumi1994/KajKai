@@ -98,9 +98,9 @@ export const getFeedbacks = (offet, length, next) => {
 export const banUsers = (admin, feedback, reporter, reportee, next) => {
     Admin.findById(admin.id, (err, mAdmin) => {
       if (mAdmin) {
-        const mPromise = []
+        const mPromises = []
         if (reporter) {
-          mPromise.push(new Promise((resolve, reject) => {
+          mPromises.push(new Promise((resolve, reject) => {
             User.findOne({ id: reporter.id }, (err, user) => {
               if (user) {
                 user.banned = reporter.status ? 1 : 0,
@@ -127,7 +127,7 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
         }
 
       if (reportee) {
-        mPromise.push(new Promise((resolve, reject) => {
+        mPromises.push(new Promise((resolve, reject) => {
           User.findOne({ id: reportee.id }, (err, user) => {
             if (user) {
               user.banned = reportee.status ? 1 : 0,
