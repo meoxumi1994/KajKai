@@ -15,29 +15,40 @@ export const getUser = (requesterId, id, next) => {
           })
         }
       } else {
-        next({
-          status: 'success',
-          user: {
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            avatarUrl: user.avatarUrl,
-            coverUrl: user.coverUrl,
-            address: user.address,
-            phone: user.phone,
-            language: user.language,
-            sex: user.sex,
-            yearOfBirth: user.yearOfBirth,
-            lastUpdate: user.lastUpdate,
-            blacklist: user.blackList,
-            storeList: user.storeList ? (user.storeList.map((basicStore) => ({
-              id: basicStore.id,
-              storename: basicStore.storeName,
-              avatarUrl: basicStore.avatarUrl,
-              urlname: basicStore.urlName
-            }))) : []
-          }
-        })
+        if (!user.banned || user.banned == 0) {
+          next({
+            status: 'success',
+            user: {
+              id: user.id,
+              username: user.username,
+              email: user.email,
+              avatarUrl: user.avatarUrl,
+              coverUrl: user.coverUrl,
+              address: user.address,
+              phone: user.phone,
+              language: user.language,
+              sex: user.sex,
+              yearOfBirth: user.yearOfBirth,
+              lastUpdate: user.lastUpdate,
+              blacklist: user.blackList,
+              storeList: user.storeList ? (user.storeList.map((basicStore) => ({
+                id: basicStore.id,
+                storename: basicStore.storeName,
+                avatarUrl: basicStore.avatarUrl,
+                urlname: basicStore.urlName
+              }))) : []
+            }
+          })
+        } else {
+          next({
+            status: 'failed',
+            banned: true,
+            reason: user.reason,
+            user: {
+              id: user.id
+            }
+          })
+        }
       }
   })
 }
@@ -56,6 +67,7 @@ export const getUserPrivacy = (id, next) => {
           })
         }
       } else {
+        if (!user.banned || user.banned == 0) {
           next({
             status: 'success',
             privacy: {
@@ -64,6 +76,16 @@ export const getUserPrivacy = (id, next) => {
               another: user.privacy.others
             }
           })
+        } else {
+          next({
+            status: 'failed',
+            banned: true,
+            reason: user.reason,
+            privacy: {
+              id: user.id
+            }
+          })
+        }
       }
   })
 }
@@ -80,39 +102,49 @@ export const getUserImageList = (requesterId, id, offset, next) => {
           })
         }
       } else {
-        let { imageList } = user
-        if (!imageList) {
-          imageList = []
-        }
-        const mImageList = []
-        let currentNumberOfImage = 0, mOffset, lastIndex
-        for (let i = imageList.length - 1; i >= 0; i--) {
-          let image = imageList[i]
-          if (image.time < offset) {
-            if (currentNumberOfImage < 14) {
-              mImageList.push({
-                url: image.url,
-                time: image.time
-              })
+        if (!user.banned || user.banned == 0) {
+          let { imageList } = user
+          if (!imageList) {
+            imageList = []
+          }
+          const mImageList = []
+          let currentNumberOfImage = 0, mOffset, lastIndex
+          for (let i = imageList.length - 1; i >= 0; i--) {
+            let image = imageList[i]
+            if (image.time < offset) {
+              if (currentNumberOfImage < 14) {
+                mImageList.push({
+                  url: image.url,
+                  time: image.time
+                })
 
-              mOffset = image.time.getTime()
-              lastIndex = i
-              currentNumberOfImage++
-            } else {
-              break
+                mOffset = image.time.getTime()
+                lastIndex = i
+                currentNumberOfImage++
+              } else {
+                break
+              }
             }
           }
-        }
 
-        if (currentNumberOfImage < 14 || lastIndex == 0) {
-          mOffset = -2
-        }
+          if (currentNumberOfImage < 14 || lastIndex == 0) {
+            mOffset = -2
+          }
 
-        next({
-          offset: mOffset,
-          status: 'success',
-          listImage : mImageList
-        })
+          next({
+            offset: mOffset,
+            status: 'success',
+            listImage : mImageList
+          })
+        } else {
+          next({
+            offset,
+            status: 'failed',
+            banned: true,
+            reason: user.reason,
+            listImage: []
+          })
+        }
       }
   })
 }

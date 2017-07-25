@@ -1,10 +1,18 @@
 const userMap = (state = {
-    id: '',
-    username: '',
-    avatarUrl: '',
-    status: '',
-    email: '',
-    stores: []
+    user: {
+        id: '',
+        username: '',
+        avatarUrl: '',
+        email: '',
+    },
+    stores: [],
+    ban: {
+        status: '',
+        admin: {
+            id: '',
+            username: ''
+        }
+    }
 }, action) => {
     switch (action.type) {
       case 'ADMIN/USER/INIT_USERS':
@@ -12,18 +20,18 @@ const userMap = (state = {
           const { ban, stores, user } = action.data
           return {
               ...state,
-              id: user.id,
-              username: user.username,
-              avatarUrl: user.avatarUrl,
-              email: user.email,
-              status: ban.status,
-              stores: stores
+              user,
+              stores,
+              ban
           }
 
       case 'ADMIN/USER/BAN':
           return {
               ...state,
-              status: action.data.status
+              ban: {
+                  ...state.ban,
+                  status: action.data.status
+              }
           }
 
       default:

@@ -18,5 +18,13 @@ export default {
   'STORE.Updated': {
     controller: 'StoreSubController',
     method: 'updateStoreList'
+  },
+  'BAN.AddBan': {
+    controller: 'BanSubController',
+    method: 'addBan'
+  },
+  'BAN.RemoveBan': {
+    controller: 'BanSubController',
+    method: 'removeBan'
   }
 }

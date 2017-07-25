@@ -29,6 +29,15 @@ const user = (state = {
               }
           }
 
+      case 'ADMIN/USER/DISPLAY':
+          return {
+              ...state,
+              current: {
+                  display: action.data.display,
+                  id: action.data.id
+              }
+          }
+
       default:
         return state
     }

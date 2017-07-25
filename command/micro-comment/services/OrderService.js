@@ -17,8 +17,9 @@ export const getOrder = (raw) => {
 export const getOrderInfo = (order) => {
     if (!order) return order;
     let orderInfo = [];
-    for (let i = 0; i < order.length; ++i) {
-        orderInfo.push(getOrderDetailInfo(order[i]));
+    console.log('this detail' + JSON.stringify(order.orderDetails));
+    for (let i = 0; i < order.orderDetails.length; ++i) {
+        orderInfo.push(getOrderDetailInfo(order.orderDetails[i]));
     }
     return orderInfo;
 };

@@ -1,4 +1,5 @@
 import authAdmin from './middlewares/authAdmin'
+import auth from './middlewares/auth'
 
 export default {
     '/loginadmin': {
@@ -26,6 +27,13 @@ export default {
         controller: 'AdminController',
         middleware: [authAdmin()],
         method: 'banUserHandler'
+      }
+    },
+    '/feedback': {
+      post: {
+        controller: 'AdminController',
+        middleware: [auth()],
+        method: 'createFeedbackHandler'
       }
     }
 }

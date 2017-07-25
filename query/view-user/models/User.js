@@ -23,7 +23,9 @@ const UserSchema = new mongoose.Schema({
   lastUpdate: {type: LastUpdateSchema},
   blackList: [BlackSchema],
   privacy: {type: PrivacySchema},
-  storeList: [BasicStoreSchema]
+  storeList: [BasicStoreSchema],
+  banned: {type: Number},
+  reason: {type: String}
 })
 
 export default UserSchema
