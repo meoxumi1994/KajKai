@@ -3,12 +3,12 @@ import auth from './middlewares/auth'
 export default {
     '/interest': {
         post: {
-            controller: 'ProductController',
+            controller: 'InterestController',
             middleware: [auth()],
             method: 'addNewInterestCon'
         },
         delete: {
-            controller: 'ProductController',
+            controller: 'InterestController',
             middleware: [auth()],
             method: 'removeInterestCon'
         }
