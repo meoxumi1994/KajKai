@@ -188,7 +188,7 @@ export const getNotifications = (id, offset, next) => {
                 storename: liker.storename,
                 id: liker.userId ? liker.userId : liker.storeId,
                 name: liker.username ? liker.username : liker.storeName
-              }))
+              })),
               likestatus: ['like'],
               storename: notification.storeName,
               urlname: notification.urlName
