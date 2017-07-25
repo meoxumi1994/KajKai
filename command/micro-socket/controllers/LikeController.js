@@ -16,13 +16,13 @@ export const likeAct = (action, sio, io) => {
     addLikePub(likerId, action.data.sellpostid, action.data.leadercommentid, action.data.commentid, (like) => {
         console.log('like ' + like, JSON.stringify(like));
         let data = {
-            userId: like.likerId, userName: action.data.user.username, avatarUrl: action.data.user.avatarUrl,
+            id: like.likerId, name: action.data.user.username, avatarUrl: action.data.user.avatarUrl,
             sellpostid: like.sellPostId, leadercommentid: like.fCommentId, commentid: like.sCommentId,
             status: like.type, type: likenType
         };
         if (like.name) {
             data = {
-                storeId: like.likerId, storename: like.name, avatarUrl: like.avatarUrl,
+                id: like.likerId, name: like.name, avatarUrl: like.avatarUrl,
                 sellpostid: like.sellPostId, leadercommentid: like.fCommentId, commentid: like.sCommentId,
                 status: like.type, type: likenType
             };
