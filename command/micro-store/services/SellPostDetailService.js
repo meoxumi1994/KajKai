@@ -31,7 +31,8 @@ export const getPubSellPostDetailBasicInfo = (sellPostDetail) => {
         productOrders: sellPostDetail.productOrders,
         type: sellPostDetail.type,
         postrowId: getSellPostDetailGlobalId(sellPostDetail._id),
-        products: sellPostDetail.products
+        products: sellPostDetail.products,
+        storeId: sellPostDetail.storeId
     }
 };
 
@@ -77,7 +78,7 @@ export const createSellPostDetail = (sellPostInfo, next) => {
     })
 };
 
-export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => {
+export const createMultiplePostDetail = (listSellPostInfo, sellPostId, storeId, next) => {
     let docs = [];
     let productList = [];
     for (let i = 0; i < listSellPostInfo.length; ++i) {
@@ -96,6 +97,9 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, next) => 
     }
 
     SellPostDetail.insertMany(docs, () => {
+        for (let i = 0; i < docs.length; ++i) {
+            docs[i].storeId = storeId;
+        }
         if (productList.length === 0) {
             let res = [];
             for (let i = 0; i < docs.length; ++i) {
