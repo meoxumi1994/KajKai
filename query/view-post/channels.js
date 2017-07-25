@@ -66,5 +66,13 @@ export default {
   'LIKE.RemoveLike': {
     controller: 'LikeSubController',
     method: 'removeLike'
+  },
+  'FOLLOW.AddFollow': {
+    controller: 'FollowSubController',
+    method: 'addFollow'
+  },
+  'FOLLOW.RemoveFollow': {
+    controller: 'FollowSubController',
+    method: 'removeFollow'
   }
 }

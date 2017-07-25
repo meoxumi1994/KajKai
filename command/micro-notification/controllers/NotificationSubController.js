@@ -1,5 +1,6 @@
 import { getListFollower, addNewFollow, removeFollow, modifyFollow, getListFollowee } from '../services/FollowService'
 import { addNewLike } from '../services/LikeService'
+import { getInterestWithIn } from '../services/InterestService'
 
 export const getListFollowerCon = (message, next) => {
     getListFollower(message.followeeId, (list) => {
@@ -47,12 +48,8 @@ export const addLikeCon = (message, next) => {
     })
 };
 
-export const removeLikeCon = (message, next) => {
-    removeLike(message.likerId, message.likenId, (like) => {
-        if (like) {
-            next({status: 'success', like: like})
-        } else {
-            next({status: 'failed'})
-        }
+export const getListInterestWithSub = (message, next) => {
+    getInterestWithIn(message.longitude, message.latitude, message.categoryId, 10000, (listId) => {
+        next({status: 'success', listId: listId});
     })
 };

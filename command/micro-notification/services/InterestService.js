@@ -1,5 +1,10 @@
 import { Interest } from '../models'
 import globalId from '../config/globalId'
+import redis from 'redis'
+import config from '../config/pubSubConfig'
+import {addInterestPub, removeInterestPub} from '../controllers/NotificationPubController'
+
+let redisClient = redis.createClient(config);
 
 export const INTEREST_GLOBAL_ID = globalId.INTEREST_GLOBAL_ID;
 
@@ -21,24 +26,38 @@ export const getInterest = (id, next) => {
 export const addNewInterest = (userId, categoryId, longitude, latitude, next) => {
     const interest = new Interest({userId, categoryId, location: [longitude, latitude]});
     interest.save(() => {
-        next(interest);
+        getInterestInfo(interest, (info) => {
+            next(info);
+            addInterestPub(info);
+        });
+
     })
 };
 
-export const removeInterest = (id, next) => {
+export const removeInterest = (userId, id, next) => {
     getInterest(id, (interest) => {
-        interest.remove(() => {
-            next();
+        if (userId !== interest.userId) {
+            next(null, id);
+            return;
+        }
+        interest.remove((err) => {
+            next(err, id);
+            removeInterestPub(id);
         });
     })
 };
 
-export const getInterestPubInfo = (interest) => {
-    return {
-        userId: interest.userId,
-        categoryId: interest.categoryId,
-
-    }
+export const getInterestInfo = (interest, next) => {
+    redisClient.hget('category', categoryId, (err, rep) => {
+        next({
+            userId: interest.userId,
+            categoryId: interest.categoryId,
+            categoryName: rep,
+            longitude: interest.location[0],
+            latitude: interest.location[1],
+            id: getInterestGlobalId(interest._id)
+        })
+    });
 };
 
 export const getInterestWithIn = (longitude, latitude, categoryId, radius, next) => {

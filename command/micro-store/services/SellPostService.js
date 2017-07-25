@@ -29,7 +29,7 @@ export const addSellPost = (sellPostInfo, next) => {
         getPubSellPostInfo(sellPost, (info) => {
             let sellPostDetail = sellPostInfo.postrows;
             if (sellPostDetail && sellPostDetail.length > 0) {
-                createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), (sellPostDetail) => {
+                createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), info.storeId, (sellPostDetail) => {
                     sellPost.sellPostDetailOrders = [];
                     for (let i = 0; i < sellPostDetail.length; ++i)
                         sellPost.sellPostDetailOrders.push(sellPostDetail[i].id);
