@@ -102,7 +102,7 @@ export const addLike = (message) => {
       if (basicStore) {
         const liker = new Liker({
           storeId: userId,
-          storeName: basicStore.storeName.
+          storeName: basicStore.storeName,
           avatarUrl: basicStore.avatarUrl
         })
         if (likenId.substr(0, 3) == '012') { // sellpost
