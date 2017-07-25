@@ -18,7 +18,7 @@ export const likeSellPost = (likerId, sellPostId, next) => {
         let name = null;
         let avatarUrl = null;
         if (likerId === store.owner) {
-            likenId = store.storeId;
+            likerId = store.storeId;
             name = store.storeName;
             avatarUrl = store.avatarUrl;
         }
@@ -48,7 +48,7 @@ export const likeComment = (likerId, fCommentId, sCommentId, next) => {
             let name = null;
             let avatarUrl = null;
             if (likerId === store.owner) {
-                likenId = store.storeId;
+                likerId = store.storeId;
                 name = store.storeName;
                 avatarUrl = store.avatarUrl;
             }
