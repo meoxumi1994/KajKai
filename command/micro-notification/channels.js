@@ -23,8 +23,8 @@ export default {
         controller: 'NotificationSubController',
         method: 'addLikeCon'
     },
-    'NOTI.LIKE.RemoveLike': {
+    'INTEREST.GetUserInterested': {
         controller: 'NotificationSubController',
-        method: 'removeLikeCon'
+        method: 'getListInterestWithSub'
     }
 }
