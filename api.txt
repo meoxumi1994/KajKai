@@ -1233,21 +1233,24 @@ POST /ban {
       }
     ]
 }, {
-    admin: {
-      id: '',
-      reason: '',
-      time: ''
-    },
-    feedback: {
-      id: '',
-      status,
-    },
-    users: [
-      {
-        status: true | false,
-        id: '',
-      }
-    ]
+    status: "success|failed",
+    data: {
+        admin: {
+          id: '',
+          reason: '',
+          time: ''
+        },
+        feedback: {
+          id: '',
+          status,
+        },
+        users: [
+          {
+            status: true | false,
+            id: '',
+          }
+        ]
+    }
 }
 
 POST /feedback {
