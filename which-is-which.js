@@ -1,4 +1,5 @@
 export const post = {
+    getway: 'https://g9fd0yor1e.execute-api.ap-southeast-1.amazonaws.com/kajkai/',
     kajkai_1: {
         service: {
             comment: '54.254.219.177:8082',
