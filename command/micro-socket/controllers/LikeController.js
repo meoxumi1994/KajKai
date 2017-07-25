@@ -16,9 +16,9 @@ export const likeAct = (action, sio, io) => {
     addLikePub(likerId, action.data.sellpostid, action.data.leadercommentid, action.data.commentid, (like) => {
         console.log('like ' + like, JSON.stringify(like));
         const data = {
-            userId: likerId,
-            userName: action.data.user.username,
-            avatarUrl: action.data.user.avatarUrl,
+            userId: like.likerId,
+            userName: (like.name) ? like.name : action.data.user.username,
+            avatarUrl: (like.avatarUrl) ? like.avatarUrl: action.data.user.avatarUrl,
             sellpostid: like.sellPostId,
             leadercommentid: like.fCommentId,
             commentid: like.sCommentId,
@@ -33,6 +33,5 @@ export const likeAct = (action, sio, io) => {
                 }
             })
         }
-        // sio.emit('action', {type: 'client/LIKE', data: data});
     })
 };
