@@ -9,11 +9,10 @@ class LeaderComment extends React.Component {
         super(props)
     }
     render(){
-        const { WRITE_COMMENT, comments, order, isReply, id, contentedit, avatarUrl, onReply, onChange,
+        const { WRITE_COMMENT, comments, isReply, id, contentedit, avatarUrl, onReply, onChange, order,
             onEnter, offset, numcomment, onGetMore } = this.props
         return(
             <div>
-
                 {comments.map((cm, index) => {
                     if(index){
                         return(
@@ -30,6 +29,7 @@ class LeaderComment extends React.Component {
                         return(
                             <div key={cm.id}>
                                 <Comment
+                                    order={order}
                                     id={cm.id}
                                     onReply={() => onReply(index, cm.commenterid)}
                                     isStoreRepresent={false}

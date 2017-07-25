@@ -4,6 +4,8 @@ import Tooltip from '~/components/entity/Tooltip'
 import DropDown from '~/components/entity/DropDown'
 import ContentShow from '~/components/entity/ContentShow'
 import LikeGroup from '~/components/entity/LikeGroup'
+import Product from '~/containers/entity/post/Product'
+
 
 class Comment extends React.Component {
     constructor(props){
@@ -24,7 +26,7 @@ class Comment extends React.Component {
     render(){
         const {
             RECEIVE, LIKE, REPLY, clicksetting,
-            isleader, avatarUrl, name, time, numlike, numreplys,
+            isleader, avatarUrl, name, time, numlike, numreplys, order,
             content, onReceive, onLike, onReply, beLike } = this.props
         return(
             <div
@@ -65,6 +67,16 @@ class Comment extends React.Component {
                     marginTop: isleader?-40:-20,
                     paddingRight: 18 }}>
                     <strong style={{ color: '#365899'}}>{name}</strong>{" "}
+                    <table>
+                        {order.map((item,index) => {
+                            return (
+                                <tbody key={item.id+index} style={{ marginBottom: 5 }}>
+                                    <Product id={item.id} sellpostId={id} index={index}
+                                        canRemove={true} width={index?120:160}/>
+                                </tbody>
+                            )
+                        })}
+                    </table>
                     <ContentShow
                         fontSize={13.5}
                         heightEachRow={16}

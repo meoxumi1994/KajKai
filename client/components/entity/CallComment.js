@@ -24,14 +24,17 @@ class CallComment extends React.Component {
                         marginTop: isleader?-40:-20,
                         marginLeft: isleader?50:30,
                     }}>
-                        {order.map((item,index) => {
-                            return (
-                                <div key={item.id+index} style={{ marginBottom: 5 }}>
-                                    <Product id={item.id} sellpostId={id} index={index}
-                                        canRemove={true} width={index?120:160}/>
-                                </div>
-                            )
-                        })}
+                        <table>
+                            {order.map((item,index) => {
+                                return (
+                                    <tbody key={item.id+index} style={{ marginBottom: 5 }}>
+                                        <Product id={item.id} sellpostId={id} index={index}
+                                            canRemove={true} width={index?120:160}/>
+                                    </tbody>
+                                )
+                            })}
+                        </table>
+                        <div style={{ height: 10 }}></div>
                         <ContentEditable
                             onEnter={() => onEnter()}
                             placehoder={placehoder}

@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const notification = state.inst.entity.notification
     return({
-
+        ...notification
     })
 }
 
