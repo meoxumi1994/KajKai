@@ -67,3 +67,37 @@ export const removeFollowPub = (followInfo) => {
     pub.publish('FOLLOW.RemoveFollow', JSON.stringify(publishData));
     pub.quit();
 };
+
+export const addInterestPub = (interest) => {
+    const pub = redis.createClient(config);
+    const publishData = {interest: interest};
+    pub.publish('INTEREST.AddInterest', JSON.stringify(publishData));
+    pub.quit();
+};
+
+export const removeInterestPub = (interest) => {
+    const pub = redis.createClient(config);
+    const publishData = {interest: interest};
+    pub.publish('INTEREST.AddInterest', JSON.stringify(publishData));
+    pub.quit();
+};
+
+export const getStoreFromPostId = (postId, next) => {
+    const sub = redis.createClient(config);
+    const pub = redis.createClient(config);
+    const id = getUUID();
+    const publicData = {postId: postId, eventId: id};
+    pub.publish('STORE.GetStoreFromPost', JSON.stringify(publicData));
+    sub.subscribe('STORE.GetStoreFromPost' + id);
+    sub.on('message', (channel, message) => {
+        message = JSON.parse(message);
+        if (message.status === 'success') {
+            next(message.store)
+        } else {
+            next(null)
+        }
+        sub.unsubscribe();
+        sub.quit();
+        pub.quit()
+    })
+};
