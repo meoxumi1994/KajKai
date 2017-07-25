@@ -45,10 +45,10 @@ export default {
   },
   // 'COMMENT.FirstLayerCommentCreated': {
   //   controller: 'CommentSubController',
-  //   method: 'createComment'
+  //   method: 'createCommentNotification'
   // },
   // 'COMMENT.SecondLayerCommentCreated': {
   //   controller: 'ReplySubController',
-  //   method: 'createReply'
+  //   method: 'createReplyNotification'
   // },
 }
