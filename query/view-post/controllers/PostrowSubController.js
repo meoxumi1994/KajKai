@@ -14,10 +14,10 @@ export const createPostrow = (message) => {
     postrow.images = images
     console.log('images: ', images);
     mPostrowImageList = images.map((image) => (
-      new Image{
+      new Image({
         url: image,
         time: Date.now()
-      }
+      })
     ))
 
     console.log('mPostrowImageList: ', mPostrowImageList);
@@ -45,10 +45,10 @@ export const createPostrow = (message) => {
   if (products && products.length > 0) {
     postrow.products = products
     mProductImageList = products.map((product) => (
-      new Image{
+      new Image({
         url: product.imageUrl,
         time: Date.now()
-      }
+      })
     ))
 
     BasicStore.findOne({ id: storeId }, (err, basicStore) => {
