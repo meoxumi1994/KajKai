@@ -78,7 +78,7 @@ export const createFeedbackHandler = () => (req, res) => {
       })
     } else {
       res.json({
-        status: 'failed'
+        status: 'failed 1'
       })
     }
   })

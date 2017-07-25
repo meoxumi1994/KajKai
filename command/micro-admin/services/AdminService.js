@@ -166,11 +166,11 @@ export const createFeedback = (userId, ownerId, content, sellpostId, next) => {
           feedback.save(() => {})
           next('success')
         } else {
-          next('failed')
+          next('failed 2')
         }
       })
     } else {
-      next('failed')
+      next('failed 3')
     }
   })
 }
