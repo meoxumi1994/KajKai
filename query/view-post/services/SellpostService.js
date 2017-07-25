@@ -159,7 +159,7 @@ const getClientFormatSellpost = (requesterId, sellpost, offset) => {
     postrows_order: sellpost.postrowsOrder ? sellpost.postrowsOrder : [],
     ...getClientFormatPostrows(postrows, -1),
     numlike: sellpost.numberOfLike ? sellpost.numberOfLike : 0,
-    likestatus: ['like','love','haha'],
+    likestatus: ['like','love','haha', 'wow'],
     likes: sellpost.likers ? sellpost.likers.slice(0, 5).map((liker) => ({
       userid: liker.userId,
       username: liker.username

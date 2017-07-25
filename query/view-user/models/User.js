@@ -6,6 +6,7 @@ import BasicStoreSchema from './BasicStore'
 import BlackSchema from './Black'
 import ImageSchema from './Image'
 import LastUpdateSchema from './LastUpdate'
+import NotificationSchema from './Notification'
 import PrivacySchema from './Privacy'
 
 const UserSchema = new mongoose.Schema({
@@ -25,7 +26,10 @@ const UserSchema = new mongoose.Schema({
   privacy: {type: PrivacySchema},
   storeList: [BasicStoreSchema],
   banned: {type: Number},
-  reason: {type: String}
+  reason: {type: String},
+  followingStores: [String],
+  followingSellposts: [String],
+  notifications: [NotificationSchema]
 })
 
 export default UserSchema
