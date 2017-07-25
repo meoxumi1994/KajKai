@@ -73,8 +73,9 @@ export const getListImage = (type, id, offset) => dispatch => {
         offset: offset,
     })
     .then(({ status, listImage }) => {
+
         if(status == 'success'){
-            dispatch({ type: 'GET_PHOTO_SUCCESS', listImage: listImage })
+            dispatch({ type: 'GET_PHOTO_SUCCESS', kind : type, listImage: listImage })
         }else{
             dispatch({ type: 'GET_PHOTO_FAILED' })
         }

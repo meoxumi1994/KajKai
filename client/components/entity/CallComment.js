@@ -25,7 +25,7 @@ class CallComment extends React.Component {
                         marginLeft: isleader?50:30,
                     }}>
                         <table>
-                            {order.map((item,index) => {
+                            {order && order.map((item,index) => {
                                 return (
                                     <tbody key={item.id+index} style={{ marginBottom: 5 }}>
                                         <Product id={item.id} sellpostId={id} index={index}

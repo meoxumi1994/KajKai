@@ -1,13 +1,13 @@
-export const updateLikes = (likes, userid, username) => {
+export const updateLikes = (likes, id, name) => {
     let has = false
     let newLikes = []
     likes.map((item) => {
-        if(item.userid != userid){
+        if(item.id != id){
             newLikes = [
                 ...newLikes,
                 {
-                    userid: item.userid,
-                    username: item.username,
+                    id: item.id,
+                    name: item.name,
                 }
             ]
         }else{
@@ -18,8 +18,8 @@ export const updateLikes = (likes, userid, username) => {
         newLikes = [
             ...newLikes,
             {
-                userid: userid,
-                username: username,
+                id: id,
+                name: name,
             }
         ]
     }

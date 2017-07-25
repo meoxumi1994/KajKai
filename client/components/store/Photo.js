@@ -9,7 +9,7 @@ class Photo extends React.Component {
     }
     render(){
         const { storePhotos, postPhotos, productPhotos } = this.props
-        console.log(this.props)
+        console.log('Photo', this.props)
         return (
             <div>
                 <div style={{
@@ -30,8 +30,8 @@ class Photo extends React.Component {
                                     canEdit={false}
                                     type="Carousel"
                                     width={227.6}
-                                    images={[item]}
-                                    imagesSuggest={[item]}/>
+                                    images={[item.url]}
+                                    imagesSuggest={[item.url]}/>
                             </div>
                         )
                     })}
@@ -54,8 +54,8 @@ class Photo extends React.Component {
                                     canEdit={false}
                                     type="Carousel"
                                     width={227.6}
-                                    images={[item]}
-                                    imagesSuggest={[item]}/>
+                                    images={[item.url]}
+                                    imagesSuggest={[item.url]}/>
                             </div>
                         )
                     })}
@@ -78,8 +78,8 @@ class Photo extends React.Component {
                                     canEdit={false}
                                     type="Carousel"
                                     width={227.6}
-                                    images={[item]}
-                                    imagesSuggest={[item]}/>
+                                    images={[item.url]}
+                                    imagesSuggest={[item.url]}/>
                             </div>
                         )
                     })}

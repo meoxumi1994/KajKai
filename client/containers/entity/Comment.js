@@ -7,11 +7,17 @@ import Comment from '~/components/entity/Comment'
 const mapStateToProps = (state, {id}) => {
     const g = (lang) => get(state.user.language, lang)
     const comment = state.inst.entity.comment[id]
+    const store = state.inst.store.index
+    let yourid = state.user.id
+    state.user.storeList.map((item) => {
+        if(item.id == store.id)
+            yourid = store.id
+    })
     let isyour = true
     return({
         ...comment,
         time: getTime(comment.time),
-        beLike: getBeLike(comment.likes, state.user.id),
+        beLike: getBeLike(comment.likes, yourid),
         RECEIVE: g('RECEIVE'),
         LIKE: g('LIKE'),
         REPLY: g('REPLY'),

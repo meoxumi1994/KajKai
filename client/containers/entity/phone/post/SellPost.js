@@ -8,13 +8,20 @@ const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     const sellpost = state.inst.entity.sellpost[id]
     const store = state.inst.store.index
+    let yourid = state.user.id
+    state.user.storeList.map((item) => {
+        if(item.id == store.id)
+            yourid = store.id
+    })
+    let isyour = true
     let beLike, likeContent, time
     if(sellpost){
         const { likes, numlike } = sellpost
-        beLike =  getBeLike(likes, state.user.id)
-        likeContent = getLikeContent(likes, numlike, state.user.id)
+        beLike =  getBeLike(likes, yourid)
+        likeContent = getLikeContent(likes, numlike, yourid)
         time = getTime(sellpost.time)
     }
+    console.log('mapStateToProps mapStateToProps mapStateToProps mapStateToProps mapStateToProps')
     return({
         ...store,
         ...sellpost,

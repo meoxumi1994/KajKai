@@ -23,21 +23,26 @@ const photo = (state = {
                 postPhotos: [],
                 productPhotos: [],
             }
-        case 'GET_USER_PHOTO_SUCCESS':
-            return {...state,
-                userPhotos: action.images
-            }
-        case 'GET_STORE_PHOTO_SUCCESS':
-            return {...state,
-                storePhotos: action.images
-            }
-        case 'GET_POST_PHOTO_SUCCESS':
-            return {...state,
-                postPhotos: action.images
-            }
-        case 'GET_PRODUCT_PHOTO_SUCCESS':
-            return {...state,
-                productPhotos: action.images
+        case 'GET_PHOTO_SUCCESS':
+            switch (action.kind) {
+                case 'user':
+                    return {...state,
+                        userPhotos: action.listImage
+                    }
+                case 'store':
+                    return {...state,
+                        storePhotos: action.listImage
+                    }
+                case 'postrow':
+                    return {...state,
+                        postPhotos: action.listImage
+                    }
+                case 'product':
+                    return {...state,
+                        productPhotos: action.listImage
+                    }
+                default:
+                    return state
             }
         default:
             return state
