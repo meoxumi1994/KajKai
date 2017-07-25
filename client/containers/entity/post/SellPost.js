@@ -21,7 +21,7 @@ const mapStateToProps = (state, { id }) => {
         likeContent = getLikeContent(likes, numlike, yourid)
         time = getTime(sellpost.time)
     }
-    console.log('mapStateToProps mapStateToProps mapStateToProps mapStateToProps mapStateToProps')
+    console.log('mergerProps mergerProps mergerProps mergerProps mapStatemergerPropsToProps')
     return({
         ...store,
         ...sellpost,
@@ -56,6 +56,7 @@ const mapDispatchToProps = (dispatch, { id }) => ({
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
     const { ...anotherState } = stateProps
     const { ...anotherDispatch } = dispatchProps
+    console.log('mergerProps mergerProps mergerProps mergerProps mapStatemergerPropsToProps')
     return({
         ...ownProps,
         ...anotherState,
