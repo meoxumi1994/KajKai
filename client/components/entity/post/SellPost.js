@@ -10,6 +10,7 @@ import LikeGroup from '~/components/entity/LikeGroup'
 import GroupComment from '~/containers/entity/GroupComment'
 import CallComment from '~/containers/entity/CallComment'
 import PostRow from '~/containers/entity/post/PostRow'
+import FeedBackModal from '~/containers/entity/modal/FeedBackModal'
 
 class SellPost extends React.Component {
     constructor(props){
@@ -26,7 +27,7 @@ class SellPost extends React.Component {
     render(){
         const { urlname, isOwner, ship, status, category, description, storename, avatarUrl, time,
             numfollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
-            onLike, postrows, postrows_order, clicksetting, id, onFollow,
+            onLike, postrows, postrows_order, clicksetting, id, onFollow, feedBack,
         } = this.props
         if(!likes)
             return (
@@ -46,10 +47,7 @@ class SellPost extends React.Component {
                         className="btn" style={{
                         float: 'right',
                         padding: 0}}>
-                        <div className="btn" style={{margin: 0, marginTop: -13, marginRight: 10, padding: 0 }}
-                            onClick={() => onFollow()}>
-                            <img src="/images/hasfollow.svg" width={25}/>
-                        </div>
+
                         <span
                             onMouseOver={() => this.setState({ hoversetting: true })}
                             onMouseLeave={() => this.setState({ hoversetting: false })}
@@ -62,11 +60,25 @@ class SellPost extends React.Component {
                         />
                         {clicksetting &&
                             <DropDown
-                                contents={['Report post','Block store']}
-                                onClick={(index) => console.log(index)}
+                                contents={['Feed Back','Report post','Block store']}
+                                onClick={(index) => {
+                                    if(index==0){
+                                        feedBack()
+                                        this.setState({ showFeedBack: true })
+                                    }
+                                }}
                                 width={100}
                             />
                         }
+                        <FeedBackModal
+                            showModal={this.state.showFeedBack}
+                            close={() => this.setState({ showFeedBack: false })}
+                            sellpostId={id}
+                        />
+                    </div>
+                    <div className="btn" style={{ float: 'right', margin: 0, marginTop: -11, marginRight: 10, padding: 0 }}
+                        onClick={() => onFollow()}>
+                        <img src="/images/hasfollow.svg" width={25}/>
                     </div>
                     <div>
                         <img src={avatarUrl} width={ship?60:40} height={ship?60:40}/>

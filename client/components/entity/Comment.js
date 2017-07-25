@@ -68,10 +68,10 @@ class Comment extends React.Component {
                     paddingRight: 18 }}>
                     <strong style={{ color: '#365899'}}>{name}</strong>{" "}
                     <table>
-                        {order.map((item,index) => {
+                        {order && order.map((item,index) => {
                             return (
                                 <tbody key={item.id+index} style={{ marginBottom: 5 }}>
-                                    <Product id={item.id} sellpostId={id} index={index}
+                                    <Product id={item.id} index={index} justShow={true}
                                         canRemove={true} width={index?120:160}/>
                                 </tbody>
                             )

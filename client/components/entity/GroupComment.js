@@ -9,7 +9,6 @@ class GroupComment extends React.Component {
         super(props)
     }
     componentDidMount(){
-        console.log('GroupComment',this.props)
         this.props.onJoin()
     }
     componentWillUnmount(){

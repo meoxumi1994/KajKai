@@ -148,7 +148,16 @@ const myString = {
     ADD: ['Thêm','Add'],
     HOME: ['Trang chủ','Home'],
     LOG_OUT: ['Đăng xuất', 'Logout'],
-    SETTING: ['Cài đặt', 'Setting']
+    SETTING: ['Cài đặt', 'Setting'],
+
+    FEED_BACK: ['Phản hồi', 'Feed Back'],
+    FEED_BACK_DESCRIPTION: [
+        'Phản hồi sẽ được gửi tới admin của KajKai. chúng tôi sẽ xem tất cả các phản hồi của bạn và sử lý một cách tốt nhất',
+        'Feedback will be sent to KajKai admin. We will see all your feedback and best practices'],
+    THANK_TO_FEEDBACK: ['Cảm ơn đã gửi phản hồi cho chúng tôi', 'Thanks for sending us feedback'],
+    FEED_BACK_FAILED: [
+        'xin lỗi bạn, vì một lý do nào đấy mà phản hồi không gửi được',
+        'Sorry, for some reason the reply was not sent']
 }
 
 const allString = {

@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 
 import uploadimage from './uploadimage'
+import feedback from './feedback'
 
 const modal = combineReducers({
-    uploadimage
+    uploadimage,
+    feedback
 })
 
 export default modal

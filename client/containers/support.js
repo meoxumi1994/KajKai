@@ -116,19 +116,19 @@ export const getTime = (time) => {
     return days+' days'
 }
 
-export const getLikeContent = (likes, numlike, yourid ) => {
+export const getLikeContent = (likes, numlike, yourid) => {
     if(!likes) return '';
     let likeContent = '';
     for(let i=0; i< likes.length; i++){
-        if( likes[i].userid ==  yourid ){
+        if( likes[i].id ==  yourid ){
             likeContent = 'You'
             break;
         }
     }
     for(let i=0; i< likes.length; i++){
-        if( likes[i].userid !=  yourid ){
+        if( likes[i].id !=  yourid ){
             if(likeContent != '') likeContent += ', '
-            likeContent += likes[i].username
+            likeContent += likes[i].name
         }
     }
     if(numlike - likes.length > 0 ){
@@ -144,7 +144,7 @@ export const getLikeContent = (likes, numlike, yourid ) => {
 export const getBeLike = (likes, yourid) => {
     if(!likes) return false
     for(let i = 0; i< likes.length; i++)
-        if( likes[i].userid ==  yourid )
+        if( likes[i].id ==  yourid )
             return true;
     return false;
 }

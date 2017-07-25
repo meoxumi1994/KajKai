@@ -1,4 +1,5 @@
 import { getAdmin, getAdminToken, getUsers, getFeedbacks, banUser, createFeedback } from '../services/AdminService'
+import { getOwnerFromPostId } from './AdminPubController'
 
 export const loginAdmin = () => (req, res) => {
   const { adminName, password } = req.body
@@ -67,10 +68,20 @@ export const banUserHandler = () => (req, res) => {
 }
 
 export const createFeedbackHandler = () => (req, res) => {
-  const { sellpostId, content, ownerId } = req.body
+  const { sellpostId, content } = req.body
   const userId = req.decoded._id
 
-  createFeedback(userId, ownerId, content, sellpostId, (status) => {
-    res.json({ status })
+  getOwnerFromPostId(sellpostId, (ownerId) => {
+    if (ownerId) {
+      createFeedback(userId, ownerId, content, sellpostId, (status) => {
+        res.json({ status })
+      })
+    } else {
+      res.json({
+        status: 'failed'
+      })
+    }
   })
+
+
 }

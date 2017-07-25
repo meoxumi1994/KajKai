@@ -38,26 +38,28 @@ class Page extends React.Component {
                             marginLeft: this.sellpost_marginTop?(-scrollLeft-24):-24,
                             marginTop: this.sellpost_marginTop?(-this.sellpost_inside_height.offsetHeight + height - 343):0,
                             minHeight: height - 48,
-                            paddingTop: 10,
+                            paddingTop: 0,
                             width: 520 }}>
                             {isOwner &&
-                                <div style={{
-                                    borderRadius: 4,
-                                    border: '1px solid #CCCCCC',
-                                    boxShadow: '0px 0px 4px #CCCCCC',
-                                    backgroundColor: 'white',
-                                    width: 520, padding: 10,}}>
-                                    <div className="btn btn-default" style={{
-                                        backgroundColor: '#BD081C',
-                                        color: 'white', borderWidth: 0 }}
-                                        onClick={() => onChange('showEditSellPost', true)}
-                                        >
-                                        {CREATE_SELLPOST}
+                                <div style={{ paddingTop: 10 }}>
+                                    <div style={{
+                                        borderRadius: 4,
+                                        border: '1px solid #CCCCCC',
+                                        boxShadow: '0px 0px 4px #CCCCCC',
+                                        backgroundColor: 'white',
+                                        width: 520, padding: 10,}}>
+                                        <div className="btn btn-default" style={{
+                                            backgroundColor: '#BD081C',
+                                            color: 'white', borderWidth: 0 }}
+                                            onClick={() => onChange('showEditSellPost', true)}
+                                            >
+                                            {CREATE_SELLPOST}
+                                        </div>
+                                        <EditSellPost
+                                            title={CREATE_SELLPOST}
+                                            showModal={showEditSellPost}
+                                            close={() => onChange('showEditSellPost', false)}/>
                                     </div>
-                                    <EditSellPost
-                                        title={CREATE_SELLPOST}
-                                        showModal={showEditSellPost}
-                                        close={() => onChange('showEditSellPost', false)}/>
                                 </div>
                             }
                             {sellposts.map((item, index) =>

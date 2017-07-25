@@ -7,9 +7,10 @@ export const createCommentNotification = (message) => {
   if (userId.substr(0, 3) == '001') { // user
     User.find({}, (err, users) => {
       if (users) {
-        const avatarUrlById = {}
+        const avatarUrlById = {}, usernameById = {}
         users.map((user) => {
           avatarUrlById[user.id] = user.avatarUrl
+          usernameById[user.id] = user.username
         })
         for (let i = 0; i < users.length; i++) {
           let user = users[i]
@@ -30,10 +31,11 @@ export const createCommentNotification = (message) => {
                     commentId,
                     sellpostId,
                     actorId: userId,
+                    username: usernameById[userId],
                     avatarUrl: avatarUrlById[userId],
                     storeName: basicStore.storeName,
                     urlName: basicStore.urlName,
-                    content
+                    content,
                     time: Date.now()
                   })
 
@@ -73,7 +75,7 @@ export const createCommentNotification = (message) => {
                     avatarUrl: basicStore.avatarUrl,
                     storeName: basicStore.storeName,
                     urlName: basicStore.urlName,
-                    content
+                    content,
                     time: Date.now()
                   })
 

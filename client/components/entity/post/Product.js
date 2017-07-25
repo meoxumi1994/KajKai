@@ -9,7 +9,7 @@ class Product extends React.Component {
         super(props)
     }
     render(){
-        const { id, list, imageUrl, content, canEdit, onChange, width, onAddProduct, canRemove, onRemoveProduct} = this.props
+        const { id, list, imageUrl, content, canEdit, onChange, width, onAddProduct, justShow, canRemove, onRemoveProduct} = this.props
         return(
             <tr>
                 {list.map((item,index) => {
@@ -46,18 +46,20 @@ class Product extends React.Component {
                         )
                     }
                 })}
-                <td style={{ paddingRight: 10 }}>
-                    {canRemove ?
-                        <div className="btn" style={{ padding: 0 }}
-                            onClick={() => onRemoveProduct()}>
-                            <img width={15} src="/images/minus.svg"/>
-                        </div>
-                    :   <div className="btn" style={{ padding: 0 }}
-                            onClick={() => onAddProduct()}>
-                            <img width={15} src="/images/plus.svg"/>
-                        </div>
-                    }
-                </td>
+                {!justShow &&
+                    <td style={{ paddingRight: 10 }}>
+                        {canRemove ?
+                            <div className="btn" style={{ padding: 0 }}
+                                onClick={() => onRemoveProduct()}>
+                                <img width={15} src="/images/minus.svg"/>
+                            </div>
+                        :   <div className="btn" style={{ padding: 0 }}
+                                onClick={() => onAddProduct()}>
+                                <img width={15} src="/images/plus.svg"/>
+                            </div>
+                        }
+                    </td>
+                }
                 <td>
                     {!canEdit ?
                         <OverlayTrigger placement="right" overlay={(
