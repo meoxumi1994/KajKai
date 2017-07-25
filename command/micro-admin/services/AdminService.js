@@ -95,49 +95,82 @@ export const getFeedbacks = (offet, length, next) => {
   })
 }
 
-export const banUser = (feedbackId, banned, adminId, userId, reason, next) => {
-  User.findOne({ id: userId }, (err, user) => {
-    if (user) {
-      if (!user.banned || user.banned != banned) {
-        if (banned == 0) {
-          removeBanPub(userId, reason)
-          sendUnBanEmail(user.username, user.email, reason)
-        } else {
-          addBanPub(userId, reason)
-          sendBanEmail(user.username, user.email, reason)
-        }
-        user.banned = banned
-        Admin.findById(adminId, (err, admin) => {
-          if (admin) {
-            const user = {
-              banned,
-              bannedById: admin._id.toString(),
-              bannedByAdminName: admin.adminName,
-              lastReason: reason
-            }
-            User.findOneAndUpdate({ id: userId }, user, () => {})
+export const banUsers = (admin, feedback, reporter, reportee, next) => {
+    Admin.findById(admin.id, (err, mAdmin) => {
+      if (mAdmin) {
+        const mPromise = []
+        if (reporter) {
+          mPromise.push(new Promise((resolve, reject) => {
+            User.findOne({ id: reporter.id }, (err, user) => {
+              if (user) {
+                user.banned = reporter.status ? 1 : 0,
+                user.bannedById = admin.id,
+                user.bannedByAdminName = mAdmin.adminName,
+                user.lastReason = admin.reason
 
-            if (feedbackId) {
-              const feedback = {
-                status: 1,
-                bannedById:  admin._id.toString(),
-                bannedByAdminName: admin.adminName,
-                reason,
-                time: Date.now()
+                user.save(() => {
+                  if (reporter.status) {
+                    addBanPub(user.id, admin.reason)
+                    sendBanEmail(user.username, user.email, admin.reason)
+                  } else {
+                    removeBanPub(user.id, admin.reason)
+                    sendUnBanEmail(user.username, user.email, admin.reason)
+                  }
+                })
+
+                resolve('ok')
+              } else {
+                reject('noReporterData')
               }
-              Feedback.findByIdAndUpdate(feedbackId, feedback, () => {})
-            }
+            })
+          }))
+        }
 
-            next('success')
-          } else {
-            next('noAdminData')
-          }
-        })
-      } else {
-        next('failed')
+      if (reportee) {
+        mPromise.push(new Promise((resolve, reject) => {
+          User.findOne({ id: reportee.id }, (err, user) => {
+            if (user) {
+              user.banned = reportee.status ? 1 : 0,
+              user.bannedById = admin.id,
+              user.bannedByAdminName = mAdmin.adminName,
+              user.lastReason = admin.reason
+
+              user.save(() => {
+                if (reportee.status) {
+                  addBanPub(user.id, admin.reason)
+                  sendBanEmail(user.username, user.email, admin.reason)
+                } else {
+                  removeBanPub(user.id, admin.reason)
+                  sendUnBanEmail(user.username, user.email, admin.reason)
+                }
+              })
+
+              resolve('ok')
+            } else {
+              reject('noReporteeData')
+            }
+          })
+        }))
       }
+
+      if (feedback && feedback.id) {
+        const mFeedback = {
+          status: 1,
+          bannedById:  admin.id,
+          bannedByAdminName: mAdmin.adminName,
+          reason: admin.reason,
+          time: Date.now()
+        }
+        Feedback.findByIdAndUpdate(feedback.id, mFeedback, () => {})
+      }
+
+      Promise.all(mPromises).then((results) => {
+        next('success')
+      }, (err) => {
+        next(err)
+      })
     } else {
-      next('noUserData')
+      next('noAdminData')
     }
   })
 }

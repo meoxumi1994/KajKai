@@ -1,4 +1,4 @@
-import { getAdmin, getAdminToken, getUsers, getFeedbacks, banUser, createFeedback } from '../services/AdminService'
+import { getAdmin, getAdminToken, getUsers, getFeedbacks, banUsers, createFeedback } from '../services/AdminService'
 import { getOwnerFromPostId } from './AdminPubController'
 
 export const loginAdmin = () => (req, res) => {
@@ -52,17 +52,11 @@ export const getFeedbacksHandler = () => (req, res) => {
 }
 
 export const banUserHandler = () => (req, res) => {
-  let { feedbackId, status, adminId, defendantId: userId, reason } = req.body
-  let banned = status ? 1 : 0
-  banUser(feedbackId, banned, adminId, userId, reason, (result) => {
+  const { admin, feedback, reporter, defendant: reportee } = req.body
+  banUsers(admin, feedback, reporter, reportee, (status) => {
     res.json({
-      result,
-      feedbackId,
       status,
-      adminId,
-      defendantId: userId,
-      reason,
-      time: Date.now()
+      data: req.body
     })
   })
 }
