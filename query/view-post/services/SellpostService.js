@@ -160,7 +160,9 @@ const getClientFormatSellpost = (requesterId, sellpost, offset) => {
       username: liker.username,
       storeid: liker.storeId,
       storename: liker.storeName,
-      avatarUrl: liker.avatarUrl
+      avatarUrl: liker.avatarUrl,
+      id: liker.userId ? liker.userId : liker.storeId,
+      name: liker.username ? liker.username : liker.storeName
     })) : null,
     numfollow: sellpost.numberOfFollow ? sellpost.numberOfFollow : 0,
     follows,

@@ -59,14 +59,14 @@ export default {
     controller: 'UserSubController',
     method: 'updateBasicUser'
   },
-  'LIKE.AddLike': {
-    controller: 'LikeSubController',
-    method: 'addLike'
-  },
-  'LIKE.RemoveLike': {
-    controller: 'LikeSubController',
-    method: 'removeLike'
-  },
+  // 'LIKE.AddLike': {
+  //   controller: 'LikeSubController',
+  //   method: 'addLike'
+  // },
+  // 'LIKE.RemoveLike': {
+  //   controller: 'LikeSubController',
+  //   method: 'removeLike'
+  // },
   'FOLLOW.AddFollow': {
     controller: 'FollowSubController',
     method: 'addFollow'
