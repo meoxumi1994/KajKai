@@ -1,4 +1,4 @@
-import { Store } from '../models'
+import { Store, BasicUser } from '../models'
 import { checkInside } from '../utils'
 import jwt from 'jsonwebtoken'
 
@@ -9,17 +9,37 @@ export const getStore = (requesterId, id, next) => {
             next(null)
           } else {
             next({
-              status: 'nodata',
+              status: 'noStoreData',
               store: {
                 id
               }
             })
           }
         } else {
-            next({
-              status: 'success',
-              store: getClientFormatStore(requesterId, store)
-            })
+          BasicUser.findOne({ id: store.userId }, (err, basicUser) => {
+            if (basicUser) {
+              if (!basicUser.banned || basicUser.banned == 0) {
+                next({
+                  status: 'success',
+                  store: getClientFormatStore(requesterId, store)
+                })
+              } else {
+                next({
+                  status: 'failed',
+                  banned: true,
+                  reason: basicUser.reason,
+                  store: {}
+                })
+              }
+            } else {
+              next({
+                status: 'noUserData',
+                store: {
+                  id
+                }
+              })
+            }
+          })
         }
     })
 }
@@ -77,38 +97,57 @@ export const getStoreImageList = (requesterId, id, offset, next) => {
           })
         }
       } else {
-        let { imageList } = store
-        if (!imageList) {
-          imageList = []
-        }
-        const mImageList = []
-        let currentNumberOfImage = 0, mOffset, lastIndex
-        for (let i = imageList.length - 1; i >= 0; i--) {
-          let image = imageList[i]
-          if (image.time < offset) {
-            if (currentNumberOfImage < 14) {
-              mImageList.push({
-                url: image.url,
-                time: image.time
+        BasicUser.findOne({ id: store.userId }, (err, basicUser) => {
+          if (basicUser) {
+            if (!basicUser.banned || basicUser.banned == 0) {
+              let { imageList } = store
+              if (!imageList) {
+                imageList = []
+              }
+              const mImageList = []
+              let currentNumberOfImage = 0, mOffset, lastIndex
+              for (let i = imageList.length - 1; i >= 0; i--) {
+                let image = imageList[i]
+                if (image.time < offset) {
+                  if (currentNumberOfImage < 14) {
+                    mImageList.push({
+                      url: image.url,
+                      time: image.time
+                    })
+
+                    mOffset = image.time.getTime()
+                    lastIndex = i
+                    currentNumberOfImage++
+                  } else {
+                    break
+                  }
+                }
+              }
+
+              if (currentNumberOfImage < 14 || lastIndex == 0) {
+                mOffset = -2
+              }
+
+              next({
+                offset: mOffset,
+                status: 'success',
+                listImage : mImageList
               })
-
-              mOffset = image.time.getTime()
-              lastIndex = i
-              currentNumberOfImage++
             } else {
-              break
+              next({
+                offset,
+                status: 'failed',
+                banned: true,
+                reason: basicUser.reason,
+                listImage: []
+              })
             }
+          } else {
+            next({
+              status: 'noUserData',
+              listImage: []
+            })
           }
-        }
-
-        if (currentNumberOfImage < 14 || lastIndex == 0) {
-          mOffset = -2
-        }
-
-        next({
-          offset: mOffset,
-          status: 'success',
-          listImage : mImageList
         })
       }
   })

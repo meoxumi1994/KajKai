@@ -22,5 +22,13 @@ export default {
   'FOLLOW.RemoveFollow': {
     controller: 'FollowSubController',
     method: 'removeFollow'
+  },  
+  'BAN.AddBan': {
+    controller: 'BanSubController',
+    method: 'addBan'
+  },
+  'BAN.RemoveBan': {
+    controller: 'BanSubController',
+    method: 'removeBan'
   }
 }

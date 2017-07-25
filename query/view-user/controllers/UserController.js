@@ -12,7 +12,7 @@ export const getUserHandler = () => (req, res) => {
   getUser(requesterId, requestedId, (user) => {
     if (user) {
       res.json({
-        tokenId: req.cookies.token,
+        tokenId: user.banned ? null : req.cookies.token,
         ...user
       })
     } else {

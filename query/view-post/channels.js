@@ -66,5 +66,5 @@ export default {
   'LIKE.RemoveLike': {
     controller: 'LikeSubController',
     method: 'removeLike'
-  },
+  }
 }
