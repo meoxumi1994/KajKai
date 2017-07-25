@@ -1,6 +1,7 @@
-import { BasicStore } from '../models'
+import { User, Notification, BasicStore } from '../models'
+import { NotificationType } from '../enum'
 
-export const createReply = (message) => {
+export const createReplyNotification = (message) => {
   const { parentCommentId: commentId, sCommentId: replyId, posterId: userId, sellPostId: sellpostId, minorPostId: minorpostId, content, time } = message.sComment
 
   if (userId.substr(0, 3) == '001') { // user

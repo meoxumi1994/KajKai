@@ -20,7 +20,7 @@ const SellpostSchema = new mongoose.Schema({
   postrowsOrder: [String],
   numberOfLike: {type: Number},
   likers: [LikerSchema],
-  numerOfFollow: {type: Number},
+  numberOfFollow: {type: Number},
   followers: [FollowerSchema],
   numberOfComment: {type: Number},
   comments: [CommentSchema],
