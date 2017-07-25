@@ -27,7 +27,7 @@ class Home extends React.Component {
                     <div className="tab-content" style={{width: '100%', height: '100%'}}>
                           <div id="dashboard" className="tab-pane fade in active" style={styles.center.mainDiv}>
                               <div style={styles.center.header}><h4>Dashboard</h4></div>
-                              
+                              <DashboardContainer/>
                           </div>
                           <div id="user" className="tab-pane fade" style={styles.center.mainDiv}>
                               <div style={styles.center.header}><h4>User</h4></div>

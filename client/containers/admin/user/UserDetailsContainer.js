@@ -4,9 +4,11 @@ import { getUsers, banUser } from '~/actions/asyn/admin/user/restful'
 
 const mapStateToProps = (state, ownProps) => {
     const { mapp, current } = state.inst.admin.user
+    const { auth } = state.inst.admin
     return {
         mapp,
-        current
+        current,
+        auth
     }
 
 }
@@ -15,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     close: () => {
         dispatch({type: 'ADMIN/USER/DISPLAY', data: { display: false, id: '' }})
     },
-    deactiveUser: (status, adminId, userId, reason) => {
+    changePermission: (status, adminId, userId, reason) => {
         dispatch(banUser(status, adminId, userId, reason))
     }
 })

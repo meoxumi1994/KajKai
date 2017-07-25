@@ -1,4 +1,5 @@
 import utils from '../utils'
+import feedbackMap from './feedbackMap'
 
 const dashboard = (state = {
     keyy: {
@@ -18,12 +19,14 @@ const dashboard = (state = {
           const unsolved = []
           const solved = []
           const all = []
+
           action.data.map(
               feedback => {
                   feedback.status? solved.push(feedback.id): unsolved.push(feedback.id)
                   all.push(feedback.id)
               }
           )
+
           return {
               ...state,
               keyy: {
@@ -42,6 +45,16 @@ const dashboard = (state = {
                   id: action.data.id
               }
           }
+
+      case 'ADMIN/DASHBOARD/UPDATE_FEEDBACK_USER':
+          return {
+              ...state,
+              mapp: {
+                  ...state.mapp,
+                  [action.data.id]: feedbackMap(state.mapp[action.data.id], action)
+              }
+          }
+
       default:
           return state
     }

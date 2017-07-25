@@ -11,7 +11,8 @@ const userMap = (state = {
         admin: {
             id: '',
             username: ''
-        }
+        },
+        reason: ''
     }
 }, action) => {
     switch (action.type) {
@@ -30,7 +31,8 @@ const userMap = (state = {
               ...state,
               ban: {
                   ...state.ban,
-                  status: action.data.status
+                  status: action.data.status,
+                  reason: action.data.reason
               }
           }
 
