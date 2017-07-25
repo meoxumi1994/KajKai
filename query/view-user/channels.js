@@ -43,12 +43,12 @@ export default {
     controller: 'LikeSubController',
     method: 'removeLike'
   },
-  // 'COMMENT.FirstLayerCommentCreated': {
-  //   controller: 'CommentSubController',
-  //   method: 'createCommentNotification'
-  // },
-  // 'COMMENT.SecondLayerCommentCreated': {
-  //   controller: 'ReplySubController',
-  //   method: 'createReplyNotification'
-  // },
+  'COMMENT.FirstLayerCommentCreated': {
+    controller: 'CommentSubController',
+    method: 'createCommentNotification'
+  },
+  'COMMENT.SecondLayerCommentCreated': {
+    controller: 'ReplySubController',
+    method: 'createReplyNotification'
+  },
 }
