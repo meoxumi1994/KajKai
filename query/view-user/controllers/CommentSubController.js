@@ -4,47 +4,89 @@ import { NotificationType } from '../enum'
 export const createComment = (message) => {
   const { fCommentId: commentId, posterId: userId, sellPostId: sellpostId, time, content } = message.fComment
 
-  User.find({}, (err, users) => {
-    if (users) {
-      const avatarUrlById = {}
-      users.map((user) => {
-        avatarUrlById[user.id] = user.avatarUrl
-      })
-      for (let i = 0; i < users.length; i++) {
-        let user = users[i]
-        let { followingSellposts } = user
-        if (!followingSellposts) {
-          followingSellposts = []
-        }
-        for (let k = 0; k < followingSellposts.length; k++) {
-          if (followingSellposts[k] == sellpostId) {
-            let { notifications } = user
-            if (!notifications) {
-              notifications = []
-            }
-            BasicStore.findOne({ id: storeId }, (err, store) => {
-              if (store) {
-                let notification = new Notification({
-                  type: NotificationType.COMMENT,
-                  commentId,
-                  sellpostId,
-                  actorId: userId,
-                  avatarUrl: avatarUrlById[userId],
-                  storeName: store.storeName,
-                  urlName: store.urlName,
-                  content
-                  time: Date.now()
-                })
-
-                notifications.push(notification)
-                user.notifications = notifications
-                user.save(() => {})
+  if (userId.substr(0, 3) == '001') { // user
+    User.find({}, (err, users) => {
+      if (users) {
+        const avatarUrlById = {}
+        users.map((user) => {
+          avatarUrlById[user.id] = user.avatarUrl
+        })
+        for (let i = 0; i < users.length; i++) {
+          let user = users[i]
+          let { followingSellposts } = user
+          if (!followingSellposts) {
+            followingSellposts = []
+          }
+          for (let k = 0; k < followingSellposts.length; k++) {
+            if (followingSellposts[k] == sellpostId) {
+              let { notifications } = user
+              if (!notifications) {
+                notifications = []
               }
-            })
-            break
+              BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+                if (basicStore) {
+                  let notification = new Notification({
+                    type: NotificationType.COMMENT,
+                    commentId,
+                    sellpostId,
+                    actorId: userId,
+                    avatarUrl: avatarUrlById[userId],
+                    storeName: basicStore.storeName,
+                    urlName: basicStore.urlName,
+                    content
+                    time: Date.now()
+                  })
+
+                  notifications.push(notification)
+                  user.notifications = notifications
+                  user.save(() => {})
+                }
+              })
+              break
+            }
           }
         }
       }
-    }
-  })
+    })
+  } else if (userId.substr(0, 3) == '002') { // store
+    User.find({}, (err, users) => {
+      if (users) {
+        for (let i = 0; i < users.length; i++) {
+          let user = users[i]
+          let { followingSellposts } = user
+          if (!followingSellposts) {
+            followingSellposts = []
+          }
+          for (let k = 0; k < followingSellposts.length; k++) {
+            if (followingSellposts[k] == sellpostId) {
+              let { notifications } = user
+              if (!notifications) {
+                notifications = []
+              }
+              BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+                if (basicStore) {
+                  let notification = new Notification({
+                    type: NotificationType.COMMENT,
+                    commentId,
+                    sellpostId,
+                    actorId: userId,
+                    avatarUrl: basicStore.avatarUrl,
+                    storeName: basicStore.storeName,
+                    urlName: basicStore.urlName,
+                    content
+                    time: Date.now()
+                  })
+
+                  notifications.push(notification)
+                  user.notifications = notifications
+                  user.save(() => {})
+                }
+              })
+              break
+            }
+          }
+        }
+      }
+    })
+  }
 }

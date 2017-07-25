@@ -1,6 +1,7 @@
 import mongoose from '../datasource'
 import _ from 'lodash'
 import { NotificationType } from '../enum'
+import LikerSchema from './Liker'
 
 const NotificationSchema = new mongoose.Schema({
   type: {type: String, enum: _.values(NotificationType)},
@@ -14,7 +15,7 @@ const NotificationSchema = new mongoose.Schema({
   time: {type: Date},
   storeName: {type: String},
   urlName: {type: String},
-  likers: [Ba], // con thang nao khac like nua thi` random vai thang :D
+  likers: [LikerSchema]
 })
 
 export default NotificationSchema

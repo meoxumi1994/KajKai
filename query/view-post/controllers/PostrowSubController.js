@@ -25,7 +25,9 @@ export const createPostrow = (message) => {
         if (!postrowImageList) {
           postrowImageList = []
         }
-        postrowImageList = [...postrowImageList, ...mPostrowImageList]
+        mProductImageList.map((image) => {
+          postrowImageList.push(image)
+        })
         basicStore.postrowImageList = postrowImageList
 
         basicStore.save(() => {})
@@ -48,7 +50,9 @@ export const createPostrow = (message) => {
         if (!productImageList) {
           productImageList = []
         }
-        productImageList = [...productImageList, ...mProductImageList]
+        mProductImageList.map((image) => {
+          productImageList.push(image)
+        })
         basicStore.productImageList = productImageList
 
         basicStore.save(() => {})

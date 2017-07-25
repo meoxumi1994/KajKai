@@ -1,128 +1,90 @@
-import { Sellpost, Minorpost, Comment, Reply, BasicUser, BasicStore } from '../models'
+import { BasicStore } from '../models'
 
 export const createReply = (message) => {
-  const { parentCommentId: commentId, sCommentId: id, posterId: userId, sellPostId: sellpostId, minorPostId: minorpostId, content, time } = message.sComment
+  const { parentCommentId: commentId, sCommentId: replyId, posterId: userId, sellPostId: sellpostId, minorPostId: minorpostId, content, time } = message.sComment
 
-  const reply = new Reply({
-    commentId, id, userId
-  })
-
-  if (content) reply.content = content
-  if (time) reply.time = time
-
-  if(userId.substr(0, 3) == '001') {
-    reply.type = 'user'
-    BasicUser.findOne({ id: userId }, (err, basicUser) => {
-      if (basicUser) {
-        reply.username = basicUser.username
-        reply.avatarUrl = basicUser.avatarUrl
-        reply.save(() => {})
-
-        Comment.findOne({ id: commentId }, (err, comment) => {
-          if (comment) {
-            comment.replies.push(reply)
-            comment.numberOfReply = comment.replies.length - 1
-            comment.save(() => {})
-          }
+  if (userId.substr(0, 3) == '001') { // user
+    User.find({}, (err, users) => {
+      if (users) {
+        const avatarUrlById = {}
+        users.map((user) => {
+          avatarUrlById[user.id] = user.avatarUrl
         })
-
-        if (sellpostId) {
-          Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
-            if (sellpost) {
-              const { comments } = sellpost
-
-              for (let i = 0; i < comments.length; i++) {
-                let comment = comments[i]
-                if (comment.id == commentId) {
-                  comment.replies.push(reply)
-                  comment.numberOfReply = comment.replies.length - 1
-                  comments[i] = comment
-                  break
-                }
+        for (let i = 0; i < users.length; i++) {
+          let user = users[i]
+          let { followingSellposts } = user
+          if (!followingSellposts) {
+            followingSellposts = []
+          }
+          for (let k = 0; k < followingSellposts.length; k++) {
+            if (followingSellposts[k] == sellpostId) {
+              let { notifications } = user
+              if (!notifications) {
+                notifications = []
               }
+              BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+                if (basicStore) {
+                  let notification = new Notification({
+                    type: NotificationType.COMMENT,
+                    commentId,
+                    replyId,
+                    sellpostId,
+                    actorId: userId,
+                    avatarUrl: avatarUrlById[userId],
+                    storeName: basicStore.storeName,
+                    urlName: basicStore.urlName,
+                    content
+                    time: Date.now()
+                  })
 
-              sellpost.comments = comments
-              sellpost.save(() => {})
-            }
-          })
-        } else {
-          Minorpost.findOne({ id: minorpostId }, (err, minorpost) => {
-            if (minorpost) {
-              const { comments } = minorpost
-
-              for (let i = 0; i < comments.length; i++) {
-                let comment = comments[i]
-                if (comment.id == commentId) {
-                  comment.replies.push(reply)
-                  comment.numberOfReply = comment.replies.length - 1
-                  comments[i] = comment
-                  break
+                  notifications.push(notification)
+                  user.notifications = notifications
+                  user.save(() => {})
                 }
-              }
-
-              minorpost.comments = comments
-              minorpost.save(() => {})
+              })
+              break
             }
-          })
+          }
         }
       }
     })
-  } else {
-    reply.type = 'store'
-    BasicStore.findOne({ id: userId }, (err, basicStore) => {
-      if (basicStore) {
-        reply.urlName = basicStore.urlName
-        reply.username = basicStore.storeName
-        reply.avatarUrl = basicStore.avatarUrl
-        reply.save(() => {})
-
-        Comment.findOne({ id: commentId }, (err, comment) => {
-          if (comment) {
-            comment.replies.push(reply)
-            comment.numberOfReply = comment.replies.length - 1
-            comment.save(() => {})
+  } else if (userId.substr(0, 3) == '002') { // store
+    User.find({}, (err, users) => {
+      if (users) {
+        for (let i = 0; i < users.length; i++) {
+          let user = users[i]
+          let { followingSellposts } = user
+          if (!followingSellposts) {
+            followingSellposts = []
           }
-        })
-
-        if (sellpostId) {
-          Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
-            if (sellpost) {
-              const { comments } = sellpost
-
-              for (let i = 0; i < comments.length; i++) {
-                let comment = comments[i]
-                if (comment.id == commentId) {
-                  comment.replies.push(reply)
-                  comment.numberOfReply = comment.replies.length - 1
-                  comments[i] = comment
-                  break
-                }
+          for (let k = 0; k < followingSellposts.length; k++) {
+            if (followingSellposts[k] == sellpostId) {
+              let { notifications } = user
+              if (!notifications) {
+                notifications = []
               }
+              BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+                if (basicStore) {
+                  let notification = new Notification({
+                    type: NotificationType.COMMENT,
+                    commentId,
+                    sellpostId,
+                    actorId: userId,
+                    avatarUrl: basicStore.avatarUrl,
+                    storeName: basicStore.storeName,
+                    urlName: basicStore.urlName,
+                    content
+                    time: Date.now()
+                  })
 
-              sellpost.comments = comments
-              sellpost.save(() => {})
-            }
-          })
-        } else {
-          Minorpost.findOne({ id: minorpostId }, (err, minorpost) => {
-            if (minorpost) {
-              const { comments } = minorpost
-
-              for (let i = 0; i < comments.length; i++) {
-                let comment = comments[i]
-                if (comment.id == commentId) {
-                  comment.replies.push(reply)
-                  comment.numberOfReply = comment.replies.length - 1
-                  comments[i] = comment
-                  break
+                  notifications.push(notification)
+                  user.notifications = notifications
+                  user.save(() => {})
                 }
-              }
-
-
-              minorpost.comments = comments
-              minorpost.save(() => {})
+              })
+              break
             }
-          })
+          }
         }
       }
     })
