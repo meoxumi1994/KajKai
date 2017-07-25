@@ -1,4 +1,4 @@
-import { getUser, getUserPrivacy, getUserImageList } from '../services/UserService.js'
+import { getUser, getUserPrivacy, getUserImageList, getNotifications, updateNotification } from '../services/UserService.js'
 
 export const getUserHandler = () => (req, res) => {
   let { id: requestedId } = req.params
@@ -16,7 +16,7 @@ export const getUserHandler = () => (req, res) => {
         ...user
       })
     } else {
-      res.json({status: 'failed'})
+      res.json({ status: 'failed' })
     }
   })
 }
@@ -36,7 +36,7 @@ export const getUserPrivacyHandler = () => (req, res) => {
       if (userPrivacy) {
         res.json(userPrivacy)
       } else {
-        res.json({status: 'failed'})
+        res.json({ status: 'failed' })
       }
     })
   }
@@ -61,7 +61,47 @@ export const getUserImageListHandler = () => (req, res) => {
     if (userImageList) {
       res.json(userImageList)
     } else {
-      res.json({status: 'failed'})
+      res.json({ status: 'failed' })
     }
   })
+}
+
+export const getNotificationsHandler = () => (req, res) => {
+  const requestedId = req.decoded._id
+  let { offset } = req.query
+  if (!offset || offset == '-1') {
+    offset =  Date.now()
+  } else {
+    offset = new Date(parseInt(offset))
+  }
+  if (requestedId == 'Guest') {
+    res.json({
+      status: 'failed',
+      reason: 'Guest',
+      offset
+    })
+  } else {
+    getNotifications(requestedId, offset, (result) => {
+      if (result) {
+        res.json(result)
+      } else {
+        res.json({ status: 'failed' })
+      }
+    })
+  }
+}
+
+export const updateNotificationHandler = () => (req, res) => {
+  const requestedId = req.decoded._id
+  const { topId } = req.body
+  if (requestedId == 'Guest') {
+    res.json({
+      status: 'failed',
+      reason: 'Guest'
+    })
+  } else {
+    updateNotification(requestedId, topId, (status) => {
+      res.json({ status })
+    })
+  }
 }

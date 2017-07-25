@@ -43,6 +43,18 @@ export default {
       method: 'getUserImageListHandler'
     }
   },
+  '/notification': {
+    get: {
+      controller: 'UserController',
+      middleware: [auth()]
+      method: 'getNotificationsHandler'
+    },
+    put: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'updateNotificationHandler'
+    }
+  },
   '/test': {
     get: {
       controller: 'TestController',

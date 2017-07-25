@@ -37,11 +37,11 @@ export default {
   },
   'LIKE.AddLike': {
     controller: 'LikeSubController',
-    method: 'addLike'
+    method: 'createLikeNotification'
   },
   'LIKE.RemoveLike': {
     controller: 'LikeSubController',
-    method: 'removeLike'
+    method: 'removeLikeNotification'
   },
   'COMMENT.FirstLayerCommentCreated': {
     controller: 'CommentSubController',
@@ -50,5 +50,17 @@ export default {
   'COMMENT.SecondLayerCommentCreated': {
     controller: 'ReplySubController',
     method: 'createReplyNotification'
+  },
+  'SELLPOST.Created': {
+    controller: 'SellpostSubController',
+    method: 'createSellpostCreatedNotification'
+  },
+  'SELLPOST.Updated': {
+    controller: 'SellpostSubController',
+    method: 'createSellpostUpdatedNotification'
+  },
+  'SELLPOST.Deleted': {
+    controller: 'SellpostSubController',
+    method: 'deleteSellpostNotification'
   },
 }

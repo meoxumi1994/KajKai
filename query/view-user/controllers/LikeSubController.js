@@ -1,243 +1,216 @@
-import { BasicUser, Liker, Sellpost, Comment, Reply } from '../models'
+import { User, BasicStore, Liker, SellpostLiker, CommentLiker, ReplyLiker } from '../models'
+import { createLikeSellpostNotification, createLikeCommentNotification, createLikeReplyNotification } from '../services/NotificationService'
 import { NotificationType } from '../enum'
 
-export const addLike = (message) => {
-  const { likenId, likerId: userId } = message.like
+export const createLikeNotification = (message) => {
+  const { likenId, likerId } = message.like
 
-  BasicUser.findOne({ id: userId }, (err, basicUser) => {
-    if (basicUser) {
-      const liker = new Liker({
-        userId,
-        username: basicUser.username
-      })
-      if (likenId.substr(0, 3) == '012') { // sellpost
-        User.find({}, (err, users) => {
-          if (users) {
-            const avatarUrlById = {}, usernameById = {}
-            users.map((user) => {
-              avatarUrlById[user.id] = user.avatarUrl
-              usernameById[user.id] = user.username
-            })
-            for (let i = 0; i < users.length; i++) {
-              let user = users[i]
-              let { followingSellposts } = user
-              if (!followingSellposts) {
-                followingSellposts = []
-              }
-              for (let k = 0; k < followingSellposts.length; k++) {
-                if (followingSellposts[k] == sellpostId) {
-                  let { notifications } = user
-                  if (!notifications) {
-                    notifications = []
-                  }
-                  BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-                    if (basicStore) {
-                      let notification = new Notification({
-                        type: NotificationType.LIKE,
-                        sellpostId: likenId,
-                        actorId: userId,
-                        username: usernameById[userId],
-                        avatarUrl: avatarUrlById[userId],
-                        storeName: basicStore.storeName,
-                        urlName: basicStore.urlName,
-                        content,
-                        time: Date.now()
-                      })
-
-                      
-
-                      notifications.push(notification)
-                      user.notifications = notifications
-                      user.save(() => {})
-                    }
-                  })
-                  break
-                }
-              }
-            }
-          }
+  const mPromises = []
+  mPromises.push(new Promise((resolve, reject) => {
+    User.findOne({ id: likerId }, (err, user) => {
+      if (user) {
+        const liker = new Liker({
+          userId: likerId,
+          username: user.username,
+          avatarUrl: user.avatarUrl
         })
-        Sellpost.findOne({ id: likenId }, (err, sellpost) => {
-          if (sellpost) {
-            let { likers } = sellpost
-            if (!likers) {
-              likers = []
-            }
-            likers.push(liker)
-            sellpost.likers = likers
-            sellpost.numberOfLike = likers.length
-            sellpost.save(() => {})
-          }
-        })
-      } else if (likenId.substr(0, 3) == '004') { // comment
-        Comment.findOne({ id: likenId }, (err, comment) => {
-          if (comment) {
-            let { likers } = comment.replies[0]
-            if (!likers) {
-              likers = []
-            }
-            likers.push(liker)
-            comment.replies[0].likers = likers
-            comment.replies[0].numberOfLike = likers.length
-            comment.save(() => {})
-
-            Sellpost.findOne({ id: comment.sellpostId }, (err, sellpost) => {
-              if (sellpost) {
-                const { comments } = sellpost
-                for (let i = 0; i < comments.length; i++) {
-                  if (comments[i].id == likenId) {
-                    comments[i].replies[0].likers = likers
-                    comments[i].replies[0].numberOfLike = likers.length
-                    break
-                  }
-                }
-                sellpost.comments = comments
-                sellpost.save(() => {})
-              }
-            })
-          }
-        })
-      } else { // 005 reply
-        Reply.findOne({ id:  likenId }, (err, reply) => {
-          if (reply) {
-            let { likers } = reply
-            if (!likers) {
-              likers = []
-            }
-            likers.push(liker)
-            reply.likers = likers
-            reply.numberOfLike = likers.length
-            reply.save(() => {})
-
-            Comment.findOne({ id: reply.commentId }, (err, comment) => {
-              if (comment) {
-                const { replies } = comment
-                for (let i = 0; i < replies.length; i++) {
-                  if (replies[i].id == likenId) {
-                    replies[i].likers = likers
-                    replies[i].numberOfLike = likers.length
-                    break
-                  }
-                }
-                comment.replies = replies
-                comment.save(() => {})
-
-                Sellpost.findOne({ id: comment.sellpostId }, (err, sellpost) => {
-                  if (sellpost) {
-                    const { comments } = sellpost
-                    for (let i = 0; i < comments.length; i++) {
-                      if (comments[i].id == likenId) {
-                        comments[i].replies = replies
-                        break
-                      }
-                    }
-                    sellpost.comments = comments
-                    sellpost.save(() => {})
-                  }
-                })
-              }
-            })
-          }
-        })
+        resolve(liker)
+      } else {
+        resolve(null)
       }
+    })
+  }))
+  mPromises.push(new Promise((resolve, reject) => {
+    BasicStore.findOne({ id: likerId }, (err, basicStore) => {
+      if (basicStore) {
+        const liker = new Liker({
+          storeId: likerId,
+          storeName: basicStore.storeName,
+          avatarUrl: basicStore.avatarUrl
+        })
+        resolve(liker)
+      } else {
+        resolve(null)
+      }
+    })
+  }))
+
+  Promise.all(mPromises).then((likers) => {
+    const liker = likers[0] ? likers[0] : likers[1]
+    if (likenId.substr(0, 3) == '012') { // sellpost
+      SellpostLiker.findOne({ sellpostId: likenId }, (err, sellpostLiker) => {
+        if (sellpostLiker) {
+          let { likers } = sellpostLiker
+          if (!likers) {
+            likers = []
+          }
+          likers.push(liker)
+          sellpostLiker.likers = likers
+          sellpostLiker.save(() => {
+            createLikeSellpostNotification(likenId)
+          })
+        } else {
+          const mSellpostLiker = new SellpostLiker({
+            sellpostId: likenId,
+            likers: [liker]
+          })
+          mSellpostLiker.save(() => {
+            createLikeSellpostNotification(likenId)
+          })
+        }
+      })
+    } else if (likenId.substr(0, 3) == '004') { // comment
+      CommentLiker.findOne({ commentId: likenId }, (err, commentLiker) => {
+        if (commentLiker) {
+          let { likers } = commentLiker
+          if (!likers) {
+            likers = []
+          }
+          likers.push(liker)
+          commentLiker.likers = likers
+          commentLiker.save(() => {
+            createLikeCommentNotification(likenId)
+          })
+        } else {
+          const mCommentLiker = new SellpostLiker({
+            commentId: likenId,
+            likers: [liker]
+          })
+          mCommentLiker.save(() => {
+            createLikeCommentNotification(likenId)
+          })
+        }
+      })
+    } else { // 005 reply
+      ReplyLiker.findOne({ replyId:  likenId }, (err, replyLiker) => {
+        if (replyLiker) {
+          let { likers } = replyLiker
+          if (!likers) {
+            likers = []
+          }
+          likers.push(liker)
+          replyLiker.likers = likers
+          replyLiker.save(() => {
+            createLikeReplyNotification(likenId)
+          })
+        } else {
+          const mReplyLiker = new SellpostLiker({
+            replyId: likenId,
+            likers: [liker]
+          })
+
+          mReplyLiker.save(() => {
+            createLikeReplyNotification(likenId)
+          })
+        }
+      })
     }
   })
 }
 
 export const removeLike = (message) => {
-  const { likenId, likerId: userId } = message.like
+  const { likenId, likerId } = message.like
 
-  BasicUser.findOne({ id: userId }, (err, basicUser) => {
-    if (basicUser) {
-      if (likenId.substr(0, 3) == '012') { // sellpost
-        Sellpost.findOne({ id: likenId }, (err, sellpost) => {
-          if (sellpost) {
-            let { likers } = sellpost
-            for (let i = 0; i < likers.length; i++) {
-              if (likers[i].userId == userId) {
-                likers.splice(i, 1)
-                break
+  if (likenId.substr(0, 3) == '012') { // sellpost
+    SellpostLiker.find({ sellpostId: likenId }, (err, sellpostLiker) => {
+      if (sellpostLiker) {
+        const { likers } = sellpostLiker
+        for (let i = 0; i < likers.length; i++) {
+          let liker = likers[i]
+          if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
+            likers.splice(i, 1)
+            break
+          }
+        }
+        sellpostLiker.likers = likers
+        sellpostLiker.save(() => {})
+      }
+    })
+  } else if (likenId.substr(0, 3) == '004') { // comment
+    CommentLiker.find({ commentId: likenId }, (err, commentLiker) => {
+      if (commentLiker) {
+        const { likers } = commentLiker
+        for (let i = 0; i < likers.length; i++) {
+          let liker = likers[i]
+          if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
+            likers.splice(i, 1)
+            break
+          }
+        }
+        commentLiker.likers = likers
+        commentLiker.save(() => {})
+      }
+    })
+  } else if (likenId.substr(0, 3) == '005') { // reply
+    ReplyLiker.find({ replyId: likenId }, (err, replyLiker) => {
+      if (replyLiker) {
+        const { likers } = replyLiker
+        for (let i = 0; i < likers.length; i++) {
+          let liker = likers[i]
+          if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
+            likers.splice(i, 1)
+            break
+          }
+        }
+        replyLiker.likers = likers
+        replyLiker.save(() => {})
+      }
+    })
+  }
+}
+
+export const removeLikeNotification = (message) => {
+  const { likenId, likerId } = message.like
+
+  let UNLIKETYPE = ''
+  if (likenId.substr(0, 3) == '012') { // sellpost
+    UNLIKETYPE = NotificationType.LIKESELLPOST
+  } else if (likenId.substr(0, 3) == '004') { // comment
+    UNLIKETYPE = NotificationType.LIKECOMMENT
+  } else if (likenId.substr(0, 3) == '005') { // reply
+    UNLIKETYPE = NotificationType.LIKEREPLY
+  }
+
+  User.find({}, (err, users) => {
+    if (users) {
+      for (let i = 0; i < users.length; i++) {
+        let user = users[i]
+        let { notifications, mNumberOfUnRead } = user
+        if (!notifications) {
+          notifications = []
+        }
+        if (!mNumberOfUnRead) {
+          mNumberOfUnRead = 0
+        }
+        let mNotifications = []
+        for (let k = 0; k < notifications.length; k++) {
+          let notification = notifications[k]
+          let { type } = notification
+          if (type == UNLIKETYPE) {
+            if (type == NotificationType.LIKESELLPOST && notification.sellpostId == likenId) {
+              if (k >= notifications.length - mNumberOfUnRead) {
+                mNumberOfUnRead--
+              }
+            } else if (type == NotificationType.LIKECOMMENT && notification.commentId == likenId) {
+              if (k >= notifications.length - mNumberOfUnRead) {
+                mNumberOfUnRead--
+              }
+            } else if (type == NotificationType.LIKEREPLY && notification.replyId == likenId) {
+              if (k >= notifications.length - mNumberOfUnRead) {
+                mNumberOfUnRead--
+              }
+            } else {
+              if (k >= notifications.length - mNumberOfUnRead) {
+                mNumberOfUnRead--
               }
             }
-            sellpost.likers = likers
-            sellpost.numberOfLike = likers.length
-            sellpost.save(() => {})
+          } else {
+            mNotifications.push(notification)
           }
-        })
-      } else if (likenId.substr(0, 3) == '004') { // comment
-        Comment.findOne({ id: likenId }, (err, comment) => {
-          if (comment) {
-            let { likers } = comment.replies[0]
-            for (let i = 0; i < likers.length; i++) {
-              if (likers[i].userId == userId) {
-                likers.splice(i, 1)
-                break
-              }
-            }
-            comment.replies[0].likers = likers
-            comment.replies[0].numberOfLike = likers.length
-            comment.save(() => {})
-
-            Sellpost.findOne({ id: comment.sellpostId }, (err, sellpost) => {
-              if (sellpost) {
-                const { comments } = sellpost
-                for (let i = 0; i < comments.length; i++) {
-                  if (comments[i].id == likenId) {
-                    comments[i].replies[0].likers = likers
-                    comments[i].replies[0].numberOfLike = likers.length
-                    break
-                  }
-                }
-                sellpost.comments = comments
-                sellpost.save(() => {})
-              }
-            })
-          }
-        })
-      } else { // 005 reply
-        Reply.findOne({ id:  likenId }, (err, reply) => {
-          if (reply) {
-            let { likers } = reply
-            for (let i = 0; i < likers.length; i++) {
-              if (likers[i].userId == userId) {
-                likers.splice(i, 1)
-                break
-              }
-            }
-            reply.likers = likers
-            reply.numberOfLike = likers.length
-            reply.save(() => {})
-
-            Comment.findOne({ id: reply.commentId }, (err, comment) => {
-              if (comment) {
-                const { replies } = comment
-                for (let i = 0; i < replies.length; i++) {
-                  if (replies[i].id == likenId) {
-                    replies[i].likers = likers
-                    replies[i].numberOfLike = likers.length
-                    break
-                  }
-                }
-                comment.replies = replies
-                comment.save(() => {})
-
-                Sellpost.findOne({ id: comment.sellpostId }, (err, sellpost) => {
-                  if (sellpost) {
-                    const { comments } = sellpost
-                    for (let i = 0; i < comments.length; i++) {
-                      if (comments[i].id == likenId) {
-                        comments[i].replies = replies
-                        break
-                      }
-                    }
-                    sellpost.comments = comments
-                    sellpost.save(() => {})
-                  }
-                })
-              }
-            })
-          }
-        })
+        }
+        user.notifications = mNotifications
+        user.numberOfUnRead = mNumberOfUnRead
+        user.save(() => {})
       }
     }
   })

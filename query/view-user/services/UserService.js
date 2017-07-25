@@ -1,4 +1,4 @@
-import { User, Address } from '../models'
+import { User } from '../models'
 import jwt from 'jsonwebtoken'
 
 export const getUser = (requesterId, id, next) => {
@@ -146,6 +146,101 @@ export const getUserImageList = (requesterId, id, offset, next) => {
           })
         }
       }
+  })
+}
+
+export const getNotifications = (id, offset, next) => {
+  User.findOne({ id }, (err, user) => {
+    if (err || !user) {
+      if(err) {
+        next(null)
+      } else {
+        next({
+          status: 'nodata',
+          offset,
+          notifications: []
+        })
+      }
+    } else {
+      const { notifications } = user
+      const mNotifications = []
+      let currentNumberOfNotification = 0, mOffset = -2, lastIndex = -1
+      for (let i = notifications.length - 1; i >= 0; i--) {
+        let notification = notifications[i]
+        if (notification.time < offset) {
+          if (currentNumberOfNotification < 10) {
+            mNotifications.push({
+              id: notification._id,
+              commentid: notification.replyId,
+              leadercommentid: notification.commentId,
+              sellpostid: notification.sellpostId,
+              ownerid: notification.actorId,
+              avatarUrl: notification.avatarUrl,
+              name: notification.name,
+              content: notification.content,
+              time: notification.time.getTime(),
+              numlike: notification.numberOfLike,
+              likes: notification.likers.map((liker) => ({
+                avatarUrl: liker.avatarUrl,
+                userid: liker.userId,
+                username: liker.username,
+                storeid: liker.storeId,
+                storename: liker.storename,
+                id: liker.userId ? liker.userId : liker.storeId,
+                name: liker.username ? liker.username : liker.storeName
+              }))
+              likestatus: ['like'],
+              storename: notification.storeName,
+              urlname: notification.urlName
+            })
+
+            mOffset = notification.time.getTime()
+            lastIndex = i
+            currentNumberOfNotification++
+          } else {
+            break
+          }
+        }
+      }
+
+      if (lastIndex == 0) {
+        mOffset = -2
+      }
+
+      next({
+        status: 'success',
+        numUnreaded: user.numberOfUnRead,
+        offset: mOffset,
+        notifications: mNotifications
+      })
+    }
+  })
+}
+
+export const updateNotification = (id, topId, next) => {
+  User.findOne({ id }, (err, user) => {
+    if (err || !user) {
+      if(err) {
+        next('failed')
+      } else {
+        next('noUserData')
+      }
+    } else {
+      const { notifications } = user
+      if (notifications) {
+        for (let i = notifications.length - 1; i >= 0; i--) {
+          let notification = notifications[i]
+          if (notification._id == topId) {
+            user.numberOfUnRead = notifications.length - (i + 1)
+            break
+          }
+        }
+      } else {
+        user.numberOfUnRead = 0
+      }
+      user.save(() => {})
+      next({ status: 'success' })
+    }
   })
 }
 

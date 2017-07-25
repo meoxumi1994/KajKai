@@ -29,7 +29,8 @@ const UserSchema = new mongoose.Schema({
   reason: {type: String},
   followingStores: [String],
   followingSellposts: [String],
-  notifications: [NotificationSchema]
+  notifications: [NotificationSchema],
+  numberOfUnRead: {type: Number}
 })
 
 export default UserSchema
