@@ -46,11 +46,11 @@ fs.readFile(path.resolve(__dirname, '../data/category.json'), 'utf8', (err, data
 		    if (err || !data) {
 		        category.save();
 		        category.subcategory.forEach((sub) => {
-		            redisClient.hset('category', sub._id, sub.name);
+		            redisClient.hset('category', sub._id.toString(), sub.name);
                 })
             } else {
 		        data.subcategory.forEach((sub) => {
-                    redisClient.hset('category', sub._id, sub.name);
+                    redisClient.hset('category', sub._id.toString(), sub.name);
                 })
             }
         });
