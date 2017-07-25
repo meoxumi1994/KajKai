@@ -97,6 +97,9 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, storeId, 
     }
 
     SellPostDetail.insertMany(docs, () => {
+        for (let i = 0; i < docs.length; ++i) {
+            docs[i].storeId = storeId;
+        }
         if (productList.length === 0) {
             let res = [];
             for (let i = 0; i < docs.length; ++i) {
@@ -118,7 +121,6 @@ export const createMultiplePostDetail = (listSellPostInfo, sellPostId, storeId, 
                         j++;
                     }
                     res.push(getBasicSellPostDetailInfo(cur));
-                    cur.storeId = storeId;
                     postRowCreatedPub(getPubSellPostDetailBasicInfo(cur));
                 }
                 next(res);
