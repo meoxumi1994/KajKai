@@ -7,7 +7,7 @@ class FeedbackDetails extends React.Component {
     }
 
     render() {
-        const { current, mapp, auth, details,
+        const { display, mapp, auth, details,
                 close, changePermission, save } = this.props
 
         if (details == undefined) {
@@ -15,12 +15,11 @@ class FeedbackDetails extends React.Component {
                 <div></div>
             )
         }
-
         const { id, reporter, defendant, status, time, solvedTime, decision } = details
 
         let reason = ''
         return (
-          <Modal style={{ marginTop: 120 }} show={current.display} onHide={() => close()}>
+          <Modal style={{ marginTop: 120 }} show={display.details} onHide={() => close()}>
               <Modal.Header closeButton>
               <Modal.Title><label>Feedback #{id}:</label><label style={{color: status? 'green': 'red', marginLeft: 10}}>{status? 'Solved': 'Unsolved'}</label></Modal.Title>
               </Modal.Header>
@@ -38,7 +37,7 @@ class FeedbackDetails extends React.Component {
                                         {reporter.ban.status? 'Deactivated': 'Activated'}
                                     </p>
                                     :
-                                    <button className={reporter.ban.status? "btn btn-danger": "btn btn-success"} style={{float: 'right', width: 100}} onClick={() => changePermission('reporter', current.id, !reporter.ban.status)}>
+                                    <button className={reporter.ban.status? "btn btn-danger": "btn btn-success"} style={{float: 'right', width: 100}} onClick={() => changePermission('reporter', id, !reporter.ban.status)}>
                                         {reporter.ban.status? "Deactivated": "Activated"}
                                     </button>
                                   }
@@ -55,7 +54,7 @@ class FeedbackDetails extends React.Component {
                                           {defendant.ban.status? 'Deactivated': 'Activated'}
                                       </p>
                                       :
-                                      <button className={defendant.ban.status? "btn btn-danger": "btn btn-success"} style={{float: 'right', width: 100}} onClick={() => changePermission('defendant', current.id, !defendant.ban.status)}>
+                                      <button className={defendant.ban.status? "btn btn-danger": "btn btn-success"} style={{float: 'right', width: 100}} onClick={() => changePermission('defendant', id, !defendant.ban.status)}>
                                           {defendant.ban.status? "Deactivated": "Activated"}
                                       </button>
                                   }

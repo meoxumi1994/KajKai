@@ -14,7 +14,7 @@ class AdminLogin extends React.Component {
               <div style={{backgroundColor: "white", position: "absolute", left: '35%', right: '35%', top: '20%', bottom: '30%'}}>
 
                   <div style={{ position: "absolute", left: '20%', right: '20%', top: '18%'}}>
-                      <img src="./images/kajkai.png" style={{width: 70, height: 70, float: 'left', marginRight: 20, marginLeft: 40}}/>
+                      <img src="./images-admin/kajkai.png" style={{width: 70, height: 70, float: 'left', marginRight: 20, marginLeft: 40}}/>
                       <h3><b>KAJKAI ADMINSTRATION</b></h3>
                   </div>
 

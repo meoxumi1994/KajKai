@@ -3,20 +3,21 @@ import UserDetails from '~/components/admin/user/UserDetails'
 import { getUsers, banUser } from '~/actions/asyn/admin/user/restful'
 
 const mapStateToProps = (state, ownProps) => {
-    const { mapp, current } = state.inst.admin.user
+    const { mapp, display, current } = state.inst.admin.user
     const { auth } = state.inst.admin
-    // console.log('state', state.inst.admin);
+    console.log('state', state.inst.admin);
     return {
         mapp,
-        current,
-        auth
+        display,
+        auth,
+        current
     }
 
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     close: () => {
-        dispatch({type: 'ADMIN/USER/DISPLAY', data: { display: false, id: '' }})
+        dispatch({type: 'ADMIN/USER/DISPLAY', subType: 'USER_DETAILS', data: { display: false, id: '' }})
     },
     changePermission: (adminId, reason, userId, userStatus) => {
         dispatch(banUser(

@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onDetailsFeedback: (id) => {
         dispatch(getFeedback(id))
-    }
+    },
 })
 
 const FeedbacksContainer = connect(

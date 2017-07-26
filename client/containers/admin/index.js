@@ -4,7 +4,7 @@ import { auth } from '~/actions/asyn/admin/login/restful'
 
 const mapStateToProps = (state, ownProps) => {
     const { auth } = state.inst.admin
-    console.log('state', state.inst.admin.auth);
+    // console.log('state', state.inst.admin.auth);
     return {
         auth
     }

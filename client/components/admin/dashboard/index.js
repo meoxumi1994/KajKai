@@ -7,25 +7,26 @@ class Dashboard extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getNewFeed()
+        this.props.getFeedbacks()
     }
 
     render() {
-        const { keyy, mapp } = this.props
+        const { keyy, mapp, display,
+                loadFeedback} = this.props
         return (
             <div className="container" style={{width: '100%', height: '100%'}}>
-                  <ul className="nav nav-tabs nav-pills">
-                      <li className="active">
-                          <a data-toggle="tab" href="#new">NEW</a>
-                      </li>
-                      <li>
-                          <a data-toggle="tab" href="#solved">SOLVED</a>
-                      </li>
-                      <li>
-                          <a data-toggle="tab" href="#all">ALL</a>
-                      </li>
-                  </ul>
-
+                <ul className="nav nav-tabs nav-pills">
+                    <li className="active">
+                        <a data-toggle="tab" href="#new">NEW</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#solved">SOLVED</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#all">ALL</a>
+                    </li>
+                    <button style={{float: 'right', marginTop: 4}} className="btn btn-default" onClick={() => loadFeedback(keyy.all.length)}>{display.loadMore? 'Load more': 'Data is up to date'}</button>
+                </ul>
                 <div className="tab-content">
                     <div id="new" className="tab-pane fade in active">
                         <FeedbacksContainer myKeyy={keyy.unsolved}/>
