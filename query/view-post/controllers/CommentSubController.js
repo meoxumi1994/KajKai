@@ -1,7 +1,7 @@
 import { Sellpost, Minorpost, Comment, Reply, BasicUser, BasicStore } from '../models'
 
 export const createComment = (message) => {
-  const { fCommentId: id, posterId: userId, sellPostId: sellpostId, minorPostId: minorpostId, order, time, content } = message.fComment
+  const { fCommentId: id, posterId, sellPostId: sellpostId, minorPostId: minorpostId, order, time, content } = message.fComment
 
   const comment = new Comment({
     id
@@ -16,160 +16,110 @@ export const createComment = (message) => {
     list: product.list,
     numberOfOrder: product.num
   }))
-  if (time) comment.time = time
 
-  if(userId.substr(0, 3) == '001') {
-    BasicUser.findOne({ id: userId }, (err, basicUser) => {
+  const mPromises = []
+  mPromises.push(new Promise((resolve, reject) => {
+    BasicUser.findOne({ id: posterId }, (err, basicUser) => {
       if (basicUser) {
         const reply = new Reply({
           commentId: id,
           type: 'user',
           id,
-          userId,
+          userId: posterId,
           username: basicUser.username,
           avatarUrl: basicUser.avatarUrl,
           content,
-          time,
+          time : Date.now(),
           numberOfLike: 0
         })
-
-        comment.replies = []
-        comment.replies.push(reply)
-        comment.save(() => {})
-
-        if (sellpostId) {
-          Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
-            if (sellpost) {
-              let { comments } = sellpost
-
-              if (!comments) {
-                comments = []
-              }
-              comments.push(comment)
-              sellpost.numberOfComment = comments.length
-              sellpost.comments = comments
-
-              if (order) {
-                const { postrows } = sellpost
-                for (let i = 0; i < postrows.length; i++) {
-                  let { products } = postrows[i]
-                  if (products) {
-                    for (let k = 0; k < products.length; k++) {
-                      let product = products[k]
-
-                      order.map((orderedProduct) => {
-                        if (orderedProduct.id == product.id) {
-                          if (product.numberOfOrder) {
-                            product.numberOfOrder += orderedProduct.numberOfOrder
-                          } else {
-                            product.numberOfOrder = orderedProduct.numberOfOrder
-                          }
-                        }
-                      })
-                      products[k] = product
-                    }
-                    postrows[i].products = products
-                  }
-                }
-
-                sellpost.postrows = postrows
-              }
-              sellpost.save(() => {})
-            }
-          })
-        } else {
-          Minorpost.findOne({ id: minorpostId }, (err, minorpost) => {
-            if (minorpost) {
-              let { comments } = minorpost
-
-              if (!comments) {
-                comments = []
-              }
-              comments.push(comment)
-              minorpost.numberOfComment = comments.length
-              minorpost.comments = comments
-              minorpost.save(() => {})
-            }
-          })
-        }
+        resolve(reply)
+      } else {
+        resolve(null)
       }
     })
-  } else {
-    BasicStore.findOne({ id: userId }, (err, basicStore) => {
+  }))
+  mPromises.push(new Promise((resolve, reject) => {
+    BasicStore.findOne({ id: posterId }, (err, basicStore) => {
       if (basicStore) {
         const reply = new Reply({
           commentId: id,
           type: 'store',
-          urlname: basicStore.urlName,
+          urlName: basicStore.urlName,
           id,
-          userId,
+          userId: posterId,
           username: basicStore.storeName,
           avatarUrl: basicStore.avatarUrl,
           content,
-          time,
+          time: Date.now(),
           numberOfLike: 0
         })
-
-        comment.replies = []
-        comment.replies.push(reply)
-        comment.save(() => {})
-
-        if (sellpostId) {
-          Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
-            if (sellpost) {
-              let { comments } = sellpost
-
-              if (!comments) {
-                comments = []
-              }
-              comments.push(comment)
-              sellpost.numberOfComment = comments.length
-              sellpost.comments = comments
-
-              if (order) {
-                const { postrows } = sellpost
-                for (let i = 0; i < postrows.length; i++) {
-                  let { products } = postrows[i]
-                  if (products) {
-                    for (let k = 0; k < products.length; k++) {
-                      let product = products[k]
-
-                      order.map((orderedProduct) => {
-                        if (orderedProduct.id == product.id) {
-                          if (product.numberOfOrder) {
-                            product.numberOfOrder += orderedProduct.numberOfOrder
-                          } else {
-                            product.numberOfOrder = orderedProduct.numberOfOrder
-                          }
-                        }
-                      })
-                      products[k] = product
-                    }
-                    postrows[i].products = products
-                  }
-                }
-
-                sellpost.postrows = postrows
-              }
-              sellpost.save(() => {})
-            }
-          })
-        } else {
-          Minorpost.findOne({ id: minorpostId }, (err, minorpost) => {
-            if (minorpost) {
-              let { comments } = minorpost
-
-              if (!comments) {
-                comments = []
-              }
-              comments.push(comment)
-              minorpost.numberOfComment = comments.length
-              minorpost.comments = comments
-              minorpost.save(() => {})
-            }
-          })
-        }
+        resolve(reply)
+      } else {
+        resolve(null)
       }
     })
-  }
+  }))
+
+  Promise.all(mPromises).then((replies) => {
+    const reply = replies[0] ? replies[0] : replies[1]
+
+    comment.replies = [reply]
+    comment.save(() => {})
+
+    if (sellpostId) {
+      Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
+        if (sellpost) {
+          let { comments } = sellpost
+
+          if (!comments) {
+            comments = []
+          }
+          comments.push(comment)
+          sellpost.comments = comments
+          sellpost.numberOfComment = comments.length
+
+          if (order) {
+            const { postrows } = sellpost
+            for (let i = 0; i < postrows.length; i++) {
+              let { products } = postrows[i]
+              if (products) {
+                for (let k = 0; k < products.length; k++) {
+                  let product = products[k]
+
+                  order.map((orderedProduct) => {
+                    if (orderedProduct.id == product.id) {
+                      if (product.numberOfOrder) {
+                        product.numberOfOrder += orderedProduct.numberOfOrder
+                      } else {
+                        product.numberOfOrder = orderedProduct.numberOfOrder
+                      }
+                    }
+                  })
+                  products[k] = product
+                }
+                postrows[i].products = products
+              }
+            }
+
+            sellpost.postrows = postrows
+          }
+          sellpost.save(() => {})
+        }
+      })
+    } else {
+      Minorpost.findOne({ id: minorpostId }, (err, minorpost) => {
+        if (minorpost) {
+          let { comments } = minorpost
+
+          if (!comments) {
+            comments = []
+          }
+          comments.push(comment)
+          minorpost.numberOfComment = comments.length
+          minorpost.comments = comments
+          minorpost.save(() => {})
+        }
+      })
+    }
+  })
 }
