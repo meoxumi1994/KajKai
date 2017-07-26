@@ -12,6 +12,7 @@ const postrow = (state = {
                 })
             })
             return newstate
+        case 'EDIT_SELL_POST_SUCCESS':
         case 'GET_SELL_POST_SUCCESS':
         case 'CREATE_SELL_POST_SUCCESS':
             let nstate = state

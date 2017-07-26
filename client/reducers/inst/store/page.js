@@ -45,6 +45,11 @@ const page = (state = {
                 minorposts: [],
                 sellposts: [],
             }
+        case 'EDIT_SELL_POST_SUCCESS':
+            return {
+                ...state,
+                showEditSellPost: false,
+            }
         case 'CREATE_SELL_POST_SUCCESS':
             return {
                 ...state,

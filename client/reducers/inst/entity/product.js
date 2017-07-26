@@ -3,6 +3,7 @@ const product = (state = {
     switch (action.type) {
         case 'CREATE_SELL_POST_SUCCESS':
         case 'GET_SELL_POST_SUCCESS':
+        case 'EDIT_SELL_POST_SUCCESS':
             let mystate = state
             action.sellpost.postrows.map((pr) => {
                 if(pr.type=='product' || pr.type=='groupproduct'){

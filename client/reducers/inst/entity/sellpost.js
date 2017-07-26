@@ -37,6 +37,7 @@ const sellpost = (state = {
                 }
             }
             return state
+        case 'EDIT_SELL_POST_SUCCESS':
         case 'GET_SELL_POST_SUCCESS':
         case 'CREATE_SELL_POST_SUCCESS':
             return {

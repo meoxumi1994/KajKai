@@ -77,3 +77,23 @@ export const fleu = (url, body) => {
         console.error('PUT',myurl,error);
     })
 }
+
+export const flex = (url, body) => {
+    let myurl = config.getDomain() + url
+    console.log('DELETE',myurl, body)
+    return fetch( myurl , {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        method: 'DELETE',
+        credentials: 'include',
+        body: JSON.stringify(body)
+    }).then((response) => response.json())
+    .then((res) => {
+        console.log('DELETE',myurl, res)
+        return res
+    })
+    .catch((error)=> {
+        console.error('DELETE',myurl,error);
+    })
+}

@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
 import EditSellPost from '~/components/entity/post/EditSellPost'
-import { postSellPost } from '~/actions/asyn/entity/sellpost'
+import { postSellPost, putSellPost } from '~/actions/asyn/entity/sellpost'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
@@ -29,14 +29,17 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     addPostRow: (item, newid) => {
         dispatch({ type: 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_POST_ROW', item: item, newid: newid, time: (new Date()).getTime() })
     },
-    createSellPost: (store) => {
-        dispatch(postSellPost(store))
+    createSellPost: (sellpost) => {
+        dispatch(postSellPost(sellpost))
+    },
+    editSellPost: (sellpost) => {
+        dispatch(putSellPost(sellpost))
     }
 })
 
 const mergerProp = (stateProps, dispatchProps, ownProps) => {
     const { editpostrow, product, id, ...anotherState } = stateProps
-    const { createSellPost, ...anotherDispatch } = dispatchProps
+    const { editSellPost, createSellPost, ...anotherDispatch } = dispatchProps
     return({
         onCreateSellPost: () => {
             let postrows = []
@@ -55,14 +58,40 @@ const mergerProp = (stateProps, dispatchProps, ownProps) => {
                     }
                 }
             )
-            const store = {
+            const sellpost = {
                 ...stateProps,
                 postrows: postrows,
                 storeid: id,
                 status: 'notyet',
             }
-            createSellPost(store)
+            createSellPost(sellpost)
         },
+        onEditSellPost: () => {
+            let postrows = []
+            stateProps.postrows_order.map((item) => {
+                    if(editpostrow[item].type == 'product'){
+                        let products = []
+                        editpostrow[item].products_order.map((item) => {
+                            products = [...products, product[item] ]
+                        })
+                        postrows = [...postrows, {
+                            ...editpostrow[item],
+                            products: products,
+                        }]
+                    }else{
+                        postrows = [...postrows, editpostrow[item]]
+                    }
+                }
+            )
+            const sellpost = {
+                ...stateProps,
+                postrows: postrows,
+                storeid: id,
+                status: 'notyet',
+            }
+            editSellPost(sellpost)
+        },
+        id: id,
         ...anotherState,
         ...anotherDispatch,
         ...ownProps,

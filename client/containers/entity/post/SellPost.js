@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 import { getTime, getBeLike, getLikeContent, getBeFollow } from '~/containers/support'
-import { getSellPost } from '~/actions/asyn/entity/sellpost'
+import { getSellPost, deteleSellPost } from '~/actions/asyn/entity/sellpost'
 import SellPost from '~/components/entity/post/SellPost'
 
 const mapStateToProps = (state, { id }) => {
@@ -47,6 +47,9 @@ const mapDispatchToProps = (dispatch, { id }) => ({
     onGetSellpost: () => {
         dispatch(getSellPost(id))
     },
+    onDeleteSellpost: () => {
+        dispatch(deteleSellPost(id))
+    },
     onFollow: () => {
         dispatch({ type: 'server/FOLLOW', data: {
             id: id,
@@ -67,7 +70,7 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
     const { onShowEditSellPost, ...anotherDispatch } = dispatchProps
     return({
         showEditSellPost: () => {
-            onShowEditSellPost({ category ,description ,status, ship , postrows_order, postrows })
+            onShowEditSellPost({ category ,description ,status, ship , postrows_order, postrows, sellpostid: ownProps.id })
         },
         ...ownProps,
         ...stateProps,
