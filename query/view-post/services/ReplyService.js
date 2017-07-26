@@ -27,7 +27,7 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
   if (!replies) {
     return {
       status: 'success',
-      offset,
+      offset: -2,,
       comments: []
     }
   }
