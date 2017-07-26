@@ -1,7 +1,7 @@
 const auth = (state={
-    status: true,
-    id: "59785f2028f7386891685e27",
-    adminName: 'admin',
+    status: false,
+    id: "",
+    adminName: '',
 }, action) => {
     switch (action.type) {
       case 'ADMIN/AUTH':
