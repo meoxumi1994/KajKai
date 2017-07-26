@@ -51,8 +51,6 @@ export const getUsers = (offset, length, next) => {
 }
 
 export const getFeedbacks = (offset, length, next) => {
-  console.log('offset: ', offset);
-  console.log('length: ', length);
   Feedback.find({}, (err, feedbacks) => {
     if (feedbacks) {
       console.log('feedbacks: ', feedbacks);
@@ -68,7 +66,7 @@ export const getFeedbacks = (offset, length, next) => {
               avatarUrl: fb.reporter.avatarUrl
             },
             ban: {
-                status: 'abc', //fb.reporter.banned && fb.reporter.banned != 0,
+                status: (fb.reporter.banned && fb.reporter.banned != 0),
                 admin: {
                     id: fb.reporter.bannedById,
                     username: fb.reporter.bannedByAdminName,
@@ -85,7 +83,7 @@ export const getFeedbacks = (offset, length, next) => {
               avatarUrl: fb.reportee.avatarUrl
             },
             ban: {
-                status: fb.reportee.banned && fb.reportee.banned != 0,
+                status: (fb.reportee.banned && fb.reportee.banned != 0),
                 admin: {
                     id: fb.reportee.bannedById,
                     username: fb.reportee.bannedByAdminName,
