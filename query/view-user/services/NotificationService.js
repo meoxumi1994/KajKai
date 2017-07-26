@@ -204,3 +204,28 @@ export const createLikeReplyNotification = (replyId) => {
     }
   })
 }
+
+export const getClientFormatNotification = (notification) => ({
+  id: notification._id,
+  commentid: notification.replyId,
+  leadercommentid: notification.commentId,
+  sellpostid: notification.sellpostId,
+  ownerid: notification.actorId,
+  avatarUrl: notification.avatarUrl,
+  name: notification.name,
+  content: notification.content,
+  time: notification.time.getTime(),
+  numlike: notification.numberOfLike,
+  likes: notification.likers.map((liker) => ({
+    avatarUrl: liker.avatarUrl,
+    userid: liker.userId,
+    username: liker.username,
+    storeid: liker.storeId,
+    storename: liker.storename,
+    id: liker.userId ? liker.userId : liker.storeId,
+    name: liker.username ? liker.username : liker.storeName
+  })),
+  likestatus: ['like'],
+  storename: notification.storeName,
+  urlname: notification.urlName
+})
