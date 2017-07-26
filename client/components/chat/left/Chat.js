@@ -73,14 +73,6 @@ class Chat extends React.Component {
                     </small>
                 </div>
               }
-
-              {
-                mesId == 0?
-                <button style={{backgroundColor: '#cc3333', marginTop: 5, marginLeft: 60}} className="btn">
-                    <img src="./images/cancel.png" style={{width: 20, height: 20, backgroundColor: '#cc3333'}}/>
-                </button>
-                : undefined
-              }
           </div>
         )
     }

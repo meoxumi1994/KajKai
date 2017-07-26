@@ -10,8 +10,8 @@ const dashboard = (state = {
     mapp: {},
     current: {
         display: false,
-        id: ''
-    }
+    },
+    details: undefined
 }, action) => {
     switch (action.type) {
 
@@ -42,16 +42,46 @@ const dashboard = (state = {
               ...state,
               current: {
                   display: action.data.display,
-                  id: action.data.id
+              }
+          }
+
+      case 'ADMIN/DASHBOARD/INIT_DETAILS':
+          return {
+              ...state,
+              details: feedbackMap(undefined, action),
+              current: {
+                  ...state.current,
+                  display: true
               }
           }
 
       case 'ADMIN/DASHBOARD/UPDATE_FEEDBACK_USER':
           return {
               ...state,
+              details: feedbackMap(state.details, action)
+          }
+
+      case 'ADMIN/FEEDBACK/UPDATE_STATUS':
+
+          const unsolvedList = state.keyy.unsolved
+          const solvedList = state.keyy.solved
+
+          // console.log('before', unsolvedList, solvedList);
+
+          unsolvedList.splice(unsolvedList.indexOf(action.data.feedback.id), 1)
+          solvedList.push(action.data.feedback.id)
+          // console.log('after', unsolvedList, solvedList);
+
+          return {
+              ...state,
+              keyy: {
+                  ...state.keyy,
+                  unsolved: unsolvedList,
+                  solved: solvedList
+              },
               mapp: {
-                  ...state.mapp,
-                  [action.data.id]: feedbackMap(state.mapp[action.data.id], action)
+                ...state.mapp,
+                [action.data.feedback.id]: feedbackMap(state.mapp[action.data.feedback.id], action)
               }
           }
 

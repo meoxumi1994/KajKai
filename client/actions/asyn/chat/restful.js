@@ -24,7 +24,6 @@ export const getMessages = (mesId, offset, type) => dispatch => {
           switch (type) {
               case 'init':
               case 'load':
-                  dispatch(addChat(response, false))
                   dispatch(addChat(response, true))
                   dispatch(setCurrentChat(response.mesId))
                   break
@@ -48,10 +47,10 @@ export const getChatList = (offset) => dispatch => {
           console.log('\n[API] /getChatList ', response);
           const { data, lazyLoad } = response
           dispatch(initChatList(data, lazyLoad))
-          if (data.length > 0) {
-              dispatch(getMessages(data[0].mesId, Date.now(), 'init'))
-              dispatch(setCurrentChat(data[0].mesId))
-          }
+          // if (data.length > 0) {
+          //     dispatch(getMessages(data[0].mesId, Date.now(), 'init'))
+          //     dispatch(setCurrentChat(data[0].mesId))
+          // }
     })
 }
 

@@ -28,15 +28,15 @@ class Dashboard extends React.Component {
 
                 <div className="tab-content">
                     <div id="new" className="tab-pane fade in active">
-                        <FeedbacksContainer keyy={keyy.unsolved}/>
+                        <FeedbacksContainer myKeyy={keyy.unsolved}/>
                     </div>
 
                     <div id="solved" className="tab-pane fade">
-                        <FeedbacksContainer keyy={keyy.solved}/>
+                        <FeedbacksContainer myKeyy={keyy.solved}/>
                     </div>
 
                     <div id="all" className="tab-pane fade">
-                        <FeedbacksContainer keyy={keyy.all}/>
+                        <FeedbacksContainer myKeyy={keyy.all}/>
                     </div>
                 </div>
             </div>

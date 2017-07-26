@@ -6,7 +6,7 @@ const ChatLeft = ({multiChat}) => {
   return (
       <div>
           <HeadContainer/>
-          <ChatListContainer multiChat={multiChat}/>
+          <ChatListContainer/>
       </div>
   )
 }

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import Feedbacks from '~/components/admin/dashboard/Feedbacks'
+import { getFeedback } from '~/actions/asyn/admin/dashboard/restful'
 
 const mapStateToProps = (state, ownProps) => {
-    // console.log('--- STATE', state.inst.admin);
     const { mapp } = state.inst.admin.dashboard
     return {
         mapp
@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onDetailsFeedback: (id) => {
-        dispatch({type: 'ADMIN/DASHBOARD/CURRENT', data: {display: true, id: id}})
+        dispatch(getFeedback(id))
     }
 })
 

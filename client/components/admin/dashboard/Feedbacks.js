@@ -7,9 +7,10 @@ class Feedbacks extends React.Component {
     }
 
     render() {
-        const { keyy, mapp,
+        const { myKeyy, mapp,
                 onDetailsFeedback
               } = this.props
+
         return (
             <div>
                 <table className="table table-bordered">
@@ -20,15 +21,14 @@ class Feedbacks extends React.Component {
                          <th>Defendant</th>
                          <th>Content</th>
                          <th>Sellpost</th>
-                         <th>Time</th>
+                         <th>Last updated</th>
                          <th>Status</th>
                          <th>Details</th>
                       </tr>
                   </thead>
                   <tbody>
-                    <FeedbackDetailsContainer/>
                       {
-                      keyy.map((id, index) =>
+                      myKeyy.reverse().map((id, index) =>
                         {
                           const { reporter, defendant, status, time } = mapp[id]
                           return (
@@ -54,9 +54,9 @@ class Feedbacks extends React.Component {
                                <td>
                                     {
                                       status?
-                                      <p style={{color: 'green'}}>Solved</p>
+                                      <p style={{color: 'green'}}><b>Solved</b></p>
                                       :
-                                      <p style={{color: 'red'}}>Unsolved</p>
+                                      <p style={{color: 'red'}}><b>Unsolved</b></p>
                                     }
                                </td>
                                <td>
@@ -71,6 +71,7 @@ class Feedbacks extends React.Component {
                     }
                   </tbody>
                 </table>
+              <FeedbackDetailsContainer/>
             </div>
         )
     }
