@@ -12,7 +12,7 @@ export const createReplyNotification = (message) => {
     User.findOne({ id: replierId }, (err, user) => {
       if (user) {
         const replier = {
-          actorId: likerId,
+          actorId: replierId,
           name: user.username,
           avatarUrl: user.avatarUrl
         }
@@ -28,7 +28,7 @@ export const createReplyNotification = (message) => {
     BasicStore.findOne({ id: replierId }, (err, basicStore) => {
       if (basicStore) {
         const replier = {
-          actorId: likerId,
+          actorId: replierId,
           name: basicStore.storeName,
           avatarUrl: basicStore.avatarUrl
         }

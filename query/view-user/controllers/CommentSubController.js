@@ -12,7 +12,7 @@ export const createCommentNotification = (message) => {
     User.findOne({ id: commenterId }, (err, user) => {
       if (user) {
         const commenter = {
-          actorId: likerId,
+          actorId: commenterId,
           name: user.username,
           avatarUrl: user.avatarUrl
         }
@@ -28,7 +28,7 @@ export const createCommentNotification = (message) => {
     BasicStore.findOne({ id: commenterId }, (err, basicStore) => {
       if (basicStore) {
         const commenter = {
-          actorId: likerId,
+          actorId: commenterId,
           name: basicStore.storeName,
           avatarUrl: basicStore.avatarUrl
         }
