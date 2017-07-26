@@ -71,7 +71,7 @@ export const getFeedbacks = (offet, length, next) => {
                     username: fb.reporter.bannedByAdminName,
                 },
                 reason: fb.reporter.lastReason,
-                time: fb.reporter.time.getTime()
+                time: fb.reporter.time ? fb.reporter.time.getTime() : ''
             },
             content: fb.content
           },
@@ -88,7 +88,7 @@ export const getFeedbacks = (offet, length, next) => {
                     username: fb.reportee.bannedByAdminName,
                 },
                 reason: fb.reportee.lastReason,
-                time: fb.reportee.time.getTime()
+                time: fb.reportee.time ? fb.reportee.time.getTime() : ''
             },
             sellpostId: fb.sellpostId
           },
