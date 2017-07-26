@@ -17,7 +17,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    getMessages: (mesId, multiChat) => {
+    getMessages: (mesId) => {
         dispatch(getMessages(mesId, Date.now(), 'load'))
         dispatch({type: 'server/READ_CHAT', data: {mesId: mesId}})
     },

@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux'
 
 const center = (state = {
-    singleKey: [],
+    // singleKey: [],
     multipleKey: [],
     messagesMap: {},
 }, action) => {
     switch (action.type) {
 
         case 'client/ADD_MEMBER':
-            if (state.singleKey.indexOf(action.data.mesId) != -1) {
+            if (state.multipleKey.indexOf(action.data.mesId) != -1) {
                 return state
             }
             const addMember = {
                 ...state,
-                singleKey: [action.data.mesId],
+                // singleKey: [action.data.mesId],
                 multipleKey: [
                     ...state.multipleKey,
                     action.data.mesId
@@ -40,7 +40,7 @@ const center = (state = {
         case 'INIT_SINGLE_MESSAGES':
             const initSingleMessages = {
               ...state,
-              singleKey: [action.data.mesId],
+              // singleKey: [action.data.mesId],
               messagesMap: {
                   ...state.messagesMap,
                   [action.data.mesId]: action.data.messages.reverse()
@@ -99,7 +99,7 @@ const center = (state = {
             }
             const newChat = {
                 ...state,
-                singleKey: ['0'],
+                // singleKey: ['0'],
                 multipleKey: [
                     ...state.multipleKey,
                     '0'

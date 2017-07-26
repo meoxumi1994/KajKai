@@ -10,7 +10,7 @@ class ChatCenter extends React.Component {
     }
 
     render() {
-      const { mesId, styles, messagesMap,
+      const { mesId, messagesMap, multiChat,
               setCurrentChat
             } = this.props
 
@@ -23,18 +23,17 @@ class ChatCenter extends React.Component {
       return (
         <div key={mesId} style={{width: '100%', height: '100%'}} onClick={() => setCurrentChat(mesId)}>
             <ChatTopContainer
-                  mesId={mesId}
-                  styles={styles.top}/>
+                  mesId={mesId}/>
             <MessageListContainer
                   mesId={mesId}
-                  messagesMap={messagesMap}
-                  styles={styles.center}/>
+                  messagesMap={messagesMap}/>
             <ChatBottomContainer
-                  mesId={mesId}
-                  styles={styles.bottom}/>
+                  mesId={mesId}/>
         </div>
       )
     }
 }
+
+
 
 export default ChatCenter

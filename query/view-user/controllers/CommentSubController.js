@@ -1,6 +1,7 @@
 import { User, Notification, BasicStore, IDSellpostStore } from '../models'
 import { NotificationType } from '../enum'
 import { addIDCommentSellpost } from '../services/IDService'
+import { notify } from './NotificationPubController'
 
 export const createCommentNotification = (message) => {
   const { fCommentId: commentId, posterId: commenterId, sellPostId: sellpostId, time, content } = message.fComment
@@ -12,7 +13,7 @@ export const createCommentNotification = (message) => {
     User.findOne({ id: commenterId }, (err, user) => {
       if (user) {
         const commenter = {
-          actorId: likerId,
+          actorId: commenterId,
           name: user.username,
           avatarUrl: user.avatarUrl
         }
@@ -28,7 +29,7 @@ export const createCommentNotification = (message) => {
     BasicStore.findOne({ id: commenterId }, (err, basicStore) => {
       if (basicStore) {
         const commenter = {
-          actorId: likerId,
+          actorId: commenterId,
           name: basicStore.storeName,
           avatarUrl: basicStore.avatarUrl
         }
@@ -71,7 +72,7 @@ export const createCommentNotification = (message) => {
                         storeName: basicStore.storeName,
                         urlName: basicStore.urlName
                       })
-
+                      notify(notification)
                       notifications.push(notification)
                       user.notifications = notifications
                       user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1

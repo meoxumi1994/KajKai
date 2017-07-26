@@ -55,10 +55,10 @@ class User extends React.Component {
                                     {user.email}
                                   </td>
                                   <td>
-                                      {ban.status? 'Deactivated': 'Activated'}
+                                      <p style={{color: ban.status? 'red': 'green'}}><b>{ban.status? 'Deactivated': 'Activated'}</b></p>
                                   </td>
                                   <td>
-                                        <button onClick={() => onUserDetails(user.id)} className={ban.status?"btn btn-primary":"btn btn-danger"}>{ban.status?'Activated':'Deactivated'}</button>
+                                        <button onClick={() => onUserDetails(user.id)} className="btn btn-default">Details</button>
                                   </td>
                               </tr>
                             )

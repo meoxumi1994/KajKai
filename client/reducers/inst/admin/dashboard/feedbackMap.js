@@ -27,13 +27,26 @@ const feedbackMap = (state={
       time: '',
 }, action) => {
     switch (action.type) {
+
+      case 'ADMIN/DASHBOARD/INIT_DETAILS':
+          return {
+              ...state,
+              id: action.data.id,
+              reporter: action.data.reporter,
+              defendant: action.data.defendant,
+              decision: action.data.reason,
+              status: action.data.status,
+              time: action.data.time
+          }
+
+
       case 'ADMIN/DASHBOARD/INIT_FEEDBACK':
-          const { id, reporter, defendant, decision, status, time } = action.data
+          const { id, reporter, defendant, reason, status, time } = action.data
           return {
               id,
               reporter,
               defendant,
-              decision,
+              decision: reason,
               status,
               time
           }
@@ -63,6 +76,12 @@ const feedbackMap = (state={
             }
           }
 
+      case 'ADMIN/FEEDBACK/UPDATE_STATUS':
+          return {
+              ...state,
+              status: action.data.feedback.status,
+              time: action.data.admin.time
+          }
 
       default:
           return state

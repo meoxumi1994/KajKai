@@ -70,7 +70,7 @@ class UserDetails extends React.Component {
                   </table>
               </Modal.Body>
               <Modal.Footer>
-                  <button onClick={() => reason == ''? console.log('blank'): changePermission(!ban.status, auth.id, user.id, reason)} className={ban.status?"btn btn-primary":"btn btn-danger"}>{ban.status?'Activate':'Deactivate'}</button>
+                  <button onClick={() => reason == ''? console.log('blank'): changePermission(auth.id, reason, user.id, !ban.status)} className={ban.status?"btn btn-success":"btn btn-danger"}>{ban.status?'Activate':'Deactivate'}</button>
                   <button className="btn" onClick={() => close()}>Close</button>
               </Modal.Footer>
           </Modal>

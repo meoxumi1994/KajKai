@@ -55,7 +55,7 @@ GET /notification?offset=-1 {
     offset: ,
     notifications: [
         {
-            type: 'like|comment|leadercomment|createsellpost|editsellpost|createminorpost'
+            type: 'likesellpost|likeleadercomment|likecomment|comment|leadercomment|createsellpost|editsellpost|createminorpost'
             // tra ve nhieu nhat co the nhung thong tin o ben duoi
             id: , // day la cai id cua notification
             commentid: ,
@@ -1317,12 +1317,28 @@ GET /feedbacks?offset=0&length=10 {
     ]
 }
 
+
+
 POST /loginadmin {
   adminName: ,
   password:
 }, {
   status: 'success|failed'
   admin: {
-    adminName
+    id: '',
+    adminName: ''
   }
+}
+
+GET /admin {
+  authorization: 'FAILED', // hoặc bên duói
+  status: 'success|failed',
+  admin: {
+    id:
+    adminName:
+  }
+}
+
+GET /logout: {
+  status: 'success|failed',
 }

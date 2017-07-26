@@ -15,7 +15,7 @@ class ChatTop extends React.Component {
     render() {
       let conversator
       const {
-              mesId, styles,
+              mesId,
               chatListMap, currentChat, multipleKey,
               displayAddMember, displaySettings, close
             } = this.props
@@ -27,11 +27,6 @@ class ChatTop extends React.Component {
         <div style={currentChat.mesId == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
             <DisplayLabelContainer mesId={mesId} styles={styles}/>
             <div style={styles.iconGroupDiv}>
-                <button className="btn" style={styles.hiddenButton}>
-                    <Link to={"/chat"} >
-                        <img style={styles.hiddenImg} src="./images/blackChat.png"/>
-                    </Link>
-                </button>
                 <button className="btn" style={styles.button} onClick={() => displayAddMember(mesId)}>
                     <img style={styles.iconImg} src="/images/plus.ico"/>
                 </button>
@@ -48,6 +43,60 @@ class ChatTop extends React.Component {
             <SettingsContainer mesId={mesId}/>
         </div>
       )
+    }
+}
+
+const styles = {
+    currentMainDiv: {
+        backgroundColor: '#c90c0c',
+        color: 'white',
+        height: 30,
+        width: 320
+    },
+    mainDiv: {
+        backgroundColor: 'grey',
+        color: 'white',
+        height: 30,
+        width: 320
+    },
+    iconImg: {
+        width: 20,
+        height: 20,
+    },
+    hiddenImg: {
+        width: 20,
+        height: 20,
+    },
+    button: {
+        backgroundColor: '#c90c0c',
+        width: 25,
+        height: 25,
+        paddingTop: 2,
+        paddingLeft: 2
+    },
+    hiddenButton: {
+        backgroundColor: '#c90c0c',
+        width: 25,
+        height: 25,
+        paddingTop: 2,
+        paddingLeft: 2
+    },
+    iconGroupDiv: {
+        position: 'absolute',
+        right: 10,
+        top: 2
+    },
+    spliterHr: {
+        display: 'none',
+    },
+    displayLabel: {
+        fontSize: 15,
+        marginTop: 5,
+        marginLeft: 5
+    },
+    addMemberDiv: {
+        position: 'absolute',
+        bottom: -40,
     }
 }
 

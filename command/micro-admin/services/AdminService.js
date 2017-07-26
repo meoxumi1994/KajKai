@@ -13,12 +13,28 @@ export const getAdmin = (adminName, password, next) => {
   })
 }
 
+export const getAdminById = (id, next) => {
+  Admin.findById(id, (err, admin) => {
+    if (admin) {
+      next({
+        status: 'success',
+        admin: {
+          id: admin._id,
+          adminName: admin.adminName
+        }
+      })
+    } else {
+      next({ status: 'failed' })
+    }
+  })
+}
+
 export const getUsers = (offset, length, next) => {
   User.find({}, (err, users) => {
     if (users) {
       next({
         status: 'success',
-        data: offset >= users.length ? [] : users.slice(offset, length).map((user) => ({
+        data: offset >= users.length ? [] : users.splice(offset, length).map((user) => ({
           user: {
             id: user.id,
             username: user.username,
@@ -53,49 +69,10 @@ export const getUsers = (offset, length, next) => {
 export const getFeedbacks = (offset, length, next) => {
   Feedback.find({}, (err, feedbacks) => {
     if (feedbacks) {
-      let fbs = offset >= feedbacks.length ? [] : feedbacks.slice(offset, length)
+      let fbs = offset >= feedbacks.length ? [] : feedbacks.splice(offset, length)
       next({
         status: 'success',
-        data: fbs.map((fb) => ({
-          id: fb._id,
-          reporter: {
-            user: {
-              id: fb.reporter.id,
-              username: fb.reporter.username,
-              avatarUrl: fb.reporter.avatarUrl
-            },
-            ban: {
-                status: fb.reporter.banned ? (fb.reporter.banned != 0) : false,
-                admin: {
-                    id: fb.reporter.bannedById,
-                    username: fb.reporter.bannedByAdminName,
-                },
-                reason: fb.reporter.lastReason,
-                time: fb.reporter.time ? fb.reporter.time.getTime() : ''
-            },
-            content: fb.content
-          },
-          defendant: {
-            user: {
-              id: fb.reportee.id,
-              username: fb.reportee.username,
-              avatarUrl: fb.reportee.avatarUrl
-            },
-            ban: {
-                status: fb.reportee.banned ? (fb.reportee.banned != 0) : false,
-                admin: {
-                    id: fb.reportee.bannedById,
-                    username: fb.reportee.bannedByAdminName,
-                },
-                reason: fb.reportee.lastReason,
-                time: fb.reportee.time ? fb.reportee.time.getTime() : ''
-            },
-            sellpostId: fb.sellpostId
-          },
-          reason: fb.reason,
-          status: fb.status != 0,
-          time: fb.time.getTime()
-        }))
+        data: fbs.map((fb) => (getClientFormatFeedback(fb)))
       })
     } else {
       next({
@@ -120,6 +97,7 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
                 user.lastReason = admin.reason
 
                 user.save(() => {
+                  updateUserInFeedbacks(user)
                   if (reporter.status) {
                     addBanPub(user.id, admin.reason)
                     sendBanEmail(user.username, user.email, admin.reason)
@@ -147,6 +125,7 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
               user.lastReason = admin.reason
 
               user.save(() => {
+                updateUserInFeedbacks(user)
                 if (reportee.status) {
                   addBanPub(user.id, admin.reason)
                   sendBanEmail(user.username, user.email, admin.reason)
@@ -210,6 +189,80 @@ export const createFeedback = (reporterId, reporteeId, content, sellpostId, next
     }
   })
 }
+
+export const getFeedback = (id, next) => {
+  Feedback.findById(id, (err, feedback) => {
+    if (feedback) {
+      next({
+        status: 'success',
+        data: getClientFormatFeedback(feedback)
+      })
+    } else {
+      next({
+        status: 'nodata',
+        data: {}
+      })
+    }
+  })
+}
+
+const updateUserInFeedbacks = (user) => {
+  Feedback.find({}, (err, feedbacks) => {
+    if (feedbacks) {
+      for (let i = 0; i < feedbacks.length; i++) {
+        let feedback = feedbacks[i]
+        if (feedback.reporter.id == user.id) {
+          feedback.reporter = user
+        }
+        if (feedback.reportee.id == user.id) {
+          feedback.reportee = user
+        }
+        feedback.save(() => {})
+      }
+    }
+  })
+}
+
+const getClientFormatFeedback = (fb) => ({
+  id: fb._id,
+  reporter: {
+    user: {
+      id: fb.reporter.id,
+      username: fb.reporter.username,
+      avatarUrl: fb.reporter.avatarUrl
+    },
+    ban: {
+        status: fb.reporter.banned ? (fb.reporter.banned != 0) : false,
+        admin: {
+            id: fb.reporter.bannedById,
+            username: fb.reporter.bannedByAdminName,
+        },
+        reason: fb.reporter.lastReason,
+        time: fb.reporter.time ? fb.reporter.time.getTime() : ''
+    },
+    content: fb.content
+  },
+  defendant: {
+    user: {
+      id: fb.reportee.id,
+      username: fb.reportee.username,
+      avatarUrl: fb.reportee.avatarUrl
+    },
+    ban: {
+        status: fb.reportee.banned ? (fb.reportee.banned != 0) : false,
+        admin: {
+            id: fb.reportee.bannedById,
+            username: fb.reportee.bannedByAdminName,
+        },
+        reason: fb.reportee.lastReason,
+        time: fb.reportee.time ? fb.reportee.time.getTime() : ''
+    },
+    sellpostId: fb.sellpostId
+  },
+  reason: fb.reason,
+  status: fb.status != 0,
+  time: fb.time.getTime()
+})
 
 export const verifyAdminToken = (token) => {
     try {

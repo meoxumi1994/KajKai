@@ -1,6 +1,6 @@
 import React from 'react'
 import AdminLoginContainer from '~/containers/admin/login'
-import Home from '~/components/admin/home'
+import HomeContainer from '~/containers/admin/home'
 
 class Admin extends React.Component {
     constructor(props) {
@@ -9,15 +9,20 @@ class Admin extends React.Component {
 
     render() {
         const { auth } = this.props
+        console.log('auth', auth);
         if (auth.status) {
             return (
-                <Home/>
+                <HomeContainer/>
             )
         } else {
             return (
                 <AdminLoginContainer/>
             )
         }
+    }
+
+    componentDidMount() {
+        this.props.checkAuth()
     }
 }
 

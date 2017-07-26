@@ -77,7 +77,7 @@ export const getSellPostBasicInfo = (sellPost) => {
         id: getSellPostGlobalId(sellPost._id),
         likes: [],
         numlike: 0,
-        likestatus: ['like','love','haha'],
+        likestatus: ['like'],
         follows: [],
         follow: 0,
         leadercomments: []

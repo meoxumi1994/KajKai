@@ -21,7 +21,7 @@ export const sendUnBanEmail = (username, email, reason, next) => {
         to:   email,
         subject: 'KAJKAI BAN',
         text: 'Hi ' + username + '\n' +
-        'We would like to inform that now you can loin to your KAJKAI account normally! \n' +
+        'We would like to inform that now you can login to your KAJKAI account normally! \n' +
         'Reason: ' + reason + '\n' +
         'KAJKAI TEAM :D'
     });

@@ -1,5 +1,6 @@
 import { User, BasicStore, IDSellpostStore, IDCommentSellpost, IDReplyCommentSellpost, SellpostLiker, CommentLiker, ReplyLiker } from '../models'
 import { NotificationType } from '../enum'
+import { notify } from '../controllers/NotificationPubController'
 
 export const createLikeSellpostNotification = (sellpostId) => {
   SellpostLiker.findOne({ sellpostId }, (err, sellpostLiker) => {
@@ -47,6 +48,7 @@ export const createLikeSellpostNotification = (sellpostId) => {
                             user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
                           }
                         }
+                        notify(notification)
                         notifications.push(notification)
                         user.notifications = notifications
                         user.save(() => {})
@@ -113,6 +115,7 @@ export const createLikeCommentNotification = (commendId) => {
                                 user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
                               }
                             }
+                            notify(notification)
                             notifications.push(notification)
                             user.notifications = notifications
                             user.save(() => {})
@@ -182,6 +185,7 @@ export const createLikeReplyNotification = (replyId) => {
                                 user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
                               }
                             }
+                            notify(notification)
                             notifications.push(notification)
                             user.notifications = notifications
                             user.save(() => {})
@@ -200,3 +204,28 @@ export const createLikeReplyNotification = (replyId) => {
     }
   })
 }
+
+export const getClientFormatNotification = (notification) => ({
+  id: notification._id,
+  commentid: notification.replyId,
+  leadercommentid: notification.commentId,
+  sellpostid: notification.sellpostId,
+  ownerid: notification.actorId,
+  avatarUrl: notification.avatarUrl,
+  name: notification.name,
+  content: notification.content,
+  time: notification.time.getTime(),
+  numlike: notification.numberOfLike,
+  likes: notification.likers.map((liker) => ({
+    avatarUrl: liker.avatarUrl,
+    userid: liker.userId,
+    username: liker.username,
+    storeid: liker.storeId,
+    storename: liker.storename,
+    id: liker.userId ? liker.userId : liker.storeId,
+    name: liker.username ? liker.username : liker.storeName
+  })),
+  likestatus: ['like'],
+  storename: notification.storeName,
+  urlname: notification.urlName
+})

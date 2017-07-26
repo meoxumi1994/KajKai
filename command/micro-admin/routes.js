@@ -8,6 +8,20 @@ export default {
         method: 'loginAdmin'
       }
     },
+    '/admin': {
+      get: {
+        controller: 'AdminController',
+        middleware: [authAdmin()],
+        method: 'getAdminHandler'
+      }
+    },
+    '/logout': {
+      get: {
+        controller: 'AdminController',
+        middleware: [authAdmin()],
+        method: 'logoutHandler'
+      }
+    },
     '/users': {
       get: {
         controller: 'AdminController',
@@ -34,6 +48,13 @@ export default {
         controller: 'AdminController',
         middleware: [auth()],
         method: 'createFeedbackHandler'
+      }
+    },
+    '/feedback/:id': {
+      get: {
+        controller: 'AdminController',
+        middleware: [authAdmin()],
+        method: 'getFeedbackHandler'
       }
     }
 }

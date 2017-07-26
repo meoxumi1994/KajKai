@@ -2,6 +2,7 @@ import { User, Notification, BasicStore } from '../models'
 import { NotificationType } from '../enum'
 import { IDSellpostStore } from '../models'
 import { addIDSellpostStore, removeIDSellpostStore, removeIDCommentSellpost, removeIDReplySellpost } from '../services/IDService'
+import { notify } from './NotificationPubController'
 
 export const createSellpostCreatedNotification = (message) => {
   const { sellPostId: sellpostId, storeId, category, title, description } = message.sellpost
@@ -35,7 +36,7 @@ export const createSellpostCreatedNotification = (message) => {
                   storeName: basicStore.storeName,
                   urlName: basicStore.urlName
                 })
-
+                notify(notification)
                 notifications.push(notification)
                 user.notifications = notifications
                 user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
@@ -80,7 +81,7 @@ export const createSellpostUpdatedNotification = (message) => {
                   storeName: basicStore.storeName,
                   urlName: basicStore.urlName
                 })
-
+                notify(notification)
                 notifications.push(notification)
                 user.notifications = notifications
                 user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1

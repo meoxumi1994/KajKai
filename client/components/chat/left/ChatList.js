@@ -9,7 +9,7 @@ class ChatList extends React.Component {
         this.props.setUserId(this.props.userId)
     }
     render(){
-        const { chatListMap, chatListKey, currentChat, multiChat, unread } = this.props
+        const { chatListMap, chatListKey, currentChat, unread } = this.props
         const { createNewChat, getMessages } = this.props
 
         chatListKey.sort(function(a, b) {
@@ -23,7 +23,7 @@ class ChatList extends React.Component {
               {chatListKey.map(mesId =>
                 {
                   return (
-                      <ul className="nav nav-tabs" key={mesId} onClick={() => getMessages(mesId, multiChat)}
+                      <ul className="nav nav-tabs" key={mesId} onClick={() => getMessages(mesId)}
                       style={{backgroundColor: getTabColor(mesId, currentChat, unread)}}>
                         <div className="container-fluid">
                             <ChatContainer mesId={mesId}/>

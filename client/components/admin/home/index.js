@@ -8,10 +8,18 @@ class Home extends React.Component {
     }
 
     render() {
+
+        const { logout } = this.props
+
         return (
             <div className="container" style={{width: '100%', height: '100%', backgroundColor: 'white', zIndex: 100}}>
-                <div style={{width: '15%', height: '100%', position: 'fixed', left: 0}}>
-                    <div style={styles.left.leftHeader}><h4>KAJKAI ADMINSTRATION</h4></div>
+                <div style={{width: '15%', height: '100%', position: 'fixed', left: 0, backgroundColor: 'white'}}>
+                    <div style={styles.left.leftHeader}>
+                        <div style={{marginTop: 20}}>
+                          <img src="./images-admin/kajkai.png" style={{width: 40, height: 40, marginRight: 10}}/>
+                          <label style={{fontSize: 20}}>KAJKAI ADMINSTRATION</label>
+                        </div>
+                    </div>
                     <div style={{width: '100%', height: '100%', borderStyle: 'solid', borderWidth: 1}}>
                         <ul className="nav nav-tabs nav-pills" style={{width: '100%', height: '100%'}}>
                             <li style={styles.left.ul} className="active">
@@ -23,18 +31,35 @@ class Home extends React.Component {
                         </ul>
                     </div>
                 </div>
-                <div style={{width: '85%', height: '100%', position: 'fixed', left: '15%'}}>
+                <div style={{width: '85%', height: '100%', position: 'fixed', left: '15%', backgroundColor: 'white'}}>
                     <div className="tab-content" style={{width: '100%', height: '100%'}}>
                           <div id="dashboard" className="tab-pane fade in active" style={styles.center.mainDiv}>
-                              <div style={styles.center.header}><h4>Dashboard</h4></div>
+                              <div style={styles.center.header}>
+                                  <div style={{marginTop: 18}}>
+                                      <img src="./images-admin/details.png" style={{width: 35, height: 35, marginRight: 10}}/>
+                                      <label style={{fontSize: 20, marginTop: 10}}> DASHBOARD </label>
+                                      <button style={{float: 'right', marginRight: 30}} className="btn btn-default" onClick={() => logout()}>
+                                            Logout
+                                      </button>
+                                  </div>
+                              </div>
                               <DashboardContainer/>
                           </div>
                           <div id="user" className="tab-pane fade" style={styles.center.mainDiv}>
-                              <div style={styles.center.header}><h4>User</h4></div>
+                              <div style={styles.center.header}>
+                                  <div style={{marginTop: 18}}>
+                                      <img src="./images-admin/avatar.png" style={{width: 40, height: 40, marginRight: 10}}/>
+                                      <label style={{fontSize: 20, marginTop: 10}}> USER </label>
+                                      <button style={{float: 'right', marginRight: 30}} className="btn btn-default" onClick={() => logout()}>
+                                            Logout
+                                      </button>
+                                  </div>
+                              </div>
                               <UserContainer/>
                           </div>
                     </div>
                 </div>
+
             </div>
         )
     }
@@ -47,10 +72,11 @@ const styles = {
         },
         leftHeader: {
             width: '100%',
-            height: '5%',
+            height: '8%',
             textAlign: 'center',
             borderStyle: 'solid',
-            borderWidth: 1
+            borderWidth: 0.5,
+            borderColor: 'grey'
         },
     },
     center: {
@@ -60,10 +86,11 @@ const styles = {
         },
         header: {
             width: '100%',
-            height: '5%',
+            height: '8%',
             textAlign: 'center',
             borderStyle: 'solid',
-            borderWidth: 1,
+            borderWidth: 0.5,
+            borderColor: 'grey'
         }
     }
 }

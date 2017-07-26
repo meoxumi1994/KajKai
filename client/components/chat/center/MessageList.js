@@ -22,7 +22,7 @@ class MessageList extends React.Component {
     }
 
     render() {
-        const { mesId, messagesMap, styles,
+        const { mesId, messagesMap,
                 user, chatListMap,
                 getMessages
               } = this.props
@@ -59,6 +59,72 @@ class MessageList extends React.Component {
           </div>
         )
     }
+}
+
+const styles = {
+    mainDiv: {
+      width: 320,
+      height: 300,
+      overflowY: 'scroll'
+    },
+    rightMsg: {
+        imgDiv: {
+            float: 'right',
+        },
+        imgIcon: {
+            borderRadius: 50,
+            borderWidth: 1,
+            width: 40,
+            height: 40
+        },
+        text: {
+            marginRight: 51,
+            marginTop: 10,
+            textAlign: 'left',
+        },
+        bounds: {
+            marginTop: 5,
+            backgroundColor: '#cc3333',
+            color: 'white',
+            width: 200,
+            paddingTop: 10,
+            paddingRight: 10,
+            paddingBottom: 10,
+            paddingLeft: 10,
+            borderRadius: 10,
+            float: 'right',
+        },
+        senderDiv: {
+            color: 'grey',
+            display: 'none'
+        }
+    },
+    leftMsg: {
+        imgDiv: {
+            float: 'left',
+        },
+        imgIcon: {
+            borderRadius: 50,
+            borderWidth: 1,
+            width: 40,
+            height: 40
+        },
+        text: {
+            marginLeft: 15,
+        },
+        bounds: {
+            backgroundColor: '#e0e0e0',
+            width: 200,
+            paddingTop: 10,
+            paddingRight: 10,
+            paddingBottom: 10,
+            paddingLeft: 10,
+            borderRadius: 10
+        },
+        senderDiv: {
+          color: 'grey'
+        }
+    },
 }
 
 export default MessageList

@@ -4,7 +4,6 @@ import { getFeedbacks } from '~/actions/asyn/admin/dashboard/restful'
 
 const mapStateToProps = (state, ownProps) => {
     const { keyy, mapp } = state.inst.admin.dashboard
-    console.log('state', state.inst.admin.dashboard);
     return {
         keyy,
         mapp
