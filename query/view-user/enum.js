@@ -27,7 +27,7 @@ export const PrivacyOthers = {
 export const NotificationType = {
   LIKESELLPOST: 'likesellpost',
   LIKECOMMENT: 'likeleadercomment',
-  LIKEREPLY: 'likereply',
+  LIKEREPLY: 'likecomment',
   REPLY: 'comment',
   COMMENT: 'leadercomment',
   SELLPOSTCreated: 'createsellpost',
