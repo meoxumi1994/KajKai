@@ -9,7 +9,6 @@ class Admin extends React.Component {
 
     render() {
         const { auth } = this.props
-        console.log('auth', auth);
         if (auth.status) {
             return (
                 <HomeContainer/>

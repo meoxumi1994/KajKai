@@ -12,7 +12,7 @@ class Feedbacks extends React.Component {
               } = this.props
 
         return (
-            <div>
+            <div style={{overflowY: 'scroll', height: 850}}>
                 <table className="table table-bordered">
                   <thead className="thead-default">
                       <tr>

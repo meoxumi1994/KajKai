@@ -34,8 +34,8 @@ class FeedbackDetails extends React.Component {
                                   {reporter.user.username}
                                   {
                                     status?
-                                    <p style={{color: reporterStatus? 'red': 'green', float: 'right'}}>
-                                        {reporterStatus? 'Deactivated': 'Activated'}
+                                    <p style={{color: reporter.ban.status? 'red': 'green', float: 'right'}}>
+                                        {reporter.ban.status? 'Deactivated': 'Activated'}
                                     </p>
                                     :
                                     <CustomizedToggle status={reporter.ban.status} changePermission={changePermission} type="reporter" id={id}/>
