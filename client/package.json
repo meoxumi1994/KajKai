@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "body-parser": "^1.17.2",
+    "bootstrap-toggle": "^2.2.2",
     "bootstrap-vertical-tabs": "^1.2.2",
     "classnames": "^2.2.5",
     "cors": "^2.8.3",
@@ -23,6 +24,7 @@
     "react-input-autosize": "^1.1.4",
     "react-tag-input": "4.7.2",
     "react-tagsinput": "^3.17.0",
+    "react-toggle-button": "^2.1.0",
     "redux-devtools-extension": "^2.13.2",
     "socket.io": "^2.0.3",
     "spdy": "^3.4.4"

@@ -14,12 +14,12 @@ class EditSellPost extends React.Component {
     }
     render(){
         const {
-            title, showModal, close, height,
+            title, showModal, close, height, id,
             avatarUrl, ship, storename, category,
             description, time,
             postrows_order, onChange,
             addPostRow, onChangePostRow,
-            onCreateSellPost,
+            onCreateSellPost, onEditSellPost, isCreate
         } = this.props
         return (
             <Modal show={showModal} bsSize="sm" onHide={() => close()}>
@@ -99,16 +99,24 @@ class EditSellPost extends React.Component {
                         <div style={{ position: 'absolute', width: '100%', bottom: 0, paddingBottom: 10 }}>
                             <hr style={{ margin: 0 }}/>
                             <div style={{ marginTop: 10, marginRight: 10 }}>
+                                {!isCreate ?
+                                    <div className="btn btn-default btn-sm"
+                                        onClick={() => onEditSellPost()}
+                                        style={{
+                                        float: 'right', backgroundColor: '#BD081C', borderWidth: 0, color: 'white'}}>
+                                        Edit SellPost
+                                    </div>
+                                :   <div className="btn btn-default btn-sm"
+                                        onClick={() => onCreateSellPost()}
+                                        style={{
+                                        float: 'right', backgroundColor: '#BD081C', borderWidth: 0, color: 'white'}}>
+                                        Create SellPost
+                                    </div>
+                                }
                                 <div className="btn btn-default btn-sm"
                                     onClick={() => close()}
-                                    style={{ float: 'right'}}>
+                                    style={{ float: 'right', marginRight: 10 }}>
                                     Close
-                                </div>
-                                <div className="btn btn-default btn-sm"
-                                    onClick={() => onCreateSellPost()}
-                                    style={{
-                                    float: 'right', backgroundColor: '#BD081C', marginRight: 10, borderWidth: 0, color: 'white'}}>
-                                    Create SellPost
                                 </div>
                             </div>
                         </div>

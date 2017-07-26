@@ -9,6 +9,7 @@ const editsellpost = (state = {
         case 'INST_STORE_PAGE_CHANGE':
             if(action.key == 'showEditSellPost'){
                 return {
+                    isCreate: true,
                     category: '',
                     description: '',
                     status: '',
@@ -26,7 +27,9 @@ const editsellpost = (state = {
                 [action.key] : action.value,
             }
         case 'INST_ENTITY_CREATE_EDIT_SELL_POST':
-            return action.sellpost
+            return {...action.sellpost,
+                isCreate: false,
+            }
         default:
             return state
     }

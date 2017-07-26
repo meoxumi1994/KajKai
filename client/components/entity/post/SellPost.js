@@ -27,6 +27,7 @@ class SellPost extends React.Component {
     render(){
         const { urlname, isOwner, ship, status, category, description, storename, avatarUrl, time,
             numfollow, beFollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
+            onDeleteSellpost,
             onLike, postrows, postrows_order, clicksetting, id, onFollow, feedBack, showEditSellPost,
         } = this.props
         if(!likes)
@@ -60,8 +61,8 @@ class SellPost extends React.Component {
                         {clicksetting &&
                             <DropDown
                                 contents={isOwner?
-                                    ['Feed Back','Report post','Block store'] :
-                                    ['Feed Back','Edit SellPost','Report post','Block store']}
+                                    ['Feed Back'] :
+                                    ['Feed Back','Edit SellPost','Delete SellPost']}
                                 onClick={(index) => {
                                     if(index==0){
                                         feedBack()
@@ -69,6 +70,9 @@ class SellPost extends React.Component {
                                     }
                                     if(index==1){
                                         showEditSellPost(this.props)
+                                    }
+                                    if(index==2){
+                                        onDeleteSellpost()
                                     }
                                 }}
                                 width={100}
