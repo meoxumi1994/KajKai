@@ -21,7 +21,7 @@ export const loginAdmin = () => (req, res) => {
   })
 }
 
-export const getAdminHandler = () = (req, res) => {
+export const getAdminHandler = () => (req, res) => {
   const requestedId = req.decoded._id
   getAdminById(requestedId, (admin) => {
     res.json(admin)
