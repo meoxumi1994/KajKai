@@ -16,7 +16,7 @@ const corsOptions = {
 // app.use(compression())
 // app.use(cors(corsOptions))
 app.use((req, res, next) => {
-  const allowedOrigins = ['http://localhost:3000', 'https://admin.kajkai.com']
+  const allowedOrigins = ['http://localhost:3000', 'https://admin.kajkai.com', 'https://www.kajkai.com']
   const origin = req.headers.origin
   if(allowedOrigins.indexOf(origin) > -1) {
        res.set('Access-Control-Allow-Origin', origin)
