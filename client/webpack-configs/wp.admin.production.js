@@ -51,7 +51,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: '../index.html',
-      template: './template.html'
+      template: './template-admin.html'
     }),
     new webpack.optimize.CommonsChunkPlugin({
     //   name: 'vendor',
