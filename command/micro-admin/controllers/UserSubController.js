@@ -1,4 +1,4 @@
-import { User, BasicUser } from '../models'
+import { User } from '../models'
 
 export const createUser = (message) => {
   const { id, username, email, avatarUrl } = message.user
@@ -9,16 +9,6 @@ export const createUser = (message) => {
   if (avatarUrl) user.avatarUrl = avatarUrl
 
   user.save(() => {})
-
-  const basicUser = new BasicUser({
-    id
-  })
-
-  if (username) basicUser.username = username
-  if (email) basicUser.email = email
-  if (avatarUrl) basicUser.avatarUrl = avatarUrl
-
-  basicUser.save(() => {})
 }
 
 export const updateUser = (message) => {
@@ -29,5 +19,4 @@ export const updateUser = (message) => {
   if (avatarUrl) user.avatarUrl = avatarUrl
 
   User.findOneAndUpdate({ id }, user, () => {})
-  BasicUser.findOneAndUpdate({ id }, user, () => {})
 }

@@ -1,15 +1,13 @@
 import mongoose from '../datasource'
 import BasicStoreSchema from './BasicStore'
-import BasicUserSchema from './BasicUser'
+import UserSchema from './BasicUser'
 
 const FeedbackSchema = new mongoose.Schema({
-  reporter: {type: BasicUserSchema},
+  reporter: {type: UserSchema},
   content: {type: String},
-  reportee: {type: BasicUserSchema},
+  reportee: {type: UserSchema},
   sellpostId: {type: String},
   status: {type: Number},
-  bannedById: {type: String},
-  bannedByAdminName: {type: String},
   reason: {type: String},
   time: {type: Date}
 })

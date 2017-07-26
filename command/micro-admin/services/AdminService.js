@@ -1,4 +1,4 @@
-import { Admin, BasicUser, User, Feedback } from '../models'
+import { Admin, User, Feedback } from '../models'
 import { sendBanEmail, sendUnBanEmail } from './EmailService'
 import { addBanPub, removeBanPub } from './BanPubService'
 import jwt from 'jsonwebtoken'
@@ -64,6 +64,15 @@ export const getFeedbacks = (offet, length, next) => {
               username: fb.reporter.username,
               avatarUrl: fb.reporter.avatarUrl
             },
+            ban: {
+                status: fb.reporter.banned && fb.reporter.banned != 0,
+                admin: {
+                    id: fb.reporter.bannedById,
+                    username: fb.reporter.bannedByAdminName,
+                },
+                reason: fb.reporter.lastReason,
+                time: fb.reporter.time.getTime()
+            },
             content: fb.content
           },
           defendant: {
@@ -72,16 +81,18 @@ export const getFeedbacks = (offet, length, next) => {
               username: fb.reportee.username,
               avatarUrl: fb.reportee.avatarUrl
             },
+            ban: {
+                status: fb.reportee.banned && fb.reportee.banned != 0,
+                admin: {
+                    id: fb.reportee.bannedById,
+                    username: fb.reportee.bannedByAdminName,
+                },
+                reason: fb.reportee.lastReason,
+                time: fb.reportee.time.getTime()
+            },
             sellpostId: fb.sellpostId
           },
-          ban: {
-            admin: {
-              id: fb.bannedById,
-              username: fb.bannedByAdminName
-            },
-            status: fb.bannedBy != null,
-            reason: fb.reason
-          },
+          reason: fb.reason,
           status: fb.status != 0,
           time: fb.time.getTime()
         }))
@@ -175,23 +186,15 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
   })
 }
 
-export const createFeedback = (userId, ownerId, content, sellpostId, next) => {
-  BasicUser.findOne({ id: userId }, (err, reporter) => {
+export const createFeedback = (reporterId, reporteeId, content, sellpostId, next) => {
+  User.findOne({ id: reporterId }, (err, reporter) => {
     if (reporter) {
-      BasicUser.findOne({ id: ownerId }, (err, reportee) => {
+      User.findOne({ id: reporteeId }, (err, reportee) => {
         if (reportee) {
           const feedback = new Feedback({
-            reporter: {
-              id: reporter.id,
-              username: reporter.username,
-              avatarUrl: reporter.avatarUrl
-            },
+            reporter,
             content,
-            reportee: {
-              id: reportee.id,
-              username: reportee.username,
-              avatarUrl: reportee.avatarUrl
-            },
+            reportee,
             sellpostId,
             status: 0,
             time: Date.now()
