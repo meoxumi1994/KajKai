@@ -1,4 +1,4 @@
-import { getAdmin, getAdminToken, getUsers, getFeedbacks, banUsers, createFeedback } from '../services/AdminService'
+import { getAdmin, getAdminToken, getUsers, getFeedbacks, banUsers, createFeedback, getFeedback } from '../services/AdminService'
 import { getOwnerFromPostId } from './AdminPubController'
 
 export const loginAdmin = () => (req, res) => {
@@ -76,6 +76,11 @@ export const createFeedbackHandler = () => (req, res) => {
       })
     }
   })
+}
 
-
+export const getFeedbackHandler = () => (req, res) => {
+  const { id } = req.query
+  getFeedback(id, (feedback) => {
+    res.json(feedback)
+  })
 }
