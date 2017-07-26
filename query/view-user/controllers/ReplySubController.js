@@ -1,6 +1,7 @@
 import { User, Notification, BasicStore, IDSellpostStore } from '../models'
 import { NotificationType } from '../enum'
 import { addIDReplyCommentSellpost } from '../services/IDService'
+import { notify } from './NotificationPubController'
 
 export const createReplyNotification = (message) => {
   const { parentCommentId: commentId, sCommentId: replyId, posterId: replierId, sellPostId: sellpostId, minorPostId: minorpostId, content, time } = message.sComment
@@ -72,7 +73,7 @@ export const createReplyNotification = (message) => {
                       storeName: basicStore.storeName,
                       urlName: basicStore.urlName
                     })
-
+                    notify(notification)
                     notifications.push(notification)
                     user.notifications = notifications
                     user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
