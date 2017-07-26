@@ -91,3 +91,8 @@ export const getFeedbackHandler = () => (req, res) => {
     res.json(feedback)
   })
 }
+
+export const logoutHandler = () => (req, res) => {
+  res.cookie('token', 'invalid')
+  res.json({ status: 'success' })
+}
