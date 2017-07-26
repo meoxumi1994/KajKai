@@ -18,6 +18,7 @@ import product from './product'
 import phone from './phone'
 import thumnail from './thumnail'
 import notification from './notification'
+import groupnotification from './groupnotification'
 
 const entity = combineReducers({
     modal,
@@ -38,6 +39,7 @@ const entity = combineReducers({
     groupcomment,
     leadercomment,
     notification,
+    groupnotification,
 })
 
 export default entity

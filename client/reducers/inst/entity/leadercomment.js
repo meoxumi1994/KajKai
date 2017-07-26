@@ -29,8 +29,9 @@ const leadercomment = (state = {
                 [action.id] : {
                     ...state[action.id],
                     comments : [
-                        ...state[action.id].comments,
+                        state[action.id].comments[0],
                         ...action.comments,
+                        ...state[action.id].comments.slice(1,state[action.id].comments.length),
                     ]
                 }
             }

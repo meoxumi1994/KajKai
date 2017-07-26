@@ -5,6 +5,7 @@ import { DropdownButton, MenuItem } from 'react-bootstrap'
 import DropDownSettingBar from '~/containers/entity/DropDownSettingBar'
 import ChatLeftContainer from '~/containers/chat/left'
 import AutoCompleteContainer from '~/containers/mapp/AutoCompleteContainer'
+import GroupNotification from '~/containers/entity/GroupNotification'
 
 const HandlerUser = ({ LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
     id, isloading, isusername, avatarUrl, g, onLogoutClick, onLoadChatClick, setMultiChat, clicksetting, clickSetting, unreadChat, resetChatQuantity}) => {
@@ -58,6 +59,7 @@ const HandlerUser = ({ LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
                             imgWidth: 20,
                             imgHeight: 20,
                         }} number="12"/>
+                    <GroupNotification/>
                 </div>
 
                 <div className="dropdown" style={{ marginRight: 10, float: 'right'}} onClick={() => resetChatQuantity()}>

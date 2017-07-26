@@ -56,7 +56,6 @@ class Page extends React.Component {
                                             {CREATE_SELLPOST}
                                         </div>
                                         <EditSellPost
-                                            title={CREATE_SELLPOST}
                                             showModal={showEditSellPost}
                                             close={() => onChange('showEditSellPost', false)}/>
                                     </div>

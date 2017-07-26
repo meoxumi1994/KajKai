@@ -55,15 +55,22 @@ const mapDispatchToProps = (dispatch, { id }) => ({
     },
     feedBack: () => {
         dispatch({ type: 'FEED_BACK_ING'})
+    },
+    onShowEditSellPost: (sellpost) => {
+        dispatch({ type: 'INST_STORE_PAGE_CHANGE', key: 'showEditSellPost', value: true })
+        dispatch({ type: 'INST_ENTITY_CREATE_EDIT_SELL_POST', sellpost: sellpost })
     }
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { ...anotherState } = stateProps
-    const { ...anotherDispatch } = dispatchProps
+    const { category ,description ,status, ship , postrows_order , postrows, ...anotherState } = stateProps
+    const { onShowEditSellPost, ...anotherDispatch } = dispatchProps
     return({
+        showEditSellPost: () => {
+            onShowEditSellPost({ category ,description ,status, ship , postrows_order, postrows })
+        },
         ...ownProps,
-        ...anotherState,
+        ...stateProps,
         ...anotherDispatch,
     })
 }

@@ -53,6 +53,15 @@ const editpostrow = (state = {}, action) => {
                     [action.key] : action.value
                 }
             }
+        case 'INST_ENTITY_CREATE_EDIT_SELL_POST':
+            let newstate = state
+            const postrows = action.sellpost.postrows
+            postrows.map((item) => {
+                newstate = {...newstate,
+                    [item.id] : item
+                }
+            })
+            return newstate
         default:
             return state
     }

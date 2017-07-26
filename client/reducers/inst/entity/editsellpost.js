@@ -1,38 +1,3 @@
-const addPostRow = (item) => {
-    switch (item) {
-        case 'title':
-        case 'normal':
-            return {
-                type: item,
-                content: '',
-            };
-        case 'textimage':
-        case 'imagetext':
-            return {
-                type: item,
-                content: '',
-                images: [],
-            };
-        case 'product':
-        case 'listproduct':
-            return {
-                type: item,
-                products: [{
-                    id: 'product001',
-                    list: [''],
-                }],
-                products_order: ['product001'],
-            };
-        case 'groupimage':
-            return {
-                type: item,
-                images: [],
-            };
-        default:
-            return;
-    }
-}
-
 const editsellpost = (state = {
     category: '',
     description: '',
@@ -60,6 +25,8 @@ const editsellpost = (state = {
             return {...state,
                 [action.key] : action.value,
             }
+        case 'INST_ENTITY_CREATE_EDIT_SELL_POST':
+            return action.sellpost
         default:
             return state
     }

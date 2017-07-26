@@ -2,13 +2,13 @@ import React from 'react'
 
 import Notification from '~/containers/entity/Notification'
 
-class Notification extends React.Component {
+class GroupNotification extends React.Component {
     constructor(props){
         super(props)
     }
     render(){
         const { onClick, notifications } = this.props
-        console.log('notifications', notification)
+        console.log(notifications)
         return(
             <div>
                 {notifications.map((item) =>
@@ -17,6 +17,9 @@ class Notification extends React.Component {
             </div>
         )
     }
+    componentDidMount(){
+        this.props.onGetNotification()
+    }
 }
 
-export default Notification
+export default GroupNotification

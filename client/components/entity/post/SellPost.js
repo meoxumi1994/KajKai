@@ -27,7 +27,7 @@ class SellPost extends React.Component {
     render(){
         const { urlname, isOwner, ship, status, category, description, storename, avatarUrl, time,
             numfollow, beFollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
-            onLike, postrows, postrows_order, clicksetting, id, onFollow, feedBack,
+            onLike, postrows, postrows_order, clicksetting, id, onFollow, feedBack, showEditSellPost,
         } = this.props
         if(!likes)
             return (
@@ -47,7 +47,6 @@ class SellPost extends React.Component {
                         className="btn" style={{
                         float: 'right',
                         padding: 0}}>
-
                         <span
                             onMouseOver={() => this.setState({ hoversetting: true })}
                             onMouseLeave={() => this.setState({ hoversetting: false })}
@@ -60,11 +59,16 @@ class SellPost extends React.Component {
                         />
                         {clicksetting &&
                             <DropDown
-                                contents={['Feed Back','Report post','Block store']}
+                                contents={isOwner?
+                                    ['Feed Back','Report post','Block store'] :
+                                    ['Feed Back','Edit SellPost','Report post','Block store']}
                                 onClick={(index) => {
                                     if(index==0){
                                         feedBack()
                                         this.setState({ showFeedBack: true })
+                                    }
+                                    if(index==1){
+                                        showEditSellPost(this.props)
                                     }
                                 }}
                                 width={100}
