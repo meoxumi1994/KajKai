@@ -47,7 +47,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
   if (!comments) {
     return {
       status: 'success',
-      offset,
+      offsetleadercomments: offset,
       leadercomments: []
     }
   }
@@ -109,7 +109,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
 
   return {
     status: 'success',
-    offset: cOffset,
+    offsetleadercomments: cOffset,
     leadercomments: mComments
   }
 }
