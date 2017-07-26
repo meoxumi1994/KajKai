@@ -9,7 +9,7 @@ export const createSellpostCreatedNotification = (message) => {
   addIDSellpostStore(sellpostId, storeId)
 
   BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-    if (store) {
+    if (basicStore) {
       User.find({}, (err, users) => {
         if (users) {
           for (let i = 0; i < users.length; i++) {
@@ -54,7 +54,7 @@ export const createSellpostUpdatedNotification = (message) => {
   const { sellPostId: sellpostId, storeId, category, title, description } = message.sellpost
 
   BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-    if (store) {
+    if (basicStore) {
       User.find({}, (err, users) => {
         if (users) {
           for (let i = 0; i < users.length; i++) {
