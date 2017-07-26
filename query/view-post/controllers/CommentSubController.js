@@ -121,5 +121,5 @@ export const createComment = (message) => {
         }
       })
     }
-  }
+  })
 }

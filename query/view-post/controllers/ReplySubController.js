@@ -90,5 +90,5 @@ export const createReply = (message) => {
         }
       })
     }
-  }
+  })
 }
