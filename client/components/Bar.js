@@ -74,7 +74,7 @@ const HandlerUser = ({ LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
                             number={unreadChat.quantity}/>
                     </div>
                     <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
-                        <ChatLeftContainer multiChat={true}/>
+                        <ChatLeftContainer/>
                     </ul>
                 </div>
             </div>

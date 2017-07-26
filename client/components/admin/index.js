@@ -9,6 +9,7 @@ class Admin extends React.Component {
 
     render() {
         const { auth } = this.props
+        
         if (auth.status) {
             return (
                 <Home/>

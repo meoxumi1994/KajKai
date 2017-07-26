@@ -5,26 +5,61 @@ export const getUsers = () => dispatch => {
 
     }, {}
     ).then((response) => {
-          const { status, data } = response
-          if (status) {
-              dispatch({type: 'ADMIN/USER/INIT_USERS', data: data})
+          if (response != undefined && response.status == 'success') {
+              dispatch({type: 'ADMIN/USER/INIT_USERS', data: response.data})
           }
     })
 }
 
-export const banUser = (status, adminId, defendantId, reason) => dispatch => {
+export const banUser = (type, adminId, reason, feedbackId, feedbackStatus, reporter, defendant) => dispatch => {
     flet('/ban',{
-        status,
-        adminId,
-        defendantId,
-        reason,
-        time: Date.now()
+        admin: {
+            id: adminId,
+            reason: reason,
+            time: Date.now()
+        },
+        feedback: {
+            id: feedbackId,
+            status: feedbackStatus
+        },
+        reporter: reporter,
+        defendant: defendant
     })
     .then((response) => {
-          // console.log('response', response);
-          if (response.result == "success") {
-              dispatch({type: 'ADMIN/USER/BAN', data: {adminId: response.adminId, defendantId: response.defendantId, reason: response.reason, status: response.status, time: response.time, reason: response.reason}})
-              dispatch({type: 'ADMIN/USER/DISPLAY', data: { display: false, id: '' }})
+          console.log('[API] /banUser', response);
+          if (response != undefined && response.status == "success") {
+                const { admin, feedback, reporter, defendant} = response.data
+
+                if (type == 'user') {
+                    dispatch({type: 'ADMIN/USER/DISPLAY', data: { display: false, id: '' }})
+                } else {
+                    dispatch({
+                      type: 'ADMIN/USER/BAN',
+                      data: {
+                          adminId: admin.id,
+                          defendantId: reporter.id,
+                          status: reporter.status,
+                          reason: admin.reason,
+                          time: admin.time,
+                      }})
+                      dispatch({
+                        type: 'ADMIN/FEEDBACK/UPDATE_STATUS',
+                        data: {
+                            feedback: feedback,
+                            admin: admin
+                        }
+                      })
+                }
+
+                dispatch({
+                  type: 'ADMIN/USER/BAN',
+                  data: {
+                      adminId: admin.id,
+                      defendantId: defendant.id,
+                      status: defendant.status,
+                      reason: admin.reason,
+                      time: admin.time,
+                  }})
           }
     })
 }

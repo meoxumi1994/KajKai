@@ -48,5 +48,16 @@ const IconPopOver = (
   </Popover>
 )
 
+const styles = {
+  inputForm: {
+    width: 320
+  },
+  inputDiv: {
+    width: '100%'
+  },
+  iconButton: {
+    fontSize: 13
+  }
+}
 
 export default ChatBottom

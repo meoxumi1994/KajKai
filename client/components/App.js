@@ -101,7 +101,7 @@ class App extends React.Component {
         const path = this.props.location.pathname;
         const { width, height, username, onScroll } = this.props
         const { messagesKey, messagesMap, showProgress, closeProgress } = this.props
-        const { chat, styles } = this.props
+        const { chat } = this.props
         const { multipleKey  } = chat
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
@@ -118,7 +118,7 @@ class App extends React.Component {
                           </div>
                     }
                     <div style={{ paddingTop: 48, marginRight: (width > 1100 + 280)? 280: 0 }}>
-                        {(path == "/" || path == "/chat" || path == "/admin" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
+                        {(path == "/" || path == "/admin" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
                               <div style={{ height: height - 48, width: Math.max(1100, width) }}>
                                   <Route exact path="/" component={Home}/>
@@ -126,7 +126,6 @@ class App extends React.Component {
                                   <Route path="/register" component={UserLoginRegister}/>
                                   <Route path="/profile" component={Profile}/>
                                   <Route path="/registerstore" component={RegisterStore}/>
-                                  <Route path="/chat" component={Chat}/>
                                   <Route path="/admin" component={Admin}/>
                               </div>
                               {
@@ -145,7 +144,6 @@ class App extends React.Component {
                                                 }}>
                                                     <ChatCenterContainer
                                                         mesId={mesId}
-                                                        styles={styles}
                                                         messagesMap={messagesMap}/>
                                                 </div>
                                               )
@@ -171,7 +169,7 @@ class App extends React.Component {
     }
     componentDidMount(){
         this.props.onWho()
-        // this.props.getChatList()
+        this.props.getChatList()
     }
 }
 
