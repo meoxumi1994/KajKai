@@ -1,12 +1,18 @@
 import { flem, flet } from '../../../support'
 
-export const getUsers = () => dispatch => {
+export const getUsers = (offset) => dispatch => {
+    const length = 5
     flem('/users', {
-
+      offset: offset,
+      length: length
     }, {}
     ).then((response) => {
           if (response != undefined && response.status == 'success') {
-              dispatch({type: 'ADMIN/USER/INIT_USERS', data: response.data})
+              if (response.data.length > 0) {
+                  dispatch({type: 'ADMIN/USER/INIT_USERS', data: response.data})
+              } else {
+                  dispatch({type: 'ADMIN/USER/DISPLAY', subType: 'LOAD_MORE', data: { display: false, id: undefined }})
+              }
           }
     })
 }
@@ -31,7 +37,7 @@ export const banUser = (type, adminId, reason, feedbackId, feedbackStatus, repor
                 const { admin, feedback, reporter, defendant} = response.data
 
                 if (type == 'user') {
-                    dispatch({type: 'ADMIN/USER/DISPLAY', data: { display: false, id: '' }})
+                    dispatch({type: 'ADMIN/USER/DISPLAY', subType: 'USER_DETAILS', data: { display: false, id: '' }})
                 } else {
                     dispatch({
                       type: 'ADMIN/USER/BAN',
@@ -49,6 +55,7 @@ export const banUser = (type, adminId, reason, feedbackId, feedbackStatus, repor
                             admin: admin
                         }
                       })
+                      dispatch({ type: 'ADMIN/DASHBOARD/DISPLAY', subType: 'FEEDBACK_DETAILS', data: {display: false}})
                 }
 
                 dispatch({

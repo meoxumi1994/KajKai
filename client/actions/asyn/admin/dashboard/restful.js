@@ -1,14 +1,19 @@
 import { flem, flet } from '../../../support'
 
-export const getFeedbacks = (offset, length) => dispatch => {
+export const getFeedbacks = (offset) => dispatch => {
+    const length = 5
     flem('/feedbacks',{
-        offset: 0,
-        length: 100
+        offset: offset,
+        length: length
     })
     .then((response) => {
         console.log('[API] /getFeedbacks', response);
         if ( response != undefined && response.status == 'success') {
-            dispatch({type: 'ADMIN/DASHBOARD/INIT_FEEDBACK', data: response.data})
+            if (response.data.length > 0) {
+                dispatch({type: 'ADMIN/DASHBOARD/INIT_FEEDBACK', data: response.data})
+            } else {
+                dispatch({type: 'ADMIN/DASHBOARD/DISPLAY', subType: 'LOAD_MORE', data: {display: false}})
+            }
         }
     })
 }
@@ -18,7 +23,7 @@ export const getFeedback = (id) => dispatch => {
     .then((response) => {
         console.log('[API] /getFeedback', response);
         if ( response != undefined && response.status == 'success') {
-            dispatch({type: 'ADMIN/DASHBOARD/INIT_DETAILS', data: response.data})
+              dispatch({type: 'ADMIN/DASHBOARD/INIT_DETAILS', data: response.data})
         }
     })
 }

@@ -3,16 +3,20 @@ import Dashboard from '~/components/admin/dashboard'
 import { getFeedbacks } from '~/actions/asyn/admin/dashboard/restful'
 
 const mapStateToProps = (state, ownProps) => {
-    const { keyy, mapp } = state.inst.admin.dashboard
+    const { keyy, mapp, display } = state.inst.admin.dashboard
     return {
         keyy,
-        mapp
+        mapp,
+        display
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    getNewFeed: () => {
-        dispatch(getFeedbacks(Date.now(), 10))
+    getFeedbacks: () => {
+        dispatch(getFeedbacks(0))
+    },
+    loadFeedback: (offset) => {
+        dispatch(getFeedbacks(offset))
     }
 })
 

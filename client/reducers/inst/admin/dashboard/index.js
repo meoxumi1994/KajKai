@@ -8,24 +8,34 @@ const dashboard = (state = {
         all: []
     },
     mapp: {},
-    current: {
-        display: false,
-    },
+    display: {
+        details: false,
+        loadMore: true
+    },    
     details: undefined
 }, action) => {
     switch (action.type) {
 
       case 'ADMIN/DASHBOARD/INIT_FEEDBACK':
-          const unsolved = []
-          const solved = []
-          const all = []
+          const unsolved = state.keyy.unsolved
+          const solved = state.keyy.solved
+          const all = state.keyy.all
 
-          action.data.map(
-              feedback => {
-                  feedback.status? solved.push(feedback.id): unsolved.push(feedback.id)
+          for (let i in action.data) {
+              const feedback = action.data[i]
+              if (feedback.status) {
+                  if (solved.indexOf(feedback.id) == -1) {
+                      solved.push(feedback.id)
+                  }
+              } else {
+                if (unsolved.indexOf(feedback.id) == -1) {
+                    unsolved.push(feedback.id)
+                }
+              }
+              if (all.indexOf(feedback.id) == -1) {
                   all.push(feedback.id)
               }
-          )
+          }
 
           return {
               ...state,
@@ -34,24 +44,44 @@ const dashboard = (state = {
                   solved,
                   all
               },
-              mapp: utils.getFeedbacksMap(action)
+              mapp: {
+                  ...state.mapp,
+                  ...utils.getFeedbacksMap(action)
+              }
+
           }
 
-      case 'ADMIN/DASHBOARD/CURRENT':
-          return {
-              ...state,
-              current: {
-                  display: action.data.display,
-              }
+      case 'ADMIN/DASHBOARD/DISPLAY':
+          console.log('action', action);
+          switch (action.subType) {
+            case 'FEEDBACK_DETAILS':
+                return {
+                    ...state,
+                    display: {
+                        ...state.display,
+                        details: action.data.display,
+                    }
+                }
+            case 'LOAD_MORE':
+                return {
+                    ...state,
+                    display: {
+                        ...state.display,
+                        loadMore: action.data.display
+                    }
+                }
+            default:
+                return state
           }
+
 
       case 'ADMIN/DASHBOARD/INIT_DETAILS':
           return {
               ...state,
               details: feedbackMap(undefined, action),
-              current: {
-                  ...state.current,
-                  display: true
+              display: {
+                  ...state.display,
+                  details: true,
               }
           }
 

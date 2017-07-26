@@ -7,8 +7,8 @@ class UserDetails extends React.Component {
     }
 
     render() {
-        const { mapp, current, auth,
-                close, changePermission } = this.props
+        const { mapp, display, auth,
+                close, changePermission, current } = this.props
 
         if (current.id == '' || current.id == undefined) {
             return (
@@ -19,7 +19,7 @@ class UserDetails extends React.Component {
         const { user, stores, ban } = mapp[current.id]
         let reason = ''
         return (
-          <Modal style={{ marginTop: 120 }} show={current.display} onHide={() => close()}>
+          <Modal style={{ marginTop: 120 }} show={display.details} onHide={() => close()}>
               <Modal.Header closeButton>
               <Modal.Title>
                     <img src={user.avatarUrl} style={{width: 40, height: 40, marginRight: 10, borderRadius: 50}}/>

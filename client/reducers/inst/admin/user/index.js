@@ -5,18 +5,26 @@ const user = (state = {
     keyy: [],
     mapp: {},
     current: {
-        display: false,
         id: ''
+    },
+    display: {
+        details: false,
+        loadMore: true
     }
 }, action) => {
     switch (action.type) {
 
       case 'ADMIN/USER/INIT_USERS':
-          // console.log('action', action.data);
           return {
               ...state,
-              keyy: action.data.map(d => d.user.id),
-              mapp: utils.getUsersMap(action)
+              keyy: [
+                  ...state.keyy,
+                  ...action.data.map(d => d.user.id)
+              ],
+              mapp: {
+                  ...state.mapp,
+                  ...utils.getUsersMap(action)
+              }
           }
 
       case 'ADMIN/USER/BAN':
@@ -30,12 +38,34 @@ const user = (state = {
           }
 
       case 'ADMIN/USER/DISPLAY':
-          return {
-              ...state,
-              current: {
-                  display: action.data.display,
-                  id: action.data.id
-              }
+          switch (action.subType) {
+            case 'USER_DETAILS':
+                return {
+                    ...state,
+                    current: {
+                        id: action.data.id
+                    },
+                    display: {
+                        ...state.display,
+                        details: action.data.display
+                    }
+                }
+            case 'LOAD_MORE':
+                return {
+                    ...state,
+                    display: {
+                        ...state.display,
+                        loadMore: action.data.display
+                    }
+                }
+
+            default:
+                return {
+                    ...state,
+                    current: {
+                        id: action.data.id
+                    }
+                }
           }
 
       default:
