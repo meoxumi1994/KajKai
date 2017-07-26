@@ -11,7 +11,7 @@ export const createSellPostDetailCon = () => {
 
 export const updateSellPostDetailCon = () => {
     return (req, res) => {
-        updateSellPostDetail(req.body.id, req.body, (sellPostDetail) => {
+        updateSellPostDetail(req.body.sellpostid, req.body, (sellPostDetail) => {
             res.json(req.body)
         })
     }
@@ -19,8 +19,8 @@ export const updateSellPostDetailCon = () => {
 
 export const dellSellPostDetailCon = () => {
     return (req, res) => {
-        dellSellPostDetail(req.body.id, (sellPostDetail) => {
-            updateSellPost({sellpostid: req.body.sellpostid, products_order: req.body.postrows_order}, () => {
+        dellSellPostDetail(req.body.sellpostid, (sellPostDetail) => {
+            getSellPostDetailBasicInfo({sellpostid: req.body.sellpostid, products_order: req.body.postrows_order}, () => {
                 res.json(req.body)
             })
         })

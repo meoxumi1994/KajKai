@@ -28,12 +28,12 @@ class Feedbacks extends React.Component {
                   </thead>
                   <tbody>
                       {
-                      myKeyy.reverse().map((id, index) =>
+                      myKeyy.map((id, index) =>
                         {
                           const { reporter, defendant, status, time } = mapp[id]
                           return (
                             <tr key={id}>
-                               <td>{index}</td>
+                               <td>{index + 1}</td>
                                <td>
                                    <img src={reporter.user.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
                                    {reporter.user.username}

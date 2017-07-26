@@ -73,7 +73,7 @@ export const createReplyNotification = (message) => {
                       storeName: basicStore.storeName,
                       urlName: basicStore.urlName
                     })
-                    notify(notification)
+                    notify(user.id, notification)
                     notifications.push(notification)
                     user.notifications = notifications
                     user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1

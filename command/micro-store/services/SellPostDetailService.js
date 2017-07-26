@@ -20,6 +20,17 @@ export const getSellPostDetail = (sellPostDetailId, next) => {
     })
 };
 
+export const removeBulk = (sellpostId, next) => {
+    SellPostDetail.find({sellPostId: sellpostId}, (err, docs) => {
+        SellPostDetail.deleteMany({sellPostId: sellpostId}, () => {
+            for (let i = 0; i < docs.length; ++i)
+                postRowDeletedPub(getSellPostDetailGlobalId(docs[i]), sellpostId);
+            next();
+        })
+    });
+
+};
+
 export const getPubSellPostDetailBasicInfo = (sellPostDetail) => {
     return {
         sellPostId: sellPostDetail.sellPostId,

@@ -36,7 +36,7 @@ export const createSellpostCreatedNotification = (message) => {
                   storeName: basicStore.storeName,
                   urlName: basicStore.urlName
                 })
-                notify(notification)
+                notify(user.id, notification)
                 notifications.push(notification)
                 user.notifications = notifications
                 user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
@@ -81,7 +81,7 @@ export const createSellpostUpdatedNotification = (message) => {
                   storeName: basicStore.storeName,
                   urlName: basicStore.urlName
                 })
-                notify(notification)
+                notify(user.id, notification)
                 notifications.push(notification)
                 user.notifications = notifications
                 user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1

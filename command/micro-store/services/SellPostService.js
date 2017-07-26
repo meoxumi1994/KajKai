@@ -2,7 +2,7 @@ import { SellPost } from '../models'
 import globalId from '../config/globalId'
 import { getStore } from './StoreService'
 import { sellPostCreated, sellPostDeleted, sellPostUpdated } from '../controllers/StorePubController'
-import { createMultiplePostDetail } from './SellPostDetailService'
+import { createMultiplePostDetail, removeBulk } from './SellPostDetailService'
 
 const SELLPOST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID;
 
@@ -54,12 +54,33 @@ export const updateSellPost = (sellpostInfo, next) => {
         if (sellpostInfo.time) sellPost.time = sellpostInfo.time;
         if (sellpostInfo.status) sellPost.status = sellpostInfo.status;
         if (sellpostInfo.ship) sellPost.shippable = sellpostInfo.ship;
-        if (sellpostInfo.postrows_order) sellPost.sellPostDetailOrders = sellpostInfo.postrow_order;
+        if (sellpostInfo.postrows_order) sellPost.sellPostDetailOrders = sellpostInfo.postrows_order;
         sellPost.save(() => {
-            getPubSellPostInfo(sellPost, (info) => {
-                sellPostUpdated(info);
+            removeBulk(sellpostInfo.sellpostid, () => {
+                getPubSellPostInfo(sellPost, (info) => {
+                    let sellPostDetail = sellpostInfo.postrows;
+                    if (sellPostDetail && sellPostDetail.length > 0) {
+                        createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), info.storeId, (sellPostDetail) => {
+                            sellPost.sellPostDetailOrders = [];
+                            for (let i = 0; i < sellPostDetail.length; ++i)
+                                sellPost.sellPostDetailOrders.push(sellPostDetail[i].id);
+                            info.postrows_order = sellPost.sellPostDetailOrders;
+                            sellPost.save(() => {
+                                next(sellPost, sellPostDetail);
+                            });
+                            sellPostUpdated(info);
+                        });
+                    } else {
+                        next(sellPost, null);
+                    }
+                });
             });
-            next(sellPost);
+
+
+            // getPubSellPostInfo(sellPost, (info) => {
+            //     sellPostUpdated(info);
+            // });
+            // next(sellPost);
         })
     })
 };
@@ -88,9 +109,9 @@ export const deleteSellPost = (sellpostid, next) => {
     getSellPost(sellpostid, (sellPost) => {
         if (!sellPost) next(null);
         else {
-            SellPost.findOneAndRemove({_id: getSellPostLocalId(sellpostid)}, () => {
+            sellPost.remove(() => {
                 sellPostDeleted(sellPost.storeId, sellpostid);
-                next(true)
+                next(true);
             })
         }
     })

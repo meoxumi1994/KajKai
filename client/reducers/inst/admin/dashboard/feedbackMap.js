@@ -52,28 +52,31 @@ const feedbackMap = (state={
           }
 
       case 'ADMIN/DASHBOARD/UPDATE_FEEDBACK_USER':
-          if (action.data.type == 'reporter') {
-              return {
-                  ...state,
-                  reporter: {
-                      ...state.reporter,
-                      ban: {
-                          ...state.reporter.ban,
-                          status: action.data.status
-                      }
-                  }
-              }
-          } else {
-            return {
-                ...state,
-                defendant: {
-                    ...state.defendant,
-                    ban: {
-                        ...state.defendant.ban,
-                        status: action.data.status
+          switch (action.subType) {
+            case 'reporter':
+                return {
+                    ...state,
+                    reporter: {
+                        ...state.reporter,
+                        ban: {
+                            ...state.reporter.ban,
+                            status: action.data.status
+                        }
                     }
                 }
-            }
+            case 'defendant':
+                return {
+                    ...state,
+                    defendant: {
+                        ...state.defendant,
+                        ban: {
+                            ...state.defendant.ban,
+                            status: action.data.status
+                        }
+                    }
+                }
+            default:
+                return state
           }
 
       case 'ADMIN/FEEDBACK/UPDATE_STATUS':

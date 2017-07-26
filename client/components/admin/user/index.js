@@ -13,12 +13,16 @@ class User extends React.Component {
     }
 
     render() {
-        const { keyy, mapp, adminId,
-                onUserDetails
+        const { keyy, mapp, adminId, display,
+                onUserDetails, loadMore
               } = this.props
         return (
             <div style={{width: '100%', height: '100%', borderWidth: 1, borderStyle: 'solid'}}>
-                <UserDetailsContainer/>
+
+                <nav className="navbar navbar-default">
+                    <button onClick={() => loadMore(keyy.length)} style={{float: 'right', margin: '5px 10px 5px 5px'}} className="btn btn-default">{display.loadMore?'Load more':'Data is up to date'}</button>
+                </nav>
+
                 <table className="table table-bordered">
                     <thead className="thead-default">
                         <tr style={styles.tr}>
@@ -66,7 +70,7 @@ class User extends React.Component {
                         )}
                     </tbody>
                 </table>
-
+                <UserDetailsContainer/>
             </div>
         )
     }
