@@ -9,7 +9,7 @@ cp ../deploy/frontend/temp.js ./config/index.js && rm ../deploy/frontend/temp.js
 cp index.html ../deploy/frontend/admin.kajkai/index.html &&
 cp App.css ../deploy/frontend/admin.kajkai/App.css &&
 cp cropper.css ../deploy/frontend/admin.kajkai/cropper.css &&
-cp -r images ../deploy/frontend/admin.kajkai &&
+cp -r images-admin ../deploy/frontend/admin.kajkai &&
 cp -r dist ../deploy/frontend/admin.kajkai  #&&
 
-# aws s3 sync ../deploy/frontend/admin.kajkai s3://kajkai-admin --delete
+aws s3 sync ../deploy/frontend/admin.kajkai s3://kajkai-admin --delete
