@@ -68,7 +68,7 @@ export const updateSellPost = (sellpostInfo, next) => {
                             sellPost.save(() => {
                                 next(sellPost, sellPostDetail);
                             });
-                            sellPostCreated(info);
+                            sellPostUpdated(info);
                         });
                     } else {
                         next(sellPost, null);
