@@ -8,6 +8,13 @@ export default {
         method: 'loginAdmin'
       }
     },
+    '/admin': {
+      get: {
+        controller: 'AdminController',
+        middleware: [authAdmin()],
+        method: 'getAdminHandler'
+      }
+    },
     '/users': {
       get: {
         controller: 'AdminController',

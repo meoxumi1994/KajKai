@@ -13,6 +13,22 @@ export const getAdmin = (adminName, password, next) => {
   })
 }
 
+export const getAdminById = (id, next) => {
+  Admin.findById(id, (err, admin) => {
+    if (admin) {
+      next({
+        status: 'success',
+        admin: {
+          id: admin._id,
+          adminName: admin.adminName
+        }
+      })
+    } else {
+      next({ status: 'failed' })
+    }
+  })
+}
+
 export const getUsers = (offset, length, next) => {
   User.find({}, (err, users) => {
     if (users) {

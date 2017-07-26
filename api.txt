@@ -1323,6 +1323,16 @@ POST /loginadmin {
 }, {
   status: 'success|failed'
   admin: {
-    adminName
+    id: '',
+    adminName: ''
+  }
+}
+
+GET /admin {
+  authorization: 'FAILED', // hoặc bên duói
+  status: 'success|failed',
+  admin: {
+    id:
+    adminName:
   }
 }
