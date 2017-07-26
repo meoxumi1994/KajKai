@@ -54,7 +54,7 @@ export const updateSellPost = (sellpostInfo, next) => {
         if (sellpostInfo.time) sellPost.time = sellpostInfo.time;
         if (sellpostInfo.status) sellPost.status = sellpostInfo.status;
         if (sellpostInfo.ship) sellPost.shippable = sellpostInfo.ship;
-        if (sellpostInfo.postrows_order) sellPost.sellPostDetailOrders = sellpostInfo.postrow_order;
+        if (sellpostInfo.postrows_order) sellPost.sellPostDetailOrders = sellpostInfo.postrows_order;
         sellPost.save(() => {
             getPubSellPostInfo(sellPost, (info) => {
                 sellPostUpdated(info);
