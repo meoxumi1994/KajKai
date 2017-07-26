@@ -67,7 +67,7 @@ export default {
     controller: 'InterestSubController',
     method: 'addInterest'
   },
-  'INTEREST.RemoveInterest', {
+  'INTEREST.RemoveInterest': {
     controller: 'InterestSubController',
     method: 'removeInterest'
   }
