@@ -109,9 +109,9 @@ export const deleteSellPost = (sellpostid, next) => {
     getSellPost(sellpostid, (sellPost) => {
         if (!sellPost) next(null);
         else {
-            SellPost.findOneAndRemove({_id: getSellPostLocalId(sellpostid)}, () => {
+            sellPost.remove(() => {
                 sellPostDeleted(sellPost.storeId, sellpostid);
-                next(true)
+                next(true);
             })
         }
     })

@@ -32,7 +32,7 @@ export const updateSellPostCon = () => {
 export const deleteSellPostCon = () => {
     return (req, res) => {
         deleteSellPost(req.body.sellpostid, () => {
-            res.join({sellpost: req.body, status: 'success'})
+            res.json({sellpost: req.body, status: 'success'})
         })
     }
 };
