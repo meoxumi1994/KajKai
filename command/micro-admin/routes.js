@@ -15,6 +15,13 @@ export default {
         method: 'getAdminHandler'
       }
     },
+    '/logout': {
+      get: {
+        controller: 'AdminController',
+        middleware: [authAdmin()],
+        method: 'logoutHandler'
+      }
+    },
     '/users': {
       get: {
         controller: 'AdminController',

@@ -21,7 +21,7 @@ export const loginAdmin = () => (req, res) => {
   })
 }
 
-export const getAdminHandler = () = (req, res) => {
+export const getAdminHandler = () => (req, res) => {
   const requestedId = req.decoded._id
   getAdminById(requestedId, (admin) => {
     res.json(admin)
@@ -90,4 +90,9 @@ export const getFeedbackHandler = () => (req, res) => {
   getFeedback(id, (feedback) => {
     res.json(feedback)
   })
+}
+
+export const logoutHandler = () => (req, res) => {
+  res.cookie('token', 'invalid')
+  res.json({ status: 'success' })
 }
