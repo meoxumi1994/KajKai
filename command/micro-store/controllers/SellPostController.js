@@ -17,8 +17,14 @@ export const addSellPostCon = () => {
 
 export const updateSellPostCon = () => {
     return (req, res) => {
-        updateSellPost(req.body, (sellPost) => {
-            res.json({sellpost: req.body, status: 'success'})
+        updateSellPost(req.body, (sellPost, sellPostDetail) => {
+            res.json({
+                sellpost: {
+                    ...getSellPostBasicInfo(sellPost),
+                    postrows: sellPostDetail
+                },
+                status: 'success'
+            })
         })
     }
 };
