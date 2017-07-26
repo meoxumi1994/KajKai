@@ -81,9 +81,7 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
                 user.lastReason = admin.reason
 
                 user.save(() => {
-                  if (feedback && feedback.id) {
-                    updateUserInFeedbacks(user)
-                  }
+                  updateUserInFeedbacks(user)
                   if (reporter.status) {
                     addBanPub(user.id, admin.reason)
                     sendBanEmail(user.username, user.email, admin.reason)
@@ -111,9 +109,7 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
               user.lastReason = admin.reason
 
               user.save(() => {
-                if (feedback && feedback.id) {
-                  updateUserInFeedbacks(user)
-                }
+                updateUserInFeedbacks(user)
                 if (reportee.status) {
                   addBanPub(user.id, admin.reason)
                   sendBanEmail(user.username, user.email, admin.reason)
