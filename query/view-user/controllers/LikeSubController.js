@@ -171,7 +171,10 @@ const removeLike = (likenId, likerId) => {
   if (likenId.substr(0, 3) == '012') { // sellpost
     SellpostLiker.find({ sellpostId: likenId }, (err, sellpostLiker) => {
       if (sellpostLiker) {
-        const { likers } = sellpostLiker
+        let { likers } = sellpostLiker
+        if (!likers) {
+          likers = []
+        }
         for (let i = 0; i < likers.length; i++) {
           let liker = likers[i]
           if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
@@ -186,7 +189,10 @@ const removeLike = (likenId, likerId) => {
   } else if (likenId.substr(0, 3) == '004') { // comment
     CommentLiker.find({ commentId: likenId }, (err, commentLiker) => {
       if (commentLiker) {
-        const { likers } = commentLiker
+        let { likers } = commentLiker
+        if (!likers) {
+          likers = []
+        }
         for (let i = 0; i < likers.length; i++) {
           let liker = likers[i]
           if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
@@ -201,7 +207,10 @@ const removeLike = (likenId, likerId) => {
   } else if (likenId.substr(0, 3) == '005') { // reply
     ReplyLiker.find({ replyId: likenId }, (err, replyLiker) => {
       if (replyLiker) {
-        const { likers } = replyLiker
+        let { likers } = replyLiker
+        if (!likers) {
+          likers = []
+        }
         for (let i = 0; i < likers.length; i++) {
           let liker = likers[i]
           if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
