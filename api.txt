@@ -55,7 +55,7 @@ GET /notification?offset=-1 {
     offset: ,
     notifications: [
         {
-            type: 'like|comment|leadercomment|createsellpost|editsellpost|createminorpost'
+            type: 'likesellpost|likeleadercomment|likecomment|comment|leadercomment|createsellpost|editsellpost|createminorpost'
             // tra ve nhieu nhat co the nhung thong tin o ben duoi
             id: , // day la cai id cua notification
             commentid: ,

@@ -35,5 +35,12 @@ export default {
         middleware: [auth()],
         method: 'createFeedbackHandler'
       }
+    },
+    '/feedback/:id': {
+      get: {
+        controller: 'AdminController',
+        middleware: [authAdmin()],
+        method: 'getFeedbackHandler'
+      }
     }
 }
