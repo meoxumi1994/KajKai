@@ -42,13 +42,15 @@ export const removeInterest = (userId, id, next) => {
         }
         interest.remove((err) => {
             next(err, id);
-            removeInterestPub(id);
+            getInterestInfo(interest, (info) => {
+                removeInterestPub(info);
+            });
         });
     })
 };
 
 export const getInterestInfo = (interest, next) => {
-    redisClient.hget('category', categoryId, (err, rep) => {
+    redisClient.hget('category', interest.categoryId, (err, rep) => {
         next({
             userId: interest.userId,
             categoryId: interest.categoryId,
