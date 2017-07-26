@@ -24,7 +24,7 @@ export const removeBulk = (sellpostId, next) => {
     SellPostDetail.find({sellPostId: sellpostId}, (err, docs) => {
         SellPostDetail.deleteMany({sellPostId: sellpostId}, () => {
             for (let i = 0; i < docs.length; ++i)
-                postRowDeletedPub(getSellPostDetailGlobalId(docs[i]), sellpostId);
+                postRowDeletedPub(getSellPostDetailGlobalId(docs[i]._id), sellpostId);
             next();
         })
     });
