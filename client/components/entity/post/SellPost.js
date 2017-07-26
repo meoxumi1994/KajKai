@@ -26,7 +26,7 @@ class SellPost extends React.Component {
     }
     render(){
         const { urlname, isOwner, ship, status, category, description, storename, avatarUrl, time,
-            numfollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
+            numfollow, beFollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
             onLike, postrows, postrows_order, clicksetting, id, onFollow, feedBack,
         } = this.props
         if(!likes)
@@ -78,7 +78,7 @@ class SellPost extends React.Component {
                     </div>
                     <div className="btn" style={{ float: 'right', margin: 0, marginTop: -11, marginRight: 10, padding: 0 }}
                         onClick={() => onFollow()}>
-                        <img src="/images/hasfollow.svg" width={25}/>
+                        <img src={beFollow?"/images/hasfollow.svg":"/images/follow.svg"} width={25}/>
                     </div>
                     <div>
                         <img src={avatarUrl} width={ship?60:40} height={ship?60:40}/>
@@ -126,21 +126,23 @@ class SellPost extends React.Component {
                         beLike={beLike}/>
                 </div>
                 <hr style={{ margin: 0}}/>
-                <div style={{ padding: '8px 0px 8px 0px'}}>
-                    <LikeGroup
-                        size={20}
-                        content={likeContent}
-                        typeLikes={likestatus}
-                        other={19}
-                        />
-                </div>
-                <hr style={{ margin: 0 }}/>
+                {likeContent &&
+                    <div style={{ padding: '8px 0px 8px 0px'}}>
+                        <LikeGroup
+                            size={20}
+                            content={likeContent}
+                            typeLikes={likestatus}
+                            other={19}
+                            />
+                    </div>
+                }
+                {likeContent && <hr style={{ margin: 0 }}/>}
+
                 <GroupComment id={id}/>
             </div>
         )
     }
     componentDidMount(){
-        console.log('componentDidMount')
         if(this.props.needGetSellPost){
             this.props.onGetSellpost()
         }

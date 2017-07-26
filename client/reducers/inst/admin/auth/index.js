@@ -1,6 +1,6 @@
 const auth = (state={
     status: true,
-    id: '597612080b080d79757e39bf',
+    id: '59775f1e69c80c310ea04f72',
     adminName: 'admin',
 }, action) => {
     switch (action.type) {

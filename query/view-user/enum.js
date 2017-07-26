@@ -24,8 +24,10 @@ export const PrivacyOthers = {
   no: 'no'
 }
 
-export NotificationType = {
-  LIKE: 'like',
+export const NotificationType = {
+  LIKESELLPOST: 'likesellpost',
+  LIKECOMMENT: 'likeleadercomment',
+  LIKEREPLY: 'likereply',
   REPLY: 'comment',
   COMMENT: 'leadercomment',
   SELLPOSTCreated: 'createsellpost',

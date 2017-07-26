@@ -6,6 +6,8 @@ class LikeGroup extends React.Component {
     }
     render(){
         const { typeLikes, content, size  } = this.props
+        if(!content)
+            return <div></div>
         return(
             <div style={{ fontSize: 12.5, display: 'inline-block', color: '#365899'}}>
                 {typeLikes.map((item, index) =>

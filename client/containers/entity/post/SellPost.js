@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
-import { getTime, getBeLike, getLikeContent } from '~/containers/support'
+import { getTime, getBeLike, getLikeContent, getBeFollow } from '~/containers/support'
 import { getSellPost } from '~/actions/asyn/entity/sellpost'
 import SellPost from '~/components/entity/post/SellPost'
 
@@ -14,17 +14,20 @@ const mapStateToProps = (state, { id }) => {
             yourid = store.id
     })
     let isyour = true
-    let beLike, likeContent, time
+    let beLike, likeContent, time, beFollow
     if(sellpost){
         const { likes, numlike } = sellpost
         beLike =  getBeLike(likes, yourid)
+        beFollow = getBeFollow(sellpost.follows, state.user.id)
         likeContent = getLikeContent(likes, numlike, yourid)
         time = getTime(sellpost.time)
     }
+
     return({
         ...store,
         ...sellpost,
         beLike: beLike,
+        beFollow: beFollow,
         likeContent: likeContent,
         time: time,
     })

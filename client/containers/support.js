@@ -148,3 +148,11 @@ export const getBeLike = (likes, yourid) => {
             return true;
     return false;
 }
+
+export const getBeFollow = (follows, yourid) => {
+    if(!follows) return false
+    for(let i = 0; i< follows.length; i++)
+        if( follows[i].userid ==  yourid )
+            return true;
+    return false;
+}

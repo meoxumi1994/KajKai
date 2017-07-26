@@ -25,3 +25,29 @@ export const updateLikes = (likes = [], id, name) => {
     }
     return newLikes
 }
+
+export const updateFollows = (follows = [], userid) => {
+    let has = false
+    let newFollows = []
+    follows.map((item) => {
+        if(item.userid != userid){
+            newFollows = [
+                ...newFollows,
+                {
+                    userid: item.userid,
+                }
+            ]
+        }else{
+            has = true
+        }
+    })
+    if(!has){
+        newFollows = [
+            ...newFollows,
+            {
+                userid: userid,
+            }
+        ]
+    }
+    return newFollows
+}

@@ -13,7 +13,10 @@ const utils = {
     getFeedbacksMap: (action) => {
         const feedbacksMap = {}
         action.data.map(feedback =>
-            feedbacksMap[feedback.id] = feedbackMap(undefined, {type: action.type, data: feedback})
+            {
+              console.log('feedback', feedback)
+              feedbacksMap[feedback.id] = feedbackMap(undefined, {type: action.type, data: feedback})
+            }
         )
         return feedbacksMap
     }

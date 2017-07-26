@@ -13,7 +13,7 @@ export const addBan = (message) => {
 export const removeBan = (message) => {
   const { userId, reason } = message.ban
   const user = {
-    banned: 1,
+    banned: 0,
     reason
   }
 

@@ -67,16 +67,18 @@ class Comment extends React.Component {
                     marginTop: isleader?-40:-20,
                     paddingRight: 18 }}>
                     <strong style={{ color: '#365899'}}>{name}</strong>{" "}
-                    <table>
-                        {order && order.map((item,index) => {
-                            return (
-                                <tbody key={item.id+index} style={{ marginBottom: 5 }}>
-                                    <Product id={item.id} index={index} justShow={true}
-                                        canRemove={true} width={index?120:160}/>
-                                </tbody>
-                            )
-                        })}
-                    </table>
+                    {order &&
+                        <table>
+                            {order.map((item,index) => {
+                                return (
+                                    <tbody key={item.id+index} style={{ marginBottom: 5 }}>
+                                        <Product id={item.id} index={index} justShow={true}
+                                            canRemove={true} width={index?120:160}/>
+                                    </tbody>
+                                )
+                            })}
+                        </table>
+                    }
                     <ContentShow
                         fontSize={13.5}
                         heightEachRow={16}
@@ -92,7 +94,7 @@ class Comment extends React.Component {
                         {onReceive && "."}
                         <div className="btn" onClick={() => onLike()}
                             style={{ padding: '0px 1px 0px 1px', fontWeight: beLike?'bold':'normal'}}>
-                            <a style={{ fontSize: 12, color: '#365899' }}>{LIKE}</a>
+                            <a style={{ fontSize: beLike?13:12, color: beLike?'#4673cc':'#365899' }}>{LIKE}</a>
                         </div>
                         {"."}
                         <div className="btn" onClick={() => onReply()}

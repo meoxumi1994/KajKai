@@ -18,7 +18,8 @@ class Feedbacks extends React.Component {
                          <th>#</th>
                          <th>Reporter</th>
                          <th>Defendant</th>
-                         <th>Reason</th>
+                         <th>Content</th>
+                         <th>Sellpost</th>
                          <th>Time</th>
                          <th>Status</th>
                          <th>Details</th>
@@ -29,20 +30,23 @@ class Feedbacks extends React.Component {
                       {
                       keyy.map((id, index) =>
                         {
-                          const {  reporter, defendant, reason, time, status } = mapp[id]
+                          const { reporter, defendant, status, time } = mapp[id]
                           return (
                             <tr key={id}>
                                <td>{index}</td>
                                <td>
-                                   <img src={reporter.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
-                                   {reporter.username}
+                                   <img src={reporter.user.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
+                                   {reporter.user.username}
                                </td>
                                <td>
-                                   <img src={defendant.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
-                                   {defendant.username}
+                                   <img src={defendant.user.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
+                                   {defendant.user.username}
                                </td>
                                <td>
-                                    {reason}
+                                    {reporter.content}
+                               </td>
+                               <td>
+                                    <p><a href={'https://kajkai.com/sellpost/'+defendant.sellpostId}>Link</a></p>
                                </td>
                                <td>
                                     {Date(time * 1000)}

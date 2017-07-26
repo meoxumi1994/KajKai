@@ -38,6 +38,11 @@ const addPostRow = (item, time) => {
 
 const editpostrow = (state = {}, action) => {
     switch (action.type) {
+        case 'INST_STORE_PAGE_CHANGE':
+            if(action.key == 'showEditSellPost'){
+                return {}
+            }
+            return state
         case 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_POST_ROW':
             return {...state,
                 ['postrow' + action.newid] : addPostRow(action.item, action.time)

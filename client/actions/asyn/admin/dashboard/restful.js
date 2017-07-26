@@ -1,112 +1,47 @@
-import { flem } from '../../../support'
+import { flem, flet } from '../../../support'
 
-export const getNewFeed = (offset, length) => dispatch => {
-    flem('/admin/newfeeds',{
-        offset,
-        length
+export const getFeedbacks = (offset, length) => dispatch => {
+    flet('/feedbacks',{
+        offset: 0,
+        length: 10
     })
     .then((response) => {
         response = {
-          status: 'success',
-          data: [
-              {
-                id: 24234,
-                reporter: {
-                    id: 234024,
-                    username: 'Long Ly',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
+            status: 'success',
+            data: [
+                {
+                  id: 123152141,
+                  reporter: {
+                      user: {
+                          id: 2342342352,
+                          username: 'Long Lý',
+                          avatarUrl: ''
+                      },
+                      ban: {
+                          status: false,
+                      },
+                      content: 'bán thực phẩm bẩn'
+                  },
+                  defendant: {
+                      user: {
+                          id: 2349789,
+                          username: 'Đức Minh',
+                          avatarUrl: ''
+                      },
+                      ban: {
+                          status: true,
+                      },
+                      sellpostId: 252423523
+                  },
+                  decision: '',
+                  status: false,
+                  time: Date.now(),
                 },
-                defendant: {
-                    id: 23402456454,
-                    username: 'Minh gay',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
-                },
-                store: {
-                    id: 2342353,
-                    storename: 'Store B',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
-                },
-                reason: "Minh gay sida",
-                time: Date.now(),
-                status: true
-              },
-              {
-                id: 24235154,
-                reporter: {
-                    id: 234024,
-                    username: 'Long Ly',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
-                },
-                defendant: {
-                    id: 23402456454,
-                    username: 'Mr.A',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
-                },
-                store: {
-                    id: 2342353,
-                    storename: 'Store B',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
-                },
-                reason: "Minh gay sida 2",
-                time: Date.now(),
-                status: false
-              },
-              {
-                id: 24238749874,
-                reporter: {
-                    id: 234024,
-                    username: 'Long Ly',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
-                },
-                defendant: {
-                    id: 23402456454,
-                    username: 'Mr.B',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
-                },
-                store: {
-                    id: 2342353,
-                    storename: 'Store B',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
-                },
-                reason: "Minh gay sida 4",
-                time: Date.now(),
-                status: true
-              },
-              {
-                id: 242848734,
-                reporter: {
-                    id: 234024,
-                    username: 'Long Ly',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
-                },
-                defendant: {
-                    id: 23402456454,
-                    username: 'Mr.FUCKer',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
-                },
-                store: {
-                    id: 2342353,
-                    storename: 'Store B',
-                    avatarUrl: 'http://d2d3l62ibcj1br.cloudfront.net/hyperin-portal/imageserver/tenants/54444/_DSC3158.jpg',
-                    url: ''
-                },
-                reason: "Minh gay sida 3",
-                time: Date.now(),
-                status: true
-              }
-          ]
+            ]
         }
-        // dispatch({type: 'ADMIN/DASHBOARD/INIT_FEEDBACK', data: response.data})
+        console.log('[API] /getFeedbacks', response);
+        if (response.status == 'success') {
+            dispatch({type: 'ADMIN/DASHBOARD/INIT_FEEDBACK', data: response.data})
+        }
     })
 }

@@ -1,94 +1,90 @@
-import { User, Notification, BasicStore } from '../models'
+import { User, Notification, BasicStore, IDSellpostStore } from '../models'
 import { NotificationType } from '../enum'
+import { addIDCommentSellpost } from '../services/IDService'
 
 export const createCommentNotification = (message) => {
-  const { fCommentId: commentId, posterId: userId, sellPostId: sellpostId, time, content } = message.fComment
+  const { fCommentId: commentId, posterId: commenterId, sellPostId: sellpostId, time, content } = message.fComment
 
-  if (userId.substr(0, 3) == '001') { // user
-    User.find({}, (err, users) => {
-      if (users) {
-        const avatarUrlById = {}, usernameById = {}
-        users.map((user) => {
-          avatarUrlById[user.id] = user.avatarUrl
-          usernameById[user.id] = user.username
+  addIDCommentSellpost(commentId, sellpostId)
+
+  const mPromises = []
+  mPromises.push(new Promise((resolve, reject) => {
+    User.findOne({ id: commenterId }, (err, user) => {
+      if (user) {
+        const commenter = {
+          actorId: likerId,
+          name: user.username,
+          avatarUrl: user.avatarUrl
+        }
+        resolve({
+          commenter
         })
-        for (let i = 0; i < users.length; i++) {
-          let user = users[i]
-          let { followingSellposts } = user
-          if (!followingSellposts) {
-            followingSellposts = []
-          }
-          for (let k = 0; k < followingSellposts.length; k++) {
-            if (followingSellposts[k] == sellpostId) {
-              let { notifications } = user
-              if (!notifications) {
-                notifications = []
-              }
-              BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-                if (basicStore) {
-                  let notification = new Notification({
-                    type: NotificationType.COMMENT,
-                    commentId,
-                    sellpostId,
-                    actorId: userId,
-                    username: usernameById[userId],
-                    avatarUrl: avatarUrlById[userId],
-                    storeName: basicStore.storeName,
-                    urlName: basicStore.urlName,
-                    content,
-                    time: Date.now()
-                  })
-
-                  notifications.push(notification)
-                  user.notifications = notifications
-                  user.save(() => {})
-                }
-              })
-              break
-            }
-          }
-        }
+      } else {
+        resolve(null)
       }
     })
-  } else if (userId.substr(0, 3) == '002') { // store
-    User.find({}, (err, users) => {
-      if (users) {
-        for (let i = 0; i < users.length; i++) {
-          let user = users[i]
-          let { followingSellposts } = user
-          if (!followingSellposts) {
-            followingSellposts = []
-          }
-          for (let k = 0; k < followingSellposts.length; k++) {
-            if (followingSellposts[k] == sellpostId) {
-              let { notifications } = user
-              if (!notifications) {
-                notifications = []
-              }
-              BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-                if (basicStore) {
-                  let notification = new Notification({
-                    type: NotificationType.COMMENT,
-                    commentId,
-                    sellpostId,
-                    actorId: userId,
-                    avatarUrl: basicStore.avatarUrl,
-                    storeName: basicStore.storeName,
-                    urlName: basicStore.urlName,
-                    content,
-                    time: Date.now()
-                  })
-
-                  notifications.push(notification)
-                  user.notifications = notifications
-                  user.save(() => {})
-                }
-              })
-              break
-            }
-          }
+  }))
+  mPromises.push(new Promise((resolve, reject) => {
+    BasicStore.findOne({ id: commenterId }, (err, basicStore) => {
+      if (basicStore) {
+        const commenter = {
+          actorId: likerId,
+          name: basicStore.storeName,
+          avatarUrl: basicStore.avatarUrl
         }
+        resolve({
+          commenter
+        })
+      } else {
+        resolve(null)
       }
     })
-  }
+  }))
+
+  Promise.all(mPromises).then((commenters) => {
+    const commenter = commenters[0] ? commenters[0] : commenters[1]
+    IDSellpostStore.findOne({ sellpostId }, (err, mIDSellpostStore) => {
+      if (mIDSellpostStore) {
+        BasicStore.findOne({ id: mIDSellpostStore.storeId }, (err, basicStore) => {
+          if (basicStore) {
+            User.find({}, (err, users) => {
+              if (users) {
+                for (let i = 0; i < users.length; i++) {
+                  let user = users[i]
+                  let { followingSellposts } = user
+                  if (!followingSellposts) {
+                    followingSellposts = []
+                  }
+                  for (let k = 0; k < followingSellposts.length; k++) {
+                    if (followingSellposts[k] == sellpostId) {
+                      let { notifications } = user
+                      if (!notifications) {
+                        notifications = []
+                      }
+                      let notification = new Notification({
+                        type: NotificationType.COMMENT,
+                        commentId,
+                        sellpostId,
+                        ...commenter,
+                        content,
+                        time: Date.now(),
+                        storeName: basicStore.storeName,
+                        urlName: basicStore.urlName
+                      })
+
+                      notifications.push(notification)
+                      user.notifications = notifications
+                      user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
+                      user.save(() => {})
+                      break
+                    }
+                  }
+                }
+              }
+            })
+          }
+        })
+      }
+    })
+  })
 }

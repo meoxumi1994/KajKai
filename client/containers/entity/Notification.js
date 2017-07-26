@@ -3,9 +3,9 @@ import { get } from '~/config/allString'
 
 import Notification from '~/components/entity/Notification'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
-    const notification = state.inst.entity.notification
+    const notification = state.inst.entity.notification[id]
     return({
         ...notification
     })

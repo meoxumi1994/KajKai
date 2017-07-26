@@ -44,7 +44,7 @@ export const removeFollow = (message) => {
         }
         sellpost.followers = followers
         sellpost.numberOfFollow = followers.length
-        store.save(() => {})
+        sellpost.save(() => {})
       }
     })
   }
