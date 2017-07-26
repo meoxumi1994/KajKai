@@ -59,7 +59,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
       }
     }
   }
-  const oneHour = 3600000
+  const oneHour = 3600000000
 
   let currentNumberOfComment = 0, cOffset = Date.now(), lastIndex = -1
   let mComments = []
