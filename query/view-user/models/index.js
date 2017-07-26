@@ -7,6 +7,7 @@ import IDCommentSellpostSchema from './IDCommentSellpost'
 import IDReplyCommentSellpostSchema from './IDReplyCommentSellpost'
 import IDSellpostStoreSchema from './IDSellpostStore'
 import ImageSchema from './Image'
+import InterestSchema from './Interest'
 import LastUpdateSchema from './LastUpdate'
 import NotificationSchema from './Notification'
 import PrivacySchema from './Privacy'
@@ -22,6 +23,7 @@ export const IDCommentSellpost = mongoose.model('IDCommentSellpost', IDCommentSe
 export const IDReplyCommentSellpost = mongoose.model('IDReplyCommentSellpost', IDReplyCommentSellpostSchema)
 export const IDSellpostStore = mongoose.model('IDSellpostStore', IDSellpostStoreSchema)
 export const Image = mongoose.model('Image', ImageSchema)
+export const Interest = mongoose.model('Interest', InterestSchema)
 export const LastUpdate = mongoose.model('LastUpdate', LastUpdateSchema)
 export const Notification = mongoose.model('Notification', NotificationSchema)
 export const Privacy = mongoose.model('Privacy', PrivacySchema)

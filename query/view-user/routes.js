@@ -55,6 +55,13 @@ export default {
       method: 'updateNotificationHandler'
     }
   },
+  '/interest': {
+    get: {
+      controller: 'UserController',
+      middleware: [auth()],
+      method: 'getInterestsHandler'
+    }
+  },
   '/test': {
     get: {
       controller: 'TestController',

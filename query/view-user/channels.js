@@ -63,4 +63,12 @@ export default {
     controller: 'SellpostSubController',
     method: 'deleteSellpostNotification'
   },
+  'INTEREST.AddInterest': {
+    controller: 'InterestSubController',
+    method: 'addInterest'
+  },
+  'INTEREST.RemoveInterest', {
+    controller: 'InterestSubController',
+    method: 'removeInterest'
+  }
 }

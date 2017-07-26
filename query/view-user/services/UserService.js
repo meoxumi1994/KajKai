@@ -244,6 +244,56 @@ export const updateNotification = (id, topId, next) => {
   })
 }
 
+export const getInterests = (id, offset, next) => {
+  User.findOne({ id }, (err, user) => {
+    if (err || !user) {
+      if(err) {
+        next({ status: 'failed' })
+      } else {
+        next({ status: 'noUserData' })
+      }
+    } else {
+      let { interests } = user
+      if (!interests) {
+        interests = []
+      }
+      const mInterests = []
+      let currentNumberOfInterest = 0, mOffset = -2, lastIndex = -1
+      for (let i = notifications.length - 1; i >= 0; i--) {
+        let interest = interests[i]
+        if (notification.time < offset) {
+          if (currentNumberOfInterest < 10) {
+            mInterests.push({
+              id: interest.id,
+              categoryId: interest.categoryId,
+              categoryName: interest.categoryName,
+              longitude: interest.longitude,
+              latitude: interest.latitude,
+              time: interest.time.getTime()
+            })
+
+            mOffset = interest.time.getTime()
+            lastIndex = i
+            currentNumberOfInterest++
+          } else {
+            break
+          }
+        }
+      }
+
+      if (lastIndex == 0) {
+        mOffset = -2
+      }
+      next({
+        status: 'success',
+        offset: mOffset,
+        numberOfInterest: interests.length,
+        interests: mInterests
+      })
+    }
+  })
+}
+
 export const verifyToken = (token) => {
     try {
         const decoded = jwt.verify(token, 'secret');

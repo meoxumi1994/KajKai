@@ -5,6 +5,7 @@ import AddressSchema from './Address'
 import BasicStoreSchema from './BasicStore'
 import BlackSchema from './Black'
 import ImageSchema from './Image'
+import InterestSchema from './Interest'
 import LastUpdateSchema from './LastUpdate'
 import NotificationSchema from './Notification'
 import PrivacySchema from './Privacy'
@@ -30,7 +31,8 @@ const UserSchema = new mongoose.Schema({
   followingStores: [String],
   followingSellposts: [String],
   notifications: [NotificationSchema],
-  numberOfUnRead: {type: Number}
+  numberOfUnRead: {type: Number},
+  interests: [InterestSchema]
 })
 
 export default UserSchema

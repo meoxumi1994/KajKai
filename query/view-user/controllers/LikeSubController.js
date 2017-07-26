@@ -108,59 +108,10 @@ export const createLikeNotification = (message) => {
   })
 }
 
-export const removeLike = (message) => {
-  const { likenId, likerId } = message.like
-
-  if (likenId.substr(0, 3) == '012') { // sellpost
-    SellpostLiker.find({ sellpostId: likenId }, (err, sellpostLiker) => {
-      if (sellpostLiker) {
-        const { likers } = sellpostLiker
-        for (let i = 0; i < likers.length; i++) {
-          let liker = likers[i]
-          if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
-            likers.splice(i, 1)
-            break
-          }
-        }
-        sellpostLiker.likers = likers
-        sellpostLiker.save(() => {})
-      }
-    })
-  } else if (likenId.substr(0, 3) == '004') { // comment
-    CommentLiker.find({ commentId: likenId }, (err, commentLiker) => {
-      if (commentLiker) {
-        const { likers } = commentLiker
-        for (let i = 0; i < likers.length; i++) {
-          let liker = likers[i]
-          if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
-            likers.splice(i, 1)
-            break
-          }
-        }
-        commentLiker.likers = likers
-        commentLiker.save(() => {})
-      }
-    })
-  } else if (likenId.substr(0, 3) == '005') { // reply
-    ReplyLiker.find({ replyId: likenId }, (err, replyLiker) => {
-      if (replyLiker) {
-        const { likers } = replyLiker
-        for (let i = 0; i < likers.length; i++) {
-          let liker = likers[i]
-          if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
-            likers.splice(i, 1)
-            break
-          }
-        }
-        replyLiker.likers = likers
-        replyLiker.save(() => {})
-      }
-    })
-  }
-}
-
 export const removeLikeNotification = (message) => {
   const { likenId, likerId } = message.like
+
+  removeLike(likenId, likerId)
 
   let UNLIKETYPE = ''
   if (likenId.substr(0, 3) == '012') { // sellpost
@@ -214,4 +165,53 @@ export const removeLikeNotification = (message) => {
       }
     }
   })
+}
+
+const removeLike = (likenId, likerId) => {
+  if (likenId.substr(0, 3) == '012') { // sellpost
+    SellpostLiker.find({ sellpostId: likenId }, (err, sellpostLiker) => {
+      if (sellpostLiker) {
+        const { likers } = sellpostLiker
+        for (let i = 0; i < likers.length; i++) {
+          let liker = likers[i]
+          if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
+            likers.splice(i, 1)
+            break
+          }
+        }
+        sellpostLiker.likers = likers
+        sellpostLiker.save(() => {})
+      }
+    })
+  } else if (likenId.substr(0, 3) == '004') { // comment
+    CommentLiker.find({ commentId: likenId }, (err, commentLiker) => {
+      if (commentLiker) {
+        const { likers } = commentLiker
+        for (let i = 0; i < likers.length; i++) {
+          let liker = likers[i]
+          if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
+            likers.splice(i, 1)
+            break
+          }
+        }
+        commentLiker.likers = likers
+        commentLiker.save(() => {})
+      }
+    })
+  } else if (likenId.substr(0, 3) == '005') { // reply
+    ReplyLiker.find({ replyId: likenId }, (err, replyLiker) => {
+      if (replyLiker) {
+        const { likers } = replyLiker
+        for (let i = 0; i < likers.length; i++) {
+          let liker = likers[i]
+          if ((liker.userId && liker.userId == likenId) || (liker.storeId && liker.storeId == likenId)) {
+            likers.splice(i, 1)
+            break
+          }
+        }
+        replyLiker.likers = likers
+        replyLiker.save(() => {})
+      }
+    })
+  }
 }

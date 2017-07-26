@@ -1,4 +1,4 @@
-import { getUser, getUserPrivacy, getUserImageList, getNotifications, updateNotification } from '../services/UserService.js'
+import { getUser, getUserPrivacy, getUserImageList, getNotifications, updateNotification, getInterests } from '../services/UserService.js'
 
 export const getUserHandler = () => (req, res) => {
   let { id: requestedId } = req.params
@@ -102,6 +102,27 @@ export const updateNotificationHandler = () => (req, res) => {
   } else {
     updateNotification(requestedId, topId, (status) => {
       res.json({ status })
+    })
+  }
+}
+
+export const getInterestsHandler = () => (req, res) => {
+  const requestedId = req.decoded._id
+  let { offset } = req.query
+  if (!offset || offset == '-1') {
+    offset =  Date.now()
+  } else {
+    offset = new Date(parseInt(offset))
+  }
+
+  if (requestedId == 'Guest') {
+    res.json({
+      status: 'failed',
+      reason: 'Guest'
+    })
+  } else {
+    getInterests(requestedId, offset, (result) => {
+      res.json(result)
     })
   }
 }
