@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import UserDetailsContainer from '~/containers/admin/user/UserDetailsContainer'
+import { link } from '~/components/admin/common/config'
 
 class User extends React.Component {
 
@@ -43,14 +44,14 @@ class User extends React.Component {
                                   <th scope="row">{index+1}</th>
                                   <td>
                                       <img src={user.avatarUrl} style={{width: 40, height: 40, marginRight: 10, borderRadius: 50}}/>
-                                      {user.username}
+                                      <a href={link.user(user.id)}>{user.username}</a>
                                   </td>
                                   <td>
                                       {
                                         stores.map(store =>
                                           <div key={store.id}>
                                                   <img src={store.avatarUrl} style={{width: 40, height: 40, marginRight: 10, marginBottom: 10, borderRadius: 50}}/>
-                                                  {store.storename}
+                                                  <a href={link.store(store.url)}>{store.storename}</a>
                                           </div>
                                         )
                                       }

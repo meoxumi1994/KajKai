@@ -23,18 +23,20 @@ class ChatTop extends React.Component {
       const { usersKey, usersMap, display } = chatListMap[mesId]
       const { addMember } = display
 
+      const headColor = currentChat.mesId == mesId? styles.highlightedButton:  styles.button
+
       return (
         <div style={currentChat.mesId == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
             <DisplayLabelContainer mesId={mesId} styles={styles}/>
             <div style={styles.iconGroupDiv}>
-                <button className="btn" style={styles.button} onClick={() => displayAddMember(mesId)}>
-                    <img style={styles.iconImg} src="/images/plus.ico"/>
+                <button className="btn" style={headColor} onClick={() => displayAddMember(mesId)}>
+                    <img style={{height: 15, width: 15, marginLeft: 3}} src="/images/chat/add.png"/>
                 </button>
-                <button className="btn" style={styles.button} onClick={() => displaySettings(mesId)}>
-                    <img style={styles.iconImg} src="/images/newSetting.png"/>
+                <button className="btn" style={headColor} onClick={() => displaySettings(mesId)}>
+                    <img style={{height: 18, width: 18, marginLeft: 2}} src="/images/chat/setting.png"/>
                 </button>
-                <button className="btn" style={styles.button} onClick={() => close(mesId, multipleKey)}>
-                    <img style={styles.hiddenImg} src="/images/blackClose.png"/>
+                <button className="btn" style={headColor} onClick={() => close(mesId, multipleKey)}>
+                    <img style={{height: 15, width: 15, marginLeft: 2}} src="/images/chat/close.png"/>
                 </button>
             </div>
             {
@@ -48,42 +50,37 @@ class ChatTop extends React.Component {
 
 const styles = {
     currentMainDiv: {
-        backgroundColor: '#c90c0c',
+        backgroundColor: '#911108',
         color: 'white',
         height: 30,
         width: 320
     },
     mainDiv: {
-        backgroundColor: 'grey',
+        backgroundColor: '#808080',
         color: 'white',
         height: 30,
         width: 320
     },
-    iconImg: {
-        width: 20,
-        height: 20,
-    },
-    hiddenImg: {
-        width: 20,
-        height: 20,
-    },
     button: {
-        backgroundColor: '#c90c0c',
+        backgroundColor: '#808080',
         width: 25,
         height: 25,
         paddingTop: 2,
-        paddingLeft: 2
+        paddingLeft: 2,
+        marginLeft: 2
     },
-    hiddenButton: {
-        backgroundColor: '#c90c0c',
+    highlightedButton: {
+        backgroundColor: '#911108',
+        // backgroundColor: 'grey',
         width: 25,
         height: 25,
-        paddingTop: 2,
-        paddingLeft: 2
+        paddingTop: 1,
+        paddingLeft: 1,
+        marginLeft: 2
     },
     iconGroupDiv: {
         position: 'absolute',
-        right: 10,
+        right: 3,
         top: 2
     },
     spliterHr: {

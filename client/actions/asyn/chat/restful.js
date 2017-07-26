@@ -17,12 +17,11 @@ export const getMesId = (id, person) => dispatch => {
 export const getMessages = (mesId, offset, type) => dispatch => {
     flem('/messages/'+mesId, {
         offset: offset,
-        length: 20
+        length: 5
     }).then((response) => {
 
           console.log('\n[API] /getMessages ', type, response);
           switch (type) {
-              case 'init':
               case 'load':
                   dispatch(addChat(response, true))
                   dispatch(setCurrentChat(response.mesId))
@@ -32,7 +31,6 @@ export const getMessages = (mesId, offset, type) => dispatch => {
                   break
               default:
                   break
-
           }
     })
 }
@@ -48,7 +46,7 @@ export const getChatList = (offset) => dispatch => {
           const { data, lazyLoad } = response
           dispatch(initChatList(data, lazyLoad))
           // if (data.length > 0) {
-          //     dispatch(getMessages(data[0].mesId, Date.now(), 'init'))
+          //     dispatch(getMessages(data[0].mesId, Date.now(), 'load'))
           //     dispatch(setCurrentChat(data[0].mesId))
           // }
     })

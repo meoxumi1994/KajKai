@@ -3,7 +3,7 @@ import { FormGroup, FormControl, HelpBlock, ControlLabel, Button , OverlayTrigge
 import ModalUploadImageContainer from '~/containers/chat/bottom/ModalUploadImageContainer'
 import EmoNavContainer from '~/containers/chat/bottom/EmoNavContainer'
 
-const ChatBottom = ({mesId, userId, sendMessage, styles}) => {
+const ChatBottom = ({mesId, userId, sendMessage}) => {
   let msg
   return (
     <div style={styles.inputForm}>

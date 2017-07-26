@@ -1,5 +1,6 @@
 import React from 'react'
 import FeedbackDetailsContainer from '~/containers/admin/dashboard/FeedbackDetailsContainer'
+import { link } from '~/components/admin/common/config'
 
 class Feedbacks extends React.Component {
     constructor(props) {
@@ -10,7 +11,6 @@ class Feedbacks extends React.Component {
         const { myKeyy, mapp,
                 onDetailsFeedback
               } = this.props
-
         return (
             <div style={{overflowY: 'scroll', height: 850}}>
                 <table className="table table-bordered">
@@ -36,17 +36,17 @@ class Feedbacks extends React.Component {
                                <td>{index + 1}</td>
                                <td>
                                    <img src={reporter.user.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
-                                   {reporter.user.username}
+                                   <a href={link.user(reporter.user.id)}>{reporter.user.username}</a>
                                </td>
                                <td>
                                    <img src={defendant.user.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
-                                   {defendant.user.username}
+                                   <a href={link.user(defendant.user.id)}>{defendant.user.username}</a>
                                </td>
                                <td>
                                     {reporter.content}
                                </td>
                                <td>
-                                    <p><a href={'https://kajkai.com/sellpost/'+defendant.sellpostId}>Link</a></p>
+                                    <p><a href={link.sellpost(defendant.sellpostId)} to="_blank">Link</a></p>
                                </td>
                                <td>
                                     {Date(time * 1000)}

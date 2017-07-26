@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal, ControlLabel, FormControl } from 'react-bootstrap'
+import { link } from '~/components/admin/common/config'
 
 class UserDetails extends React.Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class UserDetails extends React.Component {
               <Modal.Header closeButton>
               <Modal.Title>
                     <img src={user.avatarUrl} style={{width: 40, height: 40, marginRight: 10, borderRadius: 50}}/>
-                    {user.username}
+                    <a href={link.user(user.id)}>{user.username}</a>
               </Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -46,7 +47,7 @@ class UserDetails extends React.Component {
                                     stores.map(store =>
                                         <div key={store.id}>
                                             <img src={store.avatarUrl} style={{width: 40, height: 40, marginRight: 10, borderRadius: 50}}/>
-                                            {store.storename}
+                                            <a href={link.store(store.url)}>{store.storename}</a>
                                         </div>)
                                   }
                               </td>
