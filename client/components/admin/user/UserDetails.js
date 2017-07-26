@@ -18,6 +18,7 @@ class UserDetails extends React.Component {
 
         const { user, stores, ban } = mapp[current.id]
         let reason = ''
+
         return (
           <Modal style={{ marginTop: 120 }} show={display.details} onHide={() => close()}>
               <Modal.Header closeButton>
