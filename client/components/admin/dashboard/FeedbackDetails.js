@@ -7,8 +7,8 @@ class FeedbackDetails extends React.Component {
     }
 
     render() {
-        const { current, mapp,
-                close } = this.props
+        const { current, mapp, auth,
+                close, changePermission, save } = this.props
 
         if (mapp[current.id] == undefined) {
             return (
@@ -16,12 +16,13 @@ class FeedbackDetails extends React.Component {
             )
         }
 
-        const { reporter, defendant, reason, time, status } = mapp[current.id]
+        const { id, reporter, defendant, status, time } = mapp[current.id]
+        let reason = ''
 
         return (
           <Modal style={{ marginTop: 120 }} show={current.display} onHide={() => close()}>
               <Modal.Header closeButton>
-              <Modal.Title> {reporter.username} </Modal.Title>
+              <Modal.Title><p>Feedback #{id}</p> </Modal.Title>
               </Modal.Header>
               <Modal.Body>
                   <table className="table">
@@ -29,46 +30,55 @@ class FeedbackDetails extends React.Component {
                           <tr>
                               <th>Reporter</th>
                               <td>
-                                  <img src={reporter.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
-                                  {reporter.username}
-                                  <button className="btn btn-danger" style={{float: 'right'}}>
-                                      Disable
+                                  <img src={reporter.user.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
+                                  {reporter.user.username}
+                                  <button className={reporter.ban.status? "btn btn-primary": "btn btn-danger"} style={{float: 'right'}} onClick={() => changePermission('reporter', current.id, !reporter.ban.status)}>
+                                      {reporter.ban.status? "Activate": "Deactivate"}
                                   </button>
                               </td>
                           </tr>
                           <tr>
                               <th>Defendant</th>
                               <td>
-                                  <img src={defendant.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
-                                  {defendant.username}
-                                  <button className="btn btn-danger" style={{float: 'right'}}>
-                                      Disable
+                                  <img src={defendant.user.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
+                                  {defendant.user.username}
+                                  <button className={defendant.ban.status? "btn btn-primary": "btn btn-danger"} style={{float: 'right'}} onClick={() => changePermission('defendant', current.id, !defendant.ban.status)}>
+                                      {defendant.ban.status? "Activate": "Deactivate"}
                                   </button>
                               </td>
                           </tr>
                           <tr>
-                              <th>Url</th>
-                              <td><a href="google.com">Link</a></td>
+                              <th>Content</th>
+                              <td>{reporter.content}</td>
                           </tr>
                           <tr>
-                              <th>Reason</th>
-                              <td>{reason}</td>
+                              <th>Sellpost url</th>
+                              <td><p><a href={'https://kajkai.com/sellpost/'+defendant.sellpostId}>Link</a></p></td>
                           </tr>
                           <tr>
                               <th>Time</th>
-                              <td>{time}</td>
+                              <td>{Date(time*1000)}</td>
                           </tr>
                           <tr>
                               <th>Reason</th>
                               <td>
-                                  <FormControl style={{height: 100}} componentClass="textarea" placeholder="Please type decision" />
+                                  <FormControl onChange={(e) => reason = e.target.value} style={{height: 100}}
+                                  placeholder="Admin decision" componentClass="textarea"/>
                               </td>
                           </tr>
                       </tbody>
                   </table>
               </Modal.Body>
               <Modal.Footer>
-                  <button className="btn btn-primary">Save</button>
+                  <button className="btn btn-primary" onClick={() => save(
+                    { id: reporter.user.id,
+                      status: reporter.ban.status },
+                    { id: defendant.user.id,
+                      status: defendant.ban.status },
+                    auth.id,
+                    reason)}>
+                      Solve
+                  </button>
                   <button className="btn" onClick={() => close()}>Close</button>
               </Modal.Footer>
           </Modal>

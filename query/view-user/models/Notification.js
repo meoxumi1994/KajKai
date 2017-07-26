@@ -9,12 +9,13 @@ const NotificationSchema = new mongoose.Schema({
   replyId: {type: String},
   sellpostId: {type: String},
   actorId: {type: String},
+  name: {type: String},
   avatarUrl: {type: String},
-  username: {type: String},
   content: {type: String},
   time: {type: Date},
   storeName: {type: String},
   urlName: {type: String},
+  numberOfLike: {type: Number},
   likers: [LikerSchema]
 })
 

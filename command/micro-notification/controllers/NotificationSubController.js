@@ -49,7 +49,7 @@ export const addLikeCon = (message, next) => {
 };
 
 export const getListInterestWithSub = (message, next) => {
-    getInterestWithIn(message.longitude, message.latitude, message.categoryId, 10000, (listId) => {
+    getInterestWithIn(message.longitude, message.latitude, message.categoryId, message.range, (listId) => {
         next({status: 'success', listId: listId});
     })
 };

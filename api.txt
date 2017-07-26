@@ -86,6 +86,12 @@ GET /notification?offset=-1 {
     ]
 }
 
+PUT /notification { // update số lượng notification chưa đọc khi user clicks vào biểu tượng notification trên thanh Bar
+  topId: '' // id của notification trên cùng
+}, {
+  status: 'success|failed'
+}
+
 GET /user/:id {
     status:,
     user: {
@@ -1201,7 +1207,8 @@ GET /users?offset=0&length=10 {   // offset = index
                   id,
                   username,
               },
-              reason: ''
+              reason: '',
+              time
           },
           stores: [
               {
@@ -1216,27 +1223,52 @@ GET /users?offset=0&length=10 {   // offset = index
 }
 
 POST /ban {
-    feedbackId: '',
-    status: true | false,
-    adminId: '',
-    defendantId: '',
-    reason: '',
-    time: ''
+    admin: {
+      id: '',
+      reason: '',
+      time: ''
+    },
+    feedback: {
+      id: '',
+      status,
+    },
+    reporter: {
+      status: true | false,
+      id: '',
+    },
+    defendant: {
+      status: true | false,
+      id: '',
+    }
 }, {
-    feedbackId: '',
-    status: true | false,
-    adminId: '',
-    defendantId: '',
-    reason: '',
-    time: ''
+    status: "success|failed",
+    data: {
+        admin: {
+          id: '',
+          reason: '',
+          time: ''
+        },
+        feedback: {
+          id: '',
+          status,
+        },
+        reporter: {
+          status: true | false,
+          id: '',
+        },
+        defendant: {
+          status: true | false,
+          id: '',
+        }
+    }
 }
 
 POST /feedback {
-  ownerId: '',
-  sellpostId: '',
-  content: ''
+    ownerId: '',
+    sellpostId: '',
+    content: ''
 }, {
-  status: 'success|failed'
+    status: 'success|failed'
 }
 
 GET /feedbacks?offset=0&length=10 {
@@ -1250,6 +1282,15 @@ GET /feedbacks?offset=0&length=10 {
                   username,
                   avatarUrl
               },
+              ban: {
+                  status,
+                  admin: {
+                      id,
+                      username,
+                  },
+                  reason,
+                  time
+              },
               content: ''
           },
           defendant: {
@@ -1258,18 +1299,20 @@ GET /feedbacks?offset=0&length=10 {
                   username,
                   avatarUrl
               },
+              ban: {
+                  status,
+                  admin: {
+                      id,
+                      username,
+                  },
+                  reason,
+                  time
+              },
               sellpostId: ''
           },
-          ban: {
-              admin: {
-                  id,
-                  username,
-              },
-              status: true | false,
-              reason
-          },
+          reason,
           status: false | true
-          time: Date.now(),
+          time,
         }
     ]
 }

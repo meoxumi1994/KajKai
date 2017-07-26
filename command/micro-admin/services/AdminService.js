@@ -1,4 +1,4 @@
-import { Admin, BasicUser, User, Feedback } from '../models'
+import { Admin, User, Feedback } from '../models'
 import { sendBanEmail, sendUnBanEmail } from './EmailService'
 import { addBanPub, removeBanPub } from './BanPubService'
 import jwt from 'jsonwebtoken'
@@ -50,10 +50,10 @@ export const getUsers = (offset, length, next) => {
   })
 }
 
-export const getFeedbacks = (offet, length, next) => {
+export const getFeedbacks = (offset, length, next) => {
   Feedback.find({}, (err, feedbacks) => {
     if (feedbacks) {
-      let fbs = offet >= feedbacks.length ? [] : feedbacks.slice(offet, length)
+      let fbs = offset >= feedbacks.length ? [] : feedbacks.slice(offset, length)
       next({
         status: 'success',
         data: fbs.map((fb) => ({
@@ -64,6 +64,15 @@ export const getFeedbacks = (offet, length, next) => {
               username: fb.reporter.username,
               avatarUrl: fb.reporter.avatarUrl
             },
+            ban: {
+                status: fb.reporter.banned ? (fb.reporter.banned != 0) : false,
+                admin: {
+                    id: fb.reporter.bannedById,
+                    username: fb.reporter.bannedByAdminName,
+                },
+                reason: fb.reporter.lastReason,
+                time: fb.reporter.time ? fb.reporter.time.getTime() : ''
+            },
             content: fb.content
           },
           defendant: {
@@ -72,16 +81,18 @@ export const getFeedbacks = (offet, length, next) => {
               username: fb.reportee.username,
               avatarUrl: fb.reportee.avatarUrl
             },
+            ban: {
+                status: fb.reportee.banned ? (fb.reportee.banned != 0) : false,
+                admin: {
+                    id: fb.reportee.bannedById,
+                    username: fb.reportee.bannedByAdminName,
+                },
+                reason: fb.reportee.lastReason,
+                time: fb.reportee.time ? fb.reportee.time.getTime() : ''
+            },
             sellpostId: fb.sellpostId
           },
-          ban: {
-            admin: {
-              id: fb.bannedById,
-              username: fb.bannedByAdminName
-            },
-            status: fb.bannedBy != null,
-            reason: fb.reason
-          },
+          reason: fb.reason,
           status: fb.status != 0,
           time: fb.time.getTime()
         }))
@@ -95,70 +106,95 @@ export const getFeedbacks = (offet, length, next) => {
   })
 }
 
-export const banUser = (feedbackId, banned, adminId, userId, reason, next) => {
-  User.findOne({ id: userId }, (err, user) => {
-    if (user) {
-      if (!user.banned || user.banned != banned) {
-        if (banned == 0) {
-          removeBanPub(userId, reason)
-          sendUnBanEmail(user.username, user.email, reason)
-        } else {
-          addBanPub(userId, reason)
-          sendBanEmail(user.username, user.email, reason)
-        }
-        user.banned = banned
-        Admin.findById(adminId, (err, admin) => {
-          if (admin) {
-            const user = {
-              banned,
-              bannedById: admin._id.toString(),
-              bannedByAdminName: admin.adminName,
-              lastReason: reason
-            }
-            User.findOneAndUpdate({ id: userId }, user, () => {})
+export const banUsers = (admin, feedback, reporter, reportee, next) => {
+    Admin.findById(admin.id, (err, mAdmin) => {
+      if (mAdmin) {
+        const mPromises = []
+        if (reporter) {
+          mPromises.push(new Promise((resolve, reject) => {
+            User.findOne({ id: reporter.id }, (err, user) => {
+              if (user) {
+                user.banned = reporter.status ? 1 : 0,
+                user.bannedById = admin.id,
+                user.bannedByAdminName = mAdmin.adminName,
+                user.lastReason = admin.reason
 
-            if (feedbackId) {
-              const feedback = {
-                status: 1,
-                bannedById:  admin._id.toString(),
-                bannedByAdminName: admin.adminName,
-                reason,
-                time: Date.now()
+                user.save(() => {
+                  if (reporter.status) {
+                    addBanPub(user.id, admin.reason)
+                    sendBanEmail(user.username, user.email, admin.reason)
+                  } else {
+                    removeBanPub(user.id, admin.reason)
+                    sendUnBanEmail(user.username, user.email, admin.reason)
+                  }
+                })
+
+                resolve('ok')
+              } else {
+                reject('noReporterData')
               }
-              Feedback.findByIdAndUpdate(feedbackId, feedback, () => {})
-            }
+            })
+          }))
+        }
 
-            next('success')
-          } else {
-            next('noAdminData')
-          }
-        })
-      } else {
-        next('failed')
+      if (reportee) {
+        mPromises.push(new Promise((resolve, reject) => {
+          User.findOne({ id: reportee.id }, (err, user) => {
+            if (user) {
+              user.banned = reportee.status ? 1 : 0,
+              user.bannedById = admin.id,
+              user.bannedByAdminName = mAdmin.adminName,
+              user.lastReason = admin.reason
+
+              user.save(() => {
+                if (reportee.status) {
+                  addBanPub(user.id, admin.reason)
+                  sendBanEmail(user.username, user.email, admin.reason)
+                } else {
+                  removeBanPub(user.id, admin.reason)
+                  sendUnBanEmail(user.username, user.email, admin.reason)
+                }
+              })
+
+              resolve('ok')
+            } else {
+              reject('noReporteeData')
+            }
+          })
+        }))
       }
+
+      if (feedback && feedback.id) {
+        const mFeedback = {
+          status: 1,
+          bannedById:  admin.id,
+          bannedByAdminName: mAdmin.adminName,
+          reason: admin.reason,
+          time: Date.now()
+        }
+        Feedback.findByIdAndUpdate(feedback.id, mFeedback, () => {})
+      }
+
+      Promise.all(mPromises).then((results) => {
+        next('success')
+      }, (err) => {
+        next(err)
+      })
     } else {
-      next('noUserData')
+      next('noAdminData')
     }
   })
 }
 
-export const createFeedback = (userId, ownerId, content, sellpostId, next) => {
-  BasicUser.findOne({ id: userId }, (err, reporter) => {
+export const createFeedback = (reporterId, reporteeId, content, sellpostId, next) => {
+  User.findOne({ id: reporterId }, (err, reporter) => {
     if (reporter) {
-      BasicUser.findOne({ id: ownerId }, (err, reportee) => {
+      User.findOne({ id: reporteeId }, (err, reportee) => {
         if (reportee) {
           const feedback = new Feedback({
-            reporter: {
-              id: reporter.id,
-              username: reporter.username,
-              avatarUrl: reporter.avatarUrl
-            },
+            reporter,
             content,
-            reportee: {
-              id: reportee.id,
-              username: reportee.username,
-              avatarUrl: reportee.avatarUrl
-            },
+            reportee,
             sellpostId,
             status: 0,
             time: Date.now()

@@ -42,17 +42,11 @@ document.getElementsByTagName("BODY")[0].onscroll = () => {
         scrollLeft: document.getElementsByTagName("BODY")[0].scrollLeft, })
 }
 
-// store.dispatch({ type: 'server/hello'})
-// store.dispatch({ type: 'server/TestController'})
-
 ReactDOM.render(
     <AppContainer>
        <Provider store={store}>
           <Components/>
       </Provider>
     </AppContainer>,
-   //  <Provider store={store}>
-   //     <Components/>
-   // </Provider>,
   document.getElementById('rootadmin')
 )

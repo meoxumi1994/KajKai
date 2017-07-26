@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
 import Dashboard from '~/components/admin/dashboard'
-import { getNewFeed } from '~/actions/asyn/admin/dashboard/restful'
+import { getFeedbacks } from '~/actions/asyn/admin/dashboard/restful'
 
 const mapStateToProps = (state, ownProps) => {
     const { keyy, mapp } = state.inst.admin.dashboard
+    console.log('state', state.inst.admin.dashboard);
     return {
         keyy,
         mapp
@@ -12,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getNewFeed: () => {
-        dispatch(getNewFeed(Date.now(), 10))
+        dispatch(getFeedbacks(Date.now(), 10))
     }
 })
 

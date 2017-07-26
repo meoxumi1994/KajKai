@@ -21,9 +21,10 @@ export const banUser = (status, adminId, defendantId, reason) => dispatch => {
         time: Date.now()
     })
     .then((response) => {
-          console.log('response', response);
+          // console.log('response', response);
           if (response.result == "success") {
-              dispatch({type: 'ADMIN/USER/BAN', data: {adminId: response.adminId, defendantId: response.defendantId, reason: response.reason, status: response.status, time: response.time}})
+              dispatch({type: 'ADMIN/USER/BAN', data: {adminId: response.adminId, defendantId: response.defendantId, reason: response.reason, status: response.status, time: response.time, reason: response.reason}})
+              dispatch({type: 'ADMIN/USER/DISPLAY', data: { display: false, id: '' }})
           }
     })
 }

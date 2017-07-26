@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
   bannedById: {type: String},
   lastReason: {type: String},
   bannedByAdminName: {type: String},
+  time: {type: Date},
   storeList: [BasicStoreSchema]
 })
 
