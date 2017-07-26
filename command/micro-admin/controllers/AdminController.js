@@ -79,7 +79,7 @@ export const createFeedbackHandler = () => (req, res) => {
 }
 
 export const getFeedbackHandler = () => (req, res) => {
-  const { id } = req.query
+  const { id } = req.params
   getFeedback(id, (feedback) => {
     res.json(feedback)
   })
