@@ -86,9 +86,9 @@ const getClientFormatReply = (reply) => ({
   leadercommentid: reply.commentId,
   avatarUrl: reply.avatarUrl,
   name: reply.username,
-  content: reply.content,
+  content: reply.content ? reply.content : '',
   time: reply.time.getTime(),
-  numlike: reply.numberOfLike,
+  numlike: reply.numberOfLike ? reply.numberOfLike : 0,
   likes: reply.likers ? reply.likers.map((liker) => ({
     userid: liker.userId,
     username: liker.username,
