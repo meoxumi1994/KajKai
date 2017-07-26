@@ -20,7 +20,7 @@ class User extends React.Component {
             <div style={{width: '100%', height: '100%', borderWidth: 1, borderStyle: 'solid'}}>
 
                 <nav className="navbar navbar-default">
-                    <button disabled={!display.loadMore} onClick={() => loadMore(keyy.length)} style={{float: 'right', margin: '5px 10px 5px 5px'}} className="btn btn-default">{display.loadMore?'Load more':'Data is up to date'}</button>
+                    <button onClick={() => loadMore(keyy.length)} style={{float: 'right', margin: '5px 10px 5px 5px'}} className="btn btn-default">{display.loadMore?'Load more':'Data is up to date'}</button>
                 </nav>
 
                 <table className="table table-bordered">

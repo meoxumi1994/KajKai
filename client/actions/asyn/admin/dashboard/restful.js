@@ -1,10 +1,9 @@
 import { flem, flet } from '../../../support'
 
 export const getFeedbacks = (offset) => dispatch => {
-    const length = 5
     flem('/feedbacks',{
         offset: offset,
-        length: length
+        length: 50
     })
     .then((response) => {
         console.log('[API] /getFeedbacks', response);

@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
                     <li>
                         <a data-toggle="tab" href="#all">ALL</a>
                     </li>
-                    <button disabled={!display.loadMore} style={{float: 'right', marginTop: 4}} className="btn btn-default" onClick={() => loadFeedback(keyy.all.length)}>{display.loadMore? 'Load more': 'Data is up to date'}</button>
+                    <button style={{float: 'right', marginTop: 4}} className="btn btn-default" onClick={() => loadFeedback(keyy.all.length)}>{display.loadMore? 'Load more': 'Data is up to date'}</button>
                 </ul>
                 <div className="tab-content">
                     <div id="new" className="tab-pane fade in active">
