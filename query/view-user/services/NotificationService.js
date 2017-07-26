@@ -1,4 +1,4 @@
-import { User, BasicStore, IDSellpostStore, IDCommentSellpost, IDReplyCommentSellpost } from '../models'
+import { User, BasicStore, IDSellpostStore, IDCommentSellpost, IDReplyCommentSellpost, SellpostLiker, CommentLiker, ReplyLiker } from '../models'
 import { NotificationType } from '../enum'
 
 export const createLikeSellpostNotification = (sellpostId) => {
