@@ -8,12 +8,15 @@ class Home extends React.Component {
     }
 
     render() {
+
+        const { logout } = this.props
+
         return (
             <div className="container" style={{width: '100%', height: '100%', backgroundColor: 'white', zIndex: 100}}>
                 <div style={{width: '15%', height: '100%', position: 'fixed', left: 0, backgroundColor: 'white'}}>
                     <div style={styles.left.leftHeader}>
                         <div style={{marginTop: 20}}>
-                          <img src="./images/kajkai.png" style={{width: 40, height: 40, marginRight: 10}}/>
+                          <img src="./images-admin/kajkai.png" style={{width: 40, height: 40, marginRight: 10}}/>
                           <label style={{fontSize: 20}}>KAJKAI ADMINSTRATION</label>
                         </div>
                     </div>
@@ -33,8 +36,11 @@ class Home extends React.Component {
                           <div id="dashboard" className="tab-pane fade in active" style={styles.center.mainDiv}>
                               <div style={styles.center.header}>
                                   <div style={{marginTop: 18}}>
-                                      <img src="./images/admin/details.png" style={{width: 35, height: 35, marginRight: 10}}/>
+                                      <img src="./images-admin/details.png" style={{width: 35, height: 35, marginRight: 10}}/>
                                       <label style={{fontSize: 20, marginTop: 10}}> DASHBOARD </label>
+                                      <button style={{float: 'right', marginRight: 30}} className="btn btn-default" onClick={() => logout()}>
+                                            Logout
+                                      </button>
                                   </div>
                               </div>
                               <DashboardContainer/>
@@ -42,14 +48,18 @@ class Home extends React.Component {
                           <div id="user" className="tab-pane fade" style={styles.center.mainDiv}>
                               <div style={styles.center.header}>
                                   <div style={{marginTop: 18}}>
-                                      <img src="./images/admin/avatar.png" style={{width: 40, height: 40, marginRight: 10}}/>
+                                      <img src="./images-admin/avatar.png" style={{width: 40, height: 40, marginRight: 10}}/>
                                       <label style={{fontSize: 20, marginTop: 10}}> USER </label>
+                                      <button style={{float: 'right', marginRight: 30}} className="btn btn-default" onClick={() => logout()}>
+                                            Logout
+                                      </button>
                                   </div>
                               </div>
                               <UserContainer/>
                           </div>
                     </div>
                 </div>
+
             </div>
         )
     }

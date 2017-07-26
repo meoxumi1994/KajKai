@@ -1338,3 +1338,7 @@ GET /admin {
     adminName:
   }
 }
+
+GET /logout: {
+  status: 'success|failed',
+}
