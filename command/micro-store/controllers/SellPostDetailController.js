@@ -20,7 +20,7 @@ export const updateSellPostDetailCon = () => {
 export const dellSellPostDetailCon = () => {
     return (req, res) => {
         dellSellPostDetail(req.body.sellpostid, (sellPostDetail) => {
-            updateSellPost({sellpostid: req.body.sellpostid, products_order: req.body.postrows_order}, () => {
+            getSellPostDetailBasicInfo({sellpostid: req.body.sellpostid, products_order: req.body.postrows_order}, () => {
                 res.json(req.body)
             })
         })
