@@ -68,7 +68,7 @@ export const getFeedbacks = (offset, length, next) => {
               avatarUrl: fb.reporter.avatarUrl
             },
             ban: {
-                status: fb.reporter.banned && fb.reporter.banned != 0,
+                status: 'abc', //fb.reporter.banned && fb.reporter.banned != 0,
                 admin: {
                     id: fb.reporter.bannedById,
                     username: fb.reporter.bannedByAdminName,
