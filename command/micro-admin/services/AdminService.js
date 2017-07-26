@@ -34,7 +34,7 @@ export const getUsers = (offset, length, next) => {
     if (users) {
       next({
         status: 'success',
-        data: offset >= users.length ? [] : users.slice(offset, length).map((user) => ({
+        data: offset >= users.length ? [] : users.splice(offset, length).map((user) => ({
           user: {
             id: user.id,
             username: user.username,
