@@ -41,6 +41,17 @@ const editsellpost = (state = {
     postrows_order: [],
 }, action) => {
     switch (action.type) {
+        case 'INST_STORE_PAGE_CHANGE':
+            if(action.key == 'showEditSellPost'){
+                return {
+                    category: '',
+                    description: '',
+                    status: '',
+                    ship: '',
+                    postrows_order: [],
+                }
+            }
+            return state
         case 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_POST_ROW':
             return {...state,
                 postrows_order: [...state.postrows_order, 'postrow' + state.postrows_order.length],

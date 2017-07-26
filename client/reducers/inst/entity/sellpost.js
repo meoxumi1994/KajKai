@@ -1,4 +1,4 @@
-import { updateLikes } from '~/reducers/support'
+import { updateLikes, updateFollows } from '~/reducers/support'
 
 const sellpost = (state = {
 
@@ -21,6 +21,18 @@ const sellpost = (state = {
                         ...state[id],
                         numlike: (state[id].numlike?state[id].numlike:0) + (action.data.status=='like'?1:-1),
                         likes: updateLikes(state[id].likes, action.data.id, action.data.name )
+                    }
+                }
+            }
+            return state
+        case 'client/FOLLOW':
+            if(action.data.type=='sellpost'){
+                const id = action.data.id
+                return {...state,
+                    [id] : {
+                        ...state[id],
+                        numfollow: (state[id].numlike?state[id].numlike:0) + (action.data.status=='add'?1:-1),
+                        follows: updateFollows(state[id].follows, action.data.userid )
                     }
                 }
             }

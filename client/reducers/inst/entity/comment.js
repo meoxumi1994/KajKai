@@ -16,7 +16,7 @@ const comment = (state = {
                     [id] : {
                         ...state[id],
                         numlike: (state[id].numlike?state[id].numlike:0) + (action.data.status=='like'?1:-1),
-                        likes: updateLikes(state[id].likes, action.data.userId, action.data.userName ),
+                        likes: updateLikes(state[id].likes, action.data.id, action.data.name ),
                     }
                 }
             }

@@ -103,7 +103,6 @@ class App extends React.Component {
         const { messagesKey, messagesMap, showProgress, closeProgress } = this.props
         const { chat, styles } = this.props
         const { multipleKey  } = chat
-        console.log('App App App App App')
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
                 <Bar/>

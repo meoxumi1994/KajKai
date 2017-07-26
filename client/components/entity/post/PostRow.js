@@ -11,7 +11,6 @@ class PostRow extends React.Component {
     }
     render(){
         const { id, type, products, sellpostId, products_order, content, images, canEdit } = this.props
-        console.log(this.props)
         const Row = () => {
             switch (type) {
                 case 'listproduct':

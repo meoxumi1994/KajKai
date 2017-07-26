@@ -6,6 +6,7 @@ class Notification extends React.Component {
     }
     render(){
         const { onClick, notification } = this.props
+        console.log('notifications', notification)
         return(
             <div>
                 <img src={notification.src} width={40} height={40}/>
