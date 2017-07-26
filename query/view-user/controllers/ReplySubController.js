@@ -3,13 +3,13 @@ import { NotificationType } from '../enum'
 import { addIDReplyCommentSellpost } from '../services/IDService'
 
 export const createReplyNotification = (message) => {
-  const { parentCommentId: commentId, sCommentId: replyId, posterId: userId, sellPostId: sellpostId, minorPostId: minorpostId, content, time } = message.sComment
+  const { parentCommentId: commentId, sCommentId: replyId, posterId: replierId, sellPostId: sellpostId, minorPostId: minorpostId, content, time } = message.sComment
 
   addIDReplyCommentSellpost(replyId, commentId, sellpostId)
 
   const mPromises = []
   mPromises.push(new Promise((resolve, reject) => {
-    User.findOne({ id: commenterId }, (err, user) => {
+    User.findOne({ id: replierId }, (err, user) => {
       if (user) {
         const replier = {
           actorId: likerId,
@@ -25,7 +25,7 @@ export const createReplyNotification = (message) => {
     })
   }))
   mPromises.push(new Promise((resolve, reject) => {
-    BasicStore.findOne({ id: commenterId }, (err, basicStore) => {
+    BasicStore.findOne({ id: replierId }, (err, basicStore) => {
       if (basicStore) {
         const replier = {
           actorId: likerId,

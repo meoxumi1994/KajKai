@@ -3,7 +3,7 @@ import { NotificationType } from '../enum'
 import { addIDCommentSellpost } from '../services/IDService'
 
 export const createCommentNotification = (message) => {
-  const { fCommentId: commentId, commenterId, sellPostId: sellpostId, time, content } = message.fComment
+  const { fCommentId: commentId, posterId: commenterId, sellPostId: sellpostId, time, content } = message.fComment
 
   addIDCommentSellpost(commentId, sellpostId)
 
