@@ -1,6 +1,6 @@
 import mongoose from '../datasource'
 import BasicStoreSchema from './BasicStore'
-import UserSchema from './BasicUser'
+import UserSchema from './User'
 
 const FeedbackSchema = new mongoose.Schema({
   reporter: {type: UserSchema},
