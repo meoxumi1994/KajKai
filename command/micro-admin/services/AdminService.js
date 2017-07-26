@@ -50,13 +50,13 @@ export const getUsers = (offset, length, next) => {
   })
 }
 
-export const getFeedbacks = (offet, length, next) => {
+export const getFeedbacks = (offset, length, next) => {
   console.log('offset: ', offset);
   console.log('length: ', length);
   Feedback.find({}, (err, feedbacks) => {
     if (feedbacks) {
       console.log('feedbacks: ', feedbacks);
-      let fbs = offet >= feedbacks.length ? [] : feedbacks.slice(offet, length)
+      let fbs = offset >= feedbacks.length ? [] : feedbacks.slice(offset, length)
       next({
         status: 'success',
         data: fbs.map((fb) => ({
