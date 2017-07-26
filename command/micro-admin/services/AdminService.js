@@ -53,7 +53,6 @@ export const getUsers = (offset, length, next) => {
 export const getFeedbacks = (offset, length, next) => {
   Feedback.find({}, (err, feedbacks) => {
     if (feedbacks) {
-      console.log('feedbacks: ', feedbacks);
       let fbs = offset >= feedbacks.length ? [] : feedbacks.slice(offset, length)
       next({
         status: 'success',
@@ -66,7 +65,7 @@ export const getFeedbacks = (offset, length, next) => {
               avatarUrl: fb.reporter.avatarUrl
             },
             ban: {
-                status: (fb.reporter.banned && fb.reporter.banned != 0),
+                status: fb.reporter.banned ? (fb.reporter.banned != 0) : false,
                 admin: {
                     id: fb.reporter.bannedById,
                     username: fb.reporter.bannedByAdminName,
@@ -83,7 +82,7 @@ export const getFeedbacks = (offset, length, next) => {
               avatarUrl: fb.reportee.avatarUrl
             },
             ban: {
-                status: (fb.reportee.banned && fb.reportee.banned != 0),
+                status: fb.reportee.banned ? (fb.reportee.banned != 0) : false,
                 admin: {
                     id: fb.reportee.bannedById,
                     username: fb.reportee.bannedByAdminName,
