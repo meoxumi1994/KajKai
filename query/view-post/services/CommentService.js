@@ -45,18 +45,10 @@ export const getComments = (requesterId, postType, id, offset, next) => {
 
 export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
   if (!comments) {
-    if (isFirst) {
-      return {
-        status: 'success',
-        offsetleadercomments: -2,
-        leadercomments: []
-      }
-    } else {
-      return {
-        status: 'success',
-        offset: -2,
-        leadercomments: []
-      }
+    return {
+      status: 'success',
+      offset: -2,
+      leadercomments: []
     }
   }
   const oneHour = 3600000
@@ -115,18 +107,10 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
     }
   }
 
-  if (isFirst) {
-    return {
-      status: 'success',
-      offsetleadercomments: cOffset,
-      leadercomments: mComments
-    }
-  } else {
-    return {
-      status: 'success',
-      offset: cOffset,
-      leadercomments: mComments
-    }
+  return {
+    status: 'success',
+    offset: cOffset,
+    leadercomments: mComments
   }
 }
 
