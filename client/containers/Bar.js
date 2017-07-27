@@ -38,9 +38,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onLogoutClick: () => {
         dispatch(logOut())
     },
-    // setMultiChat: (value) => {
-    //     dispatch({type: 'MULTIPLE_CHAT', data: value})
-    // },
     onLoadCategory: () => {
         dispatch(loadCategory())
     },
@@ -60,7 +57,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch({ type: 'INST_BAR_CHANGE', key: key, value: value })
     },
     resetChatQuantity: () => {
-        dispatch({type: 'server/RESET_UNREAD_CHATS_QUANTITY'})
+        // dispatch({type: 'server/RESET_UNREAD_CHATS_QUANTITY'})
     }
 })
 

@@ -11,6 +11,12 @@ const center = (state = {
             if (state.multipleKey.indexOf(action.data.mesId) != -1) {
                 return state
             }
+
+            // const keyy = state.multipleKey
+            // if (keyy.indexOf(action.data.mesId) == -1) {
+            //     keyy.push(action.data.mesId)
+            // }
+
             const initMultiMessages = {
               ...state,
               multipleKey: [
@@ -19,10 +25,13 @@ const center = (state = {
               ],
               messagesMap: {
                   ...state.messagesMap,
-                  [action.data.mesId]: action.data.messages.reverse()
+                  [action.data.mesId]: [
+                        ...action.data.messages.reverse(),
+                        // ...state.messagesMap[action.data.mesId] == undefined? []: state.messagesMap[action.data.mesId]
+                  ]
               }
             }
-            console.log('\n[Reducer Center] INIT_MULTI_MESSAGES', action, initMultiMessages);
+            // console.log('\n[Reducer Center] INIT_MULTI_MESSAGES', action, initMultiMessages);
             return initMultiMessages
 
   //---------------------------------------------------------------------------------------------------
@@ -37,7 +46,7 @@ const center = (state = {
                       ]
                   }
               }
-              console.log('\n[Reducer Center] UPDATE_MESSAGE ', action, updateMessage)
+              // console.log('\n[Reducer Center] UPDATE_MESSAGE ', action, updateMessage)
               return updateMessage
 
 //---------------------------------------------------------------------------------------------------
@@ -53,6 +62,7 @@ const center = (state = {
                     action.data.mesId
                 ],
                 messagesMap: {
+                    ...state.messagesMap,
                     [action.data.mesId]: []
                 }
             }
