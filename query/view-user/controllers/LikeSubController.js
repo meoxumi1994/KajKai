@@ -181,6 +181,7 @@ const removeLike = (likenId, likerId) => {
   if (likenId.substr(0, 3) == '012') { // sellpost
     SellpostLiker.find({ sellpostId: likenId }, (err, sellpostLiker) => {
       if (sellpostLiker) {
+        console.log('sellpostLiker: ', sellpostLiker);
         let { likers } = sellpostLiker
         if (!likers) {
           likers = []
