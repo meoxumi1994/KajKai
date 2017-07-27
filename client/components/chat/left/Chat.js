@@ -20,7 +20,7 @@ class Chat extends React.Component {
         }
 
         const { usersKey, usersMap, lastMessage, time, displayLabel } = chatListMap[mesId]
-        // console.log(lastMessage);
+
         let label = displayLabel
         if (label == undefined || label == '') {
             if (usersKey.length == 0) {
@@ -42,12 +42,12 @@ class Chat extends React.Component {
               <div className="col col-xs-2" style={styles.avatarDiv}>
                   {
                     lastMessage == undefined?
-                    <img src='./images/avatardefault.png' style={styles.avatarImg}/>
+                    <img src='/images/avatardefault.png' style={styles.avatarImg}/>
                     :
                     usersKey.length == 1?
                     <img src={usersMap[usersKey[0]].avatarUrl} key={usersKey[0]} style={styles.avatarImg}/>
                     :
-                    <img src='./images/groupAvatar.png' key={JSON.stringify(usersKey)} style={styles.avatarImg}/>
+                    <img src='/images/groupAvatar.png' key={JSON.stringify(usersKey)} style={styles.avatarImg}/>
                   }
               </div>
 

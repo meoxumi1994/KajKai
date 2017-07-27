@@ -21,7 +21,7 @@ export const getMessages = (mesId, offset, type) => dispatch => {
     }).then((response) => {
           console.log('\n[API] /getMessages ', response);
           if (type == 'init') {
-              dispatch(addChat(response, true))
+              dispatch(addChat(response))
               dispatch(setCurrentChat(response.mesId))
           } else {
               dispatch({type: 'UPDATE_MESSAGE', data: { mesId: response.mesId, messages: response.messages}})

@@ -11,26 +11,6 @@ const left = (state = {
 }, action) => {
     switch (action.type) {
 
-//------------------------------------------------------------------------------
-      case 'CHAT/UPDATE':
-          return {
-              ...state,
-              chatListMap: {
-                  ...state.chatListMap,
-                  [action.data.mesId]: chatMap(state.chatListMap[action.data.mesId], action)
-              }
-          }
-
-//------------------------------------------------------------------------------
-      case 'client/UPDATE_UI':
-          return {
-              ...state,
-              chatListMap: {
-                  ...state.chatListMap,
-                  [action.data.mesId]: chatMap(state.chatListMap[action.data.mesId], action)
-              }
-          }
-
 /**
  ** INITIAL
 **/
@@ -236,7 +216,26 @@ const left = (state = {
                 [action.data.mesId]: chatMap(state.chatListMap[action.data.mesId], action)
             }
           }
+//------------------------------------------------------------------------------
+      case 'CHAT/UPDATE':
+          return {
+              ...state,
+              chatListMap: {
+                  ...state.chatListMap,
+                  [action.data.mesId]: chatMap(state.chatListMap[action.data.mesId], action)
+              }
+          }
 
+//------------------------------------------------------------------------------
+      case 'client/UPDATE_UI':
+          return {
+              ...state,
+              chatListMap: {
+                  ...state.chatListMap,
+                  [action.data.mesId]: chatMap(state.chatListMap[action.data.mesId], action)
+              }
+          }
+//------------------------------------------------------------------------------
         default:
           return state
 

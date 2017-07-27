@@ -35,34 +35,6 @@ const chatMap = (state={
 
     switch (action.type || subAction.type) {
 
-        case 'client/UPDATE_UI':
-            return {
-                ...state,
-                displayLabel: action.data.data.groupName
-            }
-
-        case 'CHAT/UPDATE':
-            switch (action.subType) {
-              case 'LOAD_IMAGES_URL':
-                  if (state.imagesUrl.indexOf(action.data.url) != -1) {
-                      return state
-                  }
-                  return {
-                      ...state,
-                      imagesUrl: [
-                          ...state.imagesUrl,
-                          action.data.url
-                      ]
-                  }
-              case 'RESET_IMAGES_URL':
-                  return {
-                      ...state,
-                      imagesUrl: []
-                  }
-              default:
-                  return state
-            }
-
 //------------------------------------------------------------------------------
         case 'INIT_CHAT_LIST':
             return {
@@ -249,7 +221,33 @@ const chatMap = (state={
                     }
                   }
               }
+              case 'client/UPDATE_UI':
+                  return {
+                      ...state,
+                      displayLabel: action.data.data.groupName
+                  }
 
+              case 'CHAT/UPDATE':
+                  switch (action.subType) {
+                    case 'LOAD_IMAGES_URL':
+                        if (state.imagesUrl.indexOf(action.data.url) != -1) {
+                            return state
+                        }
+                        return {
+                            ...state,
+                            imagesUrl: [
+                                ...state.imagesUrl,
+                                action.data.url
+                            ]
+                        }
+                    case 'RESET_IMAGES_URL':
+                        return {
+                            ...state,
+                            imagesUrl: []
+                        }
+                    default:
+                        return state
+                  }
 //------------------------------------------------------------------------------
         default:
             return state
