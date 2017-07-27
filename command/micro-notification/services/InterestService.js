@@ -25,7 +25,8 @@ export const getInterest = (id, next) => {
 
 export const addNewInterest = (userId, categoryId, longitude, latitude, next) => {
     const interest = new Interest({userId, categoryId, location: [longitude, latitude]});
-    interest.save(() => {
+    interest.save((err) => {
+        console.log('INTEREST ERR ' + (err ? JSON.stringify(err) : null));
         getInterestInfo(interest, (info) => {
             next(info);
             addInterestPub(info);
@@ -64,7 +65,12 @@ export const getInterestInfo = (interest, next) => {
 
 export const getInterestWithIn = (longitude, latitude, categoryId, radius, next) => {
     let center = {type: "Point", coordinates: [longitude, latitude]};
-    Interest.aggregate([{$match: {categoryId: categoryId}}, {$geoNear: {near: center, maxDistance: radius}}], (err, docs) => {
+    Interest.aggregate([{$geoNear: {
+            near: center,
+            maxDistance: radius,
+            distanceField: "dist.calculated",
+            spherical: true}},
+        {$match: {categoryId: categoryId}}], (err, docs) => {
         console.log('this ' + err + ' ' + docs);
         let listUserId = [];
         if (docs && docs.length && docs.length > 0) {

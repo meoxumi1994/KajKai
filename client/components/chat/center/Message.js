@@ -32,12 +32,12 @@ const Message = ({message, time, user, styles, showAvatar}) => {
                   {
                     showAvatar? <small className="text-muted" >{username}</small>: undefined
                   }
-                  <ul style={styles.bounds}>
+                  <ul style={type == 'notification'? undefined: styles.bounds}>
                       {
                           type == 'icon'?
                           <img src={"./images/chatIcons/Baby/"+text.substring(1, text.length-1)+".png"} style={{maxWidth: 80, maxHeight: 80}}/>
                           :
-                          text.trim() == ''? undefined: text
+                          text.trim() != '' && type == 'message'? text: undefined
                       }
                       {}
                       <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={picturePopup}>

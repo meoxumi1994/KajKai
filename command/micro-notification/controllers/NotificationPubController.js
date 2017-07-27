@@ -1,7 +1,6 @@
 import redis from 'redis'
 import config from '../config/pubSubConfig'
 import { getUUID } from '../utils/utils'
-import {socketIO} from "../../../client/fakedata";
 
 export const authoriseToken = (token, next) => {
     const sub = redis.createClient(config);

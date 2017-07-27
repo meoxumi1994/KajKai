@@ -4,13 +4,18 @@ import { Link } from 'react-router-dom'
 
 class Settings extends React.Component {
 
+    constructor(props) {
+        super(props)
+    }
+
     render() {
       const { mesId, user, chatListMap } = this.props
-      const { close, changeGroupName } = this.props
-      const { usersKey, usersMap } = chatListMap[mesId]
-      const show = chatListMap[mesId].display.setting
+      const { close, changeGroupName, editing } = this.props
+      const { usersKey, usersMap, displayLabel, display } = chatListMap[mesId]
 
+      const show = display.setting
       let groupName = ''
+
       return(
           <div>
               <Modal style={{ marginTop: 120 }} show={show} onHide={() => close(mesId)}>
@@ -30,17 +35,24 @@ class Settings extends React.Component {
                               <tbody className="default-thead">
                                   <tr style={{height: 50}}>
                                       <th style={{width: 200}}>Label</th>
-                                      <td>
-                                          <input ref={ref => groupName = ref} className="from-control"/>
-                                          <button style={{position: 'absolute', right: 20, width: 70}} className="btn btn-default">Save</button>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <th>Color</th>
-                                      <td>
-                                          <button type="button" className="btn" style={{backgroundColor: '#cc3333', color: 'white'}}>Red</button>
-                                          <button type="button"  style={{position: 'absolute', right: 20, width: 70}} className="btn btn-default">Change</button>
-                                      </td>
+                                      {
+                                          display.editingLabel?
+                                          <td>
+                                              <input ref={ref => groupName = ref} className="from-control"/>
+
+                                              <ul style={{float: 'right'}} className="list-unstyled">
+                                                  <li><button type="submit" style={{width: 70}} className="btn btn-success">Save</button></li>
+                                                  <li><button type="button" onClick={() => editing(mesId)} style={{width: 70, marginTop: 5}} className="btn btn-danger">Cancel</button></li>
+                                              </ul>
+
+
+                                          </td>
+                                          :
+                                          <td>
+                                              <label>{displayLabel}</label>
+                                              <button type="button" onClick={() => editing(mesId)} style={{position: 'absolute', right: 20, width: 70}} className="btn btn-default">Edit</button>
+                                          </td>
+                                      }
                                   </tr>
                                   <tr>
                                       <th>Members</th>
@@ -49,7 +61,7 @@ class Settings extends React.Component {
                                           {
                                             usersKey.map( memberId =>
                                               <div key={memberId}>
-                                                  <img src={usersMap[memberId].avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginBottom: 5}}/>
+                                                  <img src={usersMap[memberId].avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginBottom: 5, marginRight: 5}}/>
                                                   <label>{usersMap[memberId].username}</label>
 
 
