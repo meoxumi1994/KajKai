@@ -23,8 +23,8 @@ export default {
         controller: 'NotificationSubController',
         method: 'addLikeCon'
     },
-    'INTEREST.GetUserInterested': {
+    'STORE.Created': {
         controller: 'NotificationSubController',
-        method: 'getListInterestWithSub'
-    }
+        method: 'notifyInterestSub'
+    },
 }
