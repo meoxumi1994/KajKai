@@ -8,6 +8,7 @@ export const createChat = (message) => {
   })
 
   if (name) chat.name = name
+  else chat.name = ''
   if (users) {
     const mPromises = []
     users.map((user) => {
@@ -67,9 +68,8 @@ export const updateChat = (message) => {
 
         Promise.all(mPromises).then((basicUsers) => {
           chat.users = basicUsers
-          if (name) {
-            chat.name = name
-          }
+          if (name) chat.name = name
+          else chat.name = ''
           chat.save(() => {})
 
           chat.users.map((user) => {
@@ -79,9 +79,8 @@ export const updateChat = (message) => {
                 for (let i = 0; i < chats.length; i++) {
                   if (chats[i].id == chat.id) {
                     chats[i].users = basicUsers
-                    if (name) {
-                      chats[i].name = name
-                    }
+                    if (name) chats[i].name = name
+                    else chat[i].name = ''
                     break
                   } else if (i == chats.length - 1) {
                     chats.push(chat)
