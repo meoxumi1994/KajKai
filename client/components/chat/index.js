@@ -11,51 +11,35 @@ class Chat extends React.Component {
     }
 
     render() {
-      let { messagesKey, messagesMap, styles } = this.props
+      const { styles, center } = this.props
+      const { messagesKey, messagesMap } = center
+
+      console.log('messagesKey', messagesKey);
       return(
-        <div style={mainStyles.mainDiv} className="input-group">
-            <div style={mainStyles.left}>
-                <ChatLeftContainer multiChat={false}/>
-            </div>
-            <div style={mainStyles.spliter}>
-            </div>
-            <div style={mainStyles.right}>
-                <ChatCenterContainer
-                    mesId={messagesKey[0]}
-                    messagesMap={messagesMap}
-                    styles={styles}/>
-            </div>
+        <div>
+            {
+              messagesKey.map(
+                  (mesId, index) => {
+                        return (
+                          <div key={mesId} style={{
+                              position: 'fixed',
+                              bottom: 0,
+                              backgroundColor: 'white',
+                              width: 320 ,
+                              height: 400,
+                              zIndex: 100,
+                              marginLeft: index * 325 + 5
+                          }}>
+                              <ChatCenterContainer
+                                  mesId={mesId}/>
+                          </div>
+                      )
+                  }
+            )
+          }
         </div>
       )
     }
 }
 
-
 export default Chat
-
-const mainStyles = {
-    mainDiv: {
-        height: '100%',
-        width: '100%',
-    },
-    left: {
-        width: '25%',
-        height: '100%',
-        position: 'fixed',
-        backgroundColor: 'white',
-        left: 0,
-    },
-    spliter: {
-        width: '0.05%',
-        height: '100%',
-        position: 'fixed',
-        backgroundColor: 'grey',
-        left: '25%'
-    },
-    right: {
-        width: '60%',
-        height: '100%',
-        position: 'fixed',
-        left: '25.05%',
-    },
-}

@@ -1,4 +1,4 @@
- import React from 'react'
+import React from 'react'
 import { Popover, Row } from 'react-bootstrap'
 import Message from './Message'
 import ReactDOM from 'react-dom'
@@ -10,18 +10,8 @@ class MessageList extends React.Component {
     }
 
     componentDidMount() {
-        // ReactDOM.findDOMNode(this.refs.bottom).addEventListener('scroll', this.listenScrollEvent);
         this.scrollToBottom()
     }
-
-    // componentWillUnmount() {
-    //     ReactDOM.findDOMNode(this.refs.bottom).removeEventListener('scroll', this.listenScrollEvent);
-    // }
-    //
-    // listenScrollEvent(e) {
-    //     console.log('Scroll event detected!', e);
-    // }
-    // onScroll={() => this.listenScrollEvent.bind(this)}
 
     componentDidUpdate(prevProps, prevState) {
         this.scrollToBottom()
@@ -33,8 +23,8 @@ class MessageList extends React.Component {
     }
 
     render() {
-        const { mesId, messagesMap,
-                user, chatListMap,
+        const { mesId,
+                user, chatListMap, messagesMap,
                 getMessages
               } = this.props
 

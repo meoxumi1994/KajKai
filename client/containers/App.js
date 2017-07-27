@@ -6,7 +6,6 @@ import { getChatList } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
     const { width, height } = state.inst.app
-    const { multipleKey, messagesMap } = state.inst.chat.center
     const { showModal } = state.inst.entity.thumnail.progress
     return ({
         width: width,
@@ -14,10 +13,7 @@ const mapStateToProps = (state, ownProps) => {
         username: state.user.username,
         auth: state.auth,
         children: ownProps.children,
-        messagesKey: multipleKey,
         showProgress: showModal,
-        chat: state.inst.chat.center,
-        messagesMap,        
     })
 }
 

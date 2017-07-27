@@ -4,8 +4,8 @@ export const initChatList = (data, lazyLoad) => ({
     lazyLoad: lazyLoad
 })
 
-export const addChat = (data, multiChat) => ({
-    type: multiChat? 'INIT_MULTI_MESSAGES': 'INIT_SINGLE_MESSAGES',
+export const addChat = (data) => ({
+    type: 'INIT_MESSAGES',
     data: data
 })
 
