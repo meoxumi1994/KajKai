@@ -25,7 +25,8 @@ export const getInterest = (id, next) => {
 
 export const addNewInterest = (userId, categoryId, longitude, latitude, next) => {
     const interest = new Interest({userId, categoryId, location: [longitude, latitude]});
-    interest.save(() => {
+    interest.save((err) => {
+        console.log('INTEREST ERR ' + (err ? JSON.stringify(err) : null));
         getInterestInfo(interest, (info) => {
             next(info);
             addInterestPub(info);
