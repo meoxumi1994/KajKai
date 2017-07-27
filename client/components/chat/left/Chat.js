@@ -20,7 +20,7 @@ class Chat extends React.Component {
         }
 
         const { usersKey, usersMap, lastMessage, time, displayLabel } = chatListMap[mesId]
-
+        // console.log(lastMessage);
         let label = displayLabel
         if (label == undefined || label == '') {
             if (usersKey.length == 0) {
@@ -58,7 +58,7 @@ class Chat extends React.Component {
                       <div style={{marginTop: 5}}>
                         <small className="text-muted">
                           <div style={{color: textColor}}>
-                            {lastMessage.id != user.id ? usersMap[lastMessage.id].username + ': ' : 'You: '}
+                            {lastMessage.id != user.id ? lastMessage.message.url != ''? usersMap[lastMessage.id].username +" sent you a picture" : usersMap[lastMessage.id].username + ': ' : 'You: '}
                             { lastMessage.message.text.length > 65? lastMessage.message.text.substring(0, 65) + '...': lastMessage.message.text }
                           </div>
                         </small>

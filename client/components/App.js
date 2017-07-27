@@ -138,8 +138,8 @@ class App extends React.Component {
                                                   bottom: 0,
                                                   backgroundColor: 'white',
                                                   width: 320 ,
-                                                  height: editproduct,
-                                                  zIndex:100,
+                                                  height: 400,
+                                                  zIndex: 100,
                                                   marginLeft: index * 325 + 5
                                                 }}>
                                                     <ChatCenterContainer
