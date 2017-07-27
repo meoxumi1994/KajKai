@@ -48,7 +48,7 @@ export const createLikeSellpostNotification = (sellpostId) => {
                             user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
                           }
                         }
-                        notify(user.id, notification)
+                        notify(user.id, mNotification)
                         notifications.push(notification)
                         user.notifications = notifications
                         user.save(() => {})
@@ -115,7 +115,7 @@ export const createLikeCommentNotification = (commendId) => {
                                 user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
                               }
                             }
-                            notify(user.id, notification)
+                            notify(user.id, mNotification)
                             notifications.push(notification)
                             user.notifications = notifications
                             user.save(() => {})
@@ -185,7 +185,7 @@ export const createLikeReplyNotification = (replyId) => {
                                 user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
                               }
                             }
-                            notify(user.id, notification)
+                            notify(user.id, mNotification)
                             notifications.push(notification)
                             user.notifications = notifications
                             user.save(() => {})
