@@ -206,6 +206,7 @@ export const createLikeReplyNotification = (replyId) => {
 }
 
 export const getClientFormatNotification = (notification) => ({
+  type: notification.type,
   id: notification._id,
   commentid: notification.replyId,
   leadercommentid: notification.commentId,
