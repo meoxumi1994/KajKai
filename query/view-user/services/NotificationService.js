@@ -49,7 +49,7 @@ export const createLikeSellpostNotification = (sellpostId) => {
                           }
                         }
                         notify(user.id, mNotification)
-                        notifications.push(notification)
+                        notifications.push(mNotification)
                         user.notifications = notifications
                         user.save(() => {})
                         break
@@ -116,7 +116,7 @@ export const createLikeCommentNotification = (commendId) => {
                               }
                             }
                             notify(user.id, mNotification)
-                            notifications.push(notification)
+                            notifications.push(mNotification)
                             user.notifications = notifications
                             user.save(() => {})
                             break
@@ -186,7 +186,7 @@ export const createLikeReplyNotification = (replyId) => {
                               }
                             }
                             notify(user.id, mNotification)
-                            notifications.push(notification)
+                            notifications.push(mNotification)
                             user.notifications = notifications
                             user.save(() => {})
                             break
