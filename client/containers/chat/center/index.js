@@ -3,6 +3,7 @@ import ChatCenter from '~/components/chat/center'
 import { setCurrentChat } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
+    // console.log('state',state.inst.chat);
     return {
         state
     }

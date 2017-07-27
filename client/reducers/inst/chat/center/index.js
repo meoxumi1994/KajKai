@@ -12,11 +12,6 @@ const center = (state = {
                 return state
             }
 
-            // const keyy = state.multipleKey
-            // if (keyy.indexOf(action.data.mesId) == -1) {
-            //     keyy.push(action.data.mesId)
-            // }
-
             const initMultiMessages = {
               ...state,
               multipleKey: [
@@ -27,7 +22,6 @@ const center = (state = {
                   ...state.messagesMap,
                   [action.data.mesId]: [
                         ...action.data.messages.reverse(),
-                        // ...state.messagesMap[action.data.mesId] == undefined? []: state.messagesMap[action.data.mesId]
                   ]
               }
             }

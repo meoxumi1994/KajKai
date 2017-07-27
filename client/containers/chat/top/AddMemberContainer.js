@@ -44,12 +44,17 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         // dispatch(search_resetResult())
     },
     userSearch: (mesId, keyword) => {
-        dispatch(changeDisplay('SEARCH', mesId, true))
+        // dispatch(changeDisplay('SEARCH', mesId, true))
         dispatch(searchUser(mesId, keyword))
     },
     searchAdd: (mesId, user) => {
         dispatch(search_addMember(mesId, user))
         dispatch(changeDisplay('SEARCH', mesId, false))
+    },
+    hideSearch: (mesId, value) => {
+        if (value == '' || value == undefined) {
+            dispatch(changeDisplay('SEARCH', mesId, false))
+        }
     }
 })
 

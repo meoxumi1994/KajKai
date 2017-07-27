@@ -1,4 +1,4 @@
-import { initChatList, addChat, setCurrentChat, updateUserInfo } from './actions'
+import { initChatList, addChat, setCurrentChat, updateUserInfo, changeDisplay } from './actions'
 import { flem } from '../../support'
 
 export const getMesId = (id, person) => dispatch => {
@@ -51,8 +51,9 @@ export const searchUser = (mesId, keyword) => dispatch => {
         keyword
     }, {})
     .then((response) => {
-          console.log('\n[API] /searchUser ', response);
+          console.log('\n[API] /searchUser ', keyword, response);
           dispatch({type: 'SEARCH', subType: 'ADD_SUGGESTIONS', data: {mesId: mesId, users: response.users}})
+          dispatch(changeDisplay('SEARCH', mesId, true))
     })
 }
 

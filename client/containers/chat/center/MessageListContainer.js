@@ -15,6 +15,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     getMessages: (mesId, offset) => {
         dispatch(getMessages(mesId, offset, 'update'))
     },
+    // searchDisplay: (mesId) => {
+    //     dispatch(changeDisplay('SEARCH', mesId, true))
+    // }
 })
 
 const MessageListContainer = connect(
