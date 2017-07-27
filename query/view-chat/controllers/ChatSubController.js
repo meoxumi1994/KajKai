@@ -82,10 +82,10 @@ export const updateChat = (message) => {
                 console.log('chats 1: ', util.inspect(chats, false, null));
                 for (let i = 0; i < chats.length; i++) {
                   if (chats[i].id == chat.id) {
-                    chats[i] = chat
+                    // chats[i] = chat
                     break
                   } else if (i == chats.length - 1) {
-                    chats.push(chat)
+                    // chats.push(chat)
                   }
                 }
                 console.log('chats 2: ', util.inspect(chats, false, null));
