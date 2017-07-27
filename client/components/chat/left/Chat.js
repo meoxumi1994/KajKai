@@ -52,7 +52,7 @@ class Chat extends React.Component {
               </div>
 
               <div className="col col-xs-5" style={styles.messageDiv}>
-                    <div style={{color: textColor}}><b>{label.length > 25? label.substring(0, 25) + '...': label}</b></div>
+                    <div style={{color: textColor}}><b>{label.length > 23? label.substring(0, 23) + '...': label}</b></div>
                     {
                       lastMessage != undefined?
                       <div style={{marginTop: 5}}>

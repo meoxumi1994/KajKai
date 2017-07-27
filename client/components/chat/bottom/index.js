@@ -17,13 +17,13 @@ const ChatBottom = ({mesId, userId, sendMessage, displayImageModal}) => {
         }}>
 
         <div className="input-group" style={{width: '100%'}}>
-          <FormControl style={styles.formControl}
+          <FormControl style={styles.formControl} disabled={mesId == 0? true: false}
             inputRef={ref => { msg = ref }}
             placeholder="Enter message"
           />
         </div>
 
-        <button type="button" style={styles.iconButton} className="btn btn-default btn-md" onClick={() => displayImageModal(mesId)}>
+        <button disabled={mesId == 0? true: false} type="button" style={styles.iconButton} className="btn btn-default btn-md" onClick={() => displayImageModal(mesId)}>
             <i className="glyphicon glyphicon-camera"></i>
         </button>
 
@@ -36,7 +36,7 @@ const ChatBottom = ({mesId, userId, sendMessage, displayImageModal}) => {
           </Nav>
           </Popover>
         }>
-            <button style={styles.iconButton} className="btn btn-default btn-md" type="button">
+            <button disabled={mesId == 0? true: false} style={styles.iconButton} className="btn btn-default btn-md" type="button">
                 <i className="glyphicon glyphicon-apple"></i>
             </button>
         </OverlayTrigger>
