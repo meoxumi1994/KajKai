@@ -16,8 +16,8 @@ import ContactHistory from '~/containers/contacthistory'
 import ChatCenterContainer from '~/containers/chat/center'
 import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 
-import AdminContainer from '~/containers/admin/'
-import loadAdmin from 'bundle-loader?lazy!../containers/admin'
+// import AdminContainer from '~/containers/admin/'
+// import loadAdmin from 'bundle-loader?lazy!../containers/admin'
 
 import Progress from '~/containers/entity/thumnail/Progress'
 
@@ -48,14 +48,14 @@ const Profile = () => (
     </Bundle>
 )
 
-const Admin = () => (
-    <Bundle load={loadAdmin}>
-      {(Comp) => (Comp
-        ? <Comp/>
-        : null
-      )}
-    </Bundle>
-)
+// const Admin = () => (
+//     <Bundle load={loadAdmin}>
+//       {(Comp) => (Comp
+//         ? <Comp/>
+//         : null
+//       )}
+//     </Bundle>
+// )
 
 const UserLoginRegister = () => (
     <Bundle load={loadUserLoginRegister}>
@@ -126,7 +126,7 @@ class App extends React.Component {
                                   <Route path="/register" component={UserLoginRegister}/>
                                   <Route path="/profile" component={Profile}/>
                                   <Route path="/registerstore" component={RegisterStore}/>
-                                  <Route path="/admin" component={Admin}/>
+                                  {/* <Route path="/admin" component={Admin}/> */}
                               </div>
                               {
                                 <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>
