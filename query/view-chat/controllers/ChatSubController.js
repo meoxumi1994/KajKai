@@ -70,7 +70,7 @@ export const updateChat = (message) => {
           if (name) {
             chat.name = name
           }
-          chat.save(() => {})
+          // chat.save(() => {})
 
           const util = require('util')
 
