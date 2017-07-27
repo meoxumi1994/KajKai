@@ -45,16 +45,16 @@ class MessageList extends React.Component {
                   {
                     messagesMap[mesId].map(
                         mes => {
-                          let showAvatar = previousId==mes.id?false:true
+                          let showAvatar = previousId == mes.id || mes.id == user.id? false:true
                           previousId = mes.id
                           return (
-                              <tr key={JSON.stringify(mes)}>
+                              <div style={{width: '100%'}} key={JSON.stringify(mes)}>
                                 <Message
                                     {...mes}
                                     user={mes.id == user.id? user: usersMap[mes.id]}
                                     styles={mes.id === user.id? styles.rightMsg: styles.leftMsg}
                                     showAvatar={showAvatar}/>
-                              </tr>
+                              </div>
                           )
                         }
                   )}
@@ -83,21 +83,20 @@ const styles = {
             height: 40
         },
         text: {
-            marginRight: 51,
-            marginTop: 10,
             textAlign: 'left',
         },
         bounds: {
-            marginTop: 5,
+            marginTop: 10,
             backgroundColor: '#cc3333',
             color: 'white',
             width: 200,
-            paddingTop: 10,
+            paddingTop: 5,
             paddingRight: 10,
             paddingBottom: 10,
             paddingLeft: 10,
             borderRadius: 10,
             float: 'right',
+            marginLeft: 50
         },
         senderDiv: {
             color: 'grey',
