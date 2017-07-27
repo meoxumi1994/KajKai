@@ -80,7 +80,7 @@ export const updateChat = (message) => {
                   if (chats[i].id == chat.id) {
                     chats[i].users = basicUsers
                     if (name) chats[i].name = name
-                    else chat[i].name = ''
+                    else chats[i].name = ''
                     break
                   } else if (i == chats.length - 1) {
                     chats.push(chat)
