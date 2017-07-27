@@ -16,8 +16,12 @@ const chatMap = (state={
     display: {
         addMember: false,
         setting: false,
-        search: false
+        search: false,
+        imageModal: false
     },
+    imagesUrl: [
+
+    ],
     search: {
         results: {
             keyy: [],
@@ -31,6 +35,23 @@ const chatMap = (state={
 }, action, subAction) => {
 
     switch (action.type || subAction.type) {
+
+        case 'CHAT/UPDATE':
+            switch (action.subType) {
+              case 'LOAD_IMAGES_URL':
+                  if (state.imagesUrl.indexOf(action.data.url) != -1) {
+                      return state
+                  }
+                  return {
+                      ...state,
+                      imagesUrl: [
+                          ...state.imagesUrl,
+                          action.data.url
+                      ]
+                  }
+              default:
+                  return state
+            }
 
 //------------------------------------------------------------------------------
         case 'INIT_CHAT_LIST':
@@ -97,7 +118,7 @@ const chatMap = (state={
                         ...state,
                         display: {
                             ...state.display,
-                            addMember: action.data.value == 'toggle'? !state.display.addMember: action.data.value
+                            addMember: utils.displayToggle(action.data.value, state.display.addMember)
                         }
                     }
                 case 'SETTING':
@@ -105,7 +126,7 @@ const chatMap = (state={
                         ...state,
                         display: {
                             ...state.display,
-                            setting: action.data.value == 'toggle'? !state.display.setting: action.data.value
+                            setting: utils.displayToggle(action.data.value, state.display.setting)
                         }
                     }
                 case 'SEARCH':
@@ -113,8 +134,16 @@ const chatMap = (state={
                         ...state,
                         display: {
                             ...state.display,
-                            search: action.data.value == 'toggle'? !state.display.setting: action.data.value
+                            search: utils.displayToggle(action.data.value, state.display.search)
                         }
+                    }
+                case 'IMAGE_MODAL':
+                    return {
+                      ...state,
+                      display: {
+                          ...state.display,
+                          imageModal: utils.displayToggle(action.data.value, state.display.imageModal)
+                      }
                     }
               default:
                 return state
@@ -205,7 +234,7 @@ const chatMap = (state={
               }
 
 //------------------------------------------------------------------------------
-        
+
 //------------------------------------------------------------------------------
         default:
             return state

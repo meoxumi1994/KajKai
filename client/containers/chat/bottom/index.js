@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import ChatBottom from '~/components/chat/bottom'
 import { sendMessage } from '~/actions/asyn/chat/socket'
+import { changeDisplay } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
   return (
@@ -12,14 +13,16 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  sendMessage: (mesId, id, text, url, type) => {
-      if (mesId == 0) {
-          mesId = null
-      }
-      dispatch(sendMessage(mesId, id, text, url, 'message'))
-      dispatch({type: 'server/READ_CHAT', data: {mesId: mesId}})
-  },
-
+    sendMessage: (mesId, id, text, url, type) => {
+        if (mesId == 0) {
+            mesId = null
+        }
+        dispatch(sendMessage(mesId, id, text, url, 'message'))
+        dispatch({type: 'server/READ_CHAT', data: {mesId: mesId}})
+    },
+    displayImageModal: (mesId) => {
+        dispatch(changeDisplay('IMAGE_MODAL', mesId, true))
+    }
 })
 
 const ChatBottomContainer = connect(

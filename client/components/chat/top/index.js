@@ -32,7 +32,7 @@ class ChatTop extends React.Component {
                 <button className="btn" style={headColor} onClick={() => displayAddMember(mesId)}>
                     <img style={{height: 15, width: 15, marginLeft: 3}} src="/images/chat/add.png"/>
                 </button>
-                <button className="btn" style={headColor} onClick={() => displaySettings(mesId)}>
+                <button disabled={mesId == 0? true: false} className="btn" style={headColor} onClick={() => displaySettings(mesId)}>
                     <img style={{height: 18, width: 18, marginLeft: 2}} src="/images/chat/setting.png"/>
                 </button>
                 <button className="btn" style={headColor} onClick={() => close(mesId, multipleKey)}>

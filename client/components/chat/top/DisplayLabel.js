@@ -22,16 +22,15 @@ class DisplayLabel extends React.Component {
         if (label == undefined || label == '') {
             label = ''
             for (let i in usersKey) {
-                if (!usersMap[usersKey[i]].disabled) {
-                    label += usersMap[usersKey[i]].username + ', '
-                }
+                label += usersMap[usersKey[i]].username + ', '
             }
             label = label.substring(0, label.length - 2)
         }
 
         return (
             <div>
-                {usersKey.length == 0 && results.keyy.length == 0? <label style={styles.displayLabel}>Tin nhắn mới</label>:
+                {
+                usersKey.length == 0 && results.keyy.length == 0? <label style={styles.displayLabel}>Tin nhắn mới</label>:
                 display.addMember?
                 <div>
                     {
@@ -44,6 +43,7 @@ class DisplayLabel extends React.Component {
                     }
                     {
                       results.keyy.map(uKey =>
+                      usersKey.indexOf(uKey) != -1? undefined :
                       <label key={uKey} style={{marginTop: 5, marginBottom: 5}}>
                           <button style={{height: 30, marginLeft: 15, backgroundColor: '#c64949'}} className="btn">{results.mapp[uKey].username}</button>
                           <button style={{height: 30, backgroundColor: '#c64949'}} className="btn" onClick={() => removeUser(mesId, uKey)}>x</button>
