@@ -29,7 +29,9 @@ const Message = ({message, time, user, styles, showAvatar}) => {
           </div>
           <div>
               <ul style={styles.text}>
-                  <small style={showAvatar?styles.senderDiv:{display: 'none'}} className="text-muted" >{username}</small>
+                  {
+                    showAvatar? <small className="text-muted" >{username}</small>: undefined
+                  }
                   <ul style={styles.bounds}>
                       {
                           type == 'icon'?
