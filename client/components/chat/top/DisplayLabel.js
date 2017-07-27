@@ -30,7 +30,7 @@ class DisplayLabel extends React.Component {
         return (
             <div style={{width: '75%'}}>
                 {
-                usersKey.length == 0 && results.keyy.length == 0? <label style={styles.displayLabel}>Tin nhắn mới</label>:
+                usersKey.length == 0 && results.keyy.length == 0? <label style={styles.displayLabel}>New message</label>:
                 display.addMember?
                 <div>
                     {

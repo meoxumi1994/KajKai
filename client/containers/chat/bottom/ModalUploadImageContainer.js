@@ -16,6 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     close: (mesId) => {
         dispatch(changeDisplay('IMAGE_MODAL', mesId, false))
+        dispatch({type: 'CHAT/UPDATE', subType: 'RESET_IMAGES_URL', data: {mesId}})
     },
     handleImageChange: (e, mesId) => {
         const file = e.target.files[0]

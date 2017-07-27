@@ -65,7 +65,8 @@ const styles = {
     width: '100%'
   },
   iconButton: {
-    fontSize: 13
+    fontSize: 13,
+    width: '50%'
   }
 }
 
