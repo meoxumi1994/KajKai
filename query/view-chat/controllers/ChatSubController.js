@@ -72,6 +72,8 @@ export const updateChat = (message) => {
           }
           chat.save(() => {})
 
+          const util = require('util')
+
           chat.users.map((user) => {
             UserChat.findOne({ userId: user.id }, (err, userChat) => {
               if (userChat) {
@@ -84,10 +86,10 @@ export const updateChat = (message) => {
                     chats.push(chat)
                   }
                 }
-                console.log('chats: ', JSON.stringify(chats));
-                console.log('userChat: ', JSON.stringify(userChat));
+                console.log('chats: ', util.inspect(chats, false, null));
+                console.log('userChat: ', util.inspect(userChat, false, null));
                 userChat.chats = chats
-                console.log('userChat: ', JSON.stringify(userChat));
+                console.log('userChat 2: ', util.inspect(userChat, false, null));
                 userChat.save(() => {})
               }
             })
