@@ -70,7 +70,7 @@ export const updateChat = (message) => {
           if (name) {
             chat.name = name
           }
-          // chat.save(() => {})
+          chat.save(() => {})
 
           const util = require('util')
 
@@ -84,7 +84,7 @@ export const updateChat = (message) => {
                   if (userChat.chats[i].id == chat.id) {
                     userChat.chats[i] = chat
                     break
-                  } else if (i == chats.length - 1) {
+                  } else if (i == userChat.chats.length - 1) {
                     userChat.chats.push(chat)
                   }
                 }
@@ -92,7 +92,9 @@ export const updateChat = (message) => {
                 // console.log('userChat 2: ', util.inspect(userChat, false, null));
                 // userChat.chats = chats
                 console.log('userChat 2: ', util.inspect(userChat, false, null));
-                userChat.save(() => {})
+                userChat.save((err, xxx) => {
+                  console.log('xxx: ', xxx);
+                })
               }
             })
           })
