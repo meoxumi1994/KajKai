@@ -34,12 +34,19 @@ class DisplayLabel extends React.Component {
                 {usersKey.length == 0 && results.keyy.length == 0? <label style={styles.displayLabel}>Tin nhắn mới</label>:
                 display.addMember?
                 <div>
-                    {usersKey.map(uKey => <button key={uKey} style={{height: 40, marginTop: 11, marginLeft: 15}} className="btn">{usersMap[uKey].username}</button>)}
+                    {
+                      usersKey.map(uKey =>
+                        <div key={uKey} >
+                        <button style={{height: 30, marginTop: 5, marginBottom: 5, marginLeft: 15, backgroundColor: '#c64949'}} className="btn">
+                            {usersMap[uKey].username}
+                        </button>
+                        </div>)
+                    }
                     {
                       results.keyy.map(uKey =>
-                      <label key={uKey}>
-                          <button style={{height: 40, marginTop: 11, marginLeft: 15}} className="btn btn-primary">{results.mapp[uKey].username}</button>
-                          <button style={{height: 40, marginTop: 11}} className="btn btn-primary" onClick={() => removeUser(mesId, uKey)}>x</button>
+                      <label key={uKey} style={{marginTop: 5, marginBottom: 5}}>
+                          <button style={{height: 30, marginLeft: 15, backgroundColor: '#c64949'}} className="btn">{results.mapp[uKey].username}</button>
+                          <button style={{height: 30, backgroundColor: '#c64949'}} className="btn" onClick={() => removeUser(mesId, uKey)}>x</button>
                       </label>
                     )
                   }

@@ -10,7 +10,7 @@ export const getMesId = (id, person) => dispatch => {
           console.log('\n[API] /getMesId ', response);
           dispatch({type: 'NEW_CHAT', data: {mesId: response.mesId}})
           dispatch(getUser(person, response.mesId))
-          dispatch(getMessages(response.mesId, Date.now(), 'load'))
+          dispatch(getMessages(response.mesId, Date.now(), 'init'))
     })
 }
 
@@ -19,18 +19,12 @@ export const getMessages = (mesId, offset, type) => dispatch => {
         offset: offset,
         length: 5
     }).then((response) => {
-
-          console.log('\n[API] /getMessages ', type, response);
-          switch (type) {
-              case 'load':
-                  dispatch(addChat(response, true))
-                  dispatch(setCurrentChat(response.mesId))
-                  break
-              case 'update':
-                  dispatch({type: 'UPDATE_MESSAGE', data: {mesId: response.mesId, messages: response.messages}})
-                  break
-              default:
-                  break
+          console.log('\n[API] /getMessages ', response);
+          if (type == 'init') {
+              dispatch(addChat(response, true))
+              dispatch(setCurrentChat(response.mesId))
+          } else {
+              dispatch({type: 'UPDATE_MESSAGE', data: { mesId: response.mesId, messages: response.messages}})
           }
     })
 }
@@ -43,12 +37,10 @@ export const getChatList = (offset) => dispatch => {
     )
     .then((response) => {
           console.log('\n[API] /getChatList ', response);
-          const { data, lazyLoad } = response
-          dispatch(initChatList(data, lazyLoad))
-          // if (data.length > 0) {
-          //     dispatch(getMessages(data[0].mesId, Date.now(), 'load'))
-          //     dispatch(setCurrentChat(data[0].mesId))
-          // }
+          if (response != undefined && response.data.length > 0) {
+              const { data, lazyLoad } = response
+              dispatch(initChatList(data, lazyLoad))
+          }
     })
 }
 
