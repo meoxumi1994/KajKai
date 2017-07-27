@@ -137,19 +137,29 @@ export const removeLikeNotification = (message) => {
         for (let k = 0; k < notifications.length; k++) {
           let notification = notifications[k]
           let { type } = notification
+          let flag = false
           if (type == UNLIKETYPE) {
             if (type == NotificationType.LIKESELLPOST && notification.sellpostId == likenId) {
-              if (k >= notifications.length - mNumberOfUnRead) {
-                mNumberOfUnRead--
-              }
+              flag = true
             } else if (type == NotificationType.LIKECOMMENT && notification.commentId == likenId) {
-              if (k >= notifications.length - mNumberOfUnRead) {
-                mNumberOfUnRead--
-              }
+              flag = true
             } else if (type == NotificationType.LIKEREPLY && notification.replyId == likenId) {
-              if (k >= notifications.length - mNumberOfUnRead) {
-                mNumberOfUnRead--
+              flag = true
+            }
+          }
+          if (flag) {
+            let { likers } = notification
+            if (!likers) {
+              likers = []
+            }
+            for (let h = 0; h < likers.length; h++) {
+              if (likers[h].userId == likerId || likers[h].storeId == likerId) {
+                likers.splice(h, 1)
               }
+            }
+            if (likers.length > 0) {
+              notification.likers = likers
+              mNotifications.push(notification)
             } else {
               if (k >= notifications.length - mNumberOfUnRead) {
                 mNumberOfUnRead--
