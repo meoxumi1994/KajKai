@@ -2,7 +2,7 @@ import { Interest } from '../models'
 import globalId from '../config/globalId'
 import redis from 'redis'
 import config from '../config/pubSubConfig'
-import {addInterestPub, removeInterestPub} from '../controllers/NotificationPubController'
+import { addInterestPub, removeInterestPub, newStoreInterestPub } from '../controllers/NotificationPubController'
 
 let redisClient = redis.createClient(config);
 
@@ -73,3 +73,11 @@ export const getInterestWithIn = (longitude, latitude, categoryId, radius, next)
         next(listUserId);
     })
 };
+
+export const publishNewInterest = (store) => {
+    getInterestWithIn(store.longitude, store.latitude, store.secondCategoryId, 10000, (listId) => {
+        if (listId.length === 0) return;
+        newStoreInterestPub(store.storeId, store.storeName, store.avatarUrl, store.urlName, listId);
+    })
+};
+
