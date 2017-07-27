@@ -33,6 +33,8 @@ export const getUserChats = (userId, offset, length, next) => {
               message: lastMessage.content
             }
             mChat.displayLabel = chat.name
+            console.log('chat: ', chat);
+            console.log('mChat: ', mChat);
             console.log('what the hell:', mChat.displayLabel, chat.name);
             for (let k = 0; k < chat.users.length; k++) {
               if (chat.users[k].id == userId) {
