@@ -179,9 +179,8 @@ export const removeLikeNotification = (message) => {
 
 const removeLike = (likenId, likerId) => {
   if (likenId.substr(0, 3) == '012') { // sellpost
-    SellpostLiker.find({ sellpostId: likenId }, (err, sellpostLiker) => {
+    SellpostLiker.findOne({ sellpostId: likenId }, (err, sellpostLiker) => {
       if (sellpostLiker) {
-        console.log('sellpostLiker: ', sellpostLiker);
         let { likers } = sellpostLiker
         if (!likers) {
           likers = []
@@ -197,7 +196,7 @@ const removeLike = (likenId, likerId) => {
       }
     })
   } else if (likenId.substr(0, 3) == '004') { // comment
-    CommentLiker.find({ commentId: likenId }, (err, commentLiker) => {
+    CommentLiker.findOne({ commentId: likenId }, (err, commentLiker) => {
       if (commentLiker) {
         let { likers } = commentLiker
         if (!likers) {
@@ -214,7 +213,7 @@ const removeLike = (likenId, likerId) => {
       }
     })
   } else if (likenId.substr(0, 3) == '005') { // reply
-    ReplyLiker.find({ replyId: likenId }, (err, replyLiker) => {
+    ReplyLiker.findOne({ replyId: likenId }, (err, replyLiker) => {
       if (replyLiker) {
         let { likers } = replyLiker
         if (!likers) {
