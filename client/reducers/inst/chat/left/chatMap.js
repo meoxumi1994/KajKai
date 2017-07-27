@@ -11,13 +11,12 @@ const chatMap = (state={
     displayLabel: '',
     usersKey: [],
     usersMap: {},
-    // status: true,
-    // disabled: false,
     display: {
         addMember: false,
         setting: false,
         search: false,
-        imageModal: false
+        imageModal: false,
+        editingLabel: false
     },
     imagesUrl: [
 
@@ -35,6 +34,12 @@ const chatMap = (state={
 }, action, subAction) => {
 
     switch (action.type || subAction.type) {
+
+        case 'client/UPDATE_UI':
+            return {
+                ...state,
+                displayLabel: action.data.data.groupName
+            }
 
         case 'CHAT/UPDATE':
             switch (action.subType) {
@@ -102,7 +107,6 @@ const chatMap = (state={
                     displayLabel: utils.groupDisplayLabel(action.data.members, subAction.data.id),
                     usersKey: utils.groupUsersKey(action, action.data.members, subAction.data.id),
                     usersMap: utils.groupUsersMap(action, action.data.members, subAction.data.id),
-                    // status: false,
                 }
             } else {
               return {
@@ -143,6 +147,14 @@ const chatMap = (state={
                       display: {
                           ...state.display,
                           imageModal: utils.displayToggle(action.data.value, state.display.imageModal)
+                      }
+                    }
+                case 'EDITING_LABEL':
+                    return {
+                      ...state,
+                      display: {
+                          ...state.display,
+                          editingLabel: utils.displayToggle(action.data.value, state.display.editingLabel)
                       }
                     }
               default:
@@ -232,8 +244,6 @@ const chatMap = (state={
                     }
                   }
               }
-
-//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
         default:

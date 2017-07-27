@@ -11,7 +11,7 @@ class AddMember extends React.Component {
       let conversator
       const { mesId, styles,
               user, chatListMap, hideSearch,
-              addMember, userSearch, searchAdd } = this.props
+              addMember, searchUser, addSearchedMember } = this.props
 
       const { suggestions, results } = chatListMap[mesId].search
       const searchDisplay = chatListMap[mesId].display.search
@@ -20,7 +20,7 @@ class AddMember extends React.Component {
         <form style={styles.addMemberDiv} onSubmit={e => {
             e.preventDefault()
             if (conversator.value.trim()) {
-                userSearch(mesId, conversator.value.trim())
+                searchUser(mesId, conversator.value.trim())
             }
         }}>
           <span className="input-group-btn">
@@ -32,8 +32,10 @@ class AddMember extends React.Component {
                     onChange={(e) => hideSearch(mesId, e.target.value)}
                   >
                   </FormControl>
-                  <button disabled={results.keyy.length == 0? true: false} type="button" style={{width: '20%', height: 40, fontSize: 15}} className={results.keyy.length == 0? 'btn': 'btn btn-danger'} onClick={() => addMember( mesId, user.id, results.keyy)}>
-                      Xong
+                  <button disabled={results.keyy.length == 0? true: false} type="button" style={{width: '20%', height: 40, fontSize: 15}}
+                      className={results.keyy.length == 0? 'btn': 'btn btn-danger'}
+                      onClick={() => addMember( mesId, user.id, results.keyy)}>
+                          Xong
                   </button>
             </div>
           </span>
@@ -49,7 +51,8 @@ class AddMember extends React.Component {
                       suggestions.keyy.map(user => {
                           const { id, username, avatarUrl } = suggestions.mapp[user]
                           return (
-                              <button type="button" key={id} style={{width: '100%'}} className="btn btn-default" onClick={() => { searchAdd(mesId, suggestions.mapp[user]);conversator.value=''} }>
+                              <button type="button" key={id} style={{width: '100%'}} className="btn btn-default"
+                              onClick={() => { addSearchedMember(mesId, suggestions.mapp[user], results.keyy);conversator.value=''} }>
                                 <div className="col col-xs-2">
                                     <img src={avatarUrl} style={{width: 40, height: 40, borderRadius: 50}}/>
                                 </div>

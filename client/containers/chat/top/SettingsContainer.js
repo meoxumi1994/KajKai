@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(changeDisplay('SETTING', mesId, false))
     },
     changeGroupName: (mesId, id, groupName) => {
-        console.log('fuck ', groupName)
+        dispatch(changeDisplay('EDITING_LABEL', mesId, 'toggle'))
         dispatch({
             type: 'server/UPDATE_UI',
             data: {
@@ -27,6 +27,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             }
         })
     },
+    editing: (mesId) => {
+        dispatch(changeDisplay('EDITING_LABEL', mesId, 'toggle'))
+    }
 })
 
 const SettingsContainer = connect(
