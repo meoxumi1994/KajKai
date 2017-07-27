@@ -68,7 +68,7 @@ export const createLikeSellpostNotification = (sellpostId) => {
 
 export const createLikeCommentNotification = (commendId) => {
   console.log('createLikeCommentNotification');
-  CommentLiker.findOne({ commendId }, (err, commentLiker) => {
+  CommentLiker.findOne({ commentId }, (err, commentLiker) => {
     if (commentLiker) {
       console.log('commentLiker: ', commentLiker);
       let { likers } = commentLiker
