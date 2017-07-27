@@ -65,7 +65,7 @@ export const getInterestInfo = (interest, next) => {
 
 export const getInterestWithIn = (longitude, latitude, categoryId, radius, next) => {
     let center = {type: "Point", coordinates: [longitude, latitude]};
-    Interest.aggregate([{$match: {categoryId: categoryId}}, {$geoNear: {near: center, maxDistance: radius}}], (err, docs) => {
+    Interest.aggregate([{$match: {categoryId: categoryId}}, {$geoNear: {near: center, maxDistance: radius, distanceField: "dist.calculated"}}], (err, docs) => {
         console.log('this ' + err + ' ' + docs);
         let listUserId = [];
         if (docs && docs.length && docs.length > 0) {
