@@ -17,9 +17,7 @@ export const createCommentNotification = (message) => {
           name: user.username,
           avatarUrl: user.avatarUrl
         }
-        resolve({
-          commenter
-        })
+        resolve(commenter)
       } else {
         resolve(null)
       }
@@ -33,9 +31,7 @@ export const createCommentNotification = (message) => {
           name: basicStore.storeName,
           avatarUrl: basicStore.avatarUrl
         }
-        resolve({
-          commenter
-        })
+        resolve(commenter)
       } else {
         resolve(null)
       }
