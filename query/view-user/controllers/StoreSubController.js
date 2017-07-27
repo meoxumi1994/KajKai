@@ -56,4 +56,37 @@ export const updateStoreList = (message) => {
       user.save(() => {})
     }
   })
+
+  User.find({}, (err, users) => {
+    if (users) {
+      for (let i = 0; i < users.length; i++) {
+        let mUser = users[i]
+        const { notifications } = mUser
+        if (notifications) {
+          for (let k = 0; k < notifications.length; k++) {
+            let notification = notifications[k]
+            if (notification.actorId ==  storeId) {
+              notification.name = basicStore.storeName
+              notification.avatarUrl = basicStore.avatarUrl
+              notification.storeName = basicStore.storeName
+              notification.urlName = basicStore.urlName
+            }
+            if (notification.type.includes('LIKE')) {
+              let { likers } = notification
+              for (let h = 0; h < likers.length; h++) {
+                if (likers[h].storeId == storeId) {
+                  likers[h].storeName = basicStore.storeName
+                  likers[h].avatarUrl = basicStore.avatarUrl
+                }
+              }
+              notification.likers = likers
+            }
+            notifications[k] = notification
+          }
+          mUser.notifications = notifications
+          mUser.save(() => {})
+        }
+      }
+    }
+  })
 }
