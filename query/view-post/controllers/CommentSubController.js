@@ -17,6 +17,8 @@ export const createComment = (message) => {
     numberOfOrder: product.num
   }))
 
+  comment.time = Date.now()
+
   const mPromises = []
   mPromises.push(new Promise((resolve, reject) => {
     BasicUser.findOne({ id: posterId }, (err, basicUser) => {

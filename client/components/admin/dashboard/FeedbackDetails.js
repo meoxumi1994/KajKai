@@ -1,5 +1,8 @@
 import React from 'react'
 import { Modal, ControlLabel, FormControl } from 'react-bootstrap'
+import CustomizedToggle from './CustomizedToggle'
+import { timeSince } from '~/components/admin/common/utils'
+import { link } from '~/components/admin/common/config'
 
 class FeedbackDetails extends React.Component {
     constructor(props) {
@@ -18,6 +21,10 @@ class FeedbackDetails extends React.Component {
         const { id, reporter, defendant, status, time, solvedTime, decision } = details
 
         let reason = ''
+
+        let prettyTime = new Date(time)
+        prettyTime = prettyTime.toLocaleString()
+
         return (
           <Modal style={{ marginTop: 120 }} show={display.details} onHide={() => close()}>
               <Modal.Header closeButton>
@@ -27,53 +34,49 @@ class FeedbackDetails extends React.Component {
                   <table className="table">
                       <tbody>
                           <tr>
-                              <th>Reporter</th>
+                              <th><p style={styles.title}>Reporter</p></th>
                               <td>
-                                  <img src={reporter.user.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
-                                  {reporter.user.username}
+                                  <img src={reporter.user.avatarUrl} style={styles.avatarImg}/>
+                                  <a href={link.user(reporter.user.id)}>{reporter.user.username}</a>
                                   {
                                     status?
-                                    <p style={{color: reporter.ban.status? 'red': 'green', float: 'right'}}>
+                                    <p style={{color: reporter.ban.status? 'red': 'green', float: 'right', marginTop: 10}}>
                                         {reporter.ban.status? 'Deactivated': 'Activated'}
                                     </p>
                                     :
-                                    <button className={reporter.ban.status? "btn btn-danger": "btn btn-success"} style={{float: 'right', width: 100}} onClick={() => changePermission('reporter', id, !reporter.ban.status)}>
-                                        {reporter.ban.status? "Deactivated": "Activated"}
-                                    </button>
+                                    <CustomizedToggle status={reporter.ban.status} changePermission={changePermission} type="reporter" id={id}/>
                                   }
                               </td>
                           </tr>
                           <tr>
-                              <th>Defendant</th>
+                              <th><p style={styles.title}>Defendant</p></th>
                               <td>
-                                  <img src={defendant.user.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
-                                  {defendant.user.username}
+                                  <img src={defendant.user.avatarUrl} style={styles.avatarImg}/>
+                                  <a href={link.user(reporter.user.id)}>{defendant.user.username}</a>
                                   {
                                       status?
-                                      <p style={{color: defendant.ban.status? 'red': 'green', float: 'right'}}>
+                                      <p style={{color: defendant.ban.status? 'red': 'green', float: 'right', marginTop: 10}}>
                                           {defendant.ban.status? 'Deactivated': 'Activated'}
                                       </p>
                                       :
-                                      <button className={defendant.ban.status? "btn btn-danger": "btn btn-success"} style={{float: 'right', width: 100}} onClick={() => changePermission('defendant', id, !defendant.ban.status)}>
-                                          {defendant.ban.status? "Deactivated": "Activated"}
-                                      </button>
+                                      <CustomizedToggle status={defendant.ban.status} changePermission={changePermission} type="defendant" id={id}/>
                                   }
                               </td>
                           </tr>
                           <tr>
-                              <th>Content</th>
-                              <td>{reporter.content}</td>
+                              <th><p style={styles.title}>Content</p></th>
+                              <td><p style={styles.title}>{reporter.content}</p></td>
                           </tr>
                           <tr>
-                              <th>Sellpost url</th>
-                              <td><p><a href={'https://kajkai.com/sellpost/'+defendant.sellpostId}>Link</a></p></td>
+                              <th><p style={styles.title}>Sellpost url</p></th>
+                              <td><p style={styles.title}><a href={link.sellpost(defendant.sellpostId)}>Link</a></p></td>
                           </tr>
                           <tr>
-                              <th>Last updated</th>
-                              <td>{Date(time*1000)}</td>
+                              <th><p style={styles.title}>Last updated</p></th>
+                              <td><p style={styles.title}>{timeSince(time)}</p></td>
                           </tr>
                           <tr>
-                              <th>Reason</th>
+                              <th><p style={styles.title}>Decision</p></th>
                               <td>
                                   {
                                       status? decision :
@@ -108,6 +111,19 @@ class FeedbackDetails extends React.Component {
               </Modal.Footer>
           </Modal>
         )
+    }
+}
+
+const styles = {
+    title: {
+        marginTop: 5
+    },
+    avatarImg: {
+        width: 40,
+        height: 40,
+        borderRadius: 50,
+        marginRight: 10,
+        marginTop: 2
     }
 }
 

@@ -38,9 +38,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onLogoutClick: () => {
         dispatch(logOut())
     },
-    // setMultiChat: (value) => {
-    //     dispatch({type: 'MULTIPLE_CHAT', data: value})
-    // },
     onLoadCategory: () => {
         dispatch(loadCategory())
     },

@@ -90,9 +90,9 @@ export const getClientFormatPostrows = (postrows, offset) => {
       mPostrow.id = postrow.id
       mPostrow.content = postrow.content ? postrow.content : ''
       mPostrow.numline = postrow.numberOfLine
-      mPostrow.images = postrow.images
+      mPostrow.images = postrow.images ? postrow.images : []
       mPostrow.titles_order = postrow.titles ? postrow.titles.map(title => title.id) : []
-      mPostrow.titles = postrow.titles
+      mPostrow.titles = postrow.titles ? postrow.titles : []
       mPostrow.products_order = postrow.products ? postrow.products.map(product => product.id) : []
       mPostrow.products = postrow.products ? postrow.products.map(product => ({
         id: product.id,

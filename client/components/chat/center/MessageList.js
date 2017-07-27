@@ -37,23 +37,29 @@ class MessageList extends React.Component {
               <div></div>
               :
               <div>
-                  {messagesMap[mesId].length > 0?
+                  {
+                    messagesMap[mesId].length > 0?
                     <p style={{textAlign:'center'}} onClick={() => getMessages(mesId, messagesMap[mesId][0].time)}><i>(Show more)</i></p>
                     : undefined
                   }
-                  {messagesMap[mesId].map(
-                    mes => {
-                      let showAvatar = previousId==mes.id?false:true
-                      previousId = mes.id
-                      return (
-                          <Message key={JSON.stringify(mes)}
-                              {...mes}
-                              user={mes.id == user.id? user: usersMap[mes.id]}
-                              styles={mes.id === user.id? styles.rightMsg: styles.leftMsg}
-                              showAvatar={showAvatar}/>
-                      )
-                    }
-                  )}
+                  <ul style={{height: '100%', height: '100%'}} className="list-unstyled">
+                      {
+                        messagesMap[mesId].map(
+                            mes => {
+                              let showAvatar = previousId == mes.id || mes.id == user.id? false:true
+                              previousId = mes.id
+                              return (
+                                  <li style={{width: '100%', height: '100%', marginBottom: 5}} key={JSON.stringify(mes)}>
+                                      <Message
+                                          {...mes}
+                                          user={mes.id == user.id? user: usersMap[mes.id]}
+                                          styles={mes.id === user.id? styles.rightMsg: styles.leftMsg}
+                                          showAvatar={showAvatar}/>
+                                  </li>
+                              )
+                            }
+                      )}
+                  </ul>
               </div>
             }
           </div>
@@ -65,7 +71,7 @@ const styles = {
     mainDiv: {
       width: 320,
       height: 300,
-      overflowY: 'scroll'
+      overflowY: 'scroll',
     },
     rightMsg: {
         imgDiv: {
@@ -78,21 +84,15 @@ const styles = {
             height: 40
         },
         text: {
-            marginRight: 51,
-            marginTop: 10,
             textAlign: 'left',
         },
         bounds: {
-            marginTop: 5,
             backgroundColor: '#cc3333',
             color: 'white',
             width: 200,
-            paddingTop: 10,
-            paddingRight: 10,
-            paddingBottom: 10,
-            paddingLeft: 10,
+            padding: "5px 10px 10px 10px",
             borderRadius: 10,
-            float: 'right',
+            marginLeft: 50
         },
         senderDiv: {
             color: 'grey',
@@ -115,10 +115,7 @@ const styles = {
         bounds: {
             backgroundColor: '#e0e0e0',
             width: 200,
-            paddingTop: 10,
-            paddingRight: 10,
-            paddingBottom: 10,
-            paddingLeft: 10,
+            padding: "5px 10px 10px 10px",
             borderRadius: 10
         },
         senderDiv: {

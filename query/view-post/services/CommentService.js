@@ -47,7 +47,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
   if (!comments) {
     return {
       status: 'success',
-      offset,
+      offset: -2,
       leadercomments: []
     }
   }
@@ -65,7 +65,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
 
         mComment.id = comment.id
         mComment.sellpostid = comment.sellpostId
-        mComment.order = comment.order
+        mComment.order = comment.order ? comment.order : []
         mComment.numcomment = comment.numberOfReply
 
         mComments = [mComment, ...mComments]
@@ -89,7 +89,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
 
           mComment.id = comment.id
           mComment.sellpostid = comment.sellpostId
-          mComment.order = comment.order
+          mComment.order = comment.order ? comment.order : ''
           mComment.numcomment = comment.numberOfReply
 
           mComments = [mComment, ...mComments]

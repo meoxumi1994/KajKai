@@ -5,7 +5,6 @@ import { getUsers, banUser } from '~/actions/asyn/admin/user/restful'
 const mapStateToProps = (state, ownProps) => {
     const { mapp, display, current } = state.inst.admin.user
     const { auth } = state.inst.admin
-    console.log('state', state.inst.admin);
     return {
         mapp,
         display,

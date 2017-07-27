@@ -59,22 +59,3 @@ export const getListFollower = (followeeId, next) => {
         }
     })
 };
-
-export const getListUserFromWithin = (longitude, latitude, categoryId, range, next) => {
-    const sub = redis.createClient(config);
-    const pub = redis.createClient(config);
-    const publishData = {longitude, latitude, categoryId, range: range ? range : 10000, eventId: getUUID()};
-    pub.publish('USER.AuthorizeToken', JSON.stringify(publishData));
-    sub.subscribe('USER.AuthorizeToken' + publishData.eventId);
-    sub.on('message', (channel, message) => {
-        message = JSON.parse(message);
-        sub.unsubscribe();
-        sub.quit();
-        pub.quit();
-        if (message.status === 'success') {
-            next(message.listId)
-        } else {
-            next(null)
-        }
-    })
-};

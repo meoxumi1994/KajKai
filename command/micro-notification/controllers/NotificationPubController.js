@@ -101,3 +101,19 @@ export const getStoreFromPostId = (postId, next) => {
         pub.quit()
     })
 };
+
+export const newStoreInterestPub = (store, listUserId) => {
+    const pub = redis.createClient(config);
+    const publishData = {interest: {
+        store: {
+            storeId: store.storeId,
+            storeName: store.storeName,
+            avatarUrl: store.avatarUrl,
+            urlName: store.urlName,
+            owner: store.owner
+        },
+        listUserId: listUserId
+    }};
+    pub.publish('INTEREST.NotifyNewStoreCreated', JSON.stringify(publishData));
+    pub.quit();
+};

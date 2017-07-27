@@ -1,18 +1,19 @@
 import { connect } from 'react-redux'
 import EmoNav from '~/components/chat/bottom/EmoNav'
-// import { sendMessage } from '~/actions/asyn/chat'
 import iconUtility from '~/config/iconUtility'
+import { sendMessage } from '~/actions/asyn/chat/socket'
 
 const mapStateToProps = (state, ownProps) => {
     return ({
       mesId: state.inst.chat.center.mesId,
-      user: state.user
+      user: state.user,
+      mesId: ownProps.ownProps
     })
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    sendEmo: (mesId, user, emo) => {
-      // dispatch(sendMessage(mesId, user, emo))
+    sendEmo: (mesId, id, emo) => {
+        dispatch(sendMessage(mesId, id, emo, '', 'icon'))
     },
     loadIcon: () => {
       // iconUtility.getIconList()

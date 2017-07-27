@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import UserDetailsContainer from '~/containers/admin/user/UserDetailsContainer'
+import { link } from '~/components/admin/common/config'
 
 class User extends React.Component {
 
@@ -17,7 +18,7 @@ class User extends React.Component {
                 onUserDetails, loadMore
               } = this.props
         return (
-            <div style={{width: '100%', height: '100%', borderWidth: 1, borderStyle: 'solid'}}>
+            <div style={{width: '100%', height: 900, overflowY: 'scroll', borderWidth: 1, borderStyle: 'solid'}}>
 
                 <nav className="navbar navbar-default">
                     <button onClick={() => loadMore(keyy.length)} style={{float: 'right', margin: '5px 10px 5px 5px'}} className="btn btn-default">{display.loadMore?'Load more':'Data is up to date'}</button>
@@ -43,14 +44,14 @@ class User extends React.Component {
                                   <th scope="row">{index+1}</th>
                                   <td>
                                       <img src={user.avatarUrl} style={{width: 40, height: 40, marginRight: 10, borderRadius: 50}}/>
-                                      {user.username}
+                                      <a href={link.user(user.id)}>{user.username}</a>
                                   </td>
                                   <td>
                                       {
                                         stores.map(store =>
                                           <div key={store.id}>
                                                   <img src={store.avatarUrl} style={{width: 40, height: 40, marginRight: 10, marginBottom: 10, borderRadius: 50}}/>
-                                                  {store.storename}
+                                                  <a href={link.store(store.url)}>{store.storename}</a>
                                           </div>
                                         )
                                       }

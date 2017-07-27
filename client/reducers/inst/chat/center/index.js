@@ -6,7 +6,44 @@ const center = (state = {
     messagesMap: {},
 }, action) => {
     switch (action.type) {
+//---------------------------------------------------------------------------------------------------
+        case 'INIT_MULTI_MESSAGES':
+            if (state.multipleKey.indexOf(action.data.mesId) != -1) {
+                return state
+            }
 
+            const initMultiMessages = {
+              ...state,
+              multipleKey: [
+                  ...state.multipleKey,
+                  action.data.mesId
+              ],
+              messagesMap: {
+                  ...state.messagesMap,
+                  [action.data.mesId]: [
+                        ...action.data.messages.reverse(),
+                  ]
+              }
+            }
+            // console.log('\n[Reducer Center] INIT_MULTI_MESSAGES', action, initMultiMessages);
+            return initMultiMessages
+
+  //---------------------------------------------------------------------------------------------------
+          case 'UPDATE_MESSAGE':
+              const updateMessage = {
+                  ...state,
+                  messagesMap: {
+                      ...state.messagesMap,
+                      [action.data.mesId]: [
+                          ...action.data.messages.reverse(),
+                          ...state.messagesMap[action.data.mesId],
+                      ]
+                  }
+              }
+              // console.log('\n[Reducer Center] UPDATE_MESSAGE ', action, updateMessage)
+              return updateMessage
+
+//---------------------------------------------------------------------------------------------------
         case 'client/ADD_MEMBER':
             if (state.multipleKey.indexOf(action.data.mesId) != -1) {
                 return state
@@ -19,12 +56,14 @@ const center = (state = {
                     action.data.mesId
                 ],
                 messagesMap: {
+                    ...state.messagesMap,
                     [action.data.mesId]: []
                 }
             }
             // console.log('\n[Reducer Center] client/ADD_MEMBER', action, addMember);
             return addMember
 
+//---------------------------------------------------------------------------------------------------
         case 'REMOVE_CHAT':
         case 'CLOSE_CHAT':
             const mKey = state.multipleKey
@@ -37,37 +76,7 @@ const center = (state = {
                 messagesMap: mMap
             }
 
-        case 'INIT_SINGLE_MESSAGES':
-            const initSingleMessages = {
-              ...state,
-              // singleKey: [action.data.mesId],
-              messagesMap: {
-                  ...state.messagesMap,
-                  [action.data.mesId]: action.data.messages.reverse()
-              }
-            }
-            // console.log('\n[Reducer Center] INIT_SINGLE_MESSAGES', action, initSingleMessages);
-            return initSingleMessages
-
-        case 'INIT_MULTI_MESSAGES':
-            if (state.multipleKey.indexOf(action.data.mesId) != -1) {
-                return state
-            }
-            const initMultiMessages = {
-              ...state,
-              multipleKey: [
-                  ...state.multipleKey,
-                  action.data.mesId
-              ],
-              messagesMap: {
-                  ...state.messagesMap,
-                  [action.data.mesId]: action.data.messages
-              }
-            }
-            // console.log('\n[Reducer Center] INIT_MULTI_MESSAGES', action, initMultiMessages);
-            return initMultiMessages
-
-
+//---------------------------------------------------------------------------------------------------
         case 'global/RECEIVE_MESSAGE':
             const { mesId, user, time, message } = action.data
             const chat = state.messagesMap[mesId]
@@ -92,7 +101,7 @@ const center = (state = {
             // console.log('\n[Reducer Center] global/RECEIVE_MESSAGE ', action, msg)
             return msg
 
-
+//---------------------------------------------------------------------------------------------------
         case 'NEW_CHAT':
             if (action.data.mesId != 0 || state.multipleKey.indexOf('0') != -1) {
               return state
@@ -112,20 +121,7 @@ const center = (state = {
             // console.log('\n[Reducer Center] NEW_CHAT ', action, newChat)
             return newChat
 
-        case 'UPDATE_MESSAGE':
-            const updateMessage = {
-                ...state,
-                messagesMap: {
-                    ...state.messagesMap,
-                    [action.data.mesId]: [
-                        ...action.data.messages.reverse(),
-                        ...state.messagesMap[action.data.mesId],
-                    ]
-                }
-            }
-            console.log('\n[Reducer Center] UPDATE_MESSAGE ', action, updateMessage)
-            return updateMessage
-
+//---------------------------------------------------------------------------------------------------
         default:
           return state
     }

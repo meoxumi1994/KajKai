@@ -2,9 +2,9 @@ import { User, Address } from '../models'
 
 export const queryHandler = () => (req, res) => {
   const id = '1234'
-  User.findOne({ id }, (err, user) => {
+  User.find({ }, (err, user) => {
     res.json({
-      err, user
+      // err//, user
     })
   })
 }
@@ -15,7 +15,7 @@ export const insertHandler = () => (req, res) => {
   user.save((err, newUser, num) => {
     console.log(err, newUser, num)
     res.json({
-      err, xxx: newUser.lastUpdate.phone.getTime(), num
+      err//, xxx: newUser.lastUpdate.phone.getTime(), num
     })
   })
 }

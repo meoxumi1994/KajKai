@@ -15,7 +15,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     close: (mesId, multipleKey) => {
-        dispatch({type: 'CLOSE_CHAT', data: {mesId, newMesId: multipleKey[multipleKey.length - 2]}})
+        if (mesId == 0) {
+            dispatch({type: 'REMOVE_CHAT', data: {mesId}})
+        } else {
+            dispatch({type: 'CLOSE_CHAT', data: {mesId}})
+        }
     },
     displayAddMember: (mesId) => {
         dispatch(changeDisplay('ADD_MEMBER', mesId, 'toggle'))

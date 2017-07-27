@@ -75,10 +75,13 @@ export const updateChat = (message) => {
           chat.users.map((user) => {
             UserChat.findOne({ userId: user.id }, (err, userChat) => {
               if (userChat) {
-                const { chats } = userChat
+                let { chats } = userChat
                 for (let i = 0; i < chats.length; i++) {
                   if (chats[i].id == chat.id) {
-                    chats[i] = chat
+                    chats[i].users = basicUsers
+                    if (name) {
+                      chats[i].name = name
+                    }
                     break
                   } else if (i == chats.length - 1) {
                     chats.push(chat)

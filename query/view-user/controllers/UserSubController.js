@@ -41,6 +41,36 @@ export const updateUser = (message) => {
   }
 
   User.findOneAndUpdate({ id }, user, () => {})
+  User.find({}, (err, users) => {
+    if (users) {
+      for (let i = 0; i < users.length; i++) {
+        let mUser = users[i]
+        const { notifications } = mUser
+        if (notifications) {
+          for (let k = 0; k < notifications.length; k++) {
+            let notification = notifications[k]
+            if (notification.actorId ==  id) {
+              notification.name = user.username
+              notification.avatarUrl = user.avatarUrl
+            }
+            if (notification.type.includes('LIKE')) {
+              let { likers } = notification
+              for (let h = 0; h < likers.length; h++) {
+                if (likers[h].userId == id) {
+                  likers[h].username = user.username
+                  likers[h].avatarUrl = user.avatarUrl
+                }
+              }
+              notification.likers = likers
+            }
+            notifications[k] = notification
+          }
+          mUser.notifications = notifications
+          mUser.save(() => {})
+        }
+      }
+    }
+  })
 }
 
 export const updateBlackList = (message) => {

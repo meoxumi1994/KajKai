@@ -1,6 +1,6 @@
 export default {
-    'STORE.Created': {
+    'NOTIFICATION': {
         controller: 'SocketSubController',
-        method: 'notifyInterestSub'
+        method: 'getNotification'
     }
 }

@@ -1,4 +1,4 @@
-import { User, BasicStore, IDSellpostStore, IDCommentSellpost, IDReplyCommentSellpost, SellpostLiker, CommentLiker, ReplyLiker } from '../models'
+import { User, BasicStore, Notification, IDSellpostStore, IDCommentSellpost, IDReplyCommentSellpost, SellpostLiker, CommentLiker, ReplyLiker } from '../models'
 import { NotificationType } from '../enum'
 import { notify } from '../controllers/NotificationPubController'
 
@@ -8,7 +8,7 @@ export const createLikeSellpostNotification = (sellpostId) => {
       let { likers } = sellpostLiker
       const numberOfLike = likers.length
       const liker = likers[likers.length - 1]
-      likers = likers.length <= 5 ? likers : likers.slice(likers.length - 5)
+      likers = likers.length <= 5 ? likers : likers.splice(likers.length - 5)
       IDSellpostStore.findOne({ sellpostId }, (err, mIDSellpostStore) => {
         if (mIDSellpostStore) {
           BasicStore.findOne({ id: mIDSellpostStore.storeId }, (err, basicStore) => {
@@ -48,8 +48,8 @@ export const createLikeSellpostNotification = (sellpostId) => {
                             user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
                           }
                         }
-                        notify(user.id, notification)
-                        notifications.push(notification)
+                        notify(user.id, mNotification)
+                        notifications.push(mNotification)
                         user.notifications = notifications
                         user.save(() => {})
                         break
@@ -66,13 +66,13 @@ export const createLikeSellpostNotification = (sellpostId) => {
   })
 }
 
-export const createLikeCommentNotification = (commendId) => {
-  CommentLiker.findOne({ commendId }, (err, commentLiker) => {
+export const createLikeCommentNotification = (commentId) => {
+  CommentLiker.findOne({ commentId }, (err, commentLiker) => {
     if (commentLiker) {
       let { likers } = commentLiker
       const numberOfLike = likers.length
       const liker = likers[likers.length - 1]
-      likers = likers.length <= 5 ? likers : likers.slice(likers.length - 5)
+      likers = likers.length <= 5 ? likers : likers.splice(likers.length - 5)
       IDCommentSellpost.findOne({ commentId }, (err, mIDCommentSellpost) => {
         if (mIDCommentSellpost) {
           IDSellpostStore.findOne({ sellpostId: mIDCommentSellpost.sellpostId }, (err, mIDSellpostStore) => {
@@ -88,7 +88,7 @@ export const createLikeCommentNotification = (commendId) => {
                           followingSellposts = []
                         }
                         for (let k = 0; k < followingSellposts.length; k++) {
-                          if (followingSellposts[k] == sellpostId) {
+                          if (followingSellposts[k] == mIDCommentSellpost.sellpostId) {
                             let { notifications } = user
                             if (!notifications) {
                               notifications = []
@@ -115,8 +115,8 @@ export const createLikeCommentNotification = (commendId) => {
                                 user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
                               }
                             }
-                            notify(user.id, notification)
-                            notifications.push(notification)
+                            notify(user.id, mNotification)
+                            notifications.push(mNotification)
                             user.notifications = notifications
                             user.save(() => {})
                             break
@@ -141,7 +141,7 @@ export const createLikeReplyNotification = (replyId) => {
       let { likers } = replyLiker
       const numberOfLike = likers.length
       const liker = likers[likers.length - 1]
-      likers = likers.length <= 5 ? likers : likers.slice(likers.length - 5)
+      likers = likers.length <= 5 ? likers : likers.splice(likers.length - 5)
       IDReplyCommentSellpost.findOne({ replyId }, (err, mIDReplyCommentSellpost) => {
         if (mIDReplyCommentSellpost) {
           IDSellpostStore.findOne({ sellpostId: mIDReplyCommentSellpost.sellpostId }, (err, mIDSellpostStore) => {
@@ -157,7 +157,7 @@ export const createLikeReplyNotification = (replyId) => {
                           followingSellposts = []
                         }
                         for (let k = 0; k < followingSellposts.length; k++) {
-                          if (followingSellposts[k] == sellpostId) {
+                          if (followingSellposts[k] == mIDReplyCommentSellpost.sellpostId) {
                             let { notifications } = user
                             if (!notifications) {
                               notifications = []
@@ -185,8 +185,8 @@ export const createLikeReplyNotification = (replyId) => {
                                 user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
                               }
                             }
-                            notify(user.id, notification)
-                            notifications.push(notification)
+                            notify(user.id, mNotification)
+                            notifications.push(mNotification)
                             user.notifications = notifications
                             user.save(() => {})
                             break
@@ -206,6 +206,7 @@ export const createLikeReplyNotification = (replyId) => {
 }
 
 export const getClientFormatNotification = (notification) => ({
+  type: notification.type,
   id: notification._id,
   commentid: notification.replyId,
   leadercommentid: notification.commentId,

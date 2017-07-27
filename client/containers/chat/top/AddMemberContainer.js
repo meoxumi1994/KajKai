@@ -43,13 +43,20 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(changeDisplay('ADD_MEMBER', mesId, false))
         // dispatch(search_resetResult())
     },
-    userSearch: (mesId, keyword) => {
-        dispatch(changeDisplay('SEARCH', mesId, true))
+    searchUser: (mesId, keyword) => {
         dispatch(searchUser(mesId, keyword))
     },
-    searchAdd: (mesId, user) => {
-        dispatch(search_addMember(mesId, user))
+    addSearchedMember: (mesId, user, usersKey) => {
+        console.log('addSearchedMember', user, usersKey);
+        if (usersKey.indexOf(user.id) == -1) {
+            dispatch(search_addMember(mesId, user))
+        }
         dispatch(changeDisplay('SEARCH', mesId, false))
+    },
+    hideSearch: (mesId, value) => {
+        if (value == '' || value == undefined) {
+            dispatch(changeDisplay('SEARCH', mesId, false))
+        }
     }
 })
 

@@ -66,6 +66,12 @@ const utils = {
         }
         return usersMap
     },
+    /**
+    ** COMMON
+    **/
+    displayToggle: (value, state) => {
+        return value == 'toggle'? !state: value
+    }
 }
 
 export default utils

@@ -1,19 +1,26 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class Settings extends React.Component {
 
+    constructor(props) {
+        super(props)
+    }
+
     render() {
       const { mesId, user, chatListMap } = this.props
-      const { close, changeGroupName } = this.props
-      const { usersKey, usersMap } = chatListMap[mesId]
-      const show = chatListMap[mesId].display.setting
+      const { close, changeGroupName, editing } = this.props
+      const { usersKey, usersMap, displayLabel, display } = chatListMap[mesId]
+
+      const show = display.setting
       let groupName = ''
+
       return(
           <div>
               <Modal style={{ marginTop: 120 }} show={show} onHide={() => close(mesId)}>
                   <Modal.Header closeButton>
-                  <Modal.Title> Setting </Modal.Title>
+                  <Modal.Title><label>Conversation Setting</label></Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                       <div>
@@ -26,38 +33,44 @@ class Settings extends React.Component {
                       }}>
                           <table className="table">
                               <tbody className="default-thead">
-                                  <tr>
-                                      <td style={{width: 200}}>Group name</td>
-                                      <td>
-                                          <input ref={ref => groupName = ref} className="from-control"/>
-                                          <button style={{position: 'absolute', right: 50}} className="btn">Save</button>
-                                      </td>
+                                  <tr style={{height: 50}}>
+                                      <th style={{width: 200}}>Label</th>
+                                      {
+                                          display.editingLabel?
+                                          <td>
+                                              <input ref={ref => groupName = ref} className="from-control"/>
+
+                                              <ul style={{float: 'right'}} className="list-unstyled">
+                                                  <li><button type="submit" style={{width: 70}} className="btn btn-success">Save</button></li>
+                                                  <li><button type="button" onClick={() => editing(mesId)} style={{width: 70, marginTop: 5}} className="btn btn-danger">Cancel</button></li>
+                                              </ul>
+
+
+                                          </td>
+                                          :
+                                          <td>
+                                              <label>{displayLabel}</label>
+                                              <button type="button" onClick={() => editing(mesId)} style={{position: 'absolute', right: 20, width: 70}} className="btn btn-default">Edit</button>
+                                          </td>
+                                      }
                                   </tr>
                                   <tr>
-                                      <td>Group color</td>
-                                      <td>
-                                          <button type="button" className="btn" style={{backgroundColor: '#cc3333', color: 'white'}}>Red</button>
-                                          <button type="button"  style={{position: 'absolute', right: 50}} className="btn">Change</button>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>Group member</td>
+                                      <th>Members</th>
                                       <td>
                                           <div>
                                           {
-                                            usersKey.map(
-                                              memberId => <div key={memberId}>
-                                                  <img src={usersMap[memberId].avatarUrl} width="40" height="40"/>
+                                            usersKey.map( memberId =>
+                                              <div key={memberId}>
+                                                  <img src={usersMap[memberId].avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginBottom: 5, marginRight: 5}}/>
                                                   <label>{usersMap[memberId].username}</label>
-                                                  {
-                                                      <button
-                                                            type="button"
-                                                            disabled={true}
-                                                            className="btn"
-                                                            style={{position: 'absolute', right: 50, marginBottom: 10}}>
-                                                            Removed
-                                                      </button>
-                                                  }
+
+
+                                                  <button className="btn btn-default" style={{float: 'right', width: 70}}>
+                                                      <Link to="chart" target="_blank" to={"https://www.kajkai.com/user/" + memberId} >
+                                                          View
+                                                      </Link>
+                                                  </button>
+
                                               </div>
                                             )}
                                           </div>

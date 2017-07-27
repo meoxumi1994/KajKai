@@ -1,6 +1,6 @@
 import { getListFollower, addNewFollow, removeFollow, modifyFollow, getListFollowee } from '../services/FollowService'
 import { addNewLike } from '../services/LikeService'
-import { getInterestWithIn } from '../services/InterestService'
+import { publishNewInterest } from '../services/InterestService'
 
 export const getListFollowerCon = (message, next) => {
     getListFollower(message.followeeId, (list) => {
@@ -48,8 +48,6 @@ export const addLikeCon = (message, next) => {
     })
 };
 
-export const getListInterestWithSub = (message, next) => {
-    getInterestWithIn(message.longitude, message.latitude, message.categoryId, message.range, (listId) => {
-        next({status: 'success', listId: listId});
-    })
+export const notifyInterestSub = (message, next) => {
+    publishNewInterest(message.store);
 };

@@ -9,6 +9,7 @@ import IDSellpostStoreSchema from './IDSellpostStore'
 import ImageSchema from './Image'
 import InterestSchema from './Interest'
 import LastUpdateSchema from './LastUpdate'
+import LikerSchema from './Liker'
 import NotificationSchema from './Notification'
 import PrivacySchema from './Privacy'
 import ReplyLikerSchema from './ReplyLiker'
@@ -25,6 +26,7 @@ export const IDSellpostStore = mongoose.model('IDSellpostStore', IDSellpostStore
 export const Image = mongoose.model('Image', ImageSchema)
 export const Interest = mongoose.model('Interest', InterestSchema)
 export const LastUpdate = mongoose.model('LastUpdate', LastUpdateSchema)
+export const Liker = mongoose.model('Liker', LikerSchema)
 export const Notification = mongoose.model('Notification', NotificationSchema)
 export const Privacy = mongoose.model('Privacy', PrivacySchema)
 export const ReplyLiker = mongoose.model('ReplyLiker', ReplyLikerSchema)

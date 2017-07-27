@@ -1,13 +1,13 @@
 import React from 'react'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import iconUtility from '~/config/iconUtility'
-import { getTime } from '~/containers/support'
+import { timeSince } from '~/containers/support'
 
 const Message = ({message, time, user, styles, showAvatar}) => {
 
     const showTimePopup = (
       <Popover id="popover-trigger-hover-focus">
-          {time}
+          {timeSince(time)}
       </Popover>
     )
 
@@ -29,9 +29,20 @@ const Message = ({message, time, user, styles, showAvatar}) => {
           </div>
           <div>
               <ul style={styles.text}>
-                  <small style={showAvatar?styles.senderDiv:{display: 'none'}} className="text-muted" >{username}</small>
-                  <ul style={styles.bounds}>
-                      {text}
+                  {
+                    showAvatar? <small className="text-muted" >{username}</small>: undefined
+                  }
+                  <ul style={type == 'notification'? undefined: styles.bounds}>
+                      {
+                          type == 'icon'?
+                          <img src={"./images/chatIcons/Baby/"+text.substring(1, text.length-1)+".png"} style={{maxWidth: 80, maxHeight: 80}}/>
+                          :
+                          text.trim() != '' && type == 'message'? text: undefined
+                      }
+                      {}
+                      <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={picturePopup}>
+                          <a href={url}>{url.trim() == ''? undefined: <img src={url} style={{maxWidth: 180, maxHeight: 180}}/>}</a>
+                      </OverlayTrigger>
                   </ul>
               </ul>
           </div>

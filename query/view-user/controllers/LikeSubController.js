@@ -72,7 +72,7 @@ export const createLikeNotification = (message) => {
             createLikeCommentNotification(likenId)
           })
         } else {
-          const mCommentLiker = new SellpostLiker({
+          const mCommentLiker = new CommentLiker({
             commentId: likenId,
             likers: [liker]
           })
@@ -94,7 +94,7 @@ export const createLikeNotification = (message) => {
             createLikeReplyNotification(likenId)
           })
         } else {
-          const mReplyLiker = new SellpostLiker({
+          const mReplyLiker = new ReplyLiker({
             replyId: likenId,
             likers: [liker]
           })
@@ -126,33 +126,43 @@ export const removeLikeNotification = (message) => {
     if (users) {
       for (let i = 0; i < users.length; i++) {
         let user = users[i]
-        let { notifications, mNumberOfUnRead } = user
+        let { notifications, numberOfUnRead } = user
         if (!notifications) {
           notifications = []
         }
-        if (!mNumberOfUnRead) {
-          mNumberOfUnRead = 0
+        if (!numberOfUnRead) {
+          numberOfUnRead = 0
         }
         let mNotifications = []
         for (let k = 0; k < notifications.length; k++) {
           let notification = notifications[k]
           let { type } = notification
+          let flag = false
           if (type == UNLIKETYPE) {
             if (type == NotificationType.LIKESELLPOST && notification.sellpostId == likenId) {
-              if (k >= notifications.length - mNumberOfUnRead) {
-                mNumberOfUnRead--
-              }
+              flag = true
             } else if (type == NotificationType.LIKECOMMENT && notification.commentId == likenId) {
-              if (k >= notifications.length - mNumberOfUnRead) {
-                mNumberOfUnRead--
-              }
+              flag = true
             } else if (type == NotificationType.LIKEREPLY && notification.replyId == likenId) {
-              if (k >= notifications.length - mNumberOfUnRead) {
-                mNumberOfUnRead--
+              flag = true
+            }
+          }
+          if (flag) {
+            let { likers } = notification
+            if (!likers) {
+              likers = []
+            }
+            for (let h = 0; h < likers.length; h++) {
+              if (likers[h].userId == likerId || likers[h].storeId == likerId) {
+                likers.splice(h, 1)
               }
+            }
+            if (likers.length > 0) {
+              notification.likers = likers
+              mNotifications.push(notification)
             } else {
-              if (k >= notifications.length - mNumberOfUnRead) {
-                mNumberOfUnRead--
+              if (k >= notifications.length - numberOfUnRead) {
+                numberOfUnRead--
               }
             }
           } else {
@@ -160,7 +170,7 @@ export const removeLikeNotification = (message) => {
           }
         }
         user.notifications = mNotifications
-        user.numberOfUnRead = mNumberOfUnRead
+        user.numberOfUnRead = numberOfUnRead
         user.save(() => {})
       }
     }
@@ -169,7 +179,7 @@ export const removeLikeNotification = (message) => {
 
 const removeLike = (likenId, likerId) => {
   if (likenId.substr(0, 3) == '012') { // sellpost
-    SellpostLiker.find({ sellpostId: likenId }, (err, sellpostLiker) => {
+    SellpostLiker.findOne({ sellpostId: likenId }, (err, sellpostLiker) => {
       if (sellpostLiker) {
         let { likers } = sellpostLiker
         if (!likers) {
@@ -186,7 +196,7 @@ const removeLike = (likenId, likerId) => {
       }
     })
   } else if (likenId.substr(0, 3) == '004') { // comment
-    CommentLiker.find({ commentId: likenId }, (err, commentLiker) => {
+    CommentLiker.findOne({ commentId: likenId }, (err, commentLiker) => {
       if (commentLiker) {
         let { likers } = commentLiker
         if (!likers) {
@@ -203,7 +213,7 @@ const removeLike = (likenId, likerId) => {
       }
     })
   } else if (likenId.substr(0, 3) == '005') { // reply
-    ReplyLiker.find({ replyId: likenId }, (err, replyLiker) => {
+    ReplyLiker.findOne({ replyId: likenId }, (err, replyLiker) => {
       if (replyLiker) {
         let { likers } = replyLiker
         if (!likers) {

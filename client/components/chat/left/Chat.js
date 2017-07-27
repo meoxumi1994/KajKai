@@ -1,5 +1,5 @@
 import React from 'react'
-import { getTime } from '~/containers/support'
+import { timeSince } from '~/containers/support'
 
 class Chat extends React.Component {
     constructor(props) {
@@ -8,15 +8,18 @@ class Chat extends React.Component {
 
     render() {
 
-        const { chatListMap, mesId, user, currentChat, removeNewChat } = this.props
+        const { mesId,
+                chatListMap, user, currentChat,
+                removeNewChat
+              } = this.props
 
         if (chatListMap[mesId] == undefined || user.id == undefined) {
             return (
-              <div></div>
+                <div></div>
             )
         }
 
-        const { lastMessage, time, usersKey, usersMap, displayLabel } = chatListMap[mesId]
+        const { usersKey, usersMap, lastMessage, time, displayLabel } = chatListMap[mesId]
 
         let label = displayLabel
         if (label == undefined || label == '') {
@@ -49,7 +52,7 @@ class Chat extends React.Component {
               </div>
 
               <div className="col col-xs-5" style={styles.messageDiv}>
-                    <div style={{color: textColor}}><b>{label.length > 25? label.substring(0, 25) + '...': label}</b></div>
+                    <div style={{color: textColor}}><b>{label.length > 23? label.substring(0, 23) + '...': label}</b></div>
                     {
                       lastMessage != undefined?
                       <div style={{marginTop: 5}}>
@@ -69,7 +72,7 @@ class Chat extends React.Component {
                 lastMessage == undefined? undefined:
                 <div className="col col-xs-4" style={styles.timeDiv}>
                     <small className="text-muted" style={{color: textColor}}>
-                      {lastMessage.time}
+                      {timeSince(lastMessage.time)}
                     </small>
                 </div>
               }
