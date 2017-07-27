@@ -77,7 +77,7 @@ export const getInterestWithIn = (longitude, latitude, categoryId, radius, next)
 export const publishNewInterest = (store) => {
     getInterestWithIn(store.longitude, store.latitude, store.secondCategoryId, 10000, (listId) => {
         if (listId.length === 0) return;
-        newStoreInterestPub(store.storeId, store.storeName, store.avatarUrl, store.urlName, listId);
+        newStoreInterestPub(store, listId);
     })
 };
 

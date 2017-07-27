@@ -1,6 +1,7 @@
 import redis from 'redis'
 import config from '../config/pubSubConfig'
 import { getUUID } from '../utils/utils'
+import {socketIO} from "../../../client/fakedata";
 
 export const authoriseToken = (token, next) => {
     const sub = redis.createClient(config);
@@ -102,14 +103,15 @@ export const getStoreFromPostId = (postId, next) => {
     })
 };
 
-export const newStoreInterestPub = (storeId, storeName, avatarUrl, urlName, listUserId) => {
+export const newStoreInterestPub = (store, listUserId) => {
     const pub = redis.createClient(config);
     const publishData = {interest: {
         store: {
-            storeId,
-            storeName,
-            avatarUrl,
-            urlName
+            storeId: store.storeId,
+            storeName: store.storeName,
+            avatarUrl: store.avatarUrl,
+            urlName: store.urlName,
+            owner: store.owner
         },
         listUserId: listUserId
     }};

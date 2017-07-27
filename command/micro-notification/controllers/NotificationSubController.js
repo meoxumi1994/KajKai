@@ -49,6 +49,5 @@ export const addLikeCon = (message, next) => {
 };
 
 export const notifyInterestSub = (message, next) => {
-    const { storeId, urlName, storeName, avatarUrl, longitude, latitude, secondCategoryId } = message;
-    publishNewInterest({ storeId, urlName, storeName, avatarUrl, longitude, latitude, secondCategoryId });
+    publishNewInterest(message.store);
 };
