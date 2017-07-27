@@ -43,6 +43,14 @@ export const loadImage = (action, file, src) => dispatch => {
                     if(action.type == 'UPDATE_STORE_COVER'){
                         dispatch(updateStore({ ...action.data, coverUrl: urlreal }))
                     }
+                    if(action.type == 'UPDATE_PRODUCR_IMAGE'){
+                        dispatch({
+                            ...action.data,
+                            type: 'INST_ENTITY_PRODUCT_CHANGE',
+                            key: 'imageUrl',
+                            value: urlreal,
+                        })
+                    }
                     if(action.type == 'UPDATE_POST_ROW'){
                         dispatch({
                             type: 'INST_ENTITY_POST_EDIT_SELL_POST_CHANGE_POST_ROW',

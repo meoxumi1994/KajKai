@@ -22,7 +22,6 @@ const postrow = (state = {
                     [pr.id] : pr,
                 }
             })
-            console.log(nstate)
             return nstate
         default:
             return state

@@ -82,6 +82,15 @@ GET /notification?offset=-1 {
             // hanh` dong gay ra o store nao`
             storename: ,
             urlname: ,
+            order: [
+                {
+                  id: 'product002',
+                  content: ,
+                  imageUrl: ,
+                  list: [],
+                  num: 2
+                },
+            ],
         }
     ]
 }
@@ -483,7 +492,7 @@ GET /sellpost/:id {
     ], // tối đa 5 thằng bạn
     numcomment: ,
     numshare: ,
-    offsetleadercomments:,
+    offset:,
     leadercomments: [ // lay tat ca trong 1 gio gan day, toi da 5 thang
         {
           offset:,

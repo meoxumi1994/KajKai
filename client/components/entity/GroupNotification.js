@@ -8,7 +8,6 @@ class GroupNotification extends React.Component {
     }
     render(){
         const { onClick, notifications } = this.props
-        console.log(notifications)
         return(
             <div>
                 {notifications.map((item) =>

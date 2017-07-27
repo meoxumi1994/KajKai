@@ -54,6 +54,11 @@ const chatMap = (state={
                           action.data.url
                       ]
                   }
+              case 'RESET_IMAGES_URL':
+                  return {
+                      ...state,
+                      imagesUrl: []
+                  }
               default:
                   return state
             }

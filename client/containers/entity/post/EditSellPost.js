@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const editsellpost = state.inst.entity.editsellpost
     const editpostrow = state.inst.entity.editpostrow
-    const product = state.inst.entity.product
+    const product = state.inst.entity.editproduct
     const { avatarUrl, storename, id } = state.inst.store.index
     const { height } = state.inst.app
     return({

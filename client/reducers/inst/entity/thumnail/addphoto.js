@@ -5,8 +5,7 @@ const addphoto = (state = {
             return {...state,
                 [action.key]: action.value
             }
-        case 'UPDATE_STORE_SUCCESS':
-        case 'UPDATE_USER_SUCCESS':
+        case 'LOAD_IMAGE_SUCCESS':
             return {}
         default:
             return state

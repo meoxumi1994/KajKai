@@ -17,9 +17,7 @@ export const createReplyNotification = (message) => {
           name: user.username,
           avatarUrl: user.avatarUrl
         }
-        resolve({
-          replier
-        })
+        resolve(replier)
       } else {
         resolve(null)
       }
@@ -33,9 +31,7 @@ export const createReplyNotification = (message) => {
           name: basicStore.storeName,
           avatarUrl: basicStore.avatarUrl
         }
-        resolve({
-          replier
-        })
+        resolve(replier)
       } else {
         resolve(null)
       }

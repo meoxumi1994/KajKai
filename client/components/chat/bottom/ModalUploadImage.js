@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 
 class ModalUploadImage extends React.Component {
     constructor(props) {
@@ -27,8 +27,8 @@ class ModalUploadImage extends React.Component {
                         }
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button onClick={() => sendImage(mesId, user.id, '', imagesUrl)}>SEND</Button>
-                      <Button onClick={() => close(mesId)}>CLOSE</Button>
+                      <button className="btn btn-primary" onClick={() => imagesUrl.length == 0? undefined: sendImage(mesId, user.id, '', imagesUrl)}>SEND</button>
+                      <button className="btn btn-default" onClick={() => close(mesId)}>CLOSE</button>
                     </Modal.Footer>
                 </Modal>
             </div>

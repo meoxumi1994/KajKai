@@ -1,6 +1,7 @@
  import React from 'react'
 import { Popover, Row } from 'react-bootstrap'
 import Message from './Message'
+import ReactDOM from 'react-dom'
 
 class MessageList extends React.Component {
 
@@ -9,16 +10,26 @@ class MessageList extends React.Component {
     }
 
     componentDidMount() {
-        this.scrollToBottom();
+        // ReactDOM.findDOMNode(this.refs.bottom).addEventListener('scroll', this.listenScrollEvent);
+        this.scrollToBottom()
     }
 
+    // componentWillUnmount() {
+    //     ReactDOM.findDOMNode(this.refs.bottom).removeEventListener('scroll', this.listenScrollEvent);
+    // }
+    //
+    // listenScrollEvent(e) {
+    //     console.log('Scroll event detected!', e);
+    // }
+    // onScroll={() => this.listenScrollEvent.bind(this)}
+
     componentDidUpdate(prevProps, prevState) {
-        this.scrollToBottom();
+        this.scrollToBottom()
     }
 
     scrollToBottom() {
-      const { thing } = this.refs;
-      thing.scrollTop = thing.scrollHeight - thing.clientHeight;
+        const { bottom } = this.refs;
+        bottom.scrollTop = bottom.scrollHeight - bottom.clientHeight;
     }
 
     render() {
@@ -31,7 +42,7 @@ class MessageList extends React.Component {
         const { usersMap } = chatListMap[mesId]
 
         return (
-          <div style={styles.mainDiv} ref={"thing"}>
+          <div style={styles.mainDiv} ref={"bottom"} >
             {
               messagesMap[mesId] == undefined?
               <div></div>

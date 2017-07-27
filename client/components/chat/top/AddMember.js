@@ -27,7 +27,7 @@ class AddMember extends React.Component {
             <div className="input-group" style={{width: '100%'}}>
                   <FormControl
                     inputRef={ref => {conversator = ref}}
-                    placeholder="Thêm thành viên..."
+                    placeholder="Add members..."
                     style={{width: '80%', height: 40, fontSize: 15}}
                     onChange={(e) => hideSearch(mesId, e.target.value)}
                   >

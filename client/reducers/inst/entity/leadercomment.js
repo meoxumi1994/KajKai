@@ -28,6 +28,7 @@ const leadercomment = (state = {
             return {...state,
                 [action.id] : {
                     ...state[action.id],
+                    offset: action.offset,
                     comments : [
                         state[action.id].comments[0],
                         ...action.comments,
