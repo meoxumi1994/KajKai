@@ -72,7 +72,7 @@ export const createLikeNotification = (message) => {
             createLikeCommentNotification(likenId)
           })
         } else {
-          const mCommentLiker = new SellpostLiker({
+          const mCommentLiker = new CommentLiker({
             commentId: likenId,
             likers: [liker]
           })
@@ -94,7 +94,7 @@ export const createLikeNotification = (message) => {
             createLikeReplyNotification(likenId)
           })
         } else {
-          const mReplyLiker = new SellpostLiker({
+          const mReplyLiker = new ReplyLiker({
             replyId: likenId,
             likers: [liker]
           })
