@@ -8,7 +8,7 @@ export const createLikeSellpostNotification = (sellpostId) => {
       let { likers } = sellpostLiker
       const numberOfLike = likers.length
       const liker = likers[likers.length - 1]
-      likers = likers.length <= 5 ? likers : likers.slice(likers.length - 5)
+      likers = likers.length <= 5 ? likers : likers.splice(likers.length - 5)
       IDSellpostStore.findOne({ sellpostId }, (err, mIDSellpostStore) => {
         if (mIDSellpostStore) {
           BasicStore.findOne({ id: mIDSellpostStore.storeId }, (err, basicStore) => {
@@ -72,7 +72,7 @@ export const createLikeCommentNotification = (commendId) => {
       let { likers } = commentLiker
       const numberOfLike = likers.length
       const liker = likers[likers.length - 1]
-      likers = likers.length <= 5 ? likers : likers.slice(likers.length - 5)
+      likers = likers.length <= 5 ? likers : likers.splice(likers.length - 5)
       IDCommentSellpost.findOne({ commentId }, (err, mIDCommentSellpost) => {
         if (mIDCommentSellpost) {
           IDSellpostStore.findOne({ sellpostId: mIDCommentSellpost.sellpostId }, (err, mIDSellpostStore) => {
@@ -141,7 +141,7 @@ export const createLikeReplyNotification = (replyId) => {
       let { likers } = replyLiker
       const numberOfLike = likers.length
       const liker = likers[likers.length - 1]
-      likers = likers.length <= 5 ? likers : likers.slice(likers.length - 5)
+      likers = likers.length <= 5 ? likers : likers.splice(likers.length - 5)
       IDReplyCommentSellpost.findOne({ replyId }, (err, mIDReplyCommentSellpost) => {
         if (mIDReplyCommentSellpost) {
           IDSellpostStore.findOne({ sellpostId: mIDReplyCommentSellpost.sellpostId }, (err, mIDSellpostStore) => {
