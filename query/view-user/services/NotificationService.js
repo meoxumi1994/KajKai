@@ -67,18 +67,22 @@ export const createLikeSellpostNotification = (sellpostId) => {
 }
 
 export const createLikeCommentNotification = (commendId) => {
+  console.log('createLikeCommentNotification');
   CommentLiker.findOne({ commendId }, (err, commentLiker) => {
     if (commentLiker) {
+      console.log('commentLiker: ', commentLiker);
       let { likers } = commentLiker
       const numberOfLike = likers.length
       const liker = likers[likers.length - 1]
       likers = likers.length <= 5 ? likers : likers.splice(likers.length - 5)
+      console.log('likers: ', likers);
       IDCommentSellpost.findOne({ commentId }, (err, mIDCommentSellpost) => {
         if (mIDCommentSellpost) {
           IDSellpostStore.findOne({ sellpostId: mIDCommentSellpost.sellpostId }, (err, mIDSellpostStore) => {
             if (mIDSellpostStore) {
               BasicStore.findOne({ id: mIDSellpostStore.storeId }, (err, basicStore) => {
                 if (basicStore) {
+                  console.log('mIDCommentSellpost.sellpostId: ', mIDCommentSellpost.sellpostId);
                   User.find({}, (err, users) => {
                     if (users) {
                       for (let i = 0; i < users.length; i++) {
