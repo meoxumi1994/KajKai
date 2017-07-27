@@ -41,19 +41,24 @@ class MessageList extends React.Component {
                     <p style={{textAlign:'center'}} onClick={() => getMessages(mesId, messagesMap[mesId][0].time)}><i>(Show more)</i></p>
                     : undefined
                   }
-                  {messagesMap[mesId].map(
-                    mes => {
-                      let showAvatar = previousId==mes.id?false:true
-                      previousId = mes.id
-                      return (
-                          <Message key={JSON.stringify(mes)}
-                              {...mes}
-                              user={mes.id == user.id? user: usersMap[mes.id]}
-                              styles={mes.id === user.id? styles.rightMsg: styles.leftMsg}
-                              showAvatar={showAvatar}/>
-                      )
-                    }
+                  <table>
+                  {
+                    messagesMap[mesId].map(
+                        mes => {
+                          let showAvatar = previousId==mes.id?false:true
+                          previousId = mes.id
+                          return (
+                              <tr key={JSON.stringify(mes)}>
+                                <Message
+                                    {...mes}
+                                    user={mes.id == user.id? user: usersMap[mes.id]}
+                                    styles={mes.id === user.id? styles.rightMsg: styles.leftMsg}
+                                    showAvatar={showAvatar}/>
+                              </tr>
+                          )
+                        }
                   )}
+                  </table>
               </div>
             }
           </div>
