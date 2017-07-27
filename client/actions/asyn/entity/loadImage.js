@@ -58,6 +58,9 @@ export const loadImage = (action, file, src) => dispatch => {
                             value: [urlreal, ...action.images],
                         })
                     }
+                    if (action.type == 'SEND_IMAGE') {
+                        dispatch({type: 'CHAT/UPDATE', subType: 'LOAD_IMAGES_URL', data: Object.assign({}, action.data, {url: urlreal})})
+                    }
                     dispatch({ type: 'LOAD_IMAGE_SUCCESS' })
                 })
                 .catch( error => console.log(error))

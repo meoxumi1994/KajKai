@@ -28,7 +28,7 @@ export const uploadImage = (type, file) => dispatch => {
                   dispatch(updateUser({ [type]: urlreal }))
                   break
                 case "sendImage":
-                  // dispatch(uploadingImages([{urlreal}]))
+                  console.log('res', res);
                   break
                 default:
                   console.log('res ', res)

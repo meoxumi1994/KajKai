@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch({ type: 'INST_BAR_CHANGE', key: key, value: value })
     },
     resetChatQuantity: () => {
-        // dispatch({type: 'server/RESET_UNREAD_CHATS_QUANTITY'})
+        dispatch({type: 'server/RESET_UNREAD_CHATS_QUANTITY'})
     }
 })
 

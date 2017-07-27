@@ -69,15 +69,8 @@ const utils = {
     /**
     ** COMMON
     **/
-    deleteMapElement: (id, map) => {
-        const tempMap = map
-        delete tempMap[id]
-        return tempMap
-    },
-    deleteListElement: (id, list) => {
-        const tempList = list
-        tempList.splice(tempList.indexOf(id), 1)
-        return tempList
+    displayToggle: (value, state) => {
+        return value == 'toggle'? !state: value
     }
 }
 

@@ -11,6 +11,15 @@ const left = (state = {
 }, action) => {
     switch (action.type) {
 
+      case 'CHAT/UPDATE':
+          return {
+              ...state,
+              chatListMap: {
+                  ...state.chatListMap,
+                  [action.data.mesId]: chatMap(state.chatListMap[action.data.mesId], action)
+              }
+          }
+
 /**
  ** INITIAL
 **/
@@ -200,7 +209,7 @@ const left = (state = {
 **/
 //------------------------------------------------------------------------------
       case 'UPDATE_USER_INFO':
-          if (state.chatListMap[action.data.mesId].usersKey.indexOf(action.data.id) != -1) {
+          if (state.chatListMap[action.data.mesId] == undefined || state.chatListMap[action.data.mesId].usersKey.indexOf(action.data.id) != -1) {
               return state
           }
           return {

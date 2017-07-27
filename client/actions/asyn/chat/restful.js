@@ -60,7 +60,12 @@ export const getUser = (person, mesId) => dispatch => {
     flem('/user/'+person, {}, {})
     .then((response) => {
           console.log('\n[API] /user ', response);
-          const { avatarUrl, username, id } = response.user
-          dispatch(updateUserInfo(mesId, id, username, avatarUrl))
+          if (response != undefined && response.status == 'success') {
+              const { avatarUrl, username, id } = response.user
+              dispatch(updateUserInfo(mesId, id, username, avatarUrl))
+          } else if (response != undefined && response.status == 'nodata') {
+              dispatch(updateUserInfo(-1, 0, '', ''))
+          }
+
     })
 }
