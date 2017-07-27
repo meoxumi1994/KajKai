@@ -70,5 +70,9 @@ export default {
   'INTEREST.RemoveInterest': {
     controller: 'InterestSubController',
     method: 'removeInterest'
+  },
+  'INTEREST.NotifyNewStoreCreated': {
+    controller: 'InterestSubController',
+    method: 'createStoreCreatedNotification'
   }
 }

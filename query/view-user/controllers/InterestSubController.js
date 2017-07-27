@@ -1,4 +1,6 @@
-import { User, Interest } from '../models'
+import { User, Interest, Notification } from '../models'
+import { notify } from './NotificationPubController'
+import { NotificationType } from '../enum'
 
 export const addInterest = (message) => {
   const { id, userId, categoryId, categoryName, longitude, latitude } = message.interest
@@ -38,6 +40,39 @@ export const removeInterest = (message) => {
       }
       user.interests = interests
       user.save(() => {})
+    }
+  })
+}
+
+export const createStoreCreatedNotification = (message) => {
+  const { store, listUserId: userIds } = message.interest
+
+  User.findOne({ id: store.owner }, (err, actor) => {
+    if (actor) {
+      userIds.map((userId) => {
+        User.findOne({ id: userId }, (err, user) => {
+          if (user) {
+            let { notifications } = user
+            if (!notifications) {
+              notifications = []
+            }
+            let notification = new Notification({
+              type: NotificationType.INTEREST,
+              actorId: actor.id,
+              name: actor.username,
+              avatarUrl: actor.avatarUrl,
+              time: Date.now(),
+              storeName: store.storeName,
+              urlName: store.urlName
+            })
+
+            notify(userId, notification)
+            notifications.push(notification)
+            user.notifications = notifications
+            user.save()
+          }
+        })
+      })
     }
   })
 }

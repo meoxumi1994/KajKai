@@ -23,5 +23,34 @@ export const updateStore = (message) => {
   if (urlName) basicStore.urlName = urlName
 
   BasicStore.findOneAndUpdate({ id }, basicStore, () => {})
-  Sellpost.findOneAndUpdate( { storeId: id }, { storeName, avatarUrl }, () => {})
+  if (storeName) {
+    Sellpost.update(
+     {
+       'storeId': id
+     },
+     {
+       $set: {
+         'storeName': storeName
+       }
+     },
+     {
+       'multi': true
+     }
+    )
+  }
+  if (avatarUrl) {
+    Sellpost.update(
+     {
+       'storeId': id
+     },
+     {
+       $set: {
+         'avatarUrl': avatarUrl
+       }
+     },
+     {
+       'multi': true
+     }
+    )
+  }
 }
