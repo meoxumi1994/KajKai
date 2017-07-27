@@ -77,7 +77,7 @@ export const updateChat = (message) => {
           chat.users.map((user) => {
             UserChat.findOne({ userId: user.id }, (err, userChat) => {
               if (userChat) {
-                const { chats } = userChat
+                let { chats } = userChat
                 console.log('chats 1: ', util.inspect(chats, false, null));
                 for (let i = 0; i < chats.length; i++) {
                   if (chats[i].id == chat.id) {
