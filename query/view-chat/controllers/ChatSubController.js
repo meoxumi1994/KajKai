@@ -78,6 +78,7 @@ export const updateChat = (message) => {
             UserChat.findOne({ userId: user.id }, (err, userChat) => {
               if (userChat) {
                 let { chats } = userChat
+                console.log('userChat 1: ', util.inspect(userChat, false, null));
                 console.log('chats 1: ', util.inspect(chats, false, null));
                 for (let i = 0; i < chats.length; i++) {
                   if (chats[i].id == chat.id) {
@@ -88,9 +89,9 @@ export const updateChat = (message) => {
                   }
                 }
                 console.log('chats 2: ', util.inspect(chats, false, null));
-                console.log('userChat: ', util.inspect(userChat, false, null));
-                userChat.chats = chats
                 console.log('userChat 2: ', util.inspect(userChat, false, null));
+                userChat.chats = chats
+                console.log('userChat 3: ', util.inspect(userChat, false, null));
                 userChat.save(() => {})
               }
             })
