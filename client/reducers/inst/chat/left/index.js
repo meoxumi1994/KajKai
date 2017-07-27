@@ -11,7 +11,18 @@ const left = (state = {
 }, action) => {
     switch (action.type) {
 
+//------------------------------------------------------------------------------
       case 'CHAT/UPDATE':
+          return {
+              ...state,
+              chatListMap: {
+                  ...state.chatListMap,
+                  [action.data.mesId]: chatMap(state.chatListMap[action.data.mesId], action)
+              }
+          }
+
+//------------------------------------------------------------------------------
+      case 'client/UPDATE_UI':
           return {
               ...state,
               chatListMap: {
@@ -199,10 +210,6 @@ const left = (state = {
                 //console.log('\n[Reducer Left] global/RECEIVE_MESSAGE ---updateChat ', action, updateChat)
                 return updateChat
             }
-
-      case 'client/UPDATE_UI':
-          //console.log('client/UPDATE_UI', action);
-          return state
 
 /**
  ** USER UPDATE
