@@ -23,7 +23,7 @@ const ChatBottom = ({mesId, userId, sendMessage, displayImageModal}) => {
           />
         </div>
 
-        <button style={styles.iconButton} className="btn btn-default btn-md" onClick={() => displayImageModal(mesId)}>
+        <button type="button" style={styles.iconButton} className="btn btn-default btn-md" onClick={() => displayImageModal(mesId)}>
             <i className="glyphicon glyphicon-camera"></i>
         </button>
 
