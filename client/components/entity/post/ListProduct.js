@@ -13,7 +13,7 @@ class ListProduct extends React.Component {
                 <table>
                     {products_order.map((item, index) =>
                         <tbody key={index}>
-                            <Product id={item} sellpostId={sellpostId} canEdit={canEdit} width={index?120:160}/>
+                            <Product id={item} sellpostId={sellpostId} canEdit={canEdit} width={index?120:300}/>
                         </tbody>
                     )}
                 </table>

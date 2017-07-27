@@ -3,13 +3,17 @@ import { OverlayTrigger, Popover } from 'react-bootstrap'
 
 import ContentEditable from '~/components/entity/ContentEditable'
 import ContentShow from '~/components/entity/ContentShow'
+import ProductModal from '~/containers/entity/modal/ProductModal'
 
 class Product extends React.Component {
     constructor(props){
         super(props)
+        this.state = {}
     }
     render(){
-        const { id, list, imageUrl, content, canEdit, onChange, width, onAddProduct, justShow, canRemove, onRemoveProduct} = this.props
+        const { id, list, imageUrl, content,
+            canEdit, onChange, width, onAddProduct, justShow, canRemove,
+            onRemoveProduct} = this.props
         return(
             <tr>
                 {list.map((item,index) => {
@@ -29,13 +33,12 @@ class Product extends React.Component {
                             <td style={{ paddingRight: 10 }} key={index}>
                                 <div>
                                     <ContentEditable
-                                        canEdit={true}
-                                        placehoder={" "}
                                         handleChange={(e) => {
-                                            const newlist = [...list]
-                                            newlist[index] = e.target.value
-                                            onChange('list', newlist)
-                                        }}
+                                           const newlist = [...list]
+                                           newlist[index] = e.target.value
+                                           onChange('list', newlist)
+                                       }}
+                                        placehoder={" "}
                                         minRows={1}
                                         content={item}
                                         width={width}
@@ -73,8 +76,18 @@ class Product extends React.Component {
                         )}>
                             <img width={15} height={15} src={imageUrl} />
                         </OverlayTrigger>
-                    :   <div className="btn" style={{ padding: 0 }}>
+                    :   <div className="btn" style={{ padding: 0 }}
+                            onClick={() => this.setState({ showEditModal: true })}>
                             <img width={15} src={imageUrl? imageUrl: '/images/plusimage.svg'} />
+                            <ProductModal
+                                id={id}
+                                showModal={this.state.showEditModal}
+                                close={() => this.setState({ showEditModal: false })}
+                                imageUrl={imageUrl}
+                                content={content}
+                                list={list}
+                                onChange={(key, value) => onChange(key, value)}
+                            />
                         </div>
                     }
                 </td>

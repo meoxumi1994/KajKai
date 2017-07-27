@@ -3,9 +3,9 @@ import { get } from '~/config/allString'
 
 import Product from '~/components/entity/post/Product'
 
-const mapStateToProps = (state, { id }) => {
+const mapStateToProps = (state, { id, canEdit }) => {
     const g = (lang) => get(state.user.language, lang)
-    const product = state.inst.entity.product[id]
+    const product = canEdit ? state.inst.entity.editproduct[id] : state.inst.entity.product[id]
     return({
         ...product
     })
@@ -13,7 +13,9 @@ const mapStateToProps = (state, { id }) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onChange : (key, value) => {
-        dispatch({ type: 'INST_ENTITY_PRODUCT_CHANGE', id: ownProps.id, key: key, value: value })
+        if(ownProps.canEdit){
+            dispatch({ type: 'INST_ENTITY_PRODUCT_CHANGE', id: ownProps.id, key: key, value: value })
+        }
     },
     addProduct: (product) => {
         if(!ownProps.canEdit){

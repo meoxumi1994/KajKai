@@ -109,7 +109,7 @@ class App extends React.Component {
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
                     style={{ height: height - 48 }}>
                     {
-                      username && width > 1100 + 280 &&
+                      username && width > 1100 + 300 &&
                           <div style={{ position: 'fixed',right: 0, top: 47, height: '100%', width: '15%'}}>
                               {
                                   path == '/admin'? undefined:
@@ -117,7 +117,7 @@ class App extends React.Component {
                               }
                           </div>
                     }
-                    <div style={{ paddingTop: 48, marginRight: (width > 1100 + 280)? 280: 0 }}>
+                    <div style={{ paddingTop: 48, marginRight: (width > 1100 + 300)? 300: 0 }}>
                         {(path == "/" || path == "/admin" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
                               <div style={{ height: height - 48, width: Math.max(1100, width) }}>
@@ -138,7 +138,7 @@ class App extends React.Component {
                                                   bottom: 0,
                                                   backgroundColor: 'white',
                                                   width: 320 ,
-                                                  height: 400,
+                                                  height: editproduct,
                                                   zIndex:100,
                                                   marginLeft: index * 325 + 5
                                                 }}>

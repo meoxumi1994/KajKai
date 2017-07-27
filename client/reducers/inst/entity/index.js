@@ -15,6 +15,7 @@ import leadercomment from './leadercomment'
 import groupcomment from './groupcomment'
 import postrow from './postrow'
 import product from './product'
+import editproduct from './editproduct'
 import phone from './phone'
 import thumnail from './thumnail'
 import notification from './notification'
@@ -31,6 +32,7 @@ const entity = combineReducers({
     callcomment,
     postrow,
     product,
+    editproduct,
     editminorpost,
     editsellpost,
     editpostrow,
