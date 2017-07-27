@@ -93,6 +93,7 @@ export const updateChat = (message) => {
                 // userChat.chats = chats
                 console.log('userChat 2: ', util.inspect(userChat, false, null));
                 userChat.save((err, xxx) => {
+                  console.log('err: ', err);
                   console.log('xxx: ', xxx);
                 })
               }
