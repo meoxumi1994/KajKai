@@ -10,6 +10,8 @@ export const addStore = (message) => {
     urlName
   })
 
+  basicStore.save(() => {})
+
   User.findOne({ id }, (err, user) => {
     if (user) {
       let { storeList } = user
@@ -27,6 +29,13 @@ export const addStore = (message) => {
 
 export const updateStoreList = (message) => {
   const { id: storeId, owner: id, storeName, avatarUrl, urlName } = message.store
+  const basicStore = {}
+
+  if (storeName) basicStore.storeName = storeName
+  if (avatarUrl) basicStore.avatarUrl = avatarUrl
+  if (urlName) basicStore.urlName = urlName
+
+  BasicStore.findOneAndUpdate({ id: storeId }, basicStore, () => {})
 
   User.findOne({ id }, (err, user) => {
     if (user) {
