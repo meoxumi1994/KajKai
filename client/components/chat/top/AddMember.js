@@ -47,7 +47,7 @@ class AddMember extends React.Component {
                       suggestions.keyy.map(user => {
                           const { id, username, avatarUrl } = suggestions.mapp[user]
                           return (
-                              <button key={id} style={{width: '100%'}} className="btn btn-default" onClick={() => { searchAdd(mesId, suggestions.mapp[user]);conversator.value=''} }>
+                              <button type="button" key={id} style={{width: '100%'}} className="btn btn-default" onClick={() => { searchAdd(mesId, suggestions.mapp[user]);conversator.value=''} }>
                                 <div className="col col-xs-2">
                                     <img src={avatarUrl} style={{width: 40, height: 40}}/>
                                 </div>
