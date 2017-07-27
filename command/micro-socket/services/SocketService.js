@@ -1,6 +1,6 @@
-import obj from '../socketio'
+import init from '../socketio'
 
-let io = obj.myIO;
+let io = init();
 
 export const emitNotification = (listId, event, data) => {
     for (let i = 0; i < listId.length; ++i) {

@@ -4,7 +4,7 @@ import { authoriseToken } from '../controllers/SocketPubController'
 import { getUnreadMessageCon } from '../controllers/ChatController'
 import { getFollowListPub } from '../controllers/FollowPubController'
 
-let myIO;
+let myIO = null;
 
 const sockListen = (user, socket, io) => {
     if (user) {
@@ -36,6 +36,7 @@ const sockListen = (user, socket, io) => {
 };
 
 const init = (server) => {
+    if (myIO) return myIO;
     const sio = socketIo(server);
     console.log('SOCKET CALLED');
     sio.on('connection', (socket) => {
@@ -68,7 +69,4 @@ const init = (server) => {
 };
 
 // export myIO;
-export default {
-    init: init,
-    myIO: myIO
-};
+export default init;

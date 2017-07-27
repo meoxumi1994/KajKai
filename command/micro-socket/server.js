@@ -3,5 +3,5 @@ import init from './socketio'
 import config from './config/commonConfig'
 
 const server = http.Server();
-const sio = init.init(server);
+const sio = init(server);
 server.listen(config.SERVER_PORT);
