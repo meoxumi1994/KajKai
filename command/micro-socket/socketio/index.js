@@ -4,6 +4,8 @@ import { authoriseToken } from '../controllers/SocketPubController'
 import { getUnreadMessageCon } from '../controllers/ChatController'
 import { getFollowListPub } from '../controllers/FollowPubController'
 
+let myIO;
+
 const sockListen = (user, socket, io) => {
     if (user) {
         getFollowListPub(user.id, (list) => {
@@ -35,6 +37,7 @@ const sockListen = (user, socket, io) => {
 
 const init = (server) => {
     const sio = socketIo(server);
+    console.log('SOCKET CALLED');
     sio.on('connection', (socket) => {
         console.log('a user connected');
         socket.on('disconnect', () => {
@@ -60,7 +63,12 @@ const init = (server) => {
             }
         })
     });
-    return sio
+    myIO = sio;
+    return sio;
 };
 
-export default init
+// export myIO;
+export default {
+    init: init,
+    myIO: myIO
+};
