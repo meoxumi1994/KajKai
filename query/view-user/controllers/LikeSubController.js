@@ -126,12 +126,12 @@ export const removeLikeNotification = (message) => {
     if (users) {
       for (let i = 0; i < users.length; i++) {
         let user = users[i]
-        let { notifications, mNumberOfUnRead } = user
+        let { notifications, numberOfUnRead } = user
         if (!notifications) {
           notifications = []
         }
-        if (!mNumberOfUnRead) {
-          mNumberOfUnRead = 0
+        if (!numberOfUnRead) {
+          numberOfUnRead = 0
         }
         let mNotifications = []
         for (let k = 0; k < notifications.length; k++) {
@@ -161,8 +161,8 @@ export const removeLikeNotification = (message) => {
               notification.likers = likers
               mNotifications.push(notification)
             } else {
-              if (k >= notifications.length - mNumberOfUnRead) {
-                mNumberOfUnRead--
+              if (k >= notifications.length - numberOfUnRead) {
+                numberOfUnRead--
               }
             }
           } else {
@@ -170,7 +170,7 @@ export const removeLikeNotification = (message) => {
           }
         }
         user.notifications = mNotifications
-        user.numberOfUnRead = mNumberOfUnRead
+        user.numberOfUnRead = numberOfUnRead
         user.save(() => {})
       }
     }
