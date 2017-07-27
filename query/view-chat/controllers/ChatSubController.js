@@ -70,29 +70,26 @@ export const updateChat = (message) => {
           if (name) {
             chat.name = name
           }
-          // chat.save(() => {})
-
-          const util = require('util')
+          chat.save(() => {})
 
           chat.users.map((user) => {
             UserChat.findOne({ userId: user.id }, (err, userChat) => {
               if (userChat) {
                 let { chats } = userChat
-                console.log('userChat 1: ', util.inspect(userChat, false, null));
-                console.log('chats 1: ', util.inspect(chats, false, null));
                 for (let i = 0; i < chats.length; i++) {
                   if (chats[i].id == chat.id) {
-                    // chats[i] = chat
+                    chats[i].users = basicUsers
+                    if (name) {
+                      chats[i].name = name
+                    }
                     break
                   } else if (i == chats.length - 1) {
-                    // chats.push(chat)
+                    chats.push(chat)
                   }
                 }
-                console.log('chats 2: ', util.inspect(chats, false, null));
-                console.log('userChat 2: ', util.inspect(userChat, false, null));
-                // userChat.chats = chats
-                console.log('userChat 3: ', util.inspect(userChat, false, null));
-                // userChat.save(() => {})
+
+                userChat.chats = chats
+                userChat.save(() => {})
               }
             })
           })
