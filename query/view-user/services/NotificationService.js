@@ -88,7 +88,7 @@ export const createLikeCommentNotification = (commendId) => {
                           followingSellposts = []
                         }
                         for (let k = 0; k < followingSellposts.length; k++) {
-                          if (followingSellposts[k] == sellpostId) {
+                          if (followingSellposts[k] == mIDCommentSellpost.sellpostId) {
                             let { notifications } = user
                             if (!notifications) {
                               notifications = []
@@ -157,7 +157,7 @@ export const createLikeReplyNotification = (replyId) => {
                           followingSellposts = []
                         }
                         for (let k = 0; k < followingSellposts.length; k++) {
-                          if (followingSellposts[k] == sellpostId) {
+                          if (followingSellposts[k] == mIDReplyCommentSellpost.sellpostId) {
                             let { notifications } = user
                             if (!notifications) {
                               notifications = []
