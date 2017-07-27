@@ -1,7 +1,7 @@
 {
   "name": "micro-notification",
   "scripts": {
-    "start": "pm2 delete index-notification.js && pm2 start index-notification.js"
+    "start": "pm2 delete index-noti.js && pm2 start index-noti.js"
   },
   "dependencies": {
     "aws-serverless-express": "^3.0.2",
