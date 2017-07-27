@@ -92,7 +92,7 @@ export const updateChat = (message) => {
                 console.log('userChat 2: ', util.inspect(userChat, false, null));
                 // userChat.chats = chats
                 console.log('userChat 3: ', util.inspect(userChat, false, null));
-                userChat.save(() => {})
+                // userChat.save(() => {})
               }
             })
           })
