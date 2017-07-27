@@ -1,4 +1,4 @@
-import { User, BasicStore, IDSellpostStore, IDCommentSellpost, IDReplyCommentSellpost, SellpostLiker, CommentLiker, ReplyLiker } from '../models'
+import { User, BasicStore, Notification, IDSellpostStore, IDCommentSellpost, IDReplyCommentSellpost, SellpostLiker, CommentLiker, ReplyLiker } from '../models'
 import { NotificationType } from '../enum'
 import { notify } from '../controllers/NotificationPubController'
 
