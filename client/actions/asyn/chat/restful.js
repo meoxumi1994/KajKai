@@ -31,8 +31,8 @@ export const getMessages = (mesId, offset, type) => dispatch => {
 
 export const getChatList = (offset) => dispatch => {
     flem('/chatlist', {
-      offset: offset,
-      length: 20
+        offset: offset,
+        length: 5
     }, {}
     )
     .then((response) => {
@@ -40,6 +40,8 @@ export const getChatList = (offset) => dispatch => {
           if (response != undefined && response.data.length > 0) {
               const { data, lazyLoad } = response
               dispatch(initChatList(data, lazyLoad))
+          } else {
+              dispatch({type: 'DISPLAY_CHAT_LAZYLOAD'})
           }
     })
 }

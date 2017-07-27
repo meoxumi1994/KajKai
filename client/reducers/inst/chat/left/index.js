@@ -8,8 +8,21 @@ const left = (state = {
     mesId: '',
     id: ''
   },
+  lazyLoad: {
+      offset: '',
+      loadMore: true
+  }
 }, action) => {
     switch (action.type) {
+
+      case 'DISPLAY_CHAT_LAZYLOAD':
+          return {
+              ...state,
+              lazyLoad: {
+                  ...state.lazyLoad,
+                  loadMore: false
+              }
+          }
 
 /**
  ** INITIAL
@@ -21,8 +34,18 @@ const left = (state = {
           }
           const initChatlist = {
               ...state,
-              chatListKey: action.data.map(chat => chat.mesId),
-              chatListMap: utils.chatListMap(action),
+              chatListKey: [
+                  ...state.chatListKey,
+                  ...action.data.map(chat => chat.mesId)
+              ],
+              chatListMap: {
+                  ...state.chatListMap,
+                  ...utils.chatListMap(action)
+              },
+              lazyLoad: {
+                  ...state.lazyLoad,
+                  offset: action.lazyLoad.offset
+              }
           }
           //console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
           return initChatlist

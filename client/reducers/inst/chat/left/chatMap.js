@@ -30,7 +30,7 @@ const chatMap = (state={
             keyy: [],
             mapp: {}
         }
-    }
+    },
 }, action, subAction) => {
 
     switch (action.type || subAction.type) {
@@ -43,7 +43,7 @@ const chatMap = (state={
                 lastMessage: action.data.lastMessage,
                 displayLabel: action.data.displayLabel,
                 usersKey: action.data.users.map(user => user.id),
-                usersMap: utils.usersMap(action, action.data.users)
+                usersMap: utils.usersMap(action, action.data.users),
             }
 
 //------------------------------------------------------------------------------
