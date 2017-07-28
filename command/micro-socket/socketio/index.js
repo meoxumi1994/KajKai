@@ -48,7 +48,7 @@ const init = (server) => {
         socket.on('server/sendToken', (action) => {
             const token = action.tokenId;
             console.log('fuck token ' + token);
-
+            socket.removeAllListeners();
             if (token) {
                 console.log('token socket' + token);
                 authoriseToken(token, (user) => {
