@@ -12,6 +12,7 @@ const sockListen = (user, socket, io) => {
             console.log('followeeList: ' + JSON.stringify(list));
             if (list !== null && list.length > 0) {
                 for (let i = 0; i < list.length; ++i) {
+                    socket.leave(list[i]);
                     socket.join(list[i]);
                 }
             }
@@ -48,12 +49,12 @@ const init = (server) => {
         socket.on('server/sendToken', (action) => {
             const token = action.tokenId;
             console.log('fuck token ' + token);
-            socket.removeAllListeners();
             if (token) {
                 console.log('token socket' + token);
                 authoriseToken(token, (user) => {
                     if (user) {
                         console.log('user ' + JSON.stringify(user));
+                        socket.leave(user.id);
                         socket.join(user.id);
                         sockListen(user, socket, sio);
                         getUnreadMessageCon(user.id, socket, sio);
