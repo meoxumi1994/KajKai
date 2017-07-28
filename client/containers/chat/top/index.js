@@ -5,16 +5,14 @@ import { changeDisplay } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
     const { chatListMap, currentChat } = state.inst.chat.left
-    const { multipleKey } = state.inst.chat.center
     return {
         chatListMap,
-        multipleKey,
         currentChat,
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    close: (mesId, multipleKey) => {
+    close: (mesId) => {
         if (mesId == 0) {
             dispatch({type: 'REMOVE_CHAT', data: {mesId}})
         } else {

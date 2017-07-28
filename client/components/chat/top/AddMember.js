@@ -35,7 +35,7 @@ class AddMember extends React.Component {
                   <button disabled={results.keyy.length == 0? true: false} type="button" style={{width: '20%', height: 40, fontSize: 15}}
                       className={results.keyy.length == 0? 'btn': 'btn btn-danger'}
                       onClick={() => addMember( mesId, user.id, results.keyy)}>
-                          Xong
+                          Done
                   </button>
             </div>
           </span>

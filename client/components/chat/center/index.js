@@ -10,14 +10,12 @@ class ChatCenter extends React.Component {
     }
 
     render() {
-      const { mesId, messagesMap, multiChat,
-              setCurrentChat
-            } = this.props
+      const { mesId, messagesMap, setCurrentChat } = this.props
 
       if (mesId == undefined) {
-        return (
-          <div style={{textAlign: 'center', marginTop: 80}}><i>No conversation</i></div>
-        )
+          return (
+              <div style={{textAlign: 'center', marginTop: 80}}><i>No conversation</i></div>
+          )
       }
 
       return (
@@ -25,8 +23,7 @@ class ChatCenter extends React.Component {
             <ChatTopContainer
                   mesId={mesId}/>
             <MessageListContainer
-                  mesId={mesId}
-                  messagesMap={messagesMap}/>
+                  mesId={mesId}/>
             <ChatBottomContainer
                   mesId={mesId}/>
         </div>

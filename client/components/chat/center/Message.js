@@ -5,6 +5,14 @@ import { timeSince } from '~/containers/support'
 
 const Message = ({message, time, user, styles, showAvatar}) => {
 
+    if ( user == undefined ) {
+        return (
+            <div>
+
+            </div>
+        )
+    }
+
     const showTimePopup = (
       <Popover id="popover-trigger-hover-focus">
           {timeSince(time)}

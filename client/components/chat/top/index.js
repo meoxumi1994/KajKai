@@ -16,7 +16,7 @@ class ChatTop extends React.Component {
       let conversator
       const {
               mesId,
-              chatListMap, currentChat, multipleKey,
+              chatListMap, currentChat,
               displayAddMember, displaySettings, close
             } = this.props
 
@@ -35,7 +35,7 @@ class ChatTop extends React.Component {
                 <button disabled={mesId == 0? true: false} className="btn" style={headColor} onClick={() => displaySettings(mesId)}>
                     <img style={{height: 18, width: 18, marginLeft: 2}} src="/images/chat/setting.png"/>
                 </button>
-                <button className="btn" style={headColor} onClick={() => close(mesId, multipleKey)}>
+                <button className="btn" style={headColor} onClick={() => close(mesId)}>
                     <img style={{height: 15, width: 15, marginLeft: 2}} src="/images/chat/close.png"/>
                 </button>
             </div>

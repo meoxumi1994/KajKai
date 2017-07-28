@@ -37,7 +37,8 @@ export const getUser = (requesterId, id, next) => {
                 storename: basicStore.storeName,
                 avatarUrl: basicStore.avatarUrl,
                 urlname: basicStore.urlName
-              }))) : []
+              }))) : [],
+              numUnreaded: user.numberOfUnRead ? user.numberOfUnRead : 0
             }
           })
         } else {
@@ -184,6 +185,9 @@ export const getNotifications = (id, offset, next) => {
       if (lastIndex == 0) {
         mOffset = -2
       }
+
+      user.numberOfUnRead = 0
+      user.save(() => {})
 
       next({
         status: 'success',
