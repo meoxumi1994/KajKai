@@ -37,7 +37,8 @@ export const getUser = (requesterId, id, next) => {
                 storename: basicStore.storeName,
                 avatarUrl: basicStore.avatarUrl,
                 urlname: basicStore.urlName
-              }))) : []
+              }))) : [],
+              numUnreaded: user.numberOfUnRead ? user.numberOfUnRead : 0
             }
           })
         } else {
