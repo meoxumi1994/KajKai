@@ -186,6 +186,9 @@ export const getNotifications = (id, offset, next) => {
         mOffset = -2
       }
 
+      user.numberOfUnRead = 0
+      user.save(() => {})
+
       next({
         status: 'success',
         numUnreaded: user.numberOfUnRead,
