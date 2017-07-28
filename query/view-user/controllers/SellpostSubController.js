@@ -60,18 +60,18 @@ export const createSellpostUpdatedNotification = (message) => {
         if (users) {
           for (let i = 0; i < users.length; i++) {
             let user = users[i]
-            let { followingStores } = user
-            if (!followingStores) {
-              followingStores = []
+            let { followingSellposts } = user
+            if (!followingSellposts) {
+              followingSellposts = []
             }
-            for (let k = 0; k < followingStores.length; k++) {
-              if (followingStores[k] == storeId) {
+            for (let k = 0; k < followingSellposts.length; k++) {
+              if (followingSellposts[k] == sellpostId) {
                 let { notifications } = user
                 if (!notifications) {
                   notifications = []
                 }
                 let notification = new Notification({
-                  type: NotificationType.SELLPOSTCreated,
+                  type: NotificationType.SELLPOSTEdited,
                   sellpostId,
                   actorId: storeId,
                   name: basicStore.storeName,
