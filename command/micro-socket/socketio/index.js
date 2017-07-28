@@ -12,12 +12,18 @@ const sockListen = (user, socket, io) => {
             console.log('followeeList: ' + JSON.stringify(list));
             if (list !== null && list.length > 0) {
                 for (let i = 0; i < list.length; ++i) {
-                    socket.leave(list[i]);
                     socket.join(list[i]);
                 }
             }
         })
     }
+
+    for(let e in allEvents){
+        let handler = allEvents[e];
+        let method = require('../controllers/' + handler.controller)[handler.method];
+        socket.removeListener(e, method);
+    }
+
     for(let e in allEvents){
         let handler = allEvents[e];
         let method = require('../controllers/' + handler.controller)[handler.method];
@@ -54,7 +60,6 @@ const init = (server) => {
                 authoriseToken(token, (user) => {
                     if (user) {
                         console.log('user ' + JSON.stringify(user));
-                        socket.leave(user.id);
                         socket.join(user.id);
                         sockListen(user, socket, sio);
                         getUnreadMessageCon(user.id, socket, sio);
