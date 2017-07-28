@@ -5,7 +5,6 @@ import { setUserId, changeDisplay } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
   const { chatListMap, chatListKey, currentChat, lazyLoad } = state.inst.chat.left
-  console.log('state', lazyLoad);
   return (
     {
       chatListMap,
