@@ -22,14 +22,14 @@ const sockListen = (user, socket, io) => {
         let handler = allEvents[e];
         let method = require('../controllers/' + handler.controller)[handler.method];
         console.log(e + ' ' + method);
-        socket.removeListener(e, method);
+        socket.removeListener(e.toString(), method);
     }
 
     for(let e in allEvents){
         let handler = allEvents[e];
         let method = require('../controllers/' + handler.controller)[handler.method];
         socket.removeListener(e, method);
-        socket.on(e, (action) => {
+        socket.on(e.toString(), (action) => {
             if (user) {
                 if (action.data) {
                     action.data = {...action.data, user: user, userID: user.id}
