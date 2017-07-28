@@ -21,6 +21,9 @@ function execute(action, emit, next, dispatch) {
     if(action.type.substr(0,6) == 'client' || action.type.substr(0,6) == 'global'){
         next(action)
     }else{
+        if (action.type == 'server/sendToken') {
+            dispatch({ type: 'SETSOCKETTOKEN', socketToken: action.tokenId })
+        }
         emit(action.type, action)
     }
 }
@@ -54,6 +57,10 @@ document.getElementsByTagName("BODY")[0].onscroll = () => {
         scrollTop: document.getElementsByTagName("BODY")[0].scrollTop,
         scrollLeft: document.getElementsByTagName("BODY")[0].scrollLeft, })
 }
+
+window.addEventListener('load', () => {
+  window.addEventListener('online',  () => { store.dispatch({ type: 'server/sendToken', tokenId: store.getState().sockettoken }) })
+})
 
 // store.dispatch({ type: 'server/hello'})
 // store.dispatch({ type: 'server/TestController'})

@@ -6,6 +6,7 @@ import target from './sync/target'
 import user from './data/user'
 import middle from './inst/profile/middle/index.js'
 import inst from './inst'
+import sockettoken from './sync/sockettoken'
 
 
 const app = combineReducers({
@@ -14,6 +15,7 @@ const app = combineReducers({
     updateuser,
     inst,
     target,
+    sockettoken
 })
 
 export default app
