@@ -9,12 +9,12 @@ import loadUserLoginRegister from 'bundle-loader?lazy!../containers/user-login-r
 import MapContainer from 'bundle-loader?lazy!../containers/mapp/MapContainer'
 import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
-import loadChat from 'bundle-loader?lazy!../containers/chat'
+// import loadChat from 'bundle-loader?lazy!../containers/chat'
 import Store from '~/containers/store'
 import User from '~/containers/user'
 import ContactHistory from '~/containers/contacthistory'
-import ChatCenterContainer from '~/containers/chat/center'
 import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
+import ChatContainer from '~/containers/chat'
 
 // import AdminContainer from '~/containers/admin/'
 // import loadAdmin from 'bundle-loader?lazy!../containers/admin'
@@ -75,14 +75,14 @@ const RegisterStore = () => (
     </Bundle>
 )
 
-const Chat = ({ id }) => (
-    <Bundle load={loadChat}>
-        {(Comp) => (Comp
-          ? <Comp/>
-          : null
-        )}
-    </Bundle>
-)
+// const Chat = ({ id }) => (
+//     <Bundle load={loadChat}>
+//         {(Comp) => (Comp
+//           ? <Comp/>
+//           : null
+//         )}
+//     </Bundle>
+// )
 
 // const Target = ({ id }) => (
 //     <Bundle load={loadTarget}>
@@ -100,14 +100,11 @@ class App extends React.Component {
     render(){
         const path = this.props.location.pathname;
         const { width, height, username, onScroll } = this.props
-        const { messagesKey, messagesMap, showProgress, closeProgress } = this.props
-        const { chat } = this.props
-        const { multipleKey  } = chat
+        const { showProgress, closeProgress } = this.props
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
-                <div>
-                    <Bar width={width} height={height} />
-                </div>
+                <Bar/>
+                <ChatContainer/>
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
                     style={{ height: height - 48 }}>
                     {
@@ -130,30 +127,7 @@ class App extends React.Component {
                                   <Route path="/registerstore" component={RegisterStore}/>
                                   {/* <Route path="/admin" component={Admin}/> */}
                               </div>
-                              {
-                                <div style={path != "/chat"? {display:'inline'}: {display:'none'}}>
-                                      { multipleKey.map(
-                                          (mesId, index) => {
-                                              return (
-                                                <div key={mesId} style={{
-                                                  position: 'fixed',
-                                                  bottom: 0,
-                                                  backgroundColor: 'white',
-                                                  width: 320 ,
-                                                  height: editproduct,
-                                                  zIndex:100,
-                                                  marginLeft: index * 325 + 5
-                                                }}>
-                                                    <ChatCenterContainer
-                                                        mesId={mesId}
-                                                        messagesMap={messagesMap}/>
-                                                </div>
-                                              )
-                                          }
 
-                                      )}
-                                </div>
-                              }
                             </div>
                         :  location.pathname.split('/')[1] == 'user'?
                             <div>

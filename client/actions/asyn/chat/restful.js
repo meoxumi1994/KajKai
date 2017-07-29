@@ -21,7 +21,7 @@ export const getMessages = (mesId, offset, type) => dispatch => {
     }).then((response) => {
           console.log('\n[API] /getMessages ', response);
           if (type == 'init') {
-              dispatch(addChat(response, true))
+              dispatch(addChat(response))
               dispatch(setCurrentChat(response.mesId))
           } else {
               dispatch({type: 'UPDATE_MESSAGE', data: { mesId: response.mesId, messages: response.messages}})
@@ -31,8 +31,8 @@ export const getMessages = (mesId, offset, type) => dispatch => {
 
 export const getChatList = (offset) => dispatch => {
     flem('/chatlist', {
-      offset: offset,
-      length: 20
+        offset: offset,
+        length: 10
     }, {}
     )
     .then((response) => {
@@ -40,6 +40,9 @@ export const getChatList = (offset) => dispatch => {
           if (response != undefined && response.data.length > 0) {
               const { data, lazyLoad } = response
               dispatch(initChatList(data, lazyLoad))
+              if (response.data.length < 5) {
+                  dispatch({type: 'DISPLAY_CHAT_LAZYLOAD'})
+              }
           }
     })
 }

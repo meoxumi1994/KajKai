@@ -9,8 +9,8 @@ class ChatList extends React.Component {
         this.props.setUserId(this.props.userId)
     }
     render(){
-        const { chatListMap, chatListKey, currentChat, unread,
-                createNewChat, getMessages
+        const { chatListMap, chatListKey, currentChat, unread, lazyLoad,
+                createNewChat, getMessages, getChat
               } = this.props
 
         chatListKey.sort(function(a, b) {
@@ -30,13 +30,16 @@ class ChatList extends React.Component {
                   return (
                       <ul className="nav nav-tabs" key={mesId} onClick={() => getMessages(mesId)}
                       style={{backgroundColor: getTabColor(mesId, currentChat, unread)}}>
-                        <div className="container-fluid">
-                            <ChatContainer mesId={mesId}/>
-                        </div>
+                          <div className="container-fluid">
+                              <ChatContainer mesId={mesId}/>
+                          </div>
                       </ul>
                   )
                 }
               )}
+              <button className="btn btn-default" style={{marginLeft: '42%', marginTop: 10}} onClick={() => getChat(lazyLoad.offset)}>
+                    { lazyLoad.loadMore? 'Load more': 'Data is up to date' }
+              </button>
           </div>
         )
     }

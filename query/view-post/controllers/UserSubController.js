@@ -1,4 +1,4 @@
-import { BasicUser } from '../models'
+import { BasicUser, Sellpost, Comment } from '../models'
 
 export const createBasicUser = (message) => {
   const { id, username, avatarUrl } = message.user
@@ -18,4 +18,105 @@ export const updateBasicUser = (message) => {
   if (username) basicUser.username = username
 
   BasicUser.findOneAndUpdate({ id }, basicUser, () => {})
+  Comment.find({}, (err, comments) => {
+    if (comments) {
+      comments.map((comment) => {
+        let { replies } = comment
+        if (!replies) {
+          replies = []
+        }
+        for (let i = 0; i < replies.length; i++) {
+          let reply = replies[i]
+          if (reply.userId == id) {
+            reply.username = username ? username : reply.username
+            reply.avatarUrl = avatarUrl ? avatarUrl : reply.avatarUrl
+          }
+          let { likers } = reply
+          if (!likers) {
+            likers = []
+          }
+          for (let k = 0; k < likers.length; k++) {
+            let liker = likers[k]
+            if (liker.userId == id) {
+              liker.username = username ? username : liker.username
+              liker.avatarUrl = avatarUrl ? avatarUrl : liker.avatarUrl
+            }
+            likers[k] = liker
+          }
+          reply.likers = likers
+          replies[i] = reply
+        }
+        comment.replies = replies
+        comment.save(() => {})
+      })
+    }
+  })
+  Sellpost.find({}, (err, sellposts) => {
+    if (sellposts) {
+      sellposts.map((sellpost) => {
+        let { likers } = sellpost
+        if (!likers) {
+          likers = []
+        }
+        for (let i = 0; i < likers.length; i++) {
+          let liker = likers[i]
+          if (liker.userId == id) {
+            liker.username = username ? username : liker.username
+            liker.avatarUrl = avatarUrl ? avatarUrl : liker.avatarUrl
+          }
+          likers[i] = liker
+        }
+        sellpost.likers = likers
+        let { followers } = sellpost
+        if (!followers) {
+          followers = []
+        }
+        for (let i = 0; i < followers.length; i++) {
+          let follower = followers[i]
+          if (follower.userId == id) {
+            follower.username = username ? username : follower.username
+            follower.avatarUrl = avatarUrl ? avatarUrl : follower.avatarUrl
+          }
+          followers[i] = follower
+        }
+        sellpost.followers = followers
+        let { comments } = sellpost
+        if (!comments) {
+          comments = []
+        }
+        for (let h = 0; h < comments.length; h++) {
+          let comment = comments[h]
+          let { replies } = comment
+          if (!replies) {
+            replies = []
+          }
+          for (let i = 0; i < replies.length; i++) {
+            let reply = replies[i]
+            if (reply.userId == id) {
+              reply.username = username ? username : reply.username
+              reply.avatarUrl = avatarUrl ? avatarUrl : reply.avatarUrl
+            }
+            let { likers } = reply
+            if (!likers) {
+              likers = []
+            }
+            for (let k = 0; k < likers.length; k++) {
+              let liker = likers[k]
+              if (liker.userId == id) {
+                liker.username = username ? username : liker.username
+                liker.avatarUrl = avatarUrl ? avatarUrl : liker.avatarUrl
+              }
+              likers[k] = liker
+            }
+            reply.likers = likers
+            replies[i] = reply
+          }
+          comment.replies = replies
+          comments[h] = comment
+        }
+        sellpost.comments = comments
+        sellpost.save(() => {})
+      })
+    }
+  })
 }

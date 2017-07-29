@@ -27,11 +27,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
                 }
             }
         })
-        dispatch(sendMessage(mesId, id, groupName, '', 'notification'))
+        // dispatch(sendMessage(mesId, id, groupName, '', 'notification'))
     },
     editing: (mesId) => {
         dispatch(changeDisplay('EDITING_LABEL', mesId, 'toggle'))
-    }
+    },
 })
 
 const SettingsContainer = connect(

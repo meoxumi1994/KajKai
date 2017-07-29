@@ -1,21 +1,20 @@
 import { combineReducers } from 'redux'
 
 const center = (state = {
-    // singleKey: [],
-    multipleKey: [],
+    messagesKey: [],
     messagesMap: {},
 }, action) => {
     switch (action.type) {
 //---------------------------------------------------------------------------------------------------
-        case 'INIT_MULTI_MESSAGES':
-            if (state.multipleKey.indexOf(action.data.mesId) != -1) {
+        case 'INIT_MESSAGES':
+            if (state.messagesKey.indexOf(action.data.mesId) != -1) {
                 return state
             }
 
             const initMultiMessages = {
               ...state,
-              multipleKey: [
-                  ...state.multipleKey,
+              messagesKey: [
+                  ...state.messagesKey,
                   action.data.mesId
               ],
               messagesMap: {
@@ -25,7 +24,7 @@ const center = (state = {
                   ]
               }
             }
-            // console.log('\n[Reducer Center] INIT_MULTI_MESSAGES', action, initMultiMessages);
+            console.log('\n[Reducer Center] INIT_MULTI_MESSAGES', action, initMultiMessages);
             return initMultiMessages
 
   //---------------------------------------------------------------------------------------------------
@@ -40,19 +39,18 @@ const center = (state = {
                       ]
                   }
               }
-              // console.log('\n[Reducer Center] UPDATE_MESSAGE ', action, updateMessage)
+              console.log('\n[Reducer Center] UPDATE_MESSAGE ', action, updateMessage)
               return updateMessage
 
 //---------------------------------------------------------------------------------------------------
         case 'client/ADD_MEMBER':
-            if (state.multipleKey.indexOf(action.data.mesId) != -1) {
+            if (state.messagesKey.indexOf(action.data.mesId) != -1) {
                 return state
             }
             const addMember = {
                 ...state,
-                // singleKey: [action.data.mesId],
-                multipleKey: [
-                    ...state.multipleKey,
+                messagesKey: [
+                    ...state.messagesKey,
                     action.data.mesId
                 ],
                 messagesMap: {
@@ -60,21 +58,25 @@ const center = (state = {
                     [action.data.mesId]: []
                 }
             }
-            // console.log('\n[Reducer Center] client/ADD_MEMBER', action, addMember);
+            console.log('\n[Reducer Center] client/ADD_MEMBER', action, addMember);
             return addMember
 
 //---------------------------------------------------------------------------------------------------
         case 'REMOVE_CHAT':
         case 'CLOSE_CHAT':
-            const mKey = state.multipleKey
-            mKey.splice(mKey.indexOf(action.data.mesId), 1)
             const mMap = state.messagesMap
             delete mMap[action.data.mesId]
-            return {
+
+            const mKey = state.messagesKey
+            mKey.splice(mKey.indexOf(action.data.mesId), 1)
+
+            const close = {
                 ...state,
-                multipleKey: mKey,
+                messagesKey: mKey,
                 messagesMap: mMap
             }
+            console.log('\n[Reducer Center] REMOVE_CHAT ', action, close)
+            return close
 
 //---------------------------------------------------------------------------------------------------
         case 'global/RECEIVE_MESSAGE':
@@ -98,19 +100,19 @@ const center = (state = {
                 ]
               }
             }
-            // console.log('\n[Reducer Center] global/RECEIVE_MESSAGE ', action, msg)
+            console.log('\n[Reducer Center] global/RECEIVE_MESSAGE ', action, msg)
             return msg
 
 //---------------------------------------------------------------------------------------------------
         case 'NEW_CHAT':
-            if (action.data.mesId != 0 || state.multipleKey.indexOf('0') != -1) {
+            if (action.data.mesId != 0 || state.messagesKey.indexOf('0') != -1) {
               return state
             }
             const newChat = {
                 ...state,
                 // singleKey: ['0'],
-                multipleKey: [
-                    ...state.multipleKey,
+                messagesKey: [
+                    ...state.messagesKey,
                     '0'
                 ],
                 messagesMap: {

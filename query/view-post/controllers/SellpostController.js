@@ -1,4 +1,4 @@
-import { getSellpost, getSellposts } from '../services/SellpostService.js'
+import { getSellpost, getSellposts, getUserSellposts } from '../services/SellpostService.js'
 
 export const getSellpostHandler = () => (req, res) => {
   const requesterId = req.decoded._id
@@ -23,6 +23,28 @@ export const getSellpostsHandler = () => (req, res) => {
     offset = new Date(parseInt(offset))
   }
   getSellposts(requesterId, storeId, offset, (sellposts) => {
+    if (sellposts) {
+      res.json(sellposts)
+    } else {
+      res.json({status: 'failed'})
+    }
+  })
+}
+export const getUserSellpostsHandler = () => (req, res) => {
+  let { id: requestedId } = req.params
+  let requesterId = req.decoded._id
+
+  if(!requestedId) {
+    requestedId = requesterId
+  }
+  let { offset } = req.query
+  if (!offset || offset == '-1') {
+    offset =  Date.now()
+  } else {
+    offset = new Date(parseInt(offset))
+  }
+
+  getUserSellposts(requesterId, requestedId, offset, (sellposts) => {
     if (sellposts) {
       res.json(sellposts)
     } else {

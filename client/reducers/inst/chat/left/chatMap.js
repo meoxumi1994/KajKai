@@ -30,33 +30,10 @@ const chatMap = (state={
             keyy: [],
             mapp: {}
         }
-    }
+    },
 }, action, subAction) => {
 
     switch (action.type || subAction.type) {
-
-        case 'client/UPDATE_UI':
-            return {
-                ...state,
-                displayLabel: action.data.data.groupName
-            }
-
-        case 'CHAT/UPDATE':
-            switch (action.subType) {
-              case 'LOAD_IMAGES_URL':
-                  if (state.imagesUrl.indexOf(action.data.url) != -1) {
-                      return state
-                  }
-                  return {
-                      ...state,
-                      imagesUrl: [
-                          ...state.imagesUrl,
-                          action.data.url
-                      ]
-                  }
-              default:
-                  return state
-            }
 
 //------------------------------------------------------------------------------
         case 'INIT_CHAT_LIST':
@@ -65,8 +42,8 @@ const chatMap = (state={
                 mesId: action.data.mesId,
                 lastMessage: action.data.lastMessage,
                 displayLabel: action.data.displayLabel,
-                usersKey: action.data.users.map(user => user.id),
-                usersMap: utils.usersMap(action, action.data.users)
+                usersKey: [...new Set(action.data.users.map(e => e.id))],
+                usersMap: utils.usersMap(action, action.data.users),
             }
 
 //------------------------------------------------------------------------------
@@ -170,7 +147,7 @@ const chatMap = (state={
                         search: {
                             ...state.search,
                             suggestions:{
-                                keyy: action.data.users.map(user => user.userId),
+                                keyy: [...new Set(action.data.users.map(user => user.userId))],
                                 mapp: utils.searchUsersMap(action, action.data.users)
                             }
                         }
@@ -181,10 +158,10 @@ const chatMap = (state={
                         search: {
                             ...state.search,
                             results: {
-                                keyy: [
+                                keyy: [...new Set([
                                     ...state.search.results.keyy,
                                     action.data.user.id
-                                ],
+                                ])],
                                 mapp: {
                                     ...state.search.results.mapp,
                                     [action.data.user.id]: userMap(undefined, action)
@@ -194,10 +171,7 @@ const chatMap = (state={
                     }
 
                 case 'REMOVE_MEMBER':
-                    const tempKeyResult = state.search.results.keyy
                     const tempMapResult = state.search.results.mapp
-
-                    tempKeyResult.splice(tempKeyResult.indexOf(action.data.id), 1)
                     delete tempMapResult[action.data.id]
 
                     return {
@@ -205,13 +179,14 @@ const chatMap = (state={
                         search: {
                             ...state.search,
                             results: {
-                                keyy: tempKeyResult,
+                                keyy: state.search.results.keyy.filter(e => e != action.data.id),
                                 mapp: tempMapResult
                             }
                         }
                     }
 
                 case 'RESET_RESULTS':
+                    console.log('RESET_RESULTS', action);
                     return {
                         ...state,
                         search: {
@@ -244,7 +219,33 @@ const chatMap = (state={
                     }
                   }
               }
+              case 'client/UPDATE_UI':
+                  return {
+                      ...state,
+                      displayLabel: action.data.data.groupName
+                  }
 
+              case 'CHAT/UPDATE':
+                  switch (action.subType) {
+                    case 'LOAD_IMAGES_URL':
+                        if (state.imagesUrl.indexOf(action.data.url) != -1) {
+                            return state
+                        }
+                        return {
+                            ...state,
+                            imagesUrl: [
+                                ...state.imagesUrl,
+                                action.data.url
+                            ]
+                        }
+                    case 'RESET_IMAGES_URL':
+                        return {
+                            ...state,
+                            imagesUrl: []
+                        }
+                    default:
+                        return state
+                  }
 //------------------------------------------------------------------------------
         default:
             return state

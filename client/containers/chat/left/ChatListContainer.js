@@ -1,18 +1,18 @@
 import { connect } from 'react-redux'
 import ChatList from '~/components/chat/left/ChatList'
-import { getMessages } from '~/actions/asyn/chat/restful'
-import { setUserId } from '~/actions/asyn/chat/actions'
-import { changeDisplay } from '~/actions/asyn/chat/actions'
+import { getMessages, getChatList } from '~/actions/asyn/chat/restful'
+import { setUserId, changeDisplay } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
-  const { chatListMap, chatListKey, currentChat } = state.inst.chat.left
+  const { chatListMap, chatListKey, currentChat, lazyLoad } = state.inst.chat.left
   return (
     {
       chatListMap,
       chatListKey,
       currentChat: currentChat.mesId,
       userId: state.user.id,
-      unread: state.inst.chat.unread
+      unread: state.inst.chat.unread,
+      lazyLoad
     }
   )
 }
@@ -25,6 +25,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     setUserId: (id) => {
         dispatch(setUserId(id))
+    },
+    getChat: (offset) => {
+        dispatch(getChatList(offset))
     }
 })
 

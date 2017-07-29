@@ -4,7 +4,7 @@ import { addIDCommentSellpost } from '../services/IDService'
 import { notify } from './NotificationPubController'
 
 export const createCommentNotification = (message) => {
-  const { fCommentId: commentId, posterId: commenterId, sellPostId: sellpostId, time, content } = message.fComment
+  const { fCommentId: commentId, posterId: commenterId, sellPostId: sellpostId, time, content, order } = message.fComment
 
   addIDCommentSellpost(commentId, sellpostId)
 
@@ -69,6 +69,13 @@ export const createCommentNotification = (message) => {
                         storeName: basicStore.storeName,
                         urlName: basicStore.urlName
                       })
+                      if (order) notification.order = order.map((product) => ({
+                        id: product.id,
+                        content: product.content,
+                        imageUrl: product.imageUrl,
+                        list: product.list,
+                        numberOfOrder: product.num
+                      }))
                       notify(user.id, notification)
                       notifications.push(notification)
                       user.notifications = notifications

@@ -5,8 +5,9 @@ import EmoNavContainer from '~/containers/chat/bottom/EmoNavContainer'
 
 const ChatBottom = ({mesId, userId, sendMessage, displayImageModal}) => {
   let msg
+
   return (
-    <div style={styles.inputForm}>
+    <div style={{width: 320}}>
 
         <form onSubmit={e => {
           e.preventDefault()
@@ -17,7 +18,7 @@ const ChatBottom = ({mesId, userId, sendMessage, displayImageModal}) => {
         }}>
 
         <div className="input-group" style={{width: '100%'}}>
-          <FormControl style={styles.formControl} disabled={mesId == 0? true: false}
+          <FormControl disabled={mesId == 0? true: false}
             inputRef={ref => { msg = ref }}
             placeholder="Enter message"
           />
@@ -27,15 +28,7 @@ const ChatBottom = ({mesId, userId, sendMessage, displayImageModal}) => {
             <i className="glyphicon glyphicon-camera"></i>
         </button>
 
-        <OverlayTrigger trigger="click" rootClose placement="right" overlay={
-          <Popover id="popover-trigger-click-root-close" title="Icons">
-          <Nav bsStyle="tabs" activeKey={1}>
-              <NavItem>
-                  <EmoNavContainer mmmm={mesId}/>
-              </NavItem>
-          </Nav>
-          </Popover>
-        }>
+        <OverlayTrigger trigger="click" rootClose placement="top" overlay={IconPopOver(mesId)}>
             <button disabled={mesId == 0? true: false} style={styles.iconButton} className="btn btn-default btn-md" type="button">
                 <i className="glyphicon glyphicon-apple"></i>
             </button>
@@ -47,26 +40,19 @@ const ChatBottom = ({mesId, userId, sendMessage, displayImageModal}) => {
   )
 }
 
-// const IconPopOver = (
-//   <Popover id="popover-trigger-click-root-close" title="Icons">
-//     <Nav bsStyle="tabs" activeKey={1}>
-//         <NavItem>
-//             <EmoNavContainer mesId={mesId}/>
-//         </NavItem>
-//     </Nav>
-//   </Popover>
-// )
+const IconPopOver = (mesId) => {
+    return (
+      <Popover id="popover-trigger-click-root-close">
+          <EmoNavContainer mesId={mesId}/>
+      </Popover>
+    )
+}
 
 const styles = {
-  inputForm: {
-    width: 320
-  },
-  inputDiv: {
-    width: '100%'
-  },
-  iconButton: {
-    fontSize: 13
-  }
+    iconButton: {
+      fontSize: 13,
+      width: '50%'
+    }
 }
 
 export default ChatBottom

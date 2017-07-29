@@ -5,9 +5,7 @@ import { sendMessage } from '~/actions/asyn/chat/socket'
 
 const mapStateToProps = (state, ownProps) => {
     return ({
-      mesId: state.inst.chat.center.mesId,
-      user: state.user,
-      mesId: ownProps.ownProps
+        user: state.user,
     })
 }
 

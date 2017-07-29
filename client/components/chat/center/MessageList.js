@@ -1,6 +1,7 @@
- import React from 'react'
+import React from 'react'
 import { Popover, Row } from 'react-bootstrap'
 import Message from './Message'
+import ReactDOM from 'react-dom'
 
 class MessageList extends React.Component {
 
@@ -9,21 +10,21 @@ class MessageList extends React.Component {
     }
 
     componentDidMount() {
-        this.scrollToBottom();
+        this.scrollToBottom()
     }
 
     componentDidUpdate(prevProps, prevState) {
-        this.scrollToBottom();
+        this.scrollToBottom()
     }
 
     scrollToBottom() {
-      const { thing } = this.refs;
-      thing.scrollTop = thing.scrollHeight - thing.clientHeight;
+        const { bottom } = this.refs;
+        bottom.scrollTop = bottom.scrollHeight - bottom.clientHeight;
     }
 
     render() {
-        const { mesId, messagesMap,
-                user, chatListMap,
+        const { mesId,
+                user, chatListMap, messagesMap, hideAddMember,
                 getMessages
               } = this.props
 
@@ -31,7 +32,7 @@ class MessageList extends React.Component {
         const { usersMap } = chatListMap[mesId]
 
         return (
-          <div style={styles.mainDiv} ref={"thing"}>
+          <div style={styles.mainDiv} ref={"bottom"} onClick={() => hideAddMember(mesId)}>
             {
               messagesMap[mesId] == undefined?
               <div></div>

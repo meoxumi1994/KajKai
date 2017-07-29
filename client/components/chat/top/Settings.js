@@ -10,7 +10,7 @@ class Settings extends React.Component {
 
     render() {
       const { mesId, user, chatListMap } = this.props
-      const { close, changeGroupName, editing } = this.props
+      const { close, changeGroupName, editing, setDefaultLabel } = this.props
       const { usersKey, usersMap, displayLabel, display } = chatListMap[mesId]
 
       const show = display.setting
@@ -43,20 +43,20 @@ class Settings extends React.Component {
                                               <ul style={{float: 'right'}} className="list-unstyled">
                                                   <li><button type="submit" style={{width: 70}} className="btn btn-success">Save</button></li>
                                                   <li><button type="button" onClick={() => editing(mesId)} style={{width: 70, marginTop: 5}} className="btn btn-danger">Cancel</button></li>
+                                                  <li><button type="button" onClick={() => changeGroupName(mesId, user.id, '')} style={{width: 70, marginTop: 5}} className="btn btn-primary">Default</button></li>
                                               </ul>
-
 
                                           </td>
                                           :
-                                          <td>
-                                              <label>{displayLabel}</label>
+                                          <th>
+                                              <label>{displayLabel == undefined || displayLabel.trim() == ''? '(None)': displayLabel}</label>
                                               <button type="button" onClick={() => editing(mesId)} style={{position: 'absolute', right: 20, width: 70}} className="btn btn-default">Edit</button>
-                                          </td>
+                                          </th>
                                       }
                                   </tr>
                                   <tr>
                                       <th>Members</th>
-                                      <td>
+                                      <th>
                                           <div>
                                           {
                                             usersKey.map( memberId =>
@@ -74,7 +74,7 @@ class Settings extends React.Component {
                                               </div>
                                             )}
                                           </div>
-                                      </td>
+                                      </th>
                                   </tr>
                               </tbody>
                           </table>

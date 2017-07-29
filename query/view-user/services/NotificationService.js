@@ -228,5 +228,12 @@ export const getClientFormatNotification = (notification) => ({
   })),
   likestatus: ['like'],
   storename: notification.storeName,
-  urlname: notification.urlName
+  urlname: notification.urlName,
+  order: notification.order ? notification.order.map((product) => ({
+    id: product.id,
+    content: product.content ? product.content : '',
+    imageUrl: product.imageUrl ? product.imageUrl : '',
+    list: product.list ? product.list : [],
+    num: product.numberOfOrder
+  })) : []
 })

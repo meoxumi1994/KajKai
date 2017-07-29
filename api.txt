@@ -1343,6 +1343,11 @@ GET /admin {
   }
 }
 
-GET /logout: {
+GET /logout: { // for admin
   status: 'success|failed',
+}
+
+GET /statistics/:storeid?from=''&to='' { // số lượng leadercomment cho mỗi ngày từ ngày from tới ngày to
+  status: 'success|failed'
+  statistics: []                    // integer array
 }

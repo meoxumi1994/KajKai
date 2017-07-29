@@ -7,14 +7,6 @@
 "micro-notification": 8086
 "micro-admin": 8087
 
-
-
-
-
-
-
-
-
 "view-user": 7070
 "view-store": 7071
 "view-post": 7072

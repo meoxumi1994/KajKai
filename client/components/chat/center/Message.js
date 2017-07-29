@@ -2,8 +2,17 @@ import React from 'react'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import iconUtility from '~/config/iconUtility'
 import { timeSince } from '~/containers/support'
+import { emoSrc } from '~/config/iconUtility'
 
 const Message = ({message, time, user, styles, showAvatar}) => {
+
+    if ( user == undefined ) {
+        return (
+            <div>
+
+            </div>
+        )
+    }
 
     const showTimePopup = (
       <Popover id="popover-trigger-hover-focus">
@@ -35,7 +44,7 @@ const Message = ({message, time, user, styles, showAvatar}) => {
                   <ul style={type == 'notification'? undefined: styles.bounds}>
                       {
                           type == 'icon'?
-                          <img src={"./images/chatIcons/Baby/"+text.substring(1, text.length-1)+".png"} style={{maxWidth: 80, maxHeight: 80}}/>
+                          <img src={emoSrc + text.substring(1, text.length-1) + ".svg"} style={{maxWidth: 80, maxHeight: 80}}/>
                           :
                           text.trim() != '' && type == 'message'? text: undefined
                       }

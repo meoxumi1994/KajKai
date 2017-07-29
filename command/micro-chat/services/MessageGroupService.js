@@ -84,6 +84,7 @@ export const updateGroupInfo = (mesId, info, next) => {
         if (!group) next(null);
         else {
             if (info.groupName) group.groupName = info.groupName;
+            else group.groupName = '';
             if (info.groupColor) group.groupColor = info.groupColor;
             group.save((err) => {
                 chatGroupUpdatedPub(getGroupBasicInfo(group));
