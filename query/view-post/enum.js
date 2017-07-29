@@ -12,3 +12,9 @@ export const PostrowType = {
   IMAGETEXT: 'imagetext',
   IMAGEGROUP: 'groupimage'
 }
+
+export const OrderStatus = {
+  NEW: 'new',
+  RECEIVED: 'receive',
+  DONE: 'done'
+}

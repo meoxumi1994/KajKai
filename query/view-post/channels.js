@@ -47,6 +47,10 @@ export default {
     controller: 'CommentSubController',
     method: 'createComment'
   },
+  'COMMENT.FirstLayerCommentUpdated': {
+    controller: 'CommentSubController',
+    method: 'updateComment'
+  },
   'COMMENT.SecondLayerCommentCreated': {
     controller: 'ReplySubController',
     method: 'createReply'
