@@ -15,14 +15,14 @@ export default {
         method: 'getSellpostsHandler'
     }
   },
-  '/sellpost/user': {
+  '/post/user': {
     get :{
       controller: 'SellpostController',
       middleware: [auth()],
       method: 'getUserSellpostsHandler'
     }
   },
-  '/sellpost/user/:id': {
+  '/post/user/:id': {
     get: {
       controller: 'SellpostController',
       middleware: [auth()],

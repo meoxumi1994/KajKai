@@ -772,7 +772,7 @@ GET /minorpost/store/:storeid?offset=-1 { // length = 3
   ],
 }
 
-GET /sellpost/user/:userid?offset=-1 { // length = 2
+GET /post/user/:userid?offset=-1 { // length = 2
   offset: ,
   data: [
       {
