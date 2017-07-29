@@ -1,10 +1,10 @@
 import { BasicStore, Sellpost, Comment } from '../models'
 
 export const createStore = (message) => {
-  const { id, storeName, avatarUrl, urlName } = message.store
+  const { id, owner: userId, storeName, avatarUrl, urlName } = message.store
 
   const basicStore = new BasicStore({
-    id
+    id, userId
   })
 
   if (storeName) basicStore.storeName = storeName
