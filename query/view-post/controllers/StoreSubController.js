@@ -21,6 +21,8 @@ export const updateStore = (message) => {
   if (storeName) basicStore.storeName = storeName
   if (avatarUrl) basicStore.avatarUrl = avatarUrl
   if (urlName) basicStore.urlName = urlName
+
+  BasicStore.findOneAndUpdate({ id }, basicStore, () => {})
   Comment.find({}, (err, comments) => {
     if (comments) {
       comments.map((comment) => {
