@@ -12,7 +12,6 @@ import Contact from '~/containers/user/Contact'
 import Activity from '~/containers/user/Activity'
 
 const Middle = ({location}) => {
-    console.log('Middle Middle Middle Middle')
     switch (location.pathname.split('/')[3]) {
         case undefined:
             return <Interest/>

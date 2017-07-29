@@ -105,19 +105,21 @@ class App extends React.Component {
         const { multipleKey  } = chat
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
-                <Bar/>
+                <div>
+                    <Bar width={width} height={height} />
+                </div>
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
                     style={{ height: height - 48 }}>
                     {
-                      username && width > 1100 + 300 &&
-                          <div style={{ position: 'fixed',right: 0, top: 47, height: '100%', width: '15%'}}>
+                      username && width > 1100 + 240 &&
+                          <div style={{ position: 'fixed',right: 0, top: 47, height: '100%', width: 240 }}>
                               {
                                   path == '/admin'? undefined:
                                   <ContactHistory/>
                               }
                           </div>
                     }
-                    <div style={{ paddingTop: 48, marginRight: (width > 1100 + 300)? 300: 0 }}>
+                    <div style={{ paddingTop: 48, marginRight: (width > 1100 + 240)? 240: 0 }}>
                         {(path == "/" || path == "/admin" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
                               <div style={{ height: height - 48, width: Math.max(1100, width) }}>

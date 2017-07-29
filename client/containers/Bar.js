@@ -5,25 +5,23 @@ import { logOut } from '~/actions/asyn/user-login-register/login'
 import { loadCategory } from '~/actions/asyn/category'
 import { selectSearchType, changeKeyWord, changeLocation } from '~/actions/sync/search'
 import { search } from '~/actions/asyn/search'
+import { updateNotification } from '~/actions/asyn/entity/notification'
 import Bar from '~/components/Bar'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => allString.get(state.user.language, lang)
     const bar = state.inst.bar
-    // const { width } = state.inst.app
     const { searchType, offset } = state.inst.search
+    const { scrollTop } = state.inst.app
     return ({
         ...bar,
+        ...state.user,
         searchType: searchType,
         LOG_IN: g('LOG_IN'),
-        id: state.user.id,
         SEARCH_PRODUCT: g('SEARCH_PRODUCT'),
         SEARCH_LOCATION: g('SEARCH_LOCATION'),
-        isusername: state.user.username,
-        avatarUrl: state.user.avatarUrl,
         isloading: (state.auth == 'WHO_ING' || state.auth == 'LOGIN_ING'),
         unreadChat: state.inst.chat.left.unreadChat,
-        // width: width,
         categories: state.inst.category,
         search: state.inst.search,
         CREATE_STORE: g('CREATE_STORE'),
@@ -41,8 +39,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onLoadCategory: () => {
         dispatch(loadCategory())
     },
-    onSearchTypeSelected: (id) => {
-        console.log('onSearchTypeSelected')
+    onSearchTypeSelected: (id, value ) => {
+        dispatch({ type: 'INST_BAR_CHANGE', key: 'currentCategory', value: value })
         dispatch(selectSearchType(id))
     },
     onKeyWordEnter: (searchType, keyword, offset) => {
@@ -50,7 +48,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(changeKeyWord(keyword))
     },
     onLocationChanged: (location) => {
-        console.log('onLocationChanged')
         dispatch(changeLocation(location))
     },
     onChange: (key, value) => {

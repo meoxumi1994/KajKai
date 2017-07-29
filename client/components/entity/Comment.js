@@ -25,7 +25,7 @@ class Comment extends React.Component {
     }
     render(){
         const {
-            RECEIVE, LIKE, REPLY, clicksetting,
+            RECEIVE, LIKE, REPLY, clicksetting, isOwner,
             isleader, avatarUrl, name, time, numlike, numreplys, order,
             content, onReceive, onLike, onReply, beLike } = this.props
         return(
@@ -85,13 +85,13 @@ class Comment extends React.Component {
                         content={content}
                     />
                     <div style={{ marginLeft: -2 }}>
-                        {onReceive &&
+                        {(isOwner && isleader && onReceive) &&
                             <div className="btn" onClick={() => onReceive()}
                                 style={{  padding: '0px 1px 0px 1px' }}>
                                 <a style={{ fontSize: 12, color: '#365899' }}>{RECEIVE}</a>
                             </div>
                         }
-                        {onReceive && "."}
+                        {(isOwner && isleader && onReceive) && "."}
                         <div className="btn" onClick={() => onLike()}
                             style={{ padding: '0px 1px 0px 1px', fontWeight: beLike?'bold':'normal'}}>
                             <a style={{ fontSize: beLike?13:12, color: beLike?'#4673cc':'#365899' }}>{LIKE}</a>

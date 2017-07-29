@@ -5,7 +5,7 @@ html {
     height: 100%;
 }
 body {
-    overflow: 'auto';
+    overflow: 'hidden';
     background-color: #E9EBEE;
     min-width: 1100;
     height: 100%;

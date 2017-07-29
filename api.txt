@@ -95,12 +95,6 @@ GET /notification?offset=-1 {
     ]
 }
 
-PUT /notification { // update số lượng notification chưa đọc khi user clicks vào biểu tượng notification trên thanh Bar
-  topId: '' // id của notification trên cùng
-}, {
-  status: 'success|failed'
-}
-
 GET /user/:id {
     status:,
     user: {

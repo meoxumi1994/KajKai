@@ -14,8 +14,16 @@ const mapStateToProps = (state, {id}) => {
             yourid = store.id
     })
     let isyour = true
+    let isOwner = false
+    for(let i=0; i< state.user.storeList.length ; i++){
+        if(state.user.storeList[i].id == state.inst.store.index.id){
+            isOwner = true
+            break
+        }
+    }
     return({
         ...comment,
+        isOwner: isOwner,
         time: getTime(comment.time),
         beLike: getBeLike(comment.likes, yourid),
         RECEIVE: g('RECEIVE'),
@@ -25,6 +33,13 @@ const mapStateToProps = (state, {id}) => {
 }
 
 const mapDispatchToProps = (dispatch, {id, isleader, leadercommentid }) => ({
+    onReceive: () => {
+        dispatch({ type: 'server/RECEIVE', data: {
+            type: 'comment',
+            status: 'like',
+            leadercommentid: id,
+        }})
+    },
     onChange : (key, value) => {
         dispatch({ type: 'INST_ENTITY_COMMENT_CHANGE', id: id, key: key, value: value })
     },
