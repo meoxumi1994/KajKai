@@ -73,5 +73,9 @@ export default {
     'server/FOLLOW': {
         controller: 'FollowController',
         method: 'updateFollowCon'
+    },
+    'server/RECEIVE': {
+        controller: 'CommentController',
+        method: 'storeReceiveOrder'
     }
 }
