@@ -21,10 +21,10 @@ function execute(action, emit, next, dispatch) {
     if(action.type.substr(0,6) == 'client' || action.type.substr(0,6) == 'global'){
         next(action)
     }else{
+        emit(action.type, action)
         if (action.type == 'server/sendToken') {
             dispatch({ type: 'SETSOCKETTOKEN', socketToken: action.tokenId })
         }
-        emit(action.type, action)
     }
 }
 
