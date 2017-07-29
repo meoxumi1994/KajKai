@@ -49,6 +49,20 @@ export const createCommentNotification = (message) => {
               if (users) {
                 for (let i = 0; i < users.length; i++) {
                   let user = users[i]
+                  if (user.id == commenter.actorId || !user.storeList) {
+                    continue
+                  }
+                  let { storeList } = user
+                  let flag = true
+                  for (let k = 0; k < storeList.length; k++) {
+                    if (storeList[k].id == commenter.actorId) {
+                      flag = false
+                      break
+                    }
+                  }
+                  if (!flag) {
+                    continue
+                  }
                   let { followingSellposts } = user
                   if (!followingSellposts) {
                     followingSellposts = []
@@ -67,7 +81,8 @@ export const createCommentNotification = (message) => {
                         content,
                         time: Date.now(),
                         storeName: basicStore.storeName,
-                        urlName: basicStore.urlName
+                        urlName: basicStore.urlName,
+                        storeAvatarUrl: basicStore.avatarUrl
                       })
                       if (order) notification.order = order.map((product) => ({
                         id: product.id,

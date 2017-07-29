@@ -1,5 +1,4 @@
 const notification = (state = {
-
 }, action) => {
     switch (action.type) {
         case 'GET_NOTIFICATION_SUCCESS':

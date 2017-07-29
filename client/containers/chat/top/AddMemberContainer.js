@@ -14,10 +14,11 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    addMember: (mesId, id, conversatorIds) => {
+    addMember: (mesId, id, members, usersKey) => {
         let type = ''
+        let groupMembers = []
         if (mesId == 0) {
-            if (conversatorIds.length == 1) {
+            if (members.length == 1) {
                 type = 'new_chat'
             } else {
                 type = 'new_group'
@@ -25,29 +26,31 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         } else {
             type = 'add_member'
         }
-        console.log('type ',type);
+
         switch (type) {
             case 'new_chat':
-                dispatch(getMesId(id, conversatorIds[0]))
+                dispatch(getMesId(id, members[0]))
                 dispatch(removeChat(null))
                 break;
             case 'new_group':
-                conversatorIds.push(id)
-                dispatch(addMember(null, id, conversatorIds))
-                dispatch(removeChat(null))
-                break;
             case 'add_member':
-                dispatch(addMember(mesId, id, conversatorIds))
+                groupMembers.push(...members)
+                groupMembers.push(...usersKey)
+                groupMembers.push(id)
+                dispatch(addMember(null, id, groupMembers))
+                if (type == 'new_group') {
+                    dispatch(removeChat(null))
+                } else {
+                    dispatch({type: 'SEARCH', subType: 'RESET_RESULTS', data: {mesId}})
+                }
                 break;
         }
         dispatch(changeDisplay('ADD_MEMBER', mesId, false))
-        // dispatch(search_resetResult())
     },
     searchUser: (mesId, keyword) => {
         dispatch(searchUser(mesId, keyword))
     },
     addSearchedMember: (mesId, user, usersKey) => {
-        console.log('addSearchedMember', user, usersKey);
         if (usersKey.indexOf(user.id) == -1) {
             dispatch(search_addMember(mesId, user))
         }
@@ -57,6 +60,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         if (value == '' || value == undefined) {
             dispatch(changeDisplay('SEARCH', mesId, false))
         }
+    },
+    hideAddMember: (mesId) => {
+        dispatch(changeDisplay('ADD_MEMBER', mesId, false))
     }
 })
 

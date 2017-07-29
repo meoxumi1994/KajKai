@@ -46,7 +46,6 @@ class Settings extends React.Component {
                                                   <li><button type="button" onClick={() => changeGroupName(mesId, user.id, '')} style={{width: 70, marginTop: 5}} className="btn btn-primary">Default</button></li>
                                               </ul>
 
-
                                           </td>
                                           :
                                           <th>

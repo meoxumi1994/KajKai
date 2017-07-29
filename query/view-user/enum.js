@@ -32,5 +32,6 @@ export const NotificationType = {
   COMMENT: 'leadercomment',
   SELLPOSTCreated: 'createsellpost',
   SELLPOSTEdited: 'editsellpost',
-  INTEREST: 'createstore'
+  INTEREST: 'createstore',
+  RECEIVE: 'receive'
 }

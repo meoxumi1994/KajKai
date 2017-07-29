@@ -24,7 +24,7 @@ class MessageList extends React.Component {
 
     render() {
         const { mesId,
-                user, chatListMap, messagesMap,
+                user, chatListMap, messagesMap, hideAddMember,
                 getMessages
               } = this.props
 
@@ -32,7 +32,7 @@ class MessageList extends React.Component {
         const { usersMap } = chatListMap[mesId]
 
         return (
-          <div style={styles.mainDiv} ref={"bottom"} >
+          <div style={styles.mainDiv} ref={"bottom"} onClick={() => hideAddMember(mesId)}>
             {
               messagesMap[mesId] == undefined?
               <div></div>

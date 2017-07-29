@@ -12,16 +12,3 @@ export const getNotification = (offset) => dispatch => {
         }
     })
 }
-
-export const updateNotification = (topId) => dispatch => {
-    dispatch({ type: 'UPDATE_NOTIFICATION_ING'})
-    flem('/notification',{
-        topId: topId,
-    }).then(({ status }) => {
-        if(status == 'success'){
-            dispatch({ type: 'UPDATE_NOTIFICATION_SUCCESS' })
-        }else{
-            dispatch({ type: 'UPDATE_NOTIFICATION_FAILED'})
-        }
-    })
-}

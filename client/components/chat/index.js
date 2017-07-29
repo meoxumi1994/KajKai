@@ -14,7 +14,6 @@ class Chat extends React.Component {
       const { styles, center } = this.props
       const { messagesKey, messagesMap } = center
 
-      console.log('messagesKey', messagesKey);
       return(
         <div>
             {

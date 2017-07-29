@@ -22,6 +22,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     displayImageModal: (mesId) => {
         dispatch(changeDisplay('IMAGE_MODAL', mesId, true))
+        dispatch({type: 'CHAT/UPDATE', subType: 'RESET_IMAGES_URL', data: {mesId}})
     }
 })
 

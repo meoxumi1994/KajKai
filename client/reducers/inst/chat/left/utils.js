@@ -71,7 +71,7 @@ const utils = {
     **/
     displayToggle: (value, state) => {
         return value == 'toggle'? !state: value
-    }
+    },
 }
 
 export default utils
