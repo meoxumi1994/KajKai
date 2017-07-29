@@ -88,6 +88,12 @@ export const newFirstLayerCommentCreated = (fCommentInfo) => {
     pub.quit();
 };
 
+export const firstLayerCommentUpdated = (fCommentInfo) => {
+    const pub = redis.createClient(config);
+    pub.publish('COMMENT.FirstLayerCommentUpdated', JSON.stringify({fComment: fCommentInfo}));
+    pub.quit();
+};
+
 export const newSecondLayerCommentCreated = (sCommentInfo) => {
     const pub = redis.createClient(config);
     pub.publish('COMMENT.SecondLayerCommentCreated', JSON.stringify({sComment: sCommentInfo}));

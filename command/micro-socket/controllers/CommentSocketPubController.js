@@ -21,6 +21,26 @@ export const addNewFirstLayerCommentPub = (data, next) => {
     })
 };
 
+export const updateOrder = (id, status, userId, next) => {
+    const sub = redis.createClient(config);
+    const pub = redis.createClient(config);
+    const publishData = {id: id, status: status, userId: userId, eventId: getUUID()};
+    pub.publish('COMMENT.OrderCommentUpdated', JSON.stringify(publishData));
+    sub.subscribe('COMMENT.OrderCommentUpdated' + publishData.eventId);
+    sub.on('message', (channel, message) => {
+        message = JSON.parse(message);
+        sub.unsubscribe();
+        sub.quit();
+        pub.quit();
+        // if (message.status === 'success') {
+        //     next(message.firstLayerComment)
+        // } else {
+        //     next(null)
+        // }
+        next(message.status);
+    })
+};
+
 export const addNewSecondLayerCommentPub = (data, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
@@ -85,3 +105,4 @@ export const addNewFollow = (followerId, followeeId) => {
     pub.publish('NOTI.AddNewFollow', JSON.stringify(publishData));
     pub.quit();
 };
+

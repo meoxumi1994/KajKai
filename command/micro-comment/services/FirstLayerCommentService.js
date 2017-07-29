@@ -2,7 +2,7 @@ import { FirstLayerComment, SecondLayerComment } from '../models'
 import { getOrder, getOrderInfo } from './OrderService'
 import globalId from '../config/globalId'
 import { getUser, getStore, getStoreFromPostId } from '../controllers/CommentPubController'
-import { newFirstLayerCommentCreated } from '../controllers/CommentPubController'
+import { newFirstLayerCommentCreated, firstLayerCommentUpdated } from '../controllers/CommentPubController'
 
 const FIRST_COMMENT_GLOBAL_ID = globalId.FIRST_COMMENT_GLOBAL_ID;
 const USER_GLOBAL_ID = globalId.USER_GLOBAL_ID;
@@ -30,7 +30,8 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
                     time: fComment.time,
                     order: getOrderInfo(fComment.order),
                     id: getFirstCommentGlobalId(fComment._id),
-                    like: fComment.likeCounter
+                    like: fComment.likeCounter,
+                    status: fComment.status
                 };
                 if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     info = {...info, sellpostid: fComment.postId}
@@ -54,7 +55,8 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
                     id: getFirstCommentGlobalId(fComment._id),
                     like: fComment.likeCounter,
                     urlname: store.urlName,
-                    user: store.owner
+                    user: store.owner,
+                    status: fComment.status
                 };
                 if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     info = {...info, sellpostid: fComment.postId}
@@ -82,7 +84,7 @@ export const getFirstLayerCommentPubInfo = (fComment) => {
 
 export const saveNewFirstLayerComment = (posterId, order, time, postId, content, next) => {
     let comment = new FirstLayerComment({ posterId: posterId, order: order, time: time,
-        postId: postId, content: content });
+        postId: postId, content: content, status: 'new' });
     console.log('fuck ' + JSON.stringify(comment));
     comment.save((err) => {
         newFirstLayerCommentCreated(getFirstLayerCommentPubInfo(comment));
@@ -111,5 +113,30 @@ export const addNewFirstLayerComment = (data, next) => {
 export const getFComment = (id, next) => {
     FirstLayerComment.findById(getFirstCommentLocalId(id), (err, fComment) => {
         next(fComment);
+    })
+};
+
+export const updateStatus = (id, status, userId, next) => {
+    getFComment(id, (fComment) => {
+        if (!fComment) {
+            next(null);
+            return;
+        }
+        getStoreFromPostId(fComment.postId, (store) => {
+            if (store.owner !== userId) {
+                fComment.status = status;
+                fComment.save((err) => {
+                    if (err) {
+                        console.log('update err');
+                        next(err);
+                    } else {
+                        firstLayerCommentUpdated({fCommentId: getFirstCommentGlobalId(fComment._id), status: fComment.status});
+                        next(fComment);
+                    }
+                })
+            } else {
+                next(null);
+            }
+        });
     })
 };

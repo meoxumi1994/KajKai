@@ -1,4 +1,4 @@
-import { addNewSecondLayerCommentPub, addNewFirstLayerCommentPub, getMoreFirstLayerComments, getMoreSecondLayerComments, addNewFollow } from './CommentSocketPubController'
+import { addNewSecondLayerCommentPub, addNewFirstLayerCommentPub, getMoreFirstLayerComments, getMoreSecondLayerComments, addNewFollow, updateOrder } from './CommentSocketPubController'
 import { getListFollower } from './FollowPubController'
 
 export const joinPostCon = (action, sio, io) => {
@@ -88,5 +88,15 @@ export const getFirstLayerCommentCon = (action, sio, io) => {
     getMoreFirstLayerComments(action.data, (comments) => {
         sio.emit('action', {type: 'client/GET_MORE_LEADERCOMMENT', data: comments})
     });
+};
+
+export const storeReceiveOrder = (action, sio, io) => {
+    if (!action.data || !action.data.userID) return;
+    updateOrder(action.data.leadercommentid, action.data.status ? action.data.status : 'received', action.data.userID, (status) => {
+        sio.emit('action', {type: 'client/RECEIVE', data: {
+            leadercommentid: action.data.leadercommentid,
+            status: status
+        }})
+    })
 };
 
