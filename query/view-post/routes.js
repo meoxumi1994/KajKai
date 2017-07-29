@@ -15,6 +15,20 @@ export default {
         method: 'getSellpostsHandler'
     }
   },
+  '/sellpost/user': {
+    get :{
+      controller: 'SellpostController',
+      middleware: [auth()],
+      method: 'getUserSellpostsHandler'
+    }
+  },
+  '/sellpost/user/:id': {
+    get: {
+      controller: 'SellpostController',
+      middleware: [auth()],
+      method: 'getUserSellpostsHandler'
+    }
+  },
   '/postrows/:sellpostid': {
     get: {
       controller: 'PostrowController',
@@ -62,6 +76,13 @@ export default {
       controller: 'ProductController',
       middleware: [auth()],
       method: 'getProductImageListHandler'
+    }
+  },
+  '/statistics/:storeid': {
+    get: {
+      controller: 'StatisticsController',
+      middleware: [auth()],
+      method: 'getStatisticsHandler'
     }
   }
 }

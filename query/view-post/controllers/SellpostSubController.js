@@ -11,7 +11,7 @@ export const createSellpost = (message) => {
   if (category) sellpost.category = category
   if (title) sellpost.title = title
   if (description) sellpost.description = description
-  if (time) sellpost.time = time
+  sellpost.time = Date.now()
   if (storeState) sellpost.storeState = storeState
   if (shipStatus) sellpost.shipStatus = shipStatus
   if (postrowsOrder) sellpost.postrowsOrder = postrowsOrder
@@ -33,7 +33,7 @@ export const updateSellpost = (message) => {
   if (category) sellpost.category = category
   if (title) sellpost.title = title
   if (description) sellpost.description = description
-  if (time) sellpost.time = time
+  sellpost.time = Date.now()
   if (storeState) sellpost.storeState = storeState
   if (shipStatus) sellpost.shipStatus = shipStatus
   if (postrowsOrder) sellpost.postrowsOrder = postrowsOrder

@@ -772,7 +772,7 @@ GET /minorpost/store/:storeid?offset=-1 { // length = 3
   ],
 }
 
-GET /post/user/:userid?offset=-1 { // length = 2
+GET /sellpost/user/:userid?offset=-1 { // length = 2
   offset: ,
   data: [
       {
@@ -1349,6 +1349,11 @@ GET /admin {
   }
 }
 
-GET /logout: {
+GET /logout: { // for admin
   status: 'success|failed',
+}
+
+GET /statistics/:storeid?from=''&to='' { // số lượng leadercomment cho mỗi ngày từ ngày from tới ngày to
+  status: 'success|failed'
+  statistics: []                    // integer array
 }
