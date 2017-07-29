@@ -8,92 +8,11 @@ export const createSellpostCreatedNotification = (message) => {
   const { sellPostId: sellpostId, storeId, category, title, description } = message.sellpost
 
   addIDSellpostStore(sellpostId, storeId)
-
-  BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-    if (basicStore) {
-      User.find({}, (err, users) => {
-        if (users) {
-          for (let i = 0; i < users.length; i++) {
-            let user = users[i]
-            let { followingStores } = user
-            if (!followingStores) {
-              followingStores = []
-            }
-            for (let k = 0; k < followingStores.length; k++) {
-              if (followingStores[k] == storeId) {
-                let { notifications } = user
-                if (!notifications) {
-                  notifications = []
-                }
-                let notification = new Notification({
-                  type: NotificationType.SELLPOSTCreated,
-                  sellpostId,
-                  actorId: storeId,
-                  name: basicStore.storeName,
-                  avatarUrl: basicStore.avatarUrl,
-                  content: title,
-                  time: Date.now(),
-                  storeName: basicStore.storeName,
-                  urlName: basicStore.urlName
-                })
-                notify(user.id, notification)
-                notifications.push(notification)
-                user.notifications = notifications
-                user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
-                user.save(() => {})
-                break
-              }
-            }
-          }
-        }
-      })
-    }
-  })
+  createSellpostNotification(NotificationType.SELLPOSTCreated, message.sellpost)
 }
 
 export const createSellpostUpdatedNotification = (message) => {
-  const { sellPostId: sellpostId, storeId, category, title, description } = message.sellpost
-
-  BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-    if (basicStore) {
-      User.find({}, (err, users) => {
-        if (users) {
-          for (let i = 0; i < users.length; i++) {
-            let user = users[i]
-            let { followingSellposts } = user
-            if (!followingSellposts) {
-              followingSellposts = []
-            }
-            for (let k = 0; k < followingSellposts.length; k++) {
-              if (followingSellposts[k] == sellpostId) {
-                let { notifications } = user
-                if (!notifications) {
-                  notifications = []
-                }
-                let notification = new Notification({
-                  type: NotificationType.SELLPOSTEdited,
-                  sellpostId,
-                  actorId: storeId,
-                  name: basicStore.storeName,
-                  avatarUrl: basicStore.avatarUrl,
-                  content: title,
-                  time: Date.now(),
-                  storeName: basicStore.storeName,
-                  urlName: basicStore.urlName
-                })
-                notify(user.id, notification)
-                notifications.push(notification)
-                user.notifications = notifications
-                user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
-                user.save(() => {})
-                break
-              }
-            }
-          }
-        }
-      })
-    }
-  })
+  createSellpostNotification(NotificationType.SELLPOSTEdited, message.sellpost)
 }
 
 export const deleteSellpostNotification = (message) => {
@@ -129,6 +48,65 @@ export const deleteSellpostNotification = (message) => {
             user.notifications = mNotifications
             user.numberOfUnRead = mNumberOfUnRead
             user.save(() => {})
+          }
+        }
+      })
+    }
+  })
+}
+
+const createSellpostNotification = (type, sellpost) => {
+  const { sellPostId: sellpostId, storeId, category, title, description } = sellpost
+  BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+    if (basicStore) {
+      User.find({}, (err, users) => {
+        if (users) {
+          for (let i = 0; i < users.length; i++) {
+            let user = users[i]
+            let { storeList } = user
+            if (!storeList) {
+              storeList = []
+            }
+            let flag = true
+            for (let k = 0; k < storeList.length; k++) {
+              if (storeList[k].id == storeId) {
+                flag = false
+                break
+              }
+            }
+            if (!flag) {
+              continue
+            }
+            let { followingStores } = user
+            if (!followingStores) {
+              followingStores = []
+            }
+            for (let k = 0; k < followingStores.length; k++) {
+              if (followingStores[k] == storeId) {
+                let { notifications } = user
+                if (!notifications) {
+                  notifications = []
+                }
+                let notification = new Notification({
+                  type,
+                  sellpostId,
+                  actorId: storeId,
+                  name: basicStore.storeName,
+                  avatarUrl: basicStore.avatarUrl,
+                  content: title,
+                  time: Date.now(),
+                  storeName: basicStore.storeName,
+                  urlName: basicStore.urlName,
+                  storeAvatarUrl: basicStore.avatarUrl
+                })
+                notify(user.id, notification)
+                notifications.push(notification)
+                user.notifications = notifications
+                user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
+                user.save(() => {})
+                break
+              }
+            }
           }
         }
       })

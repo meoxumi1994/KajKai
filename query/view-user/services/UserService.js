@@ -199,7 +199,7 @@ export const getNotifications = (id, offset, length, next) => {
   })
 }
 
-export const updateNotification = (id, topId, next) => {
+export const updateNotification = (id, notificationId, next) => {
   User.findOne({ id }, (err, user) => {
     if (err || !user) {
       if(err) {
@@ -210,17 +210,15 @@ export const updateNotification = (id, topId, next) => {
     } else {
       const { notifications } = user
       if (notifications) {
-        for (let i = notifications.length - 1; i >= 0; i--) {
-          let notification = notifications[i]
-          if (notification._id == topId) {
-            user.numberOfUnRead = notifications.length - (i + 1)
+        for (let i = 0; i < notifications.length; i++) {
+          if (notifications[i]._id == notificationId) {
+            notifications[i].isRead = 1
             break
           }
         }
-      } else {
-        user.numberOfUnRead = 0
-      }
-      user.save(() => {})
+        user.notifications = notifications
+        user.save(() => {})
+      }      
       next({ status: 'success' })
     }
   })

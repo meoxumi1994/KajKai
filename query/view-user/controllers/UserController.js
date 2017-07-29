@@ -94,15 +94,15 @@ export const getNotificationsHandler = () => (req, res) => {
 }
 
 export const updateNotificationHandler = () => (req, res) => {
-  const requestedId = req.decoded._id
-  const { topId } = req.body
-  if (requestedId == 'Guest') {
+  const requesterId = req.decoded._id
+  const { id: notificationId } = req.body
+  if (requesterId == 'Guest') {
     res.json({
       status: 'failed',
       reason: 'Guest'
     })
   } else {
-    updateNotification(requestedId, topId, (status) => {
+    updateNotification(requesterId, notificationId, (status) => {
       res.json({ status })
     })
   }

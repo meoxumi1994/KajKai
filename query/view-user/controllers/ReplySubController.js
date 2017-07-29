@@ -48,6 +48,20 @@ export const createReplyNotification = (message) => {
             if (users) {
               for (let i = 0; i < users.length; i++) {
                 let user = users[i]
+                if (user.id == replier.actorId || !user.storeList) {
+                  continue
+                }
+                let { storeList } = user
+                let flag = true
+                for (let k = 0; k < storeList.length; k++) {
+                  if (storeList[k].id == replier.actorId) {
+                    flag = false
+                    break
+                  }
+                }
+                if (!flag) {
+                  continue
+                }
                 let { followingSellposts } = user
                 if (!followingSellposts) {
                   followingSellposts = []
@@ -67,7 +81,8 @@ export const createReplyNotification = (message) => {
                       content,
                       time: Date.now(),
                       storeName: basicStore.storeName,
-                      urlName: basicStore.urlName
+                      urlName: basicStore.urlName,
+                      storeAvatarUrl: basicStore.avatarUrl
                     })
                     notify(user.id, notification)
                     notifications.push(notification)

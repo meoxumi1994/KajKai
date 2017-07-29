@@ -63,7 +63,8 @@ export const createStoreCreatedNotification = (message) => {
               avatarUrl: actor.avatarUrl,
               time: Date.now(),
               storeName: store.storeName,
-              urlName: store.urlName
+              urlName: store.urlName,
+              storeAvatarUrl: store.avatarUrl
             })
 
             notify(userId, notification)

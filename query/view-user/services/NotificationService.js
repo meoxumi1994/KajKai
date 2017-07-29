@@ -17,6 +17,9 @@ export const createLikeSellpostNotification = (sellpostId) => {
                 if (users) {
                   for (let i = 0; i < users.length; i++) {
                     let user = users[i]
+                    if (isLiker(user, liker)) {
+                      continue
+                    }
                     let { followingSellposts } = user
                     if (!followingSellposts) {
                       followingSellposts = []
@@ -36,6 +39,7 @@ export const createLikeSellpostNotification = (sellpostId) => {
                           time: Date.now(),
                           storeName: basicStore.storeName,
                           urlName: basicStore.urlName,
+                          storeAvatarUrl: basicStore.avatarUrl,
                           numberOfLike,
                           likers
                         })
@@ -83,6 +87,9 @@ export const createLikeCommentNotification = (commentId) => {
                     if (users) {
                       for (let i = 0; i < users.length; i++) {
                         let user = users[i]
+                        if (isLiker(user, liker)) {
+                          continue
+                        }
                         let { followingSellposts } = user
                         if (!followingSellposts) {
                           followingSellposts = []
@@ -103,6 +110,7 @@ export const createLikeCommentNotification = (commentId) => {
                               time: Date.now(),
                               storeName: basicStore.storeName,
                               urlName: basicStore.urlName,
+                              storeAvatarUrl: basicStore.avatarUrl,
                               numberOfLike,
                               likers
                             })
@@ -152,6 +160,9 @@ export const createLikeReplyNotification = (replyId) => {
                     if (users) {
                       for (let i = 0; i < users.length; i++) {
                         let user = users[i]
+                        if (isLiker(user, liker)) {
+                          continue
+                        }
                         let { followingSellposts } = user
                         if (!followingSellposts) {
                           followingSellposts = []
@@ -173,6 +184,7 @@ export const createLikeReplyNotification = (replyId) => {
                               time: Date.now(),
                               storeName: basicStore.storeName,
                               urlName: basicStore.urlName,
+                              storeAvatarUrl: basicStore.avatarUrl,
                               numberOfLike,
                               likers
                             })
@@ -229,11 +241,32 @@ export const getClientFormatNotification = (notification) => ({
   likestatus: ['like'],
   storename: notification.storeName,
   urlname: notification.urlName,
+  avartarStore: notification.storeAvatarUrl,
   order: notification.order ? notification.order.map((product) => ({
     id: product.id,
     content: product.content ? product.content : '',
     imageUrl: product.imageUrl ? product.imageUrl : '',
     list: product.list ? product.list : [],
     num: product.numberOfOrder
-  })) : []
+  })) : [],
+  isclick: notification.isRead == 1
 })
+
+const isLiker = (user, liker) => {
+  if (liker.userId) {
+    if (user.id == liker.userId) {
+      return true
+    }
+    return false
+  }
+  let { storeList } = user
+  if (!storeList) {
+    storeList = []
+  }
+  for (let k = 0; k < storeList.length; k++) {
+    if (storeList[k].id == liker.storeId) {
+      return true
+    }
+  }
+  return false
+}
