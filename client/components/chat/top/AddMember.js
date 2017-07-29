@@ -8,34 +8,35 @@ class AddMember extends React.Component {
     }
 
     render() {
-      let conversator
+      let members
       const { mesId, styles,
-              user, chatListMap, hideSearch,
+              user, chatListMap, hideSearch, hideAddMember,
               addMember, searchUser, addSearchedMember } = this.props
 
-      const { suggestions, results } = chatListMap[mesId].search
+      const { search, usersKey } = chatListMap[mesId]
+      const { suggestions, results } = search
       const searchDisplay = chatListMap[mesId].display.search
-
+      console.log('suggestions, results',suggestions, results);
       return (
         <form style={styles.addMemberDiv} onSubmit={e => {
             e.preventDefault()
-            if (conversator.value.trim()) {
-                searchUser(mesId, conversator.value.trim())
+            if (members.value.trim()) {
+                searchUser(mesId, members.value.trim())
             }
         }}>
           <span className="input-group-btn">
             <div className="input-group" style={{width: '100%'}}>
                   <FormControl
-                    inputRef={ref => {conversator = ref}}
+                    inputRef={ref => {members = ref}}
                     placeholder="Add members..."
                     style={{width: '80%', height: 40, fontSize: 15}}
                     onChange={(e) => hideSearch(mesId, e.target.value)}
                   >
                   </FormControl>
-                  <button disabled={results.keyy.length == 0? true: false} type="button" style={{width: '20%', height: 40, fontSize: 15}}
+                  <button disabled={mesId == 0 && results.keyy.length == 0? true: false} type="button" style={{width: '20%', height: 40, fontSize: 15}}
                       className={results.keyy.length == 0? 'btn': 'btn btn-danger'}
-                      onClick={() => addMember( mesId, user.id, results.keyy)}>
-                          Done
+                      onClick={() => results.keyy.length == 0? hideAddMember(mesId) :addMember( mesId, user.id, results.keyy, usersKey)}>
+                          { results.keyy.length == 0? 'Cancel': 'Done'}
                   </button>
             </div>
           </span>
@@ -52,7 +53,7 @@ class AddMember extends React.Component {
                           const { id, username, avatarUrl } = suggestions.mapp[user]
                           return (
                               <button type="button" key={id} style={{width: '100%'}} className="btn btn-default"
-                              onClick={() => { addSearchedMember(mesId, suggestions.mapp[user], results.keyy);conversator.value=''} }>
+                              onClick={() => { addSearchedMember(mesId, suggestions.mapp[user], results.keyy); members.value=''} }>
                                 <div className="col col-xs-2">
                                     <img src={avatarUrl} style={{width: 40, height: 40, borderRadius: 50}}/>
                                 </div>
@@ -70,6 +71,6 @@ class AddMember extends React.Component {
     }
 }
 
-// addMember( mesId, user.id, conversator.value )
+// addMember( mesId, user.id, members.value )
 
 export default AddMember

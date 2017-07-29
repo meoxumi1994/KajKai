@@ -7,6 +7,19 @@ class DisplayLabel extends React.Component {
         super(props)
     }
 
+    componentDidMount() {
+        this.scrollToBottom()
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        this.scrollToBottom()
+    }
+
+    scrollToBottom() {
+        const { bottom } = this.refs;
+        bottom.scrollTop = bottom.scrollHeight - bottom.clientHeight;
+    }
+
     render() {
 
         const {
@@ -29,8 +42,8 @@ class DisplayLabel extends React.Component {
         }
 
         return (
-            <div style={{width: '75%'}}>
-              <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={popoverHoverFocus(usersKey, usersMap)}>
+            <div style={{width: '73%', maxHeight: 80, overflowY: 'scroll'}} ref={"bottom"}>
+              <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={popoverHoverFocus(usersKey, usersMap, results)}>
                   {
                   usersKey.length == 0 && results.keyy.length == 0? <label style={styles.displayLabel}>New message</label>:
                   display.addMember?
@@ -38,7 +51,7 @@ class DisplayLabel extends React.Component {
                       {
                         usersKey.map(uKey =>
                           <div key={uKey} >
-                              <button style={{height: 30, marginTop: 5, marginBottom: 5, marginLeft: 15, backgroundColor: '#c64949'}} className="btn">
+                              <button style={{height: 30, marginTop: 5, marginBottom: 5, marginLeft: 15, backgroundColor: 'grey'}} className="btn">
                                   {usersMap[uKey].username}
                               </button>
                           </div>)
@@ -62,7 +75,7 @@ class DisplayLabel extends React.Component {
                     }
                   </div>
                   :
-                      <label style={styles.displayLabel}>{label.length > 24? label.substring(0, 25) + '...': label}</label>
+                      <label style={styles.displayLabel}>{label.length > 24? label.substring(0, 23) + '...': label}</label>
                   }
               </OverlayTrigger>
           </div>
@@ -70,7 +83,7 @@ class DisplayLabel extends React.Component {
     }
 }
 
-const popoverHoverFocus = (usersKey, usersMap) => {
+const popoverHoverFocus = (usersKey, usersMap, results) => {
     return (
       <Popover id="popover-trigger-hover-focus" title="Conversator member(s)">
           {
@@ -80,10 +93,28 @@ const popoverHoverFocus = (usersKey, usersMap) => {
                   {usersMap[id].username}
               </div>
             )
-        }
+          }
+          {
+            results.keyy.map(id =>
+              <div key={id}>
+                  <img src={results.mapp[id].avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginBottom: 10, marginRight: 10}}/>
+                  {results.mapp[id].username}
+              </div>
+            )
+          }
       </Popover>
     )
 }
 
+const scrollColor = {
+    scrollbarBaseColor: 'red',
+    scrollbarFaceColor: 'red',
+    scrollbarTrackColor: 'red',
+    scrollbar3dlightColor: 'red',
+    scrollbarHighlightColor: 'red',
+    scrollbarArrowColor: 'red',
+    scrollbarDarkshadowColor: 'red',
+    scrollbarShadowColor: 'red',
+}
 
 export default DisplayLabel

@@ -42,7 +42,7 @@ const chatMap = (state={
                 mesId: action.data.mesId,
                 lastMessage: action.data.lastMessage,
                 displayLabel: action.data.displayLabel,
-                usersKey: action.data.users.map(user => user.id),
+                usersKey: [...new Set(action.data.users.map(e => e.id))],
                 usersMap: utils.usersMap(action, action.data.users),
             }
 
@@ -147,7 +147,7 @@ const chatMap = (state={
                         search: {
                             ...state.search,
                             suggestions:{
-                                keyy: action.data.users.map(user => user.userId),
+                                keyy: [...new Set(action.data.users.map(user => user.userId))],
                                 mapp: utils.searchUsersMap(action, action.data.users)
                             }
                         }
@@ -158,10 +158,10 @@ const chatMap = (state={
                         search: {
                             ...state.search,
                             results: {
-                                keyy: [
+                                keyy: [...new Set([
                                     ...state.search.results.keyy,
                                     action.data.user.id
-                                ],
+                                ])],
                                 mapp: {
                                     ...state.search.results.mapp,
                                     [action.data.user.id]: userMap(undefined, action)
@@ -171,10 +171,7 @@ const chatMap = (state={
                     }
 
                 case 'REMOVE_MEMBER':
-                    const tempKeyResult = state.search.results.keyy
                     const tempMapResult = state.search.results.mapp
-
-                    tempKeyResult.splice(tempKeyResult.indexOf(action.data.id), 1)
                     delete tempMapResult[action.data.id]
 
                     return {
@@ -182,13 +179,14 @@ const chatMap = (state={
                         search: {
                             ...state.search,
                             results: {
-                                keyy: tempKeyResult,
+                                keyy: state.search.results.keyy.filter(e => e != action.data.id),
                                 mapp: tempMapResult
                             }
                         }
                     }
 
                 case 'RESET_RESULTS':
+                    console.log('RESET_RESULTS', action);
                     return {
                         ...state,
                         search: {
