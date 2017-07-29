@@ -151,7 +151,7 @@ export const getUserImageList = (requesterId, id, offset, next) => {
   })
 }
 
-export const getNotifications = (id, offset, next) => {
+export const getNotifications = (id, offset, length, next) => {
   User.findOne({ id }, (err, user) => {
     if (err || !user) {
       if(err) {
@@ -170,7 +170,7 @@ export const getNotifications = (id, offset, next) => {
       for (let i = notifications.length - 1; i >= 0; i--) {
         let notification = notifications[i]
         if (notification.time < offset) {
-          if (currentNumberOfNotification < 10) {
+          if (currentNumberOfNotification < length) {
             mNotifications.push(getClientFormatNotification(notification))
 
             mOffset = notification.time.getTime()
