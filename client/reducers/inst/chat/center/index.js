@@ -64,10 +64,12 @@ const center = (state = {
 //---------------------------------------------------------------------------------------------------
         case 'REMOVE_CHAT':
         case 'CLOSE_CHAT':
-            const mKey = state.messagesKey
-            mKey.splice(mKey.indexOf(action.data.mesId), 1)
             const mMap = state.messagesMap
             delete mMap[action.data.mesId]
+
+            const mKey = state.messagesKey
+            mKey.splice(mKey.indexOf(action.data.mesId), 1)
+
             const close = {
                 ...state,
                 messagesKey: mKey,

@@ -36,7 +36,7 @@ const left = (state = {
               ...state,
               chatListKey: [
                   ...state.chatListKey,
-                  ...action.data.map(chat => chat.mesId)
+                  ...[...new Set(action.data.map(chat => chat.mesId))]
               ],
               chatListMap: {
                   ...state.chatListMap,

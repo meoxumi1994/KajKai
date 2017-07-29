@@ -1,80 +1,85 @@
-const babyCollection = "/images/chatIcons/Baby/"
+export const emoSrc = "/images/chat/emo/basic/"
 
-const iconList = [
-  "angry",
-  "arrogant",
-  "baby",
-  "cheeky",
-  "confused",
-  "desperate",
-  "dissapointment",
-  "faint",
-  "flirt",
-  "geek",
-  "goofy",
-  "grubby",
-  "happy",
-  "joyful",
-  "love",
-  "manly",
-  "miserly",
-  "nerd",
-  "pirate",
-  "punk",
-  "scared",
-  "sceptic",
-  "shocked",
-  "smile",
-  "smug",
-  "stunned",
-  "tired",
-  "tough",
-  "wink"
+const alex = [
+  'angel',
+  'sweat',
+  'in-love',
+  'smiling',
+  'happy',
+  'cool',
+  'astonished',
+  'confused',
+  'cry',
+  'devil',
+  'dizzy',
+  'expressionless',
+  'injury',
+  'angry',
+  'joy',
+  'kiss',
+  'mask',
+  'neutral',
+  'sad',
+  'scared',
+  'secret',
+  'sick',
+  'sleeping',
+  'smirking',
+  'thinking',
+  'tired',
+  'unamused',
+  'vomiting',
+  'zombie',
 ]
 
-const languageMaping = (icon) => {
-  switch (icon.toLowerCase()) {
-    case 'tức giận':
-    case 'tức':
-    case 'cáu':
-      return 'angry'
-
-    case 'kiêu ngạo':
-    case 'kiêu':
-    case 'ngạo mạn':
-      return 'arrogant'
-
-    case 'đáng yêu':
-      return 'baby'
-
-    case 'cười':
-      return 'smile'
-
-    default:
-      return icon
-  }
-}
+const titi = [
+  'alien',
+  'anxious',
+  'attention',
+  'bat',
+  'beer',
+  'blush',
+  'boxer',
+  'businessman',
+  'calling',
+  'crying',
+  'dead',
+  'doubt',
+  'gentleman',
+  'laugh',
+  'masked',
+  'ninja',
+  'party',
+  'peaceful',
+  'policeman',
+  'shy',
+  'sleepy',
+  'smoker',
+  'star',
+  'thumb-up',
+  'whistle',
+  'wrestler',
+]
 
 const iconUtility = {
-  getIcon: (icon) => {
-    var icon = languageMaping(icon)
-    if (iconList.indexOf(icon) == -1) {
-      return null
+    // getIconList: () => {
+    //     let icons = []
+    //     iconList.map(icon => icons.push(buildIconObj(icon)))
+    //     return icons
+    // },
+    alex: () => {
+        return alex.map(icon => buildIconObj(icon, emoSrc))
+    },
+    titi: () => {
+        return titi.map(icon => buildIconObj(icon, emoSrc))
     }
-    return buildIconObj(icon)
-  },
-  getIconList: () => {
-    let icons = []
-    iconList.map(icon => icons.push(buildIconObj(icon)))
-    return icons
-  }
 }
 
-const buildIconObj = (icon) => {
-  return {
-    syntax: '(' + icon + ')',
-    src: babyCollection + icon + '.png'
-  }
+const buildIconObj = (icon, src) => {
+    return {
+        syntax: '(' + icon + ')',
+        src: emoSrc + icon + '.svg'
+    }
 }
 
 export default iconUtility
