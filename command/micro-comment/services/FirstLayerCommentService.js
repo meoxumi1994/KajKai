@@ -112,6 +112,7 @@ export const addNewFirstLayerComment = (data, next) => {
 };
 
 export const getFComment = (id, next) => {
+    console.log('id ' + id + ' ' + getFirstCommentLocalId(id));
     FirstLayerComment.findById(getFirstCommentLocalId(id), (err, fComment) => {
         next(fComment);
     })
@@ -119,11 +120,13 @@ export const getFComment = (id, next) => {
 
 export const updateStatus = (id, status, userId, next) => {
     getFComment(id, (fComment) => {
+        console.log('fick ' + fComment);
         if (!fComment) {
             next(null);
             return;
         }
         getStoreFromPostId(fComment.postId, (store) => {
+            console.log(userId + ' ' + store.owner);
             if (store.owner !== userId) {
                 fComment.status = status;
                 fComment.save((err) => {
