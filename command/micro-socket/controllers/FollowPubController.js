@@ -2,7 +2,7 @@ import redis from 'redis'
 import config from '../config/pubSubConfig'
 import { getUUID } from '../utils/utils'
 
-export const updateFollowPub = (userId, storeId, sellPostId, next) => {
+export const updateUserFollowPub = (userId, storeId, sellPostId, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
     const publishData = {userId, storeId, sellPostId, eventId: getUUID()};
@@ -15,7 +15,7 @@ export const updateFollowPub = (userId, storeId, sellPostId, next) => {
         sub.quit();
         pub.quit();
         if (message.status === 'success') {
-            next(message.follow)
+            next(message.userFollow)
         } else {
             next(null)
         }

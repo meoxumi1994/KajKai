@@ -1,6 +1,7 @@
 import { getListFollower, addNewFollow, removeFollow, modifyFollow, getListFollowee } from '../services/FollowService'
 import { addNewLike } from '../services/LikeService'
 import { publishNewInterest } from '../services/InterestService'
+import { updateUserFollow } from '../services/UserFollowService'
 
 export const getListFollowerCon = (message, next) => {
     getListFollower(message.followeeId, (list) => {
@@ -32,6 +33,18 @@ export const updateFollowCon = (message, next) => {
     modifyFollow(followerId, followeeId, (follow) => {
         if (follow) {
             next({status: 'success', follow: follow})
+        } else {
+            next({status: 'failed'})
+        }
+    })
+};
+
+export const updateUserFollowCon = (message, next) => {
+    let followerId = message.userId;
+    let followeeId = (message.storeId) ? message.storeId : message.sellPostId;
+    updateUserFollow(followerId, followeeId, (userFollow) => {
+        if (userFollow) {
+            next({status: 'success', userFollow: userFollow})
         } else {
             next({status: 'failed'})
         }

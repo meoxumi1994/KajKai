@@ -72,7 +72,7 @@ export default {
     // },
     'server/FOLLOW': {
         controller: 'FollowController',
-        method: 'updateFollowCon'
+        method: 'updateUserFollowCon'
     },
     'server/RECEIVE': {
         controller: 'CommentController',
