@@ -47,6 +47,10 @@ export default {
     controller: 'CommentSubController',
     method: 'createCommentNotification'
   },
+  'COMMENT.FirstLayerCommentCreated': {
+    controller: 'CommentSubController',
+    method: 'createReceiveNotification'
+  },
   'COMMENT.SecondLayerCommentCreated': {
     controller: 'ReplySubController',
     method: 'createReplyNotification'

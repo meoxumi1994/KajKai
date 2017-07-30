@@ -45,10 +45,44 @@ export const createCommentNotification = (message) => {
       if (mIDSellpostStore) {
         BasicStore.findOne({ id: mIDSellpostStore.storeId }, (err, basicStore) => {
           if (basicStore) {
+            let notification = new Notification({
+              type: NotificationType.COMMENT,
+              commentId,
+              sellpostId,
+              ...commenter,
+              content,
+              time: Date.now(),
+              storeName: basicStore.storeName,
+              urlName: basicStore.urlName,
+              storeAvatarUrl: basicStore.avatarUrl
+            })
+            if (order) notification.order = order.map((product) => ({
+              id: product.id,
+              content: product.content,
+              imageUrl: product.imageUrl,
+              list: product.list,
+              numberOfOrder: product.num
+            }))
+            notification.save(() => {})
+
             User.find({}, (err, users) => {
               if (users) {
                 for (let i = 0; i < users.length; i++) {
                   let user = users[i]
+                  if (user.id == commenter.actorId || !user.storeList) {
+                    continue
+                  }
+                  let { storeList } = user
+                  let flag = true
+                  for (let k = 0; k < storeList.length; k++) {
+                    if (storeList[k].id == commenter.actorId) {
+                      flag = false
+                      break
+                    }
+                  }
+                  if (!flag) {
+                    continue
+                  }
                   let { followingSellposts } = user
                   if (!followingSellposts) {
                     followingSellposts = []
@@ -59,23 +93,7 @@ export const createCommentNotification = (message) => {
                       if (!notifications) {
                         notifications = []
                       }
-                      let notification = new Notification({
-                        type: NotificationType.COMMENT,
-                        commentId,
-                        sellpostId,
-                        ...commenter,
-                        content,
-                        time: Date.now(),
-                        storeName: basicStore.storeName,
-                        urlName: basicStore.urlName
-                      })
-                      if (order) notification.order = order.map((product) => ({
-                        id: product.id,
-                        content: product.content,
-                        imageUrl: product.imageUrl,
-                        list: product.list,
-                        numberOfOrder: product.num
-                      }))
+
                       notify(user.id, notification)
                       notifications.push(notification)
                       user.notifications = notifications
@@ -92,4 +110,56 @@ export const createCommentNotification = (message) => {
       }
     })
   })
+}
+
+export const createReceiveNotification = (message) => {
+  const { fCommentId: id, status } = message.fComment
+
+  if (status == NotificationType.RECEIVE) {
+    Notification.findOne({ commentId: id }, (err, notification) => {
+      if (notification) {
+        notification.type = NotificationType.RECEIVE
+        User.find({}, (err, users) => {
+          if (users) {
+            for (let i = 0; i < users.length; i++) {
+              let user = users[i]
+              if (user.id == notification.actorId) {
+                continue
+              }
+              let { storeList } = user
+              let flag = true
+              for (let k = 0; k < storeList.length; k++) {
+                if (storeList[k].id == notification.actorId) {
+                  flag = false
+                  break
+                }
+              }
+              if (!flag) {
+                continue
+              }
+              let { followingSellposts } = user
+              if (!followingSellposts) {
+                followingSellposts = []
+              }
+              for (let k = 0; k < followingSellposts.length; k++) {
+                if (followingSellposts[k] == sellpostId) {
+                  let { notifications } = user
+                  if (!notifications) {
+                    notifications = []
+                  }
+
+                  notify(user.id, notification)
+                  notifications.push(notification)
+                  user.notifications = notifications
+                  user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
+                  user.save(() => {})
+                  break
+                }
+              }
+            }
+          }
+        })
+      }
+    })
+  }
 }

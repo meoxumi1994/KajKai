@@ -7,17 +7,31 @@ class GroupNotification extends React.Component {
         super(props)
     }
     render(){
-        const { onClick, notifications } = this.props
+        const { onClick, notifications, statenotification } = this.props
         return(
-            <div>
-                {notifications.map((item) =>
-                    <Notification key={item.id} id={item.id}/>
+            <div style={{
+                backgroundColor: 'white',
+                width: 430,
+                maxHeight: 600 }}>
+                {notifications.map((item, index) =>
+                    <div key={item.id} >
+                        {index > 0 && <hr style={{ margin: 0 }}/>}
+                        <Notification  id={item.id}/>
+                    </div>
                 )}
+                {statenotification == 'GET_NOTIFICATION_ING' &&
+                    <div>
+                        <hr style={{ margin: 0 }}/>
+                        <div style={{ marginTop: 20, marginBottom: 20 }} id="loaderr"></div>
+                        <hr style={{ margin: 0 }}/>
+                    </div>
+                }
             </div>
         )
     }
     componentDidMount(){
-        this.props.onGetNotification()
+        if(this.props.notifications.length == 0)
+            this.props.onGetNotification()
     }
 }
 

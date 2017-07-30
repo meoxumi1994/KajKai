@@ -1,6 +1,10 @@
 socket mac dinh { type: , data: ... }
 server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
 
+'server/RECEIVE' {
+    leadercommentid: ,
+}
+
 //// NEW NEW NEW NEW NEW
 
 'server/FOLLOW' {

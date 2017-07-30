@@ -69,8 +69,10 @@ export const getUserImageListHandler = () => (req, res) => {
 export const getNotificationsHandler = () => (req, res) => {
   const requestedId = req.decoded._id
   let { offset } = req.query
+  let length = 3
   if (!offset || offset == '-1') {
     offset =  Date.now()
+    length = 10
   } else {
     offset = new Date(parseInt(offset))
   }
@@ -81,7 +83,7 @@ export const getNotificationsHandler = () => (req, res) => {
       offset
     })
   } else {
-    getNotifications(requestedId, offset, (result) => {
+    getNotifications(requestedId, offset, length, (result) => {
       if (result) {
         res.json(result)
       } else {
@@ -92,15 +94,15 @@ export const getNotificationsHandler = () => (req, res) => {
 }
 
 export const updateNotificationHandler = () => (req, res) => {
-  const requestedId = req.decoded._id
-  const { topId } = req.body
-  if (requestedId == 'Guest') {
+  const requesterId = req.decoded._id
+  const { id: notificationId } = req.body
+  if (requesterId == 'Guest') {
     res.json({
       status: 'failed',
       reason: 'Guest'
     })
   } else {
-    updateNotification(requestedId, topId, (status) => {
+    updateNotification(requesterId, notificationId, (status) => {
       res.json({ status })
     })
   }

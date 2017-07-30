@@ -8,7 +8,8 @@ const FirstLayerCommentSchema = new mongoose.Schema({
     order: {type: OrderSchema},
     postId: {type: String},
     likeCounter: {type: Number},
-    commentCounter: {type: Number}
+    commentCounter: {type: Number},
+    status: {type: String}
 });
 
 export default FirstLayerCommentSchema;

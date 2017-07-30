@@ -10,5 +10,9 @@ export default {
     'COMMENT.GetSellPostId': {
         controller: 'CommentSubController',
         method: 'getSellPostIdFromComment'
+    },
+    'COMMENT.OrderCommentUpdated': {
+        controller: 'CommentSubController',
+        method: 'updateFirstLayerComment'
     }
 }
