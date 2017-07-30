@@ -12,11 +12,11 @@ describe('UserService', () => {
     expect(decoded).to.have.all.keys(['foo', 'iat'])
   })
 
-  it('can test async function', (done) => {
-    UserService.testAsync((result) => {
-      const expectedResult = 'testAsync'
-      expect(result).to.equal(expectedResult)
-      done()
-    })
-  })
+  // it('can test async function', (done) => {
+  //   UserService.testAsync((result) => {
+  //     const expectedResult = 'testAsync'
+  //     expect(result).to.equal(expectedResult)
+  //     done()
+  //   })
+  // })
 })

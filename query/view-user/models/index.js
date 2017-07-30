@@ -15,6 +15,7 @@ import PrivacySchema from './Privacy'
 import ProductSchema from './Product'
 import ReplyLikerSchema from './ReplyLiker'
 import SellpostLikerSchema from './SellpostLiker'
+import TestSchema from './Test'
 import UserSchema from './User'
 
 export const Address = mongoose.model('Address', AddressSchema)
@@ -33,4 +34,5 @@ export const Privacy = mongoose.model('Privacy', PrivacySchema)
 export const Product = mongoose.model('Product', ProductSchema)
 export const ReplyLiker = mongoose.model('ReplyLiker', ReplyLikerSchema)
 export const SellpostLiker = mongoose.model('SellpostLiker', SellpostLikerSchema)
+export const Test = mongoose.model('Test', TestSchema)
 export const User = mongoose.model('User', UserSchema)
