@@ -132,7 +132,7 @@ export const updateStatus = (id, status, userId, next) => {
                 fComment.save((err) => {
                     if (err) {
                         console.log('update err');
-                        next(err);
+                        next(null);
                     } else {
                         firstLayerCommentUpdated({fCommentId: getFirstCommentGlobalId(fComment._id), status: fComment.status});
                         next(fComment);
