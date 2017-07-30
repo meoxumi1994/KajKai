@@ -17,7 +17,7 @@ export const insertHandler = () => (req, res) => {
     password
   })
 
-  test.save((err, newTest, num) => {\
+  test.save((err, newTest, num) => {
     res.json({
       err,
       newTest,
