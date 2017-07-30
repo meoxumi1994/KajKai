@@ -17,10 +17,10 @@ const user = (state = {
       case 'ADMIN/USER/INIT_USERS':
           return {
               ...state,
-              keyy: [
+              keyy: [...new Set([
                   ...state.keyy,
                   ...action.data.map(d => d.user.id)
-              ],
+              ])],
               mapp: {
                   ...state.mapp,
                   ...utils.getUsersMap(action)

@@ -37,12 +37,10 @@ export const deleteSellpostNotification = (message) => {
             let mNotifications = []
             for (let k = 0; k < notifications.length; k++) {
               let notification = notifications[k]
-              if (notification.sellpostId && notification.sellpostId != sellpostId) {
-                if (k >= notifications.length - mNumberOfUnRead) {
-                  mNumberOfUnRead--
-                }
-              } else {
+              if (notification.sellpostId != sellpostId) {
                 mNotifications.push(notification)
+              } else if (k >= notifications.length - mNumberOfUnRead) {
+                mNumberOfUnRead--
               }
             }
             user.notifications = mNotifications

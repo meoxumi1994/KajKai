@@ -1,4 +1,5 @@
 import { Sellpost, Minorpost, Comment, Reply, BasicUser, BasicStore } from '../models'
+import { OrderStatus } from '../enum'
 
 export const createComment = (message) => {
   const { fCommentId: id, posterId, sellPostId: sellpostId, minorPostId: minorpostId, order, time, content } = message.fComment
@@ -18,6 +19,7 @@ export const createComment = (message) => {
   }))
 
   comment.time = Date.now()
+  comment.status = OrderStatus.NEW
 
   const mPromises = []
   mPromises.push(new Promise((resolve, reject) => {
@@ -120,6 +122,30 @@ export const createComment = (message) => {
           minorpost.numberOfComment = comments.length
           minorpost.comments = comments
           minorpost.save(() => {})
+        }
+      })
+    }
+  })
+}
+
+export const updateComment = (message) => {
+  const { fCommentId: id, status } = message.fComment
+  Comment.findOne({ id }, (err, comment) => {
+    if (comment) {
+      Sellpost.findOne({ id: comment.sellpostId }, (err, sellpost) => {
+        if (sellpost) {
+          let { comments } = sellpost
+          if (!comments) {
+            comments = []
+          }
+          for (let i = 0; i < comments.length; i++) {
+            if (comments[i].id == id) {
+              comments[i].status = status
+              break
+            }
+          }
+          sellpost.comments = comments
+          sellpost.save(() => {})
         }
       })
     }
