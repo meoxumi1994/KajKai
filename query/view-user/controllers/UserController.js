@@ -68,11 +68,9 @@ export const getUserImageListHandler = () => (req, res) => {
 
 export const getNotificationsHandler = () => (req, res) => {
   const requestedId = req.decoded._id
-  let { offset } = req.query
-  let length = 3
+  let { offset, length } = req.query
   if (!offset || offset == '-1') {
     offset =  Date.now()
-    length = 10
   } else {
     offset = new Date(parseInt(offset))
   }
