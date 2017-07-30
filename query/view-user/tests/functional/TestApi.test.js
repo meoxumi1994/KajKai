@@ -28,9 +28,12 @@ describe('Test API', () => {
       .put('/test')
       .send({
         username: 'charity',
-        password: '123456'
+        password: '654321'
       })
       .expect('Content-Type', /json/)
       .expect(200, done)
+      .end((err, res) => {
+        console.log('res: ', res);
+      })
   })
 })

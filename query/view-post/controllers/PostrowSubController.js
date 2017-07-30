@@ -12,15 +12,17 @@ export const createPostrow = (message) => {
   if (numberOfLine) postrow.numberOfLine = numberOfLine
   if (images && images.length > 0) {
     postrow.images = images
-    console.log('images: ', images);
-    mPostrowImageList = images.map((image) => (
-      new Image({
-        url: image,
-        time: Date.now()
-      })
-    ))
-
-    console.log('mPostrowImageList: ', mPostrowImageList);
+    for (let i = 0; i < images.length; i++) {
+      let image = images[i]
+      if (image) {
+        mPostrowImageList.push(
+          new Image({
+            url: image,
+            time: Date.now()
+          })
+        )
+      }
+    }
 
     BasicStore.findOne({ id: storeId }, (err, basicStore) => {
       if (basicStore) {
@@ -29,12 +31,9 @@ export const createPostrow = (message) => {
           postrowImageList = []
         }
         mPostrowImageList.map((image) => {
-          console.log('image: ', image);
           postrowImageList.push(image)
-          console.log('postrowImageList: ', postrowImageList);
         })
 
-        console.log('postrowImageList: ', postrowImageList);
         basicStore.postrowImageList = postrowImageList
 
         basicStore.save(() => {})
@@ -44,12 +43,17 @@ export const createPostrow = (message) => {
   if (titles) postrow.titles = titles
   if (products && products.length > 0) {
     postrow.products = products
-    mProductImageList = products.map((product) => (
-      new Image({
-        url: product.imageUrl,
-        time: Date.now()
-      })
-    ))
+    for (let i = 0; i < products.length; i++) {
+      let product = products[i]
+      if (product && product.imageUrl) {
+        mProductImageList.push(
+          new Image({
+            url: product.imageUrl,
+            time: Date.now()
+          })
+        )
+      }
+    }
 
     BasicStore.findOne({ id: storeId }, (err, basicStore) => {
       if (basicStore) {
