@@ -26,22 +26,24 @@ export const addSellPost = (sellPostInfo, next) => {
         title: sellPostInfo.title, description: sellPostInfo.description, time: sellPostInfo.time ? sellPostInfo.time : (new Date()).getTime(),
         status: sellPostInfo.status, shippable: sellPostInfo.ship, sellPostDetailOrders: []});
     sellPost.save(() => {
-        getPubSellPostInfo(sellPost, (info) => {
-            let sellPostDetail = sellPostInfo.postrows;
-            if (sellPostDetail && sellPostDetail.length > 0) {
-                createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), info.storeId, (sellPostDetail) => {
-                    sellPost.sellPostDetailOrders = [];
-                    for (let i = 0; i < sellPostDetail.length; ++i)
-                        sellPost.sellPostDetailOrders.push(sellPostDetail[i].id);
-                    info.postrows_order = sellPost.sellPostDetailOrders;
-                    sellPost.save(() => {
-                        next(sellPost, sellPostDetail);
+        getStore(sellPost.storeId, (store) => {
+            getPubSellPostInfo(sellPost, (info) => {
+                let sellPostDetail = sellPostInfo.postrows;
+                if (sellPostDetail && sellPostDetail.length > 0) {
+                    createMultiplePostDetail(sellPostDetail, getSellPostGlobalId(sellPost._id), info.storeId, (sellPostDetail) => {
+                        sellPost.sellPostDetailOrders = [];
+                        for (let i = 0; i < sellPostDetail.length; ++i)
+                            sellPost.sellPostDetailOrders.push(sellPostDetail[i].id);
+                        info.postrows_order = sellPost.sellPostDetailOrders;
+                        sellPost.save(() => {
+                            next(sellPost, sellPostDetail);
+                        });
+                        sellPostCreated({...info, owner: store.owner});
                     });
-                    sellPostCreated(info);
-                });
-            } else {
-                next(sellPost, null);
-            }
+                } else {
+                    next(sellPost, null);
+                }
+            });
         });
     })
 };
