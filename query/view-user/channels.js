@@ -47,7 +47,7 @@ export default {
     controller: 'CommentSubController',
     method: 'createCommentNotification'
   },
-  'COMMENT.FirstLayerCommentCreated': {
+  'COMMENT.FirstLayerCommentUpdated': {
     controller: 'CommentSubController',
     method: 'createReceiveNotification'
   },
