@@ -29,7 +29,7 @@ export const insertHandler = () => (req, res) => {
 export const updateHandler = () => (req, res) => {
   let { username, password } = req.body
 
-  Test.findOneAndUpdate({ username }, { password }, (err, oldTest ) =>{
+  Test.findOneAndUpdate({ username }, { password }, (err, oldTest ) => {
     res.json({
       err,
       oldTest
