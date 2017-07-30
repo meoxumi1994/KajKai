@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onGetMoreNotification: (offset, statenotification) => {
         if(statenotification != 'GET_NOTIFICATION_ING' && offset != -2 ){
             // console.log('getMoreNotification', offset, statenotification )
-            dispatch(getNotification(offset))
+            dispatch(getNotification(offset, 4))
         }
     }
 })

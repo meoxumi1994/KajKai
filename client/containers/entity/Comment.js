@@ -27,6 +27,7 @@ const mapStateToProps = (state, {id}) => {
         time: getTime(comment.time),
         beLike: getBeLike(comment.likes, yourid),
         RECEIVE: g('RECEIVE'),
+        RECEIVED: g('RECEIVED'),
         LIKE: g('LIKE'),
         REPLY: g('REPLY'),
     })
@@ -36,7 +37,6 @@ const mapDispatchToProps = (dispatch, {id, isleader, leadercommentid }) => ({
     onReceive: () => {
         dispatch({ type: 'server/RECEIVE', data: {
             type: 'comment',
-            status: 'like',
             leadercommentid: id,
         }})
     },

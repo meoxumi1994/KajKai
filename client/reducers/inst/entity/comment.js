@@ -4,6 +4,13 @@ const comment = (state = {
 
 }, action) => {
     switch (action.type) {
+        case 'client/RECEIVE':
+            return {...state,
+                [action.data.leadercommentid]: {
+                    ...state[action.data.leadercommentid],
+                    status: 'received',
+                }
+            }
         case 'client/COMMENT':
         case 'client/LEADERCOMMENT':
             return {...state,

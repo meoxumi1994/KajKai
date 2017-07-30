@@ -14,7 +14,9 @@ const mapStateToProps = (state, { id }) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+    clickNotification: () => {
+        
+    }
 })
 
 const NotificationContainer = connect(

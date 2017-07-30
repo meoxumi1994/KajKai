@@ -90,6 +90,7 @@ const myString = {
 
     // post
     RECEIVE: ['Nhận','Receive'],
+    RECEIVED: ['Đã Nhận','Received'],
     LIKE: ['Thích','Like'],
     FOLLOW : ['Theo dõi','Follow'],
     REPLY: ['Trả lời','Reply'],

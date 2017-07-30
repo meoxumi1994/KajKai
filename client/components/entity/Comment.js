@@ -25,9 +25,10 @@ class Comment extends React.Component {
     }
     render(){
         const {
-            RECEIVE, LIKE, REPLY, clicksetting, isOwner,
+            RECEIVE, RECEIVED, LIKE, REPLY, clicksetting, isOwner, status,
             isleader, avatarUrl, name, time, numlike, numreplys, order,
             content, onReceive, onLike, onReply, beLike } = this.props
+        console.log('status', status)
         return(
             <div
                 onMouseOver={() => this.setState({ hover: true })}
@@ -88,10 +89,25 @@ class Comment extends React.Component {
                         {(isOwner && isleader && onReceive) &&
                             <div className="btn" onClick={() => onReceive()}
                                 style={{  padding: '0px 1px 0px 1px' }}>
-                                <a style={{ fontSize: 12, color: '#365899' }}>{RECEIVE}</a>
+                                <a style={{
+                                    fontWeight: (status=='received') ? 'bold' : 'normal',
+                                    fontSize: (status=='received') ? 13 : 12,
+                                    color: (status=='received') ? '#BD081C' : '#365899',
+                                }}>{(status=='received')? RECEIVED : RECEIVE}</a>
                             </div>
                         }
                         {(isOwner && isleader && onReceive) && "."}
+                        {(!isOwner && isleader && status=='received' ) &&
+                            <div className="btn" onClick={() => onReceive()}
+                                style={{  padding: '0px 1px 0px 1px' }}>
+                                <a style={{
+                                    fontWeight: 'bold',
+                                    fontSize: 13,
+                                    color: '#BD081C',
+                                }}>{RECEIVED}</a>
+                            </div>
+                        }
+                        {(!isOwner && isleader && status=='received' ) && "."}
                         <div className="btn" onClick={() => onLike()}
                             style={{ padding: '0px 1px 0px 1px', fontWeight: beLike?'bold':'normal'}}>
                             <a style={{ fontSize: beLike?13:12, color: beLike?'#4673cc':'#365899' }}>{LIKE}</a>
