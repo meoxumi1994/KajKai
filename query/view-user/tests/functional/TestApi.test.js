@@ -15,7 +15,10 @@ describe('Test API', () => {
   it('post /test', (done) => {
     request(app)
       .post('/test')
-      .field('username', 'username1')
+      .send({
+        username: 'charity',
+        password: '123456'
+      })
       .expect('Content-Type', /json/)
       .expect(200, done)
   })
@@ -23,6 +26,10 @@ describe('Test API', () => {
   it('put /test', (done) => {
     request(app)
       .put('/test')
+      .send({
+        username: 'charity',
+        password: '123456'
+      })
       .expect('Content-Type', /json/)
       .expect(200, done)
   })
