@@ -218,8 +218,8 @@ export const updateNotification = (id, notificationId, next) => {
         }
         user.notifications = notifications
         user.save(() => {})
-      }      
-      next({ status: 'success' })
+      }
+      next('success')
     }
   })
 }
