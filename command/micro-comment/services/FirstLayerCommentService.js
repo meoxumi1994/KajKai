@@ -127,7 +127,7 @@ export const updateStatus = (id, status, userId, next) => {
         }
         getStoreFromPostId(fComment.postId, (store) => {
             console.log(userId + ' ' + store.owner);
-            if (store.owner !== userId) {
+            if (store.owner === userId) {
                 fComment.status = status;
                 fComment.save((err) => {
                     if (err) {
