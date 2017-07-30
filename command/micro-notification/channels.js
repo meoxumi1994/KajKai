@@ -27,4 +27,8 @@ export default {
         controller: 'NotificationSubController',
         method: 'notifyInterestSub'
     },
+    'NOTI.UpdateUserFollow': {
+        controller: 'NotificationSubController',
+        method: 'updateUserFollowCon'
+    }
 }

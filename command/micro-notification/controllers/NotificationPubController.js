@@ -68,6 +68,20 @@ export const removeFollowPub = (followInfo) => {
     pub.quit();
 };
 
+export const addUserFollowPub = (userFollowInfo) => {
+    const pub = redis.createClient(config);
+    const publishData = {userFollow: userFollowInfo};
+    pub.publish('FOLLOW.AddUserFollow', JSON.stringify(publishData));
+    pub.quit();
+};
+
+export const removeUserFollowPub = (userFollowInfo) => {
+    const pub = redis.createClient(config);
+    const publishData = {userFollow: userFollowInfo};
+    pub.publish('FOLLOW.RemoveUserFollow', JSON.stringify(publishData));
+    pub.quit();
+};
+
 export const addInterestPub = (interest) => {
     const pub = redis.createClient(config);
     const publishData = {interest: interest};

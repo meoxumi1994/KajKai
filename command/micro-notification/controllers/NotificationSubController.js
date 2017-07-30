@@ -1,6 +1,7 @@
 import { getListFollower, addNewFollow, removeFollow, modifyFollow, getListFollowee } from '../services/FollowService'
 import { addNewLike } from '../services/LikeService'
 import { publishNewInterest } from '../services/InterestService'
+import { updateUserFollow } from '../services/UserFollowService'
 
 export const getListFollowerCon = (message, next) => {
     getListFollower(message.followeeId, (list) => {
@@ -38,6 +39,18 @@ export const updateFollowCon = (message, next) => {
     })
 };
 
+export const updateUserFollowCon = (message, next) => {
+    let followerId = message.userId;
+    let followeeId = (message.storeId) ? message.storeId : message.sellPostId;
+    updateUserFollow(followerId, followeeId, (userFollow) => {
+        if (userFollow) {
+            next({status: 'success', userFollow: userFollow})
+        } else {
+            next({status: 'failed'})
+        }
+    })
+};
+
 export const addLikeCon = (message, next) => {
     addNewLike(message.likerId, message.sellPostId, message.fCommentId, message.sCommentId, (like) => {
         if (like) {
@@ -50,4 +63,14 @@ export const addLikeCon = (message, next) => {
 
 export const notifyInterestSub = (message, next) => {
     publishNewInterest(message.store);
+};
+
+export const createSellPostSub = (message) => {
+    console.log(message, JSON.stringify(message));
+    const sellpost = message.sellpost;
+    const sellPostId = sellpost.sellPostId;
+    const userId = sellpost.owner;
+    modifyFollow(userId, sellPostId, () => {
+        console.log('sellpost owner follow ' + userId, sellPostId);
+    })
 };
