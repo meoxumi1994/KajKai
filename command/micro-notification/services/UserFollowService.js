@@ -5,7 +5,7 @@ export const updateUserFollow = (followerId, followeeId, next) => {
     UserFollow.findOne({followerId, followeeId}, (err, follow) => {
         if (follow) {
             UserFollow.remove({followerId, followeeId}, (err, follow) => {
-                removeUserFollowPub(follow);
+                removeUserFollowPub({followerId, followeeId});
                 next({...follow, type: 'remove'});
             });
         } else {
