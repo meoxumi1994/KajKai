@@ -76,7 +76,7 @@ export const getUserSellposts = (requesterId, userId, offset, next) => {
             sellposts.push(sellpost)
           }
         })
-        sellposts.sort((s1, s2) => (s1.time - s2.time))        
+        sellposts.sort((s1, s2) => (s1.time - s2.time))
         getClientFormatSellposts(requesterId, '', sellposts, offset, next)
       }, (err) => {
         console.log('error promise', err)

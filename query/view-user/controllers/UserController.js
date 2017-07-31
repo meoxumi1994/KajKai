@@ -11,10 +11,14 @@ export const getUserHandler = () => (req, res) => {
 
   getUser(requesterId, requestedId, (user) => {
     if (user) {
-      res.json({
-        tokenId: user.banned ? null : req.cookies.token,
-        ...user
-      })
+      if (requesterId == requestedId) {
+        res.json({
+          tokenId: user.banned ? null : req.cookies.token,
+          ...user
+        })
+      } else {
+        res.json(user)
+      }
     } else {
       res.json({ status: 'failed' })
     }
