@@ -16,7 +16,7 @@ export const getNotification = (offset, length) => dispatch => {
 
 export const updateNotification = (id) => dispatch => {
     dispatch({ type: 'UDPATE_NOTIFICATION_ING'})
-    flem('/notification',{
+    fleu('/notification',{
         id: id,
     }).then(({ status }) => {
         if(status == 'success'){

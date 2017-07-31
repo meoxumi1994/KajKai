@@ -11,6 +11,13 @@ const comment = (state = {
                     status: 'received',
                 }
             }
+        case 'client/DONE':
+            return {...state,
+                [action.data.leadercommentid]: {
+                    ...state[action.data.leadercommentid],
+                    status: 'done',
+                }
+            }
         case 'client/COMMENT':
         case 'client/LEADERCOMMENT':
             return {...state,

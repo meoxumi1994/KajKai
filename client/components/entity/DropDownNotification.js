@@ -22,22 +22,25 @@ class DropDownNotification extends React.Component {
             else if(e.type === 'DOMMouseScroll') {
                 scrollTo = 40 * e.originalEvent.detail;
             }
-            scrollTo = scrollTo / 4
+            scrollTo = scrollTo / 5
             if(scrollTo) {
                 e.preventDefault();
                 $(this).scrollTop(scrollTo + $(this).scrollTop());
             }
-        });
+        })
     }
     render(){
-        const { numUnreaded, onChange, onSearchTypeSelected } = this.props
+        const { numUnreaded, onChange, onSearchTypeSelected, clickNotification } = this.props
         return(
             <div className="input-group-btn" style={{ display: 'inline-block' }}>
               <div className="btn dropdown-toggle"
                   style={{ borderRadius: 0, padding: 0 }}
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div className="btn" style={{ padding: 0 }}
-                      onClick={() => this.setState({ show: true })}>
+                      onClick={() => {
+                          this.setState({ show: true })
+                          clickNotification()
+                      }}>
                       <RiseUp
                           src="/images/globe.svg"
                           style={{

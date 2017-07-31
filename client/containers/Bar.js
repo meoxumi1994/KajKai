@@ -55,6 +55,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     resetChatQuantity: () => {
         dispatch({type: 'server/RESET_UNREAD_CHATS_QUANTITY'})
+    },
+    clickNotification: () => {
+        
     }
 })
 

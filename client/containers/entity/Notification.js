@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 import { getTime } from '~/containers/support'
 
+import { updateNotification } from '~/actions/asyn/entity/notification'
 import Notification from '~/components/entity/Notification'
 
 const mapStateToProps = (state, { id }) => {
@@ -13,9 +14,9 @@ const mapStateToProps = (state, { id }) => {
     })
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, { id }) => ({
     clickNotification: () => {
-        
+        dispatch(updateNotification(id))
     }
 })
 
