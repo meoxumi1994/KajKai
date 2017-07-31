@@ -5,13 +5,13 @@ export const updateUserFollow = (followerId, followeeId, next) => {
     UserFollow.findOne({followerId, followeeId}, (err, follow) => {
         if (follow) {
             UserFollow.remove({followerId, followeeId}, (err, follow) => {
-                addUserFollowPub(follow);
+                removeUserFollowPub(newFollow);
                 next({...follow, type: 'remove'});
             });
         } else {
             const newFollow = new UserFollow({followerId, followeeId});
             newFollow.save(() => {
-                removeUserFollowPub(newFollow);
+                addUserFollowPub(follow);
                 next({...newFollow, type: 'add'});
             });
         }
