@@ -98,7 +98,7 @@ export const storeReceiveOrder = (action, sio, io) => {
             status: status
         }});
         if (sellPostId) {
-            io.to(sellPostId).emit('action', {
+            io.to(action.data.sellpostid ? action.data.sellpostid : sellPostId).emit('action', {
                 type: 'client/RECEIVE', data: {
                     leadercommentid: action.data.leadercommentid,
                     status: status
