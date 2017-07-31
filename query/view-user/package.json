@@ -9,9 +9,14 @@
   },
   "scripts": {
     "start": "pm2 delete indev-user.js && pm2 start indev-user.js",
-    "test": "istanbul cover --hook-run-in-context node_modules/mocha/bin/mocha tests/**/*.test.js -- --compilers js:babel-core/register",
+    "test": "nyc mocha --compilers js:babel-core/register",
+    "istanbul": "istanbul cover --hook-run-in-context node_modules/mocha/bin/mocha tests/**/*.test.js -- --compilers js:babel-core/register",
     "test:coverage": "nyc --reporter=text-summary --reporter=lcov npm run test",
-    "test:win": "node_modules/.bin/babel-node.cmd ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register --bail --sort --reporter dot --recursive tests/**/*.test.js"
+    "test:win": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/mocha -- --compilers js:babel-core/register --bail --sort --recursive tests/**/*.test.js",
+    "test:win:1": "node_modules/.bin/babel-node.cmd ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha --report text --check-coverage -- --compilers js:babel-core/register --timeout 5000 -u tdd --recursive tests",
+    "test-cov": "babel-node ./node_modules/istanbul/lib/cli cover -x 'config/**'  node_modules/mocha/bin/mocha -- --recursive -R tap tests/",
+    "test:isparta": "babel-node ./node_modules/isparta/lib/cli cover node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register --recursive tests/**/*.test.js",
+    "coverage": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha --  --recursive tests/**/UserService.test.js --require babel-core/register"
   },
   "dependencies": {
     "aws-serverless-express": "3.0.2",
@@ -36,8 +41,12 @@
     "babel-register": "6.24.1",
     "chai": "4.1.0",
     "cross-env": "5.0.1",
+    "gulp": "3.9.1",
+    "gulp-coverage": "0.3.38",
+    "gulp-istanbul": "1.1.2",
+    "gulp-mocha": "4.3.1",
     "isparta": "4.0.0",
-    "istanbul": "0.4.5",
+    "istanbul": "1.1.0-alpha.1",
     "mocha": "3.4.2",
     "nyc": "11.1.0",
     "supertest": "3.0.0"
