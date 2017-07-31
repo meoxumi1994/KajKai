@@ -77,7 +77,36 @@ export const getUserSellposts = (requesterId, userId, offset, next) => {
           }
         })
         sellposts.sort((s1, s2) => (s1.time - s2.time))
-        getClientFormatSellposts(requesterId, '', sellposts, offset, next)
+        const mSellposts = []
+        let currentNumberOfSellpost = 0, mOffset = -2, lastIndex = -1
+        for (let i = sellposts.length - 1; i >= 0; i--) {
+          let sellpost = sellposts[i]
+          if (sellpost.time < offset) {
+            if (currentNumberOfSellpost < 2) {
+              mSellposts.push({
+                sellpostid: sellpost.id,
+                storeid: sellpost.storeId
+              })
+
+              mOffset = sellpost.time.getTime()
+              lastIndex = i
+              currentNumberOfSellpost++
+            } else {
+              break
+            }
+          }
+        }
+
+        if (lastIndex == 0) {
+          mOffset = -2
+        }
+
+        next({
+          status: 'success',
+          offset: mOffset,
+          data: mSellposts
+        })
+
       }, (err) => {
         console.log('error promise', err)
         next(null)
