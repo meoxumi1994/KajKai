@@ -37,7 +37,7 @@ export const getSellPostIdFromComment = (message, next) => {
 
 export const updateFirstLayerComment = (message, next) => {
     updateStatus(message.id, message.status, message.userId, (fComment) => {
-        if (fComment) next({status: 'success'});
+        if (fComment) next({status: 'success', sellPostId: fComment.postId});
         else next({status: 'failed'})
     })
 };

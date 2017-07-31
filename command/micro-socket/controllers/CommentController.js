@@ -92,11 +92,19 @@ export const getFirstLayerCommentCon = (action, sio, io) => {
 
 export const storeReceiveOrder = (action, sio, io) => {
     if (!action.data || !action.data.userID) return;
-    updateOrder(action.data.leadercommentid, action.data.status ? action.data.status : 'received', action.data.userID, (status) => {
+    updateOrder(action.data.leadercommentid, action.data.status ? action.data.status : 'received', action.data.userID, (status, sellPostId) => {
         sio.emit('action', {type: 'client/RECEIVE', data: {
             leadercommentid: action.data.leadercommentid,
             status: status
-        }})
-    })
+        }});
+        if (sellPostId) {
+            io.to(sellPostId).emit('action', {
+                type: 'client/RECEIVE', data: {
+                    leadercommentid: action.data.leadercommentid,
+                    status: status
+                }
+            });
+        }
+    });
 };
 
