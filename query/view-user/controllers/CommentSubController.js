@@ -128,7 +128,7 @@ export const createReceiveNotification = (message) => {
                 followingSellposts = []
               }
               for (let k = 0; k < followingSellposts.length; k++) {
-                if (followingSellposts[k] == sellpostId) {
+                if (followingSellposts[k] == notification.sellpostId) {
                   let { notifications } = user
                   if (!notifications) {
                     notifications = []
