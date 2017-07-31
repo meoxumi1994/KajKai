@@ -127,7 +127,6 @@ class App extends React.Component {
                                   <Route path="/registerstore" component={RegisterStore}/>
                                   {/* <Route path="/admin" component={Admin}/> */}
                               </div>
-
                             </div>
                         :  location.pathname.split('/')[1] == 'user'?
                             <div>

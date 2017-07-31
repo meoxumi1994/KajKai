@@ -30,7 +30,7 @@ const ButtonLine = ({ id, location, urlname, title, last, link }) => {
 }
 
 const Top = (props) => {
-    const { id, userid, yourid, coverUrl, avatarUrl, name, onUploadImage, location } = props
+    const { id, userid, yourid, coverUrl, avatarUrl, name, onUploadImage, location, isOwner } = props
     return(
         <div className="panel panel-default"
             style={{ margin: 0, borderWidth: 1 , borderRadius: '0px 0px 5px 5px'}}>
@@ -84,6 +84,7 @@ const Top = (props) => {
                                 id: id,
                             }
                         }}
+                        canEdit={false}
                         style={{
                         src: avatarUrl,
                         width: 160,

@@ -36,11 +36,12 @@ class KeepImage extends React.Component {
         this.setState({ showView: false })
     }
     render(){
-        const { type, width, images, canEdit, imagesSuggest, action, ADD_PHOTO, SUGGEST_PHOTO, SEE_MORE } = this.props
+        const { type, width, sellpostid, images, canEdit, imagesSuggest, action, ADD_PHOTO, SUGGEST_PHOTO, SEE_MORE } = this.props
         return(
             <div>
                 {type=='Carousel' ?
                     <Carousel
+                        sellpostid={sellpostid}
                         style={{ width: width, height: width }}
                         onEdit={() => this.open()}
                         images={images.length ? images : ['/images/postrow/default.svg']}
@@ -48,6 +49,7 @@ class KeepImage extends React.Component {
                         textChange="Add photo"
                     />
                 :   <GroupImage
+                        sellpostid={sellpostid}
                         canEdit={canEdit}
                         onEdit={() => this.open()}
                         images={images.length ? images : ['/images/postrow/default.svg']}

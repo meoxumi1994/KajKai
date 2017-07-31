@@ -6,9 +6,17 @@ import Top from '~/components/store/Top'
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const { userid, id, avatarUrl, coverUrl, storename } = state.inst.store.index
+    let isOwner = false
+    for(let i=0; i< state.user.storeList.length ; i++){
+        if(state.user.storeList[i].id == state.inst.store.index.id){
+            isOwner = true
+            break
+        }
+    }
     return({
         ...state.inst.store.index,
         id : id,
+        isOwner: isOwner,
         name: storename,
         avatarUrl: avatarUrl,
         coverUrl: coverUrl,

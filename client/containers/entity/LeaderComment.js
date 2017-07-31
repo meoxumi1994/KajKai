@@ -68,6 +68,7 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
         onGetMore: () => {
             onGetMoreComment(offset)
         },
+        sellpostid: sellpostid,
         offset: offset,
         contentedit: contentedit,
         ...ownProps,

@@ -11,51 +11,103 @@ const About = ({ category, firstCategory, secondCategory, urlname, phone, storen
             backgroundColor: 'white',
             width: 938, marginTop: 10, marginLeft: -23,
             }}>
-            <div style={{ fontSize: 20, padding: 10, backgroundColor: '#F6F7F9'}}>
-                About
+            <div className="container-fluid" style={{ padding: 10 }}>
+                <div className="row">
+                    <div className="col col-xs-2">
+                        <span style={{ fontWeight: 'bold' }}>User name </span>
+                    </div>
+                    <div className="col col-xs-9" style={{ marginLeft: 28 }}>
+                        <span>{storename}</span>
+                    </div>
+                </div>
             </div>
-            <hr style={{ margin: 0, padding: 0 }}/>
-            <div style={{ padding: 10 }}>
-                <span style={{ fontWeight: 'bold' }}>User name : </span>
-                <span>{storename}</span>
+
+            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+            <div className="container-fluid" style={{ padding: 10 }}>
+                <div className="row">
+                    <div className="col col-xs-2">
+                        <span style={{ fontWeight: 'bold' }}>Category 1</span>
+                    </div>
+                    <div className="col col-xs-9" style={{ marginLeft: 28 }}>
+                        <span>{firstCategory}</span>
+                    </div>
+                </div>
             </div>
-            <hr style={{ margin: 0, padding: 0 }}/>
-            <div style={{ padding: 10 }}>
-                <span style={{ fontWeight: 'bold' }}>Category 1: </span>
-                <span>{firstCategory}</span>
+            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+
+            <div className="container-fluid" style={{ padding: 10 }}>
+                <div className="row">
+                    <div className="col col-xs-2">
+                        <span style={{ fontWeight: 'bold' }}>Category 2</span>
+                    </div>
+                    <div className="col col-xs-9" style={{ marginLeft: 28 }}>
+                        <span>{secondCategory}</span>
+                    </div>
+                </div>
             </div>
-            <hr style={{ margin: 0, padding: 0 }}/>
-            <div style={{ padding: 10 }}>
-                <span style={{ fontWeight: 'bold' }}>Category 2: </span>
-                <span>{(secondCategory == 'en')? 'english' : 'vietnam'}</span>
+            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+
+            <div className="container-fluid" style={{ padding: 10 }}>
+                <div className="row">
+                    <div className="col col-xs-2">
+                        <span style={{ fontWeight: 'bold' }}>Category</span>
+                    </div>
+                    <div className="col col-xs-9" style={{ marginLeft: 28 }}>
+                        <span>{category}</span>
+                    </div>
+                </div>
             </div>
-            <hr style={{ margin: 0, padding: 0 }}/>
-            <div style={{ padding: 10 }}>
-                <span style={{ fontWeight: 'bold' }}>Category : </span>
-                <span>{category}</span>
+            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+
+            <div className="container-fluid" style={{ padding: 10 }}>
+                <div className="row">
+                    <div className="col col-xs-2">
+                        <span style={{ fontWeight: 'bold' }}>Phone</span>
+                    </div>
+                    <div className="col col-xs-9" style={{ marginLeft: 28 }}>
+                        <span>{phone}</span>
+                    </div>
+                </div>
             </div>
-            <hr style={{ margin: 0, padding: 0 }}/>
-            <div style={{ padding: 10 }}>
-                <span style={{ fontWeight: 'bold' }}>Phone : </span>
-                <span>{phone}</span>
+            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+
+            <div className="container-fluid" style={{ padding: 10 }}>
+                <div className="row">
+                    <div className="col col-xs-2">
+                        <span style={{ fontWeight: 'bold' }}>numfollow</span>
+                    </div>
+                    <div className="col col-xs-9" style={{ marginLeft: 28 }}>
+                        <span>{numfollow}</span>
+                    </div>
+                </div>
             </div>
-            <hr style={{ margin: 0, padding: 0 }}/>
-            <div style={{ padding: 10 }}>
-                <span style={{ fontWeight: 'bold' }}>numfollow : </span>
-                <span>{numfollow}</span>
+            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+
+            <div className="container-fluid" style={{ padding: 10 }}>
+                <div className="row">
+                    <div className="col col-xs-2">
+                        <span style={{ fontWeight: 'bold' }}>numlike</span>
+                    </div>
+                    <div className="col col-xs-9" style={{ marginLeft: 28 }}>
+                        <span>{numlike}</span>
+                    </div>
+                </div>
             </div>
-            <hr style={{ margin: 0, padding: 0 }}/>
-            <div style={{ padding: 10 }}>
-                <span style={{ fontWeight: 'bold' }}>numlike : </span>
-                <span>{numlike}</span>
+            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+
+            <div className="container-fluid" style={{ padding: 10 }}>
+                <div className="row">
+                    <div className="col col-xs-2">
+                        <span style={{ fontWeight: 'bold' }}>address</span>
+                    </div>
+                    <div className="col col-xs-9" style={{ marginLeft: 28 }}>
+                        <span>{address}</span>
+                    </div>
+                </div>
             </div>
-            <hr style={{ margin: 0, padding: 0 }}/>
-            <div style={{ padding: 10 }}>
-                <span style={{ fontWeight: 'bold' }}>address : </span>
-                <span>{address}</span>
-            </div>
-            <hr style={{ margin: 0, padding: 0, marginLeft: -2 }}/>
-            <ShowInMap width={937} height={400} position={position}/>
+            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+
+            <ShowInMap width={935} height={400} position={position}/>
         </div>
     )
 }

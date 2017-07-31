@@ -14,6 +14,20 @@ export const updateStore = (store) => dispatch => {
     })
 }
 
+export const getIntroduceStore = (id) => dispatch => {
+    dispatch({ type: 'INTRODUCE_STORE_GET_ING' });
+    flem('/store/'+id)
+    .then((response) => {
+        const { status, store } = response
+        if(status == 'success'){
+            dispatch({ type: 'INTRODUCE_STORE_GET_SUCCESS', store })
+        }else{
+            dispatch({ type: 'INTRODUCE_STORE_GET_FAILED', store })
+        }
+    })
+}
+
+
 export const getStore = (id) => dispatch => {
     dispatch({ type: 'STORE_GET_ING' });
     flem('/store/'+id)

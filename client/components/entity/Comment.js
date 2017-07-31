@@ -1,11 +1,12 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
+
 import Tooltip from '~/components/entity/Tooltip'
 import DropDown from '~/components/entity/DropDown'
 import ContentShow from '~/components/entity/ContentShow'
 import LikeGroup from '~/components/entity/LikeGroup'
 import Product from '~/containers/entity/post/Product'
-
 
 class Comment extends React.Component {
     constructor(props){
@@ -25,10 +26,15 @@ class Comment extends React.Component {
     }
     render(){
         const {
-            RECEIVE, RECEIVED, LIKE, REPLY, DONE, clicksetting, isOwner, status,
-            isleader, avatarUrl, name, time, numlike, numreplys, order,
+            RECEIVE, RECEIVED, LIKE, REPLY, DONE, clicksetting, isOwner, status, urlname,
+            isleader, avatarUrl, name, time, numlike, numreplys, order, ownerid, type,
             content, onReceive, onDone, onLike, onReply, beLike } = this.props
-        console.log('status', status)
+        let urlLink
+        if( type == "user" ){
+            urlLink = "user/" + ownerid
+        }else {
+            urlLink = urlname
+        }
         return(
             <div
                 onMouseOver={() => this.setState({ hover: true })}
@@ -38,7 +44,7 @@ class Comment extends React.Component {
                 paddingLeft: isleader?0:10,
                 fontSize: 12.5,
                 borderLeft: isleader?undefined:'2px solid #4080FF'}}>
-                { (this.state.hover || clicksetting) &&
+                {(this.state.hover || clicksetting) &&
                     <div
                         style={{ float: 'right', padding: 2}}>
                         <span width={14} height={14}
@@ -59,15 +65,32 @@ class Comment extends React.Component {
                         }
                     </div>
                 }
-                <img src={avatarUrl} style={{
-                    width: isleader?40:20,
-                    height: isleader?40:20,
-                }}/>
+                <Link to={urlLink}>
+                    <div className="btn" onClick={() => window.scrollTo(0, 0)}
+                        style={{ padding: 0 }}>
+                        <img src={avatarUrl} style={{
+                            width: isleader?40:20,
+                            height: isleader?40:20,
+                        }}/>
+                    </div>
+                </Link>
                 <div style={{
                     marginLeft: isleader?50:30,
                     marginTop: isleader?-40:-20,
                     paddingRight: 18 }}>
-                    <strong style={{ color: '#365899'}}>{name}</strong>{" "}
+                    <Link to={urlLink}>
+                        <div className="btn" onClick={() => window.scrollTo(0, 0)}
+                            style={{ padding: 0, marginTop: -3 }}
+                            onMouseOver={() => this.setState({ hoverName : true })}
+                            onMouseLeave={() => this.setState({ hoverName: false })}
+                            >
+                            <span href="" style={{
+                                color: '#365899',
+                                fontWeight: 'bold',
+                                textDecoration: this.state.hoverName? 'underline' : undefined ,
+                            }}>{name}{" "}</span>
+                        </div>
+                    </Link>
                     {order &&
                         <table>
                             {order.map((item,index) => {

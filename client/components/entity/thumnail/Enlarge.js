@@ -1,6 +1,7 @@
 import React from 'react'
 
 import FullScreen from '~/containers/entity/thumnail/FullScreen'
+import SellPost from '~/containers/entity/post/SellPost'
 
 class Enlarge extends React.Component {
     constructor(props){
@@ -19,17 +20,47 @@ class Enlarge extends React.Component {
         if(!this.state.hoverImage && !this.state.hoverPost && !this.state.openFullScreen)
             this.props.close()
     }
+    componentDidMount(){
+        $('#enlargeimage').on('mousewheel DOMMouseScroll', function(e) {
+            var scrollTo = null;
+            if(e.type === 'mousewheel') {
+                scrollTo = (e.originalEvent.wheelDelta * -1);
+            }
+            else if(e.type === 'DOMMouseScroll') {
+                scrollTo = 40 * e.originalEvent.detail;
+            }
+            scrollTo = scrollTo / 5
+            if(scrollTo) {
+                e.preventDefault();
+                $(this).scrollTop(scrollTo + $(this).scrollTop());
+            }
+        })
+        $('#sellpost').on('mousewheel DOMMouseScroll', function(e) {
+            var scrollTo = null;
+            if(e.type === 'mousewheel') {
+                scrollTo = (e.originalEvent.wheelDelta * -1);
+            }
+            else if(e.type === 'DOMMouseScroll') {
+                scrollTo = 40 * e.originalEvent.detail;
+            }
+            scrollTo = scrollTo / 5
+            if(scrollTo) {
+                e.preventDefault();
+                $(this).scrollTop(scrollTo + $(this).scrollTop());
+            }
+        })
+    }
     render(){
         const { TITLE, FULL_SCREEN,
             height, width, close, left, right,
-            images, index, imgHeight, imgWidth, } = this.props
+            images, index, imgHeight, imgWidth, sellpostid } = this.props
         const src = images[index]
         const ratio = imgWidth / imgHeight
-        const myHeight = Math.max(400, height - 44)
+        const myHeight = Math.max(520, height - 44)
         const myWidth = Math.max(900, width - 80)
-        const newImgWidth = Math.min(Math.min(imgHeight, myHeight) * ratio, myWidth - 400)
-        const newImgHeight = Math.min(Math.min(imgWidth, myWidth - 400 ) / ratio, myHeight)
-        const blackWidth = Math.max(500, Math.min(myWidth - 400, newImgWidth + 200 ))
+        const newImgWidth = Math.min(Math.min(imgHeight, myHeight) * ratio, myWidth - 520)
+        const newImgHeight = Math.min(Math.min(imgWidth, myWidth - 520 ) / ratio, myHeight)
+        const blackWidth = Math.max(500, Math.min(myWidth - 520, newImgWidth + 200 ))
         return(
             <div onClick={() => this.close()}
                 style={{
@@ -55,12 +86,13 @@ class Enlarge extends React.Component {
                         src="/images/close.svg"/>
                 </div>
                 <div
+                    id="enlargeimage"
                     onMouseOver={() => this.setState({ hoverImage: true })}
                     onMouseLeave={() => this.setState({ hoverImage: false })}
                     style={{
                     backgroundColor: 'black',
                     position: 'absolute',
-                    left: (width - blackWidth - 400 )/2,
+                    left: (width - blackWidth - 520 )/2,
                     top: 22,
                     width: blackWidth,
                     height: myHeight }}>
@@ -139,15 +171,20 @@ class Enlarge extends React.Component {
                     }
                 </div>
                 <div
+                    id="sellpost"
                     onMouseOver={() => this.setState({ hoverPost: true })}
                     onMouseLeave={() => this.setState({ hoverPost: false })}
                     style={{
                     top: 22,
-                    right: (width - blackWidth - 400) / 2,
+                    right: (width - blackWidth - 520) / 2,
                     position: 'absolute',
-                    width: 400,
+                    width: 520,
                     height: myHeight,
+                    overflow: 'scroll',
                     backgroundColor: 'white'}}>
+                    <SellPost
+                        closeBorder={true}
+                        id={sellpostid}/>
                 </div>
                 {this.state.openFullScreen &&
                     <FullScreen close={() => this.setState({ openFullScreen: false })}

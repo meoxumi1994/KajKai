@@ -24,11 +24,8 @@ const mapDispatchToProps = (dispatch, props) => ({
     onCreateuser: () => {
 
     },
-    onNeedSellPost: () => {
-        // console.log('onNeedSellPost')
-    },
-    onNeedMinorPost: () => {
-        // console.log('onNeedMinorPost')
+    onNeedPost: () => {
+        
     }
 })
 

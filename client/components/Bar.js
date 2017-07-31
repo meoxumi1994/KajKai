@@ -20,7 +20,6 @@ class HandlerUser extends React.Component {
           else if(e.type === 'DOMMouseScroll') {
              scrollTo = 40 * e.originalEvent.detail;
           }
-
           if(scrollTo) {
              e.preventDefault();
              $(this).scrollTop(scrollTo + $(this).scrollTop());
