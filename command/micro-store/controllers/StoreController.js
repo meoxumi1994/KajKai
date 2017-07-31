@@ -16,7 +16,7 @@ export const addStoreCon = () => {
 
 export const updateStoreCon = () => {
     return (req, res) => {
-        updateStore(req.body, (store) => {
+        updateStore(req.body, req.user.id, (store) => {
             if (typeof store === 'string') {
                 res.json({error: store})
             } else {
