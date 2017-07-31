@@ -90,6 +90,7 @@ const myString = {
 
     // post
     RECEIVE: ['Nhận','Receive'],
+    RECEIVED: ['Đã Nhận','Received'],
     LIKE: ['Thích','Like'],
     FOLLOW : ['Theo dõi','Follow'],
     REPLY: ['Trả lời','Reply'],
@@ -157,7 +158,8 @@ const myString = {
     THANK_TO_FEEDBACK: ['Cảm ơn đã gửi phản hồi cho chúng tôi', 'Thanks for sending us feedback'],
     FEED_BACK_FAILED: [
         'xin lỗi bạn, vì một lý do nào đấy mà phản hồi không gửi được',
-        'Sorry, for some reason the reply was not sent']
+        'Sorry, for some reason the reply was not sent'],
+    DONE: ['Xong', 'Done'],
 }
 
 const allString = {

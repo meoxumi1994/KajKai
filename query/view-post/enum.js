@@ -15,6 +15,6 @@ export const PostrowType = {
 
 export const OrderStatus = {
   NEW: 'new',
-  RECEIVED: 'receive',
+  RECEIVED: 'received',
   DONE: 'done'
 }

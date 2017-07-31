@@ -13,21 +13,22 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    weGetNotification: (offset) => {
-        dispatch(getNotification(offset))
+    weGetNotification: (offset, statenotification, length) => {
+        if(statenotification!= 'GET_NOTIFICATION_ING' && length > 0 )
+            dispatch(getNotification(offset, length))
     }
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { offset, ...anotherState } = stateProps
+    const { statenotification, notifications, offset, ...anotherState } = stateProps
     const { weGetNotification, ...anotherDispatch } = dispatchProps
     return({
         onGetNotification: () => {
-            weGetNotification(offset)
+            weGetNotification(offset, statenotification, 10 - notifications.length)
         },
         ...ownProps,
-        ...anotherState,
-        ...anotherDispatch,
+        ...stateProps,
+        ...dispatchProps,
     })
 }
 

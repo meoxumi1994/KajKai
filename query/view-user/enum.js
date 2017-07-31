@@ -33,5 +33,5 @@ export const NotificationType = {
   SELLPOSTCreated: 'createsellpost',
   SELLPOSTEdited: 'editsellpost',
   INTEREST: 'createstore',
-  RECEIVE: 'receive'
+  RECEIVE: 'received'
 }

@@ -122,8 +122,12 @@ export const createStore = (storeInfo, next) => {
     }
 };
 
-export const updateStore = (storeInfo, next) => {
+export const updateStore = (storeInfo, userId, next) => {
     getStore(storeInfo.id, (store) => {
+        if (store.owner != userId) {
+          next('failed')
+          return
+        }
         if (storeInfo.storename) {
             store.storeName = storeInfo.storename;
             if (storeInfo.storename.length < 6) {
@@ -229,4 +233,3 @@ export const getListStore = (storeIdList, next) => {
         next(getStoreListInfo(docs));
     })
 };
-

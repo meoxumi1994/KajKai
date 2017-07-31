@@ -1,4 +1,4 @@
-import { Test } from '../models'
+import { Test, Item } from '../models'
 
 export const queryHandler = () => (req, res) => {
   Test.find({}, (err, test) => {
@@ -12,9 +12,15 @@ export const queryHandler = () => (req, res) => {
 export const insertHandler = () => (req, res) => {
   let { username, password } = req.body
 
+  const item = new Item({
+    name: username,
+    age: 23
+  })
+
   const test = new Test({
     username,
-    password
+    password,
+    list: [item, item, item]
   })
 
   test.save((err, newTest, num) => {
@@ -29,8 +35,9 @@ export const insertHandler = () => (req, res) => {
 export const updateHandler = () => (req, res) => {
   let { username, password } = req.body
 
-  Test.findOneAndUpdate({ username }, { password }, (err, oldTest ) =>{
+  Test.findOneAndUpdate({ username }, { password }, (err, oldTest ) => {
     res.json({
+      status: 'success',
       err,
       oldTest
     })

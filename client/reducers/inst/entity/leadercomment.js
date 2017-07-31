@@ -2,6 +2,14 @@ const leadercomment = (state = {
 
 }, action) => {
     switch (action.type) {
+        case 'client/RECEIVE':
+            console.log(action)
+            return {...state,
+                [action.data.leadercommentid]: {
+                    ...state[action.data.leadercommentid],
+                    status: 'received',
+                }
+            }
         case 'client/COMMENT':
             return {...state,
                 [action.data.leadercommentid]: {

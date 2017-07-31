@@ -123,36 +123,24 @@ export const createReceiveNotification = (message) => {
           if (users) {
             for (let i = 0; i < users.length; i++) {
               let user = users[i]
-              if (user.id == notification.actorId) {
-                continue
-              }
-              let { storeList } = user
-              let flag = true
-              for (let k = 0; k < storeList.length; k++) {
-                if (storeList[k].id == notification.actorId) {
-                  flag = false
-                  break
-                }
-              }
-              if (!flag) {
-                continue
-              }
               let { followingSellposts } = user
               if (!followingSellposts) {
                 followingSellposts = []
               }
               for (let k = 0; k < followingSellposts.length; k++) {
-                if (followingSellposts[k] == sellpostId) {
+                if (followingSellposts[k] == notification.sellpostId) {
                   let { notifications } = user
                   if (!notifications) {
                     notifications = []
                   }
 
                   notify(user.id, notification)
-                  notifications.push(notification)
-                  user.notifications = notifications
-                  user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
-                  user.save(() => {})
+                  if (user.id == notification.actorId) {
+                    notifications.push(notification)
+                    user.notifications = notifications
+                    user.numberOfUnRead = user.numberOfUnRead ? user.numberOfUnRead + 1 : 1
+                    user.save(() => {})
+                  }
                   break
                 }
               }

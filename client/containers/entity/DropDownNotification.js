@@ -15,8 +15,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onGetMoreNotification: (offset, statenotification) => {
         if(statenotification != 'GET_NOTIFICATION_ING' && offset != -2 ){
             // console.log('getMoreNotification', offset, statenotification )
-            dispatch(getNotification(offset))
+            dispatch(getNotification(offset, 4))
         }
+    },
+    clickNotification: () => {
+        dispatch({ type: 'INST_ENTITY_GROUP_NOTIFICATION', key: 'numUnreaded', value: 0 })
     }
 })
 
