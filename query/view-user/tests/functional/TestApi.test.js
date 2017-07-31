@@ -32,8 +32,9 @@ describe('Test API', () => {
       })
       .expect('Content-Type', /json/)
       .expect(200, done)
-      .end((err, res) => {
-        console.log('res: ', res);
-      })
+      .expect((res) => {
+        expect(res.body).to.include({ status: 'success'})
+        // expect(res.body).to.have.all.keys(['status'])
+      }, done)
   })
 })

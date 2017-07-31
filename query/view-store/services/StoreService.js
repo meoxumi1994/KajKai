@@ -8,10 +8,39 @@ export const getStore = (requesterId, id, next) => {
           if(err) {
             next(null)
           } else {
-            next({
-              status: 'noStoreData',
-              store: {
-                id
+            Store.findOne({ id }, (err, store) => {
+              if (store) {
+                BasicUser.findOne({ id: store.userId }, (err, basicUser) => {
+                  if (basicUser) {
+                    if (!basicUser.banned || basicUser.banned == 0) {
+                      next({
+                        status: 'success',
+                        store: getClientFormatStore(requesterId, store)
+                      })
+                    } else {
+                      next({
+                        status: 'failed',
+                        banned: true,
+                        reason: basicUser.reason,
+                        store: {}
+                      })
+                    }
+                  } else {
+                    next({
+                      status: 'noUserData',
+                      store: {
+                        id
+                      }
+                    })
+                  }
+                })
+              } else {
+                next({
+                  status: 'noStoreData',
+                  store: {
+                    id
+                  }
+                })
               }
             })
           }

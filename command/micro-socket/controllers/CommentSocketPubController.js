@@ -37,7 +37,7 @@ export const updateOrder = (id, status, userId, next) => {
         // } else {
         //     next(null)
         // }
-        next(message.status);
+        next(message.status, message.sellPostId);
     })
 };
 
