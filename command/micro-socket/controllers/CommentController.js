@@ -111,7 +111,7 @@ export const storeReceiveOrder = (action, sio, io) => {
 export const storeFinishedOrder = (action, sio, io) => {
     if (!action.data || !action.data.userID) return;
     updateOrder(action.data.leadercommentid, action.data.status ? action.data.status : 'done', action.data.userID, (status, sellPostId) => {
-        sio.emit('action', {type: 'client/RECEIVE', data: {
+        sio.emit('action', {type: 'client/DONE', data: {
             leadercommentid: action.data.leadercommentid,
             status: status
         }});
