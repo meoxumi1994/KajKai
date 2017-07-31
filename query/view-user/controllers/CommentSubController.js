@@ -135,6 +135,12 @@ export const createReceiveNotification = (message) => {
                   }
 
                   notify(user.id, notification)
+                  if (user.id == notification.actorId) {
+                    notifications.push(notification)
+                    user.notifications = notifications
+                    user.numberOfUnRead = user.numberOfUnRead ? user.numberOfUnRead + 1 : 1
+                    user.save(() => {})
+                  }
                   break
                 }
               }
