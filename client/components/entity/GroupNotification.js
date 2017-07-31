@@ -30,7 +30,7 @@ class GroupNotification extends React.Component {
         )
     }
     componentDidMount(){
-        if(this.props.notifications.length == 0)
+        if(this.props.notifications.length < 10 )
             this.props.onGetNotification()
     }
 }

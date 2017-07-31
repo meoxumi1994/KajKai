@@ -17,6 +17,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             // console.log('getMoreNotification', offset, statenotification )
             dispatch(getNotification(offset, 4))
         }
+    },
+    clickNotification: () => {
+        dispatch({ type: 'INST_ENTITY_GROUP_NOTIFICATION', key: 'numUnreaded', value: 0 })
     }
 })
 

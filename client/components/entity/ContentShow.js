@@ -23,7 +23,6 @@ class ContentShow extends React.Component {
                 minHeight: minHeight,
                 fontSize: fontSize,
                 fontWeight: fontWeight,
-                backgroundColor: 'white',
                 padding: padding}}>
                 <div
                     ref={display => this.display = display}
