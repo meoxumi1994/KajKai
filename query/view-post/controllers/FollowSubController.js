@@ -75,7 +75,7 @@ export const removeFollow = (message) => {
 }
 
 export const addUserFollow = (message) => {
-  const { followerId, followeeId } = message.follow
+  const { followerId, followeeId } = message.userFollow
 
   if (followeeId.substr(0, 3) == '012') { // sellpost
     BasicUser.findOne({ id: followerId }, (err, basicUser) => {
@@ -93,7 +93,7 @@ export const addUserFollow = (message) => {
 }
 
 export const removeUserFollow = (message) => {
-  const { followerId, followeeId } = message.follow
+  const { followerId, followeeId } = message.userFollow
 
   if (followeeId.substr(0, 3) == '012') { // sellpost
     BasicUser.findOne({ id: followerId }, (err, basicUser) => {
