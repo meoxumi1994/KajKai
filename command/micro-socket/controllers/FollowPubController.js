@@ -7,8 +7,8 @@ export const updateUserFollowPub = (userId, storeId, sellPostId, next) => {
     const pub = redis.createClient(config);
     const publishData = {userId, storeId, sellPostId, eventId: getUUID()};
     console.log(JSON.stringify(publishData));
-    pub.publish('NOTI.UpdateFollow', JSON.stringify(publishData));
-    sub.subscribe('NOTI.UpdateFollow' + publishData.eventId);
+    pub.publish('NOTI.UpdateUserFollow', JSON.stringify(publishData));
+    sub.subscribe('NOTI.UpdateUserFollow' + publishData.eventId);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
         sub.unsubscribe();

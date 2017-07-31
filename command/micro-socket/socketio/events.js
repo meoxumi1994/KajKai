@@ -77,5 +77,9 @@ export default {
     'server/RECEIVE': {
         controller: 'CommentController',
         method: 'storeReceiveOrder'
+    },
+    'server/DONE': {
+        controller: 'CommentController',
+        method: 'storeFinishedOrder'
     }
 }
