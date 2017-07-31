@@ -12,10 +12,11 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => allString.get(state.user.language, lang)
     const bar = state.inst.bar
     const { searchType, offset } = state.inst.search
-    const { scrollTop } = state.inst.app
+    const { height } = state.inst.app
     return ({
         ...bar,
         ...state.user,
+        height: height,
         searchType: searchType,
         LOG_IN: g('LOG_IN'),
         SEARCH_PRODUCT: g('SEARCH_PRODUCT'),
@@ -57,7 +58,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch({type: 'server/RESET_UNREAD_CHATS_QUANTITY'})
     },
     clickNotification: () => {
-        
+
     }
 })
 

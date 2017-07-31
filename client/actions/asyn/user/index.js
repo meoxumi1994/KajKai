@@ -26,3 +26,13 @@ export const updateUser = (user) => dispatch => {
         }
     })
 }
+
+export const getInterest = () => dispatch => {
+    dispatch({ tyep: 'GET_INTEREST_ING'})
+    return flet('/user',{
+        ...user
+    })
+    .then((response) => {
+        
+    })
+}

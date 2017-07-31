@@ -4,7 +4,7 @@ import { getTime, getBeLike } from '~/containers/support'
 
 import Comment from '~/components/entity/Comment'
 
-const mapStateToProps = (state, {id}) => {
+const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     const comment = state.inst.entity.comment[id]
     const store = state.inst.store.index
@@ -34,7 +34,7 @@ const mapStateToProps = (state, {id}) => {
     })
 }
 
-const mapDispatchToProps = (dispatch, {id, isleader, leadercommentid }) => ({
+const mapDispatchToProps = (dispatch, { id, isleader, leadercommentid }) => ({
     onReceive: () => {
         dispatch({ type: 'server/RECEIVE', data: {
             type: 'comment',

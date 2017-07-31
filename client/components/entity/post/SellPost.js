@@ -27,7 +27,7 @@ class SellPost extends React.Component {
     render(){
         const { urlname, isOwner, ship, status, category, description, storename, avatarUrl, time,
             numfollow, beFollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
-            onDeleteSellpost,
+            onDeleteSellpost, closeBorder,
             onLike, postrows, postrows_order, clicksetting, id, onFollow, feedBack, showEditSellPost,
         } = this.props
         if(!likes)
@@ -38,10 +38,10 @@ class SellPost extends React.Component {
             )
         return(
             <div style={{
-                borderRadius: 4,
-                border: '1px solid #CCCCCC',
-                boxShadow: '0px 0px 4px #CCCCCC',
-                backgroundColor: 'white',
+                borderRadius: closeBorder ? undefined : 4 ,
+                border: closeBorder ? undefined : '1px solid #CCCCCC',
+                boxShadow: closeBorder ? undefined : '0px 0px 4px #CCCCCC',
+                backgroundColor: closeBorder ? undefined : 'white',
                 width: 520, padding: 10,}}>
                 <div>
                     <div
@@ -145,7 +145,6 @@ class SellPost extends React.Component {
                     </div>
                 }
                 {likeContent && <hr style={{ margin: 0 }}/>}
-
                 <GroupComment id={id}/>
             </div>
         )

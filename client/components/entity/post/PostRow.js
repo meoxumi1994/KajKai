@@ -52,6 +52,7 @@ class PostRow extends React.Component {
                         <div>
                             <div style={{ float: 'left', marginTop: -2, marginLeft: -1 }}>
                                 <KeepImage
+                                    sellpostid={sellpostId}
                                     type="Carousel"
                                     width={245}
                                     images={images}
@@ -73,6 +74,7 @@ class PostRow extends React.Component {
                         <div>
                             <div style={{ float: 'right', marginTop: -2, marginRight: -2 }}>
                                 <KeepImage
+                                    sellpostid={sellpostId}
                                     type="Carousel"
                                     width={245}
                                     images={images}
@@ -93,6 +95,7 @@ class PostRow extends React.Component {
                     return(
                         <div>
                             <KeepImage
+                                sellpostid={sellpostId}
                                 type="GroupImage"
                                 width={499}
                                 images={images}
