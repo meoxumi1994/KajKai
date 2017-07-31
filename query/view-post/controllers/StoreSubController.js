@@ -32,7 +32,7 @@ export const updateStore = (message) => {
         }
         for (let i = 0; i < replies.length; i++) {
           let reply = replies[i]
-          if (reply.storeId == id) {
+          if (reply.userId == id) {
             reply.storeName = storeName ? storeName : reply.storeName
             reply.avatarUrl = avatarUrl ? avatarUrl : reply.avatarUrl
           }
@@ -88,7 +88,7 @@ export const updateStore = (message) => {
           }
           for (let i = 0; i < replies.length; i++) {
             let reply = replies[i]
-            if (reply.storeId == id) {
+            if (reply.userId == id) {
               reply.storeName = storeName ? storeName : reply.storeName
               reply.avatarUrl = avatarUrl ? avatarUrl : reply.avatarUrl
             }

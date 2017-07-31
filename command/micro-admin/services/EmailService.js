@@ -14,7 +14,7 @@ export const sendBanEmail = (username, email, reason) => {
     send({}, (err, res) => {})
 }
 
-export const sendUnBanEmail = (username, email, reason, next) => {
+export const sendUnBanEmail = (username, email, reason) => {
     var send = require('gmail-send')({
         user: 'kajkaiverify@gmail.com',
         pass: 'verifykajkai',
