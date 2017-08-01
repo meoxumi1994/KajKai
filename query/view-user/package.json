@@ -2,7 +2,19 @@
   "name": "view-user",
   "scripts": {
     "start": "pm2 delete indev-user.js && pm2 start indev-user.js",
-    "test": "nyc mocha tests/**/*.test.js --compilers js:babel-core/register"
+    "test": "nyc --reporter lcov --reporter text mocha tests/**/*.js"
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "include": [
+      "services/**/*.js",
+      "controllers/**/*.js"
+    ],
+    "all": true,
+    "sourceMap": false,
+    "instrument": false
   },
   "dependencies": {
     "aws-serverless-express": "3.0.2",
@@ -20,6 +32,7 @@
     "babel": "6.23.0",
     "babel-cli": "6.24.1",
     "babel-core": "6.25.0",
+    "babel-plugin-add-header-comment": "1.0.3",
     "babel-plugin-istanbul": "4.1.4",
     "babel-plugin-transform-object-rest-spread": "6.23.0",
     "babel-polyfill": "6.23.0",
@@ -27,7 +40,15 @@
     "babel-register": "6.24.1",
     "chai": "4.1.0",
     "cross-env": "5.0.1",
+    "gulp": "3.9.1",
+    "gulp-coverage": "0.3.38",
+    "gulp-istanbul": "1.1.2",
+    "gulp-mocha": "4.3.1",
+    "install": "0.10.1",
+    "isparta": "4.0.0",
+    "istanbul": "1.1.0-alpha.1",
     "mocha": "3.4.2",
+    "npm": "5.3.0",
     "nyc": "11.1.0",
     "supertest": "3.0.0"
   }

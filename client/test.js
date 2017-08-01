@@ -361,8 +361,8 @@ let store = [
             id: 'category001',
             name: 'T-shirt',
         },
-        latitute: '21.0258808',
-        longitute: '105.8320113',
+        latitude: '21.0258808',
+        longitude: '105.8320113',
         certificates: {
             images: ['http://hstatic.net/093/1000067093/10/2016/1-17/01_gcndk_238326.jpeg'],
             content: 'giấy trứng nhận đăng ký nhãn hiệu',
@@ -424,8 +424,8 @@ let store = [
             id: 'category001',
             name: 'T-shirt',
         },
-        latitute: '21.0258808',
-        longitute: '105.8320113',
+        latitude: '21.0258808',
+        longitude: '105.8320113',
         certificates: {
             images: ['http://hstatic.net/093/1000067093/10/2016/1-17/01_gcndk_238326.jpeg'],
             content: 'giấy trứng nhận đăng ký nhãn hiệu',
