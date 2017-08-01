@@ -1,4 +1,4 @@
-export const post = {
+const post = {
     getway: 'https://g9fd0yor1e.execute-api.ap-southeast-1.amazonaws.com/kajkai/',
     kajkai_1: {
         service: {
@@ -27,7 +27,7 @@ export const post = {
     }
 };
 
-export const rev = {
+const rev = {
     comment: 1,
     socket: 1,
     user: 2,
