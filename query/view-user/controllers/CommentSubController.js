@@ -152,8 +152,8 @@ export const createReceiveNotification = (message) => {
                     notifications = []
                   }
 
-                  notify(user.id, mNotification)
                   if (user.id == notification.actorId) {
+                    notify(user.id, mNotification)
                     notifications.push(mNotification)
                     user.notifications = notifications
                     user.numberOfUnRead = user.numberOfUnRead ? user.numberOfUnRead + 1 : 1

@@ -32,7 +32,7 @@ describe('UserService', () => {
           numUnreaded: 2
         }
       }
-      expect(result).to.equal(expectedResult)
+      expect(result).to.deep.equal(expectedResult)
       done()
     })
   })
