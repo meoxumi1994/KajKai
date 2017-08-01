@@ -1,5 +1,5 @@
 import { Test, Item } from '../models'
-// class
+
 export const queryHandler = () => (req, res) => {
   Test.find({}, (err, test) => {
     res.json({
