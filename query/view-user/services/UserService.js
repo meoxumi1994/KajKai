@@ -219,7 +219,7 @@ export const updateNotification = (id, notificationId, next) => {
       if(err) {
         next('failed')
       } else {
-        next('noUserData')
+        next('noData')
       }
     } else {
       const { notifications } = user
@@ -244,7 +244,7 @@ export const getInterests = (id, offset, next) => {
       if(err) {
         next({ status: 'failed' })
       } else {
-        next({ status: 'noUserData' })
+        next({ status: 'noData' })
       }
     } else {
       let { interests } = user
@@ -253,9 +253,9 @@ export const getInterests = (id, offset, next) => {
       }
       const mInterests = []
       let currentNumberOfInterest = 0, mOffset = -2, lastIndex = -1
-      for (let i = notifications.length - 1; i >= 0; i--) {
+      for (let i = interests.length - 1; i >= 0; i--) {
         let interest = interests[i]
-        if (notification.time < offset) {
+        if (interest.time < offset) {
           if (currentNumberOfInterest < 10) {
             mInterests.push({
               id: interest.id,
