@@ -119,6 +119,24 @@ export const createReceiveNotification = (message) => {
     Notification.findOne({ commentId: id }, (err, notification) => {
       if (notification) {
         notification.type = NotificationType.RECEIVE
+        let mNotification = new Notification({
+          type: NotificationType.RECEIVE,
+          commentId: notification.commentId,
+          replyId: notification.replyId,
+          sellpostId: notification.sellpostId,
+          actorId: notification.actorId,
+          name: notification.name,
+          avatarUrl: notification.avatarUrl,
+          content: notification.content,
+          time: Date.now(),
+          storeName: notification.storeName,
+          urlName: notification.urlName,
+          storeAvatarUrl: notification.storeAvatarUrl,
+          numberOfLike: notification.numberOfLike,
+          likers: notification.likers,
+          order: notification.order,
+          isRead: 0
+        })
         User.find({}, (err, users) => {
           if (users) {
             for (let i = 0; i < users.length; i++) {
@@ -134,9 +152,9 @@ export const createReceiveNotification = (message) => {
                     notifications = []
                   }
 
-                  notify(user.id, notification)
+                  notify(user.id, mNotification)
                   if (user.id == notification.actorId) {
-                    notifications.push(notification)
+                    notifications.push(mNotification)
                     user.notifications = notifications
                     user.numberOfUnRead = user.numberOfUnRead ? user.numberOfUnRead + 1 : 1
                     user.save(() => {})
