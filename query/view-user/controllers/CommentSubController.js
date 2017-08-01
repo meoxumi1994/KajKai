@@ -118,51 +118,56 @@ export const createReceiveNotification = (message) => {
   if (status == NotificationType.RECEIVE) {
     Notification.findOne({ commentId: id }, (err, notification) => {
       if (notification) {
-        notification.type = NotificationType.RECEIVE
-        let mNotification = new Notification({
-          type: NotificationType.RECEIVE,
-          commentId: notification.commentId,
-          replyId: notification.replyId,
-          sellpostId: notification.sellpostId,
-          actorId: notification.actorId,
-          name: notification.name,
-          avatarUrl: notification.avatarUrl,
-          content: notification.content,
-          time: Date.now(),
-          storeName: notification.storeName,
-          urlName: notification.urlName,
-          storeAvatarUrl: notification.storeAvatarUrl,
-          numberOfLike: notification.numberOfLike,
-          likers: notification.likers,
-          order: notification.order,
-          isRead: 0
-        })
-        User.find({}, (err, users) => {
-          if (users) {
-            for (let i = 0; i < users.length; i++) {
-              let user = users[i]
-              let { followingSellposts } = user
-              if (!followingSellposts) {
-                followingSellposts = []
-              }
-              for (let k = 0; k < followingSellposts.length; k++) {
-                if (followingSellposts[k] == notification.sellpostId) {
-                  let { notifications } = user
-                  if (!notifications) {
-                    notifications = []
+        IDSellpostStore.findOne({ sellpostId: notification.sellpostId }, (err, mIDSellpostStore) => {
+          if (mIDSellpostStore) {
+            notification.type = NotificationType.RECEIVE
+            let mNotification = new Notification({
+              type: NotificationType.RECEIVE,
+              commentId: notification.commentId,
+              replyId: notification.replyId,
+              sellpostId: notification.sellpostId,
+              actorId: mIDSellpostStore.storeId,
+              name: notification.name,
+              avatarUrl: notification.avatarUrl,
+              content: notification.content,
+              time: Date.now(),
+              storeName: notification.storeName,
+              urlName: notification.urlName,
+              storeAvatarUrl: notification.storeAvatarUrl,
+              numberOfLike: notification.numberOfLike,
+              likers: notification.likers,
+              order: notification.order,
+              isRead: 0
+            })
+            User.find({}, (err, users) => {
+              if (users) {
+                for (let i = 0; i < users.length; i++) {
+                  let user = users[i]
+                  let { followingSellposts } = user
+                  if (!followingSellposts) {
+                    followingSellposts = []
                   }
+                  for (let k = 0; k < followingSellposts.length; k++) {
+                    if (followingSellposts[k] == notification.sellpostId) {
+                      let { notifications } = user
+                      if (!notifications) {
+                        notifications = []
+                      }
 
-                  if (user.id == notification.actorId) {
-                    notify(user.id, mNotification)
-                    notifications.push(mNotification)
-                    user.notifications = notifications
-                    user.numberOfUnRead = user.numberOfUnRead ? user.numberOfUnRead + 1 : 1
-                    user.save(() => {})
+                      notify(user.id, mNotification)
+
+                      if (user.id == notification.actorId) {
+                        notifications.push(mNotification)
+                        user.notifications = notifications
+                        user.numberOfUnRead = user.numberOfUnRead ? user.numberOfUnRead + 1 : 1
+                        user.save(() => {})
+                      }
+                      break
+                    }
                   }
-                  break
                 }
               }
-            }
+            })
           }
         })
       }
