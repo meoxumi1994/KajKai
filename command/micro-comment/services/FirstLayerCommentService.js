@@ -131,7 +131,7 @@ export const updateStatus = (id, status, userId, next) => {
             console.log(userId + ' ' + store.owner);
             if (store.owner === userId) {
                 switch (store.status) {
-                    case 'add':
+                    case 'new':
                         if (status !== 'received') {
                             next(null);
                             return;
