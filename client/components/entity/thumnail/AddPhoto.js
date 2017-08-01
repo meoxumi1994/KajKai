@@ -27,99 +27,87 @@ class AddPhoto extends React.Component {
                     textChange="Add photo"
                     isTop={style.isTop}
                 />
-                {canEdit ?
-                    <Modal show={this.props['showModal'+id]} onHide={() => onChange('showModal'+id, false)}>
-                        <div className="modal-content"
-                            style={{
-                                marginTop: -4,position: 'fixed',
-                                width: 790, marginLeft: -100 }} >
-                            <Modal.Header>
-                                <div onClick={() => onChange('showModal'+id, false)} style={{ padding: 0, float: 'right'}}
-                                    className="btn btn-transperant">
-                                </div>
-                                <strong>{TITLE}</strong>
-                            </Modal.Header>
-                            <Modal.Body style={{ padding: 8 }}>
-                                <div className="container-fluid" style={{ width: 784 }}>
-                                    <div className="row">
-                                        <div className="col col-xs-6" style={{ padding: 0}}>
-                                            <UploadCroppie
-                                                aspectRatio={aspectRatio}
-                                                style={{ width: 780, height: 440 }}
-                                                btnstyle={{
-                                                    width: 380,
-                                                    height: 110,
-                                                    fontSize: 17,
-                                                }}
-                                                upNow={false}
-                                                action={action}
-                                            />
-                                        </div>
-                                        <div className="col col-xs-6" style={{ padding: 0}}>
-                                            <WebcamCapture
-                                                aspectRatio={aspectRatio}
-                                                style={{ width: 590 }}
-                                                action={action}
-                                                upNow={false}
-                                                btnstyle={{
-                                                    width: 380,
-                                                    height: 110,
-                                                    fontSize: 17,
-                                                }}/>
-                                        </div>
+                <Modal show={this.props['showModal'+id]} onHide={() => onChange('showModal'+id, false)}>
+                    <div className="modal-content"
+                        style={{
+                            marginTop: -4,position: 'fixed',
+                            width: 790, marginLeft: -100 }} >
+                        <Modal.Header>
+                            <div onClick={() => onChange('showModal'+id, false)} style={{ padding: 0, float: 'right'}}
+                                className="btn btn-transperant">
+                            </div>
+                            <strong>{TITLE}</strong>
+                        </Modal.Header>
+                        <Modal.Body style={{ padding: 8 }}>
+                            <div className="container-fluid" style={{ width: 784 }}>
+                                <div className="row">
+                                    <div className="col col-xs-6" style={{ padding: 0}}>
+                                        <UploadCroppie
+                                            aspectRatio={aspectRatio}
+                                            style={{ width: 780, height: 440 }}
+                                            btnstyle={{
+                                                width: 380,
+                                                height: 110,
+                                                fontSize: 17,
+                                            }}
+                                            upNow={false}
+                                            action={action}
+                                        />
+                                    </div>
+                                    <div className="col col-xs-6" style={{ padding: 0}}>
+                                        <WebcamCapture
+                                            aspectRatio={aspectRatio}
+                                            style={{ width: 590 }}
+                                            action={action}
+                                            upNow={false}
+                                            btnstyle={{
+                                                width: 380,
+                                                height: 110,
+                                                fontSize: 17,
+                                            }}/>
                                     </div>
                                 </div>
-                            </Modal.Body>
-                            <hr style={{ margin: 0, padding: 0 }}/>
-                            <div style={{ backgroundColor: '#F6F7F9', padding: '2px 0px 2px 15px' }}>
-                                <strong className="text-muted">{SUGGEST_PHOTO}</strong>
                             </div>
-                            <hr style={{ margin: 0, padding: 0 }}/>
-                            <div style={{ maxHeight: 500, overflowY: 'scroll'}}>
-                                <div style={{ padding: '4px 4px 28px 10px'}}>
-                                    {imagesSuggest.map((item, index) => {
-                                        if(index >= this.state.maxSuggest) return
-                                        return(
-                                            <div key={index} style={{ float: 'left', padding: 4 }}>
-                                                <ChooseCroppie key={index}
-                                                    src={item}
-                                                    SAVE={'save'}
-                                                    style={{ width: 780, height: 440 }}
-                                                    imgstyle={{ width: 100, height: 100 }}
-                                                />
-                                            </div>
-                                        )
-                                    })}
-                                    {imagesSuggest.length > this.state.maxSuggest &&
-                                        <div className="btn btn-transperant btn-xs"
-                                            onClick={() => this.moreSuggest()}
-                                            style={{ color: '#3B5998', fontSize: 14, float: 'right', marginRight: 10 }}>
-                                            {SEE_MORE}
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                            <Modal.Footer>
-                                <div className="btn btn-default btn-sm" onClick={() => onChange('showModal'+id, false)}>Close</div>
-                            </Modal.Footer>
+                        </Modal.Body>
+                        <hr style={{ margin: 0, padding: 0 }}/>
+                        <div style={{ backgroundColor: '#F6F7F9', padding: '2px 0px 2px 15px' }}>
+                            <strong className="text-muted">{SUGGEST_PHOTO}</strong>
                         </div>
-                    </Modal>
-                :
-                    <div>
-                        {this.props['showModal'+id] &&
-                            <Enlarge close={() => this.setState({ openModal: false })}
-                                imgHeight={this.state.imgHeight}
-                                imgWidth={this.state.imgWidth}
-                                images={images}
-                                index={this.state.index}
-                                left={() => this.openModal((this.state.index + images.length - 1 ) % images.length)}
-                                right={() => this.openModal((this.state.index + images.length + 1 ) % images.length)}
-                                />
-                        }
+                        <hr style={{ margin: 0, padding: 0 }}/>
+                        <div style={{ maxHeight: 500, overflowY: 'scroll'}}>
+                            <div style={{ padding: '4px 4px 28px 10px'}}>
+                                {imagesSuggest.map((item, index) => {
+                                    if(index >= this.state.maxSuggest) return
+                                    return(
+                                        <div key={index} style={{ float: 'left', padding: 4 }}>
+                                            <ChooseCroppie key={index}
+                                                src={item}
+                                                SAVE={'save'}
+                                                style={{ width: 780, height: 440 }}
+                                                imgstyle={{ width: 100, height: 100 }}
+                                            />
+                                        </div>
+                                    )
+                                })}
+                                {imagesSuggest.length > this.state.maxSuggest &&
+                                    <div className="btn btn-transperant btn-xs"
+                                        onClick={() => this.moreSuggest()}
+                                        style={{ color: '#3B5998', fontSize: 14, float: 'right', marginRight: 10 }}>
+                                        {SEE_MORE}
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <Modal.Footer>
+                            <div className="btn btn-default btn-sm" onClick={() => onChange('showModal'+id, false)}>Close</div>
+                        </Modal.Footer>
                     </div>
-                }
+                </Modal>
             </div>
         )
+    }
+    componentDidMount(){
+        
     }
 }
 

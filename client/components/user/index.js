@@ -79,10 +79,10 @@ class User extends React.Component {
         if(this.left){
             this.left_marginTop = this.props.height - this.left.getBoundingClientRect().bottom > 0
         }
+        this.props.onGetUser()
     }
     componentDidMount(){
-        const { onGetUser } = this.props
-        onGetUser()
+        this.props.onGetUser()
     }
 }
 

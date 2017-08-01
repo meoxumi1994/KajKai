@@ -12,10 +12,11 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => allString.get(state.user.language, lang)
     const bar = state.inst.bar
     const { searchType, offset } = state.inst.search
-    const { height } = state.inst.app
+    const { height, width} = state.inst.app
     return ({
         ...bar,
         ...state.user,
+        width: width,
         height: height,
         searchType: searchType,
         LOG_IN: g('LOG_IN'),

@@ -25,7 +25,6 @@ const mapStateToProps = (state, { storeid }) => {
 
 const mapDispatchToProps = (dispatch, { storeid }) => ({
     onGetStore: () => {
-        console.log('dispatch(getIntroduceStore(storeid))')
         dispatch(getIntroduceStore(storeid))
     }
 })

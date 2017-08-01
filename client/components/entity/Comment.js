@@ -27,11 +27,11 @@ class Comment extends React.Component {
     render(){
         const {
             RECEIVE, RECEIVED, LIKE, REPLY, DONE, clicksetting, isOwner, status, urlname,
-            isleader, avatarUrl, name, time, numlike, numreplys, order, ownerid, type,
+            isleader, avatarUrl, name, time, numlike, numreplys, order, commenterid, type,
             content, onReceive, onDone, onLike, onReply, beLike } = this.props
         let urlLink
         if( type == "user" ){
-            urlLink = "user/" + ownerid
+            urlLink = "/user/" + commenterid
         }else {
             urlLink = urlname
         }
