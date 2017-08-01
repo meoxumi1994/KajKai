@@ -1,5 +1,63 @@
 //NEW NEW NEW
 
+GET /leadercomment?offset=12312312414123 { // lay cua thang user day leadercomment
+    offset:
+    leadercomments: [
+        {
+            id: '7586449578',
+            sellpostid: ,
+            order: [
+                {
+                  id: 'product002',
+                  content: ,
+                  imageUrl: ,
+                  list: [],
+                  num: 2
+                },
+            ],
+            numleadercomment:
+            ownerid: ,
+            avatarUrl: // small size 40x40
+            name: ,
+            content: ,
+            time: ,
+            numlike: ,
+            likestatus: ['like','love','haha','wow'],
+            status: ,
+        }
+    ]
+}
+
+GET /leadercomment/store/:id?offset=12312312414123 { // lay cua thang user day leadercomment
+    offset:
+    leadercomments: [
+        {
+            id: '7586449578',
+            sellpostid: ,
+            order: [
+                {
+                  id: 'product002',
+                  content: ,
+                  imageUrl: ,
+                  list: [],
+                  num: 2
+                },
+            ],
+            numleadercomment:
+            ownerid: ,
+            avatarUrl: // small size 40x40
+            name: ,
+            content: ,
+            time: ,
+            numlike: ,
+            likestatus: ['like','love','haha','wow'],
+            status: ,
+        }
+    ]
+}
+
+//
+
 GET /groupcomment/'sellpost|minorpost'/:id?offset=1498555009220 {
     offset:
     id:
@@ -24,6 +82,7 @@ GET /groupcomment/'sellpost|minorpost'/:id?offset=1498555009220 {
           time: ,
           numlike: ,
           likestatus: ['like','love','haha','wow'],
+          status: ,
         }
     ]
 }
