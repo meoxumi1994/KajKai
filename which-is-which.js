@@ -27,7 +27,7 @@ const post = {
     }
 };
 
-const rev = {
+const shit = {
     comment: 1,
     socket: 1,
     user: 2,
