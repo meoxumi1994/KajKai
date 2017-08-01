@@ -9,7 +9,7 @@ export const getUser = (requesterId, id, next) => {
           next(null)
         } else {
           next({
-            status: 'nodata',
+            status: 'noData',
             user: {
               id
             }
@@ -25,13 +25,27 @@ export const getUser = (requesterId, id, next) => {
               email: user.email,
               avatarUrl: user.avatarUrl,
               coverUrl: user.coverUrl,
-              address: user.address,
+              address: {
+                city : user.address.city,
+                district : user.address.district,
+                street : user.address.street,
+                longitude : user.address.longitude,
+                latitude : user.address.latitude
+              },
               phone: user.phone,
               language: user.language,
               sex: user.sex,
               yearOfBirth: user.yearOfBirth,
-              lastUpdate: user.lastUpdate,
-              blacklist: user.blackList,
+              lastUpdate: {
+                username: user.lastUpdate.username,
+                phone: user.lastUpdate.phone,
+                address: user.lastUpdate.address
+              },
+              blacklist: user.blackList ? user.blackList.map((black) => ({
+                  id: black.id,
+                  type: black.type,
+                  name: black.name
+                })) : [],
               storeList: user.storeList ? (user.storeList.map((basicStore) => ({
                 id: basicStore.id,
                 storename: basicStore.storeName,
@@ -55,42 +69,42 @@ export const getUser = (requesterId, id, next) => {
   })
 }
 
-export const getUserPrivacy = (id, next) => {
-  User.findOne({ id }, (err, user) => {
-      if (err || !user) {
-        if(err) {
-          next(null)
-        } else {
-          next({
-            status: 'nodata',
-            user: {
-              id
-            }
-          })
-        }
-      } else {
-        if (!user.banned || user.banned == 0) {
-          next({
-            status: 'success',
-            privacy: {
-              id: user.id,
-              address_email_phone: user.privacy.address_email_phone,
-              another: user.privacy.others
-            }
-          })
-        } else {
-          next({
-            status: 'failed',
-            banned: true,
-            reason: user.reason,
-            privacy: {
-              id: user.id
-            }
-          })
-        }
-      }
-  })
-}
+// export const getUserPrivacy = (id, next) => {
+//   User.findOne({ id }, (err, user) => {
+//       if (err || !user) {
+//         if(err) {
+//           next(null)
+//         } else {
+//           next({
+//             status: 'noData',
+//             user: {
+//               id
+//             }
+//           })
+//         }
+//       } else {
+//         if (!user.banned || user.banned == 0) {
+//           next({
+//             status: 'success',
+//             privacy: {
+//               id: user.id,
+//               address_email_phone: user.privacy.address_email_phone,
+//               another: user.privacy.others
+//             }
+//           })
+//         } else {
+//           next({
+//             status: 'failed',
+//             banned: true,
+//             reason: user.reason,
+//             privacy: {
+//               id: user.id
+//             }
+//           })
+//         }
+//       }
+//   })
+// }
 
 export const getUserImageList = (requesterId, id, offset, next) => {
   User.findOne({ id }, (err, user) => {
@@ -99,7 +113,7 @@ export const getUserImageList = (requesterId, id, offset, next) => {
           next(null)
         } else {
           next({
-            status: 'nodata',
+            status: 'noData',
             listImage: []
           })
         }
@@ -117,7 +131,7 @@ export const getUserImageList = (requesterId, id, offset, next) => {
               if (currentNumberOfImage < 14) {
                 mImageList.push({
                   url: image.url,
-                  time: image.time
+                  time: image.time.getTime()
                 })
 
                 mOffset = image.time.getTime()
@@ -158,7 +172,7 @@ export const getNotifications = (id, offset, length, next) => {
         next(null)
       } else {
         next({
-          status: 'nodata',
+          status: 'noData',
           offset,
           notifications: []
         })
@@ -205,7 +219,7 @@ export const updateNotification = (id, notificationId, next) => {
       if(err) {
         next('failed')
       } else {
-        next('noUserData')
+        next('noData')
       }
     } else {
       const { notifications } = user
@@ -230,7 +244,7 @@ export const getInterests = (id, offset, next) => {
       if(err) {
         next({ status: 'failed' })
       } else {
-        next({ status: 'noUserData' })
+        next({ status: 'noData' })
       }
     } else {
       let { interests } = user
@@ -239,9 +253,9 @@ export const getInterests = (id, offset, next) => {
       }
       const mInterests = []
       let currentNumberOfInterest = 0, mOffset = -2, lastIndex = -1
-      for (let i = notifications.length - 1; i >= 0; i--) {
+      for (let i = interests.length - 1; i >= 0; i--) {
         let interest = interests[i]
-        if (notification.time < offset) {
+        if (interest.time < offset) {
           if (currentNumberOfInterest < 10) {
             mInterests.push({
               id: interest.id,

@@ -130,6 +130,23 @@ export const updateStatus = (id, status, userId, next) => {
         getStoreFromPostId(fComment.postId, (store) => {
             console.log(userId + ' ' + store.owner);
             if (store.owner === userId) {
+                switch (fComment.status) {
+                    case 'new':
+                        if (status !== 'received') {
+                            next(null);
+                            return;
+                        }
+                        break;
+                    case 'received':
+                        if (status !== 'done') {
+                            next(null);
+                            return;
+                        }
+                        break;
+                    default:
+                        next(null);
+                        return;
+                }
                 fComment.status = status;
                 fComment.save((err) => {
                     if (err) {

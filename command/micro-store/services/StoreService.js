@@ -61,9 +61,7 @@ export const validateStore = (store) => {
     return true
 };
 
-
-export const createStore = (storeInfo, next) => {
-
+export const verifyStoreInfo = (storeInfo, next) => {
     if (!storeInfo.storename || storeInfo.storename.length < 6) {
         next('name');
         return;
@@ -84,48 +82,58 @@ export const createStore = (storeInfo, next) => {
         next('position');
         return;
     }
+    next(null);
+};
 
-    if (!storeInfo.urlname || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )) {
-        next('urlname');
-    } else {
-        Store.findOne({urlName: storeInfo.urlname}, (err, docs) => {
-            if (docs) {
-                next('urlname');
-                return;
-            }
-            let certificate = null;
-            if (storeInfo.certificates) {
-                certificate = new Certificate(storeInfo.certificates);
-            }
-            const store = new Store({storeName: storeInfo.storename, phone: storeInfo.phone,
-                category: storeInfo.category, owner: storeInfo.userid,
-                firstCategoryId: storeInfo.firstCategoryId, secondCategoryId: storeInfo.secondCategoryId,
-                avatarUrl: storeInfo.avatarUrl,
-                coverUrl: storeInfo.coverUrl,
-                address: storeInfo.address,
-                addressMap: storeInfo.addressMap,
-                longitude: storeInfo.position ? storeInfo.position.lng : null,
-                latitude: storeInfo.position ? storeInfo.position.lat : null,
-                certificates: certificate,
-                createdAt: storeInfo.time,
-                urlName: storeInfo.urlname
-            });
-            // console.log('store ' + JSON.stringify(store));
-            // console.log('storeInfo ' + JSON.stringify(storeInfo));
-            store.save(() => {
-                next(store);
-                getPubStoreInfo(store, (info) => {
-                    createStorePub(info);
+export const createStore = (storeInfo, next) => {
+
+    verifyStoreInfo(storeInfo, (verRes) => {
+        if (verRes) {
+            next(verRes);
+            return;
+        }
+        if (!storeInfo.urlname || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )) {
+            next('urlname');
+        } else {
+            Store.findOne({urlName: storeInfo.urlname}, (err, docs) => {
+                if (docs) {
+                    next('urlname');
+                    return;
+                }
+                let certificate = null;
+                if (storeInfo.certificates) {
+                    certificate = new Certificate(storeInfo.certificates);
+                }
+                const store = new Store({storeName: storeInfo.storename, phone: storeInfo.phone,
+                    category: storeInfo.category, owner: storeInfo.userid,
+                    firstCategoryId: storeInfo.firstCategoryId, secondCategoryId: storeInfo.secondCategoryId,
+                    avatarUrl: storeInfo.avatarUrl,
+                    coverUrl: storeInfo.coverUrl,
+                    address: storeInfo.address,
+                    addressMap: storeInfo.addressMap,
+                    longitude: storeInfo.position ? storeInfo.position.lng : null,
+                    latitude: storeInfo.position ? storeInfo.position.lat : null,
+                    certificates: certificate,
+                    createdAt: storeInfo.time,
+                    urlName: storeInfo.urlname
                 });
+                // console.log('store ' + JSON.stringify(store));
+                // console.log('storeInfo ' + JSON.stringify(storeInfo));
+                store.save(() => {
+                    next(store);
+                    getPubStoreInfo(store, (info) => {
+                        createStorePub(info);
+                    });
+                })
             })
-        })
-    }
+        }
+    });
 };
 
 export const updateStore = (storeInfo, userId, next) => {
     getStore(storeInfo.id, (store) => {
-        if (store.owner != userId) {
-          next('failed')
+        if (store.owner !== userId) {
+          next('failed');
           return
         }
         if (storeInfo.storename) {
