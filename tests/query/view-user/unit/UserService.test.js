@@ -1,3 +1,15 @@
+require('babel-register')({
+    presets: ['es2015'],
+    plugins: [
+      "transform-object-rest-spread",
+      "istanbul",
+        ["add-header-comment", {
+          "header": [
+            "class"
+          ]
+        }]
+    ]
+})
 import { verifyToken } from '../../../../query/view-user/services/UserService'
 import { expect } from 'chai'
 import jwt from 'jsonwebtoken'
