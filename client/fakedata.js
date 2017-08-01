@@ -18,7 +18,7 @@ let store = [
         coverUrl: 'https://tshirtstoreonline.com/client/tshirtstore/dynamic/articles/tshirt-store-guildford-view-3_4421.png',
         address: 'fpt university',
         category: 'shirt',
-        latitute: 1,
+        latitude: 1,
         longitude: 1,
         phone: '01655791025',
     }

@@ -265,7 +265,7 @@ GET /store/:id { // id co the urlname
         secondCategoryId: ,
         secondCategory: ,
         position: {
-          latitute: '1423424',
+          latitude: '1423424',
           longitude: '453535',
         }
         phone: '01655791025',
@@ -310,7 +310,7 @@ POST /store {
     firstCategoryId: ,
     secondCategoryId: ,
     position: {
-        latitute: '1423424',
+        latitude: '1423424',
         longitude: '453535',
     }
     phone: '01655791025',
@@ -324,7 +324,7 @@ PUT /store {
     address: ,
     addressMap: ['phuong tan an', 'tp buon ma thuot', 'daklak', 'vietnam'],
     position: {
-      latitute: '1423424',
+      latitude: '1423424',
       longitude: '453535',
     }
     phone: '01655791025',
@@ -999,7 +999,7 @@ GET /store?nelat=0&nelng=0&swlat=0&swlng=0&length=30 {    //NE=NorthEast SW=Sout
             address: ,            // Dia chi cua hang
             category: ,           // Loai sp
             position: {
-              latitute: '1423424',
+              latitude: '1423424',
               longitude: '453535',
             }
             phone: '01655791025',
