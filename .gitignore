@@ -26,3 +26,4 @@ kajkai.com
 admin.kajkai
 .babelrc
 .nyc_output
+tests/coverage
