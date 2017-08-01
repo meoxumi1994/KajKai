@@ -19,7 +19,7 @@ let store = [
         address: 'fpt university',
         category: 'shirt',
         latitute: 1,
-        longitute: 1,
+        longitude: 1,
         phone: '01655791025',
     }
 ]
