@@ -7,7 +7,9 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const { id, avatarUrl, coverUrl, username } = state.inst.user.index
     const { scrollTop, scrollLeft, height } = state.inst.app
+    
     return({
+        ...state.inst.user.interest,
         id: id,
         avatarUrl: avatarUrl,
         coverUrl: coverUrl,
@@ -15,22 +17,30 @@ const mapStateToProps = (state, ownProps) => {
         scrollTop: scrollTop,
         scrollLeft: scrollLeft,
         height: height,
-        sellposts: [1,1,1,1],
-        minorposts: [1,1,1,1,1,1,1,1],
     })
 }
 
-const mapDispatchToProps = (dispatch, props) => ({
-    onCreateuser: () => {
-
-    },
-    onNeedPost: () => {
-        
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    needPost: (id, offset) => {
+        dispatch(getInterest(id, offset ))
     }
 })
 
+const mergerProps = (stateProps, dispatchProps, ownProps) => {
+    const { id, offset, ...anotherState } = stateProps
+    const { needPost, ...anotherDispatch } = dispatchProps
+    return({
+        onNeedPost: () => {
+            needPost(id, offset)
+        },
+        ...ownProps,
+        ...stateProps,
+        ...dispatchProps,
+    })
+}
+
 const InterestContainer = connect(
-    mapStateToProps, mapDispatchToProps
+    mapStateToProps, mapDispatchToProps, mergerProps
 )(Interest)
 
 export default InterestContainer

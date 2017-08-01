@@ -1,12 +1,6 @@
 import React from 'react'
 
-import SellPost from '~/containers/entity/post/SellPost'
-import MinorPost from '~/containers/entity/post/MinorPost'
-import TimeLine from '~/components/entity/draw/TimeLine'
-import EditSellPost from '~/containers/entity/post/EditSellPost'
-import EditMinorPost from '~/containers/entity/post/EditMinorPost'
-import ShowInMap from '~/containers/entity/map/ShowInMap.js'
-import Link from 'react-router-dom'
+import Post from '~/containers/entity/post/Post'
 
 class Interest extends React.Component {
     constructor(props){
@@ -14,10 +8,14 @@ class Interest extends React.Component {
         this.state = {}
     }
     render(){
-        const {  } = this.props
+        const { data } = this.props
         return(
             <div>
-                Interest
+                {data && data.map((item) =>
+                    <div key={item.sellpostid} style={{ marginTop: 10 }}>
+                        <Post sellpostid={item.sellpostid} storeid={item.storeid}/>
+                    </div>
+                )}
             </div>
         )
     }
@@ -25,9 +23,6 @@ class Interest extends React.Component {
         // if(this.props.sellposts.length>=2 && this.sellpost.getBoundingClientRect().bottom - this.props.height < 780){
         //     this.props.onNeedSellPost()
         // }
-    }
-    componentDidMount(){
-        this.props.onNeedPost();
     }
 }
 

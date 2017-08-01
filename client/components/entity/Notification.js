@@ -24,7 +24,7 @@ class ContentNotify extends React.Component {
                         {order.length>0 &&
                         <span>
                             has <span style={{ color: '#BD081C' }}>{order.length}
-                            </span> {order.length>2 ? 'orders' : 'order'} {content && and}
+                            </span> {order.length>2 ? 'orders' : 'order'} {content && 'and'}
                         </span>}
                         {" "}<span>comment on a post </span>
                         {content &&
@@ -43,7 +43,7 @@ class ContentNotify extends React.Component {
                         {order.length>0 &&
                         <span>
                             has <span style={{ color: '#BD081C' }}>{order.length}
-                            </span> {order.length>2 ? 'orders' : 'order'} {content && and}
+                            </span> {order.length>2 ? 'orders' : 'order'} {content && 'and'}
                         </span>}
                         {" "}<span>reply on a post </span>
                         {content &&
@@ -80,6 +80,25 @@ class ContentNotify extends React.Component {
                     <div style={{ height: 35 }}>
                         <span style={{ fontWeight: 'bold'}}>{name}</span>
                         {" "}<span>edit sellpsot </span>
+                    </div>
+                )
+            case 'received':
+                return (
+                    <div style={{ height: 35, fontSize: 13 }}>
+                        <span style={{ fontWeight: 'bold'}}>{name}</span>
+                        {order.length>0 && " "}
+                        {order.length>0 &&
+                        <span>
+                            has <span style={{ color: '#BD081C' }}>{order.length}
+                            </span> {order.length>2 ? 'orders' : 'order'} {content && 'and'}
+                        </span>}
+                        {" "}<span>has received a comment</span>
+                        {content &&
+                        <ContentShow
+                            fontSize={13}
+                            heightEachRow={16}
+                            content={getString(content)}
+                        />}
                     </div>
                 )
             default:

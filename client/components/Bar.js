@@ -179,7 +179,6 @@ export default class BarScreen extends React.Component {
         const { SEARCH_PRODUCT, SEARCH_LOCATION, categories, onSearchTypeSelected, onKeyWordChanged, currentCategory,
              onLocationChanged, clicksetting, width, height } = this.props
         let inputSearchKeyWord
-        console.log(width)
         return (
             <div
                 style={{ position: 'fixed',

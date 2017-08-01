@@ -62,7 +62,6 @@ class IntroduceStore extends React.Component {
         )
     }
     componentDidMount(){
-        console.log('componentDidMount componentDidMount componentDidMount')
         this.props.onGetStore()
     }
 }

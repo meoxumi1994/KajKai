@@ -6,7 +6,10 @@ const groupcomment = (state = {
         case 'CREATE_SELL_POST_SUCCESS':
             return {
                 ...state,
-                [action.sellpost.id] : action.sellpost,
+                [action.sellpost.id] : {
+                    ...action.sellpost,
+                    order: [],
+                }
             }
         case 'client/LEADERCOMMENT':
             return {...state,
