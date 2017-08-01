@@ -35,7 +35,7 @@ export const getSecondLayerCommentInfo = (sComment, next) => {
             else {
                 let info = {
                     content: sComment.content,
-                    name: user.userName,
+                    name: user.username,
                     avatarUrl: user.avatarUrl,
                     commenterid: sComment.posterId,
                     time: sComment.time,

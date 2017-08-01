@@ -24,7 +24,7 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
             else {
                 let info = {
                     content: fComment.content,
-                    name: user.userName,
+                    name: user.username,
                     avatarUrl: user.avatarUrl,
                     commenterid: user.id,
                     time: fComment.time,
