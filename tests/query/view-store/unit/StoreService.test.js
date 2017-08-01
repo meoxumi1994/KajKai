@@ -1,13 +1,12 @@
-import * as UserService from '../../services/UserService'
+import { verifyToken } from '../../../../query/view-store/services/StoreService'
 import { expect } from 'chai'
 import jwt from 'jsonwebtoken'
 
-
-describe('UserService', () => {
+describe('StoreService', () => {
   it('verify token and return decoded payload', () => {
     const payload = { foo: 'bar' }
     const token = jwt.sign({ foo: 'bar' }, 'secret')
-    const decoded = UserService.verifyToken(token)
+    const decoded = verifyToken(token)
     expect(decoded).to.include(payload)
     expect(decoded).to.have.all.keys(['foo', 'iat'])
   })

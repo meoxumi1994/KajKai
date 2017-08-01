@@ -1,4 +1,0 @@
-instrumentation:
-  root: services
-  extensions:
-    - .js

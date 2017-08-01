@@ -82,7 +82,7 @@ const getClientFormatReply = (reply) => ({
   id: reply.id,
   type: reply.type,
   urlname: reply.urlName,
-  ownerid: reply.userId,
+  commenterid: reply.userId,
   leadercommentid: reply.commentId,
   avatarUrl: reply.avatarUrl,
   name: reply.username,

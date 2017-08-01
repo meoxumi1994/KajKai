@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for view-user/services/NotificationService.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\index.html">All files</a> / <a href="index.html">view-user/services</a> NotificationService.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.73% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>5/134</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/114</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.76% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>5/133</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { User, BasicStore, Notification, IDSellpostStore, IDCommentSellpost, IDReplyCommentSellpost, SellpostLiker, CommentLiker, ReplyLiker } from '../models'
+import { NotificationType } from '../enum'
+import { notify } from '../controllers/NotificationPubController'
+&nbsp;
+export const createLikeSellpostNotification = <span class="fstat-no" title="function not covered" >(s</span>ellpostId) =&gt; {
+<span class="cstat-no" title="statement not covered" >  SellpostLiker.findOne({ sellpostId }, <span class="fstat-no" title="function not covered" >(e</span>rr, sellpostLiker) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (sellpostLiker) {</span>
+      let { likers } = <span class="cstat-no" title="statement not covered" >sellpostLiker</span>
+      const numberOfLike = <span class="cstat-no" title="statement not covered" >likers.length</span>
+      const liker = <span class="cstat-no" title="statement not covered" >likers[likers.length - 1]</span>
+<span class="cstat-no" title="statement not covered" >      likers = likers.length &lt;= 5 ? likers : likers.splice(likers.length - 5)</span>
+<span class="cstat-no" title="statement not covered" >      IDSellpostStore.findOne({ sellpostId }, <span class="fstat-no" title="function not covered" >(e</span>rr, mIDSellpostStore) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (mIDSellpostStore) {</span>
+<span class="cstat-no" title="statement not covered" >          BasicStore.findOne({ id: mIDSellpostStore.storeId }, <span class="fstat-no" title="function not covered" >(e</span>rr, basicStore) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            if (basicStore) {</span>
+<span class="cstat-no" title="statement not covered" >              User.find({}, <span class="fstat-no" title="function not covered" >(e</span>rr, users) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                if (users) {</span>
+<span class="cstat-no" title="statement not covered" >                  for (let i = 0; i &lt; users.length; i++) {</span>
+                    let user = <span class="cstat-no" title="statement not covered" >users[i]</span>
+<span class="cstat-no" title="statement not covered" >                    if (isLiker(user, liker)) {</span>
+<span class="cstat-no" title="statement not covered" >                      continue</span>
+                    }
+                    let { followingSellposts } = <span class="cstat-no" title="statement not covered" >user</span>
+<span class="cstat-no" title="statement not covered" >                    if (!followingSellposts) {</span>
+<span class="cstat-no" title="statement not covered" >                      followingSellposts = []</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    for (let k = 0; k &lt; followingSellposts.length; k++) {</span>
+<span class="cstat-no" title="statement not covered" >                      if (followingSellposts[k] == sellpostId) {</span>
+                        let { notifications } = <span class="cstat-no" title="statement not covered" >user</span>
+<span class="cstat-no" title="statement not covered" >                        if (!notifications) {</span>
+<span class="cstat-no" title="statement not covered" >                          notifications = []</span>
+                        }
+                        let mNotification = <span class="cstat-no" title="statement not covered" >new Notification({</span>
+                          type: NotificationType.LIKESELLPOST,
+                          sellpostId,
+                          actorId: liker.userId ? liker.userId : liker.storeId,
+                          name: liker.username ? liker.username : liker.storeName,
+                          avatarUrl: liker.avatarUrl,
+                          time: Date.now(),
+                          storeName: basicStore.storeName,
+                          urlName: basicStore.urlName,
+                          storeAvatarUrl: basicStore.avatarUrl,
+                          numberOfLike,
+                          likers
+                        })
+<span class="cstat-no" title="statement not covered" >                        for (let h = 0; h &lt; notifications.length; h++) {</span>
+                          let notification = <span class="cstat-no" title="statement not covered" >notifications[h]</span>
+<span class="cstat-no" title="statement not covered" >                          if (notification.type == NotificationType.LIKESELLPOST &amp;&amp; notification.sellpostId == sellpostId) {</span>
+<span class="cstat-no" title="statement not covered" >                            notifications.splice(h, 1)</span>
+<span class="cstat-no" title="statement not covered" >                            break</span>
+                          } else <span class="cstat-no" title="statement not covered" >if (h + 1 == notifications.length) {</span>
+<span class="cstat-no" title="statement not covered" >                            user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1</span>
+                          }
+                        }
+<span class="cstat-no" title="statement not covered" >                        notify(user.id, mNotification)</span>
+<span class="cstat-no" title="statement not covered" >                        notifications.push(mNotification)</span>
+<span class="cstat-no" title="statement not covered" >                        user.notifications = notifications</span>
+<span class="cstat-no" title="statement not covered" >                        user.save(<span class="fstat-no" title="function not covered" >()</span> =&gt; {})</span>
+<span class="cstat-no" title="statement not covered" >                        break</span>
+                      }
+                    }
+                  }
+                }
+              })
+            }
+          })
+        }
+      })
+    }
+  })
+}
+&nbsp;
+export const createLikeCommentNotification = <span class="fstat-no" title="function not covered" >(c</span>ommentId) =&gt; {
+<span class="cstat-no" title="statement not covered" >  CommentLiker.findOne({ commentId }, <span class="fstat-no" title="function not covered" >(e</span>rr, commentLiker) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (commentLiker) {</span>
+      let { likers } = <span class="cstat-no" title="statement not covered" >commentLiker</span>
+      const numberOfLike = <span class="cstat-no" title="statement not covered" >likers.length</span>
+      const liker = <span class="cstat-no" title="statement not covered" >likers[likers.length - 1]</span>
+<span class="cstat-no" title="statement not covered" >      likers = likers.length &lt;= 5 ? likers : likers.splice(likers.length - 5)</span>
+<span class="cstat-no" title="statement not covered" >      IDCommentSellpost.findOne({ commentId }, <span class="fstat-no" title="function not covered" >(e</span>rr, mIDCommentSellpost) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (mIDCommentSellpost) {</span>
+<span class="cstat-no" title="statement not covered" >          IDSellpostStore.findOne({ sellpostId: mIDCommentSellpost.sellpostId }, <span class="fstat-no" title="function not covered" >(e</span>rr, mIDSellpostStore) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            if (mIDSellpostStore) {</span>
+<span class="cstat-no" title="statement not covered" >              BasicStore.findOne({ id: mIDSellpostStore.storeId }, <span class="fstat-no" title="function not covered" >(e</span>rr, basicStore) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                if (basicStore) {</span>
+<span class="cstat-no" title="statement not covered" >                  User.find({}, <span class="fstat-no" title="function not covered" >(e</span>rr, users) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                    if (users) {</span>
+<span class="cstat-no" title="statement not covered" >                      for (let i = 0; i &lt; users.length; i++) {</span>
+                        let user = <span class="cstat-no" title="statement not covered" >users[i]</span>
+<span class="cstat-no" title="statement not covered" >                        if (isLiker(user, liker)) {</span>
+<span class="cstat-no" title="statement not covered" >                          continue</span>
+                        }
+                        let { followingSellposts } = <span class="cstat-no" title="statement not covered" >user</span>
+<span class="cstat-no" title="statement not covered" >                        if (!followingSellposts) {</span>
+<span class="cstat-no" title="statement not covered" >                          followingSellposts = []</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        for (let k = 0; k &lt; followingSellposts.length; k++) {</span>
+<span class="cstat-no" title="statement not covered" >                          if (followingSellposts[k] == mIDCommentSellpost.sellpostId) {</span>
+                            let { notifications } = <span class="cstat-no" title="statement not covered" >user</span>
+<span class="cstat-no" title="statement not covered" >                            if (!notifications) {</span>
+<span class="cstat-no" title="statement not covered" >                              notifications = []</span>
+                            }
+                            let mNotification = <span class="cstat-no" title="statement not covered" >new Notification({</span>
+                              type: NotificationType.LIKECOMMENT,
+                              sellpostId: mIDCommentSellpost.sellpostId,
+                              commentId,
+                              actorId: liker.userId ? liker.userId : liker.storeId,
+                              name: liker.username ? liker.username : liker.storeName,
+                              avatarUrl: liker.avatarUrl,
+                              time: Date.now(),
+                              storeName: basicStore.storeName,
+                              urlName: basicStore.urlName,
+                              storeAvatarUrl: basicStore.avatarUrl,
+                              numberOfLike,
+                              likers
+                            })
+<span class="cstat-no" title="statement not covered" >                            for (let h = 0; h &lt; notifications.length; h++) {</span>
+                              let notification = <span class="cstat-no" title="statement not covered" >notifications[h]</span>
+<span class="cstat-no" title="statement not covered" >                              if (notification.type == NotificationType.LIKECOMMENT &amp;&amp; notification.commentId == commentId) {</span>
+<span class="cstat-no" title="statement not covered" >                                notifications.splice(h, 1)</span>
+<span class="cstat-no" title="statement not covered" >                                break</span>
+                              } else <span class="cstat-no" title="statement not covered" >if (h + 1 == notifications.length) {</span>
+<span class="cstat-no" title="statement not covered" >                                user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1</span>
+                              }
+                            }
+<span class="cstat-no" title="statement not covered" >                            notify(user.id, mNotification)</span>
+<span class="cstat-no" title="statement not covered" >                            notifications.push(mNotification)</span>
+<span class="cstat-no" title="statement not covered" >                            user.notifications = notifications</span>
+<span class="cstat-no" title="statement not covered" >                            user.save(<span class="fstat-no" title="function not covered" >()</span> =&gt; {})</span>
+<span class="cstat-no" title="statement not covered" >                            break</span>
+                          }
+                        }
+                      }
+                    }
+                  })
+                }
+              })
+            }
+          })
+        }
+      })
+    }
+  })
+}
+&nbsp;
+export const createLikeReplyNotification = <span class="fstat-no" title="function not covered" >(r</span>eplyId) =&gt; {
+<span class="cstat-no" title="statement not covered" >  ReplyLiker.findOne({ replyId }, <span class="fstat-no" title="function not covered" >(e</span>rr, replyLiker) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (replyLiker) {</span>
+      let { likers } = <span class="cstat-no" title="statement not covered" >replyLiker</span>
+      const numberOfLike = <span class="cstat-no" title="statement not covered" >likers.length</span>
+      const liker = <span class="cstat-no" title="statement not covered" >likers[likers.length - 1]</span>
+<span class="cstat-no" title="statement not covered" >      likers = likers.length &lt;= 5 ? likers : likers.splice(likers.length - 5)</span>
+<span class="cstat-no" title="statement not covered" >      IDReplyCommentSellpost.findOne({ replyId }, <span class="fstat-no" title="function not covered" >(e</span>rr, mIDReplyCommentSellpost) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (mIDReplyCommentSellpost) {</span>
+<span class="cstat-no" title="statement not covered" >          IDSellpostStore.findOne({ sellpostId: mIDReplyCommentSellpost.sellpostId }, <span class="fstat-no" title="function not covered" >(e</span>rr, mIDSellpostStore) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            if (mIDSellpostStore) {</span>
+<span class="cstat-no" title="statement not covered" >              BasicStore.findOne({ id: mIDSellpostStore.storeId }, <span class="fstat-no" title="function not covered" >(e</span>rr, basicStore) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                if (basicStore) {</span>
+<span class="cstat-no" title="statement not covered" >                  User.find({}, <span class="fstat-no" title="function not covered" >(e</span>rr, users) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                    if (users) {</span>
+<span class="cstat-no" title="statement not covered" >                      for (let i = 0; i &lt; users.length; i++) {</span>
+                        let user = <span class="cstat-no" title="statement not covered" >users[i]</span>
+<span class="cstat-no" title="statement not covered" >                        if (isLiker(user, liker)) {</span>
+<span class="cstat-no" title="statement not covered" >                          continue</span>
+                        }
+                        let { followingSellposts } = <span class="cstat-no" title="statement not covered" >user</span>
+<span class="cstat-no" title="statement not covered" >                        if (!followingSellposts) {</span>
+<span class="cstat-no" title="statement not covered" >                          followingSellposts = []</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        for (let k = 0; k &lt; followingSellposts.length; k++) {</span>
+<span class="cstat-no" title="statement not covered" >                          if (followingSellposts[k] == mIDReplyCommentSellpost.sellpostId) {</span>
+                            let { notifications } = <span class="cstat-no" title="statement not covered" >user</span>
+<span class="cstat-no" title="statement not covered" >                            if (!notifications) {</span>
+<span class="cstat-no" title="statement not covered" >                              notifications = []</span>
+                            }
+                            let mNotification = <span class="cstat-no" title="statement not covered" >new Notification({</span>
+                              type: NotificationType.LIKEREPLY,
+                              sellpostId: mIDReplyCommentSellpost.sellpostId,
+                              commentId: mIDReplyCommentSellpost.commentId,
+                              replyId,
+                              actorId: liker.userId ? liker.userId : liker.storeId,
+                              name: liker.username ? liker.username : liker.storeName,
+                              avatarUrl: liker.avatarUrl,
+                              time: Date.now(),
+                              storeName: basicStore.storeName,
+                              urlName: basicStore.urlName,
+                              storeAvatarUrl: basicStore.avatarUrl,
+                              numberOfLike,
+                              likers
+                            })
+<span class="cstat-no" title="statement not covered" >                            for (let h = 0; h &lt; notifications.length; h++) {</span>
+                              let notification = <span class="cstat-no" title="statement not covered" >notifications[h]</span>
+<span class="cstat-no" title="statement not covered" >                              if (notification.type == NotificationType.LIKEREPLY &amp;&amp; notification.replyId == replyId) {</span>
+<span class="cstat-no" title="statement not covered" >                                notifications.splice(h, 1)</span>
+<span class="cstat-no" title="statement not covered" >                                break</span>
+                              } else <span class="cstat-no" title="statement not covered" >if (h + 1 == notifications.length) {</span>
+<span class="cstat-no" title="statement not covered" >                                user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1</span>
+                              }
+                            }
+<span class="cstat-no" title="statement not covered" >                            notify(user.id, mNotification)</span>
+<span class="cstat-no" title="statement not covered" >                            notifications.push(mNotification)</span>
+<span class="cstat-no" title="statement not covered" >                            user.notifications = notifications</span>
+<span class="cstat-no" title="statement not covered" >                            user.save(<span class="fstat-no" title="function not covered" >()</span> =&gt; {})</span>
+<span class="cstat-no" title="statement not covered" >                            break</span>
+                          }
+                        }
+                      }
+                    }
+                  })
+                }
+              })
+            }
+          })
+        }
+      })
+    }
+  })
+}
+&nbsp;
+export const getClientFormatNotification = <span class="fstat-no" title="function not covered" >(n</span>otification) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+  type: notification.type,
+  id: notification._id,
+  commentid: notification.replyId,
+  leadercommentid: notification.commentId,
+  sellpostid: notification.sellpostId,
+  ownerid: notification.actorId,
+  avatarUrl: notification.avatarUrl,
+  name: notification.name,
+  content: notification.content,
+  time: notification.time.getTime(),
+  numlike: notification.numberOfLike,
+  likes: notification.likers.map(<span class="fstat-no" title="function not covered" >(l</span>iker) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+    avatarUrl: liker.avatarUrl,
+    userid: liker.userId,
+    username: liker.username,
+    storeid: liker.storeId,
+    storename: liker.storename,
+    id: liker.userId ? liker.userId : liker.storeId,
+    name: liker.username ? liker.username : liker.storeName
+  })),
+  likestatus: ['like'],
+  storename: notification.storeName,
+  urlname: notification.urlName,
+  avartarStore: notification.storeAvatarUrl,
+  order: notification.order ? notification.order.map(<span class="fstat-no" title="function not covered" >(p</span>roduct) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+    id: product.id,
+    content: product.content ? product.content : '',
+    imageUrl: product.imageUrl ? product.imageUrl : '',
+    list: product.list ? product.list : [],
+    num: product.numberOfOrder
+  })) : [],
+  isclick: notification.isRead == 1
+})
+&nbsp;
+const isLiker = <span class="fstat-no" title="function not covered" >(u</span>ser, liker) =&gt; {
+<span class="cstat-no" title="statement not covered" >  if (liker.userId) {</span>
+<span class="cstat-no" title="statement not covered" >    if (user.id == liker.userId) {</span>
+<span class="cstat-no" title="statement not covered" >      return true</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return false</span>
+  }
+  let { storeList } = <span class="cstat-no" title="statement not covered" >user</span>
+<span class="cstat-no" title="statement not covered" >  if (!storeList) {</span>
+<span class="cstat-no" title="statement not covered" >    storeList = []</span>
+  }
+<span class="cstat-no" title="statement not covered" >  for (let k = 0; k &lt; storeList.length; k++) {</span>
+<span class="cstat-no" title="statement not covered" >    if (storeList[k].id == liker.storeId) {</span>
+<span class="cstat-no" title="statement not covered" >      return true</span>
+    }
+  }
+<span class="cstat-no" title="statement not covered" >  return false</span>
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Aug 01 2017 13:13:26 GMT+0700 (SE Asia Standard Time)
+</div>
+</div>
+<script src="..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\sorter.js"></script>
+</body>
+</html>
