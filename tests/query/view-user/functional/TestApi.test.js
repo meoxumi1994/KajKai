@@ -1,15 +1,3 @@
-require('babel-register')({
-    presets: ['es2015'],
-    plugins: [
-      "transform-object-rest-spread",
-      "istanbul",
-        ["add-header-comment", {
-          "header": [
-            "class"
-          ]
-        }]
-    ]
-})
 import 'babel-polyfill'
 import { expect } from 'chai'
 import request from 'supertest'

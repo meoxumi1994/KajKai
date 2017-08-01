@@ -24,3 +24,5 @@ command/*/lambda.js
 command/*/es6.js
 kajkai.com
 admin.kajkai
+.babelrc
+.nyc_output

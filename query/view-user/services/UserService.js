@@ -1,7 +1,7 @@
 import { User } from '../models'
 import jwt from 'jsonwebtoken'
 import { getClientFormatNotification } from './NotificationService'
-
+// class
 export const getUser = (requesterId, id, next) => {
   User.findOne({ id }, (err, user) => {
       if (err || !user) {
