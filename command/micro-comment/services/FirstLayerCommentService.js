@@ -130,8 +130,8 @@ export const updateStatus = (id, status, userId, next) => {
         getStoreFromPostId(fComment.postId, (store) => {
             console.log(userId + ' ' + store.owner);
             if (store.owner === userId) {
-                switch (store.status) {
-                    case 'add':
+                switch (fComment.status) {
+                    case 'new':
                         if (status !== 'received') {
                             next(null);
                             return;
