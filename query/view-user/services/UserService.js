@@ -345,26 +345,24 @@ export const getComments = (id, offset, length, next) => {
             status: 'success',
             offset: mOffset,
             leadercomments: mComments.map((comment, index) => ({
-              {
-                  id: comment.commentId,
-                  sellpostid: comment.sellpostId,
-                  order: comment.order ? comment.order.map((product) => ({
-                    id: product.id,
-                    content: product.content ? product.content : '',
-                    imageUrl: product.imageUrl ? product.imageUrl : '',
-                    list: product.list ? product.list : [],
-                    num: product.numberOfOrder
-                  })) : [],
-                  numcomment: result[index].numberOfReply
-                  ownerid: user.id,
-                  avatarUrl: user.avatarUrl,
-                  name: user.username,
-                  content: comment.content,
-                  time: comment.time.getTime(),
-                  numlike: result[index].numberOfLike,
-                  likestatus: ['like'],
-                  status: result[index].status,
-              }
+              id: comment.commentId,
+              sellpostid: comment.sellpostId,
+              order: comment.order ? comment.order.map((product) => ({
+                id: product.id,
+                content: product.content ? product.content : '',
+                imageUrl: product.imageUrl ? product.imageUrl : '',
+                list: product.list ? product.list : [],
+                num: product.numberOfOrder
+              })) : [],
+              numcomment: result[index].numberOfReply
+              ownerid: user.id,
+              avatarUrl: user.avatarUrl,
+              name: user.username,
+              content: comment.content,
+              time: comment.time.getTime(),
+              numlike: result[index].numberOfLike,
+              likestatus: ['like'],
+              status: result[index].status
             }))
           })
         } else {
