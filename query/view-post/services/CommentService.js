@@ -57,9 +57,9 @@ export const getClientFormatSellpostComments = (comments, offset, status, isFirs
   let currentNumberOfComment = 0, cOffset = Date.now(), lastIndex = -1
   let mComments = []
   let level = {
-    OrderStatus.NEW: 1,
-    OrderStatus.RECEIVED: 2,
-    OrderStatus.DONE: 3
+    [OrderStatus.NEW]: 1,
+    [OrderStatus.RECEIVED]: 2,
+    [OrderStatus.DONE]: 3
   }
 
   if (isFirst) {
