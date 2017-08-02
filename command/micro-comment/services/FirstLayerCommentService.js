@@ -85,6 +85,9 @@ export const getFirstLayerCommentPubInfo = (fComment) => {
 };
 
 export const saveNewFirstLayerComment = (posterId, order, time, postId, content, next) => {
+    if (order) {
+        order = getOrder(order);
+    }
     let comment = new FirstLayerComment({ posterId: posterId, order: order, time: time,
         postId: postId, content: content, status: 'new' });
     console.log('fuck ' + JSON.stringify(comment));
@@ -95,18 +98,16 @@ export const saveNewFirstLayerComment = (posterId, order, time, postId, content,
 };
 
 export const addNewFirstLayerComment = (data, next) => {
-    let order = null;
-    if (data.order && data.order.length > 0) order = getOrder(data.order);
 
     getStoreFromPostId(data.sellpostid, (store) => {
         console.log('store ' + JSON.stringify(store));
         if (!store) return;
         if (data.userID === store.owner) {
-            saveNewFirstLayerComment(store.storeId, order, data.time, data.sellpostid, data.content, (comment) => {
+            saveNewFirstLayerComment(store.storeId, data.order, data.time, data.sellpostid, data.content, (comment) => {
                 next(comment)
             })
         } else {
-            saveNewFirstLayerComment(data.userID, order, data.time, data.sellpostid, data.content, (comment) => {
+            saveNewFirstLayerComment(data.userID, data.order, data.time, data.sellpostid, data.content, (comment) => {
                 next(comment);
             })
         }
