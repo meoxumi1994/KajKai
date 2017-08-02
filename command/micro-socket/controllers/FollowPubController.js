@@ -31,7 +31,6 @@ export const updateFollowPub = (userId, storeId, next) => {
     sub.subscribe('NOTI.UpdateFollow' + publishData.eventId);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
-        console.log('fuck aoihf ' + message);
         sub.unsubscribe();
         sub.quit();
         pub.quit();
