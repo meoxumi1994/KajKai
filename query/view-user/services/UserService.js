@@ -27,22 +27,22 @@ export const getUser = (requesterId, id, next) => {
               email: user.email,
               avatarUrl: user.avatarUrl,
               coverUrl: user.coverUrl,
-              address: {
+              address: user.address ? {
                 city : user.address.city,
                 district : user.address.district,
                 street : user.address.street,
                 longitude : user.address.longitude,
                 latitude : user.address.latitude
-              },
+              } : {},
               phone: user.phone,
               language: user.language,
               sex: user.sex,
               yearOfBirth: user.yearOfBirth,
-              lastUpdate: {
+              lastUpdate: user.lastUpdate ? {
                 username: user.lastUpdate.username,
                 phone: user.lastUpdate.phone,
                 address: user.lastUpdate.address
-              },
+              } : {},
               blacklist: user.blackList ? user.blackList.map((black) => ({
                   id: black.id,
                   type: black.type,
