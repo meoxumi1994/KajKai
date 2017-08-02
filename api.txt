@@ -2,57 +2,81 @@
 
 GET /leadercomment?offset=12312312414123 { // lay cua thang user day leadercomment
     offset:
-    leadercomments: [
-        {
-            id: '7586449578',
-            sellpostid: ,
-            order: [
-                {
-                  id: 'product002',
-                  content: ,
-                  imageUrl: ,
-                  list: [],
-                  num: 2
-                },
-            ],
-            numleadercomment:
+    leadercomments: [ // tối đa 5 thằng trong 1 giờ
+      {
+        id: '7586449578',
+        sellpostid: ,
+        order: [
+            {
+              id: 'product002',
+              content: ,
+              imageUrl: ,
+              list: [],
+              num: 2
+            },
+        ],
+        status,
+        numcomment:
+        comments: [ // thằng đầu tiền là comment của leader // tối đa 2 thằng trong 1 giờ
+          {
+            id: ,
             ownerid: ,
-            avatarUrl: // small size 40x40
+            leadercommentid: ,//
+            avatarUrl: // small size 20x20
             name: ,
             content: ,
             time: ,
             numlike: ,
+            likes: [
+              {
+                userid: ,
+                username: ,
+              },
+            ]
             likestatus: ['like','love','haha','wow'],
-            status: ,
-        }
+          }
+        ]
+      }
     ]
 }
 
 GET /leadercomment/store/:id?offset=12312312414123 { // lay cua thang user day leadercomment
     offset:
-    leadercomments: [
-        {
-            id: '7586449578',
-            sellpostid: ,
-            order: [
-                {
-                  id: 'product002',
-                  content: ,
-                  imageUrl: ,
-                  list: [],
-                  num: 2
-                },
-            ],
-            numleadercomment:
+    leadercomments: [ // tối đa 5 thằng trong 1 giờ
+      {
+        id: '7586449578',
+        sellpostid: ,
+        order: [
+            {
+              id: 'product002',
+              content: ,
+              imageUrl: ,
+              list: [],
+              num: 2
+            },
+        ],
+        status,
+        numcomment:
+        comments: [ // thằng đầu tiền là comment của leader // tối đa 2 thằng trong 1 giờ
+          {
+            id: ,
             ownerid: ,
-            avatarUrl: // small size 40x40
+            leadercommentid: ,//
+            avatarUrl: // small size 20x20
             name: ,
             content: ,
             time: ,
             numlike: ,
+            likes: [
+              {
+                userid: ,
+                username: ,
+              },
+            ]
             likestatus: ['like','love','haha','wow'],
-            status: ,
-        }
+          }
+        ]
+      }
     ]
 }
 
