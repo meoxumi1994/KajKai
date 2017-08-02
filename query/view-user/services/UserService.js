@@ -362,7 +362,7 @@ export const getComments = (id, offset, length, next) => {
               ownerid: user.id,
               avatarUrl: user.avatarUrl,
               name: user.username,
-              content: content[commentId],
+              content: content[comment.commentId],
               time: comment.time.getTime(),
               numlike: result[index].numberOfLike,
               likestatus: ['like'],
