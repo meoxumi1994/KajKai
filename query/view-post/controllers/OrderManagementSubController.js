@@ -21,6 +21,6 @@ export const getCommentsAdditionalInfoHandler = (message, next) => {
 
   Promise.all(mPromises).then((result) => {
     console.log('result - post: ', result);
-    next(result ? result : [])
+    next(result)
   })
 }

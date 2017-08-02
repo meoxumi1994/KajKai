@@ -10,11 +10,7 @@ export const getCommentsAdditionalInfo = (commentIds, next) => {
   pub.publish('ODERMANAGEMENT', JSON.stringify(publicData))
   sub.on('message', (channel, message) => {
       message = JSON.parse(message)
-      if (message.status === 'success') {
-          next(message.user)
-      } else {
-          next(null)
-      }
+      next(message)
       sub.unsubscribe()
       sub.quit()
       pub.quit()
