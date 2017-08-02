@@ -22,6 +22,26 @@ export const updateUserFollowPub = (userId, storeId, sellPostId, next) => {
     })
 };
 
+export const updateFollowPub = (userId, storeId, next) => {
+    const sub = redis.createClient(config);
+    const pub = redis.createClient(config);
+    const publishData = {userId, storeId, eventId: getUUID()};
+    console.log(JSON.stringify(publishData));
+    pub.publish('NOTI.UpdateFollow', JSON.stringify(publishData));
+    sub.subscribe('NOTI.UpdaterFollow' + publishData.eventId);
+    sub.on('message', (channel, message) => {
+        message = JSON.parse(message);
+        sub.unsubscribe();
+        sub.quit();
+        pub.quit();
+        if (message.status === 'success') {
+            next(message.follow)
+        } else {
+            next(null)
+        }
+    })
+};
+
 export const getFollowListPub = (userId, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);

@@ -1,7 +1,6 @@
 import { User } from '../models'
 import jwt from 'jsonwebtoken'
 import { getClientFormatNotification } from './NotificationService'
-import { getCommentsAdditionalInfo } from '../controllers/CommentPubController'
 import { NotificationType } from '../enum'
 
 export const getUser = (requesterId, id, next) => {
@@ -290,96 +289,78 @@ export const getInterests = (id, offset, next) => {
   })
 }
 
-export const getComments = (id, offset, length, next) => {
-  User.findOne({ id }, (err, user) => {
-    if (err || !user) {
-      if(err) {
-        next(null)
-      } else {
-        next({
-          status: 'noData',
-          offset,
-          leadercomments: []
-        })
-      }
-    } else {
-      let { notifications } = user
-      if (!notifications) {
-        notifications = []
-      }
-      const visitedComments = {}
-      const content = {}
-      const comments = []
-      for (let i = notifications.length - 1; i >= 0; i--) {
-        let notification = notifications[i]
-        content[notification.commentId] = notification.content
-        if (notification.type.includes('comment') || notification.type == NotificationType.RECEIVED) {
-          if (!visitedComments[notification.commentId]) {
-            visitedComments[notification.commentId] = true
-            comments.push(notification)
-          }
-        }
-      }
-      const mComments = []
-      let currentNumberOfComment = 0, mOffset = -2, lastIndex = -1
-      for (let i = 0; i < comments.length; i++) {
-        let comment = comments[i]
-        if (comment.time < offset) {
-          if (currentNumberOfComment < length) {
-            mComments.push(comment)
-
-            mOffset = comment.time.getTime()
-            lastIndex = i
-            currentNumberOfComment++
-          } else {
-            break
-          }
-        }
-      }
-
-      if (lastIndex == comments.length - 1) {
-        mOffset = -2
-      }
-      console.log('mComments: ', mComments);
-      console.log('mComments: ', JSON.stringify(mComments));
-      getCommentsAdditionalInfo(mComments.map((comment) => (comment.commentId)), (result) => {
-        console.log('result - user: ', result);
-        if (result) {
-          next({
-            status: 'success',
-            offset: mOffset,
-            leadercomments: mComments.map((comment, index) => ({
-              id: comment.commentId,
-              sellpostid: comment.sellpostId,
-              order: comment.order ? comment.order.map((product) => ({
-                id: product.id,
-                content: product.content ? product.content : '',
-                imageUrl: product.imageUrl,
-                list: product.list ? product.list : [],
-                num: product.numberOfOrder
-              })) : [],
-              numcomment: result[index].numberOfReply,
-              ownerid: user.id,
-              avatarUrl: user.avatarUrl,
-              name: user.username,
-              content: content[comment.commentId],
-              time: comment.time.getTime(),
-              numlike: result[index].numberOfLike,
-              likestatus: ['like'],
-              status: result[index].status
-            }))
-          })
-        } else {
-          next({
-            status: 'noData',
-            offset,
-            leadercomments: []
-          })
-        }
-      })
-    }
-  })
-}
+// export const getComments = (id, offset, length, next) => {
+//   User.findOne({ id }, (err, user) => {
+//     if (err || !user) {
+//       if(err) {
+//         next(null)
+//       } else {
+//         next({
+//           status: 'noData',
+//           offset,
+//           leadercomments: []
+//         })
+//       }
+//     } else {
+//       let { notifications } = user
+//       if (!notifications) {
+//         notifications = []
+//       }
+//       const visitedComments = {}
+//       const comments = []
+//       for (let i = notifications.length - 1; i >= 0; i--) {
+//         let notification = notifications[i]
+//         if (notification.type.includes('comment') || notification.type == NotificationType.RECEIVED) {
+//           if (!visitedComments[notification.commentId]) {
+//             visitedComments[notification.commentId] = true
+//             comments.push(notification)
+//           }
+//         }
+//       }
+//       const mComments = []
+//       let currentNumberOfComment = 0, mOffset = -2, lastIndex = -1
+//       for (let i = 0; i < comments.length; i++) {
+//         let comment = comments[i]
+//         if (comment.time < offset) {
+//           if (currentNumberOfComment < length) {
+//             mComments.push(comment)
+//
+//             mOffset = comment.time.getTime()
+//             lastIndex = i
+//             currentNumberOfComment++
+//           } else {
+//             break
+//           }
+//         }
+//       }
+//
+//       if (lastIndex == comments.length - 1) {
+//         mOffset = -2
+//       }
+//       console.log('mComments: ', mComments);
+//       console.log('mComments: ', JSON.stringify(mComments));
+//       getCommentsInfo(mComments.map((comment) => (comment.commentId)), (result) => {
+//         console.log('result - user: ', result);
+//         if (result) {
+//           next({
+//             status: 'success',
+//             offset: mOffset,
+//             leadercomments: result.map((result, index) => ({
+//               ...result,
+//               time: mComments[index].time.getTime()
+//             }))
+//           })
+//         } else {
+//           next({
+//             status: 'noData',
+//             offset,
+//             leadercomments: []
+//           })
+//         }
+//       })
+//     }
+//   })
+// }
 
 export const verifyToken = (token) => {
     try {

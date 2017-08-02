@@ -98,7 +98,7 @@ export const blackList = () => {
         const userId = req.decoded._id;
         const blockId = req.body.blockid;
         checkBlackList(userId, blockId, (block, type) => {
-            var idtype = '';
+            let idtype = '';
             switch (userId) {
                 case userId.startsWith(global.USER_GLOBAL_ID):
                     idtype = 'userid';

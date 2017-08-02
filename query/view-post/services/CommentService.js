@@ -1,7 +1,8 @@
 import { Sellpost, Minorpost } from '../models'
 import { getClientFormatReplies } from './ReplyService'
+import { OrderStatus } from '../enum'
 
-export const getComments = (requesterId, postType, id, offset, next) => {
+export const getComments = (requesterId, postType, id, offset, status, next) => {
   if (postType == 'sellpost') {
     Sellpost.findOne({ id }, (err, sellpost) => {
       if (err || !sellpost) {
@@ -19,7 +20,7 @@ export const getComments = (requesterId, postType, id, offset, next) => {
         const { comments } = sellpost
         next({
           id,
-          ...getClientFormatSellpostComments(comments, offset, false)
+          ...getClientFormatSellpostComments(comments, offset, status, false)
         })
       }
     })
@@ -43,7 +44,7 @@ export const getComments = (requesterId, postType, id, offset, next) => {
   }
 }
 
-export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
+export const getClientFormatSellpostComments = (comments, offset, status, isFirst) => {
   if (!comments) {
     return {
       status: 'success',
@@ -55,11 +56,16 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
 
   let currentNumberOfComment = 0, cOffset = Date.now(), lastIndex = -1
   let mComments = []
+  let level = {
+    [OrderStatus.NEW]: 1,
+    [OrderStatus.RECEIVED]: 2,
+    [OrderStatus.DONE]: 3
+  }
 
   if (isFirst) {
     for (let i = comments.length - 1; i >= 0; i--) {
       let comment = comments[i]
-      if (offset - comment.time <= oneHour && currentNumberOfComment < 5) {
+      if (offset - comment.time <= oneHour && currentNumberOfComment < 5 && level[comment.status] <= level[status]) {
         let { replies } = comment
         let mComment = getClientFormatReplies(replies, Date.now(), true)
 
@@ -90,7 +96,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
   } else {
     for (let i = comments.length - 1; i >= 0; i--) {
       let comment = comments[i]
-      if (comment.time < offset) {
+      if (comment.time < offset && level[comment.status] <= level[status]) {
         if (currentNumberOfComment < 10) {
           let { replies } = comment
           let mComment = getClientFormatReplies(replies, Date.now(), true)
