@@ -74,7 +74,7 @@ const getClientFormatMinorpost = (minorpost, offset) => {
     video: minorpost.video,
     numlike: minorpost.numberOfLike ? minorpost.numberOfLike : 0,
     likes: minorpost.likers ? minorpost.likers.slice(0, 3) : null,
-    numfollow: minorpost.numerOfFollow ? minorpost.numerOfFollow : 0,
+    numfollow: minorpost.numberOfFollow ? minorpost.numberOfFollow : 0,
     numleadercomment: minorpost.numberOfComment ? minorpost.numberOfComment : 0,
     ...getClientFormatMinorpostComments(comments, offset)
   })
