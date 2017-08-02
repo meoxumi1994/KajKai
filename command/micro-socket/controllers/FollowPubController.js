@@ -28,7 +28,7 @@ export const updateFollowPub = (userId, storeId, next) => {
     const publishData = {userId, storeId, eventId: getUUID()};
     console.log(JSON.stringify(publishData));
     pub.publish('NOTI.UpdateFollow', JSON.stringify(publishData));
-    sub.subscribe('NOTI.UpdaterFollow' + publishData.eventId);
+    sub.subscribe('NOTI.UpdateFollow' + publishData.eventId);
     sub.on('message', (channel, message) => {
         message = JSON.parse(message);
         sub.unsubscribe();
