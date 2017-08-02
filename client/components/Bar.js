@@ -185,7 +185,7 @@ export default class BarScreen extends React.Component {
                 width: '100%',
                 backgroundColor: 'white',
                 zIndex: 10 }}>
-                <div style={{ width: (width > 1100 + 240)? (width - 240) : width }}>
+                <div style={{ width: (width > 1100 + 300)? (width - 300) : width }}>
                     <div className="container-fluid" style={{ padding: 0, margin: 0 }}>
                         <div className="row" style={{ padding: 0, margin: 'auto',  width: 1100, marginTop: 9, marginBottom: 9 }}>
                             <div className="col-xs-2" style={{ padding: 0 }}>

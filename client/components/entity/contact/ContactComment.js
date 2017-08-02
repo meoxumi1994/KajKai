@@ -1,4 +1,4 @@
-import React from 'reac'
+import React from 'react'
 
 class ContactComment extends React.Component {
     constructor(props){
@@ -7,7 +7,7 @@ class ContactComment extends React.Component {
     render(){
         return(
             <div>
-                
+
             </div>
         )
     }

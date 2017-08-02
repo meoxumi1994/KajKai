@@ -1,12 +1,14 @@
 import React from 'react'
 
+import ContactComment from '~/containers/entity/contact/ContactComment'
+
 class Cell extends React.Component {
     constructor(props){
         super(props)
         this.state = {}
     }
     render(){
-        const { name, avatarUrl, hasCaret, width, onChange } = this.props
+        const { name, id, avatarUrl, hasCaret, width, onChange, onGetContact } = this.props
         return(
             <div style={{ paddingTop: 5 }}>
                 <div className="btn"
@@ -15,6 +17,8 @@ class Cell extends React.Component {
                     onClick={() => {
                         onChange('currentAvatar', avatarUrl)
                         onChange('currentName', name)
+                        onChange('currentId', id)
+                        // onGetContact()
                     }}
                     style={{
                         textAlign: 'left',
@@ -47,6 +51,7 @@ class Cell2 extends React.Component {
                     onMouseLeave={() => this.setState({ hover: false })}
                     onClick={() => {
                         onChange('currentType', name)
+
                     }}
                     style={{
                         textAlign: 'left',
@@ -69,7 +74,9 @@ class ManagerComment extends React.Component {
         super(props)
     }
     render(){
-        const { storeList, current, currentAvatar, currentName, currentType, avatarUrl, username, onChange } = this.props
+        const {
+            storeList, current, currentAvatar, onGetContact,
+            currentName, currentType, avatarUrl, username, onChange } = this.props
         return(
             <div style={{ height: '100%',}}>
                 <div style={{ padding: 5, backgroundColor: '#E9EBEE'}}>
@@ -91,11 +98,13 @@ class ManagerComment extends React.Component {
                           margin: 0, marginTop: 5, padding: '0px 0px 5px 0px',
                           borderRadius: 0, }}>
                             <li>
-                                <Cell name={username} avatarUrl={avatarUrl} width={150} onChange={onChange}/>
+                                <Cell name={username} avatarUrl={avatarUrl} onGetContact={onGetContact}
+                                    width={150} onChange={onChange}/>
                             </li>
                             {storeList.map((item) =>
                                 <li key={item.id}>
-                                    <Cell name={item.storename} avatarUrl={item.avatarUrl} width={150} onChange={onChange}/>
+                                    <Cell name={item.storename} avatarUrl={item.avatarUrl} onGetContact={onGetContact}
+                                        width={150} onChange={onChange} id={item.id}/>
                                 </li>
                             )}
                         </ul>
@@ -130,6 +139,16 @@ class ManagerComment extends React.Component {
                 <hr style={{ margin: 0}}/>
             </div>
         )
+    }
+    shouldComponentUpdate(nextProps, nextState){
+        const { offset, useroffset, currentId } = nextProps
+        if(nextProps.currentId != this.props.currentId)
+            this.props.onGetContact(offset, useroffset, currentId)
+        return true
+    }
+    componentDidMount(){
+        const { offset, useroffset, currentId } = this.props
+        this.props.onGetContact(offset, useroffset, currentId)
     }
 }
 
