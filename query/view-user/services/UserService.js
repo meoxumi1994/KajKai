@@ -1,7 +1,7 @@
 import { User } from '../models'
 import jwt from 'jsonwebtoken'
 import { getClientFormatNotification } from './NotificationService'
-import { getCommentsAdditionalInfo } from '../controllers/CommentPubController'
+import { getCommentsInfo } from '../controllers/CommentPubController'
 import { NotificationType } from '../enum'
 
 export const getUser = (requesterId, id, next) => {
@@ -308,11 +308,9 @@ export const getComments = (id, offset, length, next) => {
         notifications = []
       }
       const visitedComments = {}
-      const content = {}
       const comments = []
       for (let i = notifications.length - 1; i >= 0; i--) {
         let notification = notifications[i]
-        content[notification.commentId] = notification.content
         if (notification.type.includes('comment') || notification.type == NotificationType.RECEIVED) {
           if (!visitedComments[notification.commentId]) {
             visitedComments[notification.commentId] = true
@@ -342,31 +340,15 @@ export const getComments = (id, offset, length, next) => {
       }
       console.log('mComments: ', mComments);
       console.log('mComments: ', JSON.stringify(mComments));
-      getCommentsAdditionalInfo(mComments.map((comment) => (comment.commentId)), (result) => {
+      getCommentsInfo(mComments.map((comment) => (comment.commentId)), (result) => {
         console.log('result - user: ', result);
         if (result) {
           next({
             status: 'success',
             offset: mOffset,
-            leadercomments: mComments.map((comment, index) => ({
-              id: comment.commentId,
-              sellpostid: comment.sellpostId,
-              order: comment.order ? comment.order.map((product) => ({
-                id: product.id,
-                content: product.content ? product.content : '',
-                imageUrl: product.imageUrl,
-                list: product.list ? product.list : [],
-                num: product.numberOfOrder
-              })) : [],
-              numcomment: result[index].numberOfReply,
-              ownerid: user.id,
-              avatarUrl: user.avatarUrl,
-              name: user.username,
-              content: content[comment.commentId],
-              time: comment.time.getTime(),
-              numlike: result[index].numberOfLike,
-              likestatus: ['like'],
-              status: result[index].status
+            leadercomments: result.map((result, index) => ({
+              ...result,
+              time: mComments[index].time.getTime()
             }))
           })
         } else {

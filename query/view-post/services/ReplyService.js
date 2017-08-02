@@ -97,5 +97,5 @@ const getClientFormatReply = (reply) => ({
     avatarUrl: liker.avatarUrl,
     id: liker.userId ? liker.userId : liker.storeId,
     name: liker.username ? liker.username : liker.storeName
-  })) : null
+  })) : []
 })

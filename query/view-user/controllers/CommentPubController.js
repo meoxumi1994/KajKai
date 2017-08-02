@@ -2,7 +2,7 @@ import redis from 'redis'
 import config from '../config/pubSubConfig'
 import uuidV4 from 'uuid/v4'
 
-export const getCommentsAdditionalInfo = (commentIds, next) => {
+export const getCommentsInfo = (commentIds, next) => {
   const sub = redis.createClient(config)
   const pub = redis.createClient(config)
   const id = uuidV4()

@@ -1,6 +1,7 @@
 import { Comment } from '../models'
+import { getClientFormatReply } from '../services/ReplyService'
 
-export const getCommentsAdditionalInfoHandler = (message, next) => {
+export const getCommentsInfoHandler = (message, next) => {
   const { commentIds } = message
   const mPromises = []
   commentIds.map((id) => {
@@ -8,9 +9,18 @@ export const getCommentsAdditionalInfoHandler = (message, next) => {
       Comment.findOne({ id }, (err, comment) => {
         if (comment) {
           resolve({
-            numberOfReply: comment.numberOfReply,
-            numberOfLike: comment.replies[0].numberOfLike,
-            status: comment.status
+            id: comment.id,
+            sellpostid: comment.sellpostId,
+            order: comment.order ? comment.order.map((product) => ({
+              id: product.id,
+              content: product.content ? product.content : '',
+              imageUrl: product.imageUrl,
+              list: product.list ? product.list : [],
+              num: product.numberOfOrder
+            })) : [],
+            status: comment.status,
+            numcomment: comment.numberOfReply,
+            comments: [getClientFormatReply(comment.replies[0])]
           })
         } else {
           resolve(null)

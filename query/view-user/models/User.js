@@ -4,6 +4,7 @@ import { Sex, Language } from '../enum'
 import AddressSchema from './Address'
 import BasicStoreSchema from './BasicStore'
 import BlackSchema from './Black'
+import CommentSchema from './Comment'
 import ImageSchema from './Image'
 import InterestSchema from './Interest'
 import LastUpdateSchema from './LastUpdate'
@@ -32,7 +33,8 @@ const UserSchema = new mongoose.Schema({
   followingSellposts: [String],
   notifications: [NotificationSchema],
   numberOfUnRead: {type: Number},
-  interests: [InterestSchema]
+  interests: [InterestSchema],
+  comments: [CommentSchema]
 })
 
 export default UserSchema

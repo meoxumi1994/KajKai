@@ -81,6 +81,6 @@ export default {
   },
   'ODERMANAGEMENT': {
     controller: 'OrderManagementSubController',
-    method: 'getCommentsAdditionalInfoHandler'
+    method: 'getCommentsInfoHandler'
   }
 }

@@ -35,3 +35,9 @@ export const NotificationType = {
   INTEREST: 'createstore',
   RECEIVE: 'received'
 }
+
+export const OrderStatus = {
+  NEW: 'new',
+  RECEIVED: 'received',
+  DONE: 'done'
+}
