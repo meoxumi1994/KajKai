@@ -26,7 +26,7 @@ export const modifyFollow = (followerId, followeeId, next) => {
     Follow.findOne({followerId, followeeId}, (err, follow) => {
         if (follow) {
             removeFollowPub(follow);
-            removeFollow(followerId, followeeId, () => {
+            Follow.remove({followerId, followeeId}, () => {
                 next({...follow, type: 'remove'})
             })
         } else {
