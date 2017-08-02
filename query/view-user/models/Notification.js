@@ -20,7 +20,8 @@ const NotificationSchema = new mongoose.Schema({
   numberOfLike: {type: Number},
   likers: [LikerSchema],
   order: [ProductSchema],
-  isRead: {type: Number}
+  isRead: {type: Number},
+  numberOfReply: {type: Number}
 })
 
 export default NotificationSchema
