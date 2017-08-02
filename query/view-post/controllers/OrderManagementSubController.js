@@ -7,7 +7,7 @@ export const getCommentsAdditionalInfoHandler = (message, next) => {
     mPromises.push(new Promise((resolve, reject) => {
       Comment.findOne({ id }, (err, comment) => {
         if (comment) {
-          next({
+          resolve({
             numberOfReply: comment.numberOfReply,
             numberOfLike: comment.replies[0].numberOfLike,
             status: comment.status
