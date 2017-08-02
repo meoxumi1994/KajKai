@@ -1,7 +1,6 @@
 import { User } from '../models'
 import jwt from 'jsonwebtoken'
 import { getClientFormatNotification } from './NotificationService'
-import { getCommentsInfo } from '../controllers/CommentPubController'
 import { NotificationType } from '../enum'
 
 export const getUser = (requesterId, id, next) => {
