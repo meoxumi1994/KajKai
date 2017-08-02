@@ -30,8 +30,9 @@ export const removeFollowCon = (message, next) => {
 export const updateFollowCon = (message, next) => {
     let followerId = message.userId;
     let followeeId = (message.storeId) ? message.storeId : message.sellPostId;
-    console.log('fuck shit shit');
     modifyFollow(followerId, followeeId, (follow) => {
+
+        console.log('this shit ' + follow);
         if (follow) {
             next({status: 'success', follow: follow})
         } else {
