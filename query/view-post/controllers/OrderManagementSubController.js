@@ -20,6 +20,7 @@ export const getCommentsAdditionalInfoHandler = (message, next) => {
   })
 
   Promise.all(mPromises).then((result) => {
+    console.log('result: ', result);
     next(result)
   })
 }
