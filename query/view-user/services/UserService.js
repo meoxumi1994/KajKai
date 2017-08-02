@@ -308,9 +308,11 @@ export const getComments = (id, offset, length, next) => {
         notifications = []
       }
       const visitedComments = {}
+      const content = {}
       const comments = []
       for (let i = notifications.length - 1; i >= 0; i--) {
         let notification = notifications[i]
+        content[notification.commentId] = notification.content
         if (notification.type.includes('comment') || notification.type == NotificationType.RECEIVED) {
           if (!visitedComments[notification.commentId]) {
             visitedComments[notification.commentId] = true
@@ -360,7 +362,7 @@ export const getComments = (id, offset, length, next) => {
               ownerid: user.id,
               avatarUrl: user.avatarUrl,
               name: user.username,
-              content: comment.content,
+              content: content[commentId],
               time: comment.time.getTime(),
               numlike: result[index].numberOfLike,
               likestatus: ['like'],
