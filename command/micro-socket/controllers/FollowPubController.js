@@ -35,7 +35,7 @@ export const updateFollowPub = (userId, storeId, next) => {
         sub.quit();
         pub.quit();
         if (message.status === 'success') {
-            next(message.userFollow)
+            next(message.follow)
         } else {
             next(null)
         }
