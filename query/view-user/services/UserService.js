@@ -321,10 +321,10 @@ export const getComments = (id, offset, length, next) => {
       const mComments = []
       let currentNumberOfComment = 0, mOffset = -2, lastIndex = -1
       for (let i = 0; i < comments.length; i++) {
-        let comment = mComments[i]
+        let comment = comments[i]
         if (comment.time < offset) {
           if (currentNumberOfComment < length) {
-            mNotifications.push(getClientFormatNotification(notification))
+            mComments.push(comment)
 
             mOffset = comment.time.getTime()
             lastIndex = i
