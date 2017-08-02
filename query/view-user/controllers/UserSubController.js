@@ -2,7 +2,12 @@ import { User, Black } from '../models'
 
 export const createUser = (message) => {
   const { id, username, email, avatarUrl, imageUrls: imageList } = message.user
-  const user = new User({ id })
+  const user = new User({
+    id,
+    lastUpdate: {
+      username: Date.now()
+    }
+  })
 
   if (username) user.username = username
   if (email) user.email = email
@@ -19,26 +24,41 @@ export const updateUser = (message) => {
   const { id, username, avatarUrl, coverUrl, imageUrls: imageList, address, phone, language, sex, yearOfBirth, lastUpdate } = message.user
   const user = {}
 
-  if (username) user.username = username
+  if (username) {
+    user.username = username
+    user.lastUpdate = {
+      username: Date.now()
+    }
+  }
   if (avatarUrl) user.avatarUrl = avatarUrl
   if (coverUrl) user.coverUrl = coverUrl
   if (imageList) user.imageList = imageList.map((image) => ({
     url: image.url,
     time: image.time
   }))
-  if (address) user.address = address
-  if (phone) user.phone = phone
+  if (address) {
+    user.address = address
+    if (user.lastUpdate) {
+      user.lastUpdate.address = Date.now()
+    } else {
+      user.lastUpdate = {
+        address: Date.now()
+      }
+    }
+  }
+  if (phone) {
+    user.phone = phone
+    if (user.lastUpdate) {
+      user.lastUpdate.phone = Date.now()
+    } else {
+      user.lastUpdate = {
+        phone: Date.now()
+      }
+    }
+  }
   if (language) user.language = language
   if (sex) user.sex = sex
   if (yearOfBirth) user.yearOfBirth = yearOfBirth
-  if (lastUpdate) {
-    const mLastUpdate = {}
-    const { username, phone, address } = lastUpdate
-    if(username) mLastUpdate.username = username
-    if(phone) mLastUpdate.phone = phone
-    if(address) mLastUpdate.address = address
-    user.lastUpdate = mLastUpdate
-  }
 
   User.findOneAndUpdate({ id }, user, () => {})
   User.find({}, (err, users) => {

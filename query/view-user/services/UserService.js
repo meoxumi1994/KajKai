@@ -36,11 +36,11 @@ export const getUser = (requesterId, id, next) => {
               phone: user.phone,
               language: user.language,
               sex: user.sex,
-              yearOfBirth: user.yearOfBirth,
+              yearOfBirth: user.yearOfBirth ? user.yearOfBirth.getTime() : '',
               lastUpdate: user.lastUpdate ? {
-                username: user.lastUpdate.username,
-                phone: user.lastUpdate.phone,
-                address: user.lastUpdate.address
+                username: user.lastUpdate.username ? user.lastUpdate.username.getTime() : '',
+                phone: user.lastUpdate.phone ? user.lastUpdate.phone.getTime(): '',
+                address: user.lastUpdate.address ? user.lastUpdate.address.getTime() : ''
               } : {},
               blacklist: user.blackList ? user.blackList.map((black) => ({
                   id: black.id,

@@ -25,11 +25,11 @@ describe('UserService', () => {
               phone: '0123456789',
               language: 'vi',
               sex: 'MALE',
-              yearOfBirth: new Date('2017-08-01T12:50:56.093Z'),
+              yearOfBirth: (new Date('2017-08-01T12:50:56.093Z')).getTime(),
               lastUpdate: {
-                username : new Date('2017-08-01T12:50:56.093Z'),
-                phone : new Date('2017-08-01T12:50:56.093Z'),
-                address : new Date('2017-08-01T12:50:56.093Z')
+                username : (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+                phone : (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+                address : (new Date('2017-08-01T12:50:56.093Z')).getTime()
               },
               blacklist: [
                 {

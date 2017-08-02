@@ -7,7 +7,7 @@ export const getUserHandler = () => (req, res) => {
   if(!requestedId) {
     requestedId = requesterId
   }
-  console.log('requestedId: ', requestedId);
+  // console.log('requestedId: ', requestedId);
 
   getUser(requesterId, requestedId, (user) => {
     if (user) {
