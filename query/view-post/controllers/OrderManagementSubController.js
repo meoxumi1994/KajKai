@@ -8,8 +8,8 @@ export const getCommentsAdditionalInfoHandler = (message, next) => {
       Comment.findOne({ id }, (err, comment) => {
         if (comment) {
           next({
-            numberOfReply: comment.numberOfReply
-            numberOfLike: comment.replies[0].numberOfLike
+            numberOfReply: comment.numberOfReply,
+            numberOfLike: comment.replies[0].numberOfLike,
             status: comment.status
           })
         } else {
