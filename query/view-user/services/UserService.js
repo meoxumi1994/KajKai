@@ -307,13 +307,13 @@ export const getComments = (id, offset, length, next) => {
       if (!notifications) {
         notifications = []
       }
-      const visitedSellposts = {}
+      const visitedComments = {}
       const comments = []
       for (let i = notifications.length - 1; i >= 0; i--) {
         let notification = notifications[i]
         if (notification.type.includes('comment') || notification.type == NotificationType.RECEIVED) {
-          if (!visitedSellposts[notification.sellpostId]) {
-            visitedSellposts[notification.sellpostId] = true
+          if (!visitedComments[notification.commentId]) {
+            visitedComments[notification.commentId] = true
             comments.push(notification)
           }
         }
