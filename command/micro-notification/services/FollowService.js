@@ -25,14 +25,16 @@ export const removeFollow = (followerId, followeeId, next) => {
 export const modifyFollow = (followerId, followeeId, next) => {
     Follow.findOne({followerId, followeeId}, (err, follow) => {
         if (follow) {
-            removeFollowPub(follow);
-            Follow.remove({followerId, followeeId}, () => {
+            Follow.remove({followerId, followeeId}, (err) => {
+                console.log('fuck err', err);
+                removeFollowPub(follow);
                 next({...follow, type: 'remove'})
             })
         } else {
             const newFollow = new Follow({followerId, followeeId});
-            addFollowPub(newFollow);
-            newFollow.save(() => {
+            newFollow.save((err) => {
+                console.log('fuck err', err);
+                addFollowPub(newFollow);
                 next({...newFollow, type: 'add'});
             });
         }
