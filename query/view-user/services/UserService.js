@@ -340,7 +340,7 @@ export const getComments = (id, offset, length, next) => {
       }
 
       getCommentsAdditionalInfo(mComments.map((comment) => (comment.commentId)), (result) => {
-        console.log('result: ', result);
+        console.log('result - user: ', result);
         if (result) {
           next({
             status: 'success',
