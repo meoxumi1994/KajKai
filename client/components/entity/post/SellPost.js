@@ -84,10 +84,12 @@ class SellPost extends React.Component {
                             sellpostId={id}
                         />
                     </div>
-                    <div className="btn" style={{ float: 'right', margin: 0, marginTop: -11, marginRight: 10, padding: 0 }}
-                        onClick={() => onFollow()}>
-                        <img src={beFollow?"/images/hasfollow.svg":"/images/follow.svg"} width={25}/>
-                    </div>
+                    {!isOwner &&
+                        <div className="btn" style={{ float: 'right', margin: 0, marginTop: -11, marginRight: 10, padding: 0 }}
+                            onClick={() => onFollow()}>
+                            <img src={beFollow?"/images/hasfollow.svg":"/images/follow.svg"} width={25}/>
+                        </div>
+                    }
                     <div>
                         <img src={avatarUrl} width={ship?60:40} height={ship?60:40}/>
                     </div>

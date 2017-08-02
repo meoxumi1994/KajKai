@@ -45,6 +45,10 @@ btnn:focus{
     background:transparent;
 }
 
+.dropdown-menu {
+    min-width: 0px !important;
+}
+
 .clocker {
   width: 22px;
   height: 22px;

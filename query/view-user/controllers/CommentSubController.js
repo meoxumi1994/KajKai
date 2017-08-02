@@ -115,14 +115,14 @@ export const createCommentNotification = (message) => {
 export const createReceiveNotification = (message) => {
   const { fCommentId: id, status } = message.fComment
 
-  if (status == NotificationType.RECEIVE) {
+  if (status == NotificationType.RECEIVED) {
     Notification.findOne({ commentId: id }, (err, notification) => {
       if (notification) {
         IDSellpostStore.findOne({ sellpostId: notification.sellpostId }, (err, mIDSellpostStore) => {
           if (mIDSellpostStore) {
-            notification.type = NotificationType.RECEIVE
+            notification.type = NotificationType.RECEIVED
             let mNotification = new Notification({
-              type: NotificationType.RECEIVE,
+              type: NotificationType.RECEIVED,
               commentId: notification.commentId,
               replyId: notification.replyId,
               sellpostId: notification.sellpostId,

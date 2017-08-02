@@ -106,8 +106,17 @@ const About = ({ category, firstCategory, secondCategory, urlname, phone, storen
                 </div>
             </div>
             <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+            <div className="container-fluid" style={{ padding: 10 }}>
+                <div className="row">
+                    <div className="col col-xs-2">
+                        <span style={{ fontWeight: 'bold' }}>map</span>
+                    </div>
+                    <div className="col col-xs-9" style={{ marginLeft: 28 }}>
+                        <ShowInMap width={730} height={400} position={position}/>
+                    </div>
+                </div>
+            </div>
 
-            <ShowInMap width={935} height={400} position={position}/>
         </div>
     )
 }

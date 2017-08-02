@@ -15,6 +15,7 @@ import search from './search'
 import bar from './bar'
 import admin from './admin'
 import home from './home'
+import contacthistory from './contacthistory'
 
 const inst = combineReducers({
     userloginregister,
@@ -31,7 +32,8 @@ const inst = combineReducers({
     search,
     bar,
     admin,
-    home
+    home,
+    contacthistory
 })
 
 export default inst

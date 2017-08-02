@@ -1,4 +1,4 @@
-import { getUser, getUserPrivacy, getUserImageList, getNotifications, updateNotification, getInterests } from '../services/UserService.js'
+import { getUser, getUserPrivacy, getUserImageList, getNotifications, updateNotification, getInterests, getComments } from '../services/UserService.js'
 
 export const getUserHandler = () => (req, res) => {
   let { id: requestedId } = req.params
@@ -126,6 +126,29 @@ export const getInterestsHandler = () => (req, res) => {
     })
   } else {
     getInterests(requestedId, offset, (result) => {
+      res.json(result)
+    })
+  }
+}
+
+export const getCommentsHandler = () => (req, res) => {
+  const requestedId = req.decoded._id
+  let { offset } = req.query
+  let length = 10
+  if (!offset || offset == '-1') {
+    offset =  Date.now()
+    length = 5
+  } else {
+    offset = new Date(parseInt(offset))
+  }
+
+  if (requestedId == 'Guest') {
+    res.json({
+      status: 'failed',
+      reason: 'Guest'
+    })
+  } else {
+    getComments(requestedId, offset, length, (result) => {
       res.json(result)
     })
   }
