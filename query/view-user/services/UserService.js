@@ -303,7 +303,7 @@ export const getComments = (id, offset, length, next) => {
         })
       }
     } else {
-      const { notifications } = user
+      let { notifications } = user
       if (!notifications) {
         notifications = []
       }
