@@ -78,5 +78,9 @@ export default {
   'FOLLOW.RemoveUserFollow': {
     controller: 'FollowSubController',
     method: 'removeUserFollow'
+  },
+  'ODERMANAGEMENT': {
+    controller: 'OrderManagementSubController',
+    method: 'getCommentsAdditionalInfoHandler'
   }
 }
