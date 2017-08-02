@@ -68,7 +68,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
         mComment.order = comment.order ? comment.order.map((product) => ({
           id: product.id,
           content: product.content ? product.content : '',
-          imageUrl: product.imageUrl ? product.imageUrl : '',
+          imageUrl: product.imageUrl,
           list: product.list ? product.list : [],
           num: product.numberOfOrder
         })) : []
@@ -100,7 +100,7 @@ export const getClientFormatSellpostComments = (comments, offset, isFirst) => {
           mComment.order = comment.order ? comment.order.map((product) => ({
             id: product.id,
             content: product.content ? product.content : '',
-            imageUrl: product.imageUrl ? product.imageUrl : '',
+            imageUrl: product.imageUrl,
             list: product.list ? product.list : [],
             num: product.numberOfOrder
           })) : []

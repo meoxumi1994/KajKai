@@ -338,7 +338,8 @@ export const getComments = (id, offset, length, next) => {
       if (lastIndex == comments.length - 1) {
         mOffset = -2
       }
-
+      console.log('mComments: ', mComments);
+      console.log('mComments: ', JSON.stringify(mComments));
       getCommentsAdditionalInfo(mComments.map((comment) => (comment.commentId)), (result) => {
         console.log('result - user: ', result);
         if (result) {
@@ -351,7 +352,7 @@ export const getComments = (id, offset, length, next) => {
               order: comment.order ? comment.order.map((product) => ({
                 id: product.id,
                 content: product.content ? product.content : '',
-                imageUrl: product.imageUrl ? product.imageUrl : '',
+                imageUrl: product.imageUrl,
                 list: product.list ? product.list : [],
                 num: product.numberOfOrder
               })) : [],
