@@ -354,7 +354,7 @@ export const getComments = (id, offset, length, next) => {
                 list: product.list ? product.list : [],
                 num: product.numberOfOrder
               })) : [],
-              numcomment: result[index].numberOfReply
+              numcomment: result[index].numberOfReply,
               ownerid: user.id,
               avatarUrl: user.avatarUrl,
               name: user.username,
