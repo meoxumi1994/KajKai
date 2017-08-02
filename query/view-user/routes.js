@@ -62,13 +62,6 @@ export default {
       method: 'getInterestsHandler'
     }
   },
-  '/leadercomment': {
-    get: {
-      controller: 'UserController',
-      middleware: [auth()],
-      method: 'getCommentsHandler'
-    }
-  },
   '/test': {
     get: {
       controller: 'TestController',

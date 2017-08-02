@@ -15,15 +15,8 @@ for(let mChannel in allChannels) {
     sub.on('message', (channel, message) => {
         if(channel === mChannel) {
             const eventMessage = JSON.parse(message)
-
-            if (channel == 'ODERMANAGEMENT') {
-              const eventId = eventMessage.eventId
-              method(eventMessage, (result) => {
-                pub.publish(channel + eventId, JSON.stringify(result))
-              })
-            } else {
-              method(eventMessage)
-            }
+            
+            method(eventMessage)
         }
     })
     sub.subscribe(mChannel)
