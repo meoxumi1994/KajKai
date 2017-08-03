@@ -93,10 +93,10 @@ export const getFirstLayerCommentCon = (action, sio, io) => {
 export const storeReceiveOrder = (action, sio, io) => {
     if (!action.data || !action.data.userID) return;
     updateOrder(action.data.leadercommentid, action.data.status ? action.data.status : 'received', action.data.userID, (status, sellPostId, posterId) => {
-        sio.emit('action', {type: 'client/RECEIVE', data: {
-            leadercommentid: action.data.leadercommentid,
-            status: status
-        }});
+        // sio.emit('action', {type: 'client/RECEIVE', data: {
+        //     leadercommentid: action.data.leadercommentid,
+        //     status: status
+        // }});
         sio.emit('action', {
             type: 'global/RECEIVE', data: {
                 leadercommentid: action.data.leadercommentid,
@@ -123,7 +123,7 @@ export const storeReceiveOrder = (action, sio, io) => {
 export const storeFinishedOrder = (action, sio, io) => {
     if (!action.data || !action.data.userID) return;
     updateOrder(action.data.leadercommentid, action.data.status ? action.data.status : 'done', action.data.userID, (status, sellPostId) => {
-        sio.emit('action', {type: 'client/DONE', data: {
+        sio.emit('action', {type: 'global/DONE', data: {
             leadercommentid: action.data.leadercommentid,
             status: status
         }});
