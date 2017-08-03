@@ -10,6 +10,9 @@ export const getCommentsHandler = () => (req, res) => {
   if (!status) {
     status = 'done'
   }
+  if (!length) {
+    length = 10
+  }
   if (!offset || offset == '-1') {
     offset =  Date.now()
   } else {
