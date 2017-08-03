@@ -61,19 +61,5 @@ export default {
       middleware: [auth()],
       method: 'getInterestsHandler'
     }
-  },
-  '/test': {
-    get: {
-      controller: 'TestController',
-      method: 'queryHandler'
-    },
-    post: {
-      controller: 'TestController',
-      method: 'insertHandler'
-    },
-    put: {
-      controller: 'TestController',
-      method: 'updateHandler'
-    }
   }
 }
