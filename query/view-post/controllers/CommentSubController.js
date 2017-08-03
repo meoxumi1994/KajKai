@@ -69,11 +69,13 @@ export const createComment = (message) => {
     const reply = replies[0] ? replies[0] : replies[1]
 
     comment.replies = [reply]
-    comment.save(() => {})
 
     if (sellpostId) {
       Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
         if (sellpost) {
+          comment.storeId = sellpost.storeId          
+          comment.save(() => {})
+
           let { comments } = sellpost
 
           if (!comments) {

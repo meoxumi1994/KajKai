@@ -41,7 +41,27 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
         next(getClientFormatMinorpostComments(requesterId, comments, offset))
       }
     })
-  } else { // type == store || type == user
+  } else if (type == 'store') {
+    Comment.find({ storeId: id }, (err, comments) => {
+      if (err || !comments) {
+        if(err) {
+          next(null)
+        } else {
+          next({
+            status: 'nodata',
+            offset,
+            id,
+            leadercomments: []
+          })
+        }
+      } else {
+        next({
+          id,
+          ...getClientFormatSellpostComments(requesterId, comments, offset, status, false, length)
+        })
+      }
+    })
+  } else { // type == user
     Comment.find({ commenterId: id }, (err, comments) => {
       if (err || !comments) {
         if(err) {

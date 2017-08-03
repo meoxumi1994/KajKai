@@ -1,4 +1,4 @@
-import * as UserService from '../../../../query/view-user/services/UserService'
+import * as UserService from '../../query/view-user/services/UserService'
 import { expect } from 'chai'
 import jwt from 'jsonwebtoken'
 

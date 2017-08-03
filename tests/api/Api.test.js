@@ -1,7 +1,7 @@
 import 'babel-polyfill'
 import { expect } from 'chai'
 import request from 'supertest'
-import app from '../../../../query/view-user/app'
+import app from '../../query/view-user/app'
 import jwt from 'jsonwebtoken'
 
 describe('User API', () => {
