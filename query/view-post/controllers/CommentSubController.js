@@ -5,7 +5,8 @@ export const createComment = (message) => {
   const { fCommentId: id, posterId, sellPostId: sellpostId, minorPostId: minorpostId, order, time, content } = message.fComment
 
   const comment = new Comment({
-    id
+    id,
+    commenterId: posterId
   })
 
   if (sellpostId) comment.sellpostId = sellpostId

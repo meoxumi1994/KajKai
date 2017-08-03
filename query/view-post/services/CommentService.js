@@ -1,9 +1,9 @@
-import { Sellpost, Minorpost } from '../models'
+import { Sellpost, Minorpost, Comment } from '../models'
 import { getClientFormatReplies } from './ReplyService'
 import { OrderStatus } from '../enum'
 
-export const getComments = (requesterId, postType, id, offset, status, next) => {
-  if (postType == 'sellpost') {
+export const getComments = (requesterId, type, id, offset, status, length, next) => {
+  if (type == 'sellpost') {
     Sellpost.findOne({ id }, (err, sellpost) => {
       if (err || !sellpost) {
         if(err) {
@@ -20,11 +20,11 @@ export const getComments = (requesterId, postType, id, offset, status, next) => 
         const { comments } = sellpost
         next({
           id,
-          ...getClientFormatSellpostComments(comments, offset, status, false)
+          ...getClientFormatSellpostComments(requesterId, comments, offset, status, false, 10)
         })
       }
     })
-  } else {
+  } else if (type == 'minorpost') {
     Minorpost.findOne({ id }, (err, minorpost) => {
       if (err || !minorpost) {
         if(err) {
@@ -38,13 +38,33 @@ export const getComments = (requesterId, postType, id, offset, status, next) => 
         }
       } else {
         const { comments } = minorpost
-        next(getClientFormatMinorpostComments(comments, offset))
+        next(getClientFormatMinorpostComments(requesterId, comments, offset))
+      }
+    })
+  } else { // type == store || type == user
+    Comment.find({ commenterId: id }, (err, comments) => {
+      if (err || !comments) {
+        if(err) {
+          next(null)
+        } else {
+          next({
+            status: 'nodata',
+            offset,
+            id,
+            leadercomments: []
+          })
+        }
+      } else {
+        next({
+          id,
+          ...getClientFormatSellpostComments(requesterId, comments, offset, status, false, length)
+        })
       }
     })
   }
 }
 
-export const getClientFormatSellpostComments = (comments, offset, status, isFirst) => {
+export const getClientFormatSellpostComments = (requesterId, comments, offset, status, isFirst, length) => {
   if (!comments) {
     return {
       status: 'success',
@@ -67,7 +87,7 @@ export const getClientFormatSellpostComments = (comments, offset, status, isFirs
       let comment = comments[i]
       if (offset - comment.time <= oneHour && currentNumberOfComment < 5 && level[comment.status] <= level[status]) {
         let { replies } = comment
-        let mComment = getClientFormatReplies(replies, Date.now(), true)
+        let mComment = getClientFormatReplies(requesterId, replies, Date.now(), true)
 
         mComment.id = comment.id
         mComment.sellpostid = comment.sellpostId
@@ -97,9 +117,9 @@ export const getClientFormatSellpostComments = (comments, offset, status, isFirs
     for (let i = comments.length - 1; i >= 0; i--) {
       let comment = comments[i]
       if (comment.time < offset && level[comment.status] <= level[status]) {
-        if (currentNumberOfComment < 10) {
+        if (currentNumberOfComment < length) {
           let { replies } = comment
-          let mComment = getClientFormatReplies(replies, Date.now(), true)
+          let mComment = getClientFormatReplies(requesterId, replies, Date.now(), true)
 
           mComment.id = comment.id
           mComment.sellpostid = comment.sellpostId
@@ -136,7 +156,7 @@ export const getClientFormatSellpostComments = (comments, offset, status, isFirs
   }
 }
 
-export const getClientFormatMinorpostComments = (comments, offset) => {
+export const getClientFormatMinorpostComments = (requesterId, comments, offset) => {
   if (!comments) {
     return {
       offset,
@@ -152,7 +172,7 @@ export const getClientFormatMinorpostComments = (comments, offset) => {
     let comment = comments[i]
     if (offset - comment.time <= oneHour && currentNumberOfComment < 5) {
       let { replies } = comment
-      let mComment = getClientFormatReplies(replies, Date.now())
+      let mComment = getClientFormatReplies(requesterId, replies, Date.now())
 
       mComment.id = comment.id
       mComment.minorpostid = comment.minorPostId

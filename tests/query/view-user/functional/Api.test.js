@@ -286,4 +286,122 @@ describe('User API', () => {
       })
     })
   })
+
+  describe('GET /imagelist/user', () => {
+    describe('with correct token and offset', () => {
+      it('should return status success and list of uploaded images', (done) => {
+        const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
+        request(app)
+          .get('/imagelist/user?offset=' + (new Date('2017-08-01T12:50:56.093Z')).getTime())
+          .set('Cookie', 'token=' + token)
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err, res) => {
+            const expectedResult = {
+              offset: -2,
+              status: 'success',
+              listImage: [
+                {
+                  url: 'https://lh5.googleusercontent.com/-Uabj3hUMOdY/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoDplUFVn3NPsk8FMoKjDPp30Cf6g/s96-c/photo.jpg',
+                  time: (new Date('2017-07-27T14:09:58.447Z')).getTime()
+                }
+              ]
+            }
+            expect(res.body).to.deep.equal(expectedResult)
+            done()
+          })
+      })
+    })
+
+    describe('with correct token but no offset', () => {
+      it('should return status success and list of uploaded images', (done) => {
+        const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
+        request(app)
+          .get('/imagelist/user')
+          .set('Cookie', 'token=' + token)
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err, res) => {
+            const expectedResult = {
+              offset: -2,
+              status: 'success',
+              listImage: [
+                {
+                  url: 'https://lh5.googleusercontent.com/-Uabj3hUMOdY/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoDplUFVn3NPsk8FMoKjDPp30Cf6g/s96-c/photo.jpg',
+                  time: (new Date('2017-07-27T14:09:58.447Z')).getTime()
+                }
+              ]
+            }
+            expect(res.body).to.deep.equal(expectedResult)
+            done()
+          })
+      })
+    })
+
+    describe('with correct token and offset == 1', () => {
+      it('should return status success and list of uploaded images', (done) => {
+        const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
+        request(app)
+          .get('/imagelist/user?offset=-1')
+          .set('Cookie', 'token=' + token)
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err, res) => {
+            const expectedResult = {
+              offset: -2,
+              status: 'success',
+              listImage: [
+                {
+                  url: 'https://lh5.googleusercontent.com/-Uabj3hUMOdY/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoDplUFVn3NPsk8FMoKjDPp30Cf6g/s96-c/photo.jpg',
+                  time: (new Date('2017-07-27T14:09:58.447Z')).getTime()
+                }
+              ]
+            }
+            expect(res.body).to.deep.equal(expectedResult)
+            done()
+          })
+      })
+    })
+
+    describe('with wrong token', () => {
+      it('should return status noData', (done) => {
+        const token = 'wrong token'
+        request(app)
+          .get('/imagelist/user?offset=-1')
+          .set('Cookie', 'token=' + token)
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err, res) => {
+            const expectedResult = {
+              status: 'noData',
+              listImage: []
+            }
+            expect(res.body).to.deep.equal(expectedResult)
+            done()
+          })
+      })
+    })
+
+    describe('without token', () => {
+      it('should return status noData', (done) => {
+        const token = 'wrong token'
+        request(app)
+          .get('/imagelist/user?offset=-1')
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err, res) => {
+            const expectedResult = {
+              status: 'noData',
+              listImage: []
+            }
+            expect(res.body).to.deep.equal(expectedResult)
+            done()
+          })
+      })
+    })
+
+  })
+
+
+
 })

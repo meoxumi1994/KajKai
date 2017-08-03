@@ -120,7 +120,7 @@ describe('UserService', () => {
   })
 
   describe('getUserImageList', () => {
-    describe('with correct userId', () => {
+    describe('with correct userId and offset', () => {
       it('should return status success and list of uploaded images', (done) => {
         UserService.getUserImageList('', '0015979f436810eaa65bbca1a64', new Date('2017-08-01T12:50:56.093Z'), (result) => {
           const expectedResult = {

@@ -6,6 +6,7 @@ import ReplySchema from './Reply'
 
 const CommentSchema = new mongoose.Schema({
   id: {type: String},
+  commenterId: {type: String},
   sellpostId: {type: String},
   minorpostId: {type: String},
   order: [ProductSchema],

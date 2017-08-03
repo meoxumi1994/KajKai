@@ -225,6 +225,47 @@ const getClientFormatSellpost = (requesterId, sellpost, offset) => {
     }
   }
 
+  let { likers } = sellpost
+  if (!likers) {
+    likers = []
+  }
+  let likes = []
+
+  if (requesterId == 'Guest') {
+    likes = likers.slice(0, 5)
+  } else {
+    for (let i = 0; i < likers.length; i++) {
+      let liker = likers[i]
+      if (liker.userId == requesterId) {
+        likes.push({
+          userid: liker.userId,
+          username: liker.username,
+          storeid: liker.storeId,
+          storename: liker.storeName,
+          avatarUrl: liker.avatarUrl,
+          id: liker.userId ? liker.userId : liker.storeId,
+          name: liker.username ? liker.username : liker.storeName
+        })
+        break
+      }
+    }
+
+    for (let i = 0; i < likers.length && likers.length < 5; i++) {
+      let liker = likers[i]
+      if (liker.userId != requesterId) {
+        likes.push({
+          userid: liker.userId,
+          username: liker.username,
+          storeid: liker.storeId,
+          storename: liker.storeName,
+          avatarUrl: liker.avatarUrl,
+          id: liker.userId ? liker.userId : liker.storeId,
+          name: liker.username ? liker.username : liker.storeName
+        })
+      }
+    }
+  }
+
   return ({
     id: sellpost.id,
     storeid: sellpost.storeId,
@@ -240,19 +281,11 @@ const getClientFormatSellpost = (requesterId, sellpost, offset) => {
     ...getClientFormatPostrows(postrows, -1),
     numlike: sellpost.numberOfLike ? sellpost.numberOfLike : 0,
     likestatus: ['like'],
-    likes: sellpost.likers ? sellpost.likers.slice(0, 5).map((liker) => ({
-      userid: liker.userId,
-      username: liker.username,
-      storeid: liker.storeId,
-      storename: liker.storeName,
-      avatarUrl: liker.avatarUrl,
-      id: liker.userId ? liker.userId : liker.storeId,
-      name: liker.username ? liker.username : liker.storeName
-    })) : null,
+    likes,
     numfollow: sellpost.numberOfFollow ? sellpost.numberOfFollow : 0,
     follows,
     numleadercomment: sellpost.numberOfComment ? sellpost.numberOfComment : 0,
     numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
-    ...getClientFormatSellpostComments(comments, offset, 'done', true)
+    ...getClientFormatSellpostComments(comments, offset, 'done', true, null)
   })
 }

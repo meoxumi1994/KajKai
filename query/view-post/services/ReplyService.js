@@ -17,13 +17,13 @@ export const getReplies = (requesterId, id, offset, next) => {
       const { replies } = comment
       next({
         id,
-        ...getClientFormatReplies(replies, offset, false)
+        ...getClientFormatReplies(requesterId, replies, offset, false)
       })
     }
   })
 }
 
-export const getClientFormatReplies = (replies, offset, isFirst) => {
+export const getClientFormatReplies = (requesterId, replies, offset, isFirst) => {
   if (!replies) {
     return {
       status: 'success',
@@ -38,7 +38,7 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
     for(let k = replies.length - 1; k > 0; k--) {
       let reply = replies[k]
       if (offset - reply.time <= oneHour && currentNumberOfReply < 2) {
-        mReplies = [getClientFormatReply(reply), ...mReplies]
+        mReplies = [getClientFormatReply(requesterId, reply), ...mReplies]
 
         rOffset = reply.time.getTime()
         currentNumberOfReply++
@@ -50,13 +50,13 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
       rOffset = -2
     }
 
-    mReplies = [getClientFormatReply(replies[0]), ...mReplies]
+    mReplies = [getClientFormatReply(requesterId, replies[0]), ...mReplies]
   } else {
     for(let k = replies.length - 1; k > 0; k--) {
       let reply = replies[k]
       if (reply.time < offset) {
         if (currentNumberOfReply < 10) {
-          mReplies = [getClientFormatReply(reply), ...mReplies]
+          mReplies = [getClientFormatReply(requesterId, reply), ...mReplies]
 
           rOffset = reply.time.getTime()
           lastIndex = k
@@ -78,24 +78,59 @@ export const getClientFormatReplies = (replies, offset, isFirst) => {
   }
 }
 
-const getClientFormatReply = (reply) => ({
-  id: reply.id,
-  type: reply.type,
-  urlname: reply.urlName,
-  commenterid: reply.userId,
-  leadercommentid: reply.commentId,
-  avatarUrl: reply.avatarUrl,
-  name: reply.username,
-  content: reply.content ? reply.content : '',
-  time: reply.time.getTime(),
-  numlike: reply.numberOfLike ? reply.numberOfLike : 0,
-  likes: reply.likers ? reply.likers.map((liker) => ({
-    userid: liker.userId,
-    username: liker.username,
-    storeid: liker.storeId,
-    storename: liker.storeName,
-    avatarUrl: liker.avatarUrl,
-    id: liker.userId ? liker.userId : liker.storeId,
-    name: liker.username ? liker.username : liker.storeName
-  })) : []
-})
+const getClientFormatReply = (requesterId, reply) => {
+  let { likers } = reply
+  if (!likers) {
+    likers = []
+  }
+  let likes = []
+
+  if (requesterId == 'Guest') {
+    likes = likers.slice(0, 5)
+  } else {
+    for (let i = 0; i < likers.length; i++) {
+      let liker = likers[i]
+      if (liker.userId == requesterId) {
+        likes.push({
+          userid: liker.userId,
+          username: liker.username,
+          storeid: liker.storeId,
+          storename: liker.storeName,
+          avatarUrl: liker.avatarUrl,
+          id: liker.userId ? liker.userId : liker.storeId,
+          name: liker.username ? liker.username : liker.storeName
+        })
+        break
+      }
+    }
+
+    for (let i = 0; i < likers.length && likers.length < 5; i++) {
+      let liker = likers[i]
+      if (liker.userId != requesterId) {
+        likes.push({
+          userid: liker.userId,
+          username: liker.username,
+          storeid: liker.storeId,
+          storename: liker.storeName,
+          avatarUrl: liker.avatarUrl,
+          id: liker.userId ? liker.userId : liker.storeId,
+          name: liker.username ? liker.username : liker.storeName
+        })
+      }
+    }
+  }
+
+  return ({
+    id: reply.id,
+    type: reply.type,
+    urlname: reply.urlName,
+    commenterid: reply.userId,
+    leadercommentid: reply.commentId,
+    avatarUrl: reply.avatarUrl,
+    name: reply.username,
+    content: reply.content ? reply.content : '',
+    time: reply.time.getTime(),
+    numlike: reply.numberOfLike ? reply.numberOfLike : 0,
+    likes
+  })
+}
