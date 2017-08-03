@@ -1,12 +1,12 @@
-import * as UserService from '../../../../query/view-user/services/UserService'
+import * as UserService from '../../query/view-user/services/UserService'
 import { expect } from 'chai'
 import jwt from 'jsonwebtoken'
 
 describe('UserService', () => {
   describe('getUser', () => {
-    describe('with correct userId', () => {
+    describe('with correct userId == requesterId', () => {
       it('should return status success and correct user info', (done) => {
-        UserService.getUser('', '0015979f436810eaa65bbca1a64', (result) => {
+        UserService.getUser('0015979f436810eaa65bbca1a64', '0015979f436810eaa65bbca1a64', (result) => {
           const expectedResult = {
             status: 'success',
             user: {
@@ -25,11 +25,49 @@ describe('UserService', () => {
               phone: '0123456789',
               language: 'vi',
               sex: 'MALE',
-              yearOfBirth: new Date('2017-08-01T12:50:56.093Z'),
+              yearOfBirth: (new Date('2017-08-01T12:50:56.093Z')).getTime(),
               lastUpdate: {
-                username : new Date('2017-08-01T12:50:56.093Z'),
-                phone : new Date('2017-08-01T12:50:56.093Z'),
-                address : new Date('2017-08-01T12:50:56.093Z')
+                username : (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+                phone : (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+                address : (new Date('2017-08-01T12:50:56.093Z')).getTime()
+              },
+              blacklist: [
+                {
+                  id: '0015979f436810eaa65bbca1a65',
+                  type: 'userid',
+                  name: 'Charity'
+                }
+              ],
+              storeList:  [],
+              numUnreaded: 0
+            }
+          }
+          expect(result).to.deep.equal(expectedResult)
+          done()
+        })
+      })
+    })
+
+    describe('with correct userId != requesterId', () => {
+      it('should return status success and correct user info', (done) => {
+        UserService.getUser('requesterId', '0015979f436810eaa65bbca1a64', (result) => {
+          const expectedResult = {
+            status: 'success',
+            user: {
+              id: '0015979f436810eaa65bbca1a64',
+              username: 'Từ Thiện Nguyễn Văn',
+              email: '',
+              avatarUrl: 'https://lh5.googleusercontent.com/-Uabj3hUMOdY/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoDplUFVn3NPsk8FMoKjDPp30Cf6g/s96-c/photo.jpg',
+              coverUrl: 'https://lh5.googleusercontent.com/-Uabj3hUMOdY/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoDplUFVn3NPsk8FMoKjDPp30Cf6g/s96-c/photo.jpg',
+              address: {},
+              phone: '',
+              language: 'vi',
+              sex: 'MALE',
+              yearOfBirth: (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+              lastUpdate: {
+                username : (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+                phone : (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+                address : (new Date('2017-08-01T12:50:56.093Z')).getTime()
               },
               blacklist: [
                 {
@@ -82,7 +120,7 @@ describe('UserService', () => {
   })
 
   describe('getUserImageList', () => {
-    describe('with correct userId', () => {
+    describe('with correct userId and offset', () => {
       it('should return status success and list of uploaded images', (done) => {
         UserService.getUserImageList('', '0015979f436810eaa65bbca1a64', new Date('2017-08-01T12:50:56.093Z'), (result) => {
           const expectedResult = {
@@ -244,7 +282,7 @@ describe('UserService', () => {
   })
 
   describe('verifyToken', () => {
-    it('should return decoded that equals paylod', () => {
+    it('should return decoded that equals payload', () => {
       const payload = {
         _id: '0015979f436810eaa65bbca1a64'
       }

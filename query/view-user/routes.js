@@ -15,20 +15,20 @@ export default {
         method: 'getUserHandler'
     },
   },
-  '/privacy/user': {
-    get: {
-      controller: 'UserController',
-      middleware: [auth()],
-      method: 'getUserPrivacyHandler'
-    }
-  },
-  '/privacy/user/:id': {
-    get: {
-      controller: 'UserController',
-      middleware: [auth()],
-      method: 'getUserPrivacyHandler'
-    }
-  },
+  // '/privacy/user': {
+  //   get: {
+  //     controller: 'UserController',
+  //     middleware: [auth()],
+  //     method: 'getUserPrivacyHandler'
+  //   }
+  // },
+  // '/privacy/user/:id': {
+  //   get: {
+  //     controller: 'UserController',
+  //     middleware: [auth()],
+  //     method: 'getUserPrivacyHandler'
+  //   }
+  // },
   '/imagelist/user': {
     get: {
       controller: 'UserController',

@@ -254,7 +254,7 @@ const getClientFormatStore = (requesterId, store) => {
     certificates: store.certificates,
     numlike: store.numberOfLike ? store.numberOfLike : 0,
     likes: store.likers ? store.likers.slice(0, 5) : [],
-    numfollow: store.numberOfFollow ? store.numerOfFollow : 0,
+    numfollow: store.numberOfFollow ? store.numberOfFollow : 0,
     follows
   })
 }

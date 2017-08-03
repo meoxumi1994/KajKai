@@ -8,8 +8,10 @@
       "babel-register"
     ],
     "include": [
-      "query/view-user/services/**/*.js",
-      "query/view-user/controllers/**/*.js"
+      "query/view-user/controllers/*.js",
+      "query/view-user/middlewares/*.js",
+      "query/view-user/models/*.js",
+      "query/view-user/services/*.js"
     ],
     "all": false,
     "sourceMap": false,

@@ -17,11 +17,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch({ type: 'INST_CONTACT_HISTORY_CHANGE', key: key, value: value })
     },
     onGetContact: (offset, useroffset, currentId) => {
-        if(currentId){
-            dispatch(getContactStore(offset[currentId], currentId))
-        }else{
-            dispatch(getContactUser(useroffset))
-        }
+        // if(currentId){
+        //     dispatch(getContactStore(offset[currentId], currentId))
+        // }else{
+        //     dispatch(getContactUser(useroffset))
+        // }
     }
 })
 

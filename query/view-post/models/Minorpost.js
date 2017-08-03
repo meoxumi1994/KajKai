@@ -13,7 +13,7 @@ const MinorpostSchema = new mongoose.Schema({
   video: {type: String},
   numberOfLike: {type: Number},
   likers: [LikerSchema],
-  numerOfFollow: {type: Number},
+  numberOfFollow: {type: Number},
   numberOfComment: {type: Number},
   comments: [CommentSchema]
 })
