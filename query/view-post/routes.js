@@ -50,6 +50,13 @@ export default {
       method: 'getMinorpostContentHandler'
     }
   },
+  '/groupcomment/:type': {
+    get: {
+      controller: 'CommentController',
+      middleware: [auth()],
+      method: 'getCommentsHandler'
+    }
+  },
   '/groupcomment/:type/:id': {
     get: {
       controller: 'CommentController',
