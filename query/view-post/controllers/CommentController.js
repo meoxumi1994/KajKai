@@ -4,6 +4,9 @@ export const getCommentsHandler = () => (req, res) => {
   const requesterId = req.decoded._id
   const { posttype: postType, id } = req.params
   let { offset, status } = req.query
+  if (!status) {
+    status = 'done'
+  }
   if (!offset || offset == '-1') {
     offset =  Date.now()
   } else {

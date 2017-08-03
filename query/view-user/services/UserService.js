@@ -23,17 +23,17 @@ export const getUser = (requesterId, id, next) => {
             user: {
               id: user.id,
               username: user.username,
-              email: user.email,
+              email: requesterId == id ? user.email : '',
               avatarUrl: user.avatarUrl,
               coverUrl: user.coverUrl,
-              address: user.address ? {
+              address: (requesterId == id && user.address) ? {
                 city : user.address.city,
                 district : user.address.district,
                 street : user.address.street,
                 longitude : user.address.longitude,
                 latitude : user.address.latitude
               } : {},
-              phone: user.phone,
+              phone: requesterId == id ? user.phone : '',
               language: user.language,
               sex: user.sex,
               yearOfBirth: user.yearOfBirth ? user.yearOfBirth.getTime() : '',

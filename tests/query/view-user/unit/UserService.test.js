@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken'
 
 describe('UserService', () => {
   describe('getUser', () => {
-    describe('with correct userId', () => {
+    describe('with correct userId == requesterId', () => {
       it('should return status success and correct user info', (done) => {
-        UserService.getUser('', '0015979f436810eaa65bbca1a64', (result) => {
+        UserService.getUser('0015979f436810eaa65bbca1a64', '0015979f436810eaa65bbca1a64', (result) => {
           const expectedResult = {
             status: 'success',
             user: {
@@ -23,6 +23,44 @@ describe('UserService', () => {
                 latitude : 45
               },
               phone: '0123456789',
+              language: 'vi',
+              sex: 'MALE',
+              yearOfBirth: (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+              lastUpdate: {
+                username : (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+                phone : (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+                address : (new Date('2017-08-01T12:50:56.093Z')).getTime()
+              },
+              blacklist: [
+                {
+                  id: '0015979f436810eaa65bbca1a65',
+                  type: 'userid',
+                  name: 'Charity'
+                }
+              ],
+              storeList:  [],
+              numUnreaded: 0
+            }
+          }
+          expect(result).to.deep.equal(expectedResult)
+          done()
+        })
+      })
+    })
+
+    describe('with correct userId != requesterId', () => {
+      it('should return status success and correct user info', (done) => {
+        UserService.getUser('requesterId', '0015979f436810eaa65bbca1a64', (result) => {
+          const expectedResult = {
+            status: 'success',
+            user: {
+              id: '0015979f436810eaa65bbca1a64',
+              username: 'Từ Thiện Nguyễn Văn',
+              email: '',
+              avatarUrl: 'https://lh5.googleusercontent.com/-Uabj3hUMOdY/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoDplUFVn3NPsk8FMoKjDPp30Cf6g/s96-c/photo.jpg',
+              coverUrl: 'https://lh5.googleusercontent.com/-Uabj3hUMOdY/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoDplUFVn3NPsk8FMoKjDPp30Cf6g/s96-c/photo.jpg',
+              address: {},
+              phone: '',
               language: 'vi',
               sex: 'MALE',
               yearOfBirth: (new Date('2017-08-01T12:50:56.093Z')).getTime(),
@@ -244,7 +282,7 @@ describe('UserService', () => {
   })
 
   describe('verifyToken', () => {
-    it('should return decoded that equals paylod', () => {
+    it('should return decoded that equals payload', () => {
       const payload = {
         _id: '0015979f436810eaa65bbca1a64'
       }
