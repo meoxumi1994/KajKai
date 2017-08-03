@@ -128,9 +128,9 @@ class Cell extends React.Component {
         const { name, onClick, style } = this.props
         return(
             <li style={{
-                borderTop: this.state.hover?'1px solid #282828':'1px solid white',
-                borderBottom: this.state.hover?'1px solid #282828':'1px solid white',
-                backgroundColor: this.state.hover?'#3B5998':'white' }} >
+                borderTop: this.state.hover?'1px solid #282828':'1px solid transparent',
+                borderBottom: this.state.hover?'1px solid #282828':'1px solid transparent',
+                backgroundColor: this.state.hover?'#3B5998':'transparent' }} >
                 <div className="btn"
                     style={{ width: '100%', padding: '0px 10px 0px 10px', display: 'inline-block', textAlign: 'left' }}
                     onClick={() => onClick()}
@@ -211,24 +211,30 @@ export default class BarScreen extends React.Component {
                                         {currentCategory}{" "}
                                         <span className="caret"></span>
                                     </div>
-                                    <ul id="dropdowncategory"
-                                        className="dropdown-menu" style={{ overflow: 'auto', height: height - 100 }}>
+                                    <ul className="dropdown-menu" style={{  }}>
                                         <Cell style={{ fontWeight: 'bold', }} name={"All Category"}
                                             onClick={() => onSearchTypeSelected('-1', "All Category")} />
-                                        {categories.map(category =>
-                                            <div key={category.id}>
-                                                <Cell style={{ marginLeft: 10 }}
-                                                    key={category.id} name={category.name}
-                                                    onClick={() => onSearchTypeSelected(category.id, category.name)} />
-                                                {category.secondCategories.map(secondCategory =>
-                                                    <Cell key={secondCategory.id} style={{ marginLeft: 20 }}
-                                                        name={secondCategory.name}
-                                                        onClick={() => onSearchTypeSelected(secondCategory.id, secondCategory.name)} />
-                                                )}
-                                            </div>
-                                        )}
+                                        <hr style={{ margin: 0 }}/>
+                                        <div id="dropdowncategory" style={{
+                                            overflow: 'scroll', height: height - 200,
+                                            }}>
+                                            {categories.map(category =>
+                                                <div key={category.id}>
+                                                    <Cell style={{ marginLeft: 10 }}
+                                                        key={category.id} name={category.name}
+                                                        onClick={() => onSearchTypeSelected(category.id, category.name)} />
+                                                    {category.secondCategories.map(secondCategory =>
+                                                        <Cell key={secondCategory.id} style={{ marginLeft: 20 }}
+                                                            name={secondCategory.name}
+                                                            onClick={() => onSearchTypeSelected(secondCategory.id, secondCategory.name)} />
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <hr style={{ margin: 0 }}/>
                                         <Cell style={{ fontWeight: 'bold' }} name={"Store"}
                                             onClick={() => onSearchTypeSelected('-2', "Store")} />
+                                        <hr style={{ margin: 0 }}/>
                                         <Cell style={{ fontWeight: 'bold' }} name={"User"}
                                             onClick={() => onSearchTypeSelected('-3', "User")} />
                                     </ul>

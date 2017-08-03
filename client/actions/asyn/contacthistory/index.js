@@ -15,7 +15,7 @@ export const getContactUser = (offset) => dispatch => {
 
 export const getContactStore = (offset, id) => dispatch => {
     dispatch({ type: 'GET_CONTACT_STORE_ING'})
-    flem('/leadercomment/store/'+id, {
+    flem('/groupcomment/store/'+id, {
         offset: offset
     }).then(({ status, leadercomments }) => {
         if(status == 'success'){

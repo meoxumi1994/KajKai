@@ -20,10 +20,10 @@ const index = (state = {
             return state
         case 'client/FOLLOW':
             if(action.data.type=='store'){
-                const id = action.data.id
+                const userid = action.data.userid
                 return {...state,
                     numfollow: (state.numlike?state.numlike:0) + (action.data.status=='add'?1:-1),
-                    follows: updateFollows(state.follows, id)
+                    follows: updateFollows(state.follows, userid)
                 }
             }
         return state

@@ -2,6 +2,12 @@ import React from 'react'
 
 import ContactComment from '~/containers/entity/contact/ContactComment'
 
+const getString = (str) => {
+    let newstr = ""
+    str.split('\n').map((item) => newstr += item)
+    return newstr.substr(0,16)
+}
+
 class Cell extends React.Component {
     constructor(props){
         super(props)
@@ -30,7 +36,7 @@ class Cell extends React.Component {
                         color: this.state.hover?'white':'black',
                         margin: 0, padding: 0, marginLeft: 5, marginRight: 5, width: width }}>
                     <img width={20} height={20} src={avatarUrl}/>
-                    <span style={{ marginLeft: 5, fontSize: 12.5 }}>{name}</span>
+                    <span style={{ marginLeft: 5, fontSize: 12.5 }}>{getString(name)}</span>
                 </div>
             </div>
         )
@@ -89,7 +95,7 @@ class ManagerComment extends React.Component {
                               borderRadius: 0,
                               margin: 0, padding: 0, marginLeft: 5, marginRight: 5, width: 150 }}>
                           <img width={20} height={20} src={currentAvatar}/>
-                          <span style={{ marginLeft: 5, fontSize: 12.5 }}>{currentName}</span>
+                          <span style={{ marginLeft: 5, fontSize: 12.5 }}>{getString(currentName)}</span>
                           <span style={{
                               float: 'right',
                               marginLeft: 5, marginTop: 8, marginRight: 5, fontSize: 12.5 }} className="caret"></span>
