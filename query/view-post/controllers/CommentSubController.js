@@ -73,7 +73,7 @@ export const createComment = (message) => {
     if (sellpostId) {
       Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
         if (sellpost) {
-          comment.storeId = sellpost.storeId          
+          comment.storeId = sellpost.storeId
           comment.save(() => {})
 
           let { comments } = sellpost
@@ -135,6 +135,8 @@ export const updateComment = (message) => {
   const { fCommentId: id, status } = message.fComment
   Comment.findOne({ id }, (err, comment) => {
     if (comment) {
+      comment.status = status
+      comment.save(() => {})
       Sellpost.findOne({ id: comment.sellpostId }, (err, sellpost) => {
         if (sellpost) {
           let { comments } = sellpost
