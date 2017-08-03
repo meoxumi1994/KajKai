@@ -2,7 +2,7 @@ import { flem } from '~/actions/support'
 
 export const getContactUser = (offset) => dispatch => {
     dispatch({ type: 'GET_CONTACT_USER_ING'})
-    flem('/leadercomment', {
+    flem('/groupcomment/user', {
         offset: offset
     }).then(({ status, leadercomments }) => {
         if(status == 'success'){

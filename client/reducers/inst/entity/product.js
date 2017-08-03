@@ -24,6 +24,8 @@ const product = (state = {
                 })
             })
             return mystate
+        case 'GET_CONTACT_STORE_SUCCESS':
+        case 'GET_CONTACT_USER_SUCCESS':
         case 'GET_MORE_LEADERCOMMENT_SUCCESS':
             let usstate = state
             action.leadercomments.map((lc) => {

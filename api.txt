@@ -1,6 +1,6 @@
 //NEW NEW NEW
 
-GET /groupcomment/'sellpost|minorpost|user|store'/:id?offset=1498555009220&status='new|received|done' {
+GET /groupcomment/'sellpost|minorpost|user|store'/:id?offset=1498555009220&status='new|received|done'&length=10 {
     offset:
     id:
     leadercomments: [
