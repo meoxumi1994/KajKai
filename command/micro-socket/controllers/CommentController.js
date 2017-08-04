@@ -127,7 +127,7 @@ export const storeFinishedOrder = (action, sio, io) => {
             leadercommentid: action.data.leadercommentid,
             status: status
         }});
-        io.to(sellPostId).emit('action',{type: 'global/DONE', data: {
+        io.to(sellPostId).emit('action',{type: 'client/DONE', data: {
             leadercommentid: action.data.leadercommentid,
             status: status
         }})
