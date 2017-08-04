@@ -82,6 +82,7 @@ class ManagerComment extends React.Component {
         const {
             storeList, current, currentAvatar, onGetContact, leadercomments,
             currentName, currentType, avatarUrl, username, onChange } = this.props
+        console.log(leadercomments)
         return(
             <div style={{ height: '100%',}}>
                 <div style={{ padding: 5, backgroundColor: '#E9EBEE'}}>
