@@ -14,6 +14,10 @@ const notification = (state = {
                 ],
                 offset: (state.offset == -1) ? action.data.time : state.offset,
             }
+        case 'WHO_SUCCESS':
+            return {...state,
+                numUnreaded: action.user.numUnreaded
+            }
         case 'GET_NOTIFICATION_ING':
         case 'GET_NOTIFICATION_FAILED':
             return {

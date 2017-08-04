@@ -11,7 +11,7 @@ class DropDownNotification extends React.Component {
     componentDidMount(){
         let that = this
         $('#dropdownnotification').on('mousewheel DOMMouseScroll', function(e) {
-            if(that.overgroup.scrollTop + that.group.clientHeight == that.group.scrollHeight){
+            if(that.overgroup.scrollTop + that.group.clientHeight > that.group.scrollHeight - 300 ){
                 that.props.getMoreNotification();
                 e.originalEvent.setWheelDelta = 0;
             }

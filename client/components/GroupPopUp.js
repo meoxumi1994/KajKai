@@ -22,7 +22,7 @@ class GroupPopUp extends React.Component {
                                 <PopUpNotify  id={item}/>
                             </div>
                         )
-                    return <div></div>
+                    return <div key={item}></div>
                 })}
             </div>
         )

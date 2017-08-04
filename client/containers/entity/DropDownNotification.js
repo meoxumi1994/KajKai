@@ -7,8 +7,8 @@ import { getNotification } from '~/actions/asyn/entity/notification'
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     return({
+        ...state.user,
         ...state.inst.entity.groupnotification,
-        ...state.user
     })
 }
 

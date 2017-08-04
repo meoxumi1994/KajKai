@@ -111,7 +111,7 @@ class App extends React.Component {
                     style={{ height: height - 48 }}>
                     {
                       username && width > 1100 + 300 &&
-                          <div style={{ position: 'fixed',right: 0, top: 47, height: '100%', width: 300 }}>
+                          <div style={{ position: 'fixed', zIndex: 10, right: 0, top: 47, height: '100%', width: 300 }}>
                               {
                                   path == '/admin'? undefined:
                                   <ContactHistory/>

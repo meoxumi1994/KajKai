@@ -82,7 +82,6 @@ class ManagerComment extends React.Component {
         const {
             storeList, current, currentAvatar, onGetContact, leadercomments,
             currentName, currentType, avatarUrl, username, onChange } = this.props
-        console.log(leadercomments)
         return(
             <div style={{ height: '100%',}}>
                 <div style={{ padding: 5, backgroundColor: '#E9EBEE'}}>
@@ -143,14 +142,16 @@ class ManagerComment extends React.Component {
                     </div> */}
                 </div>
                 <hr style={{ margin: 0}}/>
-                {leadercomments && leadercomments.map((item, index) =>
-                    <div key={index}>
-                        <LeaderComment
-                            id={item.id}
-                            />
-                        <hr style={{ margin: 0 }}/>
-                    </div>
-                )}
+                {leadercomments && leadercomments.map((item, index) => {
+                    return(
+                        <div key={index}>
+                            <LeaderComment
+                                id={item.id}
+                                />
+                            <hr style={{ margin: 0 }}/>
+                        </div>
+                    )
+                })}
             </div>
         )
     }
