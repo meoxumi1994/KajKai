@@ -180,7 +180,7 @@ export default class BarScreen extends React.Component {
         },1)
     }
     render() {
-        const { SEARCH_PRODUCT, SEARCH_LOCATION, categories, onSearchTypeSelected, onKeyWordChanged, currentCategory,
+        const { SEARCH, SEARCH_STORE, SEARCH_USER, SEARCH_LOCATION, categories, onSearchTypeSelected, onKeyWordChanged, currentCategory,
              onLocationChanged, clicksetting, width, height } = this.props
         let inputSearchKeyWord
         return (
@@ -245,7 +245,7 @@ export default class BarScreen extends React.Component {
                                   </div>
                                   <input ref={node => { inputSearchKeyWord = node }}
                                     className="form-control input-sm"
-                                    placeholder={SEARCH_PRODUCT}
+                                    placeholder={SEARCH}
                                     style={{ border: 0,  outline: 'none', height: 28, fontSize: 13 }}
                                   type="text"
                                     onKeyDown={(e) => { if(e.keyCode == 13) {

@@ -20,7 +20,7 @@ const mapStateToProps = (state, ownProps) => {
         height: height,
         searchType: searchType,
         LOG_IN: g('LOG_IN'),
-        SEARCH_PRODUCT: g('SEARCH_PRODUCT'),
+        SEARCH: g('SEARCH'),
         SEARCH_LOCATION: g('SEARCH_LOCATION'),
         isloading: (state.auth == 'WHO_ING' || state.auth == 'LOGIN_ING'),
         unreadChat: state.inst.chat.left.unreadChat,

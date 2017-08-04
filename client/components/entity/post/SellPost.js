@@ -60,7 +60,7 @@ class SellPost extends React.Component {
                         />
                         {clicksetting &&
                             <DropDown
-                                contents={isOwner?
+                                contents={!isOwner?
                                     ['Feed Back'] :
                                     ['Feed Back','Edit SellPost','Delete SellPost']}
                                 onClick={(index) => {

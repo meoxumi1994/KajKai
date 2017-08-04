@@ -33,6 +33,7 @@ class RegisterStore extends React.Component {
             POSITION_IN_MAP, POSITION_IN_MAP_DESCRIPTION, ADDRESS,
             ADDRESS_DESCRIPTION, STORE_NAME, STORE_URL,  SAVE, NAME_BY_URL ,
             ENTER_YOUR_STORE_NAME, ENTER_YOUR_PHONE, ENTER_YOUR_ADDRESS, ENTER_URL_STORE,
+            ENTER_CATEGORY,
             onChangeAddress, onChangeStoreName,
             onChangeName, name, isConfirmPhone, chooseAnother, openModalPhone, onChangePosition,
             onOpenModalPhone, address, onChangeAdress, position, changeLanguage, createStore,
@@ -137,7 +138,7 @@ class RegisterStore extends React.Component {
                                 onChange={(e) => onChangeCategoryInputValue(e)}
                                 value={categoryInputValue}
                                 ref={input =>  this.input = input}
-                                placeholder={ENTER_YOUR_PHONE+" ..."} style={{
+                                placeholder={ENTER_CATEGORY+" ..."} style={{
                                 fontSize: 12.5,
                                 marginTop: 5,
                                 paddingLeft: 5,
