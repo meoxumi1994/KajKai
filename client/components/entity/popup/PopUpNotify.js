@@ -116,6 +116,8 @@ class PopUpNotify extends React.Component {
         this.state = {}
     }
     componentDidMount(){
+        const audio = new Audio('/audios/notify.mp3');
+        audio.play();
         setTimeout(() => {
             this.props.onClose()
         },6000)
@@ -133,8 +135,8 @@ class PopUpNotify extends React.Component {
                 boxShadow: '0px 0px 4px #B2B2B2',
                 padding: 5,
                 backgroundColor: 'white',
-                width: 247,
-                height: 90, }}>
+                width: 270,
+                height: 85, }}>
                 <div className="btn"
                     style={{ padding: 0, fontSize: 12, float: 'right' }}
                     onMouseOver={() => this.setState({ hoverRemove: true })}

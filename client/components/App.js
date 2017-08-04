@@ -108,10 +108,10 @@ class App extends React.Component {
                 <GroupPopUp/>
                 <ChatContainer/>
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
-                    style={{ height: height - 48 }}>
+                    style={{ height: height - 47 }}>
                     {
                       username && width > 1100 + 300 &&
-                          <div style={{ position: 'fixed', zIndex: 10, right: 0, top: 47, height: '100%', width: 300 }}>
+                          <div style={{ position: 'fixed', zIndex: 10, right: 0, top: 48, height: '100%', width: 300 }}>
                               {
                                   path == '/admin'? undefined:
                                   <ContactHistory/>
@@ -121,7 +121,7 @@ class App extends React.Component {
                     <div style={{ paddingTop: 47, marginRight: (width > 1100 + 300)? 300: 0 }}>
                         {(path == "/" || path == "/admin" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
-                              <div style={{ height: height - 48, width: Math.max(1100, width) }}>
+                              <div style={{ height: height - 47, width: Math.max(1100, width) }}>
                                   <Route exact path="/" component={Home}/>
                                   <Route path="/map" component={Mapp}/>
                                   <Route path="/register" component={UserLoginRegister}/>

@@ -2,26 +2,21 @@ const leadercomment = (state = {
 
 }, action) => {
     switch (action.type) {
-        // case 'global/RECEIVE':
-        //     return {...state,
-        //         [action.data.leadercommentid]: {
-        //             ...state[action.data.leadercommentid],
-        //             status: 'received',
-        //         }
-        //     }
         case 'global/COMMENT':
-            return {...state,
-                [action.data.leadercommentid]: {
-                    ...state[action.data.leadercommentid],
-                    numcomment: state[action.data.leadercommentid].numcomment + 1,
-                    comments: [...state[action.data.leadercommentid].comments,
-                        {
-                            id: action.data.id,
-                            commenterid: action.data.commenterid
-                        }
-                    ]
+            if(state[action.data.leadercommentid])
+                return {...state,
+                    [action.data.leadercommentid]: {
+                        ...state[action.data.leadercommentid],
+                        numcomment: state[action.data.leadercommentid].numcomment + 1,
+                        comments: [...state[action.data.leadercommentid].comments,
+                            {
+                                id: action.data.id,
+                                commenterid: action.data.commenterid
+                            }
+                        ]
+                    }
                 }
-            }
+            return state
         case 'global/LEADERCOMMENT':
             return {...state,
                 [action.data.id]: {
