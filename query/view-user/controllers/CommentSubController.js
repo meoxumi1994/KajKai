@@ -114,6 +114,7 @@ export const createCommentNotification = (message) => {
 
 export const createReceiveNotification = (message) => {
   const { fCommentId: id, status } = message.fComment
+  console.log('id: ', id);
 
   if (status == NotificationType.RECEIVED) {
     Notification.findOne({ commentId: id }, (err, notification) => {
@@ -154,6 +155,7 @@ export const createReceiveNotification = (message) => {
                         notifications = []
                       }
 
+                      console.log('what the hell ');
                       notify(user.id, mNotification)
 
                       if (user.id == notification.actorId) {
