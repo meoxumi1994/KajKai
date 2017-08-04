@@ -117,10 +117,13 @@ export const createReceiveNotification = (message) => {
   console.log('id: ', id);
 
   if (status == NotificationType.RECEIVED) {
+    console.log('===>id: ', id);
     Notification.findOne({ commentId: id }, (err, notification) => {
+      console.log('notification: ', notification);
       if (notification) {
         IDSellpostStore.findOne({ sellpostId: notification.sellpostId }, (err, mIDSellpostStore) => {
           if (mIDSellpostStore) {
+            console.log('mIDSellpostStore: ', mIDSellpostStore);
             notification.type = NotificationType.RECEIVED
             let mNotification = new Notification({
               type: NotificationType.RECEIVED,
