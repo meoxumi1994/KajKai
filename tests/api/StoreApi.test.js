@@ -4,10 +4,10 @@ import request from 'supertest'
 import app from '../../query/view-user/app'
 import jwt from 'jsonwebtoken'
 
-describe('User API', () => {
-  describe('GET /user', () => {
-    describe('with correct token', () => {
-      it('should return status success and correct user info with tokenId', (done) => {
+describe('Store API', () => {
+  describe('GET /store/:id', () => {
+    describe('with correct storeId', () => {
+      it('should return status success and correct store info', (done) => {
         const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
         request(app)
           .get('/user')
@@ -57,7 +57,7 @@ describe('User API', () => {
       })
     })
 
-    describe('with wrong token', () => {
+    describe('with wrong storeId', () => {
       it('should return status noData', (done) => {
         const token = 'wrong token'
         request(app)
@@ -79,8 +79,8 @@ describe('User API', () => {
       })
     })
 
-    describe('without token', () => {
-      it('should return status noData', (done) => {
+    describe('without token but correct storeId', () => {
+      it('should return status success and correct store info', (done) => {
         request(app)
           .get('/user')
           .expect('Content-Type', /json/)
@@ -123,9 +123,9 @@ describe('User API', () => {
     })
   })
 
-  describe('GET /user/:id', () => {
-    describe('with correct token and requesterId == id', () => {
-      it('should return status success and correct user info related :id with tokenId', (done) => {
+  describe('POST /store', () => {
+    describe('with all store valid info', () => {
+      it('should return success and the store info', (done) => {
         const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
         request(app)
           .get('/user/0015979f436810eaa65bbca1a64')
@@ -175,8 +175,59 @@ describe('User API', () => {
       })
     })
 
-    describe('with correct token and requesterId != id', () => {
-      it('should return status success and correct user public info related :id', (done) => {
+    describe('with store name does not conform business rule', () => {
+      it('should return status failed and reason', (done) => {
+        const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
+        request(app)
+          .get('/user/0015979f436810eaa65bbca1a64')
+          .set('Cookie', 'token=' + token)
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err, res) => {
+            const expectedResult = {
+              tokenId: token,
+              status: 'success',
+              user: {
+                id: '0015979f436810eaa65bbca1a64',
+                username: 'Từ Thiện Nguyễn Văn',
+                email: 'charitynguyenvan@gmail.com',
+                avatarUrl: 'https://lh5.googleusercontent.com/-Uabj3hUMOdY/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoDplUFVn3NPsk8FMoKjDPp30Cf6g/s96-c/photo.jpg',
+                coverUrl: 'https://lh5.googleusercontent.com/-Uabj3hUMOdY/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoDplUFVn3NPsk8FMoKjDPp30Cf6g/s96-c/photo.jpg',
+                address: {
+                  city : 'Quảng Nam',
+                  district : 'Cầu Giấy',
+                  street : 'Đại lộ Thăng Long',
+                  longitude : 45,
+                  latitude : 45
+                },
+                phone: '0123456789',
+                language: 'vi',
+                sex: 'MALE',
+                yearOfBirth: (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+                lastUpdate: {
+                  username : (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+                  phone : (new Date('2017-08-01T12:50:56.093Z')).getTime(),
+                  address : (new Date('2017-08-01T12:50:56.093Z')).getTime()
+                },
+                blacklist: [
+                  {
+                    id: '0015979f436810eaa65bbca1a65',
+                    type: 'userid',
+                    name: 'Charity'
+                  }
+                ],
+                storeList:  [],
+                numUnreaded: 0
+              }
+            }
+            expect(res.body).to.deep.equal(expectedResult)
+            done()
+          })
+      })
+    })
+
+    describe('with existed url name', () => {
+      it('should return status failed and reason', (done) => {
         const token = jwt.sign({_id: '0015979f436810eaa65bbca1a65'}, 'secret', { expiresIn: 60 * 60 * 60 })
         request(app)
           .get('/user/0015979f436810eaa65bbca1a64')
@@ -219,8 +270,8 @@ describe('User API', () => {
       })
     })
 
-    describe('with wrong token', () => {
-      it('should return status success and correct user public info related to :id', (done) => {
+    describe('with url name does not conform business rule', () => {
+      it('should return status failed and reason', (done) => {
         const token = 'wrong token'
         request(app)
           .get('/user/0015979f436810eaa65bbca1a64')
@@ -263,8 +314,8 @@ describe('User API', () => {
       })
     })
 
-    describe('with correct token of banned user', () => {
-      it('should return status failed with banned reson', (done) => {
+    describe('without category', () => {
+      it('should return status failed and reson', (done) => {
         const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
         request(app)
           .get('/user/0015979f436810eaa65bbca1a65')
@@ -285,11 +336,58 @@ describe('User API', () => {
           })
       })
     })
+
+    describe('without verified phone', () => {
+      it('should return status failed and reson', (done) => {
+        const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
+        request(app)
+          .get('/user/0015979f436810eaa65bbca1a65')
+          .set('Cookie', 'token=' + token)
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err, res) => {
+            const expectedResult = {
+              status: 'failed',
+              banned: true,
+              reason: 'Spam',
+              user: {
+                id: '0015979f436810eaa65bbca1a65'
+              }
+            }
+            expect(res.body).to.deep.equal(expectedResult)
+            done()
+          })
+      })
+    })
+
+    describe('without map address', () => {
+      it('should return status failed and reson', (done) => {
+        const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
+        request(app)
+          .get('/user/0015979f436810eaa65bbca1a65')
+          .set('Cookie', 'token=' + token)
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((err, res) => {
+            const expectedResult = {
+              status: 'failed',
+              banned: true,
+              reason: 'Spam',
+              user: {
+                id: '0015979f436810eaa65bbca1a65'
+              }
+            }
+            expect(res.body).to.deep.equal(expectedResult)
+            done()
+          })
+      })
+    })
+
   })
 
-  describe('GET /imagelist/user', () => {
-    describe('with correct token and offset', () => {
-      it('should return status success and list of uploaded images', (done) => {
+  describe('PUT /store/:id', () => {
+    describe('with correct token and storeId', () => {
+      it('should return status success and the new info', (done) => {
         const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
         request(app)
           .get('/imagelist/user?offset=' + (new Date('2017-08-01T12:50:56.093Z')).getTime())
@@ -313,8 +411,8 @@ describe('User API', () => {
       })
     })
 
-    describe('with correct token but no offset', () => {
-      it('should return status success and list of uploaded images', (done) => {
+    describe('with token of user that is not owner of store', () => {
+      it('should return status failed and reason', (done) => {
         const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
         request(app)
           .get('/imagelist/user')
@@ -338,8 +436,8 @@ describe('User API', () => {
       })
     })
 
-    describe('with correct token and offset == -1', () => {
-      it('should return status success and list of uploaded images', (done) => {
+    describe('with new info does not conform business rule', () => {
+      it('should return status failed and reason', (done) => {
         const token = jwt.sign({_id: '0015979f436810eaa65bbca1a64'}, 'secret', { expiresIn: 60 * 60 * 60 })
         request(app)
           .get('/imagelist/user?offset=-1')

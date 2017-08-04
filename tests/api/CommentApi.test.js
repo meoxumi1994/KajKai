@@ -4,7 +4,7 @@ import request from 'supertest'
 import app from '../../query/view-user/app'
 import jwt from 'jsonwebtoken'
 
-describe('User API', () => {
+describe('Comment API', () => {
   describe('GET /user', () => {
     describe('with correct token', () => {
       it('should return status success and correct user info with tokenId', (done) => {

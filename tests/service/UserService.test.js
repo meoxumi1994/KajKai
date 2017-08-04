@@ -49,7 +49,7 @@ describe('UserService', () => {
     })
 
     describe('with correct userId != requesterId', () => {
-      it('should return status success and correct user info', (done) => {
+      it('should return status success and only user public info', (done) => {
         UserService.getUser('requesterId', '0015979f436810eaa65bbca1a64', (result) => {
           const expectedResult = {
             status: 'success',
