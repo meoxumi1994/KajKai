@@ -24,6 +24,7 @@ const myString = {
     REGISTER_MODAL_PHONE_WARNING: ['số điện thoại này đã được sử dụng để đăng ký từ trước','This phone has been used to register'],
     CLOSE: ['Đóng', 'Close'],
     // barscreen
+    SEARCH: ['Tìm kiếm','Search'],
     SEARCH_PRODUCT: ['tìm kiếm sản phẩm','Search for products to buy'],
     SEARCH_LOCATION: ['tại địa điểm','at location'],
     // profile
