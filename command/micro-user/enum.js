@@ -11,8 +11,8 @@ export const LoginType = {
 }
 
 export const Language = {
-    VIETNAM: 'VIETNAMESE',
-    ENGLISH: 'ENGLISH'
+    VIETNAM: 'vi',
+    ENGLISH: 'en'
 }
 
 export const Sex = {
