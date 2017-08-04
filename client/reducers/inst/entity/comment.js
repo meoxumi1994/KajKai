@@ -5,19 +5,23 @@ const comment = (state = {
 }, action) => {
     switch (action.type) {
         case 'client/RECEIVE':
-            return {...state,
-                [action.data.leadercommentid]: {
-                    ...state[action.data.leadercommentid],
-                    status: 'received',
+            if(action.data.status == 'success')
+                return {...state,
+                    [action.data.leadercommentid]: {
+                        ...state[action.data.leadercommentid],
+                        status: 'received',
+                    }
                 }
-            }
+            return state
         case 'client/DONE':
-            return {...state,
-                [action.data.leadercommentid]: {
-                    ...state[action.data.leadercommentid],
-                    status: 'done',
+            if(action.data.status == 'success')
+                return {...state,
+                    [action.data.leadercommentid]: {
+                        ...state[action.data.leadercommentid],
+                        status: 'done',
+                    }
                 }
-            }
+            return state
         case 'client/COMMENT':
         case 'client/LEADERCOMMENT':
             return {...state,
@@ -26,6 +30,7 @@ const comment = (state = {
         case 'client/LIKE':
             if(action.data.type=='comment' || action.data.type=='leadercomment'){
                 const id = action.data.commentid || action.data.leadercommentid
+                if(!state[id]) return state
                 return {...state,
                     [id] : {
                         ...state[id],
@@ -43,8 +48,6 @@ const comment = (state = {
                 }
             })
             return cstate
-        case 'GET_CONTACT_STORE_SUCCESS':
-        case 'GET_CONTACT_USER_SUCCESS':
         case 'GET_MORE_LEADERCOMMENT_SUCCESS':
             let mystate = state
             action.leadercomments.map((item) => {

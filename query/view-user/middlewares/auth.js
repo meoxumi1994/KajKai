@@ -3,7 +3,7 @@ import { verifyToken } from '../services/UserService'
 const auth = () => {
     return (req, res, next) => {
         const token = req.cookies.token
-        // console.log('token: ' + token)
+        console.log('token: ' + token)
         if (!token) {
             req.decoded = { _id: 'Guest' }
             next()

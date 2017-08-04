@@ -130,26 +130,3 @@ export const getInterestsHandler = () => (req, res) => {
     })
   }
 }
-
-export const getCommentsHandler = () => (req, res) => {
-  const requestedId = req.decoded._id
-  let { offset } = req.query
-  let length = 10
-  if (!offset || offset == '-1') {
-    offset =  Date.now()
-    length = 5
-  } else {
-    offset = new Date(parseInt(offset))
-  }
-
-  if (requestedId == 'Guest') {
-    res.json({
-      status: 'failed',
-      reason: 'Guest'
-    })
-  } else {
-    getComments(requestedId, offset, length, (result) => {
-      res.json(result)
-    })
-  }
-}

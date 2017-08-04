@@ -36,7 +36,7 @@ export default class AutoComplete extends React.Component {
         onKeyDown={(e) => { if(e.keyCode == 13) {
          inputSearchLocation.blur()
         }}}
-        style={{ borderRadius: 0 }}
+        style={{ border: 0,  borderRadius: '2px 0px 0px 2px', fontSize: 13 , outline: 'none', height: 28 }}
       />
     )
   }

@@ -49,7 +49,7 @@ describe('UserService', () => {
     })
 
     describe('with correct userId != requesterId', () => {
-      it('should return status success and correct user info', (done) => {
+      it('should return status success and only user public info', (done) => {
         UserService.getUser('requesterId', '0015979f436810eaa65bbca1a64', (result) => {
           const expectedResult = {
             status: 'success',
@@ -188,7 +188,7 @@ describe('UserService', () => {
                 avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/a6a1acbb56aae018694f97951008d77e4befc90e473e2d11355b775aea3.png',
                 name: 'ga rau rau ga',
                 content: '1',
-                time: (new Date("2017-07-31T15:42:22.971Z")).getTime(),
+                time: (new Date('2017-07-31T15:42:22.971Z')).getTime(),
                 numlike: undefined,
                 likes: [],
                 likestatus: ['like'],

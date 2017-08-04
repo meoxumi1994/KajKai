@@ -17,6 +17,10 @@ span.barcode {
     word-wrap: break-word;
     white-space: pre;
 }
+
+/*.form-control {
+    border: 0;
+}*/
 /*a {
     color: #999999;
 }*/
@@ -36,6 +40,30 @@ hr {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-bottom: 5px solid black;
+}
+
+@-webkit-keyframes neverread {
+    0% {background-color: white;}
+    50% {background-color: #F1F3F6;}
+    100% {background-color: white;}
+}
+
+/* Standard syntax */
+@keyframes neverread {
+    0% {background-color: white;}
+    50% {background-color: #F1F3F6;}
+    100% {background-color: white;}
+}
+
+@-webkit-keyframes closepopup {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+/* Standard syntax */
+@keyframes closepopup {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
 }
 
 btnn:active{
