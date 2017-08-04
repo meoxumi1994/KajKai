@@ -21,6 +21,8 @@ import thumnail from './thumnail'
 import notification from './notification'
 import groupnotification from './groupnotification'
 import post from './post'
+import contact from './contact'
+import popup from './popup'
 
 const entity = combineReducers({
     modal,
@@ -44,6 +46,8 @@ const entity = combineReducers({
     notification,
     groupnotification,
     post,
+    contact,
+    popup
 })
 
 export default entity

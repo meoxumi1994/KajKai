@@ -10,6 +10,7 @@ import DropDownNotification from '~/containers/entity/DropDownNotification'
 class HandlerUser extends React.Component {
     constructor(props){
         super(props)
+        this.state = {}
     }
     componentDidMount(){
         $('#dropdownnotification').on('mousewheel DOMMouseScroll', function(e) {
@@ -57,11 +58,10 @@ class HandlerUser extends React.Component {
                               />
                           </div>
                         }
-                      <div className="btn btn-default"
-                          style={{ padding: 0, float: 'right', borderRadius: 0,
-                              borderColor: 'white'}}
+                      <div className="btn"
+                          style={{ float: 'right', padding: 3 }}
                           onClick={() => clickSetting()} >
-                          <img src="/images/setting.svg" alt="Cinque Terre" style={{ height: 29 }}/>
+                          <img src="/images/setting.svg" alt="Cinque Terre" height={20}/>
                       </div>
 
 
@@ -71,19 +71,23 @@ class HandlerUser extends React.Component {
                         </a>
                     </div>
 
-                    <div style={{ marginRight: 30, float: 'right' }}>
+                    <div style={{ marginRight: 25, float: 'right' }}>
                         <DropDownNotification {...this.props}/>
                     </div>
-                    <div className="dropdown" style={{ marginRight: 10, float: 'right'}} onClick={() => resetChatQuantity()}>
-                        <div className="btn btn-default btn-xs dropdown-toggle" id="chatDropDown" data-toggle="dropdown"
-                            style={{ borderColor: 'white', padding: 0, height: 31}} >
+                    <div className="dropdown" style={{ marginRight: 3, float: 'right'}} onClick={() => resetChatQuantity()}>
+                        <div className="btn btn-xs dropdown-toggle" id="chatDropDown" data-toggle="dropdown"
+                            style={{ borderWidth: 0, padding: 0 }}
+                            onMouseOver={() => this.setState({ hoverMessage: true })}
+                            onMouseLeave={() => this.setState({ hoverMessage: false })}
+                            >
                             <RiseUp
-                                src="/images/message.svg"
+                                src= {unreadChat.quantity > 0 ? "/images/messagehas.svg" :
+                                    (this.state.hoverMessage ? "/images/messagehover.svg" : "/images/message.svg")}
                                 style={{
                                     width: 35,
                                     height: 29,
-                                    imgWidth: 20,
-                                    imgHeight: 20,
+                                    imgWidth: 21,
+                                    imgHeight: 21,
                                 }}
                                 number={unreadChat.quantity}/>
                         </div>
@@ -183,7 +187,7 @@ export default class BarScreen extends React.Component {
             <div
                 style={{ position: 'fixed',
                 width: '100%',
-                backgroundColor: 'white',
+                backgroundColor: '#3B5998',
                 zIndex: 10 }}>
                 <div style={{ width: (width > 1100 + 300)? (width - 300) : width }}>
                     <div className="container-fluid" style={{ padding: 0, margin: 0 }}>
@@ -206,7 +210,7 @@ export default class BarScreen extends React.Component {
                                 <div className="input-group">
                                   <div className="input-group-btn">
                                     <div className="btn btn-default btn-sm dropdown-toggle"
-                                        style={{ borderRadius: 0 }}
+                                        style={{ borderRadius: '2px 0px 0px 2px', borderWidth: 0, backgroundColor: '#F6F7F9'}}
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         {currentCategory}{" "}
                                         <span className="caret"></span>
@@ -240,9 +244,10 @@ export default class BarScreen extends React.Component {
                                     </ul>
                                   </div>
                                   <input ref={node => { inputSearchKeyWord = node }}
-                                    type="text"
                                     className="form-control input-sm"
                                     placeholder={SEARCH_PRODUCT}
+                                    style={{ border: 0,  outline: 'none', height: 28, fontSize: 13 }}
+                                  type="text"
                                     onKeyDown={(e) => { if(e.keyCode == 13) {
                                         inputSearchKeyWord.blur()
                                         onKeyWordChanged(inputSearchKeyWord.value.trim())
@@ -250,20 +255,22 @@ export default class BarScreen extends React.Component {
                                   />
                                   <span className="input-group-btn">
                                       <button className="btn btn-default btn-sm" type="button"
-                                          style={{ borderRadius: 0 }}
-                                          >
+                                          style={{ borderRadius: '0px 2px 2px 0px',
+                                          borderWidth: 0, backgroundColor: '#F6F7F9'}}>
                                           <i className="glyphicon glyphicon-search"></i>
                                       </button>
                                   </span>
                                 </div>
                             </div>
-                            <div className="col-xs-3"  style={{ padding: 0}}>
-                                <div className="input-group" style={{ marginLeft: 10 }}>
+                            <div className="col-xs-3">
+                                <div className="input-group">
                                     <AutoCompleteContainer SEARCH_LOCATION={SEARCH_LOCATION}
                                       onLocationChanged={onLocationChanged}
                                     />
-                                    <span className="input-group-btn" style={{ borderRadius: 0 }}>
-                                        <button className="btn btn-default btn-sm" type="button" style={{ borderRadius: 0 }} >
+                                    <span className="input-group-btn" >
+                                        <button className="btn btn-default btn-sm" type="button"
+                                            style={{ borderRadius: '0px 2px 2px 0px',
+                                            borderWidth: 0, backgroundColor: '#F6F7F9'}}>
                                             <i className="glyphicon glyphicon-map-marker"></i>
                                         </button>
                                     </span>
@@ -297,7 +304,7 @@ export default class BarScreen extends React.Component {
                         </div>
                     </div>
                 </div>
-                <hr style={{ margin: 0 }}></hr>
+                <hr style={{ margin: 0, borderColor: '#29487D'}}></hr>
             </div>
         )
     }

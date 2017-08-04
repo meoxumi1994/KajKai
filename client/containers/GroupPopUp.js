@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import ContactComment from '~/components/entity/contact/ContactComment'
+import GroupPopUp from '~/components/GroupPopUp'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
+    const grouppopup = state.inst.grouppopup
     return({
-
+        ...grouppopup
     })
 }
 
@@ -14,8 +15,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 })
 
-const ContactCommentContainer = connect(
+const GroupPopUpContainer = connect(
     mapStateToProps, mapDispatchToProps
-)(ContactComment)
+)(GroupPopUp)
 
-export default ContactCommentContainer
+export default GroupPopUpContainer

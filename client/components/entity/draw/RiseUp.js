@@ -2,20 +2,22 @@ import React from 'react'
 
 const RiseUp = ({ src, style, number }) => {
     return(
-        <div style={{ width: style.width, height: style.height }}>
+        <div style={{ width: style.width, height: style.height,
+            display: 'inline-block', textAlign: 'left'}}>
             {number>0 &&
                 <small  style={{
                     position: 'absolute',
-                    marginLeft: style.width - style.imgWidth,
-                    fontSize: 12,
-                    border: '1px solid #ffffff',
-                    borderRadius: '3px',
-                    backgroundColor: '#BB0F23',
+                    right: 0,
+                    fontSize: 11,
+                    borderRadius: '2px',
+                    backgroundColor: '#FA3E3E',
                     color: 'white',
-                    padding: '0px 1px 0px 1px'
-                }}>{"+"+number}</small>
+                    padding: '0px 3px 0px 3px',
+                }}>{number}</small>
             }
             <img src={src} style={{
+                margin: 0,
+                padding: 0,
                 marginTop: (style.height - style.imgHeight)/2,
                 marginLeft: (style.width - style.imgWidth)/2,
                 width: style.imgWidth,
