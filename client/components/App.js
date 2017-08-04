@@ -15,6 +15,7 @@ import User from '~/containers/user'
 import ContactHistory from '~/containers/contacthistory'
 import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 import ChatContainer from '~/containers/chat'
+import GroupPopUp from '~/containers/GroupPopUp'
 
 // import AdminContainer from '~/containers/admin/'
 // import loadAdmin from 'bundle-loader?lazy!../containers/admin'
@@ -104,6 +105,7 @@ class App extends React.Component {
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
                 <Bar/>
+                <GroupPopUp/>
                 <ChatContainer/>
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
                     style={{ height: height - 48 }}>
@@ -116,7 +118,7 @@ class App extends React.Component {
                               }
                           </div>
                     }
-                    <div style={{ paddingTop: 48, marginRight: (width > 1100 + 300)? 300: 0 }}>
+                    <div style={{ paddingTop: 47, marginRight: (width > 1100 + 300)? 300: 0 }}>
                         {(path == "/" || path == "/admin" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
                               <div style={{ height: height - 48, width: Math.max(1100, width) }}>

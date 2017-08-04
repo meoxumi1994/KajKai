@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ContactComment from '~/containers/entity/contact/ContactComment'
+import LeaderComment from '~/containers/entity/contact/LeaderComment'
 
 const getString = (str) => {
     let newstr = ""
@@ -24,7 +24,6 @@ class Cell extends React.Component {
                         onChange('currentAvatar', avatarUrl)
                         onChange('currentName', name)
                         onChange('currentId', id)
-                        // onGetContact()
                     }}
                     style={{
                         textAlign: 'left',
@@ -43,37 +42,37 @@ class Cell extends React.Component {
     }
 }
 
-class Cell2 extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {}
-    }
-    render(){
-        const { name, onChange } = this.props
-        return(
-            <div>
-                <div className="btn"
-                    onMouseOver={() => this.setState({ hover: true })}
-                    onMouseLeave={() => this.setState({ hover: false })}
-                    onClick={() => {
-                        onChange('currentType', name)
-
-                    }}
-                    style={{
-                        textAlign: 'left',
-                        display: 'inline-block',
-                        borderRadius: 0,
-                        borderTop: this.state.hover?'1px solid #282828':'1px solid white',
-                        borderBottom: this.state.hover?'1px solid #282828':'1px solid white',
-                        backgroundColor: this.state.hover?'#3B5998':'white',
-                        color: this.state.hover?'white':'black',
-                        margin: 0, padding: 0, width: 80 }}>
-                    <span style={{ marginLeft: 5, fontSize: 12.5 }}>{name}</span>
-                </div>
-            </div>
-        )
-    }
-}
+// class Cell2 extends React.Component {
+//     constructor(props){
+//         super(props)
+//         this.state = {}
+//     }
+//     render(){
+//         const { name, onChange } = this.props
+//         return(
+//             <div>
+//                 <div className="btn"
+//                     onMouseOver={() => this.setState({ hover: true })}
+//                     onMouseLeave={() => this.setState({ hover: false })}
+//                     onClick={() => {
+//                         onChange('currentType', name)
+//
+//                     }}
+//                     style={{
+//                         textAlign: 'left',
+//                         display: 'inline-block',
+//                         borderRadius: 0,
+//                         borderTop: this.state.hover?'1px solid #282828':'1px solid white',
+//                         borderBottom: this.state.hover?'1px solid #282828':'1px solid white',
+//                         backgroundColor: this.state.hover?'#3B5998':'white',
+//                         color: this.state.hover?'white':'black',
+//                         margin: 0, padding: 0, width: 80 }}>
+//                     <span style={{ marginLeft: 5, fontSize: 12.5 }}>{name}</span>
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
 
 class ManagerComment extends React.Component {
     constructor(props){
@@ -81,7 +80,7 @@ class ManagerComment extends React.Component {
     }
     render(){
         const {
-            storeList, current, currentAvatar, onGetContact,
+            storeList, current, currentAvatar, onGetContact, leadercomments,
             currentName, currentType, avatarUrl, username, onChange } = this.props
         return(
             <div style={{ height: '100%',}}>
@@ -115,7 +114,7 @@ class ManagerComment extends React.Component {
                             )}
                         </ul>
                     </div>
-                    <div className="input-group-btn" style={{ padding: 0, margin: 0,}}>
+                    {/* <div className="input-group-btn" style={{ padding: 0, margin: 0,}}>
                       <div className="btn btn-default btn-xs dropdown-toggle"
                           style={{
                               textAlign: 'left',
@@ -140,9 +139,17 @@ class ManagerComment extends React.Component {
                             <Cell2 name={'Done'} onChange={onChange}/>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                 </div>
                 <hr style={{ margin: 0}}/>
+                {leadercomments && leadercomments.map((item, index) =>
+                    <div key={index}>
+                        <LeaderComment
+                            id={item.id}
+                            />
+                        <hr style={{ margin: 0 }}/>
+                    </div>
+                )}
             </div>
         )
     }
