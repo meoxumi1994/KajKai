@@ -5,7 +5,7 @@ const contacthistory = (state = {
     currentId: '',
     userState: 'WAIT',
     storeState: 'WAIT',
-    leadercomments: {},
+    leadercomments: [],
     offset: {},
     useroffset: -1,
 }, action) => {
