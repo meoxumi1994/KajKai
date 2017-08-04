@@ -140,15 +140,19 @@ export const createReceiveNotification = (message) => {
               order: notification.order,
               isRead: 0
             })
+            console.log('what the hell 1');
             User.find({}, (err, users) => {
               if (users) {
+                console.log('what the hell 2');
                 for (let i = 0; i < users.length; i++) {
+                  console.log('what the hell 3');
                   let user = users[i]
                   let { followingSellposts } = user
                   if (!followingSellposts) {
                     followingSellposts = []
                   }
                   for (let k = 0; k < followingSellposts.length; k++) {
+                    console.log('what the hell 4');
                     if (followingSellposts[k] == notification.sellpostId) {
                       let { notifications } = user
                       if (!notifications) {
