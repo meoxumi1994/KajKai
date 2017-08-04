@@ -139,3 +139,23 @@ export const minorPostUpdatedPub = (minorPost) => {
     pub.publish('MINORPOST.Updated', JSON.stringify(publishData));
     pub.quit();
 };
+
+export const updateFollowPub = (userId, storeId, sellPostId, next) => {
+    const sub = redis.createClient(config);
+    const pub = redis.createClient(config);
+    const publishData = {userId, storeId, sellPostId, eventId: getUUID()};
+    console.log(JSON.stringify(publishData));
+    pub.publish('NOTI.UpdateFollow', JSON.stringify(publishData));
+    sub.subscribe('NOTI.UpdateFollow' + publishData.eventId);
+    sub.on('message', (channel, message) => {
+        message = JSON.parse(message);
+        sub.unsubscribe();
+        sub.quit();
+        pub.quit();
+        if (message.status === 'success') {
+            next(message.follow)
+        } else {
+            next(null)
+        }
+    })
+};

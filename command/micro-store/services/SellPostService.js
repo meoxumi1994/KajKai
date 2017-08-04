@@ -1,7 +1,7 @@
 import { SellPost } from '../models'
 import globalId from '../config/globalId'
 import { getStore } from './StoreService'
-import { sellPostCreated, sellPostDeleted, sellPostUpdated } from '../controllers/StorePubController'
+import { sellPostCreated, sellPostDeleted, sellPostUpdated, updateFollowPub } from '../controllers/StorePubController'
 import { createMultiplePostDetail, removeBulk } from './SellPostDetailService'
 
 const SELLPOST_GLOBAL_ID = globalId.SELLPOST_GLOBAL_ID;
@@ -27,6 +27,7 @@ export const addSellPost = (sellPostInfo, next) => {
         status: sellPostInfo.status, shippable: sellPostInfo.ship, sellPostDetailOrders: []});
     sellPost.save(() => {
         getStore(sellPost.storeId, (store) => {
+            updateFollowPub(store.owner, null, getSellPostGlobalId(sellPost._id), (follow) => {});
             getPubSellPostInfo(sellPost, (info) => {
                 let sellPostDetail = sellPostInfo.postrows;
                 if (sellPostDetail && sellPostDetail.length > 0) {
