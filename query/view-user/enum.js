@@ -33,7 +33,7 @@ export const NotificationType = {
   SELLPOSTCreated: 'createsellpost',
   SELLPOSTEdited: 'editsellpost',
   INTEREST: 'createstore',
-  RECEIVE: 'received'
+  RECEIVED: 'received'
 }
 
 export const OrderStatus = {

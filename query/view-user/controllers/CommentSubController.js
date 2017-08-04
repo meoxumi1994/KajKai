@@ -114,16 +114,12 @@ export const createCommentNotification = (message) => {
 
 export const createReceiveNotification = (message) => {
   const { fCommentId: id, status } = message.fComment
-  console.log('id: ', id);
 
   if (status == NotificationType.RECEIVED) {
-    console.log('===>id: ', id);
     Notification.findOne({ commentId: id }, (err, notification) => {
-      console.log('notification: ', notification);
       if (notification) {
         IDSellpostStore.findOne({ sellpostId: notification.sellpostId }, (err, mIDSellpostStore) => {
           if (mIDSellpostStore) {
-            console.log('mIDSellpostStore: ', mIDSellpostStore);
             notification.type = NotificationType.RECEIVED
             let mNotification = new Notification({
               type: NotificationType.RECEIVED,
@@ -143,26 +139,21 @@ export const createReceiveNotification = (message) => {
               order: notification.order,
               isRead: 0
             })
-            console.log('what the hell 1');
             User.find({}, (err, users) => {
               if (users) {
-                console.log('what the hell 2');
                 for (let i = 0; i < users.length; i++) {
-                  console.log('what the hell 3');
                   let user = users[i]
                   let { followingSellposts } = user
                   if (!followingSellposts) {
                     followingSellposts = []
                   }
                   for (let k = 0; k < followingSellposts.length; k++) {
-                    console.log('what the hell 4');
                     if (followingSellposts[k] == notification.sellpostId) {
                       let { notifications } = user
                       if (!notifications) {
                         notifications = []
                       }
 
-                      console.log('what the hell ');
                       notify(user.id, mNotification)
 
                       if (user.id == notification.actorId) {
