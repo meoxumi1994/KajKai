@@ -2,14 +2,14 @@ const leadercomment = (state = {
 
 }, action) => {
     switch (action.type) {
-        case 'client/RECEIVE':
-            return {...state,
-                [action.data.leadercommentid]: {
-                    ...state[action.data.leadercommentid],
-                    status: 'received',
-                }
-            }
-        case 'client/COMMENT':
+        // case 'global/RECEIVE':
+        //     return {...state,
+        //         [action.data.leadercommentid]: {
+        //             ...state[action.data.leadercommentid],
+        //             status: 'received',
+        //         }
+        //     }
+        case 'global/COMMENT':
             return {...state,
                 [action.data.leadercommentid]: {
                     ...state[action.data.leadercommentid],
@@ -22,7 +22,7 @@ const leadercomment = (state = {
                     ]
                 }
             }
-        case 'client/LEADERCOMMENT':
+        case 'global/LEADERCOMMENT':
             return {...state,
                 [action.data.id]: {
                     ...action.data,
@@ -43,6 +43,8 @@ const leadercomment = (state = {
                     ]
                 }
             }
+        case 'GET_CONTACT_STORE_SUCCESS':
+        case 'GET_CONTACT_USER_SUCCESS':
         case 'GET_MORE_LEADERCOMMENT_SUCCESS':
             let mystate = state
             action.leadercomments.map((item) => {

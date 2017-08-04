@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="179px" height="200px" viewBox="0 0 179 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
-    <title>Slice 14</title>
+<svg width="130px" height="130px" viewBox="0 0 130 130" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>setting</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="Rectangle-34" fill="#B5B5B5" x="24" y="34" width="130" height="26" rx="13"></rect>
-        <rect id="Rectangle-34" fill="#B5B5B5" x="24" y="138" width="130" height="26" rx="13"></rect>
-        <rect id="Rectangle-34" fill="#B5B5B5" x="24" y="87" width="130" height="26" rx="13"></rect>
+        <g id="setting" fill="#18243D">
+            <g id="Page-1">
+                <rect id="Rectangle-34" x="0" y="0" width="130" height="26" rx="13"></rect>
+                <rect id="Rectangle-34" x="0" y="104" width="130" height="26" rx="13"></rect>
+                <rect id="Rectangle-34" x="0" y="53" width="130" height="26" rx="13"></rect>
+            </g>
+        </g>
     </g>
 </svg>
