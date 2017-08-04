@@ -5,7 +5,8 @@ export const createComment = (message) => {
   const { fCommentId: id, posterId, sellPostId: sellpostId, minorPostId: minorpostId, order, time, content } = message.fComment
 
   const comment = new Comment({
-    id
+    id,
+    commenterId: posterId
   })
 
   if (sellpostId) comment.sellpostId = sellpostId
@@ -68,11 +69,13 @@ export const createComment = (message) => {
     const reply = replies[0] ? replies[0] : replies[1]
 
     comment.replies = [reply]
-    comment.save(() => {})
 
     if (sellpostId) {
       Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
         if (sellpost) {
+          comment.storeId = sellpost.storeId
+          comment.save(() => {})
+
           let { comments } = sellpost
 
           if (!comments) {
@@ -132,6 +135,8 @@ export const updateComment = (message) => {
   const { fCommentId: id, status } = message.fComment
   Comment.findOne({ id }, (err, comment) => {
     if (comment) {
+      comment.status = status
+      comment.save(() => {})
       Sellpost.findOne({ id: comment.sellpostId }, (err, sellpost) => {
         if (sellpost) {
           let { comments } = sellpost

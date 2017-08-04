@@ -1,7 +1,10 @@
 const socketToken = ( state = null , action) => {
     switch (action.type) {
         case 'SETSOCKETTOKEN':
-            return action.socketToken
+            if (action.socketToken) {
+              return action.socketToken
+            }
+            return state
         default:
             return state
     }

@@ -3,7 +3,7 @@ import { fleu } from '~/actions/support'
 
 export const changeLanguage = (language) => dispatch => {
     dispatch(updateuserData('LANGUAGE', { language : language }))
-    fleu('/updateuser',{
+    fleu('/user',{
         language: language
     },{
         status: 'failed|success'

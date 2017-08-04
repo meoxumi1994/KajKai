@@ -1,8 +1,8 @@
-import * as UserService from '../../../../query/view-user/services/UserService'
+import * as UserService from '../../query/view-user/services/UserService'
 import { expect } from 'chai'
 import jwt from 'jsonwebtoken'
 
-describe('UserService', () => {
+describe('SearchService', () => {
   describe('getUser', () => {
     describe('with correct userId == requesterId', () => {
       it('should return status success and correct user info', (done) => {
@@ -120,7 +120,7 @@ describe('UserService', () => {
   })
 
   describe('getUserImageList', () => {
-    describe('with correct userId', () => {
+    describe('with correct userId and offset', () => {
       it('should return status success and list of uploaded images', (done) => {
         UserService.getUserImageList('', '0015979f436810eaa65bbca1a64', new Date('2017-08-01T12:50:56.093Z'), (result) => {
           const expectedResult = {
@@ -188,7 +188,7 @@ describe('UserService', () => {
                 avatarUrl: 'https://d1z4p30mgj29.cloudfront.net/a6a1acbb56aae018694f97951008d77e4befc90e473e2d11355b775aea3.png',
                 name: 'ga rau rau ga',
                 content: '1',
-                time: (new Date("2017-07-31T15:42:22.971Z")).getTime(),
+                time: (new Date('2017-07-31T15:42:22.971Z')).getTime(),
                 numlike: undefined,
                 likes: [],
                 likestatus: ['like'],
