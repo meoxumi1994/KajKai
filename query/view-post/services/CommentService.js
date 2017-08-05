@@ -55,9 +55,15 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           })
         }
       } else {
+        const mComments = []
+        comments.map((comment) => {
+          if (comment.commenterId != id) {
+            mComments.push(comment)
+          }
+        })
         next({
           id,
-          ...getClientFormatSellpostComments(requesterId, comments, offset, status, false, length)
+          ...getClientFormatSellpostComments(requesterId, mComments, offset, status, false, length)
         })
       }
     })
