@@ -53,7 +53,8 @@ export const getUser = (requesterId, id, next) => {
                 avatarUrl: basicStore.avatarUrl,
                 urlname: basicStore.urlName
               }))) : [],
-              numUnreaded: user.numberOfUnRead ? user.numberOfUnRead : 0
+              numUnreaded: user.numberOfUnRead ? user.numberOfUnRead : 0,
+              currentId: user.currentId ? user.currentId : user.id
             }
           })
         } else {
