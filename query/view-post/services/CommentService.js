@@ -195,6 +195,7 @@ export const getClientFormatMinorpostComments = (requesterId, comments, offset) 
       let mComment = getClientFormatReplies(requesterId, replies, Date.now())
 
       mComment.id = comment.id
+      mComment.storeid = comment.storeId
       mComment.minorpostid = comment.minorPostId
       mComment.numcomment = comment.numberOfReply
 
