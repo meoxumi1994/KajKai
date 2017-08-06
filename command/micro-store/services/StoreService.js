@@ -133,8 +133,8 @@ export const createStore = (storeInfo, next) => {
 export const updateStore = (storeInfo, userId, next) => {
     getStore(storeInfo.id, (store) => {
         if (store.owner !== userId) {
-          next('failed');
-          return
+            next('failed');
+            return
         }
         if (storeInfo.storename) {
             store.storeName = storeInfo.storename;

@@ -40,7 +40,9 @@ export default {
             controller: 'StoreController',
             middleware: [auth()],
             method: 'addStoreCon'
-        },
+        }
+    },
+    '/store/:id': {
         put: {
             controller: 'StoreController',
             middleware: [auth()],
