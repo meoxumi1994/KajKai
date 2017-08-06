@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
     avatarUrl: {type: String},
     coverUrl: {type: String},
     phone: {type: String},
-    address: {type: AddressSchema},
+    address: {type: String},
     language: {type: String, enum: _.values(Language)},
     sex: {type: String},
     yearOfBirth: {type: Number},
