@@ -7,6 +7,7 @@ import { getMoreComment } from '~/actions/asyn/entity/comment'
 const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     const leadercomment = state.inst.entity.contact.leadercomment[id]
+    const status = state.inst.entity.contact.comment[id].status
     let isOwner = false
     let avatarUrl = state.user.avatarUrl
     for(let i=0; i< state.user.storeList.length ; i++){
@@ -19,6 +20,8 @@ const mapStateToProps = (state, { id }) => {
     return({
         ...leadercomment,
         avatarUrl: avatarUrl,
+        isOwner: isOwner,
+        status: status,
         WRITE_COMMENT: g('WRITE_COMMENT')
     })
 }

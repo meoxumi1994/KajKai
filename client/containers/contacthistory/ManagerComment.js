@@ -6,9 +6,11 @@ import ManagerComment from '~/components/contacthistory/ManagerComment.js'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
+    const managercomment = state.inst.contacthistory.managercomment
+    const contact = managercomment.contact[managercomment.currentId]
     return({
-        ...state.user,
-        ...state.inst.contacthistory,
+        ...managercomment,
+        ...contact,
     })
 }
 
@@ -16,23 +18,23 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onChange: (key, value) => {
         dispatch({ type: 'INST_CONTACT_HISTORY_CHANGE', key: key, value: value })
     },
-    getContact: (offset, useroffset, currentId, userState, storeState ) => {
-        if(currentId){
-            if(offset[currentId] != -2 && storeState != 'GET_CONTACT_STORE_ING')
-                dispatch(getContactStore(offset[currentId], currentId, 1 ))
+    getContact: (type, offset, id, state, length ) => {
+        if(type == 'store'){
+            if(offset != -2 && state != 'GET_CONTACT_STORE_ING')
+                dispatch(getContactStore(offset, id, 20))
         }else{
-            if(useroffset != -2 && userState != 'GET_CONTACT_USER_ING')
-                dispatch(getContactUser(useroffset, 1 ))
+            if(offset != -2 && state != 'GET_CONTACT_USER_ING')
+                dispatch(getContactUser(offset, id, 20 ))
         }
-    }
+    },
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { currentId, offset, useroffset, userState, storeState, ...anotherState } = stateProps
+    const { ...anotherState } = stateProps
     const { getContact, ...anotherDispatch } = dispatchProps
     return({
-        onGetContact: (offset, useroffset, currentId) => {
-            getContact(offset, useroffset, currentId, userState, storeState )
+        onGetContact: (type, offset, id, state) => {
+            getContact(type, offset, id, state)
         },
         ...ownProps,
         ...stateProps,

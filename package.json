@@ -41,7 +41,8 @@
     ]
   },
   "dependencies": {
-    "jsonwebtoken": "7.4.1"
+    "jsonwebtoken": "7.4.1",
+    "node-notifier": "^5.1.2"
   },
   "devDependencies": {
     "babel": "6.23.0",

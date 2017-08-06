@@ -70,7 +70,7 @@ export const updatePhone = (phone) => dispatch => {
     })
 }
 
-export const verifyPhone = (phone, code) => dispatch => {
+export const verifyPhone = (phone, code, needUpdate, id) => dispatch => {
     dispatch(dispatch({ type: 'VERIFY_PHONE_ING'}))
     flet('/phonecodeverification',{
         phone: phone,

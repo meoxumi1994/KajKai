@@ -8,6 +8,7 @@ class GroupPopUp extends React.Component {
     }
     render(){
         const { popups } = this.props
+
         return(
             <div style={{
                 position: 'fixed',
