@@ -26,13 +26,7 @@ export const getUser = (requesterId, id, next) => {
               email: requesterId == id ? user.email : '',
               avatarUrl: user.avatarUrl,
               coverUrl: user.coverUrl,
-              address: (requesterId == id && user.address) ? {
-                city : user.address.city,
-                district : user.address.district,
-                street : user.address.street,
-                longitude : user.address.longitude,
-                latitude : user.address.latitude
-              } : {},
+              address: requesterId == id ? user.address : '',
               phone: requesterId == id ? user.phone : '',
               language: user.language,
               sex: user.sex,
