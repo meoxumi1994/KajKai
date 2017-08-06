@@ -27,7 +27,9 @@ const UserSchema = new mongoose.Schema({
     privacyAEP: {type: String, enum: _.values(PrivacyAEP)},
     privacyOthers: {type: String, enum: _.values(PrivacyOthers)},
     banned: {type: Number},
-    banReason: {type: String}
+    banReason: {type: String},
+    longitude: {type: Number},
+    latitude: {type: Number}
 });
 
 export default UserSchema

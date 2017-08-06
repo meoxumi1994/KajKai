@@ -55,12 +55,17 @@ export const getUserBasicInfo = (user) => {
             address: user.addressLastUpdateAt,
         },
         imageUrls: user.imageUrl,
+        position: {
+            lng: user.longitude,
+            lat: user.latitude
+        },
         // blacklist: [{
         //     id:,
         //     type: 'userid|storeid|mesid',
         //     name: ,
         // }],
-        id: getUserGlobalId(user._id) }
+        id: getUserGlobalId(user._id)
+    }
 };
 
 export const getUserBasicStoreInfo = (user) => {
@@ -69,7 +74,10 @@ export const getUserBasicStoreInfo = (user) => {
         language: user.language,
         avatarUrl: user.avatarUrl,
         coverUrl: user.coverUrl,
-        id: getUserGlobalId(user._id) }
+        id: getUserGlobalId(user._id),
+        longitude: user.longitude,
+        latitude: user.latitude
+    }
 };
 
 export const getListUser = (ids, next) => {
@@ -249,7 +257,7 @@ export const createUser = (email, userName, password, verified, yearOfBirth, soc
             return;
         }
     }
-    if (yearOfBirth !== null && !validateYearOfBirth(yearOfBirth)) {
+    if (yearOfBirth !== null) {
         next(null);
         return;
     }
@@ -339,13 +347,14 @@ export const updateUserInfo = (userId, info, next) => {
         if (info.yearOfBirth) {
             try{
                 const year = parseInt(info.yearOfBirth);
-                if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
-                    user.yearOfBirth = year;
-                    updateYOB = true
-                } else {
-                    next('year error', null);
-                    return
-                }
+                user.yearOfBirth = year;
+                // if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
+                //     user.yearOfBirth = year;
+                //     updateYOB = true
+                // } else {
+                //     next('year error', null);
+                //     return
+                // }
             } catch (err) {
                 next('year error', null)
             }
@@ -359,6 +368,11 @@ export const updateUserInfo = (userId, info, next) => {
         }
         if (updateAddress) {
             user.addressLastUpdateAt = new Date()
+        }
+
+        if (info.position) {
+            if (info.position.lng) user.longitude = info.position.lng;
+            if (info.position.lat) user.latitude = info.position.lat;
         }
 
         user.save((err) => {
