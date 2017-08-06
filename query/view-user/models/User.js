@@ -19,6 +19,8 @@ const UserSchema = new mongoose.Schema({
   imageList: [ImageSchema],
   phone: {type: String},
   address: {type: String},
+  latitude: {type: Number},
+  longitude: {type: Number},
   language: {type: String, enum: _.values(Language)},
   sex: {type: String, enum: _.values(Sex)},
   yearOfBirth: {type: Date},
