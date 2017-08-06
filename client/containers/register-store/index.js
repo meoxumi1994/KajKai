@@ -4,7 +4,7 @@ import { get } from '~/config/allString'
 import { FilteringPhoneDefaultVietName } from '~/containers/support'
 import { changeLanguage } from '~/actions/asyn/user-login-register'
 import { authAction } from '~/actions/sync/auth'
-import { getCategory, updatePhone, verifyPhone, registerStore } from '~/actions/asyn/register-store'
+import { getCategory, updatePhone, registerStore } from '~/actions/asyn/register-store'
 import Registerstore from '~/components/register-store'
 
 const mapStateToProps = (state, ownProps) => {

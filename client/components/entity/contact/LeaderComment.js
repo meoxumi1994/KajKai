@@ -10,7 +10,9 @@ class LeaderComment extends React.Component {
     }
     render(){
         const { WRITE_COMMENT, comments, isReply, id, contentedit, avatarUrl, onReply, onChange, order, status,
-            sellpostid, onEnter, offset, numcomment, onGetMore } = this.props
+            sellpostid, onEnter, offset, numcomment, onGetMore, isOwner} = this.props
+        if( status == 'done' && isOwner )
+            return <div></div>
         return(
             <div>
                 {comments.map((cm, index) => {

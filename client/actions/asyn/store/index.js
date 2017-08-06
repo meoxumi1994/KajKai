@@ -1,8 +1,8 @@
 import { flem, flet, fleu} from '~/actions/support'
 
-export const updateStore = (store) => dispatch => {
+export const updateStore = (id, store) => dispatch => {
     dispatch({ type: 'UPDATE_STORE_ING'})
-    fleu('/store',{
+    fleu('/store/' + id,{
         ...store
     })
     .then(({ status, store }) => {
