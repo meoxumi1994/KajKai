@@ -49,7 +49,7 @@ class Comment extends React.Component {
                     marginLeft: isleader?0:38,
                     paddingLeft: isleader?0:10,
                     fontSize: 12.5,
-                    borderLeft: isleader?undefined:'2px solid #4080FF'}}>
+                    borderLeft: isleader?undefined:'2px solid #4080FF' }}>
                 {(this.state.hover || clicksetting) &&
                     <div
                         style={{ float: 'right', padding: 2}}>

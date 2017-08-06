@@ -38,10 +38,10 @@ export const loadImage = (action, file, src) => dispatch => {
                         dispatch(updateUser({ ...action.data, coverUrl: urlreal }))
                     }
                     if(action.type == 'UPDATE_STORE_AVATAR'){
-                        dispatch(updateStore({ ...action.data, avatarUrl: urlreal}))
+                        dispatch(updateStore(action.data.id, { ...action.data, avatarUrl: urlreal}))
                     }
                     if(action.type == 'UPDATE_STORE_COVER'){
-                        dispatch(updateStore({ ...action.data, coverUrl: urlreal }))
+                        dispatch(updateStore(action.data.id, { ...action.data, coverUrl: urlreal }))
                     }
                     if(action.type == 'UPDATE_PRODUCR_IMAGE'){
                         dispatch({

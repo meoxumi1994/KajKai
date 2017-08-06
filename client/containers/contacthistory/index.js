@@ -5,7 +5,9 @@ import ContactHistory from '~/components/contacthistory'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
+    const contacthistory = state.inst.contacthistory.index
     return({
+        ...contacthistory
     })
 }
 

@@ -315,7 +315,8 @@ export const updateUserInfo = (userId, info, next) => {
             }
         }
         if (info.address) { // TO DO
-            user.address = new Address(info.address);
+            // user.address = new Address(info.address);
+            user.address = info.address;
             updateAddress = true
         }
         if (info.language) {
