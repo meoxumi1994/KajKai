@@ -27,3 +27,17 @@ export const sendUnBanEmail = (username, email, reason) => {
     });
     send({}, (err, res) => {})
 }
+
+export const sendResolveEmail = (username, email, content) => {
+    var send = require('gmail-send')({
+        user: 'kajkaiverify@gmail.com',
+        pass: 'verifykajkai',
+        to:   email,
+        subject: 'KAJKAI BAN',
+        text: 'Hi ' + username + '\n' +
+        'We would like to inform that your feedback has been resolved by KajKai admin! \n' +
+        'Content: ' + content + '\n' +
+        'KAJKAI TEAM :D'
+    });
+    send({}, (err, res) => {})
+}

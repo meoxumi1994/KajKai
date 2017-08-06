@@ -1,5 +1,5 @@
 import { Admin, User, Feedback } from '../models'
-import { sendBanEmail, sendUnBanEmail } from './EmailService'
+import { sendBanEmail, sendUnBanEmail, sendResolveEmail } from './EmailService'
 import { addBanPub, removeBanPub } from './BanPubService'
 import jwt from 'jsonwebtoken'
 
@@ -102,8 +102,8 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
                     addBanPub(user.id, admin.reason)
                     sendBanEmail(user.username, user.email, admin.reason)
                   } else {
+                    sendResolveEmail(user.username, user.email, admin.reason)
                     removeBanPub(user.id, admin.reason)
-                    sendUnBanEmail(user.username, user.email, admin.reason)
                   }
                 })
 
@@ -131,7 +131,9 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
                   sendBanEmail(user.username, user.email, admin.reason)
                 } else {
                   removeBanPub(user.id, admin.reason)
-                  sendUnBanEmail(user.username, user.email, admin.reason)
+                  if (user.banned == 1) {
+                    sendUnBanEmail(user.username, user.email, admin.reason)
+                  }
                 }
               })
 

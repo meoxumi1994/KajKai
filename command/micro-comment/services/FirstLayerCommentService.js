@@ -18,57 +18,56 @@ export const getFirstCommentLocalId = (id) => {
 };
 
 export const getFirstLayerCommentInfo = (fComment, next) => {
-    if (fComment.posterId.startsWith(USER_GLOBAL_ID)) {
-        getUser(fComment.posterId, (user) => {
-            if (!user) next(null);
-            else {
-                let info = {
-                    content: fComment.content,
-                    name: user.username,
-                    avatarUrl: user.avatarUrl,
-                    commenterid: user.id,
-                    time: fComment.time,
-                    order: getOrderInfo(fComment.order),
-                    id: getFirstCommentGlobalId(fComment._id),
-                    like: fComment.likeCounter,
-                    status: fComment.status,
-                    type: 'user'
-                };
-                if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
-                    info = {...info, sellpostid: fComment.postId}
-                } else {
-                    info = {...info, minorpostid: fComment.postId};
+    getStoreFromPostId(fComment.postId, (store) => {
+        if (fComment.posterId.startsWith(USER_GLOBAL_ID)) {
+            getUser(fComment.posterId, (user) => {
+                if (!user) next(null);
+                else {
+                    let info = {
+                        content: fComment.content,
+                        name: user.username,
+                        avatarUrl: user.avatarUrl,
+                        commenterid: user.id,
+                        time: fComment.time,
+                        order: getOrderInfo(fComment.order),
+                        id: getFirstCommentGlobalId(fComment._id),
+                        like: fComment.likeCounter,
+                        status: fComment.status,
+                        type: 'user',
+                        storeid: store.storeId
+                    };
+                    if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
+                        info = {...info, sellpostid: fComment.postId}
+                    } else {
+                        info = {...info, minorpostid: fComment.postId};
+                    }
+                    next(info);
                 }
-                next(info);
+            })
+        } else {
+            let info = {
+                content: fComment.content,
+                name: store.storeName,
+                avatarUrl: store.avatarUrl,
+                commenterid: store.storeId,
+                time: fComment.time,
+                order: getOrderInfo(fComment.order),
+                id: getFirstCommentGlobalId(fComment._id),
+                like: fComment.likeCounter,
+                urlname: store.urlName,
+                user: store.owner,
+                status: fComment.status,
+                type: 'store',
+                storeid: store.storeId
+            };
+            if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
+                info = {...info, sellpostid: fComment.postId}
+            } else {
+                info = {...info, minorpostid: fComment.postId};
             }
-        })
-    } else {
-        getStore(fComment.posterId, (store) => {
-            if (!store) next(null);
-            else {
-                let info = {
-                    content: fComment.content,
-                    name: store.storeName,
-                    avatarUrl: store.avatarUrl,
-                    commenterid: store.storeId,
-                    time: fComment.time,
-                    order: getOrderInfo(fComment.order),
-                    id: getFirstCommentGlobalId(fComment._id),
-                    like: fComment.likeCounter,
-                    urlname: store.urlName,
-                    user: store.owner,
-                    status: fComment.status,
-                    type: 'store'
-                };
-                if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
-                    info = {...info, sellpostid: fComment.postId}
-                } else {
-                    info = {...info, minorpostid: fComment.postId};
-                }
-                next(info);
-            }
-        })
-    }
+            next(info);
+        }
+    });
 };
 
 export const getFirstLayerCommentPubInfo = (fComment) => {
