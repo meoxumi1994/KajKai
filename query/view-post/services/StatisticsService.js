@@ -33,7 +33,11 @@ export const getStatistics = (userId, storeId, from, to, next) => {
             }
             for (let d = from; d <= to; d.setDate(d.getDate() + 1)) {
               console.log('d: ', d);
-              let value = resultByDate[d]
+              let temDate = new Date()
+              temDate.setDate(d.getDate())
+              temDate.setMonth(d.getMonth())
+              temDate.setFullYear(d.getFullYear())
+              let value = resultByDate[temDate]
               result.push(value ? value : 0)
             }
             next({
