@@ -27,7 +27,7 @@ export const getStatistics = (userId, storeId, from, to, next) => {
                 time.setFullYear(year)
                 console.log('time: ', time);
                 if (comment.userId != userId && comment.userId != storeId && from <= time && time <= to) {
-                  let value = resultByDate[time]
+                  let value = resultByDate[time.getDate() + time.getMonth() + time.getFullYear()]
                   resultByDate[time] = value ? value + 1 : 1
                 }
               }
@@ -39,7 +39,7 @@ export const getStatistics = (userId, storeId, from, to, next) => {
               temDate.setMonth(d.getMonth())
               temDate.setFullYear(d.getFullYear())
               console.log('temDate: ', temDate);
-              let value = resultByDate[temDate]
+              let value = resultByDate[d.getDate() + d.getMonth() + d.getFullYear()]
               result.push(value ? value : 0)
             }
             next({
