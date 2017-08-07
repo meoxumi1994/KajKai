@@ -21,7 +21,7 @@ export const createUser = (message) => {
 }
 
 export const updateUser = (message) => {
-  const { id, username, avatarUrl, coverUrl, imageUrls: imageList, address, phone, language, sex, yearOfBirth, lastUpdate, currentId } = message.user
+  const { id, username, avatarUrl, coverUrl, imageUrls: imageList, address, phone, language, sex, yearOfBirth, lastUpdate, currentId, position } = message.user
   const user = {}
 
   if (currentId) {
@@ -48,6 +48,15 @@ export const updateUser = (message) => {
       user.lastUpdate = {
         address: Date.now()
       }
+    }
+  }
+  if (position) {
+    let { lng, lat } = position
+    if (lng) {
+      user.longitude = lng
+    }
+    if (lat) {
+      user.latitude = lat
     }
   }
   if (phone) {
