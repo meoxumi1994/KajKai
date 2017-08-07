@@ -18,10 +18,10 @@ export const getStatistics = (userId, storeId, from, to, next) => {
               for (let k = 0 ; k < comments.length; k++) {
                 let comment = comments[k].replies[0]
                 let { time } = comment
-                time.setTime(0)
                 let date = time.getDate()
                 let month = time.getMonth()
                 let year = time.getFullYear()
+                time.setTime(0)
                 console.log(date, month, year);
                 time.setDate(date)
                 time.setMonth(month)
