@@ -51,10 +51,11 @@ export const updateUser = (message) => {
     }
   }
   if (position) {
-    if (position.lng) {
+    let { lng, lat } = position
+    if (lng) {
       user.longitude = lng
     }
-    if (position.lat) {
+    if (lat) {
       user.latitude = lat
     }
   }
