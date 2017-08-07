@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 import page from './page'
 import photo from './photo'
+import statistic from './statistic'
 import { updateFollows } from '~/reducers/support'
 
 const index = (state = {
@@ -36,6 +37,7 @@ const store = combineReducers({
     index,
     page,
     photo,
+    statistic,
 })
 
 export default store

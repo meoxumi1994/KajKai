@@ -8,6 +8,7 @@ const Setting = (props) => {
         ENTER_CATEGORY, CREATE_STORE_DESCRIPTION_4, CATEGORY_FAILED,
         ENTER_YOUR_ADDRESS, ADDRESS_DESCRIPTION, ADDRESS_FAILED,
         PHONE,
+        AGE,
         POSITION_IN_MAP, POSITION_FAILED
         } = props
     return(
@@ -19,6 +20,7 @@ const Setting = (props) => {
             <SettingCell id={id} kind="address" type="store" title={ENTER_YOUR_ADDRESS} description={ADDRESS_DESCRIPTION}
                 placeholder={ENTER_YOUR_ADDRESS} failed={ADDRESS_FAILED}/>
             <SettingCell id={id} kind="phone" type="store" title={PHONE}/>
+            <SettingCell id={id} kind="age" type="store" title={AGE} placeholder={AGE}/>
             <SettingCell id={id} kind="position" type="store" title={POSITION_IN_MAP}
                 placeholder={ENTER_YOUR_ADDRESS} failed={ADDRESS_FAILED}/>
         </div>

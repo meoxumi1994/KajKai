@@ -95,3 +95,18 @@ export const getListImage = (type, id, offset) => dispatch => {
         }
     })
 }
+
+export const getStatistic = (id, from, to) => dispatch => {
+    dispatch({ type: 'GET_STORE_STATICTIS_ING' })
+    flem('/statistic/' + id,{
+        from: from,
+        to: to,
+    })
+    .then(({ status, statistics }) => {
+        if(status == 'success'){
+            dispatch({ type: 'GET_STORE_STATICTIS_SUCCESS', statistics })
+        }else{
+            dispatch({ type: 'GET_STORE_STATICTIS_FAILED' })
+        }
+    })
+}

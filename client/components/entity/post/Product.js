@@ -11,7 +11,7 @@ class Product extends React.Component {
         this.state = {}
     }
     render(){
-        const { id, list, imageUrl, content,
+        const { id, list, imageUrl, content, isOverLayLeft,
             canEdit, onChange, width, onAddProduct, justShow, canRemove,
             onRemoveProduct} = this.props
         return(
@@ -65,12 +65,19 @@ class Product extends React.Component {
                 }
                 <td>
                     {!canEdit ?
-                        <OverlayTrigger placement="right" overlay={(
+                        <OverlayTrigger placement={isOverLayLeft ? "left" : "right" } style={{ padding: 10 }} overlay={(
                             <Popover id="popover-positioned-bottom" title={list[0]}>
                                 {list.map((item,index) => {
                                     if(index) return (<div key={index}>{item}</div>)
                                     return undefined
                                 })}
+                                <div style={{ paddingBottom: 5, }}>
+                                    <ContentShow
+                                        fontSize={13.5}
+                                        heightEachRow={16}
+                                        content={content}
+                                    />
+                                </div>
                                 <img src={imageUrl} alt="Cinque Terre" width="200" height="200"/>
                             </Popover>
                         )}>

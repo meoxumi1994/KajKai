@@ -52,6 +52,7 @@ const myString = {
     NOTE_ADDRESS: ['Địa chỉ mặc định khi bạn đặt hàng tại cửa hàng, nhớ thay đổi hoặc ghi rõ với cửa hàng khi bạn thay đổi địa chỉ ship',
     'The default address when you place your order at the store, remember to change or specify with the store when you change ship\'s address'],
     AGE: ['Tuổi','Age'],
+    ENTER_AGE: ['Nhập tuổi của bạn','Enter your age'],
     NOTE_AGE: ['Thêm tuổi có thể giúp đỡ việc nhận và giao hàng tốt hơn','Add age can help with getting and delivering better'],
     PASSWORD: ['Mật khẩu','Password'],
     NOTE_VERIFY_PASSWORD: ['mật khẩu phải từ 6 ký tự trở lên, mật khẩu mới và cũ phải khác nhau',

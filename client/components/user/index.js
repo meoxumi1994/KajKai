@@ -4,7 +4,7 @@ import { Redirect  } from 'react-router-dom';
 import Top from '~/containers/user/Top'
 import Interest from '~/containers/user/Interest'
 import About from '~/containers/user/About'
-import Setting from '~/containers/target/middle/user/Setting'
+import Setting from '~/containers/user/Setting'
 import Store from '~/containers/user/Store'
 import Post from '~/containers/user/Post'
 import Left from '~/containers/user/Left'

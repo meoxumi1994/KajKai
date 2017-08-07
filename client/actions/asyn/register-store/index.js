@@ -2,6 +2,9 @@ import { authAction, authData} from '~/actions/sync/auth'
 import { flet, flem } from '~/actions/support'
 import { onWho } from '~/actions/asyn/app'
 
+import { updateUser } from '~/actions/asyn/user'
+import { updateStore } from '~/actions/asyn/store'
+
 export const registerStore = (store) => dispatch => {
     dispatch({ type: 'REGISTER_STORE_ING' })
     flet('/store',{
@@ -70,7 +73,7 @@ export const updatePhone = (phone) => dispatch => {
     })
 }
 
-export const verifyPhone = (phone, code, needUpdate, id) => dispatch => {
+export const verifyPhone = (phone, code, data) => dispatch => {
     dispatch(dispatch({ type: 'VERIFY_PHONE_ING'}))
     flet('/phonecodeverification',{
         phone: phone,
@@ -79,8 +82,16 @@ export const verifyPhone = (phone, code, needUpdate, id) => dispatch => {
         status: 'verified|error'
     })
     .then(({status}) => {
-        if(status == 'verified')
+        if(status == 'verified'){
             dispatch({ type: 'VERIFY_PHONE_SUCCESS' })
+            if(data){
+                if(data.type == 'user'){
+                    dispatch(updateUser({ phone: phone }))
+                }else{
+                    dispatch(updateStore(data.id, { phone: phone }))
+                }
+            }
+        }
         if(status == 'error')
             dispatch({ type: 'VERIFY_PHONE_FAILED' })
     })
