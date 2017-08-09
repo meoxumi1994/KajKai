@@ -262,8 +262,8 @@ export const getInterests = (id, offset, next) => {
               categoryId: interest.categoryId,
               categoryName: interest.categoryName,
               position: {
-                longitude: interest.longitude,
-                latitude: interest.latitude
+                lng: interest.longitude,
+                lat: interest.latitude
               },
               time: interest.time.getTime()
             })
