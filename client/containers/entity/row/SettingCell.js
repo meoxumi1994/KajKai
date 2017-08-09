@@ -9,16 +9,16 @@ import { updateStore } from '~/actions/asyn/store'
 import { updateUser } from '~/actions/asyn/user'
 
 
-const mapStateToProps = (state, { kind }) => {
+const mapStateToProps = (state, { kind, type }) => {
     const g = (lang) => get(state.user.language, lang)
     const store = state.inst.store.index
-    const user = state.inst.user.index
+    const user = state.user
     const settingcell = state.inst.entity.row.settingcell
     return({
         EDIT: g('EDIT'),
         SAVE: g('SAVE'),
         CONFIRM: g('CONFIRM'),
-        value: store[kind],
+        value: (type=='store') ? store[kind] : user[kind],
         ...settingcell,
     })
 }

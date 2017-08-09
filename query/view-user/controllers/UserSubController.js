@@ -21,7 +21,7 @@ export const createUser = (message) => {
 }
 
 export const updateUser = (message) => {
-  const { id, username, avatarUrl, coverUrl, imageUrls: imageList, address, phone, language, sex, yearOfBirth, lastUpdate, currentId, longitude, latitude } = message.user
+  const { id, username, avatarUrl, coverUrl, imageUrls: imageList, address, phone, language, sex, yearOfBirth, lastUpdate, currentId, position } = message.user
   const user = {}
 
   if (currentId) {
@@ -50,11 +50,14 @@ export const updateUser = (message) => {
       }
     }
   }
-  if (longitude) {
-    user.longitude = longitude
-  }
-  if (latitude) {
-    user.latitude = latitude
+  if (position) {
+    let { lng, lat } = position
+    if (lng) {
+      user.longitude = lng
+    }
+    if (lat) {
+      user.latitude = lat
+    }
   }
   if (phone) {
     user.phone = phone

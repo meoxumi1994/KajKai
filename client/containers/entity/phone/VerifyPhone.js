@@ -22,9 +22,9 @@ const mapStateToProps = (state, ownProps) => {
     })
 }
 
-const mapDispatchToProps = (dispatch, { phone }) => ({
+const mapDispatchToProps = (dispatch, { phone, data }) => ({
     onVerifyPhone: (code) => {
-        dispatch(verifyPhone(FilteringPhoneDefaultVietName(phone), code))
+        dispatch(verifyPhone(FilteringPhoneDefaultVietName(phone), code, data ))
     },
     onChangeCode: (e) => {
         dispatch({ type: 'INST_ENTITY_PHONE_ON_CHANGE_CODE', value: e.target.value })

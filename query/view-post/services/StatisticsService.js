@@ -21,6 +21,7 @@ export const getStatistics = (userId, storeId, from, to, next) => {
                 let date = time.getDate()
                 let month = time.getMonth()
                 let year = time.getFullYear()
+                time.setTime(0)
                 time.setDate(date)
                 time.setMonth(month)
                 time.setFullYear(year)
@@ -31,7 +32,12 @@ export const getStatistics = (userId, storeId, from, to, next) => {
               }
             }
             for (let d = from; d <= to; d.setDate(d.getDate() + 1)) {
-              let value = resultByDate[d]
+              let temDate = new Date()
+              temDate.setTime(0)
+              temDate.setDate(d.getDate())
+              temDate.setMonth(d.getMonth())
+              temDate.setFullYear(d.getFullYear())
+              let value = resultByDate[temDate]
               result.push(value ? value : 0)
             }
             next({

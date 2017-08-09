@@ -11,6 +11,7 @@ import Post from '~/containers/store/Post'
 import Left from '~/containers/store/Left'
 import Contact from '~/containers/store/Contact'
 import Activity from '~/containers/store/Activity'
+import Statistic from '~/containers/store/Statistic'
 
 const Middle = ({id}) => {
     switch (location.pathname.split('/')[2]) {
@@ -26,6 +27,8 @@ const Middle = ({id}) => {
             return <Post/>
         case 'contact':
             return <Contact/>
+        case 'statistic':
+            return <Statistic/>
         case 'activity':
             return <Activity/>
         case 'setting':

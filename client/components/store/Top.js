@@ -122,10 +122,11 @@ class Top extends React.Component {
                         <ButtonLine {...this.props} title="Page" last="0" link=""/>
                         <ButtonLine {...this.props} title="About" last="0" link="/about"/>
                         {/* <ButtonLine {...this.props} title="Post" last="0" link="/post"/> */}
-                        <ButtonLine {...this.props} title="Photos" last={(userid == yourid) ? 0:'1px'} link="/photo"/>
+                        <ButtonLine {...this.props} title="Photos" last={(userid == yourid) ? 0: '1px'} link="/photo"/>
                         {/* <ButtonLine {...this.props} title="Videos" last="0" link="/video"/> */}
                         {/* <ButtonLine {...this.props} title="Contact" last={(userid == yourid) ? 0:'1px'} link="/contact"/> */}
                         {/* {(userid == yourid) && <ButtonLine {...this.props} title="Activity" last="0" link="/activity"/>} */}
+                        {(userid == yourid) && <ButtonLine {...this.props} title="Statistic" last={0} link="/statistic"/>}
                         {(userid == yourid) && <ButtonLine {...this.props} title="Setting" last="1px" link="/setting"/>}
                     </div>
                 </div>

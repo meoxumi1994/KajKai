@@ -38,8 +38,8 @@ class ShowInMap extends React.Component {
     }
     render(){
         const { CLOSE, GET_CURRENT_POSITION, position, width, height, onChangePosition, canEdit } = this.props
-        const marker = position ? { position: position } : undefined
-        const currentPosition = position ? position : { lat: 20.969133867372143, lng: 105.86288452148438 }
+        const marker = (position && position.lat) ? { position: position } : undefined
+        const currentPosition = (position && position.lat) ? position : { lat: 20.969133867372143, lng: 105.86288452148438 }
         return(
             <div>
                 <div className="btn" style={{ padding: 0 }}

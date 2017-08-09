@@ -19,10 +19,10 @@ class SettingCell extends React.Component {
         this.setState({ value: this.props.value })
     }
     render(){
-        const { title, description, onVerify, EDIT, SAVE, CONFIRM, kind, openModalPhone } = this.props
+        const { id, title, description, placeholder, onVerify, EDIT, SAVE, CONFIRM, kind, openModalPhone } = this.props
         return(
             <div className="panel panel-default" style={{ margin: 0, marginLeft: -23, marginTop: 10, }}>
-                <div style={{ padding: 10, fontSize: 18, backgroundColor: '#F6F7F9'}}>
+                <div style={{ padding: 10, borderRadius: '3px 3px 0px 0px', fontSize: 18, backgroundColor: '#F6F7F9'}}>
                     {title}
                 </div>
                 <hr style={{ margin : 0 }}/>
@@ -44,7 +44,7 @@ class SettingCell extends React.Component {
                     : kind == 'phone' ?
                         <div style={{ padding: 10 }}>
                             <div className="btn btn-default btn-sm"
-                                disabled={checkPhone(this.state.value)}
+                                disabled={this.state.isEdit && checkPhone(this.state.value)}
                                 style={{ float: 'right', marginRight: 10 }}
                                 onClick={() => {
                                         this.setState({ isEdit: !this.state.isEdit })
@@ -59,14 +59,16 @@ class SettingCell extends React.Component {
                             </div>
                             {this.state.isEdit ?
                                 <input className="form-control input-sm"
+                                    placeholder={placeholder}
                                     style={{ width: '80%', fontSize: 13.5, marginTop: 1 }}
                                     value={this.state.value}
                                     onChange={(e) => this.setState({ value: e.target.value })}/>
                             :   <div style={{ padding: 6,  fontSize: 13.5 }}>
-                                    {this.state.value}
+                                    { this.state.value ? this.state.value : placeholder }
                                 </div>
                             }
                             <VerifyPhone
+                                data={{ type: 'store', id: id }}
                                 phone={this.state.value}
                                 showModal={openModalPhone}
                                 close={() => this.props.onChange('openModalPhone', false )}/>
@@ -92,11 +94,12 @@ class SettingCell extends React.Component {
                             </div>
                             {this.state.isEdit ?
                                 <input className="form-control input-sm"
+                                    placeholder={placeholder}
                                     style={{ width: '80%', fontSize: 13.5, marginTop: 1 }}
                                     value={this.state.value}
                                     onChange={(e) => this.setState({ value: e.target.value })}/>
                             :   <div style={{ padding: 6,  fontSize: 13.5 }}>
-                                    {this.state.value}
+                                    { this.state.value ? this.state.value : placeholder }
                                 </div>
                             }
                         </div>
