@@ -1,5 +1,8 @@
 import React from 'react'
 
+import CreateInterest from '~/containers/entity/modal/CreateInterest'
+import GroupInterest from '~/containers/entity/GroupInterest'
+
 const Left = ({ storeList, STORE, HOME, CREATE_STORE }) => {
     return(
         <div>
@@ -40,6 +43,8 @@ const Left = ({ storeList, STORE, HOME, CREATE_STORE }) => {
                     <a href={"/registerstore"} style={{ fontSize: 13}}>{CREATE_STORE}</a>
                 </div>
             </div>
+            <CreateInterest/>
+            <GroupInterest/>
         </div>
     )
 }

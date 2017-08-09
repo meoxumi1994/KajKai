@@ -20,6 +20,12 @@ const contacthistory = (state = {
                 [action.key] : action.value
             }
         case 'WHO_SUCCESS':
+        case 'LOGIN_SUCCESS':
+        case 'REGISTER_SUCCESS':
+        case 'LANGUAGE':
+        case 'VERIFY_SUCCESS':
+        case 'UPDATE_USER_SUCCESS':
+            console.log(action)
             let newcontact = {
                 [action.user.id] : {
                     id: action.user.id,

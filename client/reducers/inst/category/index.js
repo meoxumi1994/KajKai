@@ -29,7 +29,7 @@ const category = (state = [
     },
 ], action) => {
   switch (action.type) {
-    case 'LOADED_CATEGORY':
+    case 'GET_CATEGORY_SUCCESS':
     const { categories } = action
       return categories
     default:

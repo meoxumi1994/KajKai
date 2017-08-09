@@ -22,17 +22,17 @@ const mapStateToProps = (state, { id }) => {
         likeContent = getLikeContent(likes, numlike, yourid)
         time = getTime(sellpost.time)
     }
-    let isOwner = false
-    for(let i=0; i< state.user.storeList.length ; i++){
-        if(state.user.storeList[i].id == sellpost.storeid){
-            isOwner = true
-            break
-        }
-    }
+    // let isOwner = false
+    // for(let i=0; i< state.user.storeList.length ; i++){
+    //     if(state.user.storeList[i].id == sellpost.storeid){
+    //         isOwner = true
+    //         break
+    //     }
+    // }
     return({
         ...store,
         ...sellpost,
-        isOwner: isOwner,
+        // isOwner: isOwner,
         beLike: beLike,
         beFollow: beFollow,
         likeContent: likeContent,

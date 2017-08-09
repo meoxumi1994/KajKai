@@ -7,7 +7,7 @@ const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     let isOwner = state.user.id == state.inst.user.index.id
     return({
-        ...state.user,
+        ...state.inst.user.index,
         isOwner: isOwner,
     })
 }

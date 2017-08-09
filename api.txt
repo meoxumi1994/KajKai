@@ -1040,19 +1040,29 @@ GET /stores?offset=0&length=10 {
     ]
 }
 
+GET /interest {
+    status:
+    offset:
+    interests: []
+}
+
 POST /interest { // khi một store được tạo có category tương ứng và trong bán kính 10km từ longitude, latitude
                 // thì user nhận notification qua socket global/...
-  categoryId: ,
-  longitude: ,
-  latitude:
+  categoryId: , // this guy is secondCategoryId
+  position: {
+    lat: ,
+    lng: ,
+  }
 }, {
   status: 'success|failed',
   interest: {
     id: '',
-    categoryId: '',
-    categoryName: '',
-    longitude: ,
-    latitude:
+    categoryId: , // this guy is secondCategoryId
+    categoryName: ,
+    position: {
+      lat: ,
+      lng: ,
+    }
   }
 }
 
@@ -1215,7 +1225,7 @@ GET /logout: { // for admin
   status: 'success|failed',
 }
 
-GET /statistics/:storeid?from=''&to='' { // số lượng leadercomment cho mỗi ngày từ ngày from tới ngày to
+GET /statistics/:storeid?from=''&to=''& { // số lượng leadercomment cho mỗi ngày từ ngày from tới ngày to
   status: 'success|failed'
   statistics: []                    // integer array
 }

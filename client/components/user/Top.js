@@ -106,10 +106,10 @@ const Top = (props) => {
                 }}>
                     <ButtonLine {...props} title="Interest" last="0" link=""/>
                     <ButtonLine {...props} title="About" last="0" link="/about"/>
-                    <ButtonLine {...props} title="Post" last="0" link="/post"/>
-                    <ButtonLine {...props} title="Store" last="0" link="/store"/>
-                    <ButtonLine {...props} title="Contact" last={(yourid==id)?0:"1px"} link="/contact"/>
-                    {yourid == id && <ButtonLine {...props} title="Activity" last="0" link="/activity"/> }
+                    {/* <ButtonLine {...props} title="Post" last="0" link="/post"/> */}
+                    {/* <ButtonLine {...props} title="Store" last="0" link="/store"/> */}
+                    {/* <ButtonLine {...props} title="Contact" last={(yourid==id)?0:"1px"} link="/contact"/> */}
+                    {/* {yourid == id && <ButtonLine {...props} title="Activity" last="0" link="/activity"/> } */}
                     {yourid == id && <ButtonLine {...props} title="Setting" last="1px" link="/setting"/> }
                 </div>
             </div>

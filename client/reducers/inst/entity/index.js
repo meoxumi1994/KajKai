@@ -23,6 +23,7 @@ import groupnotification from './groupnotification'
 import post from './post'
 import contact from './contact'
 import popup from './popup'
+import groupinterest from './groupinterest'
 
 const entity = combineReducers({
     modal,
@@ -47,7 +48,8 @@ const entity = combineReducers({
     groupnotification,
     post,
     contact,
-    popup
+    popup,
+    groupinterest
 })
 
 export default entity

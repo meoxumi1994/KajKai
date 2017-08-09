@@ -152,7 +152,6 @@ const myString = {
     HOME: ['Trang chủ','Home'],
     LOG_OUT: ['Đăng xuất', 'Logout'],
     SETTING: ['Cài đặt', 'Setting'],
-
     FEED_BACK: ['Phản hồi', 'Feed Back'],
     FEED_BACK_DESCRIPTION: [
         'Phản hồi sẽ được gửi tới admin của KajKai. chúng tôi sẽ xem tất cả các phản hồi của bạn và sử lý một cách tốt nhất',
@@ -162,6 +161,7 @@ const myString = {
         'xin lỗi bạn, vì một lý do nào đấy mà phản hồi không gửi được',
         'Sorry, for some reason the reply was not sent'],
     DONE: ['Xong', 'Done'],
+    CREATE_INTEREST: ['Tạo quan tâm','Create Interest'],
 }
 
 const allString = {

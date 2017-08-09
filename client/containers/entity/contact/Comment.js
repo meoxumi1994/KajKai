@@ -16,7 +16,7 @@ const mapStateToProps = (state, { id }) => {
     let isyour = true
     let isOwner = false
     for(let i=0; i< state.user.storeList.length ; i++){
-        if(state.user.storeList[i].id == state.inst.store.index.id){
+        if(state.user.storeList[i].id == comment.storeid){
             isOwner = true
             break
         }

@@ -1,5 +1,5 @@
 * {
-    font-family: "Lucida Grande/Tahoma", Sans-serif;
+    font-family: "San Francisco", Sans-serif;
 }
 html {
     height: 100%;
@@ -200,7 +200,7 @@ textarea#note {
 
   display:block;
 
-  width:14px;
+  width:16px;
   height:14px;
 
   margin: auto;

@@ -2,39 +2,27 @@ import React from 'react'
 
 import  { Line } from 'react-chartjs'
 
-const data = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-    }]
-}
-
 const options =  {
     scales: {
         yAxes: [{
             ticks: {
-                beginAtZero:true
+                // beginAtZero:true
             }
         }]
     }
+}
+
+const getLabel = (current, numday ) => {
+    let labels = []
+    for(let i=0; i<=numday; i++){
+        let j = new Date(current)
+        j.setDate( current.getDate() - i)
+        labels = [
+            j.getDate() + " " + j.toLocaleString("en-us", { month: "long" }),
+            ...labels,
+        ]
+    }
+    return labels
 }
 
 class Statistic extends React.Component {
@@ -42,40 +30,76 @@ class Statistic extends React.Component {
         super(props)
     }
     render(){
+        const { current, numday, statistics, onChange, myState } = this.props
+        const data = {
+            labels: getLabel(current, numday),
+            datasets: [{
+                label: '# of Votes',
+                data: statistics,
+            }]
+        }
         return(
             <div className="panel panel-default" style={{ margin: 0, marginLeft: -23, marginTop: 10, }}>
                 <div style={{ padding: 10, borderRadius: '3px 3px 0px 0px', fontSize: 18, backgroundColor: '#F6F7F9'}}>
                     Statistic
                 </div>
-                <div style={{ padding: 10 }}>
-                    <Line data={data} options={options} width="915" height="300"/>
-                </div>
-                <div className="btn btn-default btn-sm">
-                    previous
-                </div>
-                <div className="btn btn-default btn-sm">
-                    next
-                </div>
-                <div marginLeft="" className="btn btn-default btn-sm">
-                    1 week
-                </div>
-                <div className="btn btn-default btn-sm">
-                    3 weeks
-                </div>
-                <div className="btn btn-default btn-sm">
-                    1 mounth
-                </div>
-                <div className="btn btn-default btn-sm">
-                    3 mounth
-                </div>
-                <div className="btn btn-default btn-sm">
-                    6 mounth
-                </div>
-                <div className="btn btn-default btn-sm">
-                    1 years
+                <div style={{ padding: '0px 10px 10px 10px'}}>
+                    <div style={{ padding: 10 }}>
+                        {myState != 'GET_STORE_STATICTIS_ING' ?
+                            <div style={{ width: 915, height: 510 }}>
+                                <Line data={data} options={options} width="915" height="500"/>
+                            </div>
+                        :   <div style={{ width: 915, height: 510 }}></div>
+                        }
+                    </div>
+                    <div className="btn btn-default btn-sm"
+                        onClick={() => {
+                            let newcurrent = new Date(current)
+                            newcurrent.setDate( current.getDate() - numday )
+                            onChange('current', newcurrent )
+                        }}>
+                        previous
+                    </div>
+                    <div className="btn btn-default btn-sm"
+                        onClick={() => {
+                            let newcurrent = new Date(current)
+                            newcurrent.setDate( current.getDate() + numday )
+                            if(newcurrent > (new Date()))
+                                onChange('current', new Date())
+                            else
+                                onChange('current', newcurrent)
+                        }} style={{ marginLeft: 10 }}>
+                        next
+                    </div>
+                    <div style={{ float: 'right'}}>
+                        <div className="btn btn-default btn-sm"
+                            onClick={() => onChange('numday', 7)}>
+                            1 week
+                        </div>
+                        <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}
+                            onClick={() => onChange('numday', 14)}>
+                            2 weeks
+                        </div>
+                        <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}
+                            onClick={() => onChange('numday', 30)}>
+                            1 mounth
+                        </div>
+                        {/* <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}>
+                            3 mounth
+                        </div>
+                        <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}>
+                            6 mounth
+                        </div>
+                        <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}>
+                            1 years
+                        </div> */}
+                    </div>
                 </div>
             </div>
         )
+    }
+    componentDidMount(){
+        this.props.onGetStatistic()
     }
 }
 
