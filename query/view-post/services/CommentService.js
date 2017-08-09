@@ -116,6 +116,7 @@ export const getClientFormatSellpostComments = (requesterId, comments, offset, s
         let mComment = getClientFormatReplies(requesterId, replies, Date.now(), true)
 
         mComment.id = comment.id
+        mComment.storeid = comment.storeId
         mComment.sellpostid = comment.sellpostId
         mComment.order = comment.order ? comment.order.map((product) => ({
           id: product.id,
@@ -148,6 +149,7 @@ export const getClientFormatSellpostComments = (requesterId, comments, offset, s
           let mComment = getClientFormatReplies(requesterId, replies, Date.now(), true)
 
           mComment.id = comment.id
+          mComment.storeid = comment.storeId
           mComment.sellpostid = comment.sellpostId
           mComment.order = comment.order ? comment.order.map((product) => ({
             id: product.id,
