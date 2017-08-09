@@ -53,7 +53,7 @@ export const createStoreCreatedNotification = (message) => {
         User.findOne({ id: userId }, (err, user) => {
           if (user) {
             if (user.id == actor.id) {
-              continue
+              return
             }
             let { notifications } = user
             if (!notifications) {
