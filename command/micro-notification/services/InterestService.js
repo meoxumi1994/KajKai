@@ -39,7 +39,7 @@ export const getInterestDisplayInfo = (info) => {
     return {
         userId: info.userId,
         categoryId: info.categoryId,
-        categoryName: rep,
+        categoryName: info.categoryName,
         position: {
             lng: info.longitude,
             lat: info.latitude
