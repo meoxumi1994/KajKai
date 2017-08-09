@@ -11,7 +11,8 @@ const UserSchema = new mongoose.Schema({
   lastReason: {type: String},
   bannedByAdminName: {type: String},
   time: {type: Date},
-  storeList: [BasicStoreSchema]
+  storeList: [BasicStoreSchema],
+  language: {type: String}
 })
 
 export default UserSchema

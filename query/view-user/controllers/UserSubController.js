@@ -1,7 +1,7 @@
 import { User, Black } from '../models'
 
 export const createUser = (message) => {
-  const { id, username, email, avatarUrl, imageUrls: imageList } = message.user
+  const { id, username, email, avatarUrl, imageUrls: imageList, language } = message.user
   const user = new User({
     id,
     lastUpdate: {
@@ -16,6 +16,7 @@ export const createUser = (message) => {
     url: image.url,
     time: image.time
   }))
+  user.language = language ? language : 'vi'
 
   user.save(() => {})
 }
