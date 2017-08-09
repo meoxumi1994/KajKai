@@ -28,11 +28,24 @@ export const addNewInterest = (userId, categoryId, longitude, latitude, next) =>
     interest.save((err) => {
         console.log('INTEREST ERR ' + (err ? JSON.stringify(err) : null));
         getInterestInfo(interest, (info) => {
-            next(info);
+            next(getInterestDisplayInfo(info));
             addInterestPub(info);
         });
 
     })
+};
+
+export const getInterestDisplayInfo = (info) => {
+    return {
+        userId: info.userId,
+        categoryId: info.categoryId,
+        categoryName: rep,
+        position: {
+            lng: info.longitude,
+            lat: info.latitude
+        },
+        id: info.id
+    }
 };
 
 export const removeInterest = (userId, id, next) => {
@@ -62,6 +75,7 @@ export const getInterestInfo = (interest, next) => {
         })
     });
 };
+
 
 export const getInterestWithIn = (longitude, latitude, categoryId, radius, next) => {
     let center = {type: "Point", coordinates: [longitude, latitude]};
