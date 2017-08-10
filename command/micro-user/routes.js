@@ -79,13 +79,6 @@ export default {
             method: 'logOutUser'
         }
     },
-    '/blacklist': {
-        put: {
-            controller: 'UserController',
-            middleware: [auth()],
-            method: 'blackList'
-        }
-    },
     '/awsimageurl': {
         post: {
             controller: 'AWSController',
@@ -98,6 +91,11 @@ export default {
             controller: 'UserController',
             middleware: [auth()],
             method: 'blockUserCon'
+        },
+        delete: {
+            controller: 'UserController',
+            middleware: [auth()],
+            method: 'unblockUserCon'
         }
     }
 }

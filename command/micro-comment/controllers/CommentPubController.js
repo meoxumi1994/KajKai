@@ -100,3 +100,23 @@ export const newSecondLayerCommentCreated = (sCommentInfo) => {
     pub.quit();
 };
 
+export const checkBlacList = (userId, blockId, next) => {
+    const sub = redis.createClient(config);
+    const pub = redis.createClient(config);
+    const id = getUUID();
+    const publicData = {userId, blockId, eventId: id};
+    pub.publish('BLACKLIST.Check', JSON.stringify(publicData));
+    sub.subscribe('BLACKLIST.Check' + id);
+    sub.on('message', (channel, message) => {
+        message = JSON.parse(message);
+        if (message.status === 'success') {
+            next(true)
+        } else {
+            next(null)
+        }
+        sub.unsubscribe();
+        sub.quit();
+        pub.quit();
+    })
+};
+

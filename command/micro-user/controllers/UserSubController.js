@@ -1,5 +1,5 @@
 import { getUserFromToken, getUserBasicStoreInfo, getUser, getListUser, getListUserBasicInfo, addBan, removeBan } from '../services/UserService'
-import { }
+import { getBlackList } from '../services/BlackListService'
 
 export const authorizeTokenSub = (message, next) => {
     getUserFromToken(message.token, function (user) {
@@ -45,6 +45,10 @@ export const removeBanCon = (message, next) => {
 
 export const checkBlackList = (message, next) => {
     getBlackList(message.userId, message.blockId, (block) => {
-
+        if (block) {
+            next({status: 'success'})
+        } else {
+            next({status: 'failed'})
+        }
     })
 };

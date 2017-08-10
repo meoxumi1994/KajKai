@@ -1,6 +1,6 @@
 import { SecondLayerComment } from '../models'
 import globalId from '../config/globalId'
-import { getUser, getListUser, getStore, getStoreFromPostId, newSecondLayerCommentCreated } from '../controllers/CommentPubController'
+import { getUser, getStore, getStoreFromPostId, newSecondLayerCommentCreated, checkBlacList } from '../controllers/CommentPubController'
 
 const SECOND_COMMENT_GLOBAL_ID = globalId.SECOND_COMMENT_GLOBAL_ID;
 const USER_GLOBAL_ID = globalId.USER_GLOBAL_ID;
@@ -111,14 +111,19 @@ export const saveNewScondLayerComment = (posterId, time, postId, content, parent
 export const addNewSecondLayerComment = (data, next) => {
     console.log('thisss ' + JSON.stringify(data));
     getStoreFromPostId(data.sellpostid, (store) => {
-        if (data.userID === store.owner) {
-            saveNewScondLayerComment(store.storeId, data.time, data.sellpostid, data.content, data.leadercommentid, (comment) => {
-                next(comment)
-            })
-        } else {
-            saveNewScondLayerComment(data.userID, data.time, data.sellpostid, data.content, data.leadercommentid, (comment) => {
-                next(comment);
-            })
-        }
+        checkBlacList(store.owner, data.userID, (block) => {
+            if (block) next(null);
+            else {
+                if (data.userID === store.owner) {
+                    saveNewScondLayerComment(store.storeId, data.time, data.sellpostid, data.content, data.leadercommentid, (comment) => {
+                        next(comment)
+                    })
+                } else {
+                    saveNewScondLayerComment(data.userID, data.time, data.sellpostid, data.content, data.leadercommentid, (comment) => {
+                        next(comment);
+                    })
+                }
+            }
+        });
     });
 };

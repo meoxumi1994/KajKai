@@ -2,17 +2,22 @@ import { BlackList } from '../models'
 import { addBlackListPub, removeBlackListPub } from '../controllers/UserPubController'
 
 export const addBlackList = (userId, blockId, next) => {
-    const block = new BlackList({userId: userId, blockId: blockId});
-    block.save(() => {
-        next(getBlackListPubInfo(block));
-        addBlackListPub(getBlackListPubInfo(block));
+    BlackList.findOne({userId, blockId}, (err, bbb) => {
+        if (bbb) next(null);
+        else {
+            const block = new BlackList({userId: userId, blockId: blockId});
+            block.save(() => {
+                next(getBlackListPubInfo(block));
+                addBlackListPub(getBlackListPubInfo(block));
+            });
+        }
     });
 };
 
 export const removeBlackList = (id, next) => {
-    BlackList.findByIdAndRemove(id, () => {
+    BlackList.findByIdAndRemove(id, (err, block) => {
         next();
-        removeBlackListPub(id)
+        removeBlackListPub(getBlackListPubInfo(block));
     })
 };
 
