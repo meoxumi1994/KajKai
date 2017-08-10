@@ -40,10 +40,10 @@ export const getUser = (requesterId, id, next) => {
                 phone: user.lastUpdate.phone ? user.lastUpdate.phone.getTime(): '',
                 address: user.lastUpdate.address ? user.lastUpdate.address.getTime() : ''
               } : {},
-              blacklist: user.blackList ? user.blackList.map((black) => ({
+              blocks: user.blackList ? user.blackList.map((black) => ({
                   id: black.id,
-                  type: black.type,
-                  name: black.name
+                  userid: black.userId,
+                  username: black.username
                 })) : [],
               storeList: user.storeList ? (user.storeList.map((basicStore) => ({
                 id: basicStore.id,
