@@ -1,4 +1,4 @@
-import { Comment } from '../models'
+import { Comment, BasicUser } from '../models'
 
 export const getReplies = (requesterId, id, offset, next) => {
   Comment.findOne({ id }, (err, comment) => {
@@ -14,10 +14,31 @@ export const getReplies = (requesterId, id, offset, next) => {
         })
       }
     } else {
-      const { replies } = comment
-      next({
-        id,
-        ...getClientFormatReplies(requesterId, replies, offset, false)
+      let { replies } = comment
+      BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
+        if (basicUser) {
+          const mReplies = []
+          const { blackList } = basicUser
+          if (!replies) {
+            replies = []
+          }
+          replies.map((reply) => {
+            if (blackList.indexOf(reply.userId) == -1) {
+              mReplies.push(reply)
+            }
+          })
+          next({
+            id,
+            ...getClientFormatReplies(requesterId, mReplies, offset, false)
+          })
+        } else {
+          next({
+            id,
+            status: 'nodata',
+            offset,
+            comments: []
+          })
+        }
       })
     }
   })

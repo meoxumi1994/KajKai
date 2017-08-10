@@ -1,4 +1,4 @@
-import { Sellpost, Minorpost, Comment } from '../models'
+import { Sellpost, Minorpost, Comment, BasicUser } from '../models'
 import { getClientFormatReplies } from './ReplyService'
 import { OrderStatus } from '../enum'
 
@@ -17,10 +17,31 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           })
         }
       } else {
-        const { comments } = sellpost
-        next({
-          id,
-          ...getClientFormatSellpostComments(requesterId, comments, offset, status, false, 10)
+        let { comments } = sellpost
+        BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
+          if (basicUser) {
+            const mComments = []
+            const { blackList } = basicUser
+            if (!comments) {
+              comments = []
+            }
+            comments.map((comment) => {
+              if (blackList.indexOf(comment.commenterId) == -1) {
+                mComments.push(comment)
+              }
+            })
+            next({
+              id,
+              ...getClientFormatSellpostComments(requesterId, mComments, offset, status, false, 10)
+            })
+          } else {
+            next({
+              status: 'nodata',
+              offset,
+              id,
+              leadercomments: []
+            })
+          }
         })
       }
     })
@@ -55,15 +76,30 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           })
         }
       } else {
-        const mComments = []
-        comments.map((comment) => {
-          if (comment.commenterId != id) {
-            mComments.push(comment)
+        BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
+          if (basicUser) {
+            const mComments = []
+            const { blackList } = basicUser
+            if (!comments) {
+              comments = []
+            }
+            comments.map((comment) => {
+              if (comment.commenterId != id && blackList.indexOf(comment.commenterId) == -1) {
+                mComments.push(comment)
+              }
+            })
+            next({
+              id,
+              ...getClientFormatSellpostComments(requesterId, mComments, offset, status, false, length)
+            })
+          } else {
+            next({
+              status: 'nodata',
+              offset,
+              id,
+              leadercomments: []
+            })
           }
-        })
-        next({
-          id,
-          ...getClientFormatSellpostComments(requesterId, mComments, offset, status, false, length)
         })
       }
     })
@@ -81,9 +117,30 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           })
         }
       } else {
-        next({
-          id,
-          ...getClientFormatSellpostComments(requesterId, comments, offset, status, false, length)
+        BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
+          if (basicUser) {
+            const mComments = []
+            const { blackList } = basicUser
+            if (!comments) {
+              comments = []
+            }
+            comments.map((comment) => {
+              if (comment.commenterId != id && blackList.indexOf(comment.commenterId) == -1) {
+                mComments.push(comment)
+              }
+            })
+            next({
+              id,
+              ...getClientFormatSellpostComments(requesterId, comments, offset, status, false, length)
+            })
+          } else {
+            next({
+              status: 'nodata',
+              offset,
+              id,
+              leadercomments: []
+            })
+          }
         })
       }
     })
@@ -98,6 +155,7 @@ export const getClientFormatSellpostComments = (requesterId, comments, offset, s
       leadercomments: []
     }
   }
+
   const oneHour = 3600000
 
   let currentNumberOfComment = 0, cOffset = Date.now(), lastIndex = -1

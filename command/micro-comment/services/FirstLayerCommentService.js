@@ -1,7 +1,7 @@
-import { FirstLayerComment, SecondLayerComment } from '../models'
+import { FirstLayerComment } from '../models'
 import { getOrder, getOrderInfo } from './OrderService'
 import globalId from '../config/globalId'
-import { getUser, getStore, getStoreFromPostId } from '../controllers/CommentPubController'
+import { getUser, getStoreFromPostId, checkBlacList } from '../controllers/CommentPubController'
 import { newFirstLayerCommentCreated, firstLayerCommentUpdated } from '../controllers/CommentPubController'
 
 const FIRST_COMMENT_GLOBAL_ID = globalId.FIRST_COMMENT_GLOBAL_ID;
@@ -101,15 +101,21 @@ export const addNewFirstLayerComment = (data, next) => {
     getStoreFromPostId(data.sellpostid, (store) => {
         console.log('store ' + JSON.stringify(store));
         if (!store) return;
-        if (data.userID === store.owner) {
-            saveNewFirstLayerComment(store.storeId, data.order, data.time, data.sellpostid, data.content, (comment) => {
-                next(comment)
-            })
-        } else {
-            saveNewFirstLayerComment(data.userID, data.order, data.time, data.sellpostid, data.content, (comment) => {
-                next(comment);
-            })
-        }
+        checkBlacList(store.owner, data.userID, (check) => {
+            if (!check) {
+                if (data.userID === store.owner) {
+                    saveNewFirstLayerComment(store.storeId, data.order, data.time, data.sellpostid, data.content, (comment) => {
+                        next(comment)
+                    })
+                } else {
+                    saveNewFirstLayerComment(data.userID, data.order, data.time, data.sellpostid, data.content, (comment) => {
+                        next(comment);
+                    })
+                }
+            } else {
+                next(null);
+            }
+        });
     });
 };
 

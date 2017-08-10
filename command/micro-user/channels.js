@@ -18,5 +18,9 @@ export default {
     'BAN.RemoveBan': {
         controller: 'UserSubController',
         method: 'removeBanCon'
+    },
+    'BLACKLIST.Check': {
+        controller: 'UserSubController',
+        method: 'checkBlackList'
     }
 }

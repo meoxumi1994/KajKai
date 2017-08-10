@@ -79,18 +79,23 @@ export default {
             method: 'logOutUser'
         }
     },
-    '/blacklist': {
-        put: {
-            controller: 'UserController',
+    '/awsimageurl': {
+        post: {
+            controller: 'AWSController',
             middleware: [auth()],
-            method: 'blackList'
+            method: 'getS3PutObjectSignedUrl'
         }
     },
-    '/awsimageurl': {
-      post: {
-        controller: 'AWSController',
-        middleware: [auth()],
-        method: 'getS3PutObjectSignedUrl'
-      }
+    '/block': {
+        post: {
+            controller: 'UserController',
+            middleware: [auth()],
+            method: 'blockUserCon'
+        },
+        delete: {
+            controller: 'UserController',
+            middleware: [auth()],
+            method: 'unblockUserCon'
+        }
     }
 }
