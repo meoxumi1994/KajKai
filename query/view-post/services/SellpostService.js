@@ -152,32 +152,53 @@ const getClientFormatSellposts = (requesterId, storeId, sellposts, offset, next)
     }))
   })
   Promise.all(mPromises).then((postrowses) => {
-    const mSellposts = []
-    let currentNumberOfSellpost = 0, mOffset = -2, lastIndex = -1
-    for (let i = sellposts.length - 1; i >= 0; i--) {
-      let sellpost = sellposts[i]
-      if (sellpost.time < offset) {
-        if (currentNumberOfSellpost < 2) {
-          mSellposts.push(getClientFormatSellpost(requesterId, sellpost, Date.now()))
+    BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
+      if (basicUser) {
+        sellposts.map((sellpost, index) => {
+          let mComments = []
+          let { comments } = sellpost
+          comments.map((comment) => {
+            if (blackList.indexOf(comment.commenterId) == -1) {
+              mComments.push(comment)
+            }
+          })
+          sellpost.comments = mComments
+          sellposts[index] = sellpost
+        })
+        const mSellposts = []
+        let currentNumberOfSellpost = 0, mOffset = -2, lastIndex = -1
+        for (let i = sellposts.length - 1; i >= 0; i--) {
+          let sellpost = sellposts[i]
+          if (sellpost.time < offset) {
+            if (currentNumberOfSellpost < 2) {
+              mSellposts.push(getClientFormatSellpost(requesterId, sellpost, Date.now()))
 
-          mOffset = sellpost.time.getTime()
-          lastIndex = i
-          currentNumberOfSellpost++
-        } else {
-          break
+              mOffset = sellpost.time.getTime()
+              lastIndex = i
+              currentNumberOfSellpost++
+            } else {
+              break
+            }
+          }
         }
+
+        if (lastIndex == 0) {
+          mOffset = -2
+        }
+
+        next({
+          status: 'success',
+          offset: mOffset,
+          storeid: storeId,
+          sellposts: mSellposts
+        })
+      } else {
+        next({
+          status: 'noUserData',
+          offset,
+          sellposts: []
+        })
       }
-    }
-
-    if (lastIndex == 0) {
-      mOffset = -2
-    }
-
-    next({
-      status: 'success',
-      offset: mOffset,
-      storeid: storeId,
-      sellposts: mSellposts
     })
 
   }, err => {
