@@ -78,5 +78,13 @@ export default {
   'INTEREST.NotifyNewStoreCreated': {
     controller: 'InterestSubController',
     method: 'createStoreCreatedNotification'
+  },
+  'BLOCK.AddBlock': {
+    controller: 'BlockSubController',
+    method: 'addBlock'
+  },
+  'BLOCK.RemoveBlock': {
+    controller: 'BlockSubController',
+    method: 'removeBlock'
   }
 }
