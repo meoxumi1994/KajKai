@@ -39,21 +39,16 @@ export const getStore = (storeId, next) => {
     })
 };
 
-export const updateBlackList = (userId, blockId, status) => {
+export const addBlackListPub = (block) => {
     const pub = redis.createClient(config);
-    var type = 'userid';
-    switch (blockId){
-        case blockId.startsWith(globalId.USER_GLOBAL_ID):
-            type = 'userid';
-            break;
-        case blockId.startsWith(globalId.STORE_GLOBAL_ID):
-            type = 'storeid';
-            break;
-        case blockId.startsWith(globalId.MESSAGE_GLOBAL_ID):
-            type = 'mesid';
-            break;
-    }
-    const publishData = {user: {userId: userId, blockId: blockId, status: status, type: type}};
-    pub.publish('USER.BlackListUpdated', JSON.stringify(publishData));
+    const publicData = {blackList: block};
+    pub.publish('BLACKLIST.Add', JSON.stringify(publicData));
+    pub.quit();
+};
+
+export const removeBlackListPub = (block) => {
+    const pub = redis.createClient(config);
+    const publicData = {blackList: block};
+    pub.publish('BLACKLIST.Remove', JSON.stringify(publicData));
     pub.quit();
 };
