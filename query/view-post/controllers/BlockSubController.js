@@ -10,5 +10,5 @@ export const addBlock = (message) => {
 
 export const removeBlock = (message) => {
   const { id, userId, blockId } = message.blackList
-  blockee.remove({ blockeeId: blockId }, () => {})
+  Blockee.remove({ blockeeId: blockId }, () => {})
 }
