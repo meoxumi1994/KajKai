@@ -41,3 +41,17 @@ export const updateUser = (user) => dispatch => {
         }
     })
 }
+
+export const blockUser = (userid) => dispatch => {
+    dispatch({ type: 'BLOCK_USER_ING' })
+    return flet('/block',{
+        userid: userid,
+    })
+    .then(({ status, userid, id }) => {
+        if(status == 'success'){
+            dispatch({ type: 'BLOCK_USER_SUCCESS', userid: userid, id: id })
+        }else{
+            dispatch({ type: 'BLOCK_USER_FAILED' })
+        }
+    })
+}

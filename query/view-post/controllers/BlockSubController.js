@@ -16,7 +16,7 @@ export const addBlock = (message) => {
 }
 
 export const removeBlock = (message) => {
-  const { id, userId } = message.blackList
+  const { id, userId, blockId } = message.blackList
   BasicUser.findOne({ id: userId }, (err, basicUser) => {
     if (basicUser) {
       let { blackList } = basicUser
@@ -24,7 +24,7 @@ export const removeBlock = (message) => {
         blackList = []
       }
       for (let i = 0; i < blackList.length; i++) {
-        if (blackList[i].id == id) {
+        if (blackList[i].id == blockId) {
           blackList.splice(i, 1)
           break
         }

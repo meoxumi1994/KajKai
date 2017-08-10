@@ -1,4 +1,4 @@
-import { flem, flet } from '~/actions/support'
+import { flem, flet, flex } from '~/actions/support'
 
 export const createNewInterest = (id, position, time) => dispatch => {
     dispatch({ type: 'CREATE_SUB_INTEREST_ING'})
@@ -24,6 +24,19 @@ export const getInterest = (offset) => dispatch => {
             dispatch({ type: 'GET_SUB_INTEREST_SUCCESS', offset, interests })
         }else{
             dispatch({ type: 'GET_SUB_INTEREST_FAILED' })
+        }
+    })
+}
+
+export const removeInterest = (id) => dispatch => {
+    dispatch({ type: 'REMOVE_INTEREST_ING' })
+    flex('/interest',{
+        id: id,
+    }).then(({ status, id }) => {
+        if(status == 'success'){
+            dispatch({ type: 'REMOVE_INTEREST_SUCCESS', id })
+        }else{
+            dispatch({ type: 'REMOVE_INTEREST_FAILED' })
         }
     })
 }

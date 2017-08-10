@@ -59,7 +59,10 @@ class Comment extends React.Component {
                         {clicksetting &&
                             <DropDown
                                 width={130}
-                                onClick={(index) => console.log(index)}
+                                onClick={(index) => {
+                                    if(index == 0)
+                                        this.props.onBlock()
+                                }}
                                 contents={['Block','hr','Report']}
                             />
                         }

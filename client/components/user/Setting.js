@@ -23,6 +23,9 @@ const Setting = (props) => {
                 placeholder={ENTER_AGE}/>
             <SettingCell id={id} kind="position" type="user" title={POSITION_IN_MAP}
                 placeholder={ENTER_YOUR_ADDRESS} failed={ADDRESS_FAILED}/>
+            <div className="" style={{ }}>
+
+            </div>
         </div>
     )
 }

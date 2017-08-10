@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
+import { removeInterest } from '~/actions/asyn/interest'
 import InterestCell from '~/components/entity/row/InterestCell'
 
 const mapStateToProps = (state, {id}) => {
@@ -11,8 +12,10 @@ const mapStateToProps = (state, {id}) => {
     })
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-
+const mapDispatchToProps = (dispatch, {id}) => ({
+    onRemove: () => {
+        dispatch(removeInterest(id))
+    }
 })
 
 const InterestCellContainer = connect(

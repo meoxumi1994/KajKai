@@ -21,7 +21,10 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
         BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
           if (basicUser) {
             const mComments = []
-            const { blackList } = basicUser
+            let { blackList } = basicUser
+            if (!blackList) {
+              blackList = []
+            }
             if (!comments) {
               comments = []
             }
@@ -79,7 +82,10 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
         BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
           if (basicUser) {
             const mComments = []
-            const { blackList } = basicUser
+            let { blackList } = basicUser
+            if (!blackList) {
+              blackList = []
+            }
             if (!comments) {
               comments = []
             }
@@ -120,7 +126,10 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
         BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
           if (basicUser) {
             const mComments = []
-            const { blackList } = basicUser
+            let { blackList } = basicUser
+            if (!blackList) {
+              blackList = []
+            }
             if (!comments) {
               comments = []
             }
@@ -155,10 +164,6 @@ export const getClientFormatSellpostComments = (requesterId, comments, offset, s
       leadercomments: []
     }
   }
-
-  BasicUser.findOne({ id }, (err, basicUser) => {
-
-  })
 
   const oneHour = 3600000
 
@@ -222,7 +227,7 @@ export const getClientFormatSellpostComments = (requesterId, comments, offset, s
           })) : []
           mComment.time = comment.time.getTime()
           mComment.status = comment.status
-          mComment.numcomment = comment.numberOfReply
+          mComment.numcomment = replies ? replies.length : 0
 
           mComments = [mComment, ...mComments]
 
