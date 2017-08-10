@@ -4,7 +4,8 @@ const BasicUserSchema = new mongoose.Schema({
   id: {type: String},
   username: {type: String},
   avatarUrl: {type: String},
-  followingSellposts: [String]
+  followingSellposts: [String],
+  blackList: [String]
 })
 
 export default BasicUserSchema
