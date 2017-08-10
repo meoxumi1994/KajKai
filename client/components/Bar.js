@@ -6,6 +6,7 @@ import DropDownSettingBar from '~/containers/entity/DropDownSettingBar'
 import ChatLeftContainer from '~/containers/chat/left'
 import AutoCompleteContainer from '~/containers/mapp/AutoCompleteContainer'
 import DropDownNotification from '~/containers/entity/DropDownNotification'
+import places from 'react-google-maps'
 
 class HandlerUser extends React.Component {
     constructor(props){
@@ -47,6 +48,7 @@ class HandlerUser extends React.Component {
                           <li><a href="#" onClick={()=> onLogoutClick() }>log out</a></li>
                       </ul>
                   </div> */}
+                  
                       {clicksetting &&
                           <div style={{ position: 'absolute', right: 20, top: 30  }}>
                               <DropDownSettingBar

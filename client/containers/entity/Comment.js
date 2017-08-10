@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 import { getTime, getBeLike } from '~/containers/support'
+import { blockUser } from '~/actions/asyn/user'
 
 import Comment from '~/components/entity/Comment'
 
@@ -41,6 +42,10 @@ const mapDispatchToProps = (dispatch, { id, isleader, leadercommentid }) => ({
             leadercommentid: id,
         }})
     },
+    block: (userid, type) => {
+        if(type == 'user')
+            dispatch(blockUser(userid))
+    },
     onDone: () => {
         dispatch({ type: 'server/DONE', data: {
             type: 'comment',
@@ -68,8 +73,21 @@ const mapDispatchToProps = (dispatch, { id, isleader, leadercommentid }) => ({
     }
 })
 
+const mergerProps = (stateProps, dispatchProps, ownProps) => {
+    const { type, commenterid, ...anotherState } = stateProps
+    const { block, ...anotherDispatch } = dispatchProps
+    return({
+        onBlock: () => {
+            block(commenterid, type)
+        },
+        ...ownProps,
+        ...stateProps,
+        ...dispatchProps,
+    })
+}
+
 const CommentContainer = connect(
-    mapStateToProps, mapDispatchToProps
+    mapStateToProps, mapDispatchToProps, mergerProps
 )(Comment)
 
 export default CommentContainer

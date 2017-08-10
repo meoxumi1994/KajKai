@@ -4,7 +4,6 @@ const groupinterest = (state = {
 }, action) => {
     switch (action.type) {
         case 'GET_SUB_INTEREST_SUCCESS':
-            console.log(action)
             return {
                 ...state,
                 offset: action.offset,

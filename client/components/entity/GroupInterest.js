@@ -10,11 +10,10 @@ class GroupInterest extends React.Component {
         const { interests } = this.props
         if(!interests)
             return <div></div>
-        console.log(this.props)
         return(
             <div>
                 {interests.map((item) =>
-                    <div key={item.id} style={{ paddingTop: 10, width: 150 }}>
+                    <div key={item.id} style={{ width: 150 }}>
                         <InterestCell id={item.id}/>
                     </div>
                 )}

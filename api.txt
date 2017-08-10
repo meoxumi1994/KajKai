@@ -29,6 +29,21 @@ GET /groupcomment/'sellpost|minorpost|user|store'/:id?offset=1498555009220&statu
     ]
 }
 
+POST /block {
+    userid: // this guy is store id,
+},{
+    status: ,
+    userid: ,
+    id:
+}
+
+DELETE /block {
+    id: // this guy is store id,
+},{
+    status: ,
+    id: ,
+}
+
 GET /leadercomment/:leadercommentid?offset=1498555009220 {
     id
     offset
