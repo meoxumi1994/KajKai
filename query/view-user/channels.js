@@ -7,10 +7,6 @@ export default {
     controller: 'UserSubController',
     method: 'updateUser'
   },
-  'USER.BlackListUpdated': {
-    controller: 'UserSubController',
-    method: 'updateBlackList'
-  },
   'STORE.Created': {
     controller: 'StoreSubController',
     method: 'addStore'
@@ -79,11 +75,11 @@ export default {
     controller: 'InterestSubController',
     method: 'createStoreCreatedNotification'
   },
-  'BLOCK.AddBlock': {
+  'BLACKLIST.Add': {
     controller: 'BlockSubController',
     method: 'addBlock'
   },
-  'BLOCK.RemoveBlock': {
+  'BLACKLIST.Remove': {
     controller: 'BlockSubController',
     method: 'removeBlock'
   }

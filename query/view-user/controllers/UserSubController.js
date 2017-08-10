@@ -105,40 +105,21 @@ export const updateUser = (message) => {
       }
     }
   })
-}
-
-export const updateBlackList = (message) => {
-  const { userId: id, blockId, status } = message.user
-
-  User.findOne({ id }, (err, user) => {
-    if (user) {
-      const { blackList } = user
-
-      if (status == 'add') {
-        User.findOne({ id: blockId }, (err, user) => {
-          if(user) {
-            const black = new Black({
-              id: blockId,
-              type: '???',
-              name: user.username
-            })
-
-            blackList.push(black)
-
-            user.blackList = blackList
-            user.save(() => {})
+  User.find({}, (err, users) => {
+    if (users) {
+      for (let i = 0; i < users.length; i++) {
+        let mUser = users[i]
+        const { blackList } = mUser
+        if (blackList) {
+          for (let k = 0; k < blackList.length; k++) {
+            if (blackList[k].userId == id) {
+              blackList[k].username = user.username
+              break
+            }
           }
-        })
-      } else {
-        for (let i = 0; i < blackList.length; i++) {
-          if (blackList[i].id == blockid) {
-            blackList.splice(i, 1)
-            break
-          }
+          mUser.blackList = blackList
+          mUser.save(() => {})
         }
-
-        user.blackList = blackList
-        user.save(() => {})
       }
     }
   })

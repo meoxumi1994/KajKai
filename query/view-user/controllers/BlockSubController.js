@@ -1,21 +1,45 @@
-import { User } from '../models'
+import { User, Black } from '../models'
 
 export const addBlock = (message) => {
-  const { userId, reason } = message.ban
-  const user = {
-    banned: 1,
-    reason
-  }
-
-  User.findOneAndUpdate({ id:  userId }, user, () => {})
+  const { id, userId, blockId } = message.blackList
+  User.findOne({ id: blockId }, (err, blockee) => {
+    if (blockee) {
+      const black = new Black({
+        id,
+        userId: blockId,
+        username: blockee.username
+      })
+      User.findOne({ id: userId }, (err, user) => {
+        if (user) {
+          let { blackList } = user
+          if (!blackList) {
+            blackList = []
+          }
+          blackList.push(black)
+          user.blackList = blackList
+          user.save(() => {})
+        }
+      })
+    }
+  })
 }
 
 export const removeBlock = (message) => {
-  const { userId, reason } = message.ban
-  const user = {
-    banned: 0,
-    reason
-  }
-
-  User.findOneAndUpdate({ id:  userId }, user, () => {})
+  const { id, userId } = message.blackList
+  User.findOne({ id: userId }, (err, user) => {
+    if (user) {
+      let { blackList } = user
+      if (!blackList) {
+        blackList = []
+      }
+      for (let i = 0; i < blackList.length; i++) {
+        if (blackList[i].id == id) {
+          blackList.splice(i, 1)
+          break
+        }
+      }
+      user.blackList = blackList
+      user.save(() => {})
+    }
+  })
 }
