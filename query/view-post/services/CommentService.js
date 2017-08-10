@@ -156,10 +156,6 @@ export const getClientFormatSellpostComments = (requesterId, comments, offset, s
     }
   }
 
-  BasicUser.findOne({ id }, (err, basicUser) => {
-
-  })
-
   const oneHour = 3600000
 
   let currentNumberOfComment = 0, cOffset = Date.now(), lastIndex = -1
