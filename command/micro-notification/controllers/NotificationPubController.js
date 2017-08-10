@@ -92,7 +92,7 @@ export const addInterestPub = (interest) => {
 export const removeInterestPub = (interest) => {
     const pub = redis.createClient(config);
     const publishData = {interest: interest};
-    pub.publish('INTEREST.AddInterest', JSON.stringify(publishData));
+    pub.publish('INTEREST.RemoveInterest', JSON.stringify(publishData));
     pub.quit();
 };
 
