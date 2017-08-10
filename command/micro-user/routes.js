@@ -79,13 +79,6 @@ export default {
             method: 'logOutUser'
         }
     },
-    '/blacklist': {
-        put: {
-            controller: 'UserController',
-            middleware: [auth()],
-            method: 'blackList'
-        }
-    },
     '/awsimageurl': {
         post: {
             controller: 'AWSController',

@@ -1,4 +1,4 @@
-import { updateUserInfo, getUser} from '../services/UserService.js'
+import { updateUserInfo, getUser } from '../services/UserService.js'
 import { updateUserPub } from './UserPubController'
 import { addBlackList } from '../services/BlackListService'
 
