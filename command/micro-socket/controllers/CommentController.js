@@ -44,7 +44,8 @@ export const addNewSecondLayerCommentCon = (action, sio, io) => {
             }
         } else {
             io.to(action.data.sellpostid).emit('action', {type: 'client/COMMENT', data: {
-                status: 'failed'
+                status: 'failed',
+                description: 'blocked'
             }});
         }
     })
@@ -75,7 +76,8 @@ export const addNewFirstLayerCommentCon = (action, sio, io) => {
             }
         } else {
             io.to(action.data.sellpostid).emit('action', {type: 'client/LEADERCOMMENT', data: {
-                status: 'failed'
+                status: 'failed',
+                description: 'blocked'
             }});
         }
     })
