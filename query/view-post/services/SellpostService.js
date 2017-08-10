@@ -197,17 +197,15 @@ const getClientFormatSellposts = (blackList, requesterId, storeId, sellposts, of
         storeid: storeId,
         sellposts: mSellposts
       })
+    }, err => {
+      console.log('error promise', err)
+      next({
+        status: 'failed',
+        offset: mOffset,
+        storeid: storeId,
+        sellposts: []
+      })
     })
-
-  }, err => {
-    console.log('error promise', err)
-    next({
-      status: 'failed',
-      offset: mOffset,
-      storeid: storeId,
-      sellposts: []
-    })
-  })
 }
 
 const getClientFormatSellpost = (blackList, requesterId, sellpost, offset) => {
