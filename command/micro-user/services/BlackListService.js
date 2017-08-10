@@ -2,6 +2,10 @@ import { BlackList } from '../models'
 import { addBlackListPub, removeBlackListPub } from '../controllers/UserPubController'
 
 export const addBlackList = (userId, blockId, next) => {
+    if (userId === blockId) {
+        next(null);
+        return;
+    }
     BlackList.findOne({userId, blockId}, (err, bbb) => {
         if (bbb) next(null);
         else {
