@@ -91,6 +91,11 @@ export default {
             controller: 'UserController',
             middleware: [auth()],
             method: 'blockUserCon'
+        },
+        delete: {
+            controller: 'UserController',
+            middleware: [auth()],
+            method: 'unblockUserCon'
         }
     }
 }

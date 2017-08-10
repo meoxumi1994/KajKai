@@ -1,6 +1,6 @@
 import { updateUserInfo, getUser } from '../services/UserService.js'
 import { updateUserPub } from './UserPubController'
-import { addBlackList } from '../services/BlackListService'
+import { addBlackList, removeBlackList } from '../services/BlackListService'
 
 export const updateUserPassword = () => {
     return (req, res) => {
@@ -45,6 +45,15 @@ export const blockUserCon = () => {
             } else {
                 res.json({status: 'failed'})
             }
+        })
+    }
+};
+
+export const unblockUserCon = () => {
+    return (req, res) => {
+        const id = req.body.id;
+        removeBlackList(id, () => {
+            res.json({status: 'success'})
         })
     }
 };
