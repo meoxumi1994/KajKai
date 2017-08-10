@@ -1,6 +1,7 @@
 import mongoose from '../datasource'
 import BasicStoreSchema from './BasicStore'
 import BasicUserSchema from './BasicUser'
+import BlockeeSchema from './Blockee'
 import CommentSchema from './Comment'
 import FollowerSchema from './Follower'
 import ImageSchema from './Image'
@@ -14,6 +15,7 @@ import TitleSchema from './Title'
 
 export const BasicStore = mongoose.model('BasicStore', BasicStoreSchema)
 export const BasicUser = mongoose.model('BasicUser', BasicUserSchema)
+export const Blockee = mongoose.model('Blockee', BlockeeSchema)
 export const Comment = mongoose.model('Comment', CommentSchema)
 export const Follower = mongoose.model('Follower', FollowerSchema)
 export const Image = mongoose.model('Image', ImageSchema)
