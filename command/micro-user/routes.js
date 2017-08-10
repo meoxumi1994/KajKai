@@ -87,10 +87,17 @@ export default {
         }
     },
     '/awsimageurl': {
-      post: {
-        controller: 'AWSController',
-        middleware: [auth()],
-        method: 'getS3PutObjectSignedUrl'
-      }
+        post: {
+            controller: 'AWSController',
+            middleware: [auth()],
+            method: 'getS3PutObjectSignedUrl'
+        }
+    },
+    '/block': {
+        post: {
+            controller: 'UserController',
+            middleware: [auth()],
+            method: 'blockUserCon'
+        }
     }
 }

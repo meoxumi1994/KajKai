@@ -1,64 +1,6 @@
-import { updateUserInfo, getUser, getUserBasicInfo, getUserTrivivalInfo } from '../services/UserService.js'
+import { updateUserInfo, getUser} from '../services/UserService.js'
 import { updateUserPub } from './UserPubController'
-import { checkBlackList } from '../services/BlackListService'
-import global from '../config/globalId'
-
-export const getUserController = () => {
-    return (req, res) => {
-        console.log(req.decoded);
-        if (req.decoded) {
-            const id = req.decoded._id;
-            getUser(id, (user) => {
-                if (user) {
-                    getUserBasicInfo(user, (data) => {
-                        res.json(data)
-                    })
-                } else {
-                    res.json({status: 'failed'})
-                }
-            })
-        } else {
-            res.json({status: 'failed'})
-        }
-    }
-};
-
-export const getUserTrivial = () => {
-    return (req, res) => {
-        if (req.decoded) {
-            const id = req.decoded._id;
-            getUser(id, function (user) {
-                if (user) {
-                    res.json(getUserTrivivalInfo(user))
-                } else {
-                    res.json({status: 'failed'})
-                }
-            })
-        } else {
-            res.json({status: 'failed'})
-        }
-    }
-};
-
-export const changeUserPhone = () => {
-    return (req, res) => {
-        console.log(req.body.phone)
-        getUser(req.decoded._id, (user) => {
-            if (user) {
-                user.phone = req.body.phone
-                user.save((err) =>{
-                    if (err) {
-                        res.json({status: 'failed'})
-                    } else {
-                        res.json({status: 'success'})
-                    }
-                })
-            } else {
-                res.json({status: 'failed'})
-            }
-        })
-    }
-}
+import { addBlackList } from '../services/BlackListService'
 
 export const updateUserPassword = () => {
     return (req, res) => {
@@ -93,24 +35,16 @@ export const changeUserProfile = () => {
     }
 };
 
-export const blackList = () => {
+export const blockUserCon = () => {
     return (req, res) => {
         const userId = req.decoded._id;
-        const blockId = req.body.blockid;
-        checkBlackList(userId, blockId, (block, type) => {
-            let idtype = '';
-            switch (userId) {
-                case userId.startsWith(global.USER_GLOBAL_ID):
-                    idtype = 'userid';
-                    break;
-                case userId.startsWith(global.STORE_GLOBAL_ID):
-                    idtype = 'storeid';
-                    break;
-                case userId.startsWith(global.MESSAGE_GLOBAL_ID):
-                    idtype = 'mesid';
-                    break
+        const blockId = req.body.userid;
+        addBlackList(userId, blockId, (block) => {
+            if (block) {
+                res.json({status: 'success', userid: blockId, id: block.id})
+            } else {
+                res.json({status: 'failed'})
             }
-            res.json({blockid: blockId, type: type, idtype: idtype, name: block.name})
         })
     }
 };
