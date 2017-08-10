@@ -10,9 +10,9 @@ export const addBlackList = (userId, blockId, next) => {
 };
 
 export const removeBlackList = (id, next) => {
-    BlackList.findByIdAndRemove(id, () => {
+    BlackList.findByIdAndRemove(id, (err, block) => {
         next();
-        removeBlackListPub(id)
+        removeBlackListPub(getBlackListPubInfo(block));
     })
 };
 

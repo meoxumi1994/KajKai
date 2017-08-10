@@ -25,46 +25,58 @@ export const leavePostCon = (action, sio, io) => {
 
 export const addNewSecondLayerCommentCon = (action, sio, io) => {
     addNewSecondLayerCommentPub(action.data, (sComment) => {
-        console.log('new second comment ' + JSON.stringify(sComment));
-        io.to(action.data.sellpostid).emit('action', {type: 'client/COMMENT', data: sComment});
-        getListFollower(action.data.sellpostid, (list) => {
-            const newId = sComment.user ? sComment.user : sComment.commenterid;
-            if (list.indexOf(newId) === -1) {
-                list.push(newId);
+        if (sComment) {
+            console.log('new second comment ' + JSON.stringify(sComment));
+            io.to(action.data.sellpostid).emit('action', {type: 'client/COMMENT', data: sComment});
+            getListFollower(action.data.sellpostid, (list) => {
+                const newId = sComment.user ? sComment.user : sComment.commenterid;
+                if (list.indexOf(newId) === -1) {
+                    list.push(newId);
+                }
+                for (let i = 0; i < list.length; ++i) {
+                    io.to(list[i]).emit('action', {type: 'global/COMMENT', data: sComment});
+                }
+            });
+            if (sComment.user) {
+                addNewFollow(sComment.user, action.data.sellpostid);
+            } else {
+                addNewFollow(sComment.commenterid, action.data.sellpostid);
             }
-            for (let i = 0; i < list.length; ++i) {
-                io.to(list[i]).emit('action', {type: 'global/COMMENT', data: sComment});
-            }
-        });
-        if (sComment.user) {
-            addNewFollow(sComment.user, action.data.sellpostid);
         } else {
-            addNewFollow(sComment.commenterid, action.data.sellpostid);
+            io.to(action.data.sellpostid).emit('action', {type: 'client/COMMENT', data: {
+                status: 'failed'
+            }});
         }
     })
 };
 
 export const addNewFirstLayerCommentCon = (action, sio, io) => {
     addNewFirstLayerCommentPub(action.data, (fComment) => {
-        console.log("new first comment " + JSON.stringify(fComment));
-        if (action.data.sellpostid) {
-            io.to(action.data.sellpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
-        } else {
-            io.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
-        }
-        getListFollower(action.data.sellpostid, (list) => {
-            const newId = fComment.user ? fComment.user : fComment.commenterid;
-            if (list.indexOf(newId) === -1) {
-                list.push(newId);
+        if (fComment) {
+            console.log("new first comment " + JSON.stringify(fComment));
+            if (action.data.sellpostid) {
+                io.to(action.data.sellpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
+            } else {
+                io.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
             }
-            for (let i = 0; i < list.length; ++i) {
-                io.to(list[i]).emit('action', {type: 'global/LEADERCOMMENT', data: fComment});
+            getListFollower(action.data.sellpostid, (list) => {
+                const newId = fComment.user ? fComment.user : fComment.commenterid;
+                if (list.indexOf(newId) === -1) {
+                    list.push(newId);
+                }
+                for (let i = 0; i < list.length; ++i) {
+                    io.to(list[i]).emit('action', {type: 'global/LEADERCOMMENT', data: fComment});
+                }
+            });
+            if (fComment.user) {
+                addNewFollow(fComment.user, action.data.sellpostid);
+            } else {
+                addNewFollow(fComment.commenterid, action.data.sellpostid);
             }
-        });
-        if (fComment.user) {
-            addNewFollow(fComment.user, action.data.sellpostid);
         } else {
-            addNewFollow(fComment.commenterid, action.data.sellpostid);
+            io.to(action.data.sellpostid).emit('action', {type: 'client/LEADERCOMMENT', data: {
+                status: 'failed'
+            }});
         }
     })
 };
