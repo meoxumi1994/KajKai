@@ -22,6 +22,9 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           if (basicUser) {
             const mComments = []
             const { blackList } = basicUser
+            if (!blackList) {
+              blackList = []
+            }
             if (!comments) {
               comments = []
             }
@@ -80,6 +83,9 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           if (basicUser) {
             const mComments = []
             const { blackList } = basicUser
+            if (!blackList) {
+              blackList = []
+            }
             if (!comments) {
               comments = []
             }
@@ -121,6 +127,9 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           if (basicUser) {
             const mComments = []
             const { blackList } = basicUser
+            if (!blackList) {
+              blackList = []
+            }
             if (!comments) {
               comments = []
             }

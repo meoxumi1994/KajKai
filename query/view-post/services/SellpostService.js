@@ -158,6 +158,9 @@ const getClientFormatSellposts = (requesterId, storeId, sellposts, offset, next)
           let mComments = []
           let { comments } = sellpost
           let { blackList } = basicUser
+          if (!blackList) {
+            blackList = []
+          }
           comments.map((comment) => {
             if (blackList.indexOf(comment.commenterId) == -1) {
               mComments.push(comment)
