@@ -100,9 +100,9 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
                   updateUserInFeedbacks(user)
                   if (reporter.status) {
                     addBanPub(user.id, admin.reason)
-                    sendBanEmail(user.username, user.email, admin.reason)
+                    sendBanEmail(user.username, user.email, admin.reason, user.language)
                   } else {
-                    sendResolveEmail(user.username, user.email, admin.reason)
+                    sendResolveEmail(user.username, user.email, admin.reason, user.language)
                     removeBanPub(user.id, admin.reason)
                   }
                 })
@@ -128,11 +128,11 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
                 updateUserInFeedbacks(user)
                 if (reportee.status) {
                   addBanPub(user.id, admin.reason)
-                  sendBanEmail(user.username, user.email, admin.reason)
+                  sendBanEmail(user.username, user.email, admin.reason, user.language)
                 } else {
                   removeBanPub(user.id, admin.reason)
                   if (user.banned == 1) {
-                    sendUnBanEmail(user.username, user.email, admin.reason)
+                    sendUnBanEmail(user.username, user.email, admin.reason, user.language)
                   }
                 }
               })

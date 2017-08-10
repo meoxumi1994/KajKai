@@ -6,7 +6,6 @@ const user = ( state = {
 }, action) => {
     switch (action.type) {
         case 'LOGOUT':
-            console.log(state.language)
             return {
                 avatarUrl: '/images/avatardefaultIcon.png',
                 coverUrl: '/images/cover.png',

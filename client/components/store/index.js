@@ -28,7 +28,7 @@ const Middle = ({id}) => {
         case 'contact':
             return <Contact/>
         case 'statistic':
-            return <Statistic/>
+            return <Statistic id={id}/>
         case 'activity':
             return <Activity/>
         case 'setting':

@@ -52,6 +52,9 @@ export const createStoreCreatedNotification = (message) => {
       userIds.map((userId) => {
         User.findOne({ id: userId }, (err, user) => {
           if (user) {
+            if (user.id == actor.id) {
+              return
+            }
             let { notifications } = user
             if (!notifications) {
               notifications = []

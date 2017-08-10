@@ -98,7 +98,7 @@ export const getListImage = (type, id, offset) => dispatch => {
 
 export const getStatistic = (id, from, to) => dispatch => {
     dispatch({ type: 'GET_STORE_STATICTIS_ING' })
-    flem('/statistic/' + id,{
+    flem('/statistics/' + id,{
         from: from,
         to: to,
     })

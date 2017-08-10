@@ -20,12 +20,6 @@ class About extends React.Component {
                 backgroundColor: 'white',
                 width: 938, marginTop: 10, marginLeft: -23,
                 }}>
-                <div
-                    className="btn btn-default"
-                    onClick={() => this._onClick()}
-                    >
-                    click me
-                </div>
                 {this.state.show && 'hihihi'}
                 <div style={{ fontSize: 20, padding: 10, backgroundColor: '#F6F7F9'}}>
                     About

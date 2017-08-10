@@ -60,7 +60,9 @@ document.getElementsByTagName("BODY")[0].onscroll = () => {
 
 window.addEventListener('load', () => {
   window.addEventListener('online',  () => { store.dispatch({ type: 'server/sendToken', tokenId: store.getState().sockettoken }) })
-  window.addEventListener('offline',  () => { alert('MẤT MẠNG RỒI! ĐỪNG ĐỔ THỪA SERVER NỮA!') })
+  window.addEventListener('offline',  () => {
+    //   alert('MẤT MẠNG RỒI! ĐỪNG ĐỔ THỪA SERVER NỮA!')
+  })
 })
 
 // store.dispatch({ type: 'server/hello'})

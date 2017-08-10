@@ -54,7 +54,7 @@ class DropDownNotification extends React.Component {
                 <ul className="dropdown-menu"
                     onChange={() => console.log('onChange dropdown')}
                     aria-labelledby="chatDropDown"
-                    style={{  marginLeft: -380, marginTop: 5, borderRadius: 0 }}>
+                    style={{  marginLeft: -380, marginTop: 9, borderRadius: 0 }}>
                     <div style={{ marginLeft: 10, fontSize: 12 , padding: 2,   fontWeight: 'bold' }}>{"Notification"}</div>
                     <hr style={{ margin: 0 }}/>
                     <div id="dropdownnotification" ref={ overgroup => this.overgroup = overgroup }

@@ -261,8 +261,10 @@ export const getInterests = (id, offset, next) => {
               id: interest.id,
               categoryId: interest.categoryId,
               categoryName: interest.categoryName,
-              longitude: interest.longitude,
-              latitude: interest.latitude,
+              position: {
+                lng: interest.longitude,
+                lat: interest.latitude
+              },
               time: interest.time.getTime()
             })
 

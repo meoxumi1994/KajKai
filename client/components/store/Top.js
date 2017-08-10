@@ -126,7 +126,7 @@ class Top extends React.Component {
                         {/* <ButtonLine {...this.props} title="Videos" last="0" link="/video"/> */}
                         {/* <ButtonLine {...this.props} title="Contact" last={(userid == yourid) ? 0:'1px'} link="/contact"/> */}
                         {/* {(userid == yourid) && <ButtonLine {...this.props} title="Activity" last="0" link="/activity"/>} */}
-                        {(userid == yourid) && <ButtonLine {...this.props} title="Statistic" last={0} link="/statistic"/>}
+                        {(userid == yourid) && <ButtonLine {...this.props} title="Statistics" last={0} link="/statistic"/>}
                         {(userid == yourid) && <ButtonLine {...this.props} title="Setting" last="1px" link="/setting"/>}
                     </div>
                 </div>
@@ -144,7 +144,7 @@ class Top extends React.Component {
                             marginTop: -37,
                             width: 200,
                             fontSize: 13.5,
-                            backgroundColor: this.state.hoverMessage ? '#29487D' : '#4267B2'}}>
+                            backgroundColor: this.state.hoverMessage ? '#29487D' : '#4267B2', fontWeight: 600 }}>
                         Send Message
                     </div>
                 }

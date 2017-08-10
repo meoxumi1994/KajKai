@@ -110,6 +110,28 @@ class ContentNotify extends React.Component {
     }
 }
 
+const FirstIcon = ({ type, order }) => {
+    switch (type) {
+        case 'leadercomment':
+        case 'comment':
+            if(order && order.length > 0)
+                return <img src="/images/notification/order.svg"
+                        width={16} height={16} style={{ marginRight: 7 }}/>
+            return <img src="/images/notification/comment.svg"
+                        width={14} height={14} style={{ marginRight: 7 }}/>
+        case 'received':
+            return <img src="/images/notification/received.svg"
+                        width={16} height={16} style={{ marginRight: 7 }}/>
+        case 'likesellpost':
+        case 'likeleadercomment':
+        case 'likecomment':
+            return <img src="/images/notification/like.svg"
+                        width={16} height={16} style={{ marginRight: 7 }}/>
+        default:
+            return <div></div>
+    }
+}
+
 class Notification extends React.Component {
     constructor(props){
         super(props)
@@ -137,10 +159,11 @@ class Notification extends React.Component {
                 <img src={avatarUrl} width={50} height={50}/>
                 <div style={{ minHeight: 40, marginLeft: 60, marginTop: -50, fontSize: 13 }}>
                     <ContentNotify {...this.props}/>
-                    <div style={{ fontSize: 12 }} >
+                    <div style={{ fontSize: 12, color: '#80848C' }} >
+                        <FirstIcon {...this.props}/>
                         {"at"}<img src={avartarStore} width={14} height={14} style={{ marginLeft: 7, marginRight: 7 }}/>
-                        {storename}{" "}
-                        <a style={{ fontSize: 12, color: '#A7ABB1' }}>{time}</a>
+                        {storename}{" . "}
+                        <a style={{ fontSize: 12, color: '#80848C' }}>{time}</a>
                     </div>
                 </div>
             </div>

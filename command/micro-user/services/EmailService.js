@@ -5,8 +5,8 @@ export const sendVerifyEmail = (email, token, next) => {
         user: 'kajkaiverify@gmail.com',
         pass: 'verifykajkai',
         to:   email,
-        subject: 'KAJKAI REGISTRATION',
-        text:    'Please click on the following link to finish you registration: \n' +
+        subject: 'ĐĂNG KÝ KAJKAI',
+        text:    'Hãy truy cập đường dẫn bên dưới để hoàn thành việc đăng ký tài khoản KAJKAI của bạn: \n' +
         config.getServerDomain() + '/emailverification/' + token
     });
     send({}, function(err, res){
