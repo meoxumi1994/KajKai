@@ -21,7 +21,7 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
         BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
           if (basicUser) {
             const mComments = []
-            const { blackList } = basicUser
+            let { blackList } = basicUser
             if (!blackList) {
               blackList = []
             }
@@ -82,7 +82,7 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
         BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
           if (basicUser) {
             const mComments = []
-            const { blackList } = basicUser
+            let { blackList } = basicUser
             if (!blackList) {
               blackList = []
             }
@@ -126,7 +126,7 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
         BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
           if (basicUser) {
             const mComments = []
-            const { blackList } = basicUser
+            let { blackList } = basicUser
             if (!blackList) {
               blackList = []
             }
