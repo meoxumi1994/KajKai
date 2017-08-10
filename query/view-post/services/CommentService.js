@@ -227,7 +227,7 @@ export const getClientFormatSellpostComments = (requesterId, comments, offset, s
           })) : []
           mComment.time = comment.time.getTime()
           mComment.status = comment.status
-          mComment.numcomment = comment.numberOfReply
+          mComment.numcomment = replies ? replies.length : 0
 
           mComments = [mComment, ...mComments]
 

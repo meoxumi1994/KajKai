@@ -309,7 +309,7 @@ const getClientFormatSellpost = (requesterId, sellpost, offset) => {
     likes,
     numfollow: sellpost.numberOfFollow ? sellpost.numberOfFollow : 0,
     follows,
-    numleadercomment: sellpost.numberOfComment ? sellpost.numberOfComment : 0,
+    numleadercomment: sellpost.comments ? sellpost.comments.length : 0,
     numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
     ...getClientFormatSellpostComments(requesterId, comments, offset, 'done', true, null)
   })
