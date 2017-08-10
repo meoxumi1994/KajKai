@@ -53,7 +53,7 @@ export const unblockUserCon = () => {
     return (req, res) => {
         const id = req.body.id;
         removeBlackList(id, () => {
-            res.json({status: 'success'})
+            res.json({status: 'success', id})
         })
     }
 };
