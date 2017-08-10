@@ -8,7 +8,7 @@ export const addBlock = (message) => {
       if (!blackList) {
         blackList = []
       }
-      blackList.push(black)
+      blackList.push(blockId)
       basicUser.blackList = blackList
       basicUser.save(() => {})
     }
