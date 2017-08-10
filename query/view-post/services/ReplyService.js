@@ -62,7 +62,9 @@ export const getClientFormatReplies = (requesterId, replies, offset, isFirst) =>
       rOffset = -2
     }
 
-    mReplies = [getClientFormatReply(requesterId, replies[0]), ...mReplies]
+    if (replies.length > 0) {
+      mReplies = [getClientFormatReply(requesterId, replies[0]), ...mReplies]
+    }
   } else {
     for(let k = replies.length - 1; k > 0; k--) {
       let reply = replies[k]
