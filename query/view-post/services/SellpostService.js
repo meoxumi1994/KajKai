@@ -29,7 +29,7 @@ export const getSellpost = (targetId, requesterId, id, next) => {
               let { targetStatus, ...data } = getClientFormatSellpost(targetId, notifySellposts, blackList, requesterId, sellpost, Date.now())
               next({
                 status: targetStatus,
-                sellpost: data
+                sellpost: targetStatus == 'success' ? data : null
               })
             } else {
               next({
