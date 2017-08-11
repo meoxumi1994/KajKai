@@ -1,4 +1,4 @@
-import { updateUserInfo, getUser } from '../services/UserService.js'
+import { updateUserInfo, getUser, resetPassword, updatePasswordToken } from '../services/UserService.js'
 import { updateUserPub } from './UserPubController'
 import { addBlackList, removeBlackList } from '../services/BlackListService'
 
@@ -54,6 +54,27 @@ export const unblockUserCon = () => {
         const id = req.body.id;
         removeBlackList(id, () => {
             res.json({status: 'success', id})
+        })
+    }
+};
+
+export const resetPasswordCon = () => {
+    return (req, res) => {
+        const email = req.body.email;
+        resetPassword(email, (user) => {
+            if (user) res.json({status: 'success'});
+            else res.json({status: 'failed'})
+        })
+    }
+};
+
+export const resetPasswordEmailCon = () => {
+    return (req, res) => {
+        const token = req.params.token;
+        updatePasswordToken(token, (user) => {
+            if (user) {
+                res.redirect(redirectUrl + '/login');
+            }
         })
     }
 };

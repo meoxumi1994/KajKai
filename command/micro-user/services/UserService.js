@@ -1,8 +1,9 @@
-import { User, Address, Image } from '../models'
+import { User, Image } from '../models'
 import jwt from 'jsonwebtoken'
 import mongoose from '../datasource'
-import { checkEmail } from '../utils/utils'
+import { checkEmail, generateRandomPassword } from '../utils/utils'
 import { SocialType, Language, Sex } from '../enum'
+import { sendResetPasswordEmail } from '../services/EmailService'
 const USER_GLOBAL_ID = '001';
 
 export const getUser = (id, next) => {
@@ -164,6 +165,21 @@ export const getUserFromToken = (token, next) => {
         getUser(decoded._id, function (user) {
             next(user)
         })
+    }
+};
+
+export const getPasswordToken = (id, password) => {
+    let curId = id.toString();
+    if (!curId.startsWith(USER_GLOBAL_ID)) curId = getUserGlobalId(curId);
+    return jwt.sign({_id: curId, password: password}, 'aiehiahweg', {expiresIn: 24 * 60 * 60});
+};
+
+export const verifyPasswordToken = (token) => {
+    try {
+        const decoded = jwt.verify(token, 'aiehiahweg');
+        return decoded;
+    } catch (err) {
+        return null;
     }
 };
 
@@ -404,6 +420,42 @@ export const removeBan = (userId, reason, next) => {
             user.save(() => {
                 next();
             });
+        }
+    })
+};
+
+export const resetPassword = (email, next) => {
+    getUserFromEmail(email, (user) => {
+        if (user) {
+            next(user);
+            const password = generateRandomPassword();
+            sendResetPasswordEmail(email, getPasswordToken(user._id, password), password, () => {});
+        } else {
+            next(null);
+        }
+    })
+};
+
+export const updatePasswordToken = (token, next) => {
+    let decoded = verifyPasswordToken(token);
+    if (!decoded) {
+        next(null);
+        return;
+    }
+    updatePassword(decoded._id, decoded.password, (user) => {
+        next(user);
+    })
+};
+
+export const updatePassword = (id, password, next) => {
+    getUser(id, (user) => {
+        if (user) {
+            user.password = password;
+            user.save(() => {
+                next(user);
+            })
+        } else {
+            next(null);
         }
     })
 };

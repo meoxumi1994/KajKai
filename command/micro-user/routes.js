@@ -2,19 +2,19 @@ import auth from './middlewares/auth'
 import phoneCheck from './middlewares/phoneChecking'
 
 export default {
-
     '/emailverification/:token': {
         get: {
             controller: 'RegisterController',
             method: 'confirmEmailVerification'
         }
     },
+    '/passwordreset/:token': {
+        get: {
+            controller: 'UserController',
+            method: 'resetPasswordEmailCon'
+        }
+    },
     '/user': {
-        // get: {
-        //     controller: 'UserController',
-        //     middleware: [auth()],
-        //     method: 'getUserTrivial'
-        // },
         post: {
             controller: 'RegisterController',
             method: 'registerNewUser'
@@ -96,6 +96,12 @@ export default {
             controller: 'UserController',
             middleware: [auth()],
             method: 'unblockUserCon'
+        }
+    },
+    '/reset': {
+        post: {
+            controller: 'UserController',
+            method: 'resetPasswordCon'
         }
     }
 }
