@@ -12,5 +12,12 @@ export default {
             middleware: [auth()],
             method: 'removeInterestCon'
         }
+    },
+    '/turnnotify/:sellpostid': {
+        put: {
+            controller: 'NotifyController',
+            middleware: [auth()],
+            method: 'updateNotifyCon'
+        }
     }
 }
