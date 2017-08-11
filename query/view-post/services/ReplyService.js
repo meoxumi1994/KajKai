@@ -1,36 +1,12 @@
-import { Comment, BasicUser } from '../models'
+import { Comment } from '../models'
+import { getBlackList } from './BlockService'
 
 export const getReplies = (requesterId, id, offset, next) => {
-  Comment.findOne({ id }, (err, comment) => {
-    if (err || !comment) {
-      if(err) {
-        next(null)
-      } else {
-        next({
-          id,
-          status: 'nodata',
-          offset,
-          comments: []
-        })
-      }
-    } else {
-      let { replies } = comment
-      BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
-        if (basicUser) {
-          const mReplies = []
-          const { blackList } = basicUser
-          if (!replies) {
-            replies = []
-          }
-          replies.map((reply) => {
-            if (blackList.indexOf(reply.userId) == -1) {
-              mReplies.push(reply)
-            }
-          })
-          next({
-            id,
-            ...getClientFormatReplies(requesterId, mReplies, offset, false)
-          })
+  getBlackList((blackList) => {
+    Comment.findOne({ id }, (err, comment) => {
+      if (err || !comment) {
+        if(err) {
+          next(null)
         } else {
           next({
             id,
@@ -39,8 +15,23 @@ export const getReplies = (requesterId, id, offset, next) => {
             comments: []
           })
         }
-      })
-    }
+      } else {
+        let { replies } = comment
+        const mReplies = []
+        if (!replies) {
+          replies = []
+        }
+        replies.map((reply) => {
+          if (blackList.indexOf(reply.userId) == -1) {
+            mReplies.push(reply)
+          }
+        })
+        next({
+          id,
+          ...getClientFormatReplies(requesterId, mReplies, offset, false)
+        })
+      }
+    })
   })
 }
 
@@ -71,7 +62,9 @@ export const getClientFormatReplies = (requesterId, replies, offset, isFirst) =>
       rOffset = -2
     }
 
-    mReplies = [getClientFormatReply(requesterId, replies[0]), ...mReplies]
+    if (replies.length > 0) {
+      mReplies = [getClientFormatReply(requesterId, replies[0]), ...mReplies]
+    }
   } else {
     for(let k = replies.length - 1; k > 0; k--) {
       let reply = replies[k]

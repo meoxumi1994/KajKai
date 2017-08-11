@@ -48,7 +48,7 @@ class HandlerUser extends React.Component {
                           <li><a href="#" onClick={()=> onLogoutClick() }>log out</a></li>
                       </ul>
                   </div> */}
-                  
+
                       {clicksetting &&
                           <div style={{ position: 'absolute', right: 20, top: 30  }}>
                               <DropDownSettingBar
@@ -265,17 +265,17 @@ export default class BarScreen extends React.Component {
                                 </div>
                             </div>
                             <div className="col-xs-3">
-                                <div className="input-group">
+                                <div className="input-group" style={{ width: 250 }}>
                                     <AutoCompleteContainer SEARCH_LOCATION={SEARCH_LOCATION}
                                       onLocationChanged={onLocationChanged}
                                     />
-                                    <span className="input-group-btn" >
+                                    {/* <span className="input-group-btn" >
                                         <button className="btn btn-default btn-sm" type="button"
                                             style={{ borderRadius: '0px 2px 2px 0px',
                                             borderWidth: 0, backgroundColor: '#F6F7F9'}}>
                                             <i className="glyphicon glyphicon-map-marker"></i>
                                         </button>
-                                    </span>
+                                    </span> */}
                                 </div>
                             </div>
                             {/* <div className="col-xs-3"  style={{ padding: 0}}>

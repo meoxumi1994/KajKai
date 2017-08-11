@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { withGoogleMap, GoogleMap, Marker, GoogleMapLoader } from "react-google-maps";
 import { places } from "react-google-maps"
 
 const GettingStartedGoogleMap = withGoogleMap(props => {
@@ -16,13 +16,13 @@ const GettingStartedGoogleMap = withGoogleMap(props => {
             defaultCenter={props.defaultCenter}
             onClick={props.onMapClick}>
             {/* <SearchBox
-              inputPlaceholder="Customized your placeholder"
+            inputPlaceholder="Customized your placeholder"
             /> */}
             {props.marker &&
-                <Marker
-                    {...props.marker}
-                    onRightClick={() => props.onMarkerRightClick(index)}
-                />
+              <Marker
+                  {...props.marker}
+                  onRightClick={() => props.onMarkerRightClick(index)}
+              />
             }
         </GoogleMap>
     )

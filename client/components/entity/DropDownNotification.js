@@ -28,21 +28,25 @@ class DropDownNotification extends React.Component {
                 $(this).scrollTop(scrollTo + $(this).scrollTop());
             }
         })
+        $('#dropdownnotify').on('show.bs.dropdown', () => {
+            this.setState({ isTurnNotifi: true })
+        });
+        $('#dropdownnotify').on('hide.bs.dropdown', () => {
+            this.setState({ isTurnNotifi: false })
+        });
     }
     render(){
         const { numUnreaded, onChange, onSearchTypeSelected, clickNotification } = this.props
         return(
-            <div className="dropdown">
-                <div className="btn btn-xs dropdown-toggle" id="chatDropDown" data-toggle="dropdown"
-                    style={{ borderWidth: 0, padding: 0 }}
-                    onMouseOver={() => this.setState({ hoverNotification: true })}
-                    onMouseLeave={() => this.setState({ hoverNotification: false })}
+            <div className="dropdown" id="dropdownnotify">
+                <div className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"
+                    style={{ borderWidth: 0, padding: 0, backgroundColor: 'transparent'}}
                     onClick={() => {
+                        onChange('numUnreaded', 0)
                         this.setState({ show: true })
-                        clickNotification()
                     }}>
                     <RiseUp
-                        src={ (numUnreaded>0) ? "/images/globehas.svg" :
+                        src={ (numUnreaded>0 || this.state.isTurnNotifi) ? "/images/globehas.svg" :
                         (this.state.hoverNotification ? "/images/globehover.svg" : "/images/globe.svg")}
                         style={{
                             width: 35,
@@ -50,9 +54,12 @@ class DropDownNotification extends React.Component {
                             imgWidth: 21,
                             imgHeight: 21,
                         }} number={numUnreaded}/>
+                    {this.state.isTurnNotifi &&
+                        <img style={{ position: 'absolute', zIndex: 100000, marginTop: 28.3, marginLeft: -29 }}
+                            src="/images/arrowTop.svg" width={24} height={12}/>
+                    }
                 </div>
                 <ul className="dropdown-menu"
-                    onChange={() => console.log('onChange dropdown')}
                     aria-labelledby="chatDropDown"
                     style={{  marginLeft: -380, marginTop: 9, borderRadius: 0 }}>
                     <div style={{ marginLeft: 10, fontSize: 12 , padding: 2,   fontWeight: 'bold' }}>{"Notification"}</div>
