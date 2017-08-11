@@ -1,11 +1,13 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
+import { unBlockUser } from '~/actions/asyn/user'
 import Setting from '~/components/user/Setting'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const user = state.user
+    // const Setting = state.inst.containers.user.setting
     return({
         ...user,
         USER_NAME: g('USER_NAME'),
@@ -28,7 +30,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+    unBlock : (id) => {
+        dispatch(unBlockUser(id))
+    }
 })
 
 const SettingContainer = connect(

@@ -12,6 +12,20 @@ const user = ( state = {
                 language: state.language,
                 storeList: [],
             }
+        case 'UN_BLOCK_USER_SUCCESS':
+            let newstate = state
+            state.blocks.map((item, index) => {
+                if(item.id == action.id){
+                    newstate = {
+                        ...state,
+                        blocks: [
+                            ...state.blocks.slice(0,index),
+                            ...state.blocks.slice(index+1,state.blocks.length)
+                        ],
+                    }
+                }
+            })
+            return newstate
         case 'WHO_SUCCESS':
         case 'LOGIN_SUCCESS':
         case 'REGISTER_SUCCESS':
