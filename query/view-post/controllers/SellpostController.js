@@ -3,8 +3,8 @@ import { getSellpost, getSellposts, getUserSellposts } from '../services/Sellpos
 export const getSellpostHandler = () => (req, res) => {
   const requesterId = req.decoded._id
   const { id } = req.params
-
-  getSellpost(requesterId, id, (sellpost) => {
+  let { id: targetId } = req.query
+  getSellpost(targetId, requesterId, id, (sellpost) => {
     if (sellpost) {
       res.json(sellpost)
     } else {

@@ -31,7 +31,7 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           })
           next({
             id,
-            ...getClientFormatSellpostComments(blackList, requesterId, mComments, offset, status, false, 10)
+            ...getClientFormatSellpostComments(null, blackList, requesterId, mComments, offset, status, false, 10)
           })
         }
       })
@@ -77,7 +77,7 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           })
           next({
             id,
-            ...getClientFormatSellpostComments(blackList, requesterId, mComments, offset, status, false, length)
+            ...getClientFormatSellpostComments(null, blackList, requesterId, mComments, offset, status, false, length)
           })
         }
       })
@@ -106,7 +106,7 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           })
           next({
             id,
-            ...getClientFormatSellpostComments(blackList, requesterId, comments, offset, status, false, length)
+            ...getClientFormatSellpostComments(null, blackList, requesterId, comments, offset, status, false, length)
           })
         }
       })
@@ -114,12 +114,21 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
   })
 }
 
-export const getClientFormatSellpostComments = (blackList, requesterId, comments, offset, status, isFirst, length) => {
+export const getClientFormatSellpostComments = (targetId, blackList, requesterId, comments, offset, status, isFirst, length) => {
   if (!comments) {
-    return {
-      status: 'success',
-      offset: -2,
-      leadercomments: []
+    if (targetId) {
+      return {
+        status: 'success',
+        offset: -2,
+        leadercomments: []
+      }
+    } else {
+      return {
+        targetStatus: 'failed',
+        status: 'success',
+        offset: -2,
+        leadercomments: []
+      }
     }
   }
 
@@ -133,52 +142,69 @@ export const getClientFormatSellpostComments = (blackList, requesterId, comments
     [OrderStatus.DONE]: 3
   }
 
-  if (isFirst) {
-    for (let i = comments.length - 1; i >= 0; i--) {
+  let targetStatus = 'success'
+
+  if (targetId) {
+    for (let i = 0; i < comments.length; i++) {
       let comment = comments[i]
-      if (offset - comment.time <= oneHour && currentNumberOfComment < 5 && level[comment.status] <= level[status]) {
-        let { replies } = comment
-        let mReplies = []
-        if (!replies) {
-          replies = []
+      let { replies } = comment
+      let mReplies = []
+      if (!replies) {
+        replies = []
+      }
+      replies.map((reply) => {
+        if (blackList.indexOf(reply.userId) == -1) {
+          mReplies.push(reply)
         }
-        replies.map((reply) => {
-          if (blackList.indexOf(reply.userId) == -1) {
-            mReplies.push(reply)
-          }
-        })
-        let mComment = getClientFormatReplies(requesterId, mReplies, Date.now(), true)
-
-        mComment.id = comment.id
-        mComment.storeid = comment.storeId
-        mComment.sellpostid = comment.sellpostId
-        mComment.order = comment.order ? comment.order.map((product) => ({
-          id: product.id,
-          content: product.content ? product.content : '',
-          imageUrl: product.imageUrl,
-          list: product.list ? product.list : [],
-          num: product.numberOfOrder
-        })) : []
-        mComment.time = comment.time.getTime()
-        mComment.status = comment.status
-        mComment.numcomment = mReplies.length
-
-        mComments = [mComment, ...mComments]
-
-        cOffset = comment.time.getTime()
-        currentNumberOfComment++
-      } else {
+      })
+      if (comment.id == targetId || repliesContainTargetId(replies, targetId)) {
+        mComments = comments.splice(0, i + 6)
         break
+      } else if (i + 1 == comments.length) {
+        targetStatus = 'failed'
       }
     }
-    if (comments.length == 0 || currentNumberOfComment == comments.length) {
-      cOffset = -2
-    }
-  } else {
+
+    comments = mComments
+    mComments = []
+
     for (let i = comments.length - 1; i >= 0; i--) {
       let comment = comments[i]
-      if (comment.time < offset && level[comment.status] <= level[status]) {
-        if (currentNumberOfComment < length) {
+      let { replies } = comment
+      let mReplies = []
+      if (!replies) {
+        replies = []
+      }
+      replies.map((reply) => {
+        if (blackList.indexOf(reply.userId) == -1) {
+          mReplies.push(reply)
+        }
+      })
+      let mComment = getClientFormatReplies(targetId, requesterId, mReplies, Date.now(), true)
+
+      mComment.id = comment.id
+      mComment.storeid = comment.storeId
+      mComment.sellpostid = comment.sellpostId
+      mComment.order = comment.order ? comment.order.map((product) => ({
+        id: product.id,
+        content: product.content ? product.content : '',
+        imageUrl: product.imageUrl,
+        list: product.list ? product.list : [],
+        num: product.numberOfOrder
+      })) : []
+      mComment.time = comment.time.getTime()
+      mComment.status = comment.status
+      mComment.numcomment = mReplies.length
+
+      mComments = [mComment, ...mComments]
+
+      cOffset = comment.time.getTime()
+    }
+  } else {
+    if (isFirst) {
+      for (let i = comments.length - 1; i >= 0; i--) {
+        let comment = comments[i]
+        if (offset - comment.time <= oneHour && currentNumberOfComment < 5 && level[comment.status] <= level[status]) {
           let { replies } = comment
           let mReplies = []
           if (!replies) {
@@ -189,7 +215,7 @@ export const getClientFormatSellpostComments = (blackList, requesterId, comments
               mReplies.push(reply)
             }
           })
-          let mComment = getClientFormatReplies(requesterId, mReplies, Date.now(), true)
+          let mComment = getClientFormatReplies(null, requesterId, mReplies, Date.now(), true)
 
           mComment.id = comment.id
           mComment.storeid = comment.storeId
@@ -208,22 +234,74 @@ export const getClientFormatSellpostComments = (blackList, requesterId, comments
           mComments = [mComment, ...mComments]
 
           cOffset = comment.time.getTime()
-          lastIndex = i
           currentNumberOfComment++
         } else {
           break
         }
       }
-    }
-    if (lastIndex == 0) {
-      cOffset = -2
+      if (comments.length == 0 || currentNumberOfComment == comments.length) {
+        cOffset = -2
+      }
+    } else {
+      for (let i = comments.length - 1; i >= 0; i--) {
+        let comment = comments[i]
+        if (comment.time < offset && level[comment.status] <= level[status]) {
+          if (currentNumberOfComment < length) {
+            let { replies } = comment
+            let mReplies = []
+            if (!replies) {
+              replies = []
+            }
+            replies.map((reply) => {
+              if (blackList.indexOf(reply.userId) == -1) {
+                mReplies.push(reply)
+              }
+            })
+            let mComment = getClientFormatReplies(null, requesterId, mReplies, Date.now(), true)
+
+            mComment.id = comment.id
+            mComment.storeid = comment.storeId
+            mComment.sellpostid = comment.sellpostId
+            mComment.order = comment.order ? comment.order.map((product) => ({
+              id: product.id,
+              content: product.content ? product.content : '',
+              imageUrl: product.imageUrl,
+              list: product.list ? product.list : [],
+              num: product.numberOfOrder
+            })) : []
+            mComment.time = comment.time.getTime()
+            mComment.status = comment.status
+            mComment.numcomment = mReplies.length
+
+            mComments = [mComment, ...mComments]
+
+            cOffset = comment.time.getTime()
+            lastIndex = i
+            currentNumberOfComment++
+          } else {
+            break
+          }
+        }
+      }
+      if (lastIndex == 0) {
+        cOffset = -2
+      }
     }
   }
 
-  return {
-    status: 'success',
-    offset: cOffset,
-    leadercomments: mComments
+  if (targetId) {
+    return {
+      targetStatus,
+      status: 'success',
+      offset: cOffset,
+      leadercomments: mComments
+    }
+  } else {
+    return {
+      status: 'success',
+      offset: cOffset,
+      leadercomments: mComments
+    }
   }
 }
 
@@ -268,4 +346,14 @@ export const getClientFormatMinorpostComments = (requesterId, comments, offset) 
     offset: cOffset,
     leadercomments: mComments
   }
+}
+
+const repliesContainTargetId = (replies, targetId) => {
+  if (!replies) return false
+  for (let i = 0; i < replies.length; i++) {
+    if (replies[i].id == targetId) {
+      return true
+    }
+  }
+  return false
 }

@@ -28,14 +28,14 @@ export const getReplies = (requesterId, id, offset, next) => {
         })
         next({
           id,
-          ...getClientFormatReplies(requesterId, mReplies, offset, false)
+          ...getClientFormatReplies(null, requesterId, mReplies, offset, false)
         })
       }
     })
   })
 }
 
-export const getClientFormatReplies = (requesterId, replies, offset, isFirst) => {
+export const getClientFormatReplies = (targetId, requesterId, replies, offset, isFirst) => {
   if (!replies) {
     return {
       status: 'success',
@@ -46,42 +46,64 @@ export const getClientFormatReplies = (requesterId, replies, offset, isFirst) =>
   const oneHour = 3600000
   let currentNumberOfReply = 0, rOffset = Date.now(), lastIndex = -1
   let mReplies = []
-  if (isFirst) {
-    for(let k = replies.length - 1; k > 0; k--) {
-      let reply = replies[k]
-      if (offset - reply.time <= oneHour && currentNumberOfReply < 2) {
-        mReplies = [getClientFormatReply(requesterId, reply), ...mReplies]
-
-        rOffset = reply.time.getTime()
-        currentNumberOfReply++
-      } else {
+  if (targetId) {
+    for (let i = 0; i < replies.length; i++) {
+      let reply = replies[i]
+      if (reply.id == targetId) {
+        mReplies = replies.splice(0, i + 6)
         break
       }
     }
-    if (replies.length == 0 || currentNumberOfReply == replies.length) {
-      rOffset = -2
+    replies = mReplies
+    mReplies = []
+    for(let k = replies.length - 1; k > 0; k--) {
+      let reply = replies[k]
+      mReplies = [getClientFormatReply(requesterId, reply), ...mReplies]
+
+      rOffset = reply.time.getTime()
     }
 
     if (replies.length > 0) {
       mReplies = [getClientFormatReply(requesterId, replies[0]), ...mReplies]
     }
   } else {
-    for(let k = replies.length - 1; k > 0; k--) {
-      let reply = replies[k]
-      if (reply.time < offset) {
-        if (currentNumberOfReply < 10) {
+    if (isFirst) {
+      for(let k = replies.length - 1; k > 0; k--) {
+        let reply = replies[k]
+        if (offset - reply.time <= oneHour && currentNumberOfReply < 2) {
           mReplies = [getClientFormatReply(requesterId, reply), ...mReplies]
 
           rOffset = reply.time.getTime()
-          lastIndex = k
           currentNumberOfReply++
         } else {
           break
         }
       }
-    }
-    if (lastIndex == 1) {
-      rOffset = -2
+      if (replies.length == 0 || currentNumberOfReply == replies.length) {
+        rOffset = -2
+      }
+
+      if (replies.length > 0) {
+        mReplies = [getClientFormatReply(requesterId, replies[0]), ...mReplies]
+      }
+    } else {
+      for(let k = replies.length - 1; k > 0; k--) {
+        let reply = replies[k]
+        if (reply.time < offset) {
+          if (currentNumberOfReply < 10) {
+            mReplies = [getClientFormatReply(requesterId, reply), ...mReplies]
+
+            rOffset = reply.time.getTime()
+            lastIndex = k
+            currentNumberOfReply++
+          } else {
+            break
+          }
+        }
+      }
+      if (lastIndex == 1) {
+        rOffset = -2
+      }
     }
   }
 
