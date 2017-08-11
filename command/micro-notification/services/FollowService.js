@@ -18,7 +18,7 @@ export const addNewFollow = (followerId, followeeId, next) => {
 export const removeFollow = (followerId, followeeId, next) => {
     Follow.remove({followerId, followeeId}, () => {
         removeFollowPub({followerId, followeeId});
-        next();
+        next({followerId, followeeId});
     })
 };
 

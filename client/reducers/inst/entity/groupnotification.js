@@ -5,6 +5,10 @@ const notification = (state = {
     numUnreaded: 0,
 }, action) => {
     switch (action.type) {
+        case 'SCREEN_CLICK':
+            return {...state,
+                isTurnNotifi: false,
+            }
         case 'global/NOTIFICATION':
             return {...state,
                 numUnreaded: parseInt(state.numUnreaded) + 1,
@@ -37,7 +41,7 @@ const notification = (state = {
                     ...notifications
                 ]
             }
-        case 'INST_ENTITY_GROUP_NOTIFICATION':
+        case 'INST_ENTITY_GROUP_NOTIFICATION_CHANGE':
             return {
                 ...state,
                 [action.key] : action.value

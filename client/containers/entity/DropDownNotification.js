@@ -18,8 +18,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             dispatch(getNotification(offset, 20))
         }
     },
-    clickNotification: () => {
-        dispatch({ type: 'INST_ENTITY_GROUP_NOTIFICATION', key: 'numUnreaded', value: 0 })
+    onChange: (key, value) => {
+        dispatch({ type: 'INST_ENTITY_GROUP_NOTIFICATION_CHANGE', key, value })
     }
 })
 

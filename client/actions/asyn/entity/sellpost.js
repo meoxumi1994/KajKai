@@ -51,3 +51,18 @@ export const deteleSellPost = (id) => dispatch => {
         }
     })
 }
+
+export const turnNotify = (id, turnotify) => dispatch => {
+    dispatch({ type: 'TURN_NOTIFY_ING' })
+    fleu('/turnnotify/'+id,{
+        turnotify: turnotify,
+    })
+    .then(({ status, id, turnotify}) => {
+        if(status == 'success'){
+            dispatch({ type: 'TURN_NOTIFY_SUCCESS'})
+            dispatch({ type: 'INST_ENTITY_SELL_POST_CHANGE', key: 'turnotify', value: turnotify })
+        }else{
+            dispatch({ type: 'TURN_NOTIFY_FAILED'})
+        }
+    })
+}

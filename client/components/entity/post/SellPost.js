@@ -27,7 +27,7 @@ class SellPost extends React.Component {
     render(){
         const { urlname, isOwner, ship, status, category, description, storename, avatarUrl, time,
             numfollow, beFollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
-            onDeleteSellpost, closeBorder,
+            onDeleteSellpost, closeBorder, turnnotify,
             onLike, postrows, postrows_order, clicksetting, id, onFollow, feedBack, showEditSellPost,
         } = this.props
         if(!likes)
@@ -62,7 +62,8 @@ class SellPost extends React.Component {
                             <DropDown
                                 contents={!isOwner?
                                     ['Feed Back'] :
-                                    ['Feed Back','Edit SellPost','Delete SellPost']}
+                                    ['Feed Back','Edit SellPost','Delete SellPost',
+                                    turnnotify ? 'Turn off notification for this post' : 'Turn on notification for this post']}
                                 onClick={(index) => {
                                     if(index==0){
                                         feedBack()
@@ -74,8 +75,11 @@ class SellPost extends React.Component {
                                     if(index==2){
                                         onDeleteSellpost()
                                     }
+                                    if(index==3){
+                                        this.props.onTurnNotify()
+                                    }
                                 }}
-                                width={100}
+                                width={190}
                             />
                         }
                         <FeedBackModal

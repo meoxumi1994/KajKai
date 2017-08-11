@@ -1,4 +1,4 @@
-import { flem, flet, fleu } from '~/actions/support'
+import { flem, flet, fleu, flex } from '~/actions/support'
 
 export const getInterest = ( id, offset ) => dispatch => {
     dispatch({ type: 'GET_INTEREST_ING'})
@@ -52,6 +52,20 @@ export const blockUser = (userid) => dispatch => {
             dispatch({ type: 'BLOCK_USER_SUCCESS', userid: userid, id: id })
         }else{
             dispatch({ type: 'BLOCK_USER_FAILED' })
+        }
+    })
+}
+
+export const unBlockUser = (id) => dispatch => {
+    dispatch({ type: 'UN_BLOCK_USER_ING'})
+    return flex('/block',{
+        id: id,
+    })
+    .then(({ status, id }) => {
+        if(status == 'success'){
+            dispatch({ type: 'UN_BLOCK_USER_SUCCESS', id })
+        }else{
+            dispatch({ type: 'UN_BLOCK_USER_FAILED' })
         }
     })
 }

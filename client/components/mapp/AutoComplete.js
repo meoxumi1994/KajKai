@@ -4,17 +4,21 @@ export default class AutoComplete extends React.Component {
     constructor(props) {
         super(props)
     }
-
     componentDidMount() {
         window.initAutocomplete = () => {
             this.autocomplete = new google.maps.places.Autocomplete(
                 (document.getElementById('autocomplete')),
-                { types: [] }
+                { types: ['geocode'] }
             )
+            this.autocomplete.addListener('place_changed', () => {
+                const place = this.autocomplete.getPlace()
+                const lat = place.geometry.location.lat()
+                const lng = place.geometry.location.lng()
+                console.log(lat, lng)
+            });
         }
         this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyDEy3sjvl8Sq5bsInBAU61uu_u4_fK3zvk&libraries=places&callback=initAutocomplete')
     }
-
     loadJS(src) {
         const ref = window.document.getElementsByTagName("script")[0]
         const script = window.document.createElement("script")
@@ -22,9 +26,8 @@ export default class AutoComplete extends React.Component {
         script.async = true
         ref.parentNode.insertBefore(script, ref)
     }
-
     render() {
-        const { SEARCH_LOCATION, searchType, onLocationChanged } = this.props
+        const { SEARCH_LOCATION, searchType, onLocationChanged, data, onChange, value } = this.props
         let inputSearchLocation
         return (
             <input className="form-control input-sm" ref={node => { inputSearchLocation = node}}
@@ -34,13 +37,11 @@ export default class AutoComplete extends React.Component {
                 type="text"
                 onBlur={() => {
                     onLocationChanged(inputSearchLocation.value.trim())
-                    // console.log('inputSearchLocation.value.trim()', inputSearchLocation.value.trim())
                 }}
                 onKeyDown={(e) => { if(e.keyCode == 13) {
                     inputSearchLocation.blur()
-                    console.log('inputSearchLocation.value.trim()', inputSearchLocation.value.trim())
                 }}}
-                style={{ border: 0,  borderRadius: '2px 0px 0px 2px', fontSize: 13 , outline: 'none', height: 28 }}
+                style={{ border: 0,  borderRadius: '2px 2px 2px 2px', fontSize: 13 , outline: 'none', height: 28 }}
             />
         )
     }
