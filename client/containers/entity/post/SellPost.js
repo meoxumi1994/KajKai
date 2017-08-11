@@ -23,10 +23,12 @@ const mapStateToProps = (state, { id }) => {
         time = getTime(sellpost.time)
     }
     let isOwner = false
-    for(let i=0; i< state.user.storeList.length ; i++){
-        if(state.user.storeList[i].id == sellpost.storeid){
-            isOwner = true
-            break
+    if(sellpost){
+        for(let i=0; i< state.user.storeList.length ; i++){
+            if(state.user.storeList[i].id == sellpost.storeid){
+                isOwner = true
+                break
+            }
         }
     }
     return({
