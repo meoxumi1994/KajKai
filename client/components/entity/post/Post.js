@@ -15,8 +15,10 @@ class Post extends React.Component {
                     <div className="col col-xs-7" style={{ margin: 0, padding: 0 }}>
                         <SellPost id={sellpostid}  needGetSellPost={true}/>
                     </div>
-                    <div className="col col-xs-5" style={{ marginLeft: -18, padding: 0 }}>
-                        <IntroduceStore storeid={storeid}/>
+                    <div className="col col-xs-5" style={{ padding: 0 }}>
+                        <div style={{ marginLeft: -18 }}>
+                            <IntroduceStore storeid={storeid}/>
+                        </div>
                     </div>
                 </div>
             </div>
