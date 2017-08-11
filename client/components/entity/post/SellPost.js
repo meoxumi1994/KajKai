@@ -61,22 +61,23 @@ class SellPost extends React.Component {
                         {clicksetting &&
                             <DropDown
                                 contents={!isOwner?
-                                    ['Feed Back'] :
-                                    ['Feed Back','Edit SellPost','Delete SellPost',
-                                    turnnotify ? 'Turn off notification for this post' : 'Turn on notification for this post']}
+                                    ['Feed Back', turnnotify ? 'Turn off notification for this post' : 'Turn on notification for this post'] :
+                                    ['Feed Back',
+                                    turnnotify ? 'Turn off notification for this post' : 'Turn on notification for this post',
+                                    'Edit SellPost','Delete SellPost',]}
                                 onClick={(index) => {
                                     if(index==0){
                                         feedBack()
                                         this.setState({ showFeedBack: true })
                                     }
                                     if(index==1){
-                                        showEditSellPost(this.props)
+                                        this.props.onTurnNotify()
                                     }
                                     if(index==2){
-                                        onDeleteSellpost()
+                                        showEditSellPost(this.props)
                                     }
                                     if(index==3){
-                                        this.props.onTurnNotify()
+                                        onDeleteSellpost()
                                     }
                                 }}
                                 width={190}

@@ -79,6 +79,14 @@ export default {
     controller: 'FollowSubController',
     method: 'removeUserFollow'
   },
+  'FOLLOW.AddFollow': {
+    controller: 'FollowSubController',
+    method: 'addFollow'
+  },
+  'FOLLOW.RemoveFollow': {
+    controller: 'FollowSubController',
+    method: 'removeFollow'
+  },
   'BLACKLIST.Add': {
     controller: 'BlockSubController',
     method: 'addBlock'

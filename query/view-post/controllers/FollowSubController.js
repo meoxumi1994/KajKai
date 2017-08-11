@@ -73,3 +73,41 @@ export const removeUserFollow = (message) => {
     })
   }
 }
+
+export const addFollow = (message) => {
+  const { followerId, followeeId } = message.follow
+
+  if (followeeId.substr(0, 3) == '012') { // sellpost
+    BasicUser.findOne({ id: followerId }, (err, basicUser) => {
+      if (basicUser) {
+        let { notifySellposts } = basicUser
+        if (!notifySellposts) {
+          notifySellposts = []
+        }
+        notifySellposts.push(followeeId)
+        basicUser.notifySellposts = notifySellposts
+        basicUser.save(() => {})
+      }
+    })
+  }
+}
+
+export const removeFollow = (message) => {
+  const { followerId, followeeId } = message.follow
+
+  if (followeeId.substr(0, 3) == '012') { // sellpost
+    BasicUser.findOne({ id: followerId }, (err, basicUser) => {
+      if (basicUser) {
+        let { notifySellposts } = basicUser
+        for (let i = 0; i < notifySellposts.length; i++) {
+          if (notifySellposts[i] == followeeId) {
+            notifySellposts.splice(i, 1)
+            break
+          }
+        }
+        basicUser.notifySellposts = notifySellposts
+        basicUser.save(() => {})
+      }
+    })
+  }
+}

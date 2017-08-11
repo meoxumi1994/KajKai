@@ -12,11 +12,13 @@ class Post extends React.Component {
         return(
             <div className="container-fluid" style={{ margin: 0, padding: 0 }}>
                 <div className="row" style={{ margin: 0, padding: 0, marginLeft: -23 }}>
-                    <div className="col col-xs-6" style={{ margin: 0, padding: 0 }}>
+                    <div className="col col-xs-7" style={{ margin: 0, padding: 0 }}>
                         <SellPost id={sellpostid}  needGetSellPost={true}/>
                     </div>
-                    <div className="col col-xs-6" style={{ margin: 0, padding: 0, paddingLeft: 60 }}>
+                    <div className="col col-xs-5" style={{ padding: 0 }}>
+                        <div style={{ marginLeft: -18 }}>
                             <IntroduceStore storeid={storeid}/>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -450,7 +450,7 @@ GET /sellpost/store/:storeid?offset=-1 { // length = 2
   ],
 }
 
-GET /sellpost/:id {
+GET /sellpost/:id?id="00123123" {
     storeid: ,
     storename: ,
     category: ,
