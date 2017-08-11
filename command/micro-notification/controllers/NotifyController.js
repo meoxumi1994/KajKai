@@ -2,13 +2,13 @@ import { addNewFollow, removeFollow } from '../services/FollowService'
 
 export const updateNotifyCon = () => {
     return (req, res) => {
-        const turnotify = req.body.turnotify;
+        const turnnotify = req.body.turnnotify;
         const sellpostId = req.params.sellpostid;
         const userId = req.user.id;
-        if (turnotify) {
+        if (turnnotify) {
             addNewFollow(userId, sellpostId, (follow) => {
                 if (follow) {
-                    res.json({status: 'success', turnotify, id: sellpostId})
+                    res.json({status: 'success', turnnotify, id: sellpostId})
                 } else {
                     res.json({status: 'failed'})
                 }
@@ -16,7 +16,7 @@ export const updateNotifyCon = () => {
         } else {
             removeFollow(userId, sellpostId, (follow) => {
                 if (follow) {
-                    res.json({status: 'success', turnotify, id: sellpostId})
+                    res.json({status: 'success', turnnotify, id: sellpostId})
                 } else {
                     res.json({status: 'failed'})
                 }
