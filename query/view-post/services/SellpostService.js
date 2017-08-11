@@ -1,6 +1,7 @@
 import { Sellpost, Postrow, BasicUser } from '../models'
 import { getClientFormatPostrows } from './PostrowService'
 import { getClientFormatSellpostComments } from './CommentService'
+import { getBlackList } from './BlockService'
 import jwt from 'jsonwebtoken'
 
 export const getSellpost = (requesterId, id, next) => {
@@ -21,10 +22,11 @@ export const getSellpost = (requesterId, id, next) => {
         } else {
           sellpost.postrows = []
         }
-
-        next({
-          status: 'success',
-          sellpost: getClientFormatSellpost(requesterId, sellpost, Date.now())
+        getBlackList((blackList) => {
+          next({
+            status: 'success',
+            sellpost: getClientFormatSellpost(blackList, requesterId, sellpost, Date.now())
+          })
         })
       })
     }
@@ -45,7 +47,9 @@ export const getSellposts = (requesterId, storeId, offset, next) => {
         })
       }
     } else {
-      getClientFormatSellposts(requesterId, storeId, sellposts, offset, next)
+      getBlackList((blackList) => {
+        getClientFormatSellposts(blackList, requesterId, storeId, sellposts, offset, next)
+      })
     }
   })
 }
@@ -134,7 +138,7 @@ export const verifyToken = (token) => {
     }
 }
 
-const getClientFormatSellposts = (requesterId, storeId, sellposts, offset, next) => {
+const getClientFormatSellposts = (blackList, requesterId, storeId, sellposts, offset, next) => {
   const mPromises = [], sellpostById = {}
   sellposts.map((sellpost, index) => {
     sellpostById[sellpost.id] = index
@@ -152,46 +156,59 @@ const getClientFormatSellposts = (requesterId, storeId, sellposts, offset, next)
     }))
   })
   Promise.all(mPromises).then((postrowses) => {
-    const mSellposts = []
-    let currentNumberOfSellpost = 0, mOffset = -2, lastIndex = -1
-    for (let i = sellposts.length - 1; i >= 0; i--) {
-      let sellpost = sellposts[i]
-      if (sellpost.time < offset) {
-        if (currentNumberOfSellpost < 2) {
-          mSellposts.push(getClientFormatSellpost(requesterId, sellpost, Date.now()))
+      sellposts.map((sellpost, index) => {
+        let mComments = []
+        let { comments } = sellpost
+        if (!blackList) {
+          blackList = []
+        }
+        comments.map((comment) => {
+          if (blackList.indexOf(comment.commenterId) == -1) {
+            mComments.push(comment)
+          }
+        })
+        sellpost.comments = mComments
+        sellposts[index] = sellpost
+      })
+      const mSellposts = []
+      let currentNumberOfSellpost = 0, mOffset = -2, lastIndex = -1
+      for (let i = sellposts.length - 1; i >= 0; i--) {
+        let sellpost = sellposts[i]
+        if (sellpost.time < offset) {
+          if (currentNumberOfSellpost < 2) {
+            mSellposts.push(getClientFormatSellpost(blackList ,requesterId, sellpost, Date.now()))
 
-          mOffset = sellpost.time.getTime()
-          lastIndex = i
-          currentNumberOfSellpost++
-        } else {
-          break
+            mOffset = sellpost.time.getTime()
+            lastIndex = i
+            currentNumberOfSellpost++
+          } else {
+            break
+          }
         }
       }
-    }
 
-    if (lastIndex == 0) {
-      mOffset = -2
-    }
+      if (lastIndex == 0) {
+        mOffset = -2
+      }
 
-    next({
-      status: 'success',
-      offset: mOffset,
-      storeid: storeId,
-      sellposts: mSellposts
+      next({
+        status: 'success',
+        offset: mOffset,
+        storeid: storeId,
+        sellposts: mSellposts
+      })
+    }, err => {
+      console.log('error promise', err)
+      next({
+        status: 'failed',
+        offset: mOffset,
+        storeid: storeId,
+        sellposts: []
+      })
     })
-
-  }, err => {
-    console.log('error promise', err)
-    next({
-      status: 'failed',
-      offset: mOffset,
-      storeid: storeId,
-      sellposts: []
-    })
-  })
 }
 
-const getClientFormatSellpost = (requesterId, sellpost, offset) => {
+const getClientFormatSellpost = (blackList, requesterId, sellpost, offset) => {
   const { postrows, comments } = sellpost
 
   let { followers } = sellpost
@@ -284,8 +301,8 @@ const getClientFormatSellpost = (requesterId, sellpost, offset) => {
     likes,
     numfollow: sellpost.numberOfFollow ? sellpost.numberOfFollow : 0,
     follows,
-    numleadercomment: sellpost.numberOfComment ? sellpost.numberOfComment : 0,
+    numleadercomment: sellpost.comments ? sellpost.comments.length : 0,
     numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
-    ...getClientFormatSellpostComments(requesterId, comments, offset, 'done', true, null)
+    ...getClientFormatSellpostComments(blackList, requesterId, comments, offset, 'done', true, null)
   })
 }

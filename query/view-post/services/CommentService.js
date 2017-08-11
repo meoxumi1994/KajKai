@@ -1,39 +1,15 @@
 import { Sellpost, Minorpost, Comment, BasicUser } from '../models'
 import { getClientFormatReplies } from './ReplyService'
+import { getBlackList } from './BlockService'
 import { OrderStatus } from '../enum'
 
 export const getComments = (requesterId, type, id, offset, status, length, next) => {
-  if (type == 'sellpost') {
-    Sellpost.findOne({ id }, (err, sellpost) => {
-      if (err || !sellpost) {
-        if(err) {
-          next(null)
-        } else {
-          next({
-            status: 'nodata',
-            offset,
-            id,
-            leadercomments: []
-          })
-        }
-      } else {
-        let { comments } = sellpost
-        BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
-          if (basicUser) {
-            const mComments = []
-            const { blackList } = basicUser
-            if (!comments) {
-              comments = []
-            }
-            comments.map((comment) => {
-              if (blackList.indexOf(comment.commenterId) == -1) {
-                mComments.push(comment)
-              }
-            })
-            next({
-              id,
-              ...getClientFormatSellpostComments(requesterId, mComments, offset, status, false, 10)
-            })
+  getBlackList((blackList) => {
+    if (type == 'sellpost') {
+      Sellpost.findOne({ id }, (err, sellpost) => {
+        if (err || !sellpost) {
+          if(err) {
+            next(null)
           } else {
             next({
               status: 'nodata',
@@ -42,56 +18,45 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
               leadercomments: []
             })
           }
-        })
-      }
-    })
-  } else if (type == 'minorpost') {
-    Minorpost.findOne({ id }, (err, minorpost) => {
-      if (err || !minorpost) {
-        if(err) {
-          next(null)
         } else {
-          next({
-            offset,
-            id,
-            leadercomments: []
-          })
-        }
-      } else {
-        const { comments } = minorpost
-        next(getClientFormatMinorpostComments(requesterId, comments, offset))
-      }
-    })
-  } else if (type == 'store') {
-    Comment.find({ storeId: id }, (err, comments) => {
-      if (err || !comments) {
-        if(err) {
-          next(null)
-        } else {
-          next({
-            status: 'nodata',
-            offset,
-            id,
-            leadercomments: []
-          })
-        }
-      } else {
-        BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
-          if (basicUser) {
-            const mComments = []
-            const { blackList } = basicUser
-            if (!comments) {
-              comments = []
+          let { comments } = sellpost
+          const mComments = []
+          if (!comments) {
+            comments = []
+          }
+          comments.map((comment) => {
+            if (blackList.indexOf(comment.commenterId) == -1) {
+              mComments.push(comment)
             }
-            comments.map((comment) => {
-              if (comment.commenterId != id && blackList.indexOf(comment.commenterId) == -1) {
-                mComments.push(comment)
-              }
-            })
+          })
+          next({
+            id,
+            ...getClientFormatSellpostComments(blackList, requesterId, mComments, offset, status, false, 10)
+          })
+        }
+      })
+    } else if (type == 'minorpost') {
+      Minorpost.findOne({ id }, (err, minorpost) => {
+        if (err || !minorpost) {
+          if(err) {
+            next(null)
+          } else {
             next({
+              offset,
               id,
-              ...getClientFormatSellpostComments(requesterId, mComments, offset, status, false, length)
+              leadercomments: []
             })
+          }
+        } else {
+          const { comments } = minorpost
+          next(getClientFormatMinorpostComments(requesterId, comments, offset))
+        }
+      })
+    } else if (type == 'store') {
+      Comment.find({ storeId: id }, (err, comments) => {
+        if (err || !comments) {
+          if(err) {
+            next(null)
           } else {
             next({
               status: 'nodata',
@@ -100,39 +65,27 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
               leadercomments: []
             })
           }
-        })
-      }
-    })
-  } else { // type == user
-    Comment.find({ commenterId: id }, (err, comments) => {
-      if (err || !comments) {
-        if(err) {
-          next(null)
         } else {
+          const mComments = []
+          if (!comments) {
+            comments = []
+          }
+          comments.map((comment) => {
+            if (comment.commenterId != id && blackList.indexOf(comment.commenterId) == -1) {
+              mComments.push(comment)
+            }
+          })
           next({
-            status: 'nodata',
-            offset,
             id,
-            leadercomments: []
+            ...getClientFormatSellpostComments(blackList, requesterId, mComments, offset, status, false, length)
           })
         }
-      } else {
-        BasicUser.findOne({ id: requesterId }, (err, basicUser) => {
-          if (basicUser) {
-            const mComments = []
-            const { blackList } = basicUser
-            if (!comments) {
-              comments = []
-            }
-            comments.map((comment) => {
-              if (comment.commenterId != id && blackList.indexOf(comment.commenterId) == -1) {
-                mComments.push(comment)
-              }
-            })
-            next({
-              id,
-              ...getClientFormatSellpostComments(requesterId, comments, offset, status, false, length)
-            })
+      })
+    } else { // type == user
+      Comment.find({ commenterId: id }, (err, comments) => {
+        if (err || !comments) {
+          if(err) {
+            next(null)
           } else {
             next({
               status: 'nodata',
@@ -141,13 +94,27 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
               leadercomments: []
             })
           }
-        })
-      }
-    })
-  }
+        } else {
+          const mComments = []
+          if (!comments) {
+            comments = []
+          }
+          comments.map((comment) => {
+            if (comment.commenterId != id && blackList.indexOf(comment.commenterId) == -1) {
+              mComments.push(comment)
+            }
+          })
+          next({
+            id,
+            ...getClientFormatSellpostComments(blackList, requesterId, comments, offset, status, false, length)
+          })
+        }
+      })
+    }
+  })
 }
 
-export const getClientFormatSellpostComments = (requesterId, comments, offset, status, isFirst, length) => {
+export const getClientFormatSellpostComments = (blackList, requesterId, comments, offset, status, isFirst, length) => {
   if (!comments) {
     return {
       status: 'success',
@@ -171,7 +138,16 @@ export const getClientFormatSellpostComments = (requesterId, comments, offset, s
       let comment = comments[i]
       if (offset - comment.time <= oneHour && currentNumberOfComment < 5 && level[comment.status] <= level[status]) {
         let { replies } = comment
-        let mComment = getClientFormatReplies(requesterId, replies, Date.now(), true)
+        let mReplies = []
+        if (!replies) {
+          replies = []
+        }
+        replies.map((reply) => {
+          if (blackList.indexOf(reply.userId) == -1) {
+            mReplies.push(reply)
+          }
+        })
+        let mComment = getClientFormatReplies(requesterId, mReplies, Date.now(), true)
 
         mComment.id = comment.id
         mComment.storeid = comment.storeId
@@ -185,7 +161,7 @@ export const getClientFormatSellpostComments = (requesterId, comments, offset, s
         })) : []
         mComment.time = comment.time.getTime()
         mComment.status = comment.status
-        mComment.numcomment = comment.numberOfReply
+        mComment.numcomment = mReplies.length
 
         mComments = [mComment, ...mComments]
 
@@ -204,7 +180,16 @@ export const getClientFormatSellpostComments = (requesterId, comments, offset, s
       if (comment.time < offset && level[comment.status] <= level[status]) {
         if (currentNumberOfComment < length) {
           let { replies } = comment
-          let mComment = getClientFormatReplies(requesterId, replies, Date.now(), true)
+          let mReplies = []
+          if (!replies) {
+            replies = []
+          }
+          replies.map((reply) => {
+            if (blackList.indexOf(reply.userId) == -1) {
+              mReplies.push(reply)
+            }
+          })
+          let mComment = getClientFormatReplies(requesterId, mReplies, Date.now(), true)
 
           mComment.id = comment.id
           mComment.storeid = comment.storeId
@@ -218,7 +203,7 @@ export const getClientFormatSellpostComments = (requesterId, comments, offset, s
           })) : []
           mComment.time = comment.time.getTime()
           mComment.status = comment.status
-          mComment.numcomment = comment.numberOfReply
+          mComment.numcomment = mReplies.length
 
           mComments = [mComment, ...mComments]
 
