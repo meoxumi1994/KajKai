@@ -5,7 +5,7 @@ import { getBlackList } from './BlockService'
 import { getNotifySellposts } from './FollowService'
 import jwt from 'jsonwebtoken'
 
-export const getSellpost = (requesterId, id, next) => {
+export const getSellpost = (targetId, requesterId, id, next) => {
   Sellpost.findOne({ id }, (err, sellpost) => {
     if (err || !sellpost) {
       if(err) {
@@ -25,10 +25,18 @@ export const getSellpost = (requesterId, id, next) => {
         }
         getBlackList((blackList) => {
           getNotifySellposts(requesterId, (notifySellposts) => {
-            next({
-              status: 'success',
-              sellpost: getClientFormatSellpost(notifySellposts, blackList, requesterId, sellpost, Date.now())
-            })
+            if (targetId) {
+              let { targetStatus, ...data } = getClientFormatSellpost(targetId, notifySellposts, blackList, requesterId, sellpost, Date.now())
+              next({
+                status: targetStatus,
+                sellpost: targetStatus == 'success' ? data : null
+              })
+            } else {
+              next({
+                status: 'success',
+                sellpost: getClientFormatSellpost(targetId, notifySellposts, blackList, requesterId, sellpost, Date.now())
+              })
+            }
           })
         })
       })
@@ -181,7 +189,7 @@ const getClientFormatSellposts = (notifySellposts, blackList, requesterId, store
         let sellpost = sellposts[i]
         if (sellpost.time < offset) {
           if (currentNumberOfSellpost < 2) {
-            mSellposts.push(getClientFormatSellpost(notifySellposts, blackList ,requesterId, sellpost, Date.now()))
+            mSellposts.push(getClientFormatSellpost(null, notifySellposts, blackList ,requesterId, sellpost, Date.now()))
 
             mOffset = sellpost.time.getTime()
             lastIndex = i
@@ -213,7 +221,7 @@ const getClientFormatSellposts = (notifySellposts, blackList, requesterId, store
     })
 }
 
-const getClientFormatSellpost = (notifySellposts, blackList, requesterId, sellpost, offset) => {
+const getClientFormatSellpost = (targetId, notifySellposts, blackList, requesterId, sellpost, offset) => {
   const { postrows, comments } = sellpost
 
   let { followers } = sellpost
@@ -309,6 +317,6 @@ const getClientFormatSellpost = (notifySellposts, blackList, requesterId, sellpo
     follows,
     numleadercomment: sellpost.comments ? sellpost.comments.length : 0,
     numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
-    ...getClientFormatSellpostComments(blackList, requesterId, comments, offset, 'done', true, null)
+    ...getClientFormatSellpostComments(targetId, blackList, requesterId, comments, offset, 'done', true, null)
   })
 }

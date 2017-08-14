@@ -40,7 +40,7 @@ export const getTokenSocketCookie = (str) => {
     var last = str.indexOf(';')
     if (last === -1) last = str.length
     return str.substr(n + 6, last - n - 6)
-}
+};
 
 export const getCurrentTime = () => {
     return (new Date()).getTime()
@@ -48,4 +48,14 @@ export const getCurrentTime = () => {
 
 export const getUUID = () => {
     return uuidv4();
+};
+
+export const generateRandomPassword = () => {
+    let text = "";
+    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (let i = 0; i < 8; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
 };
