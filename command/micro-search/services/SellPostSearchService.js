@@ -1,12 +1,19 @@
 import config from '../config/elasticConfig'
 import searchClient from '../datasource'
+import { toRoot } from '../utils/utils'
 
 export const indexSellPost = (sellpost) => {
+    const elasticSellPost = {...sellpost,
+        nonTokenTitle: sellpost.title ? toRoot(sellpost.title) : null,
+        nonTokenCategory: sellpost.category ? toRoot(sellpost.category) : null,
+        nonTokenFCategory: sellpost.firstCategoryName ? toRoot(sellpost.firstCategoryName) : null,
+        nonTokenSCategory: sellpost.secondCategoryName ? toRoot(sellpost.secondCategoryName) : null
+    };
     searchClient.index({
         index: config.INDEX,
         type: config.TYPE_SELL_POST,
         id: sellpost.sellPostId,
-        body: sellpost
+        body: elasticSellPost
     }, (error, response) => {
         console.log('insert sellpost error ' + error, 'response ' + JSON.stringify(response));
     });
@@ -19,7 +26,6 @@ export const getSellPost = (sellPostId, next) => {
         id: sellPostId
     }, (error, response) => {
         console.log('get sell post: ', 'error ' + error, 'response ' + JSON.stringify(response));
-        // let res = getHitResult(response);
         if (response.found) {
             next(response._source);
         } else {
@@ -69,20 +75,7 @@ export const updateSellPost = (sellpost) => {
 
 export const addNewProduct = (product) => {
     getSellPost(product.sellPostId, (oldSellPost) => {
-        oldSellPost.productContent += product.sellPostId + ':&' + product.content + ';&';
-        indexSellPost(oldSellPost);
-    })
-};
-
-export const updateProduct = (product) => {
-    getSellPost(product.sellPostId, (oldSellPost) => {
-        // oldSellPost.productContent
-        let content = oldSellPost.productContent;
-        let f = content.indexOf(product.sellPostId + ':&');
-        if (f === -1) return;
-        console.log('product id not valid ' + JSON.stringify(product));
-        let s = content.indexOf(';&', f);
-        oldSellPost.content = content.substring(0, f) + product.sellPostId + ':&' + product.content + content.substring(s, content.length);
+        oldSellPost.productContent += product.sellPostId + ':& ' + toRoot(product.content) + ' ;&';
         indexSellPost(oldSellPost);
     })
 };
@@ -156,6 +149,14 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     fields: ['title', 'category', 'productContent', 'firstCategoryName', 'secondCategoryName']
                                 }
                             }, {
+                                multi_match: {
+                                    query: keyword,
+                                    fuzziness: 1,
+                                    prefix_length: 0,
+                                    max_expansions: 20,
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
+                                }
+                            },{
                                 match_phrase_prefix: {
                                     category: keyword
                                 }
@@ -283,11 +284,6 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                         boost: 2
                                     }
                                 }
-                            }, {
-                                match_phrase_prefix: {
-                                    category: keyword,
-                                    boost: 10
-                                }
                             }]
                         }
                     },
@@ -368,11 +364,6 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                         max_expansions: 5,
                                         boost: 2
                                     }
-                                }
-                            }, {
-                                match_phrase_prefix: {
-                                    category: keyword,
-                                    boost: 10
                                 }
                             }]
                         }

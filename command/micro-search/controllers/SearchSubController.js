@@ -1,7 +1,7 @@
-import { createUser, updateUser } from '../services/UserSearchService'
-import { createStore, updateStore } from '../services/StoreSearchService'
+import { indexUser } from '../services/UserSearchService'
+import { indexStore } from '../services/StoreSearchService'
 import { getStore } from '../controllers/SearchPubController'
-import { indexSellPost, updateSellPost, updateProduct, addNewProduct, updateSellPostThroughStore } from '../services/SellPostSearchService'
+import { indexSellPost, updateSellPost, addNewProduct, updateSellPostThroughStore } from '../services/SellPostSearchService'
 
 export const createUserSub = (message) => {
     console.log(message, JSON.stringify(message));
@@ -9,16 +9,7 @@ export const createUserSub = (message) => {
     const userId = user.id;
     const username = user.username;
     const avatarUrl = user.avatarUrl;
-    createUser({userId, username, avatarUrl});
-};
-
-export const updateUserSub = (message) => {
-    console.log(message, JSON.stringify(message));
-    const user = message.user;
-    const userId = user.id;
-    const username = user.username;
-    const avatarUrl = user.avatarUrl;
-    updateUser({userId, username, avatarUrl});
+    indexUser({userId, username, avatarUrl});
 };
 
 export const createStoreSub = (message) => {
@@ -31,7 +22,7 @@ export const createStoreSub = (message) => {
     const category = store.category;
     const firstCategoryName = store.firstCategoryName;
     const secondCategoryName = store.secondCategoryName;
-    createStore({storeId, storeName, avatarUrl, address, category, firstCategoryName, secondCategoryName});
+    indexStore({storeId, storeName, avatarUrl, address, category, firstCategoryName, secondCategoryName});
     if (avatarUrl) {
         updateSellPostThroughStore(storeId, avatarUrl)
     }
@@ -47,7 +38,7 @@ export const updateStoreSub = (message) => {
     const category = store.category;
     const firstCategoryName = store.firstCategoryName;
     const secondCategoryName = store.secondCategoryName;
-    updateStore({storeId, storeName, avatarUrl, address, category, firstCategoryName, secondCategoryName});
+    indexStore({storeId, storeName, avatarUrl, address, category, firstCategoryName, secondCategoryName});
     if (avatarUrl) {
         updateSellPostThroughStore(storeId, avatarUrl)
     }
@@ -85,21 +76,25 @@ export const updateSellPostSub = (message) => {
 export const createSellPostProductSub = (message) => {
     console.log(message, JSON.stringify(message));
     const product = message.product;
-    const content = product.product.content;
-    const sellPostId = product.sellPostId;
-    const productId = product.productId;
-    setTimeout(function(){
-        addNewProduct({sellPostId, content, productId});
-    }, 30000);
+    if (product.product.list && product.product.list.length > 0) {
+        const content = product.product.list[0];
+        const sellPostId = product.sellPostId;
+        const productId = product.productId;
+        setTimeout(function () {
+            addNewProduct({sellPostId, content, productId});
+        }, 30000);
+    }
 };
 
 export const updateSellPostProductSub = (message) => {
     console.log(message, JSON.stringify(message));
     const product = message.product;
-    const content = product.product.content;
-    const sellPostId = product.sellPostId;
-    const productId = product.productId;
-    setTimeout(function(){
-        updateProduct({sellPostId, content, productId});
-    }, 30000);
+    if (product.product.list && product.product.list.length > 0) {
+        const content = product.product.list[0];
+        const sellPostId = product.sellPostId;
+        const productId = product.productId;
+        setTimeout(function () {
+            addNewProduct({sellPostId, content, productId});
+        }, 30000);
+    }
 };
