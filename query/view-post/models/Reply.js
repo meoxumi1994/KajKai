@@ -1,6 +1,6 @@
 import mongoose from '../datasource'
 import LikerSchema from './Liker'
-import { MatchSchema } from './Match'
+import MatchSchema from './Match'
 
 const ReplySchema = new mongoose.Schema({
   commentId: {type: String},

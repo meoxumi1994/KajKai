@@ -1,7 +1,7 @@
 import mongoose from '../datasource'
 import _ from 'lodash'
 import { OrderStatus } from '../enum'
-import { MatchSchema } from './Match'
+import MatchSchema from './Match'
 import ProductSchema from './Product'
 import ReplySchema from './Reply'
 

@@ -2,7 +2,7 @@ import mongoose from '../datasource'
 import _ from 'lodash'
 import { NotificationType } from '../enum'
 import LikerSchema from './Liker'
-import { MatchSchema } from './Match'
+import MatchSchema from './Match'
 import ProductSchema from './Product'
 
 const NotificationSchema = new mongoose.Schema({
