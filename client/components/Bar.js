@@ -103,7 +103,7 @@ class HandlerUser extends React.Component {
 
         if(isloading){
             return (
-                <div style={{ paddingTop: 5, addingBottom: 3 }}>
+                <div style={{ paddingTop: 5, paddingBottom: 3 }}>
                     {/* <div className="clocker" >
                         <img src="/images/loader.svg" alt="Cinque Terre" width="22px" height="22px"/>
                     </div> */}

@@ -2,6 +2,7 @@ import React from 'react';
 
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
+import ForgotPassword from '~/containers/user-login-register/ForgotPassword'
 
 const Login = (props) => {
     const {
@@ -29,7 +30,7 @@ const Login = (props) => {
                     { warningPassword && PASSWORD_WARNING }
                 </div>
             </div>
-            <div onClick={()=> forgotPassword()} className="btn btn-xs" style={{ padding: 0}}><a>{FORGOT_PASSWORD}</a></div>
+            <ForgotPassword/>
             <div>
                 <div style={{  float: 'right' }}>
                     <FacebookLogin

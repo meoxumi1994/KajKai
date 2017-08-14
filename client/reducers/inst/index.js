@@ -17,6 +17,7 @@ import admin from './admin'
 import home from './home'
 import contacthistory from './contacthistory'
 import grouppopup from './grouppopup'
+import showdetail from './showdetail'
 
 const inst = combineReducers({
     userloginregister,
@@ -35,7 +36,8 @@ const inst = combineReducers({
     admin,
     home,
     contacthistory,
-    grouppopup
+    grouppopup,
+    showdetail
 })
 
 export default inst

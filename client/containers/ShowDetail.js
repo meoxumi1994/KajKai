@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
-import Post from '~/components/entity/post/Post'
+import ShowDetail from '~/components/ShowDetail'
 
-const mapStateToProps = (state, { sellpostid }) => {
+const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
-    const sellpost = state.inst.entity.post.post[sellpostid]
+    const showdetail = state.inst.showdetail
     return({
-        sellpost: sellpost,
+        ...showdetail
     })
 }
 
@@ -15,8 +15,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 })
 
-const PostContainer = connect(
+const ShowDetailContainer = connect(
     mapStateToProps, mapDispatchToProps
-)(Post)
+)(ShowDetail)
 
-export default PostContainer
+export default ShowDetailContainer

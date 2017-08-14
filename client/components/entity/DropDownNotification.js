@@ -62,7 +62,7 @@ class DropDownNotification extends React.Component {
                 <ul className="dropdown-menu"
                     aria-labelledby="chatDropDown"
                     style={{  marginLeft: -380, marginTop: 9, borderRadius: 0 }}>
-                    <div style={{ marginLeft: 10, fontSize: 12 , padding: 2,   fontWeight: 'bold' }}>{"Notification"}</div>
+                    <div style={{ marginLeft: 10, fontSize: 12 , padding: '5px 0px 5px 2px',   fontWeight: 'bold' }}>{"Notification"}</div>
                     <hr style={{ margin: 0 }}/>
                     <div id="dropdownnotification" ref={ overgroup => this.overgroup = overgroup }
                         style={{ overflow: 'auto', maxHeight: 600, }}>
