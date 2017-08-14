@@ -29,24 +29,22 @@ export const searchStore = (keyword, offset, length, next) => {
             query: {
                 bool: {
                     should: [{
-                        match: {
-                            username: {
-                                query: keyword,
-                                fuzziness: 1,
-                                prefix_length: 0,
-                                max_expansions: 20,
-                                fields: ['storeName', 'category', 'firstCategoryName', 'secondCategoryName']
-                            }
+                        multi_match: {
+                            query: keyword,
+                            fuzziness: 1,
+                            prefix_length: 0,
+                            max_expansions: 20,
+                            fields: ['storeName', 'category', 'firstCategoryName', 'secondCategoryName'],
+                            boost: 10
                         }
                     }, {
-                        match: {
-                            nonTokenUsername: {
-                                query: toRoot(keyword),
-                                fuzziness: 1,
-                                prefix_length: 0,
-                                max_expansions: 20,
-                                fields: ['nonTokenStoreName', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory']
-                            }
+                        multi_match: {
+                            query: keyword,
+                            fuzziness: 1,
+                            prefix_length: 0,
+                            max_expansions: 20,
+                            fields: ['nonTokenStoreName', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
+                            boost: 10
                         }
                     }]
                 }
