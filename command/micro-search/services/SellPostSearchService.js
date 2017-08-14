@@ -157,8 +157,10 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 }
                             }, {
                                 match_phrase_prefix: {
-                                    category: keyword
+                                    nonTokenCategory: keyword
                                 }
+                            }, {
+                                match_all: {}
                             }]
                         }
                     }
@@ -245,6 +247,9 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                     from: offset,
                     size: length,
                     bool: {
+                        must: {
+                              match_all: {}
+                        },
                         filter: {
                             geo_distance: {
                                 distance: config.MAX_DISTANT_FILTER,
