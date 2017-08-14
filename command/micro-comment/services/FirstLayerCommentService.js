@@ -34,7 +34,8 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
                         like: fComment.likeCounter,
                         status: fComment.status,
                         type: 'user',
-                        storeid: store.storeId
+                        storeid: store.storeId,
+                        match: fComment.match
                     };
                     if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                         info = {...info, sellpostid: fComment.postId}
@@ -58,7 +59,8 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
                 user: store.owner,
                 status: fComment.status,
                 type: 'store',
-                storeid: store.storeId
+                storeid: store.storeId,
+                match: fComment.match
             };
             if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                 info = {...info, sellpostid: fComment.postId}
