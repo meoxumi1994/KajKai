@@ -109,7 +109,7 @@ export const saveNewScondLayerComment = (posterId, time, postId, content, parent
         }
     }
     let comment = new SecondLayerComment({posterId: posterId, time: time,
-        postId: postId, content: content, parentCommentId: parentCommentId});
+        postId: postId, content: content, parentCommentId: parentCommentId, match: listTag});
     comment.save(function (err) {
         newSecondLayerCommentCreated(getSecondLayerCommentPubInfo(comment));
         next(comment);
