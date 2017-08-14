@@ -32,9 +32,9 @@ export const deleteIndexCon = () => {
 
 export const searchSellPostCon = () => {
     return (req, res) => {
-        const { offset, length, id, location, keyword } = req.query;
+        const { offset, length, id, keyword, lat, lng } = req.query;
         console.log(req.query);
-        searchSellPost(offset, length, id, location, keyword, (data) => {
+        searchSellPost(offset, length, id, { lat, lng }, keyword, (data) => {
             res.json(data)
         });
     }

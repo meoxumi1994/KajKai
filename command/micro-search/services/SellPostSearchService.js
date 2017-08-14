@@ -81,7 +81,7 @@ export const addNewProduct = (product) => {
 };
 
 export const searchSellPost = (offset, length, categoryId, location, keyword, next) => {
-    if (location && location.length > 0) {
+    if (location) {
         searchWithLocation(offset, length, categoryId, location, keyword, (res) => {
             next(getDisplayResult(res));
         })
@@ -244,13 +244,11 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                 body: {
                     from: offset,
                     size: length,
-                    query: {
-                        match: {
-                            address: {
-                                query: location,
-                                fuzziness: 1,
-                                prefix_length: 0,
-                                max_expansions: 20
+                    bool: {
+                        filter: {
+                            geo_distance: {
+                                distance: config.MAX_DISTANT_FILTER,
+                                location: location
                             }
                         }
                     }
@@ -267,31 +265,32 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                     from: offset,
                     size: length,
                     query: {
-                        dis_max: {
-                            tie_breaker: 0.1,
-                            queries: [{
+                        bool: {
+                            should: [{
                                 multi_match: {
-                                    boost: 5,
                                     query: keyword,
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent']
+                                    fields: ['title', 'category', 'productContent', 'firstCategoryName', 'secondCategoryName']
                                 }
                             }, {
-                                match: {
-                                    address: {
-                                        query: location,
-                                        fuzziness: 1,
-                                        prefix_length: 0,
-                                        max_expansions: 5,
-                                        boost: 2
-                                    }
+                                multi_match: {
+                                    query: toRoot(keyword),
+                                    fuzziness: 1,
+                                    prefix_length: 0,
+                                    max_expansions: 20,
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
                                 }
-                            }]
+                            }],
+                            filter: {
+                                geo_distance: {
+                                    distance: config.MAX_DISTANT_FILTER,
+                                    location: location
+                                }
+                            }
                         }
-                    },
-                    min_score: 0.5
+                    }
                 }
             }, (error, response) => {
                 console.log('search location: ' + location + ';category: ' + categoryId + ' ' + ';keyword: ' + keyword, error, JSON.stringify(response));
@@ -306,29 +305,20 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                 body: {
                     from: offset,
                     size: length,
-                    query: {
-                        dis_max: {
-                            tie_breaker: 0.1,
-                            queries: [{
-                                multi_match: {
-                                    query: categoryId,
-                                    fields: ['firstCategoryId', 'secondCategoryId'],
-                                    boost: 5,
-                                }
-                            }, {
-                                match: {
-                                    address: {
-                                        query: location,
-                                        fuzziness: 1,
-                                        prefix_length: 0,
-                                        max_expansions: 5,
-                                        boost: 2
-                                    }
-                                }
-                            }]
+                    bool: {
+                        should: [{
+                            multi_match: {
+                                query: categoryId,
+                                fields: ['firstCategoryId', 'secondCategoryId']
+                            }
+                        }],
+                        filter: {
+                            geo_distance: {
+                                distance: config.MAX_DISTANT_FILTER,
+                                location: location
+                            }
                         }
-                    },
-                    min_score: 0.5
+                    }
                 }
             }, (error, response) => {
                 console.log('search location: ' + location + ';category: ' + categoryId + ' ' + ';keyword: ' + keyword, error, JSON.stringify(response));
@@ -342,9 +332,8 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                     from: offset,
                     size: length,
                     query: {
-                        dis_max: {
-                            tie_breaker: 0.1,
-                            queries: [{
+                        bool: {
+                            should: [{
                                 multi_match: {
                                     query: keyword,
                                     fuzziness: 1,
@@ -355,24 +344,30 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                 }
                             }, {
                                 multi_match: {
-                                    query: categoryId,
-                                    fields: ['firstCategoryId', 'secondCategoryId'],
-                                    boost: 5,
+                                    query: toRoot(keyword),
+                                    fuzziness: 1,
+                                    prefix_length: 0,
+                                    max_expansions: 20,
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
                                 }
-                            }, {
-                                match: {
-                                    address: {
-                                        query: location,
-                                        fuzziness: 1,
-                                        prefix_length: 0,
-                                        max_expansions: 5,
-                                        boost: 2
-                                    }
+                            }],
+                            filter: {
+                                bool: {
+                                    should: [
+                                        {term: {firstCategoryId: categoryId}},
+                                        {term: {secondCategoryId: categoryId}},
+                                        {
+                                            geo_distance: {
+                                                distance: config.MAX_DISTANT_FILTER,
+                                                location: location
+                                            }
+                                        }
+                                    ],
+                                    minimum_should_match: 2
                                 }
-                            }]
+                            }
                         }
-                    },
-                    min_score: 1
+                    }
                 }
             }, (error, response) => {
                 console.log('search location: ' + location + ';category: ' + categoryId + ' ' + ';keyword: ' + keyword, error, JSON.stringify(response));
