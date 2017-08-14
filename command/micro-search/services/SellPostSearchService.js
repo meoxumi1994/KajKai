@@ -157,7 +157,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 }
                             }, {
                                 match_phrase_prefix: {
-                                    nonTokenCategory: keyword
+                                    nonTokenCategory: toRoot(keyword)
                                 }
                             }, {
                                 match_all: {}
@@ -215,6 +215,10 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     prefix_length: 0,
                                     max_expansions: 20,
                                     fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
+                                }
+                            }, {
+                                match_phrase_prefix: {
+                                    nonTokenCategory: toRoot(keyword)
                                 }
                             }],
                             filter: {
@@ -287,6 +291,10 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     max_expansions: 20,
                                     fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
                                 }
+                            }, {
+                                match_phrase_prefix: {
+                                    nonTokenCategory: toRoot(keyword)
+                                }
                             }],
                             filter: {
                                 geo_distance: {
@@ -354,6 +362,10 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     prefix_length: 0,
                                     max_expansions: 20,
                                     fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
+                                }
+                            }, {
+                                match_phrase_prefix: {
+                                    nonTokenCategory: toRoot(keyword)
                                 }
                             }],
                             filter: {
