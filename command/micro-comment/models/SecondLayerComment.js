@@ -1,5 +1,5 @@
 import mongoose from '../datasource'
-import MatchSchema from './MatchSchema'
+import MatchSchema from './Match'
 
 const SecondLayerCommentSchema = new mongoose.Schema({
     posterId: {type: String},
