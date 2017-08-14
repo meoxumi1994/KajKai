@@ -18,7 +18,7 @@ export default {
         }
     },
     '/setindex': {
-        put: {
+        get: {
             controller: 'SearchController',
             method: 'setIndexCon'
         }
