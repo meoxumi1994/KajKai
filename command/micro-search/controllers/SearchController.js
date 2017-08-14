@@ -1,4 +1,4 @@
-import { searchUser, delIndex } from '../services/UserSearchService'
+import { searchUser, delIndex, setIndex } from '../services/UserSearchService'
 import { searchStore } from '../services/StoreSearchService'
 import { searchSellPost } from '../services/SellPostSearchService'
 
@@ -26,6 +26,14 @@ export const deleteIndexCon = () => {
     return (req, res) => {
         delIndex((error, response) => {
             res.json({error: error, response: response});
+        });
+    }
+};
+
+export const setIndexCon = () => {
+    return (req, res) => {
+        setIndex((err, response) => {
+            res.json({error: err, response: response});
         });
     }
 };

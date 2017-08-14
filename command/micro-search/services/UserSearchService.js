@@ -77,3 +77,18 @@ export const delIndex = (next) => {
         next(error, response);
     });
 };
+
+export const setIndex = (next) => {
+    searchClient.indices.putMapping({
+        index: config.INDEX,
+        type: config.TYPE_SELL_POST,
+        body: {
+            location: {
+                type: 'geo_point'
+            }
+        }
+    }, (error, response) => {
+        console.log(error, response);
+        next(error, response);
+    })
+};
