@@ -150,7 +150,7 @@ export const createReceiveNotification = (message) => {
               numberOfLike: notification.numberOfLike,
               likers: notification.likers,
               order: notification.order,
-              match: notification.match
+              match: notification.match,
               isRead: 0
             })
             User.find({}, (err, users) => {
