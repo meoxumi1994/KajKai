@@ -1,6 +1,7 @@
 import React from 'react'
 
 import ContentShow from '~/components/entity/ContentShow'
+import { Link } from 'react-router-dom'
 
 const getString =  (str) => {
     let newstr = ""
@@ -141,7 +142,7 @@ class Notification extends React.Component {
     }
     onClick(){
         this.props.clickNotification()
-        // window.location = '/sellpost/'+this.props.sellpostid;
+        window.location = '/post/'+this.props.sellpostid;
     }
     render(){
         const { id, type, avatarUrl, content, name, time, storename, avartarStore, isclick } = this.props

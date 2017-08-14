@@ -72,20 +72,20 @@ const mapDispatchToProps = (dispatch, { id }) => ({
         dispatch({ type: 'INST_STORE_PAGE_CHANGE', key: 'showEditSellPost', value: true })
         dispatch({ type: 'INST_ENTITY_CREATE_EDIT_SELL_POST', sellpost: sellpost })
     },
-    weTurnNotify: (turnotify) => {
-        dispatch(turnNotify(id, !turnotify))
+    weTurnNotify: (turnnotify) => {
+        dispatch(turnNotify(id, !turnnotify))
     }
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { turnotify, category ,description ,status, ship , postrows_order , postrows, ...anotherState } = stateProps
+    const { turnnotify, category ,description ,status, ship , postrows_order , postrows, ...anotherState } = stateProps
     const { weTurnNotify, onShowEditSellPost, ...anotherDispatch } = dispatchProps
     return({
         showEditSellPost: () => {
             onShowEditSellPost({ category ,description ,status, ship , postrows_order, postrows, sellpostid: ownProps.id })
         },
         onTurnNotify: () => {
-            weTurnNotify(turnotify)
+            weTurnNotify(turnnotify)
         },
         ...ownProps,
         ...stateProps,

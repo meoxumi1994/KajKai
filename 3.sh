@@ -9,4 +9,5 @@ pm2 start ./command/micro-notification/index-noti.js &&
 pm2 start ./command/micro-search/index-search.js &&
 pm2 start ./command/micro-store/index-store.js &&
 
-curl localhost:8085/deleteindex
+curl localhost:8085/deleteindex &&
+curl localhost:8085/setindex

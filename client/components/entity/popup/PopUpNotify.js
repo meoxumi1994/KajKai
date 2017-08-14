@@ -110,6 +110,28 @@ class ContentNotify extends React.Component {
     }
 }
 
+const FirstIcon = ({ type, order }) => {
+    switch (type) {
+        case 'leadercomment':
+        case 'comment':
+            if(order && order.length > 0)
+                return <img src="/images/notification/order.svg"
+                        width={16} height={16} style={{ marginRight: 7 }}/>
+            return <img src="/images/notification/comment.svg"
+                        width={14} height={14} style={{ marginRight: 7 }}/>
+        case 'received':
+            return <img src="/images/notification/received.svg"
+                        width={16} height={16} style={{ marginRight: 7 }}/>
+        case 'likesellpost':
+        case 'likeleadercomment':
+        case 'likecomment':
+            return <img src="/images/notification/like.svg"
+                        width={16} height={16} style={{ marginRight: 7 }}/>
+        default:
+            return <div></div>
+    }
+}
+
 class PopUpNotify extends React.Component {
     constructor(props){
         super(props)
@@ -150,8 +172,7 @@ class PopUpNotify extends React.Component {
                     <ContentNotify {...this.props}/>
                 </div>
                 <div style={{ fontSize: 12, marginTop: 15, marginLeft: 40 }} >
-                    {type.substr(0,4) == 'like' &&
-                        <img src="/images/reactting/like.svg" width={14} height={14} style={{ marginRight: 7 }}/>}
+                    <FirstIcon {...this.props}/>
                     {"at"}<img src={avartarStore} width={14} height={14} style={{ marginLeft: 7, marginRight: 7 }}/>
                     {storename}{" "}
                     <a style={{ fontSize: 12, color: '#A7ABB1' }}>{time}</a>

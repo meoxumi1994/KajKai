@@ -8,7 +8,8 @@ class Post extends React.Component {
         super(props)
     }
     render(){
-        const { sellpostid, storeid } = this.props
+        const { sellpostid, storeid, sellpost } = this.props
+        const myStoreId = storeid ? storeid : (sellpost ? sellpost.storeid : undefined);
         return(
             <div className="container-fluid" style={{ margin: 0, padding: 0 }}>
                 <div className="row" style={{ margin: 0, padding: 0, marginLeft: -23 }}>
@@ -17,7 +18,7 @@ class Post extends React.Component {
                     </div>
                     <div className="col col-xs-5" style={{ padding: 0 }}>
                         <div style={{ marginLeft: -18 }}>
-                            <IntroduceStore storeid={storeid}/>
+                            { myStoreId && <IntroduceStore storeid={myStoreId}/> }
                         </div>
                     </div>
                 </div>

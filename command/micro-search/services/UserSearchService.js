@@ -1,25 +1,22 @@
 import config from '../config/elasticConfig'
 import searchClient from '../datasource'
+import { toRoot } from '../utils/utils'
 
-export const createUser = (user) => {
+export const indexUser = (user) => {
+    console.log('indexing user ' + JSON.stringify(user));
+    const elasticUser = {
+        userId: user.userId,
+        username: user.username,
+        avatarUrl: user.avatarUrl,
+        nonTokenUsername: toRoot(user.username)
+    };
     searchClient.index({
         index: config.INDEX,
         type: config.TYPE_USER,
         id: user.userId,
-        body: user
+        body: elasticUser
     }, (error, response) => {
-        console.log('insert user error ' + error, 'response ' + JSON.stringify(response));
-    });
-};
-
-export const updateUser = (user) => {
-    searchClient.index({
-        index: config.INDEX,
-        type: config.TYPE_USER,
-        id: user.userId,
-        body: user
-    }, (error, response) => {
-        console.log('update user error ' + error, 'response ' + JSON.stringify(response));
+        console.log('index user error ' + error, 'response ' + JSON.stringify(response));
     });
 };
 
@@ -31,13 +28,26 @@ export const searchUser = (userName, offset, length, next) => {
             from: offset,
             size: length,
             query: {
-                match: {
-                    username: {
-                        query: userName,
-                        fuzziness: 1,
-                        prefix_length: 0,
-                        max_expansions: 20
-                    }
+                bool: {
+                    should: [{
+                        match: {
+                            username: {
+                                query: userName,
+                                fuzziness: 1,
+                                prefix_length: 0,
+                                max_expansions: 20
+                            }
+                        }
+                    }, {
+                        match: {
+                            nonTokenUsername: {
+                                query: toRoot(userName),
+                                fuzziness: 1,
+                                prefix_length: 0,
+                                max_expansions: 20
+                            }
+                        }
+                    }]
                 }
             }
         }
@@ -66,4 +76,21 @@ export const delIndex = (next) => {
         console.log(error, response);
         next(error, response);
     });
+};
+
+export const setIndex = (next) => {
+    searchClient.indices.putMapping({
+        index: config.INDEX,
+        type: config.TYPE_SELL_POST,
+        body: {
+            properties: {
+                location: {
+                    type: 'geo_point'
+                }
+            }
+        }
+    }, (error, response) => {
+        console.log(error, response);
+        next(error, response);
+    })
 };

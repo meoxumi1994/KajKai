@@ -16,6 +16,7 @@ import ContactHistory from '~/containers/contacthistory'
 import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 import ChatContainer from '~/containers/chat'
 import GroupPopUp from '~/containers/GroupPopUp'
+import ShowDetail from '~/containers/ShowDetail'
 
 // import AdminContainer from '~/containers/admin/'
 // import loadAdmin from 'bundle-loader?lazy!../containers/admin'
@@ -119,7 +120,8 @@ class App extends React.Component {
                           </div>
                     }
                     <div style={{ paddingTop: 47, marginRight: (width > 1100 + 300)? 300: 0 }}>
-                        {(path == "/" || path == "/admin" || path == "/map" || path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
+                        {(path == "/" || path == "/admin" || path == "/map" ||
+                        path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
                               <div style={{ height: height - 47, width: Math.max(1100, width) }}>
                                   <Route exact path="/" component={Home}/>
@@ -127,12 +129,17 @@ class App extends React.Component {
                                   <Route path="/register" component={UserLoginRegister}/>
                                   <Route path="/profile" component={Profile}/>
                                   <Route path="/registerstore" component={RegisterStore}/>
+
                                   {/* <Route path="/admin" component={Admin}/> */}
                               </div>
                             </div>
                         :  location.pathname.split('/')[1] == 'user'?
                             <div>
                                 <Route path="*" component={User}/>
+                            </div>
+                        :  location.pathname.split('/')[1] == 'post' ?
+                            <div>
+                                <Route path="*" component={ShowDetail}/>
                             </div>
                         :   <div>
                                 <Route path="*" component={Store}/>
