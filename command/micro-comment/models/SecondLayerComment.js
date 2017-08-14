@@ -1,4 +1,5 @@
 import mongoose from '../datasource'
+import MatchSchema from './MatchSchema'
 
 const SecondLayerCommentSchema = new mongoose.Schema({
     posterId: {type: String},
@@ -6,7 +7,8 @@ const SecondLayerCommentSchema = new mongoose.Schema({
     content: {type: String},
     time: {type: Number},
     likeCounter: {type: Number},
-    parentCommentId: {type: String}
+    parentCommentId: {type: String},
+    match: [MatchSchema]
 });
 
 export default SecondLayerCommentSchema;
