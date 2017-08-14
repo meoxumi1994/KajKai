@@ -59,7 +59,12 @@ export const createSellPostSub = (message) => {
         const secondCategoryName = store.secondCategoryName;
         const avatarUrl = store.avatarUrl;
         const productContent = '';
-        indexSellPost({sellPostId, storeId, title, category, address, firstCategoryId, secondCategoryId, firstCategoryName, secondCategoryName, avatarUrl, productContent});
+        const location = {
+            lat: store.latitude,
+            lon: store.longitude
+        };
+        indexSellPost({sellPostId, storeId, title, category, address, firstCategoryId,
+            secondCategoryId, firstCategoryName, secondCategoryName, avatarUrl, productContent, location});
     })
 };
 

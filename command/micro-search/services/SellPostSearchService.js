@@ -138,9 +138,8 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                     from: offset,
                     size: length,
                     query: {
-                        dis_max: {
-                            tie_breaker: 0.1,
-                            queries: [{
+                        bool: {
+                            should: [{
                                 multi_match: {
                                     query: keyword,
                                     fuzziness: 1,
@@ -150,13 +149,13 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 }
                             }, {
                                 multi_match: {
-                                    query: keyword,
+                                    query: toRoot(keyword),
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
                                     fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
                                 }
-                            },{
+                            }, {
                                 match_phrase_prefix: {
                                     category: keyword
                                 }
@@ -164,6 +163,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                         }
                     }
                 }
+
             }, (error, response) => {
                 console.log('search without location: ' + 'category: ' + categoryId + ' ' + 'keyword: ' + keyword, error, JSON.stringify(response));
                 next(getHitResult(response));
@@ -196,9 +196,8 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                     from: offset,
                     size: length,
                     query: {
-                        dis_max: {
-                            tie_breaker: 0.1,
-                            queries: [{
+                        bool: {
+                            should: [{
                                 multi_match: {
                                     query: keyword,
                                     fuzziness: 1,
@@ -209,19 +208,24 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 }
                             }, {
                                 multi_match: {
-                                    query: categoryId,
-                                    fields: ['firstCategoryId', 'secondCategoryId'],
-                                    boost: 5,
+                                    query: toRoot(keyword),
+                                    fuzziness: 1,
+                                    prefix_length: 0,
+                                    max_expansions: 20,
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
                                 }
-                            }, {
-                                match_phrase_prefix: {
-                                    category: keyword,
-                                    boost: 10
+                            }],
+                            filter: {
+                                bool: {
+                                    should: [
+                                        {term: {firstCategoryId: categoryId}},
+                                        {term: {secondCategoryId: categoryId}}
+                                    ],
+                                    minimum_should_match: 1
                                 }
-                            }]
+                            }
                         }
-                    },
-                    min_score: 0.5
+                    }
                 }
             }, (error, response) => {
                 console.log('search without location: ' + 'category: ' + categoryId + ' ' + 'keyword: ' + keyword, error, JSON.stringify(response));
