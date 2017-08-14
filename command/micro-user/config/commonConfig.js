@@ -1,6 +1,6 @@
 const config = {
     SERVER_PORT: 8080,
-    getServerDomain: () => ('https://5viu9v4ig1.execute-api.ap-southeast-1.amazonaws.com/kajkai_prod_ec2'),
+    getServerDomain: () => ('https://g9fd0yor1e.execute-api.ap-southeast-1.amazonaws.com/kajkai'),
     getClientDomain: () => ('https://www.kajkai.com'),
     getDataSource: () => ('mongodb://admin:dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu@localhost/kajkai-user'),
     FACEBOOK_API_URL: 'https://graph.facebook.com/me?fields=id,name,email,picture.type(large)&access_token=',
