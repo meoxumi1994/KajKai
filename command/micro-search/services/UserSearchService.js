@@ -83,8 +83,10 @@ export const setIndex = (next) => {
         index: config.INDEX,
         type: config.TYPE_SELL_POST,
         body: {
-            location: {
-                type: 'geo_point'
+            property: {
+                location: {
+                    type: 'geo_point'
+                }
             }
         }
     }, (error, response) => {
