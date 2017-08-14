@@ -52,6 +52,8 @@ export const getClientFormatReplies = (targetId, requesterId, replies, offset, i
       if (reply.id == targetId) {
         mReplies = replies.splice(0, i + 6)
         break
+      } else if (i + 1 == replies.length) {
+        mReplies = replies.splice(0, 5)
       }
     }
     replies = mReplies

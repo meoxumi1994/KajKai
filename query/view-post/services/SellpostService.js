@@ -222,7 +222,7 @@ const getClientFormatSellposts = (notifySellposts, blackList, requesterId, store
 }
 
 const getClientFormatSellpost = (targetId, notifySellposts, blackList, requesterId, sellpost, offset) => {
-  const { postrows, comments } = sellpost
+  let { postrows, comments } = sellpost
 
   let { followers } = sellpost
   if (!followers) {
@@ -296,6 +296,18 @@ const getClientFormatSellpost = (targetId, notifySellposts, blackList, requester
     }
   }
 
+  if (!comments) {
+    comments = []
+  }
+
+  let mComments = []
+
+  comments.map((comment) => {
+    if (blackList.indexOf(comment.commenterId) == -1) {
+      mComments.push(comment)
+    }
+  })
+
   return ({
     id: sellpost.id,
     turnnotify: notifySellposts.indexOf(sellpost.id) != -1,
@@ -315,8 +327,8 @@ const getClientFormatSellpost = (targetId, notifySellposts, blackList, requester
     likes,
     numfollow: sellpost.numberOfFollow ? sellpost.numberOfFollow : 0,
     follows,
-    numleadercomment: sellpost.comments ? sellpost.comments.length : 0,
+    numleadercomment: mComments.length,
     numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
-    ...getClientFormatSellpostComments(targetId, blackList, requesterId, comments, offset, 'done', true, null)
+    ...getClientFormatSellpostComments(targetId, blackList, requesterId, mComments, offset, 'done', true, null)
   })
 }
