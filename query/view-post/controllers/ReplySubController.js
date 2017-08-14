@@ -1,13 +1,27 @@
-import { Sellpost, Minorpost, Comment, Reply, BasicUser, BasicStore } from '../models'
+import { Sellpost, Minorpost, Comment, Reply, BasicUser, BasicStore, Match } from '../models'
 
 export const createReply = (message) => {
-  const { parentCommentId: commentId, sCommentId: id, posterId, sellPostId: sellpostId, minorPostId: minorpostId, content, time } = message.sComment
+  const { parentCommentId: commentId, sCommentId: id, posterId, sellPostId: sellpostId, minorPostId: minorpostId, content, time, match } = message.sComment
 
   const reply = new Reply({
     commentId,
     id,
     userId: posterId
   })
+
+  if (match) {
+    let tags = []
+    match.map((item) => {
+      tags.push(
+        new Match({
+          id: item.id,
+          name: item.name,
+          link: itme.link
+        })
+      )
+    })
+    reply.match = tags
+  }
 
   if (content) reply.content = content
   if (time) reply.time = time

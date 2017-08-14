@@ -1,5 +1,6 @@
 import mongoose from '../datasource'
 import LikerSchema from './Liker'
+import MatchSchema from './Match'
 
 const ReplySchema = new mongoose.Schema({
   commentId: {type: String},
@@ -12,7 +13,8 @@ const ReplySchema = new mongoose.Schema({
   content: {type: String},
   time: {type: Date},
   numberOfLike: {type: Number},
-  likers: [LikerSchema]
+  likers: [LikerSchema],
+  match: [MatchSchema]
 })
 
 export default ReplySchema

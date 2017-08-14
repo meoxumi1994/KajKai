@@ -1,10 +1,10 @@
-import { User, Notification, BasicStore, IDSellpostStore } from '../models'
+import { User, Notification, BasicStore, IDSellpostStore, Match } from '../models'
 import { NotificationType } from '../enum'
 import { addIDCommentSellpost } from '../services/IDService'
 import { notify } from './NotificationPubController'
 
 export const createCommentNotification = (message) => {
-  const { fCommentId: commentId, posterId: commenterId, sellPostId: sellpostId, time, content, order } = message.fComment
+  const { fCommentId: commentId, posterId: commenterId, sellPostId: sellpostId, time, content, order, match } = message.fComment
 
   addIDCommentSellpost(commentId, sellpostId)
 
@@ -63,6 +63,19 @@ export const createCommentNotification = (message) => {
               list: product.list,
               numberOfOrder: product.num
             }))
+            if (match) {
+              let tags = []
+              match.map((item) => {
+                tags.push(
+                  new Match({
+                    id: item.id,
+                    name: item.name,
+                    link: itme.link
+                  })
+                )
+              })
+              notification.match = tags
+            }
             notification.save(() => {})
 
             User.find({}, (err, users) => {
@@ -137,6 +150,7 @@ export const createReceiveNotification = (message) => {
               numberOfLike: notification.numberOfLike,
               likers: notification.likers,
               order: notification.order,
+              match: notification.match,
               isRead: 0
             })
             User.find({}, (err, users) => {
@@ -152,7 +166,7 @@ export const createReceiveNotification = (message) => {
                       let { notifications } = user
                       if (!notifications) {
                         notifications = []
-                      }                  
+                      }
 
                       if (user.id == notification.actorId) {
                         notify(user.id, mNotification)

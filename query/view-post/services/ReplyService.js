@@ -169,6 +169,7 @@ const getClientFormatReply = (requesterId, reply) => {
     content: reply.content ? reply.content : '',
     time: reply.time.getTime(),
     numlike: reply.numberOfLike ? reply.numberOfLike : 0,
-    likes
+    likes,
+    match: reply.match ? reply.match : []
   })
 }
