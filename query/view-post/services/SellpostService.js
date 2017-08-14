@@ -303,7 +303,7 @@ const getClientFormatSellpost = (targetId, notifySellposts, blackList, requester
   let mComments = []
 
   comments.map((comment) => {
-    if (comment.commenterId != id && blackList.indexOf(comment.commenterId) == -1) {
+    if (blackList.indexOf(comment.commenterId) == -1) {
       mComments.push(comment)
     }
   })
