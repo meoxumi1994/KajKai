@@ -42,7 +42,8 @@ export const getSecondLayerCommentInfo = (sComment, next) => {
                     id: getSecondCommentGlobalId(sComment._id),
                     leadercommentid: sComment.parentCommentId,
                     like: sComment.likeCounter,
-                    type: 'user'
+                    type: 'user',
+                    match: sComment.match
                 };
                 if (sComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     info = {...info, sellpostid: sComment.postId}
@@ -67,7 +68,8 @@ export const getSecondLayerCommentInfo = (sComment, next) => {
                     like: sComment.likeCounter,
                     urlname: store.urlName,
                     user: store.owner,
-                    type: 'store'
+                    type: 'store',
+                    match: sComment.match
                 };
                 if (sComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     info = {...info, sellpostid: sComment.postId}
