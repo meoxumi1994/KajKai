@@ -26,7 +26,7 @@ export const createComment = (message) => {
         new Match({
           id: item.id,
           name: item.name,
-          link: itme.link
+          link: item.link
         })
       )
     })
