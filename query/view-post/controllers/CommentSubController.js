@@ -1,8 +1,8 @@
-import { Sellpost, Minorpost, Comment, Reply, BasicUser, BasicStore } from '../models'
+import { Sellpost, Minorpost, Comment, Reply, BasicUser, BasicStore, Match } from '../models'
 import { OrderStatus } from '../enum'
 
 export const createComment = (message) => {
-  const { fCommentId: id, posterId, sellPostId: sellpostId, minorPostId: minorpostId, order, time, content } = message.fComment
+  const { fCommentId: id, posterId, sellPostId: sellpostId, minorPostId: minorpostId, order, time, content, match } = message.fComment
 
   const comment = new Comment({
     id,
@@ -18,6 +18,20 @@ export const createComment = (message) => {
     list: product.list,
     numberOfOrder: product.num
   }))
+
+  if (match) {
+    let tags = []
+    match.map((item) => {
+      tags.push(
+        new Match({
+          id: item.id,
+          name: item.name,
+          link: itme.link
+        })
+      )
+    })
+    comment.match = tags
+  }
 
   comment.time = Date.now()
   comment.status = OrderStatus.NEW
@@ -37,6 +51,9 @@ export const createComment = (message) => {
           time : Date.now(),
           numberOfLike: 0
         })
+        if (comment.match) {
+          reply.match = comment.match
+        }
         resolve(reply)
       } else {
         resolve(null)
@@ -58,6 +75,9 @@ export const createComment = (message) => {
           time: Date.now(),
           numberOfLike: 0
         })
+        if (comment.match) {
+          reply.match = comment.match
+        }
         resolve(reply)
       } else {
         resolve(null)

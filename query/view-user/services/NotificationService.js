@@ -249,7 +249,8 @@ export const getClientFormatNotification = (notification) => ({
     list: product.list ? product.list : [],
     num: product.numberOfOrder
   })) : [],
-  isclick: notification.isRead == 1
+  isclick: notification.isRead == 1,
+  match: notification.match ? notification.match : []
 })
 
 const isLiker = (user, liker) => {

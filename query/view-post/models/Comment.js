@@ -1,6 +1,7 @@
 import mongoose from '../datasource'
 import _ from 'lodash'
 import { OrderStatus } from '../enum'
+import { MatchSchema } from './Match'
 import ProductSchema from './Product'
 import ReplySchema from './Reply'
 
@@ -14,7 +15,8 @@ const CommentSchema = new mongoose.Schema({
   numberOfReply: {type: Number},
   replies: [ReplySchema],
   time: {type: Date},
-  status: {type: String, enum: _.values(OrderStatus)}
+  status: {type: String, enum: _.values(OrderStatus)},
+  match: [MatchSchema]
 })
 
 export default CommentSchema

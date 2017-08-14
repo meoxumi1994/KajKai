@@ -1,10 +1,10 @@
-import { User, Notification, BasicStore, IDSellpostStore } from '../models'
+import { User, Notification, BasicStore, IDSellpostStore, Match } from '../models'
 import { NotificationType } from '../enum'
 import { addIDReplyCommentSellpost } from '../services/IDService'
 import { notify } from './NotificationPubController'
 
 export const createReplyNotification = (message) => {
-  const { parentCommentId: commentId, sCommentId: replyId, posterId: replierId, sellPostId: sellpostId, minorPostId: minorpostId, content, time } = message.sComment
+  const { parentCommentId: commentId, sCommentId: replyId, posterId: replierId, sellPostId: sellpostId, minorPostId: minorpostId, content, time, match } = message.sComment
 
   addIDReplyCommentSellpost(replyId, commentId, sellpostId)
 
@@ -84,6 +84,19 @@ export const createReplyNotification = (message) => {
                       urlName: basicStore.urlName,
                       storeAvatarUrl: basicStore.avatarUrl
                     })
+                    if (match) {
+                      let tags = []
+                      match.map((item) => {
+                        tags.push(
+                          new Match({
+                            id: item.id,
+                            name: item.name,
+                            link: itme.link
+                          })
+                        )
+                      })
+                      notification.match = tags
+                    }
                     notify(user.id, notification)
                     notifications.push(notification)
                     user.notifications = notifications
