@@ -10,8 +10,7 @@ const leadercomment = (state = {
                         numcomment: state[action.data.leadercommentid].numcomment + 1,
                         comments: [...state[action.data.leadercommentid].comments,
                             {
-                                id: action.data.id,
-                                commenterid: action.data.commenterid
+                                ...action.data
                             }
                         ]
                     }
@@ -27,6 +26,7 @@ const leadercomment = (state = {
                 }
             }
         case 'GET_MORE_COMMENT_SUCCESS':
+            if(!state[action.id] || !state[action.id].comments) return state
             return {...state,
                 [action.id] : {
                     ...state[action.id],

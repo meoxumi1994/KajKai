@@ -33,13 +33,14 @@ export const flem = (url, body) => {
     //   }
     // }
     if (body) {
-      let ch = '?'
-      for (let qr in body) {
-        myurl += ch + qr + '=' + body[qr]
-        if (ch == '?') {
-          ch = '&'
+        let ch = '?'
+        for (let qr in body) {
+            if(body[qr] == undefined || qr == undefined ) continue
+            myurl += ch + qr + '=' + body[qr]
+            if (ch == '?') {
+                ch = '&'
+            }
         }
-      }
     }
     console.log('GET',myurl)
     return fetch( myurl , {

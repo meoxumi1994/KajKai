@@ -26,7 +26,6 @@ const comment = (state = {
             return state
         case 'global/COMMENT':
         case 'global/LEADERCOMMENT':
-            console.log(action)
             return {...state,
                 [action.data.id]: {
                     ...action.data,

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import SellPost from '~/containers/entity/post/SellPost'
+import Post from '~/containers/entity/post/Post'
 
 class NewFeed extends React.Component {
     constructor(props){
@@ -8,7 +9,7 @@ class NewFeed extends React.Component {
     }
     render(){
         const { sellposts } = this.props
-        console.log(sellposts)
+        console.log('NewFeed NewFeed', this.props)
         if(!sellposts)
             return <div></div>
         return(
@@ -16,9 +17,11 @@ class NewFeed extends React.Component {
                 {sellposts.map((item,index) => {
                     return(
                         <div key={item.sellPostId} style={{ paddingBottom: 10 }}>
-                            <SellPost
+                            {/* <SellPost
                                 needGetSellPost={true}
-                                id={item.sellPostId}/>
+                                id={item.sellPostId}/> */}
+                            <Post sellpostid={item.sellPostId}
+                                />
                         </div>
                     )
                 })}

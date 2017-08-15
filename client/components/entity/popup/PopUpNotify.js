@@ -144,11 +144,18 @@ class PopUpNotify extends React.Component {
             this.props.onClose()
         },6000)
     }
+    onClick(){
+        const commentid = this.props.commentid || this.props.leadercommentid
+        window.location = '/post/' + this.props.sellpostid + '/' + commentid;
+    }
     render(){
         const { id, type, avatarUrl, content, name, time, storename, avartarStore, isclose, onClose } = this.props
         if(!type || isclose) return <div></div>
         return(
-            <div style={{
+            <div className="btn" style={{
+                display: 'inline-block',
+                textAlign: 'left',
+                padding: 0,
                 animationName: 'closepopup',
                 animationDuration: '1s',
                 animationDelay: '5s',
@@ -158,7 +165,9 @@ class PopUpNotify extends React.Component {
                 padding: 5,
                 backgroundColor: 'white',
                 width: 270,
-                height: 85, }}>
+                height: 85, }}
+                onClick={() => this.onClick() }
+                >
                 <div className="btn"
                     style={{ padding: 0, fontSize: 12, float: 'right' }}
                     onMouseOver={() => this.setState({ hoverRemove: true })}

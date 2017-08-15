@@ -27,7 +27,7 @@ class Comment extends React.Component {
     render(){
         const {
             RECEIVE, RECEIVED, LIKE, REPLY, DONE, clicksetting, isOwner, status, urlname,
-            isleader, avatarUrl, name, time, numlike, numreplys, order, commenterid, type,
+            isleader, avatarUrl, name, time, numlike, numreplys, order, commenterid, type, match,
             content, onReceive, onDone, onLike, onReply, beLike, isRead, onRemoveRead } = this.props
         let urlLink
         if( type == "user" ){
@@ -114,6 +114,7 @@ class Comment extends React.Component {
                         fontSize={13.5}
                         heightEachRow={16}
                         content={content}
+                        match={match}
                     />
                     <div style={{ marginLeft: -2 }}>
                         {(isOwner && isleader && onReceive) &&

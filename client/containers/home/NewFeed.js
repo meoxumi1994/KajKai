@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onGetSellpost: () => {
-        dispatch(search({searchType: 'CATEGORY', keyword: '', id: -1, offset: 0, length: 10000 }))
+        dispatch(search({ currentType: 'category', keyword: '', id: -1, offset: 0, length: 10000 }))
         // dispatch(changeKeyWord(keyword))
     }
 })

@@ -7,6 +7,8 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const showdetail = state.inst.showdetail
     return({
+        iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT'),
+        isusername: state.user.username,
         ...showdetail
     })
 }

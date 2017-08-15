@@ -105,7 +105,7 @@ class App extends React.Component {
         const { showProgress, closeProgress } = this.props
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
-                <Bar/>
+                <Route path="*" component={Bar}/>
                 <GroupPopUp/>
                 <ChatContainer/>
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
@@ -123,13 +123,12 @@ class App extends React.Component {
                         {(path == "/" || path == "/admin" || path == "/map" ||
                         path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
-                              <div style={{ height: height - 47, width: Math.max(1100, width) }}>
+                              <div style={{ height: height - 47 }}>
                                   <Route exact path="/" component={Home}/>
                                   <Route path="/map" component={Mapp}/>
                                   <Route path="/register" component={UserLoginRegister}/>
                                   <Route path="/profile" component={Profile}/>
                                   <Route path="/registerstore" component={RegisterStore}/>
-
                                   {/* <Route path="/admin" component={Admin}/> */}
                               </div>
                             </div>
