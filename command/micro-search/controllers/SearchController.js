@@ -42,7 +42,7 @@ export const searchSellPostCon = () => {
     return (req, res) => {
         const { offset, length, id, keyword, lat, lng } = req.query;
         console.log(req.query);
-        searchSellPost(offset, length, id, { lat, lng }, keyword, (data) => {
+        searchSellPost(offset, length, id, { lat, lon: lng }, keyword, (data) => {
             res.json(data)
         });
     }
