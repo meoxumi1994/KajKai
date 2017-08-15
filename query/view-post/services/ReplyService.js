@@ -52,6 +52,8 @@ export const getClientFormatReplies = (targetId, requesterId, replies, offset, i
       if (reply.id == targetId) {
         mReplies = replies.splice(0, i + 6)
         break
+      } else if (i + 1 == replies.length) {
+        mReplies = replies.splice(0, 5)
       }
     }
     replies = mReplies
@@ -167,6 +169,7 @@ const getClientFormatReply = (requesterId, reply) => {
     content: reply.content ? reply.content : '',
     time: reply.time.getTime(),
     numlike: reply.numberOfLike ? reply.numberOfLike : 0,
-    likes
+    likes,
+    match: reply.match ? reply.match : []
   })
 }

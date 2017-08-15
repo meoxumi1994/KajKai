@@ -1,6 +1,7 @@
 import { updateUserInfo, getUser, resetPassword, updatePasswordToken } from '../services/UserService.js'
 import { updateUserPub } from './UserPubController'
 import { addBlackList, removeBlackList } from '../services/BlackListService'
+import config from '../config/commonConfig'
 
 export const updateUserPassword = () => {
     return (req, res) => {
@@ -71,6 +72,7 @@ export const resetPasswordCon = () => {
 export const resetPasswordEmailCon = () => {
     return (req, res) => {
         const token = req.params.token;
+        let redirectUrl = config.getClientDomain();
         updatePasswordToken(token, (user) => {
             if (user) {
                 res.redirect(redirectUrl + '/login');

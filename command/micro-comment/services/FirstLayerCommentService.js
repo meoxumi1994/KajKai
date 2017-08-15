@@ -1,4 +1,4 @@
-import { FirstLayerComment } from '../models'
+import { FirstLayerComment, Match } from '../models'
 import { getOrder, getOrderInfo } from './OrderService'
 import globalId from '../config/globalId'
 import { getUser, getStoreFromPostId, checkBlacList } from '../controllers/CommentPubController'
@@ -34,7 +34,8 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
                         like: fComment.likeCounter,
                         status: fComment.status,
                         type: 'user',
-                        storeid: store.storeId
+                        storeid: store.storeId,
+                        match: fComment.match
                     };
                     if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                         info = {...info, sellpostid: fComment.postId}
@@ -58,7 +59,8 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
                 user: store.owner,
                 status: fComment.status,
                 type: 'store',
-                storeid: store.storeId
+                storeid: store.storeId,
+                match: fComment.match
             };
             if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                 info = {...info, sellpostid: fComment.postId}
@@ -74,6 +76,7 @@ export const getFirstLayerCommentPubInfo = (fComment) => {
     let data = {
         posterId: fComment.posterId, order: getOrderInfo(fComment.order), time: fComment.time,
         content: fComment.content, fCommentId: getFirstCommentGlobalId(fComment._id),
+        match: fComment.match
     };
     if (fComment.postId.startsWith(SELL_POST_GLOBAL_ID)) {
         data = {...data, sellPostId: fComment.postId};
@@ -83,12 +86,18 @@ export const getFirstLayerCommentPubInfo = (fComment) => {
     return data;
 };
 
-export const saveNewFirstLayerComment = (posterId, order, time, postId, content, next) => {
+export const saveNewFirstLayerComment = (posterId, order, time, postId, content, match, next) => {
     if (order) {
         order = getOrder(order);
     }
+    let listTag = [];
+    if (match) {
+        for (let i = 0; i < match.length; ++i) {
+            listTag.push(new Match(match[i]));
+        }
+    }
     let comment = new FirstLayerComment({ posterId: posterId, order: order, time: time,
-        postId: postId, content: content, status: 'new' });
+        postId: postId, content: content, status: 'new' , match: listTag });
     console.log('fuck ' + JSON.stringify(comment));
     comment.save((err) => {
         newFirstLayerCommentCreated(getFirstLayerCommentPubInfo(comment));
@@ -97,18 +106,17 @@ export const saveNewFirstLayerComment = (posterId, order, time, postId, content,
 };
 
 export const addNewFirstLayerComment = (data, next) => {
-
     getStoreFromPostId(data.sellpostid, (store) => {
         console.log('store ' + JSON.stringify(store));
         if (!store) return;
         checkBlacList(store.owner, data.userID, (check) => {
             if (!check) {
                 if (data.userID === store.owner) {
-                    saveNewFirstLayerComment(store.storeId, data.order, data.time, data.sellpostid, data.content, (comment) => {
+                    saveNewFirstLayerComment(store.storeId, data.order, data.time, data.sellpostid, data.content, data.match, (comment) => {
                         next(comment)
                     })
                 } else {
-                    saveNewFirstLayerComment(data.userID, data.order, data.time, data.sellpostid, data.content, (comment) => {
+                    saveNewFirstLayerComment(data.userID, data.order, data.time, data.sellpostid, data.content, data.match, (comment) => {
                         next(comment);
                     })
                 }

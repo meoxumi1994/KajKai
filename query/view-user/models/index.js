@@ -11,6 +11,7 @@ import InterestSchema from './Interest'
 import ItemSchema from './Item'
 import LastUpdateSchema from './LastUpdate'
 import LikerSchema from './Liker'
+import MatchSchema from './Match'
 import NotificationSchema from './Notification'
 import PrivacySchema from './Privacy'
 import ProductSchema from './Product'
@@ -31,6 +32,7 @@ export const Interest = mongoose.model('Interest', InterestSchema)
 export const Item = mongoose.model('Item', ItemSchema)
 export const LastUpdate = mongoose.model('LastUpdate', LastUpdateSchema)
 export const Liker = mongoose.model('Liker', LikerSchema)
+export const Match = mongoose.model('Match', MatchSchema)
 export const Notification = mongoose.model('Notification', NotificationSchema)
 export const Privacy = mongoose.model('Privacy', PrivacySchema)
 export const Product = mongoose.model('Product', ProductSchema)

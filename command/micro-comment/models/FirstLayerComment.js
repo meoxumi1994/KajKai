@@ -1,5 +1,6 @@
 import mongoose from '../datasource'
 import OrderSchema from './Order'
+import MatchSchema from './Match'
 
 const FirstLayerCommentSchema = new mongoose.Schema({
     posterId: {type: String},
@@ -9,7 +10,8 @@ const FirstLayerCommentSchema = new mongoose.Schema({
     postId: {type: String},
     likeCounter: {type: Number},
     commentCounter: {type: Number},
-    status: {type: String}
+    status: {type: String},
+    match: [MatchSchema]
 });
 
 export default FirstLayerCommentSchema;

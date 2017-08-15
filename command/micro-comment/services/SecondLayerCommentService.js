@@ -1,4 +1,4 @@
-import { SecondLayerComment } from '../models'
+import { SecondLayerComment, Match } from '../models'
 import globalId from '../config/globalId'
 import { getUser, getStore, getStoreFromPostId, newSecondLayerCommentCreated, checkBlacList } from '../controllers/CommentPubController'
 
@@ -42,7 +42,8 @@ export const getSecondLayerCommentInfo = (sComment, next) => {
                     id: getSecondCommentGlobalId(sComment._id),
                     leadercommentid: sComment.parentCommentId,
                     like: sComment.likeCounter,
-                    type: 'user'
+                    type: 'user',
+                    match: sComment.match
                 };
                 if (sComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     info = {...info, sellpostid: sComment.postId}
@@ -67,7 +68,8 @@ export const getSecondLayerCommentInfo = (sComment, next) => {
                     like: sComment.likeCounter,
                     urlname: store.urlName,
                     user: store.owner,
-                    type: 'store'
+                    type: 'store',
+                    match: sComment.match
                 };
                 if (sComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
                     info = {...info, sellpostid: sComment.postId}
@@ -90,7 +92,7 @@ export const getSecondLayerCommentById = (id, next) => {
 export const getSecondLayerCommentPubInfo = (sComment) => {
     let data = {posterId: sComment.posterId, time: sComment.time,
         content: sComment.content, parentCommentId: sComment.parentCommentId,
-        sCommentId: getSecondCommentGlobalId(sComment._id)};
+        sCommentId: getSecondCommentGlobalId(sComment._id), match: sComment.match};
     if (sComment.postId.startsWith(SELL_POST_GLOBAL_ID)) {
         data = {...data, sellPostId: sComment.postId};
     } else {
@@ -99,9 +101,15 @@ export const getSecondLayerCommentPubInfo = (sComment) => {
     return data;
 };
 
-export const saveNewScondLayerComment = (posterId, time, postId, content, parentCommentId, next) => {
+export const saveNewScondLayerComment = (posterId, time, postId, content, parentCommentId, match, next) => {
+    let listTag = [];
+    if (match) {
+        for (let i = 0; i < match.length; ++i) {
+            listTag.push(new Match(match[i]));
+        }
+    }
     let comment = new SecondLayerComment({posterId: posterId, time: time,
-        postId: postId, content: content, parentCommentId: parentCommentId});
+        postId: postId, content: content, parentCommentId: parentCommentId, match: listTag});
     comment.save(function (err) {
         newSecondLayerCommentCreated(getSecondLayerCommentPubInfo(comment));
         next(comment);
@@ -115,11 +123,11 @@ export const addNewSecondLayerComment = (data, next) => {
             if (block) next(null);
             else {
                 if (data.userID === store.owner) {
-                    saveNewScondLayerComment(store.storeId, data.time, data.sellpostid, data.content, data.leadercommentid, (comment) => {
+                    saveNewScondLayerComment(store.storeId, data.time, data.sellpostid, data.content, data.leadercommentid, data.match, (comment) => {
                         next(comment)
                     })
                 } else {
-                    saveNewScondLayerComment(data.userID, data.time, data.sellpostid, data.content, data.leadercommentid, (comment) => {
+                    saveNewScondLayerComment(data.userID, data.time, data.sellpostid, data.content, data.leadercommentid, data.match, (comment) => {
                         next(comment);
                     })
                 }

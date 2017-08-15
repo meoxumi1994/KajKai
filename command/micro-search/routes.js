@@ -17,6 +17,12 @@ export default {
             method: 'deleteIndexCon'
         }
     },
+    '/setindex': {
+        get: {
+            controller: 'SearchController',
+            method: 'setIndexCon'
+        }
+    },
     '/search/category': {
         get: {
             controller: 'SearchController',

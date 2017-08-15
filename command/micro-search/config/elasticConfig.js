@@ -3,7 +3,8 @@ const config = {
     INDEX: 'kajkaiindex',
     TYPE_USER: 'user',
     TYPE_STORE: 'store',
-    TYPE_SELL_POST: 'sellpost'
+    TYPE_SELL_POST: 'sellpost',
+    MAX_DISTANT_FILTER: "100km"
 };
 
 export default config;

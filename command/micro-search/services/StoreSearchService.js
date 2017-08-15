@@ -1,25 +1,21 @@
 import config from '../config/elasticConfig'
 import searchClient from '../datasource'
+import { toRoot } from '../utils/utils'
 
-export const createStore = (store) => {
+export const indexStore = (store) => {
+    const elasticStore = {...store,
+        nonTokenStoreName: toRoot(store.storeName),
+        nonTokenCategory: toRoot(store.category),
+        nonTokenFCategory: toRoot(store.firstCategoryName),
+        nonTokenSCategory: toRoot(store.secondCategoryName)
+    };
     searchClient.index({
         index: config.INDEX,
         type: config.TYPE_STORE,
         id: store.storeId,
-        body: store
+        body: elasticStore
     }, (error, response) => {
         console.log('insert store: error ' + error, 'response ' + JSON.stringify(response));
-    });
-};
-
-export const updateStore = (store) => {
-    searchClient.index({
-        index: config.INDEX,
-        type: config.TYPE_STORE,
-        id: store.storeId,
-        body: store
-    }, (error, response) => {
-        console.log('update store: error ' + error, 'response ' + JSON.stringify(response));
     });
 };
 
@@ -31,12 +27,32 @@ export const searchStore = (keyword, offset, length, next) => {
             from: offset,
             size: length,
             query: {
-                multi_match: {
-                    query: keyword,
-                    fuzziness: 1,
-                    prefix_length: 0,
-                    max_expansions: 20,
-                    fields: ['storeName', 'category', 'firstCategoryName', 'secondCategoryName']
+                bool: {
+                    should: [{
+                        multi_match: {
+                            query: keyword,
+                            fuzziness: 1,
+                            prefix_length: 0,
+                            max_expansions: 20,
+                            fields: ['storeName', 'category', 'firstCategoryName', 'secondCategoryName'],
+                            boost: 10
+                        }
+                    }, {
+                        multi_match: {
+                            query: keyword,
+                            fuzziness: 1,
+                            prefix_length: 0,
+                            max_expansions: 20,
+                            fields: ['nonTokenStoreName', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
+                            boost: 10
+                        }
+                    }, {
+                        match_phrase_prefix: {
+                            nonTokenStoreName: toRoot(keyword)
+                        }
+                    }, {
+                        match_all: {}
+                    }]
                 }
             }
         }

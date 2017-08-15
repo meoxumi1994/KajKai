@@ -195,6 +195,7 @@ export const getClientFormatSellpostComments = (targetId, blackList, requesterId
       mComment.time = comment.time.getTime()
       mComment.status = comment.status
       mComment.numcomment = mReplies.length
+      mComment.match = comment.match ? comment.match : []
 
       mComments = [mComment, ...mComments]
 
@@ -230,6 +231,7 @@ export const getClientFormatSellpostComments = (targetId, blackList, requesterId
           mComment.time = comment.time.getTime()
           mComment.status = comment.status
           mComment.numcomment = mReplies.length
+          mComment.match = comment.match ? comment.match : []
 
           mComments = [mComment, ...mComments]
 
@@ -272,6 +274,7 @@ export const getClientFormatSellpostComments = (targetId, blackList, requesterId
             mComment.time = comment.time.getTime()
             mComment.status = comment.status
             mComment.numcomment = mReplies.length
+            mComment.match = comment.match ? comment.match : []
 
             mComments = [mComment, ...mComments]
 
