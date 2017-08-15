@@ -1,7 +1,11 @@
 const bar = (state = {
+    keyword: '',
+    offset: 0,
     clicksetting: false,
     showNotification: false,
     currentCategory: 'All category',
+    currentType: 'category',
+    currentCategoryId: -1,
 }, action) => {
     switch (action.type) {
         case 'SCREEN_CLICK':

@@ -142,7 +142,8 @@ class Notification extends React.Component {
     }
     onClick(){
         this.props.clickNotification()
-        window.location = '/post/'+this.props.sellpostid;
+        const commentid = this.props.commentid || this.props.leadercommentid
+        window.location = '/post/' + this.props.sellpostid + '/' + commentid;
     }
     render(){
         const { id, type, avatarUrl, content, name, time, storename, avartarStore, isclick } = this.props

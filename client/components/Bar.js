@@ -8,6 +8,8 @@ import AutoCompleteContainer from '~/containers/mapp/AutoCompleteContainer'
 import DropDownNotification from '~/containers/entity/DropDownNotification'
 import places from 'react-google-maps'
 
+import { Redirect } from 'react-router-dom'
+
 class HandlerUser extends React.Component {
     constructor(props){
         super(props)
@@ -159,6 +161,7 @@ export default class BarScreen extends React.Component {
         super(props)
     }
     componentDidMount(){
+        console.log(this.props.location)
         this.props.onLoadCategory()
         $('#dropdowncategory').on('mousewheel DOMMouseScroll', function(e) {
           var scrollTo = null;
@@ -182,8 +185,9 @@ export default class BarScreen extends React.Component {
         },1)
     }
     render() {
-        const { SEARCH, SEARCH_STORE, SEARCH_USER, SEARCH_LOCATION, categories, onSearchTypeSelected, onKeyWordChanged, currentCategory,
-             onLocationChanged, clicksetting, width, height } = this.props
+        const { SEARCH, SEARCH_STORE, SEARCH_USER, SEARCH_LOCATION,
+             categories, onChangeTypeSelected, currentCategory,
+             onLocationChanged, clicksetting, width, height, keyword, onChange, onSearch} = this.props
         let inputSearchKeyWord
         return (
             <div
@@ -217,9 +221,12 @@ export default class BarScreen extends React.Component {
                                         {currentCategory}{" "}
                                         <span className="caret"></span>
                                     </div>
-                                    <ul className="dropdown-menu" style={{  }}>
-                                        <Cell style={{ fontWeight: 'bold', }} name={"All Category"}
-                                            onClick={() => onSearchTypeSelected('-1', "All Category")} />
+                                    <ul className="dropdown-menu" style={{
+                                        borderRadius: '0px 0px 3px 3px', marginTop: 0, marginRight: -5, backgroundColor: '#F6F7F9'}}>
+                                        <div style={{  backgroundColor: '#EEEEEE' }}>
+                                            <Cell style={{ fontWeight: 'bold', }} name={"All Category"}
+                                                onClick={() => onChangeTypeSelected('-1', "All Category")} />
+                                        </div>
                                         <hr style={{ margin: 0 }}/>
                                         <div id="dropdowncategory" style={{
                                             overflow: 'scroll', height: height - 200,
@@ -228,31 +235,35 @@ export default class BarScreen extends React.Component {
                                                 <div key={category.id}>
                                                     <Cell style={{ marginLeft: 10 }}
                                                         key={category.id} name={category.name}
-                                                        onClick={() => onSearchTypeSelected(category.id, category.name)} />
+                                                        onClick={() => onChangeTypeSelected(category.id, category.name)} />
                                                     {category.secondCategories.map(secondCategory =>
                                                         <Cell key={secondCategory.id} style={{ marginLeft: 20 }}
                                                             name={secondCategory.name}
-                                                            onClick={() => onSearchTypeSelected(secondCategory.id, secondCategory.name)} />
+                                                            onClick={() => onChangeTypeSelected(secondCategory.id, secondCategory.name)} />
                                                     )}
                                                 </div>
                                             )}
                                         </div>
                                         <hr style={{ margin: 0 }}/>
-                                        <Cell style={{ fontWeight: 'bold' }} name={"Store"}
-                                            onClick={() => onSearchTypeSelected('-2', "Store")} />
-                                        <hr style={{ margin: 0 }}/>
-                                        <Cell style={{ fontWeight: 'bold' }} name={"User"}
-                                            onClick={() => onSearchTypeSelected('-3', "User")} />
+                                        <div style={{  backgroundColor: '#EEEEEE' }}>
+                                            <Cell style={{ fontWeight: 'bold' }} name={"Store"}
+                                                onClick={() => onChangeTypeSelected('-2', "Store")} />
+                                            <hr style={{ margin: 0 }}/>
+                                            <Cell style={{ fontWeight: 'bold' }} name={"User"}
+                                                onClick={() => onChangeTypeSelected('-3', "User")} />
+                                        </div>
                                     </ul>
                                   </div>
                                   <input ref={node => { inputSearchKeyWord = node }}
                                     className="form-control input-sm"
                                     placeholder={SEARCH}
                                     style={{ border: 0,  outline: 'none', height: 28, fontSize: 13 }}
-                                  type="text"
+                                    type="text"
+                                    value={keyword}
+                                    onChange={(e) => onChange('keyword', e.target.value)}
                                     onKeyDown={(e) => { if(e.keyCode == 13) {
+                                        onSearch()
                                         inputSearchKeyWord.blur()
-                                        onKeyWordChanged(inputSearchKeyWord.value.trim())
                                     }}}
                                   />
                                   <span className="input-group-btn">
@@ -286,7 +297,7 @@ export default class BarScreen extends React.Component {
                                       placeholder={SEARCH_LOCATION}
                                       onKeyDown={(e) => {
                                         if(e.keyCode == 13) {
-                                          onLocationChanged(inputSearchLocation.value.trim())
+                                          onLocationChanged(inputSearchLocation.keyword.trim())
                                           inputSearchLocation.blur()
                                         }
                                       }}

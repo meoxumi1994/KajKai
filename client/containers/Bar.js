@@ -3,7 +3,6 @@ import allString from '~/config/allString'
 
 import { logOut } from '~/actions/asyn/user-login-register/login'
 import { loadCategory } from '~/actions/asyn/category'
-import { selectSearchType, changeKeyWord, changeLocation } from '~/actions/sync/search'
 import { search } from '~/actions/asyn/search'
 import { updateNotification } from '~/actions/asyn/entity/notification'
 import Bar from '~/components/Bar'
@@ -41,22 +40,27 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onLoadCategory: () => {
         dispatch(loadCategory())
     },
-    onSearchTypeSelected: (id, value ) => {
-        dispatch({ type: 'INST_BAR_CHANGE', key: 'currentCategory', value: value })
-        dispatch(selectSearchType(id))
-    },
-    onKeyWordEnter: (searchType, keyword, offset) => {
-        dispatch(search({ keyword: keyword, id: -1, offset: offset, length: 2 }))
-        dispatch(changeKeyWord(keyword))
-    },
-    onLocationChanged: (location) => {
-        dispatch(changeLocation(location))
+    weSearch: (currentType, currentCategoryId, keyword, lat, lng, offset) => {
+        console.log('onSearch: ', currentType, currentCategoryId, keyword, lat, lng, offset)
+        dispatch(search({ id: currentCategoryId, currentType, keyword, lat, lng, offset, length: 10 }))
+        ownProps.history.push("/")
     },
     onChange: (key, value) => {
+        if(key == 'currentCategoryId'){
+            if(value == -2){
+                dispatch({ type: 'INST_BAR_CHANGE', key: 'currentType', value: 'store' })
+            }else
+            if(value == -3){
+                dispatch({ type: 'INST_BAR_CHANGE', key: 'currentType', value: 'user' })
+            }else {
+                dispatch({ type: 'INST_BAR_CHANGE', key: 'currentType', value: 'category' })
+            }
+            dispatch({ type: 'INST_BAR_CHANGE', key: 'keyword', value: '' })
+        }
         dispatch({ type: 'INST_BAR_CHANGE', key: key, value: value })
     },
     resetChatQuantity: () => {
-        dispatch({type: 'server/RESET_UNREAD_CHATS_QUANTITY'})
+        dispatch({ type: 'server/RESET_UNREAD_CHATS_QUANTITY' })
     },
     clickNotification: () => {
 
@@ -64,15 +68,24 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { searchType, offset, ...anotherState } = stateProps
-    const { onKeyWordEnter, ...anotherDispatch } = dispatchProps
+    const { currentType, currentCategoryId, keyword, offset, lat, lng, ...anotherState } = stateProps
+    const { onSearch, onChange, weSearch, ...anotherDispatch } = dispatchProps
     return({
-        onKeyWordChanged: (keyword) => {
-            onKeyWordEnter(searchType, keyword, offset)
+        onLocationChanged: (lat, lng) => {
+            onChange('lat',lat)
+            onChange('lng',lng)
+            weSearch(currentType, currentCategoryId, keyword, lat, lng, offset)
+        },
+        onSearch: () => {
+            weSearch(currentType, currentCategoryId, keyword, lat, lng, offset)
+        },
+        onChangeTypeSelected: (id, value ) => {
+            onChange('currentCategoryId', id)
+            onChange('currentCategory', value)
         },
         ...ownProps,
-        ...anotherState,
-        ...anotherDispatch,
+        ...stateProps,
+        ...dispatchProps,
     })
 }
 

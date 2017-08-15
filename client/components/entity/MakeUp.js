@@ -13,7 +13,7 @@ export const InsertTagA = (text, match) => {
     let newtext = text
     if(match){
         match.map((item) => {
-          newtext = MakeUp(newtext, '['+item.name+']', ' <a href="'+item.link+'">'+item.name+'</a> ')
+          newtext = MakeUp(newtext, item.name, '<a href="'+item.link+'">'+item.name+'</a>')
         })
     }
     return newtext

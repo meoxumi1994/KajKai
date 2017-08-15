@@ -42,7 +42,7 @@ const mapStateToProps = (state, { id }) => {
     })
 }
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { id, commentid }) => ({
     onLike: () => {
         dispatch({ type: 'server/LIKE', data: {
             type: 'sellpost',
@@ -54,7 +54,7 @@ const mapDispatchToProps = (dispatch, { id }) => ({
         dispatch({ type: 'INST_ENTITY_SELL_POST_CHANGE', id: id, key: key, value: value })
     },
     onGetSellpost: () => {
-        dispatch(getSellPost(id))
+        dispatch(getSellPost(id, commentid))
     },
     onDeleteSellpost: () => {
         dispatch(deteleSellPost(id))

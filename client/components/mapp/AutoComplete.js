@@ -14,7 +14,7 @@ export default class AutoComplete extends React.Component {
                 const place = this.autocomplete.getPlace()
                 const lat = place.geometry.location.lat()
                 const lng = place.geometry.location.lng()
-                console.log(lat, lng)
+                this.props.onLocationChanged(lat, lng)
             });
         }
         this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyDEy3sjvl8Sq5bsInBAU61uu_u4_fK3zvk&libraries=places&callback=initAutocomplete')
@@ -27,7 +27,7 @@ export default class AutoComplete extends React.Component {
         ref.parentNode.insertBefore(script, ref)
     }
     render() {
-        const { SEARCH_LOCATION, searchType, onLocationChanged, data, onChange, value } = this.props
+        const { SEARCH_LOCATION, searchType, data } = this.props
         let inputSearchLocation
         return (
             <input className="form-control input-sm" ref={node => { inputSearchLocation = node}}
@@ -35,12 +35,6 @@ export default class AutoComplete extends React.Component {
                 id="autocomplete"
                 placeholder={SEARCH_LOCATION}
                 type="text"
-                onBlur={() => {
-                    onLocationChanged(inputSearchLocation.value.trim())
-                }}
-                onKeyDown={(e) => { if(e.keyCode == 13) {
-                    inputSearchLocation.blur()
-                }}}
                 style={{ border: 0,  borderRadius: '2px 2px 2px 2px', fontSize: 13 , outline: 'none', height: 28 }}
             />
         )

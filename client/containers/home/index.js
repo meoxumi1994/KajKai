@@ -18,12 +18,12 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onSearchQueryUpdated: (searchQuery) => {
-      dispatch(search(searchQuery))
-    },
+    // onSearchQueryUpdated: (searchQuery) => {
+    //   dispatch(search(searchQuery))
+    // },
     onNeedPost: () => {
         console.log('onNeedPost')
-        
+
     }
 })
 

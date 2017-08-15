@@ -14,9 +14,11 @@ export const postSellPost = (sellpost) => dispatch => {
     })
 }
 
-export const getSellPost = (id) => dispatch => {
+export const getSellPost = (id, commentid) => dispatch => {
     dispatch({ type: 'GET_SELL_POST_ING'})
-    flem('/sellpost/'+id,{})
+    flem('/sellpost/'+id,{
+        id: commentid,
+    })
     .then(({ status, sellpost }) => {
         if(status == 'success'){
             dispatch({ type: 'GET_SELL_POST_SUCCESS', sellpost: sellpost})

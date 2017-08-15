@@ -10,7 +10,7 @@ class LeaderComment extends React.Component {
     }
     render(){
         const { WRITE_COMMENT, comments, isReply, id, contentedit, avatarUrl, onReply, onChange, order, status,
-            sellpostid, onEnter, offset, numcomment, onGetMore } = this.props
+            sellpostid, onEnter, offset, numcomment, onGetMore, match } = this.props
         return(
             <div>
                 {comments.map((cm, index) => {
@@ -21,7 +21,7 @@ class LeaderComment extends React.Component {
                                 leadercommentid={comments[0].id}
                                 key={cm.id}
                                 id={cm.id}
-                                onReply={() => onReply(index, cm.commenterid)}
+                                onReply={() => onReply(index, cm.commenterid, cm.type, cm.urlname, cm.name)}
                                 isStoreRepresent={false}
                                 isleader={false}
                                 />
@@ -34,16 +34,16 @@ class LeaderComment extends React.Component {
                                     status={status}
                                     order={order}
                                     id={cm.id}
-                                    onReply={() => onReply(index, cm.commenterid)}
+                                    onReply={() => onReply(index, cm.commenterid, cm.type, cm.urlname, cm.name)}
                                     isStoreRepresent={false}
                                     isleader={true}
                                     />
-                                {( offset != -2 && numcomment > comments.length - 1 && comments.length > 1 ) &&
+                                {( offset != -2 && numcomment > comments.length && comments.length > 1 ) &&
                                     <CommentSuggest
                                         id={3}
                                         isleader={false}
                                         onClick={() => onGetMore()}
-                                        content={'View more '+ (numcomment - comments.length + 1 )+' comments'}
+                                        content={'View more '+ (numcomment - comments.length )+' comments'}
                                         // end={comments.length + ' of '+numcomment}
                                         />
                                 }
@@ -59,6 +59,7 @@ class LeaderComment extends React.Component {
                         id={id}
                         handleChange={(e) => onChange('contentedit', e.target.value)}
                         content={contentedit}
+                        match={match}
                         isleader={false}
                         avatarUrl={avatarUrl}
                         placehoder={WRITE_COMMENT}

@@ -10,9 +10,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onSearchQueryUpdated: (searchQuery) => {
-    dispatch(search(searchQuery))
-  },
+  // onSearchQueryUpdated: (searchQuery) => {
+  //   dispatch(search(searchQuery))
+  // },
   onNeedMoreSearchResult: (more) => {
     dispatch(needMoreSearch(more))
   }

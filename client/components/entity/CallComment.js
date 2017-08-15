@@ -8,7 +8,7 @@ class CallComment extends React.Component {
         super(props)
     }
     render(){
-        const { isleader, avatarUrl, placehoder, id, handleChange, content, onEnter, order } = this.props
+        const { isleader, avatarUrl, placehoder, id, handleChange, content, onEnter, order, match } = this.props
         return(
             <div style={{ paddingBottom: 10 }}>
                 <div style={{
@@ -36,6 +36,7 @@ class CallComment extends React.Component {
                         </table>
                         {order && <div style={{ height: 10 }}></div>}
                         <ContentEditable
+                            match={match}
                             onEnter={() => onEnter()}
                             placehoder={placehoder}
                             handleChange={(e) => handleChange(e)}

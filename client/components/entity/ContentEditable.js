@@ -28,41 +28,7 @@ class ContentEditable extends React.Component {
             <div style={{
                 outline: '1px solid #D2D2D2',
                 fontSize: 14,
-                // backgroundColor: 'white',
                 padding: padding}}>
-                <Textarea
-                    ref={ textarea => this.textarea = textarea }
-                    autoComplete="off"
-                    autoCorrect="off"
-                    autoCapitalize="off"
-                    spellCheck={false}
-                    style={{
-                        caretColor: '#1D2129',
-                        backgroundColor: 'transparent',
-                        position: 'absolute',
-                        color: 'transparent',
-                        borderWidth: 0,
-                        resize: 'none',
-                        fontSize: 14,
-                        padding: 0,
-                        width: this.state.width,
-                        outline: 'none',
-                    }}
-                    minRows={minRows}
-                    value={content}
-                    onKeyPress={(e) => {
-                        if(onEnter && e.key == "Enter"){
-                            this.setState({ enter: true })
-                            onEnter()
-                        }
-                    }}
-                    onChange={(e) => {
-                        if(this.state.enter){
-                            this.setState({ enter: false })
-                        }else{
-                            handleChange(e)
-                        }
-                    }}/>
                 <div
                     ref={display => this.display = display}
                     style={{
@@ -71,6 +37,43 @@ class ContentEditable extends React.Component {
                         width: width,
                     }}
                     dangerouslySetInnerHTML={{ __html: content?MixMakeUp(content, match):placehoder }}>
+                </div>
+                <div style={{
+                        marginTop: (this.display) ? -this.display.getBoundingClientRect().height : 0,
+                        float: 'right'
+                    }}>
+                    <Textarea
+                        ref={ textarea => this.textarea = textarea }
+                        autoComplete="off"
+                        autoCorrect="off"
+                        autoCapitalize="off"
+                        spellCheck={false}
+                        style={{
+                            caretColor: '#1D2129',
+                            backgroundColor: 'transparent',
+                            color: 'transparent',
+                            borderWidth: 0,
+                            resize: 'none',
+                            fontSize: 14,
+                            padding: 0,
+                            width: this.state.width,
+                            outline: 'none',
+                        }}
+                        minRows={minRows}
+                        value={content}
+                        onKeyPress={(e) => {
+                            if(onEnter && e.key == "Enter"){
+                                this.setState({ enter: true })
+                                onEnter()
+                            }
+                        }}
+                        onChange={(e) => {
+                            if(this.state.enter){
+                                this.setState({ enter: false })
+                            }else{
+                                handleChange(e)
+                            }
+                        }}/>
                 </div>
             </div>
         )
