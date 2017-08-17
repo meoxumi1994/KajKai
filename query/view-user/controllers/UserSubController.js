@@ -17,6 +17,7 @@ export const createUser = (message) => {
     time: image.time
   }))
   user.language = language ? language : 'vi'
+  user.createdAt = Date.now()
 
   user.save(() => {})
 }

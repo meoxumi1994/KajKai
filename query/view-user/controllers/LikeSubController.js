@@ -5,6 +5,18 @@ import { NotificationType } from '../enum'
 export const createLikeNotification = (message) => {
   const { likenId, likerId } = message.like
 
+  User.findOne({ id: likerId }, (err, user) => {
+    if (user) {
+      let { numberOfLike } = user
+      if (!numberOfLike) {
+        numberOfLike = 0
+      }
+      numberOfLike++
+      user.numberOfLike = numberOfLike
+      user.save(() => {})
+    }
+  })
+
   const mPromises = []
   mPromises.push(new Promise((resolve, reject) => {
     User.findOne({ id: likerId }, (err, user) => {

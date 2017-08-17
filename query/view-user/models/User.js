@@ -35,7 +35,13 @@ const UserSchema = new mongoose.Schema({
   notifications: [NotificationSchema],
   numberOfUnRead: {type: Number},
   interests: [InterestSchema],
-  currentId: {type: String}
+  currentId: {type: String},
+  numberOfComment: {type: Number},
+  numberOfReply: {type: Number},
+  numberOfLike: {type: Number},
+  numberOfFollow: {type: Number},
+  createdAt: {type: Date},
+  lastVisitTime: {type: Date}
 })
 
 export default UserSchema

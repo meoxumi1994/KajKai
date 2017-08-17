@@ -6,6 +6,18 @@ import { notify } from './NotificationPubController'
 export const createReplyNotification = (message) => {
   const { parentCommentId: commentId, sCommentId: replyId, posterId: replierId, sellPostId: sellpostId, minorPostId: minorpostId, content, time, match } = message.sComment
 
+  User.findOne({ id: replierId }, (err, user) => {
+    if (user) {
+      let { numberOfReply } = user
+      if (!numberOfReply) {
+        numberOfReply = 0
+      }
+      numberOfReply++
+      user.numberOfReply = numberOfReply
+      user.save(() => {})
+    }
+  })
+
   addIDReplyCommentSellpost(replyId, commentId, sellpostId)
 
   const mPromises = []

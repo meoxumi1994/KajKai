@@ -6,6 +6,18 @@ import { notify } from './NotificationPubController'
 export const createCommentNotification = (message) => {
   const { fCommentId: commentId, posterId: commenterId, sellPostId: sellpostId, time, content, order, match } = message.fComment
 
+  User.findOne({ id: commenterId }, (err, user) => {
+    if (user) {
+      let { numberOfComment } = user
+      if (!numberOfComment) {
+        numberOfComment = 0
+      }
+      numberOfComment++
+      user.numberOfComment = numberOfComment
+      user.save(() => {})
+    }
+  })
+
   addIDCommentSellpost(commentId, sellpostId)
 
   const mPromises = []
