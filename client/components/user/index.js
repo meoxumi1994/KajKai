@@ -10,6 +10,7 @@ import Post from '~/containers/user/Post'
 import Left from '~/containers/user/Left'
 import Contact from '~/containers/user/Contact'
 import Activity from '~/containers/user/Activity'
+import Photo from '~/containers/user/Photo'
 
 const Middle = ({location}) => {
     switch (location.pathname.split('/')[3]) {
@@ -19,6 +20,8 @@ const Middle = ({location}) => {
             return <About/>
         case 'store':
             return <Store/>
+        case 'photo':
+            return <Photo/>
         case 'post':
             return <Post/>
         case 'contact':
@@ -26,7 +29,7 @@ const Middle = ({location}) => {
         case 'activity':
             return <Activity/>
         case 'setting':
-            return <Setting/>
+            return <Setting location={location}/>
         default:
             return <div></div>
     }

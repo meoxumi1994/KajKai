@@ -26,6 +26,16 @@ const mapStateToProps = (state, ownProps) => {
         NOTE_AGE: g('NOTE_AGE'),
         POSITION_IN_MAP: g('POSITION_IN_MAP'),
         POSITION_FAILED: g('POSITION_FAILED'),
+        BLOCK: g('BLOCK'),
+        UNBLOCK: g('UNBLOCK'),
+        GENERAL: g('GENERAL'),
+        SECURITY: g('SECURITY'),
+        PASSWORD: g('PASSWORD'),
+        NOTE_VERIFY_PASSWORD: g('NOTE_VERIFY_PASSWORD'),
+        NOTE_PASSWORD: g('NOTE_PASSWORD'),
+        BLOCK_DESCRIPTION: g('BLOCK_DESCRIPTION'),
+        BLOCK_USER: g('BLOCK_USER'),
+        SEARCH_BY_NAME: g('SEARCH_BY_NAME')
     })
 }
 

@@ -9,6 +9,15 @@ const mapStateToProps = (state, { id }) => {
     return({
         ...state.inst.user.index,
         isOwner: isOwner,
+        USER_NAME: g('USER_NAME'),
+        EMAIL: g('EMAIL'),
+        LANGUAGE: g('LANGUAGE'),
+        ADDRESS: g('ADDRESS'),
+        PHONE: g('PHONE'),
+        AGE: g('AGE'),
+        INFO_GENERAL: g('INFO_GENERAL'),
+        POSITION_IN_MAP: g('POSITION_IN_MAP'),
+        INTERACTION: g('INTERACTION'),
     })
 }
 

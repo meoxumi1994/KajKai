@@ -8,7 +8,7 @@ const ButtonLine = ({ title, last, link, location, urlname, id }) => {
     return (
         <Link to={"/user/"+id+link}>
             <button type="button" className="btn btn-default"
-                style={{ height: 46, width: 78, borderColor: '#DFE0E4',
+                style={{ height: 46, width: 90, borderColor: '#DFE0E4', padding: 0,
                 borderRadius: 0, borderRightWidth: last, fontSize: 16, outline: 'none' }}>
                 {title}
             </button>
@@ -16,7 +16,7 @@ const ButtonLine = ({ title, last, link, location, urlname, id }) => {
                 <img style={{
                     position: 'absolute',
                     marginTop: 38.5,
-                    marginLeft: -46,
+                    marginLeft: -52,
                     width: 17,
                     height: 9.5,
                     borderColor: 'transparent',
@@ -29,7 +29,8 @@ const ButtonLine = ({ title, last, link, location, urlname, id }) => {
 }
 
 const Top = (props) => {
-    const { yourid, id, coverUrl, avatarUrl, username, onUploadImage, location } = props
+    const { yourid, id, coverUrl, avatarUrl, username, onUploadImage, location,
+        INTEREST, ABOUT, PHOTOS, SETTING } = props
     return(
         <div style={{ margin: 0,
             backgroundColor: 'white',
@@ -104,13 +105,14 @@ const Top = (props) => {
                     marginTop: -2,
                     marginLeft: 183,
                 }}>
-                    <ButtonLine {...props} title="Interest" last="0" link=""/>
-                    <ButtonLine {...props} title="About" last="0" link="/about"/>
+                    <ButtonLine {...props} title={INTEREST} last="0" link=""/>
+                    <ButtonLine {...props} title={ABOUT} last="0" link="/about"/>
+                    <ButtonLine {...props} title={PHOTOS} last="0" link="/photo"/>
                     {/* <ButtonLine {...props} title="Post" last="0" link="/post"/> */}
                     {/* <ButtonLine {...props} title="Store" last="0" link="/store"/> */}
                     {/* <ButtonLine {...props} title="Contact" last={(yourid==id)?0:"1px"} link="/contact"/> */}
                     {/* {yourid == id && <ButtonLine {...props} title="Activity" last="0" link="/activity"/> } */}
-                    {yourid == id && <ButtonLine {...props} title="Setting" last="1px" link="/setting"/> }
+                    {yourid == id && <ButtonLine {...props} title={SETTING} last="1px" link="/setting"/> }
                 </div>
             </div>
             <hr style={{ marginTop: 43, marginBottom: 0, borderColor: 'transparent'}}></hr>

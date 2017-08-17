@@ -10,6 +10,10 @@ const mapStateToProps = (state, ownProps) => {
     return({
         ...state.inst.user.index,
         yourid: state.user.id,
+        INTEREST: g('INTEREST'),
+        ABOUT: g('ABOUT'),
+        PHOTOS: g('PHOTOS'),
+        SETTING: g('SETTING'),
     })
 }
 

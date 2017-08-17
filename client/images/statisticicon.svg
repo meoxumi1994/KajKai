@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="117px" height="129px" viewBox="0 0 117 129" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>statisticicon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="statisticicon" fill="#90949C">
+            <rect id="Rectangle-60" transform="translate(34.750000, 41.988330) rotate(45.000000) translate(-34.750000, -41.988330) " x="27.4939033" y="12.8284271" width="14.5121933" height="58.3198052"></rect>
+            <rect id="Rectangle-60" transform="translate(60.815418, 36.815418) rotate(-45.000000) translate(-60.815418, -36.815418) " x="53.5593209" y="16.048282" width="14.5121933" height="41.5342712"></rect>
+            <rect id="Rectangle-60" transform="translate(84.723126, 32.907709) rotate(45.000000) translate(-84.723126, -32.907709) " x="77.4670297" y="6.6142384" width="14.5121933" height="52.5869408"></rect>
+            <circle id="Oval-44" cx="10" cy="67" r="10"></circle>
+            <circle id="Oval-44" cx="107" cy="10" r="10"></circle>
+            <rect id="Rectangle-57" x="7" y="84" width="27" height="45" rx="5"></rect>
+            <rect id="Rectangle-57" x="45" y="68" width="27" height="61" rx="5"></rect>
+            <rect id="Rectangle-57" x="84" y="51" width="27" height="78" rx="5"></rect>
+        </g>
+    </g>
+</svg>

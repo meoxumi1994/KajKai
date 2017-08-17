@@ -11,7 +11,34 @@ class Photo extends React.Component {
         const { storePhotos, postPhotos, productPhotos, userPhotos} = this.props
         return (
             <div>
-                {storePhotos.length > 0 &&
+                {userPhotos.length > 0 &&
+                    <div style={{
+                        borderRadius: 2.5,
+                        border: '1px solid #CCCCCC',
+                        boxShadow: '0px 0px 4px #CCCCCC',
+                        backgroundColor: 'white',
+                        width: 938, marginTop: 10, marginLeft: -23, paddingBottom: 8,
+                        }}>
+                        <div style={{ padding: 10, borderRadius: 3.5,fontSize: 20, backgroundColor: '#F6F7F9'}}>
+                            <img src={"/images/photousericon.svg"} width={22} height={22}/>
+                            <span style={{ marginLeft: 10, fontSize: 18 }}>Photos User</span>
+                        </div>
+                        <hr style={{ margin: 0 }}/>
+                        {userPhotos.map((item,index) => {
+                            return(
+                                <div key={index} style={{ display: 'inline-block', padding: '5px 0px 0px 5px'}}>
+                                    <KeepImage
+                                        canEdit={false}
+                                        type="Carousel"
+                                        width={227.6}
+                                        images={[item.url]}
+                                        imagesSuggest={[item.url]}/>
+                                </div>
+                            )
+                        })}
+                    </div>
+                }
+                {/* {storePhotos.length > 0 &&
                     <div style={{
                         borderRadius: 2.5,
                         border: '1px solid #CCCCCC',
@@ -91,7 +118,7 @@ class Photo extends React.Component {
                             )
                         })}
                     </div>
-                }
+                } */}
             </div>
         )
     }
