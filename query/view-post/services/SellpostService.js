@@ -142,6 +142,87 @@ export const getUserSellposts = (requesterId, userId, offset, next) => {
   })
 }
 
+export const getNearBy = (id, type, next) => {
+  Sellpost.findOne({ id }, (err, sellpost) => {
+    if (sellpost) {
+      Sellpost.find({ storeId: sellpost.storeId }, (err, sellposts) => {
+        if (sellposts) {
+          const mPromises = [], sellpostById = {}
+          let sellpostList = [], hasImage = []
+          sellposts.map((sellpost, index) => {
+            sellpostById[sellpost.id] = index
+            sellpostList.push(sellpost.id)
+            hasImage.push(false)
+          })
+
+          sellposts.map((sellpost) => {
+            mPromises.push(new Promise((resolve, reject) => {
+              Postrow.find({ sellpostId: sellpost.id }, (err, postrows) => {
+                if (postrows) {
+                  let flag = false
+                  let { images, products } = postrow
+                  if (images && images.length > 0) {
+                    flag = true
+                  }
+                  if (products) {
+                    for (let i = 0; i < products.length; i++) {
+                      if (products[i].imageUrl) {
+                        flag = true
+                        break
+                      }
+                    }
+                  }
+                  hasImage[sellpostById[sellpost.id]] = flag
+                  resolve(postrows)
+                } else {
+                  reject(err)
+                }
+              })
+            }))
+          })
+          Promise.all(mPromises).then((postrowses) => {
+              let imagaleSellposts = []
+              let start
+              for (let i = 0; i < sellpostList.length; i++) {
+                let sellpostId = sellpostList[i]
+                if (hasImage[sellpostId] || sellpostId == id) {
+                  if (sellpostId == id) {
+                    start = imagaleSellposts.length
+                  }
+                  imagaleSellposts.push(sellpostId)
+                }
+              }
+              let n = imagaleSellposts.length
+              if (n == 0 || n == 1) {
+                next(id)
+              } else {
+                if (type == 'next') {
+                  if (start < n - 1) {
+                    next(imagaleSellposts[start + 1])
+                  } else {
+                    next(imagaleSellposts[0])
+                  }
+                } else {
+                  if (start > 0) {
+                    next(imagaleSellposts[start - 1])
+                  } else {
+                    next(imagaleSellposts[n - 1])
+                  }
+                }
+              }
+            }, err => {
+              next(id)
+            })
+        } else {
+          next(id)
+        }
+      })
+    } else {
+      next(id)
+    }
+  })
+}
+
 export const verifyToken = (token) => {
     try {
         const decoded = jwt.verify(token, 'secret');
