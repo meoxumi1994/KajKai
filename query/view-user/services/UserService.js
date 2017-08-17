@@ -52,9 +52,20 @@ export const getUser = (requesterId, id, next) => {
                 urlname: basicStore.urlName
               }))) : [],
               numUnreaded: user.numberOfUnRead ? user.numberOfUnRead : 0,
-              currentId: user.currentId ? user.currentId : user.id
+              currentId: user.currentId ? user.currentId : user.id,
+              interactive : {
+                 numleadercomment: user.numberOfComment ? user.numberOfComment : 0,
+                 numcomment: user.numberOfReply ? user.numberOfReply : 0,
+                 numlike: user.numberOfLike ? user.numberOfLike : 0,
+                 numfollow: user.numberOfFollow ? user.numberOfFollow : 0,
+                 create_time: user.createdAt ? user.createdAt.getTime() : null,
+                 last_time: user.lastVisitTime ? user.lastVisitTime.getTime() : null
+              }
             }
           })
+          if (requesterId == id) {
+            User.findOneAndUpdate({ id }, { lastVisitTime: Date.now() }, () => {})
+          }
         } else {
           next({
             status: 'failed',
