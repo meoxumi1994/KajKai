@@ -1,0 +1,35 @@
+config:
+  target: 'https://socket.kajkai.com'
+  phases:
+    - duration: 300
+      arrivalCount: 150
+scenarios:
+- engine: 'socketio'
+  name: comment to order
+  flow:
+    - emit:
+        channel: 'server/sendToken'
+        data: {
+            type: 'server/sendToken',
+            tokenId: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIwMDE1OTkyZGZlOGExMjkyNjY1MWJmYzFjYWYiLCJpYXQiOjE1MDI3OTc4MDAsImV4cCI6MTUwMzAxMzgwMH0._5CFZX3bzoSkGmGixazTv7VbWZvuKx-YDrTfdoPHElk'
+          }
+    - emit:
+        channel: 'server/LEADERCOMMENT'
+        data:
+          {
+            type: 'server/LEADERCOMMENT',
+            data: {
+                content: 'nhanh giúp mình nhé :D',
+                order: [
+                  {
+                    content: '',
+                    id: '0095992e032c57f2d2e781c34f9',
+                    imageUrl: 'https://d1z4p30mgj29.cloudfront.net/38ace224602a8e874bbc589510005a6010a2ba86cc59f5df4a6b3da4e12.png',
+                    list: ['a'],
+                    num: 1
+                  }
+                ],
+                sellpostid: '0125992e032c57f2d2e781c34f7',
+                time: 1502789647712
+              }
+          }
