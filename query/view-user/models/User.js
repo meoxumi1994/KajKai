@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema({
   id: {type: String},
   username: {type: String},
   email: {type: String},
+  socialType: {type: String},
   avatarUrl: {type: String},
   coverUrl: {type: String},
   imageList: [ImageSchema],

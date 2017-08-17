@@ -1,7 +1,7 @@
 import { User, Black } from '../models'
 
 export const createUser = (message) => {
-  const { id, username, email, avatarUrl, imageUrls: imageList, language } = message.user
+  const { id, username, email, avatarUrl, imageUrls: imageList, language, socialType } = message.user
   const user = new User({
     id,
     lastUpdate: {
@@ -11,6 +11,7 @@ export const createUser = (message) => {
 
   if (username) user.username = username
   if (email) user.email = email
+  if (socialType) user.socialType = socialType
   if (avatarUrl) user.avatarUrl = avatarUrl
   if (imageList) user.imageList = imageList.map((image) => ({
     url: image.url,
