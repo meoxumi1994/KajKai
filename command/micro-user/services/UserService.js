@@ -60,6 +60,7 @@ export const getUserBasicInfo = (user) => {
             lng: user.longitude,
             lat: user.latitude
         },
+        socialType: user.socialNetworkType,
         // blacklist: [{
         //     id:,
         //     type: 'userid|storeid|mesid',
@@ -77,7 +78,8 @@ export const getUserBasicStoreInfo = (user) => {
         coverUrl: user.coverUrl,
         id: getUserGlobalId(user._id),
         longitude: user.longitude,
-        latitude: user.latitude
+        latitude: user.latitude,
+        socialType: user.socialNetworkType
     }
 };
 
