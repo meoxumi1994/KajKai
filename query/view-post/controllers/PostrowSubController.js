@@ -30,17 +30,11 @@ export const createPostrow = (message) => {
         if (!postrowImageList) {
           postrowImageList = []
         }
-        console.log('mPostrowImageList: ', mPostrowImageList);
         mPostrowImageList.map((image) => {
           postrowImageList.push(image)
         })
-        console.log('postrowImageList: ',postrowImageList);
 
         BasicStore.findOneAndUpdate({ id: storeId }, { postrowImageList }, () => {})
-
-        // basicStore.postrowImageList = postrowImageList
-        //
-        // basicStore.save(() => {})
       }
     })
   }
@@ -68,9 +62,7 @@ export const createPostrow = (message) => {
         mProductImageList.map((image) => {
           productImageList.push(image)
         })
-        basicStore.productImageList = productImageList
-
-        basicStore.save(() => {})
+        BasicStore.findOneAndUpdate({ id: storeId }, { productImageList }, () => {})
       }
     })
   }
@@ -112,9 +104,7 @@ export const updatePostrow = (message) => {
             mPostrowImageList.map((image) => {
               postrowImageList.push(image)
             })
-            basicStore.postrowImageList = postrowImageList
-
-            basicStore.save(() => {})
+            BasicStore.findOneAndUpdate({ id: storeId }, { postrowImageList }, () => {})
           }
         })
       }
@@ -146,9 +136,7 @@ export const updatePostrow = (message) => {
             mProductImageList.map((image) => {
               productImageList.push(image)
             })
-            basicStore.productImageList = productImageList
-
-            basicStore.save(() => {})
+            BasicStore.findOneAndUpdate({ id: storeId }, { productImageList }, () => {})
           }
         })
       }
