@@ -36,9 +36,11 @@ export const createPostrow = (message) => {
         })
         console.log('postrowImageList: ',postrowImageList);
 
-        basicStore.postrowImageList = postrowImageList
+        BasicStore.findOneAndUpdate({ id: storeId }, { postrowImageList }, () => {})
 
-        basicStore.save(() => {})
+        // basicStore.postrowImageList = postrowImageList
+        //
+        // basicStore.save(() => {})
       }
     })
   }
