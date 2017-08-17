@@ -182,7 +182,7 @@ export const getNearBy = (id, type, next) => {
           })
           Promise.all(mPromises).then((postrowses) => {
               let imagaleSellposts = []
-              let start
+              let start = -1
               for (let i = 0; i < sellpostList.length; i++) {
                 let sellpostId = sellpostList[i]
                 if (hasImage[sellpostId] || sellpostId == id) {
@@ -193,7 +193,7 @@ export const getNearBy = (id, type, next) => {
                 }
               }
               let n = imagaleSellposts.length
-              if (n == 0 || n == 1) {
+              if (n == 0 || n == 1 || start == -1) {
                 next(id)
               } else {
                 if (type == 'next') {
