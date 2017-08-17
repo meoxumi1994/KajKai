@@ -30,9 +30,11 @@ export const createPostrow = (message) => {
         if (!postrowImageList) {
           postrowImageList = []
         }
+        console.log('mPostrowImageList: ', mPostrowImageList);
         mPostrowImageList.map((image) => {
           postrowImageList.push(image)
         })
+        console.log('postrowImageList: ',postrowImageList);
 
         basicStore.postrowImageList = postrowImageList
 
