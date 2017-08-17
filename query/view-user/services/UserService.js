@@ -24,6 +24,7 @@ export const getUser = (requesterId, id, next) => {
               id: user.id,
               username: user.username,
               email: requesterId == id ? user.email : '',
+              typeLogin: user.socialType ? user.socialType : 'normal',
               avatarUrl: user.avatarUrl,
               coverUrl: user.coverUrl,
               address: requesterId == id ? user.address : '',
@@ -52,9 +53,20 @@ export const getUser = (requesterId, id, next) => {
                 urlname: basicStore.urlName
               }))) : [],
               numUnreaded: user.numberOfUnRead ? user.numberOfUnRead : 0,
-              currentId: user.currentId ? user.currentId : user.id
+              currentId: user.currentId ? user.currentId : user.id,
+              interactive : {
+                 numleadercomment: user.numberOfComment ? user.numberOfComment : 0,
+                 numcomment: user.numberOfReply ? user.numberOfReply : 0,
+                 numlike: user.numberOfLike ? user.numberOfLike : 0,
+                 numfollow: user.numberOfFollow ? user.numberOfFollow : 0,
+                 create_time: user.createdAt ? user.createdAt.getTime() : null,
+                 last_time: user.lastVisitTime ? user.lastVisitTime.getTime() : null
+              }
             }
           })
+          if (requesterId == id) {
+            User.findOneAndUpdate({ id }, { lastVisitTime: Date.now() }, () => {})
+          }
         } else {
           next({
             status: 'failed',

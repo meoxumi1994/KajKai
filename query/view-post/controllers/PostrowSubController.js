@@ -34,9 +34,7 @@ export const createPostrow = (message) => {
           postrowImageList.push(image)
         })
 
-        basicStore.postrowImageList = postrowImageList
-
-        basicStore.save(() => {})
+        BasicStore.findOneAndUpdate({ id: storeId }, { postrowImageList }, () => {})
       }
     })
   }
@@ -64,9 +62,7 @@ export const createPostrow = (message) => {
         mProductImageList.map((image) => {
           productImageList.push(image)
         })
-        basicStore.productImageList = productImageList
-
-        basicStore.save(() => {})
+        BasicStore.findOneAndUpdate({ id: storeId }, { productImageList }, () => {})
       }
     })
   }
@@ -85,12 +81,17 @@ export const updatePostrow = (message) => {
   if (numberOfLine) mPostrow.numberOfLine = numberOfLine
   if (images && images.length > 0) {
     mPostrow.images = images
-    mPostrowImageList = images.map((image) => (
-      new Image({
-        url: image.url,
-        time: Date.now()
-      })
-    ))
+    for (let i = 0; i < images.length; i++) {
+      let image = images[i]
+      if (image) {
+        mPostrowImageList.push(
+          new Image({
+            url: image,
+            time: Date.now()
+          })
+        )
+      }
+    }
 
     Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
       if (sellpost) {
@@ -100,10 +101,10 @@ export const updatePostrow = (message) => {
             if (!postrowImageList) {
               postrowImageList = []
             }
-            postrowImageList = [...postrowImageList, ...mPostrowImageList]
-            basicStore.postrowImageList = postrowImageList
-
-            basicStore.save(() => {})
+            mPostrowImageList.map((image) => {
+              postrowImageList.push(image)
+            })
+            BasicStore.findOneAndUpdate({ id: storeId }, { postrowImageList }, () => {})
           }
         })
       }
@@ -112,12 +113,17 @@ export const updatePostrow = (message) => {
   if (titles) mPostrow.titles = titles
   if (products && products.length > 0) {
     mPostrow.products = products
-    mProductImageList = products.map((product) => (
-      new Image({
-        url: product.imageUrl,
-        time: Date.now()
-      })
-    ))
+    for (let i = 0; i < products.length; i++) {
+      let product = products[i]
+      if (product && product.imageUrl) {
+        mProductImageList.push(
+          new Image({
+            url: product.imageUrl,
+            time: Date.now()
+          })
+        )
+      }
+    }
 
     Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
       if (sellpost) {
@@ -127,10 +133,10 @@ export const updatePostrow = (message) => {
             if (!productImageList) {
               productImageList = []
             }
-            productImageList = [...productImageList, ...mProductImageList]
-            basicStore.productImageList = productImageList
-
-            basicStore.save(() => {})
+            mProductImageList.map((image) => {
+              productImageList.push(image)
+            })
+            BasicStore.findOneAndUpdate({ id: storeId }, { productImageList }, () => {})
           }
         })
       }

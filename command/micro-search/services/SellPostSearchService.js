@@ -81,7 +81,7 @@ export const addNewProduct = (product) => {
 };
 
 export const searchSellPost = (offset, length, categoryId, location, keyword, next) => {
-    if (location) {
+    if (location && location.lat && location.lon) {
         searchWithLocation(offset, length, categoryId, location, keyword, (res) => {
             next(getDisplayResult(res));
         })
@@ -250,14 +250,16 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                 body: {
                     from: offset,
                     size: length,
-                    bool: {
-                        must: {
-                              match_all: {}
-                        },
-                        filter: {
-                            geo_distance: {
-                                distance: config.MAX_DISTANT_FILTER,
-                                location: location
+                    query: {
+                        bool: {
+                            must: {
+                                match_all: {}
+                            },
+                            filter: {
+                                geo_distance: {
+                                    distance: config.MAX_DISTANT_FILTER,
+                                    location: location
+                                }
                             }
                         }
                     }
@@ -318,17 +320,19 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                 body: {
                     from: offset,
                     size: length,
-                    bool: {
-                        should: [{
-                            multi_match: {
-                                query: categoryId,
-                                fields: ['firstCategoryId', 'secondCategoryId']
-                            }
-                        }],
-                        filter: {
-                            geo_distance: {
-                                distance: config.MAX_DISTANT_FILTER,
-                                location: location
+                    query: {
+                        bool: {
+                            should: [{
+                                multi_match: {
+                                    query: categoryId,
+                                    fields: ['firstCategoryId', 'secondCategoryId']
+                                }
+                            }],
+                            filter: {
+                                geo_distance: {
+                                    distance: config.MAX_DISTANT_FILTER,
+                                    location: location
+                                }
                             }
                         }
                     }

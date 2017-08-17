@@ -5,6 +5,18 @@ export const addFollow = (message) => {
 
   User.findOne({ id: followerId }, (err, user) => {
     if (user) {
+      let { numberOfFollow } = user
+      if (!numberOfFollow) {
+        numberOfFollow = 0
+      }
+      numberOfFollow++
+      user.numberOfFollow = numberOfFollow
+      user.save(() => {})
+    }
+  })
+
+  User.findOne({ id: followerId }, (err, user) => {
+    if (user) {
       if (followeeId.substr(0, 3) == '002') { // store
         let { followingStores } = user
         if (!followingStores) {
