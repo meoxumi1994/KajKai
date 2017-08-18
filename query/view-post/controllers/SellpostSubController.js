@@ -18,6 +18,7 @@ export const createSellpost = (message) => {
 
   BasicStore.findOne({ id: storeId }, (err, basicStore) => {
     if (basicStore) {
+      sellpost.urlName = basicStore.urlName
       sellpost.storeName = basicStore.storeName
       sellpost.avatarUrl = basicStore.avatarUrl
     }

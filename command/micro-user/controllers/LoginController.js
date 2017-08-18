@@ -88,7 +88,7 @@ export const loginGoogle = () => {
                     if (user) {
                         login(res, user);
                     } else {
-                        createUser(body.email.toLowerCase(), body.name, '1234678', 1, SocialType.GOOGLE, null, null, body.picture, (newUser) => {
+                        createUser(body.email.toLowerCase(), body.name, '1234678', 1, null, SocialType.GOOGLE, null, body.picture, (newUser) => {
                             login(res, newUser);
                             createUserPub(newUser);
                         })

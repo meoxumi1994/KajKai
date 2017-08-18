@@ -1,4 +1,4 @@
-import { getSellpost, getSellposts, getUserSellposts } from '../services/SellpostService.js'
+import { getSellpost, getSellposts, getUserSellposts, getNearBy } from '../services/SellpostService.js'
 
 export const getSellpostHandler = () => (req, res) => {
   const requesterId = req.decoded._id
@@ -50,5 +50,15 @@ export const getUserSellpostsHandler = () => (req, res) => {
     } else {
       res.json({status: 'failed'})
     }
+  })
+}
+
+export const getNearByHandler = () => (req, res) => {
+  let { id } = req.params
+  let { type } = req.query
+  getNearBy(id, type, (sellpostId) => {
+    res.json({
+      sellpostid: sellpostId
+    })
   })
 }
