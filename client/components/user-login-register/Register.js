@@ -29,7 +29,7 @@ const Register = (props) => {
                 </div>
             </div>
             <div className={"form-group" + (warningpassword ?" has-error":"")}>
-                <input type="text" className="form-control input-md"
+                <input type="password" className="form-control input-md"
                     value={password} placeholder={ PASSWORD }
                     onChange={(e) => handleChange('password', e.target.value)}
                 />

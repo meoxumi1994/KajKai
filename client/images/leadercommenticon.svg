@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128px" height="128px" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>leadercommenticon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M0,16.0094086 C0,7.1676564 7.15611005,0 16.0008841,0 L111.999116,0 C120.83616,0 128,7.15667402 128,16.0094086 L128,82.9492876 C128,91.7910399 120.83353,98.9586963 111.995205,98.9586963 L66.7037915,98.9586963 L29.2251185,128 L29.2251185,98.9586963 L16.0020231,98.9586963 C7.16434978,98.9586963 0,91.8020222 0,82.9492876 L0,16.0094086 Z" id="leadercommenticon" fill="#90949C"></path>
+    </g>
+</svg>

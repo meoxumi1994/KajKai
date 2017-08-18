@@ -7,7 +7,7 @@ class AboutCell extends React.Component {
     }
     render(){
         const { title, kind, value } = this.props
-        if(!value || !title)
+        if( value == undefined || title == undefined)
             return (
                 <div></div>
             )
