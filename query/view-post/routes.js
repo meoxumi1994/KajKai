@@ -91,5 +91,12 @@ export default {
       middleware: [auth()],
       method: 'getStatisticsHandler'
     }
+  },
+  '/nearby/sellpost/:id': {
+    get: {
+      controller: 'SellpostController',
+      middleware: [auth()],
+      method: 'getNearByHandler'
+    }
   }
 }

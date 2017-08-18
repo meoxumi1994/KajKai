@@ -18,6 +18,12 @@ const mapStateToProps = (state, { kind, type }) => {
         EDIT: g('EDIT'),
         SAVE: g('SAVE'),
         CONFIRM: g('CONFIRM'),
+        ADD: g('ADD'),
+        EDIT_PASSWORD: g('EDIT_PASSWORD'),
+        NEW_PASSWORD: g('NEW_PASSWORD'),
+        OLD_PASSWORD: g('OLD_PASSWORD'),
+        RE_PASSWORD: g('RE_PASSWORD'),
+        DONE: g('DONE'),
         value: (type=='store') ? store[kind] : user[kind],
         ...settingcell,
     })

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 import interest from './interest'
+import photo from './photo'
 
 const index = (state = {
     stateUser : 'WAIT'
@@ -27,6 +28,7 @@ const index = (state = {
 const user = combineReducers({
     index,
     interest,
+    photo,
 })
 
 export default user

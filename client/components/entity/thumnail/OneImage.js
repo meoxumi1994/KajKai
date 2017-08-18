@@ -24,17 +24,17 @@ class OneImage extends React.Component {
                         textAlign: 'left',
                         position: 'absolute',
                         width: style.width,
-                        marginTop: isTop?0:style.height*7/8 - 16,
+                        marginTop: isTop?0:(style.height - 22) - 16,
                         backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                        <img src="/images/camera.svg" style={{ margin: 8 , height: style.height / 8 }}/>
+                        <img src="/images/camera.svg" style={{ margin: 8 , height: 22 }}/>
                         <span style={{ marginLeft: 8, fontSize: 12, color: 'white'}}>{ADD_PHOTO}</span>
                     </div>
                 :   <div  style={{
                         textAlign: 'left',
                         position: 'absolute',
-                        marginTop: isTop?0:style.height*7/8 - 16,
+                        marginTop: isTop?0:(style.height - 22) - 16,
                         }}>
-                        <img src="/images/camera.svg" style={{ margin: 12 ,height: style.height / 10 }}/>
+                        <img src="/images/camera.svg" style={{ margin: 9 ,height: 20 }}/>
                     </div>
                 }
                 <img src={src} width={style.width} height={style.height}/>

@@ -9,6 +9,7 @@ const mapStateToProps = (state, ownProps) => {
     // console.log('current', (new Date()).getDate(), (new Date()).getMonth())
     const statistic = state.inst.store.statistic
     return({
+        STATISTIC: g('STATISTIC'),
         ...statistic
     })
 }

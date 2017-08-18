@@ -30,7 +30,7 @@ class Statistic extends React.Component {
         super(props)
     }
     render(){
-        const { current, numday, statistics, onChange, myState } = this.props
+        const { current, numday, statistics, onChange, myState, STATISTIC } = this.props
         const data = {
             labels: getLabel(current, numday),
             datasets: [{
@@ -41,7 +41,8 @@ class Statistic extends React.Component {
         return(
             <div className="panel panel-default" style={{ margin: 0, marginLeft: -23, marginTop: 10, }}>
                 <div style={{ padding: 10, borderRadius: '3px 3px 0px 0px', fontSize: 18, backgroundColor: '#F6F7F9'}}>
-                    Statistic
+                    <img src={"/images/statisticicon.svg"} width={20} height={20}/>
+                    <span style={{ marginLeft: 10 }}>{STATISTIC}</span>
                 </div>
                 <div style={{ padding: '0px 10px 10px 10px'}}>
                     <div style={{ padding: 10 }}>

@@ -1214,8 +1214,6 @@ GET /feedbacks?offset=0&length=10 {
     ]
 }
 
-
-
 POST /loginadmin {
   adminName: ,
   password:
@@ -1243,4 +1241,8 @@ GET /logout: { // for admin
 GET /statistics/:storeid?from=''&to=''& { // số lượng leadercomment cho mỗi ngày từ ngày from tới ngày to
   status: 'success|failed'
   statistics: []                    // integer array
+}
+
+GET /nearby/sellpost/:sellpostid?type='next|previous' {
+    sellpostid
 }

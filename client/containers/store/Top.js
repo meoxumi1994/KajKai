@@ -22,6 +22,11 @@ const mapStateToProps = (state, ownProps) => {
         coverUrl: coverUrl,
         userid: userid,
         yourid: state.user.id,
+        SETTING: g('SETTING'),
+        PAGE: g('PAGE'),
+        ABOUT: g('ABOUT'),
+        PHOTOS: g('PHOTOS'),
+        STATISTIC: g('STATISTIC'),
     })
 }
 

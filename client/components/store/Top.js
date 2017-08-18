@@ -9,7 +9,7 @@ const ButtonLine = ({ id, location, urlname, title, last, link }) => {
         <Link to={"/"+urlname + link}>
             <button type="button" className="btn btn-default"
                 style={{
-                    height: 46, width: 78, borderRadius: 0, borderColor: '#DFE0E4',
+                    height: 46, width: 90, borderRadius: 0, borderColor: '#DFE0E4', padding: 0,
                     borderRightWidth: last, fontSize: 16, outline: 'none' }}>
                 {title}
             </button>
@@ -17,7 +17,7 @@ const ButtonLine = ({ id, location, urlname, title, last, link }) => {
                 <img style={{
                     position: 'absolute',
                     marginTop: 38.5,
-                    marginLeft: -46,
+                    marginLeft: -52,
                     width: 17,
                     height: 9.5,
                     borderColor: 'transparent',
@@ -35,7 +35,8 @@ class Top extends React.Component {
         this.state = {}
     }
     render(){
-        const { id, userid, yourid, coverUrl, avatarUrl, name, onUploadImage, location, isOwner } = this.props
+        const { id, userid, yourid, coverUrl, avatarUrl, name, onUploadImage, location, isOwner,
+            PAGE, ABOUT, PHOTOS, STATISTIC, SETTING } = this.props
         return(
             <div className="panel panel-default"
                 style={{ margin: 0, borderWidth: 1 , borderRadius: '0px 0px 5px 5px'}}>
@@ -119,15 +120,15 @@ class Top extends React.Component {
                         marginTop: -2,
                         marginLeft: 183,
                     }}>
-                        <ButtonLine {...this.props} title="Page" last="0" link=""/>
-                        <ButtonLine {...this.props} title="About" last="0" link="/about"/>
+                        <ButtonLine {...this.props} title={PAGE} last="0" link=""/>
+                        <ButtonLine {...this.props} title={ABOUT} last="0" link="/about"/>
                         {/* <ButtonLine {...this.props} title="Post" last="0" link="/post"/> */}
-                        <ButtonLine {...this.props} title="Photos" last={(userid == yourid) ? 0: '1px'} link="/photo"/>
+                        <ButtonLine {...this.props} title={PHOTOS} last={(userid == yourid) ? 0: '1px'} link="/photo"/>
                         {/* <ButtonLine {...this.props} title="Videos" last="0" link="/video"/> */}
                         {/* <ButtonLine {...this.props} title="Contact" last={(userid == yourid) ? 0:'1px'} link="/contact"/> */}
                         {/* {(userid == yourid) && <ButtonLine {...this.props} title="Activity" last="0" link="/activity"/>} */}
-                        {(userid == yourid) && <ButtonLine {...this.props} title="Statistics" last={0} link="/statistic"/>}
-                        {(userid == yourid) && <ButtonLine {...this.props} title="Setting" last="1px" link="/setting"/>}
+                        {(userid == yourid) && <ButtonLine {...this.props} title={STATISTIC} last={0} link="/statistic"/>}
+                        {(userid == yourid) && <ButtonLine {...this.props} title={SETTING} last="1px" link="/setting"/>}
                     </div>
                 </div>
                 <hr style={{ marginTop: 43, marginBottom: 0, borderColor: 'transparent'}}></hr>

@@ -13,17 +13,20 @@ const checkPhone = (phone) => {
 class SettingCell extends React.Component {
     constructor(props){
         super(props)
-        this.state = { isEdit: false, value: '' }
+        this.state = { isEdit: false, value: '', value1: '', value2: '', value3: '' }
     }
     componentDidMount(){
-        this.setState({ value: this.props.value })
+        this.setState({ value: this.props.value || ''})
     }
     render(){
-        const { id, title, description, placeholder, onVerify, EDIT, SAVE, CONFIRM, kind, openModalPhone } = this.props
+        const { id, title, description, placeholder, onVerify, EDIT_PASSWORD,
+            NEW_PASSWORD, OLD_PASSWORD, RE_PASSWORD, DONE,
+            EDIT, SAVE, ADD, CONFIRM, kind, openModalPhone, width } = this.props
         return(
-            <div className="panel panel-default" style={{ margin: 0, marginLeft: -23, marginTop: 10, }}>
+            <div className="panel panel-default" style={{ margin: 0, marginTop: 10, }}>
                 <div style={{ padding: 10, borderRadius: '3px 3px 0px 0px', fontSize: 18, backgroundColor: '#F6F7F9'}}>
-                    {title}
+                    <img src={"/images/"+kind+"icon.svg"} width={20} height={20}/>
+                    <span style={{ marginLeft: 10 }}>{title}</span>
                 </div>
                 <hr style={{ margin : 0 }}/>
                 <div>
@@ -34,7 +37,7 @@ class SettingCell extends React.Component {
                     }
                     {kind == 'position' ?
                         <div style={{ padding: 10 }}>
-                            <ShowInMap position={this.state.value} width={918} height={500}
+                            <ShowInMap position={this.state.value} width={width-22} height={500}
                                     onChangePosition={(value) => {
                                         this.setState({ value: value })
                                         this.props.onUpdate(value)
@@ -55,7 +58,7 @@ class SettingCell extends React.Component {
                                         }
                                     }
                                 }>
-                                {this.state.isEdit ? CONFIRM : EDIT}
+                                {this.state.isEdit ? CONFIRM : (this.state.value ? EDIT : ADD)}
                             </div>
                             {this.state.isEdit ?
                                 <input className="form-control input-sm"
@@ -82,6 +85,39 @@ class SettingCell extends React.Component {
                                 </div>
                             } */}
                         </div>
+                    : kind=='password' ?
+                        <div style={{ padding: 10 }}>
+                            <div className="btn btn-default btn-sm" style={{ float: 'right', marginRight: 10 }}
+                                onClick={() => {
+                                        this.setState({ isEdit: !this.state.isEdit })
+                                        if(this.state.isEdit)
+                                            this.props.onUpdate(this.state.value)
+                                    }
+                                }>
+                                {this.state.isEdit ? DONE : EDIT_PASSWORD }
+                            </div>
+                            {this.state.isEdit ?
+                                <div>
+                                    <input className="form-control input-sm"
+                                        placeholder={OLD_PASSWORD}
+                                        style={{ width: '80%', fontSize: 13.5, marginTop: 1 }}
+                                        value={this.state.value1}
+                                        onChange={(e) => this.setState({ value: e.target.value1 })}/>
+                                    <input className="form-control input-sm"
+                                        placeholder={NEW_PASSWORD}
+                                        style={{ width: '80%', fontSize: 13.5, marginTop: 5 }}
+                                        value={this.state.value2}
+                                        onChange={(e) => this.setState({ value: e.target.value2 })}/>
+                                    <input className="form-control input-sm"
+                                        placeholder={RE_PASSWORD}
+                                        style={{ width: '80%', fontSize: 13.5, marginTop: 5 }}
+                                        value={this.state.value3}
+                                        onChange={(e) => this.setState({ value: e.target.value3 })}/>
+                                </div>
+                            :   <div style={{ height: 40 }}>
+                                </div>
+                            }
+                        </div>
                     :   <div style={{ padding: 10 }}>
                             <div className="btn btn-default btn-sm" style={{ float: 'right', marginRight: 10 }}
                                 onClick={() => {
@@ -90,7 +126,7 @@ class SettingCell extends React.Component {
                                             this.props.onUpdate(this.state.value)
                                     }
                                 }>
-                                {this.state.isEdit ? SAVE : EDIT}
+                                {this.state.isEdit ? SAVE : (this.state.value ? EDIT : ADD)}
                             </div>
                             {this.state.isEdit ?
                                 <input className="form-control input-sm"

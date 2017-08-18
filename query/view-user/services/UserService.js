@@ -24,7 +24,7 @@ export const getUser = (requesterId, id, next) => {
               id: user.id,
               username: user.username,
               email: requesterId == id ? user.email : '',
-              typeLogin: user.socialType ? user.socialType ? 'normal',
+              typeLogin: user.socialType ? user.socialType : 'normal',
               avatarUrl: user.avatarUrl,
               coverUrl: user.coverUrl,
               address: requesterId == id ? user.address : '',

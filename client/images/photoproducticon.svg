@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="139px" height="126px" viewBox="0 0 139 126" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>photoproducticon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="46" y="14" width="89" height="90"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="89" height="90" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="photoproducticon">
+            <g>
+                <path d="M14,14 L112,14 L112,112 L14,112 L14,14 Z M22,22 L104,22 L104,104 L22,104 L22,22 Z" id="Combined-Shape" fill="#90949C" transform="translate(63.000000, 63.000000) rotate(-20.000000) translate(-63.000000, -63.000000) "></path>
+                <use id="Rectangle-68" stroke="#979797" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-1"></use>
+                <path d="M41,10 L139,10 L139,108 L41,108 L41,10 Z M49,18 L131,18 L131,100 L49,100 L49,18 Z" id="Combined-Shape" fill="#90949C"></path>
+            </g>
+            <polygon id="Path-66" fill="#90949C" points="58.059064 81.9242422 86.3167098 91.9121855 86.3354063 50.1131179 58 40.7916477"></polygon>
+            <polygon id="Path-67" fill="#90949C" points="94.0875336 92.046875 122.415291 81.8366287 122.383847 40.7916477 94 50.0054535"></polygon>
+            <polygon id="Path-68" fill="#90949C" points="89.5039985 44.9089769 115.596674 36.1885966 89.3918194 28 63 36.0709068"></polygon>
+        </g>
+    </g>
+</svg>
