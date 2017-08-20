@@ -60,7 +60,7 @@ export const getDisplayResult = (hitsResult, offset, length) => {
         };
         res.push(sellPost);
     }
-    return {sellPosts: res, offset: (length == res.length) ? offset + length : -2};
+    return {sellPosts: res, offset: (length == res.length) ? Number(offset) + Number(length) : -2};
 };
 
 export const updateSellPost = (sellpost) => {
