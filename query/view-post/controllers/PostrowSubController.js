@@ -16,30 +16,6 @@ export const createPostrow = (message) => {
   if (titles) postrow.titles = titles
   if (products && products.length > 0) {
     postrow.products = products
-    for (let i = 0; i < products.length; i++) {
-      let product = products[i]
-      if (product && product.imageUrl) {
-        mProductImageList.push(
-          new Image({
-            url: product.imageUrl,
-            time: Date.now()
-          })
-        )
-      }
-    }
-
-    BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-      if (basicStore) {
-        let { productImageList } = basicStore
-        if (!productImageList) {
-          productImageList = []
-        }
-        mProductImageList.map((image) => {
-          productImageList.push(image)
-        })
-        BasicStore.findOneAndUpdate({ id: storeId }, { productImageList }, () => {})
-      }
-    })
   }
   if (type) postrow.type = type
 
@@ -197,7 +173,7 @@ export const deletePostrow = (message) => {
           }
         })
 
-        BasicStore.findOneAndUpdate({ id: storeId }, { postrowImageList: mPostrowImageList }, () => {})
+        BasicStore.findOneAndUpdate({ id: basicStore.id }, { postrowImageList: mPostrowImageList }, () => {})
       })
 
       BasicStore.findOne({ id: sellpost.storeId }, (err, basicStore) => {
@@ -212,7 +188,7 @@ export const deletePostrow = (message) => {
           }
         })
 
-        BasicStore.findOneAndUpdate({ id: storeId }, { productImageList: mProductImageList }, () => {})
+        BasicStore.findOneAndUpdate({ id: basicStore.id }, { productImageList: mProductImageList }, () => {})
       })
     }
   })
