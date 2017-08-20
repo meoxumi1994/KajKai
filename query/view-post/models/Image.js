@@ -2,7 +2,8 @@ import mongoose from '../datasource'
 
 const ImageSchema = new mongoose.Schema({
     url: {type: String},
-    time: {type: Date}
+    time: {type: Date},
+    postrowId: {type: String}
 })
 
 export default ImageSchema

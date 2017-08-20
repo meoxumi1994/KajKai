@@ -43,8 +43,6 @@ class User extends React.Component {
         const { iswhoing, isusername, location, store, scrollTop, scrollLeft, height } = this.props
         if(iswhoing)
             return <div></div>
-        if(!isusername)
-            return <Redirect to='/register'/>
         return(
             <div style={{ width: 1100, margin: 'auto' }}>
                 <div style={{ marginLeft: 160, float: 'left', width: 940 }}>

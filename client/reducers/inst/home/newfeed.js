@@ -1,13 +1,46 @@
 const newfeed = (state = {
-    sellposts: []
+    type: 'WAIT',
+    kind: 'category',
+    sellPosts: [],
+    stores: [],
+    users: [],
 }, action) => {
     switch (action.type) {
         case 'SEARCH_SUCCESS':
-            console.log(action)
+            if(action.kind == 'user')
+                return {
+                    ...state,
+                    ...action,
+                    users: [
+                        ...state.users,
+                        ...action.users
+                    ]
+                }
+            if(action.kind == 'store'){
+                return {
+                    ...state,
+                    ...action,
+                    stores: [
+                        ...state.stores,
+                        ...action.stores
+                    ]
+                }
+            }
+            if(action.kind == 'category'){
+                return {
+                    ...state,
+                    ...action,
+                    sellPosts: [
+                        ...state.sellPosts,
+                        ...action.sellPosts
+                    ]
+                }
+            }
+            return state
+        case 'SEARCH_ING':
             return {
                 ...state,
-                sellposts: action.sellPosts,
-                // ...action.searchResult,
+                type: 'SEARCH_ING'
             }
         default:
             return state

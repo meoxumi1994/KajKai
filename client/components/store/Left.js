@@ -5,10 +5,10 @@ class Left extends React.Component {
         super(props)
     }
     render(){
-        const { isOwner, storeList, STORE, HOME, CREATE_STORE, beFollow, onFollow } = this.props
+        const { isOwner, storeList, STORE, HOME, CREATE_STORE, FOLLOW, username, beFollow, onFollow } = this.props
         return(
             <div>
-                {!isOwner &&
+                {(!isOwner && username) &&
                     <div style={{ marginBottom: 10 }}>
                         <div className="btn btn-default btn-sm"
                             onClick={() => onFollow()}
@@ -20,7 +20,7 @@ class Left extends React.Component {
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <span style={{ fontSize: 13, fontWeight: 'bold',
                                 color: beFollow ? '#BD081C' : '#7F7F7F' }}>
-                                Follow
+                                {FOLLOW}
                             </span>
                         </div>
                     </div>
@@ -53,15 +53,17 @@ class Left extends React.Component {
                         <a href={"/"} style={{ fontSize: 13}}>{HOME}</a>
                     </div>
                 </div>
-                <div style={{ paddingBottom: 10 }}>
-                    <div className="btn"
-                        style={{
-                            textAlign: 'left',
-                            display: 'inline-block',
-                            margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
-                        <a href={"/registerstore"} style={{ fontSize: 13}}>{CREATE_STORE}</a>
+                {username &&
+                    <div style={{ paddingBottom: 10 }}>
+                        <div className="btn"
+                            style={{
+                                textAlign: 'left',
+                                display: 'inline-block',
+                                margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
+                            <a href={"/registerstore"} style={{ fontSize: 13}}>{CREATE_STORE}</a>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         )
     }

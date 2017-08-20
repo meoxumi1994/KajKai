@@ -46,8 +46,6 @@ class Store extends React.Component {
         const { iswhoing, isusername, location, store, scrollTop, scrollLeft, height } = this.props
         if(iswhoing || (location.pathname.split('/')[1] != store.id && location.pathname.split('/')[1] != store.urlname ))
             return <div></div>
-        if(!isusername)
-            return <Redirect to='/register'/>
         const id = store.id
         return(
             <div style={{ width: 1100, margin: 'auto' }}>

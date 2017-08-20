@@ -16,7 +16,7 @@ class GroupComment extends React.Component {
     }
     render(){
         const { WRITE_COMMENT_OR_ORDER, WRITE_COMMENT, numleadercomment , leadercomments, content, onChange, id,
-            onEnter, avatarUrl, onGetMore, offset, order } = this.props
+            onEnter, avatarUrl, onGetMore, offset, order, userid } = this.props
         return(
             <div style={{ padding: '10px 0px 0px 0px'}}>
                 {(offset != -2 && numleadercomment > leadercomments.length) &&
@@ -133,16 +133,18 @@ class GroupComment extends React.Component {
                     isleader={true}
                     content={'View more comments'}
                     /> */}
-                <CallComment
-                    order={order}
-                    onEnter={() => onEnter()}
-                    id={id}
-                    handleChange={(e) => onChange('content', e.target.value)}
-                    content={content}
-                    isleader={true}
-                    avatarUrl={avatarUrl}
-                    placehoder={WRITE_COMMENT}
-                    />
+                {userid &&
+                    <CallComment
+                        order={order}
+                        onEnter={() => onEnter()}
+                        id={id}
+                        handleChange={(e) => onChange('content', e.target.value)}
+                        content={content}
+                        isleader={true}
+                        avatarUrl={avatarUrl}
+                        placehoder={WRITE_COMMENT}
+                        />
+                }
             </div>
         )
     }

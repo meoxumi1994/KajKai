@@ -17,16 +17,18 @@ import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 import ChatContainer from '~/containers/chat'
 import GroupPopUp from '~/containers/GroupPopUp'
 import ShowDetail from '~/containers/ShowDetail'
+import PopUpUpdate from '~/containers/PopUpUpdate'
+import Warning from '~/containers/Warning'
 
 // import AdminContainer from '~/containers/admin/'
 // import loadAdmin from 'bundle-loader?lazy!../containers/admin'
 
 import Progress from '~/containers/entity/thumnail/Progress'
 
-const Home = () => (
+const Home = (props) => (
   <Bundle load={loadHome}>
     {(Comp) => (Comp
-      ? <Comp/>
+      ? <Comp {...props}/>
       : null
     )}
   </Bundle>
@@ -100,14 +102,16 @@ class App extends React.Component {
         super(props)
     }
     render(){
-        const path = this.props.location.pathname;
+        const path = "/" +this.props.location.pathname.split('/')[1];
         const { width, height, username, onScroll } = this.props
         const { showProgress, closeProgress } = this.props
         return(
             <div style={{ height: '100%', minWidth: 1100 }}>
                 <Route path="*" component={Bar}/>
                 <GroupPopUp/>
+                <PopUpUpdate/>
                 <ChatContainer/>
+                <Warning/>
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
                     style={{ height: height - 47 }}>
                     {
@@ -119,12 +123,13 @@ class App extends React.Component {
                               }
                           </div>
                     }
-                    <div style={{ paddingTop: 47, marginRight: (width > 1100 + 300)? 300: 0 }}>
-                        {(path == "/" || path == "/admin" || path == "/map" ||
+                    <div style={{ paddingTop: 47, marginRight: (width > 1100 + 300 && username)? 300: 0 }}>
+                        {(path == "/" || path == "/admin" || path == "/map" || path == "/home" ||
                         path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
                               <div style={{ height: height - 47 }}>
                                   <Route exact path="/" component={Home}/>
+                                  <Route path="/home" component={Home}/>
                                   <Route path="/map" component={Mapp}/>
                                   <Route path="/register" component={UserLoginRegister}/>
                                   <Route path="/profile" component={Profile}/>

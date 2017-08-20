@@ -11,8 +11,8 @@ class ShowDetail extends React.Component {
         const { location, iswhoing, isusername  } = this.props
         if(iswhoing)
             return <div></div>
-        if(!isusername)
-            return <Redirect to='/register'/>
+        // if(!isusername)
+        //     return <Redirect to='/register'/>
         const id = location.pathname.split('/')[2]
         return(
             <div style={{ width: 1100, margin: 'auto' }}>
@@ -22,7 +22,7 @@ class ShowDetail extends React.Component {
                             {" "}
                         </div>
                         <div className="col col-xs-10" style={{ padding: 0, margin: 0}}>
-                            <div style={{ paddingTop: 10 }}>
+                            <div style={{ paddingTop: 10, marginLeft: -23 }}>
                                 <Post sellpostid={id} commentid={location.pathname.split('/')[3]}/>
                             </div>
                         </div>

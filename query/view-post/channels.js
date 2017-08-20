@@ -23,10 +23,10 @@ export default {
     controller: 'PostrowSubController',
     method: 'createPostrow'
   },
-  'POSTROW.Updated': {
-    controller: 'PostrowSubController',
-    method: 'updatePostrow'
-  },
+  // 'POSTROW.Updated': {
+  //   controller: 'PostrowSubController',
+  //   method: 'updatePostrow'
+  // },
   'POSTROW.Deleted': {
     controller: 'PostrowSubController',
     method: 'deletePostrow'

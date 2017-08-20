@@ -1,33 +1,4 @@
-const category = (state = [
-    {
-        id: 'category001',
-        name: 'Shirt',
-        secondCategories: [
-            {
-                id: 'secondcategory001',
-                name: 'R-shirt',
-            },
-            {
-                id: 'secondcategory002',
-                name: 'T-shirt',
-            }
-        ]
-    },
-    {
-        id: 'category002',
-        name: 'Food',
-        secondCategories: [
-            {
-                id: 'secondcategory003',
-                name: 'Fast Food',
-            },
-            {
-                id: 'secondcategory004',
-                name: 'Nutri Food',
-            }
-        ]
-    },
-], action) => {
+const category = (state = [], action) => {
   switch (action.type) {
     case 'GET_CATEGORY_SUCCESS':
     const { categories } = action

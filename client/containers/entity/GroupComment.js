@@ -21,6 +21,7 @@ const mapStateToProps = (state, { id }) => {
     return({
         ...groupcomment,
         ...user,
+        userid: state.user.id,
         isOwner: isOwner,
         avatarUrl: avatarUrl,
         WRITE_COMMENT_OR_ORDER: g('WRITE_COMMENT_OR_ORDER'),
@@ -38,7 +39,6 @@ const mapDispatchToProps = (dispatch, { id }) => ({
             dispatch(getMoreLeaderComment('sellpost',offset,id))
     },
     onEnterProps: (content, order) => {
-        console.log(content, order)
         if(content || (order && order.length))
             dispatch({ type: 'server/LEADERCOMMENT', data: {
                     sellpostid: id,

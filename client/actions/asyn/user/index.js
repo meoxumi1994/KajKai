@@ -28,6 +28,21 @@ export const getUser = (id) => dispatch => {
     })
 }
 
+export const getUserOverView = (id) => dispatch => {
+    dispatch({ type: 'USER_OVERVIEW_GET_ING' });
+    return flem('/user/'+id)
+    .then((response) => {
+        const { status, user } = response
+        if(status == 'success'){
+            dispatch({ type: 'USER_OVERVIEW_GET_SUCCESS', user })
+            dispatch(getInterest( id, -1 ))
+        }else{
+            dispatch({ type: 'USER_OVERVIEW_GET_FAILED', user })
+        }
+    })
+}
+
+
 export const updateUser = (user) => dispatch => {
     dispatch({ type: 'UPDATE_USER_ING'})
     return fleu('/user',{
@@ -37,7 +52,7 @@ export const updateUser = (user) => dispatch => {
         if(status == 'success'){
             dispatch({ type: 'UPDATE_USER_SUCCESS', user: user })
         }else{
-            dispatch({ type: 'UPDATE_USER_FAILED' })
+            dispatch({ type: 'UPDATE_USER_FAILED', user: user })
         }
     })
 }

@@ -27,6 +27,7 @@ const mapStateToProps = (state, ownProps) => {
         ABOUT: g('ABOUT'),
         PHOTOS: g('PHOTOS'),
         STATISTIC: g('STATISTIC'),
+        SEND_MESSAGE: g('SEND_MESSAGE'),
     })
 }
 

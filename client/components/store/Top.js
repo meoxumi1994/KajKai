@@ -36,7 +36,7 @@ class Top extends React.Component {
     }
     render(){
         const { id, userid, yourid, coverUrl, avatarUrl, name, onUploadImage, location, isOwner,
-            PAGE, ABOUT, PHOTOS, STATISTIC, SETTING } = this.props
+            PAGE, ABOUT, PHOTOS, STATISTIC, SETTING, SEND_MESSAGE } = this.props
         return(
             <div className="panel panel-default"
                 style={{ margin: 0, borderWidth: 1 , borderRadius: '0px 0px 5px 5px'}}>
@@ -146,7 +146,7 @@ class Top extends React.Component {
                             width: 200,
                             fontSize: 13.5,
                             backgroundColor: this.state.hoverMessage ? '#29487D' : '#4267B2', fontWeight: 600 }}>
-                        Send Message
+                        {SEND_MESSAGE}
                     </div>
                 }
             </div>
