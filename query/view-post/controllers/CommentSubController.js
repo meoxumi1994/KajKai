@@ -88,6 +88,10 @@ export const createComment = (message) => {
   Promise.all(mPromises).then((replies) => {
     const reply = replies[0] ? replies[0] : replies[1]
 
+    if (!reply) {
+      return
+    }
+
     comment.replies = [reply]
 
     if (sellpostId) {

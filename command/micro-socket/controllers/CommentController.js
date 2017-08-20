@@ -24,6 +24,12 @@ export const leavePostCon = (action, sio, io) => {
 };
 
 export const addNewSecondLayerCommentCon = (action, sio, io) => {
+    if (!action.data.userID) {
+        sio.emit('action', {type: 'global/ERROR', data: {
+            status: 'auth_failed'
+        }});
+        return;
+    }
     addNewSecondLayerCommentPub(action.data, (sComment) => {
         if (sComment) {
             console.log('new second comment ' + JSON.stringify(sComment));
@@ -52,6 +58,12 @@ export const addNewSecondLayerCommentCon = (action, sio, io) => {
 };
 
 export const addNewFirstLayerCommentCon = (action, sio, io) => {
+    if (!action.data.userID) {
+        sio.emit('action', {type: 'global/ERROR', data: {
+            status: 'auth_failed'
+        }});
+        return;
+    }
     addNewFirstLayerCommentPub(action.data, (fComment) => {
         if (fComment) {
             console.log("new first comment " + JSON.stringify(fComment));

@@ -52,6 +52,9 @@ export const createCommentNotification = (message) => {
 
   Promise.all(mPromises).then((commenters) => {
     const commenter = commenters[0] ? commenters[0] : commenters[1]
+    if (!commenter) {
+      return
+    }
     console.log('commenter: ', commenter);
     IDSellpostStore.findOne({ sellpostId }, (err, mIDSellpostStore) => {
       if (mIDSellpostStore) {

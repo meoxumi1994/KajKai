@@ -58,11 +58,11 @@ export const searchStore = (keyword, offset, length, next) => {
         }
     }, (error, response) => {
         console.log('search store: ' + error, 'response ' + JSON.stringify(response));
-        next(getHitResult(response));
+        next(getHitResult(response, offset, length));
     })
 };
 
-export const getHitResult = (result) => {
+export const getHitResult = (result, offset, length) => {
     let res = [];
     if (!result || !result.hits || !result.hits.hits) {
         return {stores: []};
@@ -76,5 +76,5 @@ export const getHitResult = (result) => {
         };
         res.push(store);
     }
-    return {stores: res};
+    return {stores: res, offset: (length == res.length) ? Number(offset) + Number(length) : -2};
 };

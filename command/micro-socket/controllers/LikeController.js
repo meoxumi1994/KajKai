@@ -3,6 +3,12 @@ import { getListFollower } from './FollowPubController'
 
 
 export const likeAct = (action, sio, io) => {
+    if (!action.data.userID) {
+        sio.emit('action', {type: 'global/ERROR', data: {
+            status: 'auth_failed'
+        }});
+        return;
+    }
     const likerId = action.data.userID;
     let likenType;
     if (action.data.commentid)

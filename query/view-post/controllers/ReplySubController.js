@@ -55,6 +55,9 @@ export const createReply = (message) => {
 
   Promise.all(mPromises).then((replies) => {
     const reply = replies[0] ? replies[0] : replies[1]
+    if (!reply) {
+      return
+    }
     reply.save(() => {})
 
     Comment.findOne({ id: commentId }, (err, comment) => {

@@ -393,7 +393,7 @@ const getClientFormatSellpost = (targetId, notifySellposts, blackList, requester
     id: sellpost.id,
     turnnotify: notifySellposts.indexOf(sellpost.id) != -1,
     storeid: sellpost.storeId,
-    urlname: sellpost.urlname,
+    urlname: sellpost.urlName,
     storename: sellpost.storeName,
     avatarUrl: sellpost.avatarUrl,
     category: sellpost.category ? sellpost.category : '',
