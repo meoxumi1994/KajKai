@@ -54,6 +54,7 @@ const Top = (props) => {
                     action={{
                     type: 'UPDATE_USER_COVER'
                     }}
+                    canEdit={yourid == id}
                     style={{
                     src: coverUrl,
                     width: 938,
@@ -80,6 +81,7 @@ const Top = (props) => {
                         action={{
                         type: 'UPDATE_USER_AVATAR'
                     }}
+                        canEdit={yourid == id}
                         style={{
                         src: avatarUrl,
                         width: 160,

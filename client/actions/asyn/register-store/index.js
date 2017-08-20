@@ -39,7 +39,7 @@ export const getCategory = () => dispatch => {
 
 export const reUpdatePhone = (phone) => dispatch => {
     dispatch({ type: 'UPDATE_PHONE_ING', newvalue: phone })
-    flet('/phonereverification',{
+    flet('/phoneverification',{
         phone: phone
     },{
         status: 'pending|used|error'

@@ -16,7 +16,7 @@ class GroupComment extends React.Component {
     }
     render(){
         const { WRITE_COMMENT_OR_ORDER, WRITE_COMMENT, numleadercomment , leadercomments, content, onChange, id,
-            onEnter, avatarUrl, onGetMore, offset, order, userid } = this.props
+            onEnter, avatarUrl, onGetMore, offset, order, userid, closeComment } = this.props
         return(
             <div style={{ padding: '10px 0px 0px 0px'}}>
                 {(offset != -2 && numleadercomment > leadercomments.length) &&
@@ -133,7 +133,7 @@ class GroupComment extends React.Component {
                     isleader={true}
                     content={'View more comments'}
                     /> */}
-                {userid &&
+                {(userid && !closeComment ) &&
                     <CallComment
                         order={order}
                         onEnter={() => onEnter()}

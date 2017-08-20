@@ -61,6 +61,7 @@ class Top extends React.Component {
                                 id: id,
                             }
                         }}
+                        canEdit={isOwner}
                         style={{
                         src: coverUrl,
                         width: 938,
@@ -90,7 +91,7 @@ class Top extends React.Component {
                                     id: id,
                                 }
                             }}
-                            canEdit={false}
+                            canEdit={isOwner}
                             style={{
                             src: avatarUrl,
                             width: 160,

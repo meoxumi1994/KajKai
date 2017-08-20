@@ -4,6 +4,16 @@ import AboutCell from '~/containers/entity/row/AboutCell'
 
 import { getTime } from '~/containers/support'
 
+const getLongLanguage = (language) => {
+    if(language == 'vi'){
+        return 'Việt Nam'
+    }
+    if(language == 'en'){
+        return 'English'
+    }
+    return ""
+}
+
 class About extends React.Component {
     constructor(props){
         super(props)
@@ -18,7 +28,6 @@ class About extends React.Component {
         const { username, email, language, address, phone, age , isOwner, position, interactive,
             USER_NAME, EMAIL, LANGUAGE, ADDRESS, PHONE, AGE, INFO_GENERAL, POSITION_IN_MAP, INTERACTION,
             TOTAL_LIKE, TOTAL_COMMENT, TOTAL_REPLY_COMMENT, TOTAL_FOLLOW, CREATE_TIME, LAST_TIME } = this.props
-        console.log('interactive', interactive)
         return(
             <div>
                 <div style={{
@@ -36,7 +45,7 @@ class About extends React.Component {
                     <hr style={{ margin: 0, padding: 0 }}/>
                     <AboutCell kind="username" title={USER_NAME} value={username}/>
                     <AboutCell kind="email" title={EMAIL} value={email}/>
-                    <AboutCell kind="language" title={LANGUAGE} value={language}/>
+                    <AboutCell kind="language" title={LANGUAGE} value={getLongLanguage(language)}/>
                     <AboutCell kind="address" title={ADDRESS} value={address}/>
                     <AboutCell kind="phone" title={PHONE} value={phone}/>
                     <AboutCell kind="age" title={AGE} value={age}/>

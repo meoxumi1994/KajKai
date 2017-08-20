@@ -81,9 +81,10 @@ export const getClientFormatPostrows = (postrows, offset) => {
 
   let currentNumberOfLine = 0, postrowOffset = -1
 
-  for (let i = offset + 1; i < postrows.length; i++) {
+  for (let i = 0; i < postrows.length; i++) {
+  // for (let i = offset + 1; i < postrows.length; i++) {
     let postrow = postrows[i]
-    if (currentNumberOfLine + 0.5 * postrow.numberOfLine < 30) {
+    // if (currentNumberOfLine + 0.5 * postrow.numberOfLine < 30) {
 
       let mPostrow = {}
       mPostrow.sellpostid = postrow.sellpostId
@@ -106,9 +107,9 @@ export const getClientFormatPostrows = (postrows, offset) => {
       mPostrows.push(mPostrow)
       currentNumberOfLine += postrow.numberOfLine
       postrowOffset = i
-    } else {
-      break
-    }
+    // } else {
+    //   break
+    // }
   }
 
   return ({

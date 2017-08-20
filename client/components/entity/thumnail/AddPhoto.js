@@ -21,12 +21,15 @@ class AddPhoto extends React.Component {
         ]
         return(
             <div>
-                <OneImage style={{ width: style.width, height: style.height }}
-                    src={style.src}
-                    onClick={() => onChange('showModal'+id, true)}
-                    textChange="Add photo"
-                    isTop={style.isTop}
-                />
+                {canEdit ?
+                    <OneImage style={{ width: style.width, height: style.height }}
+                        src={style.src}
+                        onClick={() => onChange('showModal'+id, true)}
+                        textChange="Add photo"
+                        isTop={style.isTop}
+                    />
+                :   <img src={style.src} style={{ width: style.width, height: style.height }}/>
+                }
                 <Modal show={this.props['showModal'+id]} onHide={() => onChange('showModal'+id, false)}>
                     <div className="modal-content"
                         style={{
@@ -107,7 +110,7 @@ class AddPhoto extends React.Component {
         )
     }
     componentDidMount(){
-        
+
     }
 }
 
