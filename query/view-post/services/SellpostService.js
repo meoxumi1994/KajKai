@@ -389,6 +389,8 @@ const getClientFormatSellpost = (targetId, notifySellposts, blackList, requester
     }
   })
 
+  let { status, ...data } = getClientFormatSellpostComments(targetId, blackList, requesterId, mComments, offset, 'done', true, null)
+
   return ({
     id: sellpost.id,
     turnnotify: notifySellposts.indexOf(sellpost.id) != -1,
@@ -411,6 +413,6 @@ const getClientFormatSellpost = (targetId, notifySellposts, blackList, requester
     follows,
     numleadercomment: mComments.length,
     numshare: sellpost.numberOfShare ? sellpost.numberOfShare : 0,
-    ...getClientFormatSellpostComments(targetId, blackList, requesterId, mComments, offset, 'done', true, null)
+    ...data
   })
 }
