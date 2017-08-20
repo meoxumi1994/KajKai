@@ -173,7 +173,7 @@ export const deletePostrow = (message) => {
           }
         })
 
-        BasicStore.findOneAndUpdate({ id: storeId }, { postrowImageList: mPostrowImageList }, () => {})
+        BasicStore.findOneAndUpdate({ id: basicStore.id }, { postrowImageList: mPostrowImageList }, () => {})
       })
 
       BasicStore.findOne({ id: sellpost.storeId }, (err, basicStore) => {
@@ -188,7 +188,7 @@ export const deletePostrow = (message) => {
           }
         })
 
-        BasicStore.findOneAndUpdate({ id: storeId }, { productImageList: mProductImageList }, () => {})
+        BasicStore.findOneAndUpdate({ id: basicStore.id }, { productImageList: mProductImageList }, () => {})
       })
     }
   })
