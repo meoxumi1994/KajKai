@@ -52,7 +52,7 @@ class ManagerComment extends React.Component {
                 this.props.contact[i]
             ]
         }
-        if(contact.length==0 || !avatar || !name)
+        if(contact.length==0 || !name)
             return <div></div>
         return(
             <div style={{ height: '100%', backgroundColor: '#E9EBEE'}}>

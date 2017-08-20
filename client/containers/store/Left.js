@@ -19,9 +19,11 @@ const mapStateToProps = (state, ownProps) => {
         beFollow: getBeFollow(state.inst.store.index.follows, state.user.id),
         isOwner: isOwner,
         storeList: user.storeList,
+        username: user.username,
         STORE: g('STORE'),
         HOME: g('HOME'),
         CREATE_STORE: g('CREATE_STORE'),
+        FOLLOW: g('FOLLOW'),
     })
 }
 

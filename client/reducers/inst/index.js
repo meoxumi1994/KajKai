@@ -18,6 +18,7 @@ import home from './home'
 import contacthistory from './contacthistory'
 import grouppopup from './grouppopup'
 import showdetail from './showdetail'
+import warning from './warning'
 
 const inst = combineReducers({
     userloginregister,
@@ -37,7 +38,8 @@ const inst = combineReducers({
     home,
     contacthistory,
     grouppopup,
-    showdetail
+    showdetail,
+    warning
 })
 
 export default inst

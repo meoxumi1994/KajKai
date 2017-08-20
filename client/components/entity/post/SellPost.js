@@ -30,7 +30,7 @@ class SellPost extends React.Component {
             onDeleteSellpost, closeBorder, turnnotify,
             onLike, postrows, postrows_order, clicksetting, id, onFollow, feedBack, showEditSellPost,
         } = this.props
-        if(!likes)
+        if(!likes || !postrows_order)
             return (
                 <div>
                     <TimeLine style={{ height: 400, width: 520, margin: '0px 0px 0px 0px'}}/>
@@ -42,7 +42,7 @@ class SellPost extends React.Component {
                 border: closeBorder ? undefined : '1px solid #CCCCCC',
                 boxShadow: closeBorder ? undefined : '0px 0px 4px #CCCCCC',
                 backgroundColor: closeBorder ? undefined : 'white',
-                width: 520, padding: 10,}}>
+                width: 520, padding: 10 }}>
                 <div>
                     <div
                         className="btn" style={{

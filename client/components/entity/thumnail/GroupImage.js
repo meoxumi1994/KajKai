@@ -107,7 +107,7 @@ class GroupImage extends React.Component {
     render(){
         const { EDIT, onEdit, images, canEdit, sellpostid } = this.props
         const width = this.props.width - ((images.length>1)? 1 : 2);
-        const height = width * 2/ 3;
+        const height = width;
 
         return(
             <div style={{ marginLeft: -1 }}>

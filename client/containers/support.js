@@ -106,6 +106,7 @@ export const FilteringPhoneDefaultVietName = (phone) => {
 }
 
 export const getTime = (time) => {
+    const date = new Date(time)
     const seconds = Math.floor(((new Date()).getTime() - time) / 1000);
     if(seconds < 60) return 'just now'
     const mins = Math.floor(((new Date()).getTime() - time) / 60000);
@@ -113,7 +114,11 @@ export const getTime = (time) => {
     const hours = Math.floor(((new Date()).getTime() - time) / 3600000);
     if(hours < 24) return hours+' hrs'
     const days = Math.floor(((new Date()).getTime() - time) / 86400000);
-    return days+' days'
+    if(days == 1 ) return 'yesterday at ' + date.getHours() + ':' + date.getMinutes()
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    return date.getDate() + ' ' + monthNames[date.getMonth()] + ' at ' + date.getHours() + ":" + date.getMinutes()
 }
 
 export const getLikeContent = (likes, numlike, yourid) => {
@@ -160,16 +165,15 @@ export const getBeFollow = (follows, yourid) => {
 export const timeSince = (date) => {
     var seconds = Math.floor((new Date() - date) / 1000)
     var interval = Math.floor(seconds / 31536000)
-    if (interval > 1) {
-        return interval + " years"
-    }
-    interval = Math.floor(seconds / 2592000)
-    if (interval > 1) {
-        return interval + " months"
-    }
+
+
     interval = Math.floor(seconds / 86400)
     if (interval > 1) {
         return interval + " days ago"
+    }
+    interval = Math.floor(seconds / 86400)
+    if (interval == 1) {
+        return "yesterday at "
     }
     interval = Math.floor(seconds / 3600)
     if (interval > 1) {

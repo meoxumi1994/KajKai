@@ -12,6 +12,7 @@ export const onWho = () => dispatch => {
             dispatch({ type: 'server/sendToken', tokenId: response.tokenId })
         }else{
             dispatch(authAction('WHO_FAILED'))
+            dispatch({ type: 'server/sendToken', tokenId: null })
         }
     })
 }

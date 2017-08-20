@@ -11,8 +11,8 @@ class Post extends React.Component {
         const { sellpostid, storeid, sellpost, commentid } = this.props
         const myStoreId = storeid ? storeid : (sellpost ? sellpost.storeid : undefined);
         return(
-            <div className="container-fluid" style={{ margin: 0, padding: 0 }}>
-                <div className="row" style={{ margin: 0, padding: 0, marginLeft: -23 }}>
+            <div className="container-fluid" style={{ margin: 0, padding: 0, width: 940 }}>
+                <div className="row" style={{ margin: 0, padding: 0 }}>
                     <div className="col col-xs-7" style={{ margin: 0, padding: 0 }}>
                         <SellPost id={sellpostid}  needGetSellPost={true} commentid={commentid}/>
                     </div>

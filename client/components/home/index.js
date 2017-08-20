@@ -59,7 +59,7 @@ class Home extends React.Component {
         if(this.newfeed){
             this.newfeed_marginTop = this.props.height - this.newfeed.getBoundingClientRect().bottom > 0
             if(this.newfeed.getBoundingClientRect().bottom - this.props.height < 780){
-                this.props.onNeedPost()
+                // this.props.onNeedPost()
             }
         }
     }

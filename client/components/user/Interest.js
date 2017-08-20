@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Post from '~/containers/entity/post/Post'
+import GuildUser from '~/containers/entity/guild/GuildUser'
 
 class Interest extends React.Component {
     constructor(props){
@@ -16,6 +17,9 @@ class Interest extends React.Component {
                         <Post sellpostid={item.sellpostid} storeid={item.storeid}/>
                     </div>
                 )}
+                {(data || (data && data.length == 0)) &&
+                    <GuildUser/>
+                }
             </div>
         )
     }

@@ -5,6 +5,7 @@ const user = ( state = {
     storeList: [],
 }, action) => {
     switch (action.type) {
+        case 'WHO_FAILED':
         case 'LOGOUT':
             return {
                 avatarUrl: '/images/avatardefaultIcon.png',
