@@ -18,6 +18,12 @@ const mapStateToProps = (state, { id }) => {
         INFO_GENERAL: g('INFO_GENERAL'),
         POSITION_IN_MAP: g('POSITION_IN_MAP'),
         INTERACTION: g('INTERACTION'),
+        TOTAL_COMMENT: g('TOTAL_COMMENT'),
+        TOTAL_REPLY_COMMENT: g('TOTAL_REPLY_COMMENT'),
+        TOTAL_LIKE: g('TOTAL_LIKE'),
+        TOTAL_FOLLOW: g('TOTAL_FOLLOW'),
+        CREATE_TIME: g('CREATE_TIME'),
+        LAST_TIME: g('LAST_TIME')
     })
 }
 

@@ -1246,3 +1246,14 @@ GET /statistics/:storeid?from=''&to=''& { // số lượng leadercomment cho m�
 GET /nearby/sellpost/:sellpostid?type='next|previous' {
     sellpostid
 }
+
+GET /suggest/category|user|store?keyword= {
+    suggests: [
+        {
+            avatarUrl:   << truong hop user va store
+            name:        << truong hop user va store
+            address: << truong hop user va store
+            content:     << truong hop category
+        }
+    ]
+}
