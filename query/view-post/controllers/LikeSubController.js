@@ -35,6 +35,9 @@ export const addLike = (message) => {
 
   Promise.all(mPromises).then((likers) => {
     const liker = likers[0] ? likers[0] : likers[1]
+    if (!liker) {
+      return
+    }
     if (likenId.substr(0, 3) == '012') { // sellpost
       Sellpost.findOne({ id: likenId }, (err, sellpost) => {
         if (sellpost) {

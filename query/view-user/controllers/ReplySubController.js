@@ -52,6 +52,9 @@ export const createReplyNotification = (message) => {
 
   Promise.all(mPromises).then((repliers) => {
     const replier = repliers[0] ? repliers[0] : repliers[1]
+    if (!replier) {
+      return
+    }
     IDSellpostStore.findOne({ sellpostId }, (err, mIDSellpostStore) => {
       if (mIDSellpostStore) {
         BasicStore.findOne({ id: mIDSellpostStore.storeId }, (err, basicStore) => {

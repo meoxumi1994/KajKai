@@ -8,21 +8,24 @@ export const getUserHandler = () => (req, res) => {
     requestedId = requesterId
   }
   // console.log('requestedId: ', requestedId);
-
-  getUser(requesterId, requestedId, (user) => {
-    if (user) {
-      if (requesterId == requestedId) {
-        res.json({
-          tokenId: user.banned ? null : req.cookies.token,
-          ...user
-        })
+  if (requesterId == 'Guest' && requestedId == 'Guest') {
+    res.json({ status: 'failed' })
+  } else {
+    getUser(requesterId, requestedId, (user) => {
+      if (user) {
+        if (requesterId == requestedId) {
+          res.json({
+            tokenId: user.banned ? null : req.cookies.token,
+            ...user
+          })
+        } else {
+          res.json(user)
+        }
       } else {
-        res.json(user)
+        res.json({ status: 'failed' })
       }
-    } else {
-      res.json({ status: 'failed' })
-    }
-  })
+    })
+  }  
 }
 
 // export const getUserPrivacyHandler = () => (req, res) => {
