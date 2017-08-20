@@ -49,7 +49,7 @@ export const getHitResult = (result, offset, length) => {
 export const getDisplayResult = (hitsResult, offset, length) => {
     let res = [];
     if (!hitsResult || !hitsResult.sellPosts || hitsResult.sellPosts.length === 0) {
-        return {stores: res, offset: (length === res.length) ? offset + length : -2};
+        return {sellPosts: res, offset: (length === res.length) ? offset + length : -2};
     }
     for (let i = 0; i < hitsResult.sellPosts.length; ++i) {
         let sellPost = {
@@ -60,7 +60,7 @@ export const getDisplayResult = (hitsResult, offset, length) => {
         };
         res.push(sellPost);
     }
-    return {stores: res, offset: (length === res.length) ? offset + length : -2};
+    return {sellPosts: res, offset: (length === res.length) ? offset + length : -2};
 };
 
 export const updateSellPost = (sellpost) => {
