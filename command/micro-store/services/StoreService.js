@@ -132,7 +132,7 @@ export const createStore = (storeInfo, next) => {
 
 export const updateStore = (storeInfo, userId, next) => {
     getStore(storeInfo.id, (store) => {
-        if (store.owner !== userId) {
+        if (!store || store.owner !== userId) {
             next('failed');
             return
         }
