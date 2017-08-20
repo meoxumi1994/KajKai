@@ -20,7 +20,7 @@ class IntroduceStore extends React.Component {
                     <span style={{ marginLeft: 10, color: '#90949C'}}>{CATEGORY}{" : "}</span>{category}</div>
                 <div style={{ paddingTop: 5 }}><img src="/images/phoneicon.svg" width={15} height={15}/>
                     <span style={{ marginLeft: 10, color: '#90949C'}}>{PHONE}{" : "}</span>{phone}</div>
-                <div style={{ paddingTop: 5 }}>
+                {/* <div style={{ paddingTop: 5 }}>
                     <img src="/images/likeicon.svg" width={15} height={15}/>
                     <span style={{ marginLeft: 10, color: '#90949C'}}>{LIKE}{" "}{BY}{" : "}</span>
                     {likes.map((item,index) =>
@@ -39,7 +39,7 @@ class IntroduceStore extends React.Component {
                         {likes.map((item,index) =>
                             <img key={index} width={15} height={15} style={{ margin: '4px 0px 4px 4px'}} src={item.avatarUrl}/>)}
                     </div>
-                </div>
+                </div> */}
                 <div style={{ paddingTop: 5 }}>
                     <img src="/images/followicon.svg" width={15} height={15}/>
                     <span style={{ marginLeft: 10, color: '#90949C'}}>{FOLLOW}{" "}{BY}{" : "}</span>

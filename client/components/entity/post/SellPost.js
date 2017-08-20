@@ -29,6 +29,7 @@ class SellPost extends React.Component {
             numfollow, beFollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
             onDeleteSellpost, closeBorder, turnnotify,
             onLike, postrows, postrows_order, clicksetting, id, onFollow, feedBack, showEditSellPost,
+            OPEN, SLEEP,
         } = this.props
         if(!likes || !postrows_order)
             return (
@@ -40,9 +41,18 @@ class SellPost extends React.Component {
             <div style={{
                 borderRadius: closeBorder ? undefined : 4 ,
                 border: closeBorder ? undefined : '1px solid #CCCCCC',
-                boxShadow: closeBorder ? undefined : '0px 0px 4px #CCCCCC',
-                backgroundColor: closeBorder ? undefined : 'white',
+                boxShadow: (closeBorder || status != 'open') ? undefined : '0px 0px 4px #CCCCCC',
+                backgroundColor: (status == 'open') ? 'white' : '#E9EBEE',
                 width: 520, padding: 10 }}>
+                {isOwner &&
+                    <div style={{ right: 50 , marginTop: 37, position: 'absolute' }}>
+                        <div className="btn btn-default btn-xs"
+                            onClick={() => this.props.onUpdateSellpost('status', (status == 'open') ? 'sleep' : 'open' )}
+                            >
+                            {(status == 'open') ? SLEEP : OPEN }
+                        </div>
+                    </div>
+                }
                 <div>
                     <div
                         className="btn" style={{
@@ -152,7 +162,7 @@ class SellPost extends React.Component {
                     </div>
                 }
                 {likeContent && <hr style={{ margin: 0 }}/>}
-                <GroupComment id={id}/>
+                <GroupComment closeComment={(status != 'open')} id={id}/>
             </div>
         )
     }

@@ -100,7 +100,7 @@ const myString = {
     WRITE_COMMENT_OR_ORDER: ['Bình luận hoặc Đặt hàng...','Write a comment or Order...'],
     WRITE_COMMENT: ['Bình luận','Write a comment'],
     FULL_SCREEN: ['Phóng to','Full Screen'],
-    ADDRESSMAP : ['Địa chỉ theo google map', 'Address in googlemap'],
+    ADDRESSMAP : ['Địa chỉ theo Google Map', 'Address in Google Map'],
     ANOTHER_PEOPLE: ['người khác','another people'],
     PEOPLE: ['người','people'],
     CATEGORY : ['Loại hình', 'Category'],
@@ -184,7 +184,7 @@ const myString = {
     DONE: ['Xong', 'Done'],
     CREATE_INTEREST: ['Tạo quan tâm','Create Interest'],
     EMAIL: ['Thư điện tử','Email'],
-    LANGUAGE: ['Ngôn ngữ sử dụng','Language using'],
+    LANGUAGE: ['Ngôn ngữ','Language'],
     USER: ['Người dùng','User'],
     NOT_LOGIN: ['Bạn cần đăng nhập để thực hiện chức năng này.','You need to log in to perform this function.'],
     GO_LOGIN: ['Đến trang đăng nhập ngay!','Go to login page now!'],
@@ -203,6 +203,8 @@ const myString = {
         'Nhắn tin',
         'Send Message'
     ],
+    OPEN: ['Mở','Open'],
+    SLEEP: ['Tạm nghỉ','Sleep'],
 }
 
 const allString = {

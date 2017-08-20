@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 import { getTime, getBeLike, getLikeContent, getBeFollow } from '~/containers/support'
-import { getSellPost, deteleSellPost, turnNotify } from '~/actions/asyn/entity/sellpost'
+import { getSellPost, deteleSellPost, turnNotify, putSellPost } from '~/actions/asyn/entity/sellpost'
 import SellPost from '~/components/entity/post/SellPost'
 
 const mapStateToProps = (state, { id }) => {
@@ -34,11 +34,14 @@ const mapStateToProps = (state, { id }) => {
     return({
         ...store,
         ...sellpost,
+        sellpost: sellpost,
         isOwner: isOwner,
         beLike: beLike,
         beFollow: beFollow,
         likeContent: likeContent,
         time: time,
+        OPEN: g('OPEN'),
+        SLEEP: g('SLEEP'),
     })
 }
 
@@ -74,18 +77,28 @@ const mapDispatchToProps = (dispatch, { id, commentid }) => ({
     },
     weTurnNotify: (turnnotify) => {
         dispatch(turnNotify(id, !turnnotify))
+    },
+    weUpdateSellpost: (sellpost) => {
+        dispatch(putSellPost(sellpost))
     }
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { turnnotify, category ,description ,status, ship , postrows_order , postrows, ...anotherState } = stateProps
-    const { weTurnNotify, onShowEditSellPost, ...anotherDispatch } = dispatchProps
+    const { turnnotify, sellpost, category ,description ,status, ship , postrows_order , postrows, ...anotherState } = stateProps
+    const { weUpdateSellpost, weTurnNotify, onShowEditSellPost, ...anotherDispatch } = dispatchProps
     return({
         showEditSellPost: () => {
             onShowEditSellPost({ category ,description ,status, ship , postrows_order, postrows, sellpostid: ownProps.id })
         },
         onTurnNotify: () => {
             weTurnNotify(turnnotify)
+        },
+        onUpdateSellpost: (key, value) => {
+            weUpdateSellpost({
+                ...sellpost,
+                [key] : value,
+                sellpostid: sellpost.id,
+            })
         },
         ...ownProps,
         ...stateProps,

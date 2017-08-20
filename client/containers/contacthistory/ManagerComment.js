@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
 import { getContactUser, getContactStore } from '~/actions/asyn/contacthistory'
+import { updateUser } from '~/actions/asyn/user'
 import ManagerComment from '~/components/contacthistory/ManagerComment.js'
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,6 +17,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onChange: (key, value) => {
+        if(key == 'currentId'){
+            dispatch(updateUser({ currentId: value }))
+        }
         dispatch({ type: 'INST_CONTACT_HISTORY_CHANGE', key: key, value: value })
     },
     getContact: (type, offset, id, state, length ) => {

@@ -77,7 +77,7 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
             onChange('lat',lat)
             onChange('lng',lng)
             // weSearch(currentType, currentCategoryId, keyword, lat, lng, offset)
-            if(currentType!= 'category' && currentType!= 'store' && currentType != 'user'){
+            if(currentType== 'category' || currentType== 'store' || currentType == 'user'){
                 window.location = "/home/"+currentType+"?id="+currentCategoryId+"&keyword="
                 +keyword+"&lat="+lat+"&lng="+lng+"&offset="+offset+"&name="+currentCategory+"&positionname="+positionname
             }

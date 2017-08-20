@@ -1,7 +1,7 @@
 const config = {
     ISTEST : 1,
     PROTOCOL: ['http', 'https','http'],
-    IP: ['localhost', 'gcd6xarlkf.execute-api.ap-southeast-1.amazonaws.com/kajkai','localhost'], // 13.228.23.106 10.20.16.137 192.168.43.179
+    IP: ['localhost', 'j4h6kqwid6.execute-api.ap-southeast-1.amazonaws.com/kajkai_dev','localhost'], // 13.228.23.106 10.20.16.137 192.168.43.179
     // IP: ['localhost', '3cle5jdlb0.execute-api.ap-southeast-1.amazonaws.com/kajkai_dev','localhost'],
     // IP: ['localhost', 'aqju17j8of.execute-api.ap-southeast-1.amazonaws.com/kajkai_admin','localhost'],
     PORT: ':8080',

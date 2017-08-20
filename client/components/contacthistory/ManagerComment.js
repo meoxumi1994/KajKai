@@ -3,6 +3,7 @@ import React from 'react'
 import LeaderComment from '~/containers/entity/contact/LeaderComment'
 
 const getString = (str) => {
+    if(str == undefined) return ""
     let newstr = ""
     str.split('\n').map((item) => newstr += item)
     return newstr.substr(0,15)
@@ -46,6 +47,7 @@ class ManagerComment extends React.Component {
     }
     render(){
         const { currentId, avatar, name, state, onGetContact, onChange, leadercomments } = this.props
+        console.log(this.props)
         let contact = []
         for(let i in this.props.contact){
             contact = [...contact,
@@ -55,7 +57,7 @@ class ManagerComment extends React.Component {
         if(contact.length==0 || !name)
             return <div></div>
         return(
-            <div style={{ height: '100%', backgroundColor: '#E9EBEE'}}>
+            <div style={{ height: '100%', backgroundColor: '#E9EBEE' }}>
                 <div style={{ padding: 5 }}>
                     <div className="input-group-btn" style={{ padding: 0, margin: 0 }}>
                       <div className="btn btn-default btn-xs dropdown-toggle"

@@ -71,7 +71,7 @@ class SettingCell extends React.Component {
                                 </div>
                             }
                             <VerifyPhone
-                                data={{ type: 'store', id: id }}
+                                data={{ type: 'user', id: id }}
                                 phone={this.state.value}
                                 showModal={openModalPhone}
                                 close={() => this.props.onChange('openModalPhone', false )}/>

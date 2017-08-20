@@ -24,8 +24,6 @@ const contacthistory = (state = {
         case 'REGISTER_SUCCESS':
         case 'LANGUAGE':
         case 'VERIFY_SUCCESS':
-        case 'UPDATE_USER_SUCCESS':
-            console.log(action)
             let newcontact = {
                 [action.user.id] : {
                     id: action.user.id,
@@ -53,8 +51,14 @@ const contacthistory = (state = {
                     }
                 })
             return {
+                ...state,
                 currentId: action.user.currentId,
                 contact: newcontact
+            }
+        case 'UPDATE_USER_SUCCESS':
+            return {
+                ...state,
+                currentId: action.user.currentId,
             }
         case 'GET_CONTACT_USER_ING':
         case 'GET_CONTACT_USER_FAILED':
