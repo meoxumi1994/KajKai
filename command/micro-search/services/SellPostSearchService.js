@@ -62,7 +62,8 @@ export const getDisplayResult = (hitsResult, offset, length) => {
     }
     console.log(length + ' ' + res.length);
     console.log(length === res.length);
-    return {sellPosts: res, offset: (length === res.length) ? offset + length : -2};
+    console.log(length == res.length);
+    return {sellPosts: res, offset: (length == res.length) ? offset + length : -2};
 };
 
 export const updateSellPost = (sellpost) => {
