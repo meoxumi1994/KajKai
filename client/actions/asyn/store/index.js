@@ -9,7 +9,7 @@ export const updateStore = (id, store) => dispatch => {
         if(status == 'success'){
             dispatch({ type: 'UPDATE_STORE_SUCCESS', store: store })
         }else{
-            dispatch({ type: 'UPDATE_STORE_FAILED' })
+            dispatch({ type: 'UPDATE_STORE_FAILED', store })
         }
     })
 }

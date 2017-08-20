@@ -14,6 +14,11 @@ export default class AutoComplete extends React.Component {
                 const place = this.autocomplete.getPlace()
                 const lat = place.geometry.location.lat()
                 const lng = place.geometry.location.lng()
+                let fullname = ""
+                place.address_components.map((item) => {
+                    fullname += item.long_name + " "
+                })
+                this.props.onChangePositionName(fullname)
                 this.props.onLocationChanged(lat, lng)
             });
         }
@@ -27,10 +32,14 @@ export default class AutoComplete extends React.Component {
         ref.parentNode.insertBefore(script, ref)
     }
     render() {
-        const { SEARCH_LOCATION, searchType, data } = this.props
-        let inputSearchLocation
+        const { SEARCH_LOCATION, searchType, data, positionname } = this.props
         return (
-            <input className="form-control input-sm" ref={node => { inputSearchLocation = node}}
+            <input className="form-control input-sm" ref={node => { this.inputSearchLocation = node}}
+                value={positionname}
+                onChange={(e) => {
+                    this.props.onChangePositionName(e.target.value)
+                }}
+                onClick={() => this.inputSearchLocation.select()}
                 disabled={searchType == 'STORE' || searchType == 'USER'}
                 id="autocomplete"
                 placeholder={SEARCH_LOCATION}

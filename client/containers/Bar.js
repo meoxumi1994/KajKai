@@ -41,9 +41,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(loadCategory())
     },
     weSearch: (currentType, currentCategoryId, keyword, lat, lng, offset) => {
-        console.log('onSearch: ', currentType, currentCategoryId, keyword, lat, lng, offset)
-        dispatch(search({ id: currentCategoryId, currentType, keyword, lat, lng, offset, length: 10 }))
-        ownProps.history.push("/")
+        // console.log('ONSEARCH ONSEARCH ONSEARCH', currentType, currentCategoryId, keyword, lat, lng, offset)
+        if(currentType== 'category' || currentType== 'store' || currentType == 'user'){
+            dispatch(search({ id: currentCategoryId, currentType, keyword, lat, lng, offset: 0, length: (currentType=='category') ? 3 : 10 }))
+        }
+        // ownProps.history.push("/")
     },
     onChange: (key, value) => {
         if(key == 'currentCategoryId'){
@@ -68,16 +70,25 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { currentType, currentCategoryId, keyword, offset, lat, lng, ...anotherState } = stateProps
+    const { currentType, currentCategoryId, currentCategory, positionname, keyword, offset, lat, lng, ...anotherState } = stateProps
     const { onSearch, onChange, weSearch, ...anotherDispatch } = dispatchProps
     return({
         onLocationChanged: (lat, lng) => {
             onChange('lat',lat)
             onChange('lng',lng)
-            weSearch(currentType, currentCategoryId, keyword, lat, lng, offset)
+            // weSearch(currentType, currentCategoryId, keyword, lat, lng, offset)
+            if(currentType!= 'category' && currentType!= 'store' && currentType != 'user'){
+                window.location = "/home/"+currentType+"?id="+currentCategoryId+"&keyword="
+                +keyword+"&lat="+lat+"&lng="+lng+"&offset="+offset+"&name="+currentCategory+"&positionname="+positionname
+            }
         },
         onSearch: () => {
-            weSearch(currentType, currentCategoryId, keyword, lat, lng, offset)
+            // weSearch(currentType, currentCategoryId, keyword, lat, lng, offset)
+            // console.log("/home/"+currentType+"?id="+currentCategoryId+"&keyword="+keyword+"&lat="+lat+"&lng="+lng+"&offset="+offset)
+            if(currentType== 'category' || currentType== 'store' || currentType == 'user'){
+                window.location = "/home/"+currentType+"?id="+currentCategoryId+"&keyword="
+                +keyword+"&lat="+lat+"&lng="+lng+"&offset="+offset+"&name="+currentCategory+"&positionname="+positionname
+            }
         },
         onChangeTypeSelected: (id, value ) => {
             onChange('currentCategoryId', id)

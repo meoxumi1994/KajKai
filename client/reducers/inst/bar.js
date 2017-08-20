@@ -1,5 +1,6 @@
 const bar = (state = {
     keyword: '',
+    positionname: '',
     offset: 0,
     clicksetting: false,
     showNotification: false,

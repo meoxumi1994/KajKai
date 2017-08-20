@@ -122,9 +122,6 @@ class HandlerUser extends React.Component {
             </a>
         )
     }
-    componentDidMount(){
-        console.log('componentDidMount HandlerUser')
-    }
 }
 
 class Cell extends React.Component {
@@ -161,7 +158,6 @@ export default class BarScreen extends React.Component {
         super(props)
     }
     componentDidMount(){
-        console.log(this.props.location)
         this.props.onLoadCategory()
         $('#dropdowncategory').on('mousewheel DOMMouseScroll', function(e) {
           var scrollTo = null;
@@ -178,6 +174,27 @@ export default class BarScreen extends React.Component {
              $(this).scrollTop(scrollTo + $(this).scrollTop());
           }
         });
+
+        const params = new URLSearchParams(this.props.location.search);
+        const currentType = this.props.location.pathname.split('/')[2]
+        if( currentType == 'store'){
+            this.props.onChangeTypeSelected('-2', "Store")
+        }else if( currentType == 'user'){
+            this.props.onChangeTypeSelected('-3', "User")
+        }else {
+            const id = params.get('id')
+            const name = params.get('name')
+            if(!name || !id){
+                this.props.onChangeTypeSelected(-1, 'All Category')
+            }else {
+                this.props.onChangeTypeSelected(id, name)
+            }
+        }
+        this.props.onChange('keyword', params.get('keyword') || '')
+        this.props.onChange('positionname', params.get('positionname') || '')
+        this.props.onChange('lat', params.get('lat'))
+        this.props.onChange('lng', params.get('lng'))
+        this.props.weSearch(currentType, params.get('id'), params.get('keyword'), params.get('lat'), params.get('lng'), 0)
     }
     clickSetting(){
         setTimeout(()=>{
@@ -186,7 +203,7 @@ export default class BarScreen extends React.Component {
     }
     render() {
         const { SEARCH, SEARCH_STORE, SEARCH_USER, SEARCH_LOCATION,
-             categories, onChangeTypeSelected, currentCategory,
+             categories, onChangeTypeSelected, currentCategory, positionname, currentType,
              onLocationChanged, clicksetting, width, height, keyword, onChange, onSearch} = this.props
         let inputSearchKeyWord
         return (
@@ -276,18 +293,25 @@ export default class BarScreen extends React.Component {
                                 </div>
                             </div>
                             <div className="col-xs-3">
-                                <div className="input-group" style={{ width: 250 }}>
-                                    <AutoCompleteContainer SEARCH_LOCATION={SEARCH_LOCATION}
-                                      onLocationChanged={onLocationChanged}
-                                    />
-                                    {/* <span className="input-group-btn" >
-                                        <button className="btn btn-default btn-sm" type="button"
-                                            style={{ borderRadius: '0px 2px 2px 0px',
-                                            borderWidth: 0, backgroundColor: '#F6F7F9'}}>
-                                            <i className="glyphicon glyphicon-map-marker"></i>
-                                        </button>
-                                    </span> */}
-                                </div>
+                                {(currentType == 'category')?
+                                    <div className="input-group" style={{ width: 250 }}>
+                                        <AutoCompleteContainer SEARCH_LOCATION={SEARCH_LOCATION}
+                                            positionname={positionname}
+                                            onChangePositionName={(value) => {
+                                                this.props.onChange('positionname', value)
+                                            }}
+                                            onLocationChanged={onLocationChanged}
+                                        />
+                                        {/* <span className="input-group-btn" >
+                                            <button className="btn btn-default btn-sm" type="button"
+                                                style={{ borderRadius: '0px 2px 2px 0px',
+                                                borderWidth: 0, backgroundColor: '#F6F7F9'}}>
+                                                <i className="glyphicon glyphicon-map-marker"></i>
+                                            </button>
+                                        </span> */}
+                                    </div>
+                                :   <div></div>
+                                }
                             </div>
                             {/* <div className="col-xs-3"  style={{ padding: 0}}>
                                 <div className="input-group" style={{ marginLeft: 10 }}>

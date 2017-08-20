@@ -185,6 +185,24 @@ const myString = {
     CREATE_INTEREST: ['Tạo quan tâm','Create Interest'],
     EMAIL: ['Thư điện tử','Email'],
     LANGUAGE: ['Ngôn ngữ sử dụng','Language using'],
+    USER: ['Người dùng','User'],
+    NOT_LOGIN: ['Bạn cần đăng nhập để thực hiện chức năng này.','You need to log in to perform this function.'],
+    GO_LOGIN: ['Đến trang đăng nhập ngay!','Go to login page now!'],
+    WELCOME_TO_KAJKAI: ['Chào mừng tới KajKai','Welcome to KajKai'],
+    GUILD_USER_1: ['Hiện tại bạn chưa theo dõi bất kỳ bài đăng bán hàng nào.','You currently do not track any sales posts.'],
+    GUILD_USER_2: [
+        'Để theo dõi bài đăng bán hàng bạn hãy tìm kiếm một bài đăng mà bạn thích sau đó ấn vào biểu tượng',
+        'To follow your sales post, look for a post you like and then click on the icon'],
+    GUILD_USER_3: [
+        'như hình bên dưới',
+        'shown below'],
+    GUILD_USER_4: [
+        'Người dùng này chưa theo dõi bất kỳ bài đăng bán hàng nào',
+        'This user has not followed any sales posts yet'],
+    SEND_MESSAGE: [
+        'Nhắn tin',
+        'Send Message'
+    ],
 }
 
 const allString = {
