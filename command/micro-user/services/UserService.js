@@ -66,7 +66,8 @@ export const getUserBasicInfo = (user) => {
         //     type: 'userid|storeid|mesid',
         //     name: ,
         // }],
-        id: getUserGlobalId(user._id)
+        id: getUserGlobalId(user._id),
+        currentId: user.currentId
     }
 };
 
@@ -79,7 +80,8 @@ export const getUserBasicStoreInfo = (user) => {
         id: getUserGlobalId(user._id),
         longitude: user.longitude,
         latitude: user.latitude,
-        socialType: user.socialNetworkType
+        socialType: user.socialNetworkType,
+        currentId: user.currentId
     }
 };
 
@@ -391,6 +393,10 @@ export const updateUserInfo = (userId, info, next) => {
         if (info.position) {
             if (info.position.lng) user.longitude = info.position.lng;
             if (info.position.lat) user.latitude = info.position.lat;
+        }
+
+        if (info.currentId) {
+            user.currentId = info.currentId
         }
 
         user.save((err) => {

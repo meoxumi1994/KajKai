@@ -27,7 +27,8 @@ const UserSchema = new mongoose.Schema({
     banned: {type: Number},
     banReason: {type: String},
     longitude: {type: Number},
-    latitude: {type: Number}
+    latitude: {type: Number},
+    currentId: {type: String}
 });
 
 export default UserSchema
