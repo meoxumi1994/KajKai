@@ -72,7 +72,7 @@ export const getHitResult = (result) => {
     for (let i = 0; i < hits.length; ++i) {
         res.push(hits[i]._source);
     }
-    return {stores: res, offset: (length === res.length) ? offset + length : -2};
+    return {stores: res, offset: (length == res.length) ? offset + length : -2};
 };
 
 export const delIndex = (next) => {

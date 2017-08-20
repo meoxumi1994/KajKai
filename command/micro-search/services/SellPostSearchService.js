@@ -60,9 +60,6 @@ export const getDisplayResult = (hitsResult, offset, length) => {
         };
         res.push(sellPost);
     }
-    console.log(length + ' ' + res.length);
-    console.log(length === res.length);
-    console.log(length == res.length);
     return {sellPosts: res, offset: (length == res.length) ? offset + length : -2};
 };
 

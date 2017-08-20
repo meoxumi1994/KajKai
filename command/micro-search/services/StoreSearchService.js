@@ -76,5 +76,5 @@ export const getHitResult = (result, offset, length) => {
         };
         res.push(store);
     }
-    return {stores: res, offset: (length === res.length) ? offset + length : -2};
+    return {stores: res, offset: (length == res.length) ? offset + length : -2};
 };
