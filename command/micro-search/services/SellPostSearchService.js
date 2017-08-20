@@ -46,10 +46,10 @@ export const getHitResult = (result, offset, length) => {
     return {sellPosts: res, offset: (length === res.length) ? offset + length : -2};
 };
 
-export const getDisplayResult = (hitsResult) => {
+export const getDisplayResult = (hitsResult, offset, length) => {
     let res = [];
     if (!hitsResult || !hitsResult.sellPosts || hitsResult.sellPosts.length === 0) {
-        return {sellPosts: res}
+        return {stores: res, offset: (length === res.length) ? offset + length : -2};
     }
     for (let i = 0; i < hitsResult.sellPosts.length; ++i) {
         let sellPost = {
@@ -60,7 +60,7 @@ export const getDisplayResult = (hitsResult) => {
         };
         res.push(sellPost);
     }
-    return {sellPosts: res};
+    return {stores: res, offset: (length === res.length) ? offset + length : -2};
 };
 
 export const updateSellPost = (sellpost) => {
@@ -83,11 +83,11 @@ export const addNewProduct = (product) => {
 export const searchSellPost = (offset, length, categoryId, location, keyword, next) => {
     if (location && location.lat && location.lon) {
         searchWithLocation(offset, length, categoryId, location, keyword, (res) => {
-            next(getDisplayResult(res));
+            next(getDisplayResult(res, offset, length));
         })
     } else {
         searchWithoutLocation(offset, length, categoryId, keyword, (res) => {
-            next(getDisplayResult(res));
+            next(getDisplayResult(res, offset, length));
         })
     }
 };
