@@ -34,7 +34,7 @@ export const getSellPost = (sellPostId, next) => {
     })
 };
 
-export const getHitResult = (result) => {
+export const getHitResult = (result, offset, length) => {
     let res = [];
     if (!result || !result.hits || !result.hits.hits) {
         return {sellPosts: []};
@@ -43,7 +43,7 @@ export const getHitResult = (result) => {
     for (let i = 0; i < hits.length; ++i) {
         res.push(hits[i]._source);
     }
-    return {sellPosts: res};
+    return {sellPosts: res, offset: (length === res.length) ? offset + length : -2};
 };
 
 export const getDisplayResult = (hitsResult) => {
@@ -128,7 +128,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                 }
             }, (error, response) => {
                 console.log('search without location: ' + 'category: ' + categoryId + ' ' + 'keyword: ' + keyword, error, JSON.stringify(response));
-                next(getHitResult(response));
+                next(getHitResult(response, offset, length));
             })
         } else {
             searchClient.search({
@@ -168,7 +168,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
 
             }, (error, response) => {
                 console.log('search without location: ' + 'category: ' + categoryId + ' ' + 'keyword: ' + keyword, error, JSON.stringify(response));
-                next(getHitResult(response));
+                next(getHitResult(response, offset, length));
             })
         }
     } else {
@@ -188,7 +188,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                 }
             }, (error, response) => {
                 console.log('search without location: ' + 'category: ' + categoryId + ' ' + 'keyword: ' + keyword, error, JSON.stringify(response));
-                next(getHitResult(response));
+                next(getHitResult(response, offset, length));
             })
         } else {
             searchClient.search({
@@ -235,7 +235,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                 }
             }, (error, response) => {
                 console.log('search without location: ' + 'category: ' + categoryId + ' ' + 'keyword: ' + keyword, error, JSON.stringify(response));
-                next(getHitResult(response));
+                next(getHitResult(response, offset, length));
             })
         }
     }
@@ -266,7 +266,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                 }
             }, (error, response) => {
                 console.log('search location: ' + location + ';category: ' + categoryId + ' ' + ';keyword: ' + keyword, error, JSON.stringify(response));
-                next(getHitResult(response));
+                next(getHitResult(response, offset, length));
             })
         } else {
             searchClient.search({
@@ -309,7 +309,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                 }
             }, (error, response) => {
                 console.log('search location: ' + location + ';category: ' + categoryId + ' ' + ';keyword: ' + keyword, error, JSON.stringify(response));
-                next(getHitResult(response));
+                next(getHitResult(response, offset, length));
             })
         }
     } else {
@@ -339,7 +339,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                 }
             }, (error, response) => {
                 console.log('search location: ' + location + ';category: ' + categoryId + ' ' + ';keyword: ' + keyword, error, JSON.stringify(response));
-                next(getHitResult(response));
+                next(getHitResult(response, offset, length));
             })
         } else {
             searchClient.search({
@@ -392,7 +392,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                 }
             }, (error, response) => {
                 console.log('search location: ' + location + ';category: ' + categoryId + ' ' + ';keyword: ' + keyword, error, JSON.stringify(response));
-                next(getHitResult(response));
+                next(getHitResult(response, offset, length));
             })
         }
     }
