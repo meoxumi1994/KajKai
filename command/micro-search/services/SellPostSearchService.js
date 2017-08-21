@@ -73,6 +73,16 @@ export const updateSellPost = (sellpost) => {
     })
 };
 
+export const deleteSellPost = (id) => {
+    searchClient.delete({
+        index: config.INDEX,
+        type: config.TYPE_SELL_POST,
+        id: id
+    }, (err, resp) => {
+        console.log('delete ' + err, resp);
+    })
+};
+
 export const addNewProduct = (product) => {
     getSellPost(product.sellPostId, (oldSellPost) => {
         oldSellPost.productContent += product.sellPostId + ':& ' + toRoot(product.content) + ' ;&';

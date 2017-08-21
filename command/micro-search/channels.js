@@ -30,5 +30,9 @@ export default {
     'POSTROW.PRODUCT.Updated': {
         controller: 'SearchSubController',
         method: 'updateSellPostProductSub'
+    },
+    'SELLPOST.Deleted': {
+        controller: 'SearchSubController',
+        method: 'deleteSellpostSub'
     }
 }
