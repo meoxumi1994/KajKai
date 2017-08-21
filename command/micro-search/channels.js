@@ -5,7 +5,7 @@ export default {
     },
     'USER.Updated': {
         controller: 'SearchSubController',
-        method: 'updateUserSub'
+        method: 'createUserSub'
     },
     'STORE.Created': {
         controller: 'SearchSubController',
