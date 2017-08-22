@@ -25,7 +25,7 @@ export const getSellpostsHandler = () => (req, res) => {
   } else {
     offset = new Date(parseInt(offset))
   }
-  checkStoreOwner(requesterId, id, (ok) => {
+  checkStoreOwner(requesterId, storeId, (ok) => {
     getSellposts(ok, requesterId, storeId, offset, (sellposts) => {
       if (sellposts) {
         res.json(sellposts)
