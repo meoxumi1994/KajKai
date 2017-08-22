@@ -105,7 +105,6 @@ class App extends React.Component {
         const path = "/" +this.props.location.pathname.split('/')[1];
         const { width, height, username, onScroll } = this.props
         const { showProgress, closeProgress } = this.props
-        console.log(this.width)
         return(
             <div style={{ height: '100%', minWidth: 1040 }}>
                 <Route path="*" component={Bar}/>

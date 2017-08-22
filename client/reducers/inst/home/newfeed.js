@@ -6,6 +6,11 @@ const newfeed = (state = {
     users: [],
 }, action) => {
     switch (action.type) {
+        case 'INST_HOME_NEWFEED_CHANGE':
+            return {
+                ...state,
+                [action.key] : action.value
+            }
         case 'SEARCH_SUCCESS':
             if(action.kind == 'user')
                 return {

@@ -41,11 +41,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(loadCategory())
     },
     weSearch: (currentType, currentCategoryId, keyword, lat, lng, offset) => {
-        // console.log('ONSEARCH ONSEARCH ONSEARCH', currentType, currentCategoryId, keyword, lat, lng, offset)
         if(currentType== 'category' || currentType== 'store' || currentType == 'user'){
+            dispatch({ type: 'INST_HOME_NEWFEED_CHANGE', key: 'stores', value: [] })
+            dispatch({ type: 'INST_HOME_NEWFEED_CHANGE', key: 'users', value: [] })
+            dispatch({ type: 'INST_HOME_NEWFEED_CHANGE', key: 'sellPosts', value: [] })
             dispatch(search({ id: currentCategoryId, currentType, keyword, lat, lng, offset: 0, length: (currentType=='category') ? 3 : 10 }))
         }
-        // ownProps.history.push("/")
     },
     onChange: (key, value) => {
         if(key == 'currentCategoryId'){
@@ -76,18 +77,15 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
         onLocationChanged: (lat, lng) => {
             onChange('lat',lat)
             onChange('lng',lng)
-            // weSearch(currentType, currentCategoryId, keyword, lat, lng, offset)
             if(currentType== 'category' || currentType== 'store' || currentType == 'user'){
-                window.location = "/home/"+currentType+"?id="+currentCategoryId+"&keyword="
-                +keyword+"&lat="+lat+"&lng="+lng+"&offset="+offset+"&name="+currentCategory+"&positionname="+positionname
+                ownProps.history.push("/home/"+currentType+"?id="+currentCategoryId+"&keyword="
+                +keyword+"&lat="+lat+"&lng="+lng+"&offset="+offset+"&name="+currentCategory+"&positionname="+positionname)
             }
         },
         onSearch: () => {
-            // weSearch(currentType, currentCategoryId, keyword, lat, lng, offset)
-            // console.log("/home/"+currentType+"?id="+currentCategoryId+"&keyword="+keyword+"&lat="+lat+"&lng="+lng+"&offset="+offset)
             if(currentType== 'category' || currentType== 'store' || currentType == 'user'){
-                window.location = "/home/"+currentType+"?id="+currentCategoryId+"&keyword="
-                +keyword+"&lat="+lat+"&lng="+lng+"&offset="+offset+"&name="+currentCategory+"&positionname="+positionname
+                ownProps.history.push("/home/"+currentType+"?id="+currentCategoryId+"&keyword="
+                +keyword+"&lat="+lat+"&lng="+lng+"&offset="+offset+"&name="+currentCategory+"&positionname="+positionname)
             }
         },
         onChangeTypeSelected: (id, value ) => {

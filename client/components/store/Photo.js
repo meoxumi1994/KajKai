@@ -8,7 +8,7 @@ class Photo extends React.Component {
         super(props)
     }
     render(){
-        const { storePhotos, postPhotos, productPhotos, userPhotos} = this.props
+        const { storePhotos, postPhotos, productPhotos, userPhotos } = this.props
         return (
             <div>
                 {storePhotos.length > 0 &&

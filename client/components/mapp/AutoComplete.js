@@ -12,14 +12,16 @@ export default class AutoComplete extends React.Component {
             )
             this.autocomplete.addListener('place_changed', () => {
                 const place = this.autocomplete.getPlace()
-                const lat = place.geometry.location.lat()
-                const lng = place.geometry.location.lng()
-                let fullname = ""
-                place.address_components.map((item) => {
-                    fullname += item.long_name + " "
-                })
-                this.props.onChangePositionName(fullname)
-                this.props.onLocationChanged(lat, lng)
+                if(place.geometry){
+                    const lat = place.geometry.location.lat()
+                    const lng = place.geometry.location.lng()
+                    let fullname = ""
+                    place.address_components.map((item) => {
+                        fullname += item.long_name + " "
+                    })
+                    this.props.onChangePositionName(fullname)
+                    this.props.onLocationChanged(lat, lng)
+                }
             });
         }
         this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyDEy3sjvl8Sq5bsInBAU61uu_u4_fK3zvk&libraries=places&callback=initAutocomplete')

@@ -170,9 +170,11 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 match_phrase_prefix: {
                                     nonTokenCategory: toRoot(keyword)
                                 }
-                            }, {
-                                match_all: {}
-                            }]
+                            },
+                            //     {
+                            //     match_all: {}
+                            // }
+                            ]
                         }
                     }
                 }
