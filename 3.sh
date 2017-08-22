@@ -5,8 +5,8 @@ mongo -u admin -p dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu --authenticationDat
 
 pm2 flush &&
 
-pm2 start ./command/micro-notification/index-noti.js &&
 pm2 start ./command/micro-search/index-search.js &&
+pm2 start ./command/micro-notification/index-noti.js &&
 pm2 start ./command/micro-store/index-store.js &&
 
 curl localhost:8085/deleteindex &&
