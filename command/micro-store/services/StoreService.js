@@ -174,6 +174,8 @@ export const updateStore = (storeInfo, userId, next) => {
         }
         store.save(() => {
             getPubStoreInfo(store, (info) => {
+                if (!storeInfo.avatarUrl) info.avatarUrl = undefined;
+                if (!storeInfo.coverUrl) info.coverUrl = undefined;
                 updateStorePub(info);
             });
             next(store);
