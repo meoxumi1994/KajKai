@@ -125,7 +125,7 @@ class App extends React.Component {
                     }
                     <div style={{ paddingTop: 47,
                         // marginRight: (width >  1040 +280 && username)?280: 0,
-                        paddingLeft: Math.max(0, Math.min( username ? width - 1340 : 1000000 , (width - 1040) / 2 )) }}>
+                        paddingLeft: Math.max(0, Math.min( username ? width - 1330 : 1000000 , (width - 1040) / 2 )) }}>
                         {(path == "/" || path == "/admin" || path == "/map" || path == "/home" ||
                         path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
