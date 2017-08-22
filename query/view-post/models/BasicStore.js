@@ -6,9 +6,7 @@ const BasicStoreSchema = new mongoose.Schema({
   userId: {type: String},
   storeName: {type: String},
   avatarUrl: {type: String},
-  urlName: {type: String},
-  postrowImageList: [ImageSchema],
-  productImageList: [ImageSchema]
+  urlName: {type: String}
 })
 
 export default BasicStoreSchema

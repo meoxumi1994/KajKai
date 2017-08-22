@@ -51,9 +51,11 @@ export const searchUser = (userName, offset, length, next) => {
                         match_phrase_prefix: {
                             nonTokenUsername: toRoot(userName)
                         }
-                    }, {
-                        match_all: {}
-                    }]
+                    },
+                    //     {
+                    //     match_all: {}
+                    // }
+                    ]
                 }
             }
         }

@@ -18,3 +18,8 @@ export const OrderStatus = {
   RECEIVED: 'received',
   DONE: 'done'
 }
+
+export const ImageType = {
+  POSTROW: 'POSTROW',
+  PRODUCT: 'PRODUCT'
+}

@@ -49,7 +49,11 @@ export const createComment = (message) => {
           avatarUrl: basicUser.avatarUrl,
           content,
           time : Date.now(),
-          numberOfLike: 0
+          numberOfLike: 0,
+          phone: basicUser.phone,
+          address: basicUser.address,
+          latitude: basicUser.latitude,
+          longitude: basicUser.longitude
         })
         if (comment.match) {
           reply.match = comment.match

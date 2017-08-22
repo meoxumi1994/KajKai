@@ -1,21 +1,20 @@
-import {  BasicStore } from '../models'
+import { Image } from '../models'
+import { ImageType } from '../enum'
 
 export const getProductImageList = (requesterId, storeId, offset, next) => {
-  BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-      if (err || !basicStore) {
+  Image.find({ storeId, type: ImageType.PRODUCT }, (err, productImageList) => {
+      if (err || !productImageList) {
         if(err) {
           next(null)
         } else {
           next({
-            status: 'nodata',
+            offset: -2,
+            status: 'success',
             listImage: []
           })
         }
       } else {
-        let { productImageList } = basicStore
-        if (!productImageList) {
-          productImageList = []
-        }
+        productImageList.sort((i1, i2) => (i2.time - i1.time))
         const mImageList = []
         let currentNumberOfImage = 0, mOffset, lastIndex
         for (let i = productImageList.length - 1; i >= 0; i--) {
