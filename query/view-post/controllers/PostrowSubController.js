@@ -24,9 +24,10 @@ export const createPostrow = (message) => {
           type: ImageType.POSTROW
         })
 
-        mImage.save(() => {})
+        mPostrowImageList.push(mImage)
       }
     }
+    saveInOrder(mPostrowImageList)
   }
   if (titles) postrow.titles = titles
   if (products && products.length > 0) {
@@ -42,9 +43,10 @@ export const createPostrow = (message) => {
           type: ImageType.PRODUCT
         })
 
-        mImage.save(() => {})
+        mProductImageList.push(mImage)
       }
     }
+    saveInOrder(mProductImageList)
   }
   if (type) postrow.type = type
 
@@ -56,3 +58,17 @@ export const deletePostrow = (message) => {
   Postrow.remove({ id }, () => {})
   Image.remove({ postrowId: id }, () => {})
 }
+
+const saveInOrder = (images) => {
+  if (!images || images.length == 0) {
+    return
+  }
+
+  let image = images[0]
+
+  image.save(() => {
+    saveInOrder(images.splice(1))
+  })
+}
+
+saveAll();
