@@ -70,5 +70,3 @@ const saveInOrder = (images) => {
     saveInOrder(images.splice(1))
   })
 }
-
-saveAll();
