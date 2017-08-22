@@ -37,3 +37,6 @@ const shit = {
     chat: 4,
     event: 4
 };
+
+sphere = db.getCollection('interests').createIndex( { 'location' : "2dsphere" } );
+db.getCollection('interests').createIndex( { "name" : 1 } )

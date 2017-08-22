@@ -3,7 +3,7 @@ import { getClientFormatReplies } from './ReplyService'
 import { getBlackList } from './BlockService'
 import { OrderStatus } from '../enum'
 
-export const getComments = (requesterId, type, id, offset, status, length, next) => {
+export const getComments = (ok, requesterId, type, id, offset, status, length, next) => {
   getBlackList((blackList) => {
     if (type == 'sellpost') {
       Sellpost.findOne({ id }, (err, sellpost) => {
@@ -31,7 +31,7 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           })
           next({
             id,
-            ...getClientFormatSellpostComments(null, blackList, requesterId, mComments, offset, status, false, 10)
+            ...getClientFormatSellpostComments(ok, null, blackList, requesterId, mComments, offset, status, false, 10)
           })
         }
       })
@@ -77,7 +77,7 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           })
           next({
             id,
-            ...getClientFormatSellpostComments(null, blackList, requesterId, mComments, offset, status, false, length)
+            ...getClientFormatSellpostComments(ok, null, blackList, requesterId, mComments, offset, status, false, length)
           })
         }
       })
@@ -106,7 +106,7 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
           })
           next({
             id,
-            ...getClientFormatSellpostComments(null, blackList, requesterId, comments, offset, status, false, length)
+            ...getClientFormatSellpostComments(ok, null, blackList, requesterId, comments, offset, status, false, length)
           })
         }
       })
@@ -114,7 +114,7 @@ export const getComments = (requesterId, type, id, offset, status, length, next)
   })
 }
 
-export const getClientFormatSellpostComments = (targetId, blackList, requesterId, comments, offset, status, isFirst, length) => {
+export const getClientFormatSellpostComments = (ok, targetId, blackList, requesterId, comments, offset, status, isFirst, length) => {
   if (!comments) {
     if (targetId) {
       return {
@@ -196,6 +196,15 @@ export const getClientFormatSellpostComments = (targetId, blackList, requesterId
       mComment.status = comment.status
       mComment.numcomment = mReplies.length
       mComment.match = comment.match ? comment.match : []
+
+      if (ok) {
+        mComment.address = mComment.address ? mComment.address : ''
+        mComment.position =  {
+          lat: mComment.latitude,
+          lng: mComment.longitude
+        }
+        mComment.phone = mComment.phone ? mComment.phone : ''
+      }
 
       mComments = [mComment, ...mComments]
 

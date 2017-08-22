@@ -52,6 +52,7 @@ export const getUser = (requesterId, id, next) => {
                 avatarUrl: basicStore.avatarUrl,
                 urlname: basicStore.urlName
               }))) : [],
+              followstores: user.followingStores ? user.followingStores : [],
               numUnreaded: user.numberOfUnRead ? user.numberOfUnRead : 0,
               currentId: user.currentId ? user.currentId : user.id,
               interactive : {

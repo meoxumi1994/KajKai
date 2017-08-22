@@ -11,11 +11,22 @@ export const createBasicUser = (message) => {
 }
 
 export const updateBasicUser = (message) => {
-  const { id, username, avatarUrl } = message.user
+  const { id, username, avatarUrl, address, phone, position } = message.user
   const basicUser = {}
 
   if (avatarUrl) basicUser.avatarUrl = avatarUrl
   if (username) basicUser.username = username
+  if (address) user.address = address
+  if (position) {
+    let { lng, lat } = position
+    if (lng) {
+      user.longitude = lng
+    }
+    if (lat) {
+      user.latitude = lat
+    }
+  }
+  if (phone) user.phone = phone
 
   BasicUser.findOneAndUpdate({ id }, basicUser, () => {})
   Comment.find({}, (err, comments) => {
@@ -86,6 +97,17 @@ export const updateBasicUser = (message) => {
         }
         for (let h = 0; h < comments.length; h++) {
           let comment = comments[h]
+          if (address) comment.address = address
+          if (position) {
+            let { lng, lat } = position
+            if (lng) {
+              comment.longitude = lng
+            }
+            if (lat) {
+              comment.latitude = lat
+            }
+          }
+          if (phone) comment.phone = phone
           let { replies } = comment
           if (!replies) {
             replies = []

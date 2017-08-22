@@ -8,6 +8,10 @@ import ReplySchema from './Reply'
 const CommentSchema = new mongoose.Schema({
   id: {type: String},
   commenterId: {type: String},
+  phone: {type: String},
+  address: {type: String},
+  latitude: {type: Number},
+  longitude: {type: Number},
   storeId: {type: String},
   sellpostId: {type: String},
   minorpostId: {type: String},

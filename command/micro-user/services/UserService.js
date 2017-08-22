@@ -403,6 +403,8 @@ export const updateUserInfo = (userId, info, next) => {
             if (err) {
                 next('update err', null)
             } else {
+                if (!info.coverUrl) user.coverUrl = undefined;
+                if (!info.avatarUrl) user.avatarUrl = undefined;
                 next('success', user)
             }
         })
