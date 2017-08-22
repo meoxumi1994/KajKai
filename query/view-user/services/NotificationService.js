@@ -39,6 +39,7 @@ export const createLikeSellpostNotification = (sellpostId) => {
                           time: Date.now(),
                           storeName: basicStore.storeName,
                           urlName: basicStore.urlName,
+                          storeId: basicStore.id,
                           storeAvatarUrl: basicStore.avatarUrl,
                           numberOfLike,
                           likers
@@ -110,6 +111,7 @@ export const createLikeCommentNotification = (commentId) => {
                               time: Date.now(),
                               storeName: basicStore.storeName,
                               urlName: basicStore.urlName,
+                              storeId: basicStore.id,
                               storeAvatarUrl: basicStore.avatarUrl,
                               numberOfLike,
                               likers
@@ -184,6 +186,7 @@ export const createLikeReplyNotification = (replyId) => {
                               time: Date.now(),
                               storeName: basicStore.storeName,
                               urlName: basicStore.urlName,
+                              storeId: basicStore.id,
                               storeAvatarUrl: basicStore.avatarUrl,
                               numberOfLike,
                               likers

@@ -69,6 +69,7 @@ export const createCommentNotification = (message) => {
               time: Date.now(),
               storeName: basicStore.storeName,
               urlName: basicStore.urlName,
+              storeId: basicStore.id,
               storeAvatarUrl: basicStore.avatarUrl
             })
             if (order) notification.order = order.map((product) => ({
@@ -161,6 +162,7 @@ export const createReceiveNotification = (message) => {
               time: Date.now(),
               storeName: notification.storeName,
               urlName: notification.urlName,
+              storeId: notification.storeId,
               storeAvatarUrl: notification.storeAvatarUrl,
               numberOfLike: notification.numberOfLike,
               likers: notification.likers,

@@ -95,6 +95,7 @@ const createSellpostNotification = (type, sellpost) => {
                   time: Date.now(),
                   storeName: basicStore.storeName,
                   urlName: basicStore.urlName,
+                  storeId: basicStore.id,
                   storeAvatarUrl: basicStore.avatarUrl
                 })
                 notify(user.id, notification)
