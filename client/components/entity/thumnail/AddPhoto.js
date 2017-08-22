@@ -13,7 +13,7 @@ class AddPhoto extends React.Component {
         this.state = {}
     }
     render(){
-        const { TITLE, SUGGEST_PHOTO, style, action, onChange, id, aspectRatio, canEdit } = this.props
+        const { TITLE, SUGGEST_PHOTO, UPDATE_PHOTO, style, action, onChange, id, aspectRatio, canEdit } = this.props
         const imagesSuggest = [
             'https://beebom-redkapmedia.netdna-ssl.com/wp-content/uploads/2016/01/Reverse-Image-Search-Engines-Apps-And-Its-Uses-2016.jpg',
             'http://www.jqueryscript.net/images/jQuery-Plugin-For-Fullscreen-Image-Viewer-Chroma-Gallery.jpg',
@@ -33,50 +33,48 @@ class AddPhoto extends React.Component {
                 <Modal show={this.props['showModal'+id]} onHide={() => onChange('showModal'+id, false)}>
                     <div className="modal-content"
                         style={{
-                            marginTop: -4,position: 'fixed',
+                            borderRadius: 4,
+                            marginTop: -4, position: 'fixed',
                             width: 790, marginLeft: -100 }} >
-                        <Modal.Header>
+                        {/* <Modal.Header>
                             <div onClick={() => onChange('showModal'+id, false)} style={{ padding: 0, float: 'right'}}
                                 className="btn btn-transperant">
                             </div>
-                            <strong>{TITLE}</strong>
-                        </Modal.Header>
-                        <Modal.Body style={{ padding: 8 }}>
-                            <div className="container-fluid" style={{ width: 784 }}>
-                                <div className="row">
-                                    <div className="col col-xs-6" style={{ padding: 0}}>
-                                        <UploadCroppie
-                                            aspectRatio={aspectRatio}
-                                            style={{ width: 780, height: 440 }}
-                                            btnstyle={{
-                                                width: 380,
-                                                height: 110,
-                                                fontSize: 17,
-                                            }}
-                                            upNow={false}
-                                            action={action}
-                                        />
-                                    </div>
-                                    <div className="col col-xs-6" style={{ padding: 0}}>
-                                        <WebcamCapture
-                                            aspectRatio={aspectRatio}
-                                            style={{ width: 590 }}
-                                            action={action}
-                                            upNow={false}
-                                            btnstyle={{
-                                                width: 380,
-                                                height: 110,
-                                                fontSize: 17,
-                                            }}/>
-                                    </div>
-                                </div>
-                            </div>
-                        </Modal.Body>
-                        <hr style={{ margin: 0, padding: 0 }}/>
-                        <div style={{ backgroundColor: '#F6F7F9', padding: '2px 0px 2px 15px' }}>
-                            <strong className="text-muted">{SUGGEST_PHOTO}</strong>
+                            <strong></strong>
+                        </Modal.Header> */}
+                        <div style={{ padding: 10, color: 'white', borderRadius: '3px 3px 0px 0px',
+                            fontSize: 14, fontWeight: 'bold', backgroundColor: '#3B5998'}}>
+                            {UPDATE_PHOTO}
                         </div>
-                        <hr style={{ margin: 0, padding: 0 }}/>
+                        <div style={{ marginLeft: 10, marginTop: 10 }}>
+                            <UploadCroppie
+                                aspectRatio={aspectRatio}
+                                style={{ width: 780, height: 440 }}
+                                btnstyle={{
+                                    width: 380,
+                                    height: 110,
+                                    fontSize: 17,
+                                }}
+                                upNow={false}
+                                action={action}
+                            />
+                        </div>
+                        <div style={{ marginTop: -110, marginLeft: 400 }}>
+                            <WebcamCapture
+                                aspectRatio={aspectRatio}
+                                style={{ width: 590 }}
+                                action={action}
+                                upNow={false}
+                                btnstyle={{
+                                    width: 380,
+                                    height: 110,
+                                    fontSize: 17,
+                                }}/>
+                        </div>
+                        <hr style={{ margin: '10px 10px 0px 10px', borderColor: '#E9EBEE' }}/>
+                        <div style={{ padding: 10, fontSize: 14,  color: '#90949C'}}>
+                            {SUGGEST_PHOTO}
+                        </div>
                         <div style={{ maxHeight: 500, overflowY: 'scroll'}}>
                             <div style={{ padding: '4px 4px 28px 10px'}}>
                                 {imagesSuggest.map((item, index) => {

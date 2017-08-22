@@ -1,6 +1,4 @@
 const user = ( state = {
-    avatarUrl: '/images/avatardefaultIcon.png',
-    coverUrl: '/images/cover.png',
     language: 'en',
     storeList: [],
 }, action) => {
@@ -8,8 +6,6 @@ const user = ( state = {
         case 'WHO_FAILED':
         case 'LOGOUT':
             return {
-                avatarUrl: '/images/avatardefaultIcon.png',
-                coverUrl: '/images/cover.png',
                 language: state.language,
                 storeList: [],
             }

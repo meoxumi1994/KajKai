@@ -6,18 +6,19 @@ import statistic from './statistic'
 import { updateFollows } from '~/reducers/support'
 
 const index = (state = {
-
+    coverUrl: '/images/storeCoverDefault.svg',
 }, action) => {
     switch (action.type) {
         case 'STORE_GET_ING':
             return {}
         case 'STORE_GET_SUCCESS':
             return {
+                coverUrl: '/images/storeCoverDefault.svg',
                 ...action.store,
             }
         case 'UPDATE_STORE_SUCCESS':
             if(state.id == action.store.id)
-                return {...state, ...action.store}
+                return {...state, coverUrl: '/images/storeCoverDefault.svg', ...action.store}
             return state
         case 'client/FOLLOW':
             if(action.data.type=='store'){

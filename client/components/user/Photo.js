@@ -17,7 +17,7 @@ class Photo extends React.Component {
                         border: '1px solid #CCCCCC',
                         boxShadow: '0px 0px 4px #CCCCCC',
                         backgroundColor: 'white',
-                        width: 838, marginTop: 10,  paddingBottom: 8,
+                        width: 790, marginTop: 10,  paddingBottom: 8,
                         }}>
                         <div style={{ padding: 10, borderRadius: 3.5,fontSize: 20, backgroundColor: '#F6F7F9'}}>
                             <img src={"/images/photousericon.svg"} width={22} height={22}/>
@@ -30,7 +30,7 @@ class Photo extends React.Component {
                                     <KeepImage
                                         canEdit={false}
                                         type="Carousel"
-                                        width={227.6}
+                                        width={190.7}
                                         images={[item.url]}
                                         imagesSuggest={[item.url]}/>
                                 </div>

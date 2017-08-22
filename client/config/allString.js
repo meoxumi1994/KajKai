@@ -81,9 +81,9 @@ const myString = {
     VERIFY_PHONE: ['Xác Nhận Số Điện THoại','Verify Phone Number'],
     // thumnail
     ADD_PHOTO: ['Thêm ảnh', 'Add Photo'],
-    SUGGEST_PHOTO:['Gợi Ý Ảnh', 'Suggest Photo'],
+    SUGGEST_PHOTO:['Gợi ý ảnh', 'Suggest photo'],
     SEE_MORE: ['Xem thêm', 'See More'],
-    TAKE_PHOTO: ['Lấy Ảnh','Take Photo'],
+    TAKE_PHOTO: ['Chụp Ảnh','Take Photo'],
     WEBCAM_DESCRIPTION: ['Hình ảnh của bạn luôn công khai.', 'Your picture is always public.'],
     CAPTURE_PHOTO: ['Chụp Ảnh','Capture Photo'],
     RETAKE_PHOTO: ['Chụp Lại','Retake Photo'],
@@ -224,6 +224,7 @@ const myString = {
     CREATE_SELL_POST: ['Tạo bài đăng','Create Sell Post'],
     REMOVE: ['xoá','remove'],
     ADD_PRODUCT: ['thêm sản phẩm','add product'],
+    UPDATE_PHOTO: ['Cập nhật ảnh','Update photo'],
 }
 
 const allString = {

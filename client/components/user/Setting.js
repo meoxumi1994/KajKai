@@ -43,7 +43,7 @@ const Setting = (props) => {
                         </Link>
                     </div>
                     <div className="col-xs-9" style={{ padding: 0 }}>
-                        <div style={{ width: 643, marginLeft: -5 }}>
+                        <div style={{ width: 604, marginLeft: -5 }}>
                             {currentSettingType != 'security'?
                                 <div>
                                     <SettingCell id={id} kind="username" type="user" title={USER_NAME} placeholder={ENTER_STORE}
@@ -53,7 +53,7 @@ const Setting = (props) => {
                                     <SettingCell id={id} kind="phone" type="user" title={PHONE} placeholder={ENTER_YOUR_PHONE}/>
                                     <SettingCell id={id} kind="age" type="user" title={AGE} description={NOTE_AGE}
                                         placeholder={ENTER_AGE}/>
-                                    <SettingCell id={id} kind="position" type="user" title={POSITION_IN_MAP} width={643}
+                                    <SettingCell id={id} kind="position" type="user" title={POSITION_IN_MAP} width={604}
                                         placeholder={ENTER_YOUR_ADDRESS} failed={ADDRESS_FAILED}/>
                                 </div>
                             :
