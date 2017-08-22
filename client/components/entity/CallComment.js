@@ -36,6 +36,7 @@ class CallComment extends React.Component {
                         </table>
                         {order && <div style={{ height: 10 }}></div>}
                         <ContentEditable
+                            // width={}
                             match={match}
                             onEnter={() => onEnter()}
                             placehoder={placehoder}
