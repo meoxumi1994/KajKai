@@ -5,7 +5,7 @@ export const checkStoreOwner = (requesterId, id, next) => {
     if (basicStore) {
       next(requesterId == basicStore.userId)
     } else {
-      nexy(false)
+      next(false)
     }
   })
 }
