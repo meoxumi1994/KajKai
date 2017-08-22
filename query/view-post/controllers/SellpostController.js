@@ -1,15 +1,18 @@
-import { getSellpost, getSellposts, getUserSellposts, getNearBy } from '../services/SellpostService.js'
+import { getSellpost, getSellposts, getUserSellposts, getNearBy } from '../services/SellpostService'
+import { checkStoreOwner, checkSellpostOwner } from '../services/PrivacyService'
 
 export const getSellpostHandler = () => (req, res) => {
   const requesterId = req.decoded._id
   const { id } = req.params
   let { id: targetId } = req.query
-  getSellpost(targetId, requesterId, id, (sellpost) => {
-    if (sellpost) {
-      res.json(sellpost)
-    } else {
-      res.json({status: 'failed'})
-    }
+  checkSellpostOwner(requesterId, id, (ok) => {
+    getSellpost(ok, targetId, requesterId, id, (sellpost) => {
+      if (sellpost) {
+        res.json(sellpost)
+      } else {
+        res.json({status: 'failed'})
+      }
+    })
   })
 }
 
@@ -22,12 +25,14 @@ export const getSellpostsHandler = () => (req, res) => {
   } else {
     offset = new Date(parseInt(offset))
   }
-  getSellposts(requesterId, storeId, offset, (sellposts) => {
-    if (sellposts) {
-      res.json(sellposts)
-    } else {
-      res.json({status: 'failed'})
-    }
+  checkStoreOwner(requesterId, storeId, (ok) => {
+    getSellposts(ok, requesterId, storeId, offset, (sellposts) => {
+      if (sellposts) {
+        res.json(sellposts)
+      } else {
+        res.json({status: 'failed'})
+      }
+    })
   })
 }
 export const getUserSellpostsHandler = () => (req, res) => {

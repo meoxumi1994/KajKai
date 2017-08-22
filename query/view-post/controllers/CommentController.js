@@ -1,4 +1,5 @@
-import { getComments } from '../services/CommentService.js'
+import { getComments } from '../services/CommentService'
+import { checkStoreOwner, checkSellpostOwner } from '../services/PrivacyService'
 
 export const getCommentsHandler = () => (req, res) => {
   let requesterId = req.decoded._id
@@ -18,11 +19,35 @@ export const getCommentsHandler = () => (req, res) => {
   } else {
     offset = new Date(parseInt(offset))
   }
-  getComments(requesterId, type, id, offset, status, length, (comments) => {
-    if (comments) {
-      res.json(comments)
-    } else {
-      res.json({status: 'failed'})
-    }
-  })
+  if (type == 'store') {
+    checkStoreOwner(requesterId, id, (ok) => {
+      getComments(ok, requesterId, type, id, offset, status, length, (comments) => {
+        if (comments) {
+          res.json(comments)
+        } else {
+          res.json({status: 'failed'})
+        }
+      })
+    })
+  } else if (type == 'sellpost') {
+    checkSellpostOwner(requesterId, id, (ok) => {
+      getComments(ok, requesterId, type, id, offset, status, length, (comments) => {
+        if (comments) {
+          res.json(comments)
+        } else {
+          res.json({status: 'failed'})
+        }
+      })
+    })
+  } else if (type == 'user') {
+    getComments(null, requesterId, type, id, offset, status, length, (comments) => {
+      if (comments) {
+        res.json(comments)
+      } else {
+        res.json({status: 'failed'})
+      }
+    })
+  } else { // minorpost
+
+  }
 }

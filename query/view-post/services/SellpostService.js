@@ -5,7 +5,7 @@ import { getBlackList } from './BlockService'
 import { getNotifySellposts } from './FollowService'
 import jwt from 'jsonwebtoken'
 
-export const getSellpost = (targetId, requesterId, id, next) => {
+export const getSellpost = (ok, targetId, requesterId, id, next) => {
   Sellpost.findOne({ id }, (err, sellpost) => {
     if (err || !sellpost) {
       if(err) {
@@ -26,7 +26,7 @@ export const getSellpost = (targetId, requesterId, id, next) => {
         getBlackList((blackList) => {
           getNotifySellposts(requesterId, (notifySellposts) => {
             if (targetId) {
-              let { targetStatus, ...data } = getClientFormatSellpost(targetId, notifySellposts, blackList, requesterId, sellpost, Date.now())
+              let { targetStatus, ...data } = getClientFormatSellpost(ok, targetId, notifySellposts, blackList, requesterId, sellpost, Date.now())
               next({
                 status: targetStatus,
                 sellpost: targetStatus == 'success' ? data : null
@@ -34,7 +34,7 @@ export const getSellpost = (targetId, requesterId, id, next) => {
             } else {
               next({
                 status: 'success',
-                sellpost: getClientFormatSellpost(targetId, notifySellposts, blackList, requesterId, sellpost, Date.now())
+                sellpost: getClientFormatSellpost(ok, targetId, notifySellposts, blackList, requesterId, sellpost, Date.now())
               })
             }
           })
@@ -44,7 +44,7 @@ export const getSellpost = (targetId, requesterId, id, next) => {
   })
 }
 
-export const getSellposts = (requesterId, storeId, offset, next) => {
+export const getSellposts = (ok, requesterId, storeId, offset, next) => {
   Sellpost.find({ storeId }, (err, sellposts) => {
     if (err || !sellposts) {
       if(err) {
@@ -60,7 +60,7 @@ export const getSellposts = (requesterId, storeId, offset, next) => {
     } else {
       getBlackList((blackList) => {
         getNotifySellposts(requesterId, (notifySellposts) => {
-          getClientFormatSellposts(notifySellposts, blackList, requesterId, storeId, sellposts, offset, next)
+          getClientFormatSellposts(ok, notifySellposts, blackList, requesterId, storeId, sellposts, offset, next)
         })
       })
     }
@@ -232,7 +232,7 @@ export const verifyToken = (token) => {
     }
 }
 
-const getClientFormatSellposts = (notifySellposts, blackList, requesterId, storeId, sellposts, offset, next) => {
+const getClientFormatSellposts = (ok, notifySellposts, blackList, requesterId, storeId, sellposts, offset, next) => {
   const mPromises = [], sellpostById = {}
   sellposts.map((sellpost, index) => {
     sellpostById[sellpost.id] = index
@@ -270,7 +270,7 @@ const getClientFormatSellposts = (notifySellposts, blackList, requesterId, store
         let sellpost = sellposts[i]
         if (sellpost.time < offset) {
           if (currentNumberOfSellpost < 2) {
-            mSellposts.push(getClientFormatSellpost(null, notifySellposts, blackList ,requesterId, sellpost, Date.now()))
+            mSellposts.push(getClientFormatSellpost(ok, null, notifySellposts, blackList ,requesterId, sellpost, Date.now()))
 
             mOffset = sellpost.time.getTime()
             lastIndex = i
@@ -302,7 +302,7 @@ const getClientFormatSellposts = (notifySellposts, blackList, requesterId, store
     })
 }
 
-const getClientFormatSellpost = (targetId, notifySellposts, blackList, requesterId, sellpost, offset) => {
+const getClientFormatSellpost = (ok, targetId, notifySellposts, blackList, requesterId, sellpost, offset) => {
   let { postrows, comments } = sellpost
 
   let { followers } = sellpost
@@ -389,7 +389,7 @@ const getClientFormatSellpost = (targetId, notifySellposts, blackList, requester
     }
   })
 
-  let { status, ...data } = getClientFormatSellpostComments(targetId, blackList, requesterId, mComments, offset, 'done', true, null)
+  let { status, ...data } = getClientFormatSellpostComments(ok, targetId, blackList, requesterId, mComments, offset, 'done', true, null)
 
   return ({
     id: sellpost.id,
