@@ -198,12 +198,12 @@ export const getClientFormatSellpostComments = (ok, targetId, blackList, request
       mComment.match = comment.match ? comment.match : []
 
       if (ok) {
-        mComment.address = mComment.address ? mComment.address : '',
+        mComment.address = mComment.address ? mComment.address : ''
         mComment.position =  {
           lat: mComment.latitude,
-          lng: mComment.longitude,
+          lng: mComment.longitude
         }
-        mComment.phone = mComment.phone ? mComment.phone : '',
+        mComment.phone = mComment.phone ? mComment.phone : ''
       }
 
       mComments = [mComment, ...mComments]
