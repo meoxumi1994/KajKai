@@ -1,3 +1,5 @@
+import { updateFollows } from '~/reducers/support'
+
 const introducestore = (state = {
 
 }, action) => {
@@ -6,6 +8,18 @@ const introducestore = (state = {
             return {...state,
                 [action.store.id] : action.store
             }
+        case 'client/FOLLOW':
+            if(action.data.type=='store'){
+                const userid = action.data.userid
+                return {...state,
+                    [action.data.id] : {
+                        ...state[action.data.id],
+                        numfollow: (state[action.data.id].numfollow?state[action.data.id].numfollow:0) + (action.data.status=='add'?1:-1),
+                        follows: updateFollows(state[action.data.id].follows, userid, action.data.avatarUrl, action.data.username)
+                    }
+                }
+            }
+        return state
         default:
             return state
     }

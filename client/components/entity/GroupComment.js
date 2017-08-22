@@ -15,7 +15,8 @@ class GroupComment extends React.Component {
         this.props.onLeave()
     }
     render(){
-        const { WRITE_COMMENT_OR_ORDER, WRITE_COMMENT, numleadercomment , leadercomments, content, onChange, id,
+        const { WRITE_COMMENT_OR_ORDER, WRITE_COMMENT, CLOSE_STORE_DESCRIPTION,
+            numleadercomment , leadercomments, content, onChange, id, storeid,
             onEnter, avatarUrl, onGetMore, offset, order, userid, closeComment } = this.props
         return(
             <div style={{ padding: '10px 0px 0px 0px'}}>
@@ -144,6 +145,11 @@ class GroupComment extends React.Component {
                         avatarUrl={avatarUrl}
                         placehoder={WRITE_COMMENT}
                         />
+                }
+                {(userid && closeComment) &&
+                    <div style={{ color: '#53565C' }}>
+                        {CLOSE_STORE_DESCRIPTION}
+                    </div>
                 }
             </div>
         )

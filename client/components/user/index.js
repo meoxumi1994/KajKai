@@ -40,12 +40,12 @@ class User extends React.Component {
         super(props)
     }
     render(){
-        const { iswhoing, isusername, location, store, scrollTop, scrollLeft, height } = this.props
+        const { iswhoing, isusername, id, location, store, scrollTop, scrollLeft, height } = this.props
         if(iswhoing)
             return <div></div>
         return(
-            <div style={{ width: 1100, margin: 'auto' }}>
-                <div style={{ marginLeft: 160, float: 'left', width: 940 }}>
+            <div style={{ width: 1040, margin: 'auto' }}>
+                <div style={{ float: 'left', width: 1040 }}>
                     <Top location={location}/>
                 </div>
                 <div className="container-fluid">
@@ -55,7 +55,7 @@ class User extends React.Component {
                             height: this.left_inside_height?this.left_inside_height.offsetHeight: undefined,
                             padding: 0,
                             margin: 0 }}
-                            className="col col-xs-2">
+                            className="col col-xs-3">
                             <div ref= { left_inside => { this.left_inside_height = left_inside } }
                                 style={{
                                 position: this.left_marginTop?'fixed':'static',
@@ -64,11 +64,13 @@ class User extends React.Component {
                                 minHeight: height - 48,
                                 paddingTop: 10,
                                 }}>
-                                <Left/>
+                                {id && <Left/>}
                             </div>
                         </div>
-                        <div className="col col-xs-10" style={{ padding: 0, margin: 0}}>
-                            <Middle location={location}/>
+                        <div className="col col-xs-9" style={{ padding: 0, margin: 0}}>
+                            <div style={{ marginLeft: -10 }}>
+                                <Middle location={location}/>
+                            </div>
                         </div>
                     </div>
                 </div>

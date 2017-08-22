@@ -16,7 +16,7 @@ class Target extends React.Component {
         // if(!type)
         //     return <div>NOT FOUND</div>
         return(
-            <div style={{ width: 1100, margin: 'auto' }}>
+            <div style={{ width: 1040, margin: 'auto' }}>
                 <Middle location = {this.props.location}/>
             </div>
         )

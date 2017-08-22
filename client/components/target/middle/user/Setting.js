@@ -10,9 +10,9 @@ import ModalUploadCover from '~/containers/profile/middle/ModalUploadCover'
 const Setting = ({ INFO, PRIVACY, SECURITY }) => {
     console.log('Setting Setting Setting Setting')
     return(
-        <div style={{  width: '100%', marginLeft: -23, marginTop: 10, height: 786 }} >
+        <div style={{  width: '100%',  marginTop: 10, height: 786 }} >
             <div className="panel panel-default"
-                style={{ width: 938 }}>
+                style={{ width: 838 }}>
                 <div className="panel-heading">{INFO}</div>
                 <RowInfo
                     title={'USER_NAME'}
@@ -37,12 +37,12 @@ const Setting = ({ INFO, PRIVACY, SECURITY }) => {
                 {/* <PhoneInfo/>
             </div>
             <div className="panel panel-default"
-                style={{ width: 938, marginTop: 10 }}>
+                style={{ width: 838, marginTop: 10 }}>
                 <div className="panel-heading">{PRIVACY}</div>
                 {/* <RowPrivacy/> */}
             </div>
             <div className="panel panel-default"
-                style={{ width: 938, marginTop: 10}}>
+                style={{ width: 838, marginTop: 10}}>
                 <div className="panel-heading">{SECURITY}</div>
                 {/* <RowSecurity
                     title={'PASSWORD'}

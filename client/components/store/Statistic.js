@@ -39,7 +39,7 @@ class Statistic extends React.Component {
             }]
         }
         return(
-            <div className="panel panel-default" style={{ margin: 0, marginLeft: -23, marginTop: 10, }}>
+            <div className="panel panel-default" style={{ margin: 0, marginTop: 10, }}>
                 <div style={{ padding: 10, borderRadius: '3px 3px 0px 0px', fontSize: 18, backgroundColor: '#F6F7F9'}}>
                     <img src={"/images/statisticicon.svg"} width={20} height={20}/>
                     <span style={{ marginLeft: 10 }}>{STATISTIC}</span>
@@ -47,10 +47,10 @@ class Statistic extends React.Component {
                 <div style={{ padding: '0px 10px 10px 10px'}}>
                     <div style={{ padding: 10 }}>
                         {myState != 'GET_STORE_STATICTIS_ING' ?
-                            <div style={{ width: 915, height: 510 }}>
-                                <Line data={data} options={options} width="915" height="500"/>
+                            <div style={{ width: 815, height: 520 }}>
+                                <Line data={data} options={options} width="805" height="500"/>
                             </div>
-                        :   <div style={{ width: 915, height: 510 }}></div>
+                        :   <div style={{ width: 815, height: 520 }}></div>
                         }
                     </div>
                     <div className="btn btn-default btn-sm"

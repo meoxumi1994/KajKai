@@ -5,7 +5,8 @@ class LikeShareComment extends React.Component {
         super(props)
     }
     render(){
-        const { onLike, typeLikes, onComment, onShare, beLike } = this.props
+        const { onLike, typeLikes, onComment, onShare, beLike, status, onChangeStatus, isOwner,
+            LIKE, SHARE, COMMENT, OPEN, CLOSE } = this.props
         return(
             <div className="container-fluid" style={{
                 width: 265,
@@ -41,65 +42,69 @@ class LikeShareComment extends React.Component {
                                 color: beLike?'#4673CC': '#3C3F45',
                                 fontSize: 13,
                                 fontWeight: 'bold',
-                            }}>{'Like'}</a>
+                            }}>{LIKE}</a>
                             </div>
                         </div>
                     </div>
                     <div className="col col-xs-4" style={{ padding: 0, margin: 0 }}>
-                        <div className="btn" style={{ marginLeft: -6, padding: 0, width: 97 }}
-                            ref={img => this.cmt = img}
-                            onClick={() => {
-                                this.cmt.className = "btn decline declineing"
-                                setTimeout(() => {
-                                    this.cmt.className = "btn decline"
-                                }, 80)
-                                onComment()
-                            }}>
-                            <img
-                                style={{
-                                    float: 'left',
-                                    width: 15,
-                                    height: 15,
-                                }} src="/images/comment.svg"
-                            />
-                            <div style={{
-                                marginTop: -2,
-                            }}><a style={{
-                                color: '#3C3F45',
-                                fontSize: 13,
-                                fontWeight: 'bold',
-                            }}>{'Comment'}</a>
+                        {(status == 'open') &&
+                            <div className="btn" style={{ marginLeft: -6, padding: 0, width: 97 }}
+                                ref={img => this.cmt = img}
+                                onClick={() => {
+                                    this.cmt.className = "btn decline declineing"
+                                    setTimeout(() => {
+                                        this.cmt.className = "btn decline"
+                                    }, 80)
+                                    onComment()
+                                }}>
+                                <img
+                                    style={{
+                                        float: 'left',
+                                        width: 15,
+                                        height: 15,
+                                    }} src="/images/comment.svg"
+                                />
+                                <div style={{
+                                    marginTop: -2,
+                                }}><a style={{
+                                    color: '#3C3F45',
+                                    fontSize: 13,
+                                    fontWeight: 'bold',
+                                }}>{COMMENT}</a>
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
                     <div className="col col-xs-4" style={{ padding: 0, margin: 0 }}>
-                        <div className="btn" style={{ marginLeft: 19, padding: 0, width: 72}}
-                            onClick={() => onShare()}
-                            ref={img => this.share = img}
-                            onClick={() => {
-                                this.share.className = "btn decline declineing"
-                                setTimeout(() => {
-                                    this.share.className = "btn decline"
-                                }, 80)
-                                onShare()
-                            }}
-                            >
-                            <img
-                                style={{
-                                    float: 'left',
-                                    width: 15,
-                                    height: 15,
-                                }} src={"/images/share.svg"}
-                            />
-                            <div style={{
-                                marginTop: -2,
-                            }}><a style={{
-                                color: '#3C3F45',
-                                fontSize: 13,
-                                fontWeight: 'bold',
-                            }}>{'Share'}</a>
+                        {isOwner &&
+                            <div className="btn" style={{ marginLeft: 19, padding: 0, width: 72}}
+                                onClick={() => onShare()}
+                                ref={img => this.share = img}
+                                onClick={() => {
+                                    this.share.className = "btn decline declineing"
+                                    setTimeout(() => {
+                                        this.share.className = "btn decline"
+                                    }, 80)
+                                    onChangeStatus()
+                                }}
+                                >
+                                <img
+                                    style={{
+                                        float: 'left',
+                                        width: 15,
+                                        height: 15,
+                                    }} src={(status == 'open') ? '/images/openicon.svg' : '/images/closeicon.svg'}
+                                />
+                                <div style={{
+                                    marginTop: -2,
+                                }}><a style={{
+                                    color: (status == 'open') ? '#5890FF' : '#3C3F45' ,
+                                    fontSize: 13,
+                                    fontWeight: 'bold',
+                                }}>{(status == 'open') ? OPEN : CLOSE}</a>
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>

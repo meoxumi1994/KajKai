@@ -13,7 +13,7 @@ const Setting = (props) => {
         POSITION_IN_MAP, POSITION_FAILED
         } = props
     return(
-        <div style={{ marginLeft: -23 }}>
+        <div>
             <SettingCell id={id} kind="storename" type="store" title={STORE_NAME} placeholder={ENTER_STORE}
                 failed={STORE_NAME_FAILED}/>
             <SettingCell id={id} kind="category" type="store" title={ENTER_CATEGORY} description={CREATE_STORE_DESCRIPTION_4}
@@ -21,7 +21,7 @@ const Setting = (props) => {
             <SettingCell id={id} kind="address" type="store" title={ENTER_YOUR_ADDRESS} description={ADDRESS_DESCRIPTION}
                 placeholder={ENTER_YOUR_ADDRESS} failed={ADDRESS_FAILED}/>
             <SettingCell id={id} kind="phone" type="store" title={PHONE}/>
-            <SettingCell id={id} kind="position" type="store" title={POSITION_IN_MAP} width={940}
+            <SettingCell id={id} kind="position" type="store" title={POSITION_IN_MAP} width={840}
                 placeholder={ENTER_YOUR_ADDRESS} failed={ADDRESS_FAILED}/>
         </div>
     )

@@ -2,55 +2,71 @@ import React from 'react'
 
 import CreateInterest from '~/containers/entity/modal/CreateInterest'
 import GroupInterest from '~/containers/entity/GroupInterest'
+import KeepImage from '~/containers/entity/thumnail/KeepImage'
 
-const Left = ({ username, storeList, STORE, HOME, CREATE_STORE }) => {
-    return(
-        <div>
-            <div style={{ paddingBottom: 10 }}>
-                <div style={{ margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
-                    {STORE}
-                </div>
-            </div>
-            {storeList.map((item, index) =>
-                <div key={index} style={{ paddingBottom: 10 }}>
-                    <a href={"/"+item.urlname}>
-                        <div className="btn"
-                            style={{
-                                textAlign: 'left',
-                                display: 'inline-block',
-                                margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
-                            <img width={20} height={20} src={item.avatarUrl}/>
-                            {" "}<span>{item.storename }</span>
-                        </div>
-                    </a>
-                </div>
-            )}
-            <div style={{ paddingBottom: 10 }}>
-                <div className="btn"
-                    style={{
-                        textAlign: 'left',
-                        display: 'inline-block',
-                        margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
-                    <a href={"/"} style={{ fontSize: 13}}>{HOME}</a>
-                </div>
-            </div>
-            {username &&
-                <div>
-                    <div style={{ paddingBottom: 10 }}>
-                        <div className="btn"
-                            style={{
-                                textAlign: 'left',
-                                display: 'inline-block',
-                                margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
-                            <a href={"/registerstore"} style={{ fontSize: 13}}>{CREATE_STORE}</a>
-                        </div>
+class Left extends React.Component {
+    constructor(props){
+        super(props)
+    }
+    render(){
+        const { username, userPhotos, storeList, address, phone,
+            STORE, HOME, CREATE_STORE, SETTING_BOLD, ABOUT, PHOTOS } = this.props
+        return(
+            <div>
+                <div style={{
+                    border: '1px solid #DFE0E4',
+                    padding: 10,
+                    width: 240,
+                    backgroundColor: 'white',
+                    borderRadius: 3,
+                    color: '#1D2129'
+                }}>
+                    <div>
+                        <img src="/images/usericon.svg" width={25} height={25}/>
+                        <span style={{ marginLeft: 10, fontSize: 16 }}>{ABOUT}</span>
                     </div>
-                    <CreateInterest/>
-                    <GroupInterest/>
+                    <hr style={{ margin: 0, marginTop: 10, borderColor: '#E9EBEE'}}/>
+                    <div style={{ marginTop: 10, fontSize: 12.5 }}>
+                        {username}
+                        {address && <span>{" . "}{address}</span>}
+                        {phone && <span>{" . "}{phone}</span>}
+                    </div>
                 </div>
-            }
-        </div>
-    )
+                <div style={{
+                    marginTop: 10,
+                    border: '1px solid #DFE0E4',
+                    width: 240,
+                    backgroundColor: 'white',
+                    borderRadius: 3,
+                    color: '#1D2129'
+                }}>
+                    <div style={{ padding: 10 }}>
+                        <img src="/images/photoicon.svg" width={25} height={25}/>
+                        <span style={{ marginLeft: 10, fontSize: 16 }}>{PHOTOS}</span>
+                    </div>
+                    <hr style={{ margin: 0}}/>
+                    <div style={{ paddingBottom: 5 }}>
+                        {userPhotos.map((item,index) => {
+                            return(
+                                <div key={index} style={{
+                                    display: 'inline-block', padding: '4px 0px 0px 4px' }}>
+                                    <KeepImage
+                                        canEdit={false}
+                                        type="Carousel"
+                                        width={113}
+                                        images={[item.url]}
+                                        imagesSuggest={[item.url]}/>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    componentDidMount(){
+        this.props.onGetPhoto()
+    }
 }
 
 export default Left

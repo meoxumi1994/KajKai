@@ -185,3 +185,10 @@ export const timeSince = (date) => {
     }
     return Math.floor(seconds) + " seconds ago"
 }
+
+export const getSmallString = (str, length) => {
+    if(str == undefined) return ""
+    let newstr = ""
+    str.split('\n').map((item) => newstr += item)
+    return newstr.substr(0,length)
+}

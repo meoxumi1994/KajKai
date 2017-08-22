@@ -15,7 +15,7 @@ class ShowDetail extends React.Component {
         //     return <Redirect to='/register'/>
         const id = location.pathname.split('/')[2]
         return(
-            <div style={{ width: 1100, margin: 'auto' }}>
+            <div style={{ width: 1040, margin: 'auto' }}>
                 <div className="container-fluid">
                     <div className="row">
                         <div style={{ padding: 0, margin: 0 }} className="col col-xs-2">
@@ -23,7 +23,7 @@ class ShowDetail extends React.Component {
                         </div>
                         <div className="col col-xs-10" style={{ padding: 0, margin: 0}}>
                             <div style={{ paddingTop: 10, marginLeft: -23 }}>
-                                <Post sellpostid={id} commentid={location.pathname.split('/')[3]}/>
+                                <Post sellpostid={id} commentid={location.pathname.split('/')[3]} introduceWidth={310}/>
                             </div>
                         </div>
                     </div>

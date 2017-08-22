@@ -40,6 +40,14 @@ const sellpost = (state = {
         case 'EDIT_SELL_POST_SUCCESS':
         case 'GET_SELL_POST_SUCCESS':
         case 'CREATE_SELL_POST_SUCCESS':
+            if([action.sellpost.id])
+                return {
+                    ...state,
+                    [action.sellpost.id] : {
+                        ...state[action.sellpost.id],
+                        ...action.sellpost,
+                    }
+                }
             return {
                 ...state,
                 [action.sellpost.id] : action.sellpost,

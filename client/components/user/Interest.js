@@ -14,10 +14,10 @@ class Interest extends React.Component {
             <div>
                 {data && data.map((item) =>
                     <div key={item.sellpostid} style={{ marginTop: 10 }}>
-                        <Post sellpostid={item.sellpostid} storeid={item.storeid}/>
+                        <Post sellpostid={item.sellpostid} storeid={item.storeid} introduceWidth={260}/>
                     </div>
                 )}
-                {(data || (data && data.length == 0)) &&
+                {(!data || (data && data.length == 0)) &&
                     <GuildUser/>
                 }
             </div>

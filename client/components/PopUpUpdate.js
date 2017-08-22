@@ -15,7 +15,7 @@ class PopUpUpdate extends React.Component {
     }
     render(){
         const { id, status, kind, type, value, popuptime, onChange } = this.props
-        if(popuptime <= 0 || type =='currentId' || type == 'avatarUrl' || type == 'coverUrl')
+        if(popuptime <= 0 || type =='currentId' || type == 'avatarUrl' || type == 'coverUrl' || type == 'language' || type == 'id')
             return <div></div>
         return(
             <div style={{

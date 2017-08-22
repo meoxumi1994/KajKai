@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
+import { getBeFollow } from '~/containers/support'
 import Top from '~/components/store/Top'
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,6 +17,7 @@ const mapStateToProps = (state, ownProps) => {
     return({
         ...state.inst.store.index,
         id : id,
+        beFollow: getBeFollow(state.inst.store.index.follows, state.user.id),
         isOwner: isOwner,
         name: storename,
         avatarUrl: avatarUrl,
@@ -28,17 +30,35 @@ const mapStateToProps = (state, ownProps) => {
         PHOTOS: g('PHOTOS'),
         STATISTIC: g('STATISTIC'),
         SEND_MESSAGE: g('SEND_MESSAGE'),
+        FOLLOW_US: g('FOLLOW_US'),
+        FOLLOWED: g('FOLLOWED'),
     })
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onUploadImage : (typeUrl, e) => {
         dispatch({ type: 'ENTITY_MODAL_UPLOAD_IMAGE_OPEN', typeUrl: typeUrl})
-    }
+    },
+    follow: (storeid) => {
+        dispatch({ type: 'server/FOLLOW', data: { type: 'store', id: storeid }})
+    },
 })
 
+const mergerProps = (stateProps, dispatchProps, ownProps) => {
+    const { id, ...anotherState } = stateProps
+    const { follow, ...anotherDispatch } = dispatchProps
+    return({
+        onFollow: () => {
+            follow(id)
+        },
+        ...ownProps,
+        ...stateProps,
+        ...dispatchProps,
+    })
+}
+
 const TopContainer = connect(
-    mapStateToProps, mapDispatchToProps
+    mapStateToProps, mapDispatchToProps, mergerProps
 )(Top)
 
 export default TopContainer

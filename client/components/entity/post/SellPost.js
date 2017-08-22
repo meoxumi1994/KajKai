@@ -5,7 +5,7 @@ import TimeLine from '~/components/entity/draw/TimeLine'
 
 import ContentEditable from '~/components/entity/ContentEditable'
 import DropDown from '~/components/entity/DropDown'
-import LikeShareComment from '~/components/entity/LikeShareComment'
+import LikeShareComment from '~/containers/entity/LikeShareComment'
 import LikeGroup from '~/components/entity/LikeGroup'
 import GroupComment from '~/containers/entity/GroupComment'
 import CallComment from '~/containers/entity/CallComment'
@@ -41,18 +41,18 @@ class SellPost extends React.Component {
             <div style={{
                 borderRadius: closeBorder ? undefined : 4 ,
                 border: closeBorder ? undefined : '1px solid #CCCCCC',
-                boxShadow: (closeBorder || status != 'open') ? undefined : '0px 0px 4px #CCCCCC',
-                backgroundColor: (status == 'open') ? 'white' : '#E9EBEE',
+                boxShadow: closeBorder ? undefined : '0px 0px 4px #CCCCCC',
+                backgroundColor: 'white',
                 width: 520, padding: 10 }}>
-                {isOwner &&
-                    <div style={{ right: 50 , marginTop: 37, position: 'absolute' }}>
+                {/* {isOwner &&
+                    <div style={{ right: 50 , marginTop: 22, position: 'absolute' }}>
                         <div className="btn btn-default btn-xs"
                             onClick={() => this.props.onUpdateSellpost('status', (status == 'open') ? 'sleep' : 'open' )}
                             >
                             {(status == 'open') ? SLEEP : OPEN }
                         </div>
                     </div>
-                }
+                } */}
                 <div>
                     <div
                         className="btn" style={{
@@ -145,6 +145,9 @@ class SellPost extends React.Component {
                 <hr style={{ margin: 0 }}/>
                 <div style={{ padding: '6px 0px 6px 0px'}}>
                     <LikeShareComment
+                        isOwner={isOwner}
+                        status={status}
+                        onChangeStatus={() => this.props.onUpdateSellpost('status', (status == 'open') ? 'sleep' : 'open' )}
                         onLike={onLike}
                         onComment={() => console.log('onComment')}
                         onShare={() => console.log('onShare')}

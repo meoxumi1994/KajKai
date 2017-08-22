@@ -27,6 +27,7 @@ class ProductModal extends React.Component {
                 <hr style={{ margin: 0 }}/>
                 <div style={{ padding: 10, marginTop: -1, marginLeft: -2 }}>
                     <AddPhoto
+                        canEdit={true}
                         aspectRatio={1/1}
                         id={13123123}
                         action={{

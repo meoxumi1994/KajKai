@@ -9,6 +9,7 @@ import DropDownNotification from '~/containers/entity/DropDownNotification'
 import places from 'react-google-maps'
 
 import { Redirect } from 'react-router-dom'
+import { getSmallString } from '~/containers/support'
 
 class HandlerUser extends React.Component {
     constructor(props){
@@ -29,6 +30,9 @@ class HandlerUser extends React.Component {
              $(this).scrollTop(scrollTo + $(this).scrollTop());
           }
         });
+    }
+    onLink(link){
+        window.location = link
     }
     render(){
         const { LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
@@ -67,15 +71,8 @@ class HandlerUser extends React.Component {
                           onClick={() => clickSetting()} >
                           <img src="/images/setting.svg" alt="Cinque Terre" height={20}/>
                       </div>
-
-
-                    <div className="btn btn-transparent btn-xs" style={{ marginRight: 10, padding: 0, float: 'right'}}>
-                        <a href={"/user/"+id}>
-                            <img src={avatarUrl} alt="Cinque Terre" width="29" height="29"/>
-                        </a>
-                    </div>
-
-                    <div style={{ marginRight: 25, float: 'right' }}>
+                      <div style={{ marginRight: 10, borderRight: '1px solid #355089', float: 'right', height: 14, marginTop: 7 }}></div>
+                    <div style={{ marginRight: 15, float: 'right' }}>
                         <DropDownNotification {...this.props}/>
                     </div>
                     <div className="dropdown" style={{ marginRight: 3, float: 'right'}} onClick={() => resetChatQuantity()}>
@@ -99,6 +96,28 @@ class HandlerUser extends React.Component {
                             <ChatLeftContainer/>
                         </ul>
                     </div>
+                    {/* #355089 */}
+                    <div onClick={() => this.onLink("/")}
+                        onMouseOver={() => this.setState({ hoverHome: true })}
+                        onMouseLeave={() => this.setState({ hoverHome: false })}
+                        className="btn btn-xs"
+                        style={{ borderRadius: 0, marginRight: 10,
+                            backgroundColor: this.state.hoverHome ? '#355089' : undefined,
+                            padding: '4px 7px 4px 7px', float: 'right'}}>
+                        <span style={{  color: 'white'}}>{HOME}</span>
+                    </div>
+                    <div style={{ borderRight: '1px solid #355089', float: 'right', height: 14, marginTop: 7 }}>
+                    </div>
+                    <div className="btn btn-xs"
+                        onClick={() => this.onLink("/user/"+id)}
+                        onMouseOver={() => this.setState({ hoverUser: true })}
+                        onMouseLeave={() => this.setState({ hoverUser: false })}
+                        style={{
+                            backgroundColor: this.state.hoverUser ? '#355089' : undefined,
+                            marginTop: -1, padding: 0, paddingRight: 10, float: 'right'}}>
+                            <img src={avatarUrl} alt="Cinque Terre" width="29" height="29"/>
+                            <span style={{ marginLeft: 5, color: 'white'}}>{getSmallString(username, 4)}</span>
+                    </div>
                 </div>
             )
         }
@@ -109,13 +128,13 @@ class HandlerUser extends React.Component {
                     {/* <div className="clocker" >
                         <img src="/images/loader.svg" alt="Cinque Terre" width="22px" height="22px"/>
                     </div> */}
-                    <div style={{ marginLeft: -40 }} id="loaderr"></div>
+                    <div style={{ marginLeft: 137 }} id="loaderr"></div>
                 </div>
             )
         }
 
         return (
-            <a href={"/register"}>
+            <a href={"/register"} style={{ marginLeft: 120 }}>
                 <button className="btn btn-default btn-sm" type="button" >
                     {LOG_IN}
                 </button>
@@ -176,12 +195,13 @@ export default class BarScreen extends React.Component {
         });
 
         const params = new URLSearchParams(this.props.location.search);
-        const currentType = this.props.location.pathname.split('/')[2]
+        let currentType = this.props.location.pathname.split('/')[2]
         if( currentType == 'store'){
             this.props.onChangeTypeSelected('-2', "Store")
         }else if( currentType == 'user'){
             this.props.onChangeTypeSelected('-3', "User")
         }else {
+            currentType = 'category'
             const id = params.get('id')
             const name = params.get('name')
             if(!name || !id){
@@ -194,7 +214,7 @@ export default class BarScreen extends React.Component {
         this.props.onChange('positionname', params.get('positionname') || '')
         this.props.onChange('lat', params.get('lat'))
         this.props.onChange('lng', params.get('lng'))
-        this.props.weSearch(currentType, params.get('id'), params.get('keyword'), params.get('lat'), params.get('lng'), 0)
+        this.props.weSearch(currentType, params.get('id') || -1, params.get('keyword'), params.get('lat'), params.get('lng'), 0)
     }
     clickSetting(){
         setTimeout(()=>{
@@ -202,7 +222,7 @@ export default class BarScreen extends React.Component {
         },1)
     }
     render() {
-        const { SEARCH, SEARCH_STORE, SEARCH_USER, SEARCH_LOCATION,
+        const { SEARCH, SEARCH_STORE, SEARCH_USER, SEARCH_LOCATION, username,
              categories, onChangeTypeSelected, currentCategory, positionname, currentType,
              onLocationChanged, clicksetting, width, height, keyword, onChange, onSearch} = this.props
         let inputSearchKeyWord
@@ -212,10 +232,11 @@ export default class BarScreen extends React.Component {
                 width: '100%',
                 backgroundColor: '#3B5998',
                 zIndex: 10 }}>
-                <div style={{ width: (width > 1100 + 300)? (width - 300) : width }}>
+                <div style={{ width: (username && width > 1040 + 280)? (width - 280) : width }}>
                     <div className="container-fluid" style={{ padding: 0, margin: 0 }}>
-                        <div className="row" style={{ padding: 0, margin: 'auto',  width: 1100, marginTop: 9, marginBottom: 9 }}>
-                            <div className="col-xs-2" style={{ padding: 0 }}>
+                        <div className="row" style={{ padding: 0,
+                            margin: 'auto',  width: 1040, marginTop: 9, marginBottom: 9 }}>
+                            <div className="col-xs-1" style={{ padding: 0 }}>
                                 <div>
                                     <div className="btn btn-transparent btn-xs" style={{ padding: 0 }}>
                                         <a href="/">
@@ -229,7 +250,7 @@ export default class BarScreen extends React.Component {
                                     </div> */}
                                 </div>
                             </div>
-                            <div className="col-xs-5"  style={{ padding: 0, marginLeft: -23 }}>
+                            <div className="col-xs-4"  style={{ padding: 0, marginLeft: -23 }}>
                                 <div className="input-group">
                                   <div className="input-group-btn">
                                     <div className="btn btn-default btn-sm dropdown-toggle"
@@ -333,8 +354,8 @@ export default class BarScreen extends React.Component {
                                     </span>
                                 </div>
                             </div> */}
-                            <div className="col-xs-2"  style={{ padding: 0, marginLeft: 23 }}>
-                                <div style={{ position: 'absolute', right: 0}}>
+                            <div className="col-xs-4"  style={{ padding: 0, marginLeft: 23 }}>
+                                <div style={{ position: 'absolute', right: 0, width: 400 }}>
                                     <HandlerUser {...this.props} clickSetting={() => this.clickSetting()}/>
                                 </div>
                             </div>

@@ -105,8 +105,9 @@ class App extends React.Component {
         const path = "/" +this.props.location.pathname.split('/')[1];
         const { width, height, username, onScroll } = this.props
         const { showProgress, closeProgress } = this.props
+        console.log(this.width)
         return(
-            <div style={{ height: '100%', minWidth: 1100 }}>
+            <div style={{ height: '100%', minWidth: 1040 }}>
                 <Route path="*" component={Bar}/>
                 <GroupPopUp/>
                 <PopUpUpdate/>
@@ -115,15 +116,15 @@ class App extends React.Component {
                 <div ref={ scroll => this.scroll = scroll } onScroll={ () => onScroll(this.scroll.scrollTop)}
                     style={{ height: height - 47 }}>
                     {
-                      username && width > 1100 + 300 &&
-                          <div style={{ position: 'fixed', zIndex: 10, right: 0, top: 48, height: '100%', width: 300 }}>
+                      username && width > 1040 +280 &&
+                          <div style={{ position: 'fixed', zIndex: 10, right: 0, top: 48, height: '100%', width:280 }}>
                               {
                                   path == '/admin'? undefined:
                                   <ContactHistory/>
                               }
                           </div>
                     }
-                    <div style={{ paddingTop: 47, marginRight: (width > 1100 + 300 && username)? 300: 0 }}>
+                    <div style={{ paddingTop: 47, marginRight: (width >  1040 +280 && username)?280: 0 }}>
                         {(path == "/" || path == "/admin" || path == "/map" || path == "/home" ||
                         path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>

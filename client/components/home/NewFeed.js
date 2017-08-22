@@ -74,7 +74,7 @@ class ShowNewFeed extends React.Component {
                     {sellPosts.map((item,index) => {
                         return(
                             <div key={item.sellPostId} style={{ paddingBottom: 10, marginLeft: -23 }}>
-                                <Post sellpostid={item.sellPostId}/>
+                                <Post sellpostid={item.sellPostId} introduceWidth={310}/>
                             </div>
                         )
                     })}
@@ -101,7 +101,7 @@ class NewFeed extends React.Component {
     render(){
         const { height, scrollTop } = this.props
         return (
-            <div>
+            <div style={{ marginLeft: -40 }}>
                 <div ref={ inside => this.inside = inside }>
                     <ShowNewFeed {...this.props}/>
                 </div>

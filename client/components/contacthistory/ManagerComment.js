@@ -47,7 +47,6 @@ class ManagerComment extends React.Component {
     }
     render(){
         const { currentId, avatar, name, state, onGetContact, onChange, leadercomments } = this.props
-        console.log(this.props)
         let contact = []
         for(let i in this.props.contact){
             contact = [...contact,

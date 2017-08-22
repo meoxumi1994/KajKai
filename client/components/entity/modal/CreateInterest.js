@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Modal } from 'react-bootstrap'
 import ShowInMap from '~/containers/entity/map/ShowInMap'
+import CellLeft from '~/components/entity/row/CellLeft'
 
 class Cell extends React.Component {
     constructor(props){
@@ -38,26 +39,20 @@ class CreateInterest extends React.Component {
     }
     render(){
         const { CREATE_INTEREST, CLOSE, DONE, onChange, showModal, position, categories,
+            CHOOSE_YOUR_INTEREST, CHOOSE_YOUR_LOCATION,
             firstCategory, secondCategory, onCreateInterest } = this.props
         return(
             <div>
-                <div style={{ paddingBottom: 10 }}>
-                    <div className="btn"
-                        onClick={() => onChange('showModal', true)}
-                        style={{
-                            textAlign: 'left',
-                            display: 'inline-block',
-                            margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
-                        <a style={{ fontSize: 13 }}>{CREATE_INTEREST}</a>
-                    </div>
-                </div>
+                <CellLeft avatar="/images/interesticon.svg"
+                    onClick={() => onChange('showModal', true)}
+                    name={CREATE_INTEREST} disabledLink={true}/>
                 <Modal show={showModal} onHide={() => onChange('showModal', false )}>
                     <div style={{ padding: 10, fontSize: 14, fontWeight: 600 }}>
                         {CREATE_INTEREST}
                     </div>
                     <hr style={{ margin: 0 }}/>
                     <div style={{ padding: 10 }}>
-                        choose your interest
+                        {CHOOSE_YOUR_INTEREST}
                     </div>
                     {/* <div style={{ padding: 10 }}>
                         <div className="btn btn-default btn-xs" style={{ marginTop: 5, width: 300 , fontSize: 12.5 }}
@@ -107,7 +102,7 @@ class CreateInterest extends React.Component {
                       </div>
                     </div>}
                     <div style={{ padding: 10 }}>
-                        choose your location
+                        {CHOOSE_YOUR_LOCATION}
                     </div>
                     <div style={{ padding: '0px 10px 10px 10px' }}>
                         <ShowInMap position={position} width={576} height={200}

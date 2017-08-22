@@ -95,6 +95,10 @@ const myString = {
     RECEIVE: ['Nhận','Receive'],
     RECEIVED: ['Đã Nhận','Received'],
     LIKE: ['Thích','Like'],
+    SHARE: ['Chia sẻ','Share'],
+    COMMENT: ['Bình luận','Comment'],
+    OPEN: ['Mở','Open'],
+
     FOLLOW : ['Theo dõi','Follow'],
     REPLY: ['Trả lời','Reply'],
     WRITE_COMMENT_OR_ORDER: ['Bình luận hoặc Đặt hàng...','Write a comment or Order...'],
@@ -114,7 +118,7 @@ const myString = {
     CREATE_SELLPOST_DESCRIPTTION_2: ['You create more sale\'s posts when making sure your store adds a new type of business.','Bạn tạo thêm bài đăng bán hàng khi chắc chắn rằng cửa hàng của bạn thêm một loại hình kinh doanh mới.'],
     CREATE_SELLPOST_DESCRIPTTION_3: ['You should not create too many sale\'s posts because the "likes", "follow", "shares" will be scattered.','Bạn không nên tạo quá nhiều bài đăng bán hàng vì số lượng "thích","theo dõi","chia sẻ" sẽ bị phân tán.'],
     CREATE_SELLPOST_DESCRIPTTION_4: ['If you want to post a video, add a new photo or write more to attract customers, you should create a minor post.','Nếu bạn muốn đăng video, thêm ảnh mới hoặc viết thêm để thu hút khách hàng, bạn nên tạo một bài đăng phụ.'],
-    CREATE_STORE: ['Tạo Một Cửa Hàng Mới','Create a New Store'],
+    CREATE_STORE: ['Tạo Cửa Hàng Mới','Create a New Store'],
     CREATE_STORE_DESCRIPTION: ['Trước khi bắt đầu tạo cửa hàng bạn nên xem qua một số lưu ý','Before you start creating a store you should look over some notes'],
     CREATE_STORE_DESCRIPTION_0: ['Tạo cửa hàng là hoàn toàn miễn phí, chúng tôi không thu theo tháng hay phần trăm phí bất sản phẩm nào','Creating a store is completely free, and we do not charge you any monthly or per-cent'],
     CREATE_STORE_DESCRIPTION_1: ['Nâng cao khả năng tương tác giữa của hàng và người dùng luôn là tiêu trí để KajKai phát triển','Enhancing the interoperability between the goods and the user is always the place for KajKai to develop'],
@@ -203,8 +207,17 @@ const myString = {
         'Nhắn tin',
         'Send Message'
     ],
+    FOLLOW_US: ['Theo dõi ngay','Follow us'],
+    FOLLOWED: ['Đã theo dõi','Followed'],
     OPEN: ['Mở','Open'],
     SLEEP: ['Tạm nghỉ','Sleep'],
+    STORE_BOLD: ['CỬA HÀNG','STORE'],
+    BASIC: ['CƠ BẢN','BASIC'],
+    URL_NAME: ['Tên đường dẫn','Url name'],
+    SETTING_BOLD: ['THIẾT LẬP','SETTING'],
+    CHOOSE_YOUR_INTEREST: ['Chọn loài hình', 'Choose category'],
+    CHOOSE_YOUR_LOCATION: ['Chọn vị trí', 'Choose location'],
+    CLOSE_STORE_DESCRIPTION: ['Đã hết giờ bán, cửa hàng tạm nghỉ, quý khách vui lòng quay lại sau','Time out sales, store temporarily closed, please come back later'],
 }
 
 const allString = {

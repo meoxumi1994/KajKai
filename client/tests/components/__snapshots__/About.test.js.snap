@@ -10,7 +10,7 @@ exports[`About should render self and subcomponents 1`] = `
       "boxShadow": "0px 0px 4px #CCCCCC",
       "marginLeft": -23,
       "marginTop": 10,
-      "width": 938,
+      "width": 838,
     }
   }
 >

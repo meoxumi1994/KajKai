@@ -9,10 +9,12 @@ const mapStateToProps = (state, { id }) => {
     const sellpost = state.inst.entity.sellpost[id]
     const store = state.inst.store.index
     let yourid = state.user.id
-    state.user.storeList.map((item) => {
-        if(item.id == store.id)
-            yourid = store.id
-    })
+    if(sellpost){
+        state.user.storeList.map((item) => {
+            if(item.id == sellpost.storeid)
+                yourid = sellpost.storeid
+        })
+    }
     let isyour = true
     let beLike, likeContent, time, beFollow
     if(sellpost){
@@ -34,7 +36,7 @@ const mapStateToProps = (state, { id }) => {
     return({
         ...store,
         ...sellpost,
-        sellpost: sellpost,
+        mysellpost: sellpost,
         isOwner: isOwner,
         beLike: beLike,
         beFollow: beFollow,
@@ -84,7 +86,7 @@ const mapDispatchToProps = (dispatch, { id, commentid }) => ({
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { turnnotify, sellpost, category ,description ,status, ship , postrows_order , postrows, ...anotherState } = stateProps
+    const { turnnotify, mysellpost, category ,description ,status, ship , postrows_order , postrows, ...anotherState } = stateProps
     const { weUpdateSellpost, weTurnNotify, onShowEditSellPost, ...anotherDispatch } = dispatchProps
     return({
         showEditSellPost: () => {
@@ -95,9 +97,9 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
         },
         onUpdateSellpost: (key, value) => {
             weUpdateSellpost({
-                ...sellpost,
+                ...mysellpost,
                 [key] : value,
-                sellpostid: sellpost.id,
+                sellpostid: mysellpost.id,
             })
         },
         ...ownProps,

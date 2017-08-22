@@ -23,7 +23,7 @@ const index = (state = {
             if(action.data.type=='store'){
                 const userid = action.data.userid
                 return {...state,
-                    numfollow: (state.numlike?state.numlike:0) + (action.data.status=='add'?1:-1),
+                    numfollow: (state.numfollow?state.numfollow:0) + (action.data.status=='add'?1:-1),
                     follows: updateFollows(state.follows, userid)
                 }
             }

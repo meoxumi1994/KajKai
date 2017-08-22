@@ -17,7 +17,7 @@ class Post extends React.Component {
                     <div className="btn btn-default" onClick={() => onSave()}>save</div>
                 :   <div className="btn btn-default" onClick={() => onEdit()}>edit</div> )
                 }
-                {list.map((item, index) => <PostRow key={index} id={item.id} onedit={onedit}/>)
+                {list.map((item, index) => <PostRow key={index} id={item.id} onedit={onedit} introduceWidth={310}/>)
                 }
                 {onedit &&
                     <div className="input-group-btn">

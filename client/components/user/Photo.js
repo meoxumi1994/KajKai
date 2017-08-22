@@ -8,7 +8,7 @@ class Photo extends React.Component {
         super(props)
     }
     render(){
-        const { storePhotos, postPhotos, productPhotos, userPhotos} = this.props
+        const { storePhotos, postPhotos, productPhotos, userPhotos } = this.props
         return (
             <div>
                 {userPhotos.length > 0 &&
@@ -17,7 +17,7 @@ class Photo extends React.Component {
                         border: '1px solid #CCCCCC',
                         boxShadow: '0px 0px 4px #CCCCCC',
                         backgroundColor: 'white',
-                        width: 938, marginTop: 10, marginLeft: -23, paddingBottom: 8,
+                        width: 838, marginTop: 10,  paddingBottom: 8,
                         }}>
                         <div style={{ padding: 10, borderRadius: 3.5,fontSize: 20, backgroundColor: '#F6F7F9'}}>
                             <img src={"/images/photousericon.svg"} width={22} height={22}/>
@@ -44,7 +44,7 @@ class Photo extends React.Component {
                         border: '1px solid #CCCCCC',
                         boxShadow: '0px 0px 4px #CCCCCC',
                         backgroundColor: 'white',
-                        width: 938, marginTop: 10, marginLeft: -23, paddingBottom: 8,
+                        width: 838, marginTop: 10,  paddingBottom: 8,
                         }}>
                         <div style={{ padding: 10, borderRadius: 3.5,fontSize: 20, backgroundColor: '#F6F7F9'}}>
                             <img src={"/images/photostoreicon.svg"} width={22} height={22}/>
@@ -71,7 +71,7 @@ class Photo extends React.Component {
                         border: '1px solid #CCCCCC',
                         boxShadow: '0px 0px 4px #CCCCCC',
                         backgroundColor: 'white',
-                        width: 938, marginTop: 10, marginLeft: -23, paddingBottom: 8,
+                        width: 838, marginTop: 10,  paddingBottom: 8,
                         }}>
                         <div style={{ padding: 10,  borderRadius: 3.5,fontSize: 20, backgroundColor: '#F6F7F9'}}>
                             <img src={"/images/photoproducticon.svg"} width={22} height={22}/>
@@ -98,7 +98,7 @@ class Photo extends React.Component {
                         border: '1px solid #CCCCCC',
                         boxShadow: '0px 0px 4px #CCCCCC',
                         backgroundColor: 'white',
-                        width: 938, marginTop: 10, marginLeft: -23, paddingBottom: 8,
+                        width: 838, marginTop: 10,  paddingBottom: 8,
                         }}>
                         <div style={{ padding: 10, borderRadius: 3.5, fontSize: 20, backgroundColor: '#F6F7F9'}}>
                             <img src={"/images/photoproducticon.svg"} width={22} height={22}/>

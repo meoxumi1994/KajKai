@@ -26,7 +26,7 @@ export const updateLikes = (likes = [], id, name) => {
     return newLikes
 }
 
-export const updateFollows = (follows = [], userid) => {
+export const updateFollows = (follows = [], userid, avatarUrl, username) => {
     let has = false
     let newFollows = []
     follows.map((item) => {
@@ -35,6 +35,8 @@ export const updateFollows = (follows = [], userid) => {
                 ...newFollows,
                 {
                     userid: item.userid,
+                    avatarUrl: avatarUrl,
+                    username: username,
                 }
             ]
         }else{
@@ -46,6 +48,8 @@ export const updateFollows = (follows = [], userid) => {
             ...newFollows,
             {
                 userid: userid,
+                avatarUrl: avatarUrl,
+                username: username,
             }
         ]
     }

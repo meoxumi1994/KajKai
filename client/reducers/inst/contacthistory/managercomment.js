@@ -56,10 +56,12 @@ const contacthistory = (state = {
                 contact: newcontact
             }
         case 'UPDATE_USER_SUCCESS':
-            return {
-                ...state,
-                currentId: action.user.currentId,
-            }
+            if(action.user.currentId)
+                return {
+                    ...state,
+                    currentId: action.user.currentId,
+                }
+            return state
         case 'GET_CONTACT_USER_ING':
         case 'GET_CONTACT_USER_FAILED':
         case 'GET_CONTACT_STORE_ING':
@@ -76,21 +78,23 @@ const contacthistory = (state = {
             }
         case 'GET_CONTACT_STORE_SUCCESS':
         case 'GET_CONTACT_USER_SUCCESS':
-            return {
-                ...state,
-                contact: {
-                    ...state.contact,
-                    [action.id] : {
-                        ...state.contact[action.id],
-                        state: action.type,
-                        offset: action.offset,
-                        leadercomments: [
-                            ...action.leadercomments,
-                            ...state.contact[action.id].leadercomments,
-                        ]
+            if(state.contact[action.id])
+                return {
+                    ...state,
+                    contact: {
+                        ...state.contact,
+                        [action.id] : {
+                            ...state.contact[action.id],
+                            state: action.type,
+                            offset: action.offset,
+                            leadercomments: [
+                                ...action.leadercomments,
+                                ...state.contact[action.id].leadercomments,
+                            ]
+                        }
                     }
                 }
-            }
+            return state
         case 'global/LEADERCOMMENT':
             for(let i in state.contact){
                 if(action.data.commenterid == i && action.data.type == 'user' && state.contact[i].state != 'WAIT'){

@@ -49,7 +49,7 @@ const Top = (props) => {
             </div> */}
             <div style={{ marginLeft: -1, marginTop: -1 }}>
                 <AddPhoto
-                    aspectRatio={938/250}
+                    aspectRatio={838/250}
                     id={2}
                     action={{
                     type: 'UPDATE_USER_COVER'
@@ -57,7 +57,7 @@ const Top = (props) => {
                     canEdit={yourid == id}
                     style={{
                     src: coverUrl,
-                    width: 938,
+                    width: 1038,
                     height: 250,
                     isTop: true,
                 }}/>

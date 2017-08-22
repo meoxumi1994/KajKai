@@ -23,7 +23,7 @@ const mapStateToProps = (state, { id }) => {
         TOTAL_LIKE: g('TOTAL_LIKE'),
         TOTAL_FOLLOW: g('TOTAL_FOLLOW'),
         CREATE_TIME: g('CREATE_TIME'),
-        LAST_TIME: g('LAST_TIME')
+        LAST_TIME: g('LAST_TIME'),
     })
 }
 

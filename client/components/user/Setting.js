@@ -26,7 +26,7 @@ const Setting = (props) => {
                     <div className="col-xs-3" style={{ padding: 10 }}>
                         <Link to={"/user/"+ id +"/setting/general"}>
                             <div className="btn"
-                                style={{ borderRadius: 2, padding: 5, marginLeft: -18, width: 190, fontSize: 14,
+                                style={{ borderRadius: 2, padding: 5, marginLeft: 5, width: 180, fontSize: 14,
                                     backgroundColor: (currentSettingType != 'security') ? '#C4D2E7': '#F6F7F9',
                                 }}>
                                 <img src={"/images/generalicon.svg"} width={20} height={20}/>
@@ -34,7 +34,7 @@ const Setting = (props) => {
                             </div>
                         </Link>
                         <Link to={"/user/"+ id +"/setting/security"}>
-                            <div className="btn" style={{ borderRadius: 2,  padding: 5, marginLeft: -18, width: 190, fontSize: 14,
+                            <div className="btn" style={{ borderRadius: 2,  marginLeft: 5, padding: 5, width: 180, fontSize: 14,
                                     backgroundColor: (currentSettingType == 'security') ? '#C4D2E7': '#F6F7F9'
                                 }}>
                                 <img src={"/images/securityicon.svg"} width={20} height={20}/>
@@ -43,7 +43,7 @@ const Setting = (props) => {
                         </Link>
                     </div>
                     <div className="col-xs-9" style={{ padding: 0 }}>
-                        <div style={{ marginLeft: -46, width: 740 }}>
+                        <div style={{ width: 643, marginLeft: -5 }}>
                             {currentSettingType != 'security'?
                                 <div>
                                     <SettingCell id={id} kind="username" type="user" title={USER_NAME} placeholder={ENTER_STORE}
@@ -53,7 +53,7 @@ const Setting = (props) => {
                                     <SettingCell id={id} kind="phone" type="user" title={PHONE} placeholder={ENTER_YOUR_PHONE}/>
                                     <SettingCell id={id} kind="age" type="user" title={AGE} description={NOTE_AGE}
                                         placeholder={ENTER_AGE}/>
-                                    <SettingCell id={id} kind="position" type="user" title={POSITION_IN_MAP} width={740}
+                                    <SettingCell id={id} kind="position" type="user" title={POSITION_IN_MAP} width={643}
                                         placeholder={ENTER_YOUR_ADDRESS} failed={ADDRESS_FAILED}/>
                                 </div>
                             :

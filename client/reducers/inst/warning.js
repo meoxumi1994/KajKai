@@ -3,7 +3,6 @@ const warning = (state = {
 }, action) => {
     switch (action.type) {
         case 'global/ERROR':
-            console.log(action)
             return {
                 ...state,
                 show: true

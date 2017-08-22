@@ -38,7 +38,7 @@ class Comp extends React.Component {
 
                     </div>
                     <div style={{ marginRight: 280}}>
-                        <div style={{ width: 1100, margin: 'auto', backgroundColor: 'yellow'}}>
+                        <div style={{ width: 1040, margin: 'auto', backgroundColor: 'yellow'}}>
                             <div>
                                 <div style={{ marginLeft: 170, float: 'left', width: 880}}>
                                     <div classNameName="panel panel-default" style={{ height: 300, margin: '10px 0px 0px 0px'}}>

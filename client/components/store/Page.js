@@ -26,7 +26,7 @@ class Page extends React.Component {
             <div className="container-fluid">
                 <div className="row">
                     <div ref={ sellpost => this.sellpost = sellpost }
-                        className="col col-xs-7"
+                        className="col col-xs-8"
                         style={{
                             height: this.sellpost_inside_height?this.sellpost_inside_height.offsetHeight: undefined,
                             margin: 0,
@@ -35,7 +35,7 @@ class Page extends React.Component {
                         <div ref= { sellpost_inside => { this.sellpost_inside_height = sellpost_inside } }
                             style={{
                             position: this.sellpost_marginTop?'fixed':'static',
-                            marginLeft: this.sellpost_marginTop?(-scrollLeft-24):-24,
+                            marginLeft: this.sellpost_marginTop?(-scrollLeft):0,
                             marginTop: this.sellpost_marginTop?(-this.sellpost_inside_height.offsetHeight + height - 343):0,
                             minHeight: height - 48,
                             paddingTop: 0,
@@ -70,7 +70,7 @@ class Page extends React.Component {
                         </div>
                     </div>
                     <div ref={ minorpost => this.minorpost = minorpost }
-                        className="col col-xs-5"
+                        className="col col-xs-4"
                         style={{
                             height: this.minorpost_inside_height?this.minorpost_inside_height.offsetHeight: undefined,
                             margin: 0,
@@ -79,12 +79,12 @@ class Page extends React.Component {
                         <div ref= { minorpost_inside => { this.minorpost_inside_height = minorpost_inside } }
                             style={{
                             position: this.minorpost_marginTop?'fixed':'static',
-                            marginLeft: this.minorpost_marginTop?(-scrollLeft-28):-28,
+                            marginLeft: this.minorpost_marginTop?(-scrollLeft - 30): -30,
                             marginTop: this.minorpost_marginTop?(-this.minorpost_inside_height.offsetHeight + height - 343):0,
                             minHeight: height - 48,
                             paddingTop: 10,
                             width: 410 }}>
-                            <IntroduceStore storeid={id} />
+                            <IntroduceStore storeid={id} width={310}/>
                             {/* {isOwner &&
                                 <div style={{
                                     marginTop: 10,

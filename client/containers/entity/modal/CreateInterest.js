@@ -11,7 +11,9 @@ const mapStateToProps = (state, ownProps) => {
         ...createinterest,
         CREATE_INTEREST: g('CREATE_INTEREST'),
         CLOSE: g('CLOSE'),
-        DONE: g('DONE')
+        DONE: g('DONE'),
+        CHOOSE_YOUR_INTEREST: g('CHOOSE_YOUR_INTEREST'),
+        CHOOSE_YOUR_LOCATION: g('CHOOSE_YOUR_LOCATION'),
     })
 }
 

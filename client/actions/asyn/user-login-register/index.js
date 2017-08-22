@@ -2,13 +2,14 @@ import { updateuserData } from '~/actions/sync/updateuser'
 import { fleu, flet } from '~/actions/support'
 
 export const changeLanguage = (language) => dispatch => {
-    dispatch(updateuserData('LANGUAGE', { language : language }))
+    dispatch({ type: 'UPDATE_USER_ING' })
     fleu('/user',{
         language: language
     },{
         status: 'failed|success'
     })
     .then((response) => {
+        dispatch({ type: ''})
     })
 }
 

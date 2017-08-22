@@ -48,10 +48,7 @@ class Store extends React.Component {
             return <div></div>
         const id = store.id
         return(
-            <div style={{ width: 1100, margin: 'auto' }}>
-                <div style={{ marginLeft: 160, float: 'left', width: 940 }}>
-                    <Top location={location}/>
-                </div>
+            <div style={{ width: 1040, margin: 'auto' }}>
                 <div className="container-fluid">
                     <div className="row">
                         <div ref={ left => this.left = left }
@@ -59,20 +56,23 @@ class Store extends React.Component {
                             height: this.left_inside_height?this.left_inside_height.offsetHeight: undefined,
                             padding: 0,
                             margin: 0 }}
-                            className="col col-xs-2">
+                            className="col col-xs-3">
                             <div ref= { left_inside => { this.left_inside_height = left_inside } }
                                 style={{
                                 position: this.left_marginTop?'fixed':'static',
                                 marginLeft: this.left_marginTop?(-scrollLeft):0,
-                                marginTop: this.left_marginTop?(-this.left_inside_height.offsetHeight + height - 343):0,
+                                marginTop: this.left_marginTop?(-this.left_inside_height.offsetHeight + height - 48):0,
                                 minHeight: height - 48,
                                 paddingTop: 10,
                                 }}>
-                                <Left/>
+                                <Left location={location}/>
                             </div>
                         </div>
-                        <div className="col col-xs-10" style={{ padding: 0, margin: 0}}>
-                            <Middle id={id}/>
+                        <div className="col col-xs-9" style={{ padding: 0, margin: 0 }}>
+                            <div style={{ marginLeft: -60 }}>
+                                <Top location={location}/>
+                                <Middle id={id}/>
+                            </div>
                         </div>
                     </div>
                 </div>

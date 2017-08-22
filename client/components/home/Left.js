@@ -1,44 +1,42 @@
 import React from 'react'
 
-const Left = ({ storeList, STORE, HOME, CREATE_STORE }) => {
+import CreateInterest from '~/containers/entity/modal/CreateInterest'
+import CellLeft from '~/components/entity/row/CellLeft'
+
+const Left = ({ storeList, avatarUrl, username, changeLanguage, id, STORE, HOME, BASIC, CREATE_STORE, STORE_BOLD,
+    CREATE_INTEREST, SETTING_BOLD }) => {
     return(
-        <div>
-            <div style={{ paddingBottom: 10 }}>
-                <div style={{ margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
-                    {STORE}
+        <div style={{ width: 200 }}>
+            {username && <CellLeft avatar={avatarUrl} name={username} link={"/user/"+id}/>}
+            {username && <div style={{ marginTop: 10 }}>
+                <div style={{ marginLeft: 5, marginBottom: 2, borderRadius: 2, width: 150, fontSize: 12, color: '#4B4F56'}}>
+                    {STORE_BOLD}
                 </div>
-            </div>
-            {storeList.map((item, index) =>
-                <div key={index} style={{ paddingBottom: 10 }}>
-                    <a href={"/"+item.urlname}>
-                        <div className="btn"
-                            style={{
-                                textAlign: 'left',
-                                display: 'inline-block',
-                                margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
-                            <img width={20} height={20} src={item.avatarUrl}/>
-                            {" "}<span>{item.storename }</span>
-                        </div>
-                    </a>
+            </div>}
+            {storeList && storeList.map((item, index) =>
+                <div key={index}>
+                    <CellLeft avatar={item.avatarUrl} name={item.storename} link={"/"+item.urlname}/>
                 </div>
             )}
-            <div style={{ paddingBottom: 10 }}>
-                <div className="btn"
-                    style={{
-                        textAlign: 'left',
-                        display: 'inline-block',
-                        margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
-                    <a href={"/"} style={{ fontSize: 13}}>{HOME}</a>
-                </div>
+            {username && <CellLeft avatar="/images/createstoreicon.svg" name={CREATE_STORE} link={"/registerstore"}/>}
+            <div style={{ marginTop: 10, marginLeft: 5, borderRadius: 2, width: 150, fontSize: 12, color: '#4B4F56'}}>
+                {BASIC}
             </div>
-            <div style={{ paddingBottom: 10 }}>
-                <div className="btn"
-                    style={{
-                        textAlign: 'left',
-                        display: 'inline-block',
-                        margin: 0, padding: 4, backgroundColor: 'white', borderRadius: 2, width: 150 }}>
-                    <a href={"/registerstore"} style={{ fontSize: 13}}>{CREATE_STORE}</a>
-                </div>
+            <div>
+                <CellLeft avatar="/images/kajkai.svg" name={HOME} link={"/"}/>
+                {username && <CreateInterest/> }
+            </div>
+            <div style={{ marginTop: 10, marginLeft: 5, borderRadius: 2, width: 150, fontSize: 12, color: '#4B4F56'}}>
+                {SETTING_BOLD}
+            </div>
+            <div style={{ marginLeft: 5, padding: 0, fontSize: 12.5 }} className="btn"
+                onClick={()=> changeLanguage('vi')}>
+                <a>Tiếng Việt</a>
+            </div>
+            {" . "}
+            <div className="btn" style={{ fontSize: 12.5, padding: 0,}}
+                onClick={()=> changeLanguage('en')}>
+                <a>English</a>
             </div>
         </div>
     )

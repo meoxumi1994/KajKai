@@ -35,8 +35,8 @@ class Top extends React.Component {
         this.state = {}
     }
     render(){
-        const { id, userid, yourid, coverUrl, avatarUrl, name, onUploadImage, location, isOwner,
-            PAGE, ABOUT, PHOTOS, STATISTIC, SETTING, SEND_MESSAGE } = this.props
+        const { id, userid, yourid, coverUrl, avatarUrl, name, onUploadImage, location, isOwner, beFollow, onFollow,
+            PAGE, ABOUT, PHOTOS, FOLLOW_US, FOLLOWED, STATISTIC, SETTING, SEND_MESSAGE } = this.props
         return(
             <div className="panel panel-default"
                 style={{ margin: 0, borderWidth: 1 , borderRadius: '0px 0px 5px 5px'}}>
@@ -53,7 +53,7 @@ class Top extends React.Component {
                 </div> */}
                 <div style={{ marginLeft: -1, marginTop: -1 }}>
                     <AddPhoto
-                        aspectRatio={938/250}
+                        aspectRatio={838/250}
                         id={0}
                         action={{
                             type: 'UPDATE_STORE_COVER',
@@ -64,7 +64,7 @@ class Top extends React.Component {
                         canEdit={isOwner}
                         style={{
                         src: coverUrl,
-                        width: 938,
+                        width: 838,
                         height: 250,
                         isTop: true,
                     }}/>
@@ -73,32 +73,9 @@ class Top extends React.Component {
                     position: 'relative',
                     zIndex: 1,
                     float: 'left',
-                    marginLeft: 13,
                     marginTop: -100,
                     height: 140,
                 }}>
-                    <div style={{ backgroundColor: 'white',
-                        borderRadius: 4,
-                        border: '1px solid #DFE0E4',
-                        padding: 3, float: 'left',
-                        marginTop: -35 }}>
-                        <AddPhoto
-                            aspectRatio={1}
-                            id={1}
-                            action={{
-                                type: 'UPDATE_STORE_AVATAR',
-                                data: {
-                                    id: id,
-                                }
-                            }}
-                            canEdit={isOwner}
-                            style={{
-                            src: avatarUrl,
-                            width: 160,
-                            height: 160,
-                            isTop: false,
-                        }}/>
-                    </div>
                     {/* <div className="panel panel-default"
                         style={{ padding: 4, width: 170, height: 170, float: 'left', marginTop: -35 }}>
                         <img src={ avatarUrl } alt="Cinque Terre" width="100%" height="100%"/>
@@ -109,18 +86,26 @@ class Top extends React.Component {
                         >
                         <span className="glyphicon glyphicon-camera" style={{ fontSize: 15 }}></span>
                     </div> */}
-                    <h3 style={{
-                        position: 'static',
-                        marginTop: 65,
-                        marginLeft: 183,
-                        color: 'white',
-                        textShadow: '2px 2px 4px #000000',
-                    }}>{ name }</h3>
+
                     <div style={{
                         position: 'static',
-                        marginTop: -2,
-                        marginLeft: 183,
+                        marginTop: 99,
+                        marginLeft: 190,
                     }}>
+                        {!isOwner &&
+                            <div className="btn btn-default btn-sm"
+                                onClick={() => onFollow()}
+                                style={{
+                                    marginLeft: -180, marginRight: 40, width: 170, padding: 5 }}>
+                                <img src={ beFollow ? "/images/hasfollowstore.svg" : "/images/followstore.svg" } width={16} height={16}/>
+                                <span style={{ marginLeft: 10,
+                                    color:  beFollow ? '#D0021B' : '#4B4F56',
+                                    fontWeight: 'bold'
+                                }}>
+                                    { beFollow ? FOLLOWED : FOLLOW_US }
+                                </span>
+                            </div>
+                        }
                         <ButtonLine {...this.props} title={PAGE} last="0" link=""/>
                         <ButtonLine {...this.props} title={ABOUT} last="0" link="/about"/>
                         {/* <ButtonLine {...this.props} title="Post" last="0" link="/post"/> */}

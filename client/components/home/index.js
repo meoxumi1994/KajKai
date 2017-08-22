@@ -10,7 +10,7 @@ class Home extends React.Component {
     render(){
         const { scrollTop, scrollLeft, height } = this.props
         return(
-            <div style={{ width: 1100, margin: 'auto' }}>
+            <div style={{ width:  1040, margin: 'auto' }}>
                 <div className="container-fluid">
                     <div className="row">
                         <div ref={ left => this.left = left }
@@ -18,7 +18,7 @@ class Home extends React.Component {
                             height: this.left_inside_height?this.left_inside_height.offsetHeight: undefined,
                             padding: 0,
                             margin: 0 }}
-                            className="col col-xs-2">
+                            className="col col-xs-3">
                             <div ref= { left_inside => { this.left_inside_height = left_inside } }
                                 style={{
                                 position: this.left_marginTop?'fixed':'static',
@@ -34,7 +34,7 @@ class Home extends React.Component {
                             height: this.newfeed_inside_height?this.newfeed_inside_height.offsetHeight: undefined,
                             padding: 0,
                             margin: 0 }}
-                            className="col col-xs-10">
+                            className="col col-xs-9">
                             <div ref= { newfeed_inside => { this.newfeed_inside_height = newfeed_inside } }
                                 style={{
                                 position: this.newfeed_marginTop?'fixed':'static',
