@@ -19,6 +19,12 @@ const mapStateToProps = (state, ownProps) => {
         avatarUrl: avatarUrl,
         storename: storename,
         id: id,
+        TIME: g('TIME'),
+        ADD_NEW_CONTENT: g('ADD_NEW_CONTENT'),
+        EDIT_SELL_POST: g('EDIT_SELL_POST'),
+        CREATE_SELL_POST: g('CREATE_SELL_POST'),
+        CLOSE: g('CLOSE'),
+        REMOVE: g('REMOVE')
     })
 }
 
@@ -28,6 +34,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     addPostRow: (item, newid) => {
         dispatch({ type: 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_POST_ROW', item: item, newid: newid, time: (new Date()).getTime() })
+    },
+    removePostRow: (id) => {
+        dispatch({ type: 'INST_ENTITY_POST_EDIT_SELL_POST_REMOVE_POST_ROW', id })
     },
     createSellPost: (sellpost) => {
         dispatch(postSellPost(sellpost))
@@ -62,7 +71,7 @@ const mergerProp = (stateProps, dispatchProps, ownProps) => {
                 ...stateProps,
                 postrows: postrows,
                 storeid: id,
-                status: 'sleep',
+                status: 'open',
             }
             createSellPost(sellpost)
         },

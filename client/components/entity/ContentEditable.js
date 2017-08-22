@@ -14,6 +14,8 @@ class ContentEditable extends React.Component {
         }
     }
     componentDidMount(){
+        console.log('this.display.getBoundingClientRect().width',
+        this.display.getBoundingClientRect().width, this.props.width )
         this.setState({ width: this.display.getBoundingClientRect().width })
         if(this.props.getLine)
             this.props.getLine(this.textarea.state.height / 20)
@@ -28,6 +30,7 @@ class ContentEditable extends React.Component {
             <div style={{
                 outline: '1px solid #D2D2D2',
                 fontSize: 14,
+                backgroundColor: 'yellow',
                 padding: padding}}>
                 <div
                     ref={display => this.display = display}
@@ -40,7 +43,7 @@ class ContentEditable extends React.Component {
                 </div>
                 <div style={{
                         marginTop: (this.display) ? -this.display.getBoundingClientRect().height : 0,
-                        float: 'right'
+                        // float: 'right'
                     }}>
                     <Textarea
                         ref={ textarea => this.textarea = textarea }
@@ -50,7 +53,7 @@ class ContentEditable extends React.Component {
                         spellCheck={false}
                         style={{
                             caretColor: '#1D2129',
-                            backgroundColor: 'transparent',
+                            backgroundColor: 'blue',
                             color: 'transparent',
                             borderWidth: 0,
                             resize: 'none',

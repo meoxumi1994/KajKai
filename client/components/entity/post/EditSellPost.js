@@ -16,10 +16,11 @@ class EditSellPost extends React.Component {
         const {
             title, showModal, close, height, id,
             avatarUrl, ship, storename, category,
-            description, time,
+            description, time, onRemove,
             postrows_order, onChange,
             addPostRow, onChangePostRow,
-            onCreateSellPost, onEditSellPost, isCreate
+            onCreateSellPost, onEditSellPost, isCreate,
+            TIME, ADD_NEW_CONTENT, EDIT_SELL_POST, CREATE_SELL_POST, CLOSE, REMOVE,
         } = this.props
         return (
             <Modal show={showModal} bsSize="sm" onHide={() => close()}>
@@ -29,8 +30,9 @@ class EditSellPost extends React.Component {
                     marginTop: -1,
                     minHeight: height - 70
                 }}>
-                    <div style={{ padding: 10 }}>
-                        {title}
+                    <div style={{ padding: 10, backgroundColor: '#BD081C', borderRadius: '4px 4px 0px 0px', color: 'white',
+                        fontWeight: 'bold'}}>
+                        {isCreate ? CREATE_SELL_POST : EDIT_SELL_POST}
                     </div>
                     <hr style={{ margin: 0 }}/>
                     <div style={{ padding: 10 }}>
@@ -64,7 +66,7 @@ class EditSellPost extends React.Component {
                             marginLeft: 70,
                             color: '#A7ABB1',
                             }}>
-                            time{" . "}
+                            {TIME}{" . "}
                             <input
                                 value={description}
                                 style={{ height: 18, width: 355, outline: 'none' }}
@@ -75,17 +77,18 @@ class EditSellPost extends React.Component {
                     <div>
                         {postrows_order.map((item, index) =>
                             <div key={index} style={{ paddingLeft: 10, paddingBottom: 10, paddingRight: 10 }}>
+                                <div className="btn"
+                                    onClick={() => this.props.removePostRow(item)}
+                                    style={{ padding: 0, fontSize: 12.5, }}><a>{REMOVE}</a></div>
                                 <EditPostRow
                                     id={item}
-                                    // {...postrows[item]}
-                                    // onChange={(key, value) => onChangePostRow(item,key,value)}
                                 />
                             </div>
                         )}
                     </div>
                     <div className="btn btn-default btn-xs" style={{ marginLeft: 10, marginBottom: 10 }}
                         onClick={() => this.setState({ showModal : true })}>
-                        add new content
+                        {ADD_NEW_CONTENT}
                     </div>
                     <ChoosePostRow
                         showModal={this.state.showModal}
@@ -104,19 +107,19 @@ class EditSellPost extends React.Component {
                                         onClick={() => onEditSellPost()}
                                         style={{
                                         float: 'right', backgroundColor: '#BD081C', borderWidth: 0, color: 'white'}}>
-                                        Edit SellPost
+                                        {EDIT_SELL_POST}
                                     </div>
                                 :   <div className="btn btn-default btn-sm"
                                         onClick={() => onCreateSellPost()}
                                         style={{
                                         float: 'right', backgroundColor: '#BD081C', borderWidth: 0, color: 'white'}}>
-                                        Create SellPost
+                                        {CREATE_SELL_POST}
                                     </div>
                                 }
                                 <div className="btn btn-default btn-sm"
                                     onClick={() => close()}
                                     style={{ float: 'right', marginRight: 10 }}>
-                                    Close
+                                    {CLOSE}
                                 </div>
                             </div>
                         </div>

@@ -32,7 +32,6 @@ const editproduct = (state = {
             })
             return newstate
         case 'INST_ENTITY_PRODUCT_CHANGE':
-            console.log(action)
             return {...state, [action.id]: {
                 ...state[action.id],
                 [action.key] : action.value

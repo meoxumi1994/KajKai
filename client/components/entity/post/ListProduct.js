@@ -8,12 +8,15 @@ class ListProduct extends React.Component {
     }
     render(){
         const { products, products_order, canEdit, sellpostId } = this.props
+        console.log(products_order)
         return(
             <div>
                 <table>
                     {products_order.map((item, index) =>
                         <tbody key={index}>
-                            <Product id={item} sellpostId={sellpostId} canEdit={canEdit} width={index?120:300}/>
+                            <Product onRemoveProductEdit={() => {
+                                this.props.onRemoveProductEdit(item)}}
+                                id={item} sellpostId={sellpostId} canEdit={canEdit} width={index?120:300}/>
                         </tbody>
                     )}
                 </table>

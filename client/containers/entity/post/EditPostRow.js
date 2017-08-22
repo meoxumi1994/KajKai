@@ -9,6 +9,7 @@ const mapStateToProps = (state, { id }) => {
     return({
         ...editpostrow,
         ADD: g('ADD'),
+        ADD_PRODUCT: g('ADD_PRODUCT'),
     })
 }
 
@@ -27,6 +28,25 @@ const mapDispatchToProps = (dispatch, { id }) => ({
             type: 'INST_ENTITY_POST_EDIT_SELL_POST_ADD_PRODUCT',
             id: time,
         })
+    },
+    onRemoveProductEdit: (products_order, pid) => {
+        let newProducts_order = products_order
+        products_order.map((item,index) => {
+            if(item == pid){
+                newProducts_order = [
+                    ...products_order.slice(0,index),
+                    ...products_order.slice(index+1, products_order.length)
+                ]
+            }
+        })
+        dispatch({
+            type: 'INST_ENTITY_POST_EDIT_SELL_POST_CHANGE_POST_ROW',
+            item: id, key: 'products_order',
+            value: newProducts_order
+        })
+        if(newProducts_order.length == 0){
+            dispatch({ type: 'INST_ENTITY_POST_EDIT_SELL_POST_REMOVE_POST_ROW', id })
+        }
     }
 })
 

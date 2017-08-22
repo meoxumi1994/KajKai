@@ -3,11 +3,13 @@ import { get } from '~/config/allString'
 
 import Product from '~/components/entity/post/Product'
 
-const mapStateToProps = (state, { id, canEdit }) => {
+const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
+    const { id, canEdit } = ownProps
     const product = canEdit ? state.inst.entity.editproduct[id] : state.inst.entity.product[id]
     return({
-        ...product
+        ...product,
+        REMOVE: g('REMOVE'),
     })
 }
 

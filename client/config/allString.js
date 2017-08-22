@@ -218,6 +218,12 @@ const myString = {
     CHOOSE_YOUR_INTEREST: ['Chọn loài hình', 'Choose category'],
     CHOOSE_YOUR_LOCATION: ['Chọn vị trí', 'Choose location'],
     CLOSE_STORE_DESCRIPTION: ['Đã hết giờ bán, cửa hàng tạm nghỉ, quý khách vui lòng quay lại sau','Time out sales, store temporarily closed, please come back later'],
+    TIME: ['thời gian','time'],
+    ADD_NEW_CONTENT: ['Thêm nội dung','Add new content'],
+    EDIT_SELL_POST: ['Sửa bài đăng','Edit sell post'],
+    CREATE_SELL_POST: ['Tạo bài đăng','Create Sell Post'],
+    REMOVE: ['xoá','remove'],
+    ADD_PRODUCT: ['thêm sản phẩm','add product'],
 }
 
 const allString = {

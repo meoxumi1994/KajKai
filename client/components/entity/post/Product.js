@@ -12,8 +12,8 @@ class Product extends React.Component {
     }
     render(){
         const { id, list, imageUrl, content, isOverLayLeft,
-            canEdit, onChange, width, onAddProduct, justShow, canRemove,
-            onRemoveProduct} = this.props
+            canEdit, onChange, width, onAddProduct, justShow, canRemove, REMOVE,
+            onRemoveProduct } = this.props
         return(
             <tr>
                 {list.map((item,index) => {
@@ -98,6 +98,17 @@ class Product extends React.Component {
                         </div>
                     }
                 </td>
+
+                {canEdit &&
+                    <td>
+                        <div className="btn" style={{ marginLeft: 5, padding: 0, fontSize: 12.5 }}
+                            onClick={() => {
+                                this.props.onRemoveProductEdit()}
+                            }>
+                            <a>{REMOVE}</a>
+                        </div>
+                    </td>
+                }
             </tr>
         )
     }

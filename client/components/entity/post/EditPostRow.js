@@ -5,28 +5,30 @@ import BasicInput from '~/containers/entity/input/BasicInput'
 import KeepImage from '~/containers/entity/thumnail/KeepImage'
 import ListProduct from '~/containers/entity/post/ListProduct'
 
-const Row = ({ type, id, products, products_order, content, images, numline, onAddProduct, onChange, ADD }) => {
+const Row = ({ type, id, products, products_order, content, images, numline, onAddProduct, onChange, ADD_PRODUCT, onRemoveProductEdit}) => {
     switch (type) {
         case 'product':
             return(
                 <div>
                     <ListProduct id={id} products={products}
                         products_order={products_order}
+                        onRemoveProductEdit={(id) => onRemoveProductEdit(products_order, id)}
                         canEdit={true}/>
                     <div className="btn"
-                        style={{ padding: 0, }}
+                        style={{ padding: 0, fontSize: 12.5 }}
                         onClick={() => {
                             onAddProduct(products_order)
                             onChange('numline', numline + 1)
                         }}>
-                        <a>{ADD}</a>
+                        <a>{ADD_PRODUCT}</a>
                     </div>
                 </div>
             )
         case 'listproduct':
             return(
                 <div>
-                    <ListProduct id={id} products={products} products_order={products_order} canEdit={true}/>
+                    <ListProduct id={id} onRemoveProductEdit={(id) => onRemoveProductEdit(products_order, id)}
+                        products={products} products_order={products_order} canEdit={true}/>
                     <div className="btn"
                         style={{ padding: 0, }}
                         onClick={() => {
