@@ -94,7 +94,7 @@ class NewFeed extends React.Component {
         super(props)
     }
     componentDidUpdate(){
-        if(this.props.scrollTop + this.props.height > this.inside.scrollHeight - 300){
+        if(this.props.scrollTop + this.props.height > this.inside.scrollHeight - 1000){
              this.props.onGetMore();
         }
     }
