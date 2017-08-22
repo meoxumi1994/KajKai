@@ -73,6 +73,16 @@ export const updateSellPost = (sellpost) => {
     })
 };
 
+export const deleteSellPost = (id) => {
+    searchClient.delete({
+        index: config.INDEX,
+        type: config.TYPE_SELL_POST,
+        id: id
+    }, (err, resp) => {
+        console.log('delete ' + err, resp);
+    })
+};
+
 export const addNewProduct = (product) => {
     getSellPost(product.sellPostId, (oldSellPost) => {
         oldSellPost.productContent += product.sellPostId + ':& ' + toRoot(product.content) + ' ;&';
@@ -81,7 +91,8 @@ export const addNewProduct = (product) => {
 };
 
 export const searchSellPost = (offset, length, categoryId, location, keyword, next) => {
-    if (location && location.lat && location.lon) {
+    if (location && location.lat && location.lon &&
+        location.lat !== "null" && location.lon !== 'null') {
         searchWithLocation(offset, length, categoryId, location, keyword, (res) => {
             next(getDisplayResult(res, offset, length));
         })
@@ -114,7 +125,7 @@ export const updateSellPostThroughStore = (storeId, avatarUrl) => {
 };
 
 export const searchWithoutLocation = (offset, length, categoryId, keyword, next) => {
-    if (categoryId !== -1) {
+    if (categoryId == -1) {
         if (!keyword || keyword.length === 0) {
             searchClient.search({
                 index: config.INDEX,
@@ -242,7 +253,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
 };
 
 export const searchWithLocation = (offset, length, categoryId, location, keyword, next) => {
-    if (categoryId !== -1) {
+    if (categoryId == -1) {
         if (!keyword || keyword.length === 0) {
             searchClient.search({
                 index: config.INDEX,

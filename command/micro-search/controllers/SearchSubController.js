@@ -1,7 +1,7 @@
 import { indexUser } from '../services/UserSearchService'
 import { indexStore } from '../services/StoreSearchService'
 import { getStore } from '../controllers/SearchPubController'
-import { indexSellPost, updateSellPost, addNewProduct, updateSellPostThroughStore } from '../services/SellPostSearchService'
+import { indexSellPost, updateSellPost, addNewProduct, updateSellPostThroughStore,deleteSellPost } from '../services/SellPostSearchService'
 
 export const createUserSub = (message) => {
     console.log(message, JSON.stringify(message));
@@ -75,7 +75,12 @@ export const updateSellPostSub = (message) => {
     const category = sellpost.category;
     const sellPostId = sellpost.sellPostId;
     updateSellPost({sellPostId, category, title});
+};
 
+export const deleteSellpostSub = (message) => {
+    console.log(message, JSON.stringify(message));
+    const sellpostId = message.sellpost.sellPostId;
+    deleteSellPost(sellpostId);
 };
 
 export const createSellPostProductSub = (message) => {
@@ -103,3 +108,5 @@ export const updateSellPostProductSub = (message) => {
         }, 30000);
     }
 };
+
+

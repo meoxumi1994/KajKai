@@ -5,7 +5,7 @@ export default {
     },
     'USER.Updated': {
         controller: 'SearchSubController',
-        method: 'updateUserSub'
+        method: 'createUserSub'
     },
     'STORE.Created': {
         controller: 'SearchSubController',
@@ -30,5 +30,9 @@ export default {
     'POSTROW.PRODUCT.Updated': {
         controller: 'SearchSubController',
         method: 'updateSellPostProductSub'
+    },
+    'SELLPOST.Deleted': {
+        controller: 'SearchSubController',
+        method: 'deleteSellpostSub'
     }
 }
