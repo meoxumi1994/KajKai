@@ -17,6 +17,7 @@ const NotificationSchema = new mongoose.Schema({
   time: {type: Date},
   storeName: {type: String},
   urlName: {type: String},
+  storeId: {type: String},
   storeAvatarUrl: {type: String},
   numberOfLike: {type: Number},
   likers: [LikerSchema],

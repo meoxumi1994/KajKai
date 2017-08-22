@@ -65,19 +65,19 @@ export const updateStoreList = (message) => {
         if (notifications) {
           for (let k = 0; k < notifications.length; k++) {
             let notification = notifications[k]
-            if (basicStore.avatarUrl) notification.storeAvatarUrl = basicStore.avatarUrl
+            if (notification.storeId == storeId && avatarUrl) notification.storeAvatarUrl = avatarUrl
             if (notification.actorId ==  storeId) {
-              if (basicStore.storeName) notification.name = basicStore.storeName
-              if (basicStore.avatarUrl) notification.avatarUrl = basicStore.avatarUrl
-              if (basicStore.storeName) notification.storeName = basicStore.storeName
-              if (basicStore.urlName) notification.urlName = basicStore.urlName
+              if (storeName) notification.name = storeName
+              if (avatarUrl) notification.avatarUrl = avatarUrl
+              if (storeName) notification.storeName = storeName
+              if (urlName) notification.urlName = urlName
             }
             if (notification.type.includes('LIKE')) {
               let { likers } = notification
               for (let h = 0; h < likers.length; h++) {
                 if (likers[h].storeId == storeId) {
-                  if (basicStore.storeName) likers[h].storeName = basicStore.storeName
-                  if (basicStore.avatarUrl) likers[h].avatarUrl = basicStore.avatarUrl
+                  if (storeName) likers[h].storeName = storeName
+                  if (avatarUrl) likers[h].avatarUrl = avatarUrl
                 }
               }
               notification.likers = likers

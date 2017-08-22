@@ -97,6 +97,7 @@ export const createReplyNotification = (message) => {
                       time: Date.now(),
                       storeName: basicStore.storeName,
                       urlName: basicStore.urlName,
+                      storeId: basicStore.id,
                       storeAvatarUrl: basicStore.avatarUrl
                     })
                     if (match) {
