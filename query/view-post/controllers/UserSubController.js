@@ -16,17 +16,17 @@ export const updateBasicUser = (message) => {
 
   if (avatarUrl) basicUser.avatarUrl = avatarUrl
   if (username) basicUser.username = username
-  if (address) user.address = address
+  if (address) basicUser.address = address
   if (position) {
     let { lng, lat } = position
     if (lng) {
-      user.longitude = lng
+      basicUser.longitude = lng
     }
     if (lat) {
-      user.latitude = lat
+      basicUser.latitude = lat
     }
   }
-  if (phone) user.phone = phone
+  if (phone) basicUser.phone = phone
 
   BasicUser.findOneAndUpdate({ id }, basicUser, () => {})
   Comment.find({}, (err, comments) => {
