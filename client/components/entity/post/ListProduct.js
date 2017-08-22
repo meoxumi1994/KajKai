@@ -16,7 +16,7 @@ class ListProduct extends React.Component {
                         <tbody key={index}>
                             <Product onRemoveProductEdit={() => {
                                 this.props.onRemoveProductEdit(item)}}
-                                id={item} sellpostId={sellpostId} canEdit={canEdit} width={index?120:300}/>
+                                id={item} sellpostId={sellpostId} canEdit={canEdit} width={300}/>
                         </tbody>
                     )}
                 </table>

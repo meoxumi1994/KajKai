@@ -1,4 +1,5 @@
-import { Postrow, BasicStore } from '../models'
+import { Postrow, Image } from '../models'
+import { ImageType } from '../enum'
 
 export const getPostrows = (requesterId, sellpostId, offset, next) => {
   Postrow.find({ sellpostId }, (err, postrows) => {
@@ -22,21 +23,19 @@ export const getPostrows = (requesterId, sellpostId, offset, next) => {
 }
 
 export const getPostrowImageList = (requesterId, storeId, offset, next) => {
-  BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-      if (err || !basicStore) {
+  Image.find({ storeId, type: ImageType.POSTROW }, (err, postrowImageList) => {
+      if (err || !postrowImageList) {
         if(err) {
           next(null)
         } else {
           next({
-            status: 'nodata',
+            offset: -2,
+            status: 'success',
             listImage: []
           })
         }
       } else {
-        let { postrowImageList } = basicStore
-        if (!postrowImageList) {
-          postrowImageList = []
-        }
+        postrowImageList.sort((i1, i2) => (i2.time - i1.time))
         const mImageList = []
         let currentNumberOfImage = 0, mOffset, lastIndex
         for (let i = postrowImageList.length - 1; i >= 0; i--) {

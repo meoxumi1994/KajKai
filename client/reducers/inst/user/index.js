@@ -4,15 +4,18 @@ import interest from './interest'
 import photo from './photo'
 
 const index = (state = {
-    stateUser : 'WAIT'
+    stateUser : 'WAIT',
+    coverUrl: '/images/coverDefault.svg',
 }, action) => {
     switch (action.type) {
         case 'USER_GET_ING':
             return {
                 stateUser: action.type,
+                coverUrl: '/images/coverDefault.svg',
             }
         case 'USER_GET_SUCCESS':
             return {
+                coverUrl: '/images/coverDefault.svg',
                 ...action.user,
                 stateUser: action.type,
             }

@@ -49,7 +49,7 @@ const Top = (props) => {
             </div> */}
             <div style={{ marginLeft: -1, marginTop: -1 }}>
                 <AddPhoto
-                    aspectRatio={838/250}
+                    aspectRatio={1038/250}
                     id={2}
                     action={{
                     type: 'UPDATE_USER_COVER'

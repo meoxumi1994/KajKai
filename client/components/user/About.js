@@ -34,7 +34,7 @@ class About extends React.Component {
                     borderRadius: 4,
                     border: '1px solid #DFE0E4',
                     backgroundColor: 'white',
-                    width: 838, marginTop: 10,
+                    width: 788, marginTop: 10,
                     }}>
                     {this.state.show && 'hihihi'}
                     <div style={{ fontSize: 20, padding: 10, backgroundColor: '#F6F7F9', borderRadius: '5px 5px 0px 0px'}}>
@@ -60,7 +60,7 @@ class About extends React.Component {
                     borderRadius: 4,
                     border: '1px solid #DFE0E4',
                     backgroundColor: 'white',
-                    width: 838, marginTop: 10,
+                    width: 788, marginTop: 10,
                     }}>
                     {this.state.show && 'hihihi'}
                     <div style={{ fontSize: 20, padding: 10, backgroundColor: '#F6F7F9', borderRadius: '5px 5px 0px 0px'}}>
@@ -68,17 +68,21 @@ class About extends React.Component {
                         <span style={{ marginLeft: 10 }}>{INTERACTION}</span>
                     </div>
                     <hr style={{ margin: 0, padding: 0 }}/>
-                    <AboutCell kind="leadercomment" title={TOTAL_COMMENT} value={interactive.numleadercomment}/>
-                    <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
-                    <AboutCell kind="comment" title={TOTAL_REPLY_COMMENT} value={interactive.numcomment}/>
-                    <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
-                    <AboutCell kind="like" title={TOTAL_LIKE} value={interactive.numlike}/>
-                    <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
-                    <AboutCell kind="follow" title={TOTAL_FOLLOW} value={interactive.numfollow}/>
-                    <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
-                    <AboutCell kind="create_time" title={CREATE_TIME} value={getTime(interactive.create_time)}/>
-                    <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
-                    <AboutCell kind="last_time" title={LAST_TIME} value={getTime(interactive.last_time)}/>
+                    {interactive &&
+                        <div>
+                            <AboutCell kind="leadercomment" title={TOTAL_COMMENT} value={interactive.numleadercomment}/>
+                            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+                            <AboutCell kind="comment" title={TOTAL_REPLY_COMMENT} value={interactive.numcomment}/>
+                            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+                            <AboutCell kind="like" title={TOTAL_LIKE} value={interactive.numlike}/>
+                            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+                            <AboutCell kind="follow" title={TOTAL_FOLLOW} value={interactive.numfollow}/>
+                            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+                            <AboutCell kind="create_time" title={CREATE_TIME} value={getTime(interactive.create_time)}/>
+                            <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
+                            <AboutCell kind="last_time" title={LAST_TIME} value={getTime(interactive.last_time)}/>
+                        </div>
+                    }
                 </div>
             </div>
 

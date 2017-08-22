@@ -56,7 +56,7 @@ class KeepImage extends React.Component {
                         width={width}
                     />
                 }
-                <Modal show={this.state.showModal}>
+                <Modal show={this.state.showModal} style={{ borderRadius: 0, }}>
                     <div className="modal-content" style={{
                         marginTop: -4,
                         position: 'fixed',
