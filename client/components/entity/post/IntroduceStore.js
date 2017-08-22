@@ -9,6 +9,7 @@ class IntroduceStore extends React.Component {
     render(){
         const { ADDRESS, ADDRESSMAP, CATEGORY, PHONE, LIKE, ANOTHER_PEOPLE, PEOPLE, AND, THIS, BY, FOLLOW, STORE_NAME,
             PHOTOS, ABOUT, FOLLOW_US, FOLLOWED, avatarUrl, storename, coverUrl, isOwner, beFollow, onFollow, width,
+            username,
             address, addressMap, category, phone, likes, numlike, follows, numfollow, storeid, position, urlname } = this.props
         if(!phone)
             return <div></div>
@@ -35,7 +36,7 @@ class IntroduceStore extends React.Component {
                         textShadow: '2px 2px 4px #000000',}}>
                             {storename}
                     </div>
-                    {!isOwner &&
+                    {(!isOwner && username ) &&
                         <div className="btn btn-default btn-sm"
                             onClick={() => onFollow()}
                             style={{

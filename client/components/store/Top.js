@@ -92,7 +92,7 @@ class Top extends React.Component {
                         marginTop: 99,
                         marginLeft: 190,
                     }}>
-                        {!isOwner &&
+                        {(!isOwner && yourid ) &&
                             <div className="btn btn-default btn-sm"
                                 onClick={() => onFollow()}
                                 style={{
@@ -119,7 +119,7 @@ class Top extends React.Component {
                 </div>
                 <hr style={{ marginTop: 43, marginBottom: 0, borderColor: 'transparent'}}></hr>
                 <ModalUploadImage/>
-                {!isOwner &&
+                {(!isOwner && yourid) &&
                     <div className="btn btn-default btn-sm"
                         onMouseOver={() => this.setState({ hoverMessage: true })}
                         onMouseLeave={() => this.setState({ hoverMessage: false })}

@@ -13,7 +13,8 @@ class AddPhoto extends React.Component {
         this.state = {}
     }
     render(){
-        const { TITLE, SUGGEST_PHOTO, UPDATE_PHOTO, style, action, onChange, id, aspectRatio, canEdit } = this.props
+        const { TITLE, SUGGEST_PHOTO, UPDATE_PHOTO, storePhotos, postPhotos, productPhotos, userPhotos,
+            style, action, onChange, id, aspectRatio, canEdit } = this.props
         const imagesSuggest = [
             'https://beebom-redkapmedia.netdna-ssl.com/wp-content/uploads/2016/01/Reverse-Image-Search-Engines-Apps-And-Its-Uses-2016.jpg',
             'http://www.jqueryscript.net/images/jQuery-Plugin-For-Fullscreen-Image-Viewer-Chroma-Gallery.jpg',
@@ -108,7 +109,7 @@ class AddPhoto extends React.Component {
         )
     }
     componentDidMount(){
-
+        this.props.onGetPhoto()
     }
 }
 

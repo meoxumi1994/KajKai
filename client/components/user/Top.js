@@ -66,7 +66,7 @@ const Top = (props) => {
                 position: 'relative',
                 zIndex: 1,
                 float: 'left',
-                marginLeft: 13,
+                marginLeft: 48,
                 marginTop: -100,
                 height: 140,
             }}>
@@ -74,7 +74,7 @@ const Top = (props) => {
                     borderRadius: 4,
                     border: '1px solid #DFE0E4',
                     padding: 3, float: 'left',
-                    marginTop: -35 }}>
+                    marginTop: -55 }}>
                     <AddPhoto
                         aspectRatio={1}
                         id={3}
@@ -84,8 +84,8 @@ const Top = (props) => {
                         canEdit={yourid == id}
                         style={{
                         src: avatarUrl,
-                        width: 160,
-                        height: 160,
+                        width: 180,
+                        height: 180,
                         isTop: false,
                     }}/>
                 </div>
@@ -98,14 +98,14 @@ const Top = (props) => {
                 <h3 style={{
                     position: 'static',
                     marginTop: 65,
-                    marginLeft: 183,
+                    marginLeft: 203,
                     color: 'white',
                     textShadow: '2px 2px 4px #000000',
                 }}>{ username ? username : "..."}</h3>
                 <div style={{
                     position: 'static',
                     marginTop: -2,
-                    marginLeft: 183,
+                    marginLeft: 203,
                 }}>
                     <ButtonLine {...props} title={INTEREST} last="0" link=""/>
                     <ButtonLine {...props} title={ABOUT} last="0" link="/about"/>

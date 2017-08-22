@@ -216,6 +216,32 @@ export default class BarScreen extends React.Component {
         this.props.onChange('lng', params.get('lng'))
         this.props.weSearch(currentType, params.get('id') || -1, params.get('keyword'), params.get('lat'), params.get('lng'), 0)
     }
+    shouldComponentUpdate(nextProps, nextState){
+        if(this.props.location.search != nextProps.location.search){
+            const params = new URLSearchParams(nextProps.location.search);
+            let currentType = nextProps.location.pathname.split('/')[2]
+            if( currentType == 'store'){
+                this.props.onChangeTypeSelected('-2', "Store")
+            }else if( currentType == 'user'){
+                this.props.onChangeTypeSelected('-3', "User")
+            }else {
+                currentType = 'category'
+                const id = params.get('id')
+                const name = params.get('name')
+                if(!name || !id){
+                    this.props.onChangeTypeSelected(-1, 'All Category')
+                }else {
+                    this.props.onChangeTypeSelected(id, name)
+                }
+            }
+            this.props.onChange('keyword', params.get('keyword') || '')
+            this.props.onChange('positionname', params.get('positionname') || '')
+            this.props.onChange('lat', params.get('lat'))
+            this.props.onChange('lng', params.get('lng'))
+            this.props.weSearch(currentType, params.get('id') || -1, params.get('keyword'), params.get('lat'), params.get('lng'), 0)
+        }
+        return true
+    }
     clickSetting(){
         setTimeout(()=>{
             this.props.onChange('clicksetting', true)
@@ -307,7 +333,9 @@ export default class BarScreen extends React.Component {
                                   <span className="input-group-btn">
                                       <button className="btn btn-default btn-sm" type="button"
                                           style={{ borderRadius: '0px 2px 2px 0px',
-                                          borderWidth: 0, backgroundColor: '#F6F7F9'}}>
+                                          borderWidth: 0, backgroundColor: '#F6F7F9'}}
+                                          onClick={() => onSearch()}
+                                          >
                                           <i className="glyphicon glyphicon-search"></i>
                                       </button>
                                   </span>
