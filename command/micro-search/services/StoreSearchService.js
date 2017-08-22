@@ -50,9 +50,11 @@ export const searchStore = (keyword, offset, length, next) => {
                         match_phrase_prefix: {
                             nonTokenStoreName: toRoot(keyword)
                         }
-                    }, {
-                        match_all: {}
-                    }]
+                    },
+                    //     {
+                    //     match_all: {}
+                    // }
+                    ]
                 }
             }
         }
