@@ -15,7 +15,7 @@ class ShowDetail extends React.Component {
         //     return <Redirect to='/register'/>
         const id = location.pathname.split('/')[2]
         return(
-            <div style={{ width: 1040, margin: 'auto' }}>
+            <div style={{ width: 1040 }}>
                 <div className="container-fluid">
                     <div className="row">
                         <div style={{ padding: 0, margin: 0 }} className="col col-xs-2">

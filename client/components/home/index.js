@@ -10,7 +10,7 @@ class Home extends React.Component {
     render(){
         const { scrollTop, scrollLeft, height } = this.props
         return(
-            <div style={{ width:  1040, margin: 'auto' }}>
+            <div style={{ width:  1040, }}>
                 <div className="container-fluid">
                     <div className="row">
                         <div ref={ left => this.left = left }

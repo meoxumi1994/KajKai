@@ -44,7 +44,7 @@ class User extends React.Component {
         if(iswhoing)
             return <div></div>
         return(
-            <div style={{ width: 1040, margin: 'auto' }}>
+            <div style={{ width: 1040 }}>
                 <div style={{ float: 'left', width: 1040 }}>
                     <Top location={location}/>
                 </div>

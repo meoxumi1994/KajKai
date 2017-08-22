@@ -48,7 +48,7 @@ class Store extends React.Component {
             return <div></div>
         const id = store.id
         return(
-            <div style={{ width: 1040, margin: 'auto' }}>
+            <div style={{ width: 1040 }}>
                 <div className="container-fluid">
                     <div className="row">
                         <div ref={ left => this.left = left }

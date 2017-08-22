@@ -106,7 +106,7 @@ class App extends React.Component {
         const { width, height, username, onScroll } = this.props
         const { showProgress, closeProgress } = this.props
         return(
-            <div style={{ height: '100%', minWidth: 1040 }}>
+            <div style={{ height: '100%' }}>
                 <Route path="*" component={Bar}/>
                 <GroupPopUp/>
                 <PopUpUpdate/>
@@ -123,7 +123,9 @@ class App extends React.Component {
                               }
                           </div>
                     }
-                    <div style={{ paddingTop: 47, marginRight: (width >  1040 +280 && username)?280: 0 }}>
+                    <div style={{ paddingTop: 47,
+                        // marginRight: (width >  1040 +280 && username)?280: 0,
+                        paddingLeft: Math.max(0, Math.min( username ? width - 1340 : 1000000 , (width - 1040) / 2 )) }}>
                         {(path == "/" || path == "/admin" || path == "/map" || path == "/home" ||
                         path == "/register" || path == "/store" || path == "/profile" || path == "/registerstore" )?
                           <div>
@@ -131,7 +133,11 @@ class App extends React.Component {
                                   <Route exact path="/" component={Home}/>
                                   <Route path="/home" component={Home}/>
                                   <Route path="/map" component={Mapp}/>
-                                  <Route path="/register" component={UserLoginRegister}/>
+                                  <div style={{
+                                      marginLeft: - Math.max(0, Math.min( username ? width - 1340 : 1000000 , (width - 1040) / 2 )),
+                                      height: height - 47 }}>
+                                      <Route path="/register" component={UserLoginRegister}/>
+                                  </div>
                                   <Route path="/profile" component={Profile}/>
                                   <Route path="/registerstore" component={RegisterStore}/>
                                   {/* <Route path="/admin" component={Admin}/> */}
