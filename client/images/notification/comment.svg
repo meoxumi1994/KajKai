@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="201px" viewBox="0 0 200 201" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>comment</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0,16.4224973 C0,7.58531109 7.16231056,0.421356237 16.0077278,0.421356237 L183.992272,0.421356237 C192.833096,0.421356237 200,7.59465352 200,16.4224973 L200,139.043178 C200,147.880364 192.840453,155.044319 183.996333,155.044319 L104.224674,155.044319 L45.6642476,200.421356 L45.6642476,155.044319 L16.00321,155.044319 C7.16488117,155.044319 0,147.871022 0,139.043178 L0,16.4224973 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="200" height="200" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <use id="comment" stroke="#89BE4B" mask="url(#mask-2)" stroke-width="24" fill="#A2CE70" xlink:href="#path-1"></use>
+    </g>
+</svg>
