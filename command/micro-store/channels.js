@@ -10,5 +10,9 @@ export default {
     'STORE.GetListStore': {
         controller: 'StoreSubController',
         method: 'getStoreListSub'
+    },
+    'SELLPOST.SockUpdate': {
+        controller: 'StoreSubController',
+        method: 'updateSellPostSub'
     }
 }
