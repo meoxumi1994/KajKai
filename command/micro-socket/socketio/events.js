@@ -81,5 +81,9 @@ export default {
     'server/DONE': {
         controller: 'CommentController',
         method: 'storeFinishedOrder'
+    },
+    'server/CHANGE_SELLPOST': {
+        controller: 'SellPostController',
+        method: 'updateSellPostCon'
     }
 }
