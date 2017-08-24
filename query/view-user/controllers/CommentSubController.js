@@ -56,7 +56,7 @@ export const createCommentNotification = (message) => {
           commentId,
           id: commenterId,
           name: basicStore.storeName,
-          avatarUrl: basicStore.avatarUrl
+          avatarUrl: basicStore.avatarUrl,
           type: 'store'
         })
 
