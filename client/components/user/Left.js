@@ -5,6 +5,7 @@ import GroupInterest from '~/containers/entity/GroupInterest'
 import KeepImage from '~/containers/entity/thumnail/KeepImage'
 import IntroduceStore from '~/containers/entity/post/IntroduceStore'
 import CellLeft from '~/components/entity/row/CellLeft'
+import ChangeLanguage from '~/containers/entity/row/ChangeLanguage'
 
 class Left extends React.Component {
     constructor(props){
@@ -135,24 +136,7 @@ class Left extends React.Component {
                     </div>
                 </div>
                 <div style={{ marginTop: 10, }}>
-                    {language != 'vi' ?
-                        <div style={{ marginLeft: 5, padding: 0, fontSize: 12.5 }} className="btn"
-                            onClick={()=> changeLanguage('vi')}>
-                            <a>Tiếng Việt</a>
-                        </div>
-                        :
-                        <div className="btn" style={{  color: '#737373',
-                            marginLeft: 5, padding: 0, fontSize: 12.5 }}>Tiếng Việt</div>
-                    }
-                    {" . "}
-                    {language != 'en' ?
-                        <div className="btn" style={{ fontSize: 12.5, padding: 0,}}
-                            onClick={()=> changeLanguage('en')}>
-                            <a>English</a>
-                        </div>
-                        : <div className="btn" style={{ color: '#737373',
-                            padding: 0, fontSize: 12.5 }}>English</div>
-                    }
+                    <ChangeLanguage/>
                 </div>
             </div>
         )

@@ -2,6 +2,7 @@ import React from 'react'
 
 import CreateInterest from '~/containers/entity/modal/CreateInterest'
 import CellLeft from '~/components/entity/row/CellLeft'
+import ChangeLanguage from '~/containers/entity/row/ChangeLanguage'
 
 const Left = ({ storeList, avatarUrl, username, changeLanguage, id, language,  STORE, HOME, BASIC, CREATE_STORE, STORE_BOLD,
     CREATE_INTEREST, SETTING_BOLD }) => {
@@ -29,24 +30,7 @@ const Left = ({ storeList, avatarUrl, username, changeLanguage, id, language,  S
             <div style={{ marginTop: 10, marginLeft: 5, borderRadius: 2, width: 150, fontSize: 12, color: '#4B4F56'}}>
                 {SETTING_BOLD}
             </div>
-            {language != 'vi' ?
-                <div style={{ marginLeft: 5,  adding: 0, fontSize: 12.5 }} className="btn"
-                    onClick={()=> changeLanguage('vi')}>
-                    <a>Tiếng Việt</a>
-                </div>
-                :
-                <div className="btn" style={{  color: '#737373',
-                    marginLeft: 5, padding: 0, fontSize: 12.5 }}>Tiếng Việt</div>
-            }
-            {" . "}
-            {language != 'en' ?
-                <div className="btn" style={{ fontSize: 12.5, padding: 0,}}
-                    onClick={()=> changeLanguage('en')}>
-                    <a>English</a>
-                </div>
-                : <div className="btn" style={{ color: '#737373',
-                    padding: 0, fontSize: 12.5 }}>English</div>
-            }
+            <ChangeLanguage/>
         </div>
     )
 }

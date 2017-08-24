@@ -1,5 +1,5 @@
 const user = ( state = {
-    language: 'en',
+    language: 'vi',
     storeList: [],
 }, action) => {
     switch (action.type) {

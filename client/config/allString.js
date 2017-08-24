@@ -99,7 +99,7 @@ const myString = {
     COMMENT: ['Bình luận','Comment'],
     OPEN: ['Mở','Open'],
 
-    FOLLOW : ['Theo dõi','Follow'],
+    FOLLOW : ['Theo dõi','Followed'],
     REPLY: ['Trả lời','Reply'],
     WRITE_COMMENT_OR_ORDER: ['Bình luận hoặc Đặt hàng...','Write a comment or Order...'],
     WRITE_COMMENT: ['Viết bình luận...','Write a comment...'],

@@ -42,9 +42,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     follow: (storeid) => {
         dispatch({ type: 'server/FOLLOW', data: { type: 'store', id: storeid }})
     },
-    changeLanguage: (language) => {
-        dispatch(updateUser({ language : language }))
-    },
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {

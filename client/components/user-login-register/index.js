@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import VerifyContainer from '~/containers/user-login-register/VerifyContainer'
 import LoginContainer from '~/containers/user-login-register/LoginContainer'
 import RegisterContainer from '~/containers/user-login-register/RegisterContainer'
-
+import ChangeLanguage from '~/containers/entity/row/ChangeLanguage'
 
 const LoginRegister = ({
     KAJKAI_THANK, iswhoing, isusername, changeLanguage, isregistersuccess, isloading, id }) => {
@@ -44,16 +44,8 @@ const LoginRegister = ({
                         }
                     </Col>
                 </div>
-                <div className="row" style={{ height: '20%', backgroundColor: 'white' }}>
-                    <hr style={{margin: 0}}></hr>
-                    <div style={{ marginLeft: 100}} className="btn"
-                        onClick={()=> changeLanguage('vi')}>
-                        <a>Tiếng Việt</a>
-                    </div>
-                    <div className="btn"
-                        onClick={()=> changeLanguage('en')}>
-                        <a>English</a>
-                    </div>
+                <div style={{ paddingTop: 10 }}>
+                    <ChangeLanguage fontSize={14}/>
                 </div>
             </div>
         </div>
