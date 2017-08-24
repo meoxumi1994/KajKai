@@ -54,7 +54,7 @@ export const updateSellPostStatus = (sellpostInfo, next) => {
         sellPost.status = sellpostInfo.status;
         sellPost.save(() => {
             getPubSellPostInfo(sellPost, (info) => {
-                sellPostUpdated(info);
+                sellPostUpdated({...info, changeStatus: true});
                 next();
             })
         })
