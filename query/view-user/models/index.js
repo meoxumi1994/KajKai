@@ -3,6 +3,7 @@ import AddressSchema from './Address'
 import BasicStoreSchema from './BasicStore'
 import BlackSchema from './Black'
 import CommentLikerSchema from './CommentLiker'
+import CommentActorSchema from './CommentActor'
 import IDCommentSellpostSchema from './IDCommentSellpost'
 import IDReplyCommentSellpostSchema from './IDReplyCommentSellpost'
 import IDSellpostStoreSchema from './IDSellpostStore'
@@ -24,6 +25,7 @@ export const Address = mongoose.model('Address', AddressSchema)
 export const BasicStore = mongoose.model('BasicStore', BasicStoreSchema)
 export const Black = mongoose.model('Black', BlackSchema)
 export const CommentLiker = mongoose.model('CommentLiker', CommentLikerSchema)
+export const CommentActor = mongoose.model('CommentActor',CommentActorSchema)
 export const IDCommentSellpost = mongoose.model('IDCommentSellpost', IDCommentSellpostSchema)
 export const IDReplyCommentSellpost = mongoose.model('IDReplyCommentSellpost', IDReplyCommentSellpostSchema)
 export const IDSellpostStore = mongoose.model('IDSellpostStore', IDSellpostStoreSchema)

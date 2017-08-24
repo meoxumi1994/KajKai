@@ -1,6 +1,7 @@
 import mongoose from '../datasource'
 import _ from 'lodash'
 import { NotificationType } from '../enum'
+import CommentActorSchema from './CommentActor'
 import LikerSchema from './Liker'
 import MatchSchema from './Match'
 import ProductSchema from './Product'
@@ -24,7 +25,8 @@ const NotificationSchema = new mongoose.Schema({
   order: [ProductSchema],
   isRead: {type: Number},
   numberOfReply: {type: Number},
-  match: [MatchSchema]
+  match: [MatchSchema],
+  comment: {type: CommentActor}
 })
 
 export default NotificationSchema
