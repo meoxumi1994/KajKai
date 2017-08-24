@@ -79,7 +79,7 @@ class ShowNewFeed extends React.Component {
                         )
                     })}
                     {(type == 'SEARCH_ING') &&
-                         <div style={{ marginLeft: 300 }} id="loaderr"></div>
+                         <div style={{ marginLeft: 300, padding: 10, }} id="loaderr"></div>
                     }
                 </div>
             )

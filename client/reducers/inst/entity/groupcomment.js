@@ -8,6 +8,7 @@ const groupcomment = (state = {
                 ...state,
                 [action.sellpost.id] : {
                     ...action.sellpost,
+                    content: '',
                     order: [],
                 }
             }
@@ -17,9 +18,7 @@ const groupcomment = (state = {
                     ...state[action.data.sellpostid],
                     numleadercomment: state[action.data.sellpostid].numleadercomment + 1,
                     leadercomments: [...state[action.data.sellpostid].leadercomments,
-                        {
-                            id: action.data.id,
-                        }
+                        action.data
                     ]
                 }
             }
@@ -50,22 +49,42 @@ const groupcomment = (state = {
             })
             return newstate
         case 'INST_ENTITY_PRODUCT_CLICK_ADD':
+            let oldorder = state[action.sellpostId].order
+            let neworder = new Array()
+            let added = false
+            oldorder.map((item,index) => {
+                if(item.id == action.product.id){
+                    neworder = [...neworder, {...item, num: item.num + 1 }]
+                    added = true
+                }else{
+                    neworder = [...neworder, item]
+                }
+            })
+            if(!added){
+                neworder = [...neworder, action.product]
+            }
+
             return {...state,
                 [action.sellpostId] : {
                     ...state[action.sellpostId],
-                    order: [
-                        ...state[action.sellpostId].order,
-                        action.product,
-                    ],
+                    order: neworder,
                 }
             }
         case 'INST_ENTITY_PRODUCT_CLICK_REMOVE':
-            const order = state[action.sellpostId].order
-            const index = action.index
+            let moldorder = state[action.sellpostId].order
+            let mneworder = new Array()
+            moldorder.map((item,index) => {
+                if(index == action.index){
+                    if(item.num > 1)
+                        mneworder = [...mneworder, {...item, num: item.num - 1 }]
+                }else{
+                    mneworder = [...mneworder, item]
+                }
+            })
             return {...state,
                 [action.sellpostId] : {
                     ...state[action.sellpostId],
-                    order: [...order.slice(0,index), ...order.slice(index+1,order.length)],
+                    order: mneworder,
                 }
             }
         case 'INST_ENTITY_GROUPCOMMENT_CHANGE':

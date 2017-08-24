@@ -28,8 +28,8 @@ class CallComment extends React.Component {
                             {order && order.map((item,index) => {
                                 return (
                                     <tbody key={item.id+index} style={{ marginBottom: 5 }}>
-                                        <Product id={item.id} sellpostId={id} index={index}
-                                            canRemove={true} width={index?120:160}/>
+                                        <Product id={item.id} sellpostId={id} index={index} ShowNum={true} num={item.num}
+                                            canRemove={true} width={index?300:300}/>
                                     </tbody>
                                 )
                             })}

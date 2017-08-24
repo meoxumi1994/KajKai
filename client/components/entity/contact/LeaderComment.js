@@ -10,7 +10,8 @@ class LeaderComment extends React.Component {
     }
     render(){
         const { WRITE_COMMENT, comments, isReply, id, contentedit, avatarUrl, onReply, onChange, order, status,
-            sellpostid, onEnter, offset, numcomment, onGetMore, isOwner, match } = this.props
+            sellpostid, onEnter, offset, numcomment, onGetMore, isOwner, match, storeid } = this.props
+        console.log('status', status)
         if( status == 'done' && isOwner )
             return <div></div>
         return(
@@ -32,6 +33,7 @@ class LeaderComment extends React.Component {
                         return(
                             <div key={cm.id}>
                                 <Comment
+                                    storeid={storeid}
                                     sellpostid={sellpostid}
                                     status={status}
                                     order={order}

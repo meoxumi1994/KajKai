@@ -10,7 +10,7 @@ const mapStateToProps = (state, { id }) => {
     const notification = state.inst.entity.notification[id]
     return({
         ...notification,
-        time: getTime(notification.time)
+        time: getTime(notification.time, state.user.language)
     })
 }
 

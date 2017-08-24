@@ -5,17 +5,17 @@ import photo from './photo'
 
 const index = (state = {
     stateUser : 'WAIT',
-    coverUrl: '/images/coverDefault.svg',
+    coverUrl: '/images/coverDefault.png',
 }, action) => {
     switch (action.type) {
         case 'USER_GET_ING':
             return {
                 stateUser: action.type,
-                coverUrl: '/images/coverDefault.svg',
+                coverUrl: '/images/coverDefault.png',
             }
         case 'USER_GET_SUCCESS':
             return {
-                coverUrl: '/images/coverDefault.svg',
+                coverUrl: '/images/coverDefault.png',
                 ...action.user,
                 stateUser: action.type,
             }

@@ -8,15 +8,7 @@ const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     const leadercomment = state.inst.entity.leadercomment[id]
     const comment = state.inst.entity.comment[id]
-    let isOwner = false
     let avatarUrl = state.user.avatarUrl
-    for(let i=0; i< state.user.storeList.length ; i++){
-        if(state.user.storeList[i].id == state.inst.store.index.id){
-            isOwner = true
-            avatarUrl = state.user.storeList[i].avatarUrl
-            break
-        }
-    }
     return({
         ...comment,
         ...leadercomment,

@@ -9,9 +9,11 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const managercomment = state.inst.contacthistory.managercomment
     const contact = managercomment.contact[managercomment.currentId]
+    const { height } = state.inst.app
     return({
         ...managercomment,
         ...contact,
+        height: height,
     })
 }
 

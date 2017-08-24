@@ -11,9 +11,9 @@ class Product extends React.Component {
         this.state = {}
     }
     render(){
-        const { id, list, imageUrl, content, isOverLayLeft,
+        const { id, list, imageUrl, content, isOverLayLeft, num,
             canEdit, onChange, width, onAddProduct, justShow, canRemove, REMOVE,
-            onRemoveProduct } = this.props
+            onRemoveProduct, ShowNum } = this.props
         return(
             <tr>
                 {list.map((item,index) => {
@@ -107,6 +107,11 @@ class Product extends React.Component {
                             }>
                             <a>{REMOVE}</a>
                         </div>
+                    </td>
+                }
+                {ShowNum &&
+                    <td>
+                        <div style={{ marginLeft: 10, fontSize: 13}}>{"x"}&nbsp;{num}</div>
                     </td>
                 }
             </tr>

@@ -9,14 +9,14 @@ const ButtonLine = ({ id, location, urlname, title, last, link }) => {
         <Link to={"/"+urlname + link}>
             <button type="button" className="btn btn-default"
                 style={{
-                    height: 46, width: 90, borderRadius: 0, borderColor: '#DFE0E4', padding: 0,
+                    height: 45, width: 90, borderRadius: 0, borderColor: '#DFE0E4', padding: 0, borderTopWidth: 0,
                     borderRightWidth: last, fontSize: 16, outline: 'none' }}>
                 {title}
             </button>
             {location.pathname.split('/')[2] == link.split('/')[1] &&
                 <img style={{
                     position: 'absolute',
-                    marginTop: 38.5,
+                    marginTop: 37.5,
                     marginLeft: -52,
                     width: 17,
                     height: 9.5,
@@ -51,7 +51,7 @@ class Top extends React.Component {
                     onClick={ () => onUploadImage('coverUrl') } >
                     <span className="glyphicon glyphicon-camera" style={{ fontSize: 20 }}></span>
                 </div> */}
-                <div style={{ marginLeft: -1, marginTop: -1 }}>
+                <div style={{ marginLeft: 0, marginTop: -1 }}>
                     <AddPhoto
                         aspectRatio={838/250}
                         id={0}
@@ -89,7 +89,7 @@ class Top extends React.Component {
 
                     <div style={{
                         position: 'static',
-                        marginTop: 99,
+                        marginTop: 100,
                         marginLeft: 190,
                     }}>
                         {(!isOwner && yourid ) &&

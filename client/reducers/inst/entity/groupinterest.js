@@ -21,6 +21,20 @@ const groupinterest = (state = {
                     ...state.interests,
                 ]
             }
+        case 'REMOVE_INTEREST_SUCCESS':
+            let newinterests = state.interests
+            state.interests.map((item,index) => {
+                if(item.id == action.id){
+                    newinterests = [
+                        ...state.interests.slice(0, index),
+                        ...state.interests.slice(index+1, state.interests.length)
+                    ]
+                }
+            })
+            return {
+                ...state,
+                interests: newinterests
+            }
         default:
             return state
     }

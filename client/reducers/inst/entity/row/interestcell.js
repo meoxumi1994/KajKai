@@ -16,11 +16,6 @@ const interestcell = (state = {
                 ...state,
                 [action.interest.id] : action.interest
             }
-        case 'REMOVE_INTEREST_SUCCESS':
-            return {
-                ...state,
-                [action.id]: undefined,
-            }
         default:
             return state
     }

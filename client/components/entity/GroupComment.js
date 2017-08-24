@@ -16,10 +16,10 @@ class GroupComment extends React.Component {
     }
     render(){
         const { WRITE_COMMENT_OR_ORDER, WRITE_COMMENT, CLOSE_STORE_DESCRIPTION,
-            numleadercomment , leadercomments, content, onChange, id, storeid,
+            numleadercomment , leadercomments, content, onChange, id,
             onEnter, avatarUrl, onGetMore, offset, order, userid, closeComment } = this.props
         return(
-            <div style={{ padding: '10px 0px 0px 0px'}}>
+            <div style={{ padding: '10px 0px 0px 0px' }}>
                 {(offset != -2 && numleadercomment > leadercomments.length) &&
                     <CommentSuggest
                         id={3}
@@ -29,6 +29,7 @@ class GroupComment extends React.Component {
                         end={leadercomments.length + ' of '+numleadercomment}
                         />
                 }
+
                 {leadercomments.map((item, index) =>
                     <LeaderComment
                         key={index}
@@ -135,9 +136,11 @@ class GroupComment extends React.Component {
                     content={'View more comments'}
                     /> */}
                 {(userid && !closeComment ) &&
-                    <CallComment
-                        order={order}
-                        onEnter={() => onEnter()}
+                    <CallComment key={id}
+                        order={this.props.order}
+                        onEnter={() => {
+                            onEnter(this.props.order)
+                        }}
                         id={id}
                         handleChange={(e) => onChange('content', e.target.value)}
                         content={content}
@@ -147,7 +150,7 @@ class GroupComment extends React.Component {
                         />
                 }
                 {(userid && closeComment) &&
-                    <div style={{ color: '#53565C' }}>
+                    <div style={{ color: '#53565C', paddingBottom: 10 }}>
                         {CLOSE_STORE_DESCRIPTION}
                     </div>
                 }

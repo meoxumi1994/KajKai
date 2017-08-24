@@ -42,7 +42,7 @@ class EditSellPost extends React.Component {
                         <div style={{
                             marginTop: -57,
                             marginLeft: 70,
-                            color: '#A7ABB1',
+                            color: '#91959D',
                             fontWeight: 'bold'}}>
                             <div className="btn" style={{ padding: 0 }}>
                                 <a style={{ color: '#BD081C', fontWeight: 'bold'}}>{storename}</a>
@@ -64,7 +64,7 @@ class EditSellPost extends React.Component {
                         <div style={{
                             fontSize: 12,
                             marginLeft: 70,
-                            color: '#A7ABB1',
+                            color: '#91959D',
                             }}>
                             {TIME}{" . "}
                             <input

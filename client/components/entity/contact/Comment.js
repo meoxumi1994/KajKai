@@ -2,8 +2,6 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 
-import Tooltip from '~/components/entity/Tooltip'
-import DropDown from '~/components/entity/DropDown'
 import ContentShow from '~/components/entity/ContentShow'
 import LikeGroup from '~/components/entity/LikeGroup'
 import Product from '~/containers/entity/post/Product'
@@ -26,7 +24,7 @@ class Comment extends React.Component {
     }
     render(){
         const {
-            RECEIVE, RECEIVED, LIKE, REPLY, DONE, clicksetting, isOwner, status, urlname,
+            RECEIVE, RECEIVED, LIKE, REPLY, DONE, NEW, clicksetting, isOwner, status, urlname, yourid, storeid,
             isleader, avatarUrl, name, time, numlike, numreplys, order, commenterid, type, match,
             content, onReceive, onDone, onLike, onReply, beLike, isRead, onRemoveRead } = this.props
         let urlLink
@@ -50,27 +48,6 @@ class Comment extends React.Component {
                     paddingLeft: isleader?0:10,
                     fontSize: 12.5,
                     borderLeft: isleader?undefined:'2px solid #4080FF' }}>
-                {(this.state.hover || clicksetting) &&
-                    <div
-                        style={{ float: 'right', padding: 2}}>
-                        <span width={14} height={14}
-                            onMouseOver={() => this.setState({ hoversetting: true })}
-                            onMouseLeave={() => this.setState({ hoversetting: false })}
-                            onClick={(event) => this.onCLickSetting(event)}
-                            style={{ color:'#BEC2C8'}}
-                            className="glyphicon glyphicon-menu-down"/>
-                        {(this.state.hoversetting && !clicksetting)&&
-                            <Tooltip contents={['Block, Report']}/>
-                        }
-                        {clicksetting &&
-                            <DropDown
-                                width={130}
-                                onClick={(index) => console.log(index)}
-                                contents={['Block','hr','Report']}
-                            />
-                        }
-                    </div>
-                }
                 <Link to={urlLink}>
                     <div className="btn" onClick={() => window.scrollTo(0, 0)}
                         style={{ padding: 0 }}>
@@ -103,7 +80,7 @@ class Comment extends React.Component {
                                 return (
                                     <tbody key={item.id+index} style={{ marginBottom: 5 }}>
                                         <Product id={item.id} index={index} justShow={true}
-                                            isOverLayLeft={true}
+                                            isOverLayLeft={true} ShowNum={true} num={item.num}
                                             canRemove={true} width={index?120:160}/>
                                     </tbody>
                                 )
@@ -117,7 +94,21 @@ class Comment extends React.Component {
                         match={match}
                     />
                     <div style={{ marginLeft: -2 }}>
-                        {(isOwner && isleader && onReceive) &&
+                        {(isleader && (commenterid != storeid) &&
+                            (commenterid != yourid || !isOwner) && status == 'new' && order.length > 0 ) &&
+                            <div className="btn"
+                                style={{  padding: '0px 1px 0px 1px' }}>
+                                <a style={{
+                                    fontWeight: 'bold',
+                                    fontSize: 13,
+                                    color: '#7ED321',
+                                }}>{(status=='received')? NEW : NEW}</a>
+                            </div>
+                        }
+                        {(isleader && (commenterid != storeid) &&
+                            (commenterid != yourid || !isOwner) && status == 'new' && order.length > 0 ) && "."}
+
+                        {(isOwner && isleader && onReceive && commenterid != yourid && status != 'done') &&
                             <div className="btn" onClick={() => onReceive()}
                                 style={{  padding: '0px 1px 0px 1px' }}>
                                 <a style={{
@@ -127,7 +118,8 @@ class Comment extends React.Component {
                                 }}>{(status=='received')? RECEIVED : RECEIVE}</a>
                             </div>
                         }
-                        {(isOwner && isleader && onReceive) && "."}
+                        {(isOwner && isleader && onReceive && commenterid != yourid && status != 'done' ) && "."}
+
                         {(!isOwner && isleader && status=='received' ) &&
                             <div className="btn"
                                 style={{  padding: '0px 1px 0px 1px' }}>
@@ -139,9 +131,10 @@ class Comment extends React.Component {
                             </div>
                         }
                         {(!isOwner && isleader && status=='received' ) && "."}
+
                         <div className="btn" onClick={() => onLike()}
                             style={{ padding: '0px 1px 0px 1px', fontWeight: beLike?'bold':'normal'}}>
-                            <a style={{ fontSize: beLike?13:12, color: beLike?'#4673cc':'#365899' }}>{LIKE}</a>
+                            <a style={{ fontSize: beLike?13:12, color: beLike?'#5890FF':'#365899' }}>{LIKE}</a>
                         </div>
                         {"."}
                         <div className="btn" onClick={() => onReply()}
@@ -164,15 +157,26 @@ class Comment extends React.Component {
                             <div className="btn" onClick={() => onDone()}
                                 style={{  padding: '0px 1px 0px 1px' }}>
                                 <a style={{
-                                    fontWeight: (status=='done') ? 'bold' : 'normal',
-                                    fontSize: (status=='done') ? 13 : 12,
-                                    color: (status=='done') ? '#BD081C' : '#365899',
+                                    fontSize: 12,
+                                    color: (status=='done') ? '#91959D' : '#365899',
                                 }}>{(status=='received')? DONE : DONE}</a>
                             </div>
                         }
                         {(isOwner && isleader && (status=='received' || status=='done')) && "."}
+
+                        {(!isOwner && isleader && (status=='done')) &&
+                            <div className="btn" onClick={() => onDone()}
+                                style={{  padding: '0px 1px 0px 1px' }}>
+                                <a style={{
+                                    fontSize: 12,
+                                    color: '#91959D',
+                                }}>{DONE}</a>
+                            </div>
+                        }
+                        {(!isOwner && isleader && (status=='done')) && "."}
+
                         <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
-                            <a style={{ fontSize: 12, color: '#A7ABB1' }}>{time}</a>
+                            <a style={{ fontSize: 12, color: '#91959D' }}>{time}</a>
                         </div>
                     </div>
                 </div>

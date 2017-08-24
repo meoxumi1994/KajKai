@@ -13,10 +13,10 @@ class InterestCell extends React.Component {
             return <div></div>
         }
         return(
-            <div style={{ paddingBottom: 10 }}>
-                <div className="panel panel-default" style={{ margin:0, width: 150 }}>
+            <div>
+                <div style={{ margin:0, width: 230 }}>
                     <div className="btn"
-                        style={{ padding: 0, fontSize: 12, float: 'right', marginRight: 5, marginTop: 5}}
+                        style={{ padding: 0, fontSize: 12, float: 'right', marginRight: 5, marginTop: 3}}
                         onMouseOver={() => this.setState({ hoverRemove: true })}
                         onMouseLeave={() => this.setState({ hoverRemove: false })}
                         onClick={() => onRemove()}>
@@ -27,7 +27,7 @@ class InterestCell extends React.Component {
                         {categoryName}
                     </div>
                     <div style={{ padding: 5 }}>
-                        <ShowInMap position={position} width={137} height={140}/>
+                        <ShowInMap position={position} width={222} height={140}/>
                     </div>
                 </div>
             </div>

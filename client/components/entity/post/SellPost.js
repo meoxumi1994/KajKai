@@ -43,7 +43,7 @@ class SellPost extends React.Component {
                 border: closeBorder ? undefined : '1px solid #CCCCCC',
                 boxShadow: closeBorder ? undefined : '0px 0px 4px #CCCCCC',
                 backgroundColor: 'white',
-                width: 520, padding: 10 }}>
+                width: 520 }}>
                 {/* {isOwner &&
                     <div style={{ right: 50 , marginTop: 22, position: 'absolute' }}>
                         <div className="btn btn-default btn-xs"
@@ -53,7 +53,7 @@ class SellPost extends React.Component {
                         </div>
                     </div>
                 } */}
-                <div>
+                <div style={{ padding: '10px 10px 0px 10px' }}>
                     <div
                         className="btn" style={{
                         float: 'right',
@@ -111,7 +111,7 @@ class SellPost extends React.Component {
                     <div style={{
                         marginTop: ship?-57:-40,
                         marginLeft: ship?70:50,
-                        color: '#A7ABB1',
+                        color: '#91959D',
                         fontWeight: 'bold'}}>
                         <div className="btn" style={{ padding: 0 }}>
                             <a href={"/"+urlname} style={{ color: '#BD081C', fontWeight: 'bold'}}>{storename}</a>
@@ -131,41 +131,45 @@ class SellPost extends React.Component {
                     <div style={{
                         fontSize: 12,
                         marginLeft: ship?70:50,
-                        color: '#A7ABB1',
+                        color: '#91959D',
                         }}>
                         {time}{" . "}{description}
                     </div>
                 </div>
-                {postrows_order.map((item,index) =>
-                    <div key={index} style={{ paddingTop: 10 }}>
-                        <PostRow id={item} sellpostId={id}/>
+                <div style={{ padding: '0px 10px 0px 10px'}}>
+                    {postrows_order.map((item,index) =>
+                        <div key={index} style={{ paddingTop: 10 }}>
+                            <PostRow id={item} sellpostId={id}/>
+                        </div>
+                    )}
+                    <div style={{ height: 10 }}></div>
+                    <hr style={{ margin: 0 }}/>
+                    <div style={{ padding: '6px 0px 6px 0px'}}>
+                        <LikeShareComment
+                            isOwner={isOwner}
+                            status={status}
+                            onChangeStatus={() => this.props.onUpdateSellpost('status', (status == 'open') ? 'sleep' : 'open' )}
+                            onLike={onLike}
+                            onComment={() => console.log('onComment')}
+                            onShare={() => console.log('onShare')}
+                            beLike={beLike}/>
                     </div>
-                )}
-                <div style={{ height: 10 }}></div>
-                <hr style={{ margin: 0 }}/>
-                <div style={{ padding: '6px 0px 6px 0px'}}>
-                    <LikeShareComment
-                        isOwner={isOwner}
-                        status={status}
-                        onChangeStatus={() => this.props.onUpdateSellpost('status', (status == 'open') ? 'sleep' : 'open' )}
-                        onLike={onLike}
-                        onComment={() => console.log('onComment')}
-                        onShare={() => console.log('onShare')}
-                        beLike={beLike}/>
                 </div>
                 <hr style={{ margin: 0}}/>
-                {likeContent &&
-                    <div style={{ padding: '8px 0px 8px 0px'}}>
-                        <LikeGroup
-                            size={20}
-                            content={likeContent}
-                            typeLikes={likestatus}
-                            other={19}
-                            />
-                    </div>
-                }
-                {likeContent && <hr style={{ margin: 0 }}/>}
-                <GroupComment closeComment={(status != 'open')} id={id}/>
+                <div style={{ padding: '0px 10px 0px 10px', backgroundColor: '#F6F7F9'}}>
+                    {likeContent &&
+                        <div style={{ padding: '8px 0px 8px 0px'}}>
+                            <LikeGroup
+                                size={20}
+                                content={likeContent}
+                                typeLikes={likestatus}
+                                other={19}
+                                />
+                        </div>
+                    }
+                    {likeContent && <hr style={{ margin: 0 }}/>}
+                    <GroupComment closeComment={(status != 'open')} id={id}/>
+                </div>
             </div>
         )
     }

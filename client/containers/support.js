@@ -1,6 +1,4 @@
-import allString from '~/config/allString'
-
-const g = (lang) => allString.get(state.user.language, lang)
+import { get } from '~/config/allString'
 
 const verifyCharacterVietname = (username) => {
     username = username.toUpperCase();
@@ -105,20 +103,32 @@ export const FilteringPhoneDefaultVietName = (phone) => {
     return newphone;
 }
 
-export const getTime = (time) => {
+const Add0toMinus = (minutes) => {
+    if(minutes.toString().length == 1)
+        return '0'+minutes;
+    return minutes
+}
+
+
+
+export const getTime = (time, language) => {
     const date = new Date(time)
     const seconds = Math.floor(((new Date()).getTime() - time) / 1000);
-    if(seconds < 60) return 'just now'
+    if(seconds < 60) return get(language, 'JUST_NOW')
     const mins = Math.floor(((new Date()).getTime() - time) / 60000);
-    if(mins < 60) return mins+' mins'
+    if(mins < 60) return mins+' '+get(language, 'MINS')
     const hours = Math.floor(((new Date()).getTime() - time) / 3600000);
-    if(hours < 24) return hours+' hrs'
+    if(hours < 24) return hours+' '+get(language, 'HRS')
     const days = Math.floor(((new Date()).getTime() - time) / 86400000);
-    if(days == 1 ) return 'yesterday at ' + date.getHours() + ':' + date.getMinutes()
+    if(days == 1 ) return get(language, 'YESTERDAY')+' '+get(language,'AT') + ' ' +
+        date.getHours() + ':' + Add0toMinus(date.getMinutes())
     var monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
-    return date.getDate() + ' ' + monthNames[date.getMonth()] + ' at ' + date.getHours() + ":" + date.getMinutes()
+    const finallyMonth = (language == 'en') ?
+        monthNames[date.getMonth()] :
+        ( get(language,'MONTH') + ' ' + (parseInt(date.getMonth()) + 1) )
+    return date.getDate() + ' ' + finallyMonth + ' ' + get(language,'AT') + ' ' + date.getHours() + ":" + Add0toMinus(date.getMinutes())
 }
 
 export const getLikeContent = (likes, numlike, yourid) => {

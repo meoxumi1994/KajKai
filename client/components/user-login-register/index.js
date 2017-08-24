@@ -14,7 +14,7 @@ const LoginRegister = ({
     if(isusername)
         return <Redirect to={'/user/' + id}/>
     return (
-        <div style={{ height: '100%' }}>
+        <div style={{ height: '100%', width: 1040, backgroundColor: '#F6F7F9'}}>
             <div className="container-fluid" style={{ height: '100%'}}>
                 <div className="row" style={{ height: '80%'}}>
                     <Col xs={6} sm={6} md={6} style={{ height: '100%', backgroundColor: 'white'}}>

@@ -17,6 +17,7 @@ const mapStateToProps = (state, ownProps) => {
     }
     return({
         ...user,
+        avatarUrl: undefined,
         ...state.inst.store.index,
         id: state.inst.store.index.id,
         beFollow: getBeFollow(state.inst.store.index.follows, state.user.id),
