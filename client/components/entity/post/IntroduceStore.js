@@ -1,6 +1,8 @@
 import React from 'react'
 
 import ShowInMap from '~/containers/entity/map/ShowInMap.js'
+import DisplayImage from '~/components/entity/thumnail/DisplayImage'
+import { Link } from 'react-router-dom'
 
 class IntroduceStore extends React.Component {
     constructor(props){
@@ -9,33 +11,58 @@ class IntroduceStore extends React.Component {
     render(){
         const { ADDRESS, ADDRESSMAP, CATEGORY, PHONE, LIKE, ANOTHER_PEOPLE, PEOPLE, AND, THIS, BY, FOLLOW, STORE_NAME,
             PHOTOS, ABOUT, FOLLOW_US, FOLLOWED, avatarUrl, storename, coverUrl, isOwner, beFollow, onFollow, width,
-            username,
+            username, kind,
             address, addressMap, category, phone, likes, numlike, follows, numfollow, storeid, position, urlname } = this.props
         if(!phone)
             return <div></div>
+        if(kind == 'small'){
+            return(
+                <div>
+                    <Link to={"/"+urlname}>
+                        <DisplayImage src={coverUrl} width={230} height={110}/>
+                        <img style={{
+                            position: 'absolute',
+                            zIndex: 1,
+                            marginLeft: -220,
+                            marginTop: 10,
+                            border: '1px solid white',}}
+                            src={avatarUrl} width={60} height={60}/>
+                        <div style={{
+                            position: 'absolute',
+                            zIndex: 1, marginTop: -40, marginLeft: 10, fontSize: 17,
+                            color: 'white',
+                            textShadow: '2px 2px 4px #000000',}}>
+                            {storename}
+                        </div>
+                    </Link>
+                </div>
+            )
+        }
         return(
             <div>
                 <div className="panel panel-default"
                     style={{ margin: '0px 0px 0px 0px', padding: 10, fontSize: 13, color: '#4B4F56', width: width }}>
-                    <img style={{
-                        position: 'absolute',
-                        zIndex: 0,
-                        marginLeft: -10,
-                        marginTop: -10,
-                        borderRadius: '3px 3px 0px 0px'
-                    }} src={coverUrl} width={width-2} height={89}/>
-                    <img style={{
-                        position: 'absolute',
-                        zIndex: 1,
-                        border: '1px solid white',}}
-                        src={avatarUrl} width={40} height={40}/>
-                    <div style={{
-                        position: 'absolute',
-                        zIndex: 1, marginTop: 47, fontSize: 17,
-                        color: 'white',
-                        textShadow: '2px 2px 4px #000000',}}>
-                            {storename}
-                    </div>
+                    <Link to={"/"+urlname}>
+                        <img style={{
+                            position: 'absolute',
+                            zIndex: 0,
+                            marginLeft: -10,
+                            marginTop: -10,
+                            borderRadius: '3px 3px 0px 0px'
+                        }} src={coverUrl} width={width-2} height={89}/>
+                        <img style={{
+                            position: 'absolute',
+                            zIndex: 1,
+                            border: '1px solid white',}}
+                            src={avatarUrl} width={40} height={40}/>
+                        <div style={{
+                            position: 'absolute',
+                            zIndex: 1, marginTop: 47, fontSize: 17,
+                            color: 'white',
+                            textShadow: '2px 2px 4px #000000',}}>
+                                {storename}
+                        </div>
+                    </Link>
                     {(!isOwner && username ) &&
                         <div className="btn btn-default btn-sm"
                             onClick={() => onFollow()}

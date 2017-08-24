@@ -66,7 +66,7 @@ class MinorPost extends React.Component {
                     <div style={{
                         fontSize: 12,
                         marginLeft: 50,
-                        color: '#A7ABB1',
+                        color: '#91959D',
                         }}>
                         {time}
                     </div>

@@ -99,10 +99,10 @@ const myString = {
     COMMENT: ['Bình luận','Comment'],
     OPEN: ['Mở','Open'],
 
-    FOLLOW : ['Theo dõi','Follow'],
+    FOLLOW : ['Theo dõi','Followed'],
     REPLY: ['Trả lời','Reply'],
     WRITE_COMMENT_OR_ORDER: ['Bình luận hoặc Đặt hàng...','Write a comment or Order...'],
-    WRITE_COMMENT: ['Bình luận','Write a comment'],
+    WRITE_COMMENT: ['Viết bình luận...','Write a comment...'],
     FULL_SCREEN: ['Phóng to','Full Screen'],
     ADDRESSMAP : ['Địa chỉ theo Google Map', 'Address in Google Map'],
     ANOTHER_PEOPLE: ['người khác','another people'],
@@ -225,6 +225,17 @@ const myString = {
     REMOVE: ['xoá','remove'],
     ADD_PRODUCT: ['thêm sản phẩm','add product'],
     UPDATE_PHOTO: ['Cập nhật ảnh','Update photo'],
+    HAVE_NO_PHOTO: ['Chưa có ảnh','There are no images'],
+    HAVE_NO_FOLLOW_STORE: ['Chưa theo dõi cửa hàng nào','Have not watched any store'],
+    FOLLOW_STORE: ['Cửa hàng theo dõi','Following store'],
+    HAVE_NO_INTEREST: ['Chưa có mục quan tâm','No item of interest'],
+    NEW: ['Mới','New'],
+    JUST_NOW: ['Vừa mới','Just now'],
+    MINS: ['phút','mins'],
+    HRS: ['giờ','hrs'],
+    AT: ['lúc','at'],
+    YESTERDAY: ['hôm qua','yesterday'],
+    MONTH: ['tháng','month'],
 }
 
 const allString = {

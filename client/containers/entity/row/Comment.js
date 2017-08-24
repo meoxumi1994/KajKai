@@ -8,7 +8,7 @@ const mapStateToProps = (state, { id, avatarsize }) => {
     const g = (lang) => get(state.user.language, lang)
     const comment = state.inst.entity.row.comment
     const data = comment[id] || comment.default
-    const time = getTime(data.time)
+    const time = getTime(data.time, state.user.language)
     return({
         ...data,
         time: time,

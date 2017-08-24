@@ -46,7 +46,7 @@ class ManagerComment extends React.Component {
         super(props)
     }
     render(){
-        const { currentId, avatar, name, state, onGetContact, onChange, leadercomments } = this.props
+        const { currentId, avatar, name, state, onGetContact, onChange, leadercomments, height } = this.props
         let contact = []
         for(let i in this.props.contact){
             contact = [...contact,
@@ -56,9 +56,11 @@ class ManagerComment extends React.Component {
         if(contact.length==0 || !name)
             return <div></div>
         return(
-            <div style={{ height: '100%', backgroundColor: '#E9EBEE' }}>
-                <div style={{ padding: 5 }}>
-                    <div className="input-group-btn" style={{ padding: 0, margin: 0 }}>
+            <div style={{ height: '100%', backgroundColor: '#F6F7F9' }}>
+                <div style={{ height: 255 }}></div>
+                <hr style={{ margin: 0 }}/>
+                <div style={{ padding: 5, backgroundColor: 'white'}}>
+                    <div className="input-group-btn" style={{ padding: 0, margin: 0  }}>
                       <div className="btn btn-default btn-xs dropdown-toggle"
                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                           style={{
@@ -87,7 +89,7 @@ class ManagerComment extends React.Component {
                 <hr style={{ margin: 0 }}/>
                 <div id="leadercomments"
                     ref={ leadercomments => this.leadercomments = leadercomments }
-                    style={{ overflow: 'scroll', height: '87%', backgroundColor: 'white'}}>
+                    style={{ overflow: 'scroll', height: height - 360 }}>
                     {leadercomments && leadercomments.slice(0).reverse().map((item, index) => {
                         return(
                             <div key={item.id}>

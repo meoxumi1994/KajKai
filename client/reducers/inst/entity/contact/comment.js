@@ -65,6 +65,7 @@ const comment = (state = {
                     }
                 })
             })
+            console.log(action)
             return mystate
         case 'GET_SELL_POST_SUCCESS':
             let mstate = state

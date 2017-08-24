@@ -17,10 +17,9 @@ const mapStateToProps = (state, { id }) => {
             break
         }
     }
-    // console.log(groupcomment)
     return({
-        ...groupcomment,
         ...user,
+        ...groupcomment,
         userid: state.user.id,
         isOwner: isOwner,
         avatarUrl: avatarUrl,
@@ -28,6 +27,7 @@ const mapStateToProps = (state, { id }) => {
         WRITE_COMMENT: g('WRITE_COMMENT'),
         CLOSE_STORE_DESCRIPTION: g('CLOSE_STORE_DESCRIPTION'),
         id: id,
+        order: groupcomment.order,
     })
 }
 
@@ -60,20 +60,18 @@ const mapDispatchToProps = (dispatch, { id }) => ({
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { offset, content, order, ...anotherState } = stateProps
+    const { offset, content, ...anotherState } = stateProps
     const { onGetMoreLeaderComment, onEnterProps, ...anotherDispatch } = dispatchProps
     return({
-        onEnter: () => {
+        onEnter: (order) => {
             onEnterProps(content, order)
         },
         onGetMore: () => {
             onGetMoreLeaderComment(offset)
         },
-        order: order,
-        content: content,
         ...ownProps,
-        ...anotherState,
-        ...anotherDispatch,
+        ...stateProps,
+        ...dispatchProps,
     })
 }
 

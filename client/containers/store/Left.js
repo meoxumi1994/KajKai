@@ -17,6 +17,7 @@ const mapStateToProps = (state, ownProps) => {
     }
     return({
         ...user,
+        avatarUrl: undefined,
         ...state.inst.store.index,
         id: state.inst.store.index.id,
         beFollow: getBeFollow(state.inst.store.index.follows, state.user.id),
@@ -40,9 +41,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     follow: (storeid) => {
         dispatch({ type: 'server/FOLLOW', data: { type: 'store', id: storeid }})
-    },
-    changeLanguage: (language) => {
-        dispatch(updateUser({ language : language }))
     },
 })
 

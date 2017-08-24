@@ -10,9 +10,9 @@ class Home extends React.Component {
     render(){
         const { scrollTop, scrollLeft, height } = this.props
         return(
-            <div style={{ width:  1040, }}>
-                <div className="container-fluid">
-                    <div className="row">
+            <div style={{ width:  1040 }}>
+                <div className="container-fluid" style={{ margin: 0, padding: 0 }}>
+                    <div className="row" style={{ margin: 0, padding: 0 }}>
                         <div ref={ left => this.left = left }
                             style={{
                             height: this.left_inside_height?this.left_inside_height.offsetHeight: undefined,
@@ -23,6 +23,7 @@ class Home extends React.Component {
                                 style={{
                                 position: this.left_marginTop?'fixed':'static',
                                 marginLeft: this.left_marginTop?(-scrollLeft):0,
+                                marginTop: this.left_marginTop?(-this.left_inside_height.offsetHeight + height - 48 ):0,
                                 minHeight: height - 48,
                                 paddingTop: 10,
                                 }}>
@@ -39,6 +40,7 @@ class Home extends React.Component {
                                 style={{
                                 position: this.newfeed_marginTop?'fixed':'static',
                                 marginLeft: this.newfeed_marginTop?(-scrollLeft):0,
+                                marginTop: this.newfeed_marginTop?(-this.newfeed_inside_height.offsetHeight + height - 48):0,
                                 minHeight: height - 48,
                                 paddingTop: 10,
                                 }}>
@@ -55,6 +57,7 @@ class Home extends React.Component {
         this.newfeed_marginTop = 0
         if(this.left){
             this.left_marginTop = this.props.height - this.left.getBoundingClientRect().bottom > 0
+            // console.log(this.left_marginTop)
         }
         if(this.newfeed){
             this.newfeed_marginTop = this.props.height - this.newfeed.getBoundingClientRect().bottom > 0

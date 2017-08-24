@@ -8,14 +8,14 @@ const ButtonLine = ({ title, last, link, location, urlname, id }) => {
     return (
         <Link to={"/user/"+id+link}>
             <button type="button" className="btn btn-default"
-                style={{ height: 46, width: 90, borderColor: '#DFE0E4', padding: 0,
+                style={{ height: 45, width: 90, borderColor: '#DFE0E4', padding: 0, borderTopWidth: 0,
                 borderRadius: 0, borderRightWidth: last, fontSize: 16, outline: 'none' }}>
                 {title}
             </button>
             {location.pathname.split('/')[3] == link.split('/')[1] &&
                 <img style={{
                     position: 'absolute',
-                    marginTop: 38.5,
+                    marginTop: 37.5,
                     marginLeft: -52,
                     width: 17,
                     height: 9.5,
@@ -47,7 +47,7 @@ const Top = (props) => {
                 onClick={ () => onUploadImage('coverUrl') } >
                 <span className="glyphicon glyphicon-camera" style={{ fontSize: 20 }}></span>
             </div> */}
-            <div style={{ marginLeft: -1, marginTop: -1 }}>
+            <div style={{ marginLeft: 0, marginTop: -5 }}>
                 <AddPhoto
                     aspectRatio={1038/250}
                     id={2}
@@ -104,7 +104,7 @@ const Top = (props) => {
                 }}>{ username ? username : "..."}</h3>
                 <div style={{
                     position: 'static',
-                    marginTop: -2,
+                    marginTop: -1,
                     marginLeft: 203,
                 }}>
                     <ButtonLine {...props} title={INTEREST} last="0" link=""/>

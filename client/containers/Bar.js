@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import allString from '~/config/allString'
 
-import { logOut } from '~/actions/asyn/user-login-register/login'
 import { loadCategory } from '~/actions/asyn/category'
 import { search } from '~/actions/asyn/search'
 import { updateNotification } from '~/actions/asyn/entity/notification'
@@ -34,9 +33,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onLogoutClick: () => {
-        dispatch(logOut())
-    },
     onLoadCategory: () => {
         dispatch(loadCategory())
     },

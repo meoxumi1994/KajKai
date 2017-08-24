@@ -37,6 +37,14 @@ const sellpost = (state = {
                 }
             }
             return state
+        case 'client/CHANGE_SELLPOST':
+            return {
+                ...state,
+                [action.data.id] : {
+                    ...state[action.data.id],
+                    ...action.data
+                }
+            }
         case 'EDIT_SELL_POST_SUCCESS':
         case 'GET_SELL_POST_SUCCESS':
         case 'CREATE_SELL_POST_SUCCESS':

@@ -39,7 +39,7 @@ class EditMinorPost extends React.Component {
                         <div style={{
                             marginTop: -40,
                             marginLeft: 50,
-                            color: '#A7ABB1',
+                            color: '#91959D',
                             fontWeight: 'bold'}}>
                             <div className="btn" style={{ padding: 0 }}>
                                 <a style={{ color: '#BD081C', fontWeight: 'bold'}}>{storename}</a>
@@ -48,7 +48,7 @@ class EditMinorPost extends React.Component {
                         <div style={{
                             fontSize: 12,
                             marginLeft: 50,
-                            color: '#A7ABB1',
+                            color: '#91959D',
                             }}>
                             time{" . "}
                             <input

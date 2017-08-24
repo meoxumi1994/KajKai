@@ -9,6 +9,7 @@ const mapStateToProps = (state, ownProps) => {
     const product = canEdit ? state.inst.entity.editproduct[id] : state.inst.entity.product[id]
     return({
         ...product,
+        num: ownProps.num,
         REMOVE: g('REMOVE'),
     })
 }

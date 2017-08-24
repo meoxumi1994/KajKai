@@ -21,6 +21,7 @@ const mapStateToProps = (state, { storeid }) => {
     }
     return({
         ...state.user,
+        avatarUrl: undefined,
         userAvatar: state.user.avatarUrl,
         ...introducestore,
         isOwner: isOwner,

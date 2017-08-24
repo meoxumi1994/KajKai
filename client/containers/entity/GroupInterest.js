@@ -8,7 +8,8 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const groupinterest = state.inst.entity.groupinterest
     return({
-        ...groupinterest
+        ...groupinterest,
+        HAVE_NO_INTEREST: g('HAVE_NO_INTEREST'),
     })
 }
 

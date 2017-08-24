@@ -11,7 +11,7 @@ class CommentSuggest extends React.Component {
         const { isleader, src, imgsrc, numreplys, content, onClick, time, end} = this.props
         return(
             <div>
-                <div style={{ marginTop: 3, marginRight: 10, color: '#A7ABB1',
+                <div style={{ marginTop: 3, marginRight: 10, color: '#91959D',
                     fontSize: 12.5, float: 'right'}}>
                     {end}
                 </div>
@@ -39,7 +39,7 @@ class CommentSuggest extends React.Component {
                             {content && <span style={{ color: '#365899' }}>{content}</span>}
                         </a>
                         {time && " . "}
-                        {time && <span style={{ color: '#A7ABB1' }}>{time}</span>}
+                        {time && <span style={{ color: '#91959D' }}>{time}</span>}
                     </div>
                 </div>
             </div>

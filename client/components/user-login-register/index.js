@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import VerifyContainer from '~/containers/user-login-register/VerifyContainer'
 import LoginContainer from '~/containers/user-login-register/LoginContainer'
 import RegisterContainer from '~/containers/user-login-register/RegisterContainer'
-
+import ChangeLanguage from '~/containers/entity/row/ChangeLanguage'
 
 const LoginRegister = ({
     KAJKAI_THANK, iswhoing, isusername, changeLanguage, isregistersuccess, isloading, id }) => {
@@ -14,7 +14,7 @@ const LoginRegister = ({
     if(isusername)
         return <Redirect to={'/user/' + id}/>
     return (
-        <div style={{ height: '100%' }}>
+        <div style={{ height: '100%', width: 1040, backgroundColor: '#F6F7F9'}}>
             <div className="container-fluid" style={{ height: '100%'}}>
                 <div className="row" style={{ height: '80%'}}>
                     <Col xs={6} sm={6} md={6} style={{ height: '100%', backgroundColor: 'white'}}>
@@ -44,16 +44,8 @@ const LoginRegister = ({
                         }
                     </Col>
                 </div>
-                <div className="row" style={{ height: '20%', backgroundColor: 'white' }}>
-                    <hr style={{margin: 0}}></hr>
-                    <div style={{ marginLeft: 100}} className="btn"
-                        onClick={()=> changeLanguage('vi')}>
-                        <a>Tiếng Việt</a>
-                    </div>
-                    <div className="btn"
-                        onClick={()=> changeLanguage('en')}>
-                        <a>English</a>
-                    </div>
+                <div style={{ paddingTop: 10 }}>
+                    <ChangeLanguage fontSize={14}/>
                 </div>
             </div>
         </div>

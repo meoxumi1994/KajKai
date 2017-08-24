@@ -9,7 +9,7 @@ const mapStateToProps = (state, { id }) => {
     const popupnotification = state.inst.entity.popup.popupnotification[id]
     return({
         ...popupnotification,
-        time: getTime(popupnotification.time)
+        time: getTime(popupnotification.time, state.user.language)
     })
 }
 

@@ -23,6 +23,9 @@ class ContentEditable extends React.Component {
         this.setState({ width: this.display.offsetWidth, height: this.display.offsetHeight})
         if(this.props.getLine)
             this.props.getLine(this.textarea.state.height / 20)
+        if(!this.props.content){
+            this.setState({ width: this.display.offsetWidth, height: 20 })
+        }
     }
     shouldComponentUpdate(nextProps, nextState){
         if(this.props.content != nextProps.content)
@@ -40,19 +43,21 @@ class ContentEditable extends React.Component {
                 outline: '1px solid #D2D2D2',
                 fontSize: 14,
                 padding: padding,
-                paddingBottom: padding }}>
+                paddingBottom: padding,
+                backgroundColor: 'white',
+            }}>
                 <div
                     ref={display => this.display = display}
                     style={{
                         padding: 0,
-                        color: content?undefined:(this.state.focus?'#BFC2C9':'#A7ABB1'),
+                        color: content?undefined:(this.state.focus?'#BFC2C9':'#91959D'),
                         minHeight: minRows? minRows*20: undefined,
                         width: width,
                     }}
                     dangerouslySetInnerHTML={{ __html: content?MixMakeUp(content, match):placehoder }}>
                 </div>
                 <div style={{
-                        marginTop: (this.display) ? -this.display.offsetHeight : 0,
+                        marginTop: -this.state.height,
                         padding: 0,
                         height: this.state.height,
                     }}>

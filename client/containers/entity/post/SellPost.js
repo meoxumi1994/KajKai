@@ -22,7 +22,7 @@ const mapStateToProps = (state, { id }) => {
         beLike =  getBeLike(likes, yourid)
         beFollow = getBeFollow(sellpost.follows, state.user.id)
         likeContent = getLikeContent(likes, numlike, yourid)
-        time = getTime(sellpost.time)
+        time = getTime(sellpost.time, state.user.language)
     }
     let isOwner = false
     if(sellpost){
@@ -80,8 +80,8 @@ const mapDispatchToProps = (dispatch, { id, commentid }) => ({
     weTurnNotify: (turnnotify) => {
         dispatch(turnNotify(id, !turnnotify))
     },
-    weUpdateSellpost: (sellpost) => {
-        dispatch(putSellPost(sellpost))
+    weUpdateSellpost: (key, value) => {
+        dispatch({ type: 'server/CHANGE_SELLPOST', data: { id: id, [key]: value } })
     }
 })
 
@@ -96,11 +96,14 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
             weTurnNotify(turnnotify)
         },
         onUpdateSellpost: (key, value) => {
-            weUpdateSellpost({
-                ...mysellpost,
-                [key] : value,
-                sellpostid: mysellpost.id,
-            })
+            if( key == 'status' ){
+                weUpdateSellpost(key, value)
+            }
+            // weUpdateSellpost({
+            //     ...mysellpost,
+            //     [key] : value,
+            //     sellpostid: mysellpost.id,
+            // })
         },
         ...ownProps,
         ...stateProps,

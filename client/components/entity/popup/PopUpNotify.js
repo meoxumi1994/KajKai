@@ -184,7 +184,7 @@ class PopUpNotify extends React.Component {
                     <FirstIcon {...this.props}/>
                     {"at"}<img src={avartarStore} width={14} height={14} style={{ marginLeft: 7, marginRight: 7 }}/>
                     {storename}{" "}
-                    <a style={{ fontSize: 12, color: '#A7ABB1' }}>{time}</a>
+                    <a style={{ fontSize: 12, color: '#91959D' }}>{time}</a>
                 </div>
             </div>
         )

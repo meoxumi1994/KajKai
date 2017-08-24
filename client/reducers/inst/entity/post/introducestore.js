@@ -7,7 +7,7 @@ const introducestore = (state = {
         case 'INTRODUCE_STORE_GET_SUCCESS':
             return {...state,
                 [action.store.id] : {
-                    coverUrl: '/images/storeCoverDefault.svg',
+                    coverUrl: '/images/storeCoverDefault.png',
                     ...action.store
                 }
             }
@@ -16,7 +16,7 @@ const introducestore = (state = {
                 const userid = action.data.userid
                 return {...state,
                     [action.data.id] : {
-                        coverUrl: '/images/storeCoverDefault.svg',
+                        coverUrl: '/images/storeCoverDefault.png',
                         ...state[action.data.id],
                         numfollow: (state[action.data.id].numfollow?state[action.data.id].numfollow:0) + (action.data.status=='add'?1:-1),
                         follows: updateFollows(state[action.data.id].follows, userid, action.data.avatarUrl, action.data.username)

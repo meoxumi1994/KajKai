@@ -259,7 +259,7 @@ export default class BarScreen extends React.Component {
                 backgroundColor: '#3B5998',
                 zIndex: 10 }}>
                 <div style={{
-                    marginLeft: Math.max(0, Math.min(username ? width - 1330 : 1000000, (width - 1040) / 2)),
+                    marginLeft: Math.max(0, Math.min((username && width > 1040 + 280) ? width - 1330 : 1000000, (width - 1040) / 2)),
                  }}>
                     <div className="container-fluid" style={{ padding: 0, margin: 0 }}>
                         <div className="row" style={{ padding: 0, margin: 0,
