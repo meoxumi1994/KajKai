@@ -26,7 +26,7 @@ const NotificationSchema = new mongoose.Schema({
   isRead: {type: Number},
   numberOfReply: {type: Number},
   match: [MatchSchema],
-  comment: {type: CommentActor}
+  comment: {type: CommentActorSchema}
 })
 
 export default NotificationSchema
