@@ -1,5 +1,5 @@
 import { getStore, getStoreInfoService, getListStore } from '../services/StoreService'
-import { getStoreFromSellPostId, updateSellPost } from '../services/SellPostService'
+import { getStoreFromSellPostId, updateSellPostStatus } from '../services/SellPostService'
 import config from '../config/globalId'
 
 export const getStoreSub = (message, next) => {
@@ -37,7 +37,7 @@ export const getStoreListSub = (message, next) => {
 };
 
 export const updateSellPostSub = (message, next) => {
-    updateSellPost({sellpostid: message.sellpostid, status: message.status}, () => {
+    updateSellPostStatus({sellpostid: message.sellpostid, status: message.status}, () => {
         next({status: 'success', sellPost: {
             sellpostid: message.sellpostid,
             status: message.sellpostid
