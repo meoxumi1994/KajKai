@@ -74,6 +74,7 @@ export const updateSellPost = (sellpostInfo, next) => {
                             sellPostUpdated(info);
                         });
                     } else {
+                        sellPostUpdated(info);
                         next(sellPost, null);
                     }
                 });
