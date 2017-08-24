@@ -49,6 +49,18 @@ export const addSellPost = (sellPostInfo, next) => {
     })
 };
 
+export const updateSellPostStatus = (sellpostInfo, next) => {
+    getSellPost(sellpostInfo.sellpostid, (sellPost) => {
+        sellPost.status = sellpostInfo.status;
+        sellPost.save(() => {
+            getPubSellPostInfo(sellPost, (info) => {
+                sellPostUpdated(info);
+                next();
+            })
+        })
+    })
+};
+
 export const updateSellPost = (sellpostInfo, next) => {
     getSellPost(sellpostInfo.sellpostid, (sellPost) => {
         if (sellpostInfo.category) sellPost.category = sellpostInfo.category;
