@@ -4,14 +4,8 @@ import { sendPhoneVerificationCode, checkPhoneVerificationCode } from '../servic
 export const updateUserPhoneHandler = () => (req, res) => {
     const { phone } = req.body
     console.log(phone)
-    getUserFromPhone(phone, function(user){
-        if (user) {
-            res.json({status: 'phone is already used'})
-        } else {
-            updateUserPhone(req.decoded._id, phone, (status) => {
-              res.json({ status })
-            })
-        }
+    updateUserPhone(req.decoded._id, phone, (status) => {
+      res.json({ status })
     })
 }
 

@@ -1,4 +1,4 @@
-import { User, BasicStore, Notification, IDSellpostStore, IDCommentSellpost, IDReplyCommentSellpost, SellpostLiker, CommentLiker, ReplyLiker } from '../models'
+import { User, BasicStore, Notification, IDSellpostStore, IDCommentSellpost, IDReplyCommentSellpost, SellpostLiker, CommentLiker, ReplyLiker, CommentActor, ReplyActor, ContentMap } from '../models'
 import { NotificationType } from '../enum'
 import { notify } from '../controllers/NotificationPubController'
 
@@ -84,55 +84,67 @@ export const createLikeCommentNotification = (commentId) => {
             if (mIDSellpostStore) {
               BasicStore.findOne({ id: mIDSellpostStore.storeId }, (err, basicStore) => {
                 if (basicStore) {
-                  User.find({}, (err, users) => {
-                    if (users) {
-                      for (let i = 0; i < users.length; i++) {
-                        let user = users[i]
-                        if (isLiker(user, liker)) {
-                          continue
-                        }
-                        let { followingSellposts } = user
-                        if (!followingSellposts) {
-                          followingSellposts = []
-                        }
-                        for (let k = 0; k < followingSellposts.length; k++) {
-                          if (followingSellposts[k] == mIDCommentSellpost.sellpostId) {
-                            let { notifications } = user
-                            if (!notifications) {
-                              notifications = []
-                            }
-                            let mNotification = new Notification({
-                              type: NotificationType.LIKECOMMENT,
-                              sellpostId: mIDCommentSellpost.sellpostId,
-                              commentId,
-                              actorId: liker.userId ? liker.userId : liker.storeId,
-                              name: liker.username ? liker.username : liker.storeName,
-                              avatarUrl: liker.avatarUrl,
-                              time: Date.now(),
-                              storeName: basicStore.storeName,
-                              urlName: basicStore.urlName,
-                              storeId: basicStore.id,
-                              storeAvatarUrl: basicStore.avatarUrl,
-                              numberOfLike,
-                              likers
-                            })
-                            for (let h = 0; h < notifications.length; h++) {
-                              let notification = notifications[h]
-                              if (notification.type == NotificationType.LIKECOMMENT && notification.commentId == commentId) {
-                                notifications.splice(h, 1)
-                                break
-                              } else if (h + 1 == notifications.length) {
-                                user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
+                  CommentActor.findOne({ commentId }, (err, commentActor) => {
+                    if (commentActor) {
+                      ContentMap.findOne({ id: commentId }, (err, contentMap) => {
+                        User.find({}, (err, users) => {
+                          if (users) {
+                            for (let i = 0; i < users.length; i++) {
+                              let user = users[i]
+                              if (isLiker(user, liker)) {
+                                continue
+                              }
+                              let { followingSellposts } = user
+                              if (!followingSellposts) {
+                                followingSellposts = []
+                              }
+                              for (let k = 0; k < followingSellposts.length; k++) {
+                                if (followingSellposts[k] == mIDCommentSellpost.sellpostId) {
+                                  let { notifications } = user
+                                  if (!notifications) {
+                                    notifications = []
+                                  }
+                                  let mNotification = new Notification({
+                                    type: NotificationType.LIKECOMMENT,
+                                    sellpostId: mIDCommentSellpost.sellpostId,
+                                    commentId,
+                                    actorId: liker.userId ? liker.userId : liker.storeId,
+                                    name: liker.username ? liker.username : liker.storeName,
+                                    avatarUrl: liker.avatarUrl,
+                                    time: Date.now(),
+                                    storeName: basicStore.storeName,
+                                    urlName: basicStore.urlName,
+                                    storeId: basicStore.id,
+                                    storeAvatarUrl: basicStore.avatarUrl,
+                                    numberOfLike,
+                                    likers,
+                                    comment: commentActor
+                                  })
+                                  if (contentMap) {
+                                    let { content, order } = contentMap
+                                    if (content) mNotification.content = content
+                                    if (order) mNotification.order = order
+                                  }
+                                  for (let h = 0; h < notifications.length; h++) {
+                                    let notification = notifications[h]
+                                    if (notification.type == NotificationType.LIKECOMMENT && notification.commentId == commentId) {
+                                      notifications.splice(h, 1)
+                                      break
+                                    } else if (h + 1 == notifications.length) {
+                                      user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
+                                    }
+                                  }
+                                  notify(user.id, mNotification)
+                                  notifications.push(mNotification)
+                                  user.notifications = notifications
+                                  user.save(() => {})
+                                  break
+                                }
                               }
                             }
-                            notify(user.id, mNotification)
-                            notifications.push(mNotification)
-                            user.notifications = notifications
-                            user.save(() => {})
-                            break
                           }
-                        }
-                      }
+                        })
+                      })
                     }
                   })
                 }
@@ -158,56 +170,66 @@ export const createLikeReplyNotification = (replyId) => {
             if (mIDSellpostStore) {
               BasicStore.findOne({ id: mIDSellpostStore.storeId }, (err, basicStore) => {
                 if (basicStore) {
-                  User.find({}, (err, users) => {
-                    if (users) {
-                      for (let i = 0; i < users.length; i++) {
-                        let user = users[i]
-                        if (isLiker(user, liker)) {
-                          continue
-                        }
-                        let { followingSellposts } = user
-                        if (!followingSellposts) {
-                          followingSellposts = []
-                        }
-                        for (let k = 0; k < followingSellposts.length; k++) {
-                          if (followingSellposts[k] == mIDReplyCommentSellpost.sellpostId) {
-                            let { notifications } = user
-                            if (!notifications) {
-                              notifications = []
-                            }
-                            let mNotification = new Notification({
-                              type: NotificationType.LIKEREPLY,
-                              sellpostId: mIDReplyCommentSellpost.sellpostId,
-                              commentId: mIDReplyCommentSellpost.commentId,
-                              replyId,
-                              actorId: liker.userId ? liker.userId : liker.storeId,
-                              name: liker.username ? liker.username : liker.storeName,
-                              avatarUrl: liker.avatarUrl,
-                              time: Date.now(),
-                              storeName: basicStore.storeName,
-                              urlName: basicStore.urlName,
-                              storeId: basicStore.id,
-                              storeAvatarUrl: basicStore.avatarUrl,
-                              numberOfLike,
-                              likers
-                            })
-                            for (let h = 0; h < notifications.length; h++) {
-                              let notification = notifications[h]
-                              if (notification.type == NotificationType.LIKEREPLY && notification.replyId == replyId) {
-                                notifications.splice(h, 1)
-                                break
-                              } else if (h + 1 == notifications.length) {
-                                user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
+                  ReplyActor.findOne({ replyId }, (err, replyActor) => {
+                    if (replyActor) {
+                      ContentMap.findOne({ id: replyId }, (err, contentMap) => {
+                        User.find({}, (err, users) => {
+                          if (users) {
+                            for (let i = 0; i < users.length; i++) {
+                              let user = users[i]
+                              if (isLiker(user, liker)) {
+                                continue
+                              }
+                              let { followingSellposts } = user
+                              if (!followingSellposts) {
+                                followingSellposts = []
+                              }
+                              for (let k = 0; k < followingSellposts.length; k++) {
+                                if (followingSellposts[k] == mIDReplyCommentSellpost.sellpostId) {
+                                  let { notifications } = user
+                                  if (!notifications) {
+                                    notifications = []
+                                  }
+                                  let mNotification = new Notification({
+                                    type: NotificationType.LIKEREPLY,
+                                    sellpostId: mIDReplyCommentSellpost.sellpostId,
+                                    commentId: mIDReplyCommentSellpost.commentId,
+                                    replyId,
+                                    actorId: liker.userId ? liker.userId : liker.storeId,
+                                    name: liker.username ? liker.username : liker.storeName,
+                                    avatarUrl: liker.avatarUrl,
+                                    time: Date.now(),
+                                    storeName: basicStore.storeName,
+                                    urlName: basicStore.urlName,
+                                    storeId: basicStore.id,
+                                    storeAvatarUrl: basicStore.avatarUrl,
+                                    numberOfLike,
+                                    likers,
+                                    reply: replyActor
+                                  })
+                                  if (contentMap && contentMap.content) {
+                                    mNotification.content = contentMap.content
+                                  }
+                                  for (let h = 0; h < notifications.length; h++) {
+                                    let notification = notifications[h]
+                                    if (notification.type == NotificationType.LIKEREPLY && notification.replyId == replyId) {
+                                      notifications.splice(h, 1)
+                                      break
+                                    } else if (h + 1 == notifications.length) {
+                                      user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
+                                    }
+                                  }
+                                  notify(user.id, mNotification)
+                                  notifications.push(mNotification)
+                                  user.notifications = notifications
+                                  user.save(() => {})
+                                  break
+                                }
                               }
                             }
-                            notify(user.id, mNotification)
-                            notifications.push(mNotification)
-                            user.notifications = notifications
-                            user.save(() => {})
-                            break
                           }
-                        }
-                      }
+                        })
+                      })
                     }
                   })
                 }
@@ -253,7 +275,19 @@ export const getClientFormatNotification = (notification) => ({
     num: product.numberOfOrder
   })) : [],
   isclick: notification.isRead == 1,
-  match: notification.match ? notification.match : []
+  match: notification.match ? notification.match : [],
+  leadercomment: notification.comment ? {
+    commenterid: notification.comment.id,
+    name: notification.comment.name,
+    avatarUrl: notification.comment.avatarUrl,
+    type: notification.comment.type
+  } : null,
+  comment: notification.reply ? {
+    commenterid: notification.reply.id,
+    name: notification.reply.name,
+    avatarUrl: notification.reply.avatarUrl,
+    type: notification.reply.type
+  } : null
 })
 
 const isLiker = (user, liker) => {

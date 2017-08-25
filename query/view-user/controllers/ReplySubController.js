@@ -1,4 +1,4 @@
-import { User, Notification, BasicStore, IDSellpostStore, Match } from '../models'
+import { User, Notification, BasicStore, IDSellpostStore, Match, CommentActor, ReplyActor, ContentMap } from '../models'
 import { NotificationType } from '../enum'
 import { addIDReplyCommentSellpost } from '../services/IDService'
 import { notify } from './NotificationPubController'
@@ -18,6 +18,14 @@ export const createReplyNotification = (message) => {
     }
   })
 
+  if(content) {
+    let contentMap = new ContentMap({
+      id: replyId, 
+      content
+    })
+    contentMap.save(() => {})
+  }
+
   addIDReplyCommentSellpost(replyId, commentId, sellpostId)
 
   const mPromises = []
@@ -29,6 +37,15 @@ export const createReplyNotification = (message) => {
           name: user.username,
           avatarUrl: user.avatarUrl
         }
+
+        let replyActor = new ReplyActor({
+          replyId,
+          id: replierId,
+          name: user.username,
+          avatarUrl: user.avatarUrl,
+          type: 'user'
+        })
+        replyActor.save(() => {})
         resolve(replier)
       } else {
         resolve(null)
@@ -43,6 +60,14 @@ export const createReplyNotification = (message) => {
           name: basicStore.storeName,
           avatarUrl: basicStore.avatarUrl
         }
+        let replyActor = new ReplyActor({
+          replyId,
+          id: replierId,
+          name: basicStore.storeName,
+          avatarUrl: basicStore.avatarUrl,
+          type: 'store'
+        })
+        replyActor.save(() => {})
         resolve(replier)
       } else {
         resolve(null)
@@ -59,71 +84,76 @@ export const createReplyNotification = (message) => {
       if (mIDSellpostStore) {
         BasicStore.findOne({ id: mIDSellpostStore.storeId }, (err, basicStore) => {
           if (basicStore) {
-          User.find({}, (err, users) => {
-            if (users) {
-              for (let i = 0; i < users.length; i++) {
-                let user = users[i]
-                if (user.id == replier.actorId || !user.storeList) {
-                  continue
-                }
-                let { storeList } = user
-                let flag = true
-                for (let k = 0; k < storeList.length; k++) {
-                  if (storeList[k].id == replier.actorId) {
-                    flag = false
-                    break
-                  }
-                }
-                if (!flag) {
-                  continue
-                }
-                let { followingSellposts } = user
-                if (!followingSellposts) {
-                  followingSellposts = []
-                }
-                for (let k = 0; k < followingSellposts.length; k++) {
-                  if (followingSellposts[k] == sellpostId) {
-                    let { notifications } = user
-                    if (!notifications) {
-                      notifications = []
-                    }
-                    let notification = new Notification({
-                      type: NotificationType.REPLY,
-                      commentId,
-                      replyId,
-                      sellpostId,
-                      ...replier,
-                      content,
-                      time: Date.now(),
-                      storeName: basicStore.storeName,
-                      urlName: basicStore.urlName,
-                      storeId: basicStore.id,
-                      storeAvatarUrl: basicStore.avatarUrl
-                    })
-                    if (match) {
-                      let tags = []
-                      match.map((item) => {
-                        tags.push(
-                          new Match({
-                            id: item.id,
-                            name: item.name,
-                            link: item.link
+            CommentActor.findOne({ commentId }, (err, commentActor) => {
+              if (commentActor) {
+                User.find({}, (err, users) => {
+                  if (users) {
+                    for (let i = 0; i < users.length; i++) {
+                      let user = users[i]
+                      if (user.id == replier.actorId || !user.storeList) {
+                        continue
+                      }
+                      let { storeList } = user
+                      let flag = true
+                      for (let k = 0; k < storeList.length; k++) {
+                        if (storeList[k].id == replier.actorId) {
+                          flag = false
+                          break
+                        }
+                      }
+                      if (!flag) {
+                        continue
+                      }
+                      let { followingSellposts } = user
+                      if (!followingSellposts) {
+                        followingSellposts = []
+                      }
+                      for (let k = 0; k < followingSellposts.length; k++) {
+                        if (followingSellposts[k] == sellpostId) {
+                          let { notifications } = user
+                          if (!notifications) {
+                            notifications = []
+                          }
+                          let notification = new Notification({
+                            type: NotificationType.REPLY,
+                            commentId,
+                            replyId,
+                            sellpostId,
+                            ...replier,
+                            content,
+                            time: Date.now(),
+                            storeName: basicStore.storeName,
+                            urlName: basicStore.urlName,
+                            storeId: basicStore.id,
+                            storeAvatarUrl: basicStore.avatarUrl,
+                            comment: commentActor
                           })
-                        )
-                      })
-                      notification.match = tags
+                          if (match) {
+                            let tags = []
+                            match.map((item) => {
+                              tags.push(
+                                new Match({
+                                  id: item.id,
+                                  name: item.name,
+                                  link: item.link
+                                })
+                              )
+                            })
+                            notification.match = tags
+                          }
+                          notify(user.id, notification)
+                          notifications.push(notification)
+                          user.notifications = notifications
+                          user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
+                          user.save(() => {})
+                          break
+                        }
+                      }
                     }
-                    notify(user.id, notification)
-                    notifications.push(notification)
-                    user.notifications = notifications
-                    user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
-                    user.save(() => {})
-                    break
                   }
-                }
+                })
               }
-            }
-          })
+            })
           }
         })
       }

@@ -12,7 +12,11 @@ export const createSellpostCreatedNotification = (message) => {
 }
 
 export const createSellpostUpdatedNotification = (message) => {
-  createSellpostNotification(NotificationType.SELLPOSTEdited, message.sellpost)
+  if (message.sellpost.changeStatus) {
+    createSellpostNotification(NotificationType.OPENCLOSE, message.sellpost)
+  } else {
+    createSellpostNotification(NotificationType.SELLPOSTEdited, message.sellpost)
+  }
 }
 
 export const deleteSellpostNotification = (message) => {

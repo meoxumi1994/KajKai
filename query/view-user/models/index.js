@@ -2,7 +2,9 @@ import mongoose from '../datasource'
 import AddressSchema from './Address'
 import BasicStoreSchema from './BasicStore'
 import BlackSchema from './Black'
+import CommentActorSchema from './CommentActor'
 import CommentLikerSchema from './CommentLiker'
+import ContentMapSchema from './ContentMap'
 import IDCommentSellpostSchema from './IDCommentSellpost'
 import IDReplyCommentSellpostSchema from './IDReplyCommentSellpost'
 import IDSellpostStoreSchema from './IDSellpostStore'
@@ -15,6 +17,7 @@ import MatchSchema from './Match'
 import NotificationSchema from './Notification'
 import PrivacySchema from './Privacy'
 import ProductSchema from './Product'
+import ReplyActorSchema from './ReplyActor'
 import ReplyLikerSchema from './ReplyLiker'
 import SellpostLikerSchema from './SellpostLiker'
 import TestSchema from './Test'
@@ -23,7 +26,9 @@ import UserSchema from './User'
 export const Address = mongoose.model('Address', AddressSchema)
 export const BasicStore = mongoose.model('BasicStore', BasicStoreSchema)
 export const Black = mongoose.model('Black', BlackSchema)
+export const CommentActor = mongoose.model('CommentActor', CommentActorSchema)
 export const CommentLiker = mongoose.model('CommentLiker', CommentLikerSchema)
+export const ContentMap = mongoose.model('ContentMap', ContentMapSchema)
 export const IDCommentSellpost = mongoose.model('IDCommentSellpost', IDCommentSellpostSchema)
 export const IDReplyCommentSellpost = mongoose.model('IDReplyCommentSellpost', IDReplyCommentSellpostSchema)
 export const IDSellpostStore = mongoose.model('IDSellpostStore', IDSellpostStoreSchema)
@@ -36,6 +41,7 @@ export const Match = mongoose.model('Match', MatchSchema)
 export const Notification = mongoose.model('Notification', NotificationSchema)
 export const Privacy = mongoose.model('Privacy', PrivacySchema)
 export const Product = mongoose.model('Product', ProductSchema)
+export const ReplyActor = mongoose.model('ReplyActor', ReplyActorSchema)
 export const ReplyLiker = mongoose.model('ReplyLiker', ReplyLikerSchema)
 export const SellpostLiker = mongoose.model('SellpostLiker', SellpostLikerSchema)
 export const Test = mongoose.model('Test', TestSchema)
