@@ -42,7 +42,7 @@ class DisplayLabel extends React.Component {
         }
 
         return (
-            <div style={{width: '73%', maxHeight: 80, overflowY: 'scroll'}} ref={"bottom"}>
+            <div style={{width: '70%', maxHeight: 80, overflowY: 'scroll'}} ref={"bottom"}>
               <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={popoverHoverFocus(usersKey, usersMap, results)}>
                   {
                   usersKey.length == 0 && results.keyy.length == 0? <label style={styles.displayLabel}>New message</label>:
@@ -75,7 +75,7 @@ class DisplayLabel extends React.Component {
                     }
                   </div>
                   :
-                      <label style={styles.displayLabel}>{label.length > 24? label.substring(0, 23) + '...': label}</label>
+                      <label style={{marginTop: 4, marginLeft: 4}}>{label.length > 24? label.substring(0, 23) + '...': label}</label>
                   }
               </OverlayTrigger>
           </div>
@@ -106,15 +106,11 @@ const popoverHoverFocus = (usersKey, usersMap, results) => {
     )
 }
 
-const scrollColor = {
-    scrollbarBaseColor: 'red',
-    scrollbarFaceColor: 'red',
-    scrollbarTrackColor: 'red',
-    scrollbar3dlightColor: 'red',
-    scrollbarHighlightColor: 'red',
-    scrollbarArrowColor: 'red',
-    scrollbarDarkshadowColor: 'red',
-    scrollbarShadowColor: 'red',
+const style = {
+    displayLabel: {
+        fontSize: 9
+    }
 }
+
 
 export default DisplayLabel

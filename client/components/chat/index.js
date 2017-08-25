@@ -28,10 +28,11 @@ class Chat extends React.Component {
                                   position: 'fixed',
                                   bottom: 0,
                                   backgroundColor: 'white',
-                                  width: 320 ,
-                                  height: 400,
+                                  width: 280 ,
+                                  height: 380,
                                   zIndex: 100,
-                                  marginLeft: index * 325 + 5
+                                  marginLeft: index * 285 + 5,
+                                  border: '0.1px solid #cccccc'
                               }}>
                                   <ChatCenterContainer
                                       mesId={mesId}/>
