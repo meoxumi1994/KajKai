@@ -58,7 +58,7 @@ export const deleteSellpostNotification = (message) => {
 }
 
 const createSellpostNotification = (type, sellpost) => {
-  const { sellPostId: sellpostId, storeId, category, title, description, changeStatus } = sellpost
+  const { sellPostId: sellpostId, storeId, category, title, description, changeStatus, status: storeState } = sellpost
   BasicStore.findOne({ id: storeId }, (err, basicStore) => {
     if (basicStore) {
       User.find({}, (err, users) => {
@@ -106,7 +106,7 @@ const createSellpostNotification = (type, sellpost) => {
                 storeAvatarUrl: basicStore.avatarUrl
               })
               if (changeStatus) {
-                notification.storeState = changeStatus
+                notification.storeState = storeState
               }
               notify(user.id, notification)
               notifications.push(notification)
