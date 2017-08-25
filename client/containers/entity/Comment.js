@@ -33,6 +33,7 @@ const mapStateToProps = (state, { id, storeid }) => {
         LIKE: g('LIKE'),
         REPLY: g('REPLY'),
         NEW: g('NEW'),
+        BLOCK : g('BLOCK'),
     })
 }
 

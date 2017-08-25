@@ -27,7 +27,6 @@ class ContentNotify extends React.Component {
         if(storename == name) storename = SELF
         if(commentName == name) commentName = SELF
         // console.log(this.props)
-        console.log(this.props)
         switch (type) {
             case 'leadercomment':
                 return (
@@ -39,9 +38,10 @@ class ContentNotify extends React.Component {
                             colorname="#1D2129"
                             content={
                                 (order.length>0 ? ORDER_ON : ALSO_COMMENT_IN) +
+                                (order.length==0 ? ': "' + getString(content) + '"' : '') +
                                 " " + IN_STORE_OF + " " +
                                 (isYourStore ? YOURS : (storename != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+storename+'</span>' : storename)
-                                + (order.length==0 ? ': "' + getString(content) + '"' : '')
+
                             }
                         />
                     </div>
@@ -56,9 +56,10 @@ class ContentNotify extends React.Component {
                             heightEachRow={16}
                             content={
                                 REPLY_TO_COMMENT_OF + " " + (isYourLeaderComment ? YOURS : ((commentName != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+commentName+'</span>' : commentName)) +
+                                ': "' + getString(content) + '"' +
                                 " " + IN_STORE_OF + " " +
                                 (isYourStore ? YOURS : (storename != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+storename+'</span>' : storename)
-                                + ': "' + getString(content) + '"'
+
                             }
                         />
                     </div>
@@ -93,9 +94,10 @@ class ContentNotify extends React.Component {
                             content={
                                 LIKED_A + " " + COMMENT_2 + " " + OF + " " +
                                 (isYourComment ? YOURS : ((commentName != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+commentName+'</span>' : commentName)) +
+                                ': "' + getString(content) + '"' +
                                 " " + IN_STORE_OF + " " +
                                 (isYourStore ? YOURS : (storename != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+storename+'</span>' : storename)
-                                + ': "' + getString(content) + '"'
+
                             }
                         />
                     </div>
@@ -126,9 +128,10 @@ class ContentNotify extends React.Component {
                                 (isYourComment ? YOURS :
                                     ((commentName != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+commentName+'</span>' : commentName)
                                 ) +
+                                ': "' + getString(content) + '"' +
                                 " " + IN_STORE_OF + " " +
                                 (isYourStore ? YOURS : (storename != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+storename+'</span>' : storename)
-                                + ': "' + getString(content) + '"'
+
                             }
                         />
                     </div>

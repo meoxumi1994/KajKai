@@ -250,7 +250,7 @@ const myString = {
     A_SELL_POST_YOU_FOLLOW: ['một cửa hàng mà bạn quan tâm','a sell post you followed'],
     YOUR_SELL_POST: ['cửa hàng của bạn','your sell post'],
 
-    REPLY_TO_COMMENT_OF: ['đã trả lời bình luận của', 'replyed to comment of'],
+    REPLY_TO_COMMENT_OF: ['đã trả lời bình luận của', 'replied to comment of'],
     COMMENT_ON_A_SELL_POST: ['trong cửa hàng','comment on a sell post'],
     YOURS: ['bạn','yours'],
     IN_STORE_OF: ['trong cửa hàng của','in store of'],
@@ -273,7 +273,7 @@ const myString = {
     OPENED: ['đã mở','opened'],
 
     CREATE_NEW_SELL_POST: ['đã tạo một bài đăng bán hàng mới','created a new sellpost'],
-    SELF: ['mình','self'],
+    SELF: ['mình','his/hers'],
     IN: ['trong','in'],
 }
 

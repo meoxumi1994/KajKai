@@ -26,7 +26,7 @@ class Comment extends React.Component {
     }
     render(){
         const {
-            RECEIVE, RECEIVED, LIKE, REPLY, DONE, NEW, clicksetting, isOwner, status, urlname, storeid,
+            RECEIVE, RECEIVED, LIKE, REPLY, DONE, NEW, BLOCK, clicksetting, isOwner, status, urlname, storeid,
             isleader, avatarUrl, name, time, numlike, numreplys, order, commenterid, type, match,
             content, onReceive, onDone, onLike, onReply, beLike, yourid } = this.props
         let urlLink
@@ -55,7 +55,7 @@ class Comment extends React.Component {
                             style={{ color:'#BEC2C8'}}
                             className="glyphicon glyphicon-menu-down"/>
                         {(this.state.hoversetting && !clicksetting)&&
-                            <Tooltip contents={['Block, Report']}/>
+                            <Tooltip contents={[BLOCK+', '+DONE]}/>
                         }
                         {clicksetting &&
                             <DropDown
@@ -63,8 +63,10 @@ class Comment extends React.Component {
                                 onClick={(index) => {
                                     if(index == 0)
                                         this.props.onBlock()
+                                    if(index == 1)
+                                        this.props.onDone()
                                 }}
-                                contents={['Block','hr','Report']}
+                                contents={[BLOCK,'hr',DONE]}
                             />
                         }
                     </div>
@@ -185,7 +187,7 @@ class Comment extends React.Component {
                         }
                         {(isOwner && isleader && (status=='received' || status=='done')) && "."}
 
-                        {(!isOwner && isleader && (status!='done')) &&
+                        {(!isOwner && isleader && (status=='done')) &&
                             <div className="btn" onClick={() => onDone()}
                                 style={{  padding: '0px 1px 0px 1px' }}>
                                 <a style={{
