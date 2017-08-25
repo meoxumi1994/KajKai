@@ -1,4 +1,4 @@
-import { User, Notification, BasicStore, IDSellpostStore, Match, CommentActor, ReplyActor } from '../models'
+import { User, Notification, BasicStore, IDSellpostStore, Match, CommentActor, ReplyActor, ContentMap } from '../models'
 import { NotificationType } from '../enum'
 import { addIDReplyCommentSellpost } from '../services/IDService'
 import { notify } from './NotificationPubController'
@@ -17,6 +17,11 @@ export const createReplyNotification = (message) => {
       user.save(() => {})
     }
   })
+
+  if(content) {
+    let contentMap = new ContentMap({ content })
+    contentMap.save(() => {})
+  }
 
   addIDReplyCommentSellpost(replyId, commentId, sellpostId)
 
