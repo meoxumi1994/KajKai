@@ -19,7 +19,7 @@ class Chat extends React.Component {
             )
         }
 
-        const { usersKey, usersMap, lastMessage, time, displayLabel } = chatListMap[mesId]
+        const { usersKey, usersMap, lastMessage, time, displayLabel, store } = chatListMap[mesId]
 
         let label = displayLabel
         if (label == undefined || label == '') {
@@ -52,14 +52,20 @@ class Chat extends React.Component {
               </div>
 
               <div className="col col-xs-5" style={styles.messageDiv}>
-                    <div style={{color: textColor}}><b>{label.length > 23? label.substring(0, 23) + '...': label}</b></div>
+                    <div style={{color: textColor, fontSize: 13}}><b>{label.length > 23? label.substring(0, 23) + '...': label}</b></div>
+                    {
+                      store != undefined?
+                      <div style={{color: textColor}}>({store.storeName})</div>
+                      :
+                      <div></div>
+                    }
                     {
                       lastMessage != undefined?
-                      <div style={{marginTop: 5}}>
+                      <div>
                         <small className="text-muted">
                           <div style={{color: textColor}}>
                             {lastMessage.id != user.id ? lastMessage.message.url != ''? usersMap[lastMessage.id].username +" sent you a picture" : usersMap[lastMessage.id].username + ': ' : 'You: '}
-                            { lastMessage.message.text.length > 65? lastMessage.message.text.substring(0, 65) + '...': lastMessage.message.text }
+                            { lastMessage.message.text.length > 25? lastMessage.message.text.substring(0, 25) + '...': lastMessage.message.text }
                           </div>
                         </small>
                       </div>
@@ -84,23 +90,25 @@ class Chat extends React.Component {
 const styles = {
     avatarDiv: {
         float: 'left',
-        marginTop: 9,
+        marginTop: 4,
         marginRight: 10,
         marginLeft: 10,
         width: '18%',
     },
     avatarImg: {
-        width: 60,
-        height: 60,
+        width: 45,
+        height: 45,
         borderRadius: 50,
     },
     messageDiv: {
         height: 70,
-        marginTop: 15,
+        marginTop: 4,
         width: '50%',
+        height: 55
     },
     timeDiv: {
-        marginTop: 15,
+        marginTop: 4,
+        height: 55,
         width: '25%',
     },
 }

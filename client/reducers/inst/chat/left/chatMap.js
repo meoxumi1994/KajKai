@@ -31,6 +31,7 @@ const chatMap = (state={
             mapp: {}
         }
     },
+    store: undefined
 }, action, subAction) => {
 
     switch (action.type || subAction.type) {
