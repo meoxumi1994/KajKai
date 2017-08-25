@@ -35,7 +35,7 @@ class Top extends React.Component {
         this.state = {}
     }
     render(){
-        const { id, userid, yourid, coverUrl, avatarUrl, name, onUploadImage, location, isOwner, beFollow, onFollow, sendMessage, userInfo,
+        const { id, userid, yourid, coverUrl, avatarUrl, name, onUploadImage, location, isOwner, beFollow, onFollow, sendMessage, userInfo, chatList,
             PAGE, ABOUT, PHOTOS, FOLLOW_US, FOLLOWED, STATISTIC, SETTING, SEND_MESSAGE } = this.props
         return(
             <div className="panel panel-default"
@@ -121,7 +121,7 @@ class Top extends React.Component {
                 <ModalUploadImage/>
                 {(!isOwner && yourid) &&
                     <div className="btn btn-default btn-sm"
-                        onClick={() => sendMessage(id, yourid, userid)}
+                        onClick={() => sendMessage(id, yourid, userid, chatList)}
                         onMouseOver={() => this.setState({ hoverMessage: true })}
                         onMouseLeave={() => this.setState({ hoverMessage: false })}
                         style={{

@@ -4,6 +4,7 @@ import { get } from '~/config/allString'
 import { getBeFollow } from '~/containers/support'
 import Top from '~/components/store/Top'
 import { addMember } from '~/actions/asyn/chat/socket'
+import { getMesId } from '~/actions/asyn/chat/restful'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
@@ -33,7 +34,8 @@ const mapStateToProps = (state, ownProps) => {
         SEND_MESSAGE: g('SEND_MESSAGE'),
         FOLLOW_US: g('FOLLOW_US'),
         FOLLOWED: g('FOLLOWED'),
-        userInfo: state.user
+        userInfo: state.user,
+        chatList: state.inst.chat.left.chatListKey
     })
 }
 
@@ -44,11 +46,16 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     follow: (storeid) => {
         dispatch({ type: 'server/FOLLOW', data: { type: 'store', id: storeid }})
     },
-    sendMessage: (id, yourid, userid) => {
-        let members = []
-        members.push(yourid)
-        members.push(userid)
-        dispatch(addMember(null, yourid, members))
+    sendMessage: (id, yourid, userid, chatList) => {
+        // console.log('fuck', chatList, userid);
+        // if (chatList.indexOf(userid) == -1) {
+        //     let members = []
+        //     members.push(yourid)
+        //     members.push(userid)
+        //     dispatch(addMember(null, yourid, members))
+        // } else {
+            dispatch(getMesId(yourid, userid))
+        // }
     }
 })
 
