@@ -11,6 +11,7 @@ import GroupComment from '~/containers/entity/GroupComment'
 import CallComment from '~/containers/entity/CallComment'
 import PostRow from '~/containers/entity/post/PostRow'
 import FeedBackModal from '~/containers/entity/modal/FeedBackModal'
+import WarningModal from '~/containers/entity/modal/WarningModal'
 
 class SellPost extends React.Component {
     constructor(props){
@@ -29,8 +30,10 @@ class SellPost extends React.Component {
             numfollow, beFollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
             onDeleteSellpost, closeBorder, turnnotify,
             onLike, postrows, postrows_order, clicksetting, id, onFollow, feedBack, showEditSellPost,
-            OPEN, SLEEP,
+            OPEN, SLEEP, FEED_BACK, TURN_OFF_NOTIFY, TURN_ON_NOTIFY,
+            EDIT_SELL_POST, DELETE_SELL_POST, SURE_DELETE_SELL_POST,
         } = this.props
+        if(!id) return <div></div>
         if(!likes || !postrows_order)
             return (
                 <div>
@@ -40,8 +43,7 @@ class SellPost extends React.Component {
         return(
             <div style={{
                 borderRadius: closeBorder ? undefined : 4 ,
-                border: closeBorder ? undefined : '1px solid #CCCCCC',
-                boxShadow: closeBorder ? undefined : '0px 0px 4px #CCCCCC',
+                border: closeBorder ? undefined : '1px solid #DFE0E4',
                 backgroundColor: 'white',
                 width: 520 }}>
                 {/* {isOwner &&
@@ -70,11 +72,9 @@ class SellPost extends React.Component {
                         />
                         {clicksetting &&
                             <DropDown
-                                contents={!isOwner?
-                                    ['Feed Back', turnnotify ? 'Turn off notification for this post' : 'Turn on notification for this post'] :
-                                    ['Feed Back',
-                                    turnnotify ? 'Turn off notification for this post' : 'Turn on notification for this post',
-                                    'Edit SellPost','Delete SellPost',]}
+                                contents={!isOwner ?
+                                    [FEED_BACK, turnnotify ? TURN_OFF_NOTIFY : TURN_ON_NOTIFY ] :
+                                    [FEED_BACK, turnnotify ? TURN_OFF_NOTIFY : TURN_ON_NOTIFY, EDIT_SELL_POST, DELETE_SELL_POST ]}
                                 onClick={(index) => {
                                     if(index==0){
                                         feedBack()
@@ -87,12 +87,19 @@ class SellPost extends React.Component {
                                         showEditSellPost(this.props)
                                     }
                                     if(index==3){
-                                        onDeleteSellpost()
+                                        this.setState({ showDelete: true })
                                     }
                                 }}
                                 width={190}
                             />
                         }
+                        <WarningModal
+                            title={DELETE_SELL_POST}
+                            showModal={this.state.showDelete}
+                            close={() => this.setState({ showDelete: false })}
+                            content={SURE_DELETE_SELL_POST}
+                            onDone={() => onDeleteSellpost()}
+                        />
                         <FeedBackModal
                             showModal={this.state.showFeedBack}
                             close={() => this.setState({ showFeedBack: false })}
@@ -151,12 +158,12 @@ class SellPost extends React.Component {
                             onChangeStatus={() => this.props.onUpdateSellpost('status', (status == 'open') ? 'sleep' : 'open' )}
                             onLike={onLike}
                             onComment={() => console.log('onComment')}
-                            onShare={() => console.log('onShare')}
+                            // onShare={() => console.loonShare')}
                             beLike={beLike}/>
                     </div>
                 </div>
                 <hr style={{ margin: 0}}/>
-                <div style={{ padding: '0px 10px 0px 10px', backgroundColor: '#F6F7F9'}}>
+                <div style={{ padding: '0px 10px 0px 10px', borderRadius: '0px 0px 3px 3px', backgroundColor: '#F6F7F9'}}>
                     {likeContent &&
                         <div style={{ padding: '8px 0px 8px 0px'}}>
                             <LikeGroup
@@ -170,6 +177,7 @@ class SellPost extends React.Component {
                     {likeContent && <hr style={{ margin: 0 }}/>}
                     <GroupComment closeComment={(status != 'open')} id={id}/>
                 </div>
+                <div style={{ height: 10 }}></div>
             </div>
         )
     }

@@ -10,30 +10,32 @@ class CallComment extends React.Component {
     render(){
         const { isleader, avatarUrl, placehoder, id, handleChange, content, onEnter, order, match } = this.props
         return(
-            <div style={{ paddingBottom: 10 }}>
+            <div>
                 <div style={{
                     marginLeft: isleader?0:38,
                     paddingLeft: isleader?0:10,
                     borderLeft: isleader?undefined:'2px solid #4080FF',
                 }}>
                     <img src={avatarUrl} style={{
-                        width: isleader?40:20,
-                        height: isleader?40:20,
+                        width: isleader?35:20,
+                        height: isleader?35:20,
                     }}/>
                     <div style={{
-                        marginTop: isleader?-40:-20,
-                        marginLeft: isleader?50:30,
+                        marginTop: isleader?-44:-20,
+                        marginLeft: isleader?45:30,
                     }}>
-                        <table>
-                            {order && order.map((item,index) => {
-                                return (
-                                    <tbody key={item.id+index} style={{ marginBottom: 5 }}>
-                                        <Product id={item.id} sellpostId={id} index={index} ShowNum={true} num={item.num}
-                                            canRemove={true} width={index?300:300}/>
-                                    </tbody>
-                                )
-                            })}
-                        </table>
+                        {(order && order.length > 0 ) &&
+                            <table>
+                                {order && order.map((item,index) => {
+                                    return (
+                                        <tbody key={item.id+index} style={{ marginBottom: 5 }}>
+                                            <Product id={item.id} sellpostId={id} index={index} ShowNum={true} num={item.num}
+                                                canRemove={true} width={index?300:300}/>
+                                        </tbody>
+                                    )
+                                })}
+                            </table>
+                        }
                         {order && <div style={{ height: 10 }}></div>}
                         <ContentEditable
                             // width={}
@@ -42,7 +44,7 @@ class CallComment extends React.Component {
                             placehoder={placehoder}
                             handleChange={(e) => handleChange(e)}
                             content={content}
-                            padding={isleader?5:0}
+                            padding={isleader?7:0}
                         />
                     </div>
                 </div>

@@ -19,15 +19,21 @@ class LeaderComment extends React.Component {
                 {comments.map((cm, index) => {
                     if(index){
                         return(
-                            <Comment
-                                sellpostid={sellpostid}
-                                leadercommentid={comments[0].id}
-                                key={cm.id}
-                                id={cm.id}
-                                onReply={() => onReply(index, cm.commenterid, cm.type, cm.urlname, cm.name)}
-                                isStoreRepresent={false}
-                                isleader={false}
-                                />
+                            <div key={cm.id}>
+                                <div style={{ height: 10, marginLeft: 38, borderLeft: '2px solid #DDDFE2' }}></div>
+                                <Comment
+                                    sellpostid={sellpostid}
+                                    leadercommentid={comments[0].id}
+                                    key={cm.id}
+                                    id={cm.id}
+                                    onReply={() => onReply(index, cm.commenterid, cm.type, cm.urlname, cm.name)}
+                                    isStoreRepresent={false}
+                                    isleader={false}
+                                    />
+                                {(index == comments.length-1 && isReply) &&
+                                    <div style={{ height: 10, marginLeft: 38, borderLeft: '2px solid #DDDFE2' }}></div>
+                                }
+                            </div>
                         )
                     }else{
                         return(
@@ -54,9 +60,7 @@ class LeaderComment extends React.Component {
                             </div>
                         )
                     }
-                }
-
-                )}
+                })}
                 {isReply &&
                     <CallComment
                         onEnter={() => onEnter()}
@@ -69,6 +73,7 @@ class LeaderComment extends React.Component {
                         placehoder={WRITE_COMMENT}
                         />
                 }
+                <div style={{ height: 10 }}></div>
             </div>
         )
     }

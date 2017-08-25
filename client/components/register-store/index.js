@@ -7,6 +7,7 @@ import DropDownCategory from '~/components/entity/DropDownCategory'
 import VerifyPhone from '~/containers/entity/phone/VerifyPhone'
 import ShowInMap from '~/containers/entity/map/ShowInMap'
 import WarningModal from '~/containers/entity/modal/WarningModal'
+import ChangeLanguage from '~/containers/entity/row/ChangeLanguage'
 
 const checkPhone = (phone) => {
     if(!phone) return 'error'
@@ -60,190 +61,213 @@ class RegisterStore extends React.Component {
             return <Redirect to={"/"+urlname}/>
         }
         return(
-            <div style={{ marginLeft: 200, marginRight: 200 }}>
-                <div style={{ padding: 15, backgroundColor: 'white', width: 700, height: '100%'}}>
-                    <div style={{ fontSize: 25 }}>{CREATE_STORE}</div>
-                    <div>{CREATE_STORE_DESCRIPTION}:</div>
-                    <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_0}</div>
-                    <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_1}</div>
-                    <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_2}</div>
-                    <div style={{ marginTop: 15, fontWeight: 'bold'}}>
-                        {STORE_NAME}{" :"}
-                    </div>
-                    <div>
-                        <input
-                            onChange={(e) => onChangeStoreName(e)}
-                            value={name}
-                            placeholder={ENTER_YOUR_STORE_NAME+" ..."} style={{
-                            width: 400,
-                            fontSize: 12.5,
-                            marginTop: 5,
-                            paddingLeft: 5,}}/>
-                    </div>
-                    <div style={{ marginTop: 15, fontWeight: 'bold'}}>
-                        {STORE_URL}{" :"}
-                    </div>
-                    <div>
-                        www.kajkai.com/{" "}
-                        <input
-                            onChange={(e) => onChangeUrlName(e)}
-                            value={urlname}
-                            placeholder={ENTER_URL_STORE+" ..."} style={{
-                            width: 400,
-                            fontSize: 12.5,
-                            marginTop: 5,
-                            paddingLeft: 5,}}/>
-                    </div>
-                    <div style={{ marginTop: 15, fontWeight: 'bold'}}>
-                        {CATEGORY}{" :"}
-                    </div>
-                    <div style={{  marginLeft: 350, height: 150, width: 300 }}>
-                        <div className="btn btn-default btn-xs" style={{ marginTop: 5, width: 300 , fontSize: 12.5 }}
-                            onClick={() => {
-                                setTimeout(() => {
-                                    onChange('showDropDown', true)
-                                },1)
-                            }}>
-                            {chooseCategory || 'chooseCategory'}
+            <div style={{ marginLeft: 200, marginRight: 200, marginTop: 10 }}>
+                <div style={{ width: 700, height: '100%'}}>
+
+                    <div style={{ backgroundColor: 'white', borderRadius: '5px 5px 0px 0px'}}>
+                        <div style={{ fontSize: 25, padding: 15, borderRadius: '5px 5px 0px 0px', color: 'white', backgroundColor: '#BD081C'}}>{CREATE_STORE}</div>
+                        <hr style={{ margin: 0 }}/>
+                        <div style={{ padding: 15 }}>
+                            <div>{CREATE_STORE_DESCRIPTION}:</div>
+                            <div style={{ fontSize: 13.5, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_0}</div>
+                            <div style={{ fontSize: 13.5, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_1}</div>
+                            <div style={{ fontSize: 13.5, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_2}</div>
                         </div>
-                        {showDropDown &&
-                            <DropDownCategory
-                                width={300}
-                                contents={categoriesName}
-                                onClick={(id) => onChooseCategory(id)}/>
-                        }
-                        {chooseCategory &&
-                            <div className="btn btn-default btn-xs" style={{ marginTop: 5, width: 300, fontSize: 12.5 }}
+                    </div>
+
+                    <div style={{ padding: 15, marginTop: 10, backgroundColor: 'white'}}>
+                        <div style={{ fontWeight: 'bold'}}>
+                            {STORE_NAME}{" :"}
+                        </div>
+                        <div>
+                            <input
+                                onChange={(e) => onChangeStoreName(e)}
+                                value={name}
+                                placeholder={ENTER_YOUR_STORE_NAME+" ..."} style={{
+                                width: 400,
+                                fontSize: 13.5,
+                                marginTop: 5,
+                                paddingLeft: 5,}}/>
+                        </div>
+                    </div>
+
+                    <div style={{ padding: 15, marginTop: 10, backgroundColor: 'white'}}>
+                        <div style={{ fontWeight: 'bold'}}>
+                            {STORE_URL}{" :"}
+                        </div>
+                        <div>
+                            www.kajkai.com/{" "}
+                            <input
+                                onChange={(e) => onChangeUrlName(e)}
+                                value={urlname}
+                                placeholder={ENTER_URL_STORE+" ..."} style={{
+                                width: 400,
+                                fontSize: 13.5,
+                                marginTop: 5,
+                                paddingLeft: 5,}}/>
+                        </div>
+                    </div>
+
+                    <div style={{ padding: 15, marginTop: 10, backgroundColor: 'white'}}>
+                        <div style={{ fontWeight: 'bold'}}>
+                            {CATEGORY}{" :"}
+                        </div>
+                        <div style={{  marginLeft: 350, height: 150, width: 300 }}>
+                            <div className="btn btn-default btn-xs" style={{ marginTop: 5, width: 300 , fontSize: 13.5 }}
                                 onClick={() => {
                                     setTimeout(() => {
-                                        onChange('showSecondDropDown', true)
+                                        onChange('showDropDown', true)
                                     },1)
                                 }}>
-                                {chooseSecondCategory || 'chooseSecondCategory'}
+                                {chooseCategory || 'chooseCategory'}
+                            </div>
+                            {showDropDown &&
+                                <DropDownCategory
+                                    width={300}
+                                    contents={categoriesName}
+                                    onClick={(id) => onChooseCategory(id)}/>
+                            }
+                            {chooseCategory &&
+                                <div className="btn btn-default btn-xs" style={{ marginTop: 5, width: 300, fontSize: 13.5 }}
+                                    onClick={() => {
+                                        setTimeout(() => {
+                                            onChange('showSecondDropDown', true)
+                                        },1)
+                                    }}>
+                                    {chooseSecondCategory || 'chooseSecondCategory'}
+                                </div>
+                            }
+                            { (chooseCategory && showSecondDropDown) &&
+                                <DropDownCategory
+                                    width={300}
+                                    contents={secondCategoriesName}
+                                    onClick={(id) => {
+                                        onChooseSecondCategory(id)
+                                        setTimeout(() =>{
+                                            this.input.focus()
+                                        }, 1)
+                                    }}/>
+                            }
+                            {chooseSecondCategory &&
+                                <input
+                                    onChange={(e) => onChangeCategoryInputValue(e)}
+                                    value={categoryInputValue}
+                                    ref={input =>  this.input = input}
+                                    placeholder={ENTER_CATEGORY+" ..."} style={{
+                                    fontSize: 13.5,
+                                    marginTop: 5,
+                                    paddingLeft: 5,
+                                    width: '100%' }}/>
+                            }
+                        </div>
+                        <div style={{ marginTop: -147, width: 340, }}>
+                            <div style={{ fontSize: 13.5, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_4}</div>
+                            <div style={{ fontSize: 13.5, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_5}</div>
+                        </div>
+                    </div>
+
+                    <div style={{ marginTop: 15, padding: 15, backgroundColor: 'white' }}>
+                        <div style={{  fontWeight: 'bold'}}>
+                            {PHONE}{" :"}
+                        </div>
+                        {!isConfirmPhone ?
+                            <input
+                                onChange={(e) => onChangePhone(e)}
+                                value={phone}
+                                placeholder={ENTER_YOUR_PHONE+" ..."} style={{
+                                marginLeft: 350,
+                                width: 200,
+                                fontSize: 13.5,
+                                marginTop: 5,
+                                paddingLeft: 5,}}/>
+                        :   <div style={{ display: 'inline',marginLeft: 350, paddingLeft: 5, height: 28, width: 200, }}>
+                                {phone}
                             </div>
                         }
-                        { (chooseCategory && showSecondDropDown) &&
-                            <DropDownCategory
-                                width={300}
-                                contents={secondCategoriesName}
-                                onClick={(id) => {
-                                    onChooseSecondCategory(id)
-                                    setTimeout(() =>{
-                                        this.input.focus()
-                                    }, 1)
-                                }}/>
+                        {!isConfirmPhone ?
+                            <div className="btn btn-default btn-xs"
+                                disabled={checkPhone(phone)}
+                                onClick={() => {
+                                    if(!checkPhone(phone)){
+                                        updatePhone(phone)
+                                        onOpenModalPhone(true)
+                                    }
+                                }}
+                                style={{ marginLeft: 10 }}>
+                                {CONFIRM}
+                            </div>
+                        :   <div className="btn btn-default btn-xs"
+                                style={{ marginLeft: 10 }}
+                                onClick={() => chooseAnother()}>
+                                {CHOOSE_ANOTHER}
+                            </div>
                         }
-                        {chooseSecondCategory &&
+                        <VerifyPhone
+                            phone={phone}
+                            showModal={openModalPhone}
+                            close={() => onOpenModalPhone(false)}/>
+                        <div style={{ marginTop: isConfirmPhone?-19: -25, width: 340 }}>
+                            <div style={{ fontSize: 13.5, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_6}</div>
+                            <div style={{ fontSize: 13.5, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_7}</div>
+                        </div>
+                    </div>
+
+                    <div style={{ marginTop: 10, padding: 15, backgroundColor: 'white'}}>
+                        <div style={{ fontWeight: 'bold'}}>
+                            {POSITION_IN_MAP}{" :"}
+                        </div>
+                        <div>
+                            <ShowInMap
+                                canEdit={true}
+                                width={400} height={200}
+                                position={position}
+                                onChangePosition={(position) => onChangePosition(position)}
+                            />
+                        </div>
+                    </div>
+
+                    <div style={{ marginTop: 10, padding: 15, backgroundColor: 'white'}}>
+                        <div style={{ fontWeight: 'bold'}}>
+                            {ADDRESS}{" :"}
+                        </div>
+                        <div>
+                            {". "}{ADDRESS_DESCRIPTION}
+                        </div>
+                        <div>
                             <input
-                                onChange={(e) => onChangeCategoryInputValue(e)}
-                                value={categoryInputValue}
-                                ref={input =>  this.input = input}
-                                placeholder={ENTER_CATEGORY+" ..."} style={{
-                                fontSize: 12.5,
+                                onChange={(e) => onChangeAddress(e)}
+                                value={address}
+                                placeholder={ENTER_YOUR_ADDRESS+" ..."} style={{
+                                width: 400,
+                                fontSize: 13.5,
                                 marginTop: 5,
-                                paddingLeft: 5,
-                                width: '100%' }}/>
-                        }
-                    </div>
-                    <div style={{ marginTop: -147, width: 340, }}>
-                        <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_4}</div>
-                        <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_5}</div>
-                    </div>
-                    <div style={{ marginTop: 15, fontWeight: 'bold'}}>
-                        {PHONE}{" :"}
-                    </div>
-                    {!isConfirmPhone ?
-                        <input
-                            onChange={(e) => onChangePhone(e)}
-                            value={phone}
-                            placeholder={ENTER_YOUR_PHONE+" ..."} style={{
-                            marginLeft: 350,
-                            width: 200,
-                            fontSize: 12.5,
-                            marginTop: 5,
-                            paddingLeft: 5,}}/>
-                    :   <div style={{ display: 'inline',marginLeft: 350, paddingLeft: 5, height: 28, width: 200, }}>
-                            {phone}
-                        </div>
-                    }
-                    {!isConfirmPhone ?
-                        <div className="btn btn-default btn-xs"
-                            disabled={checkPhone(phone)}
-                            onClick={() => {
-                                if(!checkPhone(phone)){
-                                    updatePhone(phone)
-                                    onOpenModalPhone(true)
-                                }
-                            }}
-                            style={{ marginLeft: 10 }}>
-                            {CONFIRM}
-                        </div>
-                    :   <div className="btn btn-default btn-xs"
-                            style={{ marginLeft: 10 }}
-                            onClick={() => chooseAnother()}>
-                            {CHOOSE_ANOTHER}
-                        </div>
-                    }
-                    <VerifyPhone
-                        phone={phone}
-                        showModal={openModalPhone}
-                        close={() => onOpenModalPhone(false)}/>
-                    <div style={{ marginTop: isConfirmPhone?-19: -25, width: 340 }}>
-                        <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_6}</div>
-                        <div style={{ fontSize: 13, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_7}</div>
-                    </div>
-                    <div style={{ marginTop: 15, fontWeight: 'bold'}}>
-                        {POSITION_IN_MAP}{" :"}
-                    </div>
-                    <div>
-                        <ShowInMap
-                            canEdit={true}
-                            width={400} height={200}
-                            position={position}
-                            onChangePosition={(position) => onChangePosition(position)}
-                        />
-                    </div>
-                    <div style={{ marginTop: 15, fontWeight: 'bold'}}>
-                        {ADDRESS}{" :"}
-                    </div>
-                    <div>
-                        {". "}{ADDRESS_DESCRIPTION}
-                    </div>
-                    <div>
-                        <input
-                            onChange={(e) => onChangeAddress(e)}
-                            value={address}
-                            placeholder={ENTER_YOUR_ADDRESS+" ..."} style={{
-                            width: 400,
-                            fontSize: 12.5,
-                            marginTop: 5,
-                            paddingLeft: 5,}}/>
-                    </div>
-                    <div style={{ height: 40 }}>
-                        <div className="btn btn-default btn-sm"
-                            style={{ float: 'right',
-                            color: '#5D9149',
-                            borderColor: '#5D9149',
-                            marginRight: 10,
-                            marginTop: 10 }}
-                            onClick={() => createStore()}
-                            >
-                            {CREATE_STORE}
+                                paddingLeft: 5,}}/>
                         </div>
                     </div>
+
+                    <div style={{ marginTop: 10, padding: 15, color: 'white',
+                        backgroundColor: '#BD081C', borderRadius: '0px 0px 5px 5px'}}>
+                        <div style={{ height: 50 }}>
+                            <div className="btn btn-default"
+                                style={{ float: 'right',
+                                fontSize: 16,
+                                color: '#4B4F56',}}
+                                onClick={() => createStore()}
+                                >
+                                <img src="/images/storeicon.svg" width={20} height={20}/>
+                                <span style={{ marginLeft: 10 }}>{CREATE_STORE}</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <WarningModal
                         showModal={openModalWarning}
                         content={contentModalWarning}
                         close={() => closeModalWarning()}
                     />
-                    <hr style={{ margin: 0, marginTop: 10 }}/>
-                    <div style={{ marginLeft: 0, padding: 5 }} className="btn"
-                        onClick={()=> changeLanguage('vi')}>
-                        <a>Tiếng Việt</a>
-                    </div>
-                    <div className="btn"
-                        onClick={()=> changeLanguage('en')}>
-                        <a>English</a>
+
+                    <div style={{ padding: 15, marginTop: 10, height: 150, backgroundColor: 'white'}}>
+                        <ChangeLanguage fontSize={14}/>
                     </div>
                 </div>
             </div>

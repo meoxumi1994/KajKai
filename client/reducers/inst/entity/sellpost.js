@@ -4,6 +4,11 @@ const sellpost = (state = {
 
 }, action) => {
     switch (action.type) {
+        case 'DELETE_SELL_POST_SUCCESS':
+            return {
+                ...state,
+                [action.sellpostid] : undefined,
+            }
         case 'GET_SELLPOST_FROM_STORE_SUCCESS':
             let newstate = state
             action.sellposts.map((item) => {

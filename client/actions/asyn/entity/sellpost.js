@@ -47,7 +47,7 @@ export const deteleSellPost = (id) => dispatch => {
         sellpostid: id,
     }).then(({ status }) => {
         if(status == 'success'){
-            dispatch({ type: 'DELETE_SELL_POST_SUCCESS' })
+            dispatch({ type: 'DELETE_SELL_POST_SUCCESS', sellpostid: id })
         }else{
             dispatch({ type: 'DELETE_SELL_POST_FAILED' })
         }

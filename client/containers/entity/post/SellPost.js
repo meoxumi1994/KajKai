@@ -4,6 +4,7 @@ import { getTime, getBeLike, getLikeContent, getBeFollow } from '~/containers/su
 import { getSellPost, deteleSellPost, turnNotify, putSellPost } from '~/actions/asyn/entity/sellpost'
 import SellPost from '~/components/entity/post/SellPost'
 
+
 const mapStateToProps = (state, { id }) => {
     const g = (lang) => get(state.user.language, lang)
     const sellpost = state.inst.entity.sellpost[id]
@@ -36,6 +37,7 @@ const mapStateToProps = (state, { id }) => {
     return({
         ...store,
         ...sellpost,
+        id: sellpost ? sellpost.id : undefined,
         mysellpost: sellpost,
         isOwner: isOwner,
         beLike: beLike,
@@ -44,6 +46,12 @@ const mapStateToProps = (state, { id }) => {
         time: time,
         OPEN: g('OPEN'),
         SLEEP: g('SLEEP'),
+        FEED_BACK: g('FEED_BACK'),
+        TURN_OFF_NOTIFY: g('TURN_OFF_NOTIFY'),
+        TURN_ON_NOTIFY: g('TURN_ON_NOTIFY'),
+        EDIT_SELL_POST: g('EDIT_SELL_POST'),
+        DELETE_SELL_POST: g('DELETE_SELL_POST'),
+        SURE_DELETE_SELL_POST: g('SURE_DELETE_SELL_POST'),
     })
 }
 

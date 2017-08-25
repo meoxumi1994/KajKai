@@ -78,7 +78,7 @@ class About extends React.Component {
                             <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
                             <AboutCell kind="follow" title={TOTAL_FOLLOW} value={interactive.numfollow}/>
                             <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
-                            <AboutCell kind="create_time" title={CREATE_TIME} value={getTime(interactive.create_time)}/>
+                            <AboutCell kind="create_time" title={CREATE_TIME} value={getTime(interactive.create_time, language)}/>
                             <hr style={{ margin: 0, padding: 0, borderColor: '#E9EbEE'}}/>
                             <AboutCell kind="last_time" title={LAST_TIME} value={getTime(interactive.last_time, language)}/>
                         </div>

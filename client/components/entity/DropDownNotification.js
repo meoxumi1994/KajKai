@@ -11,21 +11,23 @@ class DropDownNotification extends React.Component {
     componentDidMount(){
         let that = this
         $('#dropdownnotification').on('mousewheel DOMMouseScroll', function(e) {
-            if(that.overgroup.scrollTop + that.group.clientHeight > that.group.scrollHeight - 300 ){
-                that.props.getMoreNotification();
-                e.originalEvent.setWheelDelta = 0;
-            }
-            var scrollTo = null;
-            if(e.type === 'mousewheel') {
-                scrollTo = (e.originalEvent.wheelDelta * -1);
-            }
-            else if(e.type === 'DOMMouseScroll') {
-                scrollTo = 40 * e.originalEvent.detail;
-            }
-            scrollTo = scrollTo / 5
-            if(scrollTo) {
-                e.preventDefault();
-                $(this).scrollTop(scrollTo + $(this).scrollTop());
+            if(that.overgroup){
+                if(that.overgroup.scrollTop + that.group.clientHeight > that.group.scrollHeight - 300 ){
+                    that.props.getMoreNotification();
+                    e.originalEvent.setWheelDelta = 0;
+                }
+                var scrollTo = null;
+                if(e.type === 'mousewheel') {
+                    scrollTo = (e.originalEvent.wheelDelta * -1);
+                }
+                else if(e.type === 'DOMMouseScroll') {
+                    scrollTo = 40 * e.originalEvent.detail;
+                }
+                scrollTo = scrollTo / 5
+                if(scrollTo) {
+                    e.preventDefault();
+                    $(this).scrollTop(scrollTo + $(this).scrollTop());
+                }
             }
         })
         $('#dropdownnotify').on('show.bs.dropdown', () => {

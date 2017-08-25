@@ -26,6 +26,7 @@ export const EmojiShow = (text, height) => {
         [':-D','<img height='+ height +' src="/images/emoji/haha.svg"/>'],
         ['8)','<img height='+ height +' src="/images/emoji/pro.svg"/>'],
         ['&lt;3','<img height='+ height +' src="/images/emoji/love.svg"/>'],
+        ['<3','<img width="15.953125" src="/images/emoji/love.svg"/>'],
         [':o','<img height='+ height +' src="/images/emoji/wow.svg"/>'],
         [':O','<img height='+ height +' src="/images/emoji/wow.svg"/>'],
         [': )','<img height='+ height +' src="/images/emoji/smile.svg"/>'],
@@ -45,6 +46,7 @@ export const Emoji = (text) => {
         [':-D','<img height="16" width="18.65625" src="/images/emoji/haha.svg"/>'],
         ['8)','<img width="14" src="/images/emoji/pro.svg"/>'],
         ['&lt;3','<img width="15.953125" src="/images/emoji/love.svg"/>'],
+        ['<3','<img width="15.953125" src="/images/emoji/love.svg"/>'],
         [':o','<img width="11.671875" src="/images/emoji/wow.svg"/>'],
         [':O','<img width="14.765625" src="/images/emoji/wow.svg"/>'],
         [': )','<img width="12.4375" src="/images/emoji/smile.svg"/>'],
@@ -105,14 +107,24 @@ export const FilterText = (text) => {
     })
 }
 
-export const MixMakeUpShow = (text, height, match) => {
+// let htmlName = name && '<span style="color:'+colorname+'; font-weight: bold">'+name+'</span>'
+// htmlName = link && '<a href="'+link+'"><span style="color:'+colorname+'; font-weight: bold">'+name+'</span></a>'
+// htmlName = htmlName || ''
+// console.log(htmlName+content, name, colorname , link)
+
+export const MixMakeUpShow = (text, height, match, name, link, colorname) => {
+    let htmlName = name && '<span style="color:'+colorname+'; font-weight: bold">'+name+'</span> '
+    htmlName = (link && '<a href="'+link+'"><span style="color:'+colorname+'; font-weight: bold">'+name+'</span></a> ') || htmlName
+    htmlName = htmlName || ''
+    // console.log('111  ',text, height, match, name, link, colorname)
     if(!text) return ""
     let newtext = text
-    newtext = MakeUp(newtext,'<','&lt;')
-    newtext = MakeUp(newtext,'>','&gt;')
+    // newtext = MakeUp(newtext,'<','&lt;')
+    // newtext = MakeUp(newtext,'>','&gt;')
     newtext = Urlify(newtext)
-    newtext = EndLine(newtext)
+    newtext = EndLine(htmlName+newtext)
     newtext = EmojiShow(newtext, height)
     newtext = InsertTagA(newtext,match)
+    // console.log('222 ', newtext)
     return newtext
 }

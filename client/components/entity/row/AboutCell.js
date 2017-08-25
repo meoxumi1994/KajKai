@@ -22,7 +22,7 @@ class AboutCell extends React.Component {
                         {(kind != 'position') ?
                             <span style={{ marginLeft: 10 }}>{value}</span>
                         :   <div style={{ paddingLeft: 10, color: '#1D2129'}}>
-                                {value.lat && <ShowInMap position={value} width={590} height={400} canEdit={false}/>}
+                                {value.lat && <ShowInMap position={value} width={557} height={400} canEdit={false}/>}
                             </div>
                         }
                     </div>

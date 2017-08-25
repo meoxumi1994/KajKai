@@ -16,7 +16,8 @@ class ContentShow extends React.Component {
         this.setState({ width: this.display.getBoundingClientRect().width })
     }
     render(){
-        const { heightEachRow, content, padding, fontWeight, fontSize, minHeight, match } = this.props
+        const { heightEachRow, content, padding, fontWeight, fontSize, minHeight, match,
+            name, link, colorname } = this.props
         return(
             <div style={{
                 // outline: '1px solid transparent',
@@ -26,7 +27,7 @@ class ContentShow extends React.Component {
                 padding: padding}}>
                 <div
                     ref={display => this.display = display}
-                    dangerouslySetInnerHTML={{ __html: MixMakeUpShow(content, heightEachRow, match) }}>
+                    dangerouslySetInnerHTML={{ __html: MixMakeUpShow(content, heightEachRow, match, name, link, colorname) }}>
                 </div>
             </div>
         )

@@ -89,7 +89,7 @@ class ManagerComment extends React.Component {
                 <hr style={{ margin: 0 }}/>
                 <div id="leadercomments"
                     ref={ leadercomments => this.leadercomments = leadercomments }
-                    style={{ overflow: 'scroll', height: height - 360 }}>
+                    style={{ overflow: 'scroll', height: height - 360, paddingTop: 5 }}>
                     {leadercomments && leadercomments.slice(0).reverse().map((item, index) => {
                         return(
                             <div key={item.id}>

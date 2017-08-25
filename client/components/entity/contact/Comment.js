@@ -47,19 +47,19 @@ class Comment extends React.Component {
                     marginLeft: isleader?0:38,
                     paddingLeft: isleader?0:10,
                     fontSize: 12.5,
-                    borderLeft: isleader?undefined:'2px solid #4080FF' }}>
+                    borderLeft: isleader?undefined:'2px solid #DDDFE2' }}>
                 <Link to={urlLink}>
                     <div className="btn" onClick={() => window.scrollTo(0, 0)}
                         style={{ padding: 0 }}>
                         <img src={avatarUrl} style={{
-                            width: isleader?40:20,
-                            height: isleader?40:20,
+                            width: isleader?35:20,
+                            height: isleader?35:20,
                         }}/>
                     </div>
                 </Link>
                 <div style={{
-                    marginLeft: isleader?50:30,
-                    marginTop: isleader?-40:-20,
+                    marginLeft: isleader?45:30,
+                    marginTop: isleader?-38:-23,
                     paddingRight: 18 }}>
                     <Link to={urlLink}>
                         <div className="btn" onClick={() => window.scrollTo(0, 0)}
@@ -68,6 +68,7 @@ class Comment extends React.Component {
                             onMouseLeave={() => this.setState({ hoverName: false })}
                             >
                             <span href="" style={{
+                                fontSize: 13.5,
                                 color: '#365899',
                                 fontWeight: 'bold',
                                 textDecoration: this.state.hoverName? 'underline' : undefined ,
@@ -180,7 +181,6 @@ class Comment extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div style={{ height: 10 }}></div>
             </div>
         )
     }

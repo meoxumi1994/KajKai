@@ -7,6 +7,8 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     return({
         WARNING_MODAL: g('WARNING_MODAL'),
+        DONE: g('DONE'),
+        CLOSE: g('CLOSE'),
     })
 }
 

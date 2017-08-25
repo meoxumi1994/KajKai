@@ -171,7 +171,7 @@ const myString = {
     GENERAL: ['Chung','General'],
     INTERACTION: ['Tương tác', 'Interaction'],
     SECURITY: ['Bảo mật','Security'],
-    FEED_BACK: ['Phản hồi', 'Feed Back'],
+    FEED_BACK: ['Báo cáo', 'Feed Back'],
     TOTAL_COMMENT: ['Tổng số bình luận','Total comment'],
     TOTAL_REPLY_COMMENT: ['Tổng số trả lời bình luận','Total reply comment'],
     TOTAL_LIKE: ['Tổng số like', 'Total like'],
@@ -236,6 +236,44 @@ const myString = {
     AT: ['lúc','at'],
     YESTERDAY: ['hôm qua','yesterday'],
     MONTH: ['tháng','month'],
+    TURN_OFF_NOTIFY: ['Tắt thông báo từ bài đăng này','Turn off notification for this post'],
+    TURN_ON_NOTIFY: ['Bật thông báo từ bài đăng này','Turn on notification for this post'],
+    EDIT_SELL_POST: ['Sửa bài đăng','Edit SellPost'],
+    DELETE_SELL_POST: ['Xoá bài đăng','Delete SellPost'],
+    SURE_DELETE_SELL_POST: ['Bạn có chắc muốn xoá bài đăng này chứ ?','Are you sure you want to delete this post?'],
+
+    //  NOTIFI
+
+    ALSO_COMMENT_IN: ['đã bình luận trong','also commented on'],
+    ORDER_ON: ['đã đặt hàng trong', 'ordered on'],
+
+    A_SELL_POST_YOU_FOLLOW: ['một cửa hàng mà bạn quan tâm','a sell post you followed'],
+    YOUR_SELL_POST: ['cửa hàng của bạn','your sell post'],
+
+    REPLY_TO_COMMENT_OF: ['đã trả lời bình luận của', 'replyed to comment of'],
+    COMMENT_ON_A_SELL_POST: ['trong cửa hàng','comment on a sell post'],
+    YOURS: ['bạn','yours'],
+    IN_STORE_OF: ['trong cửa hàng của','in store of'],
+
+    LIKED_A: ['thích một','liked a'],
+
+    COMMENT_2: ['bình luận', 'comment'],
+    SELL_POST_2: ['bài đăng bán hàng', 'sell post'],
+    IN_STORE: ['trong cửa hàng','in store'],
+
+    CHANGED_SELL_POST_IN_STORE: ['đã thay đổi bài đăng trong cửa hàng', 'changed the sell post in store'],
+
+    RECEIVED_TO: ['đã nhận','received to'],
+    ORDER: ['đơn hàng','order'],
+
+    OF: ['của','of'],
+
+    MY_SELL_POST: ['bài đăng của cửa hàng','my sell post'],
+    CLOSED: ['tạm nghỉ','closed'],
+    OPENED: ['đã mở','opened'],
+
+    CREATE_NEW_SELL_POST: ['đã tạo một bài đăng bán hàng mới','created a new sellpost'],
+    SELF: ['mình','self'],
 }
 
 const allString = {

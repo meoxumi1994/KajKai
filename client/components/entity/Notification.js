@@ -4,9 +4,10 @@ import ContentShow from '~/components/entity/ContentShow'
 import { Link } from 'react-router-dom'
 
 const getString =  (str) => {
+    if(!str) return ''
     let newstr = ""
     str.split('\n').map((item) => newstr += item)
-    return newstr.substr(0,50) + ((newstr.length > 50)?'...':'')
+    return newstr.substr(0,30) + ((newstr.length > 30)?'...':'')
 }
 
 class ContentNotify extends React.Component {
@@ -15,103 +16,160 @@ class ContentNotify extends React.Component {
 
     }
     render(){
-        const { onClick, type, content, name, order } = this.props
+
+        const { onClick, type, status, content, name, order, isYourStore, isYourComment, isYourLeaderComment, leadercomment,
+            ALSO_COMMENT_IN, ORDER_ON, A_SELL_POST_YOU_FOLLOW, YOUR_SELL_POST, SELF,
+            REPLY_TO_COMMENT_OF, COMMENT_ON_A_SELL_POST, YOURS, IN_STORE_OF, LIKED_A, COMMENT_2,
+            SELL_POST_2, IN_STORE, CHANGED_SELL_POST_IN_STORE, RECEIVED_TO,
+            ORDER, OF, MY_SELL_POST, CREATE_NEW_SELL_POST, CLOSED, OPENED,  } = this.props
+        let storename = this.props.storename
+        let commentName = this.props.commentName
+        if(storename == name) storename = SELF
+        if(commentName == name) commentName = SELF
+        // console.log(this.props)
         switch (type) {
             case 'leadercomment':
                 return (
-                    <div style={{ height: 35, fontSize: 13 }}>
-                        <span style={{ fontWeight: 'bold'}}>{name}</span>
-                        {order.length>0 && " "}
-                        {order.length>0 &&
-                        <span>
-                            has <span style={{ color: '#BD081C' }}>{order.length}
-                            </span> {order.length>2 ? 'orders' : 'order'} {content && 'and'}
-                        </span>}
-                        {" "}<span>comment on a post </span>
-                        {content &&
+                    <div style={{  fontSize: 13,  }}>
                         <ContentShow
                             fontSize={13}
                             heightEachRow={16}
-                            content={getString(content)}
-                        />}
+                            name={name}
+                            colorname="#1D2129"
+                            content={
+                                (order.length>0 ? ORDER_ON : ALSO_COMMENT_IN) +
+                                " " + IN_STORE_OF + " " +
+                                (isYourStore ? YOURS : (storename != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+storename+'</span>' : storename)
+                                + (order.length==0 ? ': "' + getString(content) + '"' : '')
+                            }
+                        />
                     </div>
                 )
             case 'comment':
                 return (
-                    <div style={{ height: 35, fontSize: 13 }}>
-                        <span style={{ fontWeight: 'bold'}}>{name}</span>
-                        {order.length>0 && " "}
-                        {order.length>0 &&
-                        <span>
-                            has <span style={{ color: '#BD081C' }}>{order.length}
-                            </span> {order.length>2 ? 'orders' : 'order'} {content && 'and'}
-                        </span>}
-                        {" "}<span>reply on a post </span>
-                        {content &&
+                    <div style={{  fontSize: 13,  }}>
                         <ContentShow
+                            name={name}
+                            colorname="#1D2129"
                             fontSize={13}
                             heightEachRow={16}
-                            content={getString(content)}
-                        />}
+                            content={
+                                REPLY_TO_COMMENT_OF + " " + (isYourLeaderComment ? YOURS : ((commentName != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+commentName+'</span>' : commentName)) +
+                                " " + IN_STORE_OF + " " +
+                                (isYourStore ? YOURS : (storename != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+storename+'</span>' : storename)
+                                + ': "' + getString(content) + '"'
+                            }
+                        />
                     </div>
                 )
             case 'likesellpost':
                 return (
-                    <div style={{ height: 35 }}>
-                        <span style={{ fontWeight: 'bold'}}>{name}</span>
-                        {" "}<span>like a sellpost </span>
-                    </div>
-                )
-            case 'likeleadercomment':
-                return (
-                    <div style={{ height: 35 }}>
-                        <span style={{ fontWeight: 'bold'}}>{name}</span>
-                        {" "}<span>like a comment </span>
+                    <div style={{ fontSize: 13,  }}>
+                        <ContentShow
+                            name={name}
+                            colorname="#1D2129"
+                            fontSize={13}
+                            heightEachRow={16}
+                            content={
+                                LIKED_A + " " + SELL_POST_2 + " " + OF +
+                                " " + IN_STORE_OF + " " +
+                                (isYourStore ? YOURS : (storename != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+storename+'</span>' : storename)
+                            }
+                        />
+                        {/* <span style={{ fontWeight: 'bold'}}>{name}</span>
+                        {" "}{LIKED_A}{" "}{SELL_POST_2}{" "}{OF}{" "}{isYourStore ? YOURS : <span style={{ fontWeight: 'bold'}}>{storename}</span>} */}
                     </div>
                 )
             case 'likecomment':
+            case 'likeleadercomment':
                 return (
-                    <div style={{ height: 35 }}>
-                        <span style={{ fontWeight: 'bold'}}>{name}</span>
-                        {" "}<span>like a reply comment </span>
+                    <div style={{ fontSize: 13, }}>
+                        <ContentShow
+                            name={name}
+                            colorname="#1D2129"
+                            fontSize={13}
+                            heightEachRow={16}
+                            content={
+                                LIKED_A + " " + COMMENT_2 + " " + OF + " " +
+                                (isYourComment ? YOURS : ((commentName != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+commentName+'</span>' : commentName)) +
+                                " " + IN_STORE_OF + " " +
+                                (isYourStore ? YOURS : (storename != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+storename+'</span>' : storename)
+                                + ': "' + getString(content) + '"'
+                            }
+                        />
                     </div>
                 )
             case 'editsellpost':
                 return (
-                    <div style={{ height: 35 }}>
-                        <span style={{ fontWeight: 'bold'}}>{name}</span>
-                        {" "}<span>edit sellpsot </span>
+                    <div style={{ fontSize: 13,  }}>
+                        <ContentShow
+                            name={name}
+                            colorname="#1D2129"
+                            fontSize={13}
+                            heightEachRow={16}
+                            content={CHANGED_SELL_POST_IN_STORE}
+                        />
                     </div>
                 )
             case 'received':
                 return (
-                    <div style={{ height: 35, fontSize: 13 }}>
-                        <span style={{ fontWeight: 'bold'}}>{name}</span>
-                        {order.length>0 && " "}
-                        {order.length>0 &&
-                        <span>
-                            has <span style={{ color: '#BD081C' }}>{order.length}
-                            </span> {order.length>2 ? 'orders' : 'order'} {content && 'and'}
-                        </span>}
-                        {" "}<span>has received a comment</span>
-                        {content &&
+                    <div style={{  fontSize: 13,  }}>
                         <ContentShow
+                            name={name}
+                            colorname="#1D2129"
                             fontSize={13}
                             heightEachRow={16}
-                            content={getString(content)}
-                        />}
+                            content={
+                                RECEIVED_TO + " " + ((order && order.length > 0 ) ? ORDER: COMMENT_2) + " " +
+                                OF + " " +
+                                (isYourComment ? YOURS :
+                                    ((commentName != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+commentName+'</span>' : commentName)
+                                ) +
+                                " " + IN_STORE_OF + " " +
+                                (isYourStore ? YOURS : (storename != SELF) ? '<span style="font-weight: bold;color: #1D2129;">'+storename+'</span>' : storename)
+                                + ': "' + getString(content) + '"'
+                            }
+                        />
+                    </div>
+                )
+            case 'changestatus':
+                return (
+                    <div style={{  fontSize: 13,  }}>
+                        <ContentShow
+                            name={name}
+                            colorname="#1D2129"
+                            fontSize={13}
+                            heightEachRow={16}
+                            content={
+                                MY_SELL_POST + " " + (status == 'open' ? OPENED : CLOSED) +
+                                + ': "' + getString(content) + '"'
+                            }
+                        />
+                    </div>
+                )
+            case 'createsellpost':
+                return (
+                    <div style={{  fontSize: 13,  }}>
+                        <ContentShow
+                            name={name}
+                            colorname="#1D2129"
+                            fontSize={13}
+                            heightEachRow={16}
+                            content={CREATE_NEW_SELL_POST}
+                        />
                     </div>
                 )
             default:
                 return (
                     <div style={{ height: 35 }}>
+                        {/* {MY_SELL_POST}{status == 'open' ? OPENED : CLOSED } */}
                     </div>
                 )
         }
     }
 }
 
-const FirstIcon = ({ type, order }) => {
+const FirstIcon = ({ type, order, status }) => {
     switch (type) {
         case 'leadercomment':
         case 'comment':
@@ -128,6 +186,18 @@ const FirstIcon = ({ type, order }) => {
         case 'likecomment':
             return <img src="/images/notification/like.svg"
                         width={16} height={16} style={{ marginRight: 7 }}/>
+        case 'editsellpost':
+            return <img src="/images/notification/edit.svg"
+                        width={16} height={16} style={{ marginRight: 7 }}/>
+        case 'changestatus' && status == 'open':
+            return <img src="/images/notification/open.svg"
+                width={16} height={16} style={{ marginRight: 7 }}/>
+        case 'changestatus' && status == 'close':
+            return <img src="/images/notification/close.svg"
+                    width={16} height={16} style={{ marginRight: 7 }}/>
+        case 'createsellpost':
+        return <img src="/images/notification/create.svg"
+                width={16} height={16} style={{ marginRight: 7 }}/>
         default:
             return <div></div>
     }
@@ -159,8 +229,11 @@ class Notification extends React.Component {
                 onClick={() => this.onClick() }
                 >
                 <img src={avatarUrl} width={50} height={50}/>
-                <div style={{ minHeight: 40, marginLeft: 60, marginTop: -50, fontSize: 13 }}>
-                    <ContentNotify {...this.props}/>
+                <div style={{ minHeight: 40, marginLeft: 60, marginTop: -50, fontSize: 13,  }}>
+                    <div style={{ width: 350, height: 35, whiteSpace: 'pre-line' }}>
+                        <ContentNotify {...this.props}/>
+                    </div>
+
                     <div style={{ fontSize: 12, color: '#80848C' }} >
                         <FirstIcon {...this.props}/>
                         {"at"}<img src={avartarStore} width={14} height={14} style={{ marginLeft: 7, marginRight: 7 }}/>
