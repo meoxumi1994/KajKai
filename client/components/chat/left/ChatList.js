@@ -29,7 +29,7 @@ class ChatList extends React.Component {
                 {
                   return (
                       <ul className="nav nav-tabs" key={mesId} onClick={() => getMessages(mesId)}
-                      style={{backgroundColor: getTabColor(mesId, currentChat, unread), borderTop: '0.1px solid #dbdbdb', height: 60, width: 366}}>
+                      style={{backgroundColor: getTabColor(mesId, currentChat, unread), borderTop: '0.1px solid #dbdbdb', height: 60, width: 364}}>
                               <ChatContainer mesId={mesId}/>
                       </ul>
                   )
