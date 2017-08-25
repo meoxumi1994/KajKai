@@ -274,6 +274,7 @@ const myString = {
 
     CREATE_NEW_SELL_POST: ['đã tạo một bài đăng bán hàng mới','created a new sellpost'],
     SELF: ['mình','self'],
+    IN: ['trong','in'],
 }
 
 const allString = {

@@ -217,7 +217,7 @@ class Notification extends React.Component {
         window.location = '/post/' + this.props.sellpostid + '/' + commentid;
     }
     render(){
-        const { id, type, avatarUrl, content, name, time, storename, avartarStore, isclick } = this.props
+        const { id, type, avatarUrl, content, name, time, storename, avartarStore, isclick, IN } = this.props
         return (
             <div className="btn" style={{ height: 62, padding: '5px 10px 5px 10px',
                 display: 'inline-block',
@@ -237,7 +237,7 @@ class Notification extends React.Component {
 
                     <div style={{ fontSize: 12, color: '#80848C' }} >
                         <FirstIcon {...this.props}/>
-                        {"at"}<img src={avartarStore} width={14} height={14} style={{ marginLeft: 7, marginRight: 7 }}/>
+                        {IN}<img src={avartarStore} width={14} height={14} style={{ marginLeft: 7, marginRight: 7 }}/>
                         {storename}{" . "}
                         <a style={{ fontSize: 12, color: '#80848C' }}>{time}</a>
                     </div>

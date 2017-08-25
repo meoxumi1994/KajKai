@@ -74,6 +74,7 @@ const mapStateToProps = (state, { id }) => {
         SELF: g('SELF'),
         CLOSED: g('CLOSED'),
         OPENED: g('OPENED'),
+        IN: g('IN'),
     })
 }
 
