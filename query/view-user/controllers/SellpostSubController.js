@@ -58,7 +58,7 @@ export const deleteSellpostNotification = (message) => {
 }
 
 const createSellpostNotification = (type, sellpost) => {
-  const { sellPostId: sellpostId, storeId, category, title, description } = sellpost
+  const { sellPostId: sellpostId, storeId, category, title, description, changeStatus } = sellpost
   BasicStore.findOne({ id: storeId }, (err, basicStore) => {
     if (basicStore) {
       User.find({}, (err, users) => {
@@ -83,32 +83,36 @@ const createSellpostNotification = (type, sellpost) => {
             if (!followingStores) {
               followingStores = []
             }
-            for (let k = 0; k < followingStores.length; k++) {
-              if (followingStores[k] == storeId) {
-                let { notifications } = user
-                if (!notifications) {
-                  notifications = []
-                }
-                let notification = new Notification({
-                  type,
-                  sellpostId,
-                  actorId: storeId,
-                  name: basicStore.storeName,
-                  avatarUrl: basicStore.avatarUrl,
-                  content: title,
-                  time: Date.now(),
-                  storeName: basicStore.storeName,
-                  urlName: basicStore.urlName,
-                  storeId: basicStore.id,
-                  storeAvatarUrl: basicStore.avatarUrl
-                })
-                notify(user.id, notification)
-                notifications.push(notification)
-                user.notifications = notifications
-                user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
-                user.save(() => {})
-                break
+            let { followingSellposts } = user
+            if (!followingSellposts) {
+              followingSellposts = []
+            }
+            if (followingStores.indexOf(storeId) != -1 || followingSellposts.indexOf(sellpostId) != -1) {
+              let { notifications } = user
+              if (!notifications) {
+                notifications = []
               }
+              let notification = new Notification({
+                type,
+                sellpostId,
+                actorId: storeId,
+                name: basicStore.storeName,
+                avatarUrl: basicStore.avatarUrl,
+                content: title,
+                time: Date.now(),
+                storeName: basicStore.storeName,
+                urlName: basicStore.urlName,
+                storeId: basicStore.id,
+                storeAvatarUrl: basicStore.avatarUrl
+              })
+              if (changeStatus) {
+                notification.storeState = changeStatus
+              }
+              notify(user.id, notification)
+              notifications.push(notification)
+              user.notifications = notifications
+              user.numberOfUnRead = user.numberOfUnRead ? (user.numberOfUnRead + 1) : 1
+              user.save(() => {})
             }
           }
         }

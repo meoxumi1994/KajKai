@@ -1,6 +1,6 @@
 import mongoose from '../datasource'
 import _ from 'lodash'
-import { NotificationType } from '../enum'
+import { NotificationType, StoreState } from '../enum'
 import CommentActorSchema from './CommentActor'
 import LikerSchema from './Liker'
 import MatchSchema from './Match'
@@ -28,7 +28,8 @@ const NotificationSchema = new mongoose.Schema({
   numberOfReply: {type: Number},
   match: [MatchSchema],
   comment: {type: CommentActorSchema},
-  reply: {type: ReplyActorSchema}
+  reply: {type: ReplyActorSchema},
+  storeState: {type: String, enum: _.values(StoreState)}
 })
 
 export default NotificationSchema
