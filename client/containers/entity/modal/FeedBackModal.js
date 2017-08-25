@@ -13,6 +13,8 @@ const mapStateToProps = (state, ownProps) => {
         FEED_BACK_DESCRIPTION: g('FEED_BACK_DESCRIPTION'),
         THANK_TO_FEEDBACK: g('THANK_TO_FEEDBACK'),
         FEED_BACK_FAILED: g('FEED_BACK_FAILED'),
+        DONE: g('DONE'),
+        CLOSE: g('CLOSE'),
     })
 }
 

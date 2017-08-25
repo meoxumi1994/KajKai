@@ -27,6 +27,7 @@ class ContentNotify extends React.Component {
         if(storename == name) storename = SELF
         if(commentName == name) commentName = SELF
         // console.log(this.props)
+        console.log(this.props)
         switch (type) {
             case 'leadercomment':
                 return (
@@ -141,8 +142,7 @@ class ContentNotify extends React.Component {
                             fontSize={13}
                             heightEachRow={16}
                             content={
-                                MY_SELL_POST + " " + (status == 'open' ? OPENED : CLOSED) +
-                                + ': "' + getString(content) + '"'
+                                MY_SELL_POST + " " + (status == 'open' ? OPENED : CLOSED)
                             }
                         />
                     </div>
@@ -189,15 +189,16 @@ const FirstIcon = ({ type, order, status }) => {
         case 'editsellpost':
             return <img src="/images/notification/edit.svg"
                         width={16} height={16} style={{ marginRight: 7 }}/>
-        case 'changestatus' && status == 'open':
-            return <img src="/images/notification/open.svg"
-                width={16} height={16} style={{ marginRight: 7 }}/>
-        case 'changestatus' && status == 'close':
-            return <img src="/images/notification/close.svg"
+        case 'changestatus' :
+            if(status == 'open')
+                return <img src="/images/notification/open.svg"
                     width={16} height={16} style={{ marginRight: 7 }}/>
+            else
+                return <img src="/images/notification/close.svg"
+                        width={16} height={16} style={{ marginRight: 7 }}/>
         case 'createsellpost':
-        return <img src="/images/notification/create.svg"
-                width={16} height={16} style={{ marginRight: 7 }}/>
+            return <img src="/images/notification/create.svg"
+                    width={16} height={16} style={{ marginRight: 7 }}/>
         default:
             return <div></div>
     }

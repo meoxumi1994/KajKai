@@ -244,8 +244,8 @@ const myString = {
 
     //  NOTIFI
 
-    ALSO_COMMENT_IN: ['đã bình luận trong','also commented on'],
-    ORDER_ON: ['đã đặt hàng trong', 'ordered on'],
+    ALSO_COMMENT_IN: ['đã bình luận','also commented'],
+    ORDER_ON: ['đã đặt hàng', 'ordered'],
 
     A_SELL_POST_YOU_FOLLOW: ['một cửa hàng mà bạn quan tâm','a sell post you followed'],
     YOUR_SELL_POST: ['cửa hàng của bạn','your sell post'],

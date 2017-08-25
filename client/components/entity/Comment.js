@@ -185,7 +185,7 @@ class Comment extends React.Component {
                         }
                         {(isOwner && isleader && (status=='received' || status=='done')) && "."}
 
-                        {(!isOwner && isleader && (status=='done')) &&
+                        {(!isOwner && isleader && (status!='done')) &&
                             <div className="btn" onClick={() => onDone()}
                                 style={{  padding: '0px 1px 0px 1px' }}>
                                 <a style={{

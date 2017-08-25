@@ -19,21 +19,21 @@ const mapStateToProps = (state, { id }) => {
     }
     const commentName = (notification.comment && notification.comment.name) || (notification.leadercomment && notification.leadercomment.name)
     let isYourComment = false
-    isYourComment = isYourComment || (notification.leadercomment && notification.leadercomment.id == state.user.id)
-    isYourComment = isYourComment || (notification.comment && notification.comment.id == state.user.id)
+    isYourComment = isYourComment || (notification.leadercomment && notification.leadercomment.commenterid == state.user.id)
+    isYourComment = isYourComment || (notification.comment && notification.comment.commenterid == state.user.id)
 
     const commenterIdOfLeaderComment = (notification.leadercomment && notification.leadercomment.commenterid)
-    
+
     let isYourLeaderComment = state.user.id == commenterIdOfLeaderComment
     if(commenterIdOfLeaderComment){
         for(let i=0; i< state.user.storeList.length ; i++){
             if( state.user.storeList[i].id == commenterIdOfLeaderComment ){
                 isYourLeaderComment = true
             }
-            if( state.user.storeList[i].id == (notification.leadercomment && notification.leadercomment.id) ){
+            if( state.user.storeList[i].id == (notification.leadercomment && notification.leadercomment.commenterid) ){
                 isYourComment = true
             }
-            if( state.user.storeList[i].id == (notification.comment && notification.comment.id) ){
+            if( state.user.storeList[i].id == (notification.comment && notification.comment.commenterid) ){
                 isYourComment = true
             }
         }

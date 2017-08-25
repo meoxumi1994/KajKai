@@ -12,7 +12,8 @@ class FeedBackModal extends React.Component {
     }
     render(){
         const { showModal, close, onFeedBack, feedback, FEED_BACK, FEED_BACK_DESCRIPTION,
-            THANK_TO_FEEDBACK, FEED_BACK_FAILED } = this.props
+            THANK_TO_FEEDBACK, FEED_BACK_FAILED, DONE, CLOSE } = this.props
+        
         return(
             <Modal show={showModal} onHide={() => close()}>
                 <div style={{ padding: 10, fontSize: 14.5, fontWeight: 'bold'}}>
@@ -42,7 +43,7 @@ class FeedBackModal extends React.Component {
                         <div style={{ padding: 10, height: 50 }}>
                             <div style={{ float: 'right' }} className="btn btn-default btn-sm"
                                 onClick={() => onFeedBack(this.state.content)}>
-                                Done
+                                {DONE}
                             </div>
                         </div>
                     </div>
