@@ -1,4 +1,4 @@
-import { User, Notification, BasicStore, IDSellpostStore, Match, CommentActor } from '../models'
+import { User, Notification, BasicStore, IDSellpostStore, Match, CommentActor, ReplyActor } from '../models'
 import { NotificationType } from '../enum'
 import { addIDReplyCommentSellpost } from '../services/IDService'
 import { notify } from './NotificationPubController'
@@ -29,6 +29,15 @@ export const createReplyNotification = (message) => {
           name: user.username,
           avatarUrl: user.avatarUrl
         }
+
+        let replyActor = new ReplyActor({
+          replyId,
+          id: replierId,
+          name: user.username,
+          avatarUrl: user.avatarUrl,
+          type: 'user'
+        })
+        replyActor.save(() => {})
         resolve(replier)
       } else {
         resolve(null)
@@ -43,6 +52,14 @@ export const createReplyNotification = (message) => {
           name: basicStore.storeName,
           avatarUrl: basicStore.avatarUrl
         }
+        let replyActor = new ReplyActor({
+          replyId,
+          id: replierId,
+          name: basicStore.storeName,
+          avatarUrl: basicStore.avatarUrl,
+          type: 'store'
+        })
+        replyActor.save(() => {})
         resolve(replier)
       } else {
         resolve(null)
