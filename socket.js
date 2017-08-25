@@ -330,7 +330,8 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
       ''
     ],
     id: '',
-    time: ''
+    time: '',
+    storeId: ''
 },
 'client/ADD_MEMBER': {
     mesId: '',
@@ -342,7 +343,14 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
       }
     ],
     id: '',
-    time: ''
+    time: '',
+    store: {
+        id: '',
+        ownerId: '',
+        storeName: '',
+        storeUrl: '',
+        storeCover: ''
+    }
 }
 
 // Remove member from group     // status thang bi xoa == false

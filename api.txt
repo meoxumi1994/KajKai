@@ -829,7 +829,14 @@ GET /chatlist?offset=offset&length=length: { // thứ tự trả về như thế
             username: '',
             status:             // default = true
           }
-        ]
+        ],
+        store: {
+            id: '',
+            ownerId: '',
+            storeName: '',
+            storeUrl: '',
+            storeCover: ''
+        }
       }
     ]
 }
