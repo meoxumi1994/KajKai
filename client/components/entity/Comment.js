@@ -63,8 +63,9 @@ class Comment extends React.Component {
                                 onClick={(index) => {
                                     if(index == 0)
                                         this.props.onBlock()
-                                    if(index == 1)
+                                    if(index == 2){
                                         this.props.onDone()
+                                    }
                                 }}
                                 contents={[BLOCK,'hr',DONE]}
                             />

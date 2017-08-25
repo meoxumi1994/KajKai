@@ -10,7 +10,7 @@ class DisplayImage extends React.Component {
             marginLeft: 0,
         }
     }
-    componentWillMount(){
+    componentDidMount(){
         const img = new Image();
         const that = this
         const { width, height, src } = this.props
