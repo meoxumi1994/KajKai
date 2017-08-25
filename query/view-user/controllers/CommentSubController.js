@@ -18,7 +18,9 @@ export const createCommentNotification = (message) => {
     }
   })
 
-  let contentMap = new ContentMap()
+  let contentMap = new ContentMap({
+    id: commentId
+  })
   if (content) contentMap.content = content
   if (order) contentMap.order = order.map((product) => ({
     id: product.id,

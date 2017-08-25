@@ -19,7 +19,10 @@ export const createReplyNotification = (message) => {
   })
 
   if(content) {
-    let contentMap = new ContentMap({ content })
+    let contentMap = new ContentMap({
+      id: replyId, 
+      content
+    })
     contentMap.save(() => {})
   }
 
