@@ -42,3 +42,9 @@ export const OrderStatus = {
   RECEIVED: 'received',
   DONE: 'done'
 }
+
+export const StoreState = {
+  NOTYET: 'notyet',
+  OPENING: 'open',
+  CLOSING: 'sleep'
+}

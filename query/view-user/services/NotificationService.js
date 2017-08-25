@@ -287,7 +287,8 @@ export const getClientFormatNotification = (notification) => ({
     name: notification.reply.name,
     avatarUrl: notification.reply.avatarUrl,
     type: notification.reply.type
-  } : null
+  } : null,
+  status: notification.storeState ? notification.storeState : ''
 })
 
 const isLiker = (user, liker) => {
