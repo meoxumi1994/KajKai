@@ -91,17 +91,19 @@ class GroupImage extends React.Component {
         if(this.props.canEdit){
             this.props.onEdit()
         }else{
-            const img = new Image();
-            const that = this
-            img.onload = function() {
-                that.setState({
-                    openModal: true,
-                    imgHeight: this.height,
-                    imgWidth: this.width,
-                    index: index
-                })
+            if(!this.props.disableClickImage){
+                const img = new Image();
+                const that = this
+                img.onload = function() {
+                    that.setState({
+                        openModal: true,
+                        imgHeight: this.height,
+                        imgWidth: this.width,
+                        index: index
+                    })
+                }
+                img.src = this.props.images[index];
             }
-            img.src = this.props.images[index];
         }
     }
     render(){

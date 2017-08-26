@@ -6,6 +6,7 @@ import { getStore } from '~/actions/asyn/store'
 const mapStateToProps = (state, ownProps ) => {
     const { scrollTop, scrollLeft, height } = state.inst.app
     return({
+        storeid: ownProps.location.pathname.split('/')[1],
         store: state.inst.store.index,
         iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT' || !state.inst.store.index.id),
         isusername: state.user.username,
@@ -16,8 +17,8 @@ const mapStateToProps = (state, ownProps ) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onGetStore: () => {
-        dispatch(getStore(ownProps.location.pathname.split('/')[1]))
+    onGetStore: (storeid) => {
+        dispatch(getStore(storeid))
     }
 })
 

@@ -138,15 +138,15 @@ class IntroduceStore extends React.Component {
                     </div>
                 </div>
                 <div style={{ padding: 0, fontSize: 12.5 }} className="btn">
-                    <a href={"/"+urlname}>{urlname}</a>
+                    <Link to={"/"+urlname}>{urlname}</Link>
                 </div>
                 {" . "}
                 <div style={{ padding: 0, fontSize: 12.5 }} className="btn">
-                    <a href={"/"+urlname+"/photo"}>{PHOTOS}</a>
+                    <Link to={"/"+urlname+"/photo"}>{PHOTOS}</Link>
                 </div>
                 {" . "}
                 <div style={{ padding: 0, fontSize: 12.5 }} className="btn">
-                    <a href={"/"+urlname+"/about"}>{ABOUT}</a>
+                    <Link to={"/"+urlname+"/about"}>{ABOUT}</Link>
                 </div>
             </div>
         )

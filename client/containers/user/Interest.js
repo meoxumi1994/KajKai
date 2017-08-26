@@ -7,11 +7,13 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const { id, avatarUrl, coverUrl, username } = state.inst.user.index
     const { scrollTop, scrollLeft, height } = state.inst.app
-    
+
     return({
         ...state.inst.user.interest,
         id: id,
         avatarUrl: avatarUrl,
+        stateUser: state.inst.user.index.stateUser,
+        auth: state.auth,
         coverUrl: coverUrl,
         username: username,
         scrollTop: scrollTop,

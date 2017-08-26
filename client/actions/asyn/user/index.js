@@ -22,6 +22,11 @@ export const getUser = (id) => dispatch => {
         if(status == 'success'){
             dispatch({ type: 'USER_GET_SUCCESS', user })
             dispatch(getInterest( id, -1 ))
+            if(document.title.split(")").length > 1){
+                document.title = document.title.split(")")[0] + ') ' + user.username
+            }else {
+                document.title = user.username
+            }
         }else{
             dispatch({ type: 'USER_GET_FAILED', user })
         }
@@ -51,6 +56,7 @@ export const updateUser = (user) => dispatch => {
     .then(({ status, user }) => {
         if(status == 'success'){
             dispatch({ type: 'UPDATE_USER_SUCCESS', user: user })
+
         }else{
             dispatch({ type: 'UPDATE_USER_FAILED', user: user })
         }

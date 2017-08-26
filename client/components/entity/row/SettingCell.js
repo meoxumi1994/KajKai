@@ -1,7 +1,33 @@
 import React from 'react'
 
 import VerifyPhone from '~/containers/entity/phone/VerifyPhone'
-import ShowInMap from '~/containers/entity/map/ShowInMap'
+import { withGoogleMap, GoogleMap, Marker, GoogleMapLoader } from "react-google-maps";
+import { places } from "react-google-maps"
+
+const GettingStartedGoogleMap = withGoogleMap(props => {
+    const center = props.centerPosition ? {
+        center : props.centerPosition
+    }: undefined
+    return(
+        <GoogleMap
+            defaultOptions={props.defaultOptions}
+            ref={props.onMapLoad}
+            defaultZoom={14}
+            {...center}
+            defaultCenter={props.defaultCenter}
+            onClick={props.onMapClick}>
+            {/* <SearchBox
+            inputPlaceholder="Customized your placeholder"
+            /> */}
+            {props.marker &&
+              <Marker
+                  {...props.marker}
+                  onRightClick={() => props.onMarkerRightClick(index)}
+              />
+            }
+        </GoogleMap>
+    )
+})
 
 const checkPhone = (phone) => {
     if(!phone) return 'error'
@@ -13,7 +39,8 @@ const checkPhone = (phone) => {
 class SettingCell extends React.Component {
     constructor(props){
         super(props)
-        this.state = { isEdit: false, value: '', value1: '', value2: '', value3: '' }
+        this.state = { isEdit: false, value: '', value1: '', value2: '', value3: '', showModal: false,
+        centerModal: undefined,}
     }
     componentDidMount(){
         this.setState({ value: this.props.value || ''})
@@ -22,6 +49,11 @@ class SettingCell extends React.Component {
         const { id, title, description, placeholder, onVerify, EDIT_PASSWORD,
             NEW_PASSWORD, OLD_PASSWORD, RE_PASSWORD, DONE,
             EDIT, SAVE, ADD, CONFIRM, kind, openModalPhone, width } = this.props
+
+        let position = this.state.value
+        let marker = (position && position.lat) ? { position: position } : undefined
+        let currentPosition = (position && position.lat) ? position : { lat: 20.969133867372143, lng: 105.86288452148438 }
+        console.log(position)
         return(
             <div className="panel panel-default" style={{ margin: 0, marginTop: 10, }}>
                 <div style={{ padding: 10, borderRadius: '3px 3px 0px 0px', fontSize: 18, backgroundColor: '#F6F7F9'}}>
@@ -37,12 +69,63 @@ class SettingCell extends React.Component {
                     }
                     {kind == 'position' ?
                         <div style={{ padding: 10 }}>
-                            <ShowInMap position={this.state.value} width={width-22} height={500}
+                            {/* <ShowInMap position={this.state.value} width={width-22} height={500}
                                     onChangePosition={(value) => {
                                         this.setState({ value: value })
                                         this.props.onUpdate(value)
                                     }}
-                                    canEdit={true}/>
+                                    canEdit={true}/> */}
+                                    <div style={{ width: 580 }}>
+                                        <GettingStartedGoogleMap
+                                           containerElement={
+                                               <div style={{ height: 580 }} />
+                                           }
+                                           mapElement={
+                                               <div style={{ height: 580 }} />
+                                           }
+                                           centerPosition={this.state.centerModal}
+                                           defaultCenter={currentPosition}
+                                           onMapLoad={() => undefined}
+                                           center={this.state.centerModal}
+                                           onMapClick={(e) => {
+                                               this.setState({
+                                                   value: {
+                                                       lat: e.latLng.lat(),
+                                                       lng: e.latLng.lng(),
+                                                   }
+                                               })
+                                            //    this.props.onUpdate({
+                                            //        lat: e.latLng.lat(),
+                                            //        lng: e.latLng.lng(),
+                                            //    })
+                                           }}
+                                           marker={marker}
+                                         />
+                                    </div>
+                                    {/* <div style={{ height: 40 }}>
+                                        <div className="btn btn-default btn-sm"
+                                            style={{ marginTop: 10 }}
+                                            onClick={() => {
+                                                const that = this
+                                                navigator.geolocation.getCurrentPosition((pos) => {
+                                                    const coords = pos.coords;
+                                                    that.setState({
+                                                        centerModal: {
+                                                            lat: pos.coords.latitude,
+                                                            lng: pos.coords.longitude,
+                                                        }
+                                                    })
+                                                    // console.log('that', pos.coords.latitude, pos.coords.longitude )
+                                                })
+                                            }}>
+                                            {GET_CURRENT_POSITION}
+                                        </div>
+                                        <div className="btn btn-default btn-sm"
+                                            style={{ float: 'right', marginTop: 10 }}
+                                            onClick={() => this.setState({ showModal: false })}>
+                                            {CLOSE}
+                                        </div>
+                                    </div> */}
                         </div>
                     : kind == 'phone' ?
                         <div style={{ padding: 10 }}>

@@ -35,6 +35,12 @@ export const getStore = (id) => dispatch => {
         const { status, store } = response
         if(status == 'success'){
             dispatch({ type: 'STORE_GET_SUCCESS', store })
+
+            if(document.title.split(")").length > 1){
+                document.title = document.title.split(")")[0] + ') ' + store.storename
+            }else {
+                document.title = store.storename
+            }
         }else{
             dispatch({ type: 'STORE_GET_FAILED', store })
         }

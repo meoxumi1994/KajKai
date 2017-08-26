@@ -1,12 +1,18 @@
 const interest = (state = {
-
+    stateInterest: 'WAIT',
 }, action) => {
     switch (action.type) {
         case 'GET_INTEREST_ING':
-            return {}
+            return {
+                ...state,
+                data: undefined,
+                stateInterest: action.type,
+            }
         case 'GET_INTEREST_SUCCESS':
             return {
-                data: action.data
+                ...state,
+                data: action.data,
+                stateInterest: action.type,
             }
         default:
             return state

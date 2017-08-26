@@ -43,6 +43,8 @@ class DropDownNotification extends React.Component {
             <div className="dropdown" id="dropdownnotify">
                 <div className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"
                     style={{ borderWidth: 0, padding: 0, backgroundColor: 'transparent'}}
+                    onMouseOver={() => this.setState({ hoverNotification: true })}
+                    onMouseLeave={() => this.setState({ hoverNotification: false })}
                     onClick={() => {
                         onChange('numUnreaded', 0)
                         this.setState({ show: true })
@@ -70,7 +72,7 @@ class DropDownNotification extends React.Component {
                         style={{ overflow: 'auto', maxHeight: 600, }}>
                         <div ref={ group => this.group = group }>
                             {this.state.show &&
-                                <GroupNotification/>
+                                <GroupNotification history={this.props.history}/>
                             }
                         </div>
                     </div>
