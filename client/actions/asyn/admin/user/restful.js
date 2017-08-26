@@ -1,7 +1,7 @@
 import { flem, flet } from '../../../support'
 
 export const getUsers = (offset) => dispatch => {
-    const length = 5
+    const length = 10
     flem('/users', {
       offset: offset,
       length: length

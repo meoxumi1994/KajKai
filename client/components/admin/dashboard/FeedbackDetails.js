@@ -22,11 +22,13 @@ class FeedbackDetails extends React.Component {
 
         let reason = ''
 
+        console.log('DEBUG', details);
+
         let prettyTime = new Date(time)
         prettyTime = prettyTime.toLocaleString()
 
         return (
-          <Modal style={{ marginTop: 120 }} show={display.details} onHide={() => close()}>
+          <Modal style={{ marginTop: 30 }} show={display.details} onHide={() => close()}>
               <Modal.Header closeButton>
               <Modal.Title><label>Feedback #{id}:</label><label style={{color: status? 'green': 'red', marginLeft: 10}}>{status? 'Solved': 'Unsolved'}</label></Modal.Title>
               </Modal.Header>

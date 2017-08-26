@@ -18,7 +18,7 @@ class User extends React.Component {
                 onUserDetails, loadMore
               } = this.props
         return (
-            <div style={{width: '100%', height: 900, overflowY: 'scroll', borderWidth: 1, borderStyle: 'solid'}}>
+            <div style={{width: '100%', height: '95%', overflowY: 'scroll', borderWidth: 1, borderStyle: 'solid'}}>
 
                 <nav className="navbar navbar-default">
                     <button onClick={() => loadMore(keyy.length)} style={{float: 'right', margin: '5px 10px 5px 5px'}} className="btn btn-default">{display.loadMore?'Load more':'Data is up to date'}</button>

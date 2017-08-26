@@ -11,6 +11,14 @@ class Feedbacks extends React.Component {
         const { myKeyy, mapp,
                 onDetailsFeedback
               } = this.props
+
+
+        if (myKeyy.length == 0) {
+            return (
+                <div style={{textAlign: 'center', marginTop: 10}}>No feedback</div>
+            )
+        }
+
         return (
             <div style={{overflowY: 'scroll', height: 850}}>
                 <table className="table table-bordered">
@@ -34,11 +42,11 @@ class Feedbacks extends React.Component {
                           return (
                             <tr key={id}>
                                <td>{index + 1}</td>
-                               <td>
+                               <td style={{width: 150}}>
                                    <img src={reporter.user.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
                                    <a href={link.user(reporter.user.id)}>{reporter.user.username}</a>
                                </td>
-                               <td>
+                               <td style={{width: 150}}>
                                    <img src={defendant.user.avatarUrl} style={{width: 40, height: 40, borderRadius: 50, marginRight: 10}}/>
                                    <a href={link.user(defendant.user.id)}>{defendant.user.username}</a>
                                </td>
@@ -49,7 +57,9 @@ class Feedbacks extends React.Component {
                                     <p><a href={link.sellpost(defendant.sellpostId)} to="_blank">Link</a></p>
                                </td>
                                <td>
-                                    {Date(time * 1000)}
+                                    {
+                                      (new Date(time * 1000)).toLocaleString()
+                                    }
                                </td>
                                <td>
                                     {
@@ -60,7 +70,7 @@ class Feedbacks extends React.Component {
                                     }
                                </td>
                                <td>
-                                  <button className="btn btn-default" onClick={() => onDetailsFeedback(id)}>
+                                  <button className="btn btn-default" onClick={() => onDetailsFeedback(id)} style={{fontSize: 11}}>
                                       DETAILS
                                   </button>
                                </td>
