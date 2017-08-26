@@ -62,7 +62,7 @@ export const createChat = (message) => {
             }
           })
         })
-      }      
+      }
     }, err => {
       console.log('error', err)
     })
@@ -70,7 +70,7 @@ export const createChat = (message) => {
 }
 
 export const updateChat = (message) => {
-  const { groupId: id, groupName: name, members: users } = message.chatGroup
+  const { groupId: id, groupName: name, members: users, storeId } = message.chatGroup
 
   Chat.findOne({ id }, (err, chat) => {
     if (chat) {
@@ -92,28 +92,57 @@ export const updateChat = (message) => {
           chat.users = basicUsers
           if (name) chat.name = name
           else chat.name = ''
-          chat.save(() => {})
+          if (storeId) {
+            BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+              if (basicStore) {
+                chat.store = basicStore
+                chat.save(() => {})
+                chat.users.map((user) => {
+                  UserChat.findOne({ userId: user.id }, (err, userChat) => {
+                    if (userChat) {
+                      let { chats } = userChat
+                      for (let i = 0; i < chats.length; i++) {
+                        if (chats[i].id == chat.id) {
+                          chats[i].users = basicUsers
+                          if (name) chats[i].name = name
+                          else chats[i].name = ''
+                          break
+                        } else if (i == chats.length - 1) {
+                          chats.push(chat)
+                        }
+                      }
 
-          chat.users.map((user) => {
-            UserChat.findOne({ userId: user.id }, (err, userChat) => {
-              if (userChat) {
-                let { chats } = userChat
-                for (let i = 0; i < chats.length; i++) {
-                  if (chats[i].id == chat.id) {
-                    chats[i].users = basicUsers
-                    if (name) chats[i].name = name
-                    else chats[i].name = ''
-                    break
-                  } else if (i == chats.length - 1) {
-                    chats.push(chat)
-                  }
-                }
-
-                userChat.chats = chats
-                userChat.save(() => {})
+                      userChat.chats = chats
+                      userChat.save(() => {})
+                    }
+                  })
+                })
               }
             })
-          })
+          } else {
+            chat.save(() => {})
+
+            chat.users.map((user) => {
+              UserChat.findOne({ userId: user.id }, (err, userChat) => {
+                if (userChat) {
+                  let { chats } = userChat
+                  for (let i = 0; i < chats.length; i++) {
+                    if (chats[i].id == chat.id) {
+                      chats[i].users = basicUsers
+                      if (name) chats[i].name = name
+                      else chats[i].name = ''
+                      break
+                    } else if (i == chats.length - 1) {
+                      chats.push(chat)
+                    }
+                  }
+
+                  userChat.chats = chats
+                  userChat.save(() => {})
+                }
+              })
+            })
+          }
         }, err => {
           console.log('error', err)
         })
