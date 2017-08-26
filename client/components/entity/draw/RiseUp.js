@@ -10,7 +10,9 @@ const RiseUp = ({ src, style, number }) => {
                     right: 0,
                     fontSize: 11,
                     borderRadius: '2px',
-                    backgroundColor: '#BD081C',
+                    border: '1px solid white',
+                    backgroundColor: '#FA3E3E',
+                    boxShadow: '0px 0px 3px black',
                     color: 'white',
                     padding: '0px 3px 0px 3px',
                 }}>{number}</small>

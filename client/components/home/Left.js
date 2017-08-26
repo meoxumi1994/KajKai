@@ -6,7 +6,7 @@ import CellLeft from '~/components/entity/row/CellLeft'
 import ChangeLanguage from '~/containers/entity/row/ChangeLanguage'
 
 const Left = ({ storeList, avatarUrl, username, changeLanguage, id, language,  STORE, HOME, BASIC, CREATE_STORE, STORE_BOLD,
-    CREATE_INTEREST, SETTING_BOLD, INTEREST }) => {
+    CREATE_INTEREST, SETTING_BOLD, INTEREST, SETTING }) => {
     return(
         <div style={{ width: 200 }}>
             {username && <CellLeft avatar={avatarUrl} name={username} link={"/user/"+id}/>}
@@ -16,6 +16,12 @@ const Left = ({ storeList, avatarUrl, username, changeLanguage, id, language,  S
             <div>
                 <CellLeft avatar="/images/kajkai.svg" name={HOME} link={"/"} hover={true} disabledLink={true}/>
             </div>
+            {username &&
+                <div>
+                    <CellLeft avatar="/images/generalicon.svg" name={SETTING} link={"/user/"+id+"/setting"}/>
+                </div>
+            }
+
             {username && <div style={{ marginTop: 10 }}>
                 <div style={{ marginLeft: 5, marginBottom: 2, borderRadius: 2, width: 150, fontSize: 12, color: '#4B4F56'}}>
                     {STORE_BOLD}
