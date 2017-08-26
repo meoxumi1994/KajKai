@@ -51,8 +51,7 @@ class Enlarge extends React.Component {
         })
     }
     render(){
-        const { TITLE, FULL_SCREEN,
-            height, width, close, left, right,
+        const { TITLE, FULL_SCREEN, height, width, close, left, right,
             images, index, imgHeight, imgWidth, sellpostid } = this.props
         const src = images[index]
         const ratio = imgWidth / imgHeight
@@ -65,7 +64,7 @@ class Enlarge extends React.Component {
             <div onClick={() => this.close()}
                 style={{
                 position: 'fixed',
-                zIndex: 10,
+                zIndex: 1000,
                 top: 0,
                 left: 0,
                 height: height,
@@ -120,16 +119,19 @@ class Enlarge extends React.Component {
                     {this.state.hoverImage &&
                         <div className="btn"
                             style={{
-                            right: 5,
-                            top: (myHeight - 80)/2,
+                            right: 0,
+                            height: myHeight - 160,
+                            top: 80,
+                            width: (blackWidth/2 - 5),
                             color: 'white',
                             position: 'absolute',
                             opacity: this.state.hoverRight?1:0.5,
+                            paddingLeft: (blackWidth/2 - 172 ),
                             }}
                             onMouseOver={() => this.setState({ hoverRight: true })}
                             onMouseLeave={() => this.setState({ hoverRight: false })}
                             onClick={() => right()}>
-                            <span style={{ fontSize : 40, textShadow: '1px 1px 2px #000000',}}
+                            <span style={{ fontSize : 40, marginRight: -100, marginTop: (myHeight/2 - 120), textShadow: '1px 1px 2px #000000',}}
                                 className="glyphicon glyphicon-menu-right">
                             </span>
                         </div>
@@ -137,16 +139,19 @@ class Enlarge extends React.Component {
                     {this.state.hoverImage &&
                         <div className="btn"
                             style={{
-                                left: 5,
-                                top: (myHeight - 80)/2,
+                                left: 0,
+                                width: (blackWidth/2 - 5),
+                                height: myHeight - 160,
+                                top: 80,
                                 color: 'white',
                                 position: 'absolute',
                                 opacity: this.state.hoverLeft?1:0.5,
+                                paddingRight: (blackWidth/2 - 80),
                             }}
                             onMouseOver={() => this.setState({ hoverLeft: true })}
                             onMouseLeave={() => this.setState({ hoverLeft: false })}
                             onClick={() => left()}>
-                            <span style={{ fontSize : 40, textShadow: '1px 1px 2px #000000'}}
+                            <span style={{ fontSize : 40, marginTop: (myHeight/2 - 120), textShadow: '1px 1px 2px #000000'}}
                                 className="glyphicon glyphicon-menu-left">
                             </span>
                         </div>
@@ -156,7 +161,7 @@ class Enlarge extends React.Component {
                             style={{
                             height: 80,
                             top: 0,
-                            paddingTop: 10,
+                            paddingTop: 15,
                             right: 5, color: 'white',
                             position: 'absolute',
                             opacity: this.state.hoverFullScreen?1:0.5,
@@ -164,9 +169,10 @@ class Enlarge extends React.Component {
                             onMouseOver={() => this.setState({ hoverFullScreen: true })}
                             onMouseLeave={() => this.setState({ hoverFullScreen: false })}
                             onClick={() => this.setState({ openFullScreen: true })}>
-                            <span style={{ fontSize : 14, textShadow: '1px 1px 2px #000000'}}>
+                            {/* <span style={{ fontSize : 14, textShadow: '1px 1px 2px #000000'}}>
                                 {FULL_SCREEN}
-                            </span>
+                            </span> */}
+                            <img src="/images/fullscreen.svg" width={20} height={20}/>
                         </div>
                     }
                 </div>
@@ -183,6 +189,7 @@ class Enlarge extends React.Component {
                     overflow: 'scroll',
                     backgroundColor: 'white'}}>
                     <SellPost
+                        disableClickImage={true}
                         closeBorder={true}
                         id={sellpostid}/>
                 </div>

@@ -20,7 +20,7 @@ const index = (state = {
             }
         case 'UPDATE_STORE_SUCCESS':
             if(state.id == action.store.id)
-                return {...state, avatarUrl: '/images/storeAvatarDefault.png', coverUrl: '/images/storeCoverDefault.png', ...action.store}
+                return { avatarUrl: '/images/storeAvatarDefault.png', coverUrl: '/images/storeCoverDefault.png', ...state, ...action.store}
             return state
         case 'client/FOLLOW':
             if(action.data.type=='store'){

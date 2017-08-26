@@ -16,7 +16,7 @@ class GroupNotification extends React.Component {
                 {notifications.map((item, index) =>
                     <div key={item.id} >
                         {index > 0 && <hr style={{ margin: 0 }}/>}
-                        <Notification  id={item.id}/>
+                        <Notification   history={this.props.history} id={item.id}/>
                     </div>
                 )}
                 {statenotification == 'GET_NOTIFICATION_ING' &&

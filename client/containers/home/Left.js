@@ -15,6 +15,8 @@ const mapStateToProps = (state, ownProps) => {
         BASIC: g('BASIC'),
         CREATE_STORE: g('CREATE_STORE'),
         SETTING_BOLD: g('SETTING_BOLD'),
+        INTEREST: g('INTEREST'),
+        SETTING: g('SETTING'),
     })
 }
 

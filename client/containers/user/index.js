@@ -7,6 +7,7 @@ const mapStateToProps = (state, ownProps ) => {
     const { scrollTop, scrollLeft, height } = state.inst.app
     return({
         ...state.inst.user.index,
+        userid: ownProps.location.pathname.split('/')[2],
         iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT' || !state.inst.user.index.id ),
         isusername: state.user.username,
         scrollTop: scrollTop,
@@ -16,28 +17,14 @@ const mapStateToProps = (state, ownProps ) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    getUser: (stateUser, id) => {
-        if(ownProps.location.pathname.split('/')[2] != id && (stateUser == 'WAIT' || stateUser == 'USER_GET_SUCCESS')){
-            dispatch(getUser(ownProps.location.pathname.split('/')[2]))
-        }
+    onGetUser: (id) => {
+        dispatch(getUser(id))
     }
 })
 
-const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { stateUser, id, ...anotherState } = stateProps
-    const { getUser, ...anotherDispatch } = dispatchProps
-    return({
-        onGetUser: () => {
-            getUser(stateUser, id)
-        },
-        ...ownProps,
-        ...stateProps,
-        ...dispatchProps,
-    })
-}
 
 const UserContainer = connect(
-    mapStateToProps, mapDispatchToProps, mergerProps
+    mapStateToProps, mapDispatchToProps
 )(User)
 
 export default UserContainer

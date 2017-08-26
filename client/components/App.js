@@ -19,6 +19,7 @@ import GroupPopUp from '~/containers/GroupPopUp'
 import ShowDetail from '~/containers/ShowDetail'
 import PopUpUpdate from '~/containers/PopUpUpdate'
 import Warning from '~/containers/Warning'
+import Enlarge from '~/containers/Enlarge'
 
 // import AdminContainer from '~/containers/admin/'
 // import loadAdmin from 'bundle-loader?lazy!../containers/admin'
@@ -108,6 +109,7 @@ class App extends React.Component {
         return(
             <div style={{ height: '100%' }}>
                 <Route path="*" component={Bar}/>
+                <Route path="*" component={Enlarge}/>
                 <GroupPopUp/>
                 <PopUpUpdate/>
                 <ChatContainer/>
@@ -156,6 +158,17 @@ class App extends React.Component {
                 <Progress showModal={showProgress} close={() => closeProgress()}/>
             </div>
         )
+    }
+    shouldComponentUpdate(nextProps, nextState){
+        if(this.props.location.pathname.split('/')[1] != nextProps.location.pathname.split('/')[1]){
+            const path = nextProps.location.pathname.split('/')[1]
+            if(document.title.split(")").length > 1){
+                document.title = document.title.split(")")[0] + ') KajKai'
+            }else {
+                document.title = 'KajKai'
+            }
+        }
+        return true
     }
     componentDidMount(){
         this.props.onWho()

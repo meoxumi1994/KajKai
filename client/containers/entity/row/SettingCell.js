@@ -9,7 +9,7 @@ import { updateStore } from '~/actions/asyn/store'
 import { updateUser } from '~/actions/asyn/user'
 
 
-const mapStateToProps = (state, { kind, type }) => {
+const mapStateToProps = (state, { kind, type, value }) => {
     const g = (lang) => get(state.user.language, lang)
     const store = state.inst.store.index
     const user = state.user
@@ -41,7 +41,6 @@ const mapDispatchToProps = (dispatch, { id, kind, type }) => ({
         dispatch(updatePhone(FilteringPhoneDefaultVietName(phone)))
     },
     onChange: (key, value) => {
-        console.log('onChange: (key, value)', key, value )
         dispatch({ type: 'INST_ENTITY_ROW_SETTING_CELL', key: key, value: value })
     }
 })

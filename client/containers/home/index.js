@@ -9,6 +9,8 @@ const mapStateToProps = (state, ownProps) => {
     const { scrollTop, scrollLeft, height } = state.inst.app
     return({
         store: state.inst.store.index,
+        auth: state.auth,
+        interests: state.user.interests,
         iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT'),
         isusername: state.user.username,
         scrollTop: scrollTop,

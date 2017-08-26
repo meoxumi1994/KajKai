@@ -87,7 +87,13 @@ class Store extends React.Component {
     }
     componentDidMount(){
         const { onGetStore } = this.props
-        onGetStore()
+        onGetStore(this.props.storeid)
+    }
+    shouldComponentUpdate(nextProps, nextState){
+        if(nextProps.storeid != this.props.storeid){
+            this.props.onGetStore(nextProps.storeid)
+        }
+        return true
     }
 }
 

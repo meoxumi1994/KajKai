@@ -10,6 +10,7 @@ class Post extends React.Component {
     render(){
         const { sellpostid, storeid, sellpost, commentid, introduceWidth } = this.props
         const myStoreId = storeid ? storeid : (sellpost ? sellpost.storeid : undefined);
+        console.log(sellpostid)
         return(
             <div className="container-fluid" style={{ margin: 0, padding: 0, width: 940 }}>
                 <div className="row" style={{ margin: 0, padding: 0 }}>

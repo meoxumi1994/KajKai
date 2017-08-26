@@ -73,8 +73,8 @@ class ShowNewFeed extends React.Component {
                 <div>
                     {sellPosts.map((item,index) => {
                         return(
-                            <div key={item.sellPostId} style={{ paddingBottom: 10, marginLeft: -23 }}>
-                                <Post sellpostid={item.sellPostId} introduceWidth={310}/>
+                            <div key={item.sellPostId} style={{ paddingBottom: 10, marginLeft: -10 }}>
+                                <Post sellpostid={item.sellPostId} introduceWidth={300}/>
                             </div>
                         )
                     })}

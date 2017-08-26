@@ -10,7 +10,7 @@ class PostRow extends React.Component {
         super(props)
     }
     render(){
-        const { id, type, products, sellpostId, products_order, content, images, canEdit } = this.props
+        const { id, type, products, sellpostId, products_order, content, images, canEdit, disableClickImage} = this.props
         const Row = () => {
             switch (type) {
                 case 'listproduct':
@@ -52,6 +52,7 @@ class PostRow extends React.Component {
                         <div>
                             <div style={{ float: 'left', marginTop: -2, marginLeft: -1 }}>
                                 <KeepImage
+                                    disableClickImage={disableClickImage}
                                     sellpostid={sellpostId}
                                     type="Carousel"
                                     width={245}
@@ -74,6 +75,7 @@ class PostRow extends React.Component {
                         <div>
                             <div style={{ float: 'right', marginTop: -2, marginRight: -2 }}>
                                 <KeepImage
+                                    disableClickImage={disableClickImage}
                                     sellpostid={sellpostId}
                                     type="Carousel"
                                     width={245}
@@ -95,6 +97,7 @@ class PostRow extends React.Component {
                     return(
                         <div>
                             <KeepImage
+                                disableClickImage={disableClickImage}
                                 sellpostid={sellpostId}
                                 type="GroupImage"
                                 width={499}

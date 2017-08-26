@@ -1,8 +1,34 @@
 import React from 'react'
 
 import { Modal } from 'react-bootstrap'
-import ShowInMap from '~/containers/entity/map/ShowInMap'
 import CellLeft from '~/components/entity/row/CellLeft'
+import { withGoogleMap, GoogleMap, Marker, GoogleMapLoader } from "react-google-maps";
+import { places } from "react-google-maps"
+
+const GettingStartedGoogleMap = withGoogleMap(props => {
+    const center = props.centerPosition ? {
+        center : props.centerPosition
+    }: undefined
+    return(
+        <GoogleMap
+            defaultOptions={props.defaultOptions}
+            ref={props.onMapLoad}
+            defaultZoom={14}
+            {...center}
+            defaultCenter={props.defaultCenter}
+            onClick={props.onMapClick}>
+            {/* <SearchBox
+            inputPlaceholder="Customized your placeholder"
+            /> */}
+            {props.marker &&
+              <Marker
+                  {...props.marker}
+                  onRightClick={() => props.onMarkerRightClick(index)}
+              />
+            }
+        </GoogleMap>
+    )
+})
 
 class Cell extends React.Component {
     constructor(props){
@@ -36,18 +62,25 @@ class Cell extends React.Component {
 class CreateInterest extends React.Component {
     constructor(props){
         super(props)
+        this.state = {
+            centerModal: undefined,
+        }
     }
     render(){
         const { CREATE_INTEREST, CLOSE, DONE, onChange, showModal, position, categories,
             CHOOSE_YOUR_INTEREST, CHOOSE_YOUR_LOCATION,
             firstCategory, secondCategory, onCreateInterest } = this.props
+
+        const marker = (position && position.lat) ? { position: position } : undefined
+        const currentPosition = (position && position.lat) ? position : { lat: 20.969133867372143, lng: 105.86288452148438 }
         return(
             <div>
                 <CellLeft avatar="/images/interesticon.svg"
                     onClick={() => onChange('showModal', true)}
                     name={CREATE_INTEREST} disabledLink={true}/>
                 <Modal show={showModal} onHide={() => onChange('showModal', false )}>
-                    <div style={{ padding: 10, fontSize: 14, fontWeight: 600 }}>
+                    <div style={{ padding: 10, borderRadius: '4px 4px 0px 0px',
+                        fontSize: 16, fontWeight: 600, backgroundColor: '#DC6E30', color: 'white'}}>
                         {CREATE_INTEREST}
                     </div>
                     <hr style={{ margin: 0 }}/>
@@ -105,11 +138,56 @@ class CreateInterest extends React.Component {
                         {CHOOSE_YOUR_LOCATION}
                     </div>
                     <div style={{ padding: '0px 10px 10px 10px' }}>
-                        <ShowInMap position={position} width={576} height={200}
+                        {/* <ShowInMap position={position} width={576} height={400}
                             onChangePosition={(value) => {
                                 onChange('position',value)
                             }}
-                            canEdit={true}/>
+                            canEdit={true}/> */}
+                            <div style={{ width: 580 }}>
+                                <GettingStartedGoogleMap
+                                   containerElement={
+                                       <div style={{ height: 400 }} />
+                                   }
+                                   mapElement={
+                                       <div style={{ height: 400 }} />
+                                   }
+                                   centerPosition={this.state.centerModal}
+                                   defaultCenter={currentPosition}
+                                   onMapLoad={() => undefined}
+                                   center={this.state.centerModal}
+                                   onMapClick={(e) => {
+                                       onChange('position',{
+                                           lat: e.latLng.lat(),
+                                           lng: e.latLng.lng(),
+                                       })
+                                   }}
+                                   marker={marker}
+                                 />
+                            </div>
+                            {/* <div style={{ height: 40 }}>
+                                <div className="btn btn-default btn-sm"
+                                    style={{ marginTop: 10 }}
+                                    onClick={() => {
+                                        const that = this
+                                        navigator.geolocation.getCurrentPosition((pos) => {
+                                            const coords = pos.coords;
+                                            that.setState({
+                                                centerModal: {
+                                                    lat: pos.coords.latitude,
+                                                    lng: pos.coords.longitude,
+                                                }
+                                            })
+                                            // console.log('that', pos.coords.latitude, pos.coords.longitude )
+                                        })
+                                    }}>
+                                    {GET_CURRENT_POSITION}
+                                </div>
+                                <div className="btn btn-default btn-sm"
+                                    style={{ float: 'right', marginTop: 10 }}
+                                    onClick={() => this.setState({ showModal: false })}>
+                                    {CLOSE}
+                                </div>
+                            </div> */}
                     </div>
                     <hr style={{ margin: 0 }}/>
                     <div style={{ padding: 10, height: 50 }}>
