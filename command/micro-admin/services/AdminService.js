@@ -119,6 +119,7 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
         mPromises.push(new Promise((resolve, reject) => {
           User.findOne({ id: reportee.id }, (err, user) => {
             if (user) {
+              let flag = user.banned
               user.banned = reportee.status ? 1 : 0,
               user.bannedById = admin.id,
               user.bannedByAdminName = mAdmin.adminName,
@@ -131,7 +132,7 @@ export const banUsers = (admin, feedback, reporter, reportee, next) => {
                   sendBanEmail(user.username, user.email, admin.reason, user.language)
                 } else {
                   removeBanPub(user.id, admin.reason)
-                  if (user.banned == 1) {
+                  if (flag == 1) {
                     sendUnBanEmail(user.username, user.email, admin.reason, user.language)
                   }
                 }
