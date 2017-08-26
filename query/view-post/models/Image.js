@@ -7,6 +7,7 @@ const ImageSchema = new mongoose.Schema({
     time: {type: Date},
     storeId: {type: String},
     postrowId: {type: String},
+    sellpostId: {type: String},
     type: {type: String, enum: _.values(ImageType)}
 })
 

@@ -20,6 +20,7 @@ export const createPostrow = (message) => {
           url: image,
           time: Date.now(),
           postrowId: id,
+          sellpostId,
           storeId,
           type: ImageType.POSTROW
         })
@@ -39,6 +40,7 @@ export const createPostrow = (message) => {
           url: product.imageUrl,
           time: Date.now(),
           postrowId: id,
+          sellpostId,
           storeId,
           type: ImageType.PRODUCT
         })
