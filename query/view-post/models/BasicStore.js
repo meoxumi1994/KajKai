@@ -1,5 +1,4 @@
 import mongoose from '../datasource'
-import ImageSchema from './Image'
 
 const BasicStoreSchema = new mongoose.Schema({
   id: {type: String},
