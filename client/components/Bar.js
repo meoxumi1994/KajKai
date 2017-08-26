@@ -92,7 +92,7 @@ class HandlerUser extends React.Component {
                                 }}
                                 number={unreadChat.quantity}/>
                         </div>
-                        <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
+                        <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 400, maxHeight: 700, backgroundColor: 'white'}}>
                             <ChatLeftContainer/>
                         </ul>
                     </div>

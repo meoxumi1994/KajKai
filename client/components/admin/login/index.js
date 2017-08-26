@@ -16,7 +16,7 @@ class accountLogin extends React.Component {
                 <Modal.Body>
                 <div style={{marginLeft: '15%', marginBottom: 30, marginTop: 30}}>
                     <img src="/images-admin/kajkai.png" style={{width: 60, height: 60, marginRight: 10}}/>
-                    <label><p style={{fontSize: 18}}>KAJKAI ADMINSTRATION</p></label>
+                    <label><p style={{fontSize: 18}}>KAJKAI ADMINISTRATION</p></label>
                 </div>
                     <div style={{width: 300, height: 200, marginLeft: '15%'}}>
                         <form onSubmit={e => {

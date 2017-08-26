@@ -46,7 +46,9 @@ class Home extends React.Component {
                                 minHeight: height - 48,
                                 paddingTop: 10,
                                 }}>
-                                {(this.props.auth == 'WHO_SUCCESS' && (!this.props.interests || this.props.interests.length == 0 )) &&
+                                {(this.props.auth == 'WHO_SUCCESS'
+                                &&
+                                (this.props.location.pathname.split("/")[2] == 'getstart')) &&
                                 <div style={{ marginLeft: -50 }}>
                                     <GuildUser/>
                                 </div> }

@@ -70,8 +70,7 @@ class MessageList extends React.Component {
 
 const styles = {
     mainDiv: {
-      width: 320,
-      height: 300,
+      height: 280,
       overflowY: 'scroll',
     },
     rightMsg: {
@@ -90,7 +89,7 @@ const styles = {
         bounds: {
             backgroundColor: '#cc3333',
             color: 'white',
-            width: 200,
+            width: 170,
             padding: "5px 10px 10px 10px",
             borderRadius: 10,
             marginLeft: 50
@@ -115,7 +114,7 @@ const styles = {
         },
         bounds: {
             backgroundColor: '#e0e0e0',
-            width: 200,
+            width: 170,
             padding: "5px 10px 10px 10px",
             borderRadius: 10
         },

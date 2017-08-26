@@ -18,7 +18,7 @@ class WelcomeToKajKai extends React.Component {
                         <h3 style={{ color: '#90949C' }}>{GET_START_BY_FOLLOW}</h3>
                     </div>
                     <div style={{ marginTop: 35, }}>
-                        <Link to="/home">
+                        <Link to="/home/getstart">
                             <div className="btn btn-default"
                                 style={{ borderRadius: 0, padding: '10px 15px 10px 15px', backgroundColor: '#BD081C', color: 'white', borderWidth: 0 }}>
                                 {GET_START}

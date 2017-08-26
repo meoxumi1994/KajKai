@@ -24,22 +24,20 @@ class ChatList extends React.Component {
         })
 
         return(
-          <div style={{textAlign: 'left', overflowY: 'scroll', height: 625}}>
+          <div style={{textAlign: 'left', overflowY: 'scroll', marginTop: 5, maxHeight: 600}}>
               {chatListKey.map(mesId =>
                 {
                   return (
                       <ul className="nav nav-tabs" key={mesId} onClick={() => getMessages(mesId)}
-                      style={{backgroundColor: getTabColor(mesId, currentChat, unread)}}>
-                          <div className="container-fluid">
+                      style={{backgroundColor: getTabColor(mesId, currentChat, unread), borderTop: '0.1px solid #dbdbdb', height: 60, width: 364}}>
                               <ChatContainer mesId={mesId}/>
-                          </div>
                       </ul>
                   )
                 }
               )}
-              <button className="btn btn-default" style={{marginLeft: '42%', marginTop: 10}} onClick={() => getChat(lazyLoad.offset)}>
-                    { lazyLoad.loadMore? 'Load more': 'Data is up to date' }
-              </button>
+              <p style={{marginLeft: '43%', marginTop: 10, fontSize: 12}} onClick={() => getChat(lazyLoad.offset)}>
+                    <a>Load more</a>
+              </p>
           </div>
         )
     }

@@ -53,13 +53,13 @@ const styles = {
         backgroundColor: '#911108',
         color: 'white',
         height: 30,
-        width: 320
+        width: 280
     },
     mainDiv: {
         backgroundColor: '#808080',
         color: 'white',
         height: 30,
-        width: 320
+        width: 280
     },
     button: {
         backgroundColor: '#808080',
