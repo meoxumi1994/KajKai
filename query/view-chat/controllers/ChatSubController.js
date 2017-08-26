@@ -1,7 +1,7 @@
-import { Chat, UserChat, BasicUser } from '../models'
+import { Chat, UserChat, BasicUser, BasicStore } from '../models'
 
 export const createChat = (message) => {
-  const { groupId: id, groupName: name, members: users } = message.chatGroup
+  const { groupId: id, groupName: name, members: users, storeId } = message.chatGroup
 
   const chat = new Chat({
     id
@@ -25,22 +25,44 @@ export const createChat = (message) => {
 
     Promise.all(mPromises).then((basicUsers) => {
       chat.users = basicUsers
-      chat.save(() => {})
-
-      chat.users.map((user) => {
-        UserChat.findOne({ userId: user.id }, (err, userChat) => {
-          if (userChat) {
-            userChat.chats.push(chat)
-            userChat.save(() => {})
-          } else {
-            const mUserChat = new UserChat({
-              userId: user.id,
-              chats: [chat]
+      if (storeId) {
+        BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+          if (basicStore) {
+            chat.store = basicStore
+            chat.save(() => {})
+            chat.users.map((user) => {
+              UserChat.findOne({ userId: user.id }, (err, userChat) => {
+                if (userChat) {
+                  userChat.chats.push(chat)
+                  userChat.save(() => {})
+                } else {
+                  const mUserChat = new UserChat({
+                    userId: user.id,
+                    chats: [chat]
+                  })
+                  mUserChat.save(() => {})
+                }
+              })
             })
-            mUserChat.save(() => {})
           }
         })
-      })
+      } else {
+        chat.save(() => {})
+        chat.users.map((user) => {
+          UserChat.findOne({ userId: user.id }, (err, userChat) => {
+            if (userChat) {
+              userChat.chats.push(chat)
+              userChat.save(() => {})
+            } else {
+              const mUserChat = new UserChat({
+                userId: user.id,
+                chats: [chat]
+              })
+              mUserChat.save(() => {})
+            }
+          })
+        })
+      }      
     }, err => {
       console.log('error', err)
     })
