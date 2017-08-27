@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     const registerstore = state.inst.registerstore.index
     return({
+        ...state.user,
         language: state.user.language,
         isloading: (state.auth == 'REGISTER_STORE_ING'),
         iswhoing: (state.auth == 'WHO_ING' || state.auth == 'WAIT'),
