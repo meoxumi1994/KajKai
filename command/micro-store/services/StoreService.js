@@ -51,7 +51,9 @@ export const getStoreBasicInfoService = (store) => {
         storeName: store.storeName,
         id: getStoreGlobalId(store._id),
         avatarUrl: store.avatarUrl,
-        coverUrl: store.coverUrl
+        coverUrl: store.coverUrl,
+        ownerId: store.owner,
+        urlName: store.urlName
     }
 };
 
@@ -243,8 +245,6 @@ export const getListStore = (storeIdList, next) => {
         list.push(mongoose.Types.ObjectId(getStoreLocalId(storeIdList[i])));
     }
     Store.find({_id: {$in: list}}, (err, docs) => {
-        console.log(list);
-        console.log(err + ' ' + docs + ' ' + JSON.stringify(getStoreListInfo(docs)));
         next(getStoreListInfo(docs));
     })
 };

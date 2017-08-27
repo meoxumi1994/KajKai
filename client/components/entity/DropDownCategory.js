@@ -37,7 +37,7 @@ class DropDownCategory extends React.Component {
         }
     }
     render(){
-        const { width, contents, onClick } = this.props
+        const { width, contents, onClick, language } = this.props
         return(
             <div style={{
                 borderRadius: 2.5,
