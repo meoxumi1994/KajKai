@@ -117,7 +117,7 @@ export const login = (res, user) => {
         } else {
             const token = getUserToken(user._id);
             res.cookie('token', token);
-            res.json({user: getUserBasicInfo(user), tokenId: token});
+            res.json({user: getUserBasicInfo(user), tokenId: token, status: 'success'});
         }
     }
 };

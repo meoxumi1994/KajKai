@@ -18,6 +18,10 @@ const sockListen = (user, socket, io) => {
         })
     }
 
+    for (let e in allEvents) {
+        socket.removeAllListeners(e);
+    }
+
     for(let e in allEvents){
         let handler = allEvents[e];
         let method = require('../controllers/' + handler.controller)[handler.method];
@@ -46,7 +50,6 @@ const init = (server) => {
             console.log('a user disconnected')
         });
 
-        sockListen(null, socket, sio);
 
         socket.on('server/sendToken', (action) => {
             const token = action.tokenId;
@@ -67,6 +70,7 @@ const init = (server) => {
                     } else sockListen(null, socket, sio)
                 })
             } else {
+                sockListen(null, socket, sio);
             }
         })
     });
