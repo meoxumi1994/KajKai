@@ -5,10 +5,7 @@ export const updateLikes = (likes = [], id, name) => {
         if(item.id != id){
             newLikes = [
                 ...newLikes,
-                {
-                    id: item.id,
-                    name: item.name,
-                }
+                item
             ]
         }else{
             has = true
@@ -33,11 +30,7 @@ export const updateFollows = (follows = [], userid, avatarUrl, username) => {
         if(item.userid != userid){
             newFollows = [
                 ...newFollows,
-                {
-                    userid: item.userid,
-                    avatarUrl: avatarUrl,
-                    username: username,
-                }
+                item
             ]
         }else{
             has = true

@@ -101,8 +101,8 @@ class Comment extends React.Component {
                                 style={{  padding: '0px 1px 0px 1px' }}>
                                 <a style={{
                                     fontWeight: 'bold',
-                                    fontSize: 13,
-                                    color: '#7ED321',
+                                    fontSize: 12,
+                                    color: '#BD081C',
                                 }}>{(status=='received')? NEW : NEW}</a>
                             </div>
                         }
@@ -114,8 +114,8 @@ class Comment extends React.Component {
                                 style={{  padding: '0px 1px 0px 1px' }}>
                                 <a style={{
                                     fontWeight: (status=='received') ? 'bold' : 'normal',
-                                    fontSize: (status=='received') ? 13 : 12,
-                                    color: (status=='received') ? '#BD081C' : '#365899',
+                                    fontSize: (status=='received') ? 12 : 12,
+                                    color: (status=='received') ? '#42B72A' : '#365899',
                                 }}>{(status=='received')? RECEIVED : RECEIVE}</a>
                             </div>
                         }
@@ -126,8 +126,8 @@ class Comment extends React.Component {
                                 style={{  padding: '0px 1px 0px 1px' }}>
                                 <a style={{
                                     fontWeight: 'bold',
-                                    fontSize: 13,
-                                    color: '#BD081C',
+                                    fontSize: 12,
+                                    color: '#42B72A',
                                 }}>{RECEIVED}</a>
                             </div>
                         }
@@ -135,7 +135,7 @@ class Comment extends React.Component {
 
                         <div className="btn" onClick={() => onLike()}
                             style={{ padding: '0px 1px 0px 1px', fontWeight: beLike?'bold':'normal'}}>
-                            <a style={{ fontSize: beLike?13:12, color: beLike?'#5890FF':'#365899' }}>{LIKE}</a>
+                            <a style={{ fontSize: beLike?12:12, color: beLike?'#5890FF':'#365899' }}>{LIKE}</a>
                         </div>
                         {"."}
                         <div className="btn" onClick={() => onReply()}

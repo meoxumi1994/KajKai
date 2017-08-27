@@ -24,8 +24,9 @@ class CallComment extends React.Component {
                         marginTop: isleader?-44:-20,
                         marginLeft: isleader?45:30,
                     }}>
+                        {order && <div style={{ height: 10 }}></div>}
                         {(order && order.length > 0 ) &&
-                            <table>
+                            <table style={{ marginTop: -5, marginBottom: 5 }}>
                                 {order && order.map((item,index) => {
                                     return (
                                         <tbody key={item.id+index} style={{ marginBottom: 5 }}>
@@ -36,7 +37,6 @@ class CallComment extends React.Component {
                                 })}
                             </table>
                         }
-                        {order && <div style={{ height: 10 }}></div>}
                         <ContentEditable
                             // width={}
                             match={match}

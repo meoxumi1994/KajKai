@@ -270,7 +270,7 @@ export default class BarScreen extends React.Component {
         },1)
     }
     render() {
-        const { SEARCH, SEARCH_STORE, SEARCH_USER, SEARCH_LOCATION, ALL_CATEGORY, STORE, USER, username,
+        const { SEARCH, SEARCH_STORE, SEARCH_USER, SEARCH_LOCATION, ALL_CATEGORY, STORE, USER, username, language,
              categories, onChangeTypeSelected, currentCategory, positionname, currentType, currentCategoryId,
              onLocationChanged, clicksetting, width, height, keyword, onChange, onSearch} = this.props
         let inputSearchKeyWord
@@ -322,11 +322,11 @@ export default class BarScreen extends React.Component {
                                             {categories.map(category =>
                                                 <div key={category.id}>
                                                     <Cell style={{ marginLeft: 10 }}
-                                                        key={category.id} name={category.name}
+                                                        key={category.id} name={(language == 'en') ? category.enName : category.name}
                                                         onClick={() => onChangeTypeSelected(category.id, category.name)} />
                                                     {category.secondCategories.map(secondCategory =>
                                                         <Cell key={secondCategory.id} style={{ marginLeft: 20 }}
-                                                            name={secondCategory.name}
+                                                            name={(language == 'en') ? secondCategory.enName : secondCategory.name}
                                                             onClick={() => onChangeTypeSelected(secondCategory.id, secondCategory.name)} />
                                                     )}
                                                 </div>

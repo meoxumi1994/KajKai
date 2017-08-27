@@ -20,12 +20,14 @@ class Product extends React.Component {
                     if(!canEdit){
                         return (
                             <td style={{ paddingRight: 10, fontSize: 13.5 }} key={index}>
-                                <ContentShow
-                                    fontSize={13.5}
-                                    heightEachRow={16}
-                                    content={item}
-                                    handleChange={(e) => this.setState({ })}
-                                />
+                                <div style={{ marginTop: 3 }}>
+                                    <ContentShow
+                                        fontSize={13.5}
+                                        heightEachRow={16}
+                                        content={item}
+                                        handleChange={(e) => this.setState({ })}
+                                    />
+                                </div>
                             </td>
                         )
                     }else{
@@ -111,7 +113,7 @@ class Product extends React.Component {
                 }
                 {ShowNum &&
                     <td>
-                        <div style={{ marginLeft: 10, fontSize: 13}}>{"x"}&nbsp;{num}</div>
+                        <div style={{ marginLeft: 10, fontSize: 12, marginTop: 4 }}>{"x"}&nbsp;{num}</div>
                     </td>
                 }
             </tr>
