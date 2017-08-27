@@ -15,7 +15,8 @@ export const getSubListCategoryInfo = (lists) => {
     for (let i = 0; i < lists.length; ++i) {
         res.push({
             id: lists[i]._id,
-            name: lists[i].name
+            name: lists[i].name,
+            enName: lists[i].enName
         })
     }
     return res;
@@ -27,6 +28,7 @@ export const getListCategoryInfo = (lists) => {
         res.push({
             id: lists[i]._id,
             name: lists[i].name,
+            enName: lists[i].enName,
             secondCategories: getSubListCategoryInfo(lists[i].subcategory)
         })
     }
