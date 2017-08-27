@@ -52,7 +52,7 @@ export const getChatList = (offset) => dispatch => {
     )
     .then((response) => {
           console.log('\n[API] /getChatList ', response);
-          if (response != undefined && response.data.length > 0) {
+          if (response != undefined && response.data != undefined && response.data.length > 0) {
               const { data, lazyLoad } = response
               dispatch(initChatList(data, lazyLoad))
               if (response.data.length < 5) {
