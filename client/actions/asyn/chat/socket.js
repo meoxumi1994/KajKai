@@ -41,8 +41,5 @@ export const sendMessage = (mesId, id, text, url, type) => ({
           type
       },
       time: Date.now(),
-      store: {
-          id: storeId
-      }
   }
 })
