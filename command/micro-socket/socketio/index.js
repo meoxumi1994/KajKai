@@ -18,6 +18,10 @@ const sockListen = (user, socket, io) => {
         })
     }
 
+    for (let e in allEvents) {
+        socket.removeAllListeners(e);
+    }
+
     for(let e in allEvents){
         let handler = allEvents[e];
         let method = require('../controllers/' + handler.controller)[handler.method];
