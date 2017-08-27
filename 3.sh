@@ -1,6 +1,6 @@
-pm2 kill &&
-
 curl localhost:8085/deleteindex &&
+
+pm2 kill &&
 
 mongo -u admin -p dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu --authenticationDatabase admin kajkai-notification --eval "db.dropDatabase()" &&
 mongo -u admin -p dbjfu9cyr82bt2cpqbtuiavcp49q7vp48cq09xpnbu --authenticationDatabase admin kajkai-store --eval "db.dropDatabase() && db.getCollection('categories').createIndex( { name: \"text\" } )" &&
