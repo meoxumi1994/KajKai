@@ -42,14 +42,14 @@ export const addNewMessage = (mesInfo, next) => {
                     message: message.message,
                     user: info[0]
                 };
-                if (message.senderId.startsWith('002')) {
-                    curMessage = {
-                        mesId: message.mesId,
-                        time: message.time,
-                        message: message.message,
-                        store: info[0]
-                    };
-                }
+                // if (message.senderId.startsWith('002')) {
+                //     curMessage = {
+                //         mesId: message.mesId,
+                //         time: message.time,
+                //         message: message.message,
+                //         store: info[0]
+                //     };
+                // }
                 updateCounterMultiple(userIds, 1, () => {
                     Message.insertMany(arr, (err, docs) => {
                         next(curMessage, group.members);
