@@ -59,3 +59,23 @@ export const getStoreOfUserPub = (userId, next) => {
         }
     })
 };
+
+export const getListStore = (storeIdList, next) => {
+    const sub = redis.createClient(config);
+    const pub = redis.createClient(config);
+    const id = getUUID();
+    const publicData = {storeIdList: storeIdList, eventId: id};
+    pub.publish('STORE.GetListStore', JSON.stringify(publicData));
+    sub.subscribe('STORE.GetListStore' + id);
+    sub.on('message', (channel, message) => {
+        message = JSON.parse(message);
+        if (message.status === 'success') {
+            next(message.stores)
+        } else {
+            next(null)
+        }
+        sub.unsubscribe();
+        sub.quit();
+        pub.quit();
+    })
+};
