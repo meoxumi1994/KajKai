@@ -16,6 +16,7 @@ const index = (state = {
     storename: '',
     address: '',
     urlname: '',
+    avatarUrl: undefined,
     openModalWarning: false,
     contentModalWarning: '',
 }, action) => {

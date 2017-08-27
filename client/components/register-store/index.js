@@ -8,6 +8,7 @@ import VerifyPhone from '~/containers/entity/phone/VerifyPhone'
 import ShowInMap from '~/containers/entity/map/ShowInMap'
 import WarningModal from '~/containers/entity/modal/WarningModal'
 import ChangeLanguage from '~/containers/entity/row/ChangeLanguage'
+import AddPhoto from '~/containers/entity/thumnail/AddPhoto'
 
 const checkPhone = (phone) => {
     if(!phone) return 'error'
@@ -25,7 +26,7 @@ class RegisterStore extends React.Component {
     }
     render(){
         const {
-            STORE, CONFIRM, CHOOSE_ANOTHER, CREATE_STORE,
+            STORE, CONFIRM, CHOOSE_ANOTHER, CREATE_STORE, ENTER_AVATAR_STORE,
             CREATE_STORE_DESCRIPTION, CREATE_STORE_DESCRIPTION_0,
             CREATE_STORE_DESCRIPTION_1, CREATE_STORE_DESCRIPTION_2,
             CREATE_STORE_DESCRIPTION_3, CREATE_STORE_DESCRIPTION_4,
@@ -34,9 +35,10 @@ class RegisterStore extends React.Component {
             POSITION_IN_MAP, POSITION_IN_MAP_DESCRIPTION, ADDRESS,
             ADDRESS_DESCRIPTION, STORE_NAME, STORE_URL,  SAVE, NAME_BY_URL ,
             ENTER_YOUR_STORE_NAME, ENTER_YOUR_PHONE, ENTER_YOUR_ADDRESS, ENTER_URL_STORE,
-            ENTER_CATEGORY,
+            ENTER_CATEGORY, AVATAR_STORE_DESCRIPTION_1, AVATAR_STORE_DESCRIPTION_2,
+            CHOOSE_CATEGORY_1, CHOOSE_CATEGORY_2,
             onChangeAddress, onChangeStoreName,
-            onChangeName, name, isConfirmPhone, chooseAnother, openModalPhone, onChangePosition,
+            onChangeName, name, avatarUrl, isConfirmPhone, chooseAnother, openModalPhone, onChangePosition,
             onOpenModalPhone, address, onChangeAdress, position, changeLanguage, createStore,
             categories, chooseCategory, chooseSecondCategory, chooseCategoryId, phone, onChangePhone,
             isusername, iswhoing, onOpenStore, registerStoreOK, onGetCategory, updatePhone,
@@ -65,9 +67,9 @@ class RegisterStore extends React.Component {
                 <div style={{ width: 700, height: '100%'}}>
 
                     <div style={{ backgroundColor: 'white', borderRadius: '5px 5px 0px 0px'}}>
-                        <div style={{ fontSize: 25, padding: 15, borderRadius: '5px 5px 0px 0px', color: 'white', backgroundColor: '#BD081C'}}>{CREATE_STORE}</div>
+                        <div style={{ fontSize: 25, padding: '15px 20px 15px 20px', borderRadius: '5px 5px 0px 0px', color: 'white', backgroundColor: '#BD081C'}}>{CREATE_STORE}</div>
                         <hr style={{ margin: 0 }}/>
-                        <div style={{ padding: 15 }}>
+                        <div style={{ padding: '15px 20px 15px 20px' }}>
                             <div>{CREATE_STORE_DESCRIPTION}:</div>
                             <div style={{ fontSize: 13.5, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_0}</div>
                             <div style={{ fontSize: 13.5, color: '#64686E'}}>. {CREATE_STORE_DESCRIPTION_1}</div>
@@ -75,10 +77,11 @@ class RegisterStore extends React.Component {
                         </div>
                     </div>
 
-                    <div style={{ padding: 15, marginTop: 10, backgroundColor: 'white'}}>
+                    <div style={{ padding: '15px 20px 15px 20px', marginTop: 10, backgroundColor: 'white'}}>
                         <div style={{ fontWeight: 'bold'}}>
                             {STORE_NAME}{" :"}
                         </div>
+                        <hr style={{ margin: 0, marginBottom: 5, marginTop: 5 }}/>
                         <div>
                             <input
                                 onChange={(e) => onChangeStoreName(e)}
@@ -91,10 +94,11 @@ class RegisterStore extends React.Component {
                         </div>
                     </div>
 
-                    <div style={{ padding: 15, marginTop: 10, backgroundColor: 'white'}}>
+                    <div style={{ padding: '15px 20px 15px 20px', marginTop: 10, backgroundColor: 'white'}}>
                         <div style={{ fontWeight: 'bold'}}>
                             {STORE_URL}{" :"}
                         </div>
+                        <hr style={{ margin: 0, marginBottom: 5, marginTop: 5 }}/>
                         <div>
                             www.kajkai.com/{" "}
                             <input
@@ -108,10 +112,11 @@ class RegisterStore extends React.Component {
                         </div>
                     </div>
 
-                    <div style={{ padding: 15, marginTop: 10, backgroundColor: 'white'}}>
+                    <div style={{ padding: '15px 20px 15px 20px', marginTop: 10, backgroundColor: 'white'}}>
                         <div style={{ fontWeight: 'bold'}}>
                             {CATEGORY}{" :"}
                         </div>
+                        <hr style={{ margin: 0, marginBottom: 5, marginTop: 5 }}/>
                         <div style={{  marginLeft: 350, height: 150, width: 300 }}>
                             <div className="btn btn-default btn-xs" style={{ marginTop: 5, width: 300 , fontSize: 13.5 }}
                                 onClick={() => {
@@ -119,7 +124,7 @@ class RegisterStore extends React.Component {
                                         onChange('showDropDown', true)
                                     },1)
                                 }}>
-                                {chooseCategory || 'chooseCategory'}
+                                {chooseCategory || CHOOSE_CATEGORY_1}
                             </div>
                             {showDropDown &&
                                 <DropDownCategory
@@ -134,7 +139,7 @@ class RegisterStore extends React.Component {
                                             onChange('showSecondDropDown', true)
                                         },1)
                                     }}>
-                                    {chooseSecondCategory || 'chooseSecondCategory'}
+                                    {chooseSecondCategory || CHOOSE_CATEGORY_2}
                                 </div>
                             }
                             { (chooseCategory && showSecondDropDown) &&
@@ -166,10 +171,11 @@ class RegisterStore extends React.Component {
                         </div>
                     </div>
 
-                    <div style={{ marginTop: 15, padding: 15, backgroundColor: 'white' }}>
+                    <div style={{ marginTop: 15, padding: '15px 20px 15px 20px', backgroundColor: 'white' }}>
                         <div style={{  fontWeight: 'bold'}}>
                             {PHONE}{" :"}
                         </div>
+                        <hr style={{ margin: 0, marginBottom: 5, marginTop: 5 }}/>
                         {!isConfirmPhone ?
                             <input
                                 onChange={(e) => onChangePhone(e)}
@@ -212,21 +218,34 @@ class RegisterStore extends React.Component {
                         </div>
                     </div>
 
-                    <div style={{ marginTop: 10, padding: 15, backgroundColor: 'white'}}>
-                        <div style={{ fontWeight: 'bold'}}>
-                            {POSITION_IN_MAP}{" :"}
+                    <div style={{ padding: '15px 20px 15px 20px', marginTop: 10, backgroundColor: 'white' }}>
+                        <div style={{ fontWeight: 'bold' }}>
+                            {ENTER_AVATAR_STORE}{" :"}
                         </div>
-                        <div>
-                            <ShowInMap
+                        <hr style={{ margin: 0, marginBottom: 5, marginTop: 5 }}/>
+                        <div style={{ height: 180 }}>
+                            <AddPhoto
+                                aspectRatio={1}
+                                id="registerstore"
+                                onAddImage={(src) => onChange('avatarUrl', src)}
+                                action={{
+                                    type: 'UPDATE_STORE_REGISTER_AVATAR',
+                                }}
                                 canEdit={true}
-                                width={400} height={200}
-                                position={position}
-                                onChangePosition={(position) => onChangePosition(position)}
-                            />
+                                style={{
+                                src: avatarUrl,
+                                width: 180,
+                                height: 180,
+                                isTop: false,
+                            }}/>
+                            <div style={{ marginLeft: 195, marginTop: -175 }}>
+                                <div style={{ color: '#65696F' }}>{AVATAR_STORE_DESCRIPTION_1}</div>
+                                <div style={{ color: '#65696F' }}>{AVATAR_STORE_DESCRIPTION_2}</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div style={{ marginTop: 10, padding: 15, backgroundColor: 'white'}}>
+                    <div style={{ marginTop: 10, padding: '15px 20px 15px 20px', backgroundColor: 'white'}}>
                         <div style={{ fontWeight: 'bold'}}>
                             {ADDRESS}{" :"}
                         </div>
@@ -245,7 +264,22 @@ class RegisterStore extends React.Component {
                         </div>
                     </div>
 
-                    <div style={{ marginTop: 10, padding: 15, color: 'white',
+                    <div style={{ marginTop: 10, padding: '15px 20px 15px 20px', backgroundColor: 'white'}}>
+                        <div style={{ fontWeight: 'bold'}}>
+                            {POSITION_IN_MAP}{" :"}
+                        </div>
+                        <hr style={{ margin: 0, marginBottom: 5, marginTop: 5 }}/>
+                        <div>
+                            <ShowInMap
+                                canEdit={true}
+                                width={400} height={200}
+                                position={position}
+                                onChangePosition={(position) => onChangePosition(position)}
+                            />
+                        </div>
+                    </div>
+
+                    <div style={{ marginTop: 10, padding: '15px 20px 15px 20px', color: 'white',
                         backgroundColor: '#BD081C', borderRadius: '0px 0px 5px 5px'}}>
                         <div style={{ height: 50 }}>
                             <div className="btn btn-default"
@@ -265,8 +299,7 @@ class RegisterStore extends React.Component {
                         content={contentModalWarning}
                         close={() => closeModalWarning()}
                     />
-
-                    <div style={{ padding: 15, marginTop: 10, height: 150, backgroundColor: 'white'}}>
+                    <div style={{ padding: '15px 20px 15px 20px', marginTop: 10, height: 150, backgroundColor: 'white'}}>
                         <ChangeLanguage fontSize={14}/>
                     </div>
                 </div>

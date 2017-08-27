@@ -64,7 +64,6 @@ export const updatePassword = (password, newpassword) => dispatch =>{
 
 export const updateUser = (user) => dispatch => {
     dispatch(updateuserAction('UPDATE_USER_ING'))
-    console.log('123123123 123 123 123 12312')
     fleu('/user',{
         ...user
     },{

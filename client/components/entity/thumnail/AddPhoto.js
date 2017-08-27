@@ -14,7 +14,7 @@ class AddPhoto extends React.Component {
         this.state = {}
     }
     render(){
-        const { TITLE, SUGGEST_PHOTO, UPDATE_PHOTO, storePhotos, postPhotos, productPhotos, userPhotos, userid, storeList,
+        const { TITLE, SUGGEST_PHOTO, UPDATE_PHOTO, CLOSE, storePhotos, postPhotos, productPhotos, userPhotos, userid, storeList,
             style, action, onChange, id, aspectRatio, canEdit } = this.props
         const imagesSuggest = [
             'https://beebom-redkapmedia.netdna-ssl.com/wp-content/uploads/2016/01/Reverse-Image-Search-Engines-Apps-And-Its-Uses-2016.jpg',
@@ -78,7 +78,10 @@ class AddPhoto extends React.Component {
                             <div style={{ padding: '4px 4px 28px 10px'}}>
                                 <div style={{ padding: '4px 4px 0px 10px'}}>
                                     <SuggestPhoto width={840} type="user" kind="small" id={userid}
-                                        onChooseImage={(src) => this.props.onAddImage(src)}/>
+                                        onChooseImage={(src) => {
+                                            this.props.onAddImage(src)
+                                            onChange('showModal'+id, false)
+                                        }}/>
                                 </div>
                                 <hr style={{ margin: 0 }}/>
                                 {storeList && storeList.map((item,index) => {
@@ -88,11 +91,20 @@ class AddPhoto extends React.Component {
                                                 <div style={{ fontSize: 16, paddingLeft: 10, marginTop: 10,
                                                     fontWeight: 'bold', color: '#90949C' }}>{"@" + item.urlname}</div>
                                                 <SuggestPhoto width={840} type="store" kind="small"
-                                                    onChooseImage={(src) => this.props.onAddImage(src)} id={item.id}/>
+                                                    onChooseImage={(src) => {
+                                                        this.props.onAddImage(src)
+                                                        onChange('showModal'+id, false)
+                                                    }} id={item.id}/>
                                                 <SuggestPhoto width={840} type="postrow" kind="small"
-                                                    onChooseImage={(src) => this.props.onAddImage(src)} id={item.id}/>
+                                                    onChooseImage={(src) => {
+                                                        this.props.onAddImage(src)
+                                                        onChange('showModal'+id, false)
+                                                    }} id={item.id}/>
                                                 <SuggestPhoto width={840} type="product" kind="small"
-                                                    onChooseImage={(src) => this.props.onAddImage(src)} id={item.id}/>
+                                                    onChooseImage={(src) => {
+                                                        this.props.onAddImage(src)
+                                                        onChange('showModal'+id, false)
+                                                    }} id={item.id}/>
                                             </div>
                                             <hr style={{ margin: 0 }}/>
                                         </div>
@@ -102,7 +114,7 @@ class AddPhoto extends React.Component {
                             </div>
                         </div>
                         <Modal.Footer>
-                            <div className="btn btn-default btn-sm" onClick={() => onChange('showModal'+id, false)}>Close</div>
+                            <div className="btn btn-default btn-sm" onClick={() => onChange('showModal'+id, false)}>{CLOSE}</div>
                         </Modal.Footer>
                     </div>
                 </Modal>

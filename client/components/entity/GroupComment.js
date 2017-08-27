@@ -10,7 +10,6 @@ class GroupComment extends React.Component {
     }
     componentDidMount(){
         this.props.onJoin()
-        console.log(this.props.focuscommentid)
         // console.log(this[this.props.focuscommentid].getBo)
         // window.scrollTo(document.getElementById(this.props.focuscommentid))
         // document.getElementById(this.props.focuscommentid).focus();
@@ -41,8 +40,10 @@ class GroupComment extends React.Component {
                         />
                 }
                 {leadercomments.map((item, index) =>
-                    <div key={item.id + index} id={item.id} tabIndex="-1" focusable
-                        ref={ leadercomment => { console.log(item.id, index); this[item.id] = leadercomment }}
+                    <div key={item.id + index} id={item.id}
+                        ref={ leadercomment => {
+                            // console.log(item.id, index);
+                            this[item.id] = leadercomment }}
                         >
                         <LeaderComment id={item.id}/>
                     </div>

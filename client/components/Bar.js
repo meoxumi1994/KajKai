@@ -172,6 +172,28 @@ class Cell extends React.Component {
     }
 }
 
+const getNameCurrentCategory = ({currentCategoryId, categories, STORE, USER, ALL_CATEGORY }) => {
+    if(currentCategoryId == -1){
+        return ALL_CATEGORY
+    }
+    if(currentCategoryId == -2){
+        return STORE
+    }
+    if(currentCategoryId == -3){
+        return USER
+    }
+    let name = ""
+    categories.map(category => {
+        if(currentCategoryId == category.id)
+            name = category.name
+        category.secondCategories.map(second => {
+            if( second.id  == currentCategoryId )
+                name = second.name
+        })
+    })
+    return name
+}
+
 export default class BarScreen extends React.Component {
     constructor(props) {
         super(props)
@@ -197,15 +219,15 @@ export default class BarScreen extends React.Component {
         const params = new URLSearchParams(this.props.location.search);
         let currentType = this.props.location.pathname.split('/')[2]
         if( currentType == 'store'){
-            this.props.onChangeTypeSelected('-2', "Store")
+            this.props.onChangeTypeSelected('-2', this.props.STORE)
         }else if( currentType == 'user'){
-            this.props.onChangeTypeSelected('-3', "User")
+            this.props.onChangeTypeSelected('-3', this.props.USER)
         }else {
             currentType = 'category'
             const id = params.get('id')
             const name = params.get('name')
             if(!name || !id){
-                this.props.onChangeTypeSelected(-1, 'All Category')
+                this.props.onChangeTypeSelected(-1, this.props.ALL_CATEGORY)
             }else {
                 this.props.onChangeTypeSelected(id, name)
             }
@@ -221,15 +243,15 @@ export default class BarScreen extends React.Component {
             const params = new URLSearchParams(nextProps.location.search);
             let currentType = nextProps.location.pathname.split('/')[2]
             if( currentType == 'store'){
-                this.props.onChangeTypeSelected('-2', "Store")
+                this.props.onChangeTypeSelected('-2', this.props.STORE)
             }else if( currentType == 'user'){
-                this.props.onChangeTypeSelected('-3', "User")
+                this.props.onChangeTypeSelected('-3', this.props.USER)
             }else {
                 currentType = 'category'
                 const id = params.get('id')
                 const name = params.get('name')
                 if(!name || !id){
-                    this.props.onChangeTypeSelected(-1, 'All Category')
+                    this.props.onChangeTypeSelected(-1, this.props.ALL_CATEGORY)
                 }else {
                     this.props.onChangeTypeSelected(id, name)
                 }
@@ -248,8 +270,8 @@ export default class BarScreen extends React.Component {
         },1)
     }
     render() {
-        const { SEARCH, SEARCH_STORE, SEARCH_USER, SEARCH_LOCATION, username,
-             categories, onChangeTypeSelected, currentCategory, positionname, currentType,
+        const { SEARCH, SEARCH_STORE, SEARCH_USER, SEARCH_LOCATION, ALL_CATEGORY, STORE, USER, username,
+             categories, onChangeTypeSelected, currentCategory, positionname, currentType, currentCategoryId,
              onLocationChanged, clicksetting, width, height, keyword, onChange, onSearch} = this.props
         let inputSearchKeyWord
         return (
@@ -284,14 +306,14 @@ export default class BarScreen extends React.Component {
                                     <div className="btn btn-default btn-sm dropdown-toggle"
                                         style={{ borderRadius: '2px 0px 0px 2px', borderWidth: 0, backgroundColor: '#F6F7F9'}}
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {currentCategory}{" "}
+                                        {getNameCurrentCategory(this.props)}{" "}
                                         <span className="caret"></span>
                                     </div>
                                     <ul className="dropdown-menu" style={{
                                         borderRadius: '0px 0px 3px 3px', marginTop: 0, marginRight: -5, backgroundColor: '#F6F7F9'}}>
                                         <div style={{  backgroundColor: '#EEEEEE' }}>
-                                            <Cell style={{ fontWeight: 'bold', }} name={"All Category"}
-                                                onClick={() => onChangeTypeSelected('-1', "All Category")} />
+                                            <Cell style={{ fontWeight: 'bold', }} name={ALL_CATEGORY}
+                                                onClick={() => onChangeTypeSelected('-1', ALL_CATEGORY)} />
                                         </div>
                                         <hr style={{ margin: 0 }}/>
                                         <div id="dropdowncategory" style={{
@@ -312,11 +334,11 @@ export default class BarScreen extends React.Component {
                                         </div>
                                         <hr style={{ margin: 0 }}/>
                                         <div style={{  backgroundColor: '#EEEEEE' }}>
-                                            <Cell style={{ fontWeight: 'bold' }} name={"Store"}
-                                                onClick={() => onChangeTypeSelected('-2', "Store")} />
+                                            <Cell style={{ fontWeight: 'bold' }} name={STORE}
+                                                onClick={() => onChangeTypeSelected('-2', STORE)} />
                                             <hr style={{ margin: 0 }}/>
-                                            <Cell style={{ fontWeight: 'bold' }} name={"User"}
-                                                onClick={() => onChangeTypeSelected('-3', "User")} />
+                                            <Cell style={{ fontWeight: 'bold' }} name={USER}
+                                                onClick={() => onChangeTypeSelected('-3', USER)} />
                                         </div>
                                     </ul>
                                   </div>
