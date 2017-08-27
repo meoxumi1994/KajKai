@@ -26,7 +26,7 @@ class GroupComment extends React.Component {
         this.props.onLeave()
     }
     render(){
-        const { WRITE_COMMENT_OR_ORDER, WRITE_COMMENT, CLOSE_STORE_DESCRIPTION,
+        const { WRITE_COMMENT_OR_ORDER, WRITE_COMMENT, CLOSE_STORE_DESCRIPTION, VIEW_MORE, COMMENTS,
             numleadercomment , leadercomments, content, onChange, id,
             onEnter, avatarUrl, onGetMore, offset, order, userid, closeComment } = this.props
         return(
@@ -36,11 +36,10 @@ class GroupComment extends React.Component {
                         id={3}
                         isleader={true}
                         onClick={() => onGetMore()}
-                        content={'View more '+ (numleadercomment - leadercomments.length) +' comments'}
+                        content={ VIEW_MORE + ' ' + (numleadercomment - leadercomments.length) + ' ' + COMMENTS }
                         end={leadercomments.length + ' of '+numleadercomment}
                         />
                 }
-
                 {leadercomments.map((item, index) =>
                     <div key={item.id + index} id={item.id} tabIndex="-1" focusable
                         ref={ leadercomment => { console.log(item.id, index); this[item.id] = leadercomment }}

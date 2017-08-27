@@ -26,6 +26,8 @@ const mapStateToProps = (state, { id }) => {
         WRITE_COMMENT_OR_ORDER: g('WRITE_COMMENT_OR_ORDER'),
         WRITE_COMMENT: g('WRITE_COMMENT'),
         CLOSE_STORE_DESCRIPTION: g('CLOSE_STORE_DESCRIPTION'),
+        VIEW_MORE: g('VIEW_MORE'),
+        COMMENTS: g('COMMENTS'),
         id: id,
         order: groupcomment.order,
     })

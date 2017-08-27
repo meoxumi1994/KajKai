@@ -75,7 +75,7 @@ const myString = {
     ENTER_STORE: ['tên cửa hàng của bạn', 'your Store\'s name'],
     ENTER_ADDRESS: ['nhập địa cửa hàng chỉ của bạn', 'your Store\'s address'],
     ADDRESS_WARNING: ['địa chỉ chưa có','have no address'],
-    ENTER_CATEGORY: ['loại hình kinh doanh của cửa hàng','your Store\'s category'],
+    ENTER_CATEGORY: ['Loại hình kinh doanh của cửa hàng','Your Store\'s category'],
     CATEGORY_WARNING: ['chưa có loại hình kinh doanh','enter category please'],
     PHONE_STORE: ['số điện thoại để khách hàng liên hệ đến của hàng','Phone numbers for customers to contact the store'],
     VERIFY_PHONE: ['Xác Nhận Số Điện THoại','Verify Phone Number'],
@@ -292,6 +292,9 @@ const myString = {
     PHOTO_POST: ['Ảnh bài đăng','Photo post'],
     PHOTO_PRODUCT: ['Ảnh sản phẩm','Photo product'],
     NO_IMAGE_OF_THIS_TYPE: ['Không có ảnh loại này','No image of this type'],
+
+    VIEW_MORE: ['Xem thêm','View more'],
+    COMMENTS: ['bình luận','comments'],
 }
 
 const allString = {
