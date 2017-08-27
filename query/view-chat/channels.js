@@ -18,5 +18,13 @@ export default {
   'USER.Updated': {
     controller: 'UserSubController',
     method: 'updateBasicUser'
+  },
+  'STORE.Created': {
+    controller: 'StoreSubController',
+    method: 'createStore'
+  },
+  'STORE.Updated': {
+    controller: 'StoreSubController',
+    method: 'updateStore'
   }
 }

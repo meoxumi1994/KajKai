@@ -1,155 +1,227 @@
 [{
     "name": "Điện Gia Dụng - Điện Lạnh",
+    "enName": "Electrical Household Appliance",
     "subcategory": [{
-        "name": "Đồ Dùng Nhà Bếp"
+        "name": "Đồ Dùng Nhà Bếp",
+        "enName": "Kitchenware"
     }, {
-        "name": "Thiết Bị Gia Đình"
+        "name": "Thiết Bị Gia Đình",
+        "enName": "Home Appliance"
     }, {
-        "name": "Điện Lạnh"
+        "name": "Điện Lạnh",
+        "enName": "Refrigeration"
     }]
 }, {
-    "name": "Thiết bị số - Phụ Kiện số",
+    "name": "Thiết Bị Số - Phụ Kiện số",
+    "enName": "Digital Equipment - Digital Accessory",
     "subcategory": [{
-        "name": "Tai Nghe"
+        "name": "Tai Nghe",
+        "enName": "Headphones"
     }, {
-        "name": "Loa"
+        "name": "Loa",
+        "enName": "Speaker"
     }, {
-        "name": "Thiết Bị Mạng"
+        "name": "Thiết Bị Mạng",
+        "enName": "Network Equipment"
     }, {
-        "name": "Phụ Kiện Điện Thoại"
+        "name": "Phụ Kiện Điện Thoại",
+        "enName": "Phone Accessory"
     }, {
-        "name": "Phụ Kiện Máy Tính"
+        "name": "Phụ Kiện Máy Tính",
+        "enName": "Computer Accessory"
     }, {
-        "name": "Thiết Bị Đeo Thông Minh"
+        "name": "Thiết Bị Đeo Thông Minh",
+        "enName": "Smart Jewellery"
     }]
 }, {
     "name": "Điện Thoại - Máy Tính Bảng",
+    "enName": "Phone - Tablet",
     "subcategory": [{
-        "name": "Iphone"
+        "name": "iPhone",
+        "enName": "iPhone"
     }, {
-        "name": "Samsung"
+        "name": "Samsung",
+        "enName": "Samsung"
     }, {
-        "name": "Sony"
+        "name": "Sony",
+        "enName": "Sony"
     }, {
-        "name": "Asus"
+        "name": "Asus",
+        "enName": "Asus"
     }, {
-        "name": "OPPO"
+        "name": "OPPO",
+        "enName": "OPPO"
     }, {
-        "name": "HTC"
+        "name": "HTC",
+        "enName": "HTC"
     }, {
-        "name": "Ipad"
+        "name": "iPad",
+        "enName": "iPad"
     }, {
-        "name": "Galaxy Tab"
+        "name": "Galaxy Tab",
+        "enName": "Galaxy Tab"
     }]
 }, {
     "name": "Nhà Cửa Đời Sống",
+    "enName": "Furniture",
     "subcategory": [{
-        "name": "Nhà Bếp Và Phòng Ăn"
+        "name": "Nhà Bếp - Phòng Ăn",
+        "enName": "Kitchen and Dining Room"
     }, {
-        "name": "Sửa Chữa Nhà Cửa"
+        "name": "Sửa Chữa Nhà Cửa",
+        "enName": "House Repairs"
     }, {
-        "name": "Nhà Tắm"
+        "name": "Nhà Tắm",
+        "enName": "Bathroom"
     }, {
-        "name": "Phòng Ngủ"
+        "name": "Phòng Ngủ",
+        "enName": "Bedroom"
     }, {
-        "name": "Thiết Bị Chiếu Sáng"
+        "name": "Thiết Bị Chiếu Sáng",
+        "enName": "Lighting Equipment"
     }]
 }, {
     "name": "Làm Đẹp - Sức Khoẻ",
+    "enName": "Beauty - Health",
     "subcategory": [{
-        "name": "Trang Điểm"
+        "name": "Trang Điểm",
+        "enName": "Makeup"
     }, {
-        "name": "Thực Phẩm Chức Năng"
+        "name": "Thực Phẩm Chức Năng",
+        "enName": "Nutraceutical "
     }, {
-        "name": "Chăm Sóc Da Mặt"
+        "name": "Chăm Sóc Da Mặt",
+        "enName": "Face Care"
     }, {
-        "name": "Chăm Sóc Cơ Thể"
+        "name": "Chăm Sóc Cơ Thể",
+        "enName": "Body Care"
     }, {
-        "name": "Thiết Bị Chăm Sóc Sức Khoẻ"
+        "name": "Thiết Bị Chăm Sóc Sức Khoẻ",
+        "enName": "Health Care Equipment"
     }]
 }, {
-    "name": "Bách Hoá Online",
+    "name": "Bách Hoá Trực Tuyến",
+    "enName": "Online Grocery",
     "subcategory": [{
-        "name": "Bánh Kẹo"
+        "name": "Bánh Kẹo",
+        "enName": "Confectionery"
     }, {
-        "name": "Gia Vị"
+        "name": "Gia Vị",
+        "enName": "Spice"
     }, {
-        "name": "Dầu Ăn"
+        "name": "Dầu Ăn",
+        "enName": "Cooking Oil"
     }, {
-        "name": "Thực Phẩm Chay"
+        "name": "Thực Phẩm Chay",
+        "enName": "Vegetarian Foood"
     }, {
-        "name": "Đồ Uống"
+        "name": "Đồ Uống",
+        "enName": "Drinks"
     }, {
-        "name": "Cà Phê - Trà"
+        "name": "Cà Phê - Trà",
+        "enName": "Coffee - Tea"
     }, {
-        "name": "Nước Tẩy Rửa"
+        "name": "Nước Tẩy Rửa",
+        "enName": "Bleach"
     }, {
-        "name": "Bột Giặt - Nước Xả"
+        "name": "Bột Giặt - Nước Xả",
+        "enName": "Washing Powder - Fabric"
     }, {
-        "name": "Xà Phòng - Dầu Gội"
+        "name": "Xà Phòng - Dầu Gội",
+        "enName": "Soap - Shampoo"
     }]
 }, {
-    "name": "Mẹ Và Bé",
+    "name": "Mẹ và Bé",
+    "enName": "Moom and Baby",
     "subcategory": [{
-        "name": "Sữa"
+        "name": "Sữa",
+        "enName": "Milk"
     }, {
-        "name": "Tả Bỉm"
+        "name": "Tả Bỉm",
+        "enName": "Diaper"
     }, {
-        "name": "Thực Phẩm Ăn Dặm"
+        "name": "Thực Phẩm Ăn Dặm",
+        "enName": "Weaning Food"
     }, {
-        "name": "Bình Sữa, Đồ Dùng Ăn Uống"
+        "name": "Bình Sữa, Đồ Dùng Ăn Uống",
+        "enName": "Milk Bottle, Food Utensil"
     }, {
-        "name": "Đồ Dùng Bảo Vệ An Toàn"
+        "name": "Đồ Dùng Bảo Vệ An Toàn",
+        "enName": "Safety Utensil"
     }, {
-        "name": "Đồ Dùng Phòng Ngủ"
+        "name": "Đồ Dùng Phòng Ngủ",
+        "enName": "Bedroom Utensil"
     }, {
-        "name": "Đồ Dùng Phòng Tắm"
+        "name": "Đồ Dùng Phòng Tắm",
+        "enName": "Bathroom Utensil"
     }]
 }, {
 	"name": "Thể Thao - Dã Ngoại",
+  "enName": "Sport - Picnic",
     "subcategory": [{
-        "name": "Dã Ngoại, Leo Núi"
+        "name": "Dã Ngoại, Leo Núi",
+        "enName": "Picnic, Mountaineering"
     }, {
-        "name": "Giày Patin"
+        "name": "Giày Patin",
+        "enName": "Patin Shoes"
     }, {
-        "name": "Cờ"
+        "name": "Cờ",
+        "enName": "Chess"
     }, {
-        "name": "Bơi Lội"
+        "name": "Bơi Lội",
+        "enName": "Swimming"
     }, {
-        "name": "Cầu Lông"
+        "name": "Cầu Lông",
+        "enName": "Badminton"
     }, {
-        "name": "Bóng Đá, Bóng Rổ"
+        "name": "Bóng Đá, Bóng Rổ",
+        "enName": "Foodball, Basketball"
     }]
 }, {
 	"name": "Máy Ảnh - Máy Quay Phim",
+  "enName": "Camera - Camcorder",
     "subcategory": [{
-        "name": "Máy Ảnh"
+        "name": "Máy Ảnh",
+        "enName": "Camera"
     }, {
-        "name": "Ống Kính - Lens"
+        "name": "Ống Kính",
+        "enName": "Lens"
     }, {
-        "name": "Máy Quay Phim"
+        "name": "Máy Quay Phim",
+        "enName": "Camcorder"
     }, {
-        "name": "Phụ Kiện Máy Ảnh"
+        "name": "Phụ Kiện Máy Ảnh",
+        "enName": "Camera Accessory"
     }, {
-        "name": "Camera Bảo Vệ"
+        "name": "Camera Bảo Vệ",
+        "enName": "Security Camcorder"
     }]
 }, {
-	"name": "Ăn uống",
+	"name": "Ăn Uống",
+  "enName": "Food",
     "subcategory": [{
-        "name": "Bún"
+        "name": "Bún",
+        "enName": "Noodles"
     }, {
-        "name": "Phở"
+        "name": "Phở",
+        "enName": "Phở"
     }, {
-        "name": "Pizza"
+        "name": "Pizza",
+        "enName": "Pizza"
     }, {
-        "name": "Burger"
+        "name": "Burger",
+        "EnName": "Burger"
     }, {
-        "name": "Bánh Mì"
+        "name": "Bánh Mì",
+        "enName": "Bread"
     }, {
-        "name": "Cháo"
+        "name": "Cháo",
+        "enName": "Porridge"
     }, {
-        "name": "Nướng - Lẩu"
+        "name": "Nướng - Lẩu",
+        "enName": "Grill - Hotpot"
     }, {
-        "name": "Hải Sản"
+        "name": "Hải Sản",
+        "enName": "Seafood"
     }]
 }]

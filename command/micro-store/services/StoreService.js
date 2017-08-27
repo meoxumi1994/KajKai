@@ -86,13 +86,14 @@ export const verifyStoreInfo = (storeInfo, next) => {
 };
 
 export const createStore = (storeInfo, next) => {
-
+    const defaultUrl = ['map', 'admin', 'home', 'register', 'store', 'profile', 'registerstore', 'user', 'post'];
     verifyStoreInfo(storeInfo, (verRes) => {
         if (verRes) {
             next(verRes);
             return;
         }
-        if (!storeInfo.urlname || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )) {
+        if (!storeInfo.urlname || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )
+            || defaultUrl.indexOf(storeInfo.urlName) != -1) {
             next('urlname');
         } else {
             Store.findOne({urlName: storeInfo.urlname}, (err, docs) => {
@@ -242,4 +243,16 @@ export const getListStore = (storeIdList, next) => {
     Store.find({_id: {$in: list}}, (err, docs) => {
         next(getStoreListInfo(docs));
     })
+};
+
+export const getStoreOfUser = (userId, next) => {
+    Store.find({owner: userId}, (err, docs) => {
+        let res = [];
+        if (docs && docs.length && docs.length > 0) {
+            for (let i = 0; i < docs.length; ++i) {
+                res.push(getStoreBasicInfoService(docs[i]));
+            }
+        }
+        next(res);
+    });
 };

@@ -3,7 +3,7 @@ import ChatLeft from '~/components/chat/left'
 
 const mapStateToProps = (state, ownProps) => {
   const { chatListKey } = state.inst.chat.left
-  // console.log('---STATE', state.inst.chat);
+  // console.log('---STATE', state);
   return {
       chatListKey
   }

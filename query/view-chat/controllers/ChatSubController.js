@@ -1,71 +1,150 @@
 import { Chat, UserChat, BasicUser, BasicStore } from '../models'
 
 export const createChat = (message) => {
-  const { groupId: id, groupName: name, members: users, storeId } = message.chatGroup
+  const { groupId: id, groupName: name, members } = message.chatGroup
+
+  let users, storeId
+  if (members) {
+    users = []
+    for (let i = 0; i < members.length; i++) {
+      let member = members[i]
+      if (member.substr(0, 3) == '002') {
+        storeId = member
+      } else {
+        users.push(member)
+      }
+    }
+  }
 
   const chat = new Chat({
     id
   })
 
-  if (name) chat.name = name
-  else chat.name = ''
-  if (users) {
-    const mPromises = []
-    users.map((user) => {
-      mPromises.push(new Promise((resolve, reject) => {
-        BasicUser.findOne({ id: user }, (err, basicUser) => {
-          if (basicUser) {
-            resolve(basicUser)
-          } else {
-            reject(err)
-          }
-        })
-      }))
-    })
-
-    Promise.all(mPromises).then((basicUsers) => {
-      chat.users = basicUsers
-      if (storeId) {
-        BasicStore.findOne({ id: storeId }, (err, basicStore) => {
-          if (basicStore) {
-            chat.store = basicStore
-            chat.save(() => {})
-            chat.users.map((user) => {
-              UserChat.findOne({ userId: user.id }, (err, userChat) => {
-                if (userChat) {
-                  userChat.chats.push(chat)
-                  userChat.save(() => {})
+  if (storeId) {
+    BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+      if (basicStore) {
+        users.push(basicStore.userId)
+        if (name) chat.name = name
+        else chat.name = ''
+        if (users) {
+          const mPromises = []
+          users.map((user) => {
+            mPromises.push(new Promise((resolve, reject) => {
+              BasicUser.findOne({ id: user }, (err, basicUser) => {
+                if (basicUser) {
+                  resolve(basicUser)
                 } else {
-                  const mUserChat = new UserChat({
-                    userId: user.id,
-                    chats: [chat]
-                  })
-                  mUserChat.save(() => {})
+                  reject(err)
                 }
               })
-            })
-          }
-        })
-      } else {
-        chat.save(() => {})
-        chat.users.map((user) => {
-          UserChat.findOne({ userId: user.id }, (err, userChat) => {
-            if (userChat) {
-              userChat.chats.push(chat)
-              userChat.save(() => {})
-            } else {
-              const mUserChat = new UserChat({
-                userId: user.id,
-                chats: [chat]
+            }))
+          })
+
+          Promise.all(mPromises).then((basicUsers) => {
+            chat.users = basicUsers
+            if (storeId) {
+              BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+                if (basicStore) {
+                  chat.store = basicStore
+                  chat.save(() => {})
+                  chat.users.map((user) => {
+                    UserChat.findOne({ userId: user.id }, (err, userChat) => {
+                      if (userChat) {
+                        userChat.chats.push(chat)
+                        userChat.save(() => {})
+                      } else {
+                        const mUserChat = new UserChat({
+                          userId: user.id,
+                          chats: [chat]
+                        })
+                        mUserChat.save(() => {})
+                      }
+                    })
+                  })
+                }
               })
-              mUserChat.save(() => {})
+            } else {
+              chat.save(() => {})
+              chat.users.map((user) => {
+                UserChat.findOne({ userId: user.id }, (err, userChat) => {
+                  if (userChat) {
+                    userChat.chats.push(chat)
+                    userChat.save(() => {})
+                  } else {
+                    const mUserChat = new UserChat({
+                      userId: user.id,
+                      chats: [chat]
+                    })
+                    mUserChat.save(() => {})
+                  }
+                })
+              })
+            }
+          }, err => {
+            console.log('error', err)
+          })
+        }
+      }
+    })
+  } else {
+    if (users) {
+      const mPromises = []
+      users.map((user) => {
+        mPromises.push(new Promise((resolve, reject) => {
+          BasicUser.findOne({ id: user }, (err, basicUser) => {
+            if (basicUser) {
+              resolve(basicUser)
+            } else {
+              reject(err)
             }
           })
-        })
-      }
-    }, err => {
-      console.log('error', err)
-    })
+        }))
+      })
+
+      Promise.all(mPromises).then((basicUsers) => {
+        chat.users = basicUsers
+        if (storeId) {
+          BasicStore.findOne({ id: storeId }, (err, basicStore) => {
+            if (basicStore) {
+              chat.store = basicStore
+              chat.save(() => {})
+              chat.users.map((user) => {
+                UserChat.findOne({ userId: user.id }, (err, userChat) => {
+                  if (userChat) {
+                    userChat.chats.push(chat)
+                    userChat.save(() => {})
+                  } else {
+                    const mUserChat = new UserChat({
+                      userId: user.id,
+                      chats: [chat]
+                    })
+                    mUserChat.save(() => {})
+                  }
+                })
+              })
+            }
+          })
+        } else {
+          chat.save(() => {})
+          chat.users.map((user) => {
+            UserChat.findOne({ userId: user.id }, (err, userChat) => {
+              if (userChat) {
+                userChat.chats.push(chat)
+                userChat.save(() => {})
+              } else {
+                const mUserChat = new UserChat({
+                  userId: user.id,
+                  chats: [chat]
+                })
+                mUserChat.save(() => {})
+              }
+            })
+          })
+        }
+      }, err => {
+        console.log('error', err)
+      })
+    }
   }
 }
 

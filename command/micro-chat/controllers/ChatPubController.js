@@ -69,7 +69,7 @@ export const getListStore = (storeIdList, next) => {
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
     const id = getUUID();
-    const publicData = {userIdList: storeIdList, eventId: id};
+    const publicData = {storeIdList: storeIdList, eventId: id};
     pub.publish('STORE.GetListStore', JSON.stringify(publicData));
     sub.subscribe('STORE.GetListStore' + id);
     sub.on('message', (channel, message) => {

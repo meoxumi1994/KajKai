@@ -9,9 +9,17 @@ class ChatList extends React.Component {
         this.props.setUserId(this.props.userId)
     }
     render(){
-        const { chatListMap, chatListKey, currentChat, unread, lazyLoad,
+        const { chatListMap, chatListKey, currentChat, unread, lazyLoad, addon,
                 createNewChat, getMessages, getChat
               } = this.props
+
+        if (chatListKey.length == 0) {
+            return (
+                <div style={{textAlign: 'center', marginTop: 10}}>
+                    <p><i>(No conversation)</i></p>
+                </div>
+            )
+        }
 
         chatListKey.sort(function(a, b) {
             if (chatListMap[a].mesId == 0
@@ -24,13 +32,13 @@ class ChatList extends React.Component {
         })
 
         return(
-          <div style={{textAlign: 'left', overflowY: 'scroll', marginTop: 5, maxHeight: 600}}>
+          <div style={{textAlign: 'left', overflowY: 'scroll', marginTop: 5, maxHeight: addon? 255: 600}}>
               {chatListKey.map(mesId =>
                 {
                   return (
                       <ul className="nav nav-tabs" key={mesId} onClick={() => getMessages(mesId)}
-                      style={{backgroundColor: getTabColor(mesId, currentChat, unread), borderTop: '0.1px solid #dbdbdb', height: 60, width: 364}}>
-                              <ChatContainer mesId={mesId}/>
+                      style={{backgroundColor: getTabColor(mesId, currentChat, unread), borderTop: '0.1px solid #dbdbdb', height: 60, width: addon? 246: 364}}>
+                              <ChatContainer mesId={mesId} addon={addon}/>
                       </ul>
                   )
                 }
@@ -44,9 +52,11 @@ class ChatList extends React.Component {
 }
 
 const getTabColor = (mesId, currentChat, unread) => {
-    if (mesId == currentChat) {
-        return '#cc3333'
-    } else if (unread.messages.indexOf(mesId) != -1) {
+    // if (mesId == currentChat) {
+    //     return '#cc3333'
+    // } else
+
+    if (unread.messages.indexOf(mesId) != -1) {
         return '#dbdcdd'
     } else {
         return 'white'

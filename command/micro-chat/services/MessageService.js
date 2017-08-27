@@ -56,10 +56,10 @@ export const addNewMessage = (mesInfo, next) => {
 export const getUnreadMessage = (userId, next) => {
     getUnreadCounter(userId, (quantity) => {
         Message.find({owner: userId, read: false}, (err, docs) => {
-            var idArr = [];
-            for (var i = 0; i < docs.length; ++i) {
-                var has = false;
-                for (var j = 0; j < idArr.length; ++j)
+            let idArr = [];
+            for (let i = 0; i < docs.length; ++i) {
+                let has = false;
+                for (let j = 0; j < idArr.length; ++j)
                     if (idArr[j] === docs[i].mesId) {
                         has = true;
                         break;

@@ -1,16 +1,31 @@
 import { initChatList, addChat, setCurrentChat, updateUserInfo, changeDisplay } from './actions'
 import { flem } from '../../support'
 
-export const getMesId = (id, person) => dispatch => {
+export const getMesId = (id, person, store) => dispatch => {
     flem('/mesid', {
         id: id,
         person: person
     }, {}
     ).then((response) => {
           console.log('\n[API] /getMesId ', response);
-          dispatch({type: 'NEW_CHAT', data: {mesId: response.mesId}})
-          dispatch(getUser(person, response.mesId))
-          dispatch(getMessages(response.mesId, Date.now(), 'init'))
+          if (store) {
+              // dispatch({type: 'NEW_CHAT', data: {mesId: response.mesId}})
+              dispatch(getStore(person, response.mesId))
+          } else {
+              dispatch({type: 'NEW_CHAT', data: {mesId: response.mesId}})
+              dispatch(getUser(person, response.mesId))
+              dispatch(getMessages(response.mesId, Date.now(), 'init'))
+          }
+    })
+}
+
+export const getStore = (id, mesId) => dispatch => {
+    flem('/store/'+id)
+    .then((response) => {
+          console.log('\n[API] /getStore', response);
+          const {id, storename, avatarUrl} = response.store
+          dispatch({type: 'CHAT_STORE', data: { mesId: mesId, id: id, username: storename, avatarUrl: avatarUrl}})
+          dispatch(getMessages(mesId, Date.now(), 'init'))
     })
 }
 

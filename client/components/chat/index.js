@@ -22,9 +22,9 @@ class Chat extends React.Component {
               messagesKey.map(
                   (mesId, index) => {
                         return (
-                          <div>
+                          <div key={mesId}>
                               <StoreContainer index={index} mesId={mesId}/>
-                              <div key={mesId} style={{
+                              <div style={{
                                   position: 'fixed',
                                   bottom: 0,
                                   backgroundColor: 'white',

@@ -5,6 +5,15 @@ const userMap = ( state={
     disabled: false
 }, action) => {
     switch (action.type) {
+
+      case 'CHAT_STORE':
+          return {
+              ...state,
+              id: action.data.id,
+              username: action.data.username,
+              avatarUrl: action.data.avatarUrl
+          }
+
       case 'INIT_CHAT_LIST':
           return {
               ...state,

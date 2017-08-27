@@ -37,11 +37,11 @@ fs.readFile(path.resolve(__dirname, '../data/category.json'), 'utf8', (err, data
 		let subCategories = [];
 		sub.forEach((subcat) => {
 			// console.log(subcat);
-			let subCategory = new SubCategory({name: subcat.name});
+			let subCategory = new SubCategory({name: subcat.name, enName: subcat.enName});
 			subCategories.push(subCategory)
 		});
 
-		let category = new Category({name: e.name, subcategory: subCategories});
+		let category = new Category({name: e.name, enName: e.enName, subcategory: subCategories});
 		Category.findOne({name: e.name}, (err, data) => {
 		    if (err || !data) {
 		        category.save();

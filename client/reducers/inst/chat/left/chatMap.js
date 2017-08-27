@@ -32,20 +32,39 @@ const chatMap = (state={
         }
     },
     store: undefined
+    // {
+    //     storeAvatar: '',
+    //     storeUrl: 'rauga',
+    //     storeName: 'Gà lô 86'
+    // }
 }, action, subAction) => {
 
     switch (action.type || subAction.type) {
 
-//------------------------------------------------------------------------------
-        case 'INIT_CHAT_LIST':
+        case 'CHAT_STORE':
             return {
                 ...state,
                 mesId: action.data.mesId,
-                lastMessage: action.data.lastMessage,
-                displayLabel: action.data.displayLabel,
-                usersKey: [...new Set(action.data.users.map(e => e.id))],
-                usersMap: utils.usersMap(action, action.data.users),
+                usersKey: [
+                    action.data.id
+                ],
+                usersMap: {
+                    [action.data.id]: userMap(undefined, action)
+                },
+                lastMessage: undefined
             }
+
+//------------------------------------------------------------------------------
+        case 'INIT_CHAT_LIST':
+                return {
+                    ...state,
+                    mesId: action.data.mesId,
+                    lastMessage: action.data.lastMessage,
+                    displayLabel: action.data.displayLabel,
+                    usersKey: [...new Set(action.data.users.map(e => e.id))],
+                    usersMap: utils.usersMap(action, action.data.users),
+                    store: action.data.store                    
+                }
 
 //------------------------------------------------------------------------------
         case 'global/RECEIVE_MESSAGE':

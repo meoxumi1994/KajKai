@@ -3,8 +3,8 @@ import { Button, FormGroup, InputGroup, FormControl } from 'react-bootstrap'
 
 const Head = ({createNewChat}) => {
   return (
-    <div style={{ backgroundColor: 'white', width: '100%', height: '100%' }}>
-      <button onClick={() => createNewChat()} className="btn" style={{ backgroundColor: 'white', height: 25, fontSize: 12, marginBottom: 10 }}>
+    <div style={{ backgroundColor: 'white', width: '100%', height: '100%', textAlign: 'center' }}>
+      <button onClick={() => createNewChat()} className="btn" style={{ backgroundColor: 'white', height: 25, fontSize: 12, marginBottom: 10, textAlign: 'center' }}>
           <label>New Message</label>
       </button>
     </div>

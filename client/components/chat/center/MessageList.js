@@ -29,12 +29,24 @@ class MessageList extends React.Component {
               } = this.props
 
         let previousId
-        const { usersMap } = chatListMap[mesId]
+        const { usersMap, store } = chatListMap[mesId]
+
+        let myUser
+        if (store == undefined || store.ownerId != user.id) {
+            myUser = user
+        } else {
+            myUser = {
+                id: store.id,
+                username: store.storeName,
+                avatarUrl: store.avatarUrl
+            }
+        }
+
 
         return (
           <div style={styles.mainDiv} ref={"bottom"} onClick={() => hideAddMember(mesId)}>
             {
-              messagesMap[mesId] == undefined?
+              messagesMap[mesId] == undefined || messagesMap[mesId].length == 0?
               <div></div>
               :
               <div>
@@ -47,14 +59,14 @@ class MessageList extends React.Component {
                       {
                         messagesMap[mesId].map(
                             mes => {
-                              let showAvatar = previousId == mes.id || mes.id == user.id? false:true
+                              let showAvatar = previousId == mes.id || mes.id == myUser.id? false:true
                               previousId = mes.id
                               return (
                                   <li style={{width: '100%', height: '100%', marginBottom: 5}} key={JSON.stringify(mes)}>
                                       <Message
                                           {...mes}
-                                          user={mes.id == user.id? user: usersMap[mes.id]}
-                                          styles={mes.id === user.id? styles.rightMsg: styles.leftMsg}
+                                          user={mes.id == myUser.id? myUser: usersMap[mes.id]}
+                                          styles={mes.id === myUser.id? styles.rightMsg: styles.leftMsg}
                                           showAvatar={showAvatar}/>
                                   </li>
                               )

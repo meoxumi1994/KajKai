@@ -20,21 +20,27 @@ class ChatTop extends React.Component {
               displayAddMember, displaySettings, close
             } = this.props
 
-      const { usersKey, usersMap, display } = chatListMap[mesId]
+      const { usersKey, usersMap, display, store } = chatListMap[mesId]
       const { addMember } = display
 
       const headColor = currentChat.mesId == mesId? styles.highlightedButton:  styles.button
 
       return (
-        <div style={currentChat.mesId == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
+        <div style={currentChat.mesId == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">            
             <DisplayLabelContainer mesId={mesId} styles={styles}/>
             <div style={styles.iconGroupDiv}>
-                <button className="btn" style={headColor} onClick={() => displayAddMember(mesId)}>
-                    <img style={{height: 15, width: 15, marginLeft: 3}} src="/images/chat/add.png"/>
-                </button>
-                <button disabled={mesId == 0? true: false} className="btn" style={headColor} onClick={() => displaySettings(mesId)}>
-                    <img style={{height: 18, width: 18, marginLeft: 2}} src="/images/chat/setting.png"/>
-                </button>
+                {
+                    store != undefined? undefined:
+                    <button className="btn" style={headColor} onClick={() => displayAddMember(mesId)}>
+                        <img style={{height: 15, width: 15, marginLeft: 3}} src="/images/chat/add.png"/>
+                    </button>
+                }
+                {
+                    store != undefined? undefined:
+                    <button disabled={mesId == 0? true: false} className="btn" style={headColor} onClick={() => displaySettings(mesId)}>
+                        <img style={{height: 18, width: 18, marginLeft: 2}} src="/images/chat/setting.png"/>
+                    </button>
+                }
                 <button className="btn" style={headColor} onClick={() => close(mesId)}>
                     <img style={{height: 15, width: 15, marginLeft: 2}} src="/images/chat/close.png"/>
                 </button>
