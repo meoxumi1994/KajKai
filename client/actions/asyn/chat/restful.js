@@ -32,7 +32,7 @@ export const getStore = (id, mesId) => dispatch => {
 export const getMessages = (mesId, offset, type) => dispatch => {
     flem('/messages/'+mesId, {
         offset: offset,
-        length: 5
+        length: 10
     }).then((response) => {
           console.log('\n[API] /getMessages ', response);
           if (type == 'init') {
