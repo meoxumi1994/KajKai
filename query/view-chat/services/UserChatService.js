@@ -41,9 +41,10 @@ export const getUserChats = (userId, offset, length, next) => {
             }
             mChat.users = chat.users
             if (chat.store) {
-              let { id, storeName, avatarUrl, urlName } = chat.store
+              let { id, storeName, avatarUrl, urlName, userId: ownerId } = chat.store
               mChat.store = {
                 id,
+                ownerId,
                 urlName,
                 storeName,
                 avatarUrl
