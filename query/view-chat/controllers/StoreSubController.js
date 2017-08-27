@@ -16,7 +16,7 @@ export const createStore = (message) => {
 }
 
 export const updateStore = (message) => {
-  const { id, storeName, avatarUrl, urlName } = message.store
+  const { id, storeName, avatarUrl, urlName, coverUrl } = message.store
   const basicStore = {}
 
   if (storeName) basicStore.storeName = storeName
