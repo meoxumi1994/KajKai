@@ -1,4 +1,4 @@
-import { getStore, getStoreInfoService, getListStore } from '../services/StoreService'
+import { getStore, getStoreInfoService, getListStore, getStoreOfUser } from '../services/StoreService'
 import { getStoreFromSellPostId, updateSellPostStatus } from '../services/SellPostService'
 import config from '../config/globalId'
 
@@ -42,6 +42,12 @@ export const updateSellPostSub = (message, next) => {
             sellpostid: message.sellpostid,
             status: message.sellpostid
         }})
+    })
+};
+
+export const getListStoreOfUserSub = (message, next) => {
+    getStoreOfUser(message.userId, (storeList) => {
+        next({status: 'success', storeList: storeList})
     })
 };
 

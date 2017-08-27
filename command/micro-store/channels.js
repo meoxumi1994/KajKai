@@ -14,5 +14,9 @@ export default {
     'SELLPOST.SockUpdate': {
         controller: 'StoreSubController',
         method: 'updateSellPostSub'
+    },
+    'STORE.GetStoreOfUser': {
+        controller: 'StoreSubController',
+        method: 'getListStoreOfUserSub'
     }
 }

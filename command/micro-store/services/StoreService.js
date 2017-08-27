@@ -243,3 +243,15 @@ export const getListStore = (storeIdList, next) => {
         next(getStoreListInfo(docs));
     })
 };
+
+export const getStoreOfUser = (userId, next) => {
+    Store.find({owner: userId}, (err, docs) => {
+        let res = [];
+        if (docs && docs.length && docs.length > 0) {
+            for (let i = 0; i < docs.length; ++i) {
+                res.push(getStoreBasicInfoService(docs[i]));
+            }
+        }
+        next(res);
+    });
+};
