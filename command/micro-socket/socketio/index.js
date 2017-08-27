@@ -1,6 +1,6 @@
 import socketIo from 'socket.io'
 import allEvents from './events'
-import { authoriseToken } from '../controllers/SocketPubController'
+import { authoriseToken, getStoreOfUserPub } from '../controllers/SocketPubController'
 import { getUnreadMessageCon } from '../controllers/ChatController'
 import { getFollowListPub } from '../controllers/FollowPubController'
 
@@ -46,6 +46,8 @@ const init = (server) => {
             console.log('a user disconnected')
         });
 
+        sockListen(null, socket, sio);
+
         socket.on('server/sendToken', (action) => {
             const token = action.tokenId;
             console.log('fuck token ' + token);
@@ -57,10 +59,14 @@ const init = (server) => {
                         socket.join(user.id);
                         sockListen(user, socket, sio);
                         getUnreadMessageCon(user.id, socket, sio);
+                        getStoreOfUserPub(user.id, (stores) => {
+                            for (let i = 0; i < stores.length; ++i) {
+                                socket.join(stores[i].id);
+                            }
+                        })
                     } else sockListen(null, socket, sio)
                 })
             } else {
-                sockListen(null, socket, sio)
             }
         })
     });
