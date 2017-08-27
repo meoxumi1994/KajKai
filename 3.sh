@@ -10,4 +10,15 @@ pm2 start ./command/micro-notification/index-noti.js &&
 pm2 start ./command/micro-store/index-store.js &&
 
 curl localhost:8085/deleteindex &&
-curl localhost:8085/setindex
+curl -XPUT 'lhttp://search-movies-q6vci4nsiozj6shabcrhws4tny.ap-southeast-1.es.amazonaws.com:80/kajkaiindex/' -H 'Content-Type: application/json' -d'
+{
+	"mappings": {
+	    "sellpost": {
+	    	"properties": {
+	        	"location": {
+	        		"type": "geo_point"
+	        	}
+	    	}
+	    }
+	}
+}

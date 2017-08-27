@@ -14,7 +14,7 @@ export const createMessage = (message) => {
   })
 
   if (content) mMessage.content = mContent
-  if (time) mMessage.time = time
+  mMessage.time = Date.now()
 
   Chat.findOne({ id }, (err, chat) => {
     if (chat) {
