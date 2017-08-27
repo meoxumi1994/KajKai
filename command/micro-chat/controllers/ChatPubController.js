@@ -46,7 +46,10 @@ export const getStore = (storeId, next) => {
 };
 
 export const getListUser = (userIdList, next) => {
-    if (!userIdList || userIdList.length === 0) return [];
+    if (!userIdList || userIdList.length === 0) {
+        next([]);
+        return;
+    }
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
     const id = getUUID();
