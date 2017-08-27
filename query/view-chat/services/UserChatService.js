@@ -41,6 +41,7 @@ export const getUserChats = (userId, offset, length, next) => {
             }
             mChat.users = chat.users
             mChat.store = chat.store ? {
+              id: chat.store.id,
               ownerId: chat.store.userId,
               storeUrl: chat.store.urlName,
               storeName: chat.store.storeName,
