@@ -113,20 +113,49 @@ const myString = {
     AND: ['và', 'and'],
     THIS: ['điều này','this'],
     // store
-    CREATE_SELLPOST: ['Tạo Một Bài Đăng Bán Hàng', 'Create a Sell Post'],
-    CREATE_SELLPOST_DESCRIPTTION: ['Before creating a sale\'s post  you need to keep in mind:','Trước khi tạo bài đăng bán hàng bạn cần lưu ý:'],
-    CREATE_SELLPOST_DESCRIPTTION_1: ['You do not need to recreate a sale\'s post for a new product or start selling again, but you can instead re-edit your old post.','Bạn không cần tạo lại bài đăng bán hàng khi có thêm sản phẩm mới hay bắt đầu bán lại, thay vào đó bạn có thể chỉnh sửa lại bài đăng cũ.'],
-    CREATE_SELLPOST_DESCRIPTTION_2: ['You create more sale\'s posts when making sure your store adds a new type of business.','Bạn tạo thêm bài đăng bán hàng khi chắc chắn rằng cửa hàng của bạn thêm một loại hình kinh doanh mới.'],
-    CREATE_SELLPOST_DESCRIPTTION_3: ['You should not create too many sale\'s posts because the "likes", "follow", "shares" will be scattered.','Bạn không nên tạo quá nhiều bài đăng bán hàng vì số lượng "thích","theo dõi","chia sẻ" sẽ bị phân tán.'],
-    CREATE_SELLPOST_DESCRIPTTION_4: ['If you want to post a video, add a new photo or write more to attract customers, you should create a minor post.','Nếu bạn muốn đăng video, thêm ảnh mới hoặc viết thêm để thu hút khách hàng, bạn nên tạo một bài đăng phụ.'],
+    CREATE_SELLPOST: [
+        'Tạo Một Bài Đăng Bán Hàng',
+        'Create a Sell Post'],
+    CREATE_SELLPOST_DESCRIPTTION: [
+        'Trước khi tạo bài đăng bán hàng bạn cần lưu ý:',
+        'Before creating a sale\'s post  you need to keep in mind:' ],
+    CREATE_SELLPOST_DESCRIPTTION_1: [
+        'Bạn không cần tạo lại bài đăng bán hàng khi có thêm sản phẩm mới hay bắt đầu bán lại, thay vào đó bạn có thể chỉnh sửa lại bài đăng cũ.',
+        'You do not need to recreate a sale\'s post for a new product or start selling again, but you can instead re-edit your old post.',
+        ],
+    CREATE_SELLPOST_DESCRIPTTION_2: [
+        'Bạn tạo thêm bài đăng bán hàng khi chắc chắn rằng cửa hàng của bạn thêm một loại hình kinh doanh mới.',
+        'You create more sale\'s posts when making sure your store adds a new type of business.',
+    ],
+    CREATE_SELLPOST_DESCRIPTTION_3: [
+        'Bạn không nên tạo quá nhiều bài đăng bán hàng vì số lượng "thích","theo dõi","chia sẻ" sẽ bị phân tán.',
+        'You should not create too many sale\'s posts because the "likes", "follow", "shares" will be scattered.',],
+    CREATE_SELLPOST_DESCRIPTTION_4: [
+        'Nếu bạn muốn đăng video, thêm ảnh mới hoặc viết thêm để thu hút khách hàng, bạn nên tạo một bài đăng phụ.',
+        'If you want to post a video, add a new photo or write more to attract customers, you should create a minor post.',
+        ],
     CREATE_STORE: ['Tạo Cửa Hàng Mới','Create a New Store'],
-    CREATE_STORE_DESCRIPTION: ['Trước khi bắt đầu tạo cửa hàng bạn nên xem qua một số lưu ý','Before you start creating a store you should look over some notes'],
-    CREATE_STORE_DESCRIPTION_0: ['Tạo cửa hàng là hoàn toàn miễn phí, chúng tôi không thu theo tháng hay phần trăm phí bất sản phẩm nào','Creating a store is completely free, and we do not charge you any monthly or per-cent'],
-    CREATE_STORE_DESCRIPTION_1: ['Nâng cao khả năng tương tác giữa của hàng và người dùng luôn là tiêu trí để KajKai phát triển','Enhancing the interoperability between the goods and the user is always the place for KajKai to develop'],
-    CREATE_STORE_DESCRIPTION_2: ['Luôn luôn đảm bảo một sản phẩm tốt, giá cả hợp lý sẽ là tiêu trí để đưa cửa hàng của bạn phát triển','Always ensure a good product, reasonable price will be the place to put your store development'],
-    CREATE_STORE_DESCRIPTION_3: ['Cám ơn các bạn đã quan tâm đến KajKai','Thank you for your interest in KajKai'],
-    CREATE_STORE_DESCRIPTION_4: ['Chọn loại mặt hàng mà cửa hàng cửa bạn kinh doanh, việc này rất quan trọng vì liên quan đến khả năng tìm kiếm của người dùng','Choose the type of item your store is selling, which is important because it is relevant to the user\'s search capabilities'],
-    CREATE_STORE_DESCRIPTION_5: ['Bạn chọn loại hình kinh doanh chung mà chúng tôi gợi ý trước, sau đó điền chi tiết loại mặt hàng mà cửa hàng của bạn bán','You choose a general business type that we recommend first, then enter details of the type of items that your store sells'],
+    CREATE_STORE_DESCRIPTION: [
+        'Trước khi bắt đầu tạo cửa hàng bạn nên xem qua một số lưu ý',
+        'Before you start creating a store you should look over some notes'],
+    CREATE_STORE_DESCRIPTION_0: [
+        'Tạo cửa hàng là hoàn toàn miễn phí, chúng tôi không thu theo tháng hay phần trăm phí sản phẩm nào',
+        'Creating a store is absolutely free, and we do not charge a monthly or per cent of product fee'],
+    CREATE_STORE_DESCRIPTION_1: [
+        'Nâng cao khả năng tương tác giữa của hàng và người dùng luôn là tiêu chí để KajKai phát triển',
+        'Enhancing the interoperability between the goods and the user is always the place for KajKai to develop'],
+    CREATE_STORE_DESCRIPTION_2: [
+        'Luôn luôn đảm bảo một sản phẩm tốt, giá cả hợp lý sẽ là tiêu chí để đưa cửa hàng của bạn phát triển',
+        'Always ensure a good product, reasonable price will be the place to put your store development'],
+    CREATE_STORE_DESCRIPTION_3: [
+        'Cám ơn các bạn đã quan tâm đến KajKai',
+        'Thank you for your interest in KajKai'],
+    CREATE_STORE_DESCRIPTION_4: [
+        'Chọn loại mặt hàng mà cửa hàng cửa bạn kinh doanh, việc này rất quan trọng vì liên quan đến khả năng tìm kiếm của người dùng',
+        'Choose the type of item your store is selling, which is important because it is relevant to the user\'s search capabilities'],
+    CREATE_STORE_DESCRIPTION_5: [
+        'Bạn chọn loại hình kinh doanh chung mà chúng tôi gợi ý trước,sau đó điền chi tiết loại mặt hàng mà cửa hàng của bạn bán',
+        'You choose a general business type that we recommend first, then enter details of the type of items that your store sells'],
     CREATE_STORE_DESCRIPTION_6: ['Số điện thoại này là số để khách hàng liên lạc đến cửa hàng','This phone number is the phone number for customers to contact the store'],
     CREATE_STORE_DESCRIPTION_7: ['Số điện thoại này sẽ luôn được công khai','Phone number will always be public'],
     CATEGORY: ['Loại Hình Kinh Doanh','Category'],
@@ -134,8 +163,8 @@ const myString = {
     CHOOSE_ANOTHER: ['Chọn lại', 'Choose Another'],
     POSITION_IN_MAP: ['Vị trí trên Google Map',
         'Position in google map'],
-    ADDRESS_DESCRIPTION: ['Địa chỉ của bạn, bạn nên viết chính xác vì người dùng sẽ sử dụng nó để tìm ra của hàng của bạn',
-        'Your address should you write correctly because the user will use it to find out your store'],
+    ADDRESS_DESCRIPTION: ['Địa chỉ của bạn, bạn nên viết chính xác vì người dùng sẽ sử dụng nó để tìm ra cửa hàng của bạn',
+        'Your address should be written correctly because the user will use it to find out your store'],
     STORE_NAME: ['Tên cửa hàng', 'Store name'],
     GET_CURRENT_POSITION: ['Đến vị trí hiện tại','Get current Position'],
     ENTER_YOUR_STORE_NAME: ['Nhập tên cửa hàng của bạn', 'Enter your store name'],
