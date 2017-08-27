@@ -55,9 +55,14 @@ class UserDetails extends React.Component {
                           <tr>
                               <th>Status</th>
                               <td>
+                                  <p style={{color: ban.status?'red': 'green'}}>
+                                      <b>{ban.status?'Deactived':'Activated'}</b>
+                                  </p>
                                   {
-                                    <p style={{color: ban.status?'red': 'green'}}>
-                                        {ban.status?'Deactived':'Activated'} by <b>{ban.admin.username}</b> because <b>{ban.reason}</b></p>
+                                      ban.admin.username == undefined || ban.admin.username == ''? undefined: <p>by <b>{ban.admin.username}</b></p>
+                                  }
+                                  {
+                                      ban.reason == undefined || ban.reason == ''? undefined: <p>because <b>{ban.reason}</b></p>
                                   }
                               </td>
                           </tr>

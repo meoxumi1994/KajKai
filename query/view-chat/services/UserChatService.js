@@ -40,6 +40,12 @@ export const getUserChats = (userId, offset, length, next) => {
               }
             }
             mChat.users = chat.users
+            mChat.store = chat.store ? {
+              ownerId: chat.store.userId,
+              storeUrl: chat.store.urlName,
+              storeName: chat.store.storeName,
+              storeAvatar: chat.store.avatarUrl
+            } : null
 
             mChats.push(mChat)
 

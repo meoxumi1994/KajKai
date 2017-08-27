@@ -37,7 +37,7 @@ const mapStateToProps = (state, { id }) => {
     return({
         ...store,
         ...sellpost,
-        id: sellpost ? sellpost.id : undefined,
+        id: id ? id : (sellpost ? sellpost.id : undefined),
         mysellpost: sellpost,
         isOwner: isOwner,
         beLike: beLike,
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch, { id, commentid }) => ({
     onChange: (key, value) => {
         dispatch({ type: 'INST_ENTITY_SELL_POST_CHANGE', id: id, key: key, value: value })
     },
-    onGetSellpost: () => {
+    onGetSellpost: (id, commentid) => {
         dispatch(getSellPost(id, commentid))
     },
     onDeleteSellpost: () => {

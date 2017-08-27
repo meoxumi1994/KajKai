@@ -25,7 +25,8 @@ class Cell extends React.Component {
                     padding: (this.state.hover || hover) ? '4px 5px 6px 5px' : '5px 5px 5px 5px',
                     textAlign: 'left', width: width }}>
                     <img src={avatar} style={{ width: 20, height: 20 }}/>
-                    <div style={{ marginLeft: 30, width: 140, marginTop: -20, color: '#4A4D54', fontSize: 13 }}>
+                    <div style={{ marginLeft: 30, width: 140, marginTop: -20, color: '#4A4D54', fontSize: 13,
+                        fontWeight: (this.state.hover || hover) ? 'bold': undefined, }}>
                         {getSmallString(name, 20)}
                     </div>
                     {((this.state.hover || hover) && linkSetting) &&
@@ -51,7 +52,8 @@ class Cell extends React.Component {
                     backgroundColor: (this.state.hover || hover) ? '#F6F7F9' : undefined,
                     textAlign: 'left', width: width }}>
                     <img src={avatar} style={{ width: 20, height: 20 }}/>
-                    <div style={{ marginLeft: 30, width: 140, marginTop: -20, color: '#4A4D54', fontSize: 13 }}>
+                    <div style={{ marginLeft: 30, width: 140, marginTop: -20, color: '#4A4D54', fontSize: 13,
+                        fontWeight: (this.state.hover || hover) ? 'bold': undefined, }}>
                         {getSmallString(name, 20)}
                     </div>
                     {((this.state.hover || hover) && linkSetting) &&

@@ -2,6 +2,7 @@ import React from 'react'
 
 import Left from '~/containers/home/Left'
 import NewFeed from '~/containers/home/NewFeed'
+import GuildUser from '~/containers/entity/guild/GuildUser'
 
 class Home extends React.Component {
     constructor(props){
@@ -9,6 +10,7 @@ class Home extends React.Component {
     }
     render(){
         const { scrollTop, scrollLeft, height } = this.props
+
         return(
             <div style={{ width:  1040 }}>
                 <div className="container-fluid" style={{ margin: 0, padding: 0 }}>
@@ -44,6 +46,12 @@ class Home extends React.Component {
                                 minHeight: height - 48,
                                 paddingTop: 10,
                                 }}>
+                                {(this.props.auth == 'WHO_SUCCESS'
+                                &&
+                                (this.props.location.pathname.split("/")[2] == 'getstart')) &&
+                                <div style={{ marginLeft: -50 }}>
+                                    <GuildUser/>
+                                </div> }
                                 <NewFeed/>
                             </div>
                         </div>

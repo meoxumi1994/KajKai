@@ -8,6 +8,13 @@ export const onWho = () => dispatch => {
     flem('/user')
     .then((response) => {
         if(response.user){
+            if(response.user.numUnreaded > 0){
+                if(document.title.split(")").length > 1){
+                    document.title = '(' + response.user.numUnreaded + ')' + document.title.split(")")[1]
+                }else {
+                    document.title = '(' + response.user.numUnreaded + ') ' + document.title
+                }
+            }
             dispatch(authData('WHO_SUCCESS',response.user))
             dispatch({ type: 'server/sendToken', tokenId: response.tokenId })
         }else{

@@ -7,8 +7,7 @@ const ChatBottom = ({mesId, userId, sendMessage, displayImageModal}) => {
   let msg
 
   return (
-    <div style={{width: 320}}>
-
+    <div style={{width: 280}}>
         <form onSubmit={e => {
           e.preventDefault()
           if (msg.value.trim()) {
@@ -50,7 +49,7 @@ const IconPopOver = (mesId) => {
 
 const styles = {
     iconButton: {
-      fontSize: 13,
+      fontSize: 12,
       width: '50%'
     }
 }

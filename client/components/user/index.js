@@ -77,15 +77,20 @@ class User extends React.Component {
             </div>
         )
     }
-    componentWillUpdate(){
+    componentDidUpdate(){
         this.left_marginTop = 0
         if(this.left){
             this.left_marginTop = this.props.height - this.left.getBoundingClientRect().bottom > 0
         }
-        this.props.onGetUser()
     }
     componentDidMount(){
-        this.props.onGetUser()
+        this.props.onGetUser(this.props.userid)
+    }
+    shouldComponentUpdate(nextProps, nextState){
+        if(nextProps.userid != this.props.userid){
+            this.props.onGetUser(nextProps.userid)
+        }
+        return true
     }
 }
 

@@ -45,9 +45,9 @@ export const updateStoreList = (message) => {
       }
       for (let i = 0; i < storeList.length; i++){
         if (storeList[i].id == storeId) {
-          storeList[i].storeName = storeName
-          storeList[i].avatarUrl = avatarUrl
-          storeList[i].urlName = urlName
+          if (storeName) storeList[i].storeName = storeName
+          if (avatarUrl) storeList[i].avatarUrl = avatarUrl
+          if (urlName) storeList[i].urlName = urlName
           break
         }
       }

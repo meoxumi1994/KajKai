@@ -28,7 +28,7 @@ class SellPost extends React.Component {
     render(){
         const { urlname, isOwner, ship, status, category, description, storename, avatarUrl, time,
             numfollow, beFollow, likestatus, likeGroupContent, likes, numlike, beLike, likeContent,
-            onDeleteSellpost, closeBorder, turnnotify,
+            onDeleteSellpost, closeBorder, turnnotify, disableClickImage,
             onLike, postrows, postrows_order, clicksetting, id, onFollow, feedBack, showEditSellPost,
             OPEN, SLEEP, FEED_BACK, TURN_OFF_NOTIFY, TURN_ON_NOTIFY,
             EDIT_SELL_POST, DELETE_SELL_POST, SURE_DELETE_SELL_POST,
@@ -121,7 +121,9 @@ class SellPost extends React.Component {
                         color: '#91959D',
                         fontWeight: 'bold'}}>
                         <div className="btn" style={{ padding: 0 }}>
-                            <a href={"/"+urlname} style={{ color: '#BD081C', fontWeight: 'bold'}}>{storename}</a>
+                            <Link to={"/"+urlname} style={{ color: '#BD081C', fontWeight: 'bold'}}>
+                                {storename}
+                            </Link>
                         </div>
                         {" : "}
                         <div className="btn" style={{ padding: 0 }}>
@@ -146,7 +148,7 @@ class SellPost extends React.Component {
                 <div style={{ padding: '0px 10px 0px 10px'}}>
                     {postrows_order.map((item,index) =>
                         <div key={index} style={{ paddingTop: 10 }}>
-                            <PostRow id={item} sellpostId={id}/>
+                            <PostRow id={item} sellpostId={id} disableClickImage={disableClickImage}/>
                         </div>
                     )}
                     <div style={{ height: 10 }}></div>
@@ -183,8 +185,14 @@ class SellPost extends React.Component {
     }
     componentDidMount(){
         if(this.props.needGetSellPost){
-            this.props.onGetSellpost()
+            this.props.onGetSellpost(this.props.id, this.props.commentid)
         }
+    }
+    shouldComponentUpdate(nextProps, nextState ){
+        if(this.props.needGetSellPost && nextProps.id != this.props.id ){
+            this.props.onGetSellpost(nextProps.id, nextProps.commentid)
+        }
+        return true
     }
 }
 

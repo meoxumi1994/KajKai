@@ -12,9 +12,10 @@ class InterestCell extends React.Component {
         if(!categoryName || !position ){
             return <div></div>
         }
+        let width = this.props.width || 230
         return(
             <div>
-                <div style={{ margin:0, width: 230 }}>
+                <div style={{ margin:0, width: width }}>
                     <div className="btn"
                         style={{ padding: 0, fontSize: 12, float: 'right', marginRight: 5, marginTop: 3}}
                         onMouseOver={() => this.setState({ hoverRemove: true })}
@@ -27,7 +28,7 @@ class InterestCell extends React.Component {
                         {categoryName}
                     </div>
                     <div style={{ padding: 5 }}>
-                        <ShowInMap position={position} width={222} height={140}/>
+                        <ShowInMap position={position} width={width-8} height={140}/>
                     </div>
                 </div>
             </div>

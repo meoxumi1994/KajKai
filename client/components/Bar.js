@@ -32,7 +32,7 @@ class HandlerUser extends React.Component {
         });
     }
     onLink(link){
-        window.location = link
+        this.props.history.push(link)
     }
     render(){
         const { LOG_IN, CREATE_STORE, HOME, SETTING, LOG_OUT,
@@ -92,7 +92,7 @@ class HandlerUser extends React.Component {
                                 }}
                                 number={unreadChat.quantity}/>
                         </div>
-                        <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 450, backgroundColor: 'white'}}>
+                        <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 400, maxHeight: 700, backgroundColor: 'white'}}>
                             <ChatLeftContainer/>
                         </ul>
                     </div>
@@ -102,9 +102,9 @@ class HandlerUser extends React.Component {
                         onMouseLeave={() => this.setState({ hoverHome: false })}
                         className="btn btn-xs"
                         style={{ borderRadius: 0, marginRight: 10,
-                            backgroundColor: this.state.hoverHome ? '#355089' : undefined,
+                            backgroundColor: this.state.hoverHome ? '#F6F7F9' : undefined,
                             padding: '4px 7px 4px 7px', float: 'right'}}>
-                        <span style={{  color: 'white'}}>{HOME}</span>
+                        <span style={{  color: '#4A4D54'}}>{HOME}</span>
                     </div>
                     <div style={{ borderRight: '1px solid #355089', float: 'right', height: 14, marginTop: 7 }}>
                     </div>
@@ -113,10 +113,10 @@ class HandlerUser extends React.Component {
                         onMouseOver={() => this.setState({ hoverUser: true })}
                         onMouseLeave={() => this.setState({ hoverUser: false })}
                         style={{
-                            backgroundColor: this.state.hoverUser ? '#355089' : undefined,
+                            backgroundColor: this.state.hoverUser ? '#F6F7F9' : undefined,
                             marginTop: -1, padding: 0, paddingRight: 10, float: 'right'}}>
                             <img src={avatarUrl} alt="Cinque Terre" width="29" height="29"/>
-                            <span style={{ marginLeft: 5, color: 'white'}}>{getSmallString(username, 4)}</span>
+                            <span style={{ marginLeft: 5, color: '#4A4D54'}}>{getSmallString(username, 4)}</span>
                     </div>
                 </div>
             )
@@ -134,11 +134,11 @@ class HandlerUser extends React.Component {
         }
 
         return (
-            <a href={"/register"} style={{ marginLeft: 120 }}>
-                <button className="btn btn-default btn-sm" type="button" >
-                    {LOG_IN}
-                </button>
-            </a>
+            <Link to={"/register"} style={{ marginLeft: 120 }}>
+            <button className="btn btn-default btn-sm" type="button" >
+                {LOG_IN}
+            </button>
+            </Link>
         )
     }
 }
@@ -256,20 +256,20 @@ export default class BarScreen extends React.Component {
             <div
                 style={{ position: 'fixed',
                 width: '100%',
-                backgroundColor: '#3B5998',
+                backgroundColor: 'white',
                 zIndex: 10 }}>
                 <div style={{
                     marginLeft: Math.max(0, Math.min((username && width > 1040 + 280) ? width - 1330 : 1000000, (width - 1040) / 2)),
                  }}>
                     <div className="container-fluid" style={{ padding: 0, margin: 0 }}>
                         <div className="row" style={{ padding: 0, margin: 0,
-                            width: 1040, marginTop: 9, marginBottom: 9 }}>
+                            width: 1040,  }}>
                             <div className="col-xs-1" style={{ padding: 0 }}>
-                                <div>
+                                <div style={{ marginTop: 9, marginBottom: 9 }}>
                                     <div className="btn btn-transparent btn-xs" style={{ padding: 0 }}>
-                                        <a href="/">
+                                        <Link to="/">
                                             <img src="/images/kajkai.svg" alt="Cinque Terre" width="27" height="27"/>
-                                        </a>
+                                        </Link>
                                     </div>
                                     {/* <div className="btn btn-transparent btn-xs" style={{ padding: 0, marginLeft: 10 }}>
                                         <Link to="/map">
@@ -278,7 +278,7 @@ export default class BarScreen extends React.Component {
                                     </div> */}
                                 </div>
                             </div>
-                            <div className="col-xs-4"  style={{ padding: 0, marginLeft: -23 }}>
+                            <div className="col-xs-4"  style={{ padding: 0, marginLeft: -23,  marginTop: 9, marginBottom: 9 }}>
                                 <div className="input-group">
                                   <div className="input-group-btn">
                                     <div className="btn btn-default btn-sm dropdown-toggle"
@@ -343,7 +343,7 @@ export default class BarScreen extends React.Component {
                                   </span>
                                 </div>
                             </div>
-                            <div className="col-xs-3">
+                            <div className="col-xs-3" style={{ marginTop: 9, marginBottom: 9 }}>
                                 {(currentType == 'category')?
                                     <div className="input-group" style={{ width: 250 }}>
                                         <AutoCompleteContainer SEARCH_LOCATION={SEARCH_LOCATION}
@@ -385,14 +385,16 @@ export default class BarScreen extends React.Component {
                                 </div>
                             </div> */}
                             <div className="col-xs-4"  style={{ padding: 0, marginLeft: 23 }}>
-                                <div style={{ position: 'absolute', right: 0, width: 400 }}>
+                                <div style={{ position: 'absolute', right: 0, width: 300,
+                                    paddingTop: 9, paddingBottom: 9 }}>
                                     <HandlerUser {...this.props} clickSetting={() => this.clickSetting()}/>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <hr style={{ margin: 0, borderColor: '#29487D'}}></hr>
+                {/* <hr style={{ margin: 0, borderColor: '#29487D'}}></hr> */}
+                <hr style={{ margin: 0, borderColor: '#90949C'}}></hr>
             </div>
         )
     }

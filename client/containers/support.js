@@ -179,7 +179,7 @@ export const timeSince = (date) => {
 
     interval = Math.floor(seconds / 86400)
     if (interval > 1) {
-        return interval + " days ago"
+        return interval + "d ago"
     }
     interval = Math.floor(seconds / 86400)
     if (interval == 1) {
@@ -187,13 +187,13 @@ export const timeSince = (date) => {
     }
     interval = Math.floor(seconds / 3600)
     if (interval > 1) {
-        return interval + " hours ago"
+        return interval + "h ago"
     }
     interval = Math.floor(seconds / 60)
     if (interval > 1) {
-        return interval + " minutes ago"
+        return interval + "m ago"
     }
-    return Math.floor(seconds) + " seconds ago"
+    return Math.floor(seconds) + "s ago"
 }
 
 export const getSmallString = (str, length) => {

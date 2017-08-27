@@ -7,7 +7,7 @@ class GroupInterest extends React.Component {
         super(props)
     }
     render(){
-        const { interests, HAVE_NO_INTEREST } = this.props
+        const { interests, HAVE_NO_INTEREST, width } = this.props
         if(!interests)
             return <div></div>
         return(
@@ -15,7 +15,7 @@ class GroupInterest extends React.Component {
                 {(interests.length > 0 ) ? interests.map((item, index) =>
                     <div key={item.id}>
                         {index > 0 && <hr style={{ margin: 0 }}/>}
-                        <InterestCell id={item.id}/>
+                        <InterestCell id={item.id} width={width}/>
                     </div>
                 ):  <div style={{ padding: 10, fontSize: 12.5, color: '#90949C'}}>
                         {HAVE_NO_INTEREST}

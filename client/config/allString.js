@@ -192,7 +192,13 @@ const myString = {
     USER: ['Người dùng','User'],
     NOT_LOGIN: ['Bạn cần đăng nhập để thực hiện chức năng này.','You need to log in to perform this function.'],
     GO_LOGIN: ['Đến trang đăng nhập ngay!','Go to login page now!'],
+
     WELCOME_TO_KAJKAI: ['Chào mừng tới KajKai','Welcome to KajKai'],
+    GET_START_BY_FOLLOW: [
+        'Bắt đầu bằng cách theo dõi bài đăng bán hàng. Bạn sẽ được biết về sản phẩm, ảnh và những thứ khác của họ',
+        'Get started by follow SellPost. You\'ll see their photos, product and other things'],
+    GET_START: ['Bắt đầu','Get Start'],
+
     GUILD_USER_1: ['Hiện tại bạn chưa theo dõi bất kỳ bài đăng bán hàng nào.','You currently do not track any sales posts.'],
     GUILD_USER_2: [
         'Để theo dõi bài đăng bán hàng bạn hãy tìm kiếm một bài đăng mà bạn thích sau đó ấn vào biểu tượng',
