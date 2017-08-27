@@ -5,6 +5,7 @@ const BasicStoreSchema = new mongoose.Schema({
   userId: {type: String},
   storeName: {type: String},
   avatarUrl: {type: String},
+  coverUrl: {type: String},
   urlName: {type: String}
 })
 
