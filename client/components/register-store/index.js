@@ -42,16 +42,16 @@ class RegisterStore extends React.Component {
             onOpenModalPhone, address, onChangeAdress, position, changeLanguage, createStore,
             categories, chooseCategory, chooseSecondCategory, chooseCategoryId, phone, onChangePhone,
             isusername, iswhoing, onOpenStore, registerStoreOK, onGetCategory, updatePhone,
-            urlname, onChangeUrlName,
+            urlname, onChangeUrlName, language,
             onChooseCategory, onChooseSecondCategory, onChangeCategoryInputValue, categoryInputValue,
             openModalWarning, contentModalWarning, closeModalWarning,
             showDropDown, showSecondDropDown, onChange,
             } = this.props
-        const categoriesName = categories.map((item) => item.name)
+        const categoriesName = categories.map((item) => (language == 'en') ? item.enName : item.name )
         let secondCategoriesName = []
         for(let i=0; i< categories.length; i++ ){
             if(categories[i].id == chooseCategoryId){
-                secondCategoriesName = categories[i].secondCategories.map((item) => item.name)
+                secondCategoriesName = categories[i].secondCategories.map((item) => (language == 'en') ? item.enName : item.name)
                 break;
             }
         }
