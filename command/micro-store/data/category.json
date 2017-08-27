@@ -1,69 +1,99 @@
 [{
     "name": "Điện Gia Dụng - Điện Lạnh",
+    "enName": "Electrical Household Appliance",
     "subcategory": [{
-        "name": "Đồ Dùng Nhà Bếp"
+        "name": "Đồ Dùng Nhà Bếp",
+        "enName": "Kitchenware"
     }, {
-        "name": "Thiết Bị Gia Đình"
+        "name": "Thiết Bị Gia Đình",
+        "enName": "Home Appliance"
     }, {
-        "name": "Điện Lạnh"
+        "name": "Điện Lạnh",
+        "enName": ""
     }]
 }, {
     "name": "Thiết bị số - Phụ Kiện số",
+    "enName": "",
     "subcategory": [{
-        "name": "Tai Nghe"
+        "name": "Tai Nghe",
+        "enName": "Headphones"
     }, {
-        "name": "Loa"
+        "name": "Loa",
+        "enName": "Speaker"
     }, {
-        "name": "Thiết Bị Mạng"
+        "name": "Thiết Bị Mạng",
+        "enName": "Network Equipment"
     }, {
-        "name": "Phụ Kiện Điện Thoại"
+        "name": "Phụ Kiện Điện Thoại",
+        "enName": "Phone Accessory"
     }, {
-        "name": "Phụ Kiện Máy Tính"
+        "name": "Phụ Kiện Máy Tính",
+        "enName": "Computer Accessory"
     }, {
-        "name": "Thiết Bị Đeo Thông Minh"
+        "name": "Thiết Bị Đeo Thông Minh",
+        "enName": "Smart Jewellery"
     }]
 }, {
     "name": "Điện Thoại - Máy Tính Bảng",
     "subcategory": [{
-        "name": "Iphone"
+        "name": "iPhone",
+        "enName": "iPhone"
     }, {
-        "name": "Samsung"
+        "name": "Samsung",
+        "enName": "Samsung"
     }, {
-        "name": "Sony"
+        "name": "Sony",
+        "enName": "Sony"
     }, {
-        "name": "Asus"
+        "name": "Asus",
+        "enName": "Asus"
     }, {
-        "name": "OPPO"
+        "name": "OPPO",
+        "enName": "OPPO"
     }, {
-        "name": "HTC"
+        "name": "HTC",
+        "enName": "HTC"
     }, {
-        "name": "Ipad"
+        "name": "iPad",
+        "enName": "iPad"
     }, {
-        "name": "Galaxy Tab"
+        "name": "Galaxy Tab",
+        "enName": "Galaxy Tab"
     }]
 }, {
     "name": "Nhà Cửa Đời Sống",
+    "enName": "",
     "subcategory": [{
-        "name": "Nhà Bếp Và Phòng Ăn"
+        "name": "Nhà Bếp Và Phòng Ăn",
+        "enName": "Kitchen and Dining Room"
     }, {
-        "name": "Sửa Chữa Nhà Cửa"
+        "name": "Sửa Chữa Nhà Cửa",
+        "enName": "House Repairs"
     }, {
-        "name": "Nhà Tắm"
+        "name": "Nhà Tắm",
+        "enName": "Bathroom"
     }, {
-        "name": "Phòng Ngủ"
+        "name": "Phòng Ngủ",
+        "enName": "Bedroom"
     }, {
-        "name": "Thiết Bị Chiếu Sáng"
+        "name": "Thiết Bị Chiếu Sáng",
+        "enName": ""
     }]
 }, {
     "name": "Làm Đẹp - Sức Khoẻ",
+    "enName": "Beauty - Health",
     "subcategory": [{
-        "name": "Trang Điểm"
+        "name": "Trang Điểm",
+        "enName": "Makeup"
     }, {
-        "name": "Thực Phẩm Chức Năng"
+        "name": "Thực Phẩm Chức Năng",
+        "enName": ""
     }, {
-        "name": "Chăm Sóc Da Mặt"
+        "name": "Chăm Sóc Da Mặt",
+        "enName": ""
     }, {
-        "name": "Chăm Sóc Cơ Thể"
+        "name": "Chăm Sóc Cơ Thể",
+        "enName": ""
     }, {
         "name": "Thiết Bị Chăm Sóc Sức Khoẻ"
     }]
@@ -136,17 +166,23 @@
 }, {
 	"name": "Ăn uống",
     "subcategory": [{
-        "name": "Bún"
+        "name": "Bún",
+        "enName": "Noodles"
     }, {
-        "name": "Phở"
+        "name": "Phở",
+        "enName": "Phở"
     }, {
-        "name": "Pizza"
+        "name": "Pizza",
+        "enName": "Pizza"
     }, {
-        "name": "Burger"
+        "name": "Burger",
+        "EnName": "Burger"
     }, {
-        "name": "Bánh Mì"
+        "name": "Bánh Mì",
+        "enName": "Bread"
     }, {
-        "name": "Cháo"
+        "name": "Cháo",
+        "enName": "Porridge "
     }, {
         "name": "Nướng - Lẩu"
     }, {
