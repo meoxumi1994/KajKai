@@ -40,12 +40,30 @@ export const getUserChats = (userId, offset, length, next) => {
               }
             }
             mChat.users = chat.users
-            mChat.store = chat.store ? {
-              ownerId: chat.store.userId,
-              storeUrl: chat.store.urlName,
-              storeName: chat.store.storeName,
-              storeAvatar: chat.store.avatarUrl
-            } : null
+            if (chat.store) {
+              let { id, storeName, avatarUrl, urlName } = chat.store
+              mChat.store = {
+                id,
+                urlName,
+                storeName,
+                avatarUrl
+              }
+            }
+            if (chat.store && userId != chat.store.userId) {
+              let { id, storeName, avatarUrl, urlName } = chat.store
+              mChat.users.push({
+                id,
+                username: storeName,
+                avatarUrl,
+                urlName
+              })
+              for (let k = 0; k < mChat.users.length; k++) {
+                if (mChat.users[k].id == chat.store.userId) {
+                  mChat.users.splice(k, 1)
+                  break
+                }
+              }
+            }
 
             mChats.push(mChat)
 

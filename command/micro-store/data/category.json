@@ -9,11 +9,11 @@
         "enName": "Home Appliance"
     }, {
         "name": "Điện Lạnh",
-        "enName": ""
+        "enName": "Refrigeration"
     }]
 }, {
-    "name": "Thiết bị số - Phụ Kiện số",
-    "enName": "",
+    "name": "Thiết Bị Số - Phụ Kiện số",
+    "enName": "Digital Equipment - Digital Accessory",
     "subcategory": [{
         "name": "Tai Nghe",
         "enName": "Headphones"
@@ -35,6 +35,7 @@
     }]
 }, {
     "name": "Điện Thoại - Máy Tính Bảng",
+    "enName": "Phone - Tablet",
     "subcategory": [{
         "name": "iPhone",
         "enName": "iPhone"
@@ -62,9 +63,9 @@
     }]
 }, {
     "name": "Nhà Cửa Đời Sống",
-    "enName": "",
+    "enName": "Furniture",
     "subcategory": [{
-        "name": "Nhà Bếp Và Phòng Ăn",
+        "name": "Nhà Bếp - Phòng Ăn",
         "enName": "Kitchen and Dining Room"
     }, {
         "name": "Sửa Chữa Nhà Cửa",
@@ -77,7 +78,7 @@
         "enName": "Bedroom"
     }, {
         "name": "Thiết Bị Chiếu Sáng",
-        "enName": ""
+        "enName": "Lighting Equipment"
     }]
 }, {
     "name": "Làm Đẹp - Sức Khoẻ",
@@ -87,84 +88,117 @@
         "enName": "Makeup"
     }, {
         "name": "Thực Phẩm Chức Năng",
-        "enName": ""
+        "enName": "Nutraceutical "
     }, {
         "name": "Chăm Sóc Da Mặt",
-        "enName": ""
+        "enName": "Face Care"
     }, {
         "name": "Chăm Sóc Cơ Thể",
-        "enName": ""
+        "enName": "Body Care"
     }, {
-        "name": "Thiết Bị Chăm Sóc Sức Khoẻ"
+        "name": "Thiết Bị Chăm Sóc Sức Khoẻ",
+        "enName": "Health Care Equipment"
     }]
 }, {
-    "name": "Bách Hoá Online",
+    "name": "Bách Hoá Trực Tuyến",
+    "enName": "Online Grocery",
     "subcategory": [{
-        "name": "Bánh Kẹo"
+        "name": "Bánh Kẹo",
+        "enName": "Confectionery"
     }, {
-        "name": "Gia Vị"
+        "name": "Gia Vị",
+        "enName": "Spice"
     }, {
-        "name": "Dầu Ăn"
+        "name": "Dầu Ăn",
+        "enName": "Cooking Oil"
     }, {
-        "name": "Thực Phẩm Chay"
+        "name": "Thực Phẩm Chay",
+        "enName": "Vegetarian Foood"
     }, {
-        "name": "Đồ Uống"
+        "name": "Đồ Uống",
+        "enName": "Drinks"
     }, {
-        "name": "Cà Phê - Trà"
+        "name": "Cà Phê - Trà",
+        "enName": "Coffee - Tea"
     }, {
-        "name": "Nước Tẩy Rửa"
+        "name": "Nước Tẩy Rửa",
+        "enName": "Bleach"
     }, {
-        "name": "Bột Giặt - Nước Xả"
+        "name": "Bột Giặt - Nước Xả",
+        "enName": "Washing Powder - Fabric"
     }, {
-        "name": "Xà Phòng - Dầu Gội"
+        "name": "Xà Phòng - Dầu Gội",
+        "enName": "Soap - Shampoo"
     }]
 }, {
-    "name": "Mẹ Và Bé",
+    "name": "Mẹ và Bé",
+    "enName": "Moom and Baby",
     "subcategory": [{
-        "name": "Sữa"
+        "name": "Sữa",
+        "enName": "Milk"
     }, {
-        "name": "Tả Bỉm"
+        "name": "Tả Bỉm",
+        "enName": "Diaper"
     }, {
-        "name": "Thực Phẩm Ăn Dặm"
+        "name": "Thực Phẩm Ăn Dặm",
+        "enName": "Weaning Food"
     }, {
-        "name": "Bình Sữa, Đồ Dùng Ăn Uống"
+        "name": "Bình Sữa, Đồ Dùng Ăn Uống",
+        "enName": "Milk Bottle, Food Utensil"
     }, {
-        "name": "Đồ Dùng Bảo Vệ An Toàn"
+        "name": "Đồ Dùng Bảo Vệ An Toàn",
+        "enName": "Safety Utensil"
     }, {
-        "name": "Đồ Dùng Phòng Ngủ"
+        "name": "Đồ Dùng Phòng Ngủ",
+        "enName": "Bedroom Utensil"
     }, {
-        "name": "Đồ Dùng Phòng Tắm"
+        "name": "Đồ Dùng Phòng Tắm",
+        "enName": "Bathroom Utensil"
     }]
 }, {
 	"name": "Thể Thao - Dã Ngoại",
+  "enName": "Sport - Picnic",
     "subcategory": [{
-        "name": "Dã Ngoại, Leo Núi"
+        "name": "Dã Ngoại, Leo Núi",
+        "enName": "Picnic, Mountaineering"
     }, {
-        "name": "Giày Patin"
+        "name": "Giày Patin",
+        "enName": "Patin Shoes"
     }, {
-        "name": "Cờ"
+        "name": "Cờ",
+        "enName": "Chess"
     }, {
-        "name": "Bơi Lội"
+        "name": "Bơi Lội",
+        "enName": "Swimming"
     }, {
-        "name": "Cầu Lông"
+        "name": "Cầu Lông",
+        "enName": "Badminton"
     }, {
-        "name": "Bóng Đá, Bóng Rổ"
+        "name": "Bóng Đá, Bóng Rổ",
+        "enName": "Foodball, Basketball"
     }]
 }, {
 	"name": "Máy Ảnh - Máy Quay Phim",
+  "enName": "Camera - Camcorder",
     "subcategory": [{
-        "name": "Máy Ảnh"
+        "name": "Máy Ảnh",
+        "enName": "Camera"
     }, {
-        "name": "Ống Kính - Lens"
+        "name": "Ống Kính",
+        "enName": "Lens"
     }, {
-        "name": "Máy Quay Phim"
+        "name": "Máy Quay Phim",
+        "enName": "Camcorder"
     }, {
-        "name": "Phụ Kiện Máy Ảnh"
+        "name": "Phụ Kiện Máy Ảnh",
+        "enName": "Camera Accessory"
     }, {
-        "name": "Camera Bảo Vệ"
+        "name": "Camera Bảo Vệ",
+        "enName": "Security Camcorder"
     }]
 }, {
-	"name": "Ăn uống",
+	"name": "Ăn Uống",
+  "enName": "Food",
     "subcategory": [{
         "name": "Bún",
         "enName": "Noodles"
@@ -184,8 +218,10 @@
         "name": "Cháo",
         "enName": "Porridge"
     }, {
-        "name": "Nướng - Lẩu"
+        "name": "Nướng - Lẩu",
+        "enName": "Grill - Hotpot"
     }, {
-        "name": "Hải Sản"
+        "name": "Hải Sản",
+        "enName": "Seafood"
     }]
 }]
