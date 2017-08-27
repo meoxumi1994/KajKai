@@ -245,7 +245,7 @@ export const getListStore = (storeIdList, next) => {
     }
     Store.find({_id: {$in: list}}, (err, docs) => {
         console.log(list);
-        console.log(err, docs, getStoreListInfo(docs));
+        console.log(err + ' ' + docs + ' ' + getStoreListInfo(docs));
         next(getStoreListInfo(docs));
     })
 };
