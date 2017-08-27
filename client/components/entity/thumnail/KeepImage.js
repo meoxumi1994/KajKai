@@ -6,6 +6,32 @@ import UploadCroppie from '~/containers/entity/thumnail/UploadCroppie'
 import Carousel from '~/containers/entity/thumnail/Carousel'
 import GroupImage from '~/containers/entity/thumnail/GroupImage'
 import ChooseCroppie from '~/containers/entity/thumnail/ChooseCroppie'
+import DisplayImage from '~/components/entity/thumnail/DisplayImage'
+import SuggestPhoto from '~/containers/entity/show/SuggestPhoto'
+
+class SmallImage extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {}
+    }
+    render(){
+        const { src, onRemove } = this.props
+        return(
+            <div style={{ display: 'inline-block' }}>
+                <img src={src} style={{ margin: 5, width: 200, height: 200 }}/>
+                <div className="btn" style={{ marginTop: -170, marginLeft: -45}}
+                    onMouseOver={() => this.setState({ hoverImageClose : true })}
+                    onMouseLeave={() => this.setState({ hoverImageClose: false })}
+                    onClick={() => onRemove()}
+                    >
+                    <img src={ this.state.hoverImageClose ?
+                        "/images/hoverimagecloseicon.svg" : "/images/imagecloseicon.svg" }
+                    width={20} height={20}/>
+                </div>
+            </div>
+        )
+    }
+}
 
 class KeepImage extends React.Component {
     constructor(props){
@@ -36,7 +62,8 @@ class KeepImage extends React.Component {
         this.setState({ showView: false })
     }
     render(){
-        const { type, width, sellpostid, images, canEdit, disableClickImage, imagesSuggest, action, ADD_PHOTO, SUGGEST_PHOTO, SEE_MORE } = this.props
+        const { type, width, heightModal, sellpostid, images, canEdit, disableClickImage, id, storeList,
+            imagesSuggest, action, ADD_PHOTO, SUGGEST_PHOTO, SEE_MORE, DONE} = this.props
         return(
             <div>
                 {type=='Carousel' ?
@@ -58,85 +85,90 @@ class KeepImage extends React.Component {
                         width={width}
                     />
                 }
-                <Modal show={this.state.showModal} style={{ borderRadius: 0, }}>
-                    <div className="modal-content" style={{
-                        marginTop: -4,
-                        position: 'fixed',
-                        marginLeft: -100, width: 808 }}>
+                <Modal bsSize="large" show={this.state.showModal} style={{ borderRadius: 0  }}>
+                    <div>
                         <Modal.Header style={{
-                            borderRadius: '3px 3px 0px 0px',
-                            backgroundColor: '#F6F7F9',
-                            padding: '8px 12px 8px 12px'}}>
-                            <div onClick={() => this.close()} style={{ padding: 0, float: 'right'}}
+                            borderRadius: '4px 4px 0px 0px',
+                            backgroundColor: '#3B5998',
+                            padding: '10px'}}>
+                            <div onClick={() => this.close()}
+                                onMouseOver={() => this.setState({ hoverClose: true })}
+                                onMouseLeave={() => this.setState({ hoverClose: false })}
+                                style={{ padding: 0, float: 'right'}}
                                 className="btn btn-transperant">
-                                <span className="glyphicon glyphicon-remove text-muted"></span>
+                                <img src={this.state.hoverClose ? "/images/closesmallhover.svg" : "/images/closesmall.svg"}
+                                    width={10} height={10}/>
                             </div>
-                            <strong>{ADD_PHOTO}</strong>
+                            <div style={{ fontSize: 16, color: 'white'}}>
+                                {ADD_PHOTO}
+                            </div>
                         </Modal.Header>
-                        <Modal.Body style={{ padding: 4 }}>
-                            <div style={{ maxHeight: 400, overflowY: 'scroll'}}>
-                                <div style={{
-                                        backgroundColor: '#F6F7F9',
-                                        margin: 3,
-                                        border: '1px solid #B6B6B6',
-                                        width: 260, height: 260, float: 'left', padding: 4 }}>
-                                    <div style={{ width: '100%', marginBottom: 4 }}>
-                                        <UploadCroppie
-                                            style={{ width: 780, height: 440 }}
-                                            upNow={true}
-                                            action={action}
-                                            btnstyle={{
-                                                width: '100%',
-                                                height: 81,
-                                                fontSize: 14,
-                                            }}
-                                        />
-                                    </div>
-                                    <div style={{ width: '100%', marginBottom: 4 }}>
-                                        <WebcamCapture
-                                            style={{ width: 590 }}
-                                            action={action}
-                                            upNow={true}
-                                            btnstyle={{
-                                                width: '100%',
-                                                height: 81,
-                                                fontSize: 14,
-                                            }}/>
-                                    </div>
+                        <div style={{ maxHeight: ((heightModal - 190) * 0.55), overflowY: 'scroll', padding: 5 }}>
+                            <div style={{
+                                    backgroundColor: '#F6F7F9',
+                                    margin: 5,
+                                    border: '1px solid #B6B6B6',
+                                    width: 200, height: 200, float: 'left', padding: 4 }}>
+                                <div style={{ width: '100%', marginBottom: 4 }}>
+                                    <UploadCroppie
+                                        style={{ width: 780, height: 440 }}
+                                        upNow={true}
+                                        action={action}
+                                        btnstyle={{
+                                            width: '100%',
+                                            height: 67,
+                                            fontSize: 14,
+                                        }}
+                                    />
                                 </div>
-                                {images.map((item,index) => (
-                                    <img key={index} src={item} style={{ margin: 3, width: 260, height: 260 }}/>
-                                ))}
+                                <div style={{ width: '100%', marginBottom: 4 }}>
+                                    <WebcamCapture
+                                        style={{ width: 590 }}
+                                        action={action}
+                                        upNow={true}
+                                        btnstyle={{
+                                            width: '100%',
+                                            height: 67,
+                                            fontSize: 14,
+                                        }}/>
+                                </div>
                             </div>
-                        </Modal.Body>
+                            {images.map((item,index) => <SmallImage src={item}
+                                onRemove={() => this.props.onRemove(index)} key={item+index} />)}
+                        </div>
                         <hr style={{ margin: 0, padding: 0 }}/>
                         <div style={{ backgroundColor: '#F6F7F9', padding: '2px 0px 2px 15px' }}>
                             <strong className="text-muted">{SUGGEST_PHOTO}</strong>
                         </div>
                         <hr style={{ margin: 0, padding: 0 }}/>
-                        <div style={{ maxHeight: 270, overflowY: 'scroll'}}>
-                            <div style={{ padding: '4px 4px 28px 10px'}}>
-                                {imagesSuggest.map((item, index) => {
-                                    if(index >= this.state.maxSuggest) return
-                                    return(
-                                        <div key={index} style={{ float: 'left', padding: 4 }}>
-                                            <ChooseCroppie key={index}
-                                                src={item}
-                                                SAVE={'save'}
-                                                style={{ width: 780, height: 440 }}
-                                                imgstyle={{ width: 100, height: 100 }}
-                                            />
-                                        </div>
-                                    )
-                                })}
-                                {imagesSuggest.length > this.state.maxSuggest &&
-                                    <div className="btn btn-transperant btn-xs"
-                                        onClick={() => this.moreSuggest()}
-                                        style={{ color: '#3B5998', fontSize: 14, float: 'right', marginRight: 10 }}>
-                                        {SEE_MORE}
-                                    </div>
-                                }
+                        <div style={{ maxHeight: ((heightModal - 190) * 0.45), overflowY: 'scroll'}}>
+                            <div style={{ padding: '4px 4px 0px 10px'}}>
+                                <SuggestPhoto width={840} type="user" kind="small" id={id}
+                                    onChooseImage={(src) => this.props.onAddImage(src)}/>
                             </div>
+                            {storeList && storeList.map((item,index) => {
+                                return(
+                                    <div key={index+item} style={{ padding: '0px 0px 0px 10px'}}>
+                                        <div style={{ fontSize: 16, paddingLeft: 10, marginTop: 10,
+                                            fontWeight: 'bold', color: '#90949C' }}>{"@" + item.urlname}</div>
+                                        <SuggestPhoto width={840} type="store" kind="small"
+                                            onChooseImage={(src) => this.props.onAddImage(src)} id={item.id}/>
+                                        <SuggestPhoto width={840} type="postrow" kind="small"
+                                            onChooseImage={(src) => this.props.onAddImage(src)} id={item.id}/>
+                                        <SuggestPhoto width={840} type="product" kind="small"
+                                            onChooseImage={(src) => this.props.onAddImage(src)} id={item.id}/>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                    <hr style={{ margin: 0 }}/>
+                    <div style={{ padding: 10, height: 50 }}>
+                        <div className="btn btn-default btn-sm"
+                            onClick={() => this.close()}
+                            style={{ color: 'white', borderWidth: 0,
+                            float: 'right', backgroundColor: '#BD081C'}}>
+                            {DONE}
                         </div>
                     </div>
                 </Modal>

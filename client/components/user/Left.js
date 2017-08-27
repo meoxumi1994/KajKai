@@ -123,7 +123,7 @@ class Left extends React.Component {
                             <div style={{ paddingTop: 5 }}>
                                 {followstores.map((item,index) => {
                                     return(
-                                        <div style={{ paddingLeft: 4 }}>
+                                        <div key={item+index} style={{ paddingLeft: 4 }}>
                                             <IntroduceStore storeid={item} kind='small'/>
                                         </div>
                                     )

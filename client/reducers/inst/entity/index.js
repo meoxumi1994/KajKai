@@ -24,6 +24,7 @@ import post from './post'
 import contact from './contact'
 import popup from './popup'
 import groupinterest from './groupinterest'
+import suggestphoto from './suggestphoto'
 
 const entity = combineReducers({
     modal,
@@ -49,7 +50,8 @@ const entity = combineReducers({
     post,
     contact,
     popup,
-    groupinterest
+    groupinterest,
+    suggestphoto
 })
 
 export default entity

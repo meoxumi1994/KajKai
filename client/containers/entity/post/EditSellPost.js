@@ -24,7 +24,9 @@ const mapStateToProps = (state, ownProps) => {
         EDIT_SELL_POST: g('EDIT_SELL_POST'),
         CREATE_SELL_POST: g('CREATE_SELL_POST'),
         CLOSE: g('CLOSE'),
-        REMOVE: g('REMOVE')
+        REMOVE: g('REMOVE'),
+        MOVE_UP: g('MOVE_UP'),
+        MOVE_DOWN: g('MOVE_DOWN'),
     })
 }
 
@@ -37,6 +39,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     removePostRow: (id) => {
         dispatch({ type: 'INST_ENTITY_POST_EDIT_SELL_POST_REMOVE_POST_ROW', id })
+    },
+    moveUpPostRow: (id) => {
+        dispatch({ type: 'INST_ENTITY_POST_EDIT_SELL_POST_MOVE_UP_POST_ROW', id })
+    },
+    moveDownPostRow: (id) => {
+        dispatch({ type: 'INST_ENTITY_POST_EDIT_SELL_POST_MOVE_DOWN_POST_ROW', id })
     },
     createSellPost: (sellpost) => {
         dispatch(postSellPost(sellpost))

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="169px" height="169px" viewBox="0 0 169 169" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
-    <title>hovercloseicon</title>
+    <title>hoverclosesettingicon</title>
     <desc>Created with Sketch.</desc>
     <defs>
         <path d="M84.4594698,64.6604799 L33.8965928,14.0976029 C28.4357468,8.63675689 19.5696852,8.635005 14.1023451,14.1023451 C8.63380288,19.5708873 8.63288186,28.4318717 14.0976029,33.8965928 L64.6604799,84.4594698 L14.0976029,135.022347 C8.63675689,140.483193 8.635005,149.349254 14.1023451,154.816595 C19.5708873,160.285137 28.4318717,160.286058 33.8965928,154.821337 L84.4594698,104.25846 L135.022347,154.821337 C140.483193,160.282183 149.349254,160.283935 154.816595,154.816595 C160.285137,149.348052 160.286058,140.487068 154.821337,135.022347 L104.25846,84.4594698 L154.821337,33.8965928 C160.282183,28.4357468 160.283935,19.5696852 154.816595,14.1023451 C149.348052,8.63380288 140.487068,8.63288186 135.022347,14.0976029 L84.4594698,64.6604799 Z" id="path-1"></path>
@@ -12,7 +12,7 @@
         </filter>
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="hovercloseicon">
+        <g id="hoverclosesettingicon">
             <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
             <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
         </g>

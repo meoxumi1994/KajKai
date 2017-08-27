@@ -7,8 +7,8 @@ import { getListImage } from '~/actions/asyn/store'
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     return({
-        id: state.inst.user.index.id,
-        ...state.inst.user.photo
+        ...state.inst.user.index,
+        // ...state.inst.user.photo
     })
 }
 
@@ -28,8 +28,8 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
             getPhoto(id)
         },
         ...ownProps,
-        ...anotherState,
-        ...anotherDispatch,
+        ...stateProps,
+        ...dispatchProps,
     })
 }
 

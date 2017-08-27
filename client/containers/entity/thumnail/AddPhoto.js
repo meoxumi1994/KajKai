@@ -7,6 +7,8 @@ import { getListImage } from '~/actions/asyn/store'
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
     return({
+        ...state.user,
+        userid: state.user.id,
         ...state.inst.entity.thumnail.addphoto,
         SUGGEST_PHOTO: g('SUGGEST_PHOTO'),
         UPDATE_PHOTO: g('UPDATE_PHOTO'),

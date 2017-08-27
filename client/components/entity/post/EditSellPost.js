@@ -20,7 +20,7 @@ class EditSellPost extends React.Component {
             postrows_order, onChange,
             addPostRow, onChangePostRow,
             onCreateSellPost, onEditSellPost, isCreate,
-            TIME, ADD_NEW_CONTENT, EDIT_SELL_POST, CREATE_SELL_POST, CLOSE, REMOVE,
+            TIME, ADD_NEW_CONTENT, EDIT_SELL_POST, CREATE_SELL_POST, CLOSE, REMOVE, MOVE_UP, MOVE_DOWN,
         } = this.props
         return (
             <Modal show={showModal} bsSize="sm" onHide={() => close()}>
@@ -42,8 +42,7 @@ class EditSellPost extends React.Component {
                         <div style={{
                             marginTop: -57,
                             marginLeft: 70,
-                            color: '#91959D',
-                            fontWeight: 'bold'}}>
+                            color: '#BD081C', }}>
                             <div className="btn" style={{ padding: 0 }}>
                                 <a style={{ color: '#BD081C', fontWeight: 'bold'}}>{storename}</a>
                             </div>
@@ -56,7 +55,7 @@ class EditSellPost extends React.Component {
                         <div style={{ marginLeft: 70, marginTop: -3, }}>
                             <span style={{ color: '#516EA7', fontWeight: 'bold'}}>Ship</span>
                             <span>{": "}</span>
-                            <input style={{ height: 18, width: 350, outline: 'none'}}
+                            <input style={{ height: 18, fontSize: 13, width: 350, outline: 'none'}}
                                 value={ship}
                                 onChange={(e) => onChange('ship',e.target.value)}
                             />
@@ -80,6 +79,14 @@ class EditSellPost extends React.Component {
                                 <div className="btn"
                                     onClick={() => this.props.removePostRow(item)}
                                     style={{ padding: 0, fontSize: 12.5, }}><a>{REMOVE}</a></div>
+                                {index>0 && <div className="btn"
+                                    onClick={() => this.props.moveUpPostRow(item)}
+                                    style={{ marginLeft: 10, padding: 0, fontSize: 12.5, }}><a>{MOVE_UP}</a></div>}
+                                {index != postrows_order.length - 1 &&
+                                    <div className="btn"
+                                        onClick={() => this.props.moveDownPostRow(item)}
+                                        style={{ marginLeft: 10, padding: 0, fontSize: 12.5, }}><a>{MOVE_DOWN}</a></div>
+                                }
                                 <EditPostRow
                                     id={item}
                                 />
