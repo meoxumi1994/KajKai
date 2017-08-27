@@ -63,7 +63,7 @@ const chatMap = (state={
                     displayLabel: action.data.displayLabel,
                     usersKey: [...new Set(action.data.users.map(e => e.id))],
                     usersMap: utils.usersMap(action, action.data.users),
-                    store: action.data.store                    
+                    store: action.data.store
                 }
 
 //------------------------------------------------------------------------------
@@ -81,6 +81,14 @@ const chatMap = (state={
                 usersKey: [action.data.user.id],
                 usersMap: {
                     [action.data.user.id]: userMap(undefined, action)
+                },
+                store: action.data.store == undefined || action.data.store == null? undefined: {
+                    id: action.data.store.id,
+                    avatarUrl: action.data.store.avatarUrl,
+                    coverUrl: action.data.store.coverUrl,
+                    ownerId: action.data.store.ownerId,
+                    storeName: action.data.store.storeName,
+                    urlName: action.data.store.urlName
                 }
             }
 
