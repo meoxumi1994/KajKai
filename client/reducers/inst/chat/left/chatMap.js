@@ -42,6 +42,7 @@ const chatMap = (state={
     switch (action.type || subAction.type) {
 
         case 'CHAT_STORE':
+            console.log('MY ACTION', action);
             return {
                 ...state,
                 mesId: action.data.mesId,
@@ -51,7 +52,15 @@ const chatMap = (state={
                 usersMap: {
                     [action.data.id]: userMap(undefined, action)
                 },
-                lastMessage: undefined
+                lastMessage: undefined,
+                store: {
+                    id: action.data.store.id,
+                    avatarUrl: action.data.store.avatarUrl,
+                    coverUrl: action.data.store.coverUrl,
+                    ownerId: action.data.store.userid,
+                    storeName: action.data.store.storename,
+                    urlName: action.data.store.urlname
+                }
             }
 
 //------------------------------------------------------------------------------
