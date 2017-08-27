@@ -19,7 +19,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getMessages: (mesId) => {
-        dispatch(getMessages(mesId, Date.now(), 'init'))
+        dispatch(getMessages(mesId, -1, 'init'))
         dispatch({type: 'server/READ_CHAT', data: {mesId: mesId}})
         dispatch(changeDisplay('ADD_MEMBER', mesId, false))
     },
