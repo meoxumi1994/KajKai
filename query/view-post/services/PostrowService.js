@@ -43,6 +43,7 @@ export const getPostrowImageList = (requesterId, storeId, offset, next) => {
           if (image.time < offset) {
             if (currentNumberOfImage < 14) {
               mImageList.push({
+                sellpostid: image.sellpostId,
                 url: image.url,
                 time: image.time.getTime()
               })

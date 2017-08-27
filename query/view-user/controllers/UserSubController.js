@@ -86,15 +86,15 @@ export const updateUser = (message) => {
           for (let k = 0; k < notifications.length; k++) {
             let notification = notifications[k]
             if (notification.actorId ==  id) {
-              notification.name = user.username
-              notification.avatarUrl = user.avatarUrl
+              if (user.username) notification.name = user.username
+              if (user.avatarUrl) notification.avatarUrl = user.avatarUrl
             }
             if (notification.type.includes('LIKE')) {
               let { likers } = notification
               for (let h = 0; h < likers.length; h++) {
                 if (likers[h].userId == id) {
-                  likers[h].username = user.username
-                  likers[h].avatarUrl = user.avatarUrl
+                  if (user.username) likers[h].username = user.username
+                  if (user.avatarUrl) likers[h].avatarUrl = user.avatarUrl
                 }
               }
               notification.likers = likers
@@ -115,7 +115,7 @@ export const updateUser = (message) => {
         if (blackList) {
           for (let k = 0; k < blackList.length; k++) {
             if (blackList[k].userId == id) {
-              blackList[k].username = user.username
+              if (user.username) blackList[k].username = user.username
               break
             }
           }
