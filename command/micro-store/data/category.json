@@ -63,7 +63,7 @@
     }]
 }, {
     "name": "Nhà Cửa Đời Sống",
-    "enName": "",
+    "enName": "Furniture",
     "subcategory": [{
         "name": "Nhà Bếp - Phòng Ăn",
         "enName": "Kitchen and Dining Room"
@@ -88,10 +88,10 @@
         "enName": "Makeup"
     }, {
         "name": "Thực Phẩm Chức Năng",
-        "enName": ""
+        "enName": "Nutraceutical "
     }, {
         "name": "Chăm Sóc Da Mặt",
-        "enName": ""
+        "enName": "Face Care"
     }, {
         "name": "Chăm Sóc Cơ Thể",
         "enName": ""
@@ -151,7 +151,8 @@
         "name": "Đồ Dùng Phòng Ngủ",
         "enName": "Bedroom Things"
     }, {
-        "name": "Đồ Dùng Phòng Tắm"
+        "name": "Đồ Dùng Phòng Tắm",
+        "enName": ""
     }]
 }, {
 	"name": "Thể Thao - Dã Ngoại",
@@ -195,8 +196,8 @@
         "enName": "Security Camcorder"
     }]
 }, {
-	"name": "Ăn uống",
-  "enName": "",
+	"name": "Ăn Uống",
+  "enName": "Food",
     "subcategory": [{
         "name": "Bún",
         "enName": "Noodles"
