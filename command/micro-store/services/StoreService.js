@@ -239,7 +239,7 @@ export const getStoreListInfo = (storeList) => {
 export const getListStore = (storeIdList, next) => {
     let list = [];
     for (let i = 0; i < storeIdList.length; ++i) {
-        list.push(mongoose.Type.ObjectId(getStoreLocalId(storeIdList[i])));
+        list.push(mongoose.Types.ObjectId(getStoreLocalId(storeIdList[i])));
     }
     Store.find({_id: {$in: list}}, (err, docs) => {
         next(getStoreListInfo(docs));
