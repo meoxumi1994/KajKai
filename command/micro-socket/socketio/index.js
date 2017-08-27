@@ -61,7 +61,7 @@ const init = (server) => {
                         getUnreadMessageCon(user.id, socket, sio);
                         getStoreOfUserPub(user.id, (stores) => {
                             for (let i = 0; i < stores.length; ++i) {
-                                socket.json(stores[i].id);
+                                socket.join(stores[i].id);
                             }
                         })
                     } else sockListen(null, socket, sio)
