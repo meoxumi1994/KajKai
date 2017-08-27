@@ -11,7 +11,7 @@ export const getChatMessagesHandler = () => (req, res) => {
       offset = new Date(parseInt(offset))
     }
 
-    getChatMessages(id, parseInt(offset), length, (messages) => {
+    getChatMessages(id, offset, length, (messages) => {
       if (messages) {
         res.json(messages)
       } else {
