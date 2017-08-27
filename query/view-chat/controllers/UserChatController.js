@@ -11,7 +11,7 @@ export const getUserChatsHandler = () => (req, res) => {
       offset = new Date(parseInt(offset))
     }
 
-    getUserChats(userId, parseInt(offset), length, (chats) => {
+    getUserChats(userId, offset, length, (chats) => {
       if (chats) {
         res.json(chats)
       } else {
