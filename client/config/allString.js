@@ -43,6 +43,7 @@ const myString = {
     'This number was used to use, xin vui lòng nhập một số khác'],
     PHONE_FAILED: ['Số điện thoài này hiện không có thực, xin vui lòng nhập một số khác',
     'This number of electronic phone does not exist, Please enter another one'],
+    AVATAR_FAILED: ['Bạn chưa nhập ảnh đại diện','You have not entered a avatar yet'],
     PHONE_VERIFY: ['Chúng tôi đã gửi mã xác nhận đến số máy này, vui lòng xác nhận mã số để tiếp tục (mã sỗ gồm 4 ký tự):',
     'We have sent a confirmation code to this number, please confirm the code to continue (4 character code):'],
     CODE_FAILED: ['nhập mã sai', 'this code is failed'],
@@ -144,14 +145,30 @@ const myString = {
     ENTER_URL_STORE: ['Nhập tên url', 'Enter url name'],
 
     CREATE_MINORPOST: ['Tạo bài đăng phụ','Create a Minor Post'],
-    STORE_NAME_FAILED: ['bạn chưa nhập tên cửa hàng hoặc tên cửa hàng quá ngắn', 'You have not entered a store name or store name that is too short'],
-    CATEGORY_FAILED: ['bạn chưa nhập category hoặc độ dài category quá ngắn', 'You have not entered a category or category too short'],
-    PHONE_FAILED: ['số điện thoại không hợp lệ','invalid phone number'],
-    POSITION_FAILED: ['bạn chưa chọn vị trí của cửa hàng trên map','You have not selected the location of the store on the map'],
-    ADDRESS_FAILED: ['bạn chưa nhập địa chỉ hoặc địa chỉ quá ngắn','You have not entered an address or address that is too short'],
-    URL_NAME_SHORT: ['bạn chưa nhập tên url hoặc tên url quá ngắn','You have not entered the url or url name too short'],
-    URL_NAME_FAILED: ['tên url không hợp lệ, tên của bạn nhập quá đặc biệt','Invalid url name, your name is too special'],
-    URL_NAME_SPECIAL: ['tên url của bạn không chỉ được dùng chữ cái thường hoặc dấu gạch dưới', 'Your url name is not only used with lowercase letters or underscores'],
+    STORE_NAME_FAILED: [
+        'Bạn chưa nhập tên cửa hàng hoặc tên cửa hàng quá ngắn (phải có ít nhất 4 ký tự nhiều nhất 100)',
+        'You have not entered a store name or store name that is too short (must be at least 4 characters at most 100)'],
+    URL_NAME_SHORT: [
+        'Bạn chưa nhập tên url hoặc tên url quá ngắn (phải có ít nhất 4 ký tự nhiều nhất 100)',
+        'You have not entered a url or url name too short (must be at least 4 characters at most 100)'],
+    URL_NAME_FAILED: [
+        'Tên url không hợp lệ, tên của bạn nhập quá đặc biệt (tên phải khác "user,store,...")',
+        'Invalid url name, your name is too special (you only use letters, numbers, underscores, dots and names must be different from "user, store, ...")'],
+    URL_NAME_SPECIAL: [
+        'Tên url của bạn chỉ được sử dụng chữ cái, số, dấu gạch dưới, dấu chấm',
+        'Your url name is only used letters, numbers, underscores, dots'],
+    CATEGORY_FAILED: [
+        'Bạn chưa nhập category hoặc độ dài category quá ngắn (phải có ít nhất 2 ký tự nhiều nhất 200)',
+        'You have not entered a category or category too short (must have at least 2 characters at most 200)'],
+    PHONE_FAILED: [
+        'Bạn chưa nhập số điện thoại hoặc số điện thoại không hợp lệ',
+        'You have not entered an invalid phone number or phone number'],
+    POSITION_FAILED: [
+        'Bạn chưa chọn vị trí của cửa hàng trên map','You have not selected the location of the store on the map'],
+    ADDRESS_FAILED: [
+        'Bạn chưa nhập địa chỉ hoặc địa chỉ quá ngắn (địa chỉ cẩn ít nhất 6 ký tự)',
+        'You have not entered your address or address is too short (address at least 6 characters)'],
+
     WARNING_MODAL: ['Cảnh Báo', 'Warning'],
     ADD: ['Thêm','Add'],
     HOME: ['Trang chủ','Home'],
@@ -295,6 +312,29 @@ const myString = {
 
     VIEW_MORE: ['Xem thêm','View more'],
     COMMENTS: ['bình luận','comments'],
+    ALL_CATEGORY: ['Tất cả các loại','All category'],
+
+    ENTER_AVATAR_STORE: ['Nhập ảnh đại diện của cửa hàng','Enter your store\'s avatar'],
+
+    AVATAR_STORE_DESCRIPTION_1: [
+        'Ảnh đại diện của cửa hàng sẽ được hiện thị ở khắp các bài đăng',
+        'The avatar will be displayed throughout the post'
+    ],
+    AVATAR_STORE_DESCRIPTION_2: [
+        'Ảnh đại diện sẽ được người dùng nhìn vào đầu tiêu và luôn luôn công khai',
+        'The avatar will be viewed by the user at the top and always public',
+    ],
+    CHOOSE_CATEGORY_1: ['Chọn loại hình chung', 'Choose common category'],
+    CHOOSE_CATEGORY_2: ['Chọn loại hình kinh doanh', 'Choose category'],
+
+    BAN_REASON_1: [
+        'Tài khoản của bạn đã bị admin KajKai khoá, lý do :"',
+        'Your account has been banned by KajKai admin, the reason: "'],
+    BAN_REASON_2: [
+        '", nếu bạn có phản hồi gì. Vui lòng vào mail để liên hệ với chúng tôi qua hòm thư kajkaiverify@gmail.com',
+        '", If you have any feedback. Please mail to contact us to kajkaiverify@gmail.com.'
+    ]
+
 }
 
 const allString = {

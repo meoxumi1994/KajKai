@@ -42,6 +42,11 @@ const mapStateToProps = (state, ownProps) => {
         ENTER_CATEGORY: g('ENTER_CATEGORY'),
         STORE_URL: g('STORE_URL'),
         ENTER_URL_STORE: g('ENTER_URL_STORE'),
+        ENTER_AVATAR_STORE: g('ENTER_AVATAR_STORE'),
+        AVATAR_STORE_DESCRIPTION_1: g('AVATAR_STORE_DESCRIPTION_1'),
+        AVATAR_STORE_DESCRIPTION_2: g('AVATAR_STORE_DESCRIPTION_2'),
+        CHOOSE_CATEGORY_1: g('CHOOSE_CATEGORY_1'),
+        CHOOSE_CATEGORY_2: g('CHOOSE_CATEGORY_2'),
         ...registerstore,
     })
 }
@@ -104,6 +109,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(registerStore(store))
     },
     onChange: (key, value) => {
+        console.log({ type: 'INST_REGISTER_STORE_CHANGE', key: key, value: value })
         dispatch({ type: 'INST_REGISTER_STORE_CHANGE', key: key, value: value })
     }
 })
@@ -130,26 +136,28 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
                 firstCategoryId: stateProps.chooseCategoryId,
                 secondCategoryId: stateProps.chooseSecondCategoryId,
                 category: stateProps.categoryInputValue,
+                avatarUrl: stateProps.avatarUrl,
             }
             const isConfirmPhone = stateProps.isConfirmPhone
-            if(store.storename.length < 6){
+            if(store.storename.length < 4 || store.storename.length > 100){
                 onFailStore(g('STORE_NAME_FAILED'))
                 return;
             }
-            if(store.urlname.length < 4){
+            if(store.urlname.length < 4 || store.urlname.length > 100){
                 onFailStore(g('URL_NAME_SHORT'))
                 return;
             }
-            if( !(/^[a-z]*$/.test(store.urlname)) && store.urlname != '_' ){
+            if( !(/^[a-z0-9_.-]*$/.test(store.urlname)) || store.urlname.length > 100 ){
                 onFailStore(g('URL_NAME_SPECIAL'))
                 return;
             }
             const path = store.urlname
-            if((path == "chat" || path == "map" || path == "register" || path == "store" || path == "profile" || path == "registerstore" )){
+            if((path == "chat" || path == "map" || path == "admin" || path == "home" || path == "user" ||  path == "post" ||
+            path == "register" || path == "store" || path == "profile" || path == "registerstore" )){
                 onFailStore(g('URL_NAME_FAILED'))
                 return;
             }
-            if(!store.firstCategoryId || !store.secondCategoryId || store.category.length < 3){
+            if(!store.firstCategoryId || !store.secondCategoryId || store.category.length < 2 || store.category.length > 200 ){
                 onFailStore(g('CATEGORY_FAILED'))
                 return;
             }
@@ -157,12 +165,16 @@ const mergerProps = (stateProps, dispatchProps, ownProps) => {
                 onFailStore(g('PHONE_FAILED'))
                 return;
             }
-            if(!store.position){
-                onFailStore(g('POSITION_FAILED'))
+            if(!store.avatarUrl){
+                onFailStore(g('AVATAR_FAILED'))
                 return;
             }
             if(store.address.length < 6){
                 onFailStore(g('ADDRESS_FAILED'))
+                return;
+            }
+            if(!store.position){
+                onFailStore(g('POSITION_FAILED'))
                 return;
             }
             onRegisterStore(store)

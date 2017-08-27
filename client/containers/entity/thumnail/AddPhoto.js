@@ -12,6 +12,7 @@ const mapStateToProps = (state, ownProps) => {
         ...state.inst.entity.thumnail.addphoto,
         SUGGEST_PHOTO: g('SUGGEST_PHOTO'),
         UPDATE_PHOTO: g('UPDATE_PHOTO'),
+        CLOSE: g('CLOSE'),
     })
 }
 

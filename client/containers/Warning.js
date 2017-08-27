@@ -10,7 +10,11 @@ const mapStateToProps = (state, ownProps) => {
         ...warning,
         NOT_LOGIN: g('NOT_LOGIN'),
         GO_LOGIN: g('GO_LOGIN'),
-        WELCOME_TO_KAJKAI: g('WELCOME_TO_KAJKAI')
+        WELCOME_TO_KAJKAI: g('WELCOME_TO_KAJKAI'),
+        BAN_REASON_1: g('BAN_REASON_1'),
+        BAN_REASON_2: g('BAN_REASON_2'),
+        WARNING_MODAL: g('WARNING_MODAL'),
+        CLOSE: g('CLOSE'),
     })
 }
 

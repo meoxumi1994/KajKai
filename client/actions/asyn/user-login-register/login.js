@@ -13,13 +13,16 @@ export const logIn = (email, password) => dispatch => {
         address: undefined,
         phone: undefined,
     })
-    .then(({ user, tokenId }) => {
-        if(user.username){
+    .then(({ user, tokenId, banReason, status }) => {
+        if( status == 'success' ){
             dispatch(authData('LOGIN_SUCCESS', user))
             dispatch(onWho())
             dispatch({ type: 'server/sendToken', tokenId: tokenId })
-        }else{
+        } else if( status == 'failed' ){
             dispatch(authAction('LOGIN_FAILED'))
+        } else if( status == 'banned' ) {
+            dispatch(authAction('LOGIN_FAILED'))
+            dispatch({ type: 'USER_BANNED', content: banReason })
         }
     })
 }
@@ -35,13 +38,16 @@ export const logInFaceBook = (tokenId) => dispatch => {
         address: undefined,
         phone: undefined,
     })
-    .then(({ user, tokenId }) => {
-        if(user){
+    .then(({ user, tokenId, banReason, status }) => {
+        if( status == 'success' ){
             dispatch(authData('LOGIN_SUCCESS', user))
             dispatch(onWho())
             dispatch({ type: 'server/sendToken', tokenId: tokenId })
-        }else{
+        } else if( status == 'failed' ){
             dispatch(authAction('LOGIN_FAILED'))
+        } else if( status == 'banned' ){
+            dispatch(authAction('LOGIN_FAILED'))
+            dispatch({ type: 'USER_BANNED', content: banReason })
         }
     })
 }
@@ -56,13 +62,16 @@ export const logInGoogle = (tokenId) => dispatch => {
         address: undefined,
         phone: undefined,
     })
-    .then(({ user, tokenId }) => {
-        if(user.username){
+    .then(({ user, tokenId, banReason, status }) => {
+        if( status == 'success' ){
             dispatch(authData('LOGIN_SUCCESS', user))
             dispatch(onWho())
             dispatch({ type: 'server/sendToken', tokenId: tokenId })
-        }else{
+        } else if( status == 'failed' ){
             dispatch(authAction('LOGIN_FAILED'))
+        } else if( status == 'banned' ){
+            dispatch(authAction('LOGIN_FAILED'))
+            dispatch({ type: 'USER_BANNED', content: banReason })
         }
     })
 }

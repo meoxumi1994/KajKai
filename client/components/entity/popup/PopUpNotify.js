@@ -238,7 +238,7 @@ class PopUpNotify extends React.Component {
                 boxShadow: '0px 0px 4px #B2B2B2',
                 padding: 5,
                 backgroundColor: 'white',
-                width: 350,
+                width: 280,
                 height: 85, }}
                 onClick={() => this.onClick() }
                 >
@@ -252,7 +252,7 @@ class PopUpNotify extends React.Component {
                 </div>
                 <img src={avatarUrl} width={50} height={50}/>
                 <div style={{ minHeight: 40, marginLeft: 60, marginTop: -50, fontSize: 13 }}>
-                    <div style={{ width: 270, height: 35, whiteSpace: 'pre-line' }}>
+                    <div style={{ width: 200, height: 35, whiteSpace: 'pre-line' }}>
                         <ContentNotify {...this.props}/>
                     </div>
                 </div>

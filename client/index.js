@@ -59,9 +59,13 @@ document.getElementsByTagName("BODY")[0].onscroll = () => {
 }
 
 window.addEventListener('load', () => {
-  window.addEventListener('online',  () => { store.dispatch({ type: 'server/sendToken', tokenId: store.getState().sockettoken }) })
+  window.addEventListener('online',  () => {
+      store.dispatch({ type: 'server/sendToken', tokenId: store.getState().sockettoken })
+      store.dispatch({ type: 'ONLINE' })
+  })
   window.addEventListener('offline',  () => {
-      alert('You lose your internet!')
+       store.dispatch({ type: 'OFFLINE' })
+    //   alert('You lose your internet!')
   })
 })
 

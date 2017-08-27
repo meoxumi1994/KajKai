@@ -66,6 +66,13 @@ export const loadImage = (action, file, src) => dispatch => {
                             value: [urlreal, ...action.images],
                         })
                     }
+                    if(action.type == 'UPDATE_STORE_REGISTER_AVATAR'){
+                        dispatch({
+                            type: 'INST_REGISTER_STORE_CHANGE',
+                            key: 'avatarUrl',
+                            value: urlreal,
+                        })
+                    }
                     if (action.type == 'SEND_IMAGE') {
                         dispatch({type: 'CHAT/UPDATE', subType: 'LOAD_IMAGES_URL', data: Object.assign({}, action.data, {url: urlreal})})
                     }

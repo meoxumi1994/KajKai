@@ -2,6 +2,12 @@ import config from '../config'
 
 ////console.log('config.ISTEST', config.ISTEST)
 
+function delay(t) {
+   return new Promise(function(resolve) {
+       setTimeout(resolve, t)
+   });
+}
+
 export const flet = (url, body) => {
     let myurl = config.getDomain() + url
     //console.log('POST',myurl, body)
@@ -17,7 +23,10 @@ export const flet = (url, body) => {
         //console.log('POST',myurl, res)
         return res
     })
-    .catch((error)=> {
+    .catch((error) => {
+        return delay(200).then(() => {
+            return flet(url, body)
+        })
         console.error('POST',myurl,error);
     })
 }
@@ -55,6 +64,9 @@ export const flem = (url, body) => {
         return res
     })
     .catch((error)=> {
+        return delay(200).then(() => {
+            return flem(url, body)
+        })
         console.error('GET',myurl,error);
     })
 }
@@ -75,6 +87,9 @@ export const fleu = (url, body) => {
         return res
     })
     .catch((error)=> {
+        return delay(200).then(() => {
+            return fleu(url, body)
+        })
         console.error('PUT',myurl,error);
     })
 }
@@ -95,6 +110,9 @@ export const flex = (url, body) => {
         return res
     })
     .catch((error)=> {
+        return delay(200).then(() => {
+            return flex(url, body)
+        })
         console.error('DELETE',myurl,error);
     })
 }
