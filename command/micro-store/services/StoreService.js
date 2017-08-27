@@ -86,13 +86,14 @@ export const verifyStoreInfo = (storeInfo, next) => {
 };
 
 export const createStore = (storeInfo, next) => {
-
+    const defaultUrl = ['map', 'admin', 'home', 'register', 'store', 'profile', 'registerstore', 'user', 'post'];
     verifyStoreInfo(storeInfo, (verRes) => {
         if (verRes) {
             next(verRes);
             return;
         }
-        if (!storeInfo.urlname || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )) {
+        if (!storeInfo.urlname || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )
+            || defaultUrl.indexOf(storeInfo.urlName) != -1) {
             next('urlname');
         } else {
             Store.findOne({urlName: storeInfo.urlname}, (err, docs) => {
