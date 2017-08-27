@@ -94,10 +94,10 @@
         "enName": "Face Care"
     }, {
         "name": "Chăm Sóc Cơ Thể",
-        "enName": ""
+        "enName": "Body Care"
     }, {
         "name": "Thiết Bị Chăm Sóc Sức Khoẻ",
-        "enName": ""
+        "enName": "Health Care Equipment"
     }]
 }, {
     "name": "Bách Hoá Trực Tuyến",
@@ -141,18 +141,19 @@
         "enName": "Diaper"
     }, {
         "name": "Thực Phẩm Ăn Dặm",
-        "enName": ""
+        "enName": "Weaning Food"
     }, {
-        "name": "Bình Sữa, Đồ Dùng Ăn Uống"
+        "name": "Bình Sữa, Đồ Dùng Ăn Uống",
+        "enName": "Milk Bottle, Food Utensil"
     }, {
         "name": "Đồ Dùng Bảo Vệ An Toàn",
-        "enName": "Safety Things"
+        "enName": "Safety Utensil"
     }, {
         "name": "Đồ Dùng Phòng Ngủ",
-        "enName": "Bedroom Things"
+        "enName": "Bedroom Utensil"
     }, {
         "name": "Đồ Dùng Phòng Tắm",
-        "enName": ""
+        "enName": "Bathroom Utensil"
     }]
 }, {
 	"name": "Thể Thao - Dã Ngoại",
