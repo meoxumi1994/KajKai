@@ -44,6 +44,7 @@ const LoginRegister = ({
                         }
                     </Col>
                 </div>
+                <hr style={{ margin: 0 }}/>
                 <div style={{ paddingTop: 10 }}>
                     <ChangeLanguage fontSize={14}/>
                 </div>

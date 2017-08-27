@@ -28,7 +28,10 @@ const mapStateToProps = (state, ownProps) => {
         HOME: g('HOME'),
         SETTING: g('SETTING'),
         LOG_OUT: g('LOG_OUT'),
-        unreadChat: state.inst.chat.unread
+        unreadChat: state.inst.chat.unread,
+        ALL_CATEGORY: g('ALL_CATEGORY'),
+        STORE: g('STORE'),
+        USER: g('USER'),
     })
 }
 

@@ -21,7 +21,6 @@ const contacthistory = (state = {
             }
         case 'WHO_SUCCESS':
         case 'LOGIN_SUCCESS':
-        case 'REGISTER_SUCCESS':
         case 'LANGUAGE':
         case 'VERIFY_SUCCESS':
             let newcontact = {
