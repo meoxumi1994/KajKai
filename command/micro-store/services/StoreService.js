@@ -3,6 +3,7 @@ import { checkPhone } from '../utils/utils'
 import globalId from '../config/globalId'
 import { createStorePub, updateStorePub } from '../controllers/StorePubController'
 import { getCategoryName } from './CategoryService'
+import mongoose from '../datasource'
 
 const GLOBAL_STORE_ID = globalId.STORE_GLOBAL_ID;
 
