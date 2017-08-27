@@ -149,7 +149,7 @@ export const updateStatus = (id, status, userId, next) => {
             if (store.owner === userId) {
                 switch (fComment.status) {
                     case 'new':
-                        if (status !== 'received' || status !== 'done') {
+                        if (status !== 'received' && status !== 'done') {
                             next(null);
                             return;
                         }
