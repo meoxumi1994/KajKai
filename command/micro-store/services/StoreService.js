@@ -51,7 +51,9 @@ export const getStoreBasicInfoService = (store) => {
         storeName: store.storeName,
         id: getStoreGlobalId(store._id),
         avatarUrl: store.avatarUrl,
-        coverUrl: store.coverUrl
+        coverUrl: store.coverUrl,
+        ownerId: store.owner,
+        urlName: store.urlName
     }
 };
 
@@ -232,14 +234,15 @@ export const getStoreListInfo = (storeList) => {
     }
     let storeListInfo = [];
     for (let i = 0; i < storeList.length; ++i) {
-        storeListInfo.push(getStoreListInfo(storeList[i]));
+        storeListInfo.push(getStoreBasicInfoService(storeList[i]));
     }
+    return storeListInfo;
 };
 
 export const getListStore = (storeIdList, next) => {
     let list = [];
     for (let i = 0; i < storeIdList.length; ++i) {
-        list.push(mongoose.Type.ObjectId(getStoreLocalId(storeIdList[i])));
+        list.push(mongoose.Types.ObjectId(getStoreLocalId(storeIdList[i])));
     }
     Store.find({_id: {$in: list}}, (err, docs) => {
         next(getStoreListInfo(docs));

@@ -68,7 +68,7 @@ class Chat extends React.Component {
                     {
                       store != undefined && store.ownerId == user.id?
                       <div style={{color: textColor, fontSize: 11}}>
-                      <img src="/images/storeicon.svg" style={{width: 20, height: 20, marginRight: 5}}/>
+                      <img src={store.avatarUrl} style={{width: 20, height: 20, marginRight: 5}}/>
                       {store.storeName}
                       </div>
                       :
