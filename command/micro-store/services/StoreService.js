@@ -242,7 +242,8 @@ export const getListStore = (storeIdList, next) => {
         list.push(mongoose.Types.ObjectId(getStoreLocalId(storeIdList[i])));
     }
     Store.find({_id: {$in: list}}, (err, docs) => {
-        console.log(getStoreListInfo(docs));
+        console.log(list);
+        console.log(err, docs, getStoreListInfo(docs));
         next(getStoreListInfo(docs));
     })
 };
