@@ -67,7 +67,10 @@ class Chat extends React.Component {
                     <div style={{color: textColor, fontSize: 13}}><b>{label.length > 23? label.substring(0, 23) + '...': label}</b></div>
                     {
                       store != undefined && store.ownerId == user.id?
-                      <div style={{color: textColor}}>({store.storeName})</div>
+                      <div style={{color: textColor, fontSize: 11}}>
+                      <img src="/images/storeicon.svg" style={{width: 20, height: 20, marginRight: 5}}/>
+                      {store.storeName}
+                      </div>
                       :
                       <div></div>
                     }
