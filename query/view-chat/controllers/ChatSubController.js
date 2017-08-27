@@ -1,7 +1,20 @@
 import { Chat, UserChat, BasicUser, BasicStore } from '../models'
 
 export const createChat = (message) => {
-  const { groupId: id, groupName: name, members: users, storeId } = message.chatGroup
+  const { groupId: id, groupName: name, members } = message.chatGroup
+
+  let users, storeId
+  if (members) {
+    users = []
+    for (let i = 0; i < members.length; i++) {
+      let member = members[i]
+      if (member.substr(0, 3) == '002') {
+        storeId = member
+      } else {
+        users.push(member)
+      }
+    }
+  }
 
   const chat = new Chat({
     id
