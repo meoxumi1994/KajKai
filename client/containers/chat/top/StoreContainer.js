@@ -4,7 +4,8 @@ import Store from '~/components/chat/top/Store'
 const mapStateToProps = (state, ownProps) => {
     const { chatListMap } = state.inst.chat.left
     return {
-        chatListMap
+        chatListMap,
+        user: state.user
     }
 }
 

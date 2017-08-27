@@ -22,8 +22,6 @@ class FeedbackDetails extends React.Component {
 
         let reason = ''
 
-        console.log('DEBUG', details);
-
         let prettyTime = new Date(time)
         prettyTime = prettyTime.toLocaleString()
 

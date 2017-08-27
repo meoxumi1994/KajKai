@@ -3,17 +3,18 @@ import { FormGroup, FormControl, HelpBlock, ControlLabel, Button , OverlayTrigge
 import ModalUploadImageContainer from '~/containers/chat/bottom/ModalUploadImageContainer'
 import EmoNavContainer from '~/containers/chat/bottom/EmoNavContainer'
 
-const ChatBottom = ({mesId, userId, sendMessage, displayImageModal}) => {
+const ChatBottom = ({mesId, userId, sendMessage, displayImageModal, chatListMap}) => {
   let msg
 
+  const { store } = chatListMap[mesId]
   return (
     <div style={{width: 280}}>
         <form onSubmit={e => {
-          e.preventDefault()
-          if (msg.value.trim()) {
-            sendMessage(mesId, userId, msg.value, '', 'message')
-            msg.value = ''
-          }
+            e.preventDefault()
+            if (msg.value.trim()) {
+                sendMessage(mesId, store == undefined || store.ownerId != userId? userId: store.id , msg.value, '', 'message')
+                msg.value = ''
+            }
         }}>
 
         <div className="input-group" style={{width: '100%'}}>

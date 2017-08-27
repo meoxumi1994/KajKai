@@ -46,15 +46,23 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     follow: (storeid) => {
         dispatch({ type: 'server/FOLLOW', data: { type: 'store', id: storeid }})
     },
-    sendMessage: (id, yourid, userid, chatList) => {
+    sendMessage: (storeid, yourid, userid, chatList) => {
+        dispatch(getMesId(yourid, storeid, true))
+
+
+
+
+
+
+
         // console.log('fuck', chatList, userid);
         // if (chatList.indexOf(userid) == -1) {
-        //     let members = []
-        //     members.push(yourid)
-        //     members.push(userid)
-        //     dispatch(addMember(null, yourid, members))
+            // let members = []
+            // members.push(yourid)
+            // members.push(storeid)
+            // dispatch(addMember(null, yourid, members))
         // } else {
-            dispatch(getMesId(yourid, userid))
+            // dispatch(getMesId(yourid, userid))
         // }
     }
 })

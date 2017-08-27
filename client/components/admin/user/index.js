@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import UserDetailsContainer from '~/containers/admin/user/UserDetailsContainer'
 import { link } from '~/components/admin/common/config'
+import { Table } from 'react-bootstrap'
 
 class User extends React.Component {
 
@@ -24,15 +25,26 @@ class User extends React.Component {
                     <button onClick={() => loadMore(keyy.length)} style={{float: 'right', margin: '5px 10px 5px 5px'}} className="btn btn-default">{display.loadMore?'Load more':'Data is up to date'}</button>
                 </nav>
 
-                <table className="table table-bordered">
+                <Table striped bordered condensed hover style={{marginLeft: 20, marginRight: 20}}>
                     <thead className="thead-default">
                         <tr style={styles.tr}>
-                            <th>#</th>
-                            {cols.map(col =>
-                              <th key={col.label}>
-                                  {col.label}
-                              </th>
-                            )}
+                            <th style={{textAlign: 'center'}}>#</th>
+                            <th style={{textAlign: 'center', width: 300}}>
+                                User
+                            </th>
+                            <th style={{textAlign: 'center', width: 300}}>
+                                Store
+                            </th>
+                            <th style={{textAlign: 'center'}}>
+                                Email
+                            </th>
+                            <th style={{textAlign: 'center'}}>
+                                Status
+                            </th>
+                            <th style={{textAlign: 'center'}}>
+                                Action
+                            </th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -41,13 +53,16 @@ class User extends React.Component {
                             const { user, ban, stores } = mapp[userId]
                             return (
                               <tr key={userId}>
-                                  <th scope="row">{index+1}</th>
-                                  <td>
+                                  <th scope="row" style={{textAlign: 'center'}}>{index+1}</th>
+                                  <td style={{marginLeft: 20}}>
                                       <img src={user.avatarUrl} style={{width: 40, height: 40, marginRight: 10, borderRadius: 50}}/>
                                       <a href={link.user(user.id)}>{user.username}</a>
                                   </td>
-                                  <td>
+                                  <td style={{marginLeft: 20}}>
                                       {
+                                        stores.length == 0?
+                                        <p><i>(No store)</i></p>
+                                        :
                                         stores.map(store =>
                                           <div key={store.id}>
                                                   <img src={store.avatarUrl} style={{width: 40, height: 40, marginRight: 10, marginBottom: 10, borderRadius: 50}}/>
@@ -56,13 +71,18 @@ class User extends React.Component {
                                         )
                                       }
                                   </td>
-                                  <td>
+                                  <td style={{textAlign: 'center'}}>
                                     {user.email}
                                   </td>
-                                  <td>
-                                      <p style={{color: ban.status? 'red': 'green'}}><b>{ban.status? 'Deactivated': 'Activated'}</b></p>
+                                  <td style={{textAlign: 'center'}} onClick={() => onUserDetails(user.id)}>
+                                      {
+                                          ban.status?
+                                          <img src='./images-admin/untick.png' style={{width: 20, height: 20}}/>
+                                          :
+                                          <img src='./images-admin/tick.png' style={{width: 25, height: 25}}/>
+                                      }
                                   </td>
-                                  <td>
+                                  <td style={{textAlign: 'center', width: 120}}>
                                         <button onClick={() => onUserDetails(user.id)} className="btn btn-default">Details</button>
                                   </td>
                               </tr>
@@ -70,7 +90,7 @@ class User extends React.Component {
                           }
                         )}
                     </tbody>
-                </table>
+                </Table>
                 <UserDetailsContainer/>
             </div>
         )

@@ -9,7 +9,7 @@ class Chat extends React.Component {
     render() {
 
         const { mesId,
-                chatListMap, user, currentChat,
+                chatListMap, user, currentChat, addon,
                 removeNewChat
               } = this.props
 
@@ -36,7 +36,19 @@ class Chat extends React.Component {
             }
         }
 
-        let textColor = mesId == currentChat? 'white': 'black'
+        let myUser
+        if (store == undefined || store.ownerId != user.id) {
+            myUser = user
+        } else {
+            myUser = {
+                id: store.id,
+                username: store.storeName,
+                avatarUrl: store.avatarUrl
+            }
+        }
+
+        // let textColor = mesId == currentChat? 'white': 'black'
+        let textColor = 'black'
         return (
           <div className="row">
               <div className="col col-xs-2" style={styles.avatarDiv}>
@@ -51,10 +63,10 @@ class Chat extends React.Component {
                   }
               </div>
 
-              <div className="col col-xs-5" style={styles.messageDiv}>
+              <div className="col col-xs-5" style={ addon? styles.messageDivAddon: styles.messageDiv}>
                     <div style={{color: textColor, fontSize: 13}}><b>{label.length > 23? label.substring(0, 23) + '...': label}</b></div>
                     {
-                      store != undefined?
+                      store != undefined && store.ownerId == user.id?
                       <div style={{color: textColor}}>({store.storeName})</div>
                       :
                       <div></div>
@@ -64,7 +76,9 @@ class Chat extends React.Component {
                       <div>
                         <small className="text-muted">
                           <div style={{color: textColor}}>
-                            {lastMessage.id != user.id ? lastMessage.message.url != ''? usersMap[lastMessage.id].username +" sent you a picture" : usersMap[lastMessage.id].username + ': ' : 'You: '}
+                            { lastMessage.id != myUser.id ? lastMessage.message.url != ''?
+                            usersMap[lastMessage.id].username +" sent you a picture" : usersMap[lastMessage.id].username + ': '
+                            : 'You: '}
                             { lastMessage.message.text.length > 25? lastMessage.message.text.substring(0, 25) + '...': lastMessage.message.text }
                           </div>
                         </small>
@@ -75,6 +89,7 @@ class Chat extends React.Component {
               </div>
 
               {
+                addon? undefined :
                 lastMessage == undefined? undefined:
                 <div className="col col-xs-4" style={styles.timeDiv}>
                     <small className="text-muted" style={{color: textColor}}>
@@ -91,7 +106,6 @@ const styles = {
     avatarDiv: {
         float: 'left',
         marginTop: 4,
-        marginRight: 10,
         marginLeft: 10,
         width: '18%',
     },
@@ -104,7 +118,14 @@ const styles = {
         height: 70,
         marginTop: 4,
         width: '50%',
-        height: 55
+        height: 55,
+    },
+    messageDivAddon: {
+        height: 70,
+        marginTop: 4,
+        width: '75%',
+        height: 55,
+        marginLeft: 5
     },
     timeDiv: {
         marginTop: 4,

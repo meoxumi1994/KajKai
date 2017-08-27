@@ -1,6 +1,7 @@
 import React from 'react'
 
 import LeaderComment from '~/containers/entity/contact/LeaderComment'
+import ChatListContainer from '~/containers/chat/left/ChatListContainer'
 
 const getString = (str) => {
     if(str == undefined) return ""
@@ -57,7 +58,9 @@ class ManagerComment extends React.Component {
             return <div></div>
         return(
             <div style={{ height: '100%', backgroundColor: '#F6F7F9' }}>
-                <div style={{ height: 255 }}></div>
+                <div style={{ height: 255 }}>
+                    <ChatListContainer addon={true}/>
+                </div>
                 <hr style={{ margin: 0 }}/>
                 <div style={{ padding: 5, backgroundColor: 'white'}}>
                     <div className="input-group-btn" style={{ padding: 0, margin: 0  }}>

@@ -15,6 +15,22 @@ const left = (state = {
 }, action) => {
     switch (action.type) {
 
+      case 'CHAT_STORE':
+          if (state.chatListKey.indexOf(action.data.mesId) != -1) {
+              return state
+          }
+          return  {
+              ...state,
+              chatListKey: [
+                  ...state.chatListKey,
+                  action.data.mesId
+              ],
+              chatListMap: {
+                  ...state.chatListMap,
+                  [action.data.mesId]: chatMap(undefined, action)
+              }
+          }
+
       case 'DISPLAY_CHAT_LAZYLOAD':
           return {
               ...state,
@@ -47,7 +63,7 @@ const left = (state = {
                   offset: action.lazyLoad.offset
               }
           }
-          //console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
+          console.log('\n[Reducer Left] INIT_CHAT_LIST ', action, initChatlist)
           return initChatlist
 
 

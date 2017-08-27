@@ -6,7 +6,7 @@ import ChatBottomContainer from '~/containers/chat/bottom'
 class ChatCenter extends React.Component {
 
     constructor(props) {
-      super(props)
+        super(props)
     }
 
     render() {
@@ -19,7 +19,7 @@ class ChatCenter extends React.Component {
       }
 
       return (
-        <div key={mesId} style={{width: '100%', height: '100%'}} onClick={() => setCurrentChat(mesId)}>
+        <div style={{width: '100%', height: '100%'}} onClick={() => setCurrentChat(mesId)}>
             <ChatTopContainer
                   mesId={mesId}/>
             <MessageListContainer

@@ -4,16 +4,19 @@ import { sendMessage } from '~/actions/asyn/chat/socket'
 import { changeDisplay } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
+  const { chatListMap } = state.inst.chat.left
   return (
     {
       userId: state.user.id,
-      mesId: ownProps.mesId
+      mesId: ownProps.mesId,
+      chatListMap
     }
   )
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     sendMessage: (mesId, id, text, url, type) => {
+        console.log('DEBUG id', id);
         if (mesId == 0) {
             mesId = null
         }
