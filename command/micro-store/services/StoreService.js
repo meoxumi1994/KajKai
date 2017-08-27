@@ -52,7 +52,8 @@ export const getStoreBasicInfoService = (store) => {
         id: getStoreGlobalId(store._id),
         avatarUrl: store.avatarUrl,
         coverUrl: store.coverUrl,
-        owner: store.owner
+        ownerId: store.owner,
+        urlName: store.urlName
     }
 };
 
