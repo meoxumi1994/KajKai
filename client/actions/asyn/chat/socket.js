@@ -23,6 +23,6 @@ export const sendMessage = (mesId, id, text, url, type) => ({
           url,
           type
       },
-      time: Date.now()
+      time: Date.now(),
   }
 })
