@@ -40,6 +40,15 @@ export const getUserChats = (userId, offset, length, next) => {
               }
             }
             mChat.users = chat.users
+            if (chat.store) {
+              let { id, storeName, avatarUrl, urlName } = chat.store
+              mChat.store = {
+                id,
+                urlName,
+                storeName,
+                avatarUrl
+              }
+            }
             if (chat.store && userId != chat.store.userId) {
               let { id, storeName, avatarUrl, urlName } = chat.store
               mChat.users.push({
