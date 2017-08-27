@@ -232,7 +232,7 @@ export const getStoreListInfo = (storeList) => {
     }
     let storeListInfo = [];
     for (let i = 0; i < storeList.length; ++i) {
-        storeListInfo.push(getStoreListInfo(storeList[i]));
+        storeListInfo.push(getStoreBasicInfoService(storeList[i]));
     }
 };
 
