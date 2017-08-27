@@ -15,8 +15,6 @@ class Store extends React.Component {
                 <div></div>
             )
         }
-        console.log('fucking store', store);
-
         return (
             <div style={{
               borderStyle: 'solid',
