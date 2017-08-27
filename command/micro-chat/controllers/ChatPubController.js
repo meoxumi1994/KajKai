@@ -46,6 +46,7 @@ export const getStore = (storeId, next) => {
 };
 
 export const getListUser = (userIdList, next) => {
+    if (!userIdList || userIdList.length === 0) return [];
     const sub = redis.createClient(config);
     const pub = redis.createClient(config);
     const id = getUUID();
@@ -102,7 +103,7 @@ export const getInfoFromListId = (idList, next) => {
     } else {
         getListStore(storeIdList, (stores) => {
             console.log('this store ' + JSON.stringify(stores));
-            getUser(userIdList, (users) => {
+            getListUser(userIdList, (users) => {
                 console.log('this store ' + JSON.stringify(stores));
                 stores.push(users);
                 console.log('this store ' + JSON.stringify(stores));
