@@ -15,12 +15,12 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    sendMessage: (mesId, id, text, url, type) => {
+    sendMessage: (mesId, id, text, url, type, storeId) => {
         console.log('DEBUG id', id);
         if (mesId == 0) {
             mesId = null
         }
-        dispatch(sendMessage(mesId, id, text, url, 'message'))
+        dispatch(sendMessage(mesId, id, text, url, 'message', storeId))
         dispatch({type: 'server/READ_CHAT', data: {mesId: mesId}})
     },
     displayImageModal: (mesId) => {
