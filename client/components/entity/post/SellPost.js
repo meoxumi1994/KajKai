@@ -177,7 +177,7 @@ class SellPost extends React.Component {
                         </div>
                     }
                     {likeContent && <hr style={{ margin: 0 }}/>}
-                    <GroupComment closeComment={(status != 'open')} id={id}/>
+                    <GroupComment closeComment={(status != 'open')} id={id} focuscommentid={this.props.focuscommentid}/>
                 </div>
                 <div style={{ height: 10 }}></div>
             </div>
@@ -185,12 +185,12 @@ class SellPost extends React.Component {
     }
     componentDidMount(){
         if(this.props.needGetSellPost){
-            this.props.onGetSellpost(this.props.id, this.props.commentid)
+            this.props.onGetSellpost(this.props.id, this.props.focuscommentid)
         }
     }
     shouldComponentUpdate(nextProps, nextState ){
         if(this.props.needGetSellPost && nextProps.id != this.props.id ){
-            this.props.onGetSellpost(nextProps.id, nextProps.commentid)
+            this.props.onGetSellpost(nextProps.id, nextProps.focuscommentid)
         }
         return true
     }

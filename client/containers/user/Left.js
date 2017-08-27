@@ -31,7 +31,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getPhoto: (id) => {
-        dispatch(getListImage('user', id, -1))
+        // dispatch(getListImage('user', id, -1))
         // dispatch(getListImage('postrow', id, -1))
         // dispatch(getListImage('product', id, -1))
     },

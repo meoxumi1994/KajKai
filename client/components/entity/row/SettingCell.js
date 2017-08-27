@@ -53,7 +53,6 @@ class SettingCell extends React.Component {
         let position = this.state.value
         let marker = (position && position.lat) ? { position: position } : undefined
         let currentPosition = (position && position.lat) ? position : { lat: 20.969133867372143, lng: 105.86288452148438 }
-        console.log(position)
         return(
             <div className="panel panel-default" style={{ margin: 0, marginTop: 10, }}>
                 <div style={{ padding: 10, borderRadius: '3px 3px 0px 0px', fontSize: 18, backgroundColor: '#F6F7F9'}}>

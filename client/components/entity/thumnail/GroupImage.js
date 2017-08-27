@@ -110,7 +110,6 @@ class GroupImage extends React.Component {
         const { EDIT, onEdit, images, canEdit, sellpostid } = this.props
         const width = this.props.width - ((images.length>1)? 1 : 2);
         const height = width;
-
         return(
             <div style={{ marginLeft: -1 }}>
                 <Group width={width} height={height} images={images} openModal={(index) => this.openModal(index)}/>

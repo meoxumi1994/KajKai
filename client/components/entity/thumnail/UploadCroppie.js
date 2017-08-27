@@ -15,7 +15,7 @@ class UploadCroppie extends React.Component {
         this.refs.cropper.zoomTo(0.1)
     }
     onSave(){
-        console.log(this.cropper.getCroppedCanvas().toDataURL())
+        // console.log(this.cropper.getCroppedCanvas().toDataURL())
     }
     uploadPhoto(){
         document.getElementById("myinput_file").click()
@@ -64,18 +64,18 @@ class UploadCroppie extends React.Component {
                     height: 0,
                 }} accept="image/*" type="file" id="myinput_file"/>
                 <Modal show={this.state.showModal} onHide={() => this.close()}>
-                    <div className="modal-content" style={{
-                        position: 'fixed', marginTop: -4,
-                        width: style.width + 2, marginLeft: -85 }}>
+                    <div>
                         <Modal.Header>
                             <strong>{CROPPIE_TITLE}</strong>
                         </Modal.Header>
-                        <Croppie
-                            aspectRatio={aspectRatio}
-                            action={action}
-                            cropper_src={this.state.cropper_src}
-                            style={style}
-                        />
+                        <div style={{ padding: 10 }}>
+                            <Croppie
+                                aspectRatio={aspectRatio}
+                                action={action}
+                                cropper_src={this.state.cropper_src}
+                                style={{ width: 580, height: 580 }}
+                            />
+                        </div>
                     </div>
                 </Modal>
             </div>

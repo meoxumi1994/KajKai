@@ -67,6 +67,13 @@ const Row = ({ type, id, products, products_order, content, images, numline, onA
                 <div>
                     <div style={{ float: 'left', marginTop: -2, marginLeft: -1 }}>
                         <KeepImage
+                            onRemove={(index) =>
+                                onChange('images', [
+                                    ...images.slice(0,index),
+                                    ...images.slice(index+1,images.length),
+                                ])
+                            }
+                            onAddImage={(src) => onChange('images', [...images, src])}
                             action={{
                                 type: 'UPDATE_POST_ROW',
                                 id: id,
@@ -95,6 +102,13 @@ const Row = ({ type, id, products, products_order, content, images, numline, onA
                 <div>
                     <div style={{ float: 'right', marginTop: -2, marginRight: -2 }}>
                         <KeepImage
+                            onRemove={(index) =>
+                                onChange('images', [
+                                    ...images.slice(0,index),
+                                    ...images.slice(index+1,images.length),
+                                ])
+                            }
+                            onAddImage={(src) => onChange('images', [...images, src])}
                             action={{
                                 type: 'UPDATE_POST_ROW',
                                 id: id,
@@ -122,6 +136,13 @@ const Row = ({ type, id, products, products_order, content, images, numline, onA
             return(
                 <div>
                     <KeepImage
+                        onRemove={(index) =>
+                            onChange('images', [
+                                ...images.slice(0,index),
+                                ...images.slice(index+1,images.length),
+                            ])
+                        }
+                        onAddImage={(src) => onChange('images', [...images, src])}
                         action={{
                             type: 'UPDATE_POST_ROW',
                             id: id,

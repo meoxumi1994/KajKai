@@ -10,6 +10,17 @@ class GroupComment extends React.Component {
     }
     componentDidMount(){
         this.props.onJoin()
+        console.log(this.props.focuscommentid)
+        // console.log(this[this.props.focuscommentid].getBo)
+        // window.scrollTo(document.getElementById(this.props.focuscommentid))
+        // document.getElementById(this.props.focuscommentid).focus();
+        // setTimeout(() => {
+        //     if(this[this.props.focuscommentid]){
+        //         console.log('focuscommentid', this.props.focuscommentid)
+        //         console.log(this[this.props.focuscommentid])
+        //         this[this.props.focuscommentid].focus()
+        //     }
+        // }, 2000)
     }
     componentWillUnmount(){
         this.props.onLeave()
@@ -31,110 +42,13 @@ class GroupComment extends React.Component {
                 }
 
                 {leadercomments.map((item, index) =>
-                    <LeaderComment
-                        key={index}
-                        id={item.id}
-                        />
+                    <div key={item.id + index} id={item.id} tabIndex="-1" focusable
+                        ref={ leadercomment => { console.log(item.id, index); this[item.id] = leadercomment }}
+                        >
+                        <LeaderComment id={item.id}/>
+                    </div>
+
                 )}
-                {/* <CommentSuggest
-                    id={0}
-                    isleader={true}
-                    content={'View more previous comments'}
-                    end={'3 of 18'}
-                    />
-                <Comment
-                    id={0}
-                    isleader={true}
-                    onReceive={true}
-                    isStoreRepresent={true}
-                    avatar='/images/avatar.jpg'
-                    avatarsize={40}
-                    name='Phương Nguyễn‎'
-                    content='Tất cả các đơn síp đi rồi các bạn ạ ..'
-                    time='39 mins'
-                    />
-                <Comment
-                    id={1}
-                    isStoreRepresent={true}
-                    avatar='/images/avatar.jpg'
-                    avatarsize={40}
-                    name='Phương Nguyễn‎'
-                    content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
-                    time='39 mins'
-                    />
-                <Comment
-                    id={2}
-                    isStoreRepresent={true}
-                    avatar='/images/avatar.jpg'
-                    avatarsize={40}
-                    name='Phương Nguyễn‎'
-                    content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
-                    time='39 mins'
-                    />
-                <CommentSuggest
-                    id={1}
-                    src='/images/reply.svg'
-                    isleader={false}
-                    imgsrc='/images/avatar.jpg'
-                    content={' Phương Nguyễn Replied . 2 Replies'}
-                    time={'1 hrs'}
-                    />
-                <Comment
-                    id={3}
-                    isleader={true}
-                    onReceive={true}
-                    isStoreRepresent={true}
-                    avatar='/images/avatar.jpg'
-                    avatarsize={40}
-                    name='Phương Nguyễn‎'
-                    content='Tất cả các đơn síp đi rồi các bạn ạ ..'
-                    time='39 mins'
-                    />
-                <Comment
-                    isStoreRepresent={true}
-                    avatar='/images/avatar.jpg'
-                    avatarsize={40}
-                    name='Phương Nguyễn‎'
-                    content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
-                    time='39 mins'
-                    />
-                <Comment
-                    id={4}
-                    isStoreRepresent={true}
-                    avatar='/images/avatar.jpg'
-                    avatarsize={40}
-                    name='Phương Nguyễn‎'
-                    content='Suất của b 40k nhé. 11h hơn mới đi đơn đầu tiên. Lúc đó b có nhận được k'
-                    time='39 mins'
-                    />
-                <CallComment
-                    id={0}
-                    isleader={false}
-                    avatarUrl='/images/avatar.jpg'
-                    placehoder={WRITE_COMMENT_OR_ORDER}
-                    />
-                <Comment
-                    id={5}
-                    isleader={true}
-                    onReceive={true}
-                    isStoreRepresent={true}
-                    avatar='/images/avatar.jpg'
-                    avatarsize={40}
-                    name='Phương Nguyễn‎'
-                    content='Tất cả các đơn síp đi rồi các bạn ạ ..'
-                    time='39 mins'
-                    />
-                <CommentSuggest
-                    id={2}
-                    isleader={false}
-                    src='/images/reply.svg'
-                    content={'8 Replies'}
-                    />
-                <CommentSuggest
-                    id={3}
-                    isleader={true}
-                    content={'View more comments'}
-                    /> */}
                 {(userid && !closeComment ) &&
                     <CallComment key={id}
                         order={this.props.order}

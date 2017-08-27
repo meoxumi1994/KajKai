@@ -8,14 +8,14 @@ class Post extends React.Component {
         super(props)
     }
     render(){
-        const { sellpostid, storeid, sellpost, commentid, introduceWidth } = this.props
+        const { sellpostid, storeid, sellpost, focuscommentid, introduceWidth } = this.props
         const myStoreId = storeid ? storeid : (sellpost ? sellpost.storeid : undefined);
         console.log(sellpostid)
         return(
             <div className="container-fluid" style={{ margin: 0, padding: 0, width: 940 }}>
                 <div className="row" style={{ margin: 0, padding: 0 }}>
                     <div className="col col-xs-7" style={{ margin: 0, padding: 0 }}>
-                        <SellPost id={sellpostid}  needGetSellPost={true} commentid={commentid}/>
+                        <SellPost id={sellpostid}  needGetSellPost={true} focuscommentid={focuscommentid}/>
                     </div>
                     <div className="col col-xs-5" style={{ padding: 0 }}>
                         <div style={{ marginLeft: -18 }}>

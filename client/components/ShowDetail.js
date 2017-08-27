@@ -23,7 +23,7 @@ class ShowDetail extends React.Component {
                         </div>
                         <div className="col col-xs-10" style={{ padding: 0, margin: 0}}>
                             <div style={{ paddingTop: 10, marginLeft: -23 }}>
-                                <Post sellpostid={id} commentid={location.pathname.split('/')[3]} introduceWidth={310}/>
+                                <Post sellpostid={id} focuscommentid={location.pathname.split('/')[3]} introduceWidth={310}/>
                             </div>
                         </div>
                     </div>

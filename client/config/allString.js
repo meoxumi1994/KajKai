@@ -281,6 +281,17 @@ const myString = {
     CREATE_NEW_SELL_POST: ['đã tạo một bài đăng bán hàng mới','created a new sellpost'],
     SELF: ['mình','his/hers'],
     IN: ['trong','in'],
+
+    MOVE_UP: ['lên','up'],
+    MOVE_DOWN: ['xuống','down'],
+
+    /////
+
+    PHOTO_USER: ['Ảnh cá nhân','Photo user'],
+    PHOTO_STORE: ['Ảnh cửa hàng','Photo store'],
+    PHOTO_POST: ['Ảnh bài đăng','Photo post'],
+    PHOTO_PRODUCT: ['Ảnh sản phẩm','Photo product'],
+    NO_IMAGE_OF_THIS_TYPE: ['Không có ảnh loại này','No image of this type'],
 }
 
 const allString = {
