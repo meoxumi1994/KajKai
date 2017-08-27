@@ -34,6 +34,7 @@ export const addNewMessage = (mesInfo, next) => {
                     userIds.push(group.members[i]);
                 }
             }
+            console.log('* fuck 1 ' + JSON.stringify(message));
             getInfoFromListId([message.senderId], (info) => {
                 let curMessage = {
                     mesId: message.mesId,
@@ -41,8 +42,12 @@ export const addNewMessage = (mesInfo, next) => {
                     message: message.message,
                     user: info[0]
                 };
+                console.log('* fuck 2 ' + JSON.stringify(message));
                 updateCounterMultiple(userIds, 1, () => {
+
+                    console.log('* fuck 3 ' + JSON.stringify(message));
                     Message.insertMany(arr, (err, docs) => {
+                        console.log('* fuck 4 ' + JSON.stringify(message));
                         next(curMessage, group.members);
                     });
                 });
