@@ -113,7 +113,7 @@ export const login = (res, user) => {
         res.json({error: 'error'});
     } else {
         if (user.banned === 1) {
-            res.json({error: 'error', banReason: user.banReason})
+            res.json({error: 'error', banReason: user.banReason, status: 'banned'})
         } else {
             const token = getUserToken(user._id);
             res.cookie('token', token);
