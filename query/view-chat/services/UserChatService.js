@@ -40,7 +40,7 @@ export const getUserChats = (userId, offset, length, next) => {
               }
             }
             mChat.users = chat.users
-            if (chat.store && userId == chat.store.userId) {
+            if (chat.store && userId != chat.store.userId) {
               let { id, storeName, avatarUrl, urlName } = chat.store
               mChat.users.push({
                 id,
@@ -48,9 +48,6 @@ export const getUserChats = (userId, offset, length, next) => {
                 avatarUrl,
                 urlName
               })
-            }
-
-            if (chat.store && userId != chat.store.userId) {
               for (let k = 0; k < mChat.users.length; k++) {
                 if (mChat.users[k].id == chat.store.userId) {
                   mChat.users.splice(k, 1)
