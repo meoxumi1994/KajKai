@@ -12,6 +12,7 @@ const ChatBottom = ({mesId, userId, sendMessage, displayImageModal, chatListMap}
         <form onSubmit={e => {
             e.preventDefault()
             if (msg.value.trim()) {
+                console.log('component', store, userId);
                 sendMessage(mesId, store == undefined || store.ownerId != userId? userId: store.id , msg.value, '', 'message')
                 msg.value = ''
             }
