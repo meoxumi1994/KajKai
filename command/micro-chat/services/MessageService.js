@@ -42,12 +42,16 @@ export const addNewMessage = (mesInfo, next) => {
                     message: message.message,
                     user: info[0]
                 };
-                console.log('* fuck 2 ' + JSON.stringify(message));
+                if (message.senderId.startsWith('002')) {
+                    curMessage = {
+                        mesId: message.mesId,
+                        time: message.time,
+                        message: message.message,
+                        store: info[0]
+                    };
+                }
                 updateCounterMultiple(userIds, 1, () => {
-
-                    console.log('* fuck 3 ' + JSON.stringify(message));
                     Message.insertMany(arr, (err, docs) => {
-                        console.log('* fuck 4 ' + JSON.stringify(message));
                         next(curMessage, group.members);
                     });
                 });

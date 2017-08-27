@@ -305,7 +305,10 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
       url: '',
       type: ''
     },
-    time: ''
+    time: '',
+    store: {
+        id: ''
+    }
    }
 ),
 'global/RECEIVE_MESSAGE': {
@@ -320,7 +323,15 @@ server tra ve neu bi failed thi { type: , data: undefined, reason: ''}
          url,
          type
      },
-     time
+     time,
+     store: {
+        id,
+        avatarUrl,
+        coverUrl,
+        ownerId,
+        storeName,
+        urlName
+    }
  }
 
 // Add member to group or create new chat

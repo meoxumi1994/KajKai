@@ -232,7 +232,6 @@ export const getStoreListInfo = (storeList) => {
     }
     let storeListInfo = [];
     for (let i = 0; i < storeList.length; ++i) {
-        console.log('this ' + storeList[i] + ' ' + JSON.stringify(getStoreBasicInfoService(storeList[i])));
         storeListInfo.push(getStoreBasicInfoService(storeList[i]));
     }
     return storeListInfo;
@@ -245,7 +244,7 @@ export const getListStore = (storeIdList, next) => {
     }
     Store.find({_id: {$in: list}}, (err, docs) => {
         console.log(list);
-        console.log(err + ' ' + docs + ' ' + getStoreListInfo(docs));
+        console.log(err + ' ' + docs + ' ' + JSON.stringify(getStoreListInfo(docs)));
         next(getStoreListInfo(docs));
     })
 };
