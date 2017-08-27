@@ -101,8 +101,11 @@ export const getInfoFromListId = (idList, next) => {
         })
     } else {
         getListStore(storeIdList, (stores) => {
+            console.log('this store ' + JSON.stringify(stores));
             getUser(userIdList, (users) => {
+                console.log('this store ' + JSON.stringify(stores));
                 stores.push(users);
+                console.log('this store ' + JSON.stringify(stores));
                 next(stores);
             })
         })
