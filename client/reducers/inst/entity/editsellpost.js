@@ -55,11 +55,11 @@ const editsellpost = (state = {
             state.postrows_order.map((item, index) => {
                 if(item == action.id){
                     let tmp = u_postrows_order[index]
-                    u_postrows_order[index] = u_postrows_order[index-1]
-                    u_postrows_order[index-1] = tmp
+                    u_postrows_order[index] = u_postrows_order[index+1]
+                    u_postrows_order[index+1] = tmp
                     u_moveDownState = {
                         ...state,
-                        postrows_order: u_moveDownState
+                        postrows_order: u_postrows_order
                     }
                 }
             })
