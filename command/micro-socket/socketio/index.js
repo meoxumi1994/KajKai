@@ -46,7 +46,6 @@ const init = (server) => {
             console.log('a user disconnected')
         });
 
-        sockListen(null, socket, sio);
 
         socket.on('server/sendToken', (action) => {
             const token = action.tokenId;
@@ -67,6 +66,7 @@ const init = (server) => {
                     } else sockListen(null, socket, sio)
                 })
             } else {
+                sockListen(null, socket, sio);
             }
         })
     });
