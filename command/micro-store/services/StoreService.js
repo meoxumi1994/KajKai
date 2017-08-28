@@ -65,11 +65,25 @@ export const validateStore = (store) => {
 };
 
 export const verifyStoreInfo = (storeInfo, next) => {
-    if (!storeInfo.storename || storeInfo.storename.length < 6) {
+
+    if (storeInfo.urlname.length < 4 || storeInfo.urlname.length > 100) {
+        next('urlname');
+        return;
+    }
+    if (!(/^[a-z0-9_.-]*$/.test(storeInfo.urlname)) || storeInfo.urlname.length > 100 ){
+        next('urlname');
+        return;
+    }
+    if (!storeInfo.avatarUrl){
+        next('avatarUrl');
+        return;
+    }
+    if (!storeInfo.storename || storeInfo.storename.length < 6 || storeInfo.storename.length > 100) {
         next('name');
         return;
     }
-    if (!storeInfo.firstCategoryId || !storeInfo.secondCategoryId || !storeInfo.category || storeInfo.category.length < 3) {
+    if (!storeInfo.firstCategoryId || !storeInfo.secondCategoryId || !storeInfo.category || storeInfo.category.length < 3
+    || storeInfo.category.length > 200) {
         next('category');
         return;
     }
