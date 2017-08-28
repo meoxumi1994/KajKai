@@ -8,7 +8,7 @@ import ChangeLanguage from '~/containers/entity/row/ChangeLanguage'
 const Left = ({ storeList, avatarUrl, username, changeLanguage, id, language,  STORE, HOME, BASIC, CREATE_STORE, STORE_BOLD,
     CREATE_INTEREST, SETTING_BOLD, INTEREST, SETTING }) => {
     return(
-        <div style={{ width: 200 }}>
+        <div style={{ width: 200, paddingTop: 103 }}>
             {username && <CellLeft avatar={avatarUrl} name={username} link={"/user/"+id}/>}
             <div style={{ marginTop: 10, marginLeft: 5, borderRadius: 2, width: 150, fontSize: 12, color: '#4B4F56'}}>
                 {BASIC}
