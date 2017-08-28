@@ -6,12 +6,11 @@ import { changeDisplay } from '~/actions/asyn/chat/actions'
 const mapStateToProps = (state, ownProps) => {
     const { user } = state
     const { chatListMap } = state.inst.chat.left
-    const { messagesMap, messagesKey } = state.inst.chat.center
+    const { messagesMap } = state.inst.chat.center
     return {
         user,
         chatListMap,
         messagesMap,
-        messagesKey
     }
 }
 
