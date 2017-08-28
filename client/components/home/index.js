@@ -40,7 +40,7 @@ class Home extends React.Component {
                             className="col col-xs-9">
                             <div ref= { newfeed_inside => { this.newfeed_inside_height = newfeed_inside } }
                                 style={{
-                                position: this.newfeed_marginTop?'fixed':'static',
+                                // position: this.newfeed_marginTop?'fixed':'static',
                                 marginLeft: this.newfeed_marginTop?(-scrollLeft):0,
                                 marginTop: this.newfeed_marginTop?(-this.newfeed_inside_height.offsetHeight + height - 48):0,
                                 minHeight: height - 48,
@@ -48,7 +48,8 @@ class Home extends React.Component {
                                 }}>
                                 {(this.props.auth == 'WHO_SUCCESS'
                                 &&
-                                (this.props.location.pathname.split("/")[2] == 'getstart')) &&
+                                (this.props.location.pathname.split("/")[2] == 'getstart' ||
+                                ( !this.props.data || this.props.data.length == 0 ))) &&
                                 <div style={{ marginLeft: -50 }}>
                                     <GuildUser/>
                                 </div> }
@@ -59,6 +60,20 @@ class Home extends React.Component {
                 </div>
             </div>
         )
+    }
+    componentDidMount(){
+        this.left_marginTop = 0
+        this.newfeed_marginTop = 0
+        if(this.left){
+            this.left_marginTop = this.props.height - this.left.getBoundingClientRect().bottom > 0
+            // console.log(this.left_marginTop)
+        }
+        if(this.newfeed){
+            this.newfeed_marginTop = this.props.height - this.newfeed.getBoundingClientRect().bottom > 0
+            if(this.newfeed.getBoundingClientRect().bottom - this.props.height < 780){
+                // this.props.onNeedPost()
+            }
+        }
     }
     componentDidUpdate(){
         this.left_marginTop = 0

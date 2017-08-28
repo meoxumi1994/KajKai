@@ -8,14 +8,16 @@ class ModalUploadImage extends React.Component {
 
     render() {
         const { mapp, mesId, user,
-                handleImageChange, sendImage, close} = this.props
+                handleImageChange, sendImage, close,
+              SEND_IMAGE, CLOSE_SEND_IMAGE, SEND
+            } = this.props
         // console.log('mapp', mapp);
         const { display, imagesUrl } = mapp
         return(
             <div>
                 <Modal style={{ marginTop: 120 }} show={display.imageModal} onHide={() => close(mesId)}>
                     <Modal.Header closeButton>
-                    <Modal.Title> Send image </Modal.Title>
+                    <Modal.Title> {SEND_IMAGE} </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <input type="file" onChange={(e) => handleImageChange(e, mesId)}/>
@@ -27,8 +29,8 @@ class ModalUploadImage extends React.Component {
                         }
                     </Modal.Body>
                     <Modal.Footer>
-                      <button className="btn btn-primary" onClick={() => imagesUrl.length == 0? undefined: sendImage(mesId, user.id, '', imagesUrl)}>SEND</button>
-                      <button className="btn btn-default" onClick={() => close(mesId)}>CLOSE</button>
+                      <button className="btn btn-primary" onClick={() => imagesUrl.length == 0? undefined: sendImage(mesId, user.id, '', imagesUrl)}>{SEND}</button>
+                      <button className="btn btn-default" onClick={() => close(mesId)}>{CLOSE_SEND_IMAGE}</button>
                     </Modal.Footer>
                 </Modal>
             </div>

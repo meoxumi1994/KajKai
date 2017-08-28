@@ -10,6 +10,7 @@ class Chat extends React.Component {
 
         const { mesId,
                 chatListMap, user, currentChat, addon,
+                NEW_MESSAGE, SENT_A_PICTURE, YOU_SENT,
                 removeNewChat
               } = this.props
 
@@ -24,7 +25,7 @@ class Chat extends React.Component {
         let label = displayLabel
         if (label == undefined || label == '') {
             if (usersKey.length == 0) {
-                label = 'New message'
+                label = NEW_MESSAGE
             } else {
                 label = ''
                 for (let i in usersKey) {
@@ -50,7 +51,7 @@ class Chat extends React.Component {
         // let textColor = mesId == currentChat? 'white': 'black'
         let textColor = 'black'
         return (
-          <div className="row">
+          <div className="row" style={{width: '100%'}}>
               <div className="col col-xs-2" style={styles.avatarDiv}>
                   {
                     lastMessage == undefined?
@@ -80,9 +81,9 @@ class Chat extends React.Component {
                         <small className="text-muted">
                           <div style={{color: textColor}}>
                             { lastMessage.id != myUser.id ? lastMessage.message.url != ''?
-                            usersMap[lastMessage.id].username +" sent you a picture" : usersMap[lastMessage.id].username + ': '
-                            : 'You: '}
-                            { lastMessage.message.text.length > 25? lastMessage.message.text.substring(0, 25) + '...': lastMessage.message.text }
+                            usersMap[lastMessage.id].username + {SENT_A_PICTURE} : usersMap[lastMessage.id].username + ': '
+                            : YOU_SENT}
+                            { lastMessage.message.text.length > 10? lastMessage.message.text.substring(0, 10) + '...': lastMessage.message.text }
                           </div>
                         </small>
                       </div>
@@ -128,7 +129,7 @@ const styles = {
         marginTop: 4,
         width: '75%',
         height: 55,
-        marginLeft: 5
+        marginLeft: 5,
     },
     timeDiv: {
         marginTop: 4,

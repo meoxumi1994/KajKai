@@ -1,9 +1,13 @@
 import { connect } from 'react-redux'
 import Head from '~/components/chat/left/Head'
 import { changeDisplay } from '~/actions/asyn/chat/actions'
+import { get } from '~/config/allString'
 
 const mapStateToProps = (state, ownProps) => {
-    return state
+    const g = (lang) => get(state.user.language, lang)
+    return {
+        NEW_MESSAGE: g('NEW_MESSAGE'),
+    }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

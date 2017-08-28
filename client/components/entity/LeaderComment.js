@@ -61,16 +61,21 @@ class LeaderComment extends React.Component {
                 }
                 )}
                 {isReply &&
-                    <CallComment
-                        onEnter={() => onEnter()}
-                        id={id}
-                        handleChange={(e) => onChange('contentedit', e.target.value)}
-                        content={contentedit}
-                        match={match}
-                        isleader={false}
-                        avatarUrl={avatarUrl}
-                        placehoder={WRITE_COMMENT}
-                        />
+                    <div>
+                        {comments.length <= 1 &&
+                            <div style={{ height: 10, marginLeft: 38, borderLeft: '2px solid #DDDFE2' }}></div>
+                        }
+                        <CallComment
+                            onEnter={() => onEnter()}
+                            id={id}
+                            handleChange={(e) => onChange('contentedit', e.target.value)}
+                            content={contentedit}
+                            match={match}
+                            isleader={false}
+                            avatarUrl={avatarUrl}
+                            placehoder={WRITE_COMMENT}
+                            />
+                    </div>
                 }
                 <div style={{ height: 10 }}></div>
             </div>

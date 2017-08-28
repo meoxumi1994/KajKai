@@ -2,14 +2,17 @@ import { connect } from 'react-redux'
 import ChatBottom from '~/components/chat/bottom'
 import { sendMessage, sendMessageStore } from '~/actions/asyn/chat/socket'
 import { changeDisplay } from '~/actions/asyn/chat/actions'
+import { get } from '~/config/allString'
 
 const mapStateToProps = (state, ownProps) => {
+  const g = (lang) => get(state.user.language, lang)
   const { chatListMap } = state.inst.chat.left
   return (
     {
       userId: state.user.id,
       mesId: ownProps.mesId,
-      chatListMap
+      chatListMap,
+      ENTER_MESSAGE: g('ENTER_MESSAGE'),
     }
   )
 }

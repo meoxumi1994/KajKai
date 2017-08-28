@@ -17,6 +17,28 @@ const checkPhone = (phone) => {
     return null
 }
 
+const getNameCurrentCategory = (currentCategoryId, { language, categories, STORE, USER, ALL_CATEGORY }) => {
+    if(currentCategoryId == -1){
+        return ALL_CATEGORY
+    }
+    if(currentCategoryId == -2){
+        return STORE
+    }
+    if(currentCategoryId == -3){
+        return USER
+    }
+    let name = ""
+    categories.map(category => {
+        if(currentCategoryId == category.id)
+            name = (language == 'en') ? category.enName : category.name
+        category.secondCategories.map(second => {
+            if( second.id  == currentCategoryId )
+                name = (language == 'en') ? second.enName : second.name
+        })
+    })
+    return name
+}
+
 class RegisterStore extends React.Component {
     constructor(props){
         super(props)
@@ -42,7 +64,7 @@ class RegisterStore extends React.Component {
             onOpenModalPhone, address, onChangeAdress, position, changeLanguage, createStore,
             categories, chooseCategory, chooseSecondCategory, chooseCategoryId, phone, onChangePhone,
             isusername, iswhoing, onOpenStore, registerStoreOK, onGetCategory, updatePhone,
-            urlname, onChangeUrlName, language,
+            urlname, onChangeUrlName, language, chooseSecondCategoryId,
             onChooseCategory, onChooseSecondCategory, onChangeCategoryInputValue, categoryInputValue,
             openModalWarning, contentModalWarning, closeModalWarning,
             showDropDown, showSecondDropDown, onChange,
@@ -124,7 +146,7 @@ class RegisterStore extends React.Component {
                                         onChange('showDropDown', true)
                                     },1)
                                 }}>
-                                {chooseCategory || CHOOSE_CATEGORY_1}
+                                {getNameCurrentCategory(chooseCategoryId, this.props) || CHOOSE_CATEGORY_1}
                             </div>
                             {showDropDown &&
                                 <DropDownCategory
@@ -139,7 +161,7 @@ class RegisterStore extends React.Component {
                                             onChange('showSecondDropDown', true)
                                         },1)
                                     }}>
-                                    {chooseSecondCategory || CHOOSE_CATEGORY_2}
+                                    {getNameCurrentCategory(chooseSecondCategoryId, this.props) || CHOOSE_CATEGORY_2}
                                 </div>
                             }
                             { (chooseCategory && showSecondDropDown) &&

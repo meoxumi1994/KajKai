@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     weChangeLanguage: (language, username) => {
         if(username)
-            dispatch(updateUser({ language : language }))
+            dispatch(updateUser({ language : language },  true  ))
         dispatch({ type: 'UPDATE_USER_SUCCESS', user: { 'language' : language } })
     },
 })

@@ -30,9 +30,9 @@ const myString = {
     // profile
     NOTE: ['Lưu Ý','Note'],
     SAVE_CHANGE: ['Lưu Thay Đổi','Save Change'],
-    SAVE: ['lưu', 'save'],
+    SAVE: ['Lưu', 'Save'],
     CHANGE: ['Thay đổi','Change'],
-    CANCEL: ['huỷ','cancel'],
+    CANCEL: ['Huỷ','Cancel'],
     EDIT: ['Sửa','Edit'],
     NO: ['Chưa có','No'],
     USER_NAME: ['Tên','Name'],
@@ -325,6 +325,7 @@ const myString = {
     OPENED: ['đã mở','opened'],
 
     CREATE_NEW_SELL_POST: ['đã tạo một bài đăng bán hàng mới','created a new sellpost'],
+    CREATE_NEW_STORE: ['đã tạo một cửa hàng mới','created a new store'],
     SELF: ['mình','his/hers'],
     IN: ['trong','in'],
 
@@ -332,6 +333,7 @@ const myString = {
     MOVE_DOWN: ['xuống','down'],
 
     /////
+
 
     PHOTO_USER: ['Ảnh cá nhân','Photo user'],
     PHOTO_STORE: ['Ảnh cửa hàng','Photo store'],
@@ -362,6 +364,68 @@ const myString = {
     BAN_REASON_2: [
         '", nếu bạn có phản hồi gì. Vui lòng vào mail để liên hệ với chúng tôi qua hòm thư kajkaiverify@gmail.com',
         '", If you have any feedback. Please mail to contact us to kajkaiverify@gmail.com.'
+    ],
+
+    //CHAT
+    NEW_MESSAGE: [
+        'Tin nhắn mới',
+        'New message'
+    ],
+    SENT_A_PICTURE: [
+        'đã gửi cho bạn hình ảnh',
+        'sent you a picture'
+    ],
+    YOU_SENT: [
+        'Bạn: ',
+        'You: '
+    ],
+    ADD_MEMBER: [
+        'Thêm thành viên...',
+        'Add members...'
+    ],
+    CHAT_SETTING: [
+        'Cài đặt cuộc trò chuyện',
+        'Chat Setting'
+    ],
+    NO_DATA: [
+        '(Không có kết quả)',
+        '(Not found)'
+    ],
+    CHAT_LABEL: [
+        'Tên cuộc trò chuyện',
+        'Label'
+    ],
+    MEMBERS: [
+        'Thành viên',
+        'Members'
+    ],
+    DEFAULT: [
+        'Mặc định',
+        'Default'
+    ],
+    VIEW: [
+        'Xem',
+        'View'
+    ],
+    ENTER_MESSAGE: [
+        'Nhập tin nhắn...',
+        'Enter message...'
+    ],
+    NONE: [
+        '(Không có)',
+        '(None)'
+    ],
+    SEND_IMAGE: [
+        'GỬI ẢNH',
+        'SEND IMAGE'
+    ],
+    SEND: [
+        'GỬI',
+        'SEND'
+    ],
+    CLOSE_SEND_IMAGE: [
+        'HỦY',
+        'CLOSE'
     ]
 
 }
