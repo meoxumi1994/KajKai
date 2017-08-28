@@ -28,6 +28,7 @@ const mapStateToProps = (state, { id }) => {
         CATEGORY: g('CATEGORY'),
         URL_NAME: g('URL_NAME'),
         STORE_NAME: g('STORE_NAME'),
+        categories: state.inst.category,
     })
 }
 

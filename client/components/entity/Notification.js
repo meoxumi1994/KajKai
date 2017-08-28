@@ -20,7 +20,7 @@ class ContentNotify extends React.Component {
         const { onClick, type, status, content, name, order, isYourStore, isYourComment, isYourLeaderComment, leadercomment,
             ALSO_COMMENT_IN, ORDER_ON, A_SELL_POST_YOU_FOLLOW, YOUR_SELL_POST, SELF,
             REPLY_TO_COMMENT_OF, COMMENT_ON_A_SELL_POST, YOURS, IN_STORE_OF, LIKED_A, COMMENT_2,
-            SELL_POST_2, IN_STORE, CHANGED_SELL_POST_IN_STORE, RECEIVED_TO,
+            SELL_POST_2, IN_STORE, CHANGED_SELL_POST_IN_STORE, RECEIVED_TO, CREATE_NEW_STORE,
             ORDER, OF, MY_SELL_POST, CREATE_NEW_SELL_POST, CLOSED, OPENED,  } = this.props
         let storename = this.props.storename
         let commentName = this.props.commentName
@@ -162,6 +162,18 @@ class ContentNotify extends React.Component {
                         />
                     </div>
                 )
+            case 'createstore':
+                return (
+                    <div style={{  fontSize: 13,  }}>
+                        <ContentShow
+                            name={name}
+                            colorname="#1D2129"
+                            fontSize={13}
+                            heightEachRow={16}
+                            content={CREATE_NEW_STORE}
+                        />
+                    </div>
+                )
             default:
                 return (
                     <div style={{ height: 35 }}>
@@ -199,6 +211,7 @@ const FirstIcon = ({ type, order, status }) => {
             else
                 return <img src="/images/notification/close.svg"
                         width={16} height={16} style={{ marginRight: 7 }}/>
+        case 'createstore':
         case 'createsellpost':
             return <img src="/images/notification/create.svg"
                     width={16} height={16} style={{ marginRight: 7 }}/>
@@ -216,6 +229,10 @@ class Notification extends React.Component {
     }
     onClick(){
         this.props.clickNotification()
+        if(this.props.type == 'createstore'){
+            this.props.history.push('/'+ this.props.urlname)
+            return
+        }
         const commentid = this.props.commentid || this.props.leadercommentid
         this.props.history.push('/post/' + this.props.sellpostid + '/' + commentid)
     }

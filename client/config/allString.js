@@ -325,6 +325,7 @@ const myString = {
     OPENED: ['đã mở','opened'],
 
     CREATE_NEW_SELL_POST: ['đã tạo một bài đăng bán hàng mới','created a new sellpost'],
+    CREATE_NEW_STORE: ['đã tạo một cửa hàng mới','created a new store'],
     SELF: ['mình','his/hers'],
     IN: ['trong','in'],
 
@@ -332,6 +333,7 @@ const myString = {
     MOVE_DOWN: ['xuống','down'],
 
     /////
+
 
     PHOTO_USER: ['Ảnh cá nhân','Photo user'],
     PHOTO_STORE: ['Ảnh cửa hàng','Photo store'],
