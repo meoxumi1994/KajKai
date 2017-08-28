@@ -48,15 +48,16 @@ export const getUserOverView = (id) => dispatch => {
 }
 
 
-export const updateUser = (user) => dispatch => {
+export const updateUser = (user, dontDispath ) => dispatch => {
     dispatch({ type: 'UPDATE_USER_ING'})
     return fleu('/user',{
         ...user
     })
-    .then(({ status, user }) => {
+    .then(({ status, user },  ) => {
         if(status == 'success'){
-            dispatch({ type: 'UPDATE_USER_SUCCESS', user: user })
-
+            if(!dontDispath){
+                dispatch({ type: 'UPDATE_USER_SUCCESS', user: user })
+            }
         }else{
             dispatch({ type: 'UPDATE_USER_FAILED', user: user })
         }
