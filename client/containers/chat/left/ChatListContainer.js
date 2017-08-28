@@ -22,6 +22,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(getMessages(mesId, -1, 'init'))
         dispatch({type: 'server/READ_CHAT', data: {mesId: mesId}})
         dispatch(changeDisplay('ADD_MEMBER', mesId, false))
+        dispatch(changeDisplay('LOADING_MSG', mesId, true))
     },
     setUserId: (id) => {
         dispatch(setUserId(id))

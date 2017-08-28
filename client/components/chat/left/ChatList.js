@@ -1,6 +1,7 @@
 import React from 'react'
 import ChatContainer from '~/containers/chat/left/ChatContainer'
 import ReactDOM from 'react-dom'
+import HeadContainer from '~/containers/chat/left/HeadContainer'
 
 class ChatList extends React.Component {
     constructor(props){
@@ -23,17 +24,15 @@ class ChatList extends React.Component {
                 createNewChat, getMessages, getChat, scrollTop
               } = this.props
 
-        // if (!lazyLoad.loadMore) {
-        //     return (
-        //         <div id="loaderr" style={{height: 30}}></div>
-        //     )
-        // }
-
-        if (chatListKey.length == 0) {
+        if (chatListKey.length == 0 && addon) {
             return (
-                <div style={{textAlign: 'center', marginTop: 10}}>
-                    <p><i>(No conversation)</i></p>
-                </div>
+                <HeadContainer/>
+            )
+        }
+
+        if (lazyLoad.firstLoad) {
+            return (
+                <div id="loaderr" style={{height: 30}}></div>
             )
         }
 
@@ -49,9 +48,7 @@ class ChatList extends React.Component {
 
         return(
           <div style={{textAlign: 'left', overflowY: 'scroll', marginTop: 5, maxHeight: addon? 255: 400}}
-              onScroll={(event) => this.listenScrollEvent(event)}
-              ref={ re => this.myScroller = re }
-              >
+              onScroll={(event) => this.listenScrollEvent(event)}>
                <div>
                 {
                   chatListKey.map(mesId =>

@@ -32,7 +32,7 @@ export const getStore = (id, mesId) => dispatch => {
 export const getMessages = (mesId, offset, type) => dispatch => {
     flem('/messages/'+mesId, {
         offset: offset,
-        length: 10
+        length: 8
     }).then((response) => {
           console.log('\n[API] /getMessages ', response);
           if (type == 'init') {
@@ -41,6 +41,7 @@ export const getMessages = (mesId, offset, type) => dispatch => {
           } else {
               dispatch({type: 'UPDATE_MESSAGE', data: { mesId: response.mesId, messages: response.messages}})
           }
+          dispatch(changeDisplay('LOADING_MSG', mesId, false))
     })
 }
 
@@ -52,10 +53,15 @@ export const getChatList = (offset) => dispatch => {
     )
     .then((response) => {
           console.log('\n[API] /getChatList ', response);
+          dispatch({type: 'DISPLAY_CHAT_LAZYLOAD', subType: 'FIRST_LOAD', data: { value: false }})
           if (response != undefined && response.data != undefined && response.data.length > 0) {
               const { data, lazyLoad } = response
               dispatch(initChatList(data, lazyLoad))
-              dispatch({type: 'DISPLAY_CHAT_LAZYLOAD', subType: 'LOAD_MORE', data: { value: true }})
+              if (response.data.length < 8) {
+                  dispatch({type: 'DISPLAY_CHAT_LAZYLOAD', subType: 'LOAD_MORE', data: { value: false }})
+              } else {
+                  dispatch({type: 'DISPLAY_CHAT_LAZYLOAD', subType: 'LOAD_MORE', data: { value: true }})
+              }
           } else {
               dispatch({type: 'DISPLAY_CHAT_LAZYLOAD', subType: 'LOAD_MORE', data: { value: false }})
           }
