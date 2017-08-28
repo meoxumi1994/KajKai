@@ -16,7 +16,8 @@ const chatMap = (state={
         setting: false,
         search: false,
         imageModal: false,
-        editingLabel: false
+        editingLabel: false,
+        isLoading: true
     },
     imagesUrl: [
 

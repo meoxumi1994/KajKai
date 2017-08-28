@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
       currentChat: currentChat.mesId,
       userId: state.user.id,
       unread: state.inst.chat.unread,
-      lazyLoad
+      lazyLoad,
     }
   )
 }

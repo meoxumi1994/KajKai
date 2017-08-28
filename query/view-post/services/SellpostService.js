@@ -343,7 +343,15 @@ const getClientFormatSellpost = (ok, targetId, notifySellposts, blackList, reque
   let likes = []
 
   if (requesterId == 'Guest') {
-    likes = likers.slice(0, 5)
+    likes = likers.slice(0, 5).map((liker) => ({
+      userid: liker.userId,
+      username: liker.username,
+      storeid: liker.storeId,
+      storename: liker.storeName,
+      avatarUrl: liker.avatarUrl,
+      id: liker.userId ? liker.userId : liker.storeId,
+      name: liker.username ? liker.username : liker.storeName
+    }))
   } else {
     for (let i = 0; i < likers.length; i++) {
       let liker = likers[i]

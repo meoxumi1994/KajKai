@@ -1,14 +1,80 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom'
 
-import Left from '~/containers/register-store/Left'
-import Right from '~/containers/register-store/Right'
-import DropDownCategory from '~/components/entity/DropDownCategory'
-import VerifyPhone from '~/containers/entity/phone/VerifyPhone'
-import ShowInMap from '~/containers/entity/map/ShowInMap'
-import WarningModal from '~/containers/entity/modal/WarningModal'
-import ChangeLanguage from '~/containers/entity/row/ChangeLanguage'
-import AddPhoto from '~/containers/entity/thumnail/AddPhoto'
+import Bundle from '../../common/Bundle'
+import loadLeft from 'bundle-loader?lazy!../../containers/register-store/Left'
+import loadRight from 'bundle-loader?lazy!../../containers/register-store/Right'
+import loadDropDownCategory from 'bundle-loader?lazy!../../components/entity/DropDownCategory'
+import loadVerifyPhone from 'bundle-loader?lazy!../../containers/entity/phone/VerifyPhone'
+import loadShowInMap from 'bundle-loader?lazy!../../containers/entity/map/ShowInMap'
+import loadWarningModal from 'bundle-loader?lazy!../../containers/entity/modal/WarningModal'
+import loadChangeLanguage from 'bundle-loader?lazy!../../containers/entity/row/ChangeLanguage'
+import loadAddPhoto from 'bundle-loader?lazy!../../containers/entity/thumnail/AddPhoto'
+
+const Left = (props) => (
+  <Bundle load={loadLeft}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Right = (props) => (
+  <Bundle load={loadRight}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const DropDownCategory = (props) => (
+  <Bundle load={loadDropDownCategory}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const VerifyPhone = (props) => (
+  <Bundle load={loadVerifyPhone}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const ShowInMap = (props) => (
+  <Bundle load={loadShowInMap}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const WarningModal = (props) => (
+  <Bundle load={loadWarningModal}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const ChangeLanguage = (props) => (
+  <Bundle load={loadChangeLanguage}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const AddPhoto = (props) => (
+  <Bundle load={loadAddPhoto}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 const checkPhone = (phone) => {
     if(!phone) return 'error'
