@@ -4,7 +4,7 @@ const config = {
     TYPE_USER: 'user',
     TYPE_STORE: 'store',
     TYPE_SELL_POST: 'sellpost',
-    MAX_DISTANT_FILTER: "100km"
+    MAX_DISTANT_FILTER: "30km"
 };
 
 export default config;
