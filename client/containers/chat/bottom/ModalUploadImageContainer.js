@@ -6,10 +6,14 @@ import ModalUploadImage from '~/components/chat/bottom/ModalUploadImage'
 import { sendMessage } from '~/actions/asyn/chat/socket'
 
 const mapStateToProps = (state, ownProps) => {
+    const g = (lang) => get(state.user.language, lang)
     const { chatListMap } = state.inst.chat.left
     return {
         mapp: chatListMap[ownProps.mesId],
-        user: state.user
+        user: state.user,
+        SEND_IMAGE: g('SEND_IMAGE'),
+        SEND: g('SEND'),
+        CLOSE_SEND_IMAGE: g('CLOSE_SEND_IMAGE'),
     }
 }
 

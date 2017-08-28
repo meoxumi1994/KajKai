@@ -25,10 +25,11 @@ class DisplayLabel extends React.Component {
         const {
                 mesId, styles,
                 chatListMap,
+                NEW_MESSAGE,
                 removeUser
               } = this.props
 
-        const { usersKey, usersMap, displayLabel, display, search } = chatListMap[mesId]
+        const { usersKey, usersMap, displayLabel, display, search, store } = chatListMap[mesId]
 
         const { results } = search
 
@@ -42,10 +43,10 @@ class DisplayLabel extends React.Component {
         }
 
         return (
-            <div style={{width: '70%', maxHeight: 80, overflowY: 'scroll'}} ref={"bottom"}>
+            <div style={{width: '70%', maxHeight: 80, overflowY: store == undefined? 'scroll': 'none'}} ref={"bottom"}>
               <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={popoverHoverFocus(usersKey, usersMap, results)}>
                   {
-                  usersKey.length == 0 && results.keyy.length == 0? <label style={styles.displayLabel}>New message</label>:
+                  usersKey.length == 0 && results.keyy.length == 0? <label style={styles.displayLabel}>{NEW_MESSAGE}</label>:
                   display.addMember?
                   <div>
                       {

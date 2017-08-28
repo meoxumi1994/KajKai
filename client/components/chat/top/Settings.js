@@ -9,8 +9,10 @@ class Settings extends React.Component {
     }
 
     render() {
-      const { mesId, user, chatListMap } = this.props
-      const { close, changeGroupName, editing, setDefaultLabel } = this.props
+      const { mesId, user, chatListMap,
+              close, changeGroupName, editing, setDefaultLabel,
+              CHAT_SETTING, CHAT_LABEL, MEMBERS, CANCEL, EDIT, DONE, DEFAULT, SAVE, CLOSE, VIEW, NONE
+            } = this.props
       const { usersKey, usersMap, displayLabel, display } = chatListMap[mesId]
 
       const show = display.setting
@@ -20,7 +22,7 @@ class Settings extends React.Component {
           <div>
               <Modal style={{ marginTop: 120 }} show={show} onHide={() => close(mesId)}>
                   <Modal.Header closeButton>
-                  <Modal.Title><label>Conversation Setting</label></Modal.Title>
+                  <Modal.Title><label>{CHAT_SETTING}</label></Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                       <div>
@@ -34,28 +36,28 @@ class Settings extends React.Component {
                           <table className="table">
                               <tbody className="default-thead">
                                   <tr style={{height: 50}}>
-                                      <th style={{width: 200}}>Label</th>
+                                      <th style={{width: 200}}>{CHAT_LABEL}</th>
                                       {
                                           display.editingLabel?
                                           <td>
                                               <input ref={ref => groupName = ref} className="from-control"/>
 
                                               <ul style={{float: 'right'}} className="list-unstyled">
-                                                  <li><button type="submit" style={{width: 70}} className="btn btn-success">Save</button></li>
-                                                  <li><button type="button" onClick={() => editing(mesId)} style={{width: 70, marginTop: 5}} className="btn btn-danger">Cancel</button></li>
-                                                  <li><button type="button" onClick={() => changeGroupName(mesId, user.id, '')} style={{width: 70, marginTop: 5}} className="btn btn-primary">Default</button></li>
+                                                  <li><button type="submit" style={{width: 70}} className="btn btn-success">{SAVE}</button></li>
+                                                  <li><button type="button" onClick={() => editing(mesId)} style={{width: 70, marginTop: 5}} className="btn btn-danger">{CANCEL}</button></li>
+                                                  <li><button type="button" onClick={() => changeGroupName(mesId, user.id, '')} style={{width: 70, marginTop: 5}} className="btn btn-primary">{DEFAULT}</button></li>
                                               </ul>
 
                                           </td>
                                           :
                                           <th>
-                                              <label>{displayLabel == undefined || displayLabel.trim() == ''? '(None)': displayLabel}</label>
-                                              <button type="button" onClick={() => editing(mesId)} style={{position: 'absolute', right: 20, width: 70}} className="btn btn-default">Edit</button>
+                                              <label>{displayLabel == undefined || displayLabel.trim() == ''? NONE: displayLabel}</label>
+                                              <button type="button" onClick={() => editing(mesId)} style={{position: 'absolute', right: 20, width: 70}} className="btn btn-default">{EDIT}</button>
                                           </th>
                                       }
                                   </tr>
                                   <tr>
-                                      <th>Members</th>
+                                      <th>{MEMBERS}</th>
                                       <th>
                                           <div>
                                           {
@@ -67,7 +69,7 @@ class Settings extends React.Component {
 
                                                   <button className="btn btn-default" style={{float: 'right', width: 70}}>
                                                       <Link to="chart" target="_blank" to={"https://www.kajkai.com/user/" + memberId} >
-                                                          View
+                                                          {VIEW}
                                                       </Link>
                                                   </button>
 
@@ -82,7 +84,7 @@ class Settings extends React.Component {
                       </div>
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button type="button" onClick={() => close(mesId)}>CLOSE</Button>
+                    <Button type="button" onClick={() => close(mesId)}>{CLOSE}</Button>
                   </Modal.Footer>
               </Modal>
           </div>
