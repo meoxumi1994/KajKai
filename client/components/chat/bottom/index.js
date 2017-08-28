@@ -3,7 +3,7 @@ import { FormGroup, FormControl, HelpBlock, ControlLabel, Button , OverlayTrigge
 import ModalUploadImageContainer from '~/containers/chat/bottom/ModalUploadImageContainer'
 import EmoNavContainer from '~/containers/chat/bottom/EmoNavContainer'
 
-const ChatBottom = ({mesId, userId, sendMessage, displayImageModal, chatListMap}) => {
+const ChatBottom = ({mesId, userId, sendMessage, displayImageModal, chatListMap, ENTER_MESSAGE}) => {
   let msg
 
   const { store } = chatListMap[mesId]
@@ -21,7 +21,7 @@ const ChatBottom = ({mesId, userId, sendMessage, displayImageModal, chatListMap}
         <div className="input-group" style={{width: '100%'}}>
           <FormControl disabled={mesId == 0? true: false}
             inputRef={ref => { msg = ref }}
-            placeholder="Enter message"
+            placeholder={ENTER_MESSAGE}
           />
         </div>
 

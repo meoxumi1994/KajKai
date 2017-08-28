@@ -11,12 +11,12 @@ class AddMember extends React.Component {
       let members
       const { mesId, styles,
               user, chatListMap, hideSearch, hideAddMember,
+              ADD_MEMBER, DONE, CANCEL, NO_DATA,
               addMember, searchUser, addSearchedMember } = this.props
 
       const { search, usersKey } = chatListMap[mesId]
       const { suggestions, results } = search
       const searchDisplay = chatListMap[mesId].display.search
-      console.log('suggestions, results',suggestions, results);
       return (
         <form style={styles.addMemberDiv} onSubmit={e => {
             e.preventDefault()
@@ -28,7 +28,7 @@ class AddMember extends React.Component {
             <div className="input-group" style={{width: '100%'}}>
                   <FormControl
                     inputRef={ref => {members = ref}}
-                    placeholder="Add members..."
+                    placeholder={ADD_MEMBER}
                     style={{width: '80%', height: 40, fontSize: 15}}
                     onChange={(e) => hideSearch(mesId, e.target.value)}
                   >
@@ -36,7 +36,7 @@ class AddMember extends React.Component {
                   <button disabled={mesId == 0 && results.keyy.length == 0? true: false} type="button" style={{width: '20%', height: 40, fontSize: 15}}
                       className={results.keyy.length == 0? 'btn': 'btn btn-danger'}
                       onClick={() => results.keyy.length == 0? hideAddMember(mesId) :addMember( mesId, user.id, results.keyy, usersKey)}>
-                          { results.keyy.length == 0? 'Cancel': 'Done'}
+                          { results.keyy.length == 0? CANCEL: DONE}
                   </button>
             </div>
           </span>
@@ -46,7 +46,7 @@ class AddMember extends React.Component {
                     (
                       suggestions.keyy.length == 0?
                       <div style={{borderWidth: 0.5, borderStyle: 'solid', width: '100%', height: 50, backgroundColor: 'white', color: 'black', textAlign: 'center'}}>
-                          <p style={{marginTop: 10}}><i>(Không có kết quả)</i></p>
+                          <p style={{marginTop: 10}}><i>{NO_DATA}</i></p>
                       </div>
                       :
                       suggestions.keyy.map(user => {
@@ -70,7 +70,5 @@ class AddMember extends React.Component {
       )
     }
 }
-
-// addMember( mesId, user.id, members.value )
 
 export default AddMember

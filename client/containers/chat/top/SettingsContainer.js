@@ -2,12 +2,25 @@ import { connect } from 'react-redux'
 import Settings from '~/components/chat/top/Settings'
 import { changeDisplay } from '~/actions/asyn/chat/actions'
 import { sendMessage } from '~/actions/asyn/chat/socket'
+import { get } from '~/config/allString'
 
 const mapStateToProps = (state, ownProps) => {
+    const g = (lang) => get(state.user.language, lang)
     const { chatListMap } = state.inst.chat.left
     return {
         chatListMap,
-        user: state.user
+        user: state.user,
+        CHAT_SETTING: g('CHAT_SETTING'),
+        CHAT_LABEL: g('CHAT_LABEL'),
+        MEMBERS: g('MEMBERS'),
+        CANCEL: g('CANCEL'),
+        EDIT: g('EDIT'),
+        DONE: g('DONE'),
+        SAVE: g('SAVE'),
+        DEFAULT: g('DEFAULT'),
+        VIEW: g('VIEW'),
+        CLOSE: g('CLOSE'),
+        NONE: g('NONE'),
     }
 }
 
