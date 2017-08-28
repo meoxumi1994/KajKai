@@ -1,30 +1,33 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
 
-import Bar from '~/containers/Bar'
 import Bundle from '../common/Bundle'
 import loadHome from 'bundle-loader?lazy!../containers/home'
-import loadMapp from 'bundle-loader?lazy!./mapp/Map'
+// import loadMapp from 'bundle-loader?lazy!./mapp/Map'
+import loadBar from 'bundle-loader?lazy!../containers/Bar'
 import loadUserLoginRegister from 'bundle-loader?lazy!../containers/user-login-register'
-import MapContainer from 'bundle-loader?lazy!../containers/mapp/MapContainer'
 import loadProfile from 'bundle-loader?lazy!../containers/profile'
 import loadRegisterStore from 'bundle-loader?lazy!../containers/register-store'
-// import loadChat from 'bundle-loader?lazy!../containers/chat'
-import Store from '~/containers/store'
-import User from '~/containers/user'
-import ContactHistory from '~/containers/contacthistory'
-import { DropdownButton,  MenuItem , Grid, Row, Col } from 'react-bootstrap'
-import ChatContainer from '~/containers/chat'
-import GroupPopUp from '~/containers/GroupPopUp'
-import ShowDetail from '~/containers/ShowDetail'
-import PopUpUpdate from '~/containers/PopUpUpdate'
-import Warning from '~/containers/Warning'
-import Enlarge from '~/containers/Enlarge'
+import loadStore from 'bundle-loader?lazy!../containers/store'
+import loadUser from 'bundle-loader?lazy!../containers/user'
+import loadContactHistory from 'bundle-loader?lazy!../containers/contacthistory'
+import loadChatContainer from 'bundle-loader?lazy!../containers/chat'
+import loadGroupPopUp from 'bundle-loader?lazy!../containers/GroupPopUp'
+import loadShowDetail from 'bundle-loader?lazy!../containers/ShowDetail'
+import loadPopUpUpdate from 'bundle-loader?lazy!../containers/PopUpUpdate'
+import loadWarning from 'bundle-loader?lazy!../containers/Warning'
+import loadEnlarge from 'bundle-loader?lazy!../containers/Enlarge'
+import loadProgress from 'bundle-loader?lazy!../containers/entity/thumnail/Progress'
 
-// import AdminContainer from '~/containers/admin/'
-// import loadAdmin from 'bundle-loader?lazy!../containers/admin'
-
-import Progress from '~/containers/entity/thumnail/Progress'
+const Bar = (props) => (
+  <Bundle load={loadBar}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 const Home = (props) => (
   <Bundle load={loadHome}>
@@ -35,14 +38,14 @@ const Home = (props) => (
   </Bundle>
 )
 
-const Mapp = () => (
-  <Bundle load={MapContainer}>
-    {(Comp) => (Comp
-      ? <Comp/>
-      : null
-    )}
-  </Bundle>
-)
+// const Mapp = () => (
+//   <Bundle load={loadMapp}>
+//     {(Comp) => (Comp
+//       ? <Comp/>
+//       : null
+//     )}
+//   </Bundle>
+// )
 
 const Profile = () => (
     <Bundle load={loadProfile}>
@@ -52,16 +55,6 @@ const Profile = () => (
       )}
     </Bundle>
 )
-
-// const Admin = () => (
-//     <Bundle load={loadAdmin}>
-//       {(Comp) => (Comp
-//         ? <Comp/>
-//         : null
-//       )}
-//     </Bundle>
-// )
-
 const UserLoginRegister = () => (
     <Bundle load={loadUserLoginRegister}>
         {(Comp) => (Comp
@@ -79,24 +72,86 @@ const RegisterStore = () => (
         )}
     </Bundle>
 )
-
-// const Chat = ({ id }) => (
-//     <Bundle load={loadChat}>
-//         {(Comp) => (Comp
-//           ? <Comp/>
-//           : null
-//         )}
-//     </Bundle>
-// )
-
-// const Target = ({ id }) => (
-//     <Bundle load={loadTarget}>
-//         {(Comp) => (Comp
-//           ? <Comp/>
-//           : null
-//         )}
-//     </Bundle>
-// )
+const Store = (props) => (
+  <Bundle load={loadStore}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const User = (props) => (
+  <Bundle load={loadUser}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const ContactHistory = (props) => (
+  <Bundle load={loadContactHistory}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const ChatContainer = (props) => (
+  <Bundle load={loadChatContainer}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const GroupPopUp = (props) => (
+  <Bundle load={loadGroupPopUp}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const ShowDetail = (props) => (
+  <Bundle load={loadShowDetail}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const PopUpUpdate = (props) => (
+  <Bundle load={loadPopUpUpdate}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Warning = (props) => (
+  <Bundle load={loadWarning}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Enlarge = (props) => (
+  <Bundle load={loadEnlarge}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Progress = (props) => (
+  <Bundle load={loadProgress}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 class App extends React.Component {
     constructor(props){
@@ -134,11 +189,10 @@ class App extends React.Component {
                               <div style={{ height: height - 47 }}>
                                   <Route exact path="/" component={Home}/>
                                   <Route path="/home" component={Home}/>
-                                  <Route path="/map" component={Mapp}/>
+                                  {/* <Route path="/map" component={Mapp}/> */}
                                   <Route path="/register" component={UserLoginRegister}/>
                                   <Route path="/profile" component={Profile}/>
                                   <Route path="/registerstore" component={RegisterStore}/>
-                                  {/* <Route path="/admin" component={Admin}/> */}
                               </div>
                             </div>
                         :  location.pathname.split('/')[1] == 'user'?

@@ -1,8 +1,34 @@
 import React from 'react'
 
-import Left from '~/containers/home/Left'
-import NewFeed from '~/containers/home/NewFeed'
-import GuildUser from '~/containers/entity/guild/GuildUser'
+import Bundle from '../../common/Bundle'
+import loadLeft from 'bundle-loader?lazy!../../containers/home/Left'
+import loadNewFeed from 'bundle-loader?lazy!../../containers/home/NewFeed'
+import loadGuildUser from 'bundle-loader?lazy!../../containers/entity/guild/GuildUser'
+
+const Left = (props) => (
+  <Bundle load={loadLeft}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const NewFeed = (props) => (
+  <Bundle load={loadNewFeed}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const GuildUser = (props) => (
+  <Bundle load={loadGuildUser}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 class Home extends React.Component {
     constructor(props){

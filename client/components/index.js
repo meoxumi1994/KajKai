@@ -1,23 +1,85 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { Modal } from 'react-bootstrap'
-
+import Textarea from 'react-textarea-autosize'
 import Cropper from 'react-cropper';
 import Cropperjs from 'cropperjs'
+import Webcam from 'react-webcam'
 
-import App from '~/containers/App'
-import Webcam from 'react-webcam';
-import KeepImage from '~/containers/entity/thumnail/KeepImage'
-import AddPhoto from '~/containers/entity/thumnail/AddPhoto'
-import LikeShareComment from '~/containers/entity/row/LikeShareComment'
-import Textarea from 'react-textarea-autosize'
+import Bundle from '../common/Bundle'
+import loadApp from 'bundle-loader?lazy!../containers/App'
+import loadKeepImage from 'bundle-loader?lazy!../containers/entity/thumnail/KeepImage'
+import loadAddPhoto from 'bundle-loader?lazy!../containers/entity/thumnail/AddPhoto'
+import loadLikeShareComment from 'bundle-loader?lazy!../containers/entity/row/LikeShareComment'
+import loadGroupImage from 'bundle-loader?lazy!../components/entity/thumnail/GroupImage'
+import loadCarousel from 'bundle-loader?lazy!../components/entity/thumnail/Carousel'
+import loadContentEditable from 'bundle-loader?lazy!../components/entity/ContentEditable'
+import loadNotification from 'bundle-loader?lazy!../containers/entity/Notification'
 
-import GroupImage from '~/components/entity/thumnail/GroupImage'
-import Carousel from '~/components/entity/thumnail/Carousel'
-
-import ContentEditable from '~/components/entity/ContentEditable'
-
-import Notification from '~/containers/entity/Notification'
+const App = (props) => (
+  <Bundle load={loadApp}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const KeepImage = (props) => (
+  <Bundle load={loadKeepImage}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const AddPhoto = (props) => (
+  <Bundle load={loadAddPhoto}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const LikeShareComment = (props) => (
+  <Bundle load={loadLikeShareComment}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const GroupImage = (props) => (
+  <Bundle load={loadGroupImage}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Carousel = (props) => (
+  <Bundle load={loadCarousel}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const ContentEditable = (props) => (
+  <Bundle load={loadContentEditable}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Notification = (props) => (
+  <Bundle load={loadNotification}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 class Comp extends React.Component {
     constructor(props){

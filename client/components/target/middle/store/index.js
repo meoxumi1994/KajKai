@@ -1,7 +1,25 @@
 import React from 'react';
 
-import Top from '~/containers/target/middle/store/Top'
-import Post from '~/containers/target/middle/store/Post'
+import Bundle from '../../../../common/Bundle'
+import loadTop from 'bundle-loader?lazy!../../../../containers/target/middle/store/Top'
+import loadPost from 'bundle-loader?lazy!../../../../containers/target/middle/store/Post'
+
+const Top = (props) => (
+  <Bundle load={loadTop}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Post = (props) => (
+  <Bundle load={loadPost}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 const Store = ({ id, height, scrollTop, scrollLeft, sellposts, minorposts, onNeedSellPost, onNeedMinorPost}) => {
     let sellpost_marginTop = 0

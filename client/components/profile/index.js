@@ -1,9 +1,35 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-import Left from '~/containers/profile/left'
-import Middle from '~/containers/profile/middle'
-import Right from '~/containers/profile/right'
+import Bundle from '../../common/Bundle'
+import loadLeft from 'bundle-loader?lazy!../../containers/profile/left'
+import loadMiddle from 'bundle-loader?lazy!../../containers/profile/middle'
+import loadRight from 'bundle-loader?lazy!../../containers/profile/right'
+
+const Left = (props) => (
+  <Bundle load={loadLeft}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Middle = (props) => (
+  <Bundle load={loadMiddle}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Right = (props) => (
+  <Bundle load={loadRight}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 const Profile = ({ iswhoing, isusername}) => {
     if(iswhoing)
