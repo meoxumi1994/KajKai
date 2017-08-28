@@ -20,7 +20,8 @@ class WelcomeToKajKai extends React.Component {
                     <div style={{ marginTop: 35, }}>
                         <Link to="/home/getstart">
                             <div className="btn btn-default"
-                                style={{ borderRadius: 0, padding: '10px 15px 10px 15px', backgroundColor: '#BD081C', color: 'white', borderWidth: 0 }}>
+                                style={{ borderRadius: 2,
+                                    padding: '10px 10px 10px 10px', backgroundColor: '#BD081C', color: 'white', borderWidth: 0 }}>
                                 {GET_START}
                             </div>
                         </Link>

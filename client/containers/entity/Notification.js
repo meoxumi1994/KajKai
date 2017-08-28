@@ -68,7 +68,7 @@ const mapStateToProps = (state, { id }) => {
         ORDER: g('ORDER'),
 
         OF: g('OF'),
-
+        CREATE_NEW_STORE: g('CREATE_NEW_STORE'),
         MY_SELL_POST: g('MY_SELL_POST'),
         CREATE_NEW_SELL_POST: g('CREATE_NEW_SELL_POST'),
         SELF: g('SELF'),

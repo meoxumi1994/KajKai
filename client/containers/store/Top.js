@@ -17,6 +17,8 @@ const mapStateToProps = (state, ownProps) => {
         }
     }
     return({
+        ...state.user,
+        userAvatar: state.user.avatarUrl,
         ...state.inst.store.index,
         id : id,
         beFollow: getBeFollow(state.inst.store.index.follows, state.user.id),
@@ -43,8 +45,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onUploadImage : (typeUrl, e) => {
         dispatch({ type: 'ENTITY_MODAL_UPLOAD_IMAGE_OPEN', typeUrl: typeUrl})
     },
-    follow: (storeid) => {
-        dispatch({ type: 'server/FOLLOW', data: { type: 'store', id: storeid }})
+    follow: (storeid, username, userAvatar ) => {
+        dispatch({ type: 'server/FOLLOW', data: { type: 'store', id: storeid, username: username, avatarUrl: userAvatar }})
     },
     sendMessage: (storeid, yourid, userid, chatList) => {
         dispatch(getMesId(yourid, storeid, true))
@@ -52,11 +54,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
-    const { id, ...anotherState } = stateProps
+    const { id, username, userAvatar, ...anotherState } = stateProps
     const { follow, ...anotherDispatch } = dispatchProps
     return({
         onFollow: () => {
-            follow(id)
+            follow(id, username, userAvatar)
         },
         ...ownProps,
         ...stateProps,

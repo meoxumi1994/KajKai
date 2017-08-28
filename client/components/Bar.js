@@ -172,7 +172,7 @@ class Cell extends React.Component {
     }
 }
 
-const getNameCurrentCategory = ({currentCategoryId, categories, STORE, USER, ALL_CATEGORY }) => {
+const getNameCurrentCategory = ({currentCategoryId, language, categories, STORE, USER, ALL_CATEGORY }) => {
     if(currentCategoryId == -1){
         return ALL_CATEGORY
     }
@@ -185,10 +185,10 @@ const getNameCurrentCategory = ({currentCategoryId, categories, STORE, USER, ALL
     let name = ""
     categories.map(category => {
         if(currentCategoryId == category.id)
-            name = category.name
+            name = (language == 'en') ? category.enName : category.name
         category.secondCategories.map(second => {
             if( second.id  == currentCategoryId )
-                name = second.name
+                name = (language == 'en') ? second.enName : second.name
         })
     })
     return name
@@ -271,7 +271,7 @@ export default class BarScreen extends React.Component {
     }
     render() {
         const { SEARCH, SEARCH_STORE, SEARCH_USER, SEARCH_LOCATION, ALL_CATEGORY, STORE, USER, username, language,
-             categories, onChangeTypeSelected, currentCategory, positionname, currentType, currentCategoryId,
+             categories, onChangeTypeSelected, positionname, currentType, currentCategoryId,
              onLocationChanged, clicksetting, width, height, keyword, onChange, onSearch} = this.props
         let inputSearchKeyWord
         return (

@@ -44,10 +44,11 @@ export const flem = (url, body) => {
     if (body) {
         let ch = '?'
         for (let qr in body) {
-            if(body[qr] == undefined || qr == undefined ) continue
-            myurl += ch + qr + '=' + body[qr]
-            if (ch == '?') {
-                ch = '&'
+            if( body[qr] && qr && body[qr] != 'undefined' && qr != 'undefined'){
+                myurl += ch + qr + '=' + body[qr]
+                if (ch == '?') {
+                    ch = '&'
+                }
             }
         }
     }
