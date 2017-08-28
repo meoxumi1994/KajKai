@@ -26,6 +26,9 @@ class WarningModal extends React.Component {
                 <hr style={{ margin: 0 }}/>
                 <div style={{ padding: 10, minHeight: 300, color: '#4B4F56'}}>
                     {content}
+                    <div  style={{ textAlign: "center", padding: 20 }}>
+                        <img src="/images/warning.svg" width={170}/>
+                    </div>
                 </div>
                 <div>
                     <hr style={{ margin: 0 }}/>

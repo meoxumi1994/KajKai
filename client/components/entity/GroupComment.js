@@ -26,13 +26,14 @@ class GroupComment extends React.Component {
     }
     render(){
         const { WRITE_COMMENT_OR_ORDER, WRITE_COMMENT, CLOSE_STORE_DESCRIPTION, VIEW_MORE, COMMENTS,
-            numleadercomment , leadercomments, content, onChange, id,
+            numleadercomment , leadercomments, content, onChange, id, stateComment,
             onEnter, avatarUrl, onGetMore, offset, order, userid, closeComment } = this.props
         return(
             <div style={{ padding: '10px 0px 0px 0px' }}>
                 {(offset != -2 && numleadercomment > leadercomments.length) &&
                     <CommentSuggest
                         id={3}
+                        stateComment={stateComment}
                         isleader={true}
                         onClick={() => onGetMore()}
                         content={ VIEW_MORE + ' ' + (numleadercomment - leadercomments.length) + ' ' + COMMENTS }

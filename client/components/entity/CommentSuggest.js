@@ -8,7 +8,7 @@ class CommentSuggest extends React.Component {
         }
     }
     render(){
-        const { isleader, src, imgsrc, numreplys, content, onClick, time, end} = this.props
+        const { isleader, src, imgsrc, numreplys, content, onClick, time, end, stateComment } = this.props
         return(
             <div>
                 <div style={{ marginTop: 3, marginRight: 10, color: '#91959D',
@@ -40,6 +40,9 @@ class CommentSuggest extends React.Component {
                         </a>
                         {time && " . "}
                         {time && <span style={{ color: '#91959D' }}>{time}</span>}
+
+                        {stateComment == 'GET_MORE_LEADERCOMMENT_ING' &&
+                            <div style={{ marginLeft: 10, marginTop: -3, display: 'inline-block'}} className="loader-small"></div>}
                     </div>
                 </div>
             </div>

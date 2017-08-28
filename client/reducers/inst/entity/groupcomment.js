@@ -22,10 +22,19 @@ const groupcomment = (state = {
                     ]
                 }
             }
+        case 'GET_MORE_LEADERCOMMENT_ING':
+            return {
+                ...state,
+                [action.id] : {
+                    ...state[action.id],
+                    stateComment: 'GET_MORE_LEADERCOMMENT_ING',
+                }
+            }
         case 'GET_MORE_LEADERCOMMENT_SUCCESS':
             return {...state,
                 [action.id] : {
                     ...state[action.id],
+                    stateComment: 'GET_MORE_LEADERCOMMENT_SUCCESS',
                     offset: action.offset,
                     leadercomments: [
                         ...action.leadercomments,

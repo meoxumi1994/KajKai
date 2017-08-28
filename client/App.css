@@ -169,12 +169,12 @@ textarea#note {
 }
 
 .loader-small {
-    border: 2px solid #BD081C;
+    border: 2.1px solid #C1C4C9;
     border-radius: 100%;
-    border-top: 2px solid #f2f2f2;
-    border-right: 2px solid #f2f2f2;
-    width: 17px;
-    height: 17px;
+    border-top: 2.1px solid #f2f2f2;
+    border-right: 2.1px solid #f2f2f2;
+    width: 12px;
+    height: 12px;
     -webkit-animation: spin 0.4s linear infinite;
 }
 

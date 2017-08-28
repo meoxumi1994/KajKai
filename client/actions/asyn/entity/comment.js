@@ -1,7 +1,7 @@
 import { flem } from '~/actions/support'
 
 export const getMoreLeaderComment = (typepost, offset, id) => dispatch => {
-    dispatch({ type: 'GET_MORE_LEADERCOMMENT_ING'})
+    dispatch({ type: 'GET_MORE_LEADERCOMMENT_ING', id: id })
     flem('/groupcomment/'+typepost+'/'+id,{
         offset: offset
     }).then(({ status, ...anotherData }) => {
