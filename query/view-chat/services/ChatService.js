@@ -33,7 +33,7 @@ export const getChatMessages = (id, offset, length, next) => {
 
             mMessages.push(mMessage)
 
-            mOffset = message.time
+            mOffset = message.time.getTime()
             currentNumberOfMessage++
           } else {
             break

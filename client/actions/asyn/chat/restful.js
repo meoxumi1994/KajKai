@@ -24,7 +24,7 @@ export const getStore = (id, mesId) => dispatch => {
     .then((response) => {
           console.log('\n[API] /getStore', response);
           const {id, storename, avatarUrl} = response.store
-          dispatch({type: 'CHAT_STORE', data: { mesId: mesId, id: id, username: storename, avatarUrl: avatarUrl}})
+          dispatch({type: 'CHAT_STORE', data: { mesId: mesId, id: id, username: storename, avatarUrl: avatarUrl, store: response.store}})
           dispatch(getMessages(mesId, Date.now(), 'init'))
     })
 }
@@ -32,7 +32,7 @@ export const getStore = (id, mesId) => dispatch => {
 export const getMessages = (mesId, offset, type) => dispatch => {
     flem('/messages/'+mesId, {
         offset: offset,
-        length: 5
+        length: 10
     }).then((response) => {
           console.log('\n[API] /getMessages ', response);
           if (type == 'init') {

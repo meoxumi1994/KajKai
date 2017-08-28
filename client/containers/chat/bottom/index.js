@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ChatBottom from '~/components/chat/bottom'
-import { sendMessage } from '~/actions/asyn/chat/socket'
+import { sendMessage, sendMessageStore } from '~/actions/asyn/chat/socket'
 import { changeDisplay } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
@@ -15,12 +15,16 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    sendMessage: (mesId, id, text, url, type) => {
+    sendMessage: (mesId, id, text, url, type, storeId) => {
         console.log('DEBUG id', id);
         if (mesId == 0) {
             mesId = null
         }
-        dispatch(sendMessage(mesId, id, text, url, 'message'))
+        if (storeId == undefined) {
+              dispatch(sendMessage(mesId, id, text, url, 'message'))
+        } else {
+              dispatch(sendMessageStore(mesId, id, text, url, 'message', storeId))
+        }
         dispatch({type: 'server/READ_CHAT', data: {mesId: mesId}})
     },
     displayImageModal: (mesId) => {

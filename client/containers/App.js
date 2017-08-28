@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch({ type: 'ON_SCROLL', scrollTop: scrollTop })
     },
     getChatList: (id) => {
-        dispatch(getChatList(Date.now(), 10))
+        dispatch(getChatList(-1, 10))
         dispatch({type: 'CURRENT_CHAT', subType: 'SET_USER_ID', data: {id: id}})
     },
     closeProgress: () => {

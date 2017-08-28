@@ -7,13 +7,13 @@ const ChatBottom = ({mesId, userId, sendMessage, displayImageModal, chatListMap}
   let msg
 
   const { store } = chatListMap[mesId]
+  console.log('component', store);
   return (
     <div style={{width: 280}}>
         <form onSubmit={e => {
             e.preventDefault()
             if (msg.value.trim()) {
-                console.log('component', store, userId);
-                sendMessage(mesId, store == undefined || store.ownerId != userId? userId: store.id , msg.value, '', 'message')
+                sendMessage(mesId, store == undefined || store.ownerId != userId? userId: store.id , msg.value, '', 'message', store == undefined? undefined: store.id)
                 msg.value = ''
             }
         }}>

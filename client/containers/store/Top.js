@@ -48,22 +48,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     sendMessage: (storeid, yourid, userid, chatList) => {
         dispatch(getMesId(yourid, storeid, true))
-
-
-
-
-
-
-
-        // console.log('fuck', chatList, userid);
-        // if (chatList.indexOf(userid) == -1) {
-            // let members = []
-            // members.push(yourid)
-            // members.push(storeid)
-            // dispatch(addMember(null, yourid, members))
-        // } else {
-            // dispatch(getMesId(yourid, userid))
-        // }
     }
 })
 

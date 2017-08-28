@@ -13,6 +13,23 @@ export const  addMember = (mesId, id, members) => ({
     }
 })
 
+export const sendMessageStore = (mesId, id, text, url, type, storeId) => ({
+  type: 'server/SEND_MESSAGE',
+  data: {
+      mesId,
+      id,
+      message: {
+          text,
+          url,
+          type
+      },
+      time: Date.now(),
+      store: {
+          id: storeId
+      }
+  }
+})
+
 export const sendMessage = (mesId, id, text, url, type) => ({
   type: 'server/SEND_MESSAGE',
   data: {
@@ -23,6 +40,6 @@ export const sendMessage = (mesId, id, text, url, type) => ({
           url,
           type
       },
-      time: Date.now()
+      time: Date.now(),
   }
 })
