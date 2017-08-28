@@ -18,8 +18,8 @@ class MessageList extends React.Component {
     }
 
     scrollToBottom() {
-        const { bottom } = this.refs;
-        bottom.scrollTop = bottom.scrollHeight - bottom.clientHeight;
+        const { bottom } = this.refs
+        bottom.scrollTop = bottom.scrollHeight - bottom.clientHeight
     }
 
     render() {

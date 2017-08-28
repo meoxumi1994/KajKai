@@ -10,7 +10,7 @@ const left = (state = {
   },
   lazyLoad: {
       offset: '',
-      loadMore: true
+      loadMore: true,
   }
 }, action) => {
     switch (action.type) {
@@ -32,13 +32,19 @@ const left = (state = {
           }
 
       case 'DISPLAY_CHAT_LAZYLOAD':
-          return {
-              ...state,
-              lazyLoad: {
-                  ...state.lazyLoad,
-                  loadMore: false
-              }
+          switch (action.subType) {
+            case 'LOAD_MORE':
+                return {
+                    ...state,
+                    lazyLoad: {
+                        ...state.lazyLoad,
+                        loadMore: action.data.value
+                    }
+                }
+            default:
+                return state
           }
+
 
 /**
  ** INITIAL
