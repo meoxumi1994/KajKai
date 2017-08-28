@@ -56,10 +56,10 @@ const left = (state = {
           }
           const initChatlist = {
               ...state,
-              chatListKey: [
+              chatListKey: [...new Set([
                   ...state.chatListKey,
                   ...[...new Set(action.data.map(chat => chat.mesId))]
-              ],
+              ])],
               chatListMap: {
                   ...state.chatListMap,
                   ...utils.chatListMap(action)
