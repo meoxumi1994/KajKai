@@ -63,13 +63,13 @@ class Store extends React.Component {
                                 marginLeft: this.left_marginTop?(-scrollLeft):0,
                                 marginTop: this.left_marginTop?(-this.left_inside_height.offsetHeight + height - 48):0,
                                 minHeight: height - 48,
-                                paddingTop: 10,
+                                paddingTop: 20,
                                 }}>
                                 <Left location={location}/>
                             </div>
                         </div>
                         <div className="col col-xs-9" style={{ padding: 0, margin: 0 }}>
-                            <div style={{ marginLeft: -60 }}>
+                            <div style={{ marginLeft: -50 }}>
                                 <Top location={location}/>
                                 <Middle id={id}/>
                             </div>

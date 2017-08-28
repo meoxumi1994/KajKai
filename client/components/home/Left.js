@@ -36,27 +36,29 @@ const Left = ({ storeList, avatarUrl, username, changeLanguage, id, language,  S
             <div style={{ marginTop: 10, marginLeft: 5, borderRadius: 2, width: 150, fontSize: 12, color: '#4B4F56'}}>
                 {SETTING_BOLD}
             </div>
-            <div style={{
-                marginTop: 10,
-                border: '1px solid #DFE0E4',
-                width: 200,
-                backgroundColor: 'white',
-                borderRadius: 3,
-                color: '#1D2129'
-            }}>
-                <div style={{ padding: 10 }}>
-                    <img src="/images/interesticon.svg" width={25} height={25}/>
-                    <span style={{ marginLeft: 10, fontSize: 16 }}>{INTEREST}</span>
+            {username &&
+                <div style={{
+                    marginTop: 10,
+                    border: '1px solid #DFE0E4',
+                    width: 200,
+                    backgroundColor: 'white',
+                    borderRadius: 3,
+                    color: '#1D2129'
+                }}>
+                    <div style={{ padding: 10 }}>
+                        <img src="/images/interesticon.svg" width={25} height={25}/>
+                        <span style={{ marginLeft: 10, fontSize: 16 }}>{INTEREST}</span>
+                    </div>
+                    <hr style={{ margin: 0}}/>
+                    <div>
+                        <GroupInterest width={195}/>
+                    </div>
+                    <hr style={{ margin: 0}}/>
+                    <div style={{ padding: 5 }}>
+                        <CreateInterest/>
+                    </div>
                 </div>
-                <hr style={{ margin: 0}}/>
-                <div>
-                    <GroupInterest width={195}/>
-                </div>
-                <hr style={{ margin: 0}}/>
-                <div style={{ padding: 5 }}>
-                    <CreateInterest/>
-                </div>
-            </div>
+            }
             <div style={{ height: 10 }}></div>
             <ChangeLanguage/>
             <div style={{ height: 10 }}></div>

@@ -53,7 +53,7 @@ class Top extends React.Component {
                 </div> */}
                 <div style={{ marginLeft: 0, marginTop: -1 }}>
                     <AddPhoto
-                        aspectRatio={838/250}
+                        aspectRatio={828/250}
                         id={0}
                         action={{
                             type: 'UPDATE_STORE_COVER',
@@ -64,7 +64,7 @@ class Top extends React.Component {
                         canEdit={isOwner}
                         style={{
                         src: coverUrl,
-                        width: 838,
+                        width: 828,
                         height: 250,
                         isTop: true,
                     }}/>

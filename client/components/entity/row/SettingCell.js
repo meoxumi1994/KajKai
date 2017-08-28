@@ -201,8 +201,13 @@ class SettingCell extends React.Component {
                             }
                         </div>
                     :   <div style={{ padding: 10 }}>
-                            <div className="btn btn-default btn-sm" style={{ float: 'right', marginRight: 10 }}
+                            <div className="btn btn-default btn-sm"
+                                disabled={onVerify && onVerify(this.state.value)}
+                                style={{ float: 'right', marginRight: 10,
+                                }}
                                 onClick={() => {
+                                        if(onVerify && onVerify(this.state.value))
+                                            return;
                                         this.setState({ isEdit: !this.state.isEdit })
                                         if(this.state.isEdit)
                                             this.props.onUpdate(this.state.value)
@@ -215,7 +220,9 @@ class SettingCell extends React.Component {
                                     placeholder={placeholder}
                                     style={{ width: '80%', fontSize: 13.5, marginTop: 1 }}
                                     value={this.state.value}
-                                    onChange={(e) => this.setState({ value: e.target.value })}/>
+                                    onChange={(e) => {
+                                        this.setState({ value: e.target.value })}
+                                    }/>
                             :   <div style={{ padding: 6,  fontSize: 13.5 }}>
                                     { this.state.value ? this.state.value : placeholder }
                                 </div>

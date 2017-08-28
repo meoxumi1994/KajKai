@@ -18,7 +18,8 @@ class Interest extends React.Component {
                         <Post sellpostid={item.sellpostid} storeid={item.storeid} introduceWidth={260}/>
                     </div>
                 )}
-                {((!data || (data && data.length == 0)) && stateUser == 'USER_GET_SUCCESS' && stateInterest == 'GET_INTEREST_SUCCESS') &&
+                {((!data || (data && data.length == 0)) &&
+                    stateUser == 'USER_GET_SUCCESS' && stateInterest == 'GET_INTEREST_SUCCESS') &&
                     <WelcomeToKajKai/>
                 }
             </div>

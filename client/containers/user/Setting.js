@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { get } from '~/config/allString'
 
 import { unBlockUser } from '~/actions/asyn/user'
+import { checkUserName } from '~/containers/support'
 import Setting from '~/components/user/Setting'
 
 const mapStateToProps = (state, ownProps) => {
@@ -10,6 +11,7 @@ const mapStateToProps = (state, ownProps) => {
     // const Setting = state.inst.containers.user.setting
     return({
         ...user,
+        checkUserName: checkUserName,
         USER_NAME: g('USER_NAME'),
         ENTER_STORE: g('ENTER_STORE'),
         STORE_NAME_FAILED: g('STORE_NAME_FAILED'),
@@ -35,7 +37,8 @@ const mapStateToProps = (state, ownProps) => {
         NOTE_PASSWORD: g('NOTE_PASSWORD'),
         BLOCK_DESCRIPTION: g('BLOCK_DESCRIPTION'),
         BLOCK_USER: g('BLOCK_USER'),
-        SEARCH_BY_NAME: g('SEARCH_BY_NAME')
+        SEARCH_BY_NAME: g('SEARCH_BY_NAME'),
+        USER_NAME_WARNING: g('USER_NAME_WARNING'),
     })
 }
 

@@ -35,6 +35,7 @@ const mapStateToProps = (state, ownProps) => {
         PHOTOS: g('PHOTOS'),
         STATISTIC: g('STATISTIC'),
         SETTING: g('SETTING'),
+        INTEREST: g('INTEREST'),
     })
 }
 

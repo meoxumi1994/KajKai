@@ -109,8 +109,6 @@ const Add0toMinus = (minutes) => {
     return minutes
 }
 
-
-
 export const getTime = (time, language) => {
     const date = new Date(time)
     const seconds = Math.floor(((new Date()).getTime() - time) / 1000);

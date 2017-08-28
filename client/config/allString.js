@@ -53,6 +53,7 @@ const myString = {
     NOTE_ADDRESS: ['Địa chỉ mặc định khi bạn đặt hàng tại cửa hàng, nhớ thay đổi hoặc ghi rõ với cửa hàng khi bạn thay đổi địa chỉ ship',
     'The default address when you place your order at the store, remember to change or specify with the store when you change ship\'s address'],
     AGE: ['Tuổi','Age'],
+    VERIFY_AGE: ['Tuổi phải từ 1 đến 100','Age must be between 1 and 100'],
     ENTER_AGE: ['Nhập tuổi của bạn','Enter your age'],
     NOTE_AGE: ['Thêm tuổi có thể giúp đỡ việc nhận và giao hàng tốt hơn','Add age can help with getting and delivering better'],
     PASSWORD: ['Mật khẩu','Password'],
@@ -243,7 +244,7 @@ const myString = {
     GET_START_BY_FOLLOW: [
         'Bắt đầu bằng cách theo dõi bài đăng bán hàng. Bạn sẽ được biết về sản phẩm, ảnh và những thứ khác của họ',
         'Get started by follow SellPost. You\'ll see their photos, product and other things'],
-    GET_START: ['Bắt đầu','Get Start'],
+    GET_START: ['Bắt đầu','Get Started'],
 
     GUILD_USER_1: ['Hiện tại bạn chưa theo dõi bất kỳ bài đăng bán hàng nào.','You currently do not track any sales posts.'],
     GUILD_USER_2: [
@@ -278,7 +279,7 @@ const myString = {
     ADD_PRODUCT: ['thêm sản phẩm','add product'],
     UPDATE_PHOTO: ['Cập nhật ảnh','Update photo'],
     HAVE_NO_PHOTO: ['Chưa có ảnh','There are no images'],
-    HAVE_NO_FOLLOW_STORE: ['Chưa theo dõi cửa hàng nào','Have not watched any store'],
+    HAVE_NO_FOLLOW_STORE: ['Chưa theo dõi cửa hàng nào','Have not followed any store'],
     FOLLOW_STORE: ['Cửa hàng theo dõi','Following store'],
     HAVE_NO_INTEREST: ['Chưa có mục quan tâm','No item of interest'],
     NEW: ['Mới','New'],

@@ -79,12 +79,12 @@ class Page extends React.Component {
                         <div ref= { minorpost_inside => { this.minorpost_inside_height = minorpost_inside } }
                             style={{
                             position: this.minorpost_marginTop?'fixed':'static',
-                            marginLeft: this.minorpost_marginTop?(-scrollLeft - 30): -30,
+                            marginLeft: this.minorpost_marginTop?(-scrollLeft - 24): -24,
                             marginTop: this.minorpost_marginTop?(-this.minorpost_inside_height.offsetHeight + height - 343):0,
                             minHeight: height - 48,
                             paddingTop: 10,
                             width: 410 }}>
-                            <IntroduceStore storeid={id} width={310}/>
+                            <IntroduceStore storeid={id} width={300}/>
                             {/* {isOwner &&
                                 <div style={{
                                     marginTop: 10,
