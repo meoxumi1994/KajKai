@@ -5,7 +5,8 @@ export const checkStoreOwner = (requesterId, id, next) => {
   console.log('storeId: ', id);
   BasicStore.findOne({ id }, (basicStore) => {
     if (basicStore) {
-      next(requesterId == basicStore.userId ? true: false)
+      console.log('basicStore.userId: ', basicStore.userId);
+      next(requesterId == basicStore.userId)
     } else {
       next(false)
     }
