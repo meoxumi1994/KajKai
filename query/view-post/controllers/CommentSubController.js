@@ -49,12 +49,14 @@ export const createComment = (message) => {
           avatarUrl: basicUser.avatarUrl,
           content,
           time : Date.now(),
-          numberOfLike: 0,
-          phone: basicUser.phone,
-          address: basicUser.address,
-          latitude: basicUser.latitude,
-          longitude: basicUser.longitude
+          numberOfLike: 0
         })
+
+        if (basicUser.phone) comment.phone = basicUser.phone
+        if (basicUser.address) comment.address = basicUser.address
+        if (basicUser.latitude) comment.latitude = basicUser.latitude
+        if (basicUser.longitude) comment.longitude = basicUser.longitude
+
         if (comment.match) {
           reply.match = comment.match
         }
@@ -102,6 +104,8 @@ export const createComment = (message) => {
       Sellpost.findOne({ id: sellpostId }, (err, sellpost) => {
         if (sellpost) {
           comment.storeId = sellpost.storeId
+
+          BasicUser.findOne({ id: })
           comment.save(() => {})
 
           let { comments } = sellpost
