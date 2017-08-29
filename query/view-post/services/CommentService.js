@@ -242,6 +242,15 @@ export const getClientFormatSellpostComments = (ok, targetId, blackList, request
           mComment.numcomment = mReplies.length
           mComment.match = comment.match ? comment.match : []
 
+          if (ok) {
+            mComment.address = mComment.address ? mComment.address : ''
+            mComment.position =  {
+              lat: mComment.latitude,
+              lng: mComment.longitude
+            }
+            mComment.phone = mComment.phone ? mComment.phone : ''
+          }
+
           mComments = [mComment, ...mComments]
 
           cOffset = comment.time.getTime()
@@ -284,6 +293,15 @@ export const getClientFormatSellpostComments = (ok, targetId, blackList, request
             mComment.status = comment.status
             mComment.numcomment = mReplies.length
             mComment.match = comment.match ? comment.match : []
+
+            if (ok) {
+              mComment.address = mComment.address ? mComment.address : ''
+              mComment.position =  {
+                lat: mComment.latitude,
+                lng: mComment.longitude
+              }
+              mComment.phone = mComment.phone ? mComment.phone : ''
+            }
 
             mComments = [mComment, ...mComments]
 
