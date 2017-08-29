@@ -4,6 +4,7 @@ import mongoose from '../datasource'
 import { checkEmail, generateRandomPassword } from '../utils/utils'
 import { SocialType, Language, Sex } from '../enum'
 import { sendResetPasswordEmail } from '../services/EmailService'
+import { updateUserPub } from '../controllers/UserPubController'
 const USER_GLOBAL_ID = '001';
 
 export const getUser = (id, next) => {
@@ -188,18 +189,15 @@ export const verifyPasswordToken = (token) => {
 };
 
 export const updateUserPhone = (id, phone, next) => {
-    console.log('id ' + id, phone);
     getUser(id, (user) => {
         if (user) {
-            console.log(user + ' ' + JSON.stringify(user));
             user.phone = phone;
             user.phoneLastUpdateAt = new Date();
-
-            console.log(user + ' ' + JSON.stringify(user));
             user.save((err) => {
                 if (err) {
                     next('failed')
                 } else {
+                    updateUserPub(user);
                     next('success')
                 }
             })
@@ -409,6 +407,8 @@ export const updateUserInfo = (userId, info, next) => {
             } else {
                 if (!info.coverUrl) user.coverUrl = undefined;
                 if (!info.avatarUrl) user.avatarUrl = undefined;
+
+                updateUserPub(user);
                 next('success', user)
             }
         })
