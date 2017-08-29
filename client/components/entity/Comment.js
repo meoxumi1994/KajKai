@@ -27,7 +27,7 @@ class Comment extends React.Component {
     render(){
         const {
             RECEIVE, RECEIVED, LIKE, REPLY, DONE, NEW, BLOCK, clicksetting, isOwner, status, urlname, storeid,
-            isleader, avatarUrl, name, time, numlike, numreplys, order, commenterid, type, match,
+            isleader, avatarUrl, name, time, numlike, numreplys, order, commenterid, type, match, address,
             content, onReceive, onDone, onLike, onReply, beLike, yourid } = this.props
         let urlLink
         if( type == "user" ){
@@ -117,7 +117,7 @@ class Comment extends React.Component {
                         content={content}
                         match={match}
                     />
-                    <div style={{ marginLeft: -2, height: 18 }}>
+                    <div style={{ marginLeft: -2 }}>
                         {(isleader && (commenterid != storeid) &&
                             (commenterid != yourid || !isOwner) && status == 'new' && order.length > 0 ) &&
                             <div className="btn"
@@ -202,6 +202,13 @@ class Comment extends React.Component {
                         <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
                             <a style={{ fontSize: 12, color: '#91959D' }}>{time}</a>
                         </div>
+
+                        {address && " . "}
+                        {address &&
+                            <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
+                                <a style={{ fontSize: 12, color: '#91959D' }}>{address}</a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

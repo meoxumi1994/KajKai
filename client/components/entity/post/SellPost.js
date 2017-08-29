@@ -179,7 +179,6 @@ class SellPost extends React.Component {
                     {likeContent && <hr style={{ margin: 0 }}/>}
                     <GroupComment closeComment={(status != 'open')} id={id} focuscommentid={this.props.focuscommentid}/>
                 </div>
-                <div style={{ height: 10 }}></div>
             </div>
         )
     }
