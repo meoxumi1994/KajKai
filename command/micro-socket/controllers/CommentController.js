@@ -73,7 +73,7 @@ export const addNewFirstLayerCommentCon = (action, sio, io) => {
                 io.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
             }
             let data = fComment;
-            data = _objectWithoutProperties(x, ['phone', 'address', 'position']);
+            data = _objectWithoutProperties(fComment, ['phone', 'address', 'position']);
             getListFollower(action.data.sellpostid, (list) => {
                 const newId = fComment.user ? fComment.user : fComment.commenterid;
                 if (list.indexOf(newId) === -1) {
