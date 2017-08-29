@@ -233,6 +233,7 @@ export const verifyToken = (token) => {
 }
 
 const getClientFormatSellposts = (ok, notifySellposts, blackList, requesterId, storeId, sellposts, offset, next) => {
+  console.log('ok sellposts: ', ok);
   const mPromises = [], sellpostById = {}
   sellposts.map((sellpost, index) => {
     sellpostById[sellpost.id] = index
@@ -303,6 +304,7 @@ const getClientFormatSellposts = (ok, notifySellposts, blackList, requesterId, s
 }
 
 const getClientFormatSellpost = (ok, targetId, notifySellposts, blackList, requesterId, sellpost, offset) => {
+  console.log('ok sellpost: ', ok);
   let { postrows, comments } = sellpost
 
   let { followers } = sellpost
@@ -312,7 +314,10 @@ const getClientFormatSellpost = (ok, targetId, notifySellposts, blackList, reque
   let follows = []
 
   if (requesterId == 'Guest') {
-    follows = followers.slice(0, 5)
+    follows = followers.slice(0, 5).map((follower) => ({
+      userid: follower.userId,
+      username: follower.username
+    }))
   } else {
     for (let i = 0; i < followers.length; i++) {
       let follower = followers[i]
