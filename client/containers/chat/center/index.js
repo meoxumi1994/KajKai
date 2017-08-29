@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    setCurrentChat: (mesId) => {
-        dispatch(setCurrentChat(mesId))
+    readChat: (mesId) => {
+        dispatch({type: 'server/READ_CHAT', data: {mesId: mesId}})
     },
 })
 

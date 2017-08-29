@@ -17,7 +17,7 @@ class ChatTop extends React.Component {
       const {
               mesId,
               chatListMap, currentChat,
-              displayAddMember, displaySettings, close
+              displayAddMember, displaySettings, close, setCurrentChat
             } = this.props
 
       const { usersKey, usersMap, display, store } = chatListMap[mesId]
@@ -26,18 +26,18 @@ class ChatTop extends React.Component {
       const headColor = currentChat.mesId == mesId? styles.highlightedButton:  styles.button
 
       return (
-        <div style={currentChat.mesId == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">            
-            <DisplayLabelContainer mesId={mesId} styles={styles}/>
+        <div style={currentChat.mesId == mesId? styles.currentMainDiv: styles.mainDiv} className="input-group">
+            <DisplayLabelContainer mesId={mesId} styles={styles} onClick={() => setCurrentChat(mesId)}/>
             <div style={styles.iconGroupDiv}>
                 {
                     store != undefined? undefined:
-                    <button className="btn" style={headColor} onClick={() => displayAddMember(mesId)}>
+                    <button className="btn" style={headColor} onClick={() => {displayAddMember(mesId);setCurrentChat(mesId)}}>
                         <img style={{height: 15, width: 15, marginLeft: 3}} src="/images/chat/add.png"/>
                     </button>
                 }
                 {
                     store != undefined? undefined:
-                    <button disabled={mesId == 0? true: false} className="btn" style={headColor} onClick={() => displaySettings(mesId)}>
+                    <button disabled={mesId == 0? true: false} className="btn" style={headColor} onClick={() => {displaySettings(mesId);setCurrentChat(mesId)}}>
                         <img style={{height: 18, width: 18, marginLeft: 2}} src="/images/chat/setting.png"/>
                     </button>
                 }
