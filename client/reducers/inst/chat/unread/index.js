@@ -20,10 +20,10 @@ const unread = (state= {
 
         case 'client/READ_CHAT':
             const mes = state.messages
-            mes.splice(mes.indexOf(action.data.mesId), 1)
+            mes.splice(mes.indexOf(action.data[0]), 1)
             return {
                 ...state,
-                quantity: state.messages.indexOf(action.data.mesId) == -1? state.quantity: state.quantity - 1,
+                quantity: state.messages.indexOf(action.data[0]) == -1? state.quantity: state.quantity - 1,
                 messages: mes
             }
 

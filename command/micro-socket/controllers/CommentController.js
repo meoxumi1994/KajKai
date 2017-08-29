@@ -72,8 +72,8 @@ export const addNewFirstLayerCommentCon = (action, sio, io) => {
             } else {
                 io.to(action.data.minorpostid).emit('action', {type: 'client/LEADERCOMMENT', data: fComment})
             }
-
-            let { phone, position, address, ...data } = {fComment};
+            let data = _objectWithoutProperties(fComment, ['phone', 'address', 'position']);
+            console.log('this ' + data);
             getListFollower(action.data.sellpostid, (list) => {
                 const newId = fComment.user ? fComment.user : fComment.commenterid;
                 if (list.indexOf(newId) === -1) {
@@ -81,14 +81,9 @@ export const addNewFirstLayerCommentCon = (action, sio, io) => {
                 }
                 for (let i = 0; i < list.length; ++i) {
                     if (list[i].startsWith('002') || list[i] === action.data.userID) {
-                        io.to(list[i]).emit('action', {type: 'global/LEADERCOMMENT', data: {
-                            ...data,
-                            phone,
-                            position,
-                            address
-                        }});
-                    } else {
                         io.to(list[i]).emit('action', {type: 'global/LEADERCOMMENT', data: fComment});
+                    } else {
+                        io.to(list[i]).emit('action', {type: 'global/LEADERCOMMENT', data: data});
                     }
                 }
             });
