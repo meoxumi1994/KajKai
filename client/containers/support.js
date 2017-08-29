@@ -193,7 +193,7 @@ export const timeSince = (date) => {
     if (interval > 1) {
         return interval + "m ago"
     }
-    return Math.floor(seconds) + "s ago"
+    return "just now"
 }
 
 export const getSmallString = (str, length) => {

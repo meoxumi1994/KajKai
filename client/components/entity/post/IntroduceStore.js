@@ -13,7 +13,7 @@ class IntroduceStore extends React.Component {
             PHOTOS, ABOUT, FOLLOW_US, FOLLOWED, avatarUrl, storename, coverUrl, isOwner, beFollow, onFollow, width,
             username, kind,
             address, addressMap, category, phone, likes, numlike, follows, numfollow, storeid, position, urlname } = this.props
-        if(!phone)
+        if(!phone || !follows)
             return <div></div>
         if(kind == 'small'){
             return(
