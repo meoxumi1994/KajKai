@@ -203,7 +203,7 @@ class Comment extends React.Component {
                             <a style={{ fontSize: 12, color: '#91959D' }}>{time}</a>
                         </div>
 
-                        {address && " . "}
+                        {address && "."}
                         {address &&
                             <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
                                 <a style={{ fontSize: 12, color: '#91959D' }}>{address}</a>

@@ -8,7 +8,6 @@ class ListProduct extends React.Component {
     }
     render(){
         const { products, products_order, canEdit, sellpostId } = this.props
-        console.log(products_order)
         return(
             <div>
                 <table>
