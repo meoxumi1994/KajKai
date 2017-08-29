@@ -367,16 +367,16 @@ export const updateUserInfo = (userId, info, next) => {
         }
 
         if (info.yearOfBirth) {
-            try{
-                // const year = parseInt(info.yearOfBirth);
-                user.yearOfBirth = info.yearOfBirth;
-                // if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
-                //     user.yearOfBirth = year;
-                //     updateYOB = true
-                // } else {
-                //     next('year error', null);
-                //     return
-                // }
+            try {
+                const year = parseInt(info.yearOfBirth);
+                // user.yearOfBirth = info.yearOfBirth;
+                if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
+                    user.yearOfBirth = year;
+                    updateYOB = true
+                } else {
+                    next('year error', null);
+                    return
+                }
             } catch (err) {
                 next('year error', null)
             }
