@@ -219,8 +219,13 @@ class PopUpNotify extends React.Component {
         },6000)
     }
     onClick(){
+        this.props.clickNotification()
+        if(this.props.type == 'createstore'){
+            this.props.history.push('/'+ this.props.urlname)
+            return
+        }
         const commentid = this.props.commentid || this.props.leadercommentid
-        window.location = '/post/' + this.props.sellpostid + '/' + commentid;
+        this.props.history.push('/post/' + this.props.sellpostid + '/' + commentid)
     }
     render(){
         const { id, type, avatarUrl, content, name, time, storename, avartarStore, isclose, onClose, IN } = this.props

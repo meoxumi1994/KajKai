@@ -7,6 +7,7 @@ import DropDown from '~/components/entity/DropDown'
 import ContentShow from '~/components/entity/ContentShow'
 import LikeGroup from '~/components/entity/LikeGroup'
 import Product from '~/containers/entity/post/Product'
+import ShowInMap from '~/containers/entity/map/ShowInMap'
 
 class Comment extends React.Component {
     constructor(props){
@@ -202,15 +203,14 @@ class Comment extends React.Component {
                         <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
                             <a style={{ fontSize: 12, color: '#91959D' }}>{time}</a>
                         </div>
-
-                        {address && "."}
-                        {address &&
+                        {phone && "."}
+                        {phone &&
                             <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
                                 <a style={{ fontSize: 12, color: '#91959D' }}>{address}</a>
                             </div>
                         }
-                        {phone && "."}
-                        {phone &&
+                        {(address && !position) && "."}
+                        {(address && !position) &&
                             <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
                                 <a style={{ fontSize: 12, color: '#91959D' }}>{address}</a>
                             </div>
@@ -218,7 +218,8 @@ class Comment extends React.Component {
                         {( position && position.lat && position.lng ) && "."}
                         {( position && position.lat && position.lng ) &&
                             <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
-                                <a style={{ fontSize: 12, color: '#91959D' }}>{position.lat + " " + position.lng}</a>
+                                {/* <a style={{ fontSize: 12, color: '#91959D' }}>{position.lat + " " + position.lng}</a> */}
+                                <ShowInMap type="text" text={address} position={position}/>
                             </div>
                         }
                     </div>

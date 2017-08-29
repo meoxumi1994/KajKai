@@ -10,7 +10,7 @@ class LeaderComment extends React.Component {
     }
     render(){
         const { WRITE_COMMENT, comments, isReply, id, contentedit, avatarUrl, onReply, onChange, order, status, storeid,
-            sellpostid, onEnter, offset, numcomment, onGetMore, match, address } = this.props
+            sellpostid, onEnter, offset, numcomment, onGetMore, match, address, position } = this.props
         return(
             <div>
                 {comments.map((cm, index) => {
@@ -38,6 +38,7 @@ class LeaderComment extends React.Component {
                             <div key={cm.id}>
                                 <Comment
                                     address={address}
+                                    position={position}
                                     storeid={storeid}
                                     sellpostid={sellpostid}
                                     status={status}

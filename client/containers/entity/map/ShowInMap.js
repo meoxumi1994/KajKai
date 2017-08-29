@@ -8,6 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     return({
         CLOSE: g('CLOSE'),
         GET_CURRENT_POSITION: g('GET_CURRENT_POSITION'),
+        MAP: g('MAP'),
     })
 }
 

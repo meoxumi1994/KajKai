@@ -333,6 +333,7 @@ const myString = {
     MOVE_UP: ['lên','up'],
     MOVE_DOWN: ['xuống','down'],
 
+    MAP: ['bản đồ','map'],
     /////
 
 

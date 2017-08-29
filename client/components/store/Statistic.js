@@ -3,8 +3,8 @@ import React from 'react'
 import  { Line } from 'react-chartjs'
 
 const options =  {
-  scaleFontColor: "#0040FF",
-  scaleLineColor: "#000000",
+  scaleFontColor: "#5588e7",
+  scaleLineColor: "#3B5998",
     scales: {
         yAxes: [{
             ticks: {

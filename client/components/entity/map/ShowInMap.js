@@ -40,33 +40,38 @@ class ShowInMap extends React.Component {
         }
     }
     render(){
-        const { CLOSE, GET_CURRENT_POSITION, position, width, height, onChangePosition, canEdit } = this.props
+        const { CLOSE, GET_CURRENT_POSITION, MAP, text, position, width, height, onChangePosition, canEdit, type } = this.props
         const marker = (position && position.lat) ? { position: position } : undefined
         const currentPosition = (position && position.lat) ? position : { lat: 20.969133867372143, lng: 105.86288452148438 }
         return(
-            <div>
+            <div style={{ display: 'inline-block'}}>
                 <div className="btn" style={{ padding: 0 }}
                     onClick={() => this.setState({ showModal: true })}>
-                    <div style={{ width: width }}>
-                        <GettingStartedGoogleMap
-                            defaultOptions={{
-                                scrollwheel: false,
-                                zoomControl: false,
-                                crossOnDrag: false,
-                                clickable: false,
-                            }}
-                           containerElement={
-                               <div style={{ height: height }} />
-                           }
-                           centerPosition={currentPosition}
-                           mapElement={
-                               <div style={{ height: height }} />
-                           }
-                           onMapLoad={() => undefined}
-                           onMapClick={() => undefined}
-                           marker={marker}
-                         />
-                    </div>
+                    {type == "text" ?
+                        <a style={{ fontSize: 12, color: '#91959D' }}>
+                            {text ? text : MAP}
+                        </a>
+                    :   <div style={{ width: width }}>
+                            <GettingStartedGoogleMap
+                                defaultOptions={{
+                                    scrollwheel: false,
+                                    zoomControl: false,
+                                    crossOnDrag: false,
+                                    clickable: false,
+                                }}
+                               containerElement={
+                                   <div style={{ height: height }} />
+                               }
+                               centerPosition={currentPosition}
+                               mapElement={
+                                   <div style={{ height: height }} />
+                               }
+                               onMapLoad={() => undefined}
+                               onMapClick={() => undefined}
+                               marker={marker}
+                             />
+                        </div>
+                    }
                 </div>
                 <Modal show={this.state.showModal}>
                     <div className="modal-content" style={{ width: 600, padding: 10 }}>

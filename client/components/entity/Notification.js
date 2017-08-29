@@ -238,7 +238,6 @@ class Notification extends React.Component {
     }
     render(){
         const { id, type, avatarUrl, content, name, time, storename, avartarStore, isclick, IN } = this.props
-        console.log(this.props)
         return (
             <div className="btn" style={{ height: 62, padding: '5px 10px 5px 10px',
                 display: 'inline-block',

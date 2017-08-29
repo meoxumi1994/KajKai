@@ -14,11 +14,15 @@ class GroupComment extends React.Component {
         // window.scrollTo(document.getElementById(this.props.focuscommentid))
         // document.getElementById(this.props.focuscommentid).focus();
         setTimeout(() => {
-            console.log("focus : leader "+this.props.focuscommentid)
+            // console.log("focus : leader "+this.props.focuscommentid)
             if(this["leader"+this.props.focuscommentid]){
-                console.log('focuscommentid', this.props.focuscommentid)
+                // console.log('focuscommentid', this.props.focuscommentid)
                 // console.log(thsis[this.props.focuscommentid])
-                this["leader"+this.props.focuscommentid].focus()
+                // this["leader"+this.props.focuscommentid].focus()
+                // $('html, body').animate({
+                //     console.log(scrollTop: $("#" + "leader"+this.props.focuscommentid).offset().top)
+                //     scrollTop: $("#" + "leader"+this.props.focuscommentid).offset().top
+                // }, 2000);
             }
         }, 2000)
     }
@@ -42,12 +46,12 @@ class GroupComment extends React.Component {
                         />
                 }
                 {leadercomments.map((item, index) => {
-                    console.log("leader "+item.id)
+                    // console.log("leader "+item.id)
                     return(
-                        <div key={item.id} id={"leader"+item.id}
+                        <div key={item.id} id={item.id}
                             ref={ leadercomment => {
                                 // console.log(item.id, index);
-                                this[item.id] = leadercomment }}
+                                this["leader"+item.id] = leadercomment }}
                             >
                             <LeaderComment id={item.id}/>
                         </div>
