@@ -26,8 +26,8 @@ class Comment extends React.Component {
     }
     render(){
         const {
-            RECEIVE, RECEIVED, LIKE, REPLY, DONE, NEW, BLOCK, clicksetting, isOwner, status, urlname, storeid,
-            isleader, avatarUrl, name, time, numlike, numreplys, order, commenterid, type, match, address,
+            RECEIVE, RECEIVED, LIKE, REPLY, DONE, NEW, BLOCK, clicksetting, isOwner, status, urlname, storeid, position,
+            isleader, avatarUrl, name, time, numlike, numreplys, order, commenterid, type, match, address, phone,
             content, onReceive, onDone, onLike, onReply, beLike, yourid } = this.props
         let urlLink
         if( type == "user" ){
@@ -207,6 +207,18 @@ class Comment extends React.Component {
                         {address &&
                             <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
                                 <a style={{ fontSize: 12, color: '#91959D' }}>{address}</a>
+                            </div>
+                        }
+                        {phone && "."}
+                        {phone &&
+                            <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
+                                <a style={{ fontSize: 12, color: '#91959D' }}>{address}</a>
+                            </div>
+                        }
+                        {( position && position.lat && position.lng ) && "."}
+                        {( position && position.lat && position.lng ) &&
+                            <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
+                                <a style={{ fontSize: 12, color: '#91959D' }}>{position.lat + " " + position.lng}</a>
                             </div>
                         }
                     </div>

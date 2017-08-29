@@ -62,14 +62,18 @@ class SuggestPhoto extends React.Component {
                 </div>
                 <hr style={{ margin: 0, marginBottom: 5 }}/>
                 {listImage && listImage.map((item,index) => {
-                    console.log(item)
+                    // let myImages = []
+                    // let mySellPost = []
+                    // listImage.map((item) => myImages = [...myImages, item.url])
+                    // mySellPost.map((item) => mySellPost = [...mySellPost, item.sellpostid])
                     return (
                         <div key={item.url+index} style={{ display: 'inline-block', marginLeft: 5, marginBottom: 5 }}>
                             <KeepImage
+                                currentIndex = {index}
                                 canEdit={false}
                                 type="Carousel"
                                 width={(width - 28) / 4}
-                                sellpostid={item.sellpostid}
+                                sellposts={[item.sellpostid]}
                                 images={[item.url]}
                                 imagesSuggest={[item.url]}/>
                         </div>

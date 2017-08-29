@@ -182,11 +182,6 @@ class CreateInterest extends React.Component {
                                     }}>
                                     {GET_CURRENT_POSITION}
                                 </div>
-                                <div className="btn btn-default btn-sm"
-                                    style={{ float: 'right', marginTop: 10 }}
-                                    onClick={() => this.setState({ showModal: false })}>
-                                    {CLOSE}
-                                </div>
                             </div>
                     </div>
                     <hr style={{ margin: 0 }}/>

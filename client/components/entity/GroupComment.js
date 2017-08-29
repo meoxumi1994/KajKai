@@ -13,13 +13,14 @@ class GroupComment extends React.Component {
         // console.log(this[this.props.focuscommentid].getBo)
         // window.scrollTo(document.getElementById(this.props.focuscommentid))
         // document.getElementById(this.props.focuscommentid).focus();
-        // setTimeout(() => {
-        //     if(this[this.props.focuscommentid]){
-        //         console.log('focuscommentid', this.props.focuscommentid)
-        //         console.log(this[this.props.focuscommentid])
-        //         this[this.props.focuscommentid].focus()
-        //     }
-        // }, 2000)
+        setTimeout(() => {
+            console.log("focus : leader "+this.props.focuscommentid)
+            if(this["leader"+this.props.focuscommentid]){
+                console.log('focuscommentid', this.props.focuscommentid)
+                // console.log(thsis[this.props.focuscommentid])
+                this["leader"+this.props.focuscommentid].focus()
+            }
+        }, 2000)
     }
     componentWillUnmount(){
         this.props.onLeave()
@@ -40,16 +41,18 @@ class GroupComment extends React.Component {
                         end={leadercomments.length + ' of '+numleadercomment}
                         />
                 }
-                {leadercomments.map((item, index) =>
-                    <div key={item.id + index} id={item.id}
-                        ref={ leadercomment => {
-                            // console.log(item.id, index);
-                            this[item.id] = leadercomment }}
-                        >
-                        <LeaderComment id={item.id}/>
-                    </div>
-
-                )}
+                {leadercomments.map((item, index) => {
+                    console.log("leader "+item.id)
+                    return(
+                        <div key={item.id} id={"leader"+item.id}
+                            ref={ leadercomment => {
+                                // console.log(item.id, index);
+                                this[item.id] = leadercomment }}
+                            >
+                            <LeaderComment id={item.id}/>
+                        </div>
+                    )
+                })}
                 {(userid && !closeComment ) &&
                     <CallComment key={id}
                         order={this.props.order}

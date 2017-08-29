@@ -107,7 +107,7 @@ class GroupImage extends React.Component {
         }
     }
     render(){
-        const { EDIT, onEdit, images, canEdit, sellpostid } = this.props
+        const { EDIT, onEdit, images, canEdit, sellposts } = this.props
         const width = this.props.width - ((images.length>1)? 1 : 2);
         const height = width;
         return(
@@ -115,7 +115,7 @@ class GroupImage extends React.Component {
                 <Group width={width} height={height} images={images} openModal={(index) => this.openModal(index)}/>
                 {this.state.openModal &&
                     <Enlarge close={() => this.setState({ openModal: false })}
-                        sellpostid={sellpostid}
+                        sellposts={sellposts}
                         imgHeight={this.state.imgHeight}
                         imgWidth={this.state.imgWidth}
                         images={images}

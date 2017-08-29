@@ -27,7 +27,7 @@ class Carousel extends React.Component {
         }
     }
     render(){
-        const { EDIT, canEdit, images, style, onEdit, textChange, sellpostid } = this.props
+        const { EDIT, canEdit, images, style, onEdit, textChange, sellposts } = this.props
         return(
             <div style={{ width: style.width, height: style.height }}>
               <div id="myCarousel" className="carousel slide" data-ride="carousel">
@@ -101,7 +101,7 @@ class Carousel extends React.Component {
               } */}
               {this.state.openModal &&
                   <Enlarge close={() => this.setState({ openModal: false })}
-                      sellpostid={sellpostid}
+                      sellposts={sellposts}
                       imgHeight={this.state.imgHeight}
                       imgWidth={this.state.imgWidth}
                       images={images}

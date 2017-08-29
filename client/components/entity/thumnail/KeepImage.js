@@ -62,14 +62,14 @@ class KeepImage extends React.Component {
         this.setState({ showView: false })
     }
     render(){
-        const { type, width, heightModal, sellpostid, images, canEdit, disableClickImage, id, storeList,
+        const { type, width, heightModal, sellposts, images, canEdit, disableClickImage, id, storeList,
             imagesSuggest, action, ADD_PHOTO, SUGGEST_PHOTO, SEE_MORE, DONE} = this.props
         return(
             <div>
                 {type=='Carousel' ?
                     <Carousel
                         disableClickImage={disableClickImage}
-                        sellpostid={sellpostid}
+                        sellposts={sellposts}
                         style={{ width: width, height: width }}
                         onEdit={() => this.open()}
                         images={images.length ? images : ['/images/postrow/default.svg']}
@@ -78,7 +78,7 @@ class KeepImage extends React.Component {
                     />
                 :   <GroupImage
                         disableClickImage={disableClickImage}
-                        sellpostid={sellpostid}
+                        sellposts={sellposts}
                         canEdit={canEdit}
                         onEdit={() => this.open()}
                         images={images.length ? images : ['/images/postrow/default.svg']}

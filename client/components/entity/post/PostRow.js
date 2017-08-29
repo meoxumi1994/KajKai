@@ -11,6 +11,8 @@ class PostRow extends React.Component {
     }
     render(){
         const { id, type, products, sellpostId, products_order, content, images, canEdit, disableClickImage} = this.props
+        let mysellposts = []
+        images.map((item) => mysellposts = [...mysellposts, sellpostId])
         const Row = () => {
             switch (type) {
                 case 'listproduct':
@@ -53,7 +55,7 @@ class PostRow extends React.Component {
                             <div style={{ float: 'left', marginTop: -2, marginLeft: -1 }}>
                                 <KeepImage
                                     disableClickImage={disableClickImage}
-                                    sellpostid={sellpostId}
+                                    sellposts={mysellposts}
                                     type="Carousel"
                                     width={245}
                                     images={images}
@@ -76,7 +78,7 @@ class PostRow extends React.Component {
                             <div style={{ float: 'right', marginTop: -2, marginRight: -2 }}>
                                 <KeepImage
                                     disableClickImage={disableClickImage}
-                                    sellpostid={sellpostId}
+                                    sellposts={mysellposts}
                                     type="Carousel"
                                     width={245}
                                     images={images}
@@ -98,7 +100,7 @@ class PostRow extends React.Component {
                         <div>
                             <KeepImage
                                 disableClickImage={disableClickImage}
-                                sellpostid={sellpostId}
+                                sellposts={mysellposts}
                                 type="GroupImage"
                                 width={499}
                                 images={images}

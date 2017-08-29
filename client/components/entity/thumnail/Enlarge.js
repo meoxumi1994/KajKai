@@ -51,8 +51,8 @@ class Enlarge extends React.Component {
         })
     }
     render(){
-        const { TITLE, FULL_SCREEN, height, width, close, left, right,
-            images, index, imgHeight, imgWidth, sellpostid } = this.props
+        const { TITLE, FULL_SCREEN, height, width, close, left, right, needGetSellPost,
+            images, index, imgHeight, imgWidth, sellposts } = this.props
         const src = images[index]
         const ratio = imgWidth / imgHeight
         const myHeight = Math.max(520, height - 44)
@@ -176,7 +176,7 @@ class Enlarge extends React.Component {
                         </div>
                     }
                 </div>
-                {  sellpostid &&
+                {  sellposts[index] &&
                     <div
                         id="sellpost"
                         onMouseOver={() => this.setState({ hoverPost: true })}
@@ -190,10 +190,10 @@ class Enlarge extends React.Component {
                         overflow: 'scroll',
                         backgroundColor: 'white'}}>
                         <SellPost
-                            needGetSellPost={true}
+                            needGetSellPost={needGetSellPost}
                             disableClickImage={true}
                             closeBorder={true}
-                            id={sellpostid}/>
+                            id={sellposts[index]}/>
                     </div>
                 }
                 {this.state.openFullScreen &&
