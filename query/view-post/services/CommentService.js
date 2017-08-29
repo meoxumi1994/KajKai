@@ -198,12 +198,12 @@ export const getClientFormatSellpostComments = (ok, targetId, blackList, request
       mComment.match = comment.match ? comment.match : []
 
       if (ok) {
-        mComment.address = mComment.address ? mComment.address : ''
+        mComment.address = comment.address ? comment.address : ''
         mComment.position =  {
-          lat: mComment.latitude,
-          lng: mComment.longitude
+          lat: comment.latitude,
+          lng: comment.longitude
         }
-        mComment.phone = mComment.phone ? mComment.phone : ''
+        mComment.phone = comment.phone ? comment.phone : ''
       }
 
       mComments = [mComment, ...mComments]
@@ -243,12 +243,12 @@ export const getClientFormatSellpostComments = (ok, targetId, blackList, request
           mComment.match = comment.match ? comment.match : []
 
           if (ok) {
-            mComment.address = mComment.address ? mComment.address : ''
+            mComment.address = comment.address ? comment.address : ''
             mComment.position =  {
-              lat: mComment.latitude,
-              lng: mComment.longitude
+              lat: comment.latitude,
+              lng: comment.longitude
             }
-            mComment.phone = mComment.phone ? mComment.phone : ''
+            mComment.phone = comment.phone ? comment.phone : ''
           }
 
           mComments = [mComment, ...mComments]
@@ -295,12 +295,12 @@ export const getClientFormatSellpostComments = (ok, targetId, blackList, request
             mComment.match = comment.match ? comment.match : []
 
             if (ok) {
-              mComment.address = mComment.address ? mComment.address : ''
+              mComment.address = comment.address ? comment.address : ''
               mComment.position =  {
-                lat: mComment.latitude,
-                lng: mComment.longitude
+                lat: comment.latitude,
+                lng: comment.longitude
               }
-              mComment.phone = mComment.phone ? mComment.phone : ''
+              mComment.phone = comment.phone ? comment.phone : ''
             }
 
             mComments = [mComment, ...mComments]
