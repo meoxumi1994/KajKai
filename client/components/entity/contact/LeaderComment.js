@@ -9,8 +9,8 @@ class LeaderComment extends React.Component {
         super(props)
     }
     render(){
-        const { WRITE_COMMENT, comments, isReply, id, contentedit, avatarUrl, onReply, onChange, order, status,
-            sellpostid, onEnter, offset, numcomment, onGetMore, isOwner, match, storeid } = this.props
+        const { WRITE_COMMENT, comments, isReply, id, contentedit, avatarUrl, onReply, onChange, order, status, address,
+            position, phone, sellpostid, onEnter, offset, numcomment, onGetMore, isOwner, match, storeid } = this.props
         if( status == 'done'  )
             return <div></div>
         return(
@@ -38,6 +38,9 @@ class LeaderComment extends React.Component {
                         return(
                             <div key={cm.id}>
                                 <Comment
+                                    address={address}
+                                    position={position}
+                                    phone={phone}
                                     storeid={storeid}
                                     sellpostid={sellpostid}
                                     status={status}

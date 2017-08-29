@@ -206,11 +206,11 @@ class Comment extends React.Component {
                         {phone && "."}
                         {phone &&
                             <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
-                                <a style={{ fontSize: 12, color: '#91959D' }}>{address}</a>
+                                <a style={{ fontSize: 12, color: '#91959D' }}>{phone}</a>
                             </div>
                         }
-                        {(address && !position) && "."}
-                        {(address && !position) &&
+                        {(address && !position && !position.lat && !position.lng ) && "."}
+                        {(address && !position && !position.lat && !position.lng ) &&
                             <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
                                 <a style={{ fontSize: 12, color: '#91959D' }}>{address}</a>
                             </div>
@@ -218,7 +218,6 @@ class Comment extends React.Component {
                         {( position && position.lat && position.lng ) && "."}
                         {( position && position.lat && position.lng ) &&
                             <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
-                                {/* <a style={{ fontSize: 12, color: '#91959D' }}>{position.lat + " " + position.lng}</a> */}
                                 <ShowInMap type="text" text={address} position={position}/>
                             </div>
                         }

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import ContentShow from '~/components/entity/ContentShow'
 import LikeGroup from '~/components/entity/LikeGroup'
 import Product from '~/containers/entity/post/Product'
+import ShowInMap from '~/containers/entity/map/ShowInMap'
 
 class Comment extends React.Component {
     constructor(props){
@@ -25,7 +26,7 @@ class Comment extends React.Component {
     render(){
         const {
             RECEIVE, RECEIVED, LIKE, REPLY, DONE, NEW, clicksetting, isOwner, status, urlname, yourid, storeid,
-            isleader, avatarUrl, name, time, numlike, numreplys, order, commenterid, type, match, address,
+            isleader, avatarUrl, name, time, numlike, numreplys, order, commenterid, type, match, address, phone, position,
             content, onReceive, onDone, onLike, onReply, beLike, isRead, onRemoveRead } = this.props
         let urlLink
         if( type == "user" ){
@@ -193,10 +194,22 @@ class Comment extends React.Component {
                                 <a style={{ fontSize: 12, color: '#91959D' }}>{time}</a>
                             </div>
 
-                            { address && "."}
-                            { address &&
+                            {phone && "."}
+                            {phone &&
+                                <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
+                                    <a style={{ fontSize: 12, color: '#91959D' }}>{phone}</a>
+                                </div>
+                            }
+                            {(address && !position && !position.lat && !position.lng ) && "."}
+                            {(address && !position && !position.lat && !position.lng ) &&
                                 <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
                                     <a style={{ fontSize: 12, color: '#91959D' }}>{address}</a>
+                                </div>
+                            }
+                            {( position && position.lat && position.lng ) && "."}
+                            {( position && position.lat && position.lng ) &&
+                                <div className="btn" style={{ padding: '0px 1px 0px 1px'}}>
+                                    <ShowInMap type="text" text={address} position={position}/>
                                 </div>
                             }
                         </div>
