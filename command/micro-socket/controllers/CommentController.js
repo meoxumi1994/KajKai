@@ -88,7 +88,7 @@ export const addNewFirstLayerCommentCon = (action, sio, io) => {
                             address
                         }});
                     } else {
-                        io.to(list[i]).emit('action', {type: 'global/LEADERCOMMENT', data: fComment});
+                        io.to(list[i]).emit('action', {type: 'global/LEADERCOMMENT', data: data});
                     }
                 }
             });
