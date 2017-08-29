@@ -76,6 +76,7 @@ module.exports = {
     }),
     new webpack.optimize.UglifyJsPlugin({
       comments: false
-    })
+    }),
+    new webpack.optimize.AggressiveMergingPlugin()
   ]
 }

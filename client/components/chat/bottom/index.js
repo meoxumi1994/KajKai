@@ -7,7 +7,6 @@ const ChatBottom = ({mesId, userId, sendMessage, displayImageModal, chatListMap,
   let msg
 
   const { store } = chatListMap[mesId]
-  console.log('component', store);
   return (
     <div style={{width: 280}}>
         <form onSubmit={e => {

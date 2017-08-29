@@ -41,9 +41,9 @@ class DisplayLabel extends React.Component {
             }
             label = label.substring(0, label.length - 2)
         }
-
+        
         return (
-            <div style={{width: '70%', maxHeight: 80, overflowY: store == undefined? 'scroll': 'none'}} ref={"bottom"}>
+            <div style={{width: '70%', maxHeight: 80, overflowY: store || !display.addMember? 'none': 'scroll'}} ref={"bottom"}>
               <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={popoverHoverFocus(usersKey, usersMap, results)}>
                   {
                   usersKey.length == 0 && results.keyy.length == 0? <label style={styles.displayLabel}>{NEW_MESSAGE}</label>:

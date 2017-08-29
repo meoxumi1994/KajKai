@@ -20,7 +20,13 @@ class Chat extends React.Component {
             )
         }
 
-        const { usersKey, usersMap, lastMessage, time, displayLabel, store } = chatListMap[mesId]
+        const { usersKey, usersMap, lastMessage, time, displayLabel, store, display } = chatListMap[mesId]
+
+        if (display.loadingMsg) {
+            return (
+                <div id="loaderr" style={{marginTop: 10}}/>
+            )
+        }
 
         let label = displayLabel
         if (label == undefined || label == '') {
@@ -65,7 +71,7 @@ class Chat extends React.Component {
               </div>
 
               <div className="col col-xs-5" style={ addon? styles.messageDivAddon: styles.messageDiv}>
-                    <div style={{color: textColor, fontSize: 13}}><b>{label.length > 23? label.substring(0, 23) + '...': label}</b></div>
+                    <div style={{color: textColor, fontSize: 13, marginTop: store? 0: 5 }}><b>{label.length > 23? label.substring(0, 23) + '...': label}</b></div>
                     {
                       store != undefined && store.ownerId == user.id?
                       <div style={{color: textColor, fontSize: 11}}>

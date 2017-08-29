@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         user,
         chatListMap,
-        messagesMap
+        messagesMap,
     }
 }
 
