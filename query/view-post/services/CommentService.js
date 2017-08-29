@@ -132,8 +132,6 @@ export const getClientFormatSellpostComments = (ok, targetId, blackList, request
     }
   }
 
-  console.log('ok comments: ', ok);
-
   const oneHour = 3600000
 
   let currentNumberOfComment = 0, cOffset = Date.now(), lastIndex = -1
