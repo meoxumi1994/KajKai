@@ -57,7 +57,7 @@ class Chat extends React.Component {
         // let textColor = mesId == currentChat? 'white': 'black'
         let textColor = 'black'
         return (
-          <div className="row" style={{width: '100%'}}>
+          <div className="row" style={{width: '103%'}}>
               <div className="col col-xs-2" style={styles.avatarDiv}>
                   {
                     lastMessage == undefined?
@@ -71,7 +71,11 @@ class Chat extends React.Component {
               </div>
 
               <div className="col col-xs-5" style={ addon? styles.messageDivAddon: styles.messageDiv}>
-                    <div style={{color: textColor, fontSize: 13, marginTop: store? 0: 5 }}><b>{label.length > 23? label.substring(0, 23) + '...': label}</b></div>
+                    <div style={{color: textColor, fontSize: 13, marginTop: store? 0: 5}}>
+                        <b>{
+                          label.length > (addon? 23: 30)? label.substring(0, (addon? 23: 30)) + '...': label
+                        }</b>
+                    </div>
                     {
                       store != undefined && store.ownerId == user.id?
                       <div style={{color: textColor, fontSize: 11}}>
@@ -83,16 +87,13 @@ class Chat extends React.Component {
                     }
                     {
                       lastMessage != undefined?
-                      <div>
+                      <div style={{width: '100%', height: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
                         <small className="text-muted">
                           <div style={{color: textColor}}>
                             { lastMessage.id != myUser.id ? lastMessage.message.url != ''?
                              + {SENT_A_PICTURE} : usersMap[lastMessage.id].username + ': '
                             : YOU_SENT}
-                            {
-                              lastMessage.message.text.length > (addon? 10: 30)?
-                              lastMessage.message.text.substring(0, (addon? 10: 30)) + '...'
-                              : lastMessage.message.text }
+                            { lastMessage.message.text }
                           </div>
                         </small>
                       </div>
@@ -105,7 +106,7 @@ class Chat extends React.Component {
                 addon? undefined :
                 lastMessage == undefined? undefined:
                 <div className="col col-xs-4" style={styles.timeDiv}>
-                    <small className="text-muted" style={{color: textColor, marginLeft: 10}}>
+                    <small className="text-muted" style={{color: textColor}}>
                       {timeSince(lastMessage.time)}
                     </small>
                 </div>
@@ -118,7 +119,7 @@ class Chat extends React.Component {
 const styles = {
     avatarDiv: {
         float: 'left',
-        marginTop: 4,
+        marginTop: 6,
         marginLeft: 10,
         width: '18%',
     },
@@ -130,8 +131,9 @@ const styles = {
     messageDiv: {
         height: 70,
         marginTop: 4,
-        width: '50%',
+        width: '57%',
         height: 55,
+        marginLeft: -10,
     },
     messageDivAddon: {
         height: 70,
@@ -143,8 +145,9 @@ const styles = {
     timeDiv: {
         marginTop: 4,
         height: 55,
-        width: '25%',
-        float: 'right'
+        width: '23%',
+        textAlign: 'right',
+        marginRight: -5
     },
 }
 
