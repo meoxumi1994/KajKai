@@ -1,5 +1,4 @@
 import { updateUserInfo, getUser, resetPassword, updatePasswordToken } from '../services/UserService.js'
-import { updateUserPub } from './UserPubController'
 import { addBlackList, removeBlackList } from '../services/BlackListService'
 import config from '../config/commonConfig'
 
@@ -28,9 +27,6 @@ export const updateUserPassword = () => {
 export const changeUserProfile = () => {
     return (req, res) => {
         updateUserInfo(req.decoded._id, req.body, (status, user) => {
-            if (user) {
-                updateUserPub(user)
-            }
             res.json({status: status, user: {...req.body, id: req.decoded._id}});
         })
     }

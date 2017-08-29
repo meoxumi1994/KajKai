@@ -2,12 +2,16 @@ import { getUserFromPhone, updateUserPhone } from '../services/UserService.js'
 import { sendPhoneVerificationCode, checkPhoneVerificationCode } from '../services/PhoneService'
 
 export const updateUserPhoneHandler = () => (req, res) => {
-    const { phone } = req.body
-    console.log(phone)
+    const { phone } = req.body;
+    console.log(phone);
     updateUserPhone(req.decoded._id, phone, (status) => {
-      res.json({ status })
+        res.json({ status, user: {
+                phone: phone,
+                id: req.decoded._id
+            }
+        })
     })
-}
+};
 
 export const verifyPhoneHandler = () => (req, res) => {
   const { phone } = req.body

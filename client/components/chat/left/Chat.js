@@ -87,9 +87,12 @@ class Chat extends React.Component {
                         <small className="text-muted">
                           <div style={{color: textColor}}>
                             { lastMessage.id != myUser.id ? lastMessage.message.url != ''?
-                            usersMap[lastMessage.id].username + {SENT_A_PICTURE} : usersMap[lastMessage.id].username + ': '
+                             + {SENT_A_PICTURE} : usersMap[lastMessage.id].username + ': '
                             : YOU_SENT}
-                            { lastMessage.message.text.length > 10? lastMessage.message.text.substring(0, 10) + '...': lastMessage.message.text }
+                            {
+                              lastMessage.message.text.length > (addon? 10: 30)?
+                              lastMessage.message.text.substring(0, (addon? 10: 30)) + '...'
+                              : lastMessage.message.text }
                           </div>
                         </small>
                       </div>
@@ -102,7 +105,7 @@ class Chat extends React.Component {
                 addon? undefined :
                 lastMessage == undefined? undefined:
                 <div className="col col-xs-4" style={styles.timeDiv}>
-                    <small className="text-muted" style={{color: textColor}}>
+                    <small className="text-muted" style={{color: textColor, marginLeft: 10}}>
                       {timeSince(lastMessage.time)}
                     </small>
                 </div>
@@ -141,6 +144,7 @@ const styles = {
         marginTop: 4,
         height: 55,
         width: '25%',
+        float: 'right'
     },
 }
 

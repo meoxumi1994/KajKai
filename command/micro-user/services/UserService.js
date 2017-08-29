@@ -4,6 +4,7 @@ import mongoose from '../datasource'
 import { checkEmail, generateRandomPassword } from '../utils/utils'
 import { SocialType, Language, Sex } from '../enum'
 import { sendResetPasswordEmail } from '../services/EmailService'
+import { updateUserPub } from '../controllers/UserPubController'
 const USER_GLOBAL_ID = '001';
 
 export const getUser = (id, next) => {
@@ -188,7 +189,7 @@ export const verifyPasswordToken = (token) => {
 };
 
 export const updateUserPhone = (id, phone, next) => {
-    getUser(id, function(user){
+    getUser(id, (user) => {
         if (user) {
             user.phone = phone;
             user.phoneLastUpdateAt = new Date();
@@ -196,6 +197,7 @@ export const updateUserPhone = (id, phone, next) => {
                 if (err) {
                     next('failed')
                 } else {
+                    updateUserPub(user);
                     next('success')
                 }
             })
@@ -365,16 +367,16 @@ export const updateUserInfo = (userId, info, next) => {
         }
 
         if (info.yearOfBirth) {
-            try{
+            try {
                 const year = parseInt(info.yearOfBirth);
-                user.yearOfBirth = year;
-                // if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
-                //     user.yearOfBirth = year;
-                //     updateYOB = true
-                // } else {
-                //     next('year error', null);
-                //     return
-                // }
+                // user.yearOfBirth = info.yearOfBirth;
+                if (year >= 1900 && year <= (new Date()).getYear()) {
+                    user.yearOfBirth = year;
+                    updateYOB = true
+                } else {
+                    next('year error', null);
+                    return
+                }
             } catch (err) {
                 next('year error', null)
             }
@@ -399,12 +401,18 @@ export const updateUserInfo = (userId, info, next) => {
             user.currentId = info.currentId
         }
 
+        if (info.phone) {
+            user.phone = info.phone;s
+        }
+
         user.save((err) => {
             if (err) {
                 next('update err', null)
             } else {
                 if (!info.coverUrl) user.coverUrl = undefined;
                 if (!info.avatarUrl) user.avatarUrl = undefined;
+
+                updateUserPub(user);
                 next('success', user)
             }
         })
