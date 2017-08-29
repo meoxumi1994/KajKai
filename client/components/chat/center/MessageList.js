@@ -82,7 +82,7 @@ class MessageList extends React.Component {
 
     render() {
         const { mesId,
-                user, chatListMap, messagesMap, hideAddMember,
+                user, chatListMap, messagesMap, setCurrentChat,
                 getMessages
               } = this.props
 
@@ -100,7 +100,7 @@ class MessageList extends React.Component {
             }
         }
         return (
-          <div style={styles.mainDiv} ref={"bottom"} onClick={() => hideAddMember(mesId)} onScroll={(event) => this.scrollListener(event)}>
+          <div style={styles.mainDiv} ref={"bottom"} onClick={() => setCurrentChat(mesId)} onScroll={(event) => this.scrollListener(event)}>
             {
               messagesMap[mesId] == undefined || messagesMap[mesId].length == 0?
               <div></div>
