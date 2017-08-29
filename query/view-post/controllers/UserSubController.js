@@ -32,6 +32,19 @@ export const updateBasicUser = (message) => {
   Comment.find({}, (err, comments) => {
     if (comments) {
       comments.map((comment) => {
+        if (comment.commenterId == id) {
+          if (address) comment.address = address
+          if (position) {
+            let { lng, lat } = position
+            if (lng) {
+              comment.longitude = lng
+            }
+            if (lat) {
+              comment.latitude = lat
+            }
+          }
+          if (phone) comment.phone = phone
+        }
         let { replies } = comment
         if (!replies) {
           replies = []
@@ -97,17 +110,19 @@ export const updateBasicUser = (message) => {
         }
         for (let h = 0; h < comments.length; h++) {
           let comment = comments[h]
-          if (address) comment.address = address
-          if (position) {
-            let { lng, lat } = position
-            if (lng) {
-              comment.longitude = lng
+          if (comment.commenterId == id) {
+            if (address) comment.address = address
+            if (position) {
+              let { lng, lat } = position
+              if (lng) {
+                comment.longitude = lng
+              }
+              if (lat) {
+                comment.latitude = lat
+              }
             }
-            if (lat) {
-              comment.latitude = lat
-            }
+            if (phone) comment.phone = phone
           }
-          if (phone) comment.phone = phone
           let { replies } = comment
           if (!replies) {
             replies = []
