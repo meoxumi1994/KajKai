@@ -33,7 +33,6 @@ const left = (state = {
           }
 
       case 'DISPLAY_CHAT_LAZYLOAD':
-          console.log('VO DAY', action);
           switch (action.subType) {
             case 'LOAD_MORE':
                 return {
