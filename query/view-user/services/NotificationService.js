@@ -292,6 +292,9 @@ export const getClientFormatNotification = (notification) => ({
 })
 
 const isLiker = (user, liker) => {
+  if (!liker || !user) {
+    return false
+  }
   if (liker.userId) {
     if (user.id == liker.userId) {
       return true
