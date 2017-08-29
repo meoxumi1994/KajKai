@@ -1,8 +1,8 @@
 import { Sellpost, BasicStore } from '../models'
-import { getBlackList } from './BlockService'
+import { getBlackListFromUserId } from './BlockService'
 
 export const getStatistics = (userId, storeId, from, to, next) => {
-  getBlackList((blackList) => {
+  getBlackListFromUserId(userId, (blackList) => {
     BasicStore.findOne({ id: storeId }, (err, basicStore) => {
       if (basicStore) {
         if (basicStore.userId == userId) {

@@ -1,7 +1,7 @@
 import { Sellpost, Postrow, BasicUser } from '../models'
 import { getClientFormatPostrows } from './PostrowService'
 import { getClientFormatSellpostComments } from './CommentService'
-import { getBlackList } from './BlockService'
+import { getBlackListFromSellpostId, getBlackListFromStoreId } from './BlockService'
 import { getNotifySellposts } from './FollowService'
 import jwt from 'jsonwebtoken'
 
@@ -23,7 +23,7 @@ export const getSellpost = (ok, targetId, requesterId, id, next) => {
         } else {
           sellpost.postrows = []
         }
-        getBlackList((blackList) => {
+        getBlackListFromSellpostId(id, (blackList) => {
           getNotifySellposts(requesterId, (notifySellposts) => {
             if (targetId) {
               let { targetStatus, ...data } = getClientFormatSellpost(ok, targetId, notifySellposts, blackList, requesterId, sellpost, Date.now())
@@ -58,7 +58,7 @@ export const getSellposts = (ok, requesterId, storeId, offset, next) => {
         })
       }
     } else {
-      getBlackList((blackList) => {
+      getBlackListFromStoreId(storeId, (blackList) => {
         getNotifySellposts(requesterId, (notifySellposts) => {
           getClientFormatSellposts(ok, notifySellposts, blackList, requesterId, storeId, sellposts, offset, next)
         })
