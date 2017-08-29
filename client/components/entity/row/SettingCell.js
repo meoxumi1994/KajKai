@@ -202,11 +202,11 @@ class SettingCell extends React.Component {
                         </div>
                     :   <div style={{ padding: 10 }}>
                             <div className="btn btn-default btn-sm"
-                                disabled={onVerify && onVerify(this.state.value)}
+                                disabled={ this.state.isEdit && onVerify && onVerify(this.state.value) }
                                 style={{ float: 'right', marginRight: 10,
                                 }}
                                 onClick={() => {
-                                        if(onVerify && onVerify(this.state.value))
+                                        if(this.state.isEdit && onVerify && onVerify(this.state.value))
                                             return;
                                         this.setState({ isEdit: !this.state.isEdit })
                                         if(this.state.isEdit)

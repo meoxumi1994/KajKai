@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { getSmallString } from '~/containers/support'
 
 class RowDropDown extends React.Component {
     constructor(props){
@@ -25,6 +26,7 @@ class RowDropDown extends React.Component {
                             display: "block",
                             textAlign: "left",
                             borderRadius: 0,
+                            width: 200,
                             borderTop: this.state.hover?'1px solid #282828':'1px solid white',
                             borderBottom: this.state.hover?'1px solid #282828':'1px solid white',
                             backgroundColor: this.state.hover?'#3B5998':'white',
@@ -32,7 +34,7 @@ class RowDropDown extends React.Component {
                         }}>
                         {isStore && <img width={20} height={20} src={src}/>}
                         {" "}<span style={{ color: this.state.hover?'white':'black', fontSize: 13.5 }}>
-                            {content}
+                            {getSmallString(content,20)}
                         </span>
                     </div>
                 </Link>
@@ -102,7 +104,7 @@ class DropDownSettingBar extends React.Component {
                         <RowDropDown link={"/user/" + id + "/setting"} content={SETTING}/>
                         <RowDropDown item={"hr"}/>
                         <RowDropDown onClick={() => onLogoutClick()} content={LOG_OUT}/>
-                        <img style={{ position: 'absolute', zIndex: 100000, right: 2,
+                        <img style={{ position: 'absolute', zIndex: 100000, right: 6,
                             top: -10, }}
                             src="/images/arrowTop.svg" width={20} height={10}/>
                         {/* <img style={{

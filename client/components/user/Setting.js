@@ -55,7 +55,7 @@ const Setting = (props) => {
                                     <SettingCell id={id} kind="phone" type="user" title={PHONE} placeholder={ENTER_YOUR_PHONE}/>
                                     <SettingCell id={id} kind="yearOfBirth" type="user" title={AGE} description={NOTE_AGE}
                                         onVerify={(age) => {
-                                            return age < 1900
+                                            return age != "" && age != undefined && (age < 1 || age > 100)
                                         }} description={VERIFY_AGE}
                                         placeholder={ENTER_AGE}/>
                                     <SettingCell id={id} kind="position" type="user" title={POSITION_IN_MAP} width={604}
