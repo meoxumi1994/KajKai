@@ -1,6 +1,8 @@
 import { BasicStore, Sellpost } from '../models'
 
 export const checkStoreOwner = (requesterId, id, next) => {
+  console.log('requesterId: ', requesterId);
+  console.log('storeId: ', id);
   BasicStore.findOne({ id }, (basicStore) => {
     if (basicStore) {
       next(requesterId == basicStore.userId)

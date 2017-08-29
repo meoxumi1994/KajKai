@@ -27,6 +27,8 @@ export const getSellpostsHandler = () => (req, res) => {
   }
   checkStoreOwner(requesterId, storeId, (ok) => {
     console.log('ok controller: ', ok);
+    console.log('requesterId: ', requesterId);
+    console.log('storeId: ', storeId);
     getSellposts(ok, requesterId, storeId, offset, (sellposts) => {
       if (sellposts) {
         res.json(sellposts)
