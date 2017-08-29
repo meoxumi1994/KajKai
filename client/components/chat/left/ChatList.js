@@ -47,7 +47,7 @@ class ChatList extends React.Component {
         })
 
         return(
-          <div style={{textAlign: 'left', overflowY: 'scroll', marginTop: 5, maxHeight: addon? 255: 400}}
+          <div style={{textAlign: 'left', overflowY: 'scroll', marginTop: 5, height: addon? 255: 400, borderTop: '0.1px solid #dbdbdb', borderBottom: '0.1px solid #dbdbdb'}}
               onScroll={(event) => this.listenScrollEvent(event)}>
                 {
                   chatListKey.map(mesId =>
@@ -58,7 +58,7 @@ class ChatList extends React.Component {
                           backgroundColor: getTabColor(mesId, currentChat, unread),
                           borderTop: '0.1px solid #dbdbdb',
                           height: 60,
-                          width: addon? 261: 364,
+                          width: "100%",
                         }}>
                                 <ChatContainer mesId={mesId} addon={addon}/>
                         </ul>
