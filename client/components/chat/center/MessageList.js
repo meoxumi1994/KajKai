@@ -17,33 +17,27 @@ class MessageList extends React.Component {
 
     componentDidMount() {
         this.update()
+        this.scrollToBottom(-1)
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.init) {
-            this.scrollToBottom(-1)
-            this.state = {
-                ...this.state,
-                init: false
-            }
-        } else {
-            const { messagesMap, mesId, messagesKey } = this.props
-            const mes = messagesMap[mesId]
-            if (Object.keys(mes).length == 0) {
-                return
-            }
-            const first = messagesMap[mesId][0].time
-            const last = messagesMap[mesId][Object.keys(mes).length - 1].time
-            if (last > this.state.last) {
-                this.scrollToBottom(-1)
-                this.update()
-            } else if (first == this.state.first) {
-                this.scrollToBottom(0)
-            } else {
-                this.scrollToBottom(30)
-            }
-            this.loading(false)
+        const { messagesMap, mesId, messagesKey } = this.props
+        const mes = messagesMap[mesId]
+        if (Object.keys(mes).length == 0) {
+            return
         }
+        const first = messagesMap[mesId][0].time
+        const last = messagesMap[mesId][Object.keys(mes).length - 1].time
+        if (last > this.state.last) {
+            this.scrollToBottom(-1)
+            this.update()
+        }
+            // else if (first == this.state.first) {
+            //     this.scrollToBottom(0)
+            // } else {
+            //     this.scrollToBottom(30)
+            // }
+        this.loading(false)
     }
 
     scrollListener(event) {
@@ -88,7 +82,7 @@ class MessageList extends React.Component {
 
     render() {
         const { mesId,
-                user, chatListMap, messagesMap, hideAddMember,
+                user, chatListMap, messagesMap, setCurrentChat,
                 getMessages
               } = this.props
 
@@ -106,7 +100,7 @@ class MessageList extends React.Component {
             }
         }
         return (
-          <div style={styles.mainDiv} ref={"bottom"} onClick={() => hideAddMember(mesId)} onScroll={(event) => this.scrollListener(event)}>
+          <div style={styles.mainDiv} ref={"bottom"} onClick={() => setCurrentChat(mesId)} onScroll={(event) => this.scrollListener(event)}>
             {
               messagesMap[mesId] == undefined || messagesMap[mesId].length == 0?
               <div></div>

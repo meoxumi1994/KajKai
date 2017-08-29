@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import MessageList from '~/components/chat/center/MessageList'
 import { getMessages } from '~/actions/asyn/chat/restful'
-import { changeDisplay } from '~/actions/asyn/chat/actions'
+import { changeDisplay, setCurrentChat } from '~/actions/asyn/chat/actions'
 
 const mapStateToProps = (state, ownProps) => {
     const { user } = state
@@ -20,7 +20,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     hideAddMember: (mesId) => {
         // dispatch(changeDisplay('ADD_MEMBER', mesId, false))
-    }
+    },
+    setCurrentChat: (mesId) => {
+        dispatch(setCurrentChat(mesId))
+    },
 })
 
 const MessageListContainer = connect(

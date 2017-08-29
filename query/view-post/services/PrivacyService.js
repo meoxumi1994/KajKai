@@ -1,7 +1,7 @@
 import { BasicStore, Sellpost } from '../models'
 
 export const checkStoreOwner = (requesterId, id, next) => {
-  BasicStore.findOne({ id }, (basicStore) => {
+  BasicStore.findOne({ id }, (err, basicStore) => {
     if (basicStore) {
       next(requesterId == basicStore.userId)
     } else {
@@ -11,7 +11,7 @@ export const checkStoreOwner = (requesterId, id, next) => {
 }
 
 export const checkSellpostOwner = (requesterId, id, next) => {
-  Sellpost.findOne({ id }, (sellpost) => {
+  Sellpost.findOne({ id }, (err, sellpost) => {
     if (sellpost) {
       checkStoreOwner(requesterId, sellpost.storeId, next)
     } else {

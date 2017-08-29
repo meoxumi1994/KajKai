@@ -312,7 +312,10 @@ const getClientFormatSellpost = (ok, targetId, notifySellposts, blackList, reque
   let follows = []
 
   if (requesterId == 'Guest') {
-    follows = followers.slice(0, 5)
+    follows = followers.slice(0, 5).map((follower) => ({
+      userid: follower.userId,
+      username: follower.username
+    }))
   } else {
     for (let i = 0; i < followers.length; i++) {
       let follower = followers[i]

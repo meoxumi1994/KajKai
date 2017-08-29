@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import ChatBottom from '~/components/chat/bottom'
 import { sendMessage, sendMessageStore } from '~/actions/asyn/chat/socket'
-import { changeDisplay } from '~/actions/asyn/chat/actions'
+import { changeDisplay, setCurrentChat } from '~/actions/asyn/chat/actions'
 import { get } from '~/config/allString'
 
 const mapStateToProps = (state, ownProps) => {
@@ -33,7 +33,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     displayImageModal: (mesId) => {
         dispatch(changeDisplay('IMAGE_MODAL', mesId, true))
         dispatch({type: 'CHAT/UPDATE', subType: 'RESET_IMAGES_URL', data: {mesId}})
-    }
+    },
+    setCurrentChat: (mesId) => {
+        dispatch(setCurrentChat(mesId))
+    },
 })
 
 const ChatBottomContainer = connect(
