@@ -9,7 +9,7 @@ class ChoosePostRow extends React.Component {
             '0' : false,
             '1' : false,
             '2' : false,
-            '3' : false,
+            // '3' : false,
             '4' : false,
             '5' : false,
             '6' : false,
@@ -20,7 +20,7 @@ class ChoosePostRow extends React.Component {
             '0' : false,
             '1' : false,
             '2' : false,
-            '3' : false,
+            // '3' : false,
             '4' : false,
             '5' : false,
             '6' : false,
@@ -28,7 +28,9 @@ class ChoosePostRow extends React.Component {
     }
     render(){
         const { showModal, close, onChoose } = this.props
-        const type = ['title','normal','product','listproduct','textimage','imagetext','groupimage']
+        const type = ['title','normal','product',
+            // 'listproduct',
+            'textimage','imagetext','groupimage']
         return(
             <Modal show={showModal} bsSize="small" animation={false} onHide={() => close()}>
                 <div style={{ borderRadius: 5 }}>

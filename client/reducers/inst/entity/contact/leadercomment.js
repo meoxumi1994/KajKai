@@ -2,6 +2,17 @@ const leadercomment = (state = {
 
 }, action) => {
     switch (action.type) {
+        case 'global/DONE':
+            console.log(action)
+            if(state[action.data.leadercommentid] && action.data.status == 'success')
+                return {...state,
+                    [action.data.leadercommentid]: {
+                        ...state[action.data.leadercommentid],
+                        status: 'done',
+                        isRead: true,
+                    }
+                }
+            return state
         case 'global/COMMENT':
             if(state[action.data.leadercommentid])
                 return {...state,

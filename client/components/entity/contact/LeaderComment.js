@@ -11,8 +11,7 @@ class LeaderComment extends React.Component {
     render(){
         const { WRITE_COMMENT, comments, isReply, id, contentedit, avatarUrl, onReply, onChange, order, status,
             sellpostid, onEnter, offset, numcomment, onGetMore, isOwner, match, storeid } = this.props
-        console.log('status', status)
-        if( status == 'done' && isOwner )
+        if( status == 'done'  )
             return <div></div>
         return(
             <div>

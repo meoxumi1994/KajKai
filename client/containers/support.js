@@ -156,9 +156,11 @@ export const getLikeContent = (likes, numlike, yourid) => {
 
 export const getBeLike = (likes, yourid) => {
     if(!likes) return false
-    for(let i = 0; i< likes.length; i++)
+    for(let i = 0; i< likes.length; i++){
         if( likes[i].id ==  yourid )
             return true;
+    }
+
     return false;
 }
 
