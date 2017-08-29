@@ -8,9 +8,7 @@ const Message = ({message, time, user, styles, showAvatar}) => {
 
     if ( user == undefined ) {
         return (
-            <div>
-
-            </div>
+            <div></div>
         )
     }
 

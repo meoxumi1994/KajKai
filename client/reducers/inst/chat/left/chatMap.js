@@ -17,7 +17,8 @@ const chatMap = (state={
         search: false,
         imageModal: false,
         editingLabel: false,
-        isLoading: true
+        isLoading: true,
+        loadingMsg: false
     },
     imagesUrl: [
 
@@ -172,6 +173,15 @@ const chatMap = (state={
                           editingLabel: utils.displayToggle(action.data.value, state.display.editingLabel)
                       }
                     }
+                case 'LOADING_MSG':
+                    return {
+                      ...state,
+                      display: {
+                          ...state.display,
+                          loadingMsg: utils.displayToggle(action.data.value, state.display.loadingMsg)
+                      }
+                    }
+
               default:
                 return state
             }
