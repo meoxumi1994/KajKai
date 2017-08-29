@@ -8,6 +8,7 @@ export const checkStoreOwner = (requesterId, id, next) => {
       console.log('basicStore.userId: ', basicStore.userId);
       next(requesterId == basicStore.userId)
     } else {
+      console.log('what the hell');
       next(false)
     }
   })
