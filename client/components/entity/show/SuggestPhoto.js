@@ -61,17 +61,20 @@ class SuggestPhoto extends React.Component {
                     </span>
                 </div>
                 <hr style={{ margin: 0, marginBottom: 5 }}/>
-                {listImage && listImage.map((item,index) =>
-                    <div key={item.url+index} style={{ display: 'inline-block', marginLeft: 5, marginBottom: 5 }}>
-                        <KeepImage
-                            canEdit={false}
-                            type="Carousel"
-                            width={(width - 28) / 4}
-                            sellpostid={item.sellpostid}
-                            images={[item.url]}
-                            imagesSuggest={[item.url]}/>
-                    </div>
-                )}
+                {listImage && listImage.map((item,index) => {
+                    console.log(item)
+                    return (
+                        <div key={item.url+index} style={{ display: 'inline-block', marginLeft: 5, marginBottom: 5 }}>
+                            <KeepImage
+                                canEdit={false}
+                                type="Carousel"
+                                width={(width - 28) / 4}
+                                sellpostid={item.sellpostid}
+                                images={[item.url]}
+                                imagesSuggest={[item.url]}/>
+                        </div>
+                    )
+                })}
                 {(myState == 'GET_PHOTO_SUGGEST_ING' && !listImage) ?
                     <div id="loaderr" style={{ margin: 10, marginLeft: width/2 - 10 }}></div>
                 :(!listImage || listImage.length == 0) ?

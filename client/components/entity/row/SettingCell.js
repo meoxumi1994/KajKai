@@ -47,12 +47,14 @@ class SettingCell extends React.Component {
     }
     render(){
         const { id, title, description, placeholder, onVerify, EDIT_PASSWORD,
-            NEW_PASSWORD, OLD_PASSWORD, RE_PASSWORD, DONE,
+            NEW_PASSWORD, OLD_PASSWORD, RE_PASSWORD, DONE, GET_CURRENT_POSITION,
             EDIT, SAVE, ADD, CONFIRM, kind, openModalPhone, width } = this.props
 
         let position = this.state.value
         let marker = (position && position.lat) ? { position: position } : undefined
         let currentPosition = (position && position.lat) ? position : { lat: 20.969133867372143, lng: 105.86288452148438 }
+
+        console.log(position)
         return(
             <div className="panel panel-default" style={{ margin: 0, marginTop: 10, }}>
                 <div style={{ padding: 10, borderRadius: '3px 3px 0px 0px', fontSize: 18, backgroundColor: '#F6F7F9'}}>
@@ -101,30 +103,37 @@ class SettingCell extends React.Component {
                                            marker={marker}
                                          />
                                     </div>
-                                    {/* <div style={{ height: 40 }}>
+                                    <div style={{ height: 40 }}>
                                         <div className="btn btn-default btn-sm"
                                             style={{ marginTop: 10 }}
                                             onClick={() => {
                                                 const that = this
+                                                console.log('navigator.geolocation.getCurrentPosition')
                                                 navigator.geolocation.getCurrentPosition((pos) => {
+                                                    console.log('navigator.geolocation.getCurrentPosition', coords)
                                                     const coords = pos.coords;
+
                                                     that.setState({
-                                                        centerModal: {
+                                                        value: {
                                                             lat: pos.coords.latitude,
                                                             lng: pos.coords.longitude,
                                                         }
+                                                    })
+                                                    that.props.onUpdate({
+                                                        lat: pos.coords.latitude,
+                                                        lng: pos.coords.longitude,
                                                     })
                                                     // console.log('that', pos.coords.latitude, pos.coords.longitude )
                                                 })
                                             }}>
                                             {GET_CURRENT_POSITION}
                                         </div>
-                                        <div className="btn btn-default btn-sm"
+                                        {/* <div className="btn btn-default btn-sm"
                                             style={{ float: 'right', marginTop: 10 }}
                                             onClick={() => this.setState({ showModal: false })}>
                                             {CLOSE}
-                                        </div>
-                                    </div> */}
+                                        </div> */}
+                                    </div>
                         </div>
                     : kind == 'phone' ?
                         <div style={{ padding: 10 }}>

@@ -23,6 +23,7 @@ const mapStateToProps = (state, { kind, type, value }) => {
         NEW_PASSWORD: g('NEW_PASSWORD'),
         OLD_PASSWORD: g('OLD_PASSWORD'),
         RE_PASSWORD: g('RE_PASSWORD'),
+        GET_CURRENT_POSITION: g('GET_CURRENT_POSITION'),
         DONE: g('DONE'),
         value: (type=='store') ? store[kind] : user[kind],
         ...settingcell,

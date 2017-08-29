@@ -68,7 +68,7 @@ class CreateInterest extends React.Component {
     }
     render(){
         const { CREATE_INTEREST, CLOSE, DONE, onChange, showModal, position, categories,
-            CHOOSE_YOUR_INTEREST, CHOOSE_YOUR_LOCATION,
+            CHOOSE_YOUR_INTEREST, CHOOSE_YOUR_LOCATION, GET_CURRENT_POSITION,
             firstCategory, secondCategory, onCreateInterest } = this.props
 
         const marker = (position && position.lat) ? { position: position } : undefined
@@ -164,7 +164,7 @@ class CreateInterest extends React.Component {
                                    marker={marker}
                                  />
                             </div>
-                            {/* <div style={{ height: 40 }}>
+                            <div style={{ height: 40 }}>
                                 <div className="btn btn-default btn-sm"
                                     style={{ marginTop: 10 }}
                                     onClick={() => {
@@ -187,7 +187,7 @@ class CreateInterest extends React.Component {
                                     onClick={() => this.setState({ showModal: false })}>
                                     {CLOSE}
                                 </div>
-                            </div> */}
+                            </div>
                     </div>
                     <hr style={{ margin: 0 }}/>
                     <div style={{ padding: 10, height: 50 }}>
