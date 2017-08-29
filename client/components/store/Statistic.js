@@ -59,7 +59,7 @@ class Statistic extends React.Component {
                             newcurrent.setDate( current.getDate() - numday )
                             onChange('current', newcurrent )
                         }}>
-                        previous
+                        Previous
                     </div>
                     <div className="btn btn-default btn-sm"
                         onClick={() => {
@@ -70,7 +70,7 @@ class Statistic extends React.Component {
                             else
                                 onChange('current', newcurrent)
                         }} style={{ marginLeft: 10 }}>
-                        next
+                        Next
                     </div>
                     <div style={{ float: 'right'}}>
                         <div className="btn btn-default btn-sm"
@@ -83,13 +83,13 @@ class Statistic extends React.Component {
                         </div>
                         <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}
                             onClick={() => onChange('numday', 30)}>
-                            1 mounth
+                            1 month
                         </div>
                         {/* <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}>
-                            3 mounth
+                            3 month
                         </div>
                         <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}>
-                            6 mounth
+                            6 month
                         </div>
                         <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}>
                             1 years
