@@ -75,36 +75,47 @@ class DropDownSettingBar extends React.Component {
     render(){
         const { width, contents, onClick, storeList, id, onLogoutClick, CREATE_STORE, HOME, SETTING, LOG_OUT } = this.props
         return(
-            <div style={{
-                borderRadius: 2.5,
-                border: '1px solid #B2B2B2',
-                boxShadow: '0px 0px 4px #B2B2B2',
-                padding: '5px 0px 5px 0px',
-                backgroundColor: 'white',
-                position: 'absolute',
-                zIndex: 1,
-                width: 200,
-                marginLeft: -168,
-                marginTop: 9,
-                fontSize: 12.5,
-            }}>
-                <RowDropDown link={"/registerstore"} content={CREATE_STORE}/>
-                {storeList.map((item,index) => {
-                    return <RowDropDown key={index} isStore={true}src={item.avatarUrl} content={item.storename}/>
-                })}
-                <RowDropDown link={"/"} content={HOME}/>
-                <RowDropDown link={"/user/" + id + "/setting"} content={SETTING}/>
-                <RowDropDown item={"hr"}/>
-                <RowDropDown onClick={() => onLogoutClick()} content={LOG_OUT}/>
-                <img style={{
-                        position: 'absolute',
-                        right: 15,
-                        top: -6.8,
-                    }}
-                    width={18}
-                    height={9}
-                    src="/images/arrowupdropdown.svg"
-                />
+            <div className="dropdown" id="dropdownsetting">
+                <div className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"
+                    style={{ borderWidth: 0, padding: 0 }}
+                    onMouseOver={() => this.setState({ hoverNotification: true })}
+                    onMouseLeave={() => this.setState({ hoverNotification: false })}
+                    onClick={() => {
+                        onChange('numUnreaded', 0)
+                        this.setState({ show: true })
+                    }}>
+                    <div className="btn"
+                        style={{ float: 'right', padding: 3 }}
+                        onClick={() => clickSetting()} >
+                        <img src="/images/setting.svg" alt="Cinque Terre" height={20}/>
+                    </div>
+                </div>
+                <ul className="dropdown-menu"
+                    aria-labelledby="settingBarDropDown"
+                    style={{ marginLeft: -170 , marginTop: 10, borderRadius: 0, backgroundColor: 'white'}}>
+                    <div>
+                        <RowDropDown link={"/registerstore"} content={CREATE_STORE}/>
+                        {storeList.map((item,index) => {
+                            return <RowDropDown key={index} isStore={true} link={"/"+item.urlname} src={item.avatarUrl} content={item.storename}/>
+                        })}
+                        <RowDropDown link={"/"} content={HOME}/>
+                        <RowDropDown link={"/user/" + id + "/setting"} content={SETTING}/>
+                        <RowDropDown item={"hr"}/>
+                        <RowDropDown onClick={() => onLogoutClick()} content={LOG_OUT}/>
+                        <img style={{ position: 'absolute', zIndex: 100000, right: 2,
+                            top: -10, }}
+                            src="/images/arrowTop.svg" width={20} height={10}/>
+                        {/* <img style={{
+                                position: 'absolute',
+                                right: 15,
+                                top: -6.8,
+                            }}
+                            width={18}
+                            height={9}
+                            src="/images/arrowupdropdown.svg"
+                        /> */}
+                    </div>
+                </ul>
             </div>
         )
     }

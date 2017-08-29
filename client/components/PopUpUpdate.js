@@ -54,7 +54,8 @@ class PopUpUpdate extends React.Component {
                     </div>
                     <div style={{ margin: 4 }}>
                         <span style={{ fontWeight: 400 }}>{type}</span>{" "}
-                        <span style={{ marginLeft: 10, color: 'black'}}>{value}</span>
+                        <span style={{ marginLeft: 10, color: 'black'}}>{
+                            type == "position" ?  "lat :"+value.lat+", lng :"+value.lng : value }</span>
                     </div>
                 </div>
 
