@@ -122,7 +122,7 @@ class User extends React.Component {
         super(props)
     }
     render(){
-        const { iswhoing, isusername, id, location, store, scrollTop, scrollLeft, height } = this.props
+        const { iswhoing, isusername, id, location, store, scrollTop, scrollLeft, height, time} = this.props
         if(iswhoing)
             return <div></div>
         return(
@@ -159,13 +159,17 @@ class User extends React.Component {
             </div>
         )
     }
-    componentDidUpdate(){
+    componentWillUpdate(){
         this.left_marginTop = 0
         if(this.left){
             this.left_marginTop = this.props.height - this.left.getBoundingClientRect().bottom > 0
         }
     }
     componentDidMount(){
+        this.left_marginTop = 0
+        if(this.left){
+            this.left_marginTop = this.props.height - this.left.getBoundingClientRect().bottom > 0
+        }
         this.props.onGetUser(this.props.userid)
     }
     shouldComponentUpdate(nextProps, nextState){

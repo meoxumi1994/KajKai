@@ -71,6 +71,7 @@ const myString = {
     PRIVACY: ['Cá nhân', 'Privacy'],
     SECURITY: ['Bảo mật', 'Security'],
     CREATE_STORE: ['Tạo cửa hàng','Create store'],
+    REGISTER_MODAL_EMAIL_WARNING: ['Email này đã được đăng ký từ trước','This email is already registered'],
     // store
     STORE: ['Cửa hàng','Store'],
     STORE_NAME_WARNING: ['Bạn nhập thiếu tên cửa hàng','You\'re missing store name'],

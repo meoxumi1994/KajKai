@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { get } from '~/config/allString'
+import { updateUser } from '~/actions/asyn/user'
 
 import Top from '~/components/user/Top'
 
@@ -20,6 +21,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onUploadImage : (typeUrl, e) => {
         dispatch({ type: 'ENTITY_MODAL_UPLOAD_IMAGE_OPEN', typeUrl: typeUrl})
+    },
+    onUpdateUser: (key, value) => {
+        dispatch(updateUser({ [key] : value }))
     }
 })
 

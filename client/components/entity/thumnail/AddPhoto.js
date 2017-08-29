@@ -6,6 +6,9 @@ import UploadCroppie from '~/containers/entity/thumnail/UploadCroppie'
 import OneImage from '~/containers/entity/thumnail/OneImage'
 import ChooseCroppie from '~/containers/entity/thumnail/ChooseCroppie'
 import SuggestPhoto from '~/containers/entity/show/SuggestPhoto'
+// import DisplayImage from '~/containers/entity/thumnail/DisplayImage'
+
+// {/* <DisplayImage src={style.src} width={style.width} height={style.height}/> */}
 
 class AddPhoto extends React.Component {
     constructor(props){

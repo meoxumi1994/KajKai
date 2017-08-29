@@ -14,6 +14,21 @@ export const getInterest = ( id, offset ) => dispatch => {
     })
 }
 
+export const updatePassword = (password, newpassword) => dispatch => {
+    return fleu('/password',{
+        password: password,
+        newpassword: newpassword,
+    })
+    .then(({ status }) => {
+        if(status == 'success'){
+            const user = { password: 'Update Success' }
+            dispatch({ type: 'USER_GET_SUCCESS', user })
+        }else {
+            dispatch({ type: 'UPDATE_USER_FAILED' })
+        }
+    })
+}
+
 export const getUser = (id) => dispatch => {
     dispatch({ type: 'USER_GET_ING' });
     return flem('/user/'+id)
