@@ -1,7 +1,8 @@
 import mongoose from '../datasource'
 
 const BlockeeSchema = new mongoose.Schema({
-  blockeeId: String
+  userId: {type: String},
+  blockeeId: {type: String}
 })
 
 export default BlockeeSchema

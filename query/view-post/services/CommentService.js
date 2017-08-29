@@ -1,10 +1,10 @@
 import { Sellpost, Minorpost, Comment, BasicUser } from '../models'
 import { getClientFormatReplies } from './ReplyService'
-import { getBlackList } from './BlockService'
+import { getBlackListFromSellpostId } from './BlockService'
 import { OrderStatus } from '../enum'
 
 export const getComments = (ok, requesterId, type, id, offset, status, length, next) => {
-  getBlackList((blackList) => {
+  getBlackListFromSellpostId(id, (blackList) => {
     if (type == 'sellpost') {
       Sellpost.findOne({ id }, (err, sellpost) => {
         if (err || !sellpost) {

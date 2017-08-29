@@ -1,8 +1,8 @@
 import { Comment } from '../models'
-import { getBlackList } from './BlockService'
+import { getBlackListFromCommentId } from './BlockService'
 
 export const getReplies = (requesterId, id, offset, next) => {
-  getBlackList((blackList) => {
+  getBlackListFromCommentId(id, (blackList) => {
     Comment.findOne({ id }, (err, comment) => {
       if (err || !comment) {
         if(err) {
