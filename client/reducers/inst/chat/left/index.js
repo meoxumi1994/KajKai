@@ -213,8 +213,10 @@ const left = (state = {
   //------------------------------------------------------------------------------
         case 'global/RECEIVE_MESSAGE':
             if (action.data.user != undefined && action.data.user.id != state.currentChat.id) {
-                const audio = new Audio('/audios/message.mp4')
-                audio.play()
+                if (action.data.store == undefined || action.data.store.id == state.currentChat.id) {
+                    const audio = new Audio('/audios/message.mp4')
+                    audio.play()
+                }                
             }
 
             if (state.chatListKey.indexOf(action.data.mesId) == -1) {
