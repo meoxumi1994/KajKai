@@ -14,6 +14,7 @@ const mapStateToProps = (state, ownProps) => {
         DONE: g('DONE'),
         CHOOSE_YOUR_INTEREST: g('CHOOSE_YOUR_INTEREST'),
         CHOOSE_YOUR_LOCATION: g('CHOOSE_YOUR_LOCATION'),
+        GET_CURRENT_POSITION: g('GET_CURRENT_POSITION'),
     })
 }
 

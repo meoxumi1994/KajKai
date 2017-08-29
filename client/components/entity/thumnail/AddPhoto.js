@@ -5,7 +5,6 @@ import WebcamCapture from '~/containers/entity/thumnail/WebcamCapture'
 import UploadCroppie from '~/containers/entity/thumnail/UploadCroppie'
 import OneImage from '~/containers/entity/thumnail/OneImage'
 import ChooseCroppie from '~/containers/entity/thumnail/ChooseCroppie'
-import Enlarge from '~/containers/entity/thumnail/Enlarge'
 import SuggestPhoto from '~/containers/entity/show/SuggestPhoto'
 
 class AddPhoto extends React.Component {

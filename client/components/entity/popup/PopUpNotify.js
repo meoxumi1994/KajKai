@@ -238,8 +238,7 @@ class PopUpNotify extends React.Component {
                 boxShadow: '0px 0px 4px #B2B2B2',
                 padding: 5,
                 backgroundColor: 'white',
-                width: 280,
-                height: 85, }}
+                width: 280 }}
                 onClick={() => this.onClick() }
                 >
                 <div className="btn"

@@ -176,23 +176,26 @@ class Enlarge extends React.Component {
                         </div>
                     }
                 </div>
-                <div
-                    id="sellpost"
-                    onMouseOver={() => this.setState({ hoverPost: true })}
-                    onMouseLeave={() => this.setState({ hoverPost: false })}
-                    style={{
-                    top: 22,
-                    right: (width - blackWidth - 520) / 2,
-                    position: 'absolute',
-                    width: 520,
-                    height: myHeight,
-                    overflow: 'scroll',
-                    backgroundColor: 'white'}}>
-                    <SellPost
-                        disableClickImage={true}
-                        closeBorder={true}
-                        id={sellpostid}/>
-                </div>
+                {  sellpostid &&
+                    <div
+                        id="sellpost"
+                        onMouseOver={() => this.setState({ hoverPost: true })}
+                        onMouseLeave={() => this.setState({ hoverPost: false })}
+                        style={{
+                        top: 22,
+                        right: (width - blackWidth - 520) / 2,
+                        position: 'absolute',
+                        width: 520,
+                        height: myHeight,
+                        overflow: 'scroll',
+                        backgroundColor: 'white'}}>
+                        <SellPost
+                            needGetSellPost={true}
+                            disableClickImage={true}
+                            closeBorder={true}
+                            id={sellpostid}/>
+                    </div>
+                }
                 {this.state.openFullScreen &&
                     <FullScreen close={() => this.setState({ openFullScreen: false })}
                         TITLE={src}

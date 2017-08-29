@@ -41,6 +41,11 @@ export default class AutoComplete extends React.Component {
                 onChange={(e) => {
                     this.props.onChangePositionName(e.target.value)
                 }}
+                onKeyDown={(e) => {
+                    if(e.keyCode == 13){
+                        this.props.onLocationChanged(undefined, undefined)
+                    }
+                }}
                 onClick={() => this.inputSearchLocation.select()}
                 disabled={searchType == 'STORE' || searchType == 'USER'}
                 id="autocomplete"
