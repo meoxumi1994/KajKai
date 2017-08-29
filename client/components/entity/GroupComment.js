@@ -29,7 +29,7 @@ class GroupComment extends React.Component {
             numleadercomment , leadercomments, content, onChange, id, stateComment,
             onEnter, avatarUrl, onGetMore, offset, order, userid, closeComment } = this.props
         return(
-            <div style={{ padding: '10px 0px 0px 0px' }}>
+            <div style={{ padding: '10px 0px 10px 0px' }}>
                 {(offset != -2 && numleadercomment > leadercomments.length) &&
                     <CommentSuggest
                         id={3}

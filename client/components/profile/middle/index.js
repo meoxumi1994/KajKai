@@ -1,11 +1,61 @@
 import React from 'react';
 
-import RowInfo from '~/containers/profile/middle/RowInfo'
-import RowPrivacy from '~/containers/profile/middle/RowPrivacy'
-import RowSecurity from '~/containers/profile/middle/RowSecurity'
-import PhoneInfo from '~/containers/profile/middle/PhoneInfo'
-import ModalUploadAvatar from '~/containers/profile/middle/ModalUploadAvatar'
-import ModalUploadCover from '~/containers/profile/middle/ModalUploadCover'
+import Bundle from '../../../common/Bundle'
+import loadRowInfo from 'bundle-loader?lazy!../../../containers/profile/middle/RowInfo'
+import loadRowPrivacy from 'bundle-loader?lazy!../../../containers/profile/middle/RowPrivacy'
+import loadRowSecurity from 'bundle-loader?lazy!../../../containers/profile/middle/RowSecurity'
+import loadPhoneInfo from 'bundle-loader?lazy!../../../containers/profile/middle/PhoneInfo'
+import loadModalUploadAvatar from 'bundle-loader?lazy!../../../containers/profile/middle/ModalUploadAvatar'
+import loadModalUploadCover from 'bundle-loader?lazy!../../../containers/profile/middle/ModalUploadCover'
+
+const RowInfo = (props) => (
+  <Bundle load={loadRowInfo}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const RowPrivacy = (props) => (
+  <Bundle load={loadRowPrivacy}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const RowSecurity = (props) => (
+  <Bundle load={loadRowSecurity}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const PhoneInfo = (props) => (
+  <Bundle load={loadPhoneInfo}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const ModalUploadAvatar = (props) => (
+  <Bundle load={loadModalUploadAvatar}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const ModalUploadCover = (props) => (
+  <Bundle load={loadModalUploadCover}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 class Middle extends React.Component {
     constructor(props){

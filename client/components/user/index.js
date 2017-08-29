@@ -1,16 +1,98 @@
 import React from 'react';
 import { Redirect  } from 'react-router-dom';
 
-import Top from '~/containers/user/Top'
-import Interest from '~/containers/user/Interest'
-import About from '~/containers/user/About'
-import Setting from '~/containers/user/Setting'
-import Store from '~/containers/user/Store'
-import Post from '~/containers/user/Post'
-import Left from '~/containers/user/Left'
-import Contact from '~/containers/user/Contact'
-import Activity from '~/containers/user/Activity'
-import Photo from '~/containers/user/Photo'
+import Bundle from '../../common/Bundle'
+import loadTop from 'bundle-loader?lazy!../../containers/user/Top'
+import loadInterest from 'bundle-loader?lazy!../../containers/user/Interest'
+import loadAbout from 'bundle-loader?lazy!../../containers/user/About'
+import loadSetting from 'bundle-loader?lazy!../../containers/user/Setting'
+import loadStore from 'bundle-loader?lazy!../../containers/user/Store'
+import loadPost from 'bundle-loader?lazy!../../containers/user/Post'
+import loadLeft from 'bundle-loader?lazy!../../containers/user/Left'
+import loadContact from 'bundle-loader?lazy!../../containers/user/Contact'
+import loadActivity from 'bundle-loader?lazy!../../containers/user/Activity'
+import loadPhoto from 'bundle-loader?lazy!../../containers/user/Photo'
+
+const Top = (props) => (
+  <Bundle load={loadTop}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Interest = (props) => (
+  <Bundle load={loadInterest}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const About = (props) => (
+  <Bundle load={loadAbout}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Setting = (props) => (
+  <Bundle load={loadSetting}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Store = (props) => (
+  <Bundle load={loadStore}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Post = (props) => (
+  <Bundle load={loadPost}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Left = (props) => (
+  <Bundle load={loadLeft}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Contact = (props) => (
+  <Bundle load={loadContact}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Activity = (props) => (
+  <Bundle load={loadActivity}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Photo = (props) => (
+  <Bundle load={loadPhoto}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 const Middle = ({location}) => {
     switch (location.pathname.split('/')[3]) {

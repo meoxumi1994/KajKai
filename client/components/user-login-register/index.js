@@ -2,10 +2,44 @@ import React from 'react'
 import { Col } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
 
-import VerifyContainer from '~/containers/user-login-register/VerifyContainer'
-import LoginContainer from '~/containers/user-login-register/LoginContainer'
-import RegisterContainer from '~/containers/user-login-register/RegisterContainer'
-import ChangeLanguage from '~/containers/entity/row/ChangeLanguage'
+import Bundle from '../../common/Bundle'
+import loadVerifyContainer from 'bundle-loader?lazy!../../containers/user-login-register/VerifyContainer'
+import loadLoginContainer from 'bundle-loader?lazy!../../containers/user-login-register/LoginContainer'
+import loadRegisterContainer from 'bundle-loader?lazy!../../containers/user-login-register/RegisterContainer'
+import loadChangeLanguage from 'bundle-loader?lazy!../../containers/entity/row/ChangeLanguage'
+
+const VerifyContainer = (props) => (
+  <Bundle load={loadVerifyContainer}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const LoginContainer = (props) => (
+  <Bundle load={loadLoginContainer}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const RegisterContainer = (props) => (
+  <Bundle load={loadRegisterContainer}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const ChangeLanguage = (props) => (
+  <Bundle load={loadChangeLanguage}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 const LoginRegister = ({
     KAJKAI_THANK, iswhoing, isusername, changeLanguage, isregistersuccess, isloading, id }) => {

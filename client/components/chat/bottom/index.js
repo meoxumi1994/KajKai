@@ -3,13 +3,12 @@ import { FormGroup, FormControl, HelpBlock, ControlLabel, Button , OverlayTrigge
 import ModalUploadImageContainer from '~/containers/chat/bottom/ModalUploadImageContainer'
 import EmoNavContainer from '~/containers/chat/bottom/EmoNavContainer'
 
-const ChatBottom = ({mesId, userId, sendMessage, displayImageModal, chatListMap, ENTER_MESSAGE}) => {
+const ChatBottom = ({mesId, userId, sendMessage, displayImageModal, chatListMap, ENTER_MESSAGE, setCurrentChat}) => {
   let msg
 
   const { store } = chatListMap[mesId]
-  console.log('component', store);
   return (
-    <div style={{width: 280}}>
+    <div style={{width: 280}} onClick={() => setCurrentChat(mesId)}>
         <form onSubmit={e => {
             e.preventDefault()
             if (msg.value.trim()) {

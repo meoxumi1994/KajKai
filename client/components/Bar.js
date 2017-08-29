@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import RiseUp from '~/components/entity/draw/RiseUp'
 import { DropdownButton, MenuItem } from 'react-bootstrap'
+import RiseUp from '~/components/entity/draw/RiseUp'
 import DropDownSettingBar from '~/containers/entity/DropDownSettingBar'
 import ChatLeftContainer from '~/containers/chat/left'
 import AutoCompleteContainer from '~/containers/mapp/AutoCompleteContainer'
@@ -41,36 +41,16 @@ class HandlerUser extends React.Component {
         if(username){
             return (
                 <div>
-                    {/* <div className="dropdown" style={{ padding: 0, float: 'right'}}>
-                        <div className="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"
-                            style={{ padding: 0, float: 'right', borderRadius: 0,
-                                borderColor: 'white'}} >
-                            <img src="/images/setting.svg" alt="Cinque Terre" style={{ height: 29 }}/>
+                      <div style={{ float: 'right' }}>
+                          <DropDownSettingBar
+                              contents={[ CREATE_STORE, HOME, SETTING, LOG_OUT]}
+                              onClick={(index) => {
+                                  if(index==3)
+                                    onLogoutClick()
+                              }}
+                          />
                       </div>
-                      <ul className="dropdown-menu" aria-labelledby="dropdownMenu1"
-                          style={{ marginLeft: -100 }}>
-                          <li><a href="#" onClick={()=> onLogoutClick() }>create store</a></li>
-                          <li><a href="#" onClick={()=> onLogoutClick() }>setting</a></li>
-                          <li><a href="#" onClick={()=> onLogoutClick() }>log out</a></li>
-                      </ul>
-                  </div> */}
 
-                      {clicksetting &&
-                          <div style={{ position: 'absolute', right: 20, top: 30  }}>
-                              <DropDownSettingBar
-                                  contents={[ CREATE_STORE, HOME, SETTING, LOG_OUT]}
-                                  onClick={(index) => {
-                                      if(index==3)
-                                        onLogoutClick()
-                                  }}
-                              />
-                          </div>
-                        }
-                      <div className="btn"
-                          style={{ float: 'right', padding: 3 }}
-                          onClick={() => clickSetting()} >
-                          <img src="/images/setting.svg" alt="Cinque Terre" height={20}/>
-                      </div>
                       <div style={{ marginRight: 10, borderRight: '1px solid #355089', float: 'right', height: 14, marginTop: 7 }}></div>
                     <div style={{ marginRight: 15, float: 'right' }}>
                         <DropDownNotification {...this.props}/>
@@ -92,7 +72,7 @@ class HandlerUser extends React.Component {
                                 }}
                                 number={unreadChat.quantity}/>
                         </div>
-                        <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 400, maxHeight: 700, backgroundColor: 'white'}}>
+                        <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="chatDropDown" style={{width: 400, maxHeight: 700}}>
                             <ChatLeftContainer/>
                         </ul>
                     </div>

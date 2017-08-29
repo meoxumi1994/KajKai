@@ -1,15 +1,80 @@
 import React from 'react';
-
 import { BrowserRouter, Route } from 'react-router-dom'
-import Top from '~/containers/target/middle/user/Top';
 
-import Interest from '~/containers/target/middle/user/Interest'
-import About from '~/containers/target/middle/user/About'
-import Post from '~/containers/target/middle/user/Post'
-import Store from '~/containers/target/middle/user/Store'
-import Contact from '~/containers/target/middle/user/Contact'
-import Activity from '~/containers/target/middle/user/Activity'
-import Setting from '~/containers/target/middle/user/Setting'
+import Bundle from '../../../../common/Bundle'
+import loadTop from 'bundle-loader?lazy!../../../../containers/target/middle/user/Top'
+import loadInterest from 'bundle-loader?lazy!../../../../containers/target/middle/user/Interest'
+import loadAbout from 'bundle-loader?lazy!../../../../containers/target/middle/user/About'
+import loadPost from 'bundle-loader?lazy!../../../../containers/target/middle/user/Post'
+import loadStore from 'bundle-loader?lazy!../../../../containers/target/middle/user/Store'
+import loadContact from 'bundle-loader?lazy!../../../../containers/target/middle/user/Contact'
+import loadActivity from 'bundle-loader?lazy!../../../../containers/target/middle/user/Activity'
+import loadSetting from 'bundle-loader?lazy!../../../../containers/target/middle/user/Setting'
+
+const Top = (props) => (
+  <Bundle load={loadTop}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Interest = (props) => (
+  <Bundle load={loadInterest}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const About = (props) => (
+  <Bundle load={loadAbout}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Post = (props) => (
+  <Bundle load={loadPost}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Store = (props) => (
+  <Bundle load={loadStore}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Contact = (props) => (
+  <Bundle load={loadContact}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Activity = (props) => (
+  <Bundle load={loadActivity}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Setting = (props) => (
+  <Bundle load={loadSetting}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 const User = (props) => {
     const { id } = props

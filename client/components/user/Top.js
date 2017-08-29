@@ -1,8 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import AddPhoto from '~/containers/entity/thumnail/AddPhoto'
-import ModalUploadImage from '~/containers/entity/modal/UploadImage'
+import Bundle from '../../common/Bundle'
+import loadAddPhoto from 'bundle-loader?lazy!../../containers/entity/thumnail/AddPhoto'
+import loadModalUploadImage from 'bundle-loader?lazy!../../containers/entity/modal/UploadImage'
+
+const AddPhoto = (props) => (
+  <Bundle load={loadAddPhoto}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const ModalUploadImage = (props) => (
+  <Bundle load={loadModalUploadImage}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 const ButtonLine = ({ title, last, link, location, urlname, id }) => {
     return (

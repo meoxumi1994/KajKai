@@ -7,24 +7,82 @@ class MessageList extends React.Component {
 
     constructor(props) {
         super(props)
+        this.state = {
+            isLoading: false,
+            first: 0,
+            last: 0,
+            init: true,
+        }
     }
 
     componentDidMount() {
-        this.scrollToBottom()
+        this.update()
+        this.scrollToBottom(-1)
     }
 
     componentDidUpdate(prevProps, prevState) {
-        this.scrollToBottom()
+        const { messagesMap, mesId, messagesKey } = this.props
+        const mes = messagesMap[mesId]
+        if (Object.keys(mes).length == 0) {
+            return
+        }
+        const first = messagesMap[mesId][0].time
+        const last = messagesMap[mesId][Object.keys(mes).length - 1].time
+        if (last > this.state.last) {
+            this.scrollToBottom(-1)
+            this.update()
+        }
+            // else if (first == this.state.first) {
+            //     this.scrollToBottom(0)
+            // } else {
+            //     this.scrollToBottom(30)
+            // }
+        this.loading(false)
     }
 
-    scrollToBottom() {
-        const { bottom } = this.refs;
-        bottom.scrollTop = bottom.scrollHeight - bottom.clientHeight;
+    scrollListener(event) {
+        const { scrollHeight, scrollTop, clientHeight } = event.target
+        const { getMessages, mesId, messagesMap, messagesKey } = this.props
+        if (scrollTop == 0) {
+              this.loading(true)
+              getMessages(mesId, messagesMap[mesId][0].time)
+         }
+    }
+
+    scrollToBottom(value) {
+        const { bottom } = this.refs
+        if (value == -1) {
+            bottom.scrollTop = bottom.scrollHeight - bottom.clientHeight
+        } else {
+            bottom.scrollTop = value
+        }
+    }
+
+    loading(value) {
+        this.state = {
+            ...this.state,
+            isLoading: value
+        }
+    }
+
+    update() {
+        const { getMessages, mesId, messagesMap } = this.props
+        const mes = messagesMap[mesId]
+        if (Object.keys(mes).length == 0) {
+            return
+        }
+        const first = messagesMap[mesId][0].time
+        const last = messagesMap[mesId][Object.keys(mes).length - 1].time
+        this.state = {
+            ...this.state,
+            first,
+            last,
+        }
     }
 
     render() {
         const { mesId,
-                user, chatListMap, messagesMap, hideAddMember,
+                user, chatListMap, messagesMap, setCurrentChat,
                 getMessages
               } = this.props
 
@@ -41,21 +99,15 @@ class MessageList extends React.Component {
                 avatarUrl: store.avatarUrl
             }
         }
-
-
         return (
-          <div style={styles.mainDiv} ref={"bottom"} onClick={() => hideAddMember(mesId)}>
+          <div style={styles.mainDiv} ref={"bottom"} onClick={() => setCurrentChat(mesId)} onScroll={(event) => this.scrollListener(event)}>
             {
               messagesMap[mesId] == undefined || messagesMap[mesId].length == 0?
               <div></div>
               :
               <div>
-                  {
-                    messagesMap[mesId].length > 0?
-                    <p style={{textAlign:'center'}} onClick={() => getMessages(mesId, messagesMap[mesId][0].time)}><i>(Show more)</i></p>
-                    : undefined
-                  }
-                  <ul style={{height: '100%', height: '100%'}} className="list-unstyled">
+                  {this.state.isLoading? <div id="loaderr" style={{height: 30}}/>: undefined}
+                  <ul style={{height: '100%', height: '100%', marginTop: 5}} className="list-unstyled">
                       {
                         messagesMap[mesId].map(
                             mes => {

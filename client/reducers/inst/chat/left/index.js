@@ -10,7 +10,8 @@ const left = (state = {
   },
   lazyLoad: {
       offset: '',
-      loadMore: true
+      loadMore: true,
+      firstLoad: true
   }
 }, action) => {
     switch (action.type) {
@@ -32,13 +33,28 @@ const left = (state = {
           }
 
       case 'DISPLAY_CHAT_LAZYLOAD':
-          return {
-              ...state,
-              lazyLoad: {
-                  ...state.lazyLoad,
-                  loadMore: false
-              }
+          console.log('VO DAY', action);
+          switch (action.subType) {
+            case 'LOAD_MORE':
+                return {
+                    ...state,
+                    lazyLoad: {
+                        ...state.lazyLoad,
+                        loadMore: action.data.value
+                    }
+                }
+            case 'FIRST_LOAD':
+                return {
+                    ...state,
+                    lazyLoad: {
+                        ...state.lazyLoad,
+                        firstLoad: action.data.value
+                    }
+                }
+            default:
+                return state
           }
+
 
 /**
  ** INITIAL
@@ -50,10 +66,10 @@ const left = (state = {
           }
           const initChatlist = {
               ...state,
-              chatListKey: [
+              chatListKey: [...new Set([
                   ...state.chatListKey,
                   ...[...new Set(action.data.map(chat => chat.mesId))]
-              ],
+              ])],
               chatListMap: {
                   ...state.chatListMap,
                   ...utils.chatListMap(action)

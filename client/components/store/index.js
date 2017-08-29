@@ -1,17 +1,107 @@
 import React from 'react';
 import { Redirect  } from 'react-router-dom';
 
-import Top from '~/containers/store/Top'
-import About from '~/containers/store/About'
-import Page from '~/containers/store/Page'
-import Photo from '~/containers/store/Photo'
-import Video from '~/containers/store/Video'
-import Setting from '~/containers/store/Setting'
-import Post from '~/containers/store/Post'
-import Left from '~/containers/store/Left'
-import Contact from '~/containers/store/Contact'
-import Activity from '~/containers/store/Activity'
-import Statistic from '~/containers/store/Statistic'
+import Bundle from '../../common/Bundle'
+import loadTop from 'bundle-loader?lazy!../../containers/store/Top'
+import loadAbout from 'bundle-loader?lazy!../../containers/store/About'
+import loadPage from 'bundle-loader?lazy!../../containers/store/Page'
+import loadPhoto from 'bundle-loader?lazy!../../containers/store/Photo'
+import loadVideo from 'bundle-loader?lazy!../../containers/store/Video'
+import loadSetting from 'bundle-loader?lazy!../../containers/store/Setting'
+import loadPost from 'bundle-loader?lazy!../../containers/store/Post'
+import loadLeft from 'bundle-loader?lazy!../../containers/store/Left'
+import loadContact from 'bundle-loader?lazy!../../containers/store/Contact'
+import loadActivity from 'bundle-loader?lazy!../../containers/store/Activity'
+import loadStatistic from 'bundle-loader?lazy!../../containers/store/Statistic'
+
+const Top = (props) => (
+  <Bundle load={loadTop}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const About = (props) => (
+  <Bundle load={loadAbout}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Page = (props) => (
+  <Bundle load={loadPage}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Photo = (props) => (
+  <Bundle load={loadPhoto}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Video = (props) => (
+  <Bundle load={loadVideo}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Setting = (props) => (
+  <Bundle load={loadSetting}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Post = (props) => (
+  <Bundle load={loadPost}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Left = (props) => (
+  <Bundle load={loadLeft}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Contact = (props) => (
+  <Bundle load={loadContact}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Activity = (props) => (
+  <Bundle load={loadActivity}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
+const Statistic = (props) => (
+  <Bundle load={loadStatistic}>
+    {(Comp) => (Comp
+      ? <Comp {...props}/>
+      : null
+    )}
+  </Bundle>
+)
 
 const Middle = ({id}) => {
     switch (location.pathname.split('/')[2]) {

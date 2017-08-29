@@ -1,23 +1,38 @@
 import React from 'react'
 import ChatContainer from '~/containers/chat/left/ChatContainer'
+import ReactDOM from 'react-dom'
+import HeadContainer from '~/containers/chat/left/HeadContainer'
 
 class ChatList extends React.Component {
     constructor(props){
         super(props)
     }
+
     componentDidMount() {
         this.props.setUserId(this.props.userId)
     }
+
+    listenScrollEvent(event) {
+        const { scrollHeight, scrollTop, clientHeight } = event.target
+        if (scrollHeight < scrollTop + clientHeight + 1) {
+            this.props.getChat(this.props.lazyLoad.offset)
+        }
+    }
+
     render(){
         const { chatListMap, chatListKey, currentChat, unread, lazyLoad, addon,
-                createNewChat, getMessages, getChat
+                createNewChat, getMessages, getChat, scrollTop
               } = this.props
 
-        if (chatListKey.length == 0) {
+        if (chatListKey.length == 0 && addon) {
             return (
-                <div style={{textAlign: 'center', marginTop: 10}}>
-                    <p><i>(No conversation)</i></p>
-                </div>
+                <HeadContainer/>
+            )
+        }
+
+        if (lazyLoad.firstLoad) {
+            return (
+                <div id="loaderr" style={{height: 30}}></div>
             )
         }
 
@@ -32,29 +47,35 @@ class ChatList extends React.Component {
         })
 
         return(
-          <div style={{textAlign: 'left', overflowY: 'scroll', marginTop: 5, maxHeight: addon? 255: 600}}>
-              {chatListKey.map(mesId =>
+          <div style={{textAlign: 'left', overflowY: 'scroll', marginTop: 5, height: addon? 255: 400, borderTop: '0.1px solid #dbdbdb', borderBottom: '0.1px solid #dbdbdb'}}
+              onScroll={(event) => this.listenScrollEvent(event)}>
                 {
-                  return (
-                      <ul className="nav nav-tabs" key={mesId} onClick={() => getMessages(mesId)}
-                      style={{
-                        backgroundColor: getTabColor(mesId, currentChat, unread),
-                        borderTop: '0.1px solid #dbdbdb',
-                        height: 60,
-                        width: addon? 246: 364
-                      }}>
-                              <ChatContainer mesId={mesId} addon={addon}/>
-                      </ul>
-                  )
-                }
-              )}
-              <p style={{marginLeft: '43%', marginTop: 10, fontSize: 12}} onClick={() => getChat(lazyLoad.offset)}>
-                    <a>Load more</a>
-              </p>
+                  chatListKey.map(mesId =>
+                  {
+                    return (
+                        <ul className="nav nav-tabs" key={mesId} onClick={() => getMessages(mesId)}
+                        style={{
+                          backgroundColor: getTabColor(mesId, currentChat, unread),
+                          borderTop: '0.1px solid #dbdbdb',
+                          height: 60,
+                          width: "100%",
+                        }}>
+                                <ChatContainer mesId={mesId} addon={addon}/>
+                        </ul>
+                    )
+                  }
+                )}
+              {
+                lazyLoad.loadMore? <div id="loaderr" style={{height: 30}}></div>: undefined
+              }
           </div>
         )
     }
 }
+
+// <p style={{marginLeft: '43%', marginTop: 10, fontSize: 12}} onClick={() => getChat(lazyLoad.offset)}>
+//       <a>Load more</a>
+// </p>
 
 const getTabColor = (mesId, currentChat, unread) => {
     // if (mesId == currentChat) {

@@ -93,10 +93,10 @@ class SettingCell extends React.Component {
                                                        lng: e.latLng.lng(),
                                                    }
                                                })
-                                            //    this.props.onUpdate({
-                                            //        lat: e.latLng.lat(),
-                                            //        lng: e.latLng.lng(),
-                                            //    })
+                                               this.props.onUpdate({
+                                                   lat: e.latLng.lat(),
+                                                   lng: e.latLng.lng(),
+                                               })
                                            }}
                                            marker={marker}
                                          />

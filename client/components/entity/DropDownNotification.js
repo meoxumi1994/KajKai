@@ -38,7 +38,7 @@ class DropDownNotification extends React.Component {
         });
     }
     render(){
-        const { numUnreaded, onChange, onChangeTypeSelected, clickNotification } = this.props
+        const { numUnreaded, onChange, onChangeTypeSelected, clickNotification, clickSetting } = this.props
         return(
             <div className="dropdown" id="dropdownnotify">
                 <div className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"

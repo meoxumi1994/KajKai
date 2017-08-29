@@ -27,14 +27,17 @@ const Row = ({ type, id, products, products_order, content, images, numline, onA
         case 'listproduct':
             return(
                 <div>
-                    <ListProduct id={id} onRemoveProductEdit={(id) => onRemoveProductEdit(products_order, id)}
-                        products={products} products_order={products_order} canEdit={true}/>
+                    <ListProduct id={id} products={products}
+                        products_order={products_order}
+                        onRemoveProductEdit={(id) => onRemoveProductEdit(products_order, id)}
+                        canEdit={true}/>
                     <div className="btn"
-                        style={{ padding: 0, }}
+                        style={{ padding: 0, fontSize: 12.5 }}
                         onClick={() => {
                             onAddProduct(products_order)
+                            onChange('numline', numline + 1)
                         }}>
-                        <a>{ADD}</a>
+                        <a>{ADD_PRODUCT}</a>
                     </div>
                 </div>
             )
