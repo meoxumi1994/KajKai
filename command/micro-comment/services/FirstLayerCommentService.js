@@ -37,7 +37,10 @@ export const getFirstLayerCommentInfo = (fComment, next) => {
                         storeid: store.storeId,
                         match: fComment.match,
                         address: user.address,
-                        position: user.position,
+                        position: {
+                            lng: user.longitude,
+                            lat: user.latitude,
+                        },
                         phone: user.phone
                     };
                     if (fComment.postId.startsWith(globalId.SELLPOST_GLOBAL_ID)) {
