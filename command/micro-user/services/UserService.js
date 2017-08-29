@@ -401,6 +401,10 @@ export const updateUserInfo = (userId, info, next) => {
             user.currentId = info.currentId
         }
 
+        if (info.phone) {
+            user.phone = info.phone;
+        }
+
         user.save((err) => {
             if (err) {
                 next('update err', null)
