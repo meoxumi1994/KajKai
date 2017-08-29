@@ -48,6 +48,19 @@ class Comment extends React.Component {
                     paddingLeft: isleader?0:10,
                     fontSize: 12.5,
                     borderLeft: isleader?undefined:'2px solid #DDDFE2' }}>
+                    {((this.state.hover || clicksetting) && isOwner) &&
+                        <div className="btn"
+                            onClick={() => onDone()}
+                            style={{ float: 'right', paddingRight: 10 }}>
+                            <img width={10} height={10}
+                                onMouseOver={() => this.setState({ hoversetting: true })}
+                                onMouseLeave={() => this.setState({ hoversetting: false })}
+                                onClick={(event) => this.onCLickSetting(event)}
+                                style={{ color:'#BEC2C8'}}
+                                src="/images/closesettingicon.svg"/>
+
+                        </div>
+                    }
                     <Link to={urlLink}>
                         <div className="btn" onClick={() => window.scrollTo(0, 0)}
                             style={{ padding: 0 }}>

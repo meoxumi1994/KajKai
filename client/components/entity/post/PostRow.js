@@ -15,6 +15,7 @@ class PostRow extends React.Component {
             switch (type) {
                 case 'listproduct':
                 case 'product':
+                    console.log(this.props)
                     return(
                         <div>
                             <ListProduct id={id}

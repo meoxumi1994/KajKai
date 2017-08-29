@@ -23,7 +23,7 @@ const GettingStartedGoogleMap = withGoogleMap(props => {
                   {...props.marker}
                   onRightClick={() => props.onMarkerRightClick(index)}
                   title="Hello"
-                  icon="https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png"
+                //   icon="https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png"
                 //   icon='https://www.google.com.vn/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwig1ZGN9PjVAhVGXrwKHeiSAzwQjBwIBA&url=http%3A%2F%2Fwww.iconarchive.com%2Fdownload%2Fi57834%2Ficons-land%2Fvista-map-markers%2FMap-Marker-Marker-Outside-Chartreuse.ico&psig=AFQjCNHLfmW18LyGs9oOyGdYU-8MRl811A&ust=1503974592361147'
               />
             }
