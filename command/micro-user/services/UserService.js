@@ -378,7 +378,8 @@ export const updateUserInfo = (userId, info, next) => {
                     return
                 }
             } catch (err) {
-                next('year error', null)
+                next('year error', null);
+                return;
             }
         }
 
