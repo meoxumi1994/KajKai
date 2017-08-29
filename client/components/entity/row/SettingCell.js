@@ -224,7 +224,7 @@ class SettingCell extends React.Component {
                                         this.setState({ value: e.target.value })}
                                     }/>
                             :   <div style={{ padding: 6,  fontSize: 13.5 }}>
-                                    { this.state.value ? this.state.value : placeholder }
+                                    { this.state.value ? (kind=='age' ? ( 1900 + (new Date()).getYear() - value ) : this.state.value) : placeholder }
                                 </div>
                             }
                         </div>
