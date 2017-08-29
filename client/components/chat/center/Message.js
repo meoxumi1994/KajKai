@@ -34,7 +34,7 @@ const Message = ({message, time, user, styles, showAvatar}) => {
                   <img src={avatarUrl} style={showAvatar?styles.imgIcon:{display: 'none'}}/>
               </OverlayTrigger>
           </div>
-          <div>
+          <div style={{wordWrap: 'break-word'}}>
               <ul style={styles.text}>
                   {
                     showAvatar? <small className="text-muted" >{username}</small>: undefined

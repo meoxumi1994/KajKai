@@ -405,7 +405,7 @@ export const updateUserInfo = (userId, info, next) => {
         }
 
         if (info.phone) {
-            user.phone = info.phone;s
+            user.phone = info.phone;
         }
 
         user.save((err) => {

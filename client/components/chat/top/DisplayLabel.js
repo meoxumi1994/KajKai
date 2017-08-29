@@ -41,7 +41,7 @@ class DisplayLabel extends React.Component {
             }
             label = label.substring(0, label.length - 2)
         }
-        
+
         return (
             <div style={{width: '70%', maxHeight: 80, overflowY: store || !display.addMember? 'none': 'scroll'}} ref={"bottom"}>
               <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={popoverHoverFocus(usersKey, usersMap, results)}>
