@@ -188,10 +188,14 @@ export const verifyPasswordToken = (token) => {
 };
 
 export const updateUserPhone = (id, phone, next) => {
-    getUser(id, function(user){
+    console.log('id ' + id, phone);
+    getUser(id, (user) => {
         if (user) {
+            console.log(user + ' ' + JSON.stringify(user));
             user.phone = phone;
             user.phoneLastUpdateAt = new Date();
+
+            console.log(user + ' ' + JSON.stringify(user));
             user.save((err) => {
                 if (err) {
                     next('failed')
@@ -366,8 +370,8 @@ export const updateUserInfo = (userId, info, next) => {
 
         if (info.yearOfBirth) {
             try{
-                const year = parseInt(info.yearOfBirth);
-                user.yearOfBirth = year;
+                // const year = parseInt(info.yearOfBirth);
+                user.yearOfBirth = info.yearOfBirth;
                 // if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
                 //     user.yearOfBirth = year;
                 //     updateYOB = true
