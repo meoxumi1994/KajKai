@@ -372,7 +372,7 @@ export const updateUserInfo = (userId, info, next) => {
                 const year = parseInt(info.yearOfBirth);
                 console.log(year);
                 // user.yearOfBirth = info.yearOfBirth;
-                if (year >= 1900 && year <= (new Date()).getYear()) {
+                if (year >= 1900 && year <= (new Date()).getYear() + 1900) {
                     user.yearOfBirth = year;
                     updateYOB = true
                 } else {
