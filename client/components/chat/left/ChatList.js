@@ -47,7 +47,7 @@ class ChatList extends React.Component {
         })
 
         return(
-          <div style={{textAlign: 'left', overflowY: 'scroll', marginTop: 5, height: addon? 255: 400, borderTop: '0.1px solid #dbdbdb', borderBottom: '0.1px solid #dbdbdb'}}
+          <div style={{cursor: 'pointer', textAlign: 'left', overflowY: 'scroll', marginTop: 5, height: addon? 255: 400, borderTop: '0.1px solid #dbdbdb', borderBottom: '0.1px solid #dbdbdb'}}
               onScroll={(event) => this.listenScrollEvent(event)}>
                 {
                   chatListKey.map(mesId =>
