@@ -13,8 +13,12 @@ class Chat extends React.Component {
     }
 
     render() {
-      const { styles, center } = this.props
+      const { styles, center, auth, getChatList } = this.props
       const { messagesKey, messagesMap } = center
+
+      if (auth == 'WHO_SUCCESS') {
+          getChatList()
+      }
 
       return(
         <div>
