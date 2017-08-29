@@ -105,7 +105,6 @@ export const createComment = (message) => {
         if (sellpost) {
           comment.storeId = sellpost.storeId
 
-          BasicUser.findOne({ id: })
           comment.save(() => {})
 
           let { comments } = sellpost
