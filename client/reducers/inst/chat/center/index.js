@@ -80,7 +80,7 @@ const center = (state = {
 
 //---------------------------------------------------------------------------------------------------
         case 'global/RECEIVE_MESSAGE':
-            const audio = new Audio('/audios/notify.mp3'); audio.play();
+            const audio = new Audio('/audios/message.mp4'); audio.play();
             const { mesId, user, time, message } = action.data
             const chat = state.messagesMap[mesId]
             if (chat == undefined || chat == null) {
