@@ -83,9 +83,9 @@ export const deleteSellPost = (id) => {
     })
 };
 
-export const addNewProduct = (product) => {
-    getSellPost(product.sellPostId, (oldSellPost) => {
-        oldSellPost.productContent += product.sellPostId + ':& ' + toRoot(product.content) + ' ;&';
+export const updateProduct = (sellPostId, content) => {
+    getSellPost(sellPostId, (oldSellPost) => {
+        oldSellPost.productContent = content;
         indexSellPost(oldSellPost);
     })
 };
