@@ -156,7 +156,8 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent', 'firstCategoryName', 'secondCategoryName']
+                                    fields: ['title', 'category', 'productContent', 'firstCategoryName', 'secondCategoryName'],
+                                    boost: 10
                                 }
                             }, {
                                 multi_match: {
@@ -164,7 +165,8 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    boost: 5
                                 }
                             }, {
                                 match_phrase_prefix: {
@@ -227,7 +229,8 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    boost: 5
                                 }
                             }, {
                                 match_phrase_prefix: {
@@ -296,7 +299,8 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent', 'firstCategoryName', 'secondCategoryName']
+                                    fields: ['title', 'category', 'productContent', 'firstCategoryName', 'secondCategoryName'],
+                                    boost: 10
                                 }
                             }, {
                                 multi_match: {
@@ -304,7 +308,8 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    boost: 5
                                 }
                             }, {
                                 match_phrase_prefix: {
@@ -378,7 +383,8 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory']
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    boost: 5
                                 }
                             }, {
                                 match_phrase_prefix: {
