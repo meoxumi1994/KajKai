@@ -88,7 +88,8 @@ export const getListProductPub = (products) => {
     let content = '';
 
     for (let i = 0; i < products.length; ++i) {
-        content += '&*(Z' + products[i].productId + ' ' + products[i].product.list[0] + ' &!&';
+        const cur = getPubProductInfo(products[i]);
+        content += '&*(Z' + cur.productId + ' ' + cur.product.list[0] + ' &!&';
     }
     return {sellpostId, content};
 };
