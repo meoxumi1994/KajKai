@@ -39,7 +39,7 @@ export const searchStore = (keyword, offset, length, next) => {
                         }
                     }, {
                         multi_match: {
-                            query: keyword,
+                            query: toRoot(keyword),
                             fuzziness: 1,
                             prefix_length: 0,
                             max_expansions: 20,
@@ -47,12 +47,13 @@ export const searchStore = (keyword, offset, length, next) => {
                             boost: 10
                         }
                     }
+                    ,
+                        {
+                        match_phrase_prefix: {
+                            nonTokenStoreName: toRoot(keyword)
+                        }
+                    }
                     // ,
-                    //     {
-                    //     match_phrase_prefix: {
-                    //         nonTokenStoreName: toRoot(keyword)
-                    //     }
-                    // },
                     //     {
                     //     match_all: {}
                     // }
