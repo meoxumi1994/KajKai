@@ -92,7 +92,7 @@ export const createSellPostProductSub = (message) => {
         const productId = product.productId;
         setTimeout(function () {
             addNewProduct({sellPostId, content, productId});
-        }, 30000);
+        }, 3000);
     }
 };
 
@@ -105,7 +105,7 @@ export const updateSellPostProductSub = (message) => {
         const productId = product.productId;
         setTimeout(function () {
             addNewProduct({sellPostId, content, productId});
-        }, 30000);
+        }, 3000);
     }
 };
 
