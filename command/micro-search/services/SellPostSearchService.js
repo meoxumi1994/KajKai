@@ -156,7 +156,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent', 'firstCategoryName', 'secondCategoryName'],
+                                    fields: ['title', 'category', 'firstCategoryName', 'secondCategoryName'],
                                     boost: 10
                                 }
                             }, {
@@ -165,7 +165,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
                             }, {
@@ -220,7 +220,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent'],
+                                    fields: ['title', 'category'],
                                     boost: 10
                                 }
                             }, {
@@ -229,7 +229,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
                             }, {
@@ -299,7 +299,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent', 'firstCategoryName', 'secondCategoryName'],
+                                    fields: ['title', 'category', 'firstCategoryName', 'secondCategoryName'],
                                     boost: 10
                                 }
                             }, {
@@ -308,7 +308,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
                             }, {
@@ -377,7 +377,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent'],
+                                    fields: ['title', 'category'],
                                     boost: 10
                                 }
                             }, {
@@ -386,7 +386,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
                             }, {
