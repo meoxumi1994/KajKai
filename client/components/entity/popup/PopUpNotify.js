@@ -25,7 +25,7 @@ class ContentNotify extends React.Component {
         let commentName = this.props.commentName
         if(storename == name) storename = SELF
         if(commentName == name) commentName = SELF
-        // console.log(this.props)
+        console.log(this.props)
         switch (type) {
             case 'leadercomment':
                 return (
@@ -161,6 +161,18 @@ class ContentNotify extends React.Component {
                         />
                     </div>
                 )
+            case 'createstore':
+                return (
+                    <div style={{  fontSize: 13,  }}>
+                        <ContentShow
+                            name={name}
+                            colorname="#1D2129"
+                            fontSize={13}
+                            heightEachRow={16}
+                            content={CREATE_NEW_STORE}
+                        />
+                    </div>
+                )
             default:
                 return (
                     <div style={{ height: 35 }}>
@@ -198,6 +210,7 @@ const FirstIcon = ({ type, order, status }) => {
             else
                 return <img src="/images/notification/close.svg"
                         width={16} height={16} style={{ marginRight: 7 }}/>
+        case 'createstore':
         case 'createsellpost':
             return <img src="/images/notification/create.svg"
                     width={16} height={16} style={{ marginRight: 7 }}/>

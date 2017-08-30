@@ -6,6 +6,7 @@ class GuildUser extends React.Component {
     }
     render(){
         const { GUILD_USER_1, GUILD_USER_2, GUILD_USER_3, GUILD_USER_4, WELCOME_TO_KAJKAI } = this.props
+        return <div></div>
         return(
             <div style={{ paddingTop: 10 }}>
                 <div className="panel panel-default" style={{width: 520, color: '#4B4F56'}}>

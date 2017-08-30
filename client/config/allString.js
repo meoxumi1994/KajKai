@@ -429,8 +429,12 @@ const myString = {
     CLOSE_SEND_IMAGE: [
         'HỦY',
         'CLOSE'
-    ]
-
+    ],
+    PREVIOUS: ['trước','previous'],
+    NEXT: ['sau','next'],
+    WEEKS: ['tuần','week'],
+    WEEK: ['tuần','weeks'],
+    MONTH: ['tháng','month'],
 }
 
 const allString = {

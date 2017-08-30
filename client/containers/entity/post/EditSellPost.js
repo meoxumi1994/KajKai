@@ -55,7 +55,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 const mergerProp = (stateProps, dispatchProps, ownProps) => {
-    const { editpostrow, product, status, id, ...anotherState } = stateProps
+    const { editpostrow, currentType, product, status, id, ...anotherState } = stateProps
     const { editSellPost, createSellPost, ...anotherDispatch } = dispatchProps
     return({
         onCreateSellPost: () => {
@@ -81,7 +81,9 @@ const mergerProp = (stateProps, dispatchProps, ownProps) => {
                 storeid: id,
                 status: 'open',
             }
-            createSellPost(sellpost)
+            if(currentType != 'CREATE_SELL_POST_ING'){
+                createSellPost(sellpost)
+            }
         },
         onEditSellPost: () => {
             let postrows = []

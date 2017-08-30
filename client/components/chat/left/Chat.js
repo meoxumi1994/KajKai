@@ -36,7 +36,9 @@ class Chat extends React.Component {
                 label = ''
                 for (let i in usersKey) {
                     if (!usersMap[usersKey[i]].disabled) {
-                        label += usersMap[usersKey[i]].username + ', '
+                        if(usersMap[usersKey[i]]){
+                            label += usersMap[usersKey[i]].username + ', '
+                        }
                     }
                 }
                 label = label.substring(0, label.length - 2)
@@ -91,7 +93,7 @@ class Chat extends React.Component {
                         <small className="text-muted">
                           <div style={{color: textColor}}>
                             { lastMessage.id != myUser.id ? lastMessage.message.url != ''?
-                             + {SENT_A_PICTURE} : usersMap[lastMessage.id].username + ': '
+                             + {SENT_A_PICTURE} : (usersMap[lastMessage.id] ? usersMap[lastMessage.id].username : '') + ': '
                             : YOU_SENT}
                             { lastMessage.message.text }
                           </div>
