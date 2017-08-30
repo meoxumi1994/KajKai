@@ -14,13 +14,13 @@ const options =  {
     }
 }
 
-const getLabel = (current, numday ) => {
+const getLabel = (current, numday, language) => {
     let labels = []
     for(let i=0; i<=numday; i++){
         let j = new Date(current)
         j.setDate( current.getDate() - i)
         labels = [
-            j.getDate() + " " + j.toLocaleString("en-us", { month: "long" }),
+            j.getDate() + " " + j.toLocaleString(language == "vi" ? "vi-nu" : "en-us", { month: "long" }),
             ...labels,
         ]
     }
@@ -32,9 +32,9 @@ class Statistic extends React.Component {
         super(props)
     }
     render(){
-        const { current, numday, statistics, onChange, myState, STATISTIC, PREVIOUS, NEXT, WEEK, WEEKS, MONTH } = this.props
+        const { current, numday, language, statistics, onChange, myState, STATISTIC, PREVIOUS, NEXT, WEEK, WEEKS, MONTH } = this.props
         const data = {
-            labels: getLabel(current, numday),
+            labels: getLabel(current, numday, language),
             datasets: [{
                 label: '# of Votes',
                 data: statistics,

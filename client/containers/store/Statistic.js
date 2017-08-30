@@ -15,6 +15,7 @@ const mapStateToProps = (state, ownProps) => {
         WEEK: g('WEEK'),
         WEEKS: g('WEEKS'),
         MONTH: g('MONTH'),
+        language: state.user.language,
         ...statistic
     })
 }
