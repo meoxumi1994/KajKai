@@ -172,7 +172,14 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 match_phrase_prefix: {
                                     nonTokenCategory: toRoot(keyword)
                                 }
-                            },
+                            },{
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword)
+                                    }
+                                }
+                            }
+
                             //     {
                             //     match_all: {}
                             // }
@@ -235,6 +242,12 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                             }, {
                                 match_phrase_prefix: {
                                     nonTokenCategory: toRoot(keyword)
+                                }
+                            }, {
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword)
+                                    }
                                 }
                             }],
                             filter: {
@@ -315,6 +328,12 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                 match_phrase_prefix: {
                                     nonTokenCategory: toRoot(keyword)
                                 }
+                            }, {
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword)
+                                    }
+                                }
                             }],
                             filter: {
                                 geo_distance: {
@@ -392,6 +411,12 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                             }, {
                                 match_phrase_prefix: {
                                     nonTokenCategory: toRoot(keyword)
+                                }
+                            }, {
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword)
+                                    }
                                 }
                             }],
                             filter: {
