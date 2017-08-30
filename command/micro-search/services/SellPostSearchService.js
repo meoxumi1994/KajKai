@@ -156,23 +156,28 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent', 'firstCategoryName', 'secondCategoryName'],
+                                    fields: ['title', 'category', 'firstCategoryName', 'secondCategoryName'],
                                     boost: 10
                                 }
                             }, {
                                 multi_match: {
                                     query: toRoot(keyword),
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
                             }, {
                                 match_phrase_prefix: {
                                     nonTokenCategory: toRoot(keyword)
                                 }
-                            },
+                            },{
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword),
+                                        operator: 'and'
+                                    }
+                                }
+                            }
+
                             //     {
                             //     match_all: {}
                             // }
@@ -220,21 +225,25 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent'],
+                                    fields: ['title', 'category'],
                                     boost: 10
                                 }
                             }, {
                                 multi_match: {
                                     query: toRoot(keyword),
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
                             }, {
                                 match_phrase_prefix: {
                                     nonTokenCategory: toRoot(keyword)
+                                }
+                            }, {
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword),
+                                        operator: 'and'
+                                    }
                                 }
                             }],
                             filter: {
@@ -299,21 +308,25 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent', 'firstCategoryName', 'secondCategoryName'],
+                                    fields: ['title', 'category', 'firstCategoryName', 'secondCategoryName'],
                                     boost: 10
                                 }
                             }, {
                                 multi_match: {
                                     query: toRoot(keyword),
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
                             }, {
                                 match_phrase_prefix: {
                                     nonTokenCategory: toRoot(keyword)
+                                }
+                            }, {
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword),
+                                        operator: 'and'
+                                    }
                                 }
                             }],
                             filter: {
@@ -377,21 +390,25 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     fuzziness: 1,
                                     prefix_length: 0,
                                     max_expansions: 20,
-                                    fields: ['title', 'category', 'productContent'],
+                                    fields: ['title', 'category'],
                                     boost: 10
                                 }
                             }, {
                                 multi_match: {
                                     query: toRoot(keyword),
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
-                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'productContent', 'nonTokenFCategory', 'nonTokenSCategory'],
+                                    fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
                             }, {
                                 match_phrase_prefix: {
                                     nonTokenCategory: toRoot(keyword)
+                                }
+                            }, {
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword),
+                                        operator: 'and'
+                                    }
                                 }
                             }],
                             filter: {

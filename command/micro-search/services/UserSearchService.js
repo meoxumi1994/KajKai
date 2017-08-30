@@ -41,10 +41,7 @@ export const searchUser = (userName, offset, length, next) => {
                     }, {
                         match: {
                             nonTokenUsername: {
-                                query: toRoot(userName),
-                                fuzziness: 1,
-                                prefix_length: 0,
-                                max_expansions: 10
+                                query: toRoot(userName)
                             }
                         }
                     }, {
