@@ -75,7 +75,7 @@ class DropDownSettingBar extends React.Component {
         }
     }
     render(){
-        const { width, contents, onClick, storeList, id, onLogoutClick, CREATE_STORE, HOME, SETTING, LOG_OUT } = this.props
+        const { width, contents, onClick, storeList, id, onLogoutClick, clickSetting, CREATE_STORE, HOME, SETTING, LOG_OUT } = this.props
         return(
             <div className="dropdown" id="dropdownsetting">
                 <div className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"
@@ -83,12 +83,11 @@ class DropDownSettingBar extends React.Component {
                     onMouseOver={() => this.setState({ hoverNotification: true })}
                     onMouseLeave={() => this.setState({ hoverNotification: false })}
                     onClick={() => {
-                        onChange('numUnreaded', 0)
                         this.setState({ show: true })
                     }}>
                     <div className="btn"
                         style={{ float: 'right', padding: 3 }}
-                        onClick={() => clickSetting()} >
+                        >
                         <img src="/images/setting.svg" alt="Cinque Terre" height={20}/>
                     </div>
                 </div>
