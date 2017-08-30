@@ -143,7 +143,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 match: {
                                     status: {
                                         query: 'open',
-                                        boost: 2
+                                        boost: 10
                                     }
                                 }
                             }, {
