@@ -108,6 +108,13 @@ export const productCreatedPub = (product) => {
     pub.quit();
 };
 
+export const allProductCreatedPub = (list) => {
+    const pub = redis.createClient(config);
+    const publishData = {list: list};
+    pub.publish('POSTROW.ALLPRODUCT.Created', JSON.stringify(publishData));
+    pub.quit();
+};
+
 export const productUpdatedPub = (product) => {
     const pub = redis.createClient(config);
     const publishData = {product: product};
