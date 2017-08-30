@@ -109,7 +109,7 @@ export const createStore = (storeInfo, next) => {
             next(verRes);
             return;
         }
-        if (!storeInfo.urlname || (!(/^[a-z]*$/.test(storeInfo.urlname)) && storeInfo.urlname !== '_' )
+        if ( !storeInfo.urlname
             || defaultUrl.indexOf(storeInfo.urlName) != -1) {
             next('urlname');
         } else {
