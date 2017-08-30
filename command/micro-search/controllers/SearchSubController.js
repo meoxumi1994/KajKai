@@ -90,9 +90,9 @@ export const createSellPostProductSub = (message) => {
         const content = product.product.list[0];
         const sellPostId = product.sellPostId;
         const productId = product.productId;
-        setTimeout(function () {
-            addNewProduct({sellPostId, content, productId});
-        }, 3000);
+        // setTimeout(function () {
+        //     addNewProduct({sellPostId, content, productId});
+        // }, 3000);
     }
 };
 
@@ -103,9 +103,9 @@ export const updateSellPostProductSub = (message) => {
         const content = product.product.list[0];
         const sellPostId = product.sellPostId;
         const productId = product.productId;
-        setTimeout(function () {
-            addNewProduct({sellPostId, content, productId});
-        }, 3000);
+        // setTimeout(function () {
+        //     addNewProduct({sellPostId, content, productId});
+        // }, 3000);
     }
 };
 
