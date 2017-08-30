@@ -64,6 +64,7 @@ export const addNewFirstLayerCommentCon = (action, sio, io) => {
         }});
         return;
     }
+    sio.join(action.data.sellpostid);
     addNewFirstLayerCommentPub(action.data, (fComment) => {
         if (fComment) {
             console.log("new first comment " + JSON.stringify(fComment));
