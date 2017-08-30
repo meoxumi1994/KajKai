@@ -69,6 +69,7 @@ export const updateSellPost = (sellpost) => {
         if (sellpost.category) oldSellPost.category = sellpost.category;
         if (sellpost.title) oldSellPost.title = sellpost.title;
         if (sellpost.avatarUrl) oldSellPost.avatarUrl = sellpost.avatarUrl;
+        if (sellpost.status) oldSellPost.status = sellpost.status;
         indexSellPost(oldSellPost);
     })
 };
@@ -136,7 +137,22 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                     from: offset,
                     size: length,
                     query: {
-                        match_all: {}
+                        // match_all: {}
+                        should: [{
+                            match: {
+                                status: {
+                                    query: 'open',
+                                    boost: 2
+                                }
+                            }
+                        }, {
+                            match: {
+                                status: {
+                                    query: 'sleep',
+                                    boost: 1
+                                }
+                            }
+                        }]
                     }
                 }
             }, (error, response) => {
