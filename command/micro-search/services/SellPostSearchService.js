@@ -340,16 +340,19 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                     size: length,
                     query: {
                         bool: {
-                            should: [{
-                                multi_match: {
-                                    query: categoryId,
-                                    fields: ['firstCategoryId', 'secondCategoryId']
-                                }
-                            }],
                             filter: {
-                                geo_distance: {
-                                    distance: config.MAX_DISTANT_FILTER,
-                                    location: location
+                                bool: {
+                                    should: [
+                                        {term: {firstCategoryId: categoryId}},
+                                        {term: {secondCategoryId: categoryId}},
+                                        {
+                                            geo_distance: {
+                                                distance: config.MAX_DISTANT_FILTER,
+                                                location: location
+                                            }
+                                        }
+                                    ],
+                                    minimum_should_match: 2
                                 }
                             }
                         }
