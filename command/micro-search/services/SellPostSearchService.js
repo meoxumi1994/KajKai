@@ -86,7 +86,7 @@ export const deleteSellPost = (id) => {
 export const updateProduct = (sellPostId, content) => {
     getSellPost(sellPostId, (oldSellPost) => {
         if (oldSellPost) {
-            oldSellPost.productContent = content;
+            oldSellPost.productContent = toRoot(content);
             indexSellPost(oldSellPost);
         }
     })
