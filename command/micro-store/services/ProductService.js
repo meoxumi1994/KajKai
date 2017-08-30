@@ -83,7 +83,12 @@ export const getPubProductInfo = (product) => {
 };
 
 export const getListProductPub = (products) => {
-    let res = [];
-    for (let i = 0; i < products.length; ++i) res.push(getPubProductInfo(products[i]));
-    return res;
+    if (!products || products.length === 0) return null;
+    const sellpostId = products[0].sellPostId;
+    let content = '';
+
+    for (let i = 0; i < products.length; ++i) {
+        content += '&*(Z' + products[i].productId + ' ' + products[i].product.list[0] + ' &!&';
+    }
+    return {sellpostId, content};
 };
