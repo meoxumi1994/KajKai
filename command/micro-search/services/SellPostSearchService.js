@@ -26,7 +26,7 @@ export const getSellPost = (sellPostId, next) => {
         id: sellPostId
     }, (error, response) => {
         console.log('get sell post: ', 'error ' + error, 'response ' + JSON.stringify(response));
-        if (response.found) {
+        if (response && response.found) {
             next(response._source);
         } else {
             next(null);
