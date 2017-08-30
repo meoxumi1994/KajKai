@@ -83,12 +83,11 @@ class DropDownSettingBar extends React.Component {
                     onMouseOver={() => this.setState({ hoverNotification: true })}
                     onMouseLeave={() => this.setState({ hoverNotification: false })}
                     onClick={() => {
-                        onChange('numUnreaded', 0)
                         this.setState({ show: true })
                     }}>
                     <div className="btn"
                         style={{ float: 'right', padding: 3 }}
-                        onClick={() => clickSetting()} >
+                        >
                         <img src="/images/setting.svg" alt="Cinque Terre" height={20}/>
                     </div>
                 </div>
