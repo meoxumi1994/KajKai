@@ -430,8 +430,8 @@ const myString = {
         'HỦY',
         'CLOSE'
     ],
-    PREVIOUS: ['trước','previous'],
-    NEXT: ['sau','next'],
+    PREVIOUS: ['Trước','Previous'],
+    NEXT: ['Sau','Next'],
     WEEKS: ['tuần','week'],
     WEEK: ['tuần','weeks'],
     MONTH: ['tháng','month'],

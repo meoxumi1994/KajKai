@@ -216,10 +216,15 @@ const left = (state = {
             //     if (action.data.store.id != state.currentChat.id) {
             //         console.log('action.data.store',action.data.store,
             //         'action.data.store.id',action.data.store.id, 'state.currentChat.id', state.currentChat.id)
-            //         const audio = new Audio('/audios/message.mp4')
-            //         audio.play()
+            //         // const audio = new Audio('/audios/message.mp4')
+            //         // audio.play()
             //     }
             // }
+
+            if (action.data.keu) {
+              const audio = new Audio('/audios/message.mp4')
+              audio.play()
+            }
 
             if (state.chatListKey.indexOf(action.data.mesId) == -1) {
                 const newChat = {
