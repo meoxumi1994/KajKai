@@ -172,7 +172,8 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                             },{
                                 match: {
                                     productContent: {
-                                        query: toRoot(keyword)
+                                        query: toRoot(keyword),
+                                        operator: 'and'
                                     }
                                 }
                             }
@@ -240,7 +241,8 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                             }, {
                                 match: {
                                     productContent: {
-                                        query: toRoot(keyword)
+                                        query: toRoot(keyword),
+                                        operator: 'and'
                                     }
                                 }
                             }],
@@ -322,7 +324,8 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                             }, {
                                 match: {
                                     productContent: {
-                                        query: toRoot(keyword)
+                                        query: toRoot(keyword),
+                                        operator: 'and'
                                     }
                                 }
                             }],
@@ -403,7 +406,8 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                             }, {
                                 match: {
                                     productContent: {
-                                        query: toRoot(keyword)
+                                        query: toRoot(keyword),
+                                        operator: 'and'
                                     }
                                 }
                             }],
