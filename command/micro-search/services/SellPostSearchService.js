@@ -138,21 +138,23 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                     size: length,
                     query: {
                         // match_all: {}
-                        should: [{
-                            match: {
-                                status: {
-                                    query: 'open',
-                                    boost: 2
+                        bool: {
+                            should: [{
+                                match: {
+                                    status: {
+                                        query: 'open',
+                                        boost: 2
+                                    }
                                 }
-                            }
-                        }, {
-                            match: {
-                                status: {
-                                    query: 'sleep',
-                                    boost: 1
+                            }, {
+                                match: {
+                                    status: {
+                                        query: 'sleep',
+                                        boost: 1
+                                    }
                                 }
-                            }
-                        }]
+                            }]
+                        }
                     }
                 }
             }, (error, response) => {
