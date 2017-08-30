@@ -162,9 +162,6 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                             }, {
                                 multi_match: {
                                     query: toRoot(keyword),
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
@@ -233,9 +230,6 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                             }, {
                                 multi_match: {
                                     query: toRoot(keyword),
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
@@ -318,9 +312,6 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                             }, {
                                 multi_match: {
                                     query: toRoot(keyword),
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
@@ -402,9 +393,6 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                             }, {
                                 multi_match: {
                                     query: toRoot(keyword),
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['nonTokenTitle', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                                     boost: 5
                                 }
