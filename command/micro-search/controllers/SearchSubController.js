@@ -92,7 +92,7 @@ export const createSellPostProductSub = (message) => {
         console.log('this ' + sellPostId + ' ' + content);
         setTimeout(function () {
             updateProduct(sellPostId, content);
-        }, 3000);
+        }, 1000);
     }
     // if (product.product.list && product.product.list.length > 0) {
     //     const content = product.product.list[0];

@@ -172,14 +172,14 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     nonTokenCategory: toRoot(keyword)
                                 }
                             },
-                            //     {
-                            //     match: {
-                            //         productContent: {
-                            //             query: toRoot(keyword),
-                            //             operator: 'and'
-                            //         }
-                            //     }
-                            // }
+                                {
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword),
+                                        operator: 'and'
+                                    }
+                                }
+                            }
 
                             //     {
                             //     match_all: {}
@@ -242,15 +242,15 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                     nonTokenCategory: toRoot(keyword)
                                 }
                             }
-                            // ,
-                            //     {
-                            //     match: {
-                            //         productContent: {
-                            //             query: toRoot(keyword),
-                            //             operator: 'and'
-                            //         }
-                            //     }
-                            // }
+                            ,
+                                {
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword),
+                                        operator: 'and'
+                                    }
+                                }
+                            }
                             ],
                             filter: {
                                 bool: {
@@ -328,14 +328,14 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                     nonTokenCategory: toRoot(keyword)
                                 }
                             }
-                            // , {
-                            //     match: {
-                            //         productContent: {
-                            //             query: toRoot(keyword),
-                            //             operator: 'and'
-                            //         }
-                            //     }
-                            // }
+                            , {
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword),
+                                        operator: 'and'
+                                    }
+                                }
+                            }
                             ],
                             filter: {
                                 geo_distance: {
@@ -411,15 +411,15 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                 match_phrase_prefix: {
                                     nonTokenCategory: toRoot(keyword)
                                 }
+
+                            }, {
+                                match: {
+                                    productContent: {
+                                        query: toRoot(keyword),
+                                        operator: 'and'
+                                    }
+                                }
                             }],
-                            // }, {
-                            //     match: {
-                            //         productContent: {
-                            //             query: toRoot(keyword),
-                            //             operator: 'and'
-                            //         }
-                            //     }
-                            // }],
                             filter: {
                                 bool: {
                                     should: [
