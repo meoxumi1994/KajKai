@@ -89,6 +89,7 @@ export const createSellPostProductSub = (message) => {
     if (product && product.content) {
         const sellPostId = product.sellPostId;
         const content = product.content;
+        console.log('this ' + sellPostId + ' ' + content);
         setTimeout(function () {
             updateProduct(sellPostId, content);
         }, 1000);
