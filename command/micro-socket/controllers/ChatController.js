@@ -9,7 +9,7 @@ export const addNewMessageCon = (action, sio, io) => {
         if (!action.data.store) {
             for (let i = 0; i < emitList.length; ++i) {
                 console.log(emitList[i]);
-                if (emitList[i] === action.data.id) {
+                if (emitList[i] !== action.data.id) {
                     io.to(emitList[i]).emit('action', {type: 'global/RECEIVE_MESSAGE', data: {...mes, keu: true}})
                 } else {
                     io.to(emitList[i]).emit('action', {type: 'global/RECEIVE_MESSAGE', data: mes})
@@ -20,7 +20,7 @@ export const addNewMessageCon = (action, sio, io) => {
                 let data = {...mes, store: stores[0]};
                 for (let i = 0; i < emitList.length; ++i) {
                     console.log(emitList[i]);
-                    if (emitList[i] === action.data.id) {
+                    if (emitList[i] !== action.data.id) {
                         io.to(emitList[i]).emit('action', {type: 'global/RECEIVE_MESSAGE', data: {...data, keu: true}})
                     } else {
                         io.to(emitList[i]).emit('action', {type: 'global/RECEIVE_MESSAGE', data: data})
