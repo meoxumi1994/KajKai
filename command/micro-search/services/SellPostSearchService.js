@@ -176,7 +176,8 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 match: {
                                     productContent: {
                                         query: toRoot(keyword),
-                                        operator: 'and'
+                                        operator: 'and',
+                                        minimum_should_match: '75%'
                                     }
                                 }
                             }
@@ -247,7 +248,8 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 match: {
                                     productContent: {
                                         query: toRoot(keyword),
-                                        operator: 'and'
+                                        operator: 'and',
+                                        minimum_should_match: '75%'
                                     }
                                 }
                             }
@@ -332,7 +334,8 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                 match: {
                                     productContent: {
                                         query: toRoot(keyword),
-                                        operator: 'and'
+                                        operator: 'and',
+                                        minimum_should_match: '75%'
                                     }
                                 }
                             }
@@ -416,7 +419,8 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                 match: {
                                     productContent: {
                                         query: toRoot(keyword),
-                                        operator: 'and'
+                                        operator: 'and',
+                                        minimum_should_match: '75%'
                                     }
                                 }
                             }],
