@@ -23,16 +23,12 @@ export default {
         controller: 'SearchSubController',
         method: 'updateSellPostSub'
     },
-    'POSTROW.PRODUCT.Created': {
-        controller: 'SearchSubController',
-        method: 'createSellPostProductSub'
-    },
-    'POSTROW.PRODUCT.Updated': {
-        controller: 'SearchSubController',
-        method: 'updateSellPostProductSub'
-    },
     'SELLPOST.Deleted': {
         controller: 'SearchSubController',
         method: 'deleteSellpostSub'
+    },
+    'POSTROW.ALLPRODUCT.Created': {
+        controller: 'SearchSubController',
+        method: 'createSellPostProductSub'
     }
 }

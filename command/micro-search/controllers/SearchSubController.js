@@ -1,7 +1,7 @@
 import { indexUser } from '../services/UserSearchService'
 import { indexStore } from '../services/StoreSearchService'
 import { getStore } from '../controllers/SearchPubController'
-import { indexSellPost, updateSellPost, addNewProduct, updateSellPostThroughStore,deleteSellPost } from '../services/SellPostSearchService'
+import { indexSellPost, updateSellPost, updateSellPostThroughStore, deleteSellPost, updateProduct } from '../services/SellPostSearchService'
 
 export const createUserSub = (message) => {
     console.log(message, JSON.stringify(message));
@@ -85,28 +85,22 @@ export const deleteSellpostSub = (message) => {
 
 export const createSellPostProductSub = (message) => {
     console.log(message, JSON.stringify(message));
-    const product = message.product;
-    if (product.product.list && product.product.list.length > 0) {
-        const content = product.product.list[0];
+    const product = message.list;
+    if (product && product.content) {
         const sellPostId = product.sellPostId;
-        const productId = product.productId;
-        // setTimeout(function () {
-        //     addNewProduct({sellPostId, content, productId});
-        // }, 3000);
+        const content = product.content;
+        setTimeout(function () {
+            updateProduct(sellPostId, content);
+        }, 1000);
     }
-};
-
-export const updateSellPostProductSub = (message) => {
-    console.log(message, JSON.stringify(message));
-    const product = message.product;
-    if (product.product.list && product.product.list.length > 0) {
-        const content = product.product.list[0];
-        const sellPostId = product.sellPostId;
-        const productId = product.productId;
-        // setTimeout(function () {
-        //     addNewProduct({sellPostId, content, productId});
-        // }, 3000);
-    }
+    // if (product.product.list && product.product.list.length > 0) {
+    //     const content = product.product.list[0];
+    //     const sellPostId = product.sellPostId;
+    //     const productId = product.productId;
+    //     // setTimeout(function () {
+    //     //     addNewProduct({sellPostId, content, productId});
+    //     // }, 3000);
+    // }
 };
 
 
