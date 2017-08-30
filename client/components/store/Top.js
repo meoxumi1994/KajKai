@@ -55,6 +55,9 @@ class Top extends React.Component {
                     <AddPhoto
                         aspectRatio={828/250}
                         id={0}
+                        onAddImage={(src) => {
+                            this.props.onUpdateStore('coverUrl', src)
+                        }}
                         action={{
                             type: 'UPDATE_STORE_COVER',
                             data: {

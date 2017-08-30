@@ -47,7 +47,7 @@ const ButtonLine = ({ title, last, link, location, urlname, id }) => {
 }
 
 const Top = (props) => {
-    const { yourid, id, coverUrl, avatarUrl, username, onUploadImage, location,
+    const { yourid, id, coverUrl, avatarUrl, username, onUploadImage, location, onUpdateUser,
         INTEREST, ABOUT, PHOTOS, SETTING } = props
     return(
         <div style={{ margin: 0,
@@ -67,6 +67,9 @@ const Top = (props) => {
             </div> */}
             <div style={{ marginLeft: 0, marginTop: -5 }}>
                 <AddPhoto
+                    onAddImage={(src) => {
+                        onUpdateUser('coverUrl', src)
+                    }}
                     aspectRatio={1038/250}
                     id={2}
                     action={{
@@ -92,8 +95,11 @@ const Top = (props) => {
                     borderRadius: 4,
                     border: '1px solid #DFE0E4',
                     padding: 3, float: 'left',
-                    marginTop: -55 }}>
+                    marginTop: -60 }}>
                     <AddPhoto
+                        onAddImage={(src) => {
+                            onUpdateUser('coverUrl', src)
+                        }}
                         aspectRatio={1}
                         id={3}
                         action={{

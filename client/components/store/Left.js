@@ -25,6 +25,9 @@ class Left extends React.Component {
                     <AddPhoto
                         aspectRatio={1}
                         id={1}
+                        onAddImage={(src) => {
+                            this.props.onUpdateStore('avatarUrl', src)
+                        }}
                         action={{
                             type: 'UPDATE_STORE_AVATAR',
                             data: {

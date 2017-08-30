@@ -54,7 +54,6 @@ class SettingCell extends React.Component {
         let marker = (position && position.lat) ? { position: position } : undefined
         let currentPosition = (position && position.lat) ? position : { lat: 20.969133867372143, lng: 105.86288452148438 }
 
-        console.log(position)
         return(
             <div className="panel panel-default" style={{ margin: 0, marginTop: 10, }}>
                 <div style={{ padding: 10, borderRadius: '3px 3px 0px 0px', fontSize: 18, backgroundColor: '#F6F7F9'}}>
@@ -179,10 +178,18 @@ class SettingCell extends React.Component {
                     : kind=='password' ?
                         <div style={{ padding: 10 }}>
                             <div className="btn btn-default btn-sm" style={{ float: 'right', marginRight: 10 }}
+                                disabled={(this.state.isEdit && (this.state.value2 != this.state.value3 || this.state.value1 == this.state.value2 || this.state.value1 < 6 || this.state.value3 < 6) )}
                                 onClick={() => {
-                                        this.setState({ isEdit: !this.state.isEdit })
+                                        if((this.state.isEdit && (this.state.value2 != this.state.value3 || this.state.value1 == this.state.value2 || this.state.value1 < 6|| this.state.value3 < 6) ))
+                                            return;
+                                        this.setState(
+                                            { isEdit: !this.state.isEdit }
+                                        )
                                         if(this.state.isEdit)
-                                            this.props.onUpdate(this.state.value)
+                                            this.props.onUpdate({
+                                                password: this.state['value1'],
+                                                newpassword: this.state['value3'],
+                                            })
                                     }
                                 }>
                                 {this.state.isEdit ? DONE : EDIT_PASSWORD }
@@ -190,20 +197,20 @@ class SettingCell extends React.Component {
                             {this.state.isEdit ?
                                 <div>
                                     <input className="form-control input-sm"
-                                        placeholder={OLD_PASSWORD}
+                                        placeholder={OLD_PASSWORD} type="password"
                                         style={{ width: '80%', fontSize: 13.5, marginTop: 1 }}
                                         value={this.state.value1}
-                                        onChange={(e) => this.setState({ value: e.target.value1 })}/>
+                                        onChange={(e) => this.setState({ value1 : e.target.value })}/>
                                     <input className="form-control input-sm"
-                                        placeholder={NEW_PASSWORD}
+                                        placeholder={NEW_PASSWORD} type="password"
                                         style={{ width: '80%', fontSize: 13.5, marginTop: 5 }}
                                         value={this.state.value2}
-                                        onChange={(e) => this.setState({ value: e.target.value2 })}/>
+                                        onChange={(e) => this.setState({ value2 : e.target.value })}/>
                                     <input className="form-control input-sm"
-                                        placeholder={RE_PASSWORD}
+                                        placeholder={RE_PASSWORD} type="password"
                                         style={{ width: '80%', fontSize: 13.5, marginTop: 5 }}
                                         value={this.state.value3}
-                                        onChange={(e) => this.setState({ value: e.target.value3 })}/>
+                                        onChange={(e) => this.setState({ value3 : e.target.value })}/>
                                 </div>
                             :   <div style={{ height: 40 }}>
                                 </div>

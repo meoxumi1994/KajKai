@@ -5,6 +5,7 @@ import { getBeFollow } from '~/containers/support'
 import Top from '~/components/store/Top'
 import { addMember } from '~/actions/asyn/chat/socket'
 import { getMesId } from '~/actions/asyn/chat/restful'
+import { updateStore } from '~/actions/asyn/store'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
@@ -37,7 +38,7 @@ const mapStateToProps = (state, ownProps) => {
         FOLLOW_US: g('FOLLOW_US'),
         FOLLOWED: g('FOLLOWED'),
         userInfo: state.user,
-        chatList: state.inst.chat.left.chatListKey
+        chatList: state.inst.chat.left.chatListKey,
     })
 }
 
@@ -50,15 +51,21 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     sendMessage: (storeid, yourid, userid, chatList) => {
         dispatch(getMesId(yourid, storeid, true))
+    },
+    weUpdateStore: (id, key, value) => {
+        dispatch(updateStore(id, { [key] : value }))
     }
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
     const { id, username, userAvatar, ...anotherState } = stateProps
-    const { follow, ...anotherDispatch } = dispatchProps
+    const { follow, weUpdateStore, ...anotherDispatch } = dispatchProps
     return({
         onFollow: () => {
             follow(id, username, userAvatar)
+        },
+        onUpdateStore: (key, value) => {
+            weUpdateStore(id, key, value)
         },
         ...ownProps,
         ...stateProps,

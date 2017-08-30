@@ -6,7 +6,7 @@ import { FilteringPhoneDefaultVietName } from '~/containers/support'
 import { updatePhone } from '~/actions/asyn/register-store'
 
 import { updateStore } from '~/actions/asyn/store'
-import { updateUser } from '~/actions/asyn/user'
+import { updateUser, updatePassword } from '~/actions/asyn/user'
 
 
 const mapStateToProps = (state, { kind, type, value }) => {
@@ -32,6 +32,9 @@ const mapStateToProps = (state, { kind, type, value }) => {
 
 const mapDispatchToProps = (dispatch, { id, kind, type }) => ({
     onUpdate: (value) => {
+        if(kind == 'password'){
+            dispatch(updatePassword(value.password, value.newpassword))
+        }else
         if(type == 'store'){
             dispatch(updateStore(id, { [kind] : value }))
         }else{

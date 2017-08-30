@@ -4,6 +4,7 @@ import { get } from '~/config/allString'
 import { getBeFollow } from '~/containers/support'
 import Left from '~/components/store/Left'
 import { updateUser } from '~/actions/asyn/user'
+import { updateStore } from '~/actions/asyn/store'
 
 const mapStateToProps = (state, ownProps) => {
     const g = (lang) => get(state.user.language, lang)
@@ -43,14 +44,20 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     follow: (storeid) => {
         dispatch({ type: 'server/FOLLOW', data: { type: 'store', id: storeid }})
     },
+    weUpdateStore: (id, key, value) => {
+        dispatch(updateStore(id, { [key] : value }))
+    }
 })
 
 const mergerProps = (stateProps, dispatchProps, ownProps) => {
     const { id, ...anotherState } = stateProps
-    const { follow, ...anotherDispatch } = dispatchProps
+    const { follow, weUpdateStore, ...anotherDispatch } = dispatchProps
     return({
         onFollow: () => {
             follow(id)
+        },
+        onUpdateStore: (key, value) => {
+            weUpdateStore(id, key, value)
         },
         ...ownProps,
         ...stateProps,

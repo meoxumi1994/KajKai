@@ -1,6 +1,6 @@
 import React from 'react'
 
-import DisplayImage from '~/components/entity/thumnail/DisplayImage'
+// import DisplayImage from '~/components/entity/thumnail/DisplayImage'
 
 class OneImage extends React.Component {
     constructor(props){

@@ -5,6 +5,7 @@ const Register = (props) => {
     const {
         CREATE_A_NEW_ACCOUNT, YOUR_NAME, USER_NAME_WARNING, EMAIL_NEED, EMAIL_WARNING, PASSWORD_WARNING,
         PASSWORD, RULE, CREATE_ACCOUNT, REGISTER_MODAL_HEADER_WARNING, REGISTER_MODAL_PHONE_WARNING, CLOSE,
+        REGISTER_MODAL_EMAIL_WARNING,
         isloading, isshowmodalused, onCloseAlready, onRegisterClick,
         username, email, password, warningusername, warningemail, warningpassword, handleChange } = props
     return (
@@ -58,7 +59,7 @@ const Register = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <strong>{email}</strong>
-                    <div>{ REGISTER_MODAL_PHONE_WARNING }</div>
+                    <div>{ REGISTER_MODAL_EMAIL_WARNING }</div>
                 </Modal.Body>
                 <Modal.Footer>
                 <Button onClick={ () => onCloseAlready() }>{CLOSE}</Button>

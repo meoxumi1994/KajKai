@@ -4,7 +4,7 @@ import SettingCell from '~/containers/entity/row/SettingCell'
 import { Link } from 'react-router-dom'
 
 const Setting = (props) => {
-    const { id, address, category, phone, username, position, blocks, unBlock, checkUserName,
+    const { id, address, category, phone, username, position, blocks, unBlock, checkUserName, typeLogin,
         USER_NAME, ENTER_STORE, STORE_NAME_FAILED,
         ENTER_CATEGORY, CREATE_STORE_DESCRIPTION_4, CATEGORY_FAILED,
         ENTER_YOUR_ADDRESS, ADDRESS_DESCRIPTION, ADDRESS_FAILED,
@@ -63,9 +63,11 @@ const Setting = (props) => {
                                 </div>
                             :
                                 <div>
+                                    { typeLogin == 'normal' &&
                                     <SettingCell id={id} kind="password" type="user" title={PASSWORD} width={740}
                                         placeholder={ENTER_YOUR_ADDRESS} failed={ADDRESS_FAILED}
                                         description={NOTE_VERIFY_PASSWORD + '. ' + NOTE_PASSWORD}/>
+                                    }
                                     <div className="panel panel-default" style={{ margin: 0, marginTop: 10, }}>
                                         <div style={{
                                             padding: 10,
@@ -81,7 +83,7 @@ const Setting = (props) => {
                                             {BLOCK_DESCRIPTION}
                                         </div>
                                         <hr style={{ margin: 0, borderColor: '#E9EBEE'}}/>
-                                        <div style={{ padding: 10, backgroundColor: '#F6F7F9', color: '#666666'}}>
+                                        {/* <div style={{ padding: 10, backgroundColor: '#F6F7F9', color: '#666666'}}>
                                             <span>{BLOCK_USER}</span>
                                             <input className="form-control input-sm"
                                                 placeholder={SEARCH_BY_NAME}
@@ -93,7 +95,7 @@ const Setting = (props) => {
                                             <div className="btn btn-default btn-sm" style={{ marginLeft: 10 }} >
                                                 {BLOCK}
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div style={{ padding: '4px 10px 10px 130px', borderRadius: '0px 0px 3.5px 3.5px',
                                             backgroundColor: '#F6F7F9' }}>
                                             {blocks && blocks.map((item) =>
