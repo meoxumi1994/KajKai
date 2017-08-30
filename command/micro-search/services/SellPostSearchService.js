@@ -155,9 +155,6 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                             should: [{
                                 multi_match: {
                                     query: keyword,
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['title', 'category', 'firstCategoryName', 'secondCategoryName'],
                                     boost: 10
                                 }
@@ -176,8 +173,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 match: {
                                     productContent: {
                                         query: toRoot(keyword),
-                                        operator: 'and',
-                                        minimum_should_match: '75%'
+                                        operator: 'and'
                                     }
                                 }
                             }
@@ -226,9 +222,6 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                             should: [{
                                 multi_match: {
                                     query: keyword,
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['title', 'category'],
                                     boost: 10
                                 }
@@ -248,8 +241,7 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                                 match: {
                                     productContent: {
                                         query: toRoot(keyword),
-                                        operator: 'and',
-                                        minimum_should_match: '75%'
+                                        operator: 'and'
                                     }
                                 }
                             }
@@ -313,9 +305,6 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                             should: [{
                                 multi_match: {
                                     query: keyword,
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['title', 'category', 'firstCategoryName', 'secondCategoryName'],
                                     boost: 10
                                 }
@@ -334,8 +323,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                 match: {
                                     productContent: {
                                         query: toRoot(keyword),
-                                        operator: 'and',
-                                        minimum_should_match: '75%'
+                                        operator: 'and'
                                     }
                                 }
                             }
@@ -398,9 +386,6 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                             should: [{
                                 multi_match: {
                                     query: keyword,
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['title', 'category'],
                                     boost: 10
                                 }
@@ -419,8 +404,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                 match: {
                                     productContent: {
                                         query: toRoot(keyword),
-                                        operator: 'and',
-                                        minimum_should_match: '75%'
+                                        operator: 'and'
                                     }
                                 }
                             }],
