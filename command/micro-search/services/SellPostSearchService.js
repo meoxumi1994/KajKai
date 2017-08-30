@@ -409,7 +409,7 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                                 match_phrase_prefix: {
                                     nonTokenCategory: toRoot(keyword)
                                 }
-                            }]
+                            }],
                             // }, {
                             //     match: {
                             //         productContent: {
