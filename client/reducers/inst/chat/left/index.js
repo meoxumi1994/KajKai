@@ -213,7 +213,9 @@ const left = (state = {
   //------------------------------------------------------------------------------
         case 'global/RECEIVE_MESSAGE':
             if (action.data.user != undefined && action.data.user.id != state.currentChat.id) {
-                if (action.data.store == undefined || action.data.store.id != state.currentChat.id) {
+                if (action.data.store.id != state.currentChat.id) {
+                    console.log('action.data.store',action.data.store,
+                    'action.data.store.id',action.data.store.id, 'state.currentChat.id', state.currentChat.id)
                     const audio = new Audio('/audios/message.mp4')
                     audio.play()
                 }

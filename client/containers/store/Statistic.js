@@ -10,6 +10,12 @@ const mapStateToProps = (state, ownProps) => {
     const statistic = state.inst.store.statistic
     return({
         STATISTIC: g('STATISTIC'),
+        PREVIOUS: g('PREVIOUS'),
+        NEXT: g('NEXT'),
+        WEEK: g('WEEK'),
+        WEEKS: g('WEEKS'),
+        MONTH: g('MONTH'),
+        language: state.user.language,
         ...statistic
     })
 }

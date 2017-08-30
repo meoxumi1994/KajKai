@@ -14,13 +14,13 @@ const options =  {
     }
 }
 
-const getLabel = (current, numday ) => {
+const getLabel = (current, numday, language) => {
     let labels = []
     for(let i=0; i<=numday; i++){
         let j = new Date(current)
         j.setDate( current.getDate() - i)
         labels = [
-            j.getDate() + " " + j.toLocaleString("en-us", { month: "long" }),
+            j.getDate() + " " + j.toLocaleString(language == "vi" ? "vi-nu" : "en-us", { month: "long" }),
             ...labels,
         ]
     }
@@ -32,9 +32,9 @@ class Statistic extends React.Component {
         super(props)
     }
     render(){
-        const { current, numday, statistics, onChange, myState, STATISTIC } = this.props
+        const { current, numday, language, statistics, onChange, myState, STATISTIC, PREVIOUS, NEXT, WEEK, WEEKS, MONTH } = this.props
         const data = {
-            labels: getLabel(current, numday),
+            labels: getLabel(current, numday, language),
             datasets: [{
                 label: '# of Votes',
                 data: statistics,
@@ -61,7 +61,7 @@ class Statistic extends React.Component {
                             newcurrent.setDate( current.getDate() - numday )
                             onChange('current', newcurrent )
                         }}>
-                        Previous
+                        {PREVIOUS}
                     </div>
                     <div className="btn btn-default btn-sm"
                         onClick={() => {
@@ -72,20 +72,20 @@ class Statistic extends React.Component {
                             else
                                 onChange('current', newcurrent)
                         }} style={{ marginLeft: 10 }}>
-                        Next
+                        {NEXT}
                     </div>
                     <div style={{ float: 'right'}}>
                         <div className="btn btn-default btn-sm"
                             onClick={() => onChange('numday', 7)}>
-                            1 week
+                            1 {WEEK}
                         </div>
                         <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}
                             onClick={() => onChange('numday', 14)}>
-                            2 weeks
+                            2 {WEEKS}
                         </div>
                         <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}
                             onClick={() => onChange('numday', 30)}>
-                            1 month
+                            1 {MONTH}
                         </div>
                         {/* <div className="btn btn-default btn-sm"  style={{ marginLeft: 5 }}>
                             3 month

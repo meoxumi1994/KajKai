@@ -55,10 +55,10 @@ class Comment extends React.Component {
                             onClick={(event) => this.onCLickSetting(event)}
                             style={{ color:'#BEC2C8'}}
                             className="glyphicon glyphicon-menu-down"/>
-                        {(this.state.hoversetting && !clicksetting)&&
+                        {(isOwner && this.state.hoversetting && !clicksetting) &&
                             <Tooltip contents={[BLOCK+', '+DONE]}/>
                         }
-                        {clicksetting &&
+                        {isOwner && clicksetting &&
                             <DropDown
                                 width={130}
                                 onClick={(index) => {

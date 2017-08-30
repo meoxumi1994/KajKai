@@ -4,8 +4,19 @@ const editsellpost = (state = {
     status: '',
     ship: '',
     postrows_order: [],
+    currentType: 'WAIT',
 }, action) => {
     switch (action.type) {
+        case 'CREATE_SELL_POST_SUCCESS':
+            return {
+                ...state,
+                currentType: 'CREATE_SELL_POST_SUCCESS',
+            }
+        case 'CREATE_SELL_POST_ING':
+            return {
+                ...state,
+                currentType: 'CREATE_SELL_POST_ING'
+            }
         case 'INST_STORE_PAGE_CHANGE':
             if(action.key == 'showEditSellPost'){
                 return {
