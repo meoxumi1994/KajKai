@@ -46,7 +46,7 @@ export const searchStore = (keyword, offset, length, next) => {
                             max_expansions: 20,
                             // fields: ['nonTokenStoreName', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
                             fields: ['nonTokenStoreName'],
-                            boost: 10
+                            boost: 5
                         }
                     }
                     ,
