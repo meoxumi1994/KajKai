@@ -44,7 +44,7 @@ export const searchUser = (userName, offset, length, next) => {
                                 query: toRoot(userName),
                                 fuzziness: 1,
                                 prefix_length: 0,
-                                max_expansions: 20
+                                max_expansions: 10
                             }
                         }
                     }, {

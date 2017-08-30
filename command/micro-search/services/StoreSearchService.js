@@ -34,23 +34,28 @@ export const searchStore = (keyword, offset, length, next) => {
                             fuzziness: 1,
                             prefix_length: 0,
                             max_expansions: 20,
-                            fields: ['storeName', 'category', 'firstCategoryName', 'secondCategoryName'],
+                            // fields: ['storeName', 'category', 'firstCategoryName', 'secondCategoryName'],
+                            fields: ['storeName'],
                             boost: 10
                         }
                     }, {
                         multi_match: {
-                            query: keyword,
+                            query: toRoot(keyword),
                             fuzziness: 1,
                             prefix_length: 0,
                             max_expansions: 20,
-                            fields: ['nonTokenStoreName', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
-                            boost: 10
+                            // fields: ['nonTokenStoreName', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
+                            fields: ['nonTokenStoreName'],
+                            boost: 5
                         }
-                    }, {
+                    }
+                    ,
+                        {
                         match_phrase_prefix: {
                             nonTokenStoreName: toRoot(keyword)
                         }
-                    },
+                    }
+                    // ,
                     //     {
                     //     match_all: {}
                     // }
