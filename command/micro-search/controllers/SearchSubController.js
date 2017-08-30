@@ -87,7 +87,7 @@ export const createSellPostProductSub = (message) => {
     console.log(message, JSON.stringify(message));
     const product = message.list;
     if (product && product.content) {
-        const sellPostId = product.sellPostId;
+        const sellPostId = product.sellpostId;
         const content = product.content;
         console.log('this ' + sellPostId + ' ' + content);
         setTimeout(function () {
