@@ -34,7 +34,8 @@ export const searchStore = (keyword, offset, length, next) => {
                             fuzziness: 1,
                             prefix_length: 0,
                             max_expansions: 20,
-                            fields: ['storeName', 'category', 'firstCategoryName', 'secondCategoryName'],
+                            // fields: ['storeName', 'category', 'firstCategoryName', 'secondCategoryName'],
+                            fields: ['storeName'],
                             boost: 10
                         }
                     }, {
@@ -43,7 +44,8 @@ export const searchStore = (keyword, offset, length, next) => {
                             fuzziness: 1,
                             prefix_length: 0,
                             max_expansions: 20,
-                            fields: ['nonTokenStoreName', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
+                            // fields: ['nonTokenStoreName', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
+                            fields: ['nonTokenStoreName'],
                             boost: 10
                         }
                     }
