@@ -89,7 +89,7 @@ export const getListProductPub = (products) => {
 
     for (let i = 0; i < products.length; ++i) {
         const cur = getPubProductInfo(products[i]);
-        content += '&*(Z' + cur.productId + ' ' + cur.product.list[0] + ' &!&';
+        content += '&*(Z' + cur.productId + 'zzzz ' + cur.product.list[0] + ' &!&';
     }
     return {sellpostId, content};
 };
