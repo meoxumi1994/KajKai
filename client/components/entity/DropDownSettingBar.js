@@ -75,7 +75,7 @@ class DropDownSettingBar extends React.Component {
         }
     }
     render(){
-        const { width, contents, onClick, storeList, id, onLogoutClick, CREATE_STORE, HOME, SETTING, LOG_OUT } = this.props
+        const { width, contents, onClick, storeList, id, onLogoutClick, clickSetting, CREATE_STORE, HOME, SETTING, LOG_OUT } = this.props
         return(
             <div className="dropdown" id="dropdownsetting">
                 <div className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"
