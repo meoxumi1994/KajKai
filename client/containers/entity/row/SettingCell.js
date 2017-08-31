@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch, { id, kind, type }) => ({
             dispatch(updateStore(id, { [kind] : value }))
         }else{
             if(kind == 'yearOfBirth'){
-                dispatch(updateUser({ [kind] : 1900 + (new Date()).getYear() - value }))
+                dispatch(updateUser({ [kind] : 1900 + (new Date()).getYear() - value }) )
             }else{
                 dispatch(updateUser({ [kind] : value }))
             }

@@ -55,10 +55,13 @@ class Comment extends React.Component {
                             onClick={(event) => this.onCLickSetting(event)}
                             style={{ color:'#BEC2C8'}}
                             className="glyphicon glyphicon-menu-down"/>
-                        {(isOwner && this.state.hoversetting && !clicksetting) &&
-                            <Tooltip contents={[BLOCK+', '+DONE]}/>
+                        {(isOwner && this.state.hoversetting && !clicksetting) ?
+                            <Tooltip contents={[BLOCK+', '+DONE]}/> :
+                            ((this.state.hoversetting && !clicksetting) &&
+                                <Tooltip contents={[BLOCK]}/>
+                            )
                         }
-                        {isOwner && clicksetting &&
+                        {(isOwner && clicksetting) ?
                             <DropDown
                                 width={130}
                                 onClick={(index) => {
@@ -69,7 +72,16 @@ class Comment extends React.Component {
                                     }
                                 }}
                                 contents={[BLOCK,'hr',DONE]}
-                            />
+                            /> : (clicksetting &&
+                                <DropDown
+                                    width={130}
+                                    onClick={(index) => {
+                                        if(index == 0)
+                                            this.props.onBlock()
+                                    }}
+                                    contents={[BLOCK]}
+                                />
+                            )
                         }
                     </div>
                 }

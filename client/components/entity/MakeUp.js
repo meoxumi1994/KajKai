@@ -24,7 +24,7 @@ export const EmojiShow = (text, height) => {
     const emoji = [
         [':D','<img height='+ height +' src="/images/emoji/haha.svg"/>'],
         [':-D','<img height='+ height +' src="/images/emoji/haha.svg"/>'],
-        ['8)','<img height='+ height +' src="/images/emoji/pro.svg"/>'],
+        ['8)','<img height='+ height +' src="/images/emoji/pro.png"/>'],
         ['&lt;3','<img height='+ height +' src="/images/emoji/love.svg"/>'],
         ['<3','<img width="15.953125" src="/images/emoji/love.svg"/>'],
         [':o','<img height='+ height +' src="/images/emoji/wow.svg"/>'],

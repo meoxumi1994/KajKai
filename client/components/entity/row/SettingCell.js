@@ -1,6 +1,7 @@
 import React from 'react'
 
 import VerifyPhone from '~/containers/entity/phone/VerifyPhone'
+import ShowInMap from '~/containers/entity/map/ShowInMap'
 import { withGoogleMap, GoogleMap, Marker, GoogleMapLoader } from "react-google-maps";
 import { places } from "react-google-maps"
 
@@ -69,13 +70,13 @@ class SettingCell extends React.Component {
                     }
                     {kind == 'position' ?
                         <div style={{ padding: 10 }}>
-                            {/* <ShowInMap position={this.state.value} width={width-22} height={500}
+                            <ShowInMap position={this.state.value} width={width-22} height={500}
                                     onChangePosition={(value) => {
                                         this.setState({ value: value })
                                         this.props.onUpdate(value)
                                     }}
-                                    canEdit={true}/> */}
-                                    <div style={{ width: 580 }}>
+                                    canEdit={true}/>
+                                    {/* <div style={{ width: 580 }}>
                                         <GettingStartedGoogleMap
                                            containerElement={
                                                <div style={{ height: 580 }} />
@@ -109,9 +110,9 @@ class SettingCell extends React.Component {
                                                 const that = this
                                                 console.log('navigator.geolocation.getCurrentPosition')
                                                 navigator.geolocation.getCurrentPosition((pos) => {
-                                                    console.log('navigator.geolocation.getCurrentPosition', coords)
-                                                    const coords = pos.coords;
 
+                                                    const coords = pos.coords;
+                                                    console.log('navigator.geolocation.getCurrentPosition', coords)
                                                     that.setState({
                                                         value: {
                                                             lat: pos.coords.latitude,
@@ -131,8 +132,8 @@ class SettingCell extends React.Component {
                                             style={{ float: 'right', marginTop: 10 }}
                                             onClick={() => this.setState({ showModal: false })}>
                                             {CLOSE}
-                                        </div> */}
-                                    </div>
+                                        </div> 
+                                    </div> */}
                         </div>
                     : kind == 'phone' ?
                         <div style={{ padding: 10 }}>
@@ -240,7 +241,9 @@ class SettingCell extends React.Component {
                                         this.setState({ value: e.target.value })}
                                     }/>
                             :   <div style={{ padding: 6,  fontSize: 13.5 }}>
-                                    { this.state.value ? (kind=='age' ? ( 1900 + (new Date()).getYear() - value ) : this.state.value) : placeholder }
+                                    { this.state.value ?
+                                        (kind=='yearOfBirth' ? (1900 + (new Date()).getYear() - this.state.value)  : this.state.value) :
+                                        placeholder }
                                 </div>
                             }
                         </div>
