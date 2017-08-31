@@ -69,6 +69,7 @@ export const updateSellPost = (sellpost) => {
         if (sellpost.category) oldSellPost.category = sellpost.category;
         if (sellpost.title) oldSellPost.title = sellpost.title;
         if (sellpost.avatarUrl) oldSellPost.avatarUrl = sellpost.avatarUrl;
+        if (sellpost.status) oldSellPost.status = sellpost.status;
         indexSellPost(oldSellPost);
     })
 };
@@ -136,7 +137,24 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                     from: offset,
                     size: length,
                     query: {
-                        match_all: {}
+                        // match_all: {}
+                        bool: {
+                            should: [{
+                                match: {
+                                    status: {
+                                        query: 'open',
+                                        boost: 10
+                                    }
+                                }
+                            }, {
+                                match: {
+                                    status: {
+                                        query: 'sleep',
+                                        boost: 1
+                                    }
+                                }
+                            }]
+                        }
                     }
                 }
             }, (error, response) => {
@@ -155,9 +173,6 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                             should: [{
                                 multi_match: {
                                     query: keyword,
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['title', 'category', 'firstCategoryName', 'secondCategoryName'],
                                     boost: 10
                                 }
@@ -225,9 +240,6 @@ export const searchWithoutLocation = (offset, length, categoryId, keyword, next)
                             should: [{
                                 multi_match: {
                                     query: keyword,
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['title', 'category'],
                                     boost: 10
                                 }
@@ -311,9 +323,6 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                             should: [{
                                 multi_match: {
                                     query: keyword,
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['title', 'category', 'firstCategoryName', 'secondCategoryName'],
                                     boost: 10
                                 }
@@ -395,9 +404,6 @@ export const searchWithLocation = (offset, length, categoryId, location, keyword
                             should: [{
                                 multi_match: {
                                     query: keyword,
-                                    fuzziness: 1,
-                                    prefix_length: 0,
-                                    max_expansions: 20,
                                     fields: ['title', 'category'],
                                     boost: 10
                                 }

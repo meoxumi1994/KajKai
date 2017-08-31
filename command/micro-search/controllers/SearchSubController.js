@@ -51,6 +51,7 @@ export const createSellPostSub = (message) => {
     const storeId = sellpost.storeId;
     const title = sellpost.title;
     const category = sellpost.category;
+    const status = sellpost.status;
     getStore(storeId, (store) => {
         const address = store.address;
         const firstCategoryId = store.firstCategoryId;
@@ -64,7 +65,7 @@ export const createSellPostSub = (message) => {
             lon: store.longitude
         };
         indexSellPost({sellPostId, storeId, title, category, address, firstCategoryId,
-            secondCategoryId, firstCategoryName, secondCategoryName, avatarUrl, productContent, location});
+            secondCategoryId, firstCategoryName, secondCategoryName, avatarUrl, productContent, location, status});
     })
 };
 
@@ -74,7 +75,8 @@ export const updateSellPostSub = (message) => {
     const title = sellpost.title;
     const category = sellpost.category;
     const sellPostId = sellpost.sellPostId;
-    updateSellPost({sellPostId, category, title});
+    const status = sellpost.status;
+    updateSellPost({sellPostId, category, title, status});
 };
 
 export const deleteSellpostSub = (message) => {

@@ -34,15 +34,15 @@ export const searchStore = (keyword, offset, length, next) => {
                             fuzziness: 1,
                             prefix_length: 0,
                             max_expansions: 20,
-                            // fields: ['storeName', 'category', 'firstCategoryName', 'secondCategoryName'],
-                            fields: ['storeName'],
+                            fields: ['storeName', 'category', 'firstCategoryName', 'secondCategoryName'],
+                            // fields: ['storeName'],
                             boost: 10
                         }
                     }, {
                         multi_match: {
                             query: toRoot(keyword),
-                            // fields: ['nonTokenStoreName', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
-                            fields: ['nonTokenStoreName'],
+                            fields: ['nonTokenStoreName', 'nonTokenCategory', 'nonTokenFCategory', 'nonTokenSCategory'],
+                            // fields: ['nonTokenStoreName'],
                             boost: 5
                         }
                     }
